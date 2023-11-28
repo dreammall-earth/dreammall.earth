@@ -16,4 +16,4 @@ jobs:
         #TARGET_REPO: username/repo
         #TARGET_BRANCH: master
         BUILD_SCRIPT: cd presenter && npm install && npm run docs:build
-        BUILD_DIR: presenter/build/docs/
+        BUILD_DIR: build/docs/
