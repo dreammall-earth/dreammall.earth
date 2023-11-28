@@ -1,7 +1,8 @@
 name: "presenter:deploy:docs to github"
-on: push
-    # branches:
-    #   - master
+on: 
+  push:
+    branches:
+      - master
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
