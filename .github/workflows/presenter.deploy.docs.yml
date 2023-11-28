@@ -1,8 +1,7 @@
 name: "presenter:deploy:docs to github"
-on:
-  push:
-    branches:
-      - master
+on: push
+    # branches:
+    #   - master
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -16,6 +15,5 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         #TARGET_REPO: username/repo
         #TARGET_BRANCH: master
-        BUILD_SCRIPT: npm install && npm run docs:build
-        BUILD_DIR: build/docs/
-        working-directory: ./presenter
+        BUILD_SCRIPT: cd presenter && npm install && npm run docs:build
+        BUILD_DIR: presenter/build/docs/
