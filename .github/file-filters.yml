@@ -11,7 +11,6 @@ presenter-test-build-code: &presenter-test-build-code
 
 presenter-test-build-docs: &presenter-test-build-docs
   - 'presenter/**/*.md'
-  - '**/*'
   - 'presenter/.vuepress/*'
 
 presenter-test-build-storybook: &presenter-test-build-storybook
