@@ -1,4 +1,4 @@
-name: "frontend:test:unit test code with defined suites"
+name: "presenter:test:unit test code with defined suites"
 
 on: push
 
@@ -6,14 +6,14 @@ jobs:
   # only (but most important) job from this workflow required for pull requests
   # check results serve as run conditions for all other jobs here 
   files-changed:
-    name: Detect File Changes - frontend-test-unit-code
+    name: Detect File Changes - presenter-test-unit-code
     runs-on: ubuntu-latest
     outputs:
-      changes: ${{ steps.changes.outputs.frontend-test-unit-code }}
+      changes: ${{ steps.changes.outputs.presenter-test-unit-code }}
     steps:
       - uses: actions/checkout@v3.3.0
 
-      - name: Check for frontend file changes
+      - name: Check for presenter file changes
         uses: dorny/paths-filter@v2.11.1
         id: changes
         with:
@@ -23,12 +23,12 @@ jobs:
 
   unit:
     if: needs.files-changed.outputs.changes == 'true'
-    name: Unit - Frontend
+    name: Unit - Presenter
     needs: files-changed
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Frontend | Unit
+      - name: Presenter | Unit
         run: npm install && npm run test:unit
