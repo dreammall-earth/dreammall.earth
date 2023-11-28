@@ -1,4 +1,4 @@
-name: "frontend:test:lint code with defined linters"
+name: "presenter:test:lint code with defined linters"
 
 on: push
 
@@ -6,14 +6,14 @@ jobs:
   # only (but most important) job from this workflow required for pull requests
   # check results serve as run conditions for all other jobs here 
   files-changed:
-    name: Detect File Changes - frontend-test-lint-code
+    name: Detect File Changes - presenter-test-lint-code
     runs-on: ubuntu-latest
     outputs:
-      changes: ${{ steps.changes.outputs.frontend-test-lint-code }}
+      changes: ${{ steps.changes.outputs.presenter-test-lint-code }}
     steps:
       - uses: actions/checkout@v3.3.0
 
-      - name: Check for frontend file changes
+      - name: Check for presenter file changes
         uses: dorny/paths-filter@v2.11.1
         id: changes
         with:
@@ -23,12 +23,12 @@ jobs:
 
   lint:
     if: needs.files-changed.outputs.changes == 'true'
-    name: Lint - Frontend
+    name: Lint - Presenter
     needs: files-changed
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Frontend | Lint
+      - name: Presenter | Lint
         run: npm install && npm run test:lint
