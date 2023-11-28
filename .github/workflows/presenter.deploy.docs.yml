@@ -1,5 +1,5 @@
 name: "presenter:deploy:docs to github"
-on: 
+on:
   push:
     branches:
       - master
