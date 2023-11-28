@@ -15,5 +15,5 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         #TARGET_REPO: username/repo
         #TARGET_BRANCH: master
-        BUILD_SCRIPT: cd presenter && npm install && npm run docs:build
+        BUILD_SCRIPT: cd presenter/ && npm install && npm run docs:build
         BUILD_DIR: build/docs/
