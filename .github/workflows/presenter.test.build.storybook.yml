@@ -1,4 +1,4 @@
-name: "frontend:test:build test storybook"
+name: "presenter:test:build test storybook"
 
 on: push
 
@@ -6,14 +6,14 @@ jobs:
   # only (but most important) job from this workflow required for pull requests
   # check results serve as run conditions for all other jobs here
   files-changed:
-    name: Detect File Changes - frontend-test-build-storybook
+    name: Detect File Changes - presenter-test-build-storybook
     runs-on: ubuntu-latest
     outputs:
-      changes: ${{ steps.changes.outputs.frontend-test-build-storybook }}
+      changes: ${{ steps.changes.outputs.presenter-test-build-storybook }}
     steps:
       - uses: actions/checkout@v3.3.0
 
-      - name: Check for frontend file changes
+      - name: Check for presenter file changes
         uses: dorny/paths-filter@v2.11.1
         id: changes
         with:
@@ -23,12 +23,15 @@ jobs:
 
   storybook:
     if: needs.files-changed.outputs.changes == 'true'
-    name: Build Storybook - Frontend
+    name: Build Storybook - Presenter
     needs: files-changed
     runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./presenter
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Frontend | Build Storybook
+      - name: Presenter | Build Storybook
         run: npm install && npm run storybook:build
+        working-directory: ${{env.WORKING_DIRECTORY}}

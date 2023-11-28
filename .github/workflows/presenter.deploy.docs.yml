@@ -1,4 +1,4 @@
-name: "frontend:deploy:docs to github"
+name: "presenter:deploy:docs to github"
 on:
   push:
     branches:
@@ -18,3 +18,4 @@ jobs:
         #TARGET_BRANCH: master
         BUILD_SCRIPT: npm install && npm run docs:build
         BUILD_DIR: build/docs/
+        working-directory: ./presenter
