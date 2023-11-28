@@ -1,11 +1,11 @@
-name: "frontend:deploy:chromatic"
+name: "presenter:deploy:chromatic"
 on:
   push:
     branches:
       - master
 jobs:
   build-and-deploy:
-    name: Chromatic - Frontend
+    name: Chromatic - Presenter
     runs-on: ubuntu-latest
     env:
       CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
@@ -15,5 +15,5 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Frontend | Build
+      - name: Presenter | Build
         run: npm install && npm run chromatic -- --exit-zero-on-changes
