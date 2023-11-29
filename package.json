@@ -2,7 +2,7 @@
   "name": "boilerplate-backend",
   "version": "1.0.0",
   "description": "The IT4C Boilerplate for backends",
-  "main": "build/index.js",
+  "main": "build/index.ts",
   "type": "module",
   "repository": {
     "type": "git",
@@ -15,8 +15,14 @@
   "bugs": {
     "url": "https://github.com/IT4Change/boilerplate-backend/issues"
   },
+  "scripts": {
+    "dev": "nodemon --watch './**/*.{js,gql}' src/index.js"
+  },
   "dependencies": {
     "apollo-server-express": "^3.13.0",
     "graphql": "^16.8.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
