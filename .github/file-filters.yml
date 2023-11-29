@@ -1,0 +1,17 @@
+# These file filter patterns are used by the action https://github.com/dorny/paths-filter
+
+presenter-test-lint-code: &presenter-test-lint-code
+  - 'presenter/**/*'
+
+presenter-test-unit-code: &presenter-test-unit-code
+  - 'presenter/**/*'
+
+presenter-test-build-code: &presenter-test-build-code
+  - 'presenter/**/*'
+
+presenter-test-build-docs: &presenter-test-build-docs
+  - 'presenter/**/*.md'
+  - 'presenter/.vuepress/*'
+
+presenter-test-build-storybook: &presenter-test-build-storybook
+  - 'presenter/**/*'
