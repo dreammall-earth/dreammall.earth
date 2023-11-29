@@ -30,6 +30,11 @@ Install git:
 apk add git
 ```
 
+Install pm2:
+```bash
+npm install pm2 -g
+```
+
 Clone Dreammall:
 ```bash
 cd /var/www/localhost/htdocs/
