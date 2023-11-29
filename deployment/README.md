@@ -69,11 +69,11 @@ rc-update add webhook boot
 
 For the github webhook configure the following:
 
-| Field                                                | Value                                       |
-|------------------------------------------------------|---------------------------------------------|
-| Payload URL                                          | https://stage1.dreammall.earth/hooks/github |
-| Content type                                         | application/json                            |
-| Secret                                               | A SECRET                                    |
-| SSL verification                                     | Enable SSL verification                     |
-| Which events would you like to trigger this webhook? | Send me everything.                         |
-| Active                                               | [x]                                         |
+| Field                                                | Value                                                                                      |
+|------------------------------------------------------|--------------------------------------------------------------------------------------------|
+| Payload URL                                          | [https://stage1.dreammall.earth/hooks/github](https://stage1.dreammall.earth/hooks/github) |
+| Content type                                         | application/json                                                                           |
+| Secret                                               | A SECRET                                                                                   |
+| SSL verification                                     | Enable SSL verification                                                                    |
+| Which events would you like to trigger this webhook? | Send me everything.                                                                        |
+| Active                                               | [x]                                                                                        |
