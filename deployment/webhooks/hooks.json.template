@@ -2,12 +2,6 @@
     {
       "id": "github",
       "execute-command": "$PROJECT_ROOT/deployment/deploy.sh",
-      "pass-arguments-to-command": [
-        {
-          "source": "string",
-          "name": "$DEPLOY_DIR"
-        }
-      ],
       "command-working-directory": "$PROJECT_ROOT",
       "trigger-rule": {
         "and": [

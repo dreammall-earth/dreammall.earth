@@ -44,10 +44,7 @@ mv -f deployment/nginx/default.conf /etc/nginx/http.d/default.conf
 vi /etc/nginx/http.d/default.conf
 ```
 
-TODO
-
 You can use the webhook template `webhook.conf.template` and the `deploy.sh` script in `deployment/webhooks/` for an automatic deployment from a (github) webhook.
-
 ```bash
 cp deployment/webhooks/hooks.json.template deployment/webhooks/hooks.json
 vi deployment/webhooks/hooks.json
