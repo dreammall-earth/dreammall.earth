@@ -161,38 +161,38 @@ This mechanic was taken from this [source](https://stackoverflow.com/questions/1
 [badge-jq-img]: https://img.shields.io/badge/jq-latest-blue
 [badge-jq-href]: https://jqlang.github.io/jq/
 
-[badge-vue-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-frontend%2Fmaster%2Fpackage.json&query=dependencies.vue&label=vue&color=green
+[badge-vue-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fpresenter%2Fpackage.json&query=dependencies.vue&label=vue&color=green
 [badge-vue-href]: https://vuejs.org/
 
-[badge-vike-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-frontend%2Fmaster%2Fpackage.json&query=dependencies.vike&label=vike&color=green
+[badge-vike-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fpresenter%2Fpackage.json&query=dependencies.vike&label=vike&color=green
 [badge-vike-href]: https://vike.dev/
 
-[badge-vuetify-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-frontend%2Fmaster%2Fpackage.json&query=dependencies.vuetify&label=vuetify&color=green
+[badge-vuetify-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fpresenter%2Fpackage.json&query=dependencies.vuetify&label=vuetify&color=green
 [badge-vuetify-href]: https://vuetifyjs.com/
 
-[badge-pinia-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-frontend%2Fmaster%2Fpackage.json&query=dependencies.pinia&label=pinia&color=green
+[badge-pinia-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fpresenter%2Fpackage.json&query=dependencies.pinia&label=pinia&color=green
 [badge-pinia-href]: https://pinia.vuejs.org/
 
-[badge-vue-i18n-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-frontend%2Fmaster%2Fpackage.json&query=dependencies%5B%27vue-i18n%27%5D&label=vue-i18n&color=green
+[badge-vue-i18n-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fpresenter%2Fpackage.json&query=dependencies%5B%27vue-i18n%27%5D&label=vue-i18n&color=green
 [badge-vue-i18n-href]: https://vue-i18n.intlify.dev/
 
-[badge-eslint-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-frontend%2Fmaster%2Fpackage.json&query=devDependencies.eslint&label=eslint&color=yellow
+[badge-eslint-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fpresenter%2Fpackage.json&query=devDependencies.eslint&label=eslint&color=yellow
 [badge-eslint-href]: https://eslint.org/
 
-[badge-remark-cli-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-frontend%2Fmaster%2Fpackage.json&query=devDependencies%5B%27remark-cli%27%5D&label=remark-cli&color=yellow
+[badge-remark-cli-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fpresenter%2Fpackage.json&query=devDependencies%5B%27remark-cli%27%5D&label=remark-cli&color=yellow
 [badge-remark-cli-href]: https://remark.js.org/
 
-[badge-stylelint-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-frontend%2Fmaster%2Fpackage.json&query=devDependencies.stylelint&label=stylelint&color=yellow
+[badge-stylelint-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fpresenter%2Fpackage.json&query=devDependencies.stylelint&label=stylelint&color=yellow
 [badge-stylelint-href]: https://stylelint.io/
 
-[badge-vitest-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-frontend%2Fmaster%2Fpackage.json&query=devDependencies.vitest&label=vitest&color=yellow
+[badge-vitest-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fpresenter%2Fpackage.json&query=devDependencies.vitest&label=vitest&color=yellow
 [badge-vitest-href]: https://vitest.dev/
 
-[badge-storybook-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-frontend%2Fmaster%2Fpackage.json&query=devDependencies.storybook&label=storybook&color=orange
+[badge-storybook-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fpresenter%2Fpackage.json&query=devDependencies.storybook&label=storybook&color=orange
 [badge-storybook-href]: https://storybook.js.org/
 
-[badge-vuepress-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-frontend%2Fmaster%2Fpackage.json&query=devDependencies.vuepress&label=vuepress&color=orange
+[badge-vuepress-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fpresenter%2Fpackage.json&query=devDependencies.vuepress&label=vuepress&color=orange
 [badge-vuepress-href]: https://vuepress.vuejs.org/
 
-[badge-chromatic-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-frontend%2Fmaster%2Fpackage.json&query=devDependencies.chromatic&label=chromatic&color=orange
+[badge-chromatic-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fpresenter%2Fpackage.json&query=devDependencies.chromatic&label=chromatic&color=orange
 [badge-chromatic-href]: https://www.chromatic.com/
