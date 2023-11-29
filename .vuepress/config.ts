@@ -5,4 +5,5 @@ export default defineUserConfig({
   description: 'Dreammall.earth Documentation',
   dest: 'build/docs',
   base: '/dreammall.earth/',
+  pagePatterns: ['**/*.md', '!**/.vuepress', '!**/node_modules'],
 })
