@@ -1,0 +1,22 @@
+{
+  "name": "boilerplate-backend",
+  "version": "1.0.0",
+  "description": "The IT4C Boilerplate for backends",
+  "main": "build/index.js",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IT4Change/boilerplate-backend.git"
+  },
+  "author": {
+    "name": "Moriz Wahl"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/IT4Change/boilerplate-backend/issues"
+  },
+  "dependencies": {
+    "apollo-server-express": "^3.13.0",
+    "graphql": "^16.8.1"
+  }
+}
