@@ -1,5 +1,8 @@
 # These file filter patterns are used by the action https://github.com/dorny/paths-filter
 
+test-code: &test-code
+  - '**/*'
+
 presenter-test-lint-code: &presenter-test-lint-code
   - 'presenter/**/*'
 
