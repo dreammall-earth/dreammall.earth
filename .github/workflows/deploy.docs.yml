@@ -4,6 +4,10 @@ name: "dreammall:deploy:docs to github"
 #    branches:
 #      - master
 on: push
+
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
