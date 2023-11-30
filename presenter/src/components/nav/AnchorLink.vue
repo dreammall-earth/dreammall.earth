@@ -1,5 +1,4 @@
 <template>
-  <!-- <v-btn :variant="isRouteSelected($attrs.href as string) ? 'tonal' : 'flat'"> -->
   <v-btn :class="classes" variant="plain" :href="props.href">
     {{ props.label }}
   </v-btn>
@@ -7,10 +6,6 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-
-// import { usePageContext } from '#context/usePageContext'
-
-// const pageContext = usePageContext()
 
 const props = withDefaults(
   defineProps<{
@@ -26,22 +21,8 @@ const props = withDefaults(
   { href: '#', label: 'Link' },
 )
 
-// const isRouteSelected = (href: string) => {
-//     if(!href) return false;
-
-//   if (href === '/app') {
-//     return pageContext.urlPathname.indexOf(href) === 0
-//   }
-//   return pageContext.urlPathname === href
-// }
-
 const classes = computed(() => ({
   'anchor-link': true,
-//   'anchor-link--active': isRouteSelected(props.href as string) ? true : "",  
-}))
-
-const style = computed(() => ({
-//   backgroundColor: props.backgroundColor,
 }))
 
 </script>

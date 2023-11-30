@@ -32,7 +32,7 @@
         <v-col cols="12" md="4">
           <h2 class="footer-header mb-14 text-left">{{ $t('menu.header.newsletter') }}</h2>
           <div class="text-button-container">
-            <TextButtonInput :inputLabel="foo" :buttonLabel="bar"></TextButtonInput>
+            <TextButtonInput :inputLabel="$t('menu.footer.textInputLabel')" :buttonLabel="$t('menu.footer.textInputButton')"></TextButtonInput>
           </div>
         </v-col>        
       </v-row>      
@@ -48,10 +48,6 @@ import AnchorLink from '#components/nav/AnchorLink.vue'
 import TextButtonInput from '#components/inputs/TextButtonInput.vue'
 
 import LogoImage from './LogoImage.vue'
-
-
-const foo = "E-mailAdress"
-const bar = "Submit"
 
 </script>
 

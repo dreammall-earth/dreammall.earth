@@ -1,10 +1,8 @@
 <template>
-  <v-btn :class="classes" :style="style" :size="size" @click="onClick">{{ label }}</v-btn>
+  <v-btn :class="classes" :size="size" @click="onClick">{{ label }}</v-btn>
 </template>
 
 <script lang="ts" setup>
-// eslint-disable-next-line import/no-unassigned-import
-
 import { computed } from 'vue'
 
 const props = withDefaults(
@@ -21,10 +19,6 @@ const props = withDefaults(
      * size of the button
      */
     size?: 'small' | 'medium' | 'large'
-    /**
-     * background color of the button
-     */
-    // backgroundColor?: string
   }>(),
   { variant: 'primary', size: 'medium' },
 )
@@ -40,10 +34,6 @@ const classes = computed(() => ({
   'main-button--third': props.variant === 'third',
   'main-button--third-inverse': props.variant === 'third-inverse',
   [`main-button--${props.size || 'medium'}`]: true,
-}))
-
-const style = computed(() => ({
-  backgroundColor: props.backgroundColor,
 }))
 
 const onClick = () => {

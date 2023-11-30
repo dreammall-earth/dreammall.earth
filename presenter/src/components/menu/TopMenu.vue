@@ -23,11 +23,6 @@ import AnchorLink from '#components/nav/AnchorLink.vue'
 
 import LogoImage from './LogoImage.vue'
 
-// const { current: locale } = useLocale()
-// const isEnabled = ref(locale.value === 'de')
-// const onChange = () => {
-//   locale.value = isEnabled.value ? 'de' : 'en'
-// }
 </script>
 
 <style scoped lang="scss">
