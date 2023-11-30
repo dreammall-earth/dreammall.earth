@@ -1,9 +1,10 @@
 name: "dreammall:deploy:docs to github"
 
-on:
-  push:
-    branches:
-      - master
+#on:
+#  push:
+#    branches:
+#      - master
+on: push
 
 permissions:
   contents: write
