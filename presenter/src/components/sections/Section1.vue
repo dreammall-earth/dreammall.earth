@@ -25,6 +25,7 @@ import MainButton from '#components/inputs/MainButton.vue'
 <style scoped lang="scss">
 .section1 {
   display: flex;
+  padding: 2em;
   flex-direction: column;
   align-items: center;  
   background: linear-gradient(0deg, #F5F5F5 0.06%, #D8D8D8 100%);

@@ -1,22 +1,15 @@
 <template>
   <v-app-bar :absolute="true" color="#D8D8D8" flat class="topmenu pa-4">
     <v-row>
-      <v-col>
+      <v-col class="">
         <LogoImage />
       </v-col>
-      <v-col class="d-flex align-center justify-center grow">
+      <v-col class="d-none d-md-flex align-center justify-center grow">
         <AnchorLink class="mx-4" href="#about" :label="$t('menu.about')"></AnchorLink>
         <AnchorLink class="mx-4" href="#products" :label="$t('menu.products')"></AnchorLink>
         <AnchorLink class="mx-4" href="#contact" :label="$t('menu.contact')"></AnchorLink>
       </v-col>
-      <v-col>
-        <!-- <v-switch
-          v-model="isEnabled"
-          class="d-flex justify-end mr-5"
-          :label="$t('language.german')"
-          color="success"
-          @update:model-value="onChange"
-        ></v-switch> -->
+      <v-col class="d-none d-md-flex">
       </v-col>
     </v-row>
   </v-app-bar>
