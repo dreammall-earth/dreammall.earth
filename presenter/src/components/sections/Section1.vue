@@ -32,12 +32,14 @@ import MainButton from '#components/inputs/MainButton.vue'
 
   .headline{
     font-size: 1.25rem;
+    font-family: "Poppins";
     font-weight: 300;
     line-height: 1.875;
     color: #3D4753;
   }
   .subheadline{
     font-size: 1.125rem;
+    font-family: "Poppins";
     font-weight: 400;
     line-height: 1.6875;
     color: #797979;

@@ -58,6 +58,7 @@ const style = computed(() => ({
     letter-spacing: 0em;
     padding-left: 0;
     padding-right: 0;
+    font-family: "Poppins";
 
     &:hover{
         color: #3f454d;

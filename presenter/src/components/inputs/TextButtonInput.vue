@@ -50,6 +50,7 @@ const onClick = () => {
 <style lang="scss">
 
 .custom-font .v-field__field{
+  font-family: "Poppins";
   font-weight: 300;
   font-size: 1.25rem;
   line-height: 1.7rem;

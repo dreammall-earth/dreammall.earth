@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar absolute="true" color="#D8D8D8" flat class="topmenu pa-4">
+  <v-app-bar :absolute="true" color="#D8D8D8" flat class="topmenu pa-4">
     <v-row>
       <v-col>
         <LogoImage />

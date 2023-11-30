@@ -54,6 +54,7 @@ const onClick = () => {
 .main-button{ 
   padding: 12px 39px;
   color: white;
+  font-family: "Poppins";
   font-weight: 600;
   text-align: center;
   line-height: 1.6rem;

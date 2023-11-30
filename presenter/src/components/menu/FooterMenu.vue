@@ -64,6 +64,7 @@ const bar = "Submit"
 .footer-header{
     color: #3D4753;
     font-weight: 600;
+    font-family: "Poppins";
     font-size: 1.623rem;
     line-height: 2rem;
 }
