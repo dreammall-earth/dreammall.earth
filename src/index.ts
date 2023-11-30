@@ -14,6 +14,7 @@ const resolvers = {
 };
 
 async function listen(port: number) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const app: any = express();
 
   const server = new ApolloServer({
@@ -24,21 +25,16 @@ async function listen(port: number) {
 
   server.applyMiddleware({ app, path: "/" });
 
-  return new Promise((resolve, reject) => {
-    app.listen(port).once("listening", resolve).once("error", reject);
-  });
+  return app.listen(port);
 }
 
 async function main() {
-  try {
-    await listen(4000);
-    console.log("🚀 Server is ready at http://localhost:4000/graphql");
-  } catch (err) {
-    console.error("💀 Error starting the node server", err);
-  }
+  await listen(4000);
+  // eslint-disable-next-line no-console
+  console.log("🚀 Server is ready at http://localhost:4000/graphql");
 }
 
-void main().catch((e) => {
+main().catch((e) => {
   // eslint-disable-next-line no-console
   console.error(e);
   throw e;
