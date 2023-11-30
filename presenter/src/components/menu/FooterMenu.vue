@@ -11,7 +11,7 @@
         <v-col cols="12" md="2">
             <LogoImage  size="small"/>
         </v-col>        
-        <v-col cols="6" md="3">
+        <v-col cols="7" md="3" class="d-flex flex-column align-start ">
           <h2 class="footer-header mb-4 text-left">{{ $t('menu.header.sitemap') }}</h2>
           <AnchorLink href="/" :label="$t('menu.home')"></AnchorLink>
           <AnchorLink href="/" :label="$t('menu.worldCoffeeHouse')"></AnchorLink>
@@ -19,7 +19,7 @@
           <AnchorLink href="/" :label="$t('menu.humanAndProjects')"></AnchorLink>
         </v-col>
         
-        <v-col cols="6" md="3">
+        <v-col cols="5" md="3">
           <h2 class="footer-header mb-4 text-left">{{ $t('menu.header.contact') }}</h2>
           <div class="footer-links">
           <AnchorLink href="/" :label="$t('menu.eMail')"></AnchorLink>
