@@ -39,6 +39,7 @@ const classes = computed(() => ({
   'main-button--secondary': props.variant === 'secondary',
   'main-button--third': props.variant === 'third',
   'main-button--third-inverse': props.variant === 'third-inverse',
+  [`main-button--${props.size || 'medium'}`]: true,
 }))
 
 const style = computed(() => ({
