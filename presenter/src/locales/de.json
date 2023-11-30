@@ -40,14 +40,32 @@
     "text1": "Willkommen zu diesem minimalen Frontendstarter.",
     "text2": "Es handelt sich um ein einfaches Beispiel um zu zeigen was so geht - nichts besonderes.",
     "text3": "In dem Anwendungsbereich wirst du ein Zählerbeispiel finden, welches den Browserspeicher verwendet.",
-    "text4": "Fröhliches Programmieren"
+    "text4": "Fröhliches Programmieren",
+    "section1":{
+      "headline": "DreamMall created by people for people",
+      "subHeadline": "7 Days free trial",
+      "preOrderBtn": "PRE ORDER"
+    }
   },
   "language": {
     "german": "Deutsch"
   },
   "menu": {
-    "about": "Über",
-    "app": "Anwendung",
-    "home": "Daheim"
+    "about": "about",
+    "products": "products",
+    "contact": "contact",
+    "home": "Home",
+    "worldCoffeeHouse": "World Coffee House",
+    "mall": "Mall",
+    "humanAndProjects": "Human and Projects",
+    "eMail": "E-Mail",
+    "linkedIn": "LinkedIn",
+    "instagramm": "Instagramm",
+    "twitter": "X",
+    "header":{
+      "sitemap": "Sitemap",
+      "contact": "Contact",
+      "newsletter": "Join our Newsletter"
+    }
   }
 }

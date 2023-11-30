@@ -40,14 +40,32 @@
     "text1": "Welcome to this minimal starter for frontends.",
     "text2": "This is just a basic example to demonstrate things - nothing fancy.",
     "text3": "In the App Section you will find a counter example utilizing the local storage.",
-    "text4": "Happy Coding"
+    "text4": "Happy Coding",
+    "section1":{
+      "headline": "DreamMall created by people for people",
+      "subHeadline": "7 Days free trial",
+      "preOrderBtn": "PRE ORDER"
+    }
   },
   "language": {
     "german": "German"
   },
   "menu": {
-    "about": "About",
-    "app": "App",
-    "home": "Home"
+    "about": "about",
+    "products": "products",
+    "contact": "contact",
+    "home": "Home",
+    "worldCoffeeHouse": "World Coffee House",
+    "mall": "Mall",
+    "humanAndProjects": "Human and Projects",
+    "eMail": "E-Mail",
+    "linkedIn": "LinkedIn",
+    "instagramm": "Instagramm",
+    "twitter": "X",
+    "header":{
+      "sitemap": "Sitemap",
+      "contact": "Contact",
+      "newsletter": "Join our Newsletter"
+    }
   }
 }
