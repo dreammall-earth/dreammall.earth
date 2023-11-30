@@ -1,22 +1,22 @@
 <template>
-  <v-app-bar flat>
+  <v-app-bar color="#D8D8D8" flat class="topmenu pa-4">
     <v-row>
       <v-col>
-        <LogoAvatar />
+        <LogoImage />
       </v-col>
       <v-col class="d-flex align-center justify-center grow">
-        <VikeBtn href="/">{{ $t('menu.home') }}</VikeBtn>
-        <VikeBtn href="/app">{{ $t('menu.app') }}</VikeBtn>
-        <VikeBtn href="/about">{{ $t('menu.about') }}</VikeBtn>
+        <AnchorLink class="mx-4" href="#about" :label="$t('menu.about')"></AnchorLink>
+        <AnchorLink class="mx-4" href="#products" :label="$t('menu.products')"></AnchorLink>
+        <AnchorLink class="mx-4" href="#contact" :label="$t('menu.contact')"></AnchorLink>
       </v-col>
       <v-col>
-        <v-switch
+        <!-- <v-switch
           v-model="isEnabled"
           class="d-flex justify-end mr-5"
           :label="$t('language.german')"
           color="success"
           @update:model-value="onChange"
-        ></v-switch>
+        ></v-switch> -->
       </v-col>
     </v-row>
   </v-app-bar>
@@ -26,13 +26,19 @@
 import { ref } from 'vue'
 import { useLocale } from 'vuetify'
 
-import VikeBtn from '#components/VikeBtn.vue'
+import AnchorLink from '#components/nav/AnchorLink.vue'
 
-import LogoAvatar from './LogoAvatar.vue'
+import LogoImage from './LogoImage.vue'
 
-const { current: locale } = useLocale()
-const isEnabled = ref(locale.value === 'de')
-const onChange = () => {
-  locale.value = isEnabled.value ? 'de' : 'en'
-}
+// const { current: locale } = useLocale()
+// const isEnabled = ref(locale.value === 'de')
+// const onChange = () => {
+//   locale.value = isEnabled.value ? 'de' : 'en'
+// }
 </script>
+
+<style scoped lang="scss">
+.topmenu{
+  background: linear-gradient(0deg, #F5F5F5 0.06%, #D8D8D8 100%);
+}
+</style>
