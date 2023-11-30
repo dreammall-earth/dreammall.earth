@@ -2,15 +2,19 @@
   <div class="h-screen">
     <div class="section1 h-screen pt-4">
       <p class="headline mt-16">{{ $t('home.section1.headline') }}</p>
-      <div class="w-100 mt-16 d-flex justify-center ">
+      <div class="w-100 mt-16 d-flex justify-center">
         <LogoImage size="large" />
       </div>
       <p class="subheadline mt-16">
         {{ $t('home.section1.subHeadline') }}
       </p>
-      <MainButton class="mt-8" :label="$t('home.section1.preOrderBtn')" size="large" variant="primary">{{
-        $t('home.section1.preOrderBtn')
-      }}</MainButton>
+      <MainButton
+        class="mt-8"
+        :label="$t('home.section1.preOrderBtn')"
+        size="large"
+        variant="primary"
+        >{{ $t('home.section1.preOrderBtn') }}</MainButton
+      >
     </div>
   </div>
 </template>
@@ -27,20 +31,19 @@ import MainButton from '#components/inputs/MainButton.vue'
   display: flex;
   padding: 2em;
   flex-direction: column;
-  align-items: center;  
-  background: linear-gradient(0deg, #F5F5F5 0.06%, #D8D8D8 100%);
+  align-items: center;
+  background: linear-gradient(0deg, #f5f5f5 0.06%, #d8d8d8 100%);
 
-
-  .headline{
+  .headline {
     font-size: 1.25rem;
-    font-family: "Poppins";
+    font-family: 'Poppins';
     font-weight: 300;
     line-height: 1.875;
-    color: #3D4753;
+    color: #3d4753;
   }
-  .subheadline{
+  .subheadline {
     font-size: 1.125rem;
-    font-family: "Poppins";
+    font-family: 'Poppins';
     font-weight: 400;
     line-height: 1.6875;
     color: #797979;

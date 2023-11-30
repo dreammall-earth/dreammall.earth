@@ -42,43 +42,43 @@ const onClick = () => {
 </script>
 
 <style scoped lang="scss">
-.main-button{ 
+.main-button {
   padding: 12px 39px;
   color: white;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-weight: 600;
   text-align: center;
   line-height: 1.6rem;
   font-size: 1.25rem;
   border-radius: 80px;
 
-  &--primary{
-    background-color: #F09630;
+  &--primary {
+    background-color: #f09630;
   }
-  &--secondary{
+  &--secondary {
     background-color: #fff;
     color: #767676;
   }
-  &--third{
+  &--third {
     padding: 8px 38px;
     border-radius: 10px;
-    background-color: #3D4753;
+    background-color: #3d4753;
   }
-  &--third-inverse{
+  &--third-inverse {
     padding: 8px 38px;
     border-radius: 10px;
     background-color: transparent;
-    border: 1px solid #3D4753;
-    color: #3D4753;
+    border: 1px solid #3d4753;
+    color: #3d4753;
   }
 
-  &--large{
+  &--large {
     width: 16rem;
   }
-  &--medium{
+  &--medium {
     width: 8rem;
   }
-  &--small{
+  &--small {
     width: 4rem;
   }
 }

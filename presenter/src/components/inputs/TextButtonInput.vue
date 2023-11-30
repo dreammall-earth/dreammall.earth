@@ -11,7 +11,9 @@
       type="input"
     >
       <template #append-inner>
-        <MainButton class="my-2" variant="primary" :label="props.buttonLabel"> {{ props.buttonLabel }} </MainButton>
+        <MainButton class="my-2" variant="primary" :label="props.buttonLabel">
+          {{ props.buttonLabel }}
+        </MainButton>
       </template>
     </v-text-field>
   </div>
@@ -45,12 +47,11 @@ const onClick = () => {
 </script>
 
 <style lang="scss">
-
-.custom-font .v-field__field{
-  font-family: "Poppins";
+.custom-font .v-field__field {
+  font-family: 'Poppins';
   font-weight: 300;
   font-size: 1.25rem;
   line-height: 1.7rem;
-  color: #3D4753 !important;
+  color: #3d4753 !important;
 }
 </style>
