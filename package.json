@@ -16,13 +16,20 @@
     "url": "https://github.com/IT4Change/boilerplate-backend/issues"
   },
   "scripts": {
-    "dev": "nodemon --watch './**/*.{js,gql}' src/index.js"
+    "watch": "nodemon --watch './**/*.{ts,graphql}' --exec 'node --loader ts-node/esm' src/index.ts",
+    "dev": "tsc-watch  --noClear --onSuccess \"npm run watch\""
   },
   "dependencies": {
     "apollo-server-express": "^3.13.0",
     "graphql": "^16.8.1"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.1",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "tsc": "^2.0.4",
+    "tsc-watch": "^6.0.4",
+    "typescript": "^5.3.2"
   }
 }

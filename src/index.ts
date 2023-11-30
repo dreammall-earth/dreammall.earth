@@ -13,8 +13,8 @@ const resolvers = {
   },
 }
 
-async function listen(port) {
-  const app = express()
+async function listen(port: number) {
+  const app: any = express()
   
   const server = new ApolloServer({
     typeDefs,
