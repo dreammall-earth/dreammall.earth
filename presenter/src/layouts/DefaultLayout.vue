@@ -1,6 +1,6 @@
 <template>
   <v-main class="bg-grey-lighten-3">
-    <v-container>
+    <v-container fluid class="pa-0">
       <v-row>
         <v-col v-if="slots.sidemenu" cols="2">
           <v-sheet rounded>
@@ -8,18 +8,18 @@
           </v-sheet>
         </v-col>
 
-        <v-col>
-          <v-sheet rounded class="pa-3">
-            <slot />
-          </v-sheet>
+        <v-col>          
+          <slot />          
         </v-col>
       </v-row>
     </v-container>
+    <FooterMenu />
   </v-main>
 </template>
 
 <script lang="ts" setup>
 import { useSlots } from 'vue'
+import FooterMenu from '#components/menu/FooterMenu.vue'
 
 const slots = useSlots()
 </script>

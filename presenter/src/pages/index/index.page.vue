@@ -1,19 +1,24 @@
 <template>
   <DefaultLayout>
-    <h1>{{ $t('home.h1') }}</h1>
-    <p>{{ $t('home.text1') }}</p>
-    <br />
-    <p>{{ $t('home.text2') }}</p>
-    <br />
-    <p>{{ $t('home.text3') }}</p>
-    <br />
-    <p>{{ $t('home.text4') }} <v-icon icon="mdi-heart" color="red" /></p>
-    <br />
-    <p>{{ $t('home.greet1') }}</p>
-    <p>{{ $t('home.greet2') }}</p>
+    <div id="section1">
+      <Section1></Section1>
+    </div>
+    <div id="about">
+    <Section2></Section2>
+    </div>
+    <div id="products">
+    <Section3></Section3>
+    </div>
+    <div id="contact">
+    <Section4></Section4>
+    </div>
   </DefaultLayout>
 </template>
 
 <script lang="ts" setup>
 import DefaultLayout from '#layouts/DefaultLayout.vue'
+import Section1 from '#components/sections/Section1.vue'
+import Section2 from '#components/sections/Section2.vue'
+import Section3 from '#components/sections/Section3.vue'
+import Section4 from '#components/sections/Section4.vue'
 </script>
