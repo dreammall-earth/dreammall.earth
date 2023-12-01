@@ -55,5 +55,8 @@
     "tsc": "^2.0.4",
     "tsc-watch": "^6.0.4",
     "typescript": "^5.3.2"
+  },
+  "imports": {
+    "#types/*": "./src/graphql/types/*"
   }
 }
