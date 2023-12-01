@@ -1,14 +1,20 @@
-# dreammall.earth
+# Dreammall.earth
 [![nodejs][badge-nodejs-img]][badge-nodejs-href]
 [![npm][badge-npm-img]][badge-npm-href]
 [![remark-cli][badge-remark-cli-img]][badge-remark-cli-href]
 [![vuepress][badge-vuepress-img]][badge-vuepress-href]
 
-Dreammall.earth website &amp; product page
+Dreammall.earth websites & services
+
+![](presenter/src/assets/dreammall-logo.svg)
 
 ## Modules
 
 - [Presenter](presenter/README.md)
+
+## Deploy
+
+Deploy instructions can be found in [deployment/](deplyoment/README.md)
 
 ## Commands
 
