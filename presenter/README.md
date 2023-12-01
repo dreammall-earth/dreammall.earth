@@ -1,4 +1,4 @@
-# boilerplate-frontend
+# Dreammall Presenter
 [![nodejs][badge-nodejs-img]][badge-nodejs-href]
 [![npm][badge-npm-img]][badge-npm-href]
 [![docker][badge-docker-img]][badge-docker-href]
@@ -16,7 +16,9 @@
 [![vuepress][badge-vuepress-img]][badge-vuepress-href]
 [![chromatic][badge-chromatic-img]][badge-chromatic-href]
 
-The IT4C Boilerplate for frontends
+The Dreammall presenter.
+
+![](src/assets/dreammall-logo.svg)
 
 ## Requirements & Technology
 
