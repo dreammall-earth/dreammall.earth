@@ -62,11 +62,11 @@ This will build all projects parts and start a pm2 instance to serve the corresp
 
 Those services are:
 
-| Service             | URL                 |
-|---------------------|---------------------|
-| presenter           | https://host/       |
-| docs                | https://host/docs   |
-| webhooks (optional) | https://host/hooks/ |
+| Service             | URL                                        |
+|---------------------|--------------------------------------------|
+| presenter           | [https://host/](https://host/)             |
+| docs                | [https://host/docs](https://host/docs)     |
+| webhooks (optional) | [https://host/hooks/](https://host/hooks/) |
 
 ## (Optional) Webhook to auto update
 
