@@ -24,7 +24,8 @@
   },
   "dependencies": {
     "apollo-server-express": "^3.13.0",
-    "graphql": "^16.8.1"
+    "graphql": "^15.3.0",
+    "type-graphql": "^1.1.1"
   },
   "devDependencies": {
     "@eslint-community/eslint-plugin-eslint-comments": "^4.1.0",
