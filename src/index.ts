@@ -1,25 +1,17 @@
-import { ApolloServer, gql } from 'apollo-server-express'
+// eslint-disable-next-line import/no-unassigned-import
+import 'reflect-metadata'
+
+import { ApolloServer } from 'apollo-server-express'
 import express from 'express'
 
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`
-
-const resolvers = {
-  Query: {
-    hello: () => 'Hello world!',
-  },
-}
+import { schema } from './graphql/schema'
 
 async function listen(port: number) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const app: any = express()
 
   const server = new ApolloServer({
-    typeDefs,
-    resolvers,
+    schema: await schema(),
   })
   await server.start()
 

@@ -2,7 +2,7 @@
   "name": "boilerplate-backend",
   "version": "1.0.0",
   "description": "The IT4C Boilerplate for backends",
-  "main": "build/index.ts",
+  "main": "build/index.js",
   "type": "module",
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
   "dependencies": {
     "apollo-server-express": "^3.13.0",
     "graphql": "^15.3.0",
+    "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1"
   },
   "devDependencies": {
@@ -54,6 +55,7 @@
     "ts-node": "^10.9.1",
     "tsc": "^2.0.4",
     "tsc-watch": "^6.0.4",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.3.2"
   },
   "imports": {
