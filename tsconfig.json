@@ -8,7 +8,9 @@
     "baseUrl": ".",
     "lib": ["ESNext"],
     "paths": {
-      "#types/*": ["./src/graphql/types/*"]
+      "#graphql/*": ["./src/graphql/*"],
+      "#types/*": ["./src/graphql/types/*"],
+      "#test/*": ["./test/*"]
     },
     "outDir": "./build/src",
     "esModuleInterop": true,
