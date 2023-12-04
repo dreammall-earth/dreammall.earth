@@ -16,6 +16,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "start": "npm run build && TZ=UTC TS_NODE_BASEURL=./build node -r tsconfig-paths/register build/src/index.js",
     "dev": "TZ=UTC nodemon -w src --ext ts,json --exec ts-node -r tsconfig-paths/register src/index.ts",
     "test:lint": "npm run test:lint:eslint && npm run test:lint:remark",
     "test:lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.json,.yml,.yaml --max-warnings 0 --ignore-path .gitignore .",
