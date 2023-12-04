@@ -3,7 +3,7 @@
     "target": "ESNext",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "module": "ESNext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "baseUrl": ".",
     "lib": ["ESNext"],
@@ -14,8 +14,5 @@
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true
-  },
-  "ts-node": {
-    "experimentalSpecifierResolution": "node"
   }
 }

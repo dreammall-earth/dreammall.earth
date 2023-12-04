@@ -1,11 +1,7 @@
 import path from 'path'
-import { fileURLToPath } from 'url'
 
 import { GraphQLSchema } from 'graphql'
 import { buildSchema } from 'type-graphql'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
 
 export const schema = async (): Promise<GraphQLSchema> => {
   return buildSchema({

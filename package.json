@@ -2,8 +2,7 @@
   "name": "boilerplate-backend",
   "version": "1.0.0",
   "description": "The IT4C Boilerplate for backends",
-  "main": "build/index.js",
-  "type": "module",
+  "main": "build/index.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/IT4Change/boilerplate-backend.git"
@@ -16,8 +15,14 @@
     "url": "https://github.com/IT4Change/boilerplate-backend/issues"
   },
   "scripts": {
-    "watch": "nodemon --watch './**/*.{ts,graphql}' --exec 'node --loader ts-node/esm' src/index.ts",
-    "dev": "tsc-watch  --noClear --onSuccess \"npm run watch\"",
+    "build": "tsc",
+    "server": "node --loader ts-node/esm ./src/index.ts",
+    "server:dev": "npm run server",
+    "server:prod": "NODE_ENV=production npm run server",
+    "gdd": "TZ=UTC nodemon -w src --ext ts,pug,json,css --exec ts-node -r tsconfig-paths/register src/index.ts",
+    "watch2": "nodemon -w src --ext ts,pug,json,css --exec ts-node -r tsconfig-paths/register src/index.ts",
+    "watch": "nodemon --watch './**/*.{ts,graphql}' --exec 'node --no-warnings=ExperimentalWarning --loader ts-node/esm' src/index.ts",
+    "dev": "tsc-watch --noClear --onSuccess \"npm run watch\"",
     "test:lint": "npm run test:lint:eslint && npm run test:lint:remark",
     "test:lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.json,.yml,.yaml --max-warnings 0 --ignore-path .gitignore .",
     "test:lint:remark": "remark . --quiet --frail"
@@ -53,7 +58,6 @@
     "remark-preset-lint-markdown-style-guide": "^5.1.3",
     "remark-preset-lint-recommended": "^6.1.3",
     "ts-node": "^10.9.1",
-    "tsc": "^2.0.4",
     "tsc-watch": "^6.0.4",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.3.2"
