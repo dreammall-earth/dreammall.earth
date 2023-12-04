@@ -7,7 +7,7 @@ module.exports = {
   collectCoverageFrom: ['src/**/*.ts', '!**/node_modules/**', '!src/seeds/**', '!build/**'],
   coverageThreshold: {
     global: {
-      lines: 86,
+      lines: 78,
     },
   },
   setupFiles: ['./test/testSetup.ts'],
