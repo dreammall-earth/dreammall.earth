@@ -3,9 +3,11 @@ import path from 'path'
 import { GraphQLSchema } from 'graphql'
 import { buildSchema } from 'type-graphql'
 
+import { HelloResolver } from './resolvers/HelloResolver'
+
 export const schema = async (): Promise<GraphQLSchema> => {
   return buildSchema({
-    resolvers: [path.join(__dirname, 'resolvers', `!(*.spec).{ts,js}`)],
+    resolvers: [HelloResolver],
     validate: {
       validationError: { target: false },
       skipMissingProperties: true,
