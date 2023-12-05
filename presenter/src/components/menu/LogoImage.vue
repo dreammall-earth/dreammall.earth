@@ -3,8 +3,9 @@
 </template>
 
 <script lang="ts" setup>
-import Logo from '#assets/dreammall-logo.svg'
 import { computed } from 'vue'
+
+import Logo from '#assets/dreammall-logo.svg'
 
 const props = withDefaults(
   defineProps<{
@@ -17,20 +18,22 @@ const props = withDefaults(
 )
 
 const classes = computed(() => ({
-  'logo--large': props.size === 'large',
-  'logo--medium': props.size === 'medium',
-  'logo--small': props.size === 'small',
+  'logo-large': props.size === 'large',
+  'logo-medium': props.size === 'medium',
+  'logo-small': props.size === 'small',
 }))
 </script>
 
 <style scoped lang="scss">
-.logo--large {
+.logo-large {
   max-width: 36em;
 }
-.logo--medium {
+
+.logo-medium {
   max-width: 14em;
 }
-.logo--small {
+
+.logo-small {
   max-width: 8em;
 }
 </style>

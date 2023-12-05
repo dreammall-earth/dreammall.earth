@@ -4,21 +4,21 @@
       <Section1></Section1>
     </div>
     <div id="about">
-    <Section2></Section2>
+      <Section2></Section2>
     </div>
     <div id="products">
-    <Section3></Section3>
+      <Section3></Section3>
     </div>
     <div id="contact">
-    <Section4></Section4>
+      <Section4></Section4>
     </div>
   </DefaultLayout>
 </template>
 
 <script lang="ts" setup>
 import DefaultLayout from '#layouts/DefaultLayout.vue'
-import Section1 from '#components/sections/Section1.vue'
-import Section2 from '#components/sections/Section2.vue'
-import Section3 from '#components/sections/Section3.vue'
-import Section4 from '#components/sections/Section4.vue'
+import Section1 from '#root/src/components/sections/FirstSection.vue'
+import Section4 from '#root/src/components/sections/FourthSection.vue'
+import Section2 from '#root/src/components/sections/SecondSection.vue'
+import Section3 from '#root/src/components/sections/ThirdSection.vue'
 </script>

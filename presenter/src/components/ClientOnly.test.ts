@@ -1,4 +1,4 @@
-import { mount, config } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
 
 import ClientOnly from './ClientOnly.vue'
@@ -9,5 +9,4 @@ describe('ClientOnly', () => {
   it('renders content if mounted', async () => {
     expect(wrapper.isVisible()).toBeTruthy()
   })
-
 })

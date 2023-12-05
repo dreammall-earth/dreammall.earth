@@ -33,7 +33,7 @@ const classes = computed(() => ({
   'main-button--secondary': props.variant === 'secondary',
   'main-button--third': props.variant === 'third',
   'main-button--third-inverse': props.variant === 'third-inverse',
-  [`main-button--${props.size || 'medium'}`]: true,
+  [`main-button-${props.size || 'medium'}`]: true,
 }))
 
 const onClick = () => {
@@ -44,41 +44,46 @@ const onClick = () => {
 <style scoped lang="scss">
 .main-button {
   padding: 12px 39px;
-  color: white;
-  font-family: 'Poppins';
-  font-weight: 600;
-  text-align: center;
-  line-height: 1.6rem;
+  font-family: Poppins, sans-serif;
   font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.6rem;
+  color: white;
+  text-align: center;
   border-radius: 80px;
 
   &--primary {
     background-color: #f09630;
   }
+
   &--secondary {
-    background-color: #fff;
     color: #767676;
-  }
-  &--third {
-    padding: 8px 38px;
-    border-radius: 10px;
-    background-color: #3d4753;
-  }
-  &--third-inverse {
-    padding: 8px 38px;
-    border-radius: 10px;
-    background-color: transparent;
-    border: 1px solid #3d4753;
-    color: #3d4753;
+    background-color: #fff;
   }
 
-  &--large {
+  &--third {
+    padding: 8px 38px;
+    background-color: #3d4753;
+    border-radius: 10px;
+  }
+
+  &--third-inverse {
+    padding: 8px 38px;
+    color: #3d4753;
+    background-color: transparent;
+    border: 1px solid #3d4753;
+    border-radius: 10px;
+  }
+
+  &-large {
     width: 16rem;
   }
-  &--medium {
+
+  &-medium {
     width: 8rem;
   }
-  &--small {
+
+  &-small {
     width: 4rem;
   }
 }

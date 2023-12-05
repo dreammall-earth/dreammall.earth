@@ -15,9 +15,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { useLocale } from 'vuetify'
-
 import AnchorLink from '#components/nav/AnchorLink.vue'
 
 import LogoImage from './LogoImage.vue'

@@ -17,6 +17,15 @@
       "headline": "DreamMall created by people for people",
       "subHeadline": "7 Days free trial",
       "preOrderBtn": "PRE ORDER"
+    },
+    "section2":{
+      "headline": "About Section Content"
+    },
+    "section3":{
+      "headline": "Products Section Content"
+    },
+    "section4":{
+      "headline": "Contact Section Content"
     }
   },  
   "menu": {

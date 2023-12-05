@@ -28,25 +28,25 @@ const classes = computed(() => ({
 
 <style scoped lang="scss">
 .anchor-link {
-  color: #3d4753;
-  text-transform: unset !important;
-  font-weight: 300;
-  text-align: center;
-  line-height: 1.9rem;
-  font-size: 1.25rem;
-  letter-spacing: 0em;
-  padding-left: 0;
   padding-right: 0;
-  font-family: 'Poppins';
+  padding-left: 0;
+  font-family: Poppins, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 300;
+  line-height: 1.9rem;
+  color: #3d4753;
+  text-align: center;
+  text-transform: unset !important;
+  letter-spacing: 0;
 
   &:hover {
-    color: #3f454d;
     font-weight: 400;
+    color: #3f454d;
   }
 
   &--active {
-    color: rgb(121, 121, 121);
     font-weight: 400;
+    color: rgb(121 121 121);
   }
 }
 </style>

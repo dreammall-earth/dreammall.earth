@@ -8,10 +8,8 @@ const meta = {
   component: AnchorLink,
   // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/vue/writing-docs/autodocs
   tags: ['autodocs'],
-  argTypes: {
-    
-  },
-  args: {  }, // default value
+  argTypes: {},
+  args: {}, // default value
 } satisfies Meta<typeof AnchorLink>
 
 export default meta
@@ -23,7 +21,6 @@ type Story = StoryObj<typeof meta>
  */
 export const Example: Story = {
   args: {
-    href: '#',    
+    href: '#',
   },
 }
-

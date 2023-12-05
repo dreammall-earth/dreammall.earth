@@ -13,7 +13,7 @@ const meta = {
     size: { control: 'select', options: ['small', 'medium', 'large'] },
     onClick: { action: 'clicked' },
   },
-  args: { variant: "primary", size: "large"}, // default value
+  args: { variant: 'primary', size: 'large' }, // default value
 } satisfies Meta<typeof MainButton>
 
 export default meta
@@ -25,29 +25,29 @@ type Story = StoryObj<typeof meta>
  */
 export const Primary: Story = {
   args: {
-    variant: "primary",
-    size: "large",
+    variant: 'primary',
+    size: 'large',
     label: 'Button',
   },
 }
 
 export const Secondary: Story = {
   args: {
-    variant: "secondary",
+    variant: 'secondary',
     label: 'Button',
   },
 }
 
 export const Third: Story = {
   args: {
-    variant: "third",
+    variant: 'third',
     label: 'Button',
   },
 }
 
 export const ThirdInverse: Story = {
   args: {
-    variant: "third-inverse",
+    variant: 'third-inverse',
     label: 'Button',
   },
 }

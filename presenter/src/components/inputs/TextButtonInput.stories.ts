@@ -11,7 +11,7 @@ const meta = {
   argTypes: {
     onClick: { action: 'clicked' },
   },
-  args: { inputLabel: "input", buttonLabel: "button" }, // default value
+  args: { inputLabel: 'input', buttonLabel: 'button' }, // default value
 } satisfies Meta<typeof TextButtonInput>
 
 export default meta
@@ -27,4 +27,3 @@ export const Example: Story = {
     buttonLabel: 'Submit',
   },
 }
-

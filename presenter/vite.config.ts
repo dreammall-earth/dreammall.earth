@@ -41,10 +41,10 @@ const config: UserConfig = {
       scss: {
         additionalData: `
           @import "./src/assets/sass/style.scss";
-        `
-      }
-    }
-  }
+        `,
+      },
+    },
+  },
 }
 
 export default config

@@ -8,8 +8,8 @@
           </v-sheet>
         </v-col>
 
-        <v-col>          
-          <slot />          
+        <v-col>
+          <slot />
         </v-col>
       </v-row>
     </v-container>
@@ -19,6 +19,7 @@
 
 <script lang="ts" setup>
 import { useSlots } from 'vue'
+
 import FooterMenu from '#components/menu/FooterMenu.vue'
 
 const slots = useSlots()

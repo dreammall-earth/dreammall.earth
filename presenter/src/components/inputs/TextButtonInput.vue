@@ -11,7 +11,7 @@
       type="input"
     >
       <template #append-inner>
-        <MainButton class="my-2" variant="primary" :label="props.buttonLabel">
+        <MainButton class="my-2" variant="primary" :label="props.buttonLabel" @click="onClick">
           {{ props.buttonLabel }}
         </MainButton>
       </template>
@@ -20,7 +20,6 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
 import MainButton from './MainButton.vue'
 
 const props = withDefaults(
@@ -48,9 +47,9 @@ const onClick = () => {
 
 <style lang="scss">
 .custom-font .v-field__field {
-  font-family: 'Poppins';
-  font-weight: 300;
+  font-family: Poppins, sans-serif;
   font-size: 1.25rem;
+  font-weight: 300;
   line-height: 1.7rem;
   color: #3d4753 !important;
 }

@@ -27,8 +27,8 @@
           <h2 class="footer-header mb-14 text-left">{{ $t('menu.header.newsletter') }}</h2>
           <div class="text-button-container">
             <TextButtonInput
-              :inputLabel="$t('menu.footer.textInputLabel')"
-              :buttonLabel="$t('menu.footer.textInputButton')"
+              :input-label="$t('menu.footer.textInputLabel')"
+              :button-label="$t('menu.footer.textInputButton')"
             ></TextButtonInput>
           </div>
         </v-col>
@@ -39,37 +39,39 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-
-import AnchorLink from '#components/nav/AnchorLink.vue'
 import TextButtonInput from '#components/inputs/TextButtonInput.vue'
+import AnchorLink from '#components/nav/AnchorLink.vue'
 
 import LogoImage from './LogoImage.vue'
 </script>
 
 <style scoped lang="scss">
 .gradient-bg {
-  background: linear-gradient(98.77deg, #3095d4 0%, rgba(249, 196, 81, 0.55) 99.16%);
   width: 100%;
   height: 10px;
+  background: linear-gradient(98.77deg, #3095d4 0%, rgb(249 196 81 / 55%) 99.16%);
 }
+
 .footer-header {
-  color: #3d4753;
-  font-weight: 600;
-  font-family: 'Poppins';
+  font-family: Poppins, sans-serif;
   font-size: 1.623rem;
+  font-weight: 600;
   line-height: 2rem;
+  color: #3d4753;
 }
+
 .footer-links {
   display: flex;
   flex-direction: column;
-  justify-content: start;
   align-items: flex-start;
+  justify-content: start;
 }
+
 .text-button-container {
   max-width: 365px;
 }
+
 .min-width-remover {
-  min-width: 0px;
+  min-width: 0;
 }
 </style>
