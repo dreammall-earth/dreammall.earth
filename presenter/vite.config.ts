@@ -33,6 +33,16 @@ const config: UserConfig = {
       '#plugins': path.join(__dirname, '/renderer/plugins'),
       '#context': path.join(__dirname, '/renderer/context'),
       '#types': path.join(__dirname, '/types'),
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+          @import "./src/assets/sass/style.scss";
+        `,
+      },
     },
   },
 }
