@@ -1,7 +1,7 @@
 <template>
   <v-app-bar :absolute="true" color="#D8D8D8" flat class="topmenu pa-4">
     <v-row>
-      <v-col class="">
+      <v-col>
         <LogoImage />
       </v-col>
       <v-col class="d-none d-md-flex align-center justify-center grow">

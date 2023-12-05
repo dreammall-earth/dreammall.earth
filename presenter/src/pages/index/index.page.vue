@@ -1,16 +1,16 @@
 <template>
   <DefaultLayout>
     <div id="section1">
-      <Section1></Section1>
+      <Section1 />
     </div>
     <div id="about">
-      <Section2></Section2>
+      <Section2 />
     </div>
     <div id="products">
-      <Section3></Section3>
+      <Section3 />
     </div>
     <div id="contact">
-      <Section4></Section4>
+      <Section4 />
     </div>
   </DefaultLayout>
 </template>
