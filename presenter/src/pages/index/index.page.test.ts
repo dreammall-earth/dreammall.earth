@@ -1,5 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
+import { h } from 'vue'
+import { VApp } from 'vuetify/components'
 
 import Section1 from '#components/sections/FirstSection.vue'
 import Section4 from '#components/sections/FourthSection.vue'
@@ -9,7 +11,11 @@ import Section3 from '#components/sections/ThirdSection.vue'
 import IndexPage from './index.page.vue'
 
 describe('IndexPage', () => {
-  const wrapper = mount(IndexPage)
+  const wrapper = mount(VApp, {
+    slots: {
+      default: h(IndexPage),
+    },
+  })
 
   it('renders IndexPage with sections', () => {
     expect(wrapper.find('#section1').findComponent(Section1)).toBeTruthy()
