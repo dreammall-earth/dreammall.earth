@@ -1,23 +1,19 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { ApolloServer } from 'apollo-server-express'
-import express from 'express'
+import { startStandaloneServer } from '@apollo/server/standalone'
 
 import { listen } from './server'
 
-jest.mock('express', () => {
-  const originalModule = jest.requireActual('express')
+jest.mock('@apollo/server/standalone', () => {
+  const originalModule = jest.requireActual('@apollo/server/standalone')
   return {
     __esModule: true,
     ...originalModule,
-    default: jest.fn(() => {
+    startStandaloneServer: jest.fn(() => {
       return {
-        listen: jest.fn(),
+        url: 'url',
       }
     }),
   }
 })
-
-jest.mock('apollo-server-express')
 
 describe('server', () => {
   describe('listen', () => {
@@ -26,8 +22,8 @@ describe('server', () => {
       await listen(4000)
     })
 
-    it('calls express', () => {
-      expect(express).toBeCalled()
+    it('calls startStandaloneServer', () => {
+      expect(startStandaloneServer).toBeCalled()
     })
   })
 })

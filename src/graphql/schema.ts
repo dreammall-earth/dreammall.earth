@@ -1,5 +1,3 @@
-import path from 'path'
-
 import { GraphQLSchema } from 'graphql'
 import { buildSchema } from 'type-graphql'
 

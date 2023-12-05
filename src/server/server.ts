@@ -1,18 +1,18 @@
-import { ApolloServer } from 'apollo-server-express'
-import express from 'express'
+import { ApolloServer } from '@apollo/server'
+import { startStandaloneServer } from '@apollo/server/standalone'
 
 import { schema } from '#graphql/schema'
 
-export async function listen(port: number) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const app: any = express()
-
-  const server = new ApolloServer({
+export const createServer = async (): Promise<ApolloServer> => {
+  return new ApolloServer({
     schema: await schema(),
   })
-  await server.start()
+}
 
-  server.applyMiddleware({ app, path: '/' })
+export async function listen(port: number) {
+  const { url } = await startStandaloneServer(await createServer(), {
+    listen: { port },
+  })
 
-  return app.listen(port)
+  return url
 }

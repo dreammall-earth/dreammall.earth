@@ -3,9 +3,9 @@ import 'reflect-metadata'
 import { listen } from './server/server'
 
 export async function main() {
-  await listen(4000)
+  const url = await listen(4000)
   // eslint-disable-next-line no-console
-  console.log('🚀 Server is ready at http://localhost:4000/graphql')
+  console.log(`🚀 Server is ready at ${url}`)
 }
 
 main().catch((e) => {

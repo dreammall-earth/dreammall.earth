@@ -1,20 +1,25 @@
-import { ApolloServerTestClient } from 'apollo-server-testing'
+import { ApolloServer } from '@apollo/server'
 
-import { testEnvironment } from '#test/helpers'
+import { createServer } from '#src/server/server'
 
-let query: ApolloServerTestClient['query']
+let testServer: ApolloServer
 
 beforeAll(async () => {
-  const testEnv = await testEnvironment()
-  query = testEnv.query
+  testServer = await createServer()
 })
 
 describe('HelloResolver', () => {
   it('return "Hello World!"', async () => {
-    await expect(query({ query: '{ hello { hello } }' })).resolves.toMatchObject({
-      data: {
-        hello: {
-          hello: 'Hello world!',
+    const response = await testServer.executeOperation({
+      query: '{ hello { hello } }',
+    })
+    expect(response.body).toMatchObject({
+      kind: 'single',
+      singleResult: {
+        data: {
+          hello: {
+            hello: 'Hello world!',
+          },
         },
       },
     })
