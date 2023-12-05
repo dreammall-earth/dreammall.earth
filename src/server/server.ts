@@ -16,9 +16,3 @@ export async function listen(port: number) {
 
   return app.listen(port)
 }
-
-export async function main() {
-  await listen(4000)
-  // eslint-disable-next-line no-console
-  console.log('🚀 Server is ready at http://localhost:4000/graphql')
-}

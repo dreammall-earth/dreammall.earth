@@ -4,10 +4,10 @@ module.exports = {
   verbose: true,
   preset: 'ts-jest',
   collectCoverage: true,
-  collectCoverageFrom: ['src/**/*.ts', '!**/node_modules/**', '!src/seeds/**', '!build/**'],
+  collectCoverageFrom: ['src/**/*.ts', '!**/node_modules/**', '!src/index.ts', '!build/**'],
   coverageThreshold: {
     global: {
-      lines: 78,
+      lines: 100,
     },
   },
   setupFiles: ['./test/testSetup.ts'],
