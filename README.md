@@ -13,7 +13,7 @@ The IT4C Boilerplate for an apollo express backends.
 
 To be able to build this project you need `nodejs`, `npm` and optional `docker`.
 
-The project sets up an apollo express server.
+The project sets up an apollo express server. It uses `type-graphql`.
 
 ## Commands
 
