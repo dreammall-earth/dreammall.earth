@@ -1,7 +1,5 @@
 {
-  "about": {
-   
-  },  
+  "about": {},
   "error": {
     "404": {
       "h1": "404 Page Not Found",
@@ -12,42 +10,42 @@
       "text": "Something went wrong."
     }
   },
-  "home": {    
-    "section1":{
+  "home": {
+    "section1": {
       "headline": "DreamMall created by people for people",
-      "subHeadline": "7 Days free trial",
-      "preOrderBtn": "PRE ORDER"
+      "preOrderBtn": "PRE ORDER",
+      "subHeadline": "7 Days free trial"
     },
-    "section2":{
+    "section2": {
       "headline": "About Section Content"
     },
-    "section3":{
+    "section3": {
       "headline": "Products Section Content"
     },
-    "section4":{
+    "section4": {
       "headline": "Contact Section Content"
     }
-  },  
+  },
   "menu": {
     "about": "about",
-    "products": "products",
     "contact": "contact",
-    "home": "Home",
-    "worldCoffeeHouse": "World Coffee House",
-    "mall": "Mall",
-    "humanAndProjects": "Human and Projects",
     "eMail": "E-Mail",
-    "linkedIn": "LinkedIn",
-    "instagramm": "Instagramm",
-    "twitter": "X",
-    "header":{
-      "sitemap": "Sitemap",
-      "contact": "Contact",
-      "newsletter": "Join our Newsletter"
+    "footer": {
+      "textInputButton": "Submit",
+      "textInputLabel": "E-Mail Address"
     },
-    "footer":{
-      "textInputLabel": "E-Mail Address",
-      "textInputButton": "Submit"
-    }
+    "header": {
+      "contact": "Contact",
+      "newsletter": "Join our Newsletter",
+      "sitemap": "Sitemap"
+    },
+    "home": "Home",
+    "humanAndProjects": "Human and Projects",
+    "instagramm": "Instagramm",
+    "linkedIn": "LinkedIn",
+    "mall": "Mall",
+    "products": "products",
+    "twitter": "X",
+    "worldCoffeeHouse": "World Coffee House"
   }
 }
