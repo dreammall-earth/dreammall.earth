@@ -13,7 +13,7 @@ The IT4C Boilerplate for an apollo express backends.
 
 To be able to build this project you need `nodejs`, `npm` and optional `docker`.
 
-The project sets up an apollo express server. It uses `type-graphql`.
+The project sets up an apollo server. It uses `type-graphql`.
 
 ## Commands
 
@@ -82,8 +82,8 @@ The following endpoints are provided given the right command is executed or all 
 [badge-eslint-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=devDependencies.eslint&label=eslint&color=red
 [badge-eslint-href]: https://eslint.org/
 
-[badge-apollo-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=dependencies%5B%22apollo-server-express%22%5D&label=apollo-server-express&color=yellow
-[badge-apollo-href]: https://github.com/apollographql/apollo-server#readme
+[badge-apollo-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=dependencies%5B%22%40apollo%2Fserver%22%5D&label=apollo-server&color=yellow
+[badge-apollo-href]: https://apollographql.com
 
 [badge-graphql-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=dependencies.graphql&label=graphql&color=yellow
 [badge-graphql-href]: https://graphql.org/
