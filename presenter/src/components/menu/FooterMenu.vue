@@ -10,7 +10,7 @@
           <AnchorLink href="/" :label="$t('menu.home')"></AnchorLink>
           <AnchorLink href="/" :label="$t('menu.worldCoffeeHouse')"></AnchorLink>
           <AnchorLink class="min-width-remover" href="/" :label="$t('menu.mall')"></AnchorLink>
-          <AnchorLink href="/" :label="$t('menu.humanAndProjects')"></AnchorLink>
+          <AnchorLink href="/" :label="$t('menu.humansAndProjects')"></AnchorLink>
         </v-col>
 
         <v-col cols="5" md="3">
@@ -18,7 +18,7 @@
           <div class="footer-links">
             <AnchorLink href="/" :label="$t('menu.eMail')"></AnchorLink>
             <AnchorLink href="/" :label="$t('menu.linkedIn')"></AnchorLink>
-            <AnchorLink href="/" :label="$t('menu.instagramm')"></AnchorLink>
+            <AnchorLink href="/" :label="$t('menu.instagram')"></AnchorLink>
             <AnchorLink class="min-width-remover" href="/" :label="$t('menu.twitter')"></AnchorLink>
           </div>
         </v-col>

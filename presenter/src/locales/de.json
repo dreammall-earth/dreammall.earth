@@ -7,45 +7,45 @@
     },
     "500": {
       "h1": "500 Interner Fehler",
-      "text": "Irgendetwas ist schief gegangen."
+      "text": "Etwas ist schief gegangen."
     }
   },
   "home": {
     "section1": {
-      "headline": "DreamMall created by people for people",
-      "preOrderBtn": "PRE ORDER",
-      "subHeadline": "7 Days free trial"
+      "headline": "DreamMall von Menschen für Menschen geschaffen",
+      "preOrderBtn": "VORBESTELLUNG",
+      "subHeadline": "7 Tage kostenlos testen"
     },
     "section2": {
-      "headline": "About Section Content"
+      "headline": "Über DreamMall"
     },
     "section3": {
-      "headline": "Products Section Content"
+      "headline": "Produkte"
     },
     "section4": {
-      "headline": "Contact Section Content"
+      "headline": "Kontakt"
     }
   },
   "menu": {
-    "about": "about",
-    "contact": "contact",
+    "about": "über",
+    "contact": "kontakt",
     "eMail": "E-Mail",
     "footer": {
-      "textInputButton": "Submit",
+      "textInputButton": "Senden",
       "textInputLabel": "E-Mail Adresse"
     },
     "header": {
-      "contact": "Contact",
-      "newsletter": "Join our Newsletter",
+      "contact": "Kontakt",
+      "newsletter": "Newsletter abonnieren",
       "sitemap": "Sitemap"
     },
-    "home": "Home",
-    "humanAndProjects": "Human and Projects",
-    "instagramm": "Instagramm",
+    "home": "Start",
+    "humansAndProjects": "Menschen und Projekte",
+    "instagram": "Instagram",
     "linkedIn": "LinkedIn",
     "mall": "Mall",
-    "products": "products",
+    "products": "produkte",
     "twitter": "X",
-    "worldCoffeeHouse": "World Coffee House"
+    "worldCoffeeHouse": "Weltencafé"
   }
 }
