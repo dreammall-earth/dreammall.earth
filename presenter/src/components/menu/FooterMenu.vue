@@ -18,7 +18,7 @@
           <div class="footer-links">
             <AnchorLink href="/" :label="$t('menu.eMail')"></AnchorLink>
             <AnchorLink href="/" :label="$t('menu.linkedIn')"></AnchorLink>
-            <AnchorLink href="/" :label="$t('menu.instagramm')"></AnchorLink>
+            <AnchorLink href="/" :label="$t('menu.instagram')"></AnchorLink>
             <AnchorLink class="min-width-remover" href="/" :label="$t('menu.twitter')"></AnchorLink>
           </div>
         </v-col>
