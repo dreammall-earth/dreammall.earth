@@ -133,8 +133,8 @@
         },
 		{
 			"files": ["*.[test,spec].[tj]s"],
-			"plugins": ["vitest"],
-			"extends": ["plugin:vitest/all"]
+			"plugins": ["jest"],
+			"extends": ["plugin:jest/all"]
 		},
         {
             "files": ["*.yaml", "*.yml"],
