@@ -9,8 +9,11 @@ const meta = {
   // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/vue/writing-docs/autodocs
   tags: ['autodocs'],
   argTypes: {
-    variant: { control: 'select', options: ['primary', 'secondary', 'third', 'third-inverse'] },
-    size: { control: 'select', options: ['small', 'medium', 'large'] },
+    variant: {
+      control: 'select',
+      options: ['primary', 'secondary', 'third', 'third-inverse', 'fourth'],
+    },
+    size: { control: 'select', options: ['small', 'medium', 'large', 'auto'] },
     onClick: { action: 'clicked' },
   },
   args: { variant: 'primary', size: 'large' }, // default value
@@ -48,6 +51,13 @@ export const Third: Story = {
 export const ThirdInverse: Story = {
   args: {
     variant: 'third-inverse',
+    label: 'Button',
+  },
+}
+
+export const Fourth: Story = {
+  args: {
+    variant: 'fourth',
     label: 'Button',
   },
 }

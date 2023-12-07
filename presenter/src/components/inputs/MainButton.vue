@@ -33,6 +33,7 @@ const classes = computed(() => ({
   'main-button--secondary': props.variant === 'secondary',
   'main-button--third': props.variant === 'third',
   'main-button--third-inverse': props.variant === 'third-inverse',
+  'main-button--fourth': props.variant === 'fourth',
   [`main-button-${props.size || 'medium'}`]: true,
 }))
 
@@ -75,6 +76,11 @@ const onClick = () => {
     border-radius: 10px;
   }
 
+  &--fourth {
+    padding: 0.75rem 2.4375rem;
+    background-color: #2ca5b1;
+  }
+
   &-large {
     width: 16rem;
   }
@@ -85,6 +91,10 @@ const onClick = () => {
 
   &-small {
     width: 4rem;
+  }
+
+  &-auto {
+    width: auto;
   }
 }
 </style>
