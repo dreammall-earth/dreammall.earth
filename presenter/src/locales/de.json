@@ -20,17 +20,17 @@
       "headline": "Über DreamMall"
     },
     "section3": {
-      "headline": "DreamMall.",
-      "headlineAppend": "Earth",
-      "firstColumn":{
+      "firstColumn": {
         "headline": "Mall",
         "text": "Wir erschaffen eine Welt, ein Platz des gemeinsamen Lebens und der Wirtschaft."
       },
-      "secondColumn":{
+      "headline": "DreamMall.",
+      "headlineAppend": "Earth",
+      "secondColumn": {
         "headline": "Weltencafé",
         "text": "Wir finden uns, verbinden uns, vertrauen uns und fördern uns."
       },
-      "thirdColumn":{
+      "thirdColumn": {
         "headline": "Menschen und Projekte",
         "text": "Dein Talent ist wichtig für die Welt. Verwirklichen deine Kreativität in die Realität."
       }
