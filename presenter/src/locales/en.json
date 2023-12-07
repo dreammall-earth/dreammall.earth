@@ -23,13 +23,23 @@
       "headline": "Respektvolles Miteinander macht ALLES möglich."
     },
     "section3": {
-      "headline": "Products Section Content"
+      "firstColumn": {
+        "headline": "Mall",
+        "text": "Wir erschaffen eine Welt, ein Platz des gemeinsamen Lebens und der Wirtschaft."
+      },
+      "headline": "DreamMall.",
+      "headlineAppend": "Earth",
+      "secondColumn": {
+        "headline": "Weltencafé",
+        "text": "Wir finden uns, verbinden uns, vertrauen uns und fördern uns."
+      },
+      "thirdColumn": {
+        "headline": "Menschen und Projekte",
+        "text": "Dein Talent ist wichtig für die Welt. Verwirklichen deine Kreativität in die Realität."
+      }
     },
     "section4": {
       "headline": "Contact Section Content"
-    },
-    "section5": {
-      "headline": "Kontakt"
     },
     "section6": {
       "buttonText": "weiter",
