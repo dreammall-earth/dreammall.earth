@@ -13,11 +13,14 @@
   "home": {
     "section1": {
       "headline": "DreamMall von Menschen für Menschen geschaffen",
-      "preOrderBtn": "VORBESTELLUNG",
+      "preOrderBtn": "Mehr Informationen",
       "subHeadline": "7 Tage kostenlos testen"
     },
     "section2": {
-      "headline": "Über DreamMall"
+      "buttonTxt": "Persönlicher Kontakt",
+      "contentFirstParagraph": "Die DreamMall Plattform bietet Euch Unternehmern, Unternehmergruppen sowie Jungunternehmern/Startups einen vertrauensvollen Raum der kreativen Vernetzung für Eure Ideen und Projekte.",
+      "contentSecondParagraph": "Wir verwirklichen uns jetzt alle. Die DreamMall entwickelt sich mit jedem Einzelnen von uns für ein gemeinsames Wirtschaften und einer guten Lebensqualität. Unsere positive Energie vervielfältigt sich und gemeinsam blicken wir nur noch nach vorne. Weltweit!",
+      "headline": "Respektvolles Miteinander macht ALLES möglich."
     },
     "section3": {
       "firstColumn": {

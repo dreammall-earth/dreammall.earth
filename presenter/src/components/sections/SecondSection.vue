@@ -1,7 +1,58 @@
 <template>
-  <div class="">
-    <div class="section2 h-screen pt-4">{{ $t('home.section2.headline') }}</div>
-  </div>
+  <v-row class="section2 pa-16">
+    <v-col cols="7">
+      <h2 class="section-headline">
+        {{ $t('home.section2.headline') }}
+      </h2>
+      <p class="section-content mt-8">
+        {{ $t('home.section2.contentFirstParagraph') }}
+      </p>
+      <p class="section-content">
+        {{ $t('home.section2.contentSecondParagraph') }}
+      </p>
+
+      <MainButton
+        class="mt-8"
+        :label="$t('home.section2.buttonTxt')"
+        size="auto"
+        variant="fourth"
+        >{{ $t('home.section2.buttonTxt') }}</MainButton
+      >
+    </v-col>
+    <v-col align-self="center" cols="5" class="d-flex justify-center align-center">
+      <v-img class="section-logo ma-2 pa-1 w-100" :src="LogoPlain" />
+    </v-col>
+  </v-row>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import LogoPlain from '#assets/dreammall-logo-plain.svg'
+import MainButton from '#components/inputs/MainButton.vue'
+</script>
+
+<style scoped lang="scss">
+.section2 {
+  color: #3d4753;
+
+  h2.section-headline {
+    font-family: Poppins, sans-serif;
+    font-size: 3.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    text-transform: capitalize;
+  }
+
+  .section-content {
+    font-family: Poppins, sans-serif;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+  }
+
+  .section-logo {
+    max-width: 24.7268rem;
+  }
+}
+</style>
