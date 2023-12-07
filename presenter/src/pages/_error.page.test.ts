@@ -26,7 +26,7 @@ describe('ErrorPage', () => {
         is404: false,
       })
     })
-    
+
     it('renders error 500', () => {
       expect(wrapper.find('h1').text()).toEqual("$t('error.500.h1')")
       expect(wrapper.find('p').text()).toEqual("$t('error.500.text')")
@@ -39,7 +39,7 @@ describe('ErrorPage', () => {
         is404: true,
       })
     })
-    
+
     it('renders error 400', () => {
       expect(wrapper.find('h1').text()).toEqual("$t('error.404.h1')")
       expect(wrapper.find('p').text()).toEqual("$t('error.404.text')")
