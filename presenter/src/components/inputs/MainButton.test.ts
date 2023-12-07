@@ -8,7 +8,7 @@ describe('MainButton', () => {
   const Wrapper = () => {
     return mount(MainButton, {
       props: {
-        label: 'Button',
+        label: 'My Button',
         variant: 'primary',
         size: 'large',
       },
@@ -27,6 +27,12 @@ describe('MainButton', () => {
     it('emits click event', () => {
       wrapper.find('button').trigger('click')
       expect(wrapper.emitted()).toHaveProperty('click', [[1]])
+    })
+  })
+
+  describe('label', () => {
+    it('renders the label', () => {
+      expect(wrapper.find('.v-btn').text()).toEqual('My Button')
     })
   })
 
