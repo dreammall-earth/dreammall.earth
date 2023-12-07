@@ -37,6 +37,12 @@
     },
     "section4": {
       "headline": "Kontakt"
+    },
+    "section6": {
+      "buttonText": "weiter",
+      "content": "Seien Sie Teil des Anfangs einer aufregenden Veränderung! Hinterlassen Sie uns einfach Ihren Namen und Ihre E-Mail-Adresse, um exklusive Angebote und umfassende Details vor der offiziellen Veröffentlichung zu erhalten. Verpassen Sie nicht die Gelegenheit, Teil unserer einzigartigen Community zu werden und von unseren besonderen Starter-Angeboten zu profitieren!",
+      "headline": "Veränderung",
+      "headlineAppend": "Schaffen"
     }
   },
   "menu": {
