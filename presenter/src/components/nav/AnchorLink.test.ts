@@ -14,4 +14,12 @@ describe('AnchorLink', () => {
   it('renders Node with href', () => {
     expect(wrapper.find('a.v-btn').exists()).toBeTruthy()
   })
+
+  it('sets href accordingly', () => {
+    expect(wrapper.find('a.v-btn').attributes('href')).toBe('someAnchorOrUrl')
+  })
+
+  it('sets label accordingly', () => {
+    expect(wrapper.find('a.v-btn').text()).toBe('AnchorLink')
+  })
 })
