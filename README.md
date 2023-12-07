@@ -6,6 +6,7 @@
 [![apollo-server][badge-apollo-img]][badge-apollo-href]
 [![graphql][badge-graphql-img]][badge-graphql-href]
 [![type-graphql][badge-type-graphql-img]][badge-type-graphql-href]
+[![prisma][badge-prisma-img]][badge-prisma-href]
 
 The IT4C Boilerplate for an apollo express backends.
 
@@ -14,6 +15,10 @@ The IT4C Boilerplate for an apollo express backends.
 To be able to build this project you need `nodejs`, `npm` and optional `docker`.
 
 The project sets up an apollo server. It uses `type-graphql`.
+
+The project is set up for a `mysql` database, which is expected to
+run. Copy the `.env.dist` file to `.env`. You can change the database
+connection in the `prisma/schema.prisma` file and your local `.env`.
 
 ## Commands
 
@@ -32,6 +37,10 @@ The following commands are available:
 | `npm run test:lint:remark` | Run linter remark                               |
 | `npm run test:unit`        | Run all unit tests and generate coverage report |
 | `npm test`                 | Run all tests & linters                         |
+| **Database**               |                                                 |
+| `npm run db:migrate`       | Creates and executes migrations needed          |
+| `npm run db:reset`         | Drops Schema, run all migrations and seeds      |
+| `npm run db:seed`          | Run the seeds                                   |
 
 ### Docker
 
@@ -90,3 +99,6 @@ The following endpoints are provided given the right command is executed or all 
 
 [badge-type-graphql-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=dependencies%5B%22type-graphql%22%5D&label=type-graphql&color=yellow
 [badge-type-graphql-href]: https://typegraphql.com/
+
+[badge-graphql-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=dependencies.prisma&label=prisma&color=yellow
+[badge-graphql-href]: https://prisma.io/
