@@ -18,15 +18,17 @@
     "build": "tsc",
     "start": "npm run build && TZ=UTC TS_NODE_BASEURL=./build node -r tsconfig-paths/register build/src/index.js",
     "dev": "TZ=UTC nodemon -w src --ext ts,json --exec ts-node -r tsconfig-paths/register src/index.ts",
+    "db:migrate": "TZ=UTC npx prisma migrate dev",
+    "db:reset": "TZ=UTC npx prisma migrate reset --force",
+    "db:seed": "TZ=UTC npx prisma db seed",
     "test:lint": "npm run test:lint:eslint && npm run test:lint:remark",
     "test:lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.json,.yml,.yaml --max-warnings 0 --ignore-path .gitignore .",
     "test:lint:remark": "remark . --quiet --frail",
     "test:unit": "TZ=UTC jest --runInBand --forceExit --detectOpenHandles",
     "test": "npm run test:lint && npm run test:unit",
-    "update": "npx npm-check-update",
-    "db:migrate": "TZ=UTC npx prisma migrate dev",
-    "db:reset": "TZ=UTC npx prisma migrate reset --force",
-    "db:seed": "TZ=UTC npx prisma db seed"
+    "docs:dev": "vuepress dev .",
+    "docs:build": "vuepress build .",
+    "update": "npx npm-check-update"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
@@ -69,7 +71,8 @@
     "ts-node": "^10.9.1",
     "tsc-watch": "^6.0.4",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.2",
+    "vuepress": "^2.0.0-rc.0"
   },
   "imports": {
     "#graphql/*": "./src/graphql/*",

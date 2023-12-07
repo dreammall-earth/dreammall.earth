@@ -7,6 +7,7 @@
 [![graphql][badge-graphql-img]][badge-graphql-href]
 [![type-graphql][badge-type-graphql-img]][badge-type-graphql-href]
 [![prisma][badge-prisma-img]][badge-prisma-href]
+[![vuepress][badge-vuepress-img]][badge-vuepress-href]
 
 The IT4C Boilerplate for an apollo express backends.
 
@@ -31,16 +32,19 @@ The following commands are available:
 | `npm run start`            | Runs productions server                         |
 | **Develop**                |                                                 |
 | `npm run dev`              | Compiles and hot-reloads for development        |
+| **Database**               |                                                 |
+| `npm run db:migrate`       | Creates and executes migrations needed          |
+| `npm run db:reset`         | Drops Schema, run all migrations and seeds      |
+| `npm run db:seed`          | Run the seeds                                   |
 | **Test**                   |                                                 |
 | `npm run test:lint`        | Run all linters                                 |
 | `npm run test:lint:eslint` | Run linter eslint                               |
 | `npm run test:lint:remark` | Run linter remark                               |
 | `npm run test:unit`        | Run all unit tests and generate coverage report |
 | `npm test`                 | Run all tests & linters                         |
-| **Database**               |                                                 |
-| `npm run db:migrate`       | Creates and executes migrations needed          |
-| `npm run db:reset`         | Drops Schema, run all migrations and seeds      |
-| `npm run db:seed`          | Run the seeds                                   |
+| **Documentation**          |                                                 |
+| `npm run docs:dev`         | Run Documentation in development mode           |
+| `npm run docs:build`       | Build static documentation                      |
 
 ### Docker
 
@@ -102,3 +106,6 @@ The following endpoints are provided given the right command is executed or all 
 
 [badge-prisma-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=dependencies.prisma&label=prisma&color=yellow
 [badge-prisma-href]: https://prisma.io/
+
+[badge-vuepress-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=devDependencies.vuepress&label=vuepress&color=orange
+[badge-vuepress-href]: https://vuepress.vuejs.org/
