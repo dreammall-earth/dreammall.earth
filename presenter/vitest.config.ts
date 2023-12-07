@@ -12,7 +12,8 @@ export default mergeConfig(
       coverage: {
         all: true,
         include: ['src/**/*.{js,jsx,ts,tsx,vue}'],
-        exclude: [ // default value copied
+        exclude: [
+          // default value copied
           'coverage/**',
           'dist/**',
           '**/[.]**',
