@@ -23,7 +23,7 @@ const props = withDefaults(
     cardText?: ''
   }>(),
   {
-    imageSrc: '#assets/img/logo_mall.svg',
+    imageSrc: '',
     cardTitle: 'Title',
     cardText: 'Lorem ipsum text',
   },
