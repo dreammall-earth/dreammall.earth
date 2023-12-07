@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mb-2" flat>
+  <v-card class="mb-2" flat color="transparent">
     <v-img height="100" :src="props.imageSrc" class="text-white"></v-img>
     <v-card-title class="card-title mt-8">{{ props.cardTitle }}</v-card-title>
     <v-card-text class="card-text mt-8">{{ props.cardText }}</v-card-text>

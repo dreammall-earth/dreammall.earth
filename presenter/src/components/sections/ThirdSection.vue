@@ -1,5 +1,5 @@
 <template>
-  <div class="section3">
+  <div class="section3 v-container">
     <v-row class="section-header">
       <v-col>
         <h2 class="section-headline">
