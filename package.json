@@ -23,12 +23,20 @@
     "test:lint:remark": "remark . --quiet --frail",
     "test:unit": "TZ=UTC jest --runInBand --forceExit --detectOpenHandles",
     "test": "npm run test:lint && npm run test:unit",
-    "update": "npx npm-check-update"
+    "update": "npx npm-check-update",
+    "db:migrate": "TZ=UTC npx prisma migrate dev",
+    "db:reset": "TZ=UTC npx prisma migrate reset --force",
+    "db:seed": "TZ=UTC npx prisma db seed"
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },  
   "dependencies": {
     "@apollo/server": "^4.9.5",
+    "@prisma/client": "^5.6.0",
     "graphql": "^16.8.1",
     "graphql-scalars": "^1.22.4",
+    "prisma": "^5.6.0",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^2.0.0-beta.3"
   },
