@@ -31,6 +31,7 @@ export default mergeConfig(
           '**/.{eslint,mocha,prettier}rc.{?(c|m)js,yml}',
           // storybook
           '**/*{.,-}stories.?(c|m)[jt]s?(x)',
+          'src/stories/**/*',
         ],
         lines: 1,
         functions: 0,
