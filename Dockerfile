@@ -72,8 +72,8 @@ FROM base as build
 
 # Copy everything
 COPY . .
-# npm install
-RUN npm install --frozen-lockfile --non-interactive
+# npm install including dev dependencies to be able to compile
+RUN npm install --include=dev --frozen-lockfile --non-interactive
 # npm build
 RUN npm run build
 
