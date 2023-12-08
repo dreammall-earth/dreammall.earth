@@ -9,8 +9,8 @@
     <div id="products">
       <Section3 />
     </div>
-    <div id="contact">
-      <Section4 />
+    <div id="section5">
+      <Section5 />
     </div>
     <div id="section6">
       <Section6 />
@@ -20,8 +20,8 @@
 
 <script lang="ts" setup>
 import DefaultLayout from '#layouts/DefaultLayout.vue'
+import Section5 from '#root/src/components/sections/FifthSection.vue'
 import Section1 from '#root/src/components/sections/FirstSection.vue'
-import Section4 from '#root/src/components/sections/FourthSection.vue'
 import Section2 from '#root/src/components/sections/SecondSection.vue'
 import Section6 from '#root/src/components/sections/SixthSection.vue'
 import Section3 from '#root/src/components/sections/ThirdSection.vue'
