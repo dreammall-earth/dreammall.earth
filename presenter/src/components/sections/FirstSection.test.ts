@@ -29,11 +29,11 @@ describe('FirstSection', () => {
       })
 
       it('contains a video', () => {
-        expect(item.findComponent({ name: 'VideoWrapper' }).exists()).toBe(true)
+        expect(item.find('video').exists()).toBe(true)
       })
 
       it('has correct source', () => {
-        expect(item.findComponent({ name: 'VideoWrapper' }).find('source').attributes('src')).toBe(
+        expect(item.find('video').find('source').attributes('src')).toBe(
           '/src/assets/video/header_video.mp4',
         )
       })
@@ -44,7 +44,7 @@ describe('FirstSection', () => {
 
       describe('video ends', () => {
         beforeEach(() => {
-          item.findComponent({ name: 'VideoWrapper' }).vm.$emit('ended')
+          wrapper.find('video').trigger('ended')
         })
 
         it('increments the slide value', () => {
@@ -56,7 +56,7 @@ describe('FirstSection', () => {
     describe('second item', () => {
       let item
       beforeEach(() => {
-        wrapper.findComponent({ name: 'VideoWrapper' }).vm.$emit('ended')
+        wrapper.find('video').trigger('ended')
         item = wrapper.findAllComponents({ name: 'VCarouselItem' })[1]
       })
 
