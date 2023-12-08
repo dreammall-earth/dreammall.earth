@@ -11,19 +11,10 @@
       >
         <v-carousel-item>
           <v-sheet>
-            <video
-              ref="video"
-              class="video w-100"
-              :poster="VideoPoster"
-              controls
-              autoplay
-              muted
-              preload="auto"
-              playsinline
+            <video-wrapper
+              video-source="/src/assets/video/header_video.mp4"
               @ended="triggerNextSlide"
-            >
-              <source src="@/assets/video/header_video.mp4" type="video/mp4" />
-            </video>
+            />
           </v-sheet>
         </v-carousel-item>
 
@@ -56,9 +47,9 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import VideoPoster from '#assets/img/video_placeholder.png'
 import MainButton from '#components/inputs/MainButton.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
+import VideoWrapper from '#components/VideoWrapper.vue'
 
 const slide = ref(0)
 
