@@ -1,4 +1,4 @@
-import { defineConfig, mergeConfig } from 'vitest/config'
+import { defineConfig, mergeConfig, configDefaults } from 'vitest/config'
 
 import viteConfig from './vite.config'
 
@@ -12,10 +12,16 @@ export default mergeConfig(
       coverage: {
         all: true,
         include: ['src/**/*.{js,jsx,ts,tsx,vue}'],
-        lines: 1,
-        functions: 0,
-        branches: 4,
-        statements: 1,
+        exclude: [
+          ...configDefaults.exclude,
+          // storybook
+          '**/*{.,-}stories.?(c|m)[jt]s?(x)',
+          'src/stories/**/*',
+        ],
+        lines: 100,
+        functions: 100,
+        branches: 100,
+        statements: 100,
         // 100: true,
       },
     },
