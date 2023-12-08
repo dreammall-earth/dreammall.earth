@@ -31,7 +31,7 @@ describe('MainButton', () => {
   })
 
   describe('label', () => {
-    it('renders the label', () => {
+    it('renders My Button', () => {
       expect(wrapper.find('.v-btn').text()).toEqual('My Button')
     })
   })
@@ -67,7 +67,7 @@ describe('MainButton', () => {
 
     // is this behaviour wanted? Do we have to improve this?
     describe('size is some weird string', async () => {
-      it('sets class main-button-medium', async () => {
+      it('sets strange classes', async () => {
         await wrapper.setProps({ size: 'some weird string' })
         expect(wrapper.find('.v-btn').classes()).toContain('main-button-some')
         expect(wrapper.find('.v-btn').classes()).toContain('weird')
