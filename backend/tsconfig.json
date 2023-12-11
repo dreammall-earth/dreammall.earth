@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "lib": ["ESNext"],
+    "paths": {
+      "#graphql/*": ["./src/graphql/*"],
+      "#src/*": ["./src/*"],
+      "#test/*": ["./test/*"],
+      "#types/*": ["./src/graphql/types/*"]
+    },
+    "outDir": "./build",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true
+  }
+}
