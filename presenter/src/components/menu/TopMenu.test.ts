@@ -20,15 +20,59 @@ describe('FooterMenu', () => {
     expect(wrapper.findAll('.v-row > div')).toHaveLength(3)
   })
 
-  it('first column contains logo', () => {
-    expect(wrapper.findAll('.v-row > div')[0].findComponent(LogoImage)).toBeTruthy()
+  describe('first column', () => {
+    it('contains logo', () => {
+      expect(wrapper.findAll('.v-row > div')[0].findComponent(LogoImage)).toBeTruthy()
+    })
   })
 
-  it('second column contains 3 children -> AnchorLink', () => {
-    expect(wrapper.findAll('.v-row > div')[1].findAllComponents(AnchorLink)).toHaveLength(3)
+  describe('second column', () => {
+    const column = wrapper.findAll('.v-row > div')[1]
+
+    it('contains 3 children -> AnchorLink', () => {
+      expect(column.findAllComponents(AnchorLink)).toHaveLength(3)
+    })
+
+    describe('first anchor link', () => {
+      const anchor = column.findAllComponents(AnchorLink)[0]
+
+      it('has href #about', () => {
+        expect(anchor.attributes('href')).toBe('#about')
+      })
+
+      it('has label menu.about', () => {
+        expect(anchor.text()).toBe("$t('menu.about')")
+      })
+    })
+
+    describe('second anchor link', () => {
+      const anchor = column.findAllComponents(AnchorLink)[1]
+
+      it('has href #products', () => {
+        expect(anchor.attributes('href')).toBe('#products')
+      })
+
+      it('has label menu.products', () => {
+        expect(anchor.text()).toBe("$t('menu.products')")
+      })
+    })
+
+    describe('third anchor link', () => {
+      const anchor = column.findAllComponents(AnchorLink)[2]
+
+      it('has href #contact', () => {
+        expect(anchor.attributes('href')).toBe('#contact')
+      })
+
+      it('has label menu.contact', () => {
+        expect(anchor.text()).toBe("$t('menu.contact')")
+      })
+    })
   })
 
-  it('third column is placeholdre', () => {
-    expect(wrapper.findAll('.v-row > div')[2].findAll('div')).toHaveLength(0)
+  describe('third column', () => {
+    it('is placeholder', () => {
+      expect(wrapper.findAll('.v-row > div')[2].findAll('div')).toHaveLength(0)
+    })
   })
 })
