@@ -2,11 +2,13 @@
 [![nodejs][badge-nodejs-img]][badge-nodejs-href]
 [![npm][badge-npm-img]][badge-npm-href]
 [![docker][badge-docker-img]][badge-docker-href]
-[![eslint][badge-eslint-img]][badge-eslint-href]
 [![apollo-server][badge-apollo-img]][badge-apollo-href]
 [![graphql][badge-graphql-img]][badge-graphql-href]
 [![type-graphql][badge-type-graphql-img]][badge-type-graphql-href]
 [![prisma][badge-prisma-img]][badge-prisma-href]
+[![eslint][badge-eslint-img]][badge-eslint-href]
+[![remark-cli][badge-remark-cli-img]][badge-remark-cli-href]
+[![jest][badge-jest-img]][badge-jest-href]
 [![vuepress][badge-vuepress-img]][badge-vuepress-href]
 
 The IT4C Boilerplate for an apollo express backends.
@@ -16,10 +18,6 @@ The IT4C Boilerplate for an apollo express backends.
 To be able to build this project you need `nodejs`, `npm` and optional `docker`.
 
 The project sets up an apollo server. It uses `type-graphql`.
-
-The project is set up for a `mysql` database, which is expected to
-run. Copy the `.env.dist` file to `.env`. You can change the database
-connection in the `prisma/schema.prisma` file and your local `.env`.
 
 ## Commands
 
@@ -78,6 +76,12 @@ The following endpoints are provided given the right command is executed or all 
 | [http://localhost:4000/graphql](http://localhost:4000/graphql)       | GraphQL API        |
 | [http://localhost:4000/playground](http://localhost:4000/playground) | GraphQL Playground |
 
+## Database setup
+
+The project is set up for a `sqlite` database.
+In order to run the project against a mysql database adjust `primsa/schema.prisma`, copy the `.env.dist` file to `.env` and configure the database connection appropriately.
+Then run `npm run db:migrate` to generate the database. It might be required to delete the migration folder beforehand.
+
 ## License
 
 [Apache 2.0](./LICENSE)
@@ -92,20 +96,26 @@ The following endpoints are provided given the right command is executed or all 
 [badge-docker-img]: https://img.shields.io/badge/docker-latest-blue
 [badge-docker-href]: https://www.docker.com/
 
-[badge-eslint-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=devDependencies.eslint&label=eslint&color=red
-[badge-eslint-href]: https://eslint.org/
-
-[badge-apollo-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=dependencies%5B%22%40apollo%2Fserver%22%5D&label=apollo-server&color=yellow
+[badge-apollo-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=dependencies%5B%22%40apollo%2Fserver%22%5D&label=apollo-server&color=green
 [badge-apollo-href]: https://apollographql.com
 
-[badge-graphql-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=dependencies.graphql&label=graphql&color=yellow
+[badge-graphql-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=dependencies.graphql&label=graphql&color=green
 [badge-graphql-href]: https://graphql.org/
 
-[badge-type-graphql-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=dependencies%5B%22type-graphql%22%5D&label=type-graphql&color=yellow
+[badge-type-graphql-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=dependencies%5B%22type-graphql%22%5D&label=type-graphql&color=green
 [badge-type-graphql-href]: https://typegraphql.com/
 
-[badge-prisma-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=dependencies.prisma&label=prisma&color=yellow
+[badge-prisma-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=dependencies.prisma&label=prisma&color=green
 [badge-prisma-href]: https://prisma.io/
+
+[badge-eslint-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=devDependencies.eslint&label=eslint&color=yellow
+[badge-eslint-href]: https://eslint.org/
+
+[badge-remark-cli-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=devDependencies%5B%27remark-cli%27%5D&label=remark-cli&color=yellow
+[badge-remark-cli-href]: https://remark.js.org/
+
+[badge-jest-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=devDependencies.jest&label=jest&color=yellow
+[badge-jest-href]: https://jestjs.io/
 
 [badge-vuepress-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=devDependencies.vuepress&label=vuepress&color=orange
 [badge-vuepress-href]: https://vuepress.vuejs.org/
