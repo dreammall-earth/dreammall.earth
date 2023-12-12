@@ -15,7 +15,4 @@ export class ContactFormInput {
 
   @Field()
   content: string
-
-  @Field()
-  acceptedDSGVO: boolean
 }

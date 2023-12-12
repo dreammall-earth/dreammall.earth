@@ -5,7 +5,6 @@ CREATE TABLE `ContactForm` (
     `lastName` VARCHAR(50) NOT NULL,
     `email` VARCHAR(100) NOT NULL,
     `content` VARCHAR(255) NOT NULL,
-    `acceptedDSGVO` BOOLEAN NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `brevoSuccess` DATETIME(3) NULL,
 

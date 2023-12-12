@@ -23,7 +23,6 @@ describe('ContactFormResolver', () => {
             data: {
               firstName: 'Peter',
               lastName: 'Lustig',
-              acceptedDSGVO: true,
               content: 'Hello DreamMall!',
               email: 'peter@lustig.de',
             },
@@ -47,7 +46,6 @@ describe('ContactFormResolver', () => {
             id: expect.any(Number),
             firstName: 'Peter',
             lastName: 'Lustig',
-            acceptedDSGVO: true,
             content: 'Hello DreamMall!',
             email: 'peter@lustig.de',
             createdAt: expect.any(Date),

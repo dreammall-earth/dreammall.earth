@@ -13,7 +13,6 @@ model ContactForm {
   lastName      String   @db.VarChar(50)
   email         String   @db.VarChar(100)
   content       String   @db.VarChar(255)
-  acceptedDSGVO Boolean
   createdAt     DateTime @default(now())
   brevoSuccess  DateTime?
 }
