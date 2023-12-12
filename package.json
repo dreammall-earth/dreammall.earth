@@ -84,5 +84,11 @@
   },
   "engines": {
     "node": ">=21"
+  },
+  "overrides": {
+    "eslint-plugin-type-graphql": {
+      "@typescript-eslint/parser": "$@typescript-eslint/parser",
+      "eslint": "$eslint"
+    }
   }
 }
