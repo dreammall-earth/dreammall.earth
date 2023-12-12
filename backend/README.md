@@ -9,7 +9,6 @@
 [![eslint][badge-eslint-img]][badge-eslint-href]
 [![remark-cli][badge-remark-cli-img]][badge-remark-cli-href]
 [![jest][badge-jest-img]][badge-jest-href]
-[![vuepress][badge-vuepress-img]][badge-vuepress-href]
 
 The Dreammall backend.
 
@@ -143,6 +142,3 @@ Then run `npm run db:migrate` to generate the database. It might be required to 
 
 [badge-jest-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fbackend%2Fpackage.json&query=devDependencies.jest&label=jest&color=yellow
 [badge-jest-href]: https://jestjs.io/
-
-[badge-vuepress-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fbackend%2Fpackage.json&query=devDependencies.vuepress&label=vuepress&color=orange
-[badge-vuepress-href]: https://vuepress.vuejs.org/
