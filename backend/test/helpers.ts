@@ -5,5 +5,5 @@ export const deleteAll = async () => {
 }
 
 export const disconnect = async () => {
-  prisma.$disconnect()
+  await prisma.$disconnect()
 }
