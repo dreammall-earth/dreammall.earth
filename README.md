@@ -104,7 +104,7 @@ This mechanic was taken from this [source](https://stackoverflow.com/questions/1
 ## Database setup
 
 The project is set up for a `sqlite` database.
-In order to run the project against a mysql database adjust `primsa/schema.prisma`, copy the `.env.dist` file to `.env` and configure the database connection appropriately.
+In order to run the project against a mysql database adjust `prisma/schema.prisma`, copy the `.env.dist` file to `.env` and configure the database connection appropriately.
 Then run `npm run db:migrate` to generate the database. It might be required to delete the migration folder beforehand.
 
 ## License
