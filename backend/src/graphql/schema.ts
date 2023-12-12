@@ -1,11 +1,11 @@
 import { GraphQLSchema } from 'graphql'
 import { buildSchema } from 'type-graphql'
 
-import { HelloResolver } from './resolvers/HelloResolver'
+import { ContactFormResolver } from './resolvers/ContactFormResolver'
 
 export const schema = async (): Promise<GraphQLSchema> => {
   return buildSchema({
-    resolvers: [HelloResolver],
+    resolvers: [ContactFormResolver],
     validate: {
       validationError: { target: false },
       skipMissingProperties: true,
