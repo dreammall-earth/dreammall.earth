@@ -17,9 +17,10 @@ describe('TextButtonInput', () => {
     expect(wrapper.find('.v-field').findComponent(MainButton)).toBeTruthy()
   })
 
-  it('TextButtonInput emit click event', () => {
-    wrapper.findComponent(MainButton).trigger('click')
+  it('TextButtonInput emit click event', async () => {
+    await wrapper.findComponent(MainButton).trigger('click')
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     expect(wrapper.findComponent(MainButton).emitted()).toHaveProperty('click')
   })
 })

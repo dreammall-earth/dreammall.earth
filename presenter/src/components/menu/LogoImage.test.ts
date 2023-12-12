@@ -1,10 +1,11 @@
-import { mount } from '@vue/test-utils'
-import { describe, it, expect } from 'vitest'
+import { VueWrapper, mount } from '@vue/test-utils'
+import { describe, it, expect, beforeEach } from 'vitest'
+import { ComponentPublicInstance } from 'vue'
 
 import LogoImage from './LogoImage.vue'
 
 describe('LogoImage', () => {
-  let wrapper
+  let wrapper: VueWrapper<unknown, ComponentPublicInstance<unknown, Omit<unknown, never>>>
 
   const Wrapper = () => {
     return mount(LogoImage)
