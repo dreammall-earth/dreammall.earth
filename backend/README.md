@@ -107,7 +107,7 @@ This mechanic was taken from this [source](https://stackoverflow.com/questions/1
 
 The project is set up for a `mysql` database. Use
 ```bash
-docker-compose up databse
+docker-compose up database
 ```
 in the main folder to run the database inside docker. You need to copy the `.env.dist` file to `.env`.  Run `npm run db:migrate` to generate the database. It might be required to delete the migration folder beforehand.
 
