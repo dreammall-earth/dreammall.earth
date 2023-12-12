@@ -1,0 +1,10 @@
+node_modules/
+build/
+coverage/
+!.vuepress/
+.vuepress/.temp/
+.vuepress/.cache/
+.env
+
+# emacs
+*~

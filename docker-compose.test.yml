@@ -1,0 +1,22 @@
+version: "3.4"
+
+services:
+  #########################################################
+  ## MARIADB ##############################################
+  #########################################################
+  database:
+    image: dreammall.earth/database:test
+    networks: 
+      - internal-net
+      - external-net
+    volumes: 
+      - db_test_vol:/var/lib/mysql
+
+networks:
+  external-net:
+  internal-net:
+    internal: true
+
+volumes:
+  db_test_vol: 
+
