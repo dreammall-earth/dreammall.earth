@@ -1,5 +1,5 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client/core'
-import { createHttpLink } from '@apollo/client/link/http/http.cjs'
+import { createHttpLink } from '@apollo/client/link/http'
 // import { onError } from '@apollo/client/link/error'
 
 import { ENDPOINTS } from '#src/env'
