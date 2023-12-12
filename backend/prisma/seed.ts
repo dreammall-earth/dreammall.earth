@@ -19,5 +19,5 @@ main()
     // eslint-disable-next-line no-console
     console.error(e)
     await prisma.$disconnect()
-    process.exit(1)
+    throw e
   })

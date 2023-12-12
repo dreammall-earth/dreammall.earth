@@ -1,8 +1,10 @@
+import { DefaultApolloClient } from '@vue/apollo-composable'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-import { createSSRApp, defineComponent, h, markRaw, reactive } from 'vue'
+import { createSSRApp, defineComponent, h, markRaw, reactive, provide } from 'vue'
 
 import PageShell from '#components/PageShell.vue'
 import { setPageContext } from '#context/usePageContext'
+import { apolloClient } from '#plugins/apollo'
 import i18n from '#plugins/i18n'
 import pinia from '#plugins/pinia'
 import CreateVuetify from '#plugins/vuetify'
@@ -15,6 +17,9 @@ const vuetify = CreateVuetify(i18n)
 function createApp(pageContext: VikePageContext & PageContext, isClient = true) {
   let rootComponent: Component
   const PageWithWrapper = defineComponent({
+    setup: () => {
+      provide(DefaultApolloClient, apolloClient)
+    },
     data: () => ({
       Page: markRaw(pageContext.Page),
       pageProps: markRaw(pageContext.pageProps || {}),
