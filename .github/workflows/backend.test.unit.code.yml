@@ -1,5 +1,8 @@
 name: "backend:test:unit test code with defined suites"
 
+env:
+  DATABASE_URL: mysql://root:@localhost:3306/dreammall.earth
+
 on: push
 
 jobs:
@@ -34,7 +37,8 @@ jobs:
 
       - name: Backend | docker-compose database
         run: docker-compose -f docker-compose.yml -f docker-compose.test.yml up --detach --no-deps database
-        
+      - name: Backend
+
       - name: Backend | Unit
         run: npm install && npm run db:migrate && npm run test:unit
         working-directory: ${{env.WORKING_DIRECTORY}}
