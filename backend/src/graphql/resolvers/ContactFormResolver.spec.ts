@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { ApolloServer } from '@apollo/server'
+import { ContactForm } from '@prisma/client'
 
 import { prisma } from '#src/prisma'
 import { createServer } from '#src/server/server'
@@ -39,7 +40,7 @@ describe('ContactFormResolver', () => {
       })
 
       it('has the contact form stored in the database', async () => {
-        const result = await prisma.contactForm.findMany()
+        const result: ContactForm[] = await prisma.contactForm.findMany()
         expect(result).toHaveLength(1)
         expect(result).toEqual([
           {
