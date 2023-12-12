@@ -2,13 +2,7 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-async function main() {
-  await prisma.hello.create({
-    data: {
-      text: 'Hello World!',
-    },
-  })
-}
+async function main() {}
 
 main()
   .then(async () => {
