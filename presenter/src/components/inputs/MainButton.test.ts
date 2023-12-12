@@ -1,10 +1,11 @@
-import { mount } from '@vue/test-utils'
-import { describe, it, expect } from 'vitest'
+import { VueWrapper, mount } from '@vue/test-utils'
+import { describe, it, expect, beforeEach } from 'vitest'
+import { ComponentPublicInstance } from 'vue'
 
 import MainButton from './MainButton.vue'
 
 describe('MainButton', () => {
-  let wrapper
+  let wrapper: VueWrapper<unknown, ComponentPublicInstance<unknown, Omit<unknown, never>>>
   const Wrapper = () => {
     return mount(MainButton, {
       props: {
@@ -24,8 +25,8 @@ describe('MainButton', () => {
   })
 
   describe('click on button', () => {
-    it('emits click event', () => {
-      wrapper.find('button').trigger('click')
+    it('emits click event', async () => {
+      await wrapper.find('button').trigger('click')
       expect(wrapper.emitted()).toHaveProperty('click', [[1]])
     })
   })
@@ -43,7 +44,7 @@ describe('MainButton', () => {
       })
     })
 
-    describe('size small', async () => {
+    describe('size small', () => {
       it('sets class main-button-small', async () => {
         await wrapper.setProps({ size: 'small' })
         expect(wrapper.find('.v-btn').classes()).toContain('main-button-small')
@@ -51,14 +52,14 @@ describe('MainButton', () => {
     })
 
     // needed to catch the || branch
-    describe('size empty string', async () => {
+    describe('size empty string', () => {
       it('sets class main-button-medium', async () => {
         await wrapper.setProps({ size: '' })
         expect(wrapper.find('.v-btn').classes()).toContain('main-button-medium')
       })
     })
 
-    describe('size undefined', async () => {
+    describe('size undefined', () => {
       it('sets class main-button-medium', async () => {
         await wrapper.setProps({ size: undefined })
         expect(wrapper.find('.v-btn').classes()).toContain('main-button-medium')
@@ -66,7 +67,7 @@ describe('MainButton', () => {
     })
 
     // is this behaviour wanted? Do we have to improve this?
-    describe('size is some weird string', async () => {
+    describe('size is some weird string', () => {
       it('sets strange classes', async () => {
         await wrapper.setProps({ size: 'some weird string' })
         expect(wrapper.find('.v-btn').classes()).toContain('main-button-some')

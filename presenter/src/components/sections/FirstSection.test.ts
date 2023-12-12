@@ -1,10 +1,11 @@
-import { mount } from '@vue/test-utils'
-import { describe, it, expect } from 'vitest'
+import { DOMWrapper, VueWrapper, mount } from '@vue/test-utils'
+import { describe, it, expect, beforeEach } from 'vitest'
+import { ComponentPublicInstance } from 'vue'
 
 import FirstSection from './FirstSection.vue'
 
 describe('FirstSection', () => {
-  let wrapper
+  let wrapper: VueWrapper<unknown, ComponentPublicInstance<unknown, Omit<unknown, never>>>
   const Wrapper = () => {
     return mount(FirstSection)
   }
@@ -23,8 +24,9 @@ describe('FirstSection', () => {
     })
 
     describe('first item', () => {
-      let item
+      let item: VueWrapper
       beforeEach(() => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         item = wrapper.findAllComponents({ name: 'VCarouselItem' })[0]
       })
 
@@ -43,8 +45,8 @@ describe('FirstSection', () => {
       })
 
       describe('video ends', () => {
-        beforeEach(() => {
-          wrapper.find('video').trigger('ended')
+        beforeEach(async () => {
+          await wrapper.find('video').trigger('ended')
         })
 
         it('increments the slide value', () => {
@@ -54,9 +56,10 @@ describe('FirstSection', () => {
     })
 
     describe('second item', () => {
-      let item
-      beforeEach(() => {
-        wrapper.find('video').trigger('ended')
+      let item: VueWrapper
+      beforeEach(async () => {
+        await wrapper.find('video').trigger('ended')
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         item = wrapper.findAllComponents({ name: 'VCarouselItem' })[1]
       })
 
@@ -79,8 +82,8 @@ describe('FirstSection', () => {
     })
 
     describe('carousel buttons', () => {
-      let prevButton
-      let nextButton
+      let prevButton: DOMWrapper<HTMLButtonElement>
+      let nextButton: DOMWrapper<HTMLButtonElement>
 
       beforeEach(() => {
         const buttons = wrapper.find('div.v-carousel__controls').findAll('button')
@@ -93,8 +96,8 @@ describe('FirstSection', () => {
       })
 
       describe('click next', () => {
-        beforeEach(() => {
-          nextButton.trigger('click')
+        beforeEach(async () => {
+          await nextButton.trigger('click')
         })
 
         it('has slide value 1', () => {
@@ -102,8 +105,8 @@ describe('FirstSection', () => {
         })
 
         describe('click prev', () => {
-          beforeEach(() => {
-            prevButton.trigger('click')
+          beforeEach(async () => {
+            await prevButton.trigger('click')
           })
 
           it('has slide value 0', () => {
