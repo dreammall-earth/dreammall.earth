@@ -26,9 +26,12 @@ jobs:
     name: Build Docs - Backend
     needs: files-changed
     runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./backend
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Backend | Build Docs
         run: npm install && npm run docs:build
+        working-directory: ${{env.WORKING_DIRECTORY}}
