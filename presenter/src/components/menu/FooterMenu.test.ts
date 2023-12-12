@@ -94,7 +94,8 @@ describe('FooterMenu', () => {
     })
 
     describe('fifth anchor link', () => {
-      const anchor = column.findAllComponents(AnchorLink)[4]
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+      const anchor: VueWrapper = column.findAllComponents(AnchorLink)[4]
 
       it('has href to /', () => {
         expect(anchor.attributes('href')).toBe('/')
@@ -106,7 +107,8 @@ describe('FooterMenu', () => {
     })
 
     describe('sixth anchor link', () => {
-      const anchor = column.findAllComponents(AnchorLink)[5]
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+      const anchor: VueWrapper = column.findAllComponents(AnchorLink)[5]
 
       it('has href to /', () => {
         expect(anchor.attributes('href')).toBe('/')
