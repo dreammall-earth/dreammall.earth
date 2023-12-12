@@ -11,7 +11,9 @@
 [![jest][badge-jest-img]][badge-jest-href]
 [![vuepress][badge-vuepress-img]][badge-vuepress-href]
 
-The IT4C Boilerplate for an apollo express backends.
+The Dreammall backend.
+
+![](../presenter/src/assets/dreammall-logo.svg)
 
 ## Requirements & Technology
 
@@ -121,26 +123,26 @@ Then run `npm run db:migrate` to generate the database. It might be required to 
 [badge-docker-img]: https://img.shields.io/badge/docker-latest-blue
 [badge-docker-href]: https://www.docker.com/
 
-[badge-apollo-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=dependencies%5B%22%40apollo%2Fserver%22%5D&label=apollo-server&color=green
+[badge-apollo-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fbackend%2Fpackage.json&query=dependencies%5B%22%40apollo%2Fserver%22%5D&label=apollo-server&color=green
 [badge-apollo-href]: https://apollographql.com
 
-[badge-graphql-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=dependencies.graphql&label=graphql&color=green
+[badge-graphql-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fbackend%2Fpackage.json&query=dependencies.graphql&label=graphql&color=green
 [badge-graphql-href]: https://graphql.org/
 
-[badge-type-graphql-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=dependencies%5B%22type-graphql%22%5D&label=type-graphql&color=green
+[badge-type-graphql-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fbackend%2Fpackage.json&query=dependencies%5B%22type-graphql%22%5D&label=type-graphql&color=green
 [badge-type-graphql-href]: https://typegraphql.com/
 
-[badge-prisma-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=dependencies.prisma&label=prisma&color=green
+[badge-prisma-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fbackend%2Fpackage.json&query=dependencies.prisma&label=prisma&color=green
 [badge-prisma-href]: https://prisma.io/
 
-[badge-eslint-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=devDependencies.eslint&label=eslint&color=yellow
+[badge-eslint-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fbackend%2Fpackage.json&query=devDependencies.eslint&label=eslint&color=yellow
 [badge-eslint-href]: https://eslint.org/
 
-[badge-remark-cli-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=devDependencies%5B%27remark-cli%27%5D&label=remark-cli&color=yellow
+[badge-remark-cli-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fbackend%2Fpackage.json&query=devDependencies%5B%27remark-cli%27%5D&label=remark-cli&color=yellow
 [badge-remark-cli-href]: https://remark.js.org/
 
-[badge-jest-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=devDependencies.jest&label=jest&color=yellow
+[badge-jest-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fbackend%2Fpackage.json&query=devDependencies.jest&label=jest&color=yellow
 [badge-jest-href]: https://jestjs.io/
 
-[badge-vuepress-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-backend%2Fmaster%2Fpackage.json&query=devDependencies.vuepress&label=vuepress&color=orange
+[badge-vuepress-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fbackend%2Fpackage.json&query=devDependencies.vuepress&label=vuepress&color=orange
 [badge-vuepress-href]: https://vuepress.vuejs.org/
