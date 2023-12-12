@@ -16,6 +16,6 @@ main()
     console.error(e)
     throw e
   })
-  .finally(async () => {
-    await prisma.$disconnect()
+  .finally(() => {
+    void prisma.$disconnect()
   })
