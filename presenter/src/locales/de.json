@@ -65,25 +65,39 @@
     }
   },
   "menu": {
-    "about": "über",
-    "contact": "kontakt",
     "eMail": "E-Mail",
     "footer": {
-      "textInputButton": "Senden",
-      "textInputLabel": "E-Mail Adresse"
+      "contact": "Kontaktiere uns",
+      "contactForm": {
+        "fieldRequired": "Dieses Feld wird benötigt",
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "mail": "E-Mail Adresse",
+        "message": "Frag uns einfach...",
+        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unserer",
+        "privacyLinkLabel": "Datenschutzrichtlinie",
+        "submitBtn": "Absenden"
+      },
+      "cookies": "Cookie Optionen",
+      "home": "Home",
+      "humansAndProjects": "Human and Projects",
+      "impress": "Impressum",
+      "instagram": "Instagram",
+      "mall": "Mall",
+      "newsletter": "Newsletter",
+      "privacy": "Datenschutzrichtlinien",
+      "privacyHeadline": "Datenschutz",
+      "sitemap": "Sitemap",
+      "socialHeadline": "Social Media",
+      "telegram": "Telegram",
+      "worldCoffeeHouse": "World Coffee House"
     },
     "header": {
+      "about": "über",
       "contact": "Kontakt",
       "newsletter": "Newsletter abonnieren",
+      "products": "products",
       "sitemap": "Sitemap"
-    },
-    "home": "Start",
-    "humansAndProjects": "Menschen und Projekte",
-    "instagram": "Instagram",
-    "linkedIn": "LinkedIn",
-    "mall": "Mall",
-    "products": "produkte",
-    "twitter": "X",
-    "worldCoffeeHouse": "Weltencafé"
+    }
   }
 }
