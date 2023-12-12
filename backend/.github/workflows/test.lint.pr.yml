@@ -30,7 +30,6 @@ jobs:
           # Append a scope for each service here
           scopes: |
             backend
-            presenter
             docu
             docker
             release
