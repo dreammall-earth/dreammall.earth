@@ -1,7 +1,7 @@
 import { prisma } from '#src/prisma'
 
 export const deleteAll = async () => {
-  await prisma.hello.deleteMany()
+  await prisma.contactForm.deleteMany()
 }
 
 export const disconnect = async () => {
