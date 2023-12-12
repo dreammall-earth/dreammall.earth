@@ -76,6 +76,31 @@ The following endpoints are provided given the right command is executed or all 
 | [http://localhost:4000/graphql](http://localhost:4000/graphql)       | GraphQL API        |
 | [http://localhost:4000/playground](http://localhost:4000/playground) | GraphQL Playground |
 
+## How to use as part of a project
+
+If you want to use this as part of a larger project, e.g. in conjunction with a frontend also utilizing a boilerplate you cannot use the template mechanic provided by github for this repository.
+
+You can use the following commands to include the whole git history of the boilerplate and be able to update according to changes to this repo using another remote.
+
+```bash
+git remote add xxx_boilerplate_backend git@github.com:IT4Change/boilerplate-backend.git
+git fetch xxx_boilerplate_backend
+git merge -s ours --no-commit --allow-unrelated-histories xxx_boilerplate_backend/master
+git read-tree --prefix=xxx/ -u xxx_boilerplate_backend/master
+git commit -m "Imported boilerplate_backend as a subtree under xxx/."
+```
+
+To update the subtree you can use
+
+```bash
+git subtree pull -P xxx/ xxx_boilerplate_backend master
+git commit -m "Updated boilerplate_backend in subtree under xxx/."
+```
+
+Where `xxx` refers to the folder and product part you want to use the boilerplate in. This assumes that you might need several copies of the frontend boilerplate for you product.
+
+This mechanic was taken from this [source](https://stackoverflow.com/questions/1683531/how-to-import-existing-git-repository-into-another/8396318#8396318)
+
 ## Database setup
 
 The project is set up for a `sqlite` database.
