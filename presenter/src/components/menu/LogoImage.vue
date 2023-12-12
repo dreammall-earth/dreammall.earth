@@ -1,5 +1,5 @@
 <template>
-  <v-img class="ma-2 pa-1 w-100" :class="classes" :src="Logo" />
+  <v-img class="w-100" :class="classes" :src="Logo" />
 </template>
 
 <script lang="ts" setup>
