@@ -19,7 +19,7 @@ describe('FooterMenu', () => {
 
   it('renders three columns', () => {
     expect(wrapper.find('.v-row').exists()).toBeTruthy()
-    expect(wrapper.findAll('.footer.v-row > div.v-col')).toHaveLength(3)
+    expect(wrapper.findAll('.footer.v-row > div')).toHaveLength(3)
   })
 
   describe('first column', () => {
