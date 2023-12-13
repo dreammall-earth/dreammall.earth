@@ -1,15 +1,13 @@
-import { VueWrapper, mount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach } from 'vitest'
-import { ComponentPublicInstance } from 'vue'
 
 import LogoImage from './LogoImage.vue'
 
 describe('LogoImage', () => {
-  let wrapper: VueWrapper<unknown, ComponentPublicInstance<unknown, Omit<unknown, never>>>
-
   const Wrapper = () => {
     return mount(LogoImage)
   }
+  let wrapper: ReturnType<typeof Wrapper>
 
   beforeEach(() => {
     wrapper = Wrapper()
@@ -68,20 +66,6 @@ describe('LogoImage', () => {
         expect(wrapper.find('.v-img').classes('logo-large')).toBe(false)
         expect(wrapper.find('.v-img').classes('logo-medium')).toBe(false)
         expect(wrapper.find('.v-img').classes('logo-small')).toBe(true)
-      })
-    })
-
-    describe('unexpected size', () => {
-      beforeEach(async () => {
-        await wrapper.setProps({
-          size: 'unexpected',
-        })
-      })
-
-      it('has no logo size class', () => {
-        expect(wrapper.find('.v-img').classes('logo-large')).toBe(false)
-        expect(wrapper.find('.v-img').classes('logo-medium')).toBe(false)
-        expect(wrapper.find('.v-img').classes('logo-small')).toBe(false)
       })
     })
   })

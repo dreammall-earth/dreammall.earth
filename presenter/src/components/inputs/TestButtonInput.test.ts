@@ -20,7 +20,6 @@ describe('TextButtonInput', () => {
   it('TextButtonInput emit click event', async () => {
     await wrapper.findComponent(MainButton).trigger('click')
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     expect(wrapper.findComponent(MainButton).emitted()).toHaveProperty('click')
   })
 })

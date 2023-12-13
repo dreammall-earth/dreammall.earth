@@ -76,6 +76,8 @@ import LogoImage from '#components/menu/LogoImage.vue'
 
 const slide = ref(0)
 
+defineExpose({ slide })
+
 function triggerNextSlide() {
   slide.value++
 }

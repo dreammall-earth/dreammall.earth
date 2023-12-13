@@ -1,17 +1,22 @@
-import FirstSection from './FirstSection.vue'
+import NewsletterForm from './NewsletterForm.vue'
 
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 // More on how to set up stories at: https://storybook.js.org/docs/vue/writing-stories/introduction
 const meta = {
-  title: 'Sections/Section1',
+  title: 'Inputs/NewsletterForm',
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  component: FirstSection,
+  component: NewsletterForm,
   // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/vue/writing-docs/autodocs
   tags: ['autodocs'],
-  argTypes: {},
-  args: {}, // default value
-} satisfies Meta<typeof FirstSection>
+  argTypes: {
+    // onClick: { action: 'clicked' },
+  },
+  args: {
+    // inputLabel: 'input',
+    // buttonLabel: 'button'
+  }, // default value
+} satisfies Meta<typeof NewsletterForm>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -22,6 +27,7 @@ type Story = StoryObj<typeof meta>
  */
 export const Example: Story = {
   args: {
-    // href: '#',
+    // inputLabel: 'E-Mail Address',
+    // buttonLabel: 'Submit',
   },
 }
