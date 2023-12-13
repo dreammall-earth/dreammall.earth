@@ -1,23 +1,26 @@
+import { useMutation } from '@vue/apollo-composable'
 import { mount } from '@vue/test-utils'
-import { describe, it, expect } from 'vitest'
-import { h } from 'vue'
-import { VApp } from 'vuetify/components'
+import { describe, it, expect, vi } from 'vitest'
 
 import ContactForm from './ContactForm.vue'
 
+vi.mock('@vue/apollo-composable', () => ({
+  __esModule: true,
+  useMutation: vi.fn(),
+}))
+
+useMutation.mockImplementation(() => ({
+  mutate: vi.fn(),
+}))
+
 describe('ContactForm', () => {
-  const wrapper = mount(VApp, {
-    slots: {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      default: h(ContactForm),
-    },
-  })
+  const wrapper = mount(ContactForm)
 
   it('renders form', () => {
     expect(wrapper.find('form').exists()).toBeTruthy()
   })
 
-  describe('renders correct inputs', () => {
+  describe('inputs', () => {
     describe('firstname', () => {
       it('has text input', () => {
         expect(wrapper.find('input[name="firstname"][type="text"]').exists()).toBeTruthy()
@@ -89,14 +92,23 @@ describe('ContactForm', () => {
   })
 
   describe('form submit', () => {
+    beforeEach(() => {
+      // vi.clearAllMocks()
+    })
+    
     it('inputs not filled', async () => {
+      expect(useMutation).toBeCalled(1)
       // form is empty not to be submitted
       await wrapper.find('form').trigger('submit.prevent')
       expect(wrapper.emitted()).toHaveProperty('submit')
+
+      const spy = vi.spyOn(useMutation(), 'mutate')
+      expect(spy).not.toBeCalled()
     })
 
     it('data privacy checkbox not checked', async () => {
       // form not to be submitted
+      expect(useMutation).toBeCalled(1)
       await wrapper.find('input[type=text][name="firstname"]').setValue('John')
       await wrapper.find('input[type=text][name="lastname"]').setValue('Doe')
       await wrapper.find('input[type=email]').setValue('john@doe.com')
@@ -110,6 +122,8 @@ describe('ContactForm', () => {
       // form be submitted if inputs filled
       await wrapper.find('input[type="checkbox"][name="dataprivacy"]').setValue()
       expect(wrapper.emitted()).toHaveProperty('submit')
+      const spy = vi.spyOn(useMutation(), 'mutate')
+      expect(spy).toBeCalled()
     })
   })
 })

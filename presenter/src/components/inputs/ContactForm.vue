@@ -145,6 +145,14 @@ function submitForm() {
             content: message.value,
           },
         })
+          .then(() => {
+            // eslint-disable-next-line no-console
+            console.log('successfully sent form')
+          })
+          .catch((err) => {
+            // eslint-disable-next-line no-console
+            console.log(err.message)
+          })
         return value.valid
       })
       .catch(function () {})
