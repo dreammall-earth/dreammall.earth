@@ -14,11 +14,11 @@ const props = withDefaults(
     /**
      * primary or secondary button
      */
-    variant?: 'primary' | 'secondary' | 'third' | 'third-inverse'
+    variant?: 'primary' | 'secondary' | 'third' | 'third-inverse' | 'fourth' | 'submit'
     /**
      * size of the button
      */
-    size?: 'small' | 'medium' | 'large'
+    size?: 'small' | 'medium' | 'large' | 'auto'
   }>(),
   { variant: 'primary', size: 'medium' },
 )
@@ -36,7 +36,7 @@ const classes = computed(() => ({
   'main-button--fourth': props.variant === 'fourth',
   'main-button--form-submit': props.variant === 'submit',
   'main-button--download': props.variant === 'download',
-  [`main-button-${props.size || 'medium'}`]: true,
+  [`main-button-${props.size}`]: true,
 }))
 
 const onClick = () => {
