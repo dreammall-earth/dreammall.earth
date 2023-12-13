@@ -42,7 +42,7 @@ describe('MainButton', () => {
 
   describe('variant reload', () => {
     it('icon is visible', async () => {
-      await wrapper.setProps({ size: 'auto', variant: 'reload' })
+      await wrapper.setProps({ size: 'auto', variant: 'reload', label: 'My Button' })
       expect(wrapper.find('.v-icon').exists()).toBe(true)
     })
   })

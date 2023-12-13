@@ -5,6 +5,7 @@ import { ComponentPublicInstance } from 'vue'
 import FourthSection from './FourthSection.vue'
 
 describe('FourthSection', () => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   let wrapper: VueWrapper<unknown, ComponentPublicInstance<unknown, Omit<unknown, never>>>
   const Wrapper = () => {
     return mount(FourthSection)
