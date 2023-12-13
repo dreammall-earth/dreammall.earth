@@ -14,7 +14,7 @@ const props = withDefaults(
     /**
      * primary or secondary button
      */
-    variant?: 'primary' | 'secondary' | 'third' | 'third-inverse' | 'fourth' | 'submit'
+    variant?: 'primary' | 'secondary' | 'third' | 'third-inverse' | 'fourth' | 'submit' | 'download'
     /**
      * size of the button
      */
