@@ -12,15 +12,15 @@ const props = withDefaults(
     /**
      * src of the header image
      */
-    imageSrc?: ''
+    imageSrc?: string
     /**
      * card header
      */
-    cardTitle?: ''
+    cardTitle?: string
     /**
      * card text content
      */
-    cardText?: ''
+    cardText?: string
   }>(),
   {
     imageSrc: '',

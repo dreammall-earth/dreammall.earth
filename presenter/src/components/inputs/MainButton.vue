@@ -14,11 +14,11 @@ const props = withDefaults(
     /**
      * primary or secondary button
      */
-    variant?: 'primary' | 'secondary' | 'third' | 'third-inverse'
+    variant?: 'primary' | 'secondary' | 'third' | 'third-inverse' | 'fourth'
     /**
      * size of the button
      */
-    size?: 'small' | 'medium' | 'large'
+    size?: 'small' | 'medium' | 'large' | 'auto'
   }>(),
   { variant: 'primary', size: 'medium' },
 )

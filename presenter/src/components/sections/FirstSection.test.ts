@@ -1,13 +1,12 @@
 import { DOMWrapper, VueWrapper, mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach } from 'vitest'
-import { ComponentPublicInstance } from 'vue'
 
 import FirstSection from './FirstSection.vue'
 
 describe('FirstSection', () => {
-  let wrapper: VueWrapper<unknown, ComponentPublicInstance<unknown, Omit<unknown, never>>>
+  let wrapper: ReturnType<typeof mount<typeof FirstSection>>
   const Wrapper = () => {
-    return mount(FirstSection)
+    return mount<typeof FirstSection>(FirstSection)
   }
 
   beforeEach(() => {
@@ -41,7 +40,8 @@ describe('FirstSection', () => {
       })
 
       it('has slide value 0', () => {
-        expect(wrapper.vm.slide).toBe(0)
+        // see https://github.com/vuejs/test-utils/issues/972
+        expect((wrapper.vm as unknown as { slide: number }).slide).toBe(0)
       })
 
       describe('video ends', () => {
@@ -50,7 +50,8 @@ describe('FirstSection', () => {
         })
 
         it('increments the slide value', () => {
-          expect(wrapper.vm.slide).toBe(1)
+          // see https://github.com/vuejs/test-utils/issues/972
+          expect((wrapper.vm as unknown as { slide: number }).slide).toBe(1)
         })
       })
     })
@@ -92,7 +93,8 @@ describe('FirstSection', () => {
       })
 
       it('has slide value 0 at start', () => {
-        expect(wrapper.vm.slide).toBe(0)
+        // see https://github.com/vuejs/test-utils/issues/972
+        expect((wrapper.vm as unknown as { slide: number }).slide).toBe(0)
       })
 
       describe('click next', () => {
@@ -101,7 +103,8 @@ describe('FirstSection', () => {
         })
 
         it('has slide value 1', () => {
-          expect(wrapper.vm.slide).toBe(1)
+          // see https://github.com/vuejs/test-utils/issues/972
+          expect((wrapper.vm as unknown as { slide: number }).slide).toBe(1)
         })
 
         describe('click prev', () => {
@@ -110,7 +113,8 @@ describe('FirstSection', () => {
           })
 
           it('has slide value 0', () => {
-            expect(wrapper.vm.slide).toBe(0)
+            // see https://github.com/vuejs/test-utils/issues/972
+            expect((wrapper.vm as unknown as { slide: number }).slide).toBe(0)
           })
         })
       })
