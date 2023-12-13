@@ -5,23 +5,22 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 
-const props = withDefaults(
-  defineProps<{
-    /**
-     * The label of the button
-     */
-    label: string
-    /**
-     * primary or secondary button
-     */
-    variant?: 'primary' | 'secondary' | 'third' | 'third-inverse' | 'fourth'
-    /**
-     * size of the button
-     */
-    size?: 'small' | 'medium' | 'large' | 'auto'
-  }>(),
-  { variant: 'primary', size: 'medium' },
-)
+interface MainButtonProps {
+  /**
+   * The label of the button
+   */
+  label: string
+  /**
+   * primary or secondary button
+   */
+  variant?: 'primary' | 'secondary' | 'third' | 'third-inverse' | 'fourth'
+  /**
+   * size of the button
+   */
+  size?: 'small' | 'medium' | 'large' | 'auto'
+}
+
+const props = withDefaults(defineProps<MainButtonProps>(), { variant: 'primary', size: 'medium' })
 
 const emit = defineEmits<{
   (e: 'click', id: number): void
@@ -34,7 +33,7 @@ const classes = computed(() => ({
   'main-button--third': props.variant === 'third',
   'main-button--third-inverse': props.variant === 'third-inverse',
   'main-button--fourth': props.variant === 'fourth',
-  [`main-button-${props.size || 'medium'}`]: true,
+  [`main-button-${props.size}`]: true,
 }))
 
 const onClick = () => {
