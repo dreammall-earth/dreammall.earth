@@ -42,7 +42,7 @@ describe('FooterMenu', () => {
       })
 
       it('has label menu.about', () => {
-        expect(anchor.text()).toBe("$t('menu.about')")
+        expect(anchor.text()).toBe("$t('menu.header.about')")
       })
     })
 
@@ -55,7 +55,7 @@ describe('FooterMenu', () => {
       })
 
       it('has label menu.products', () => {
-        expect(anchor.text()).toBe("$t('menu.products')")
+        expect(anchor.text()).toBe("$t('menu.header.products')")
       })
     })
 
@@ -68,7 +68,7 @@ describe('FooterMenu', () => {
       })
 
       it('has label menu.contact', () => {
-        expect(anchor.text()).toBe("$t('menu.contact')")
+        expect(anchor.text()).toBe("$t('menu.header.contact')")
       })
     })
   })
