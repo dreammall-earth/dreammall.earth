@@ -1,8 +1,7 @@
-import { VueWrapper, mount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach } from 'vitest'
 
 import MainButton from './MainButton.vue'
-import { ComponentPublicInstance } from 'vue'
 
 describe('MainButton', () => {
   const Wrapper = () => {
