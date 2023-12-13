@@ -34,7 +34,7 @@ const classes = computed(() => ({
   'main-button--third': props.variant === 'third',
   'main-button--third-inverse': props.variant === 'third-inverse',
   'main-button--fourth': props.variant === 'fourth',
-  [`main-button-${props.size || 'medium'}`]: true,
+  [`main-button-${props.size}`]: true,
 }))
 
 const onClick = () => {
