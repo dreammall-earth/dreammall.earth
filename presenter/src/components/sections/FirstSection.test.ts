@@ -40,8 +40,7 @@ describe('FirstSection', () => {
       })
 
       it('has slide value 0', () => {
-        // see https://github.com/vuejs/test-utils/issues/972
-        expect((wrapper.vm as unknown as { slide: number }).slide).toBe(0)
+        expect(wrapper.vm.slide).toBe(0)
       })
 
       describe('video ends', () => {
@@ -50,8 +49,7 @@ describe('FirstSection', () => {
         })
 
         it('increments the slide value', () => {
-          // see https://github.com/vuejs/test-utils/issues/972
-          expect((wrapper.vm as unknown as { slide: number }).slide).toBe(1)
+          expect(wrapper.vm.slide).toBe(1)
         })
       })
     })
@@ -93,8 +91,7 @@ describe('FirstSection', () => {
       })
 
       it('has slide value 0 at start', () => {
-        // see https://github.com/vuejs/test-utils/issues/972
-        expect((wrapper.vm as unknown as { slide: number }).slide).toBe(0)
+        expect(wrapper.vm.slide).toBe(0)
       })
 
       describe('click next', () => {
@@ -103,8 +100,7 @@ describe('FirstSection', () => {
         })
 
         it('has slide value 1', () => {
-          // see https://github.com/vuejs/test-utils/issues/972
-          expect((wrapper.vm as unknown as { slide: number }).slide).toBe(1)
+          expect(wrapper.vm.slide).toBe(1)
         })
 
         describe('click prev', () => {
@@ -113,8 +109,7 @@ describe('FirstSection', () => {
           })
 
           it('has slide value 0', () => {
-            // see https://github.com/vuejs/test-utils/issues/972
-            expect((wrapper.vm as unknown as { slide: number }).slide).toBe(0)
+            expect(wrapper.vm.slide).toBe(0)
           })
         })
       })
