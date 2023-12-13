@@ -8,6 +8,7 @@
     "baseUrl": ".",
     "lib": ["ESNext"],
     "paths": {
+      "#api/*": ["./src/api/*"],
       "#config/*": ["./src/config/*"],
       "#graphql/*": ["./src/graphql/*"],
       "#inputs/*": ["./src/graphql/inputs/*"],
