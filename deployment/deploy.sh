@@ -13,6 +13,9 @@ pm2 stop all
 pm2 delete all
 pm2 save
 
+# Backend
+$SCRIPT_DIR/build.backend.sh
+
 # Presenter
 $SCRIPT_DIR/build.presenter.sh
 $SCRIPT_DIR/start.presenter.sh
