@@ -14,7 +14,7 @@
             <video
               ref="video"
               class="video w-100"
-              :poster="VideoPoster"
+              poster="@/assets/img/video_placeholder.png"
               controls
               autoplay
               muted
@@ -70,7 +70,6 @@ const { result, loading, error } = useQuery(HELLO_QUERY)
 
 import { ref } from 'vue'
 
-import VideoPoster from '#assets/img/video_placeholder.png'
 import MainButton from '#components/inputs/MainButton.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 
