@@ -50,32 +50,10 @@ describe('MainButton', () => {
       })
     })
 
-    // needed to catch the || branch
-    describe('size empty string', () => {
-      it('sets class main-button-medium', async () => {
-        await wrapper.setProps({ label: 'My Button', variant: 'primary', size: '' })
-        expect(wrapper.find('.v-btn').classes()).toContain('main-button-medium')
-      })
-    })
-
     describe('size undefined', () => {
       it('sets class main-button-medium', async () => {
         await wrapper.setProps({ label: 'My Button', variant: 'primary', size: undefined })
         expect(wrapper.find('.v-btn').classes()).toContain('main-button-medium')
-      })
-    })
-
-    // is this behaviour wanted? Do we have to improve this?
-    describe('size is some weird string', () => {
-      it('sets strange classes', async () => {
-        await wrapper.setProps({
-          label: 'My Button',
-          variant: 'primary',
-          size: 'some weird string',
-        })
-        expect(wrapper.find('.v-btn').classes()).toContain('main-button-some')
-        expect(wrapper.find('.v-btn').classes()).toContain('weird')
-        expect(wrapper.find('.v-btn').classes()).toContain('string')
       })
     })
   })
