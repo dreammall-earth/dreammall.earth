@@ -4,7 +4,6 @@ import { Resolver, Mutation, Query, Arg } from 'type-graphql'
 
 import { createBrevoInstance, createSmtpEmail } from '#api/NewsletterBrevo'
 import { ContactFormInput } from '#inputs/ContactFormInput'
-import { NewsletterUser } from '#model/NewsletterUser'
 import { prisma } from '#src/prisma'
 
 @Resolver()
@@ -20,20 +19,20 @@ export class ContactFormResolver {
     const sendSmtpEmail: SibApiV3Sdk.SendSmtpEmail = createSmtpEmail({
       subject: 'My {{params.subject}}',
       emailTo: [
-        new NewsletterUser(
-          contactFormData.firstName + ' ' + contactFormData.lastName,
-          contactFormData.email,
-        ),
+        {
+          name: contactFormData.firstName + ' ' + contactFormData.lastName,
+          email: contactFormData.email,
+        },
       ],
       htmlContent:
         '<html><body><h1>This is my first transactional email {{params.parameter}}</h1></body></html>',
-      sender: new NewsletterUser('DreamMall Earth Team', 'no-reply@dreammall.earth'),
-      cc: [
-        new NewsletterUser('Mathias Lenz', 'mathias.lenz@it4c.dev'),
-        new NewsletterUser('Hannes Heine', 'hannes.heine@it4c.dev'),
-        new NewsletterUser('Ulf Gebhardt', 'ulf.gebhardt@it4c.dev'),
+      sender: { name: 'DreamMall Earth Team', email: 'no-reply@dreammall.earth' },
+      bcc: [
+        { name: 'Mathias Lenz', email: 'mathias.lenz@it4c.dev' },
+        { name: 'Hannes Heine', email: 'hannes.heine@it4c.dev' },
+        { name: 'Ulf Gebhardt', email: 'ulf.gebhardt@it4c.dev' },
       ],
-      replyTo: new NewsletterUser('DreamMall Earth', 'contact@dreammall.earth'),
+      replyTo: { name: 'DreamMall Earth', email: 'contact@dreammall.earth' },
       params: { parameter: 'My param value', subject: 'New Subject' },
       headers: { 'Some-Custom-Name': 'unique-id-1234' },
     })
