@@ -9,7 +9,7 @@ const meta = {
   // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/vue/writing-docs/autodocs
   tags: ['autodocs'],
   argTypes: {
-    onClick: { action: 'clicked' },
+    // onClick: { action: 'clicked' },
   },
   args: {
     // inputLabel: 'input',
