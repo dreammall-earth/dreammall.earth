@@ -123,23 +123,22 @@ const email = ref('')
 const message = ref('')
 const dataprivacy = ref(0)
 
-const form = ref<HTMLFormElement | null>(null)
+const form = ref<HTMLFormElement>()
 
 // submit form with data
 function submitForm() {
-  if (!form.value) {
-    return false
+  if (form.value) {
+    form.value
+      .validate()
+      .then(function (value: {
+        valid: boolean
+        errors: { id: string | number; errorMessages: string[] }[]
+      }) {
+        // TODO submit form
+        return value.valid
+      })
+      .catch(function () {})
   }
-  form.value
-    .validate()
-    .then(function (value: {
-      valid: boolean
-      errors: { id: string | number; errorMessages: string[] }[]
-    }) {
-      // TODO submit form
-      return value.valid
-    })
-    .catch(function () {})
 }
 </script>
 
