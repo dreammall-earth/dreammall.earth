@@ -111,9 +111,11 @@
 </template>
 
 <script lang="ts" setup>
+import { useMutation } from '@vue/apollo-composable'
 import { ref } from 'vue'
 
 import AnchorLink from '#components/nav/AnchorLink.vue'
+import { createContactFormMutation } from '#mutations/createContactForm'
 
 import MainButton from './MainButton.vue'
 
@@ -125,7 +127,8 @@ const dataprivacy = ref(0)
 
 const form = ref<HTMLFormElement>()
 
-// submit form with data
+const { mutate: sendContactForm } = useMutation(createContactFormMutation)
+
 function submitForm() {
   if (form.value) {
     form.value
@@ -134,7 +137,14 @@ function submitForm() {
         valid: boolean
         errors: { id: string | number; errorMessages: string[] }[]
       }) {
-        // TODO submit form
+        sendContactForm({
+          data: {
+            firstName: firstname.value,
+            lastName: lastname.value,
+            email: email.value,
+            content: message.value,
+          },
+        })
         return value.valid
       })
       .catch(function () {})

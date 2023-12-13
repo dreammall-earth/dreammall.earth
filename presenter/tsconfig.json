@@ -20,7 +20,8 @@
       "#stores/*": ["./src/stores/*"],
       "#plugins/*": ["./renderer/plugins/*"],
       "#context/*": ["./renderer/context/*"],
-      "#types/*": ["./types/*"]
+      "#types/*": ["./types/*"],
+      "#mutations/*": ["./src/graphql/mutations/*"]
     }
   },
   "ts-node": {
