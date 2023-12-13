@@ -31,6 +31,7 @@ function createApp(pageContext: VikePageContext & PageContext, isClient = true) 
     },
     render() {
       return h(
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         PageShell,
         {},
         {
