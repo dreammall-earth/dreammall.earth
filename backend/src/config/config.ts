@@ -1,9 +1,10 @@
-import dotenv from 'dotenv'
 import path from 'path'
 
+import { config } from 'dotenv'
+
 // Load env file
-dotenv.config({
-  path: path.resolve(__dirname, '~/.env')
+config({
+  path: path.resolve(__dirname, '../../.env'),
 })
 
 interface ENV {
@@ -14,11 +15,13 @@ interface Config {
   BREVO_KEY: string
 }
 
+/* eslint-disable n/no-process-env */
 const getConfig = (): ENV => {
   return {
     BREVO_KEY: process.env.BREVO_KEY,
   }
 }
+/* eslint-enable n/no-process-env */
 
 const getSanitzedConfig = (config: ENV): Config => {
   for (const [key, value] of Object.entries(config)) {
@@ -29,7 +32,7 @@ const getSanitzedConfig = (config: ENV): Config => {
   return config as Config
 }
 
-const config = getConfig()
-const sanitizedConfig = getSanitzedConfig(config)
+const configEnv = getConfig()
+const sanitizedConfig = getSanitzedConfig(configEnv)
 
 export default sanitizedConfig
