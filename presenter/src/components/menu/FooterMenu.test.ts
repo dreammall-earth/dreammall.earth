@@ -3,7 +3,8 @@ import { describe, it, expect } from 'vitest'
 import { h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import TextButtonInput from '#components/inputs/TextButtonInput.vue'
+// import TextButtonInput from '#components/inputs/TextButtonInput.vue'
+import ContactForm from '#components/inputs/ContactForm.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
 
 import FooterMenu from './FooterMenu.vue'
@@ -17,28 +18,20 @@ describe('FooterMenu', () => {
     },
   })
 
-  it('renders four columns', () => {
+  it('renders three columns', () => {
     expect(wrapper.find('.v-row').exists()).toBeTruthy()
-    expect(wrapper.findAll('.v-row > div')).toHaveLength(4)
+    expect(wrapper.findAll('.footer.v-row > div')).toHaveLength(3)
   })
 
   describe('first column', () => {
     const column = wrapper.findAll('.v-row > div')[0]
 
-    it('contains logo', () => {
-      expect(column.findComponent(LogoImage)).toBeTruthy()
-    })
-  })
-
-  describe('second column', () => {
-    const column = wrapper.findAll('.v-row > div')[1]
-
-    it('contains 4 children -> AnchorLink', () => {
-      expect(column.findAllComponents(AnchorLink)).toHaveLength(4)
+    it('contains 6 children -> AnchorLink', () => {
+      expect(column.findAllComponents(AnchorLink)).toHaveLength(6)
     })
 
-    it('has header menu.header.sitemap', () => {
-      expect(column.find('h2').text()).toBe("$t('menu.header.sitemap')")
+    it('has header menu.footer.sitemap', () => {
+      expect(column.find('h2').text()).toBe("$t('menu.footer.sitemap')")
     })
 
     describe('first anchor link', () => {
@@ -50,7 +43,7 @@ describe('FooterMenu', () => {
       })
 
       it('has text menu.home', () => {
-        expect(anchor.text()).toBe("$t('menu.home')")
+        expect(anchor.text()).toBe("$t('menu.footer.home')")
       })
     })
 
@@ -63,7 +56,7 @@ describe('FooterMenu', () => {
       })
 
       it('has text menu.worldCoffeeHouse', () => {
-        expect(anchor.text()).toBe("$t('menu.worldCoffeeHouse')")
+        expect(anchor.text()).toBe("$t('menu.footer.worldCoffeeHouse')")
       })
     })
 
@@ -80,7 +73,7 @@ describe('FooterMenu', () => {
       })
 
       it('has text menu.mall', () => {
-        expect(anchor.text()).toBe("$t('menu.mall')")
+        expect(anchor.text()).toBe("$t('menu.footer.mall')")
       })
     })
 
@@ -93,20 +86,54 @@ describe('FooterMenu', () => {
       })
 
       it('has text menu.humansAndProjects', () => {
-        expect(anchor.text()).toBe("$t('menu.humansAndProjects')")
+        expect(anchor.text()).toBe("$t('menu.footer.humansAndProjects')")
+      })
+    })
+
+    it('has h3 header menu.footer.socialHeadline', () => {
+      expect(column.find('h3').text()).toBe("$t('menu.footer.socialHeadline')")
+    })
+
+    describe('fifth anchor link', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+      const anchor: VueWrapper = column.findAllComponents(AnchorLink)[4]
+
+      it('has href to /', () => {
+        expect(anchor.attributes('href')).toBe('/')
+      })
+
+      it('has text menu.footer.instagram', () => {
+        expect(anchor.text()).toBe("$t('menu.footer.instagram')")
+      })
+    })
+
+    describe('sixth anchor link', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+      const anchor: VueWrapper = column.findAllComponents(AnchorLink)[5]
+
+      it('has href to /', () => {
+        expect(anchor.attributes('href')).toBe('/')
+      })
+
+      it('has text menu.footer.telegram', () => {
+        expect(anchor.text()).toBe("$t('menu.footer.telegram')")
       })
     })
   })
 
-  describe('third column', () => {
-    const column = wrapper.findAll('.v-row > div')[2]
+  describe('second column', () => {
+    const column = wrapper.findAll('.v-row > div')[1]
+
+    it('contains logo', () => {
+      expect(column.findComponent(LogoImage)).toBeTruthy()
+    })
 
     it('contains 4 children -> AnchorLink', () => {
       expect(column.findAllComponents(AnchorLink)).toHaveLength(4)
     })
 
-    it('has header menu.header.contact', () => {
-      expect(column.find('h2').text()).toBe("$t('menu.header.contact')")
+    it('has header menu.footer.privacyHeadline', () => {
+      expect(column.find('h2').text()).toBe("$t('menu.footer.privacyHeadline')")
     })
 
     describe('first anchor link', () => {
@@ -117,8 +144,8 @@ describe('FooterMenu', () => {
         expect(anchor.attributes('href')).toBe('/')
       })
 
-      it('has text menu.eMail', () => {
-        expect(anchor.text()).toBe("$t('menu.eMail')")
+      it('has text menu.footer.impress', () => {
+        expect(anchor.text()).toBe("$t('menu.footer.impress')")
       })
     })
 
@@ -130,8 +157,8 @@ describe('FooterMenu', () => {
         expect(anchor.attributes('href')).toBe('/')
       })
 
-      it('has text menu.linkedIn', () => {
-        expect(anchor.text()).toBe("$t('menu.linkedIn')")
+      it('has text menu.footer.cookies', () => {
+        expect(anchor.text()).toBe("$t('menu.footer.cookies')")
       })
     })
 
@@ -143,8 +170,8 @@ describe('FooterMenu', () => {
         expect(anchor.attributes('href')).toBe('/')
       })
 
-      it('has text menu.instagram', () => {
-        expect(anchor.text()).toBe("$t('menu.instagram')")
+      it('has text menu.footer.newsletter', () => {
+        expect(anchor.text()).toBe("$t('menu.footer.newsletter')")
       })
     })
 
@@ -156,37 +183,21 @@ describe('FooterMenu', () => {
         expect(anchor.attributes('href')).toBe('/')
       })
 
-      it('has class min-width-remover', () => {
-        expect(anchor.classes('min-width-remover')).toBe(true)
-      })
-
-      it('has text menu.twitter', () => {
-        expect(anchor.text()).toBe("$t('menu.twitter')")
+      it('has text menu.footer.privacy', () => {
+        expect(anchor.text()).toBe("$t('menu.footer.privacy')")
       })
     })
   })
 
-  describe('fourth column', () => {
-    const column = wrapper.findAll('.v-row > div')[3]
+  describe('third column', () => {
+    const column = wrapper.findAll('.v-row > div')[2]
 
-    it('contains newsletterinput', () => {
-      expect(column.findComponent(TextButtonInput)).toBeTruthy()
+    it('contains contactform', () => {
+      expect(column.findComponent(ContactForm)).toBeTruthy()
     })
 
-    it('has header menu.header.newsletter', () => {
-      expect(column.find('h2').text()).toBe("$t('menu.header.newsletter')")
-    })
-
-    it('has an input field', () => {
-      expect(column.find('input').exists()).toBe(true)
-    })
-
-    it('has label menu.footer.textInputLabel', () => {
-      expect(column.find('label').text()).toBe("$t('menu.footer.textInputLabel')")
-    })
-
-    it('has a button with text menu.footer.textInputButton', () => {
-      expect(column.find('button').text()).toBe("$t('menu.footer.textInputButton')")
+    it('has header menu.footer.contact', () => {
+      expect(column.find('h2').text()).toBe("$t('menu.footer.contact')")
     })
   })
 })

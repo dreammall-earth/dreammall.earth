@@ -14,7 +14,7 @@ const props = withDefaults(
     /**
      * primary or secondary button
      */
-    variant?: 'primary' | 'secondary' | 'third' | 'third-inverse' | 'fourth'
+    variant?: 'primary' | 'secondary' | 'third' | 'third-inverse' | 'fourth' | 'submit'
     /**
      * size of the button
      */
@@ -34,6 +34,7 @@ const classes = computed(() => ({
   'main-button--third': props.variant === 'third',
   'main-button--third-inverse': props.variant === 'third-inverse',
   'main-button--fourth': props.variant === 'fourth',
+  'main-button--form-submit': props.variant === 'submit',
   [`main-button-${props.size}`]: true,
 }))
 
@@ -79,6 +80,11 @@ const onClick = () => {
   &--fourth {
     padding: 0.75rem 2.4375rem;
     background-color: #2ca5b1;
+  }
+
+  &--form-submit {
+    background: #23ad5b;
+    border-radius: 15px;
   }
 
   &-large {

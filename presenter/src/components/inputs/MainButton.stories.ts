@@ -12,7 +12,7 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'third', 'third-inverse', 'fourth'],
+      options: ['primary', 'secondary', 'third', 'third-inverse', 'fourth', 'submit'],
     },
     size: { control: 'select', options: ['small', 'medium', 'large', 'auto'] },
     onClick: { action: 'clicked' },
@@ -59,6 +59,13 @@ export const ThirdInverse: Story = {
 export const Fourth: Story = {
   args: {
     variant: 'fourth',
+    label: 'Button',
+  },
+}
+
+export const Submit: Story = {
+  args: {
+    variant: 'submit',
     label: 'Button',
   },
 }
