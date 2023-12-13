@@ -3,13 +3,13 @@ import { describe, it, expect } from 'vitest'
 import { h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import ContactForm from './ContactForm.vue'
+import NewsletterForm from './NewsletterForm.vue'
 
-describe('ContactForm', () => {
+describe('NewsletterForm', () => {
   const wrapper = mount(VApp, {
     slots: {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      default: h(ContactForm),
+      default: h(NewsletterForm),
     },
   })
 
@@ -23,27 +23,12 @@ describe('ContactForm', () => {
         expect(wrapper.find('input[name="firstname"][type="text"]').exists()).toBeTruthy()
       })
 
-      it('has label menu.footer.contactForm.firstName', () => {
+      it('has label home.newsletterSection.newsletterForm.firstname', () => {
         expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[0].text()).toBe(
-          "$t('menu.footer.contactForm.firstName')",
+          "$t('home.newsletterSection.newsletterForm.firstname')",
         )
         expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[1].text()).toBe(
-          "$t('menu.footer.contactForm.firstName')",
-        )
-      })
-    })
-
-    describe('lastname', () => {
-      it('has text input', () => {
-        expect(wrapper.find('input[name="lastname"][type="text"]').exists()).toBeTruthy()
-      })
-
-      it('has label menu.footer.contactForm.lastName', () => {
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[4].text()).toBe(
-          "$t('menu.footer.contactForm.lastName')",
-        )
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[5].text()).toBe(
-          "$t('menu.footer.contactForm.lastName')",
+          "$t('home.newsletterSection.newsletterForm.firstname')",
         )
       })
     })
@@ -53,24 +38,12 @@ describe('ContactForm', () => {
         expect(wrapper.find('input[name="email"][type="email"]').exists()).toBeTruthy()
       })
 
-      it('has label menu.footer.contactForm.mail', () => {
+      it('has label home.newsletterSection.newsletterForm.email', () => {
         expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[2].text()).toBe(
-          "$t('menu.footer.contactForm.mail')",
+          "$t('home.newsletterSection.newsletterForm.email')",
         )
         expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[3].text()).toBe(
-          "$t('menu.footer.contactForm.mail')",
-        )
-      })
-    })
-
-    describe('message', () => {
-      it('has textarea input', () => {
-        expect(wrapper.find('textarea[name="message"]').exists()).toBeTruthy()
-      })
-
-      it('has label menu.footer.contactForm.message', () => {
-        expect(wrapper.find('form .v-textarea.v-text-field label').text()).toBe(
-          "$t('menu.footer.contactForm.message')",
+          "$t('home.newsletterSection.newsletterForm.email')",
         )
       })
     })
@@ -80,9 +53,9 @@ describe('ContactForm', () => {
         expect(wrapper.find('input[type="checkbox"][name="dataprivacy"]').exists()).toBeTruthy()
       })
 
-      it('has label menu.footer.contactForm.message', () => {
-        expect(wrapper.find('form .v-row .v-col span.contact-agb').text()).toBe(
-          "$t('menu.footer.contactForm.privacy') $t('menu.footer.contactForm.privacyLinkLabel')",
+      it('has label home.newsletterSection.newsletterForm.privacy & privacyLinkLabel', () => {
+        expect(wrapper.find('form .v-row .v-col span.newsletter-agb').text()).toBe(
+          "$t('home.newsletterSection.newsletterForm.privacy') $t('home.newsletterSection.newsletterForm.privacyLinkLabel')",
         )
       })
     })
@@ -98,9 +71,7 @@ describe('ContactForm', () => {
     it('data privacy checkbox not checked', async () => {
       // form not to be submitted
       await wrapper.find('input[type=text][name="firstname"]').setValue('John')
-      await wrapper.find('input[type=text][name="lastname"]').setValue('Doe')
       await wrapper.find('input[type=email]').setValue('john@doe.com')
-      await wrapper.find('textarea[name="message"]').setValue('Lorem ipsum dolor sit amet')
 
       await wrapper.find('form').trigger('submit.prevent')
       expect(wrapper.emitted()).toHaveProperty('submit')

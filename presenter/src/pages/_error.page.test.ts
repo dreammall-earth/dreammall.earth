@@ -1,14 +1,13 @@
-import { VueWrapper, mount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach } from 'vitest'
-import { ComponentPublicInstance } from 'vue'
 
 import ErrorPage from './_error.page.vue'
 
 describe('ErrorPage', () => {
-  let wrapper: VueWrapper<unknown, ComponentPublicInstance<unknown, Omit<unknown, never>>>
   const Wrapper = () => {
     return mount(ErrorPage)
   }
+  let wrapper: ReturnType<typeof Wrapper>
 
   beforeEach(() => {
     wrapper = Wrapper()

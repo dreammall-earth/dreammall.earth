@@ -11,6 +11,20 @@
     }
   },
   "home": {
+    "newsletterSection": {
+      "currentNewsletter": "Aktuellen Newsletter",
+      "headline": "Newsletter",
+      "newsletterDownloadBtn": "Download",
+      "newsletterForm": {
+        "email": "E-Mail Adresse",
+        "fieldRequired": "Dieses Feld wird benötigt",
+        "firstname": "Vorname",
+        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unserer",
+        "privacyLinkLabel": "Datenschutzrichtlinie",
+        "submitBtn": "Absenden"
+      },
+      "subHeadline": "Immer auf dem laufenden bleiben"
+    },
     "section1": {
       "headline": "DreamMall created by people for people",
       "preOrderBtn": "Mehr Informationen",

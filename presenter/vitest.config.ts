@@ -16,7 +16,6 @@ export default mergeConfig(
           ...configDefaults.exclude,
           // storybook
           '**/*{.,-}stories.?(c|m)[jt]s?(x)',
-          'src/stories/**/*',
         ],
         lines: 100,
         functions: 100,
