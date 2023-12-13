@@ -15,6 +15,7 @@ pm2 save
 
 # Backend
 $SCRIPT_DIR/build.backend.sh
+$SCRIPT_DIR/migrate.database.sh
 
 # Presenter
 $SCRIPT_DIR/build.presenter.sh
