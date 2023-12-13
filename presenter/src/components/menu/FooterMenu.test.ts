@@ -12,6 +12,7 @@ import LogoImage from './LogoImage.vue'
 describe('FooterMenu', () => {
   const wrapper = mount(VApp, {
     slots: {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       default: h(FooterMenu),
     },
   })

@@ -18,7 +18,7 @@ const config: UserConfig = {
       include: path.resolve(__dirname, './src/locales/**'),
     }),
     checker({
-      // typescript: true,
+      typescript: true,
       vueTsc: true,
     }),
   ],

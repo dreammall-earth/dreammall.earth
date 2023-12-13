@@ -1,3 +1,5 @@
+import { ConcreteComponent } from 'vue'
+
 import ThirdSection from './ThirdSection.vue'
 
 import type { Meta, StoryObj } from '@storybook/vue3'
@@ -5,7 +7,7 @@ import type { Meta, StoryObj } from '@storybook/vue3'
 // More on how to set up stories at: https://storybook.js.org/docs/vue/writing-stories/introduction
 const meta = {
   title: 'Sections/Section3',
-  component: ThirdSection,
+  component: ThirdSection as Omit<ConcreteComponent<typeof ThirdSection>, 'props'>,
   // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/vue/writing-docs/autodocs
   tags: ['autodocs'],
   argTypes: {},

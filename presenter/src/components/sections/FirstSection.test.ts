@@ -40,7 +40,7 @@ describe('FirstSection', () => {
       })
 
       it('has slide value 0', () => {
-        expect(wrapper.vm.slide).toBe(0)
+        expect((wrapper.vm as unknown as { slide: number }).slide).toBe(0)
       })
 
       describe('video ends', () => {
@@ -49,7 +49,7 @@ describe('FirstSection', () => {
         })
 
         it('increments the slide value', () => {
-          expect(wrapper.vm.slide).toBe(1)
+          expect((wrapper.vm as unknown as { slide: number }).slide).toBe(1)
         })
       })
     })
@@ -91,7 +91,7 @@ describe('FirstSection', () => {
       })
 
       it('has slide value 0 at start', () => {
-        expect(wrapper.vm.slide).toBe(0)
+        expect((wrapper.vm as unknown as { slide: number }).slide).toBe(0)
       })
 
       describe('click next', () => {
@@ -100,7 +100,7 @@ describe('FirstSection', () => {
         })
 
         it('has slide value 1', () => {
-          expect(wrapper.vm.slide).toBe(1)
+          expect((wrapper.vm as unknown as { slide: number }).slide).toBe(1)
         })
 
         describe('click prev', () => {
@@ -109,7 +109,7 @@ describe('FirstSection', () => {
           })
 
           it('has slide value 0', () => {
-            expect(wrapper.vm.slide).toBe(0)
+            expect((wrapper.vm as unknown as { slide: number }).slide).toBe(0)
           })
         })
       })
