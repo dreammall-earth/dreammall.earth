@@ -35,8 +35,8 @@
   },
   "dependencies": {
     "@apollo/server": "^4.9.5",
-    "@getbrevo/brevo": "^2.0.0-beta.4",
     "@prisma/client": "^5.7.0",
+    "@sendinblue/client": "^3.3.1",
     "class-validator": "^0.14.0",
     "graphql": "^16.8.1",
     "graphql-scalars": "^1.22.4",
