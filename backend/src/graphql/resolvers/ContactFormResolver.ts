@@ -11,23 +11,40 @@ export class ContactFormResolver {
   ): Promise<boolean> {
     await prisma.contactForm.create({ data: contactFormData })
     // code to send email goes here
-    const apiInstance: SibApiV3Sdk.TransactionalEmailsApi = new SibApiV3Sdk.TransactionalEmailsApi()
-    const brevoKey = '12345' // TODO: process.env.BREVO_KEY as string
-    console.log('Brevo API_KEY', brevoKey)
-    apiInstance.setApiKey(SibApiV3Sdk.AccountApiApiKeys.apiKey, brevoKey)
+    const apiInstance = this.createBrevoInstance()
+    const sendSmtpEmail = this.createSmtpEmail()
 
-    const sendSmtpEmail: SibApiV3Sdk.SendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail()
-    sendSmtpEmail.subject = ''
-    sendSmtpEmail.htmlContent = ''
-    sendSmtpEmail.sender = {"name":"John Doe","email":"example@example.com"}
-    sendSmtpEmail.to = [{"email":"example@example.com","name":"Jane Doe"}]
-    sendSmtpEmail.cc = [{"email":"example2@example2.com","name":"Janice Doe"}]
-    sendSmtpEmail.bcc = [{"name":"John Doe","email":"example@example.com"}]
-    sendSmtpEmail.replyTo = {"email":"replyto@domain.com","name":"John Doe"}
-    sendSmtpEmail.headers = {"Some-Custom-Name":"unique-id-1234"}
-    sendSmtpEmail.params = {"parameter":"My param value","subject":"New Subject"}
+    apiInstance.sendTransacEmail(sendSmtpEmail).then((data) => {
+      console.log('API called successfully. Returned data: ' + data)
+      return true
+    }, function(error) {
+      console.error(error)
+    })
+    return false
+  }
 
-    return true
+  private createBrevoInstance(): SibApiV3Sdk.TransactionalEmailsApi {
+    const SibApiV3Sdk = require('@getbrevo/brevo')
+    const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi()
+    const apiKey = apiInstance.authentications['apiKey']
+    apiKey.apiKey = '12345'
+    return apiInstance
+  }
+
+  private createSmtpEmail(): SibApiV3Sdk.SendSmtpEmail {
+    const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail()
+
+    sendSmtpEmail.subject = "My {{params.subject}}"
+    sendSmtpEmail.htmlContent = "<html><body><h1>This is my first transactional email {{params.parameter}}</h1></body></html>";
+    sendSmtpEmail.sender = { "name": "John Doe", "email": "example@example.com" }
+    sendSmtpEmail.to = [{ "email": "hannes.heine@it4c.dev", "name": "Hannes Heine" }]
+    sendSmtpEmail.cc = [{ "email": "mathias.lenz@it4c.dev", "name": "Mathias Lenz" }]
+    sendSmtpEmail.bcc = [{ "name": "Ulf Gebhardt", "email": "ulf.gebhardt@it4c.dev" }]
+    sendSmtpEmail.replyTo = { "email": "info@it4c.dev", "name": "IT4C Support" }
+    sendSmtpEmail.headers = { "Some-Custom-Name": "unique-id-1234" }
+    sendSmtpEmail.params = { "parameter": "My param value", "subject": "New Subject" }
+
+    return sendSmtpEmail
   }
 
   // needed to avoid: GraphQLError: Type Query must define one or more fields
