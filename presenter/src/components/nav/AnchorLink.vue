@@ -17,12 +17,17 @@ const props = withDefaults(
      * The href of the anchor
      */
     href: string
+    /**
+     * variant of anchor element
+     */
+    variant?: 'default' | 'text'
   }>(),
-  { href: '#', label: 'Link' },
+  { href: '#', label: 'Link', variant: 'default' },
 )
 
 const classes = computed(() => ({
   'anchor-link': true,
+  'anchor-link--text': props.variant === 'text',
 }))
 </script>
 
@@ -47,6 +52,15 @@ const classes = computed(() => ({
   &--active {
     font-weight: 400;
     color: rgb(121 121 121);
+  }
+
+  &--text {
+    font-family: Poppins, sans-serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    color: #009dd9;
   }
 }
 </style>
