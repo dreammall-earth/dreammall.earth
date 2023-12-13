@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-namespace
-import * as SibApiV3Sdk from '@sendinblue/client'
+import * as SibApiV3Sdk from '@getbrevo/brevo'
 import { Resolver, Mutation, Query, Arg } from 'type-graphql'
 
 import config from '#config/config'
