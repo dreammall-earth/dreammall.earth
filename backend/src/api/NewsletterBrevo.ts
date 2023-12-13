@@ -2,7 +2,7 @@
 import * as SibApiV3Sdk from '@getbrevo/brevo'
 
 import config from '#config/config'
-import { NewsletterEmailAttributes } from '#model/NewsletterEmailAttributes'
+import { ContactFormInput } from '#graphql/inputs/ContactFormInput'
 
 export const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
   const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi()
@@ -11,19 +11,37 @@ export const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
 }
 
 export const createSmtpEmail = (
-  emailAttributes: NewsletterEmailAttributes,
-): SibApiV3Sdk.SendSmtpEmail => {
+  apiInstance: SibApiV3Sdk.TransactionalEmailsApi,
+  contactFormData: ContactFormInput,
+): boolean => {
   const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail()
 
-  sendSmtpEmail.subject = emailAttributes.subject
-  sendSmtpEmail.htmlContent = emailAttributes.htmlContent
-  sendSmtpEmail.sender = emailAttributes.sender
-  sendSmtpEmail.to = emailAttributes.emailTo
-  sendSmtpEmail.cc = emailAttributes.cc
-  sendSmtpEmail.bcc = emailAttributes.bcc
-  sendSmtpEmail.replyTo = emailAttributes.replyTo
-  sendSmtpEmail.headers = emailAttributes.headers
-  sendSmtpEmail.params = emailAttributes.params
+  sendSmtpEmail.subject = 'My {{params.subject}}'
+  sendSmtpEmail.htmlContent =
+    '<html><body><h1>This is my first transactional email {{params.parameter}}</h1></body></html>'
+  sendSmtpEmail.sender = { name: 'DreamMall Earth Team', email: 'no-reply@dreammall.earth' }
+  sendSmtpEmail.to = [
+    {
+      name: contactFormData.firstName + ' ' + contactFormData.lastName,
+      email: contactFormData.email,
+    },
+  ]
+  sendSmtpEmail.replyTo = { name: 'DreamMall Earth', email: 'contact@dreammall.earth' }
+  sendSmtpEmail.headers = { 'Some-Custom-Name': 'unique-id-1234' }
+  sendSmtpEmail.params = { parameter: 'My param value', subject: 'New Subject' }
+  void apiInstance.sendTransacEmail(sendSmtpEmail).then(
+    function (data) {
+      // eslint-disable-next-line no-console
+      console.log('API called successfully. Returned data: ', JSON.stringify(data))
+      return true
+    },
+    // eslint-disable-next-line promise/prefer-await-to-callbacks
+    function (error) {
+      // eslint-disable-next-line no-console
+      console.error(error)
 
-  return sendSmtpEmail
+      return false
+    },
+  )
+  return true
 }
