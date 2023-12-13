@@ -2,6 +2,7 @@
 import * as SibApiV3Sdk from '@sendinblue/client'
 import { Resolver, Mutation, Query, Arg } from 'type-graphql'
 
+import config from '#config/config'
 import { ContactFormInput } from '#inputs/ContactFormInput'
 import { prisma } from '#src/prisma'
 
@@ -16,23 +17,26 @@ export class ContactFormResolver {
     const apiInstance = this.createBrevoInstance()
     const sendSmtpEmail = this.createSmtpEmail()
 
-    try {
-      void apiInstance.sendTransacEmail(sendSmtpEmail).then(function (data) {
+    void apiInstance.sendTransacEmail(sendSmtpEmail).then(
+      function (data) {
         // eslint-disable-next-line no-console
         console.log('API called successfully. Returned data: ', JSON.stringify(data))
-        return true
-      })
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error)
-      return false
-    }
+        return data
+      },
+      // eslint-disable-next-line promise/prefer-await-to-callbacks
+      function (error) {
+        // eslint-disable-next-line no-console
+        console.error(error)
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+        return error
+      },
+    )
     return true
   }
 
   private createBrevoInstance(): SibApiV3Sdk.TransactionalEmailsApi {
     const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi()
-    apiInstance.setApiKey(SibApiV3Sdk.AccountApiApiKeys.apiKey, '12345')
+    apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, config.BREVO_KEY)
     return apiInstance
   }
 
