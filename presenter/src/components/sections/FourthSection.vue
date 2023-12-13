@@ -52,7 +52,7 @@ function triggerButtonVisibility() {
 }
 
 function playVideo() {
-  if (video.value.ended) {
+  if (video.value && video.value.ended) {
     video.value.play()
   }
 }
