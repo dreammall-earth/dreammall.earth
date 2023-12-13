@@ -2,6 +2,7 @@
 import * as SibApiV3Sdk from '@getbrevo/brevo'
 
 import config from '#config/config'
+import { NewsletterEmailAttributes } from '#src/model/NewsletterEmailAttributes'
 
 export const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
   const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi()
@@ -9,19 +10,20 @@ export const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
   return apiInstance
 }
 
-export const createSmtpEmail = (): SibApiV3Sdk.SendSmtpEmail => {
+export const createSmtpEmail = (
+  emailAttributes: NewsletterEmailAttributes,
+): SibApiV3Sdk.SendSmtpEmail => {
   const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail()
 
-  sendSmtpEmail.subject = 'My {{params.subject}}'
-  sendSmtpEmail.htmlContent =
-    '<html><body><h1>This is my first transactional email {{params.parameter}}</h1></body></html>'
-  sendSmtpEmail.sender = { name: 'John Doe', email: 'example@example.com' }
-  sendSmtpEmail.to = [{ email: 'hannes.heine@it4c.dev', name: 'Hannes Heine' }]
-  sendSmtpEmail.cc = [{ email: 'mathias.lenz@it4c.dev', name: 'Mathias Lenz' }]
-  sendSmtpEmail.bcc = [{ name: 'Ulf Gebhardt', email: 'ulf.gebhardt@it4c.dev' }]
-  sendSmtpEmail.replyTo = { email: 'info@it4c.dev', name: 'IT4C Support' }
-  sendSmtpEmail.headers = { 'Some-Custom-Name': 'unique-id-1234' }
-  sendSmtpEmail.params = { parameter: 'My param value', subject: 'New Subject' }
+  sendSmtpEmail.subject = emailAttributes.subject
+  sendSmtpEmail.htmlContent = emailAttributes.htmlContent
+  sendSmtpEmail.sender = emailAttributes.sender
+  sendSmtpEmail.to = emailAttributes.emailTo
+  sendSmtpEmail.cc = emailAttributes.cc
+  sendSmtpEmail.bcc = emailAttributes.bcc
+  sendSmtpEmail.replyTo = emailAttributes.replyTo
+  sendSmtpEmail.headers = emailAttributes.headers
+  sendSmtpEmail.params = emailAttributes.params
 
   return sendSmtpEmail
 }
