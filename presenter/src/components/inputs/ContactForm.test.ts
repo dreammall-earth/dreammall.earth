@@ -8,6 +8,7 @@ import ContactForm from './ContactForm.vue'
 describe('ContactForm', () => {
   const wrapper = mount(VApp, {
     slots: {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       default: h(ContactForm),
     },
   })
