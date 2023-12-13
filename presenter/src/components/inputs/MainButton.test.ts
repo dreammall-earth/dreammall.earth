@@ -1,13 +1,12 @@
-import { VueWrapper, mount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach } from 'vitest'
-import { ComponentPublicInstance } from 'vue'
 
 import MainButton from './MainButton.vue'
 
 describe('MainButton', () => {
-  let wrapper: VueWrapper<unknown, ComponentPublicInstance<unknown, Omit<unknown, never>>>
+  let wrapper: ReturnType<typeof mount<typeof MainButton>>
   const Wrapper = () => {
-    return mount(MainButton, {
+    return mount<typeof MainButton>(MainButton, {
       props: {
         label: 'My Button',
         variant: 'primary',
