@@ -9,7 +9,7 @@
     <div id="products">
       <Section3 />
     </div>
-    <div id="newsletter-section py-8">
+    <div id="newsletter-section" class="py-8">
       <NewsletterSection />
     </div>
     <div id="section5">
