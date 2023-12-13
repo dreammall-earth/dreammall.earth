@@ -2,7 +2,7 @@
 import * as SibApiV3Sdk from '@getbrevo/brevo'
 
 import config from '#config/config'
-import { NewsletterEmailAttributes } from '#src/model/NewsletterEmailAttributes'
+import { NewsletterEmailAttributes } from '#model/NewsletterEmailAttributes'
 
 export const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
   const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi()
