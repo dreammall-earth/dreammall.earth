@@ -22,7 +22,7 @@
               playsinline
               @ended="triggerNextSlide"
             >
-              <source src="@/assets/video/header_video.mp4" type="video/mp4" />
+              <source src="#assets/video/header_video.mp4" type="video/mp4" />
             </video>
           </v-sheet>
         </v-carousel-item>
