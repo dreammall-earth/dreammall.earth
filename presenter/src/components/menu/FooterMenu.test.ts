@@ -141,7 +141,7 @@ describe('FooterMenu', () => {
       const anchor: VueWrapper = column.findAllComponents(AnchorLink)[0]
 
       it('has href to /', () => {
-        expect(anchor.attributes('href')).toBe('/')
+        expect(anchor.attributes('href')).toBe("$t('nav.impress')")
       })
 
       it('has text menu.footer.impress', () => {
