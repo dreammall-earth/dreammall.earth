@@ -4,10 +4,10 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import FirstSection from './FirstSection.vue'
 
 describe('FirstSection', () => {
-  let wrapper: ReturnType<typeof mount<typeof FirstSection>>
   const Wrapper = () => {
-    return mount<typeof FirstSection>(FirstSection)
+    return mount(FirstSection)
   }
+  let wrapper: ReturnType<typeof Wrapper>
 
   beforeEach(() => {
     wrapper = Wrapper()
