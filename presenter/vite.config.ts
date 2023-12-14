@@ -37,7 +37,7 @@ const config: UserConfig = {
       '#plugins': path.join(__dirname, '/renderer/plugins'),
       '#context': path.join(__dirname, '/renderer/context'),
       '#types': path.join(__dirname, '/types'),
-      '#root': __dirname
+      '#root': __dirname,
     },
   },
   css: {
