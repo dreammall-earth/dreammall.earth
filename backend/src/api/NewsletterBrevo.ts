@@ -6,7 +6,10 @@ import config from '#config/config'
 
 const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
   const apiInstance: SibApiV3Sdk.TransactionalEmailsApi = new SibApiV3Sdk.TransactionalEmailsApi()
+  console.log('BREVO_KEY', config.BREVO_KEY)
   if (!config.BREVO_KEY) {
+    // eslint-disable-next-line no-console
+    console.log('BREVO_KEY:', config.BREVO_KEY)
     apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, config.BREVO_KEY)
   }
   return apiInstance
@@ -16,19 +19,21 @@ export const sendSmtpEmail = (contactFormData: ContactForm): void => {
   const apiInstance = createBrevoInstance()
   const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail()
 
-  sendSmtpEmail.subject = 'My {{params.subject}}'
-  sendSmtpEmail.htmlContent =
-    '<html><body><h1>This is my first transactional email {{params.parameter}}</h1></body></html>'
-  sendSmtpEmail.sender = { name: 'DreamMall Earth Team', email: 'no-reply@dreammall.earth' }
-  sendSmtpEmail.to = [
-    {
-      name: contactFormData.firstName + ' ' + contactFormData.lastName,
-      email: contactFormData.email,
-    },
-  ]
-  sendSmtpEmail.replyTo = { name: 'DreamMall Earth', email: 'contact@dreammall.earth' }
-  sendSmtpEmail.headers = { 'Some-Custom-Name': 'unique-id-1234' }
-  sendSmtpEmail.params = { parameter: 'My param value', subject: 'New Subject' }
+  sendSmtpEmail.templateId = 1
+  sendSmtpEmail.sender = {
+    name: contactFormData.firstName + ' ' + contactFormData.lastName,
+    email: contactFormData.email,
+  }
+  sendSmtpEmail.replyTo = {
+    name: contactFormData.firstName + ' ' + contactFormData.lastName,
+    email: contactFormData.email,
+  }
+  sendSmtpEmail.params = {
+    email: contactFormData.email,
+    firstname: contactFormData.firstName,
+    lastname: contactFormData.lastName,
+    content: contactFormData.content,
+  }
   void apiInstance.sendTransacEmail(sendSmtpEmail).then(
     function (data) {
       // eslint-disable-next-line no-console
