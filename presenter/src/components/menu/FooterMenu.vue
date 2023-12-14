@@ -23,10 +23,7 @@
             <AnchorLink href="/" :label="$t('menu.footer.impress')"></AnchorLink>
             <AnchorLink href="/" :label="$t('menu.footer.cookies')"></AnchorLink>
             <AnchorLink href="/" :label="$t('menu.footer.newsletter')"></AnchorLink>
-            <AnchorLink
-              :href="$t('nav.dataProtection')"
-              :label="$t('menu.footer.privacy')"
-            ></AnchorLink>
+            <AnchorLink href="datenschutz" :label="$t('menu.footer.privacy')"></AnchorLink>
           </div>
           <LogoImage class="mt-8" size="small" />
         </v-col>

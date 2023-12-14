@@ -180,7 +180,7 @@ describe('FooterMenu', () => {
       const anchor: VueWrapper = column.findAllComponents(AnchorLink)[3]
 
       it('has href to /', () => {
-        expect(anchor.attributes('href')).toBe("$t('nav.dataProtection')")
+        expect(anchor.attributes('href')).toBe('datenschutz')
       })
 
       it('has text menu.footer.privacy', () => {
