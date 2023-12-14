@@ -37,6 +37,7 @@ const config: UserConfig = {
       '#plugins': path.join(__dirname, '/renderer/plugins'),
       '#context': path.join(__dirname, '/renderer/context'),
       '#types': path.join(__dirname, '/types'),
+      '#mutations': path.join(__dirname, '/src/graphql/mutations'),
       '#root': __dirname,
     },
   },
