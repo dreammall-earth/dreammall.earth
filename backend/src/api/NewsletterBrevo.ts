@@ -11,7 +11,7 @@ const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
   return apiInstance
 }
 
-export const createSmtpEmail = (
+const createSmtpEmail = (
   templateId: number,
   to: SibApiV3Sdk.SendSmtpEmailToInner[],
   sender: SibApiV3Sdk.SendSmtpEmailSender,
@@ -28,34 +28,82 @@ export const createSmtpEmail = (
   return sendSmtpEmail
 }
 
-export const sendSmtpEmail = (
-  smtpEmail: SibApiV3Sdk.SendSmtpEmail,
-  contactForm: ContactForm,
-): void => {
-  if (config.BREVO_KEY) {
-    const apiInstance = createBrevoInstance()
+const sendSmtpEmail = (smtpEmail: SibApiV3Sdk.SendSmtpEmail, contactForm: ContactForm): void => {
+  const apiInstance = createBrevoInstance()
 
-    void apiInstance.sendTransacEmail(smtpEmail).then(
-      async (data) => {
-        // eslint-disable-next-line no-console
-        console.log('API called successfully. Returned data: ', JSON.stringify(data))
-        // code to store success goes here:
-        contactForm.brevoSuccess = new Date()
-        await prisma.contactForm.update({
-          where: {
-            id: contactForm.id,
-          },
-          data: {
-            ...contactForm,
-          },
-        })
-        return true
+  void apiInstance.sendTransacEmail(smtpEmail).then(
+    async (data) => {
+      // eslint-disable-next-line no-console
+      console.log('API called successfully. Returned data: ', JSON.stringify(data))
+      // code to store success goes here:
+      contactForm.brevoSuccess = new Date()
+      await prisma.contactForm.update({
+        where: {
+          id: contactForm.id,
+        },
+        data: {
+          ...contactForm,
+        },
+      })
+      return true
+    },
+    // eslint-disable-next-line promise/prefer-await-to-callbacks
+    function (error) {
+      // eslint-disable-next-line no-console
+      console.error(error)
+    },
+  )
+}
+
+export const sendContactFormEmail = (contactForm: ContactForm): void => {
+  if (config.BREVO_KEY) {
+    const smtpEmailToAdmin: SibApiV3Sdk.SendSmtpEmail = createSmtpEmail(
+      config.BREVO_TEMPLATE_CONTACT_BASE,
+      [
+        {
+          name: config.BREVO_CONTACT_REQUEST_TO_NAME,
+          email: config.BREVO_CONTACT_REQUEST_TO_EMAIL,
+        },
+      ],
+      {
+        name: contactForm.firstName + ' ' + contactForm.lastName,
+        email: contactForm.email,
       },
-      // eslint-disable-next-line promise/prefer-await-to-callbacks
-      function (error) {
-        // eslint-disable-next-line no-console
-        console.error(error)
+      {
+        name: contactForm.firstName + ' ' + contactForm.lastName,
+        email: contactForm.email,
+      },
+      {
+        email: contactForm.email,
+        firstname: contactForm.firstName,
+        lastname: contactForm.lastName,
+        content: contactForm.content,
       },
     )
+    void sendSmtpEmail(smtpEmailToAdmin, contactForm)
+
+    const smtpEmailToClient: SibApiV3Sdk.SendSmtpEmail = createSmtpEmail(
+      config.BREVO_TEMPLATE_CONTACT_USER,
+      [
+        {
+          name: contactForm.firstName + ' ' + contactForm.lastName,
+          email: contactForm.email,
+        },
+      ],
+      {
+        name: config.BREVO_CONTACT_REQUEST_TO_NAME,
+        email: config.BREVO_CONTACT_REQUEST_TO_EMAIL,
+      },
+      {
+        name: config.BREVO_CONTACT_REQUEST_TO_NAME,
+        email: config.BREVO_CONTACT_REQUEST_TO_EMAIL,
+      },
+      {
+        firstname: contactForm.firstName,
+        lastname: contactForm.lastName,
+        content: contactForm.content,
+      },
+    )
+    void sendSmtpEmail(smtpEmailToClient, contactForm)
   }
 }
