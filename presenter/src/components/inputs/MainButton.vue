@@ -1,5 +1,8 @@
 <template>
-  <v-btn :class="classes" :size="size" @click="onClick">{{ label }}</v-btn>
+  <v-btn :class="classes" :size="size" @click="onClick">
+    <v-icon v-if="props.variant === 'reload'" start class="pr-4" icon="mdi-reload"></v-icon>
+    {{ label }}</v-btn
+  >
 </template>
 
 <script lang="ts" setup>
@@ -14,7 +17,15 @@ const props = withDefaults(
     /**
      * primary or secondary button
      */
-    variant?: 'primary' | 'secondary' | 'third' | 'third-inverse' | 'fourth' | 'submit' | 'download'
+    variant?:
+      | 'primary'
+      | 'secondary'
+      | 'third'
+      | 'third-inverse'
+      | 'fourth'
+      | 'submit'
+      | 'download'
+      | 'reload'
     /**
      * size of the button
      */
@@ -36,6 +47,7 @@ const classes = computed(() => ({
   'main-button--fourth': props.variant === 'fourth',
   'main-button--form-submit': props.variant === 'submit',
   'main-button--download': props.variant === 'download',
+  'main-button--reload': props.variant === 'reload',
   [`main-button-${props.size}`]: true,
 }))
 
@@ -86,6 +98,21 @@ const onClick = () => {
   &--form-submit {
     background: #23ad5b;
     border-radius: 15px;
+  }
+
+  &--reload {
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 110%; /* 1.1rem */
+    color: #bcbcbc;
+    background: #fff;
+    border: 1px solid #e3e3e3;
+    border-radius: 3.25rem;
+  }
+
+  &--reload:hover {
+    color: #545454;
   }
 
   &--download {
