@@ -35,6 +35,18 @@ Install git:
 apk add git
 ```
 
+Install mariadb:
+```bash
+apk add mysql mysql-client
+service mariadb setup
+rc-update add mariadb boot
+# allow access from network
+vi /etc/my.cnf.d/mariadb-server.cnf
+# comment out `skip-networking`
+# add `bind-address = localhost`
+service mariadb start
+```
+
 ## Install the project
 
 Clone the repository:
@@ -51,6 +63,28 @@ mv -f deployment/nginx/default.conf /etc/nginx/http.d/default.conf
 vi /etc/nginx/http.d/default.conf
 ```
 
+Create Database User:
+```sql
+CREATE USER 'dreammall'@'localhost' IDENTIFIED BY 'SECRET';
+GRANT ALL PRIVILEGES ON * . * TO 'dreammall'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+Configure database connection:
+```bash
+cp backend/.env.dist backend/.env
+# adjust the .env config as needed
+vi backend/.env
+# DATABASE_URL="mysql://dreammall:SECRET@localhost:3306/dreammall.earth"
+```
+
+Configure backend connection:
+```bash
+cp presenter/.env.dist presenter/.env
+# adjust the .env config as needed
+vi backend/.env
+# PUBLIC_ENV__ENDPOINTS__GRAPHQL_URI=http://localhost/api
+
 ## Deploy the project
 
 To deploy the project run
@@ -65,6 +99,7 @@ Those services are:
 | Service             | URL                                        |
 |---------------------|--------------------------------------------|
 | presenter           | [https://host/](https://host/)             |
+| backend             | [https://host/api](https://host/api)       |
 | docs                | [https://host/docs](https://host/docs)     |
 | webhooks (optional) | [https://host/hooks/](https://host/hooks/) |
 

@@ -6,19 +6,6 @@ import { createContactFormMutation } from '#mutations/createContactForm'
 
 import ContactForm from './ContactForm.vue'
 
-/*
-vi.mock('@vue/apollo-composable', () => ({
-  __esModule: true,
-  useMutation: vi.fn(),
-}))
-                                 
-const useMutationMock: Mock = useMutation as Mock
-
-useMutationMock.mockImplementation(() => ({
-  mutate: vi.fn(),
-}))
-*/
-
 describe('ContactForm', () => {
   const Wrapper = () => {
     return mount(ContactForm)

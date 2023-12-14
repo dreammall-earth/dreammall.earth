@@ -1,6 +1,6 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
-import { h } from 'vue'
+import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 import AnchorLink from '#components/nav/AnchorLink.vue'
@@ -11,8 +11,7 @@ import TopMenu from './TopMenu.vue'
 describe('FooterMenu', () => {
   const wrapper = mount(VApp, {
     slots: {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      default: h(TopMenu),
+      default: h(TopMenu as Component),
     },
   })
 
@@ -35,8 +34,7 @@ describe('FooterMenu', () => {
     })
 
     describe('first anchor link', () => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-      const anchor: VueWrapper = column.findAllComponents(AnchorLink)[0]
+      const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[0]
 
       it('has href #about', () => {
         expect(anchor.attributes('href')).toBe('#about')
@@ -48,8 +46,7 @@ describe('FooterMenu', () => {
     })
 
     describe('second anchor link', () => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-      const anchor: VueWrapper = column.findAllComponents(AnchorLink)[1]
+      const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[1]
 
       it('has href #products', () => {
         expect(anchor.attributes('href')).toBe('#products')
@@ -61,8 +58,7 @@ describe('FooterMenu', () => {
     })
 
     describe('third anchor link', () => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-      const anchor: VueWrapper = column.findAllComponents(AnchorLink)[2]
+      const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[2]
 
       it('has href #contact', () => {
         expect(anchor.attributes('href')).toBe('#contact')

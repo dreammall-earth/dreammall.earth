@@ -11,7 +11,6 @@
 //  - HatTip (https://github.com/hattipjs/hattip)
 //    - You can use Bati (https://batijs.github.io/) to scaffold a Vike + HatTip app. Note that Bati generates apps that use the V1 design (https://vike.dev/migration/v1-design) and Vike packages (https://vike.dev/vike-packages)
 
-import compression from 'compression'
 import express from 'express'
 import { renderPage } from 'vike/server'
 
@@ -24,7 +23,9 @@ void startServer()
 async function startServer() {
   const app = express()
 
-  app.use(compression())
+  // TODO this is very slow, still part of the package json
+  // import compression from 'compression'
+  // app.use(compression())
 
   // Vite integration
   if (isProduction) {
@@ -52,27 +53,29 @@ async function startServer() {
 
   // Vike middleware. It should always be our last middleware (because it's a
   // catch-all middleware superseding any middleware placed after it).
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  app.get('*', async (req, res, next) => {
-    const pageContextInit = {
-      urlOriginal: req.originalUrl,
-    }
-    const pageContext = await renderPage(pageContextInit)
-    const { httpResponse } = pageContext
-    if (!httpResponse) {
-      return next()
-    } else {
-      const { body, statusCode, headers, earlyHints } = httpResponse
-      if (res.writeEarlyHints) res.writeEarlyHints({ link: earlyHints.map((e) => e.earlyHintLink) })
-      headers.forEach(([name, value]) => res.setHeader(name, value))
-      res.status(statusCode)
-      // For HTTP streams use httpResponse.pipe() instead, see https://vike.dev/stream
-      res.send(body)
-    }
+  app.get('*', (req, res, next) => {
+    void (async (req, res, next) => {
+      const pageContextInit = {
+        urlOriginal: req.originalUrl,
+      }
+      const pageContext = await renderPage(pageContextInit)
+      const { httpResponse } = pageContext
+      if (!httpResponse) {
+        next()
+      } else {
+        const { body, statusCode, headers, earlyHints } = httpResponse
+        if (res.writeEarlyHints)
+          res.writeEarlyHints({ link: earlyHints.map((e) => e.earlyHintLink) })
+        headers.forEach(([name, value]) => res.setHeader(name, value))
+        res.status(statusCode)
+        // For HTTP streams use httpResponse.pipe() instead, see https://vike.dev/stream
+        res.send(body)
+      }
+    })(req, res, next)
   })
 
   const port = process.env.PORT || 3000
   app.listen(port)
   // eslint-disable-next-line no-console
-  console.log(`Server running at http://localhost:${port}`)
+  console.log(`🚀 Server running at http://localhost:${port}`)
 }

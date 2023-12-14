@@ -11,17 +11,17 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "paths": {
-      "#root/*": ["./*"],
-      "#src/*": ["./src/*"],
       "#components/*": ["./src/components/*"],
       "#pages/*": ["./src/pages/*"],
       "#assets/*": ["./src/assets/*"],
       "#layouts/*": ["./src/layouts/*"],
       "#stores/*": ["./src/stores/*"],
+      "#src/*": ["./src/*"],
       "#plugins/*": ["./renderer/plugins/*"],
       "#context/*": ["./renderer/context/*"],
       "#types/*": ["./types/*"],
-      "#mutations/*": ["./src/graphql/mutations/*"]
+      "#mutations/*": ["./src/graphql/mutations/*"],
+      "#root/*": ["./*"]
     }
   },
   "ts-node": {
