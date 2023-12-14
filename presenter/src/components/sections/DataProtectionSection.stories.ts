@@ -1,3 +1,5 @@
+import { SBComp } from '#types/SBComp'
+
 import DataProtectionSection from './DataProtectionSection.vue'
 
 import type { Meta, StoryObj } from '@storybook/vue3'
