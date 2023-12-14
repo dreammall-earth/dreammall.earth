@@ -20,6 +20,7 @@
       "#plugins/*": ["./renderer/plugins/*"],
       "#context/*": ["./renderer/context/*"],
       "#types/*": ["./types/*"],
+      "#mutations/*": ["./src/graphql/mutations/*"],
       "#root/*": ["./*"]
     }
   },
