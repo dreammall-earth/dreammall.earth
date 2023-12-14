@@ -17,6 +17,19 @@ jest.mock('@apollo/server/standalone', () => {
   }
 })
 
+jest.mock('../config/config', () => {
+  // eslint-disable-next-line n/no-process-env
+  process.env.BREVO_KEY = ''
+  // eslint-disable-next-line n/no-process-env
+  process.env.BREVO_CONTACT_REQUEST_TO_NAME = ''
+  // eslint-disable-next-line n/no-process-env
+  process.env.BREVO_CONTACT_REQUEST_TO_EMAIL = ''
+  // eslint-disable-next-line n/no-process-env
+  process.env.BREVO_TEMPLATE_CONTACT_BASE = '1'
+  // eslint-disable-next-line n/no-process-env
+  process.env.BREVO_TEMPLATE_CONTACT_USER = '2'
+})
+
 describe('server', () => {
   describe('listen', () => {
     beforeEach(async () => {
