@@ -20,6 +20,16 @@ services:
     volumes: 
       - db_vol:/var/lib/mysql
 
+  presenter:
+    extends:
+      file: presenter/docker-compose.override.yml
+      service: frontend
+
+  backend:
+    extends:
+      file: backend/docker-compose.override.yml
+      service: backend
+
 networks:
   external-net:
   internal-net:
@@ -27,3 +37,5 @@ networks:
 
 volumes:
   db_vol: 
+  frontend_node_modules:
+  backend_node_modules:
