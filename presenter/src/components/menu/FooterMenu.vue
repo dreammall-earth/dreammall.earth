@@ -20,7 +20,7 @@
         <v-col cols="6" md="3">
           <h2 class="footer-header mb-3 text-left">{{ $t('menu.footer.privacyHeadline') }}</h2>
           <div class="footer-links">
-            <AnchorLink href="/" :label="$t('menu.footer.impress')"></AnchorLink>
+            <AnchorLink href="impressum" :label="$t('menu.footer.impress')"></AnchorLink>
             <AnchorLink href="/" :label="$t('menu.footer.cookies')"></AnchorLink>
             <AnchorLink href="/" :label="$t('menu.footer.newsletter')"></AnchorLink>
             <AnchorLink href="datenschutz" :label="$t('menu.footer.privacy')"></AnchorLink>
