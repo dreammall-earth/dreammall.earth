@@ -12,6 +12,7 @@
         <v-carousel-item class="video-item">
           <v-sheet class="video-item">
             <video
+              :key="videoSrc"
               ref="video"
               class="video w-100"
               :poster="VideoPoster"
@@ -22,7 +23,7 @@
               @ended="triggerNextSlide"
               @click="playVideo"
             >
-              <source :src="Video" type="video/mp4" />
+              <source :src="videoSrc" type="video/mp4" />
             </video>
           </v-sheet>
         </v-carousel-item>
@@ -68,15 +69,19 @@ const HELLO_QUERY = gql`
 const { result, loading, error } = useQuery(HELLO_QUERY)
 */
 
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 import VideoPoster from '#assets/img/video_placeholder.png'
 import Video from '#assets/video/header_video.mp4'
+import VideoMobile from '#assets/video/header_video_mobile.mp4'
 import MainButton from '#components/inputs/MainButton.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 
 const slide = ref(0)
 const video = ref<HTMLFormElement>()
+const videoSrc = ref('')
+
+const mobileThreshold: number = 550
 
 defineExpose({ slide })
 
@@ -89,6 +94,25 @@ function playVideo() {
     video.value.play()
   }
 }
+
+function isMobile() {
+  return window.innerWidth <= mobileThreshold
+}
+
+function setVideoSrc() {
+  if (isMobile()) {
+    videoSrc.value = VideoMobile
+  } else {
+    videoSrc.value = Video
+  }
+}
+
+onMounted(() => {
+  setVideoSrc()
+  window.addEventListener('resize', () => {
+    setVideoSrc()
+  })
+})
 </script>
 
 <style scoped lang="scss">
