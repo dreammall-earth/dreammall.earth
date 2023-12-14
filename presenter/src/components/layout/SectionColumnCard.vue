@@ -31,6 +31,8 @@ const props = withDefaults(
 </script>
 
 <style scoped lang="scss">
+$mobile: 500px;
+
 .v-card {
   max-width: 320px;
   font-family: Poppins, sans-serif;
@@ -46,6 +48,10 @@ const props = withDefaults(
     font-weight: 600;
     line-height: 125%; /* 2.03125rem */
     text-transform: capitalize;
+    @media screen and (max-width: $mobile) {
+      text-overflow: unset;
+      text-wrap: balance;
+    }
   }
 }
 </style>

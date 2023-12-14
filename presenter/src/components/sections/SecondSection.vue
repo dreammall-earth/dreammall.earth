@@ -62,6 +62,8 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+$mobile: 500px;
+
 .section2 {
   max-width: 1440px;
   min-height: 50rem;
@@ -75,6 +77,10 @@ onMounted(() => {
     font-weight: 700;
     line-height: 120%;
     text-transform: capitalize;
+
+    @media screen and (max-width: $mobile) {
+      font-size: 3rem;
+    }
   }
 
   .section-left-part {
@@ -101,10 +107,18 @@ onMounted(() => {
     font-style: normal;
     font-weight: 300;
     line-height: normal;
+
+    @media screen and (max-width: $mobile) {
+      padding: 10px;
+    }
   }
 
   .section-logo {
     max-width: 24.7268rem;
+
+    @media screen and (max-width: $mobile) {
+      padding: 10px;
+    }
   }
 }
 </style>
