@@ -2,7 +2,7 @@
   "name": "boilerplate-frontend",
   "version": "1.0.0",
   "description": "The IT4C Boilerplate for frontends",
-  "main": "build/index.js",
+  "main": "build/index.cjs",
   "type": "module",
   "repository": {
     "type": "git",
