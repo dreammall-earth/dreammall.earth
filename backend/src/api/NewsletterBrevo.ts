@@ -14,7 +14,6 @@ const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
 }
 
 export const createSmtpEmail = (
-  // contactFormData: ContactForm,
   templateId: number,
   to: SibApiV3Sdk.SendSmtpEmailToInner[],
   sender: SibApiV3Sdk.SendSmtpEmailSender,
