@@ -81,9 +81,11 @@
 </template>
 
 <script lang="ts" setup>
+import { useMutation } from '@vue/apollo-composable'
 import { ref } from 'vue'
 
 import AnchorLink from '#components/nav/AnchorLink.vue'
+import { subscribeToNewsletterMutation } from '#mutations/subscribeToNewsletterMutation'
 
 import MainButton from './MainButton.vue'
 
@@ -93,19 +95,28 @@ const dataprivacy = ref(0)
 
 const form = ref<HTMLFormElement>()
 
+const {
+  mutate: sendSubscribeToNewsletter,
+  onDone,
+  onError,
+} = useMutation(subscribeToNewsletterMutation)
+
+onDone(() => {
+  // eslint-disable-next-line no-console
+  console.log('successfully sent form')
+})
+
+// eslint-disable-next-line promise/prefer-await-to-callbacks
+onError((err) => {
+  // eslint-disable-next-line no-console
+  console.log(err.message)
+})
+
 // submit form with data
-function submitForm() {
-  if (form.value) {
-    form.value
-      .validate()
-      .then(function (value: {
-        valid: boolean
-        errors: { id: string | number; errorMessages: string[] }[]
-      }) {
-        // TODO submit form
-        return value.valid
-      })
-      .catch(function () {})
+async function submitForm() {
+  const isValid = await form.value?.validate()
+  if (isValid?.valid) {
+    await sendSubscribeToNewsletter({ email: email.value })
   }
 }
 </script>
