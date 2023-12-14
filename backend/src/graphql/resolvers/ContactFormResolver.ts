@@ -1,11 +1,9 @@
-// eslint-disable-next-line import/no-namespace
-import * as SibApiV3Sdk from '@getbrevo/brevo'
+import { ContactForm } from '@prisma/client'
 import { Resolver, Mutation, Query, Arg } from 'type-graphql'
 
 import { createBrevoInstance } from '#api/NewsletterBrevo'
 import { ContactFormInput } from '#inputs/ContactFormInput'
 import { prisma } from '#src/prisma'
-import { ContactForm } from '@prisma/client'
 
 @Resolver()
 export class ContactFormResolver {

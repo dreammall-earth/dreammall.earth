@@ -1,8 +1,8 @@
 // eslint-disable-next-line import/no-namespace
 import * as SibApiV3Sdk from '@getbrevo/brevo'
+import { ContactForm } from '@prisma/client'
 
 import config from '#config/config'
-import { ContactForm } from '@prisma/client'
 
 export const createBrevoInstance = (contactFormData: ContactForm): void => {
   const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi()
@@ -35,6 +35,7 @@ function createSmtpEmail(
     function (data) {
       // eslint-disable-next-line no-console
       console.log('API called successfully. Returned data: ', JSON.stringify(data))
+      return true
     },
     // eslint-disable-next-line promise/prefer-await-to-callbacks
     function (error) {
