@@ -4,18 +4,18 @@ import { ContactForm } from '@prisma/client'
 
 import config from '#config/config'
 
-export const createBrevoInstance = (contactFormData: ContactForm): void => {
-  const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi()
+const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
+  const apiInstance: SibApiV3Sdk.TransactionalEmailsApi = new SibApiV3Sdk.TransactionalEmailsApi()
   if (!config.BREVO_KEY) {
     apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, config.BREVO_KEY)
-    void createSmtpEmail(apiInstance, contactFormData)
   }
+  return apiInstance
 }
 
-function createSmtpEmail(
-  apiInstance: SibApiV3Sdk.TransactionalEmailsApi,
+export const sendSmtpEmail = (
   contactFormData: ContactForm,
-) {
+): void => {
+  const apiInstance = createBrevoInstance()
   const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail()
 
   sendSmtpEmail.subject = 'My {{params.subject}}'
