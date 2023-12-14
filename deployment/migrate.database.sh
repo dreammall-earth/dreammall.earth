@@ -7,4 +7,4 @@ PROJECT_ROOT=$SCRIPT_DIR/../backend
 
 # Build the project
 cd $PROJECT_ROOT
-npm run db:migrate
+npm run db:migrate:deploy
