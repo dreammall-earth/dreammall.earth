@@ -1,5 +1,30 @@
 {
   "about": {},
+  "dataProtection": {
+    "consumerDispute": {
+      "content": "Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.",
+      "headline": "Verbraucherstreitbeilegung / Universalschlichtungsstelle"
+    },
+    "euDispute": {
+      "content": "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr/. Unsere E-Mail-Adresse finden Sie oben im Impressum.",
+      "headline": "EU-Streitschlichtung"
+    },
+    "general": {
+      "city": "Musterort",
+      "company": "MusterFirma",
+      "headline": "Allgemeiner Hinweis und Pflichtinformationen",
+      "infoEnd": "Die verantwortliche Stelle entscheidet allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z.B. Namen, Kontaktdaten o. Ä.).",
+      "infoStart": "Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:",
+      "person": "Mustermann",
+      "street": "Musterweg",
+      "zip": "1212345"
+    },
+    "headline": "Datenschutzrichtlinie",
+    "revocation": {
+      "content": "Nur mit Ihrer ausdrücklichen Einwilligung sind einige Vorgänge der Datenverarbeitung möglich. Ein Widerruf Ihrer bereits erteilten Einwilligung ist jederzeit möglich. Für den Widerruf genügt eine formlose Mitteilung per E-Mail. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.",
+      "headline": "Widerruf Ihrer Einwilligung zur Datenverarbeitung"
+    }
+  },
   "error": {
     "404": {
       "h1": "404 Page Not Found",
@@ -154,8 +179,5 @@
       "products": "products",
       "sitemap": "Sitemap"
     }
-  },
-  "nav": {
-    "impress": "impressum"
   }
 }
