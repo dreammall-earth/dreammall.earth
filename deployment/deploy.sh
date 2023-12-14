@@ -13,6 +13,11 @@ pm2 stop all
 pm2 delete all
 pm2 save
 
+# Backend & Database Migration
+$SCRIPT_DIR/build.backend.sh
+$SCRIPT_DIR/migrate.database.sh
+$SCRIPT_DIR/start.backend.sh
+
 # Presenter
 $SCRIPT_DIR/build.presenter.sh
 $SCRIPT_DIR/start.presenter.sh
