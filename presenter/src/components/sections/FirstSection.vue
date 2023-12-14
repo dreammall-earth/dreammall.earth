@@ -22,7 +22,7 @@
               playsinline
               @ended="triggerNextSlide"
             >
-              <source src="@/assets/video/header_video.mp4" type="video/mp4" />
+              <source :src="Video" type="video/mp4" />
             </video>
           </v-sheet>
         </v-carousel-item>
@@ -70,6 +70,7 @@ const { result, loading, error } = useQuery(HELLO_QUERY)
 
 import { ref } from 'vue'
 
+import Video from '#assets/video/header_video.mp4'
 import MainButton from '#components/inputs/MainButton.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 
