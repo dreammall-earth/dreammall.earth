@@ -7,9 +7,7 @@ import { prisma } from '#src/prisma'
 
 const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
   const apiInstance: SibApiV3Sdk.TransactionalEmailsApi = new SibApiV3Sdk.TransactionalEmailsApi()
-  if (config.BREVO_KEY) {
-    apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, config.BREVO_KEY)
-  }
+  apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, config.BREVO_KEY)
   return apiInstance
 }
 
@@ -34,28 +32,30 @@ export const sendSmtpEmail = (
   smtpEmail: SibApiV3Sdk.SendSmtpEmail,
   contactForm: ContactForm,
 ): void => {
-  const apiInstance = createBrevoInstance()
+  if (config.BREVO_KEY) {
+    const apiInstance = createBrevoInstance()
 
-  void apiInstance.sendTransacEmail(smtpEmail).then(
-    async (data) => {
-      // eslint-disable-next-line no-console
-      console.log('API called successfully. Returned data: ', JSON.stringify(data))
-      // code to store success goes here:
-      contactForm.brevoSuccess = new Date()
-      await prisma.contactForm.update({
-        where: {
-          id: contactForm.id,
-        },
-        data: {
-          ...contactForm,
-        },
-      })
-      return true
-    },
-    // eslint-disable-next-line promise/prefer-await-to-callbacks
-    function (error) {
-      // eslint-disable-next-line no-console
-      console.error(error)
-    },
-  )
+    void apiInstance.sendTransacEmail(smtpEmail).then(
+      async (data) => {
+        // eslint-disable-next-line no-console
+        console.log('API called successfully. Returned data: ', JSON.stringify(data))
+        // code to store success goes here:
+        contactForm.brevoSuccess = new Date()
+        await prisma.contactForm.update({
+          where: {
+            id: contactForm.id,
+          },
+          data: {
+            ...contactForm,
+          },
+        })
+        return true
+      },
+      // eslint-disable-next-line promise/prefer-await-to-callbacks
+      function (error) {
+        // eslint-disable-next-line no-console
+        console.error(error)
+      },
+    )
+  }
 }
