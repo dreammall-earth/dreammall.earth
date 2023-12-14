@@ -1,8 +1,8 @@
 <template>
-  <v-app-bar :absolute="true" color="#D8D8D8" flat class="topmenu pa-4">
+  <v-app-bar :color="appBackground" flat class="topmenu">
     <v-row>
       <v-col>
-        <LogoImage />
+        <LogoImage class="ml-8" />
       </v-col>
       <v-col class="d-none d-md-flex align-center justify-center grow">
         <AnchorLink class="mx-4" href="#about" :label="$t('menu.header.about')"></AnchorLink>
@@ -15,13 +15,39 @@
 </template>
 
 <script lang="ts" setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+
 import AnchorLink from '#components/nav/AnchorLink.vue'
 
 import LogoImage from './LogoImage.vue'
+
+const appBackground = ref('transparent')
+
+function changeAppBarBackground() {
+  if (appBackground.value !== '#f5f5f5') {
+    // TODO change class for smoother transition
+    appBackground.value = '#f5f5f5'
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', changeAppBarBackground)
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll', changeAppBarBackground)
+})
 </script>
 
 <style scoped lang="scss">
 .topmenu {
   background: linear-gradient(0deg, #f5f5f5 0.06%, #d8d8d8 100%);
+}
+</style>
+
+<style lang="scss">
+.topmenu {
+  .v-toolbar__content {
+    height: 95px !important;
+  }
 }
 </style>
