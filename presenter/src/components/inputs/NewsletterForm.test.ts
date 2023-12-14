@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
-import { h } from 'vue'
+import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 import NewsletterForm from './NewsletterForm.vue'
@@ -8,8 +8,7 @@ import NewsletterForm from './NewsletterForm.vue'
 describe('NewsletterForm', () => {
   const wrapper = mount(VApp, {
     slots: {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      default: h(NewsletterForm),
+      default: h(NewsletterForm as Component),
     },
   })
 
