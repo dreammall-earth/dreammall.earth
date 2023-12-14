@@ -72,8 +72,8 @@ const onClick = () => {
   }
 
   &--primary:hover {
-    background: linear-gradient(98deg, #f09630 8.53%, rgba(75, 84, 96, 0.69) 107.12%);
-    box-shadow: 0px 6px 24px 0px rgba(64, 74, 86, 0.2);
+    background: linear-gradient(98deg, #f09630 8.53%, rgb(75 84 96 / 69%) 107.12%);
+    box-shadow: 0 6px 24px 0 rgb(64 74 86 / 20%);
   }
 
   &--secondary {
@@ -101,8 +101,8 @@ const onClick = () => {
   }
 
   &--fourth:hover {
-    background: linear-gradient(98deg, #009dd9 8.53%, rgba(75, 84, 96, 0.69) 107.12%);
-    box-shadow: 0px 6px 24px 0px rgba(64, 74, 86, 0.2);
+    background: linear-gradient(98deg, #009dd9 8.53%, rgb(75 84 96 / 69%) 107.12%);
+    box-shadow: 0 6px 24px 0 rgb(64 74 86 / 20%);
   }
 
   &--form-submit {
@@ -111,8 +111,8 @@ const onClick = () => {
   }
 
   &--form-submit:hover {
-    background: linear-gradient(98deg, #23ad5b 8.53%, rgba(75, 84, 96, 0.69) 107.12%);
-    box-shadow: 0px 6px 24px 0px rgba(64, 74, 86, 0.2);
+    background: linear-gradient(98deg, #23ad5b 8.53%, rgb(75 84 96 / 69%) 107.12%);
+    box-shadow: 0 6px 24px 0 rgb(64 74 86 / 20%);
   }
 
   &--reload {
@@ -136,8 +136,8 @@ const onClick = () => {
   }
 
   &--download:hover {
-    background: linear-gradient(98deg, #009dd9 8.53%, rgba(75, 84, 96, 0.69) 107.12%);
-    box-shadow: 0px 6px 24px 0px rgba(64, 74, 86, 0.2);
+    background: linear-gradient(98deg, #009dd9 8.53%, rgb(75 84 96 / 69%) 107.12%);
+    box-shadow: 0 6px 24px 0 rgb(64 74 86 / 20%);
   }
 
   &-large {
