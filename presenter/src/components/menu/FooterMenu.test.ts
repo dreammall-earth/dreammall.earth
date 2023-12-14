@@ -1,6 +1,6 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
-import { h } from 'vue'
+import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 // import TextButtonInput from '#components/inputs/TextButtonInput.vue'
@@ -13,8 +13,7 @@ import LogoImage from './LogoImage.vue'
 describe('FooterMenu', () => {
   const wrapper = mount(VApp, {
     slots: {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      default: h(FooterMenu),
+      default: h(FooterMenu as Component),
     },
   })
 
@@ -35,8 +34,7 @@ describe('FooterMenu', () => {
     })
 
     describe('first anchor link', () => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-      const anchor: VueWrapper = column.findAllComponents(AnchorLink)[0]
+      const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[0]
 
       it('has href to /', () => {
         expect(anchor.attributes('href')).toBe('/')
@@ -48,8 +46,7 @@ describe('FooterMenu', () => {
     })
 
     describe('second anchor link', () => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-      const anchor: VueWrapper = column.findAllComponents(AnchorLink)[1]
+      const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[1]
 
       it('has href to /', () => {
         expect(anchor.attributes('href')).toBe('/')
@@ -61,8 +58,7 @@ describe('FooterMenu', () => {
     })
 
     describe('third anchor link', () => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-      const anchor: VueWrapper = column.findAllComponents(AnchorLink)[2]
+      const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[2]
 
       it('has href to /', () => {
         expect(anchor.attributes('href')).toBe('/')
@@ -78,8 +74,7 @@ describe('FooterMenu', () => {
     })
 
     describe('fourth anchor link', () => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-      const anchor: VueWrapper = column.findAllComponents(AnchorLink)[3]
+      const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[3]
 
       it('has href to /', () => {
         expect(anchor.attributes('href')).toBe('/')
@@ -95,8 +90,7 @@ describe('FooterMenu', () => {
     })
 
     describe('fifth anchor link', () => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-      const anchor: VueWrapper = column.findAllComponents(AnchorLink)[4]
+      const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[4]
 
       it('has href to /', () => {
         expect(anchor.attributes('href')).toBe('/')
@@ -108,8 +102,7 @@ describe('FooterMenu', () => {
     })
 
     describe('sixth anchor link', () => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-      const anchor: VueWrapper = column.findAllComponents(AnchorLink)[5]
+      const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[5]
 
       it('has href to /', () => {
         expect(anchor.attributes('href')).toBe('/')
@@ -137,8 +130,7 @@ describe('FooterMenu', () => {
     })
 
     describe('first anchor link', () => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-      const anchor: VueWrapper = column.findAllComponents(AnchorLink)[0]
+      const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[0]
 
       it('has href to /', () => {
         expect(anchor.attributes('href')).toBe('impressum')
@@ -150,8 +142,7 @@ describe('FooterMenu', () => {
     })
 
     describe('second anchor link', () => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-      const anchor: VueWrapper = column.findAllComponents(AnchorLink)[1]
+      const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[1]
 
       it('has href to /', () => {
         expect(anchor.attributes('href')).toBe('/')
@@ -163,8 +154,7 @@ describe('FooterMenu', () => {
     })
 
     describe('third anchor link', () => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-      const anchor: VueWrapper = column.findAllComponents(AnchorLink)[2]
+      const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[2]
 
       it('has href to /', () => {
         expect(anchor.attributes('href')).toBe('/')
@@ -176,8 +166,7 @@ describe('FooterMenu', () => {
     })
 
     describe('fourth anchor link', () => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-      const anchor: VueWrapper = column.findAllComponents(AnchorLink)[3]
+      const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[3]
 
       it('has href to /', () => {
         expect(anchor.attributes('href')).toBe('datenschutz')

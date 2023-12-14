@@ -1,6 +1,6 @@
 import { DefaultApolloClient } from '@vue/apollo-composable'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-import { createSSRApp, defineComponent, h, markRaw, reactive, provide } from 'vue'
+import { createSSRApp, defineComponent, h, markRaw, reactive, Component, provide } from 'vue'
 
 import PageShell from '#components/PageShell.vue'
 import { setPageContext } from '#context/usePageContext'
@@ -9,13 +9,13 @@ import i18n from '#plugins/i18n'
 import pinia from '#plugins/pinia'
 import CreateVuetify from '#plugins/vuetify'
 
-import type { Component } from '#types/Component'
 import type { PageContext, VikePageContext } from '#types/PageContext'
 
 const vuetify = CreateVuetify(i18n)
 
 function createApp(pageContext: VikePageContext & PageContext, isClient = true) {
-  let rootComponent: Component
+  // eslint-disable-next-line no-use-before-define
+  let rootComponent: InstanceType<typeof PageWithWrapper>
   const PageWithWrapper = defineComponent({
     setup: () => {
       provide(DefaultApolloClient, apolloClient)
@@ -31,8 +31,7 @@ function createApp(pageContext: VikePageContext & PageContext, isClient = true) 
     },
     render() {
       return h(
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        PageShell,
+        PageShell as Component,
         {},
         {
           default: () => {
@@ -55,9 +54,7 @@ function createApp(pageContext: VikePageContext & PageContext, isClient = true) 
   objectAssign(app, {
     changePage: (pageContext: VikePageContext & PageContext) => {
       Object.assign(pageContextReactive, pageContext)
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       rootComponent.Page = markRaw(pageContext.Page)
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       rootComponent.pageProps = markRaw(pageContext.pageProps || {})
     },
   })
