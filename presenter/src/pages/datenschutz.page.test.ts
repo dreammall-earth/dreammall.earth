@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
-import { h } from 'vue'
+import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 import DataProtectionSection from '#components/sections/DataProtectionSection.vue'
