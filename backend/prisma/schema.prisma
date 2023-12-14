@@ -16,3 +16,10 @@ model ContactForm {
   createdAt     DateTime @default(now())
   brevoSuccess  DateTime?
 }
+
+model NewsletterSubscription {
+  id            Int      @id @default(autoincrement())
+  email         String   @db.VarChar(100)
+  createdAt     DateTime @default(now())
+  brevoSuccess  DateTime?
+}
