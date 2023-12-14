@@ -1,37 +1,69 @@
 <template>
-  <v-row class="section2 pa-16">
-    <v-col cols="7">
-      <h2 class="section-headline">
-        {{ $t('home.section2.headline') }}
-      </h2>
-      <p class="section-content mt-8">
-        {{ $t('home.section2.contentFirstParagraph') }}
-      </p>
-      <p class="section-content">
-        {{ $t('home.section2.contentSecondParagraph') }}
-      </p>
+  <div ref="target">
+    <v-row class="section2 pa-16">
+      <v-col cols="7">
+        <div class="section-left-part" :class="{ show: animate }">
+          <h2 class="section-headline">
+            {{ $t('home.section2.headline') }}
+          </h2>
+          <p class="section-content mt-8">
+            {{ $t('home.section2.contentFirstParagraph') }}
+          </p>
+          <p class="section-content">
+            {{ $t('home.section2.contentSecondParagraph') }}
+          </p>
 
-      <MainButton
-        class="mt-8"
-        :label="$t('home.section2.buttonTxt')"
-        size="auto"
-        variant="fourth"
-        >{{ $t('home.section2.buttonTxt') }}</MainButton
-      >
-    </v-col>
-    <v-col align-self="center" cols="5" class="d-flex justify-center align-center">
-      <v-img class="section-logo ma-2 pa-1 w-100" :src="LogoPlain" />
-    </v-col>
-  </v-row>
+          <MainButton
+            class="mt-8"
+            :label="$t('home.section2.buttonTxt')"
+            size="auto"
+            variant="fourth"
+            >{{ $t('home.section2.buttonTxt') }}</MainButton
+          >
+        </div>
+      </v-col>
+      <v-col align-self="center" cols="5" class="d-flex justify-center align-center">
+        <div class="section-right-part w-100" :class="{ show: animate }">
+          <v-img class="section-logo ma-2 pa-1 w-100" :src="LogoPlain" />
+        </div>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script lang="ts" setup>
+import { onBeforeMount, onMounted, ref } from 'vue'
+
 import LogoPlain from '#assets/dreammall-logo-plain.svg'
 import MainButton from '#components/inputs/MainButton.vue'
+
+const target = ref()
+const animate = ref(false)
+let observer: IntersectionObserver
+
+onBeforeMount(() => {
+  observer = new IntersectionObserver(
+    ([entry]) => {
+      animate.value = entry.isIntersecting
+      if (animate.value) {
+        observer.disconnect()
+      }
+    },
+    {
+      threshold: 0.5,
+    },
+  )
+})
+onMounted(() => {
+  if (observer) {
+    observer.observe(target.value)
+  }
+})
 </script>
 
 <style scoped lang="scss">
 .section2 {
+  min-height: 50rem;
   color: #3d4753;
 
   h2.section-headline {
@@ -41,6 +73,24 @@ import MainButton from '#components/inputs/MainButton.vue'
     font-weight: 700;
     line-height: 120%;
     text-transform: capitalize;
+  }
+
+  .section-left-part {
+    transition: 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transform: translateX(-200%);
+
+    &.show {
+      transform: translateX(0%);
+    }
+  }
+
+  .section-right-part {
+    transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transform: translateX(200%) rotate(180deg);
+
+    &.show {
+      transform: rotate(0deg) translateX(0%);
+    }
   }
 
   .section-content {
