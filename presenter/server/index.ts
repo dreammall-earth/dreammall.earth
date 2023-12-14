@@ -24,7 +24,7 @@ void startServer()
 async function startServer() {
   const app = express()
 
-  app.use(compression())
+  // app.use(compression())
 
   // Vite integration
   if (isProduction) {
