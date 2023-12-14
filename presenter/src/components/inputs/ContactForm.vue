@@ -127,35 +127,30 @@ const dataprivacy = ref(0)
 
 const form = ref<HTMLFormElement>()
 
-const { mutate: sendContactForm } = useMutation(createContactFormMutation)
+const { mutate: sendContactForm, onDone, onError } = useMutation(createContactFormMutation)
 
-function submitForm() {
-  if (form.value) {
-    form.value
-      .validate()
-      .then(function (value: {
-        valid: boolean
-        errors: { id: string | number; errorMessages: string[] }[]
-      }) {
-        sendContactForm({
-          data: {
-            firstName: firstname.value,
-            lastName: lastname.value,
-            email: email.value,
-            content: message.value,
-          },
-        })
-          .then(() => {
-            // eslint-disable-next-line no-console
-            console.log('successfully sent form')
-          })
-          .catch((err) => {
-            // eslint-disable-next-line no-console
-            console.log(err.message)
-          })
-        return value.valid
-      })
-      .catch(function () {})
+onDone(() => {
+  // eslint-disable-next-line no-console
+  console.log('successfully sent form')
+})
+
+// eslint-disable-next-line promise/prefer-await-to-callbacks
+onError((err) => {
+  // eslint-disable-next-line no-console
+  console.log(err.message)
+})
+
+async function submitForm() {
+  const isValid = await form.value?.validate()
+  if (isValid?.valid) {
+    await sendContactForm({
+      data: {
+        firstName: firstname.value,
+        lastName: lastname.value,
+        email: email.value,
+        content: message.value,
+      },
+    })
   }
 }
 </script>

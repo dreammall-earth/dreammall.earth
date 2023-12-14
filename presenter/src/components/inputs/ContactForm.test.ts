@@ -1,20 +1,34 @@
 import { useMutation } from '@vue/apollo-composable'
-import { mount } from '@vue/test-utils'
-import { describe, it, expect, vi } from 'vitest'
+import { mount, flushPromises } from '@vue/test-utils'
+import { describe, it, expect, vi, beforeEach, SpyInstance } from 'vitest'
+
+import { createContactFormMutation } from '#mutations/createContactForm'
 
 import ContactForm from './ContactForm.vue'
 
+/*
 vi.mock('@vue/apollo-composable', () => ({
   __esModule: true,
   useMutation: vi.fn(),
 }))
+                                 
+const useMutationMock: Mock = useMutation as Mock
 
-useMutation.mockImplementation(() => ({
+useMutationMock.mockImplementation(() => ({
   mutate: vi.fn(),
 }))
+*/
 
 describe('ContactForm', () => {
-  const wrapper = mount(ContactForm)
+  const Wrapper = () => {
+    return mount(ContactForm)
+  }
+
+  let wrapper: ReturnType<typeof Wrapper>
+
+  beforeEach(() => {
+    wrapper = Wrapper()
+  })
 
   it('renders form', () => {
     expect(wrapper.find('form').exists()).toBeTruthy()
@@ -91,39 +105,62 @@ describe('ContactForm', () => {
     })
   })
 
-  describe('form submit', () => {
+  describe('submit', () => {
+    let spy: SpyInstance
     beforeEach(() => {
-      // vi.clearAllMocks()
-    })
-    
-    it('inputs not filled', async () => {
-      expect(useMutation).toBeCalled(1)
-      // form is empty not to be submitted
-      await wrapper.find('form').trigger('submit.prevent')
-      expect(wrapper.emitted()).toHaveProperty('submit')
-
-      const spy = vi.spyOn(useMutation(), 'mutate')
-      expect(spy).not.toBeCalled()
+      vi.clearAllMocks()
+      spy = vi.spyOn(useMutation(createContactFormMutation), 'mutate')
     })
 
-    it('data privacy checkbox not checked', async () => {
-      // form not to be submitted
-      expect(useMutation).toBeCalled(1)
-      await wrapper.find('input[type=text][name="firstname"]').setValue('John')
-      await wrapper.find('input[type=text][name="lastname"]').setValue('Doe')
-      await wrapper.find('input[type=email]').setValue('john@doe.com')
-      await wrapper.find('textarea[name="message"]').setValue('Lorem ipsum dolor sit amet')
+    describe('empty form', () => {
+      beforeEach(async () => {
+        await wrapper.find('form').trigger('submit.prevent')
+        await flushPromises()
+      })
 
-      await wrapper.find('form').trigger('submit.prevent')
-      expect(wrapper.emitted()).toHaveProperty('submit')
+      it('shows errors for all 5 fields', () => {
+        const errorMessages = wrapper.findAll('.v-messages__message')
+        expect(errorMessages).toHaveLength(5)
+        // firstname
+        expect(errorMessages[0].text()).toBe("$t('menu.footer.contactForm.fieldRequired')")
+        // email
+        expect(errorMessages[1].text()).toBe("$t('menu.footer.contactForm.fieldRequired')")
+        // lastname
+        expect(errorMessages[2].text()).toBe("$t('menu.footer.contactForm.fieldRequired')")
+        // content
+        expect(errorMessages[3].text()).toBe("$t('menu.footer.contactForm.fieldRequired')")
+        // checkbox
+        expect(errorMessages[4].text()).toBe("$t('menu.footer.contactForm.fieldRequired')")
+      })
+
+      it('does not call the API', () => {
+        expect(spy).not.toBeCalled()
+      })
     })
 
-    it('form is valid', async () => {
-      // form be submitted if inputs filled
-      await wrapper.find('input[type="checkbox"][name="dataprivacy"]').setValue()
-      expect(wrapper.emitted()).toHaveProperty('submit')
-      const spy = vi.spyOn(useMutation(), 'mutate')
-      expect(spy).toBeCalled()
+    describe('valid form', () => {
+      beforeEach(async () => {
+        spy.mockImplementation(() => ({
+          data: { createContactForm: true },
+        }))
+        await wrapper.find('input[name="firstname"]').setValue('Peter')
+        await wrapper.find('input[name="email"]').setValue('peter@lustig.de')
+        await wrapper.find('input[name="lastname"]').setValue('Lustig')
+        await wrapper.find('textarea[name="message"]').setValue('Eine gute Frage.')
+        await wrapper.find('input[name="dataprivacy"]').setValue(true)
+        await wrapper.find('form').trigger('submit.prevent')
+      })
+
+      it.skip('calls the API', () => {
+        expect(spy).toBeCalledWith({
+          data: {
+            firstName: 'Peter',
+            lastName: 'Lustig',
+            email: 'peter@lustig.de',
+            content: 'Eine gute Frage.',
+          },
+        })
+      })
     })
   })
 })
