@@ -6,10 +6,7 @@ import config from '#config/config'
 
 const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
   const apiInstance: SibApiV3Sdk.TransactionalEmailsApi = new SibApiV3Sdk.TransactionalEmailsApi()
-  console.log('BREVO_KEY', config.BREVO_KEY)
-  if (!config.BREVO_KEY) {
-    // eslint-disable-next-line no-console
-    console.log('BREVO_KEY:', config.BREVO_KEY)
+  if (config.BREVO_KEY) {
     apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, config.BREVO_KEY)
   }
   return apiInstance
@@ -20,6 +17,12 @@ export const sendSmtpEmail = (contactFormData: ContactForm): void => {
   const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail()
 
   sendSmtpEmail.templateId = 1
+  sendSmtpEmail.to = [
+    {
+      name: config.BREVO_CONTACT_REQUEST_TO_NAME,
+      email: config.BREVO_CONTACT_REQUEST_TO_EMAIL,
+    },
+  ]
   sendSmtpEmail.sender = {
     name: contactFormData.firstName + ' ' + contactFormData.lastName,
     email: contactFormData.email,
