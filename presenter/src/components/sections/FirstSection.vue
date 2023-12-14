@@ -9,13 +9,12 @@
         color="#ffffff"
         theme="dark"
       >
-        <v-carousel-item>
-          <v-sheet>
+        <v-carousel-item class="video-item">
+          <v-sheet class="video-item">
             <video
               ref="video"
               class="video w-100"
               :poster="VideoPoster"
-              controls
               autoplay
               muted
               preload="auto"
@@ -112,6 +111,16 @@ function triggerNextSlide() {
 
 <style lang="scss">
 .section1 {
+  .v-carousel {
+    .v-carousel-item {
+      &:first-child {
+        .v-responsive__content {
+          align-self: center;
+        }
+      }
+    }
+  }
+
   .v-window__controls {
     .v-btn {
       .v-btn__underlay {

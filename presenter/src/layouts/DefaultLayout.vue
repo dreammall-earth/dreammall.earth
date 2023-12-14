@@ -1,5 +1,5 @@
 <template>
-  <v-main class="bg-grey-lighten-3">
+  <v-main class="main-layout">
     <v-container fluid class="pa-0">
       <v-row>
         <v-col v-if="slots.sidemenu" cols="2">
@@ -24,3 +24,9 @@ import FooterMenu from '#components/menu/FooterMenu.vue'
 
 const slots = useSlots()
 </script>
+
+<style scoped lang="scss">
+.main-layout {
+  background: #f5f5f5;
+}
+</style>

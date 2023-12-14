@@ -14,66 +14,57 @@
         <v-carousel hide-delimiter-background show-arrows="hover" color="#ABABAB" :height="650">
           <v-carousel-item draggable>
             <v-sheet rounded="xl" color="#F5F5F5" border :height="600">
-              <div class="icon-container">
-                <v-img class="w-100 slide-icon icon-1" :src="icon1" />
-                <v-img class="w-100 slide-icon icon-2" :src="icon2" />
-                <v-img class="w-100 slide-icon icon-3" :src="icon3" />
-
-                <h3 class="w-100 slide-headline slide-headline-1">
-                  {{ $t('home.section5.slide1.headline') }}
-                </h3>
+              <div class="icon-container slide1">
                 <v-img class="w-100 icon-main main-slide-icon-1" :src="slideLogo1" />
                 <h3 class="w-100 slide-subheadline slide-subheadline-1">
                   {{ $t('home.section5.slide1.subheadline') }}
                 </h3>
+                <h3 class="w-100 slide-headline slide-headline-1">
+                  {{ $t('home.section5.slide1.headline') }}
+                </h3>
 
-                <v-img class="w-100 slide-icon icon-4" :src="icon4" />
-                <v-img class="w-100 slide-icon icon-5" :src="icon5" />
-                <v-img class="w-100 slide-icon icon-6" :src="icon6" />
+                <v-img class="w-100 slide-icon icon-1" :src="slide1Icon1" />
+                <v-img class="w-100 slide-icon icon-2" :src="slide1Icon2" />
+                <v-img class="w-100 slide-icon icon-3" :src="slide1Icon3" />
+                <v-img class="w-100 slide-icon icon-4" :src="slide1Icon4" />
+                <v-img class="w-100 slide-icon icon-5" :src="slide1Icon5" />
               </div>
             </v-sheet>
           </v-carousel-item>
 
           <v-carousel-item draggable>
             <v-sheet rounded="xl" color="#F5F5F5" border :height="600">
-              <div class="icon-container">
-                <v-img class="w-100 slide-icon icon-1" :src="icon6" />
-                <v-img class="w-100 slide-icon icon-2" :src="icon2" />
-                <v-img class="w-100 slide-icon icon-3" :src="icon3" />
-
-                <h3 class="w-100 slide-headline slide-headline-2">
-                  {{ $t('home.section5.slide2.headline') }}
-                </h3>
+              <div class="icon-container slide2">
                 <v-img class="w-100 icon-main main-slide-icon-2" :src="slideLogo2" />
                 <h3 class="w-100 slide-subheadline slide-subheadline-2">
                   {{ $t('home.section5.slide2.subheadline') }}
                 </h3>
+                <h3 class="w-100 slide-headline slide-headline-2">
+                  {{ $t('home.section5.slide2.headline') }}
+                </h3>
 
-                <v-img class="w-100 slide-icon icon-4" :src="icon8" />
-                <v-img class="w-100 slide-icon icon-5" :src="icon5" />
-                <v-img class="w-100 slide-icon icon-6" :src="icon1" />
+                <v-img class="w-100 slide-icon icon-1" :src="slide2Icon1" />
+                <v-img class="w-100 slide-icon icon-2" :src="slide2Icon2" />
+                <v-img class="w-100 slide-icon icon-3" :src="slide2Icon3" />
+                <v-img class="w-100 slide-icon icon-4" :src="slide2Icon4" />
               </div>
             </v-sheet>
           </v-carousel-item>
 
           <v-carousel-item draggable>
             <v-sheet rounded="xl" color="#F5F5F5" border :height="600">
-              <div class="icon-container">
-                <v-img class="w-100 slide-icon icon-1" :src="icon1" />
-                <v-img class="w-100 slide-icon icon-2" :src="icon5" />
-                <v-img class="w-100 slide-icon icon-3" :src="icon3" />
-
+              <div class="icon-container slide3">
+                <h3 class="w-100 slide-subheadline slide-subheadline-3">
+                  {{ $t('home.section5.slide3.subheadline') }}
+                </h3>
                 <h3 class="w-100 slide-headline slide-headline-3">
                   {{ $t('home.section5.slide3.headline') }}
                 </h3>
                 <v-img class="w-100 icon-main main-slide-icon-3" :src="slideLogo3" />
-                <h3 class="w-100 slide-subheadline slide-subheadline-3">
-                  {{ $t('home.section5.slide3.subheadline') }}
-                </h3>
 
-                <v-img class="w-100 slide-icon icon-4" :src="icon4" />
-                <v-img class="w-100 slide-icon icon-5" :src="icon2" />
-                <v-img class="w-100 slide-icon icon-6" :src="icon7" />
+                <v-img class="w-100 slide-icon icon-1" :src="slide3Icon1" />
+                <v-img class="w-100 slide-icon icon-2" :src="slide3Icon2" />
+                <v-img class="w-100 slide-icon icon-3" :src="slide3Icon3" />
               </div>
             </v-sheet>
           </v-carousel-item>
@@ -84,17 +75,21 @@
 </template>
 
 <script lang="ts" setup>
-import icon1 from '#assets/img/slides/app_1.svg'
-import icon7 from '#assets/img/slides/app_10.svg'
-import icon2 from '#assets/img/slides/app_2.svg'
-import icon3 from '#assets/img/slides/app_3.svg'
-import icon4 from '#assets/img/slides/app_4.svg'
-import icon5 from '#assets/img/slides/app_5.svg'
-import icon6 from '#assets/img/slides/app_8.svg'
-import icon8 from '#assets/img/slides/app_calendar.svg'
-import slideLogo1 from '#assets/img/slides/slide1_logo.svg'
-import slideLogo2 from '#assets/img/slides/slide2_logo.svg'
-import slideLogo3 from '#assets/img/slides/slide3_logo.svg'
+import slide1Icon4 from '#assets/img/slides/slide1-calendar.svg'
+import slide1Icon5 from '#assets/img/slides/slide1-link-based.svg'
+import slideLogo1 from '#assets/img/slides/slide1-logo.svg'
+import slide1Icon3 from '#assets/img/slides/slide1-presentation.svg'
+import slide1Icon1 from '#assets/img/slides/slide1-social.svg'
+import slide1Icon2 from '#assets/img/slides/slide1-video-conf.svg'
+import slideLogo2 from '#assets/img/slides/slide2-logo.svg'
+import slide2Icon1 from '#assets/img/slides/slide2-presenter.svg'
+import slide2Icon4 from '#assets/img/slides/slide2-selling.svg'
+import slide2Icon3 from '#assets/img/slides/slide2-shops.svg'
+import slide2Icon2 from '#assets/img/slides/slide2-trade.svg'
+import slide3Icon2 from '#assets/img/slides/slide3-dashboard.svg'
+import slide3Icon1 from '#assets/img/slides/slide3-invitation.svg'
+import slideLogo3 from '#assets/img/slides/slide3-logo.svg'
+import slide3Icon3 from '#assets/img/slides/slide3-search.svg'
 </script>
 
 <style scoped lang="scss">
@@ -123,109 +118,166 @@ import slideLogo3 from '#assets/img/slides/slide3_logo.svg'
   }
 
   .icon-container {
-    .slide-icon {
-      position: absolute;
-      max-width: 160px;
+    &.slide1 {
+      .slide-icon {
+        position: absolute;
+        max-width: 150px;
 
-      &.icon-1 {
-        top: 50px;
-        left: 50px;
-      }
+        &.icon-1 {
+          top: 230px;
+          left: 50px;
+        }
 
-      &.icon-2 {
-        top: 250px;
-        left: 200px;
-      }
+        &.icon-2 {
+          top: 350px;
+          left: 200px;
+        }
 
-      &.icon-3 {
-        top: 450px;
-        left: 75px;
-      }
+        &.icon-3 {
+          top: 300px;
+          right: 0;
+          left: 0;
+          margin-right: auto;
+          margin-left: auto;
+        }
 
-      &.icon-4 {
-        top: 60px;
-        right: 50px;
-      }
+        &.icon-4 {
+          top: 270px;
+          right: 220px;
+        }
 
-      &.icon-5 {
-        top: 260px;
-        right: 150px;
-      }
-
-      &.icon-6 {
-        top: 440px;
-        right: 40px;
-      }
-    }
-
-    .icon-main {
-      position: absolute;
-      max-width: 80px;
-
-      &.main-slide-icon-1 {
-        top: 100px;
-        right: calc(50% - 40px);
-      }
-
-      &.main-slide-icon-2 {
-        top: 100px;
-        right: calc(50% - 40px);
-      }
-
-      &.main-slide-icon-3 {
-        top: 100px;
-        right: calc(50% - 40px);
+        &.icon-5 {
+          top: 360px;
+          right: 50px;
+        }
       }
     }
 
-    .slide-headline {
-      position: absolute;
-      font-family: Poppins, sans-serif;
-      font-size: 1.625rem;
-      font-style: normal;
-      font-weight: 600;
-      line-height: 125%;
-      text-align: center;
-      background: linear-gradient(264deg, #35a3aa 28.43%, #e47a24 72.25%);
-      -webkit-background-clip: text; /* stylelint-disable-line */
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+    &.slide2 {
+      .slide-icon {
+        position: absolute;
+        max-width: 150px;
 
-      &.slide-headline-1 {
-        top: 40px;
-      }
+        &.icon-1 {
+          top: 350px;
+          left: 120px;
+        }
 
-      &.slide-headline-2 {
-        top: 40px;
-      }
+        &.icon-2 {
+          top: 350px;
+          left: 300px;
+        }
 
-      &.slide-headline-3 {
-        top: 40px;
+        &.icon-3 {
+          top: 350px;
+          left: 480px;
+        }
+
+        &.icon-4 {
+          top: 350px;
+          left: 660px;
+        }
       }
     }
 
-    .slide-subheadline {
-      position: absolute;
-      font-family: Poppins, sans-serif;
-      font-size: 1.625rem;
-      font-style: normal;
-      font-weight: 600;
-      line-height: 125%; /* 2.03125rem */
-      color: #383838;
-      text-align: center;
-      text-transform: capitalize;
+    &.slide3 {
+      .slide-icon {
+        position: absolute;
+        max-width: 150px;
 
-      &.slide-subheadline-1 {
-        top: 240px;
-      }
+        &.icon-1 {
+          top: 300px;
+          left: 100px;
+        }
 
-      &.slide-subheadline-2 {
-        top: 240px;
-      }
+        &.icon-2 {
+          top: 350px;
+          right: 0;
+          left: 0;
+          margin-right: auto;
+          margin-left: auto;
+        }
 
-      &.slide-subheadline-3 {
-        top: 240px;
+        &.icon-3 {
+          top: 300px;
+          right: 100px;
+        }
       }
+    }
+  }
+
+  .icon-main {
+    position: absolute;
+    max-width: 60px;
+
+    &.main-slide-icon-1 {
+      top: 60px;
+      right: calc(50% - 30px);
+    }
+
+    &.main-slide-icon-2 {
+      top: 60px;
+      right: calc(50% - 30px);
+    }
+
+    &.main-slide-icon-3 {
+      top: 60px;
+      right: calc(50% - 30px);
+    }
+  }
+
+  .slide-headline {
+    position: absolute;
+    font-family: Poppins, sans-serif;
+    font-size: 1.625rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 125%;
+    text-align: center;
+    background: linear-gradient(264deg, #35a3aa 28.43%, #e47a24 72.25%);
+    -webkit-background-clip: text; /* stylelint-disable-line */
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    &.slide-headline-1 {
+      top: 220px;
+    }
+
+    &.slide-headline-2 {
+      top: 220px;
+    }
+
+    &.slide-headline-3 {
+      top: 220px;
+      right: 0;
+      left: 0;
+      max-width: 560px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+
+  .slide-subheadline {
+    position: absolute;
+    font-family: Poppins, sans-serif;
+    font-size: 1.625rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 125%; /* 2.03125rem */
+    color: #383838;
+    text-align: center;
+    text-transform: capitalize;
+
+    &.slide-subheadline-1 {
+      top: 160px;
+    }
+
+    &.slide-subheadline-2 {
+      top: 160px;
+    }
+
+    &.slide-subheadline-3 {
+      top: 160px;
     }
   }
 }

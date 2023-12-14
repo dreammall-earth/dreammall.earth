@@ -32,6 +32,7 @@ const props = withDefaults(
 
 <style scoped lang="scss">
 .v-card {
+  max-width: 320px;
   font-family: Poppins, sans-serif;
   font-size: 1.25rem;
   font-style: normal;

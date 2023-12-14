@@ -1,6 +1,6 @@
 <template>
-  <v-row class="section2 pa-16">
-    <v-col cols="7">
+  <v-row class="section2 py-16">
+    <v-col cols="12" md="7">
       <h2 class="section-headline">
         {{ $t('home.section2.headline') }}
       </h2>
@@ -19,8 +19,8 @@
         >{{ $t('home.section2.buttonTxt') }}</MainButton
       >
     </v-col>
-    <v-col align-self="center" cols="5" class="d-flex justify-center align-center">
-      <v-img class="section-logo ma-2 pa-1 w-100" :src="LogoPlain" />
+    <v-col align-self="center" cols="12" md="5" class="d-flex justify-center align-center">
+      <v-img class="section-logo mt-8 mt-md-2 ma-2 pa-1 w-100" :src="LogoPlain" />
     </v-col>
   </v-row>
 </template>
@@ -32,7 +32,9 @@ import MainButton from '#components/inputs/MainButton.vue'
 
 <style scoped lang="scss">
 .section2 {
+  max-width: 1440px;
   color: #3d4753;
+  background: #fff;
 
   h2.section-headline {
     font-family: Poppins, sans-serif;
