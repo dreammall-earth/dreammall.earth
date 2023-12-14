@@ -2,9 +2,10 @@
 import * as SibApiV3Sdk from '@getbrevo/brevo'
 import { Resolver, Mutation, Query, Arg } from 'type-graphql'
 
-import { createBrevoInstance, createSmtpEmail } from '#api/NewsletterBrevo'
+import { createBrevoInstance } from '#api/NewsletterBrevo'
 import { ContactFormInput } from '#inputs/ContactFormInput'
 import { prisma } from '#src/prisma'
+import { ContactForm } from '@prisma/client'
 
 @Resolver()
 export class ContactFormResolver {
@@ -12,12 +13,10 @@ export class ContactFormResolver {
   async createContactForm(
     @Arg('contactFormData') contactFormData: ContactFormInput,
   ): Promise<boolean> {
-    await prisma.contactForm.create({ data: contactFormData })
+    const contactForm: ContactForm = await prisma.contactForm.create({ data: contactFormData })
     // code to send email goes here
-    const apiInstance: SibApiV3Sdk.TransactionalEmailsApi = createBrevoInstance()
-
-    const success: boolean = createSmtpEmail(apiInstance, contactFormData)
-    return success
+    void createBrevoInstance(contactForm)
+    return true
   }
 
   // needed to avoid: GraphQLError: Type Query must define one or more fields

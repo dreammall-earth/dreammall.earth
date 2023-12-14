@@ -2,18 +2,20 @@
 import * as SibApiV3Sdk from '@getbrevo/brevo'
 
 import config from '#config/config'
-import { ContactFormInput } from '#graphql/inputs/ContactFormInput'
+import { ContactForm } from '@prisma/client'
 
-export const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
+export const createBrevoInstance = (contactFormData: ContactForm): void => {
   const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi()
-  apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, config.BREVO_KEY)
-  return apiInstance
+  if (!config.BREVO_KEY) {
+    apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, config.BREVO_KEY)
+    void createSmtpEmail(apiInstance, contactFormData)
+  }
 }
 
-export const createSmtpEmail = (
+function createSmtpEmail(
   apiInstance: SibApiV3Sdk.TransactionalEmailsApi,
-  contactFormData: ContactFormInput,
-): boolean => {
+  contactFormData: ContactForm,
+) {
   const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail()
 
   sendSmtpEmail.subject = 'My {{params.subject}}'
@@ -33,15 +35,11 @@ export const createSmtpEmail = (
     function (data) {
       // eslint-disable-next-line no-console
       console.log('API called successfully. Returned data: ', JSON.stringify(data))
-      return true
     },
     // eslint-disable-next-line promise/prefer-await-to-callbacks
     function (error) {
       // eslint-disable-next-line no-console
       console.error(error)
-
-      return false
     },
   )
-  return true
 }
