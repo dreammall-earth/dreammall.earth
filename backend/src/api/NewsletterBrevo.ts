@@ -12,9 +12,7 @@ const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
   return apiInstance
 }
 
-export const sendSmtpEmail = (
-  contactFormData: ContactForm,
-): void => {
+export const sendSmtpEmail = (contactFormData: ContactForm): void => {
   const apiInstance = createBrevoInstance()
   const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail()
 
