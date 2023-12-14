@@ -1,6 +1,7 @@
 import CoffeeIcon from '#assets/img/coffee_icon.svg'
 import MallIcon from '#assets/img/logo_mall.svg'
 import ProjectsIcon from '#assets/img/menschen_projekte.svg'
+import { SBComp } from '#types/SBComp'
 
 import SectionColumnCard from './SectionColumnCard.vue'
 
@@ -9,8 +10,7 @@ import type { Meta, StoryObj } from '@storybook/vue3'
 // More on how to set up stories at: https://storybook.js.org/docs/vue/writing-stories/introduction
 const meta = {
   title: 'Layout/SectionColumnCard',
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  component: SectionColumnCard,
+  component: SectionColumnCard as SBComp,
   // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/vue/writing-docs/autodocs
   tags: ['autodocs'],
   argTypes: {
