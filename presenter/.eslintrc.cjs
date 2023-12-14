@@ -43,7 +43,7 @@ module.exports = {
     'vue/multi-word-component-names': [
       'error',
       {
-        ignores: ['default', 'index.page', 'datenschutz.page'],
+        ignores: ['default', 'index.page', 'datenschutz.page', 'impressum.page'],
       },
     ],
     // Optional eslint-comments rule
