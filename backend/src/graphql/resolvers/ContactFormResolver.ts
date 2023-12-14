@@ -40,6 +40,7 @@ export class ContactFormResolver {
       },
     )
     void sendSmtpEmail(smtpEmailToAdmin, contactForm)
+
     const smtpEmailToClient: SibApiV3Sdk.SendSmtpEmail = createSmtpEmail(
       2,
       [
@@ -63,6 +64,7 @@ export class ContactFormResolver {
       },
     )
     void sendSmtpEmail(smtpEmailToClient, contactForm)
+
     return true
   }
 
