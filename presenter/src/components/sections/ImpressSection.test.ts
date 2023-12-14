@@ -56,7 +56,7 @@ describe('ImpressSection', () => {
 
     it('has p impress.tax.content & impress.tax.id', () => {
       expect(wrapper.findAll('.v-col > .v-card')[2].find('p.card-content').text()).toBe(
-        "$t('impress.tax.content'): $t('impress.tax.id')",
+        "$t('impress.tax.content')$t('impress.tax.id')",
       )
     })
   })
