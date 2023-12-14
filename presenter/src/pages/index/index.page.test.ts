@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
-import { h } from 'vue'
+import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 import Section5 from '#components/sections/FifthSection.vue'
@@ -14,8 +14,7 @@ import IndexPage from './index.page.vue'
 describe('IndexPage', () => {
   const wrapper = mount(VApp, {
     slots: {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      default: h(IndexPage),
+      default: h(IndexPage as Component),
     },
   })
 
