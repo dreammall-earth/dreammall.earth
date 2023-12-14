@@ -1,6 +1,7 @@
 {
     "rules": {
-        "selector-class-pattern": "^([a-z][a-z0-9]*)((--?|__)?[a-z0-9]+)*$"
+        "selector-class-pattern": "^([a-z][a-z0-9]*)((--?|__)?[a-z0-9]+)*$",
+        "media-query-no-invalid": null
     },
     "extends": [
         "stylelint-config-standard",
