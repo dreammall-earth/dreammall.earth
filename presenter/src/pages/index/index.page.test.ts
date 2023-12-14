@@ -9,8 +9,11 @@ import Section4 from '#components/sections/FourthSection.vue'
 import Section2 from '#components/sections/SecondSection.vue'
 import Section6 from '#components/sections/SixthSection.vue'
 import Section3 from '#components/sections/ThirdSection.vue'
+import { setupIntersectionObserverMock } from '#root/scripts/tests/mock.IntersectionObserver'
 
 import IndexPage from './index.page.vue'
+
+setupIntersectionObserverMock()
 
 describe('IndexPage', () => {
   const wrapper = mount(VApp, {
