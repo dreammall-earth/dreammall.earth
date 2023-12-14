@@ -54,20 +54,6 @@
 </template>
 
 <script lang="ts" setup>
-/* EXAMPLE QUERY
-import { useQuery } from "@vue/apollo-composable"
-import gql from 'graphql-tag'
-const HELLO_QUERY = gql`
-  {
-    hello {
-      hello
-    }
-  }
-`
-
-const { result, loading, error } = useQuery(HELLO_QUERY)
-*/
-
 import { ref } from 'vue'
 
 import VideoPoster from '#assets/img/video_placeholder.png'
