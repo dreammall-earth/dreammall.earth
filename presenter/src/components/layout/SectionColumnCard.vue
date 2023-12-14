@@ -48,6 +48,7 @@ $mobile: 500px;
     font-weight: 600;
     line-height: 125%; /* 2.03125rem */
     text-transform: capitalize;
+
     @media screen and (max-width: $mobile) {
       text-overflow: unset;
       text-wrap: balance;
