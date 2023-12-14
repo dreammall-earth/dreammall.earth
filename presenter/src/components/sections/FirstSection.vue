@@ -20,6 +20,7 @@
               preload="auto"
               playsinline
               @ended="triggerNextSlide"
+              @click="playVideo"
             >
               <source :src="Video" type="video/mp4" />
             </video>
@@ -75,11 +76,18 @@ import MainButton from '#components/inputs/MainButton.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 
 const slide = ref(0)
+const video = ref<HTMLFormElement>()
 
 defineExpose({ slide })
 
 function triggerNextSlide() {
   slide.value++
+}
+
+function playVideo() {
+  if (video.value && video.value.ended) {
+    video.value.play()
+  }
 }
 </script>
 
