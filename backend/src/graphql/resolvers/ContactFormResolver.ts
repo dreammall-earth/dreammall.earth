@@ -25,18 +25,18 @@ export class ContactFormResolver {
         },
       ],
       {
-        name: contactFormData.firstName + ' ' + contactFormData.lastName,
-        email: contactFormData.email,
+        name: contactForm.firstName + ' ' + contactForm.lastName,
+        email: contactForm.email,
       },
       {
-        name: contactFormData.firstName + ' ' + contactFormData.lastName,
-        email: contactFormData.email,
+        name: contactForm.firstName + ' ' + contactForm.lastName,
+        email: contactForm.email,
       },
       {
-        email: contactFormData.email,
-        firstname: contactFormData.firstName,
-        lastname: contactFormData.lastName,
-        content: contactFormData.content,
+        email: contactForm.email,
+        firstname: contactForm.firstName,
+        lastname: contactForm.lastName,
+        content: contactForm.content,
       },
     )
     void sendSmtpEmail(smtpEmailToAdmin, contactForm)
@@ -45,8 +45,8 @@ export class ContactFormResolver {
       2,
       [
         {
-          name: contactFormData.firstName + ' ' + contactFormData.lastName,
-          email: contactFormData.email,
+          name: contactForm.firstName + ' ' + contactForm.lastName,
+          email: contactForm.email,
         },
       ],
       {
@@ -58,9 +58,9 @@ export class ContactFormResolver {
         email: config.BREVO_CONTACT_REQUEST_TO_EMAIL,
       },
       {
-        firstname: contactFormData.firstName,
-        lastname: contactFormData.lastName,
-        content: contactFormData.content,
+        firstname: contactForm.firstName,
+        lastname: contactForm.lastName,
+        content: contactForm.content,
       },
     )
     void sendSmtpEmail(smtpEmailToClient, contactForm)
