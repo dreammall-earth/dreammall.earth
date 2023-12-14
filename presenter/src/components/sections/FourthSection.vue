@@ -18,7 +18,7 @@
           playsinline
           @ended="triggerButtonVisibility"
         >
-          <source src="@/assets/video/timeline.mp4" type="video/mp4" />
+          <source :src="Video" type="video/mp4" />
         </video>
       </v-col>
     </v-row>
@@ -42,6 +42,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
+import Video from '#assets/video/timeline.mp4'
 import MainButton from '#components/inputs/MainButton.vue'
 
 const showButton = ref(false)
