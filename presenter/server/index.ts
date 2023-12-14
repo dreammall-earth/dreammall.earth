@@ -23,6 +23,7 @@ void startServer()
 async function startServer() {
   const app = express()
 
+  // TODO this is very slow, still part of the package json
   // import compression from 'compression'
   // app.use(compression())
 
