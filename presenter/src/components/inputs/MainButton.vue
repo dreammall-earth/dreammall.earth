@@ -40,7 +40,6 @@ const classes = computed(() => ({
   'main-button--form-submit': props.variant === 'submit',
   'main-button--download': props.variant === 'download',
   'main-button--reload': props.variant === 'reload',
-  [`main-button-${props.size || 'medium'}`]: true,
   [`main-button-${props.size}`]: true,
 }))
 
