@@ -53,7 +53,8 @@
       }
     },
     "section4": {
-      "headline": "Contact Section Content"
+      "headline": "DreamMall Planning",
+      "timelineBtn": "Reload"
     },
     "section5": {
       "headline": "Deine Zutaten",
@@ -76,6 +77,46 @@
       "content": "Seien Sie Teil des Anfangs einer aufregenden Veränderung! Hinterlassen Sie uns einfach Ihren Namen und Ihre E-Mail-Adresse, um exklusive Angebote und umfassende Details vor der offiziellen Veröffentlichung zu erhalten. Verpassen Sie nicht die Gelegenheit, Teil unserer einzigartigen Community zu werden und von unseren besonderen Starter-Angeboten zu profitieren!",
       "headline": "Veränderung",
       "headlineAppend": "Schaffen"
+    }
+  },
+  "impress": {
+    "consumerDispute": {
+      "content": "Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.",
+      "headline": "Verbraucherstreitbeilegung / Universalschlichtungsstelle"
+    },
+    "contact": {
+      "email": "mustermann (at) musterfirma.de",
+      "emailLabel": "E-Mail:",
+      "headline": "Kontakt",
+      "telefax": "+49 (0) 123 44 55 99",
+      "telefaxLabel": "Telefax:",
+      "telephone": "+49 (0) 123 44 55 66",
+      "telephoneLabel": "Telefon:"
+    },
+    "data": {
+      "additional": "Gebäude 44",
+      "city": "Musterstadt",
+      "court": "Amtsgericht Musterstadt",
+      "courtLabel": "Registergericht:",
+      "headline": "Angaben gemäß § 5 TMG",
+      "name": "Muster GbR",
+      "person1": "Dr. Harry Mustermann",
+      "person2": "Luise Beispiel",
+      "personHeadline": "Vertreten durch",
+      "register": "HRB 999999",
+      "registerLabel": "Handelsregister:",
+      "street": "Musterstraße 111",
+      "zip": "90210"
+    },
+    "euDispute": {
+      "content": "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr/. Unsere E-Mail-Adresse finden Sie oben im Impressum.",
+      "headline": "EU-Streitschlichtung"
+    },
+    "headline": "Impressum",
+    "tax": {
+      "content": "Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:",
+      "headline": "Umsatzsteuer-ID",
+      "id": "DE999999999"
     }
   },
   "menu": {
@@ -113,5 +154,8 @@
       "products": "products",
       "sitemap": "Sitemap"
     }
+  },
+  "nav": {
+    "impress": "impressum"
   }
 }
