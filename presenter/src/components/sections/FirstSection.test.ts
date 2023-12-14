@@ -25,8 +25,7 @@ describe('FirstSection', () => {
     describe('first item', () => {
       let item: VueWrapper
       beforeEach(() => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        item = wrapper.findAllComponents({ name: 'VCarouselItem' })[0]
+        item = (wrapper.findAllComponents({ name: 'VCarouselItem' }) as VueWrapper[])[0]
       })
 
       it('contains a video', () => {
@@ -58,8 +57,7 @@ describe('FirstSection', () => {
       let item: VueWrapper
       beforeEach(async () => {
         await wrapper.find('video').trigger('ended')
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        item = wrapper.findAllComponents({ name: 'VCarouselItem' })[1]
+        item = (wrapper.findAllComponents({ name: 'VCarouselItem' }) as VueWrapper[])[1]
       })
 
       it('has section-headline home.section1.headline', () => {
