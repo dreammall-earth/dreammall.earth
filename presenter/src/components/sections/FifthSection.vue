@@ -160,22 +160,22 @@ import slide3Icon3 from '#assets/img/slides/slide3-search.svg'
 
         &.icon-1 {
           top: 350px;
-          left: 120px;
+          left: 180px;
         }
 
         &.icon-2 {
           top: 350px;
-          left: 300px;
+          left: 370px;
         }
 
         &.icon-3 {
           top: 350px;
-          left: 480px;
+          right: 370px;
         }
 
         &.icon-4 {
           top: 350px;
-          left: 660px;
+          right: 180px;
         }
       }
     }

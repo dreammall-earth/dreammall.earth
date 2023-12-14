@@ -8,7 +8,7 @@
           </v-sheet>
         </v-col>
 
-        <v-col>
+        <v-col class="pa-0 pa-sm-1 pt-0">
           <slot />
         </v-col>
       </v-row>
@@ -28,5 +28,6 @@ const slots = useSlots()
 <style scoped lang="scss">
 .main-layout {
   background: #f5f5f5;
+  padding-top: 0;
 }
 </style>

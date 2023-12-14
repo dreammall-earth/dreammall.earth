@@ -1,9 +1,9 @@
 <template>
   <div class="">
-    <div class="section1 pt-4">
+    <div class="section1">
       <v-carousel
         v-model="slide"
-        class="h-screen"
+        class="h-screen landing-slider"
         hide-delimiter-background
         show-arrows="hover"
         color="#ffffff"
@@ -104,7 +104,7 @@ function triggerNextSlide() {
   }
 
   .content-slide {
-    padding: 2rem;
+    padding: 4rem 2rem 2rem 2rem;
   }
 }
 </style>
@@ -112,6 +112,8 @@ function triggerNextSlide() {
 <style lang="scss">
 .section1 {
   .v-carousel {
+    background: transparent;
+
     .v-carousel-item {
       &:first-child {
         .v-responsive__content {
