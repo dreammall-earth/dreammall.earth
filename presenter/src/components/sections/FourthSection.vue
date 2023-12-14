@@ -45,7 +45,7 @@ import { ref } from 'vue'
 import MainButton from '#components/inputs/MainButton.vue'
 
 const showButton = ref(false)
-const video = ref(null)
+const video = ref<HTMLFormElement>()
 
 function triggerButtonVisibility() {
   showButton.value = true
