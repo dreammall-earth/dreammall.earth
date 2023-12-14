@@ -12,5 +12,5 @@ rm -R $BUILD_DIR
 
 export VUEPRESS_BASE=docs
 
-npm install
+npm install --dev
 npm run docs:build

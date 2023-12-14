@@ -9,5 +9,5 @@ BUILD_DIR=$PROJECT_ROOT/build
 # Build the project
 cd $PROJECT_ROOT
 rm -R $BUILD_DIR
-npm install
+npm install --dev
 npm run build
