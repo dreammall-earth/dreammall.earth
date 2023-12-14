@@ -1,6 +1,5 @@
-import { VueWrapper, mount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach } from 'vitest'
-import { ComponentPublicInstance } from 'vue'
 
 import FourthSection from './FourthSection.vue'
 
