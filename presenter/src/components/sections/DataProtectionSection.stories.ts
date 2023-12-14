@@ -1,18 +1,18 @@
 import { SBComp } from '#types/SBComp'
 
-import NewsletterSection from './NewsletterSection.vue'
+import DataProtectionSection from './DataProtectionSection.vue'
 
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 // More on how to set up stories at: https://storybook.js.org/docs/vue/writing-stories/introduction
 const meta = {
-  title: 'Sections/NewsletterSection',
-  component: NewsletterSection as SBComp,
+  title: 'Sections/DataProtectionSection',
+  component: DataProtectionSection as SBComp,
   // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/vue/writing-docs/autodocs
   tags: ['autodocs'],
   argTypes: {},
   args: {}, // default value
-} satisfies Meta<typeof NewsletterSection>
+} satisfies Meta<typeof DataProtectionSection>
 
 export default meta
 type Story = StoryObj<typeof meta>

@@ -23,6 +23,10 @@ describe('MainButton', () => {
     expect(wrapper.find('.v-btn').exists()).toBeTruthy()
   })
 
+  it('icon is hidden', () => {
+    expect(wrapper.find('.v-icon').exists()).toBe(false)
+  })
+
   describe('click on button', () => {
     it('emits click event', async () => {
       await wrapper.find('button').trigger('click')
@@ -33,6 +37,13 @@ describe('MainButton', () => {
   describe('label', () => {
     it('renders My Button', () => {
       expect(wrapper.find('.v-btn').text()).toEqual('My Button')
+    })
+  })
+
+  describe('variant reload', () => {
+    it('icon is visible', async () => {
+      await wrapper.setProps({ size: 'auto', variant: 'reload', label: 'My Button' })
+      expect(wrapper.find('.v-icon').exists()).toBe(true)
     })
   })
 
