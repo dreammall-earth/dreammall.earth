@@ -27,7 +27,7 @@ const slots = useSlots()
 
 <style scoped lang="scss">
 .main-layout {
-  background: #f5f5f5;
   padding-top: 0;
+  background: #f5f5f5;
 }
 </style>

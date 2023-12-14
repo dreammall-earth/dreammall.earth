@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar :color="appBackground" flat class="topmenu" @scroll="foo">
+  <v-app-bar :color="appBackground" flat class="topmenu">
     <v-row>
       <v-col>
         <LogoImage class="ml-8" />

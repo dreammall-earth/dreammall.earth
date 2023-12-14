@@ -112,7 +112,7 @@ function playVideo() {
   }
 
   .content-slide {
-    padding: 4rem 2rem 2rem 2rem;
+    padding: 4rem 2rem 2rem;
   }
 }
 </style>
