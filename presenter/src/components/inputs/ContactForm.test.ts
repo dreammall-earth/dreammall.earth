@@ -1,10 +1,26 @@
-import { useMutation } from '@vue/apollo-composable'
+import { provideApolloClient, useMutation } from '@vue/apollo-composable'
 import { mount, flushPromises } from '@vue/test-utils'
+import { createMockClient } from 'mock-apollo-client'
 import { describe, it, expect, vi, beforeEach, SpyInstance } from 'vitest'
 
 import { createContactFormMutation } from '#mutations/createContactForm'
 
 import ContactForm from './ContactForm.vue'
+
+const mockClient = createMockClient()
+
+const createContactFormMutationMock = vi.fn()
+
+const consoleSpy = vi.spyOn(global.console, 'log')
+
+mockClient.setRequestHandler(
+  createContactFormMutation,
+  createContactFormMutationMock.mockResolvedValue({
+    data: { createContactForm: true },
+  }),
+)
+
+provideApolloClient(mockClient)
 
 describe('ContactForm', () => {
   const Wrapper = () => {
@@ -93,12 +109,6 @@ describe('ContactForm', () => {
   })
 
   describe('submit', () => {
-    let spy: SpyInstance
-    beforeEach(() => {
-      vi.clearAllMocks()
-      spy = vi.spyOn(useMutation(createContactFormMutation), 'mutate')
-    })
-
     describe('empty form', () => {
       beforeEach(async () => {
         await wrapper.find('form').trigger('submit.prevent')
@@ -121,15 +131,13 @@ describe('ContactForm', () => {
       })
 
       it('does not call the API', () => {
-        expect(spy).not.toBeCalled()
+        // false positve, as it is never called :(
+        expect(createContactFormMutationMock).not.toBeCalled()
       })
     })
 
     describe('valid form', () => {
       beforeEach(async () => {
-        spy.mockImplementation(() => ({
-          data: { createContactForm: true },
-        }))
         await wrapper.find('input[name="firstname"]').setValue('Peter')
         await wrapper.find('input[name="email"]').setValue('peter@lustig.de')
         await wrapper.find('input[name="lastname"]').setValue('Lustig')
@@ -138,8 +146,8 @@ describe('ContactForm', () => {
         await wrapper.find('form').trigger('submit.prevent')
       })
 
-      it.skip('calls the API', () => {
-        expect(spy).toBeCalledWith({
+      it('calls the API', () => {
+        expect(createContactFormMutationMock).toBeCalledWith({
           data: {
             firstName: 'Peter',
             lastName: 'Lustig',
@@ -147,6 +155,10 @@ describe('ContactForm', () => {
             content: 'Eine gute Frage.',
           },
         })
+      })
+
+      it('logs success', () => {
+        expect(consoleSpy).toBeCalledWith('successfully sent form')
       })
     })
   })

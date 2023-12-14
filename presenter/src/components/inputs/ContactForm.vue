@@ -143,6 +143,7 @@ onError((err) => {
 async function submitForm() {
   const isValid = await form.value?.validate()
   if (isValid?.valid) {
+    console.log('HERE')
     await sendContactForm({
       data: {
         firstName: firstname.value,
