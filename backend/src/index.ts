@@ -9,8 +9,7 @@ export const main = async (): Promise<void> => {
   console.log(`🚀 Server is ready at ${url}`)
 }
 
-// eslint-disable-next-line promise/catch-or-return
-main()
+void main()
   .catch((e) => {
     // eslint-disable-next-line no-console
     console.error(e)
