@@ -7,5 +7,4 @@ PROJECT_ROOT=$SCRIPT_DIR/../backend
 
 # Build the project
 cd $PROJECT_ROOT
-npm install
 npm run db:migrate
