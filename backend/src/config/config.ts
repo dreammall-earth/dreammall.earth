@@ -42,7 +42,8 @@ const getConfig = (): ENV => {
 const getSanitzedConfig = (config: ENV): Config => {
   for (const [key, value] of Object.entries(config)) {
     if (value === undefined) {
-      throw new Error(`Missing key ${key} in config.env`)
+      // eslint-disable-next-line no-console
+      console.warn(`Missing key ${key} in config.env`)
     }
   }
   return config as Config
