@@ -1,4 +1,4 @@
-import { provideApolloClient, DefaultApolloClient } from '@vue/apollo-composable'
+import { DefaultApolloClient } from '@vue/apollo-composable'
 import { mount, flushPromises } from '@vue/test-utils'
 import { createMockClient } from 'mock-apollo-client'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
@@ -10,8 +10,6 @@ import ContactForm from './ContactForm.vue'
 const mockClient = createMockClient()
 
 const createContactFormMutationMock = vi.fn()
-
-provideApolloClient(mockClient)
 
 mockClient.setRequestHandler(
   createContactFormMutation,
