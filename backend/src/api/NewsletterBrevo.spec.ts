@@ -2,6 +2,7 @@
 import * as SibApiV3Sdk from '@getbrevo/brevo'
 import { ContactForm } from '@prisma/client'
 
+import config from '#config/config'
 import { prisma } from '#src/prisma'
 
 import { sendContactFormEmail } from './NewsletterBrevo'
@@ -63,21 +64,14 @@ describe('NewsletterBrevo', () => {
   })
 
   describe('call successful', () => {
-    jest.mock('#config/config', () => {
-      return {
-        BREVO_KEY: '1234',
-        BREVO_CONTACT_REQUEST_TO_NAME: 'Peter Lustig',
-        BREVO_CONTACT_REQUEST_TO_EMAIL: 'peter@lustig.de',
-        BREVO_TEMPLATE_CONTACT_BASE: '1',
-        BREVO_TEMPLATE_CONTACT_USER: '2',
-      }
-    })
-
     beforeEach(() => {
       jest.resetAllMocks()
+      // TODO: This does lead to the Brevo API been called
+      config.BREVO_KEY = '1234'
       sendContactFormEmail(contactForm)
     })
 
+    // TODO: Make Brevo API been called and remove skip
     it.skip('does call mocked Brevo library', () => {
       expect(SibApiV3Sdk.TransactionalEmailsApi).toHaveBeenCalledTimes(1)
     })

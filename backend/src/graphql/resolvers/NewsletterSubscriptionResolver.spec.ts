@@ -5,6 +5,16 @@ import { NewsletterSubscription } from '@prisma/client'
 import { prisma } from '#src/prisma'
 import { createServer } from '#src/server/server'
 
+jest.mock('#config/config', () => {
+  return {
+    BREVO_KEY: '',
+    BREVO_CONTACT_REQUEST_TO_NAME: 'Peter Lustig',
+    BREVO_CONTACT_REQUEST_TO_EMAIL: 'peter@lustig.de',
+    BREVO_TEMPLATE_CONTACT_BASE: '1',
+    BREVO_TEMPLATE_CONTACT_USER: '2',
+  }
+})
+
 let testServer: ApolloServer
 
 beforeAll(async () => {
