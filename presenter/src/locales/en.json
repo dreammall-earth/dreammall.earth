@@ -1,25 +1,25 @@
 {
   "about": {},
   "dataProtection": {
-    "consumerDispute": {
-      "content": "Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.",
-      "headline": "Verbraucherstreitbeilegung / Universalschlichtungsstelle"
-    },
     "euDispute": {
-      "content": "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr/. Unsere E-Mail-Adresse finden Sie oben im Impressum.",
+      "content": "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr/. Unsere E-Mail-Adresse finden Sie im Impressum.",
       "headline": "EU-Streitschlichtung"
     },
     "general": {
-      "city": "Musterort",
-      "company": "MusterFirma",
+      "city": "Kempten",
+      "company": "DreamMall Verlag GbR",
       "headline": "Allgemeiner Hinweis und Pflichtinformationen",
       "infoEnd": "Die verantwortliche Stelle entscheidet allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z.B. Namen, Kontaktdaten o. Ä.).",
       "infoStart": "Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:",
-      "person": "Mustermann",
-      "street": "Musterweg",
-      "zip": "1212345"
+      "person": "Sabine Laudien & Claudia Siebert",
+      "street": "Rosenau 15",
+      "zip": "DE-87437"
     },
     "headline": "Datenschutzrichtlinie",
+    "processing": {
+      "content": "Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder eMail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten können im Rahmen der Erfüllung des angebotenen Services an Dritte weitergegeben werden. Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.",
+      "headline": "Einwilligung zur Datenverarbeitung"
+    },
     "revocation": {
       "content": "Nur mit Ihrer ausdrücklichen Einwilligung sind einige Vorgänge der Datenverarbeitung möglich. Ein Widerruf Ihrer bereits erteilten Einwilligung ist jederzeit möglich. Für den Widerruf genügt eine formlose Mitteilung per E-Mail. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.",
       "headline": "Widerruf Ihrer Einwilligung zur Datenverarbeitung"
@@ -27,12 +27,12 @@
   },
   "error": {
     "404": {
-      "h1": "404 Page Not Found",
-      "text": "This page could not be found."
+      "h1": "404 Seite nicht gefunden",
+      "text": "Diese Seite konnte nicht gefunden werden."
     },
     "500": {
-      "h1": "500 Internal Error",
-      "text": "Something went wrong."
+      "h1": "500 Interner Fehler",
+      "text": "Etwas ist schief gegangen."
     }
   },
   "home": {
@@ -51,9 +51,9 @@
       "subHeadline": "Immer auf dem laufenden bleiben"
     },
     "section1": {
-      "headline": "DreamMall created by people for people",
+      "headline": "DreamMall von Menschen für Menschen geschaffen",
       "preOrderBtn": "Mehr Informationen",
-      "subHeadline": "7 Days free trial"
+      "subHeadline": "7 Tage kostenlos testen"
     },
     "section2": {
       "buttonTxt": "Persönlicher Kontakt",
@@ -110,7 +110,7 @@
       "headline": "Verbraucherstreitbeilegung / Universalschlichtungsstelle"
     },
     "contact": {
-      "email": "mustermann (at) musterfirma.de",
+      "email": "kontakt (at) dreammall.earth",
       "emailLabel": "E-Mail:",
       "headline": "Kontakt",
       "telefax": "+49 (0) 123 44 55 99",
@@ -118,26 +118,38 @@
       "telephone": "+49 (0) 123 44 55 66",
       "telephoneLabel": "Telefon:"
     },
+    "copyright": {
+      "content": "Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.",
+      "headline": "Urheberrecht"
+    },
     "data": {
       "additional": "Gebäude 44",
-      "city": "Musterstadt",
+      "city": "Kempten",
       "court": "Amtsgericht Musterstadt",
       "courtLabel": "Registergericht:",
       "headline": "Angaben gemäß § 5 TMG",
-      "name": "Muster GbR",
-      "person1": "Dr. Harry Mustermann",
-      "person2": "Luise Beispiel",
+      "name": "DreamMall Verlag GbR",
+      "person1": "Sabine Laudien",
+      "person2": "Claudia Siebert",
       "personHeadline": "Vertreten durch",
       "register": "HRB 999999",
       "registerLabel": "Handelsregister:",
-      "street": "Musterstraße 111",
-      "zip": "90210"
-    },
-    "euDispute": {
-      "content": "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr/. Unsere E-Mail-Adresse finden Sie oben im Impressum.",
-      "headline": "EU-Streitschlichtung"
+      "street": "Rosenau 15",
+      "zip": "DE-87437"
     },
     "headline": "Impressum",
+    "legalDisclaimer": {
+      "content": "Dieser Haftungsausschluss ist als Teil des Internetangebotes zu betrachten, von dem aus auf diese Seite verwiesen wurde. Sofern Teile oder einzelne Formulierungen dieses Textes der geltenden Rechtslage nicht, nicht mehr oder nicht vollständig entsprechen sollten, bleiben die übrigen Teile des Dokumentes in ihrem Inhalt und ihrer Gültigkeit davon unberührt.",
+      "headline": "Rechtswirksamkeit dieses Haftungsausschlusses"
+    },
+    "liabilityContent": {
+      "content": "Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.",
+      "headline": "Haftung für Inhalte"
+    },
+    "liabilityLinks": {
+      "content": "Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.",
+      "headline": "Haftung für Links"
+    },
     "tax": {
       "content": "Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:",
       "headline": "Umsatzsteuer-ID",
