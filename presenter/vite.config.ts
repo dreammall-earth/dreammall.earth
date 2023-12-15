@@ -12,7 +12,7 @@ const isStorybook = () =>
 const config: UserConfig = {
   plugins: [
     vue(),
-    !isStorybook() && vike(), // SSR only when storybook is not running
+    !isStorybook() && vike({ prerender: true }), // SSR only when storybook is not running
     vueI18n({
       ssr: true,
       include: path.resolve(__dirname, './src/locales/**'),
