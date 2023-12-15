@@ -9,7 +9,6 @@ import { sendContactFormEmail } from './NewsletterBrevo'
 
 jest.mock('#config/config', () => {
   return {
-    // TODO: To tests the NewsletterBrevo we need a value and mock setApiKey correctly
     BREVO_KEY: '',
     BREVO_CONTACT_REQUEST_TO_NAME: 'Peter Lustig',
     BREVO_CONTACT_REQUEST_TO_EMAIL: 'peter@lustig.de',
@@ -63,8 +62,7 @@ describe('NewsletterBrevo', () => {
 
   describe('call successful', () => {
     beforeEach(() => {
-      jest.resetAllMocks()
-      // TODO: This does lead to the Brevo API been called
+      jest.clearAllMocks()
       config.BREVO_KEY = '1234'
       sendContactFormEmail(contactForm)
     })
