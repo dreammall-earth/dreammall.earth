@@ -1,7 +1,7 @@
 <template>
   <div ref="target">
-    <v-row class="section2 pa-16">
-      <v-col cols="7">
+    <v-row class="section2 py-16">
+      <v-col cols="12" md="7">
         <div class="section-left-part" :class="{ show: animate }">
           <h2 class="section-headline">
             {{ $t('home.section2.headline') }}
@@ -22,7 +22,7 @@
           >
         </div>
       </v-col>
-      <v-col align-self="center" cols="5" class="d-flex justify-center align-center">
+      <v-col align-self="center" cols="12" md="5" class="d-flex justify-center align-center">
         <div class="section-right-part w-100" :class="{ show: animate }">
           <v-img class="section-logo ma-2 pa-1 w-100" :src="LogoPlain" />
         </div>
@@ -62,9 +62,13 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+$mobile: 500px;
+
 .section2 {
+  max-width: 1440px;
   min-height: 50rem;
   color: #3d4753;
+  background: #fff;
 
   h2.section-headline {
     font-family: Poppins, sans-serif;
@@ -73,6 +77,10 @@ onMounted(() => {
     font-weight: 700;
     line-height: 120%;
     text-transform: capitalize;
+
+    @media screen and (max-width: $mobile) {
+      font-size: 3rem;
+    }
   }
 
   .section-left-part {
@@ -99,10 +107,18 @@ onMounted(() => {
     font-style: normal;
     font-weight: 300;
     line-height: normal;
+
+    @media screen and (max-width: $mobile) {
+      padding: 10px;
+    }
   }
 
   .section-logo {
     max-width: 24.7268rem;
+
+    @media screen and (max-width: $mobile) {
+      padding: 10px;
+    }
   }
 }
 </style>

@@ -13,9 +13,9 @@ describe('ImpressSection', () => {
     wrapper = Wrapper()
   })
 
-  it('renders 5 cards', () => {
+  it('renders 7 cards', () => {
     expect(wrapper.find('.impress-section').exists()).toBeTruthy()
-    expect(wrapper.findAll('.v-col > .v-card')).toHaveLength(5)
+    expect(wrapper.findAll('.v-col > .v-card')).toHaveLength(7)
   })
 
   it('has h1 impress.headline', () => {
@@ -61,29 +61,57 @@ describe('ImpressSection', () => {
   })
 
   describe('fourth card', () => {
-    it('has h2 impress.euDispute.headline', () => {
+    it('has h2 impress.liabilityContent.headline', () => {
       expect(wrapper.findAll('.v-col > .v-card')[3].find('h2.card-header').text()).toBe(
-        "$t('impress.euDispute.headline')",
+        "$t('impress.liabilityContent.headline')",
       )
     })
 
-    it('has p impress.euDispute.content', () => {
+    it('has p impress.liabilityContent.content', () => {
       expect(wrapper.findAll('.v-col > .v-card')[3].find('p.card-content').text()).toBe(
-        "$t('impress.euDispute.content')",
+        "$t('impress.liabilityContent.content')",
       )
     })
   })
 
   describe('fifth card', () => {
-    it('has h2 impress.consumerDispute.headline', () => {
+    it('has h2 impress.liabilityLinks.headline', () => {
       expect(wrapper.findAll('.v-col > .v-card')[4].find('h2.card-header').text()).toBe(
-        "$t('impress.consumerDispute.headline')",
+        "$t('impress.liabilityLinks.headline')",
       )
     })
 
-    it('has p impress.consumerDispute.content', () => {
+    it('has p impress.liabilityLinks.content', () => {
       expect(wrapper.findAll('.v-col > .v-card')[4].find('p.card-content').text()).toBe(
-        "$t('impress.consumerDispute.content')",
+        "$t('impress.liabilityLinks.content')",
+      )
+    })
+  })
+
+  describe('sixth card', () => {
+    it('has h2 impress.copyright.headline', () => {
+      expect(wrapper.findAll('.v-col > .v-card')[5].find('h2.card-header').text()).toBe(
+        "$t('impress.copyright.headline')",
+      )
+    })
+
+    it('has p impress.copyright.content', () => {
+      expect(wrapper.findAll('.v-col > .v-card')[5].find('p.card-content').text()).toBe(
+        "$t('impress.copyright.content')",
+      )
+    })
+  })
+
+  describe('seventh card', () => {
+    it('has h2 impress.legalDisclaimer.headline', () => {
+      expect(wrapper.findAll('.v-col > .v-card')[6].find('h2.card-header').text()).toBe(
+        "$t('impress.legalDisclaimer.headline')",
+      )
+    })
+
+    it('has p impress.legalDisclaimer.content', () => {
+      expect(wrapper.findAll('.v-col > .v-card')[6].find('p.card-content').text()).toBe(
+        "$t('impress.legalDisclaimer.content')",
       )
     })
   })

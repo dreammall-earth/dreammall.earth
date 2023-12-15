@@ -36,6 +36,8 @@ import MainButton from '#components/inputs/MainButton.vue'
 
 <style scoped lang="scss">
 .section6 {
+  max-width: 960px;
+
   .section-header {
     text-align: center;
 

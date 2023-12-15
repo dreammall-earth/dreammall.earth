@@ -13,7 +13,16 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'third', 'third-inverse', 'fourth', 'submit'],
+      options: [
+        'primary',
+        'secondary',
+        'third',
+        'third-inverse',
+        'fourth',
+        'submit',
+        'reload',
+        'download',
+      ],
     },
     size: { control: 'select', options: ['small', 'medium', 'large', 'auto'] },
     onClick: { action: 'clicked' },
