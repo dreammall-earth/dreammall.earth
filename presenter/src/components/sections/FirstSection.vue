@@ -1,28 +1,29 @@
 <template>
   <div class="">
-    <div class="section1 pt-4">
+    <div class="section1">
       <v-carousel
         v-model="slide"
-        class="h-screen"
+        class="h-screen landing-slider"
         hide-delimiter-background
         show-arrows="hover"
         color="#ffffff"
         theme="dark"
       >
-        <v-carousel-item>
-          <v-sheet>
+        <v-carousel-item class="video-item">
+          <v-sheet class="video-item">
             <video
+              :key="videoSrc"
               ref="video"
               class="video w-100"
               :poster="VideoPoster"
-              controls
               autoplay
               muted
               preload="auto"
               playsinline
               @ended="triggerNextSlide"
+              @click="playVideo"
             >
-              <source :src="Video" type="video/mp4" />
+              <source :src="videoSrc" type="video/mp4" />
             </video>
           </v-sheet>
         </v-carousel-item>
@@ -54,34 +55,50 @@
 </template>
 
 <script lang="ts" setup>
-/* EXAMPLE QUERY
-import { useQuery } from "@vue/apollo-composable"
-import gql from 'graphql-tag'
-const HELLO_QUERY = gql`
-  {
-    hello {
-      hello
-    }
-  }
-`
-
-const { result, loading, error } = useQuery(HELLO_QUERY)
-*/
-
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 import VideoPoster from '#assets/img/video_placeholder.png'
 import Video from '#assets/video/header_video.mp4'
+import VideoMobile from '#assets/video/header_video_mobile.mp4'
 import MainButton from '#components/inputs/MainButton.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 
 const slide = ref(0)
+const video = ref<HTMLFormElement>()
+const videoSrc = ref('')
+
+const mobileThreshold: number = 550
 
 defineExpose({ slide })
 
 function triggerNextSlide() {
   slide.value++
 }
+
+function playVideo() {
+  if (video.value && video.value.ended) {
+    video.value.play()
+  }
+}
+
+function isMobile() {
+  return window.innerWidth <= mobileThreshold
+}
+
+function setVideoSrc() {
+  if (isMobile()) {
+    videoSrc.value = VideoMobile
+  } else {
+    videoSrc.value = Video
+  }
+}
+
+onMounted(() => {
+  setVideoSrc()
+  window.addEventListener('resize', () => {
+    setVideoSrc()
+  })
+})
 </script>
 
 <style scoped lang="scss">
@@ -105,13 +122,25 @@ function triggerNextSlide() {
   }
 
   .content-slide {
-    padding: 2rem;
+    padding: 4rem 2rem 2rem;
   }
 }
 </style>
 
 <style lang="scss">
 .section1 {
+  .v-carousel {
+    background: transparent;
+
+    .v-carousel-item {
+      &:first-child {
+        .v-responsive__content {
+          align-self: center;
+        }
+      }
+    }
+  }
+
   .v-window__controls {
     .v-btn {
       .v-btn__underlay {

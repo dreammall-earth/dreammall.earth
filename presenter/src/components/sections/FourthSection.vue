@@ -61,6 +61,7 @@ function playVideo() {
 
 <style scoped lang="scss">
 .section4 {
+  max-width: 1140px;
   background: #f5f5f5;
 
   .section-header {
