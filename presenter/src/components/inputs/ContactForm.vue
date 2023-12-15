@@ -127,24 +127,12 @@ const dataprivacy = ref(0)
 
 const form = ref<HTMLFormElement>()
 
-const { mutate: sendContactForm, onDone, onError } = useMutation(createContactFormMutation)
-
-onDone(() => {
-  // eslint-disable-next-line no-console
-  console.log('successfully sent form')
-})
-
-// eslint-disable-next-line promise/prefer-await-to-callbacks
-onError((err) => {
-  // eslint-disable-next-line no-console
-  console.log(err.message)
-})
+const { mutate: sendContactForm } = useMutation(createContactFormMutation)
 
 async function submitForm() {
   const isValid = await form.value?.validate()
   if (isValid?.valid) {
-    console.log('HERE')
-    await sendContactForm({
+    sendContactForm({
       data: {
         firstName: firstname.value,
         lastName: lastname.value,
@@ -152,6 +140,11 @@ async function submitForm() {
         content: message.value,
       },
     })
+      .then(() => {
+        form.value?.reset()
+        return undefined
+      })
+      .catch(() => {})
   }
 }
 </script>

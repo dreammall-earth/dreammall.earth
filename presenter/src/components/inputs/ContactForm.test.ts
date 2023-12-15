@@ -1,7 +1,7 @@
-import { provideApolloClient, useMutation } from '@vue/apollo-composable'
+import { provideApolloClient, DefaultApolloClient } from '@vue/apollo-composable'
 import { mount, flushPromises } from '@vue/test-utils'
 import { createMockClient } from 'mock-apollo-client'
-import { describe, it, expect, vi, beforeEach, SpyInstance } from 'vitest'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 
 import { createContactFormMutation } from '#mutations/createContactForm'
 
@@ -11,20 +11,22 @@ const mockClient = createMockClient()
 
 const createContactFormMutationMock = vi.fn()
 
-const consoleSpy = vi.spyOn(global.console, 'log')
+provideApolloClient(mockClient)
 
 mockClient.setRequestHandler(
   createContactFormMutation,
-  createContactFormMutationMock.mockResolvedValue({
-    data: { createContactForm: true },
-  }),
+  createContactFormMutationMock.mockResolvedValue({ data: { createContactForm: true } }),
 )
-
-provideApolloClient(mockClient)
 
 describe('ContactForm', () => {
   const Wrapper = () => {
-    return mount(ContactForm)
+    return mount(ContactForm, {
+      global: {
+        provide: {
+          [DefaultApolloClient]: mockClient,
+        },
+      },
+    })
   }
 
   let wrapper: ReturnType<typeof Wrapper>
@@ -131,7 +133,6 @@ describe('ContactForm', () => {
       })
 
       it('does not call the API', () => {
-        // false positve, as it is never called :(
         expect(createContactFormMutationMock).not.toBeCalled()
       })
     })
@@ -144,21 +145,28 @@ describe('ContactForm', () => {
         await wrapper.find('textarea[name="message"]').setValue('Eine gute Frage.')
         await wrapper.find('input[name="dataprivacy"]').setValue(true)
         await wrapper.find('form').trigger('submit.prevent')
+        await flushPromises()
       })
 
-      it('calls the API', () => {
-        expect(createContactFormMutationMock).toBeCalledWith({
-          data: {
-            firstName: 'Peter',
-            lastName: 'Lustig',
-            email: 'peter@lustig.de',
-            content: 'Eine gute Frage.',
-          },
+      describe('with success', () => {
+        it('calls the API', () => {
+          expect(createContactFormMutationMock).toBeCalledWith({
+            data: {
+              firstName: 'Peter',
+              lastName: 'Lustig',
+              email: 'peter@lustig.de',
+              content: 'Eine gute Frage.',
+            },
+          })
         })
-      })
 
-      it('logs success', () => {
-        expect(consoleSpy).toBeCalledWith('successfully sent form')
+        it('resets the form', () => {
+          expect(wrapper.find('input[name="firstname"]').element).toHaveProperty('value', '')
+          expect(wrapper.find('input[name="email"]').element).toHaveProperty('value', '')
+          expect(wrapper.find('input[name="lastname"]').element).toHaveProperty('value', '')
+          expect(wrapper.find('textarea[name="message"]').element).toHaveProperty('value', '')
+          expect(wrapper.find('input[name="dataprivacy"]').element).toHaveProperty('value', 'false')
+        })
       })
     })
   })
