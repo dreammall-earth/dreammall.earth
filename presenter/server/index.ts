@@ -24,9 +24,6 @@ void startServer()
 async function startServer() {
   const app = express()
 
-  // on the fly compression
-  app.use(compression())
-
   // Vite integration
   if (isProduction) {
     // In production, we need to serve our static assets ourselves.
@@ -35,8 +32,9 @@ async function startServer() {
     app.use(
       sirv(`${root}/build/client`, {
         // maxAge: 31536000, // 1Y
-        // immutable: true, // this gives worse performance on google page insight
-        // gzip: true,
+        maxAge: 600, // 10min at this stage of development this should be a good value
+        immutable: true,
+        gzip: true,
       }),
     )
   } else {
@@ -51,6 +49,9 @@ async function startServer() {
       })
     ).middlewares
     app.use(viteDevMiddleware)
+
+    // on the fly compression
+    app.use(compression())
   }
 
   // ...
