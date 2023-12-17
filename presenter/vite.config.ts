@@ -22,7 +22,7 @@ const config: UserConfig = {
       typescript: true,
       vueTsc: true,
     }),
-    vuetify(),
+    vuetify({ styles: { configFile: './src/assets/sass/style.scss' } }),
   ],
   build: {
     outDir: './build',
@@ -41,15 +41,6 @@ const config: UserConfig = {
       '#context': path.join(__dirname, '/renderer/context'),
       '#types': path.join(__dirname, '/types'),
       '#root': __dirname,
-    },
-  },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: `
-          @import "./src/assets/sass/style.scss";
-        `,
-      },
     },
   },
 }
