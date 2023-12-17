@@ -32,7 +32,7 @@ async function startServer() {
     app.use(
       sirv(`${root}/build/client`, {
         maxAge: 31536000, // 1Y
-        immutable: true,
+        // immutable: true, // this gives worse performance on google page insight
         gzip: true,
       }),
     )
