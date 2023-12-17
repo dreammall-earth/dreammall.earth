@@ -29,18 +29,18 @@ async function startServer() {
     // In production, we need to serve our static assets ourselves.
     // (In dev, Vite's middleware serves our static assets.)
     const sirv = (await import('sirv')).default
-    // assets 1y caching
+    // cache things for 10min
     app.use(
-      sirv(`${root}/build/client/assets`, {
-        maxAge: 31536000, // 1Y
+      sirv(`${root}/build/client`, {
+        maxAge: 600,
         immutable: true,
         gzip: true,
       }),
     )
-    // everything else 10min
+    // assets 1y caching
     app.use(
-      sirv(`${root}/build/client`, {
-        maxAge: 600,
+      sirv(`${root}/build/client/assets`, {
+        maxAge: 31536000, // 1Y
         immutable: true,
         gzip: true,
       }),
