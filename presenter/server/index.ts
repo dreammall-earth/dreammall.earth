@@ -31,7 +31,7 @@ async function startServer() {
     const sirv = (await import('sirv')).default
     app.use(
       sirv(`${root}/build/client`, {
-        maxAge: 31536000, // 1Y
+        // maxAge: 31536000, // 1Y
         // immutable: true, // this gives worse performance on google page insight
         gzip: true,
       }),
