@@ -38,10 +38,12 @@ The following commands are available:
 |-----------------------------|--------------------------------------------------|
 | `npm install`               | Project setup                                    |
 | `npm run build`             | Compiles and minifies for production             |
-| `npm run server:prod`       | Runs productions server                          |
+| `npm run server:prod`       | Runs productions server (node, cjs file)         |
 | **Develop**                 |                                                  |
 | `npm run dev`               | Compiles and hot-reloads for development         |
 | `npm run server:dev`        | Run development server                           |
+| `npm run server:prod:ts`    | Run production server unbundled (ts-node)        |
+| `npm run server:bundle`     | Bundle Server into an executable cjs file        |
 | **Test**                    |                                                  |
 | `npm run test:lint`         | Run all linters                                  |
 | `npm run test:lint:eslint`  | Run linter eslint                                |

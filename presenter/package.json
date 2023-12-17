@@ -40,7 +40,8 @@
     "build": "vite build && npm run server:bundle",
     "server": "node --loader ts-node/esm ./server/index.ts",
     "server:dev": "npm run server",
-    "server:prod": "cross-env NODE_ENV=production npm run server",
+    "server:prod": "cross-env NODE_ENV=production node ./build/index.cjs",
+    "server:prod:ts": "cross-env NODE_ENV=production npm run server",
     "server:bundle": "tsx scripts/bundleServer/bundleServer",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build -o build/storybook",
@@ -137,6 +138,7 @@
     "stylelint-config-standard-scss": "^11.1.0",
     "tsx": "^4.6.2",
     "vite-plugin-checker": "^0.6.2",
+    "vite-plugin-compression": "^0.5.1",
     "vitest": "^0.34.6",
     "vue-tsc": "^1.8.25",
     "vuepress": "^2.0.0-rc.0"
