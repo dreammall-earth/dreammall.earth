@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-namespace
 import * as SibApiV3Sdk from '@getbrevo/brevo'
-import { ContactForm } from '@prisma/client'
+import { ContactForm, NewsletterSubscription } from '@prisma/client'
 
 import config from '#config/config'
 import { prisma } from '#src/prisma'
@@ -9,6 +9,25 @@ const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
   const apiInstance: SibApiV3Sdk.TransactionalEmailsApi = new SibApiV3Sdk.TransactionalEmailsApi()
   apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, config.BREVO_KEY)
   return apiInstance
+}
+
+const createBrevoContactsApi = (): SibApiV3Sdk.ContactsApi => {
+  const apiInstance = new SibApiV3Sdk.ContactsApi()
+  apiInstance.setApiKey(SibApiV3Sdk.ContactsApiApiKeys.apiKey, config.BREVO_KEY)
+  return apiInstance
+}
+
+const createAddContactToList = (contactForm: NewsletterSubscription): SibApiV3Sdk.CreateContact => {
+  const createContact: SibApiV3Sdk.CreateContact = new SibApiV3Sdk.CreateContact()
+  createContact.email = contactForm.email
+  createContact.listIds = [config.BREVO_CONTACT_LIST_ID]
+  createContact.attributes = {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    VORNAME: contactForm.firstName,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    NACHNAME: contactForm.lastName,
+  }
+  return createContact
 }
 
 const createSmtpEmail = (
@@ -105,5 +124,34 @@ export const sendContactFormEmail = (contactForm: ContactForm): void => {
       },
     )
     void sendSmtpEmail(smtpEmailToClient, contactForm)
+  }
+}
+
+export const sendContactToBrevo = (contactForm: NewsletterSubscription): void => {
+  if (config.BREVO_KEY) {
+    const createContact: SibApiV3Sdk.CreateContact = createAddContactToList(contactForm)
+    const apiInstance = createBrevoContactsApi()
+    void apiInstance.createContact(createContact).then(
+      async (data) => {
+        // eslint-disable-next-line no-console
+        console.log('API called successfully. Returned data: ', JSON.stringify(data))
+        // code to store success goes here:
+        contactForm.brevoSuccess = new Date()
+        await prisma.newsletterSubscription.update({
+          where: {
+            id: contactForm.id,
+          },
+          data: {
+            ...contactForm,
+          },
+        })
+        return true
+      },
+      // eslint-disable-next-line promise/prefer-await-to-callbacks
+      function (error) {
+        // eslint-disable-next-line no-console
+        console.error(error)
+      },
+    )
   }
 }
