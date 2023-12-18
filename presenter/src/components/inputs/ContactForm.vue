@@ -132,19 +132,17 @@ const { mutate: sendContactForm } = useMutation(createContactFormMutation)
 async function submitForm() {
   const isValid = await form.value?.validate()
   if (isValid?.valid) {
-    sendContactForm({
-      data: {
-        firstName: firstname.value,
-        lastName: lastname.value,
-        email: email.value,
-        content: message.value,
-      },
-    })
-      .then(() => {
-        form.value?.reset()
-        return undefined
+    try {
+      await sendContactForm({
+        data: {
+          firstName: firstname.value,
+          lastName: lastname.value,
+          email: email.value,
+          content: message.value,
+        },
       })
-      .catch(() => {})
+      await form.value?.reset()
+    } catch {}
   }
 }
 </script>

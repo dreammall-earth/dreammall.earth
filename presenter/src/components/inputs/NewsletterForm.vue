@@ -101,12 +101,10 @@ const { mutate: sendSubscribeToNewsletter } = useMutation(subscribeToNewsletterM
 async function submitForm() {
   const isValid = await form.value?.validate()
   if (isValid?.valid) {
-    sendSubscribeToNewsletter({ email: email.value })
-      .then(() => {
-        form.value?.reset()
-        return undefined
-      })
-      .catch(() => {})
+    try {
+      await sendSubscribeToNewsletter({ email: email.value })
+      await form.value?.reset()
+    } catch {}
   }
 }
 </script>
