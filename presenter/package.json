@@ -140,6 +140,7 @@
     "tsx": "^4.6.2",
     "vite-plugin-checker": "^0.6.2",
     "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-vuetify": "^1.0.2",
     "vitest": "^0.34.6",
     "vue-tsc": "^1.8.25",
     "vuepress": "^2.0.0-rc.0"
@@ -156,5 +157,10 @@
     "#context/*": "./renderer/context/*",
     "#types/*": "./types/*",
     "#root/*": "./*"
+  },
+  "overrides": {
+    "vite-plugin-vuetify": {
+      "vite": "$vite"
+    }
   }
 }
