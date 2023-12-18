@@ -4,6 +4,7 @@ import { ContactForm, NewsletterSubscription } from '@prisma/client'
 
 import config from '#config/config'
 
+import { CreateContactResponse } from './type/CreateContactResponse'
 import { SmtpEmailResponse } from './type/SmtpEmailResponse'
 
 const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
@@ -108,31 +109,13 @@ export const sendContactFormEmail = (
   return Promise.all([sendEmailClient, sendEmailAdmin])
 }
 
-export const sendContactToBrevo = (contactForm: NewsletterSubscription): void => {
-  if (config.BREVO_KEY) {
-    const createContact: SibApiV3Sdk.CreateContact = createAddContactToList(contactForm)
-    const apiInstance = createBrevoContactsApi()
-    void apiInstance.createContact(createContact).then(
-      async (data) => {
-        // eslint-disable-next-line no-console
-        console.log('API called successfully. Returned data: ', JSON.stringify(data))
-        // code to store success goes here:
-        contactForm.brevoSuccess = new Date()
-        await prisma.newsletterSubscription.update({
-          where: {
-            id: contactForm.id,
-          },
-          data: {
-            ...contactForm,
-          },
-        })
-        return true
-      },
-      // eslint-disable-next-line promise/prefer-await-to-callbacks
-      function (error) {
-        // eslint-disable-next-line no-console
-        console.error(error)
-      },
-    )
+export const sendContactToBrevo = (
+  contactForm: NewsletterSubscription,
+): Promise<CreateContactResponse> => {
+  if (!config.BREVO_KEY) {
+    throw new Error('No Brevo_Key defined could not send contact')
   }
+  const createContact: SibApiV3Sdk.CreateContact = createAddContactToList(contactForm)
+  const apiInstance = createBrevoContactsApi()
+  return apiInstance.createContact(createContact)
 }
