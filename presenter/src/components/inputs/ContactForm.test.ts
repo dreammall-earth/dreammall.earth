@@ -1,14 +1,30 @@
-import { useMutation } from '@vue/apollo-composable'
+import { DefaultApolloClient } from '@vue/apollo-composable'
 import { mount, flushPromises } from '@vue/test-utils'
-import { describe, it, expect, vi, beforeEach, SpyInstance } from 'vitest'
+import { createMockClient } from 'mock-apollo-client'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 
 import { createContactFormMutation } from '#mutations/createContactForm'
 
 import ContactForm from './ContactForm.vue'
 
+const mockClient = createMockClient()
+
+const createContactFormMutationMock = vi.fn()
+
+mockClient.setRequestHandler(
+  createContactFormMutation,
+  createContactFormMutationMock.mockResolvedValue({ data: { createContactForm: true } }),
+)
+
 describe('ContactForm', () => {
   const Wrapper = () => {
-    return mount(ContactForm)
+    return mount(ContactForm, {
+      global: {
+        provide: {
+          [DefaultApolloClient]: mockClient,
+        },
+      },
+    })
   }
 
   let wrapper: ReturnType<typeof Wrapper>
@@ -93,12 +109,6 @@ describe('ContactForm', () => {
   })
 
   describe('submit', () => {
-    let spy: SpyInstance
-    beforeEach(() => {
-      vi.clearAllMocks()
-      spy = vi.spyOn(useMutation(createContactFormMutation), 'mutate')
-    })
-
     describe('empty form', () => {
       beforeEach(async () => {
         await wrapper.find('form').trigger('submit.prevent')
@@ -121,31 +131,39 @@ describe('ContactForm', () => {
       })
 
       it('does not call the API', () => {
-        expect(spy).not.toBeCalled()
+        expect(createContactFormMutationMock).not.toBeCalled()
       })
     })
 
     describe('valid form', () => {
       beforeEach(async () => {
-        spy.mockImplementation(() => ({
-          data: { createContactForm: true },
-        }))
         await wrapper.find('input[name="firstname"]').setValue('Peter')
         await wrapper.find('input[name="email"]').setValue('peter@lustig.de')
         await wrapper.find('input[name="lastname"]').setValue('Lustig')
         await wrapper.find('textarea[name="message"]').setValue('Eine gute Frage.')
         await wrapper.find('input[name="dataprivacy"]').setValue(true)
         await wrapper.find('form').trigger('submit.prevent')
+        await flushPromises()
       })
 
-      it.skip('calls the API', () => {
-        expect(spy).toBeCalledWith({
-          data: {
-            firstName: 'Peter',
-            lastName: 'Lustig',
-            email: 'peter@lustig.de',
-            content: 'Eine gute Frage.',
-          },
+      describe('with success', () => {
+        it('calls the API', () => {
+          expect(createContactFormMutationMock).toBeCalledWith({
+            data: {
+              firstName: 'Peter',
+              lastName: 'Lustig',
+              email: 'peter@lustig.de',
+              content: 'Eine gute Frage.',
+            },
+          })
+        })
+
+        it('resets the form', () => {
+          expect(wrapper.find('input[name="firstname"]').element).toHaveProperty('value', '')
+          expect(wrapper.find('input[name="email"]').element).toHaveProperty('value', '')
+          expect(wrapper.find('input[name="lastname"]').element).toHaveProperty('value', '')
+          expect(wrapper.find('textarea[name="message"]').element).toHaveProperty('value', '')
+          expect(wrapper.find('input[name="dataprivacy"]').element).toHaveProperty('value', 'false')
         })
       })
     })
