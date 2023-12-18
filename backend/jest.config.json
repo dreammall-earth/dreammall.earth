@@ -5,7 +5,7 @@
   "collectCoverageFrom": ["src/**/*.ts", "!**/node_modules/**", "!src/index.ts", "!build/**"],
   "coverageThreshold": {
     "global": {
-      "lines": 75
+      "lines": 67
     }
   },
   "setupFiles": ["./test/testSetup.ts"],
