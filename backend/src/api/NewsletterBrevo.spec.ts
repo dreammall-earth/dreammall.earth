@@ -59,7 +59,7 @@ describe('NewsletterBrevo', () => {
   describe('call skiped since no BREVO_KEY defined', () => {
     beforeEach(() => {
       jest.resetAllMocks()
-      sendContactFormEmail(contactForm)
+      void sendContactFormEmail(contactForm)
     })
 
     it('does not call mocked Brevo library', () => {
@@ -71,7 +71,7 @@ describe('NewsletterBrevo', () => {
     beforeEach(() => {
       jest.clearAllMocks()
       config.BREVO_KEY = '1234'
-      sendContactFormEmail(contactForm)
+      void sendContactFormEmail(contactForm)
     })
 
     // TODO: Check if the SipApiV3Sdk methods are called.
