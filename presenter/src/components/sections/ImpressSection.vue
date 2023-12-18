@@ -12,19 +12,19 @@
         <v-card flat class="content-card mb-2 pa-4 pa-md-12">
           <template #text>
             <h2 class="card-header">{{ $t('impress.data.headline') }}</h2>
-            <ul class="card-content mt-2">
+            <ul class="card-content mt-2 my-8">
               <li>{{ $t('impress.data.name') }}</li>
               <li>{{ $t('impress.data.street') }}</li>
-              <li>{{ $t('impress.data.additional') }}</li>
+              <!--<li>{{ $t('impress.data.additional') }}</li>-->
               <li>{{ $t('impress.data.zip') }} {{ $t('impress.data.city') }}</li>
             </ul>
-            <ul class="card-content my-8">
+            <!--<ul class="card-content my-8">
               <li>{{ $t('impress.data.registerLabel') }} {{ $t('impress.data.register') }}</li>
               <li>{{ $t('impress.data.courtLabel') }} {{ $t('impress.data.court') }}</li>
-            </ul>
+            </ul>-->
 
             <h2 class="card-header">{{ $t('impress.data.personHeadline') }}</h2>
-            <ul class="card-content mt-2">
+            <ul class="card-content mt-2 my-8">
               <li>{{ $t('impress.data.person1') }}</li>
               <li>{{ $t('impress.data.person2') }}</li>
             </ul>
@@ -36,10 +36,10 @@
           <template #text>
             <h2 class="card-header">{{ $t('impress.contact.headline') }}</h2>
             <ul class="card-content mt-2">
-              <li>
+              <!--<li>
                 {{ $t('impress.contact.telephoneLabel') }} {{ $t('impress.contact.telephone') }}
               </li>
-              <li>{{ $t('impress.contact.telefaxLabel') }} {{ $t('impress.contact.telefax') }}</li>
+              <li>{{ $t('impress.contact.telefaxLabel') }} {{ $t('impress.contact.telefax') }}</li>-->
               <li>{{ $t('impress.contact.emailLabel') }} {{ $t('impress.contact.email') }}</li>
             </ul>
           </template>
@@ -59,10 +59,8 @@
       <v-col>
         <v-card flat class="content-card mb-2 pa-4 pa-md-12">
           <template #text>
-            <h2 class="card-header">{{ $t('impress.euDispute.headline') }}</h2>
-            <p class="card-content mt-2">
-              {{ $t('impress.euDispute.content') }}
-            </p>
+            <h2 class="card-header">{{ $t('impress.liabilityContent.headline') }}</h2>
+            <p class="card-content mt-2">{{ $t('impress.liabilityContent.content') }}</p>
           </template>
         </v-card>
       </v-col>
@@ -71,10 +69,28 @@
       <v-col>
         <v-card flat class="content-card mb-2 pa-4 pa-md-12">
           <template #text>
-            <h2 class="card-header">{{ $t('impress.consumerDispute.headline') }}</h2>
-            <p class="card-content mt-2">
-              {{ $t('impress.consumerDispute.content') }}
-            </p>
+            <h2 class="card-header">{{ $t('impress.liabilityLinks.headline') }}</h2>
+            <p class="card-content mt-2">{{ $t('impress.liabilityLinks.content') }}</p>
+          </template>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-card flat class="content-card mb-2 pa-4 pa-md-12">
+          <template #text>
+            <h2 class="card-header">{{ $t('impress.copyright.headline') }}</h2>
+            <p class="card-content mt-2">{{ $t('impress.copyright.content') }}</p>
+          </template>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-card flat class="content-card mb-2 pa-4 pa-md-12">
+          <template #text>
+            <h2 class="card-header">{{ $t('impress.legalDisclaimer.headline') }}</h2>
+            <p class="card-content mt-2">{{ $t('impress.legalDisclaimer.content') }}</p>
           </template>
         </v-card>
       </v-col>
