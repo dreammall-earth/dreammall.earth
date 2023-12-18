@@ -7,15 +7,9 @@ import { prisma } from '#src/prisma'
 
 import { sendContactFormEmail } from './NewsletterBrevo'
 
-const consoleLogMock = jest.fn()
 const consoleWarnMock = jest.fn()
-const consoleErrorMock = jest.fn()
-// eslint-disable-next-line no-console
-console.log = consoleLogMock
 // eslint-disable-next-line no-console
 console.warn = consoleWarnMock
-// eslint-disable-next-line no-console
-console.error = consoleErrorMock
 
 jest.mock('#config/config', () => {
   return {
