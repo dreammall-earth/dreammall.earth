@@ -1,7 +1,7 @@
 import { gql } from 'graphql-tag'
 
 export const subscribeToNewsletterMutation = gql`
-  mutation subscribeToNewsletter($email: String!) {
-    subscribeToNewsletter(email: $email)
+  mutation subscribeToNewsletter($data: SubscribeToNewsletterInput!) {
+    subscribeToNewsletter(subscribeToNewsletterData: $data)
   }
 `
