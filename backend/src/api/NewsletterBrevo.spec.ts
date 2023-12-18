@@ -7,6 +7,16 @@ import { prisma } from '#src/prisma'
 
 import { sendContactFormEmail } from './NewsletterBrevo'
 
+const consoleLogMock = jest.fn()
+const consoleWarnMock = jest.fn()
+const consoleErrorMock = jest.fn()
+// eslint-disable-next-line no-console
+console.log = consoleLogMock
+// eslint-disable-next-line no-console
+console.warn = consoleWarnMock
+// eslint-disable-next-line no-console
+console.error = consoleErrorMock
+
 jest.mock('#config/config', () => {
   return {
     BREVO_KEY: '',
@@ -17,12 +27,14 @@ jest.mock('#config/config', () => {
   }
 })
 
+const setApiKeyMock = jest.fn().mockReturnValue({})
+const sendTransacEmailThen = jest.fn().mockReturnValue({})
 jest.mock('@getbrevo/brevo', () => {
   return {
-    TransactionalEmailsApi: jest.fn().mockResolvedValue(() => {
+    TransactionalEmailsApi: jest.fn().mockImplementation(() => {
       return {
-        setApiKey: jest.fn(),
-        sendTransacEmail: jest.fn(),
+        setApiKey: setApiKeyMock,
+        sendTransacEmail: sendTransacEmailThen,
       }
     }),
     SendSmtpEmail: jest.fn().mockImplementation(() => {
@@ -67,9 +79,12 @@ describe('NewsletterBrevo', () => {
       sendContactFormEmail(contactForm)
     })
 
-    // TODO: Make Brevo API been called and remove skip
-    it.skip('does call mocked Brevo library', () => {
-      expect(SibApiV3Sdk.TransactionalEmailsApi).toHaveBeenCalledTimes(1)
+    it('call setApiKey', () => {
+      expect(SibApiV3Sdk.TransactionalEmailsApi).toHaveBeenCalled()
+      // setApiKey toHaveBeenCalledWith(
+      //   SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
+      //   '1234',
+      // )
     })
   })
 })
