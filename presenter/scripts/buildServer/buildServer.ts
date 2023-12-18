@@ -9,23 +9,24 @@ import fs, { ensureDir, remove } from 'fs-extra'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-async function bundleServer() {
+async function buildServer() {
   const result = await build({
     absWorkingDir: process.cwd(),
     entryPoints: [path.join(path.resolve(__dirname, '../../server/'), 'index.ts')],
     outfile: 'index.cjs',
     write: false,
+    minify: true,
     platform: 'node',
     bundle: true,
     format: 'cjs',
     sourcemap: false,
     treeShaking: true,
-    define: { 'import.meta.url': 'importMetaUrl' },
+    define: { 'import.meta.url': 'importMetaUrl', 'process.env.NODE_ENV': '"production"' },
     inject: [path.resolve(__dirname, './import.meta.url-polyfill.ts')],
     banner: {
       js: `/* eslint-disable prettier/prettier */`,
     },
-    tsconfig: path.resolve(__dirname, './tsconfig.bundleServer.json'),
+    tsconfig: path.resolve(__dirname, './tsconfig.buildServer.json'),
     plugins: [
       {
         name: 'externalize-deps',
@@ -52,4 +53,4 @@ async function bundleServer() {
   await fs.writeFile(filePath, text)
 }
 
-void bundleServer()
+void buildServer()
