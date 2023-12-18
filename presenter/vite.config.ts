@@ -5,6 +5,8 @@ import vue from '@vitejs/plugin-vue'
 import vike from 'vike/plugin'
 import { UserConfig } from 'vite'
 import { checker } from 'vite-plugin-checker'
+import viteCompression from 'vite-plugin-compression'
+import vuetify from 'vite-plugin-vuetify'
 
 const isStorybook = () =>
   ['storybook', 'storybook:build'].includes(process.env.npm_lifecycle_event as string)
@@ -21,6 +23,8 @@ const config: UserConfig = {
       typescript: true,
       vueTsc: true,
     }),
+    vuetify({ styles: { configFile: './src/assets/sass/style.scss' } }),
+    viteCompression({ filter: /\.*$/i }),
   ],
   build: {
     outDir: './build',
@@ -39,15 +43,6 @@ const config: UserConfig = {
       '#context': path.join(__dirname, '/renderer/context'),
       '#types': path.join(__dirname, '/types'),
       '#root': __dirname,
-    },
-  },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: `
-          @import "./src/assets/sass/style.scss";
-        `,
-      },
     },
   },
 }

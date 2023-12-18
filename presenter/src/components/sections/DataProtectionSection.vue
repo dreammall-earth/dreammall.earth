@@ -28,13 +28,22 @@
       <v-col>
         <v-card flat class="content-card mb-2 pa-4 pa-md-10 h-100">
           <template #text>
-            <h2 class="card-header">{{ $t('dataProtection.revocation.headline') }}</h2>
-            <p class="card-content my-4">{{ $t('dataProtection.revocation.content') }}</p>
+            <h2 class="card-header">{{ $t('dataProtection.processing.headline') }}</h2>
+            <p class="card-content my-4">{{ $t('dataProtection.processing.content') }}</p>
           </template>
         </v-card>
       </v-col>
     </v-row>
-
+    <v-row>
+      <v-col>
+        <v-card flat class="content-card mb-2 pa-4 pa-md-12">
+          <template #text>
+            <h2 class="card-header">{{ $t('dataProtection.revocation.headline') }}</h2>
+            <p class="card-content mt-2">{{ $t('dataProtection.revocation.content') }}</p>
+          </template>
+        </v-card>
+      </v-col>
+    </v-row>
     <v-row>
       <v-col>
         <v-card flat class="content-card mb-2 pa-4 pa-md-12">
@@ -42,18 +51,6 @@
             <h2 class="card-header">{{ $t('dataProtection.euDispute.headline') }}</h2>
             <p class="card-content mt-2">
               {{ $t('dataProtection.euDispute.content') }}
-            </p>
-          </template>
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <v-card flat class="content-card mb-2 pa-4 pa-md-12">
-          <template #text>
-            <h2 class="card-header">{{ $t('dataProtection.consumerDispute.headline') }}</h2>
-            <p class="card-content mt-2">
-              {{ $t('dataProtection.consumerDispute.content') }}
             </p>
           </template>
         </v-card>
