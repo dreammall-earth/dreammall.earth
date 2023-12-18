@@ -5,9 +5,8 @@ import vue from '@vitejs/plugin-vue'
 import vike from 'vike/plugin'
 import { UserConfig } from 'vite'
 import { checker } from 'vite-plugin-checker'
-import vuetify from 'vite-plugin-vuetify'
 import viteCompression from 'vite-plugin-compression'
-
+import vuetify from 'vite-plugin-vuetify'
 
 const isStorybook = () =>
   ['storybook', 'storybook:build'].includes(process.env.npm_lifecycle_event as string)
