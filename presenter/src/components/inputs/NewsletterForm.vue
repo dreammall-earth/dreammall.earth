@@ -90,6 +90,7 @@ import { subscribeToNewsletterMutation } from '#mutations/subscribeToNewsletterM
 import MainButton from './MainButton.vue'
 
 const firstname = ref('')
+const lastname = ref('')
 const email = ref('')
 const dataprivacy = ref(0)
 
@@ -102,7 +103,13 @@ async function submitForm() {
   const isValid = await form.value?.validate()
   if (isValid?.valid) {
     try {
-      await sendSubscribeToNewsletter({ email: email.value })
+      await sendSubscribeToNewsletter({
+        data: {
+          email: email.value,
+          firstName: firstname.value,
+          lastName: lastname.value,
+        },
+      })
       await form.value?.reset()
     } catch {}
   }

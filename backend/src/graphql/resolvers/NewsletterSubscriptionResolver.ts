@@ -1,12 +1,15 @@
 import { Resolver, Mutation, Arg } from 'type-graphql'
 
+import { SubscribeToNewsletterInput } from '#inputs/SubscribeToNewsletterInput'
 import { prisma } from '#src/prisma'
 
 @Resolver()
 export class NewsletterSubscriptionResolver {
   @Mutation(() => Boolean)
-  async subscribeToNewsletter(@Arg('email', () => String) email: string): Promise<boolean> {
-    await prisma.newsletterSubscription.create({ data: { email } })
+  async subscribeToNewsletter(
+    @Arg('subscribeToNewsletterData') subscribeToNewsletterData: SubscribeToNewsletterInput,
+  ): Promise<boolean> {
+    await prisma.newsletterSubscription.create({ data: subscribeToNewsletterData })
     return true
   }
 }
