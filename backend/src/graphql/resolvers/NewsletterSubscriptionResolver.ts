@@ -15,8 +15,8 @@ export class NewsletterSubscriptionResolver {
     const subscriber: NewsletterSubscription = await prisma.newsletterSubscription.create({
       data: subscribeToNewsletterData,
     })
-    const contactToBrevoPromise: Promise<CreateContactResponse> = sendContactToBrevo(subscriber)
     try {
+      const contactToBrevoPromise: Promise<CreateContactResponse> = sendContactToBrevo(subscriber)
       await contactToBrevoPromise.then(async (data) => {
         // eslint-disable-next-line no-console
         console.log('API called successfully. Returned data: ', JSON.stringify(data))
