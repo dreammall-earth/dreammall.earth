@@ -1,5 +1,6 @@
 import { renderToString as renderToString_ } from '@vue/server-renderer'
 import { escapeInject, dangerouslySkipEscape } from 'vike/server'
+import { resolveComponent } from 'vue'
 
 import logoUrl from '#assets/favicon.ico'
 import { META } from '#src/env'
@@ -8,6 +9,11 @@ import { createApp } from './app'
 
 import type { PageContextServer, PageContext } from '#types/PageContext'
 import type { App } from 'vue'
+
+// this fixes a warning which occurs when building
+// > "resolveComponent" is imported from external module "vue" but never used in ...
+// running this here fixes the warning and should not impact anything due to prerender setting.
+resolveComponent('nothing')
 
 // See https://vike.dev/data-fetching
 export const passToClient = ['pageProps', /* 'urlPathname', */ 'routeParams']
