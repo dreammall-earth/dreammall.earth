@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import vike from 'vike/plugin'
 import { UserConfig } from 'vite'
 import { checker } from 'vite-plugin-checker'
+import viteCompression from 'vite-plugin-compression'
 
 const isStorybook = () =>
   ['storybook', 'storybook:build'].includes(process.env.npm_lifecycle_event as string)
@@ -21,6 +22,7 @@ const config: UserConfig = {
       typescript: true,
       vueTsc: true,
     }),
+    viteCompression({ filter: /\.*$/i }),
   ],
   build: {
     outDir: './build',
