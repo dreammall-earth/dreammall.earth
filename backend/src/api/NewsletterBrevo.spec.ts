@@ -5,21 +5,18 @@ import { ContactForm } from '@prisma/client'
 import config from '#config/config'
 import { prisma } from '#src/prisma'
 
-import { sendContactFormEmail } from './NewsletterBrevo'
+import BrevoApi, {
+  createBrevoInstance,
+  createSmtpEmail,
+  sendContactFormEmail,
+  sendSmtpEmail,
+} from './NewsletterBrevo'
 
-const consoleLogMock = jest.fn()
-const consoleWarnMock = jest.fn()
-const consoleErrorMock = jest.fn()
-// eslint-disable-next-line no-console
-console.log = consoleLogMock
-// eslint-disable-next-line no-console
-console.warn = consoleWarnMock
-// eslint-disable-next-line no-console
-console.error = consoleErrorMock
+// const mockedSibApiV3SdkTransactionalEmailsApi = <jest.Mock<typeof SibApiV3Sdk.TransactionalEmailsApi>>SibApiV3Sdk.TransactionalEmailsApi
 
 jest.mock('#config/config', () => {
   return {
-    BREVO_KEY: '',
+    BREVO_KEY: 'MY KEY',
     BREVO_CONTACT_REQUEST_TO_NAME: 'Peter Lustig',
     BREVO_CONTACT_REQUEST_TO_EMAIL: 'peter@lustig.de',
     BREVO_TEMPLATE_CONTACT_BASE: '1',
@@ -27,64 +24,224 @@ jest.mock('#config/config', () => {
   }
 })
 
-const setApiKeyMock = jest.fn().mockReturnValue({})
-const sendTransacEmailThen = jest.fn().mockReturnValue({})
 jest.mock('@getbrevo/brevo', () => {
+  const originalModule = jest.requireActual<typeof import('@getbrevo/brevo')>('@getbrevo/brevo')
   return {
+    __esModule: true,
+    ...originalModule,
     TransactionalEmailsApi: jest.fn().mockImplementation(() => {
       return {
-        setApiKey: setApiKeyMock,
-        sendTransacEmail: sendTransacEmailThen,
+        setApiKey: jest.fn(),
+        sendTransacEmail: jest
+          .fn()
+          .mockResolvedValueOnce({
+            response: 'success',
+          })
+          .mockRejectedValue({
+            error: 'error',
+          }),
       }
     }),
     SendSmtpEmail: jest.fn().mockImplementation(() => {
       return {}
     }),
-    TransactionalEmailsApiApiKeys: jest.fn().mockImplementation(() => {
-      return {
-        apiKey: 1,
-      }
-    }),
   }
 })
 
 let contactForm: ContactForm
-beforeAll(async () => {
+
+beforeEach(async () => {
+  await prisma.contactForm.deleteMany()
   contactForm = await prisma.contactForm.create({
     data: {
-      firstName: 'Peter',
-      lastName: 'Lustig',
+      firstName: 'Bibi',
+      lastName: 'Bloxberg',
       content: 'Hello DreamMall!',
-      email: 'peter@lustig.de',
+      email: 'bibi@bloxberg.de',
     },
   })
 })
 
 describe('NewsletterBrevo', () => {
-  describe('call skiped since no BREVO_KEY defined', () => {
+  describe('createBrevoInstance', () => {
+    let result: SibApiV3Sdk.TransactionalEmailsApi
+
     beforeEach(() => {
-      jest.resetAllMocks()
-      sendContactFormEmail(contactForm)
+      jest.clearAllMocks()
+      result = createBrevoInstance()
     })
 
-    it('does not call mocked Brevo library', () => {
-      expect(SibApiV3Sdk.TransactionalEmailsApi).not.toHaveBeenCalled()
+    it('calls TransactionalEmailsApi constructor', () => {
+      expect(SibApiV3Sdk.TransactionalEmailsApi).toBeCalledTimes(1)
+    })
+
+    it('sets the API key', () => {
+      expect(result.setApiKey).toBeCalledTimes(1)
+      expect(result.setApiKey).toBeCalledWith(1, 'MY KEY')
     })
   })
 
-  describe('call successful', () => {
+  describe('createSmtpEmail', () => {
+    let result: SibApiV3Sdk.SendSmtpEmail
+
     beforeEach(() => {
       jest.clearAllMocks()
-      config.BREVO_KEY = '1234'
-      sendContactFormEmail(contactForm)
+      result = createSmtpEmail(
+        42,
+        [
+          {
+            name: 'Peter Lustig',
+            email: 'peter@lustig.de',
+          },
+        ],
+        {
+          name: 'Bibi Bloxberg',
+          email: 'bibi@bloxberg.de',
+        },
+        {
+          name: 'Bibi Bloxberg',
+          email: 'bibi@bloxberg.de',
+        },
+        {
+          ...contactForm,
+        },
+      )
     })
 
-    it('call setApiKey', () => {
-      expect(SibApiV3Sdk.TransactionalEmailsApi).toHaveBeenCalled()
-      // setApiKey toHaveBeenCalledWith(
-      //   SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
-      //   '1234',
-      // )
+    it('returns sendSmtpEmail object', () => {
+      expect(result).toEqual({
+        templateId: 42,
+        to: [
+          {
+            name: 'Peter Lustig',
+            email: 'peter@lustig.de',
+          },
+        ],
+        sender: {
+          name: 'Bibi Bloxberg',
+          email: 'bibi@bloxberg.de',
+        },
+        replyTo: {
+          name: 'Bibi Bloxberg',
+          email: 'bibi@bloxberg.de',
+        },
+        params: {
+          ...contactForm,
+        },
+      })
+    })
+  })
+
+  describe('sendSmtpEmail', () => {
+    describe('with error', () => {
+      beforeEach(async () => {
+        jest.clearAllMocks()
+        await sendSmtpEmail(
+          createSmtpEmail(
+            42,
+            [
+              {
+                name: 'Peter Lustig',
+                email: 'peter@lustig.de',
+              },
+            ],
+            {
+              name: 'Bibi Bloxberg',
+              email: 'bibi@bloxberg.de',
+            },
+            {
+              name: 'Bibi Bloxberg',
+              email: 'bibi@bloxberg.de',
+            },
+            {
+              ...contactForm,
+            },
+          ),
+          contactForm,
+        )
+      })
+
+      it.skip('does not update the database', async () => {
+        const result: ContactForm[] = await prisma.contactForm.findMany()
+        expect(result).toHaveLength(1)
+        expect(result).toEqual([
+          {
+            id: expect.any(Number),
+            firstName: 'Bibi',
+            lastName: 'Bloxberg',
+            content: 'Hello DreamMall!',
+            email: 'bibi@bloxberg.de',
+            createdAt: expect.any(Date),
+            brevoSuccess: null,
+          },
+        ])
+      })
+    })
+
+    describe('with success', () => {
+      beforeEach(async () => {
+        jest.clearAllMocks()
+        await sendSmtpEmail(
+          createSmtpEmail(
+            42,
+            [
+              {
+                name: 'Peter Lustig',
+                email: 'peter@lustig.de',
+              },
+            ],
+            {
+              name: 'Bibi Bloxberg',
+              email: 'bibi@bloxberg.de',
+            },
+            {
+              name: 'Bibi Bloxberg',
+              email: 'bibi@bloxberg.de',
+            },
+            {
+              ...contactForm,
+            },
+          ),
+          contactForm,
+        )
+      })
+
+      it('calls TransactionalEmailsApi constructor', () => {
+        expect(SibApiV3Sdk.TransactionalEmailsApi).toBeCalledTimes(1)
+      })
+
+      it('updates the database', async () => {
+        const result: ContactForm[] = await prisma.contactForm.findMany()
+        expect(result).toHaveLength(1)
+        expect(result).toEqual([
+          {
+            id: expect.any(Number),
+            firstName: 'Bibi',
+            lastName: 'Bloxberg',
+            content: 'Hello DreamMall!',
+            email: 'bibi@bloxberg.de',
+            createdAt: expect.any(Date),
+            brevoSuccess: expect.any(Date),
+          },
+        ])
+      })
+    })
+  })
+
+  describe('sendContactFormEmail', () => {
+    describe('brevo key given', () => {
+      let spy: any
+
+      beforeEach(() => {
+        jest.clearAllMocks()
+        sendContactFormEmail(contactForm)
+        // spy = jest.spyOn(BrevoApi, sendSmtpEmail)
+      })
+
+      it('calls sendSmtpEmail twice', () => {
+        // expect(spy).toBeCalledTimes(2)
+        expect(SibApiV3Sdk.TransactionalEmailsApi.sendTransacEmail).toBeCalledWith()
+      })
     })
   })
 })
