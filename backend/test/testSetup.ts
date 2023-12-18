@@ -2,4 +2,5 @@
 import 'reflect-metadata'
 
 const mockConsoleWarn = jest.fn()
+// eslint-disable-next-line no-console
 console.warn = mockConsoleWarn
