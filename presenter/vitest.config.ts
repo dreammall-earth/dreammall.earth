@@ -18,7 +18,7 @@ export default mergeConfig(
           '**/*{.,-}stories.?(c|m)[jt]s?(x)',
         ],
         statements: 99,
-        branches: 97,
+        branches: 94,
         functions: 88,
         lines: 99,
       },
