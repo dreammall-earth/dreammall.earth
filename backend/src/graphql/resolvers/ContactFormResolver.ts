@@ -12,7 +12,6 @@ export class ContactFormResolver {
     @Arg('contactFormData') contactFormData: ContactFormInput,
   ): Promise<boolean> {
     const contactForm: ContactForm = await prisma.contactForm.create({ data: contactFormData })
-    // code to send email goes here
     void sendContactFormEmail(contactForm)
     return true
   }
