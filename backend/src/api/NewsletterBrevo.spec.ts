@@ -10,6 +10,9 @@ import { sendContactFormEmail } from './NewsletterBrevo'
 const consoleWarnMock = jest.fn()
 // eslint-disable-next-line no-console
 console.warn = consoleWarnMock
+const consoleErrorMock = jest.fn()
+// eslint-disable-next-line no-console
+console.error = consoleErrorMock
 
 jest.mock('#config/config', () => {
   return {
@@ -59,11 +62,12 @@ describe('NewsletterBrevo', () => {
   describe('call skiped since no BREVO_KEY defined', () => {
     beforeEach(() => {
       jest.resetAllMocks()
-      void sendContactFormEmail(contactForm)
     })
 
     it('does not call mocked Brevo library', () => {
-      expect(SibApiV3Sdk.TransactionalEmailsApi).not.toHaveBeenCalled()
+      expect(() => sendContactFormEmail(contactForm)).toThrow(
+        'No Brevo_Key defined could not send email',
+      )
     })
   })
 
