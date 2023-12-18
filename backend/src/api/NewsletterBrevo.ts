@@ -22,9 +22,7 @@ const createAddContactToList = (contactForm: NewsletterSubscription): SibApiV3Sd
   createContact.email = contactForm.email
   createContact.listIds = [config.BREVO_CONTACT_LIST_ID]
   createContact.attributes = {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     VORNAME: contactForm.firstName,
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     NACHNAME: contactForm.lastName,
   }
   return createContact
