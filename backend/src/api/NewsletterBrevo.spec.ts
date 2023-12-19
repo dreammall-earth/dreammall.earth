@@ -345,11 +345,11 @@ describe('NewsletterBrevo', () => {
         })
 
         it('calls sendSmtpEmail twice', () => {
-          expect(mockSendTransacEmail).toBeCalledTimes(2)
+          expect(mockSendTransacEmail).toHaveBeenCalledTimes(2)
         })
 
         it('sends email to base', () => {
-          expect(mockSendTransacEmail).toBeCalledWith({
+          expect(mockSendTransacEmail).toHaveBeenCalledWith({
             templateId: 1,
             to: [
               {
@@ -375,7 +375,7 @@ describe('NewsletterBrevo', () => {
         })
 
         it('sends email to client', () => {
-          expect(mockSendTransacEmail).toBeCalledWith({
+          expect(mockSendTransacEmail).toHaveBeenCalledWith({
             templateId: 2,
             to: [
               {
@@ -408,7 +408,7 @@ describe('NewsletterBrevo', () => {
         })
 
         it('does not call sendSmtpEmail', () => {
-          expect(mockSendTransacEmail).not.toBeCalled()
+          expect(mockSendTransacEmail).not.toHaveBeenCalled()
         })
       })
     })
