@@ -46,7 +46,7 @@
           </template>
         </v-card>
 
-        <v-card flat class="content-card mb-2 pa-4 pa-md-10">
+        <v-card flat class="content-card mb-2 pa-4 pa-md-10 my-4">
           <template #text>
             <h2 class="card-header">{{ $t('impress.tax.headline') }}</h2>
             <p class="card-content mt-2">
