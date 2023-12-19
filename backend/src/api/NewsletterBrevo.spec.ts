@@ -100,7 +100,7 @@ describe('NewsletterBrevo', () => {
       it('returns sendSmtpEmail object', () => {
         expect(result).toEqual({
           email: newsletterSubscription.email,
-          listIds: [1],
+          listIds: [3],
           attributes: {
             VORNAME: newsletterSubscription.firstName,
             NACHNAME: newsletterSubscription.lastName,
