@@ -21,4 +21,4 @@ npm version ${VERSION}
 
 # generate changelog
 cd ${PROJECT_DIR}
-npx auto-changelog --commit-limit 0 --latest-version ${VERSION}
+npx --yes auto-changelog --commit-limit 0 --latest-version ${VERSION}
