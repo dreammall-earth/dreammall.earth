@@ -24,10 +24,11 @@
             </ul>-->
 
             <h2 class="card-header">{{ $t('impress.data.personHeadline') }}</h2>
-            <ul class="card-content mt-2 my-8">
+            <ul class="card-content mt-2">
               <li>{{ $t('impress.data.person1') }}</li>
               <li>{{ $t('impress.data.person2') }}</li>
             </ul>
+            <p class="mt-5">{{ $t('impress.data.additionalLaw') }}</p>
           </template>
         </v-card>
       </v-col>
