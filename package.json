@@ -1,6 +1,6 @@
 {
   "name": "dreammall.earth",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Dreammall.earth website & product page",
   "main": "build/index.js",
   "type": "module",
@@ -28,8 +28,7 @@
     "docs:build": "vuepress build .",
     "release": "scripts/release.sh"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@vuepress/bundler-vite": "^2.0.0-rc.0",
     "remark-cli": "^12.0.0",
