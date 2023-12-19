@@ -121,21 +121,15 @@ describe('ContactForm', () => {
       })
 
       it('shows error for email', () => {
-        expect(wrapper.find('.v-messages__message').text()).toBe(
-          'Dieses Feld muss eine Email-Adresse sein',
-        )
-      })
+        expect(wrapper.find('.v-messages__message').text()).toBe('Dieses Feld muss eine Email-Adresse sein')
+      })      
     })
 
     describe('last name too long', () => {
       beforeEach(async () => {
         await wrapper.find('input[name="firstname"]').setValue('Peter')
         await wrapper.find('input[name="email"]').setValue('peter@lustig.de')
-        await wrapper
-          .find('input[name="lastname"]')
-          .setValue(
-            'Stormborn of the House Targaryen, First of Her Name, the Unburnt, Queen of the Andals and the First Men, Khaleesi of the Great Grass Sea, Breaker of Chains, and Mother of Dragons',
-          )
+        await wrapper.find('input[name="lastname"]').setValue('Stormborn of the House Targaryen, First of Her Name, the Unburnt, Queen of the Andals and the First Men, Khaleesi of the Great Grass Sea, Breaker of Chains, and Mother of Dragons')
         await wrapper.find('textarea[name="message"]').setValue('Eine gute Frage.')
         await wrapper.find('input[name="dataprivacy"]').setValue(true)
         await wrapper.find('form').trigger('submit.prevent')
@@ -147,7 +141,7 @@ describe('ContactForm', () => {
       })
     })
   })
-
+  
   describe('submit', () => {
     describe('empty form', () => {
       beforeEach(async () => {
