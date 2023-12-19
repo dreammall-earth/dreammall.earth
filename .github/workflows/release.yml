@@ -6,6 +6,8 @@ name: "dreammall:release to github"
 #      - master
 on: push
 
+permissions: write
+
 jobs:
   # JOB: GITHUB TAG LATEST VERSION #############################################
   ##############################################################################
