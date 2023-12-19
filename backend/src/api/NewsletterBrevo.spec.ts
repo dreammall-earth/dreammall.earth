@@ -7,6 +7,7 @@ import config from '#config/config'
 import { prisma } from '#src/prisma'
 
 import {
+  createBrevoContactsApi,
   createBrevoInstance,
   createSmtpEmail,
   sendContactFormEmail,
@@ -69,6 +70,26 @@ describe('NewsletterBrevo', () => {
 
     it('calls TransactionalEmailsApi constructor', () => {
       expect(SibApiV3Sdk.TransactionalEmailsApi).toHaveBeenCalledTimes(1)
+    })
+
+    it('sets the API key', () => {
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(result.setApiKey).toHaveBeenCalledTimes(1)
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(result.setApiKey).toHaveBeenCalledWith(0, 'MY KEY')
+    })
+  })
+
+  describe('createBrevoContactsApi', () => {
+    let result: SibApiV3Sdk.ContactsApi
+
+    beforeEach(() => {
+      jest.clearAllMocks()
+      result = createBrevoContactsApi()
+    })
+
+    it('calls TransactionalEmailsApi constructor', () => {
+      expect(SibApiV3Sdk.ContactsApi).toHaveBeenCalledTimes(1)
     })
 
     it('sets the API key', () => {
