@@ -74,7 +74,7 @@ describe('FirstSection', () => {
       })
 
       it('has a button with text home.section1.preOrderBtn', () => {
-        expect(item.find('button').text()).toBe("$t('home.section1.preOrderBtn')")
+        expect(item.find('a').text()).toBe("$t('home.section1.preOrderBtn')")
       })
     })
 
