@@ -7,16 +7,24 @@ import config from '#config/config'
 import { CreateContactResponse } from './type/CreateContactResponse'
 import { SmtpEmailResponse } from './type/SmtpEmailResponse'
 
+let apiTransactionalEmailInstance: SibApiV3Sdk.TransactionalEmailsApi | undefined
+let apiBrevoContactsInstance: SibApiV3Sdk.ContactsApi | undefined
+
 const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
-  const apiInstance: SibApiV3Sdk.TransactionalEmailsApi = new SibApiV3Sdk.TransactionalEmailsApi()
-  apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, config.BREVO_KEY)
-  return apiInstance
+  if (apiTransactionalEmailInstance) return apiTransactionalEmailInstance
+  apiTransactionalEmailInstance = new SibApiV3Sdk.TransactionalEmailsApi()
+  apiTransactionalEmailInstance.setApiKey(
+    SibApiV3Sdk.TransactionalEmailsApiApiKeys.partnerKey,
+    config.BREVO_KEY,
+  )
+  return apiTransactionalEmailInstance
 }
 
 const createBrevoContactsApi = (): SibApiV3Sdk.ContactsApi => {
-  const apiInstance = new SibApiV3Sdk.ContactsApi()
-  apiInstance.setApiKey(SibApiV3Sdk.ContactsApiApiKeys.apiKey, config.BREVO_KEY)
-  return apiInstance
+  if (apiBrevoContactsInstance) return apiBrevoContactsInstance
+  apiBrevoContactsInstance = new SibApiV3Sdk.ContactsApi()
+  apiBrevoContactsInstance.setApiKey(SibApiV3Sdk.ContactsApiApiKeys.partnerKey, config.BREVO_KEY)
+  return apiBrevoContactsInstance
 }
 
 const createAddContactToList = (contactForm: NewsletterSubscription): SibApiV3Sdk.CreateContact => {

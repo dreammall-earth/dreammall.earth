@@ -1,6 +1,9 @@
 // eslint-disable-next-line import/no-unassigned-import
 import 'reflect-metadata'
+import path from 'path'
 
-const mockConsoleWarn = jest.fn()
-// eslint-disable-next-line no-console
-console.warn = mockConsoleWarn
+import { config } from 'dotenv'
+
+config({
+  path: path.resolve(__dirname, '../.env.test'),
+})
