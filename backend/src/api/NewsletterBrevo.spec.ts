@@ -120,7 +120,7 @@ describe('NewsletterBrevo', () => {
         it('calls createContact', () => {
           expect(mockCreateContact).toHaveBeenCalledWith({
             email: newsletterSubscription.email,
-            listIds: [1],
+            listIds: [3],
             attributes: {
               VORNAME: newsletterSubscription.firstName,
               NACHNAME: newsletterSubscription.lastName,
