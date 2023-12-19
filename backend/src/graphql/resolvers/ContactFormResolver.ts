@@ -1,5 +1,7 @@
+import { ContactForm } from '@prisma/client'
 import { Resolver, Mutation, Query, Arg } from 'type-graphql'
 
+import { sendContactFormEmail } from '#api/NewsletterBrevo'
 import { ContactFormInput } from '#inputs/ContactFormInput'
 import { prisma } from '#src/prisma'
 
@@ -9,8 +11,8 @@ export class ContactFormResolver {
   async createContactForm(
     @Arg('contactFormData') contactFormData: ContactFormInput,
   ): Promise<boolean> {
-    await prisma.contactForm.create({ data: contactFormData })
-    // code to send email goes here
+    const contactForm: ContactForm = await prisma.contactForm.create({ data: contactFormData })
+    void sendContactFormEmail(contactForm)
     return true
   }
 
