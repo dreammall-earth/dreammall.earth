@@ -17,7 +17,7 @@ export const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
 }
 
 const createBrevoContactsApi = (): SibApiV3Sdk.ContactsApi => {
-  const apiBrevoContactsInstance: SibApiV3Sdk.ContactsApi = new SibApiV3Sdk.ContactsApi()
+  const apiBrevoContactsInstance = new SibApiV3Sdk.ContactsApi()
   apiBrevoContactsInstance.setApiKey(SibApiV3Sdk.ContactsApiApiKeys.apiKey, config.BREVO_KEY)
   return apiBrevoContactsInstance
 }
