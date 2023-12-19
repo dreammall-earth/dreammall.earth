@@ -126,12 +126,8 @@ export const sendContactFormEmail = (
       content: contactForm.content,
     },
   )
-  const sendEmailClient: Promise<
-    ReturnType<SibApiV3Sdk.TransactionalEmailsApi['sendTransacEmail']> | undefined
-  > = sendSmtpEmail(smtpEmailToClient, contactForm)
-  const sendEmailAdmin: Promise<
-    ReturnType<SibApiV3Sdk.TransactionalEmailsApi['sendTransacEmail']> | undefined
-  > = sendSmtpEmail(smtpEmailToAdmin, contactForm)
+  const sendEmailClient = sendSmtpEmail(smtpEmailToClient, contactForm)
+  const sendEmailAdmin = sendSmtpEmail(smtpEmailToAdmin, contactForm)
   return Promise.all([sendEmailAdmin, sendEmailClient])
 }
 
