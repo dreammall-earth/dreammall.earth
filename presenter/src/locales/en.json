@@ -161,7 +161,9 @@
     "footer": {
       "contact": "Kontaktiere uns",
       "contactForm": {
+        "fieldNoEmail": "Dieses Feld muss eine Email-Adresse sein",
         "fieldRequired": "Dieses Feld wird benötigt",
+        "fieldTooLong": "Dieses Feld ist zu lang",
         "firstName": "Vorname",
         "lastName": "Nachname",
         "mail": "E-Mail Adresse",
