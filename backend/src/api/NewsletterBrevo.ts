@@ -127,7 +127,7 @@ export const sendContactFormEmail = async (contactForm: ContactForm): Promise<bo
     await sendAllEmail.then(() => {
       // console.log('API called successfully. Returned data: ', JSON.stringify(data))
       contactForm.brevoSuccess = new Date()
-      void prisma.contactForm.update({
+      await prisma.contactForm.update({
         where: {
           id: contactForm.id,
         },
