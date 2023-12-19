@@ -12,6 +12,7 @@ import {
   createBrevoInstance,
   createSmtpEmail,
   sendContactFormEmail,
+  sendContactToBrevo,
   sendSmtpEmail,
 } from './NewsletterBrevo'
 
@@ -25,6 +26,7 @@ config.BREVO_CONTACT_LIST_ID = 1
 const mockSendTransacEmail = jest.fn().mockResolvedValue({
   response: 'success',
 })
+const mockCreateContact = jest.fn()
 
 jest.mock('@getbrevo/brevo', () => {
   const originalModule = jest.requireActual<typeof import('@getbrevo/brevo')>('@getbrevo/brevo')
@@ -40,6 +42,7 @@ jest.mock('@getbrevo/brevo', () => {
     ContactsApi: jest.fn().mockImplementation(() => {
       return {
         setApiKey: jest.fn(),
+        createContact: mockCreateContact,
       }
     }),
     SendSmtpEmail: jest.fn().mockImplementation(() => {
@@ -106,11 +109,45 @@ describe('NewsletterBrevo', () => {
         })
       })
     })
+
+    describe('sendContactToBrevo', () => {
+      describe('brevo key given', () => {
+        beforeEach(async () => {
+          jest.clearAllMocks()
+          await sendContactToBrevo(newsletterSubscription)
+        })
+
+        it('calls createContact', () => {
+          expect(mockCreateContact).toHaveBeenCalledWith({
+            email: newsletterSubscription.email,
+            listIds: [1],
+            attributes: {
+              VORNAME: newsletterSubscription.firstName,
+              NACHNAME: newsletterSubscription.lastName,
+            },
+            updateEnabled: false,
+          })
+        })
+      })
+
+      describe('without brevo key', () => {
+        beforeEach(async () => {
+          jest.clearAllMocks()
+          config.BREVO_KEY = ''
+          await sendContactToBrevo(newsletterSubscription)
+        })
+
+        it('does not call sendSmtpEmail', () => {
+          expect(mockCreateContact).not.toHaveBeenCalled()
+        })
+      })
+    })
   })
 
   describe('contactForm', () => {
     let contactForm: ContactForm
     beforeEach(async () => {
+      config.BREVO_KEY = 'MY KEY'
       await prisma.contactForm.deleteMany()
       contactForm = await prisma.contactForm.create({
         data: {
