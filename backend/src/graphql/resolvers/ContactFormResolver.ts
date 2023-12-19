@@ -2,7 +2,6 @@ import { ContactForm } from '@prisma/client'
 import { Resolver, Mutation, Query, Arg } from 'type-graphql'
 
 import { sendContactFormEmail } from '#api/NewsletterBrevo'
-import { SmtpEmailResponse } from '#api/type/SmtpEmailResponse'
 import { ContactFormInput } from '#inputs/ContactFormInput'
 import { prisma } from '#src/prisma'
 
