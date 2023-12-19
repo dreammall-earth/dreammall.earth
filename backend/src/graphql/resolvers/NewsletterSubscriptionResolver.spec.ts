@@ -4,8 +4,15 @@ import { NewsletterSubscription } from '@prisma/client'
 
 import { prisma } from '#src/prisma'
 import { createServer } from '#src/server/server'
+import { sendContactToBrevo } from '#api/NewsletterBrevo'
 
 let testServer: ApolloServer
+
+jest.mock('#api/NewsletterBrevo', () => {
+  return {
+    sendContactToBrevo: jest.fn(),
+  }
+})
 
 beforeAll(async () => {
   testServer = await createServer()
@@ -165,6 +172,10 @@ describe('NewsletterSubscriptionResolver', () => {
           },
         ])
       })
+    })
+
+    it('calls sendContactFormEmail', () => {
+      expect(sendContactToBrevo).toBeCalled()
     })
   })
 })
