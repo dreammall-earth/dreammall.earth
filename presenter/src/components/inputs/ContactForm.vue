@@ -15,7 +15,7 @@
             flat
             rounded="xl"
             required
-            :rules="[() => !!firstname || $t('menu.footer.contactForm.fieldRequired')]"
+            :rules="nameRules"
           ></v-text-field>
 
           <v-text-field
@@ -31,7 +31,7 @@
             rounded="xl"
             type="email"
             required
-            :rules="[() => !!email || $t('menu.footer.contactForm.fieldRequired')]"
+            :rules="emailRules"
           ></v-text-field>
         </v-col>
         <v-col>
@@ -47,7 +47,7 @@
             flat
             rounded="xl"
             required
-            :rules="[() => !!lastname || $t('menu.footer.contactForm.fieldRequired')]"
+            :rules="nameRules"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -64,7 +64,7 @@
             variant="solo"
             rounded="xl"
             required
-            :rules="[() => !!message || $t('menu.footer.contactForm.fieldRequired')]"
+            :rules="messageRules"
           ></v-textarea>
         </v-col>
       </v-row>
@@ -79,7 +79,7 @@
             :center-affix="false"
             density="compact"
             required
-            :rules="[() => !!dataprivacy || $t('menu.footer.contactForm.fieldRequired')]"
+            :rules="[() => !!dataprivacy || $t('validation.fieldRequired')]"
           >
           </v-checkbox>
           <span class="ml-4 pt-2 contact-agb"
@@ -116,6 +116,7 @@ import { ref } from 'vue'
 
 import AnchorLink from '#components/nav/AnchorLink.vue'
 import { createContactFormMutation } from '#mutations/createContactForm'
+import { nameRules, messageRules, emailRules } from '#src/validation/validation'
 
 import MainButton from './MainButton.vue'
 
