@@ -47,6 +47,37 @@ describe('MainButton', () => {
     })
   })
 
+  describe('bg color', () => {
+    it('is primary bg color', () => {
+      expect(wrapper.find('.v-btn.main-button--primary').attributes('style')).toContain('#f09630')
+    })
+
+    it('sets variant to secondary', async () => {
+      await wrapper.setProps({ label: 'My Button', variant: 'secondary', size: 'small' })
+      expect(wrapper.find('.v-btn.main-button--secondary').attributes('style')).toContain('#767676')
+    })
+
+    it('sets variant to third', async () => {
+      await wrapper.setProps({ label: 'My Button', variant: 'third', size: 'small' })
+      expect(wrapper.find('.v-btn.main-button--third').attributes('style')).toContain('#3d4753')
+    })
+
+    it('sets variant to third-inverse', async () => {
+      await wrapper.setProps({ label: 'My Button', variant: 'third-inverse', size: 'small' })
+      expect(wrapper.find('.main-button--third-inverse').classes()).toContain('bg-transparent')
+    })
+
+    it('sets variant to download', async () => {
+      await wrapper.setProps({ label: 'My Button', variant: 'download', size: 'small' })
+      expect(wrapper.find('.v-btn.main-button--download').attributes('style')).toContain('#009dd9')
+    })
+
+    it('sets variant to undefined value', async () => {
+      await wrapper.setProps({ label: 'My Button', variant: 'something', size: 'small' })
+      expect(wrapper.find('.v-btn.main-button').attributes('style')).toContain('#f09630')
+    })
+  })
+
   describe('classes', () => {
     describe('size large', () => {
       it('sets class main-button-large', () => {

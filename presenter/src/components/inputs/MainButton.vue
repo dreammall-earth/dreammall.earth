@@ -1,5 +1,5 @@
 <template>
-  <v-btn :class="classes" :size="size" @click="onClick">
+  <v-btn :color="setColor" :class="classes" :size="size" @click="onClick">
     <v-icon v-if="props.variant === 'reload'" start class="pr-4" icon="mdi-reload"></v-icon>
     {{ label }}</v-btn
   >
@@ -51,6 +51,28 @@ const classes = computed(() => ({
   [`main-button-${props.size}`]: true,
 }))
 
+const setColor = computed(() => {
+  if (props.variant === 'primary') {
+    return '#f09630'
+  } else if (props.variant === 'secondary') {
+    return '#767676'
+  } else if (props.variant === 'third') {
+    return '#3d4753'
+  } else if (props.variant === 'third-inverse') {
+    return 'transparent'
+  } else if (props.variant === 'fourth') {
+    return '#2ca5b1'
+  } else if (props.variant === 'submit') {
+    return '#23ad5b'
+  } else if (props.variant === 'download') {
+    return '#009dd9'
+  } else if (props.variant === 'reload') {
+    return '#fff'
+  } else {
+    return '#f09630'
+  }
+})
+
 const onClick = () => {
   emit('click', 1)
 }
@@ -68,6 +90,7 @@ const onClick = () => {
   border-radius: 80px;
 
   &--primary {
+    color: white !important;
     background-color: #f09630;
   }
 
