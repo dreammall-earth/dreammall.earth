@@ -13,23 +13,7 @@ export class NewsletterSubscriptionResolver {
     const subscriber = await prisma.newsletterSubscription.create({
       data: subscribeToNewsletterData,
     })
-    const promise = sendContactToBrevo(subscriber)
-    if (promise) {
-      void promise.then(() => {
-        // console.log('API called successfully. Returned data: ', JSON.stringify(data))
-        // code to store success goes here:
-        subscriber.brevoSuccess = new Date()
-        void prisma.newsletterSubscription.update({
-          where: {
-            id: subscriber.id,
-          },
-          data: {
-            ...subscriber,
-          },
-        })
-        return undefined
-      })
-    }
+    void sendContactToBrevo(subscriber)
     return true
   }
 }
