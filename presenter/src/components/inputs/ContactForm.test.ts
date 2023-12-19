@@ -119,13 +119,13 @@ describe('ContactForm', () => {
         const errorMessages = wrapper.findAll('.v-messages__message')
         expect(errorMessages).toHaveLength(5)
         // firstname
-        expect(errorMessages[0].text()).toBe("$t('menu.footer.contactForm.fieldRequired')")
+        expect(errorMessages[0].text()).toBe('Dieses Feld wird benötigt')
         // email
-        expect(errorMessages[1].text()).toBe("$t('menu.footer.contactForm.fieldRequired')")
+        expect(errorMessages[1].text()).toBe('Dieses Feld wird benötigt')
         // lastname
-        expect(errorMessages[2].text()).toBe("$t('menu.footer.contactForm.fieldRequired')")
+        expect(errorMessages[2].text()).toBe('Dieses Feld wird benötigt')
         // content
-        expect(errorMessages[3].text()).toBe("$t('menu.footer.contactForm.fieldRequired')")
+        expect(errorMessages[3].text()).toBe('Dieses Feld wird benötigt')
         // checkbox
         expect(errorMessages[4].text()).toBe("$t('menu.footer.contactForm.fieldRequired')")
       })
