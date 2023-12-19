@@ -42,11 +42,14 @@
       "newsletterDownloadBtn": "Download",
       "newsletterForm": {
         "email": "E-Mail Adresse",
+        "errorMsg": "Das hat leider nicht funktioniert! Bitte erneut probieren",
         "fieldRequired": "Dieses Feld wird benötigt",
         "firstname": "Vorname",
+        "lastname": "Nachname",
         "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unserer",
         "privacyLinkLabel": "Datenschutzrichtlinie",
-        "submitBtn": "Absenden"
+        "submitBtn": "Absenden",
+        "successMsg": "E-Mail gesendet"
       },
       "subHeadline": "Immer auf dem laufenden bleiben"
     },
@@ -161,6 +164,7 @@
     "footer": {
       "contact": "Kontaktiere uns",
       "contactForm": {
+        "errorMsg": "Das hat leider nicht funktioniert! Bitte erneut probieren",
         "fieldRequired": "Dieses Feld wird benötigt",
         "firstName": "Vorname",
         "lastName": "Nachname",
@@ -168,7 +172,9 @@
         "message": "Frag uns einfach...",
         "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unserer",
         "privacyLinkLabel": "Datenschutzrichtlinie",
-        "submitBtn": "Absenden"
+        "submitBtn": "Absenden",
+        "successMsg": "E-Mail gesendet",
+        "topic": "Thema"
       },
       "cookies": "Cookie Optionen",
       "home": "Home",
