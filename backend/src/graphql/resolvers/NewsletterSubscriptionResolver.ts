@@ -2,7 +2,6 @@ import { NewsletterSubscription } from '@prisma/client'
 import { Resolver, Mutation, Arg } from 'type-graphql'
 
 import { sendContactToBrevo } from '#api/NewsletterBrevo'
-import { CreateContactResponse } from '#api/type/CreateContactResponse'
 import { SubscribeToNewsletterInput } from '#inputs/SubscribeToNewsletterInput'
 import { prisma } from '#src/prisma'
 
@@ -16,7 +15,7 @@ export class NewsletterSubscriptionResolver {
       data: subscribeToNewsletterData,
     })
     try {
-      const contactToBrevoPromise: Promise<CreateContactResponse> = sendContactToBrevo(subscriber)
+      const contactToBrevoPromise = sendContactToBrevo(subscriber)
       await contactToBrevoPromise.then(async (data) => {
         // eslint-disable-next-line no-console
         console.log('API called successfully. Returned data: ', JSON.stringify(data))

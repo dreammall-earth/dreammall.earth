@@ -5,7 +5,7 @@ import { ContactForm, NewsletterSubscription } from '@prisma/client'
 import config from '#config/config'
 import { prisma } from '#src/prisma'
 
-import { CreateContactResponse } from './type/CreateContactResponse'
+import type { ContactsApi } from '@getbrevo/brevo'
 
 export const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
   const apiTransactionalEmailInstance: SibApiV3Sdk.TransactionalEmailsApi =
@@ -137,7 +137,7 @@ export const sendContactFormEmail = (
 
 export const sendContactToBrevo = (
   contactForm: NewsletterSubscription,
-): Promise<CreateContactResponse> => {
+): ReturnType<ContactsApi['createContact']> => {
   if (!config.BREVO_KEY) {
     throw new Error('No Brevo_Key defined could not send contact')
   }
