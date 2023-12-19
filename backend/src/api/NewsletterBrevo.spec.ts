@@ -3,6 +3,7 @@
 import * as SibApiV3Sdk from '@getbrevo/brevo'
 import { ContactForm } from '@prisma/client'
 
+import config from '#config/config'
 import { prisma } from '#src/prisma'
 
 import {
@@ -12,17 +13,12 @@ import {
   sendSmtpEmail,
 } from './NewsletterBrevo'
 
-// const mockedSibApiV3SdkTransactionalEmailsApi = <jest.Mock<typeof SibApiV3Sdk.TransactionalEmailsApi>>SibApiV3Sdk.TransactionalEmailsApi
+config.BREVO_KEY = 'MY KEY'
+config.BREVO_CONTACT_REQUEST_TO_NAME = 'Peter Lustig'
+config.BREVO_CONTACT_REQUEST_TO_EMAIL = 'peter@lustig.de'
+config.BREVO_TEMPLATE_CONTACT_BASE = 1
+config.BREVO_TEMPLATE_CONTACT_USER = 2
 
-jest.mock('#config/config', () => {
-  return {
-    BREVO_KEY: 'MY KEY',
-    BREVO_CONTACT_REQUEST_TO_NAME: 'Peter Lustig',
-    BREVO_CONTACT_REQUEST_TO_EMAIL: 'peter@lustig.de',
-    BREVO_TEMPLATE_CONTACT_BASE: '1',
-    BREVO_TEMPLATE_CONTACT_USER: '2',
-  }
-})
 const mockSendTransacEmail = jest
   .fn()
   .mockResolvedValueOnce({
@@ -240,6 +236,18 @@ describe('NewsletterBrevo', () => {
 
       it('calls sendSmtpEmail twice', () => {
         expect(mockSendTransacEmail).toHaveBeenCalledTimes(2)
+      })
+    })
+
+    describe('without brevo key', () => {
+      beforeEach(async () => {
+        jest.clearAllMocks()
+        config.BREVO_KEY = ''
+        await sendContactFormEmail(contactForm)
+      })
+
+      it('does not call sendSmtpEmail', () => {
+        expect(mockSendTransacEmail).toHaveBeenCalledTimes(0)
       })
     })
   })
