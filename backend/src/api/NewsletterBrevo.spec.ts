@@ -1,11 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 // eslint-disable-next-line import/no-namespace
 import * as SibApiV3Sdk from '@getbrevo/brevo'
 import { ContactForm } from '@prisma/client'
 
-import config from '#config/config'
 import { prisma } from '#src/prisma'
 
-import BrevoApi, {
+import {
   createBrevoInstance,
   createSmtpEmail,
   sendContactFormEmail,
@@ -73,12 +73,14 @@ describe('NewsletterBrevo', () => {
     })
 
     it('calls TransactionalEmailsApi constructor', () => {
-      expect(SibApiV3Sdk.TransactionalEmailsApi).toBeCalledTimes(1)
+      expect(SibApiV3Sdk.TransactionalEmailsApi).toHaveBeenCalledTimes(1)
     })
 
     it('sets the API key', () => {
-      expect(result.setApiKey).toBeCalledTimes(1)
-      expect(result.setApiKey).toBeCalledWith(1, 'MY KEY')
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(result.setApiKey).toHaveBeenCalledTimes(1)
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(result.setApiKey).toHaveBeenCalledWith(1, 'MY KEY')
     })
   })
 

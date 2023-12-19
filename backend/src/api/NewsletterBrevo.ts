@@ -4,7 +4,6 @@ import { ContactForm } from '@prisma/client'
 
 import config from '#config/config'
 import { prisma } from '#src/prisma'
-import { Return } from '@prisma/client/runtime/library'
 
 export const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
   const apiInstance: SibApiV3Sdk.TransactionalEmailsApi = new SibApiV3Sdk.TransactionalEmailsApi()
@@ -45,11 +44,10 @@ export const sendSmtpEmail = async (
 ): Promise<ReturnType<SibApiV3Sdk.TransactionalEmailsApi['sendTransacEmail']> | undefined> => {
   const apiInstance = createBrevoInstance()
 
-  console.log(smtpEmail)
+  // console.log(smtpEmail)
   try {
     const apiResponse = await apiInstance.sendTransacEmail(smtpEmail)
-    // eslint-disable-next-line no-consolew
-    console.log('API called successfully. Returned data: ', JSON.stringify(apiResponse))
+    // console.log('API called successfully. Returned data: ', JSON.stringify(apiResponse))
     // code to store success goes here:
     contactForm.brevoSuccess = new Date()
     await prisma.contactForm.update({
@@ -67,11 +65,13 @@ export const sendSmtpEmail = async (
   }
 }
 
-export const sendContactFormEmail = (contactForm: ContactForm): Promise<Awaited<ReturnType<typeof sendSmtpEmail>>[]> | undefined => {
+export const sendContactFormEmail = (
+  contactForm: ContactForm,
+): Promise<Awaited<ReturnType<typeof sendSmtpEmail>>[]> | undefined => {
   if (!config.BREVO_KEY) {
     return undefined
   }
-  console.log(contactForm)
+  // console.log(contactForm)
   const smtpEmailToAdmin: SibApiV3Sdk.SendSmtpEmail = createSmtpEmail(
     config.BREVO_TEMPLATE_CONTACT_BASE,
     [
