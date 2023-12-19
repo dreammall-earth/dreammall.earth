@@ -3,27 +3,23 @@ import * as SibApiV3Sdk from '@getbrevo/brevo'
 import { ContactForm, NewsletterSubscription } from '@prisma/client'
 
 import config from '#config/config'
+import { prisma } from '#src/prisma'
 
 import { CreateContactResponse } from './type/CreateContactResponse'
-import { SmtpEmailResponse } from './type/SmtpEmailResponse'
 
-let apiTransactionalEmailInstance: SibApiV3Sdk.TransactionalEmailsApi | undefined
-let apiBrevoContactsInstance: SibApiV3Sdk.ContactsApi | undefined
-
-const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
-  if (apiTransactionalEmailInstance) return apiTransactionalEmailInstance
-  apiTransactionalEmailInstance = new SibApiV3Sdk.TransactionalEmailsApi()
+export const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
+  const apiTransactionalEmailInstance: SibApiV3Sdk.TransactionalEmailsApi =
+    new SibApiV3Sdk.TransactionalEmailsApi()
   apiTransactionalEmailInstance.setApiKey(
-    SibApiV3Sdk.TransactionalEmailsApiApiKeys.partnerKey,
+    SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
     config.BREVO_KEY,
   )
   return apiTransactionalEmailInstance
 }
 
 const createBrevoContactsApi = (): SibApiV3Sdk.ContactsApi => {
-  if (apiBrevoContactsInstance) return apiBrevoContactsInstance
-  apiBrevoContactsInstance = new SibApiV3Sdk.ContactsApi()
-  apiBrevoContactsInstance.setApiKey(SibApiV3Sdk.ContactsApiApiKeys.partnerKey, config.BREVO_KEY)
+  const apiBrevoContactsInstance: SibApiV3Sdk.ContactsApi = new SibApiV3Sdk.ContactsApi()
+  apiBrevoContactsInstance.setApiKey(SibApiV3Sdk.ContactsApiApiKeys.apiKey, config.BREVO_KEY)
   return apiBrevoContactsInstance
 }
 
@@ -38,7 +34,7 @@ const createAddContactToList = (contactForm: NewsletterSubscription): SibApiV3Sd
   return createContact
 }
 
-const createSmtpEmail = (
+export const createSmtpEmail = (
   templateId: number,
   to: SibApiV3Sdk.SendSmtpEmailToInner[],
   sender: SibApiV3Sdk.SendSmtpEmailSender,
@@ -55,16 +51,34 @@ const createSmtpEmail = (
   return sendSmtpEmail
 }
 
-const sendSmtpEmail = (smtpEmail: SibApiV3Sdk.SendSmtpEmail): Promise<SmtpEmailResponse> => {
+export const sendSmtpEmail = async (
+  smtpEmail: SibApiV3Sdk.SendSmtpEmail,
+  contactForm: ContactForm,
+): Promise<ReturnType<SibApiV3Sdk.TransactionalEmailsApi['sendTransacEmail']> | undefined> => {
   const apiInstance = createBrevoInstance()
-  return apiInstance.sendTransacEmail(smtpEmail)
+  try {
+    const apiResponse = await apiInstance.sendTransacEmail(smtpEmail)
+    contactForm.brevoSuccess = new Date()
+    await prisma.contactForm.update({
+      where: {
+        id: contactForm.id,
+      },
+      data: {
+        ...contactForm,
+      },
+    })
+    return apiResponse
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(error)
+  }
 }
 
 export const sendContactFormEmail = (
   contactForm: ContactForm,
-): Promise<[SmtpEmailResponse, SmtpEmailResponse]> => {
+): Promise<Awaited<ReturnType<typeof sendSmtpEmail>>[]> | undefined => {
   if (!config.BREVO_KEY) {
-    throw new Error('No Brevo_Key defined could not send email')
+    return undefined
   }
   const smtpEmailToAdmin: SibApiV3Sdk.SendSmtpEmail = createSmtpEmail(
     config.BREVO_TEMPLATE_CONTACT_BASE,
@@ -112,8 +126,12 @@ export const sendContactFormEmail = (
       content: contactForm.content,
     },
   )
-  const sendEmailClient: Promise<SmtpEmailResponse> = sendSmtpEmail(smtpEmailToClient)
-  const sendEmailAdmin: Promise<SmtpEmailResponse> = sendSmtpEmail(smtpEmailToAdmin)
+  const sendEmailClient: Promise<
+    ReturnType<SibApiV3Sdk.TransactionalEmailsApi['sendTransacEmail']> | undefined
+  > = sendSmtpEmail(smtpEmailToClient, contactForm)
+  const sendEmailAdmin: Promise<
+    ReturnType<SibApiV3Sdk.TransactionalEmailsApi['sendTransacEmail']> | undefined
+  > = sendSmtpEmail(smtpEmailToAdmin, contactForm)
   return Promise.all([sendEmailClient, sendEmailAdmin])
 }
 

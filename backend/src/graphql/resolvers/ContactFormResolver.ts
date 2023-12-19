@@ -14,28 +14,7 @@ export class ContactFormResolver {
   ): Promise<boolean> {
     const contactForm: ContactForm = await prisma.contactForm.create({ data: contactFormData })
     // code to send email goes here
-    try {
-      const contactFormEmailPromise: Promise<[SmtpEmailResponse, SmtpEmailResponse]> =
-        sendContactFormEmail(contactForm)
-      await contactFormEmailPromise.then(async (data) => {
-        // eslint-disable-next-line no-console
-        console.log('API called successfully. Returned data: ', JSON.stringify(data))
-        // code to store success goes here:
-        contactForm.brevoSuccess = new Date()
-        await prisma.contactForm.update({
-          where: {
-            id: contactForm.id,
-          },
-          data: {
-            ...contactForm,
-          },
-        })
-        return true
-      })
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error)
-    }
+    void sendContactFormEmail(contactForm)
     return true
   }
 
