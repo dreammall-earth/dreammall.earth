@@ -59,10 +59,10 @@ describe('ContactForm', () => {
       })
 
       it('has label menu.footer.contactForm.lastName', () => {
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[4].text()).toBe(
+        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[2].text()).toBe(
           "$t('menu.footer.contactForm.lastName')",
         )
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[5].text()).toBe(
+        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[3].text()).toBe(
           "$t('menu.footer.contactForm.lastName')",
         )
       })
@@ -74,10 +74,10 @@ describe('ContactForm', () => {
       })
 
       it('has label menu.footer.contactForm.mail', () => {
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[2].text()).toBe(
+        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[4].text()).toBe(
           "$t('menu.footer.contactForm.mail')",
         )
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[3].text()).toBe(
+        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[5].text()).toBe(
           "$t('menu.footer.contactForm.mail')",
         )
       })
@@ -130,6 +130,11 @@ describe('ContactForm', () => {
         expect(errorMessages[4].text()).toBe("$t('menu.footer.contactForm.fieldRequired')")
       })
 
+      it('user feedback not visible', () => {
+        expect(wrapper.find('span.info-text.form-success').exists()).toBe(false)
+        expect(wrapper.find('span.info-text.form-error').exists()).toBe(false)
+      })
+
       it('does not call the API', () => {
         expect(createContactFormMutationMock).not.toBeCalled()
       })
@@ -164,6 +169,16 @@ describe('ContactForm', () => {
           expect(wrapper.find('input[name="lastname"]').element).toHaveProperty('value', '')
           expect(wrapper.find('textarea[name="message"]').element).toHaveProperty('value', '')
           expect(wrapper.find('input[name="dataprivacy"]').element).toHaveProperty('value', 'false')
+        })
+
+        describe('success message for user', () => {
+          it('shows message', () => {
+            expect(wrapper.find('span.info-text.form-success').exists()).toBeTruthy()
+
+            expect(wrapper.find('span.info-text.form-success').text()).toBe(
+              "$t('menu.footer.contactForm.successMsg')",
+            )
+          })
         })
       })
     })
