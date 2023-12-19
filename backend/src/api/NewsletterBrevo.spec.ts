@@ -35,6 +35,11 @@ jest.mock('@getbrevo/brevo', () => {
         sendTransacEmail: mockSendTransacEmail,
       }
     }),
+    ContactsApi: jest.fn().mockImplementation(() => {
+      return {
+        setApiKey: jest.fn(),
+      }
+    }),
     SendSmtpEmail: jest.fn().mockImplementation(() => {
       return {}
     }),
@@ -88,7 +93,7 @@ describe('NewsletterBrevo', () => {
       result = createBrevoContactsApi()
     })
 
-    it('calls TransactionalEmailsApi constructor', () => {
+    it('calls ContactsApi constructor', () => {
       expect(SibApiV3Sdk.ContactsApi).toHaveBeenCalledTimes(1)
     })
 
