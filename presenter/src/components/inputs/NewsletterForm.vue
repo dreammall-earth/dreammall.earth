@@ -15,9 +15,7 @@
             flat
             rounded="xl"
             required
-            :rules="[
-              () => !!firstname || $t('home.newsletterSection.newsletterForm.fieldRequired'),
-            ]"
+            :rules="nameRules"
           ></v-text-field>
         </v-col>
         <v-col cols="12" sm="6">
@@ -33,7 +31,7 @@
             flat
             rounded="xl"
             required
-            :rules="[() => !!email || $t('home.newsletterSection.newsletterForm.fieldRequired')]"
+            :rules="nameRules"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -52,7 +50,7 @@
             rounded="xl"
             type="email"
             required
-            :rules="[() => !!email || $t('home.newsletterSection.newsletterForm.fieldRequired')]"
+            :rules="emailRules"
           ></v-text-field>
         </v-col>
         <v-col cols="12" sm="6 d-flex align-center">
@@ -79,9 +77,7 @@
             :center-affix="false"
             density="compact"
             required
-            :rules="[
-              () => !!dataprivacy || $t('home.newsletterSection.newsletterForm.fieldRequired'),
-            ]"
+            :rules="[() => !!dataprivacy || $t('validation.fieldRequired')]"
           >
           </v-checkbox>
           <span class="ml-4 pt-2 newsletter-agb"
@@ -117,6 +113,7 @@ import { ref } from 'vue'
 
 import AnchorLink from '#components/nav/AnchorLink.vue'
 import { subscribeToNewsletterMutation } from '#mutations/subscribeToNewsletterMutation'
+import { nameRules, emailRules } from '#src/validation/validation'
 
 import MainButton from './MainButton.vue'
 
