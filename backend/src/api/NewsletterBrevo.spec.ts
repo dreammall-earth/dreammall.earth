@@ -23,6 +23,14 @@ jest.mock('#config/config', () => {
     BREVO_TEMPLATE_CONTACT_USER: '2',
   }
 })
+const mockSendTransacEmail = jest
+.fn()
+.mockResolvedValueOnce({
+  response: 'success',
+})
+.mockRejectedValue({
+  error: 'error',
+})
 
 jest.mock('@getbrevo/brevo', () => {
   const originalModule = jest.requireActual<typeof import('@getbrevo/brevo')>('@getbrevo/brevo')
@@ -32,14 +40,7 @@ jest.mock('@getbrevo/brevo', () => {
     TransactionalEmailsApi: jest.fn().mockImplementation(() => {
       return {
         setApiKey: jest.fn(),
-        sendTransacEmail: jest
-          .fn()
-          .mockResolvedValueOnce({
-            response: 'success',
-          })
-          .mockRejectedValue({
-            error: 'error',
-          }),
+        sendTransacEmail: mockSendTransacEmail
       }
     }),
     SendSmtpEmail: jest.fn().mockImplementation(() => {
@@ -221,26 +222,22 @@ describe('NewsletterBrevo', () => {
             content: 'Hello DreamMall!',
             email: 'bibi@bloxberg.de',
             createdAt: expect.any(Date),
-            brevoSuccess: expect.any(Date),
+            brevoSucmockmyfunccess: expect.any(Date),
           },
         ])
       })
     })
   })
 
-  describe('sendContactFormEmail', () => {
+  describe.only('sendContactFormEmail', () => {
     describe('brevo key given', () => {
-      let spy: any
-
-      beforeEach(() => {
+      beforeEach(async () => {
         jest.clearAllMocks()
-        sendContactFormEmail(contactForm)
-        // spy = jest.spyOn(BrevoApi, sendSmtpEmail)
+        await sendContactFormEmail(contactForm)
       })
 
       it('calls sendSmtpEmail twice', () => {
-        // expect(spy).toBeCalledTimes(2)
-        expect(SibApiV3Sdk.TransactionalEmailsApi.sendTransacEmail).toBeCalledWith()
+        expect(mockSendTransacEmail).toHaveBeenCalledTimes(2)
       })
     })
   })
