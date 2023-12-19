@@ -1,6 +1,6 @@
 {
   "name": "boilerplate-backend",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "description": "The IT4C Boilerplate for backends",
   "main": "build/index.ts",
   "repository": {

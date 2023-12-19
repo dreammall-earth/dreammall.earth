@@ -21,18 +21,21 @@ Deploy instructions can be found in [deployment/](deplyoment/README.md)
 
 The following commands are available:
 
-| Command                    | Description                           |
-|----------------------------|---------------------------------------|
-| `npm install`              | Project setup                         |
-| **Test**                   |                                       |
-| `npm run test:lint`        | Run all linters                       |
-| `npm run test:lint:remark` | Run linter remark                     |
-| `npm test`                 | Run all tests & linters               |
-| **Documentation**          |                                       |
-| `npm run docs:dev`         | Run Documentation in development mode |
-| `npm run docs:build`       | Build static documentation            |
-| **Maintenance**            |                                       |
-| `npm run update`           | Check for updates                     |
+| Command                         | Description                                    |
+|---------------------------------|------------------------------------------------|
+| `npm install`                   | Project setup                                  |
+| **Test**                        |                                                |
+| `npm run test:lint`             | Run all linters                                |
+| `npm run test:lint:remark`      | Run linter remark                              |
+| `npm test`                      | Run all tests & linters                        |
+| **Documentation**               |                                                |
+| `npm run docs:dev`              | Run Documentation in development mode          |
+| `npm run docs:build`            | Build static documentation                     |
+| **Maintenance**                 |                                                |
+| `npx npm-check-update`          | Check for updates                              |
+| **Release**                     |                                                |
+| `npm version patch|minor|major` | Increase release version                       |
+| `npm run release`               | Propagate release version & generate changelog |
 
 ## License
 
