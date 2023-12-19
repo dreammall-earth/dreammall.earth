@@ -79,7 +79,7 @@
             :center-affix="false"
             density="compact"
             required
-            :rules="[() => !!dataprivacy || $t('menu.footer.contactForm.fieldRequired')]"
+            :rules="[() => !!dataprivacy || $t('validation.fieldRequired')]"
           >
           </v-checkbox>
           <span class="ml-4 pt-2 contact-agb"

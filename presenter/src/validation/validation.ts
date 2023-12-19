@@ -12,11 +12,11 @@ export const messageRules = [(value: string) => maxLengthRule(value, MAX_MESSAGE
 
 export const emailRules = [
   (value: string) => maxLengthRule(value, MAX_EMAIL_LENGTH),
-  (value: string) => isEmail(value) || i18n.global.t('menu.footer.contactForm.fieldNoEmail'),
+  (value: string) => isEmail(value) || i18n.global.t('validation.fieldNoEmail'),
 ]
 
 const maxLengthRule = (value: string, maxLength: number) => {
-  if (!value) return i18n.global.t('menu.footer.contactForm.fieldRequired')
-  if (value.length > maxLength) return i18n.global.t('menu.footer.contactForm.fieldTooLong')
+  if (!value) return i18n.global.t('validation.fieldRequired')
+  if (value.length > maxLength) return i18n.global.t('validation.fieldTooLong')
   return true
 }

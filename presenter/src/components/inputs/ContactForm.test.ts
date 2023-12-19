@@ -127,7 +127,7 @@ describe('ContactForm', () => {
         // content
         expect(errorMessages[3].text()).toBe('Dieses Feld wird benötigt')
         // checkbox
-        expect(errorMessages[4].text()).toBe("$t('menu.footer.contactForm.fieldRequired')")
+        expect(errorMessages[4].text()).toBe("$t('validation.fieldRequired')")
       })
 
       it('does not call the API', () => {

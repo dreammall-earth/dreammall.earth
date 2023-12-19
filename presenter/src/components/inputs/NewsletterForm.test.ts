@@ -96,9 +96,7 @@ describe('NewsletterForm', () => {
         // email
         expect(errorMessages[1].text()).toBe('Dieses Feld wird benötigt')
         // checkbox
-        expect(errorMessages[2].text()).toBe(
-          "$t('home.newsletterSection.newsletterForm.fieldRequired')",
-        )
+        expect(errorMessages[2].text()).toBe("$t('validation.fieldRequired')")
       })
 
       it('does not call the API', () => {
