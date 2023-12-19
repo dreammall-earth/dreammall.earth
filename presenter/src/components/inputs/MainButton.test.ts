@@ -73,7 +73,7 @@ describe('MainButton', () => {
     })
 
     it('sets variant to undefined value', async () => {
-      await wrapper.setProps({ label: 'My Button', variant: 'something', size: 'small' })
+      await wrapper.setProps({ label: 'My Button', variant: undefined, size: 'small' })
       expect(wrapper.find('.v-btn.main-button').attributes('style')).toContain('#f09630')
     })
   })

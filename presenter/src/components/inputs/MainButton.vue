@@ -52,9 +52,7 @@ const classes = computed(() => ({
 }))
 
 const setColor = computed(() => {
-  if (props.variant === 'primary') {
-    return '#f09630'
-  } else if (props.variant === 'secondary') {
+  if (props.variant === 'secondary') {
     return '#767676'
   } else if (props.variant === 'third') {
     return '#3d4753'
