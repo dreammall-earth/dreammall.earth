@@ -2,9 +2,9 @@
 import { ApolloServer } from '@apollo/server'
 import { NewsletterSubscription } from '@prisma/client'
 
+import { sendContactToBrevo } from '#api/NewsletterBrevo'
 import { prisma } from '#src/prisma'
 import { createServer } from '#src/server/server'
-import { sendContactToBrevo } from '#api/NewsletterBrevo'
 
 let testServer: ApolloServer
 
