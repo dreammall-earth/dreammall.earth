@@ -6,8 +6,11 @@ import config from '#config/config'
 
 import { SmtpEmailResponse } from './type/SmtpEmailResponse'
 
+let apiInstance: SibApiV3Sdk.TransactionalEmailsApi | undefined
+
 const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
-  const apiInstance: SibApiV3Sdk.TransactionalEmailsApi = new SibApiV3Sdk.TransactionalEmailsApi()
+  if (apiInstance) return apiInstance
+  apiInstance = new SibApiV3Sdk.TransactionalEmailsApi()
   apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, config.BREVO_KEY)
   return apiInstance
 }
