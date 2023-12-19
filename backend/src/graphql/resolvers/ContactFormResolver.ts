@@ -11,22 +11,7 @@ export class ContactFormResolver {
     @Arg('contactFormData') contactFormData: ContactFormInput,
   ): Promise<boolean> {
     const contactForm = await prisma.contactForm.create({ data: contactFormData })
-    const promise = sendContactFormEmail(contactForm)
-    if (promise) {
-      void promise.then(() => {
-        // console.log('API called successfully. Returned data: ', JSON.stringify(data))
-        contactForm.brevoSuccess = new Date()
-        void prisma.contactForm.update({
-          where: {
-            id: contactForm.id,
-          },
-          data: {
-            ...contactForm,
-          },
-        })
-        return undefined
-      })
-    }
+    void sendContactFormEmail(contactForm)
     return true
   }
 

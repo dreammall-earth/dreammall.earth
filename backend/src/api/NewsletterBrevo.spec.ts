@@ -26,7 +26,9 @@ config.BREVO_CONTACT_LIST_ID = 3
 const mockSendTransacEmail = jest.fn().mockResolvedValue({
   response: 'success',
 })
-const mockCreateContact = jest.fn()
+const mockCreateContact = jest.fn().mockResolvedValue({
+  response: 'success',
+})
 
 jest.mock('@getbrevo/brevo', () => {
   const originalModule = jest.requireActual<typeof import('@getbrevo/brevo')>('@getbrevo/brevo')
@@ -50,10 +52,6 @@ jest.mock('@getbrevo/brevo', () => {
     }),
   }
 })
-
-const consoleLogMock = jest.fn()
-// eslint-disable-next-line no-console
-console.log = consoleLogMock
 
 describe('NewsletterBrevo', () => {
   describe('newsletter', () => {
@@ -127,6 +125,21 @@ describe('NewsletterBrevo', () => {
             },
             updateEnabled: false,
           })
+        })
+
+        it('does update the database', async () => {
+          const result: NewsletterSubscription[] = await prisma.newsletterSubscription.findMany()
+          expect(result).toHaveLength(1)
+          expect(result).toEqual([
+            {
+              id: expect.any(Number),
+              firstName: 'Bibi',
+              lastName: 'Bloxberg',
+              email: 'bibi@bloxberg.de',
+              createdAt: expect.any(Date),
+              brevoSuccess: expect.any(Date),
+            },
+          ])
         })
       })
 
@@ -329,10 +342,6 @@ describe('NewsletterBrevo', () => {
               brevoSuccess: null,
             },
           ])
-        })
-
-        it('calls the console.log in error path', () => {
-          expect(consoleLogMock).toHaveBeenCalledWith({ error: 'error' })
         })
       })
     })
