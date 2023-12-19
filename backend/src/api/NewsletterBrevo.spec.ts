@@ -40,6 +40,10 @@ jest.mock('@getbrevo/brevo', () => {
   }
 })
 
+const consoleLogMock = jest.fn()
+// eslint-disable-next-line no-console
+console.log = consoleLogMock
+
 let contactForm: ContactForm
 
 beforeEach(async () => {
@@ -225,6 +229,10 @@ describe('NewsletterBrevo', () => {
             brevoSuccess: null,
           },
         ])
+      })
+
+      it('calls the console.log in error path', () => {
+        expect(consoleLogMock).toHaveBeenCalledWith({ error: 'error' })
       })
     })
   })
