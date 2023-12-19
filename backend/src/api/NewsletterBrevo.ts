@@ -66,8 +66,7 @@ export const sendSmtpEmail = async (
     })
     return apiResponse
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error)
+    // TODO: logging or event
   }
 }
 
@@ -139,6 +138,7 @@ export const sendContactFormEmail = async (contactForm: ContactForm): Promise<bo
       return undefined
     })
   } catch (error) {
+    // TODO: logging or event
     return false
   }
   return true
@@ -167,6 +167,7 @@ export const sendContactToBrevo = async (contactForm: NewsletterSubscription): P
       return undefined
     })
   } catch (error) {
+    // TODO: logging or event
     return false
   }
   return true
