@@ -277,12 +277,15 @@ describe('NewsletterBrevo', () => {
       })
 
       describe('with error', () => {
-        beforeEach(async () => {
+        let sendSmtpEmailPromise: Promise<
+          ReturnType<SibApiV3Sdk.TransactionalEmailsApi['sendTransacEmail']>
+        >
+        beforeEach(() => {
           jest.clearAllMocks()
           mockSendTransacEmail.mockRejectedValue({
             error: 'error',
           })
-          await sendSmtpEmail(
+          sendSmtpEmailPromise = sendSmtpEmail(
             createSmtpEmail(
               42,
               [
@@ -306,8 +309,10 @@ describe('NewsletterBrevo', () => {
           )
         })
 
-        it('calls TransactionalEmailsApi constructor', () => {
-          expect(SibApiV3Sdk.TransactionalEmailsApi).toHaveBeenCalledTimes(1)
+        it('to throw error', async () => {
+          await expect(sendSmtpEmailPromise).rejects.toMatchObject({
+            error: 'error',
+          })
         })
       })
     })
@@ -316,6 +321,9 @@ describe('NewsletterBrevo', () => {
       describe('brevo key given', () => {
         beforeEach(async () => {
           jest.clearAllMocks()
+          mockSendTransacEmail.mockResolvedValue({
+            response: 'success',
+          })
           await sendContactFormEmail(contactForm)
         })
 
@@ -386,6 +394,32 @@ describe('NewsletterBrevo', () => {
               content: 'Hello DreamMall!',
               createdAt: expect.any(Date),
               brevoSuccess: expect.any(Date),
+            },
+          ])
+        })
+      })
+
+      describe('with error from Brevo', () => {
+        beforeEach(async () => {
+          jest.clearAllMocks()
+          mockSendTransacEmail.mockRejectedValue({
+            error: 'error',
+          })
+          await sendContactFormEmail(contactForm)
+        })
+
+        it('does not update the database', async () => {
+          const result: ContactForm[] = await prisma.contactForm.findMany()
+          expect(result).toHaveLength(1)
+          expect(result).toEqual([
+            {
+              id: expect.any(Number),
+              firstName: 'Bibi',
+              lastName: 'Bloxberg',
+              content: 'Hello DreamMall!',
+              email: 'bibi@bloxberg.de',
+              createdAt: expect.any(Date),
+              brevoSuccess: null,
             },
           ])
         })

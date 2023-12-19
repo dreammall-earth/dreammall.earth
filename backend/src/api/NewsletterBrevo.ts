@@ -50,14 +50,9 @@ export const createSmtpEmail = (
 
 export const sendSmtpEmail = async (
   smtpEmail: SibApiV3Sdk.SendSmtpEmail,
-): Promise<ReturnType<SibApiV3Sdk.TransactionalEmailsApi['sendTransacEmail']> | undefined> => {
+): Promise<ReturnType<SibApiV3Sdk.TransactionalEmailsApi['sendTransacEmail']>> => {
   const apiInstance = createBrevoInstance()
-  try {
-    const apiResponse = await apiInstance.sendTransacEmail(smtpEmail)
-    return apiResponse
-  } catch (error) {
-    // TODO: logging or event
-  }
+  return apiInstance.sendTransacEmail(smtpEmail)
 }
 
 export const sendContactFormEmail = async (contactForm: ContactForm): Promise<boolean> => {
@@ -112,8 +107,9 @@ export const sendContactFormEmail = async (contactForm: ContactForm): Promise<bo
   )
   const sendEmailClient = sendSmtpEmail(smtpEmailToClient)
   const sendEmailAdmin = sendSmtpEmail(smtpEmailToAdmin)
+  const promiseAll = Promise.all([sendEmailAdmin, sendEmailClient])
   try {
-    await Promise.all([sendEmailAdmin, sendEmailClient])
+    await promiseAll
     // console.log('API called successfully. Returned data: ', JSON.stringify(data))
     contactForm.brevoSuccess = new Date()
     await prisma.contactForm.update({
@@ -137,8 +133,9 @@ export const sendContactToBrevo = async (contactForm: NewsletterSubscription): P
   }
   const createContact: SibApiV3Sdk.CreateContact = createAddContactToList(contactForm)
   const apiInstance = createBrevoContactsApi()
+  const createContactPromise = apiInstance.createContact(createContact)
   try {
-    await apiInstance.createContact(createContact)
+    await createContactPromise
     // console.log('API called successfully. Returned data: ', JSON.stringify(data))
     // code to store success goes here:
     contactForm.brevoSuccess = new Date()
