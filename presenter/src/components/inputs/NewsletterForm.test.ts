@@ -122,7 +122,11 @@ describe('NewsletterForm', () => {
       describe('with success', () => {
         it('calls the API', () => {
           expect(subscribeToNewsletterMutationMock).toBeCalledWith({
-            email: 'peter@lustig.de',
+            data: {
+              firstName: 'Peter',
+              lastName: '',
+              email: 'peter@lustig.de',
+            },
           })
         })
 

@@ -16,11 +16,15 @@ describe('NewsletterSubscriptionResolver', () => {
     describe('with correct data', () => {
       it('returns true', async () => {
         const response = await testServer.executeOperation({
-          query: `mutation($email: String!) {
-                    subscribeToNewsletter(email: $email) 
+          query: `mutation($data: SubscribeToNewsletterInput!) {
+                    subscribeToNewsletter(subscribeToNewsletterData: $data) 
                   }`,
           variables: {
-            email: 'peter@lustig.de',
+            data: {
+              firstName: 'Peter',
+              lastName: 'Lustig',
+              email: 'peter@lustig.de',
+            },
           },
         })
         expect(response.body).toMatchObject({
@@ -39,6 +43,8 @@ describe('NewsletterSubscriptionResolver', () => {
         expect(result).toEqual([
           {
             id: expect.any(Number),
+            firstName: 'Peter',
+            lastName: 'Lustig',
             email: 'peter@lustig.de',
             createdAt: expect.any(Date),
             brevoSuccess: null,
