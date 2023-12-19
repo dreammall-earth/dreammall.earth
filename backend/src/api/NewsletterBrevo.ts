@@ -132,7 +132,7 @@ export const sendContactFormEmail = (
   const sendEmailAdmin: Promise<
     ReturnType<SibApiV3Sdk.TransactionalEmailsApi['sendTransacEmail']> | undefined
   > = sendSmtpEmail(smtpEmailToAdmin, contactForm)
-  return Promise.all([sendEmailClient, sendEmailAdmin])
+  return Promise.all([sendEmailAdmin, sendEmailClient])
 }
 
 export const sendContactToBrevo = (

@@ -267,8 +267,8 @@ describe('NewsletterBrevo', () => {
           },
           params: {
             email: contactForm.email,
-            firstName: contactForm.firstName,
-            lastName: contactForm.lastName,
+            firstname: contactForm.firstName,
+            lastname: contactForm.lastName,
             content: contactForm.content,
           },
         })
@@ -292,8 +292,8 @@ describe('NewsletterBrevo', () => {
             email: 'peter@lustig.de',
           },
           params: {
-            firstName: contactForm.firstName,
-            lastName: contactForm.lastName,
+            firstname: contactForm.firstName,
+            lastname: contactForm.lastName,
             content: contactForm.content,
           },
         })
