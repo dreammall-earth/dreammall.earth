@@ -1,8 +1,17 @@
 <template>
   <v-btn :color="setColor" :class="classes" :size="size" @click="onClick">
     <v-icon v-if="props.variant === 'reload'" start class="pr-4" icon="mdi-reload"></v-icon>
-    {{ label }}</v-btn
-  >
+    <span class="main-button-content"
+      >{{ label }}
+      <v-progress-circular
+        v-if="props.isLoading"
+        indeterminate="disable-shrink"
+        width="1"
+        size="15"
+        class="btn-loading"
+      ></v-progress-circular
+    ></span>
+  </v-btn>
 </template>
 
 <script lang="ts" setup>
@@ -30,8 +39,12 @@ const props = withDefaults(
      * size of the button
      */
     size?: 'small' | 'medium' | 'large' | 'auto'
+    /**
+     * show loading animation
+     */
+    isLoading?: boolean
   }>(),
-  { variant: 'primary', size: 'medium' },
+  { variant: 'primary', size: 'medium', isLoading: false },
 )
 
 const emit = defineEmits<{
@@ -175,6 +188,16 @@ const onClick = () => {
 
   &-auto {
     width: auto;
+  }
+
+  .main-button-content {
+    position: relative;
+
+    .btn-loading {
+      position: absolute;
+      top: 4px;
+      right: -20px;
+    }
   }
 }
 </style>
