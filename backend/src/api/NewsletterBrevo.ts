@@ -8,8 +8,7 @@ import { prisma } from '#src/prisma'
 import type { ContactsApi } from '@getbrevo/brevo'
 
 export const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
-  const apiTransactionalEmailInstance: SibApiV3Sdk.TransactionalEmailsApi =
-    new SibApiV3Sdk.TransactionalEmailsApi()
+  const apiTransactionalEmailInstance = new SibApiV3Sdk.TransactionalEmailsApi()
   apiTransactionalEmailInstance.setApiKey(
     SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
     config.BREVO_KEY,
