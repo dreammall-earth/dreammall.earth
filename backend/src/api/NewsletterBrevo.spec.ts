@@ -268,28 +268,11 @@ describe('NewsletterBrevo', () => {
                 ...contactForm,
               },
             ),
-            contactForm,
           )
         })
 
         it('calls TransactionalEmailsApi constructor', () => {
           expect(SibApiV3Sdk.TransactionalEmailsApi).toHaveBeenCalledTimes(1)
-        })
-
-        it('does update the database', async () => {
-          const result: ContactForm[] = await prisma.contactForm.findMany()
-          expect(result).toHaveLength(1)
-          expect(result).toEqual([
-            {
-              id: expect.any(Number),
-              firstName: 'Bibi',
-              lastName: 'Bloxberg',
-              email: 'bibi@bloxberg.de',
-              content: 'Hello DreamMall!',
-              createdAt: expect.any(Date),
-              brevoSuccess: expect.any(Date),
-            },
-          ])
         })
       })
 
@@ -320,28 +303,11 @@ describe('NewsletterBrevo', () => {
                 ...contactForm,
               },
             ),
-            contactForm,
           )
         })
 
         it('calls TransactionalEmailsApi constructor', () => {
           expect(SibApiV3Sdk.TransactionalEmailsApi).toHaveBeenCalledTimes(1)
-        })
-
-        it('does not update the database', async () => {
-          const result: ContactForm[] = await prisma.contactForm.findMany()
-          expect(result).toHaveLength(1)
-          expect(result).toEqual([
-            {
-              id: expect.any(Number),
-              firstName: 'Bibi',
-              lastName: 'Bloxberg',
-              content: 'Hello DreamMall!',
-              email: 'bibi@bloxberg.de',
-              createdAt: expect.any(Date),
-              brevoSuccess: null,
-            },
-          ])
         })
       })
     })
@@ -407,6 +373,22 @@ describe('NewsletterBrevo', () => {
             },
           })
         })
+
+        it('does update the database', async () => {
+          const result: ContactForm[] = await prisma.contactForm.findMany()
+          expect(result).toHaveLength(1)
+          expect(result).toEqual([
+            {
+              id: expect.any(Number),
+              firstName: 'Bibi',
+              lastName: 'Bloxberg',
+              email: 'bibi@bloxberg.de',
+              content: 'Hello DreamMall!',
+              createdAt: expect.any(Date),
+              brevoSuccess: expect.any(Date),
+            },
+          ])
+        })
       })
 
       describe('without brevo key', () => {
@@ -418,6 +400,22 @@ describe('NewsletterBrevo', () => {
 
         it('does not call sendSmtpEmail', () => {
           expect(mockSendTransacEmail).not.toHaveBeenCalled()
+        })
+
+        it('does not update the database', async () => {
+          const result: ContactForm[] = await prisma.contactForm.findMany()
+          expect(result).toHaveLength(1)
+          expect(result).toEqual([
+            {
+              id: expect.any(Number),
+              firstName: 'Bibi',
+              lastName: 'Bloxberg',
+              content: 'Hello DreamMall!',
+              email: 'bibi@bloxberg.de',
+              createdAt: expect.any(Date),
+              brevoSuccess: null,
+            },
+          ])
         })
       })
     })

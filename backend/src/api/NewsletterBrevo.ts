@@ -50,20 +50,10 @@ export const createSmtpEmail = (
 
 export const sendSmtpEmail = async (
   smtpEmail: SibApiV3Sdk.SendSmtpEmail,
-  contactForm: ContactForm,
 ): Promise<ReturnType<SibApiV3Sdk.TransactionalEmailsApi['sendTransacEmail']> | undefined> => {
   const apiInstance = createBrevoInstance()
   try {
     const apiResponse = await apiInstance.sendTransacEmail(smtpEmail)
-    contactForm.brevoSuccess = new Date()
-    await prisma.contactForm.update({
-      where: {
-        id: contactForm.id,
-      },
-      data: {
-        ...contactForm,
-      },
-    })
     return apiResponse
   } catch (error) {
     // TODO: logging or event
@@ -120,22 +110,19 @@ export const sendContactFormEmail = async (contactForm: ContactForm): Promise<bo
       content: contactForm.content,
     },
   )
-  const sendEmailClient = sendSmtpEmail(smtpEmailToClient, contactForm)
-  const sendEmailAdmin = sendSmtpEmail(smtpEmailToAdmin, contactForm)
-  const sendAllEmail = Promise.all([sendEmailAdmin, sendEmailClient])
+  const sendEmailClient = sendSmtpEmail(smtpEmailToClient)
+  const sendEmailAdmin = sendSmtpEmail(smtpEmailToAdmin)
   try {
-    await sendAllEmail.then(() => {
-      // console.log('API called successfully. Returned data: ', JSON.stringify(data))
-      contactForm.brevoSuccess = new Date()
-      await prisma.contactForm.update({
-        where: {
-          id: contactForm.id,
-        },
-        data: {
-          ...contactForm,
-        },
-      })
-      return undefined
+    await Promise.all([sendEmailAdmin, sendEmailClient])
+    // console.log('API called successfully. Returned data: ', JSON.stringify(data))
+    contactForm.brevoSuccess = new Date()
+    await prisma.contactForm.update({
+      where: {
+        id: contactForm.id,
+      },
+      data: {
+        ...contactForm,
+      },
     })
   } catch (error) {
     // TODO: logging or event
@@ -150,21 +137,18 @@ export const sendContactToBrevo = async (contactForm: NewsletterSubscription): P
   }
   const createContact: SibApiV3Sdk.CreateContact = createAddContactToList(contactForm)
   const apiInstance = createBrevoContactsApi()
-  const promise = apiInstance.createContact(createContact)
   try {
-    await promise.then(async () => {
-      // console.log('API called successfully. Returned data: ', JSON.stringify(data))
-      // code to store success goes here:
-      contactForm.brevoSuccess = new Date()
-      await prisma.newsletterSubscription.update({
-        where: {
-          id: contactForm.id,
-        },
-        data: {
-          ...contactForm,
-        },
-      })
-      return undefined
+    await apiInstance.createContact(createContact)
+    // console.log('API called successfully. Returned data: ', JSON.stringify(data))
+    // code to store success goes here:
+    contactForm.brevoSuccess = new Date()
+    await prisma.newsletterSubscription.update({
+      where: {
+        id: contactForm.id,
+      },
+      data: {
+        ...contactForm,
+      },
     })
   } catch (error) {
     // TODO: logging or event
