@@ -21,7 +21,7 @@ config.BREVO_CONTACT_REQUEST_TO_NAME = 'Peter Lustig'
 config.BREVO_CONTACT_REQUEST_TO_EMAIL = 'peter@lustig.de'
 config.BREVO_TEMPLATE_CONTACT_BASE = 1
 config.BREVO_TEMPLATE_CONTACT_USER = 2
-config.BREVO_CONTACT_LIST_ID = 1
+config.BREVO_CONTACT_LIST_ID = 3
 
 const mockSendTransacEmail = jest.fn().mockResolvedValue({
   response: 'success',
