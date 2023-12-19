@@ -76,9 +76,9 @@ export const sendSmtpEmail = async (
 
 export const sendContactFormEmail = (
   contactForm: ContactForm,
-): Promise<Awaited<ReturnType<typeof sendSmtpEmail>>[]> | undefined => {
+): Promise<Awaited<ReturnType<typeof sendSmtpEmail>>[]> | false => {
   if (!config.BREVO_KEY) {
-    return undefined
+    return false
   }
   const smtpEmailToAdmin: SibApiV3Sdk.SendSmtpEmail = createSmtpEmail(
     config.BREVO_TEMPLATE_CONTACT_BASE,
@@ -133,9 +133,9 @@ export const sendContactFormEmail = (
 
 export const sendContactToBrevo = (
   contactForm: NewsletterSubscription,
-): ReturnType<ContactsApi['createContact']> => {
+): ReturnType<ContactsApi['createContact']> | false => {
   if (!config.BREVO_KEY) {
-    throw new Error('No Brevo_Key defined could not send contact')
+    return false
   }
   const createContact: SibApiV3Sdk.CreateContact = createAddContactToList(contactForm)
   const apiInstance = createBrevoContactsApi()
