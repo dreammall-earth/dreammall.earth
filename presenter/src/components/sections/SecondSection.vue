@@ -18,6 +18,7 @@
             :label="$t('home.section2.buttonTxt')"
             size="auto"
             variant="fourth"
+            href="#contactname"
             >{{ $t('home.section2.buttonTxt') }}</MainButton
           >
         </div>
