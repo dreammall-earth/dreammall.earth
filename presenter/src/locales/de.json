@@ -43,7 +43,6 @@
       "newsletterForm": {
         "email": "E-Mail Adresse",
         "errorMsg": "Das hat leider nicht funktioniert! Bitte erneut probieren",
-        "fieldRequired": "Dieses Feld wird benötigt",
         "firstname": "Vorname",
         "lastname": "Nachname",
         "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unserer",
@@ -165,7 +164,6 @@
       "contact": "Kontaktiere uns",
       "contactForm": {
         "errorMsg": "Das hat leider nicht funktioniert! Bitte erneut probieren",
-        "fieldRequired": "Dieses Feld wird benötigt",
         "firstName": "Vorname",
         "lastName": "Nachname",
         "mail": "E-Mail Adresse",
@@ -197,5 +195,10 @@
       "products": "products",
       "sitemap": "Sitemap"
     }
+  },
+  "validation": {
+    "fieldNoEmail": "Dieses Feld muss eine Email-Adresse sein",
+    "fieldRequired": "Dieses Feld wird benötigt",
+    "fieldTooLong": "Dieses Feld ist zu lang"
   }
 }

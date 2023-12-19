@@ -15,7 +15,7 @@
             flat
             rounded="xl"
             required
-            :rules="[() => !!firstname || $t('menu.footer.contactForm.fieldRequired')]"
+            :rules="nameRules"
           ></v-text-field>
         </v-col>
         <v-col cols="12" md="6">
@@ -31,7 +31,7 @@
             flat
             rounded="xl"
             required
-            :rules="[() => !!lastname || $t('menu.footer.contactForm.fieldRequired')]"
+            :rules="nameRules"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -50,26 +50,26 @@
             rounded="xl"
             type="email"
             required
-            :rules="[() => !!email || $t('menu.footer.contactForm.fieldRequired')]"
+            :rules="emailRules"
           ></v-text-field>
         </v-col>
         <v-col cols="12" md="6" class="pa-0 pa-md-3">
           <!-- <v-select
-            v-model="topic"
-            name="topic"
-            :items="topicItems"
-            :rules="[() => !!topic || $t('menu.footer.contactForm.fieldRequired')]"
-            required
-            class="contact-text mt-4"
-            :label="$t('menu.footer.contactForm.topic')"
-            variant="solo"
-            color="#3D4753"
-            bg-color="rgba(174, 179, 189, 0.50)"
-            hide-details="auto"
-            flat
-            rounded="xl"
-            menu-icon="mdi-arrow-down"
-          ></v-select> -->
+               v-model="topic"
+               name="topic"
+               :items="topicItems"
+               :rules="[() => !!topic || $t('menu.footer.contactForm.fieldRequired')]"
+               required
+               class="contact-text mt-4"
+               :label="$t('menu.footer.contactForm.topic')"
+               variant="solo"
+               color="#3D4753"
+               bg-color="rgba(174, 179, 189, 0.50)"
+               hide-details="auto"
+               flat
+               rounded="xl"
+               menu-icon="mdi-arrow-down"
+               ></v-select> -->
         </v-col>
       </v-row>
       <v-row>
@@ -85,7 +85,7 @@
             variant="solo"
             rounded="xl"
             required
-            :rules="[() => !!message || $t('menu.footer.contactForm.fieldRequired')]"
+            :rules="messageRules"
           ></v-textarea>
         </v-col>
       </v-row>
@@ -100,7 +100,7 @@
             :center-affix="false"
             density="compact"
             required
-            :rules="[() => !!dataprivacy || $t('menu.footer.contactForm.fieldRequired')]"
+            :rules="[() => !!dataprivacy || $t('validation.fieldRequired')]"
           >
           </v-checkbox>
           <span class="ml-4 pt-2 contact-agb"
@@ -147,6 +147,7 @@ import { ref } from 'vue'
 
 import AnchorLink from '#components/nav/AnchorLink.vue'
 import { createContactFormMutation } from '#mutations/createContactForm'
+import { nameRules, messageRules, emailRules } from '#src/validation/validation'
 
 import MainButton from './MainButton.vue'
 
