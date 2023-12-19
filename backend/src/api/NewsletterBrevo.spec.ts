@@ -134,7 +134,7 @@ describe('NewsletterBrevo', () => {
   })
 
   describe('sendSmtpEmail', () => {
-    describe('with error', () => {
+    describe('with success', () => {
       beforeEach(async () => {
         jest.clearAllMocks()
         await sendSmtpEmail(
@@ -162,7 +162,7 @@ describe('NewsletterBrevo', () => {
         )
       })
 
-      it.skip('does not update the database', async () => {
+      it('does update the database', async () => {
         const result: ContactForm[] = await prisma.contactForm.findMany()
         expect(result).toHaveLength(1)
         expect(result).toEqual([
@@ -173,13 +173,13 @@ describe('NewsletterBrevo', () => {
             content: 'Hello DreamMall!',
             email: 'bibi@bloxberg.de',
             createdAt: expect.any(Date),
-            brevoSuccess: null,
+            brevoSuccess: expect.any(Date),
           },
         ])
       })
     })
 
-    describe('with success', () => {
+    describe('with error', () => {
       beforeEach(async () => {
         jest.clearAllMocks()
         await sendSmtpEmail(
@@ -211,7 +211,7 @@ describe('NewsletterBrevo', () => {
         expect(SibApiV3Sdk.TransactionalEmailsApi).toHaveBeenCalledTimes(1)
       })
 
-      it('updates the database', async () => {
+      it('does not update the database', async () => {
         const result: ContactForm[] = await prisma.contactForm.findMany()
         expect(result).toHaveLength(1)
         expect(result).toEqual([
@@ -222,14 +222,14 @@ describe('NewsletterBrevo', () => {
             content: 'Hello DreamMall!',
             email: 'bibi@bloxberg.de',
             createdAt: expect.any(Date),
-            brevoSucmockmyfunccess: expect.any(Date),
+            brevoSuccess: null,
           },
         ])
       })
     })
   })
 
-  describe.only('sendContactFormEmail', () => {
+  describe('sendContactFormEmail', () => {
     describe('brevo key given', () => {
       beforeEach(async () => {
         jest.clearAllMocks()
