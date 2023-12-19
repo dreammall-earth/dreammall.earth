@@ -7,7 +7,7 @@ import { prisma } from '#src/prisma'
 
 import type { ContactsApi } from '@getbrevo/brevo'
 
-export const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
+export const createBrevoInstance = () => {
   const apiTransactionalEmailInstance = new SibApiV3Sdk.TransactionalEmailsApi()
   apiTransactionalEmailInstance.setApiKey(
     SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
@@ -16,13 +16,13 @@ export const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
   return apiTransactionalEmailInstance
 }
 
-export const createBrevoContactsApi = (): SibApiV3Sdk.ContactsApi => {
+export const createBrevoContactsApi = () => {
   const apiBrevoContactsInstance = new SibApiV3Sdk.ContactsApi()
   apiBrevoContactsInstance.setApiKey(SibApiV3Sdk.ContactsApiApiKeys.apiKey, config.BREVO_KEY)
   return apiBrevoContactsInstance
 }
 
-export const createAddContactToList = (contactForm: NewsletterSubscription): SibApiV3Sdk.CreateContact => {
+export const createAddContactToList = (contactForm: NewsletterSubscription) => {
   const createContact: SibApiV3Sdk.CreateContact = new SibApiV3Sdk.CreateContact()
   createContact.email = contactForm.email
   createContact.listIds = [config.BREVO_CONTACT_LIST_ID]
