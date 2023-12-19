@@ -37,7 +37,7 @@ describe('FooterMenu', () => {
       const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[0]
 
       it('has href #about', () => {
-        expect(anchor.attributes('href')).toBe('#about')
+        expect(anchor.attributes('href')).toBe('/#about')
       })
 
       it('has label menu.about', () => {
@@ -49,7 +49,7 @@ describe('FooterMenu', () => {
       const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[1]
 
       it('has href #products', () => {
-        expect(anchor.attributes('href')).toBe('#products')
+        expect(anchor.attributes('href')).toBe('/#products')
       })
 
       it('has label menu.products', () => {
@@ -61,7 +61,7 @@ describe('FooterMenu', () => {
       const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[2]
 
       it('has href #contact', () => {
-        expect(anchor.attributes('href')).toBe('#contact')
+        expect(anchor.attributes('href')).toBe('/#contactname')
       })
 
       it('has label menu.contact', () => {
