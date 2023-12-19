@@ -92,17 +92,11 @@ describe('NewsletterForm', () => {
         const errorMessages = wrapper.findAll('.v-messages__message')
         expect(errorMessages).toHaveLength(3)
         // firstname
-        expect(errorMessages[0].text()).toBe(
-          "$t('home.newsletterSection.newsletterForm.fieldRequired')",
-        )
+        expect(errorMessages[0].text()).toBe('Dieses Feld wird benötigt')
         // email
-        expect(errorMessages[1].text()).toBe(
-          "$t('home.newsletterSection.newsletterForm.fieldRequired')",
-        )
+        expect(errorMessages[1].text()).toBe('Dieses Feld wird benötigt')
         // checkbox
-        expect(errorMessages[2].text()).toBe(
-          "$t('home.newsletterSection.newsletterForm.fieldRequired')",
-        )
+        expect(errorMessages[2].text()).toBe("$t('validation.fieldRequired')")
       })
 
       it('does not call the API', () => {
