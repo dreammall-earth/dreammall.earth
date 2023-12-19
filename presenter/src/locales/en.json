@@ -124,6 +124,7 @@
     },
     "data": {
       "additional": "Gebäude 44",
+      "additionalLaw": "Verantwortlich i.S.d. von § 18 MStV ist Sabine Laudien, Rosenau 15, 87437 Kempten.",
       "city": "Kempten",
       "court": "Amtsgericht Musterstadt",
       "courtLabel": "Registergericht:",
@@ -131,7 +132,7 @@
       "name": "DreamMall Verlag GbR",
       "person1": "Sabine Laudien",
       "person2": "Claudia Siebert",
-      "personHeadline": "Vertreten durch",
+      "personHeadline": "vertreten durch die Gesellschafter",
       "register": "HRB 999999",
       "registerLabel": "Handelsregister:",
       "street": "Rosenau 15",
