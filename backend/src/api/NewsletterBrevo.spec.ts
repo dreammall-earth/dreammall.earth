@@ -24,13 +24,13 @@ jest.mock('#config/config', () => {
   }
 })
 const mockSendTransacEmail = jest
-.fn()
-.mockResolvedValueOnce({
-  response: 'success',
-})
-.mockRejectedValue({
-  error: 'error',
-})
+  .fn()
+  .mockResolvedValueOnce({
+    response: 'success',
+  })
+  .mockRejectedValue({
+    error: 'error',
+  })
 
 jest.mock('@getbrevo/brevo', () => {
   const originalModule = jest.requireActual<typeof import('@getbrevo/brevo')>('@getbrevo/brevo')
@@ -40,7 +40,7 @@ jest.mock('@getbrevo/brevo', () => {
     TransactionalEmailsApi: jest.fn().mockImplementation(() => {
       return {
         setApiKey: jest.fn(),
-        sendTransacEmail: mockSendTransacEmail
+        sendTransacEmail: mockSendTransacEmail,
       }
     }),
     SendSmtpEmail: jest.fn().mockImplementation(() => {
@@ -208,7 +208,7 @@ describe('NewsletterBrevo', () => {
       })
 
       it('calls TransactionalEmailsApi constructor', () => {
-        expect(SibApiV3Sdk.TransactionalEmailsApi).toBeCalledTimes(1)
+        expect(SibApiV3Sdk.TransactionalEmailsApi).toHaveBeenCalledTimes(1)
       })
 
       it('updates the database', async () => {
