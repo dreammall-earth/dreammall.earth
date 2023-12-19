@@ -19,14 +19,9 @@ config.BREVO_CONTACT_REQUEST_TO_EMAIL = 'peter@lustig.de'
 config.BREVO_TEMPLATE_CONTACT_BASE = 1
 config.BREVO_TEMPLATE_CONTACT_USER = 2
 
-const mockSendTransacEmail = jest
-  .fn()
-  .mockResolvedValueOnce({
-    response: 'success',
-  })
-  .mockRejectedValue({
-    error: 'error',
-  })
+const mockSendTransacEmail = jest.fn().mockResolvedValue({
+  response: 'success',
+})
 
 jest.mock('@getbrevo/brevo', () => {
   const originalModule = jest.requireActual<typeof import('@getbrevo/brevo')>('@getbrevo/brevo')
@@ -160,6 +155,10 @@ describe('NewsletterBrevo', () => {
         )
       })
 
+      it('calls TransactionalEmailsApi constructor', () => {
+        expect(SibApiV3Sdk.TransactionalEmailsApi).toHaveBeenCalledTimes(1)
+      })
+
       it('does update the database', async () => {
         const result: ContactForm[] = await prisma.contactForm.findMany()
         expect(result).toHaveLength(1)
@@ -180,6 +179,9 @@ describe('NewsletterBrevo', () => {
     describe('with error', () => {
       beforeEach(async () => {
         jest.clearAllMocks()
+        mockSendTransacEmail.mockRejectedValue({
+          error: 'error',
+        })
         await sendSmtpEmail(
           createSmtpEmail(
             42,
