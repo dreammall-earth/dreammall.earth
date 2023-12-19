@@ -23,6 +23,7 @@
           :label="$t('home.section6.buttonText')"
           size="large"
           variant="primary"
+          href="/#contactname"
           >{{ $t('home.section6.buttonText') }}</MainButton
         >
       </v-col>
