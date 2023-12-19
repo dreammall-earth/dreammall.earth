@@ -7,17 +7,7 @@ import { prisma } from '#src/prisma'
 
 export const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
   const apiInstance: SibApiV3Sdk.TransactionalEmailsApi = new SibApiV3Sdk.TransactionalEmailsApi()
-  /* node_modules/@getbrevo/brevo/dist/api/transactionalEmailsApi.d.ts
-    export declare enum TransactionalEmailsApiApiKeys {
-      apiKey = 0,
-      partnerKey = 1
-    }
-  */
-  // so SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey is always 0
-  // may be it is just
-  // apiInstance.setApiKey(1, config.BREVO_KEY)
-  // ?????
-  apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.partnerKey, config.BREVO_KEY)
+  apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, config.BREVO_KEY)
   return apiInstance
 }
 
@@ -44,11 +34,8 @@ export const sendSmtpEmail = async (
 ): Promise<ReturnType<SibApiV3Sdk.TransactionalEmailsApi['sendTransacEmail']> | undefined> => {
   const apiInstance = createBrevoInstance()
 
-  // console.log(smtpEmail)
   try {
     const apiResponse = await apiInstance.sendTransacEmail(smtpEmail)
-    // console.log('API called successfully. Returned data: ', JSON.stringify(apiResponse))
-    // code to store success goes here:
     contactForm.brevoSuccess = new Date()
     await prisma.contactForm.update({
       where: {
@@ -71,7 +58,6 @@ export const sendContactFormEmail = (
   if (!config.BREVO_KEY) {
     return undefined
   }
-  // console.log(contactForm)
   const smtpEmailToAdmin: SibApiV3Sdk.SendSmtpEmail = createSmtpEmail(
     config.BREVO_TEMPLATE_CONTACT_BASE,
     [
@@ -90,8 +76,8 @@ export const sendContactFormEmail = (
     },
     {
       email: contactForm.email,
-      firstname: contactForm.firstName,
-      lastname: contactForm.lastName,
+      firstName: contactForm.firstName,
+      lastName: contactForm.lastName,
       content: contactForm.content,
     },
   )
@@ -114,13 +100,11 @@ export const sendContactFormEmail = (
       email: config.BREVO_CONTACT_REQUEST_TO_EMAIL,
     },
     {
-      firstname: contactForm.firstName,
-      lastname: contactForm.lastName,
+      firstName: contactForm.firstName,
+      lastName: contactForm.lastName,
       content: contactForm.content,
     },
   )
   const emailClient = sendSmtpEmail(smtpEmailToClient, contactForm)
   return Promise.all([emailAdmin, emailClient])
 }
-
-export default { createBrevoInstance, createSmtpEmail, sendContactFormEmail, sendSmtpEmail }

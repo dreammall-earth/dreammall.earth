@@ -76,7 +76,7 @@ describe('NewsletterBrevo', () => {
       // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(result.setApiKey).toHaveBeenCalledTimes(1)
       // eslint-disable-next-line @typescript-eslint/unbound-method
-      expect(result.setApiKey).toHaveBeenCalledWith(1, 'MY KEY')
+      expect(result.setApiKey).toHaveBeenCalledWith(0, 'MY KEY')
     })
   })
 
@@ -235,7 +235,58 @@ describe('NewsletterBrevo', () => {
       })
 
       it('calls sendSmtpEmail twice', () => {
-        expect(mockSendTransacEmail).toHaveBeenCalledTimes(2)
+        expect(mockSendTransacEmail).toBeCalledTimes(2)
+      })
+
+      it('sends email to base', () => {
+        expect(mockSendTransacEmail).toBeCalledWith({
+          templateId: 1,
+          to: [
+            {
+              name: 'Peter Lustig',
+              email: 'peter@lustig.de',
+            },
+          ],
+          sender: {
+            name: 'Bibi Bloxberg',
+            email: 'bibi@bloxberg.de',
+          },
+          replyTo: {
+            name: 'Bibi Bloxberg',
+            email: 'bibi@bloxberg.de',
+          },
+          params: {
+            email: contactForm.email,
+            firstName: contactForm.firstName,
+            lastName: contactForm.lastName,
+            content: contactForm.content,
+          },
+        })
+      })
+
+      it('sends email to client', () => {
+        expect(mockSendTransacEmail).toBeCalledWith({
+          templateId: 2,
+          to: [
+            {
+              name: 'Bibi Bloxberg',
+              email: 'bibi@bloxberg.de',
+            },
+          ],
+          sender: {
+            name: 'Peter Lustig',
+            email: 'peter@lustig.de',
+          },
+          replyTo: {
+            name: 'Peter Lustig',
+            email: 'peter@lustig.de',
+          },
+          params: {
+            firstName: contactForm.firstName,
+            lastName: contactForm.lastName,
+            content: contactForm.content,
+          },
+        })
       })
     })
 
@@ -247,7 +298,7 @@ describe('NewsletterBrevo', () => {
       })
 
       it('does not call sendSmtpEmail', () => {
-        expect(mockSendTransacEmail).toHaveBeenCalledTimes(0)
+        expect(mockSendTransacEmail).not.toBeCalled()
       })
     })
   })
