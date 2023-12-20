@@ -116,6 +116,9 @@ onMounted(() => {
   const videoSlide = document.querySelector('#intro-video-slide')
   if (videoSlide && videoSlideObserver) {
     videoSlideObserver.observe(videoSlide)
+  } else {
+    // fallback to show navbar on other pages
+    changeAppBarBackground()
   }
 })
 </script>
