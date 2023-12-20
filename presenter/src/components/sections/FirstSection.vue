@@ -45,7 +45,7 @@
               :label="$t('home.section1.preOrderBtn')"
               size="auto"
               variant="primary"
-              href="#about"
+              href="#/about"
               >{{ $t('home.section1.preOrderBtn') }}</MainButton
             >
           </v-sheet>
