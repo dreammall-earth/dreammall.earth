@@ -441,15 +441,6 @@ describe('NewsletterBrevo', () => {
           mockSendTransacEmail.mockRejectedValue({
             error: 'error',
           })
-          await prisma.contactForm.deleteMany()
-          contactForm = await prisma.contactForm.create({
-            data: {
-              firstName: 'Bibi',
-              lastName: 'Bloxberg',
-              content: 'Hello DreamMall!',
-              email: 'bibi@bloxberg.de',
-            },
-          })
         })
 
         it('expect to throw error', async () => {
