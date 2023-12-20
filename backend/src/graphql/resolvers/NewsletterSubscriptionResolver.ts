@@ -1,6 +1,6 @@
 import { Resolver, Mutation, Arg } from 'type-graphql'
 
-import { sendContactToBrevo } from '#api/NewsletterBrevo'
+import { sendContactToBrevo } from '#api/Brevo'
 import { SubscribeToNewsletterInput } from '#inputs/SubscribeToNewsletterInput'
 import { prisma } from '#src/prisma'
 

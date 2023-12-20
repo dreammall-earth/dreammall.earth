@@ -1,6 +1,6 @@
 import { Resolver, Mutation, Query, Arg } from 'type-graphql'
 
-import { sendContactFormEmail } from '#api/NewsletterBrevo'
+import { sendContactFormEmail } from '#api/Brevo'
 import { ContactFormInput } from '#inputs/ContactFormInput'
 import { prisma } from '#src/prisma'
 

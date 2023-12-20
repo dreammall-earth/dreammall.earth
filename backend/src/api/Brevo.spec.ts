@@ -4,7 +4,7 @@ import { ContactForm, NewsletterSubscription } from '@prisma/client'
 import { CONFIG } from '#config/config'
 import { prisma } from '#src/prisma'
 
-import { sendContactFormEmail, sendContactToBrevo } from './NewsletterBrevo'
+import { sendContactFormEmail, sendContactToBrevo } from './Brevo'
 
 CONFIG.BREVO_KEY = 'MY KEY'
 CONFIG.BREVO_CONTACT_REQUEST_TO_NAME = 'Peter Lustig'

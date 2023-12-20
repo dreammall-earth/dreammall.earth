@@ -2,13 +2,13 @@
 import { ApolloServer } from '@apollo/server'
 import { ContactForm } from '@prisma/client'
 
-import { sendContactFormEmail } from '#api/NewsletterBrevo'
+import { sendContactFormEmail } from '#api/Brevo'
 import { prisma } from '#src/prisma'
 import { createServer } from '#src/server/server'
 
 let testServer: ApolloServer
 
-jest.mock('#api/NewsletterBrevo', () => {
+jest.mock('#api/Brevo', () => {
   return {
     sendContactFormEmail: jest.fn(),
   }
