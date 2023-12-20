@@ -1,21 +1,28 @@
 import { TransactionalEmailsApi } from '@getbrevo/brevo'
-import { ContactForm } from '@prisma/client'
+import { ContactForm, NewsletterSubscription } from '@prisma/client'
 
-import config from '#config/config'
+import { CONFIG } from '#config/config'
 import { prisma } from '#src/prisma'
 
-import { sendContactFormEmail } from './NewsletterBrevo'
+import { sendContactFormEmail, createAddContactToList,
+  createBrevoContactsApi,
+  sendContactToBrevo } from './NewsletterBrevo'
 
-config.BREVO_KEY = 'MY KEY'
-config.BREVO_CONTACT_REQUEST_TO_NAME = 'Peter Lustig'
-config.BREVO_CONTACT_REQUEST_TO_EMAIL = 'peter@lustig.de'
-config.BREVO_TEMPLATE_CONTACT_BASE = 1
-config.BREVO_TEMPLATE_CONTACT_USER = 2
+CONFIG.BREVO_KEY = 'MY KEY'
+CONFIG.BREVO_CONTACT_REQUEST_TO_NAME = 'Peter Lustig'
+CONFIG.BREVO_CONTACT_REQUEST_TO_EMAIL = 'peter@lustig.de'
+CONFIG.BREVO_TEMPLATE_CONTACT_BASE = 1
+CONFIG.BREVO_TEMPLATE_CONTACT_USER = 2
+CONFIG.BREVO_CONTACT_LIST_ID = 3
 
 const mockSendTransacEmail = jest.fn().mockResolvedValue({
   response: 'success',
 })
 const mockSetApiKey = jest.fn()
+
+const mockCreateContact = jest.fn().mockResolvedValue({
+  response: 'success',
+})
 
 jest.mock('@getbrevo/brevo', () => {
   const originalModule = jest.requireActual<typeof import('@getbrevo/brevo')>('@getbrevo/brevo')
@@ -28,18 +35,19 @@ jest.mock('@getbrevo/brevo', () => {
         sendTransacEmail: mockSendTransacEmail,
       }
     }),
+    ContactsApi: jest.fn().mockImplementation(() => {
+      return {
+        setApiKey: jest.fn(),
+        createContact: mockCreateContact,
+      }
+    }),
     SendSmtpEmail: jest.fn().mockImplementation(() => {
       return {}
     }),
   }
 })
 
-const consoleLogMock = jest.fn()
-// eslint-disable-next-line no-console
-console.log = consoleLogMock
-
 let contactForm: ContactForm
-
 beforeEach(async () => {
   await prisma.contactForm.deleteMany()
   contactForm = await prisma.contactForm.create({
@@ -55,7 +63,8 @@ beforeEach(async () => {
 describe('NewsletterBrevo', () => {
   describe('sendContactFormEmail', () => {
     describe('brevo key given', () => {
-      beforeEach(async () => {
+      let result: TransactionalEmailsApi
+      beforeEach(() => {
         jest.clearAllMocks()
         await sendContactFormEmail(contactForm)
       })
@@ -80,32 +89,6 @@ describe('NewsletterBrevo', () => {
       it('sends email to base', () => {
         expect(mockSendTransacEmail).toHaveBeenCalledWith({
           templateId: 1,
-          to: [
-            {
-              name: 'Peter Lustig',
-              email: 'peter@lustig.de',
-            },
-          ],
-          sender: {
-            name: 'Bibi Bloxberg',
-            email: 'bibi@bloxberg.de',
-          },
-          replyTo: {
-            name: 'Bibi Bloxberg',
-            email: 'bibi@bloxberg.de',
-          },
-          params: {
-            email: contactForm.email,
-            firstName: contactForm.firstName,
-            lastName: contactForm.lastName,
-            content: contactForm.content,
-          },
-        })
-      })
-
-      it('sends email to client', () => {
-        expect(mockSendTransacEmail).toHaveBeenCalledWith({
-          templateId: 2,
           to: [
             {
               name: 'Bibi Bloxberg',
@@ -190,14 +173,151 @@ describe('NewsletterBrevo', () => {
     })
 
     describe('without brevo key', () => {
-      beforeEach(async () => {
+      beforeEach(() => {
         jest.clearAllMocks()
-        config.BREVO_KEY = ''
+        CONFIG.BREVO_KEY = undefined
         await sendContactFormEmail(contactForm)
       })
 
       it('does not call sendSmtpEmail', () => {
         expect(mockSendTransacEmail).not.toHaveBeenCalled()
+      })
+
+      afterAll(() => {
+        CONFIG.BREVO_KEY = 'MY KEY'
+      })
+    })
+  })
+
+  describe('newsletter', () => {
+    let newsletterSubscription: NewsletterSubscription
+    beforeEach(async () => {
+      await prisma.newsletterSubscription.deleteMany()
+      newsletterSubscription = await prisma.newsletterSubscription.create({
+        data: {
+          firstName: 'Bibi',
+          lastName: 'Bloxberg',
+          email: 'bibi@bloxberg.de',
+        },
+      })
+    })
+
+    describe('createBrevoContactsApi', () => {
+      let result: ContactsApi
+
+      beforeEach(() => {
+        jest.clearAllMocks()
+        result = createBrevoContactsApi()
+      })
+
+      it('calls ContactsApi constructor', () => {
+        expect(SibApiV3Sdk.ContactsApi).toHaveBeenCalledTimes(1)
+      })
+
+      it('sets the API key', () => {
+        // eslint-disable-next-line @typescript-eslint/unbound-method
+        expect(result.setApiKey).toHaveBeenCalledTimes(1)
+        // eslint-disable-next-line @typescript-eslint/unbound-method
+        expect(result.setApiKey).toHaveBeenCalledWith(0, 'MY KEY')
+      })
+    })
+
+    describe('createAddContactToList', () => {
+      let result: SibApiV3Sdk.CreateContact
+
+      beforeEach(() => {
+        jest.clearAllMocks()
+        result = createAddContactToList(newsletterSubscription)
+      })
+
+      it('returns sendSmtpEmail object', () => {
+        expect(result).toEqual({
+          email: newsletterSubscription.email,
+          listIds: [3],
+          attributes: {
+            VORNAME: newsletterSubscription.firstName,
+            NACHNAME: newsletterSubscription.lastName,
+          },
+          updateEnabled: false,
+        })
+      })
+    })
+
+    describe('sendContactToBrevo', () => {
+      describe('brevo key given', () => {
+        beforeEach(async () => {
+          jest.clearAllMocks()
+          await sendContactToBrevo(newsletterSubscription)
+        })
+
+        it('calls createContact', () => {
+          expect(mockCreateContact).toHaveBeenCalledWith({
+            email: newsletterSubscription.email,
+            listIds: [3],
+            attributes: {
+              VORNAME: newsletterSubscription.firstName,
+              NACHNAME: newsletterSubscription.lastName,
+            },
+            updateEnabled: false,
+          })
+        })
+
+        it('does update the database', async () => {
+          const result: NewsletterSubscription[] = await prisma.newsletterSubscription.findMany()
+          expect(result).toHaveLength(1)
+          expect(result).toEqual([
+            {
+              id: expect.any(Number),
+              firstName: 'Bibi',
+              lastName: 'Bloxberg',
+              email: 'bibi@bloxberg.de',
+              createdAt: expect.any(Date),
+              brevoSuccess: expect.any(Date),
+            },
+          ])
+        })
+      })
+
+      describe('with error from Brevo', () => {
+        beforeEach(() => {
+          jest.clearAllMocks()
+          mockCreateContact.mockRejectedValue({
+            error: 'error',
+          })
+        })
+
+        it('expect to reject with error', async () => {
+          await expect(sendContactToBrevo(newsletterSubscription)).rejects.toStrictEqual({
+            error: 'error',
+          })
+        })
+
+        it('does not update the database', async () => {
+          const result: NewsletterSubscription[] = await prisma.newsletterSubscription.findMany()
+          expect(result).toHaveLength(1)
+          expect(result).toEqual([
+            {
+              id: expect.any(Number),
+              firstName: 'Bibi',
+              lastName: 'Bloxberg',
+              email: 'bibi@bloxberg.de',
+              createdAt: expect.any(Date),
+              brevoSuccess: null,
+            },
+          ])
+        })
+      })
+
+      describe('without brevo key', () => {
+        beforeEach(async () => {
+          jest.clearAllMocks()
+          CONFIG.BREVO_KEY = undefined
+          await sendContactToBrevo(newsletterSubscription)
+        })
+
+        it('does not call sendSmtpEmail', () => {
+          expect(mockCreateContact).not.toHaveBeenCalled()
+        })
       })
     })
   })
