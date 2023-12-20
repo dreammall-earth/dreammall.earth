@@ -1,3 +1,4 @@
+/* eslint-disable n/no-process-env */
 import path from 'path'
 
 import { config } from 'dotenv'
@@ -7,49 +8,45 @@ config({
   path: path.resolve(__dirname, '../../.env'),
 })
 
-interface ENV {
-  BREVO_KEY: string | undefined
-  BREVO_CONTACT_REQUEST_TO_NAME: string | undefined
-  BREVO_CONTACT_REQUEST_TO_EMAIL: string | undefined
-  BREVO_TEMPLATE_CONTACT_BASE: number | undefined
-  BREVO_TEMPLATE_CONTACT_USER: number | undefined
+const BREVO = {
+  BREVO_KEY: process.env.BREVO_KEY,
+  BREVO_CONTACT_REQUEST_TO_NAME: process.env.BREVO_CONTACT_REQUEST_TO_NAME,
+  BREVO_CONTACT_REQUEST_TO_EMAIL: process.env.BREVO_CONTACT_REQUEST_TO_EMAIL,
+  BREVO_TEMPLATE_CONTACT_BASE: process.env.BREVO_TEMPLATE_CONTACT_BASE
+    ? Number(process.env.BREVO_TEMPLATE_CONTACT_BASE)
+    : undefined,
+  BREVO_TEMPLATE_CONTACT_USER: process.env.BREVO_TEMPLATE_CONTACT_USER
+    ? Number(process.env.BREVO_TEMPLATE_CONTACT_USER)
+    : undefined,
 }
 
-interface Config {
-  BREVO_KEY: string
-  BREVO_CONTACT_REQUEST_TO_NAME: string
-  BREVO_CONTACT_REQUEST_TO_EMAIL: string
-  BREVO_TEMPLATE_CONTACT_BASE: number
-  BREVO_TEMPLATE_CONTACT_USER: number
-}
-
-/* eslint-disable n/no-process-env */
-const getConfig = (): ENV => {
-  return {
-    BREVO_KEY: process.env.BREVO_KEY,
-    BREVO_CONTACT_REQUEST_TO_NAME: process.env.BREVO_CONTACT_REQUEST_TO_NAME,
-    BREVO_CONTACT_REQUEST_TO_EMAIL: process.env.BREVO_CONTACT_REQUEST_TO_EMAIL,
-    BREVO_TEMPLATE_CONTACT_BASE: process.env.BREVO_TEMPLATE_CONTACT_BASE
-      ? Number(process.env.BREVO_TEMPLATE_CONTACT_BASE)
-      : undefined,
-    BREVO_TEMPLATE_CONTACT_USER: process.env.BREVO_TEMPLATE_CONTACT_USER
-      ? Number(process.env.BREVO_TEMPLATE_CONTACT_USER)
-      : undefined,
-  }
-}
-/* eslint-enable n/no-process-env */
-
-const getSanitzedConfig = (config: ENV): Config => {
-  for (const [key, value] of Object.entries(config)) {
-    if (value === undefined) {
+export const validateConfigOut = (text: string) => {
+  switch (process.env.NODE_ENV) {
+    case 'test':
+      return
+    case 'production':
+      throw new Error(text)
+    default:
       // eslint-disable-next-line no-console
-      console.warn(`Missing key ${key} in config.env`)
-    }
+      console.warn(text)
   }
-  return config as Config
+}
+const validateConfig = () => {
+  if (!BREVO.BREVO_KEY) {
+    validateConfigOut('Missing BREVO_KEY in config')
+  }
+
+  if (
+    BREVO.BREVO_KEY &&
+    (!BREVO.BREVO_CONTACT_REQUEST_TO_EMAIL ||
+      !BREVO.BREVO_CONTACT_REQUEST_TO_NAME ||
+      !BREVO.BREVO_TEMPLATE_CONTACT_BASE ||
+      !BREVO.BREVO_TEMPLATE_CONTACT_USER)
+  ) {
+    validateConfigOut('BREVO_KEY is set, but one or more of the required BREVO configs are missing')
+  }
 }
 
-const configEnv = getConfig()
-const sanitizedConfig = getSanitzedConfig(configEnv)
+validateConfig()
 
-export default sanitizedConfig
+export default { ...BREVO }
