@@ -64,6 +64,7 @@ onMounted(() => {
 
 <style scoped lang="scss">
 $mobile: 500px;
+$tablet: 960px;
 
 .section2 {
   max-width: 1440px;
@@ -91,6 +92,12 @@ $mobile: 500px;
     &.show {
       transform: translateX(0%);
     }
+
+    @media screen and (max-width: $mobile) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   .section-right-part {
@@ -99,6 +106,20 @@ $mobile: 500px;
 
     &.show {
       transform: rotate(0deg) translateX(0%);
+    }
+
+    @media screen and (max-width: $tablet) {
+      padding-top: 3em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @media screen and (max-width: $mobile) {
+      padding-top: 3em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
   }
 
@@ -119,6 +140,7 @@ $mobile: 500px;
 
     @media screen and (max-width: $mobile) {
       padding: 10px;
+      max-width: 10.5rem;
     }
   }
 }
