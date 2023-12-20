@@ -76,7 +76,7 @@ export const sendContactFormEmail = (
     return undefined
   }
 
-    const smtpEmailToAdmin: SibApiV3Sdk.SendSmtpEmail = createSmtpEmail(
+  const smtpEmailToAdmin: SibApiV3Sdk.SendSmtpEmail = createSmtpEmail(
     config.BREVO_TEMPLATE_CONTACT_BASE,
     [
       {
@@ -126,18 +126,21 @@ export const sendContactFormEmail = (
   const sendEmailAdmin = sendSmtpEmail(smtpEmailToAdmin)
   const promiseAll = Promise.all([sendEmailAdmin, sendEmailClient])
 
-  void promiseAll.then(async () => {
-    contactForm.brevoSuccess = new Date()
-    await prisma.contactForm.update({
-      where: {
-        id: contactForm.id,
-      },
-      data: {
-        ...contactForm,
-      },
+  void promiseAll
+    .then(async () => {
+      contactForm.brevoSuccess = new Date()
+      await prisma.contactForm.update({
+        where: {
+          id: contactForm.id,
+        },
+        data: {
+          ...contactForm,
+        },
+      })
+      return undefined
     })
-  })
-  
+    .catch(() => {})
+
   return promiseAll
 }
 
