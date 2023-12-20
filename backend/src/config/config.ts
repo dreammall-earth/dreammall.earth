@@ -43,7 +43,9 @@ const validateConfig = () => {
       !BREVO.BREVO_TEMPLATE_CONTACT_BASE ||
       !BREVO.BREVO_TEMPLATE_CONTACT_USER)
   ) {
-    validateConfigError('BREVO_KEY is set, but one or more of the required BREVO configs are missing')
+    validateConfigError(
+      'BREVO_KEY is set, but one or more of the required BREVO configs are missing',
+    )
   }
 }
 
