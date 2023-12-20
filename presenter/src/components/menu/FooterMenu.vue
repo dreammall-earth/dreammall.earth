@@ -4,17 +4,21 @@
       <v-row justify="center" class="my-4 justify-space-around footer">
         <v-col cols="6" md="3" class="d-flex flex-column align-start">
           <h2 class="footer-header mb-3 text-left">{{ $t('menu.footer.sitemap') }}</h2>
-          <AnchorLink href="/" :label="$t('menu.footer.home')"></AnchorLink>
-          <AnchorLink href="/" :label="$t('menu.footer.worldCoffeeHouse')"></AnchorLink>
-          <AnchorLink
-            class="min-width-remover"
-            href="/"
-            :label="$t('menu.footer.mall')"
-          ></AnchorLink>
-          <AnchorLink href="/" :label="$t('menu.footer.humansAndProjects')"></AnchorLink>
-          <h3 class="footer-header mt-4 mb-1 text-left">{{ $t('menu.footer.socialHeadline') }}</h3>
-          <AnchorLink href="/" :label="$t('menu.footer.instagram')"></AnchorLink>
-          <AnchorLink href="/" :label="$t('menu.footer.telegram')"></AnchorLink>
+          <div class="footer-links">
+            <AnchorLink class="min-helper" href="/" :label="$t('menu.footer.home')"></AnchorLink>
+            <AnchorLink href="/" :label="$t('menu.footer.worldCoffeeHouse')"></AnchorLink>
+            <AnchorLink
+              class="min-width-remover"
+              href="/"
+              :label="$t('menu.footer.mall')"
+            ></AnchorLink>
+            <AnchorLink href="/" :label="$t('menu.footer.humansAndProjects')"></AnchorLink>
+            <h3 class="footer-header mt-4 mb-1 text-left">
+              {{ $t('menu.footer.socialHeadline') }}
+            </h3>
+            <AnchorLink href="/" :label="$t('menu.footer.instagram')"></AnchorLink>
+            <AnchorLink href="/" :label="$t('menu.footer.telegram')"></AnchorLink>
+          </div>
         </v-col>
 
         <v-col cols="6" md="3">
@@ -48,6 +52,8 @@ import LogoImage from './LogoImage.vue'
 </script>
 
 <style scoped lang="scss">
+$mobile: 500px;
+
 .gradient-bg {
   width: 100%;
   height: 10px;
@@ -64,6 +70,9 @@ import LogoImage from './LogoImage.vue'
   font-weight: 600;
   line-height: 2rem;
   color: #3d4753;
+  @media screen and (max-width: $mobile) {
+    font-size: 140%;
+  }
 }
 
 .footer-links {
@@ -71,6 +80,15 @@ import LogoImage from './LogoImage.vue'
   flex-direction: column;
   align-items: flex-start;
   justify-content: start;
+  a {
+    @media screen and (max-width: $mobile) {
+      font-size: 100%;
+    }
+  }
+
+  .min-helper {
+    min-width: auto;
+  }
 }
 
 .min-width-remover {
