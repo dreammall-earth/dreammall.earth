@@ -144,15 +144,11 @@ describe('Brevo', () => {
     describe('with error from Brevo', () => {
       beforeEach(() => {
         jest.clearAllMocks()
-        mockSendTransacEmail.mockResolvedValueOnce('success').mockRejectedValue({
-          error: 'error',
-        })
+        mockSendTransacEmail.mockResolvedValueOnce('success').mockRejectedValue('error')
       })
 
       it('does reject with error', async () => {
-        await expect(sendContactEmails(contactForm)).rejects.toStrictEqual({
-          error: 'error',
-        })
+        await expect(sendContactEmails(contactForm)).rejects.toStrictEqual('error')
       })
 
       it('does not update the database', async () => {
@@ -252,15 +248,11 @@ describe('Brevo', () => {
     describe('with error from Brevo', () => {
       beforeEach(() => {
         jest.clearAllMocks()
-        mockCreateContact.mockRejectedValue({
-          error: 'error',
-        })
+        mockCreateContact.mockRejectedValue('error')
       })
 
       it('does reject with error', async () => {
-        await expect(subscribeToNewsletter(newsletterSubscription)).rejects.toStrictEqual({
-          error: 'error',
-        })
+        await expect(subscribeToNewsletter(newsletterSubscription)).rejects.toStrictEqual('error')
       })
 
       it('does not update the database', async () => {
