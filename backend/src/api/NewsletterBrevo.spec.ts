@@ -1,12 +1,15 @@
-import { TransactionalEmailsApi } from '@getbrevo/brevo'
+import { ContactsApi, CreateContact, TransactionalEmailsApi } from '@getbrevo/brevo'
 import { ContactForm, NewsletterSubscription } from '@prisma/client'
 
 import { CONFIG } from '#config/config'
 import { prisma } from '#src/prisma'
 
-import { sendContactFormEmail, createAddContactToList,
+import {
+  sendContactFormEmail,
+  createAddContactToList,
   createBrevoContactsApi,
-  sendContactToBrevo } from './NewsletterBrevo'
+  sendContactToBrevo,
+} from './NewsletterBrevo'
 
 CONFIG.BREVO_KEY = 'MY KEY'
 CONFIG.BREVO_CONTACT_REQUEST_TO_NAME = 'Peter Lustig'
@@ -63,8 +66,7 @@ beforeEach(async () => {
 describe('NewsletterBrevo', () => {
   describe('sendContactFormEmail', () => {
     describe('brevo key given', () => {
-      let result: TransactionalEmailsApi
-      beforeEach(() => {
+      beforeEach(async () => {
         jest.clearAllMocks()
         await sendContactFormEmail(contactForm)
       })
@@ -91,22 +93,23 @@ describe('NewsletterBrevo', () => {
           templateId: 1,
           to: [
             {
-              name: 'Bibi Bloxberg',
-              email: 'bibi@bloxberg.de',
+              name: 'Peter Lustig',
+              email: 'peter@lustig.de',
             },
           ],
           sender: {
-            name: 'Peter Lustig',
-            email: 'peter@lustig.de',
+            name: 'Bibi Bloxberg',
+            email: 'bibi@bloxberg.de',
           },
           replyTo: {
-            name: 'Peter Lustig',
-            email: 'peter@lustig.de',
+            name: 'Bibi Bloxberg',
+            email: 'bibi@bloxberg.de',
           },
           params: {
             firstName: contactForm.firstName,
             lastName: contactForm.lastName,
             content: contactForm.content,
+            email: contactForm.email,
           },
         })
       })
@@ -173,7 +176,7 @@ describe('NewsletterBrevo', () => {
     })
 
     describe('without brevo key', () => {
-      beforeEach(() => {
+      beforeEach(async () => {
         jest.clearAllMocks()
         CONFIG.BREVO_KEY = undefined
         await sendContactFormEmail(contactForm)
@@ -211,7 +214,7 @@ describe('NewsletterBrevo', () => {
       })
 
       it('calls ContactsApi constructor', () => {
-        expect(SibApiV3Sdk.ContactsApi).toHaveBeenCalledTimes(1)
+        expect(ContactsApi).toHaveBeenCalledTimes(1)
       })
 
       it('sets the API key', () => {
@@ -223,7 +226,7 @@ describe('NewsletterBrevo', () => {
     })
 
     describe('createAddContactToList', () => {
-      let result: SibApiV3Sdk.CreateContact
+      let result: CreateContact
 
       beforeEach(() => {
         jest.clearAllMocks()
@@ -267,11 +270,14 @@ describe('NewsletterBrevo', () => {
           expect(result).toHaveLength(1)
           expect(result).toEqual([
             {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(Number),
               firstName: 'Bibi',
               lastName: 'Bloxberg',
               email: 'bibi@bloxberg.de',
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               createdAt: expect.any(Date),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               brevoSuccess: expect.any(Date),
             },
           ])
@@ -297,10 +303,12 @@ describe('NewsletterBrevo', () => {
           expect(result).toHaveLength(1)
           expect(result).toEqual([
             {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(Number),
               firstName: 'Bibi',
               lastName: 'Bloxberg',
               email: 'bibi@bloxberg.de',
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               createdAt: expect.any(Date),
               brevoSuccess: null,
             },
