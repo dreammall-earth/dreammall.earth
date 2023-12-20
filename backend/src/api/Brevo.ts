@@ -1,5 +1,11 @@
-// eslint-disable-next-line import/no-namespace
-import * as SibApiV3Sdk from '@getbrevo/brevo'
+import {
+  ContactsApi,
+  ContactsApiApiKeys,
+  CreateContact,
+  SendSmtpEmail,
+  TransactionalEmailsApi,
+  TransactionalEmailsApiApiKeys,
+} from '@getbrevo/brevo'
 import { ContactForm, NewsletterSubscription } from '@prisma/client'
 
 import { CONFIG, CONFIG_CHECKS } from '#config/config'
@@ -12,8 +18,8 @@ export const sendContactEmails = async (
     return undefined
   }
 
-  const apiInstance: SibApiV3Sdk.TransactionalEmailsApi = new SibApiV3Sdk.TransactionalEmailsApi()
-  apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, CONFIG.BREVO_KEY)
+  const apiInstance = new TransactionalEmailsApi()
+  apiInstance.setApiKey(TransactionalEmailsApiApiKeys.apiKey, CONFIG.BREVO_KEY)
 
   const admin = {
     name: CONFIG.BREVO_ADMIN_NAME,
@@ -25,7 +31,7 @@ export const sendContactEmails = async (
   }
 
   // Admin Mail
-  const smtpEmailToAdmin = new SibApiV3Sdk.SendSmtpEmail()
+  const smtpEmailToAdmin = new SendSmtpEmail()
   smtpEmailToAdmin.templateId = CONFIG.BREVO_CONTACT_TEMPLATE_ADMIN
   smtpEmailToAdmin.to = [admin]
   smtpEmailToAdmin.sender = user
@@ -34,7 +40,7 @@ export const sendContactEmails = async (
   const emailAdmin = apiInstance.sendTransacEmail(smtpEmailToAdmin)
 
   // Client Mail
-  const smtpEmailToClient = new SibApiV3Sdk.SendSmtpEmail()
+  const smtpEmailToClient = new SendSmtpEmail()
   smtpEmailToClient.templateId = CONFIG.BREVO_CONTACT_TEMPLATE_USER
   smtpEmailToClient.to = [user]
   smtpEmailToClient.sender = admin
@@ -72,11 +78,11 @@ export const subscribeToNewsletter = async (
     return undefined
   }
 
-  const apiInstance = new SibApiV3Sdk.ContactsApi()
-  apiInstance.setApiKey(SibApiV3Sdk.ContactsApiApiKeys.apiKey, CONFIG.BREVO_KEY)
+  const apiInstance = new ContactsApi()
+  apiInstance.setApiKey(ContactsApiApiKeys.apiKey, CONFIG.BREVO_KEY)
 
   // Create ContactBREVO_CONTACT_LIST_ID
-  const contact = new SibApiV3Sdk.CreateContact()
+  const contact = new CreateContact()
   contact.email = newsletterSubscription.email
   contact.listIds = [CONFIG.BREVO_NEWSLETTER_LIST]
   contact.attributes = {
