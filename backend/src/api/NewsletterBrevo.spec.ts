@@ -9,7 +9,7 @@ import { sendContactFormEmail, sendContactToBrevo } from './NewsletterBrevo'
 CONFIG.BREVO_KEY = 'MY KEY'
 CONFIG.BREVO_CONTACT_REQUEST_TO_NAME = 'Peter Lustig'
 CONFIG.BREVO_CONTACT_REQUEST_TO_EMAIL = 'peter@lustig.de'
-CONFIG.BREVO_TEMPLATE_CONTACT_BASE = 1
+CONFIG.BREVO_TEMPLATE_CONTACT_ADMIN = 1
 CONFIG.BREVO_TEMPLATE_CONTACT_USER = 2
 CONFIG.BREVO_CONTACT_LIST_ID = 3
 
@@ -79,7 +79,7 @@ describe('NewsletterBrevo', () => {
         expect(mockSendTransacEmail).toHaveBeenCalledTimes(2)
       })
 
-      it('sends email to base', () => {
+      it('sends email to admin', () => {
         expect(mockSendTransacEmail).toHaveBeenCalledWith({
           templateId: 1,
           to: [
@@ -96,12 +96,28 @@ describe('NewsletterBrevo', () => {
             name: 'Bibi Bloxberg',
             email: 'bibi@bloxberg.de',
           },
-          params: {
-            firstName: contactForm.firstName,
-            lastName: contactForm.lastName,
-            content: contactForm.content,
-            email: contactForm.email,
+          params: contactForm,
+        })
+      })
+
+      it('sends email to user', () => {
+        expect(mockSendTransacEmail).toHaveBeenCalledWith({
+          templateId: 2,
+          to: [
+            {
+              name: 'Bibi Bloxberg',
+              email: 'bibi@bloxberg.de',
+            },
+          ],
+          sender: {
+            name: 'Peter Lustig',
+            email: 'peter@lustig.de',
           },
+          replyTo: {
+            name: 'Peter Lustig',
+            email: 'peter@lustig.de',
+          },
+          params: contactForm,
         })
       })
 

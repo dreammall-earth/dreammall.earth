@@ -17,7 +17,7 @@ export const sendContactFormEmail = async (
 
   // Admin Mail
   const smtpEmailToAdmin = new SibApiV3Sdk.SendSmtpEmail()
-  smtpEmailToAdmin.templateId = CONFIG.BREVO_TEMPLATE_CONTACT_BASE
+  smtpEmailToAdmin.templateId = CONFIG.BREVO_TEMPLATE_CONTACT_ADMIN
   smtpEmailToAdmin.to = [
     {
       name: CONFIG.BREVO_CONTACT_REQUEST_TO_NAME,
@@ -32,12 +32,7 @@ export const sendContactFormEmail = async (
     name: contactForm.firstName + ' ' + contactForm.lastName,
     email: contactForm.email,
   }
-  smtpEmailToAdmin.params = {
-    email: contactForm.email,
-    firstName: contactForm.firstName,
-    lastName: contactForm.lastName,
-    content: contactForm.content,
-  }
+  smtpEmailToAdmin.params = contactForm
   const emailAdmin = apiInstance.sendTransacEmail(smtpEmailToAdmin)
 
   // Client Mail
@@ -57,11 +52,7 @@ export const sendContactFormEmail = async (
     name: CONFIG.BREVO_CONTACT_REQUEST_TO_NAME,
     email: CONFIG.BREVO_CONTACT_REQUEST_TO_EMAIL,
   }
-  smtpEmailToClient.params = {
-    firstName: contactForm.firstName,
-    lastName: contactForm.lastName,
-    content: contactForm.content,
-  }
+  smtpEmailToClient.params = contactForm
   const emailClient = apiInstance.sendTransacEmail(smtpEmailToClient)
 
   // Construct result

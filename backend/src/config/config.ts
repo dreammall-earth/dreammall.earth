@@ -15,8 +15,8 @@ const BREVO = {
   BREVO_KEY: process.env.BREVO_KEY,
   BREVO_CONTACT_REQUEST_TO_NAME: process.env.BREVO_CONTACT_REQUEST_TO_NAME,
   BREVO_CONTACT_REQUEST_TO_EMAIL: process.env.BREVO_CONTACT_REQUEST_TO_EMAIL,
-  BREVO_TEMPLATE_CONTACT_BASE: !isNaN(Number(process.env.BREVO_TEMPLATE_CONTACT_BASE))
-    ? Number(process.env.BREVO_TEMPLATE_CONTACT_BASE)
+  BREVO_TEMPLATE_CONTACT_ADMIN: !isNaN(Number(process.env.BREVO_TEMPLATE_CONTACT_ADMIN))
+    ? Number(process.env.BREVO_TEMPLATE_CONTACT_ADMIN)
     : undefined,
   BREVO_TEMPLATE_CONTACT_USER: !isNaN(Number(process.env.BREVO_TEMPLATE_CONTACT_USER))
     ? Number(process.env.BREVO_TEMPLATE_CONTACT_USER)
@@ -34,13 +34,13 @@ export const CONFIG_CHECKS = {
     config: typeof CONFIG,
   ): config is typeof CONFIG & {
     BREVO_KEY: string
-    BREVO_TEMPLATE_CONTACT_BASE: number
+    BREVO_TEMPLATE_CONTACT_ADMIN: number
     BREVO_TEMPLATE_CONTACT_USER: number
     BREVO_CONTACT_REQUEST_TO_NAME: string
     BREVO_CONTACT_REQUEST_TO_EMAIL: string
   } =>
     typeof config.BREVO_KEY === 'string' &&
-    typeof config.BREVO_TEMPLATE_CONTACT_BASE === 'number' &&
+    typeof config.BREVO_TEMPLATE_CONTACT_ADMIN === 'number' &&
     typeof config.BREVO_TEMPLATE_CONTACT_USER === 'number' &&
     typeof config.BREVO_CONTACT_REQUEST_TO_NAME === 'string' &&
     typeof config.BREVO_CONTACT_REQUEST_TO_EMAIL === 'string',
