@@ -7,11 +7,11 @@ import { prisma } from '#src/prisma'
 import { sendContactEmails, subscribeToNewsletter } from './Brevo'
 
 CONFIG.BREVO_KEY = 'MY KEY'
-CONFIG.BREVO_CONTACT_REQUEST_TO_NAME = 'Peter Lustig'
-CONFIG.BREVO_CONTACT_REQUEST_TO_EMAIL = 'peter@lustig.de'
-CONFIG.BREVO_TEMPLATE_CONTACT_ADMIN = 1
-CONFIG.BREVO_TEMPLATE_CONTACT_USER = 2
-CONFIG.BREVO_CONTACT_LIST_ID = 3
+CONFIG.BREVO_ADMIN_NAME = 'Peter Lustig'
+CONFIG.BREVO_ADMIN_EMAIL = 'peter@lustig.de'
+CONFIG.BREVO_CONTACT_TEMPLATE_ADMIN = 1
+CONFIG.BREVO_CONTACT_TEMPLATE_USER = 2
+CONFIG.BREVO_NEWSLETTER_LIST = 3
 
 const mockSendTransacEmail = jest.fn().mockResolvedValue({
   response: 'success',
@@ -276,7 +276,8 @@ describe('Brevo', () => {
         expect(result).toHaveLength(1)
         expect(result).toEqual([
           {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            // eslint-disable-next-line @typescript-e
+})lint/no-unsafe-assignment
             id: expect.any(Number),
             firstName: 'Bibi',
             lastName: 'Bloxberg',

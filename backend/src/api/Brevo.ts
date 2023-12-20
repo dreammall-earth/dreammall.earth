@@ -17,11 +17,11 @@ export const sendContactEmails = async (
 
   // Admin Mail
   const smtpEmailToAdmin = new SibApiV3Sdk.SendSmtpEmail()
-  smtpEmailToAdmin.templateId = CONFIG.BREVO_TEMPLATE_CONTACT_ADMIN
+  smtpEmailToAdmin.templateId = CONFIG.BREVO_CONTACT_TEMPLATE_ADMIN
   smtpEmailToAdmin.to = [
     {
-      name: CONFIG.BREVO_CONTACT_REQUEST_TO_NAME,
-      email: CONFIG.BREVO_CONTACT_REQUEST_TO_EMAIL,
+      name: CONFIG.BREVO_ADMIN_NAME,
+      email: CONFIG.BREVO_ADMIN_EMAIL,
     },
   ]
   smtpEmailToAdmin.sender = {
@@ -37,7 +37,7 @@ export const sendContactEmails = async (
 
   // Client Mail
   const smtpEmailToClient = new SibApiV3Sdk.SendSmtpEmail()
-  smtpEmailToClient.templateId = CONFIG.BREVO_TEMPLATE_CONTACT_USER
+  smtpEmailToClient.templateId = CONFIG.BREVO_CONTACT_TEMPLATE_USER
   smtpEmailToClient.to = [
     {
       name: contactForm.firstName + ' ' + contactForm.lastName,
@@ -45,12 +45,12 @@ export const sendContactEmails = async (
     },
   ]
   smtpEmailToClient.sender = {
-    name: CONFIG.BREVO_CONTACT_REQUEST_TO_NAME,
-    email: CONFIG.BREVO_CONTACT_REQUEST_TO_EMAIL,
+    name: CONFIG.BREVO_ADMIN_NAME,
+    email: CONFIG.BREVO_ADMIN_EMAIL,
   }
   smtpEmailToClient.replyTo = {
-    name: CONFIG.BREVO_CONTACT_REQUEST_TO_NAME,
-    email: CONFIG.BREVO_CONTACT_REQUEST_TO_EMAIL,
+    name: CONFIG.BREVO_ADMIN_NAME,
+    email: CONFIG.BREVO_ADMIN_EMAIL,
   }
   smtpEmailToClient.params = contactForm
   const emailClient = apiInstance.sendTransacEmail(smtpEmailToClient)
@@ -88,10 +88,10 @@ export const subscribeToNewsletter = async (
   const apiInstance = new SibApiV3Sdk.ContactsApi()
   apiInstance.setApiKey(SibApiV3Sdk.ContactsApiApiKeys.apiKey, CONFIG.BREVO_KEY)
 
-  // Create Contact
+  // Create ContactBREVO_CONTACT_LIST_ID
   const contact = new SibApiV3Sdk.CreateContact()
   contact.email = newsletterSubscription.email
-  contact.listIds = [CONFIG.BREVO_CONTACT_LIST_ID]
+  contact.listIds = [CONFIG.BREVO_NEWSLETTER_LIST]
   contact.attributes = {
     VORNAME: newsletterSubscription.firstName,
     NACHNAME: newsletterSubscription.lastName,
