@@ -1,10 +1,11 @@
 <template>
-  <v-btn :class="classes" variant="plain" :href="props.href">
+  <v-btn :class="classes" variant="plain" :href="props.href" @click.prevent="onClick()">
     {{ props.label }}
   </v-btn>
 </template>
 
 <script lang="ts" setup>
+import { navigate } from 'vike/client/router'
 import { computed } from 'vue'
 
 const props = withDefaults(
@@ -29,6 +30,11 @@ const classes = computed(() => ({
   'anchor-link': true,
   'anchor-link--text': props.variant === 'text',
 }))
+
+async function onClick() {
+  const navigationPromise = navigate('/#products')
+  await navigationPromise
+}
 </script>
 
 <style scoped lang="scss">
