@@ -1,6 +1,6 @@
 import { Resolver, Mutation, Query, Arg } from 'type-graphql'
 
-import { sendContactFormEmail } from '#api/Brevo'
+import { sendContactEmails } from '#api/Brevo'
 import { ContactFormInput } from '#inputs/ContactFormInput'
 import { prisma } from '#src/prisma'
 
@@ -11,7 +11,7 @@ export class ContactFormResolver {
     @Arg('contactFormData') contactFormData: ContactFormInput,
   ): Promise<boolean> {
     const contactForm = await prisma.contactForm.create({ data: contactFormData })
-    void sendContactFormEmail(contactForm)
+    void sendContactEmails(contactForm)
     return true
   }
 

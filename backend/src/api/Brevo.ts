@@ -5,7 +5,7 @@ import { ContactForm, NewsletterSubscription } from '@prisma/client'
 import { CONFIG, CONFIG_CHECKS } from '#config/config'
 import { prisma } from '#src/prisma'
 
-export const sendContactFormEmail = async (
+export const sendContactEmails = async (
   contactForm: ContactForm,
 ): Promise<Awaited<ReturnType<typeof apiInstance.sendTransacEmail>>[] | undefined> => {
   if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SEND_CONTACT(CONFIG)) {
@@ -78,7 +78,7 @@ export const sendContactFormEmail = async (
   return promiseAll
 }
 
-export const sendContactToBrevo = async (
+export const subscribeToNewsletter = async (
   newsletterSubscription: NewsletterSubscription,
 ): Promise<Awaited<ReturnType<typeof apiInstance.createContact>> | undefined> => {
   if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SUBSCRIBE_NEWSLETTER(CONFIG)) {
