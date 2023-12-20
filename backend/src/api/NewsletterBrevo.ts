@@ -139,9 +139,11 @@ export const sendContactFormEmail = async (
   return promiseAll
 }
 
-export const sendContactToBrevo = async (contactForm: NewsletterSubscription): Promise<boolean> => {
+export const sendContactToBrevo = async (
+  contactForm: NewsletterSubscription,
+): Promise<Awaited<ReturnType<typeof apiInstance.createContact>> | undefined> => {
   if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SEND_CONTACT(CONFIG)) {
-    return false
+    return undefined
   }
   const createContact: SibApiV3Sdk.CreateContact = createAddContactToList(contactForm)
   const apiInstance = createBrevoContactsApi()
@@ -161,7 +163,6 @@ export const sendContactToBrevo = async (contactForm: NewsletterSubscription): P
     })
   } catch (error) {
     // TODO: logging or event
-    return false
   }
-  return true
+  return createContactPromise
 }

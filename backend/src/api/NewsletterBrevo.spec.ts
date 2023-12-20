@@ -179,6 +179,36 @@ describe('NewsletterBrevo', () => {
         })
       })
 
+      describe('with error from Brevo', () => {
+        beforeEach(() => {
+          jest.clearAllMocks()
+          mockCreateContact.mockRejectedValue({
+            error: 'error',
+          })
+        })
+
+        it('expect to reject with error', async () => {
+          await expect(sendContactToBrevo(newsletterSubscription)).rejects.toStrictEqual({
+            error: 'error',
+          })
+        })
+
+        it('does not update the database', async () => {
+          const result: NewsletterSubscription[] = await prisma.newsletterSubscription.findMany()
+          expect(result).toHaveLength(1)
+          expect(result).toEqual([
+            {
+              id: expect.any(Number),
+              firstName: 'Bibi',
+              lastName: 'Bloxberg',
+              email: 'bibi@bloxberg.de',
+              createdAt: expect.any(Date),
+              brevoSuccess: null,
+            },
+          ])
+        })
+      })
+
       describe('without brevo key', () => {
         beforeEach(async () => {
           jest.clearAllMocks()
