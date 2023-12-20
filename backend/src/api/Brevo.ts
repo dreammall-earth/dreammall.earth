@@ -15,43 +15,30 @@ export const sendContactEmails = async (
   const apiInstance: SibApiV3Sdk.TransactionalEmailsApi = new SibApiV3Sdk.TransactionalEmailsApi()
   apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, CONFIG.BREVO_KEY)
 
+  const admin = {
+    name: CONFIG.BREVO_ADMIN_NAME,
+    email: CONFIG.BREVO_ADMIN_EMAIL,
+  }
+  const user = {
+    name: contactForm.firstName + ' ' + contactForm.lastName,
+    email: contactForm.email,
+  }
+
   // Admin Mail
   const smtpEmailToAdmin = new SibApiV3Sdk.SendSmtpEmail()
   smtpEmailToAdmin.templateId = CONFIG.BREVO_CONTACT_TEMPLATE_ADMIN
-  smtpEmailToAdmin.to = [
-    {
-      name: CONFIG.BREVO_ADMIN_NAME,
-      email: CONFIG.BREVO_ADMIN_EMAIL,
-    },
-  ]
-  smtpEmailToAdmin.sender = {
-    name: contactForm.firstName + ' ' + contactForm.lastName,
-    email: contactForm.email,
-  }
-  smtpEmailToAdmin.replyTo = {
-    name: contactForm.firstName + ' ' + contactForm.lastName,
-    email: contactForm.email,
-  }
+  smtpEmailToAdmin.to = [admin]
+  smtpEmailToAdmin.sender = user
+  smtpEmailToAdmin.replyTo = user
   smtpEmailToAdmin.params = contactForm
   const emailAdmin = apiInstance.sendTransacEmail(smtpEmailToAdmin)
 
   // Client Mail
   const smtpEmailToClient = new SibApiV3Sdk.SendSmtpEmail()
   smtpEmailToClient.templateId = CONFIG.BREVO_CONTACT_TEMPLATE_USER
-  smtpEmailToClient.to = [
-    {
-      name: contactForm.firstName + ' ' + contactForm.lastName,
-      email: contactForm.email,
-    },
-  ]
-  smtpEmailToClient.sender = {
-    name: CONFIG.BREVO_ADMIN_NAME,
-    email: CONFIG.BREVO_ADMIN_EMAIL,
-  }
-  smtpEmailToClient.replyTo = {
-    name: CONFIG.BREVO_ADMIN_NAME,
-    email: CONFIG.BREVO_ADMIN_EMAIL,
-  }
+  smtpEmailToClient.to = [user]
+  smtpEmailToClient.sender = admin
+  smtpEmailToClient.replyTo = admin
   smtpEmailToClient.params = contactForm
   const emailClient = apiInstance.sendTransacEmail(smtpEmailToClient)
 
