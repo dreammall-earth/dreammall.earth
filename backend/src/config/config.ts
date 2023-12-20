@@ -3,6 +3,8 @@ import path from 'path'
 
 import { config } from 'dotenv'
 
+import { validateConfig } from './validateConfig'
+
 // Load env file
 config({
   path: path.resolve(__dirname, '../../.env'),
@@ -20,33 +22,8 @@ const BREVO = {
     : undefined,
 }
 
-export const printConfigError = (error: string) => {
-  switch (process.env.NODE_ENV) {
-    case 'test':
-      return
-    case 'production':
-      throw new Error(error)
-    default:
-      // eslint-disable-next-line no-console
-      console.warn(error)
-  }
-}
-const validateConfig = () => {
-  if (!BREVO.BREVO_KEY) {
-    printConfigError('Missing BREVO_KEY in config')
-  }
+const CONFIG = { ...BREVO }
 
-  if (
-    BREVO.BREVO_KEY &&
-    (!BREVO.BREVO_CONTACT_REQUEST_TO_EMAIL ||
-      !BREVO.BREVO_CONTACT_REQUEST_TO_NAME ||
-      !BREVO.BREVO_TEMPLATE_CONTACT_BASE ||
-      !BREVO.BREVO_TEMPLATE_CONTACT_USER)
-  ) {
-    printConfigError('BREVO_KEY is set, but one or more of the required BREVO configs are missing')
-  }
-}
+validateConfig(CONFIG)
 
-validateConfig()
-
-export default { ...BREVO }
+export default CONFIG
