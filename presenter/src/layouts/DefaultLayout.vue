@@ -31,3 +31,9 @@ const slots = useSlots()
   background: #f5f5f5;
 }
 </style>
+
+<style lang="scss">
+html {
+  scroll-behavior: smooth;
+}
+</style>

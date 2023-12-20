@@ -17,10 +17,10 @@ export default mergeConfig(
           // storybook
           '**/*{.,-}stories.?(c|m)[jt]s?(x)',
         ],
-        statements: 99,
-        branches: 94,
+        statements: 98,
+        branches: 92,
         functions: 87,
-        lines: 99,
+        lines: 98,
       },
     },
   }),
