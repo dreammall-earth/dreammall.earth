@@ -4,11 +4,14 @@ import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 import AnchorLink from '#components/nav/AnchorLink.vue'
+import { setupIntersectionObserverMock } from '#root/scripts/tests/mock.IntersectionObserver'
 
 import LogoImage from './LogoImage.vue'
 import TopMenu from './TopMenu.vue'
 
-describe('FooterMenu', () => {
+setupIntersectionObserverMock()
+
+describe('TopMenu', () => {
   const wrapper = mount(VApp, {
     slots: {
       default: h(TopMenu as Component),

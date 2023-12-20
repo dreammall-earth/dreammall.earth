@@ -61,7 +61,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onBeforeMount } from 'vue'
 
 import MobileMenuIcon from '#assets/img/hamburger_mobile.svg'
 import AnchorLink from '#components/nav/AnchorLink.vue'
@@ -72,11 +72,19 @@ const appBackground = ref('transparent')
 const navBackground = ref('#d8d8d8')
 const mobileMenu = ref(false)
 
+let videoSlideObserver: IntersectionObserver
+
 function changeAppBarBackground() {
   if (appBackground.value !== '#f5f5f5') {
-    // TODO change class for smoother transition
     appBackground.value = '#f5f5f5'
     navBackground.value = '#f5f5f5'
+  }
+}
+
+function resetAppBarBackground() {
+  if (appBackground.value !== 'transparent') {
+    appBackground.value = 'transparent'
+    navBackground.value = 'transparent'
   }
 }
 
@@ -84,17 +92,31 @@ function toggleNavBar() {
   mobileMenu.value = !mobileMenu.value
 
   if (navBackground.value !== '#f5f5f5') {
-    // TODO change class for smoother transition
     navBackground.value = '#f5f5f5'
     appBackground.value = '#f5f5f5'
   }
 }
 
-onMounted(() => {
-  window.addEventListener('scroll', changeAppBarBackground)
+onBeforeMount(() => {
+  videoSlideObserver = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        resetAppBarBackground()
+      } else {
+        changeAppBarBackground()
+      }
+    },
+    {
+      threshold: 0.1,
+    },
+  )
 })
-onUnmounted(() => {
-  window.removeEventListener('scroll', changeAppBarBackground)
+
+onMounted(() => {
+  const videoSlide = document.querySelector('#intro-video-slide')
+  if (videoSlide && videoSlideObserver) {
+    videoSlideObserver.observe(videoSlide)
+  }
 })
 </script>
 
@@ -106,15 +128,19 @@ onUnmounted(() => {
 
 <style lang="scss">
 .topmenu {
-  .v-toolbar__content {
-    height: 95px !important;
-  }
+  .v-toolbar {
+    transition: background-color 0.3s;
 
-  .mobile-menu-icon {
-    max-width: 35px;
+    .v-toolbar__content {
+      height: 95px !important;
+    }
 
-    &:hover {
-      cursor: pointer;
+    .mobile-menu-icon {
+      max-width: 35px;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 

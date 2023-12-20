@@ -9,7 +9,7 @@
         color="#ffffff"
         theme="dark"
       >
-        <v-carousel-item class="video-item">
+        <v-carousel-item id="intro-video-slide" class="video-item">
           <v-sheet class="video-item">
             <video
               :key="videoSrc"
