@@ -1,12 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 // eslint-disable-next-line import/no-namespace
-import * as SibApiV3Sdk from '@getbrevo/brevo'
 import { ContactForm } from '@prisma/client'
 
 import config from '#config/config'
 import { prisma } from '#src/prisma'
 
-import { sendContactFormEmail, sendSmtpEmail } from './NewsletterBrevo'
+import { sendContactFormEmail } from './NewsletterBrevo'
 
 config.BREVO_KEY = 'MY KEY'
 config.BREVO_CONTACT_REQUEST_TO_NAME = 'Peter Lustig'
@@ -54,103 +52,6 @@ beforeEach(async () => {
 })
 
 describe('NewsletterBrevo', () => {
-  describe('sendSmtpEmail', () => {
-    describe('with success', () => {
-      beforeEach(async () => {
-        jest.clearAllMocks()
-        const email = new SibApiV3Sdk.SendSmtpEmail()
-        email.templateId = 42
-        email.to = [
-          {
-            name: 'Peter Lustig',
-            email: 'peter@lustig.de',
-          },
-        ]
-        email.sender = {
-          name: 'Bibi Bloxberg',
-          email: 'bibi@bloxberg.de',
-        }
-        email.replyTo = {
-          name: 'Bibi Bloxberg',
-          email: 'bibi@bloxberg.de',
-        }
-        email.params = contactForm
-        await sendSmtpEmail(email, contactForm)
-      })
-
-      it('calls TransactionalEmailsApi constructor', () => {
-        expect(SibApiV3Sdk.TransactionalEmailsApi).toHaveBeenCalledTimes(1)
-      })
-
-      it('does update the database', async () => {
-        const result: ContactForm[] = await prisma.contactForm.findMany()
-        expect(result).toHaveLength(1)
-        expect(result).toEqual([
-          {
-            id: expect.any(Number),
-            firstName: 'Bibi',
-            lastName: 'Bloxberg',
-            content: 'Hello DreamMall!',
-            email: 'bibi@bloxberg.de',
-            createdAt: expect.any(Date),
-            brevoSuccess: expect.any(Date),
-          },
-        ])
-      })
-    })
-
-    describe('with error', () => {
-      beforeEach(async () => {
-        jest.clearAllMocks()
-        mockSendTransacEmail.mockRejectedValue({
-          error: 'error',
-        })
-        const email = new SibApiV3Sdk.SendSmtpEmail()
-        email.templateId = 42
-        email.to = [
-          {
-            name: 'Peter Lustig',
-            email: 'peter@lustig.de',
-          },
-        ]
-        email.sender = {
-          name: 'Bibi Bloxberg',
-          email: 'bibi@bloxberg.de',
-        }
-        email.replyTo = {
-          name: 'Bibi Bloxberg',
-          email: 'bibi@bloxberg.de',
-        }
-        email.params = contactForm
-        await sendSmtpEmail(email, contactForm)
-      })
-
-      it('calls TransactionalEmailsApi constructor', () => {
-        expect(SibApiV3Sdk.TransactionalEmailsApi).toHaveBeenCalledTimes(1)
-      })
-
-      it('does not update the database', async () => {
-        const result: ContactForm[] = await prisma.contactForm.findMany()
-        expect(result).toHaveLength(1)
-        expect(result).toEqual([
-          {
-            id: expect.any(Number),
-            firstName: 'Bibi',
-            lastName: 'Bloxberg',
-            content: 'Hello DreamMall!',
-            email: 'bibi@bloxberg.de',
-            createdAt: expect.any(Date),
-            brevoSuccess: null,
-          },
-        ])
-      })
-
-      it('calls the console.log in error path', () => {
-        expect(consoleLogMock).toHaveBeenCalledWith({ error: 'error' })
-      })
-    })
-  })
-
   describe('sendContactFormEmail', () => {
     describe('brevo key given', () => {
       beforeEach(async () => {
@@ -159,11 +60,11 @@ describe('NewsletterBrevo', () => {
       })
 
       it('calls sendSmtpEmail twice', () => {
-        expect(mockSendTransacEmail).toBeCalledTimes(2)
+        expect(mockSendTransacEmail).toHaveBeenCalledTimes(2)
       })
 
       it('sends email to base', () => {
-        expect(mockSendTransacEmail).toBeCalledWith({
+        expect(mockSendTransacEmail).toHaveBeenCalledWith({
           templateId: 1,
           to: [
             {
@@ -189,7 +90,7 @@ describe('NewsletterBrevo', () => {
       })
 
       it('sends email to client', () => {
-        expect(mockSendTransacEmail).toBeCalledWith({
+        expect(mockSendTransacEmail).toHaveBeenCalledWith({
           templateId: 2,
           to: [
             {
@@ -222,7 +123,7 @@ describe('NewsletterBrevo', () => {
       })
 
       it('does not call sendSmtpEmail', () => {
-        expect(mockSendTransacEmail).not.toBeCalled()
+        expect(mockSendTransacEmail).not.toHaveBeenCalled()
       })
     })
   })

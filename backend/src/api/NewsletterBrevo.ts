@@ -5,37 +5,15 @@ import { ContactForm } from '@prisma/client'
 import config from '#config/config'
 import { prisma } from '#src/prisma'
 
-export const sendSmtpEmail = async (
-  smtpEmail: SibApiV3Sdk.SendSmtpEmail,
-  contactForm: ContactForm,
-): Promise<ReturnType<SibApiV3Sdk.TransactionalEmailsApi['sendTransacEmail']> | undefined> => {
-  const apiInstance: SibApiV3Sdk.TransactionalEmailsApi = new SibApiV3Sdk.TransactionalEmailsApi()
-  apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, config.BREVO_KEY)
-
-  try {
-    const apiResponse = await apiInstance.sendTransacEmail(smtpEmail)
-    contactForm.brevoSuccess = new Date()
-    await prisma.contactForm.update({
-      where: {
-        id: contactForm.id,
-      },
-      data: {
-        ...contactForm,
-      },
-    })
-    return apiResponse
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error)
-  }
-}
-
 export const sendContactFormEmail = (
   contactForm: ContactForm,
-): Promise<Awaited<ReturnType<typeof sendSmtpEmail>>[]> | undefined => {
+): Promise<Awaited<ReturnType<typeof apiInstance.sendTransacEmail>>[]> | undefined => {
   if (!config.BREVO_KEY) {
     return undefined
   }
+
+  const apiInstance: SibApiV3Sdk.TransactionalEmailsApi = new SibApiV3Sdk.TransactionalEmailsApi()
+  apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, config.BREVO_KEY)
 
   // Admin Mail
   const smtpEmailToAdmin = new SibApiV3Sdk.SendSmtpEmail()
@@ -60,7 +38,7 @@ export const sendContactFormEmail = (
     lastName: contactForm.lastName,
     content: contactForm.content,
   }
-  const emailAdmin = sendSmtpEmail(smtpEmailToAdmin, contactForm)
+  const emailAdmin = apiInstance.sendTransacEmail(smtpEmailToAdmin)
 
   // Client Mail
   const smtpEmailToClient = new SibApiV3Sdk.SendSmtpEmail()
@@ -84,7 +62,25 @@ export const sendContactFormEmail = (
     lastName: contactForm.lastName,
     content: contactForm.content,
   }
-  const emailClient = sendSmtpEmail(smtpEmailToClient, contactForm)
+  const emailClient = apiInstance.sendTransacEmail(smtpEmailToClient)
 
-  return Promise.all([emailAdmin, emailClient])
+  // Construct result
+  const promiseAll = Promise.all([emailAdmin, emailClient])
+
+  // Update database once both promises came back
+  void promiseAll.then(async () => {
+    contactForm.brevoSuccess = new Date()
+    await prisma.contactForm.update({
+      where: {
+        id: contactForm.id,
+      },
+      data: {
+        ...contactForm,
+      },
+    })
+    return undefined
+  })
+
+  // Return unresolved promise
+  return promiseAll
 }
