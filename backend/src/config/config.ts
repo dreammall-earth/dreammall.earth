@@ -20,6 +20,9 @@ const BREVO = {
   BREVO_TEMPLATE_CONTACT_USER: process.env.BREVO_TEMPLATE_CONTACT_USER
     ? Number(process.env.BREVO_TEMPLATE_CONTACT_USER)
     : undefined,
+  BREVO_CONTACT_LIST_ID: process.env.BREVO_CONTACT_LIST_ID
+    ? Number(process.env.BREVO_CONTACT_LIST_ID)
+    : undefined,
 }
 
 const CONFIG = { ...BREVO }
