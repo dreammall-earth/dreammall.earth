@@ -20,7 +20,7 @@ const BREVO = {
     : undefined,
 }
 
-export const validateConfigError = (error: string) => {
+export const printConfigError = (error: string) => {
   switch (process.env.NODE_ENV) {
     case 'test':
       return
@@ -33,7 +33,7 @@ export const validateConfigError = (error: string) => {
 }
 const validateConfig = () => {
   if (!BREVO.BREVO_KEY) {
-    validateConfigError('Missing BREVO_KEY in config')
+    printConfigError('Missing BREVO_KEY in config')
   }
 
   if (
@@ -43,9 +43,7 @@ const validateConfig = () => {
       !BREVO.BREVO_TEMPLATE_CONTACT_BASE ||
       !BREVO.BREVO_TEMPLATE_CONTACT_USER)
   ) {
-    validateConfigError(
-      'BREVO_KEY is set, but one or more of the required BREVO configs are missing',
-    )
+    printConfigError('BREVO_KEY is set, but one or more of the required BREVO configs are missing')
   }
 }
 
