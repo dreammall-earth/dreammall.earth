@@ -93,6 +93,9 @@ import slide3Icon3 from '#assets/img/slides/slide3-search.svg'
 </script>
 
 <style scoped lang="scss">
+$mobile: 500px;
+$tablet: 960px;
+
 .section5 {
   max-width: 1120px;
 
@@ -123,14 +126,40 @@ import slide3Icon3 from '#assets/img/slides/slide3-search.svg'
         position: absolute;
         max-width: 150px;
 
+        @media screen and (max-width: $tablet) {
+          max-width: 100px;
+        }
+
+        @media screen and (max-width: $mobile) {
+          max-width: 90px;
+        }
+
         &.icon-1 {
           top: 230px;
           left: 50px;
+
+          @media screen and (max-width: $tablet) {
+            top: 330px;
+            left: 10%;
+          }
+
+          @media screen and (max-width: $mobile) {
+            left: 5%;
+          }
         }
 
         &.icon-2 {
           top: 350px;
           left: 200px;
+
+          @media screen and (max-width: $tablet) {
+            top: 460px;
+            left: 20%;
+          }
+
+          @media screen and (max-width: $mobile) {
+            left: 15%;
+          }
         }
 
         &.icon-3 {
@@ -139,16 +168,40 @@ import slide3Icon3 from '#assets/img/slides/slide3-search.svg'
           left: 0;
           margin-right: auto;
           margin-left: auto;
+
+          @media screen and (max-width: $tablet) {
+            top: 390px;
+            transform: scale(1.4);
+          }
         }
 
         &.icon-4 {
           top: 270px;
           right: 220px;
+
+          @media screen and (max-width: $tablet) {
+            top: 320px;
+            right: 15%;
+          }
+
+          @media screen and (max-width: $mobile) {
+            right: 15%;
+          }
         }
 
         &.icon-5 {
           top: 360px;
           right: 50px;
+
+          @media screen and (max-width: $tablet) {
+            top: 460px;
+            right: 10%;
+            transform: scale(1.3);
+          }
+
+          @media screen and (max-width: $mobile) {
+            right: 5%;
+          }
         }
       }
     }
@@ -158,24 +211,55 @@ import slide3Icon3 from '#assets/img/slides/slide3-search.svg'
         position: absolute;
         max-width: 150px;
 
+        @media screen and (max-width: $tablet) {
+          max-width: 100px;
+        }
+        @media screen and (max-width: $mobile) {
+          max-width: 90px;
+        }
+
         &.icon-1 {
           top: 350px;
           left: 180px;
+          @media screen and (max-width: $tablet) {
+            left: 10%;
+          }
+          @media screen and (max-width: $mobile) {
+            left: 5%;
+          }
         }
 
         &.icon-2 {
           top: 350px;
           left: 370px;
+          @media screen and (max-width: $tablet) {
+            left: 30%;
+          }
+          @media screen and (max-width: $mobile) {
+            left: 27%;
+          }
         }
 
         &.icon-3 {
           top: 350px;
           right: 370px;
+          @media screen and (max-width: $tablet) {
+            right: 30%;
+          }
+          @media screen and (max-width: $mobile) {
+            right: 27%;
+          }
         }
 
         &.icon-4 {
           top: 350px;
           right: 180px;
+          @media screen and (max-width: $tablet) {
+            right: 10%;
+          }
+          @media screen and (max-width: $mobile) {
+            right: 5%;
+          }
         }
       }
     }
@@ -184,10 +268,23 @@ import slide3Icon3 from '#assets/img/slides/slide3-search.svg'
       .slide-icon {
         position: absolute;
         max-width: 150px;
+        @media screen and (max-width: $tablet) {
+          max-width: 100px;
+        }
+        @media screen and (max-width: $mobile) {
+          max-width: 90px;
+        }
 
         &.icon-1 {
           top: 300px;
           left: 100px;
+          @media screen and (max-width: $tablet) {
+            top: 350px;
+            left: 10%;
+          }
+          @media screen and (max-width: $mobile) {
+            left: 5%;
+          }
         }
 
         &.icon-2 {
@@ -196,11 +293,23 @@ import slide3Icon3 from '#assets/img/slides/slide3-search.svg'
           left: 0;
           margin-right: auto;
           margin-left: auto;
+
+          @media screen and (max-width: $tablet) {
+            top: 400px;
+          }
         }
 
         &.icon-3 {
           top: 300px;
           right: 100px;
+
+          @media screen and (max-width: $tablet) {
+            top: 350px;
+            right: 10%;
+          }
+          @media screen and (max-width: $mobile) {
+            right: 5%;
+          }
         }
       }
     }
