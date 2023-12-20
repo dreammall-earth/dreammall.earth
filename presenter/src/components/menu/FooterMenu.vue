@@ -6,18 +6,17 @@
           <h2 class="footer-header mb-3 text-left">{{ $t('menu.footer.sitemap') }}</h2>
           <div class="footer-links">
             <AnchorLink class="min-helper" href="/" :label="$t('menu.footer.home')"></AnchorLink>
-            <AnchorLink href="/" :label="$t('menu.footer.worldCoffeeHouse')"></AnchorLink>
+            <AnchorLink href="/#planning-section" :label="$t('menu.footer.planing')"></AnchorLink>
             <AnchorLink
-              class="min-width-remover"
-              href="/"
-              :label="$t('menu.footer.mall')"
+              href="/#coffee-section"
+              :label="$t('menu.footer.worldCoffeeHouse')"
             ></AnchorLink>
-            <AnchorLink href="/" :label="$t('menu.footer.humansAndProjects')"></AnchorLink>
-            <h3 class="footer-header mt-4 mb-1 text-left">
+            <!-- <AnchorLink href="/" :label="$t('menu.footer.humansAndProjects')"></AnchorLink> -->
+            <!-- <h3 class="footer-header mt-4 mb-1 text-left">
               {{ $t('menu.footer.socialHeadline') }}
             </h3>
             <AnchorLink href="/" :label="$t('menu.footer.instagram')"></AnchorLink>
-            <AnchorLink href="/" :label="$t('menu.footer.telegram')"></AnchorLink>
+            <AnchorLink href="/" :label="$t('menu.footer.telegram')"></AnchorLink> -->
           </div>
         </v-col>
 
@@ -25,8 +24,11 @@
           <h2 class="footer-header mb-3 text-left">{{ $t('menu.footer.privacyHeadline') }}</h2>
           <div class="footer-links">
             <AnchorLink href="impressum" :label="$t('menu.footer.impress')"></AnchorLink>
-            <AnchorLink href="/" :label="$t('menu.footer.cookies')"></AnchorLink>
-            <AnchorLink href="/" :label="$t('menu.footer.newsletter')"></AnchorLink>
+            <!-- <AnchorLink href="/" :label="$t('menu.footer.cookies')"></AnchorLink> -->
+            <AnchorLink
+              href="/#newsletter-section"
+              :label="$t('menu.footer.newsletter')"
+            ></AnchorLink>
             <AnchorLink href="datenschutz" :label="$t('menu.footer.privacy')"></AnchorLink>
           </div>
           <LogoImage class="mt-8" size="small" />
