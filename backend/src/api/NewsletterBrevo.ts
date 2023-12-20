@@ -21,7 +21,7 @@ export const createBrevoContactsApi = () => {
 }
 
 export const createAddContactToList = (contactForm: NewsletterSubscription) => {
-  const createContact: SibApiV3Sdk.CreateContact = new SibApiV3Sdk.CreateContact()
+  const createContact = new SibApiV3Sdk.CreateContact()
   createContact.email = contactForm.email
   createContact.listIds = [config.BREVO_CONTACT_LIST_ID]
   createContact.attributes = {
