@@ -342,14 +342,14 @@ $tablet: 960px;
 
     &.main-slide-icon-2 {
       top: 60px;
-      max-width: 120px;
       right: calc(50% - 60px);
+      max-width: 120px;
     }
 
     &.main-slide-icon-3 {
       top: 60px;
-      max-width: 90px;
       right: calc(50% - 45px);
+      max-width: 90px;
     }
   }
 
