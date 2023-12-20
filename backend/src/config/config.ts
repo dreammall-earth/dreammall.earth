@@ -40,7 +40,7 @@ export const CONFIG_CHECKS = {
     BREVO_ADMIN_EMAIL: string
   } =>
     typeof config.BREVO_KEY === 'string' &&
-    typeof config.BREVO_CONTACT_TEMPLATE_USER === 'number' &&
+    typeof config.BREVO_CONTACT_TEMPLATE_ADMIN === 'number' &&
     typeof config.BREVO_CONTACT_TEMPLATE_USER === 'number' &&
     typeof config.BREVO_ADMIN_NAME === 'string' &&
     typeof config.BREVO_ADMIN_EMAIL === 'string',
