@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-namespace
 import { ContactForm } from '@prisma/client'
 
 import config from '#config/config'
