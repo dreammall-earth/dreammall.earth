@@ -1,14 +1,34 @@
 // eslint-disable-next-line import/no-namespace
 import * as SibApiV3Sdk from '@getbrevo/brevo'
-import { ContactForm } from '@prisma/client'
+import { ContactForm, NewsletterSubscription } from '@prisma/client'
 
 import config from '#config/config'
 import { prisma } from '#src/prisma'
 
-export const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
-  const apiInstance: SibApiV3Sdk.TransactionalEmailsApi = new SibApiV3Sdk.TransactionalEmailsApi()
-  apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, config.BREVO_KEY)
-  return apiInstance
+export const createBrevoInstance = () => {
+  const apiTransactionalEmailInstance = new SibApiV3Sdk.TransactionalEmailsApi()
+  apiTransactionalEmailInstance.setApiKey(
+    SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
+    config.BREVO_KEY,
+  )
+  return apiTransactionalEmailInstance
+}
+
+export const createBrevoContactsApi = () => {
+  const apiBrevoContactsInstance = new SibApiV3Sdk.ContactsApi()
+  apiBrevoContactsInstance.setApiKey(SibApiV3Sdk.ContactsApiApiKeys.apiKey, config.BREVO_KEY)
+  return apiBrevoContactsInstance
+}
+
+export const createAddContactToList = (contactForm: NewsletterSubscription) => {
+  const createContact = new SibApiV3Sdk.CreateContact()
+  createContact.email = contactForm.email
+  createContact.listIds = [config.BREVO_CONTACT_LIST_ID]
+  createContact.attributes = {
+    VORNAME: contactForm.firstName,
+    NACHNAME: contactForm.lastName,
+  }
+  return createContact
 }
 
 export const createSmtpEmail = (
@@ -30,33 +50,14 @@ export const createSmtpEmail = (
 
 export const sendSmtpEmail = async (
   smtpEmail: SibApiV3Sdk.SendSmtpEmail,
-  contactForm: ContactForm,
-): Promise<ReturnType<SibApiV3Sdk.TransactionalEmailsApi['sendTransacEmail']> | undefined> => {
+): Promise<ReturnType<SibApiV3Sdk.TransactionalEmailsApi['sendTransacEmail']>> => {
   const apiInstance = createBrevoInstance()
-
-  try {
-    const apiResponse = await apiInstance.sendTransacEmail(smtpEmail)
-    contactForm.brevoSuccess = new Date()
-    await prisma.contactForm.update({
-      where: {
-        id: contactForm.id,
-      },
-      data: {
-        ...contactForm,
-      },
-    })
-    return apiResponse
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error)
-  }
+  return apiInstance.sendTransacEmail(smtpEmail)
 }
 
-export const sendContactFormEmail = (
-  contactForm: ContactForm,
-): Promise<Awaited<ReturnType<typeof sendSmtpEmail>>[]> | undefined => {
+export const sendContactFormEmail = async (contactForm: ContactForm): Promise<boolean> => {
   if (!config.BREVO_KEY) {
-    return undefined
+    return false
   }
   const smtpEmailToAdmin: SibApiV3Sdk.SendSmtpEmail = createSmtpEmail(
     config.BREVO_TEMPLATE_CONTACT_BASE,
@@ -76,12 +77,11 @@ export const sendContactFormEmail = (
     },
     {
       email: contactForm.email,
-      firstName: contactForm.firstName,
-      lastName: contactForm.lastName,
+      firstname: contactForm.firstName,
+      lastname: contactForm.lastName,
       content: contactForm.content,
     },
   )
-  const emailAdmin = sendSmtpEmail(smtpEmailToAdmin, contactForm)
 
   const smtpEmailToClient: SibApiV3Sdk.SendSmtpEmail = createSmtpEmail(
     config.BREVO_TEMPLATE_CONTACT_USER,
@@ -100,11 +100,56 @@ export const sendContactFormEmail = (
       email: config.BREVO_CONTACT_REQUEST_TO_EMAIL,
     },
     {
-      firstName: contactForm.firstName,
-      lastName: contactForm.lastName,
+      firstname: contactForm.firstName,
+      lastname: contactForm.lastName,
       content: contactForm.content,
     },
   )
-  const emailClient = sendSmtpEmail(smtpEmailToClient, contactForm)
-  return Promise.all([emailAdmin, emailClient])
+  const sendEmailClient = sendSmtpEmail(smtpEmailToClient)
+  const sendEmailAdmin = sendSmtpEmail(smtpEmailToAdmin)
+  const promiseAll = Promise.all([sendEmailAdmin, sendEmailClient])
+  try {
+    await promiseAll
+    // console.log('API called successfully. Returned data: ', JSON.stringify(data))
+    contactForm.brevoSuccess = new Date()
+    await prisma.contactForm.update({
+      where: {
+        id: contactForm.id,
+      },
+      data: {
+        ...contactForm,
+      },
+    })
+  } catch (error) {
+    // TODO: logging or event
+    return false
+  }
+  return true
+}
+
+export const sendContactToBrevo = async (contactForm: NewsletterSubscription): Promise<boolean> => {
+  if (!config.BREVO_KEY) {
+    return false
+  }
+  const createContact: SibApiV3Sdk.CreateContact = createAddContactToList(contactForm)
+  const apiInstance = createBrevoContactsApi()
+  const createContactPromise = apiInstance.createContact(createContact)
+  try {
+    await createContactPromise
+    // console.log('API called successfully. Returned data: ', JSON.stringify(data))
+    // code to store success goes here:
+    contactForm.brevoSuccess = new Date()
+    await prisma.newsletterSubscription.update({
+      where: {
+        id: contactForm.id,
+      },
+      data: {
+        ...contactForm,
+      },
+    })
+  } catch (error) {
+    // TODO: logging or event
+    return false
+  }
+  return true
 }

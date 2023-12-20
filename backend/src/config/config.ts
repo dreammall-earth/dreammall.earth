@@ -13,6 +13,7 @@ interface ENV {
   BREVO_CONTACT_REQUEST_TO_EMAIL: string | undefined
   BREVO_TEMPLATE_CONTACT_BASE: number | undefined
   BREVO_TEMPLATE_CONTACT_USER: number | undefined
+  BREVO_CONTACT_LIST_ID: number | undefined
 }
 
 interface Config {
@@ -21,6 +22,7 @@ interface Config {
   BREVO_CONTACT_REQUEST_TO_EMAIL: string
   BREVO_TEMPLATE_CONTACT_BASE: number
   BREVO_TEMPLATE_CONTACT_USER: number
+  BREVO_CONTACT_LIST_ID: number
 }
 
 /* eslint-disable n/no-process-env */
@@ -34,6 +36,9 @@ const getConfig = (): ENV => {
       : undefined,
     BREVO_TEMPLATE_CONTACT_USER: process.env.BREVO_TEMPLATE_CONTACT_USER
       ? Number(process.env.BREVO_TEMPLATE_CONTACT_USER)
+      : undefined,
+    BREVO_CONTACT_LIST_ID: process.env.BREVO_CONTACT_LIST_ID
+      ? Number(process.env.BREVO_CONTACT_LIST_ID)
       : undefined,
   }
 }
