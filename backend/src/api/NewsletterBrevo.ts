@@ -2,35 +2,35 @@
 import * as SibApiV3Sdk from '@getbrevo/brevo'
 import { ContactForm, NewsletterSubscription } from '@prisma/client'
 
-import config from '#config/config'
+import { CONFIG, CONFIG_CHECKS } from '#config/config'
 import { prisma } from '#src/prisma'
 
 export const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
-  if (!config.BREVO_KEY) {
+  if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SEND_CONTACT(CONFIG)) {
     throw new Error('BREVO_KEY missing')
   }
   const apiInstance: SibApiV3Sdk.TransactionalEmailsApi = new SibApiV3Sdk.TransactionalEmailsApi()
-  apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, config.BREVO_KEY)
+  apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, CONFIG.BREVO_KEY)
   return apiInstance
 }
 
 export const createBrevoContactsApi = () => {
-  if (!config.BREVO_KEY) {
+  if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SUBSCRIBE_NEWSLETTER(CONFIG)) {
     throw new Error('BREVO_KEY missing')
   }
 
   const apiBrevoContactsInstance = new SibApiV3Sdk.ContactsApi()
-  apiBrevoContactsInstance.setApiKey(SibApiV3Sdk.ContactsApiApiKeys.apiKey, config.BREVO_KEY)
+  apiBrevoContactsInstance.setApiKey(SibApiV3Sdk.ContactsApiApiKeys.apiKey, CONFIG.BREVO_KEY)
   return apiBrevoContactsInstance
 }
 
 export const createAddContactToList = (contactForm: NewsletterSubscription) => {
-  if (!config.BREVO_CONTACT_LIST_ID) {
+  if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SUBSCRIBE_NEWSLETTER(CONFIG)) {
     throw new Error('BREVO_CONTACT_LIST_ID missing')
   }
   const createContact = new SibApiV3Sdk.CreateContact()
   createContact.email = contactForm.email
-  createContact.listIds = [config.BREVO_CONTACT_LIST_ID]
+  createContact.listIds = [CONFIG.BREVO_CONTACT_LIST_ID]
   createContact.attributes = {
     VORNAME: contactForm.firstName,
     NACHNAME: contactForm.lastName,
@@ -65,23 +65,17 @@ export const sendSmtpEmail = async (
 export const sendContactFormEmail = async (
   contactForm: ContactForm,
 ): Promise<Awaited<ReturnType<typeof sendSmtpEmail>>[] | undefined> => {
-  if (
-    !config.BREVO_KEY ||
-    !config.BREVO_TEMPLATE_CONTACT_BASE ||
-    !config.BREVO_TEMPLATE_CONTACT_USER ||
-    !config.BREVO_CONTACT_REQUEST_TO_NAME ||
-    !config.BREVO_CONTACT_REQUEST_TO_EMAIL
-  ) {
+  if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SEND_CONTACT(CONFIG)) {
     // TODO log
     return undefined
   }
 
   const smtpEmailToAdmin: SibApiV3Sdk.SendSmtpEmail = createSmtpEmail(
-    config.BREVO_TEMPLATE_CONTACT_BASE,
+    CONFIG.BREVO_TEMPLATE_CONTACT_BASE,
     [
       {
-        name: config.BREVO_CONTACT_REQUEST_TO_NAME,
-        email: config.BREVO_CONTACT_REQUEST_TO_EMAIL,
+        name: CONFIG.BREVO_CONTACT_REQUEST_TO_NAME,
+        email: CONFIG.BREVO_CONTACT_REQUEST_TO_EMAIL,
       },
     ],
     {
@@ -101,7 +95,7 @@ export const sendContactFormEmail = async (
   )
 
   const smtpEmailToClient: SibApiV3Sdk.SendSmtpEmail = createSmtpEmail(
-    config.BREVO_TEMPLATE_CONTACT_USER,
+    CONFIG.BREVO_TEMPLATE_CONTACT_USER,
     [
       {
         name: contactForm.firstName + ' ' + contactForm.lastName,
@@ -109,12 +103,12 @@ export const sendContactFormEmail = async (
       },
     ],
     {
-      name: config.BREVO_CONTACT_REQUEST_TO_NAME,
-      email: config.BREVO_CONTACT_REQUEST_TO_EMAIL,
+      name: CONFIG.BREVO_CONTACT_REQUEST_TO_NAME,
+      email: CONFIG.BREVO_CONTACT_REQUEST_TO_EMAIL,
     },
     {
-      name: config.BREVO_CONTACT_REQUEST_TO_NAME,
-      email: config.BREVO_CONTACT_REQUEST_TO_EMAIL,
+      name: CONFIG.BREVO_CONTACT_REQUEST_TO_NAME,
+      email: CONFIG.BREVO_CONTACT_REQUEST_TO_EMAIL,
     },
     {
       firstname: contactForm.firstName,
@@ -146,7 +140,7 @@ export const sendContactFormEmail = async (
 }
 
 export const sendContactToBrevo = async (contactForm: NewsletterSubscription): Promise<boolean> => {
-  if (!config.BREVO_KEY) {
+  if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SEND_CONTACT(CONFIG)) {
     return false
   }
   const createContact: SibApiV3Sdk.CreateContact = createAddContactToList(contactForm)

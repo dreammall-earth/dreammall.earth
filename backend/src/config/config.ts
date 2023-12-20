@@ -3,6 +3,7 @@ import path from 'path'
 
 import { config } from 'dotenv'
 
+// eslint-disable-next-line import/no-cycle
 import { validateConfig } from './validateConfig'
 
 // Load env file
@@ -25,8 +26,27 @@ const BREVO = {
     : undefined,
 }
 
-const CONFIG = { ...BREVO }
+export const CONFIG = { ...BREVO }
 
-validateConfig(CONFIG)
+export const CONFIG_CHECKS = {
+  CONFIG_CHECK_BREVO_SEND_CONTACT: (
+    config: typeof CONFIG,
+  ): config is typeof CONFIG & {
+    BREVO_KEY: string
+    BREVO_TEMPLATE_CONTACT_BASE: number
+    BREVO_TEMPLATE_CONTACT_USER: number
+    BREVO_CONTACT_REQUEST_TO_NAME: string
+    BREVO_CONTACT_REQUEST_TO_EMAIL: string
+  } =>
+    typeof config.BREVO_KEY === 'string' &&
+    typeof config.BREVO_TEMPLATE_CONTACT_BASE === 'number' &&
+    typeof config.BREVO_TEMPLATE_CONTACT_USER === 'number' &&
+    typeof config.BREVO_CONTACT_REQUEST_TO_NAME === 'string' &&
+    typeof config.BREVO_CONTACT_REQUEST_TO_EMAIL === 'string',
+  CONFIG_CHECK_BREVO_SUBSCRIBE_NEWSLETTER: (
+    config: typeof CONFIG,
+  ): config is typeof CONFIG & { BREVO_KEY: string; BREVO_CONTACT_LIST_ID: number } =>
+    typeof config.BREVO_KEY === 'string' && typeof config.BREVO_CONTACT_LIST_ID === 'number',
+}
 
-export default CONFIG
+validateConfig()

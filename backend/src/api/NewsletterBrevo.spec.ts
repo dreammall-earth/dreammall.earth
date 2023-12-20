@@ -3,7 +3,7 @@
 import * as SibApiV3Sdk from '@getbrevo/brevo'
 import { ContactForm, NewsletterSubscription } from '@prisma/client'
 
-import config from '#config/config'
+import { CONFIG } from '#config/config'
 import { prisma } from '#src/prisma'
 
 import {
@@ -16,12 +16,12 @@ import {
   sendSmtpEmail,
 } from './NewsletterBrevo'
 
-config.BREVO_KEY = 'MY KEY'
-config.BREVO_CONTACT_REQUEST_TO_NAME = 'Peter Lustig'
-config.BREVO_CONTACT_REQUEST_TO_EMAIL = 'peter@lustig.de'
-config.BREVO_TEMPLATE_CONTACT_BASE = 1
-config.BREVO_TEMPLATE_CONTACT_USER = 2
-config.BREVO_CONTACT_LIST_ID = 3
+CONFIG.BREVO_KEY = 'MY KEY'
+CONFIG.BREVO_CONTACT_REQUEST_TO_NAME = 'Peter Lustig'
+CONFIG.BREVO_CONTACT_REQUEST_TO_EMAIL = 'peter@lustig.de'
+CONFIG.BREVO_TEMPLATE_CONTACT_BASE = 1
+CONFIG.BREVO_TEMPLATE_CONTACT_USER = 2
+CONFIG.BREVO_CONTACT_LIST_ID = 3
 
 const mockSendTransacEmail = jest.fn().mockResolvedValue({
   response: 'success',
@@ -77,7 +77,7 @@ describe('NewsletterBrevo', () => {
     describe('without brevo key', () => {
       beforeEach(() => {
         jest.clearAllMocks()
-        config.BREVO_KEY = undefined
+        CONFIG.BREVO_KEY = undefined
       })
 
       it('throws an Error', () => {
@@ -85,7 +85,7 @@ describe('NewsletterBrevo', () => {
       })
 
       afterAll(() => {
-        config.BREVO_KEY = 'MY KEY'
+        CONFIG.BREVO_KEY = 'MY KEY'
       })
     })
   })
@@ -182,7 +182,7 @@ describe('NewsletterBrevo', () => {
       describe('without brevo key', () => {
         beforeEach(async () => {
           jest.clearAllMocks()
-          config.BREVO_KEY = ''
+          CONFIG.BREVO_KEY = undefined
           await sendContactToBrevo(newsletterSubscription)
         })
 
@@ -196,7 +196,7 @@ describe('NewsletterBrevo', () => {
   describe('contactForm', () => {
     let contactForm: ContactForm
     beforeEach(async () => {
-      config.BREVO_KEY = 'MY KEY'
+      CONFIG.BREVO_KEY = 'MY KEY'
       await prisma.contactForm.deleteMany()
       contactForm = await prisma.contactForm.create({
         data: {
@@ -467,7 +467,7 @@ describe('NewsletterBrevo', () => {
       describe('without brevo key', () => {
         beforeEach(async () => {
           jest.clearAllMocks()
-          config.BREVO_KEY = ''
+          CONFIG.BREVO_KEY = undefined
           await sendContactFormEmail(contactForm)
         })
 

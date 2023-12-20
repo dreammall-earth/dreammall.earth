@@ -1,4 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+// eslint-disable-next-line import/no-cycle
+import { CONFIG, CONFIG_CHECKS } from './config'
+
 const printConfigError = (error: string) => {
   // eslint-disable-next-line n/no-process-env
   switch (process.env.NODE_ENV) {
@@ -12,20 +14,16 @@ const printConfigError = (error: string) => {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const validateConfig = (config: any) => {
-  if (!config.BREVO_KEY) {
-    printConfigError('Missing BREVO_KEY in config')
+export const validateConfig = () => {
+  if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SEND_CONTACT(CONFIG)) {
+    printConfigError(
+      'BREVO_SEND_CONTACT functionality is disabled - some BREVO configs are missing',
+    )
   }
 
-  if (
-    config.BREVO_KEY &&
-    (!config.BREVO_CONTACT_REQUEST_TO_EMAIL ||
-      !config.BREVO_CONTACT_REQUEST_TO_NAME ||
-      !config.BREVO_TEMPLATE_CONTACT_BASE ||
-      !config.BREVO_TEMPLATE_CONTACT_USER ||
-      !config.BREVO_CONTACT_LIST_ID)
-  ) {
-    printConfigError('BREVO_KEY is set, but one or more of the required BREVO configs are missing')
+  if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SUBSCRIBE_NEWSLETTER(CONFIG)) {
+    printConfigError(
+      'BREVO_SUBSCRIBE_NEWSLETTER functionality is disabled - some BREVO configs are missing',
+    )
   }
 }
