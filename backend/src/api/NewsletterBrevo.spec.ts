@@ -60,22 +60,38 @@ beforeEach(async () => {
 
 describe('NewsletterBrevo', () => {
   describe('createBrevoInstance', () => {
-    let result: SibApiV3Sdk.TransactionalEmailsApi
+    describe('brevo key given', () => {
+      let result: SibApiV3Sdk.TransactionalEmailsApi
+      beforeEach(() => {
+        jest.clearAllMocks()
+        result = createBrevoInstance()
+      })
 
-    beforeEach(() => {
-      jest.clearAllMocks()
-      result = createBrevoInstance()
+      it('calls TransactionalEmailsApi constructor', () => {
+        expect(SibApiV3Sdk.TransactionalEmailsApi).toHaveBeenCalledTimes(1)
+      })
+
+      it('sets the API key', () => {
+        // eslint-disable-next-line @typescript-eslint/unbound-method
+        expect(result.setApiKey).toHaveBeenCalledTimes(1)
+        // eslint-disable-next-line @typescript-eslint/unbound-method
+        expect(result.setApiKey).toHaveBeenCalledWith(0, 'MY KEY')
+      })
     })
 
-    it('calls TransactionalEmailsApi constructor', () => {
-      expect(SibApiV3Sdk.TransactionalEmailsApi).toHaveBeenCalledTimes(1)
-    })
+    describe('without brevo key', () => {
+      beforeEach(() => {
+        jest.clearAllMocks()
+        config.BREVO_KEY = undefined
+      })
 
-    it('sets the API key', () => {
-      // eslint-disable-next-line @typescript-eslint/unbound-method
-      expect(result.setApiKey).toHaveBeenCalledTimes(1)
-      // eslint-disable-next-line @typescript-eslint/unbound-method
-      expect(result.setApiKey).toHaveBeenCalledWith(0, 'MY KEY')
+      it('throws an Error', () => {
+        expect(createBrevoInstance).toThrow(new Error('BREVO_KEY missing'))
+      })
+
+      afterAll(() => {
+        config.BREVO_KEY = 'MY KEY'
+      })
     })
   })
 

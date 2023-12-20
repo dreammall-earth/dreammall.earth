@@ -6,6 +6,9 @@ import config from '#config/config'
 import { prisma } from '#src/prisma'
 
 export const createBrevoInstance = (): SibApiV3Sdk.TransactionalEmailsApi => {
+  if (!config.BREVO_KEY) {
+    throw new Error('BREVO_KEY missing')
+  }
   const apiInstance: SibApiV3Sdk.TransactionalEmailsApi = new SibApiV3Sdk.TransactionalEmailsApi()
   apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, config.BREVO_KEY)
   return apiInstance
@@ -55,7 +58,14 @@ export const sendSmtpEmail = async (
 export const sendContactFormEmail = (
   contactForm: ContactForm,
 ): Promise<Awaited<ReturnType<typeof sendSmtpEmail>>[]> | undefined => {
-  if (!config.BREVO_KEY) {
+  if (
+    !config.BREVO_KEY ||
+    !config.BREVO_TEMPLATE_CONTACT_BASE ||
+    !config.BREVO_TEMPLATE_CONTACT_USER ||
+    !config.BREVO_CONTACT_REQUEST_TO_NAME ||
+    !config.BREVO_CONTACT_REQUEST_TO_EMAIL
+  ) {
+    // TODO log
     return undefined
   }
   const smtpEmailToAdmin: SibApiV3Sdk.SendSmtpEmail = createSmtpEmail(
