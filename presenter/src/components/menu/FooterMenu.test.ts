@@ -132,8 +132,8 @@ describe('FooterMenu', () => {
     describe('first anchor link', () => {
       const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[0]
 
-      it('has href to /', () => {
-        expect(anchor.attributes('href')).toBe('impressum')
+      it('has href to /impressum', () => {
+        expect(anchor.attributes('href')).toBe('/impressum')
       })
 
       it('has text menu.footer.impress', () => {
@@ -168,8 +168,8 @@ describe('FooterMenu', () => {
     describe('fourth anchor link', () => {
       const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[3]
 
-      it('has href to /', () => {
-        expect(anchor.attributes('href')).toBe('datenschutz')
+      it('has href to /datenschutz', () => {
+        expect(anchor.attributes('href')).toBe('/datenschutz')
       })
 
       it('has text menu.footer.privacy', () => {
