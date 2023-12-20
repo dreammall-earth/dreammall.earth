@@ -1,10 +1,10 @@
+import { TransactionalEmailsApi } from '@getbrevo/brevo'
 import { ContactForm } from '@prisma/client'
 
 import config from '#config/config'
 import { prisma } from '#src/prisma'
 
 import { sendContactFormEmail } from './NewsletterBrevo'
-import { TransactionalEmailsApi } from '@getbrevo/brevo'
 
 config.BREVO_KEY = 'MY KEY'
 config.BREVO_CONTACT_REQUEST_TO_NAME = 'Peter Lustig'
@@ -137,12 +137,15 @@ describe('NewsletterBrevo', () => {
           expect(result).toHaveLength(1)
           expect(result).toEqual([
             {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(Number),
               firstName: 'Bibi',
               lastName: 'Bloxberg',
               content: 'Hello DreamMall!',
               email: 'bibi@bloxberg.de',
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               createdAt: expect.any(Date),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               brevoSuccess: expect.any(Date),
             },
           ])
@@ -171,11 +174,13 @@ describe('NewsletterBrevo', () => {
           expect(result).toHaveLength(1)
           expect(result).toEqual([
             {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(Number),
               firstName: 'Bibi',
               lastName: 'Bloxberg',
               content: 'Hello DreamMall!',
               email: 'bibi@bloxberg.de',
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               createdAt: expect.any(Date),
               brevoSuccess: null,
             },
