@@ -125,9 +125,8 @@ export const sendContactFormEmail = (
   const sendEmailClient = sendSmtpEmail(smtpEmailToClient)
   const sendEmailAdmin = sendSmtpEmail(smtpEmailToAdmin)
   const promiseAll = Promise.all([sendEmailAdmin, sendEmailClient])
-  try {
-    await promiseAll
-    // console.log('API called successfully. Returned data: ', JSON.stringify(data))
+
+  void promiseAll.then(async () => {
     contactForm.brevoSuccess = new Date()
     await prisma.contactForm.update({
       where: {
@@ -137,11 +136,9 @@ export const sendContactFormEmail = (
         ...contactForm,
       },
     })
-  } catch (error) {
-    // TODO: logging or event
-    return false
-  }
-  return true
+  })
+  
+  return promiseAll
 }
 
 export const sendContactToBrevo = async (contactForm: NewsletterSubscription): Promise<boolean> => {
