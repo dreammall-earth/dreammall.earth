@@ -2,7 +2,7 @@
   "about": {},
   "dataProtection": {
     "euDispute": {
-      "content": "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr/. Unsere E-Mail-Adresse finden Sie im Impressum.",
+      "content": "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr/. Unsere E-Mail Adresse finden Sie im Impressum.",
       "headline": "EU-Streitschlichtung"
     },
     "general": {
@@ -37,7 +37,7 @@
   },
   "home": {
     "newsletterSection": {
-      "currentNewsletter": "Aktuellen Newsletter",
+      "currentNewsletter": "Aktueller Newsletter",
       "headline": "Newsletter",
       "newsletterDownloadBtn": "Download",
       "newsletterForm": {
@@ -76,7 +76,7 @@
       },
       "thirdColumn": {
         "headline": "Menschen und Projekte",
-        "text": "Dein Talent ist wichtig für die Welt. Verwirklichen deine Kreativität in die Realität."
+        "text": "Dein Talent ist wichtig für die Welt. Verwirkliche deine Kreativität in die Realität."
       }
     },
     "section4": {
@@ -101,7 +101,7 @@
     },
     "section6": {
       "buttonText": "weiter",
-      "content": "Seien Sie Teil des Anfangs einer aufregenden Veränderung! Hinterlassen Sie uns einfach Ihren Namen und Ihre E-Mail-Adresse, um exklusive Angebote und umfassende Details vor der offiziellen Veröffentlichung zu erhalten. Verpassen Sie nicht die Gelegenheit, Teil unserer einzigartigen Community zu werden und von unseren besonderen Starter-Angeboten zu profitieren!",
+      "content": "Seien Sie Teil des Anfangs einer aufregenden Veränderung! Hinterlassen Sie uns einfach Ihren Namen und Ihre E-Mail Adresse, um exklusive Angebote und umfassende Details vor der offiziellen Veröffentlichung zu erhalten. Verpassen Sie nicht die Gelegenheit, Teil unserer einzigartigen Community zu werden und von unseren besonderen Starter-Angeboten zu profitieren!",
       "headline": "Veränderung",
       "headlineAppend": "Schaffen"
     }
@@ -167,7 +167,7 @@
         "firstName": "Vorname",
         "lastName": "Nachname",
         "mail": "E-Mail Adresse",
-        "message": "Frag uns einfach...",
+        "message": "Frag uns einfach …",
         "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unserer",
         "privacyLinkLabel": "Datenschutzrichtlinie",
         "submitBtn": "Absenden",
@@ -190,7 +190,7 @@
     },
     "header": {
       "about": "über",
-      "contact": "Kontakt",
+      "contact": "kontakt",
       "newsletter": "Newsletter abonnieren",
       "products": "products",
       "sitemap": "Sitemap"

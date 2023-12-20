@@ -135,11 +135,11 @@ $tablet: 960px;
         }
 
         &.icon-1 {
-          top: 230px;
+          top: 170px;
           left: 50px;
 
           @media screen and (max-width: $tablet) {
-            top: 330px;
+            top: 350px;
             left: 10%;
           }
 
@@ -168,6 +168,7 @@ $tablet: 960px;
           left: 0;
           margin-right: auto;
           margin-left: auto;
+          transform: scale(1.4);
 
           @media screen and (max-width: $tablet) {
             top: 390px;
@@ -192,6 +193,7 @@ $tablet: 960px;
         &.icon-5 {
           top: 360px;
           right: 50px;
+          transform: scale(1.2);
 
           @media screen and (max-width: $tablet) {
             top: 460px;
@@ -209,7 +211,7 @@ $tablet: 960px;
     &.slide2 {
       .slide-icon {
         position: absolute;
-        max-width: 150px;
+        max-width: 130px;
 
         @media screen and (max-width: $tablet) {
           max-width: 100px;
@@ -276,7 +278,7 @@ $tablet: 960px;
     &.slide3 {
       .slide-icon {
         position: absolute;
-        max-width: 150px;
+        max-width: 130px;
 
         @media screen and (max-width: $tablet) {
           max-width: 100px;
@@ -288,7 +290,7 @@ $tablet: 960px;
 
         &.icon-1 {
           top: 300px;
-          left: 100px;
+          left: 120px;
 
           @media screen and (max-width: $tablet) {
             top: 350px;
@@ -314,7 +316,7 @@ $tablet: 960px;
 
         &.icon-3 {
           top: 300px;
-          right: 100px;
+          right: 120px;
 
           @media screen and (max-width: $tablet) {
             top: 350px;
@@ -340,12 +342,14 @@ $tablet: 960px;
 
     &.main-slide-icon-2 {
       top: 60px;
-      right: calc(50% - 30px);
+      max-width: 120px;
+      right: calc(50% - 60px);
     }
 
     &.main-slide-icon-3 {
       top: 60px;
-      right: calc(50% - 30px);
+      max-width: 90px;
+      right: calc(50% - 45px);
     }
   }
 
