@@ -87,54 +87,45 @@ export const sendContactFormEmail = async (
   return promiseAll
 }
 
-export const createBrevoContactsApi = () => {
-  if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SUBSCRIBE_NEWSLETTER(CONFIG)) {
-    throw new Error('BREVO_KEY missing')
-  }
-
-  const apiBrevoContactsInstance = new SibApiV3Sdk.ContactsApi()
-  apiBrevoContactsInstance.setApiKey(SibApiV3Sdk.ContactsApiApiKeys.apiKey, CONFIG.BREVO_KEY)
-  return apiBrevoContactsInstance
-}
-
-export const createAddContactToList = (contactForm: NewsletterSubscription) => {
-  if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SUBSCRIBE_NEWSLETTER(CONFIG)) {
-    throw new Error('BREVO_CONTACT_LIST_ID missing')
-  }
-  const createContact = new SibApiV3Sdk.CreateContact()
-  createContact.email = contactForm.email
-  createContact.listIds = [CONFIG.BREVO_CONTACT_LIST_ID]
-  createContact.attributes = {
-    VORNAME: contactForm.firstName,
-    NACHNAME: contactForm.lastName,
-  }
-  return createContact
-}
-
 export const sendContactToBrevo = async (
-  contactForm: NewsletterSubscription,
+  newsletterSubscription: NewsletterSubscription,
 ): Promise<Awaited<ReturnType<typeof apiInstance.createContact>> | undefined> => {
-  if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SEND_CONTACT(CONFIG)) {
+  if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SUBSCRIBE_NEWSLETTER(CONFIG)) {
     return undefined
   }
-  const createContact: SibApiV3Sdk.CreateContact = createAddContactToList(contactForm)
-  const apiInstance = createBrevoContactsApi()
-  const createContactPromise = apiInstance.createContact(createContact)
+
+  const apiInstance = new SibApiV3Sdk.ContactsApi()
+  apiInstance.setApiKey(SibApiV3Sdk.ContactsApiApiKeys.apiKey, CONFIG.BREVO_KEY)
+
+  // Create Contact
+  const contact = new SibApiV3Sdk.CreateContact()
+  contact.email = newsletterSubscription.email
+  contact.listIds = [CONFIG.BREVO_CONTACT_LIST_ID]
+  contact.attributes = {
+    VORNAME: newsletterSubscription.firstName,
+    NACHNAME: newsletterSubscription.lastName,
+  }
+
+  // Send to Brevo
+  const promise = apiInstance.createContact(contact)
+
+  // Update database once promise came back
   try {
-    await createContactPromise
+    await promise
     // console.log('API called successfully. Returned data: ', JSON.stringify(data))
     // code to store success goes here:
-    contactForm.brevoSuccess = new Date()
+    newsletterSubscription.brevoSuccess = new Date()
     await prisma.newsletterSubscription.update({
       where: {
-        id: contactForm.id,
+        id: newsletterSubscription.id,
       },
       data: {
-        ...contactForm,
+        ...newsletterSubscription,
       },
     })
   } catch (error) {
     // TODO: logging or event
   }
-  return createContactPromise
+
+  return promise
 }
