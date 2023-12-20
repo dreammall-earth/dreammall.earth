@@ -3,7 +3,7 @@
 import * as SibApiV3Sdk from '@getbrevo/brevo'
 import { ContactForm, NewsletterSubscription } from '@prisma/client'
 
-import config from '#config/config'
+import { CONFIG } from '#config/config'
 import { prisma } from '#src/prisma'
 
 import {
@@ -16,12 +16,12 @@ import {
   sendSmtpEmail,
 } from './NewsletterBrevo'
 
-config.BREVO_KEY = 'MY KEY'
-config.BREVO_CONTACT_REQUEST_TO_NAME = 'Peter Lustig'
-config.BREVO_CONTACT_REQUEST_TO_EMAIL = 'peter@lustig.de'
-config.BREVO_TEMPLATE_CONTACT_BASE = 1
-config.BREVO_TEMPLATE_CONTACT_USER = 2
-config.BREVO_CONTACT_LIST_ID = 3
+CONFIG.BREVO_KEY = 'MY KEY'
+CONFIG.BREVO_CONTACT_REQUEST_TO_NAME = 'Peter Lustig'
+CONFIG.BREVO_CONTACT_REQUEST_TO_EMAIL = 'peter@lustig.de'
+CONFIG.BREVO_TEMPLATE_CONTACT_BASE = 1
+CONFIG.BREVO_TEMPLATE_CONTACT_USER = 2
+CONFIG.BREVO_CONTACT_LIST_ID = 3
 
 const mockSendTransacEmail = jest.fn().mockResolvedValue({
   response: 'success',
@@ -54,6 +54,42 @@ jest.mock('@getbrevo/brevo', () => {
 })
 
 describe('NewsletterBrevo', () => {
+  describe('createBrevoInstance', () => {
+    describe('brevo key given', () => {
+      let result: SibApiV3Sdk.TransactionalEmailsApi
+      beforeEach(() => {
+        jest.clearAllMocks()
+        result = createBrevoInstance()
+      })
+
+      it('calls TransactionalEmailsApi constructor', () => {
+        expect(SibApiV3Sdk.TransactionalEmailsApi).toHaveBeenCalledTimes(1)
+      })
+
+      it('sets the API key', () => {
+        // eslint-disable-next-line @typescript-eslint/unbound-method
+        expect(result.setApiKey).toHaveBeenCalledTimes(1)
+        // eslint-disable-next-line @typescript-eslint/unbound-method
+        expect(result.setApiKey).toHaveBeenCalledWith(0, 'MY KEY')
+      })
+    })
+
+    describe('without brevo key', () => {
+      beforeEach(() => {
+        jest.clearAllMocks()
+        CONFIG.BREVO_KEY = undefined
+      })
+
+      it('throws an Error', () => {
+        expect(createBrevoInstance).toThrow(new Error('BREVO_KEY missing'))
+      })
+
+      afterAll(() => {
+        CONFIG.BREVO_KEY = 'MY KEY'
+      })
+    })
+  })
+
   describe('newsletter', () => {
     let newsletterSubscription: NewsletterSubscription
     beforeEach(async () => {
@@ -143,10 +179,40 @@ describe('NewsletterBrevo', () => {
         })
       })
 
+      describe('with error from Brevo', () => {
+        beforeEach(() => {
+          jest.clearAllMocks()
+          mockCreateContact.mockRejectedValue({
+            error: 'error',
+          })
+        })
+
+        it('expect to reject with error', async () => {
+          await expect(sendContactToBrevo(newsletterSubscription)).rejects.toStrictEqual({
+            error: 'error',
+          })
+        })
+
+        it('does not update the database', async () => {
+          const result: NewsletterSubscription[] = await prisma.newsletterSubscription.findMany()
+          expect(result).toHaveLength(1)
+          expect(result).toEqual([
+            {
+              id: expect.any(Number),
+              firstName: 'Bibi',
+              lastName: 'Bloxberg',
+              email: 'bibi@bloxberg.de',
+              createdAt: expect.any(Date),
+              brevoSuccess: null,
+            },
+          ])
+        })
+      })
+
       describe('without brevo key', () => {
         beforeEach(async () => {
           jest.clearAllMocks()
-          config.BREVO_KEY = ''
+          CONFIG.BREVO_KEY = undefined
           await sendContactToBrevo(newsletterSubscription)
         })
 
@@ -160,7 +226,7 @@ describe('NewsletterBrevo', () => {
   describe('contactForm', () => {
     let contactForm: ContactForm
     beforeEach(async () => {
-      config.BREVO_KEY = 'MY KEY'
+      CONFIG.BREVO_KEY = 'MY KEY'
       await prisma.contactForm.deleteMany()
       contactForm = await prisma.contactForm.create({
         data: {
@@ -309,7 +375,7 @@ describe('NewsletterBrevo', () => {
           )
         })
 
-        it('to throw error', async () => {
+        it('throws error', async () => {
           await expect(sendSmtpEmailPromise).rejects.toMatchObject({
             error: 'error',
           })
@@ -400,12 +466,15 @@ describe('NewsletterBrevo', () => {
       })
 
       describe('with error from Brevo', () => {
-        beforeEach(async () => {
+        beforeEach(() => {
           jest.clearAllMocks()
-          mockSendTransacEmail.mockRejectedValue({
+          mockSendTransacEmail.mockResolvedValueOnce('success').mockRejectedValue({
             error: 'error',
           })
-          await sendContactFormEmail(contactForm)
+        })
+
+        it('expect to reject with error', async () => {
+          await expect(sendContactFormEmail(contactForm)).rejects.toStrictEqual({ error: 'error' })
         })
 
         it('does not update the database', async () => {
@@ -428,7 +497,7 @@ describe('NewsletterBrevo', () => {
       describe('without brevo key', () => {
         beforeEach(async () => {
           jest.clearAllMocks()
-          config.BREVO_KEY = ''
+          CONFIG.BREVO_KEY = undefined
           await sendContactFormEmail(contactForm)
         })
 
