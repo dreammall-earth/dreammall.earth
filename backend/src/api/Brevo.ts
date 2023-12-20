@@ -96,8 +96,7 @@ export const subscribeToNewsletter = async (
   // Update database once promise came back
   try {
     await promise
-    // console.log('API called successfully. Returned data: ', JSON.stringify(data))
-    // code to store success goes here:
+
     newsletterSubscription.brevoSuccess = new Date()
     await prisma.newsletterSubscription.update({
       where: {
