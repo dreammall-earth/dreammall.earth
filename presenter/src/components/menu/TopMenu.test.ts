@@ -61,8 +61,7 @@ describe('FooterMenu', () => {
       const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[2]
 
       it('has href #contact', () => {
-        expect(anchor.attributes('href')).toBe('/#contact')
-      })
+        expect(anchor.attributes('href')).toBe('/#contactname')      })
 
       it('has label menu.contact', () => {
         expect(anchor.text()).toBe("$t('menu.header.contact')")

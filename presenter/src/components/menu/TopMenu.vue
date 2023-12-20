@@ -2,12 +2,18 @@
   <v-app-bar :color="appBackground" flat class="topmenu">
     <v-row>
       <v-col>
-        <LogoImage class="ml-8" />
+        <a href="/">
+          <LogoImage class="ml-8" />
+        </a>
       </v-col>
       <v-col class="d-none d-md-flex align-center justify-center grow">
         <AnchorLink class="mx-4" href="/#about" :label="$t('menu.header.about')"></AnchorLink>
         <AnchorLink class="mx-4" href="/#products" :label="$t('menu.header.products')"></AnchorLink>
-        <AnchorLink class="mx-4" href="/#contact" :label="$t('menu.header.contact')"></AnchorLink>
+        <AnchorLink
+          class="mx-4"
+          href="/#contactname"
+          :label="$t('menu.header.contact')"
+        ></AnchorLink>
       </v-col>
       <v-col class="d-none d-md-flex"> </v-col>
     </v-row>
