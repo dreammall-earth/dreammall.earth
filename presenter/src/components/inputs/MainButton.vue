@@ -15,6 +15,7 @@
 </template>
 
 <script lang="ts" setup>
+import { navigate } from 'vike/client/router'
 import { computed } from 'vue'
 
 const props = withDefaults(
@@ -86,6 +87,7 @@ const setColor = computed(() => {
 
 const onClick = () => {
   emit('click', 1)
+  return navigate(props.href)
 }
 </script>
 

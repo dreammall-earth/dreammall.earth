@@ -1,5 +1,5 @@
 <template>
-  <v-btn :class="classes" variant="plain" :href="props.href" @click.prevent="onClick()">
+  <v-btn :class="classes" variant="plain" :href="props.href" @click.prevent="onClick">
     {{ props.label }}
   </v-btn>
 </template>
@@ -31,9 +31,8 @@ const classes = computed(() => ({
   'anchor-link--text': props.variant === 'text',
 }))
 
-async function onClick() {
-  const navigationPromise = navigate('/#products')
-  await navigationPromise
+function onClick() {
+  return navigate(props.href)
 }
 </script>
 
