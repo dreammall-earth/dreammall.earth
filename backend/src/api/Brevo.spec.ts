@@ -121,64 +121,56 @@ describe('Brevo', () => {
         })
       })
 
-      describe('with success', () => {
-        beforeEach(() => {
-          jest.clearAllMocks()
-        })
-        it('does update the database', async () => {
-          const result: ContactForm[] = await prisma.contactForm.findMany()
-          expect(result).toHaveLength(1)
-          expect(result).toEqual([
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              firstName: 'Bibi',
-              lastName: 'Bloxberg',
-              content: 'Hello DreamMall!',
-              email: 'bibi@bloxberg.de',
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              brevoSuccess: expect.any(Date),
-            },
-          ])
+      it('does update the database', async () => {
+        const result: ContactForm[] = await prisma.contactForm.findMany()
+        expect(result).toHaveLength(1)
+        expect(result).toEqual([
+          {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            firstName: 'Bibi',
+            lastName: 'Bloxberg',
+            content: 'Hello DreamMall!',
+            email: 'bibi@bloxberg.de',
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            createdAt: expect.any(Date),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            brevoSuccess: expect.any(Date),
+          },
+        ])
+      })
+    })
+
+    describe('with error from Brevo', () => {
+      beforeEach(async () => {
+        jest.clearAllMocks()
+        mockSendTransacEmail.mockRejectedValue({
+          error: 'error',
         })
       })
 
-      describe('with error', () => {
-        beforeEach(async () => {
-          jest.clearAllMocks()
-          mockSendTransacEmail.mockRejectedValue({
-            error: 'error',
-          })
-          await prisma.contactForm.deleteMany()
-          contactForm = await prisma.contactForm.create({
-            data: {
-              firstName: 'Bibi',
-              lastName: 'Bloxberg',
-              content: 'Hello DreamMall!',
-              email: 'bibi@bloxberg.de',
-            },
-          })
+      it('does reject with error', async () => {
+        await expect(sendContactEmails(contactForm)).rejects.toStrictEqual({
+          error: 'error',
         })
+      })
 
-        it('does not update the database', async () => {
-          const result: ContactForm[] = await prisma.contactForm.findMany()
-          expect(result).toHaveLength(1)
-          expect(result).toEqual([
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              firstName: 'Bibi',
-              lastName: 'Bloxberg',
-              content: 'Hello DreamMall!',
-              email: 'bibi@bloxberg.de',
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              brevoSuccess: null,
-            },
-          ])
-        })
+      it('does not update the database', async () => {
+        const result: ContactForm[] = await prisma.contactForm.findMany()
+        expect(result).toHaveLength(1)
+        expect(result).toEqual([
+          {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            firstName: 'Bibi',
+            lastName: 'Bloxberg',
+            content: 'Hello DreamMall!',
+            email: 'bibi@bloxberg.de',
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            createdAt: expect.any(Date),
+            brevoSuccess: null,
+          },
+        ])
       })
     })
 
@@ -265,7 +257,7 @@ describe('Brevo', () => {
         })
       })
 
-      it('expect to reject with error', async () => {
+      it('does reject with error', async () => {
         await expect(subscribeToNewsletter(newsletterSubscription)).rejects.toStrictEqual({
           error: 'error',
         })
@@ -296,7 +288,7 @@ describe('Brevo', () => {
         await subscribeToNewsletter(newsletterSubscription)
       })
 
-      it('does not call sendSmtpEmail', () => {
+      it('does not call createContact', () => {
         expect(mockCreateContact).not.toHaveBeenCalled()
       })
     })
