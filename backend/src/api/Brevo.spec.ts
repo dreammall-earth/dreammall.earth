@@ -276,8 +276,7 @@ describe('Brevo', () => {
         expect(result).toHaveLength(1)
         expect(result).toEqual([
           {
-            // eslint-disable-next-line @typescript-e
-})lint/no-unsafe-assignment
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
             firstName: 'Bibi',
             lastName: 'Bloxberg',

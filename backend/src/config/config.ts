@@ -18,7 +18,7 @@ const BREVO = {
   BREVO_CONTACT_TEMPLATE_ADMIN: !isNaN(Number(process.env.BREVO_CONTACT_TEMPLATE_ADMIN))
     ? Number(process.env.BREVO_CONTACT_TEMPLATE_ADMIN)
     : undefined,
-    BREVO_CONTACT_TEMPLATE_USER: !isNaN(Number(process.env.BREVO_CONTACT_TEMPLATE_USER))
+  BREVO_CONTACT_TEMPLATE_USER: !isNaN(Number(process.env.BREVO_CONTACT_TEMPLATE_USER))
     ? Number(process.env.BREVO_CONTACT_TEMPLATE_USER)
     : undefined,
   BREVO_NEWSLETTER_LIST: !isNaN(Number(process.env.BREVO_NEWSLETTER_LIST))
