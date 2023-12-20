@@ -47,8 +47,8 @@ $mobile: 500px;
     font-size: 1.625rem;
     font-weight: 600;
     line-height: 125%; /* 2.03125rem */
-    text-transform: capitalize;
     text-overflow: unset;
+    text-transform: capitalize;
     text-wrap: balance;
   }
 }

@@ -109,17 +109,17 @@ $tablet: 960px;
     }
 
     @media screen and (max-width: $tablet) {
-      padding-top: 3em;
       display: flex;
       flex-direction: column;
       align-items: center;
+      padding-top: 3em;
     }
 
     @media screen and (max-width: $mobile) {
-      padding-top: 3em;
       display: flex;
       flex-direction: column;
       align-items: center;
+      padding-top: 3em;
     }
   }
 
@@ -139,8 +139,8 @@ $tablet: 960px;
     max-width: 24.7268rem;
 
     @media screen and (max-width: $mobile) {
-      padding: 10px;
       max-width: 10.5rem;
+      padding: 10px;
     }
   }
 }

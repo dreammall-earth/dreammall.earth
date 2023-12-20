@@ -214,6 +214,7 @@ $tablet: 960px;
         @media screen and (max-width: $tablet) {
           max-width: 100px;
         }
+
         @media screen and (max-width: $mobile) {
           max-width: 90px;
         }
@@ -221,9 +222,11 @@ $tablet: 960px;
         &.icon-1 {
           top: 350px;
           left: 180px;
+
           @media screen and (max-width: $tablet) {
             left: 10%;
           }
+
           @media screen and (max-width: $mobile) {
             left: 5%;
           }
@@ -232,9 +235,11 @@ $tablet: 960px;
         &.icon-2 {
           top: 350px;
           left: 370px;
+
           @media screen and (max-width: $tablet) {
             left: 30%;
           }
+
           @media screen and (max-width: $mobile) {
             left: 27%;
           }
@@ -243,9 +248,11 @@ $tablet: 960px;
         &.icon-3 {
           top: 350px;
           right: 370px;
+
           @media screen and (max-width: $tablet) {
             right: 30%;
           }
+
           @media screen and (max-width: $mobile) {
             right: 27%;
           }
@@ -254,9 +261,11 @@ $tablet: 960px;
         &.icon-4 {
           top: 350px;
           right: 180px;
+
           @media screen and (max-width: $tablet) {
             right: 10%;
           }
+
           @media screen and (max-width: $mobile) {
             right: 5%;
           }
@@ -268,9 +277,11 @@ $tablet: 960px;
       .slide-icon {
         position: absolute;
         max-width: 150px;
+
         @media screen and (max-width: $tablet) {
           max-width: 100px;
         }
+
         @media screen and (max-width: $mobile) {
           max-width: 90px;
         }
@@ -278,10 +289,12 @@ $tablet: 960px;
         &.icon-1 {
           top: 300px;
           left: 100px;
+
           @media screen and (max-width: $tablet) {
             top: 350px;
             left: 10%;
           }
+
           @media screen and (max-width: $mobile) {
             left: 5%;
           }
@@ -307,6 +320,7 @@ $tablet: 960px;
             top: 350px;
             right: 10%;
           }
+
           @media screen and (max-width: $mobile) {
             right: 5%;
           }

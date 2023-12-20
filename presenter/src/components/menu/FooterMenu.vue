@@ -70,6 +70,7 @@ $mobile: 500px;
   font-weight: 600;
   line-height: 2rem;
   color: #3d4753;
+
   @media screen and (max-width: $mobile) {
     font-size: 140%;
   }
@@ -80,6 +81,7 @@ $mobile: 500px;
   flex-direction: column;
   align-items: flex-start;
   justify-content: start;
+
   a {
     @media screen and (max-width: $mobile) {
       font-size: 100%;

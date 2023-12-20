@@ -23,11 +23,7 @@
         </v-col>
         <v-col class="d-flex">
           <div class="d-flex d-md-none align-center justify-end w-100 mr-8">
-            <v-img
-              class="mobile-menu-icon w-100"
-              :src="MobileMenuIcon"
-              @click="toggleNavBar"
-            />
+            <v-img class="mobile-menu-icon w-100" :src="MobileMenuIcon" @click="toggleNavBar" />
           </div>
         </v-col>
       </v-row>
@@ -67,10 +63,10 @@
 <script lang="ts" setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
+import MobileMenuIcon from '#assets/img/hamburger_mobile.svg'
 import AnchorLink from '#components/nav/AnchorLink.vue'
 
 import LogoImage from './LogoImage.vue'
-import MobileMenuIcon from '#assets/img/hamburger_mobile.svg'
 
 const appBackground = ref('transparent')
 const navBackground = ref('#d8d8d8')
@@ -113,6 +109,7 @@ onUnmounted(() => {
   .v-toolbar__content {
     height: 95px !important;
   }
+
   .mobile-menu-icon {
     max-width: 35px;
 
@@ -120,6 +117,7 @@ onUnmounted(() => {
       cursor: pointer;
     }
   }
+
   .nav-drawer {
     top: 95px !important;
     height: fit-content !important;
