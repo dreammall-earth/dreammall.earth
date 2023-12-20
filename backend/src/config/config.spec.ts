@@ -63,7 +63,7 @@ describe('validateConfig', () => {
       require('#config/config')
     })
 
-    it('passes the check', () => {
+    it('passes all checks', () => {
       expect(mockPrintConfigError).toHaveBeenCalledTimes(0)
     })
   })

@@ -29,7 +29,7 @@ describe('printConfigError', () => {
       printConfigError('test message')
     })
 
-    it('throws an error', () => {
+    it('logs a warning', () => {
       // eslint-disable-next-line no-console
       expect(console.warn).toHaveBeenCalledWith('test message')
     })
