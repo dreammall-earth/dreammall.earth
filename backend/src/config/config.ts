@@ -20,20 +20,20 @@ const BREVO = {
     : undefined,
 }
 
-export const validateConfigOut = (text: string) => {
+export const validateConfigError = (error: string) => {
   switch (process.env.NODE_ENV) {
     case 'test':
       return
     case 'production':
-      throw new Error(text)
+      throw new Error(error)
     default:
       // eslint-disable-next-line no-console
-      console.warn(text)
+      console.warn(error)
   }
 }
 const validateConfig = () => {
   if (!BREVO.BREVO_KEY) {
-    validateConfigOut('Missing BREVO_KEY in config')
+    validateConfigError('Missing BREVO_KEY in config')
   }
 
   if (
@@ -43,7 +43,7 @@ const validateConfig = () => {
       !BREVO.BREVO_TEMPLATE_CONTACT_BASE ||
       !BREVO.BREVO_TEMPLATE_CONTACT_USER)
   ) {
-    validateConfigOut('BREVO_KEY is set, but one or more of the required BREVO configs are missing')
+    validateConfigError('BREVO_KEY is set, but one or more of the required BREVO configs are missing')
   }
 }
 
