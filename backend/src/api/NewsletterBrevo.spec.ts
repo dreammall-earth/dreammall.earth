@@ -6,12 +6,7 @@ import { ContactForm } from '@prisma/client'
 import config from '#config/config'
 import { prisma } from '#src/prisma'
 
-import {
-  createBrevoInstance,
-  createSmtpEmail,
-  sendContactFormEmail,
-  sendSmtpEmail,
-} from './NewsletterBrevo'
+import { sendContactFormEmail, sendSmtpEmail } from './NewsletterBrevo'
 
 config.BREVO_KEY = 'MY KEY'
 config.BREVO_CONTACT_REQUEST_TO_NAME = 'Peter Lustig'
@@ -59,104 +54,28 @@ beforeEach(async () => {
 })
 
 describe('NewsletterBrevo', () => {
-  describe('createBrevoInstance', () => {
-    let result: SibApiV3Sdk.TransactionalEmailsApi
-
-    beforeEach(() => {
-      jest.clearAllMocks()
-      result = createBrevoInstance()
-    })
-
-    it('calls TransactionalEmailsApi constructor', () => {
-      expect(SibApiV3Sdk.TransactionalEmailsApi).toHaveBeenCalledTimes(1)
-    })
-
-    it('sets the API key', () => {
-      // eslint-disable-next-line @typescript-eslint/unbound-method
-      expect(result.setApiKey).toHaveBeenCalledTimes(1)
-      // eslint-disable-next-line @typescript-eslint/unbound-method
-      expect(result.setApiKey).toHaveBeenCalledWith(0, 'MY KEY')
-    })
-  })
-
-  describe('createSmtpEmail', () => {
-    let result: SibApiV3Sdk.SendSmtpEmail
-
-    beforeEach(() => {
-      jest.clearAllMocks()
-      result = createSmtpEmail(
-        42,
-        [
-          {
-            name: 'Peter Lustig',
-            email: 'peter@lustig.de',
-          },
-        ],
-        {
-          name: 'Bibi Bloxberg',
-          email: 'bibi@bloxberg.de',
-        },
-        {
-          name: 'Bibi Bloxberg',
-          email: 'bibi@bloxberg.de',
-        },
-        {
-          ...contactForm,
-        },
-      )
-    })
-
-    it('returns sendSmtpEmail object', () => {
-      expect(result).toEqual({
-        templateId: 42,
-        to: [
-          {
-            name: 'Peter Lustig',
-            email: 'peter@lustig.de',
-          },
-        ],
-        sender: {
-          name: 'Bibi Bloxberg',
-          email: 'bibi@bloxberg.de',
-        },
-        replyTo: {
-          name: 'Bibi Bloxberg',
-          email: 'bibi@bloxberg.de',
-        },
-        params: {
-          ...contactForm,
-        },
-      })
-    })
-  })
-
   describe('sendSmtpEmail', () => {
     describe('with success', () => {
       beforeEach(async () => {
         jest.clearAllMocks()
-        await sendSmtpEmail(
-          createSmtpEmail(
-            42,
-            [
-              {
-                name: 'Peter Lustig',
-                email: 'peter@lustig.de',
-              },
-            ],
-            {
-              name: 'Bibi Bloxberg',
-              email: 'bibi@bloxberg.de',
-            },
-            {
-              name: 'Bibi Bloxberg',
-              email: 'bibi@bloxberg.de',
-            },
-            {
-              ...contactForm,
-            },
-          ),
-          contactForm,
-        )
+        const email = new SibApiV3Sdk.SendSmtpEmail()
+        email.templateId = 42
+        email.to = [
+          {
+            name: 'Peter Lustig',
+            email: 'peter@lustig.de',
+          },
+        ]
+        email.sender = {
+          name: 'Bibi Bloxberg',
+          email: 'bibi@bloxberg.de',
+        }
+        email.replyTo = {
+          name: 'Bibi Bloxberg',
+          email: 'bibi@bloxberg.de',
+        }
+        email.params = contactForm
+        await sendSmtpEmail(email, contactForm)
       })
 
       it('calls TransactionalEmailsApi constructor', () => {
@@ -186,29 +105,24 @@ describe('NewsletterBrevo', () => {
         mockSendTransacEmail.mockRejectedValue({
           error: 'error',
         })
-        await sendSmtpEmail(
-          createSmtpEmail(
-            42,
-            [
-              {
-                name: 'Peter Lustig',
-                email: 'peter@lustig.de',
-              },
-            ],
-            {
-              name: 'Bibi Bloxberg',
-              email: 'bibi@bloxberg.de',
-            },
-            {
-              name: 'Bibi Bloxberg',
-              email: 'bibi@bloxberg.de',
-            },
-            {
-              ...contactForm,
-            },
-          ),
-          contactForm,
-        )
+        const email = new SibApiV3Sdk.SendSmtpEmail()
+        email.templateId = 42
+        email.to = [
+          {
+            name: 'Peter Lustig',
+            email: 'peter@lustig.de',
+          },
+        ]
+        email.sender = {
+          name: 'Bibi Bloxberg',
+          email: 'bibi@bloxberg.de',
+        }
+        email.replyTo = {
+          name: 'Bibi Bloxberg',
+          email: 'bibi@bloxberg.de',
+        }
+        email.params = contactForm
+        await sendSmtpEmail(email, contactForm)
       })
 
       it('calls TransactionalEmailsApi constructor', () => {
