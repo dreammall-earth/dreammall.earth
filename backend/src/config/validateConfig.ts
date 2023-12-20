@@ -1,18 +1,7 @@
-// eslint-disable-next-line import/no-cycle
+// ATTENTION: Due to import cycle this file cannot be included!
+import { printConfigError } from './printConfigError'
+// eslint-disable-next-line import/no-cycle, import/order
 import { CONFIG, CONFIG_CHECKS } from './config'
-
-const printConfigError = (error: string) => {
-  // eslint-disable-next-line n/no-process-env
-  switch (process.env.NODE_ENV) {
-    case 'test':
-      return
-    case 'production':
-      throw new Error(error)
-    default:
-      // eslint-disable-next-line no-console
-      console.warn(error)
-  }
-}
 
 export const validateConfig = () => {
   if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SEND_CONTACT(CONFIG)) {
