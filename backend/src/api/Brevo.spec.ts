@@ -142,9 +142,9 @@ describe('Brevo', () => {
     })
 
     describe('with error from Brevo', () => {
-      beforeEach(async () => {
+      beforeEach(() => {
         jest.clearAllMocks()
-        mockSendTransacEmail.mockRejectedValue({
+        mockSendTransacEmail.mockResolvedValueOnce('success').mockRejectedValue({
           error: 'error',
         })
       })
