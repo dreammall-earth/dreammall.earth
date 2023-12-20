@@ -68,18 +68,22 @@ export const sendContactFormEmail = (
   const promiseAll = Promise.all([emailAdmin, emailClient])
 
   // Update database once both promises came back
-  void promiseAll.then(async () => {
-    contactForm.brevoSuccess = new Date()
-    await prisma.contactForm.update({
-      where: {
-        id: contactForm.id,
-      },
-      data: {
-        ...contactForm,
-      },
+  void promiseAll
+    .then(async () => {
+      contactForm.brevoSuccess = new Date()
+      await prisma.contactForm.update({
+        where: {
+          id: contactForm.id,
+        },
+        data: {
+          ...contactForm,
+        },
+      })
+      return undefined
     })
-    return undefined
-  })
+    .catch(() => {
+      // TODO log
+    })
 
   // Return unresolved promise
   return promiseAll

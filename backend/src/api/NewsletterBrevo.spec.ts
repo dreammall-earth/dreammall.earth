@@ -4,6 +4,7 @@ import config from '#config/config'
 import { prisma } from '#src/prisma'
 
 import { sendContactFormEmail } from './NewsletterBrevo'
+import { TransactionalEmailsApi } from '@getbrevo/brevo'
 
 config.BREVO_KEY = 'MY KEY'
 config.BREVO_CONTACT_REQUEST_TO_NAME = 'Peter Lustig'
@@ -14,6 +15,7 @@ config.BREVO_TEMPLATE_CONTACT_USER = 2
 const mockSendTransacEmail = jest.fn().mockResolvedValue({
   response: 'success',
 })
+const mockSetApiKey = jest.fn()
 
 jest.mock('@getbrevo/brevo', () => {
   const originalModule = jest.requireActual<typeof import('@getbrevo/brevo')>('@getbrevo/brevo')
@@ -22,7 +24,7 @@ jest.mock('@getbrevo/brevo', () => {
     ...originalModule,
     TransactionalEmailsApi: jest.fn().mockImplementation(() => {
       return {
-        setApiKey: jest.fn(),
+        setApiKey: mockSetApiKey,
         sendTransacEmail: mockSendTransacEmail,
       }
     }),
@@ -56,6 +58,19 @@ describe('NewsletterBrevo', () => {
       beforeEach(async () => {
         jest.clearAllMocks()
         await sendContactFormEmail(contactForm)
+      })
+
+      it('calls TransactionalEmailsApi constructor', () => {
+        expect(TransactionalEmailsApi).toHaveBeenCalledTimes(1)
+      })
+
+      it('sets the API key', () => {
+        expect(mockSetApiKey).toHaveBeenCalledTimes(1)
+        expect(mockSetApiKey).toHaveBeenCalledWith(0, 'MY KEY')
+      })
+
+      it('calls TransactionalEmailsApi constructor', () => {
+        expect(TransactionalEmailsApi).toHaveBeenCalledTimes(1)
       })
 
       it('calls sendSmtpEmail twice', () => {
@@ -110,6 +125,61 @@ describe('NewsletterBrevo', () => {
             lastName: contactForm.lastName,
             content: contactForm.content,
           },
+        })
+      })
+
+      describe('with success', () => {
+        beforeEach(() => {
+          jest.clearAllMocks()
+        })
+        it('does update the database', async () => {
+          const result: ContactForm[] = await prisma.contactForm.findMany()
+          expect(result).toHaveLength(1)
+          expect(result).toEqual([
+            {
+              id: expect.any(Number),
+              firstName: 'Bibi',
+              lastName: 'Bloxberg',
+              content: 'Hello DreamMall!',
+              email: 'bibi@bloxberg.de',
+              createdAt: expect.any(Date),
+              brevoSuccess: expect.any(Date),
+            },
+          ])
+        })
+      })
+
+      describe('with error', () => {
+        beforeEach(async () => {
+          jest.clearAllMocks()
+          mockSendTransacEmail.mockRejectedValue({
+            error: 'error',
+          })
+          await prisma.contactForm.deleteMany()
+          contactForm = await prisma.contactForm.create({
+            data: {
+              firstName: 'Bibi',
+              lastName: 'Bloxberg',
+              content: 'Hello DreamMall!',
+              email: 'bibi@bloxberg.de',
+            },
+          })
+        })
+
+        it('does not update the database', async () => {
+          const result: ContactForm[] = await prisma.contactForm.findMany()
+          expect(result).toHaveLength(1)
+          expect(result).toEqual([
+            {
+              id: expect.any(Number),
+              firstName: 'Bibi',
+              lastName: 'Bloxberg',
+              content: 'Hello DreamMall!',
+              email: 'bibi@bloxberg.de',
+              createdAt: expect.any(Date),
+              brevoSuccess: null,
+            },
+          ])
         })
       })
     })
