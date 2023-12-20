@@ -345,7 +345,7 @@ describe('NewsletterBrevo', () => {
           )
         })
 
-        it('to throw error', async () => {
+        it('throws error', async () => {
           await expect(sendSmtpEmailPromise).rejects.toMatchObject({
             error: 'error',
           })
@@ -436,14 +436,14 @@ describe('NewsletterBrevo', () => {
       })
 
       describe('with error from Brevo', () => {
-        beforeEach(async () => {
+        beforeEach(() => {
           jest.clearAllMocks()
-          mockSendTransacEmail.mockRejectedValue({
+          mockSendTransacEmail.mockResolvedValueOnce('success').mockRejectedValue({
             error: 'error',
           })
         })
 
-        it('expect to throw error', async () => {
+        it('expect to reject with error', async () => {
           await expect(sendContactFormEmail(contactForm)).rejects.toStrictEqual({ error: 'error' })
         })
 

@@ -62,9 +62,9 @@ export const sendSmtpEmail = async (
   return apiInstance.sendTransacEmail(smtpEmail)
 }
 
-export const sendContactFormEmail = (
+export const sendContactFormEmail = async (
   contactForm: ContactForm,
-): Promise<Awaited<ReturnType<typeof sendSmtpEmail>>[]> | undefined => {
+): Promise<Awaited<ReturnType<typeof sendSmtpEmail>>[] | undefined> => {
   if (
     !config.BREVO_KEY ||
     !config.BREVO_TEMPLATE_CONTACT_BASE ||
@@ -126,20 +126,21 @@ export const sendContactFormEmail = (
   const sendEmailAdmin = sendSmtpEmail(smtpEmailToAdmin)
   const promiseAll = Promise.all([sendEmailAdmin, sendEmailClient])
 
-  void promiseAll
-    .then(async () => {
-      contactForm.brevoSuccess = new Date()
-      await prisma.contactForm.update({
-        where: {
-          id: contactForm.id,
-        },
-        data: {
-          ...contactForm,
-        },
-      })
-      return undefined
+  try {
+    await promiseAll
+
+    contactForm.brevoSuccess = new Date()
+    await prisma.contactForm.update({
+      where: {
+        id: contactForm.id,
+      },
+      data: {
+        ...contactForm,
+      },
     })
-    .catch(() => {})
+  } catch (error) {
+    // TODO log
+  }
 
   return promiseAll
 }
