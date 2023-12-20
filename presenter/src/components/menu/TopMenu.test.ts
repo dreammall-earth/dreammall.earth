@@ -72,7 +72,7 @@ describe('FooterMenu', () => {
 
   describe('third column', () => {
     it('is placeholder', () => {
-      expect(wrapper.findAll('.v-row > div')[2].findAll('div')).toHaveLength(0)
+      expect(wrapper.findAll('.v-row > div')[2].findAll('.v-img')).toHaveLength(1)
     })
   })
 })
