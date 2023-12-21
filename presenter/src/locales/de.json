@@ -110,9 +110,11 @@
       "headline": "Verbraucherstreitbeilegung / Universalschlichtungsstelle"
     },
     "contact": {
+      "additionalLaw": "Verantwortlich i.S.d. von § 18 MStV ist Sabine Laudien, Rosenau 15, 87437 Kempten.",
       "email": "kontakt (at) dreammall.earth",
       "emailLabel": "E-Mail:",
       "headline": "Kontakt",
+      "lawHeadline": "Angaben gemäß § 18 MStV",
       "telefax": "+49 (0) 123 44 55 99",
       "telefaxLabel": "Telefax:",
       "telephone": "+49 (0) 123 44 55 66",
@@ -124,7 +126,6 @@
     },
     "data": {
       "additional": "Gebäude 44",
-      "additionalLaw": "Verantwortlich i.S.d. von § 18 MStV ist Sabine Laudien, Rosenau 15, 87437 Kempten.",
       "city": "Kempten",
       "court": "Amtsgericht Musterstadt",
       "courtLabel": "Registergericht:",

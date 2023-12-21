@@ -28,7 +28,6 @@
               <li>{{ $t('impress.data.person1') }}</li>
               <li>{{ $t('impress.data.person2') }}</li>
             </ul>
-            <p class="mt-5">{{ $t('impress.data.additionalLaw') }}</p>
           </template>
         </v-card>
       </v-col>
@@ -36,24 +35,27 @@
         <v-card flat class="content-card mb-2 pa-4 pa-md-10">
           <template #text>
             <h2 class="card-header">{{ $t('impress.contact.headline') }}</h2>
-            <ul class="card-content mt-2">
+            <ul class="card-content mt-2 my-8">
               <!--<li>
                 {{ $t('impress.contact.telephoneLabel') }} {{ $t('impress.contact.telephone') }}
               </li>
               <li>{{ $t('impress.contact.telefaxLabel') }} {{ $t('impress.contact.telefax') }}</li>-->
               <li>{{ $t('impress.contact.emailLabel') }} {{ $t('impress.contact.email') }}</li>
             </ul>
+
+            <h2 class="card-header">{{ $t('impress.contact.lawHeadline') }}</h2>
+            <p class="mt-2 my-14">{{ $t('impress.contact.additionalLaw') }}</p>
           </template>
         </v-card>
 
-        <v-card flat class="content-card mb-2 pa-4 pa-md-10 my-4">
+        <!--<v-card flat class="content-card mb-2 pa-4 pa-md-10 my-4">
           <template #text>
             <h2 class="card-header">{{ $t('impress.tax.headline') }}</h2>
             <p class="card-content mt-2">
               {{ $t('impress.tax.content') }}<br />{{ $t('impress.tax.id') }}
             </p>
           </template>
-        </v-card>
+        </v-card>-->
       </v-col>
     </v-row>
     <v-row>
