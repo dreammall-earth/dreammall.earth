@@ -9,13 +9,13 @@
     <div id="products" class="py-16 px-4">
       <Section3 />
     </div>
-    <div id="section4" class="py-16 px-4">
+    <div id="planning-section" class="py-16 px-4">
       <Section4 />
     </div>
     <div id="newsletter-section" class="py-16 px-4">
       <NewsletterSection />
     </div>
-    <div id="section5" class="py-16 px-4">
+    <div id="coffee-section" class="py-16 px-4">
       <Section5 />
     </div>
     <div id="section6" class="py-16 px-4">

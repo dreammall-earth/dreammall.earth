@@ -8,22 +8,22 @@
         </h2>
       </v-col>
     </v-row>
-    <v-row class="mt-12 card-row justify-center">
-      <v-col cols="12" md="3" class="d-flex justify-center">
+    <v-row class="mt-12 card-row justify-space-around">
+      <v-col cols="12" md="3" class="d-flex justify-center pa-0">
         <section-column-card
           :image-src="MallIcon"
           :card-title="$t('home.section3.firstColumn.headline')"
           :card-text="$t('home.section3.firstColumn.text')"
         ></section-column-card>
       </v-col>
-      <v-col cols="12" md="3" class="d-flex justify-center">
+      <v-col cols="12" md="3" class="d-flex justify-center pa-0">
         <section-column-card
           :image-src="CoffeeLogo"
           :card-title="$t('home.section3.secondColumn.headline')"
           :card-text="$t('home.section3.secondColumn.text')"
         ></section-column-card>
       </v-col>
-      <v-col cols="12" md="3" class="d-flex justify-center">
+      <v-col cols="12" md="3" class="d-flex justify-center pa-0">
         <section-column-card
           :image-src="MenschenProjekteIcon"
           :card-title="$t('home.section3.thirdColumn.headline')"
@@ -66,6 +66,11 @@ import SectionColumnCard from '#components/layout/SectionColumnCard.vue'
         color: #383838;
       }
     }
+  }
+
+  .card-row {
+    width: 100%;
+    max-width: 1248px;
   }
 }
 </style>

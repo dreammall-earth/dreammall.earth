@@ -1,6 +1,6 @@
 import { Resolver, Mutation, Arg } from 'type-graphql'
 
-import { sendContactToBrevo } from '#api/NewsletterBrevo'
+import { subscribeToNewsletter } from '#api/Brevo'
 import { SubscribeToNewsletterInput } from '#inputs/SubscribeToNewsletterInput'
 import { prisma } from '#src/prisma'
 
@@ -13,7 +13,7 @@ export class NewsletterSubscriptionResolver {
     const subscriber = await prisma.newsletterSubscription.create({
       data: subscribeToNewsletterData,
     })
-    void sendContactToBrevo(subscriber)
+    void subscribeToNewsletter(subscriber)
     return true
   }
 }

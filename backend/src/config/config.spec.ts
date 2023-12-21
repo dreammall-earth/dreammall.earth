@@ -14,10 +14,10 @@ describe('validateConfig', () => {
         .spyOn(require('./printConfigError'), 'printConfigError')
         .mockImplementation()
       process.env.BREVO_KEY = 'MY KEY'
-      process.env.BREVO_CONTACT_REQUEST_TO_NAME = 'Peter Lustig'
-      process.env.BREVO_CONTACT_REQUEST_TO_EMAIL = 'peter@lustig.de'
-      process.env.BREVO_TEMPLATE_CONTACT_BASE = 'not a number'
-      process.env.BREVO_TEMPLATE_CONTACT_USER = 'not a number'
+      process.env.BREVO_ADMIN_NAME = 'Peter Lustig'
+      process.env.BREVO_ADMIN_EMAIL = 'peter@lustig.de'
+      process.env.BREVO_CONTACT_TEMPLATE_ADMIN = 'not a number'
+      process.env.BREVO_CONTACT_TEMPLATE_USER = 'not a number'
       require('#config/config')
     })
 
@@ -36,7 +36,7 @@ describe('validateConfig', () => {
         .spyOn(require('./printConfigError'), 'printConfigError')
         .mockImplementation()
       process.env.BREVO_KEY = 'MY KEY'
-      process.env.BREVO_CONTACT_LIST_ID = 'not a number'
+      process.env.BREVO_NEWSLETTER_LIST = 'not a number'
       require('#config/config')
     })
 
@@ -55,15 +55,15 @@ describe('validateConfig', () => {
         .spyOn(require('./printConfigError'), 'printConfigError')
         .mockImplementation()
       process.env.BREVO_KEY = 'MY KEY'
-      process.env.BREVO_CONTACT_REQUEST_TO_NAME = 'Peter Lustig'
-      process.env.BREVO_CONTACT_REQUEST_TO_EMAIL = 'peter@lustig.de'
-      process.env.BREVO_TEMPLATE_CONTACT_BASE = '1'
-      process.env.BREVO_TEMPLATE_CONTACT_USER = '2'
-      process.env.BREVO_CONTACT_LIST_ID = '3'
+      process.env.BREVO_ADMIN_NAME = 'Peter Lustig'
+      process.env.BREVO_ADMIN_EMAIL = 'peter@lustig.de'
+      process.env.BREVO_CONTACT_TEMPLATE_ADMIN = '1'
+      process.env.BREVO_CONTACT_TEMPLATE_USER = '2'
+      process.env.BREVO_NEWSLETTER_LIST = '3'
       require('#config/config')
     })
 
-    it('passes the check', () => {
+    it('passes all checks', () => {
       expect(mockPrintConfigError).toHaveBeenCalledTimes(0)
     })
   })
