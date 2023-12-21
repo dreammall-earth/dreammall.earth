@@ -59,10 +59,10 @@ describe('ContactForm', () => {
       })
 
       it('has label menu.footer.contactForm.lastName', () => {
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[4].text()).toBe(
+        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[2].text()).toBe(
           "$t('menu.footer.contactForm.lastName')",
         )
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[5].text()).toBe(
+        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[3].text()).toBe(
           "$t('menu.footer.contactForm.lastName')",
         )
       })
@@ -74,10 +74,10 @@ describe('ContactForm', () => {
       })
 
       it('has label menu.footer.contactForm.mail', () => {
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[2].text()).toBe(
+        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[4].text()).toBe(
           "$t('menu.footer.contactForm.mail')",
         )
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[3].text()).toBe(
+        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[5].text()).toBe(
           "$t('menu.footer.contactForm.mail')",
         )
       })
@@ -108,9 +108,50 @@ describe('ContactForm', () => {
     })
   })
 
+  describe('form validation', () => {
+    describe('no valid email', () => {
+      beforeEach(async () => {
+        await wrapper.find('input[name="firstname"]').setValue('Peter')
+        await wrapper.find('input[name="email"]').setValue('peter(at)lustig.de')
+        await wrapper.find('input[name="lastname"]').setValue('Lustig')
+        await wrapper.find('textarea[name="message"]').setValue('Eine gute Frage.')
+        await wrapper.find('input[name="dataprivacy"]').setValue(true)
+        await wrapper.find('form').trigger('submit.prevent')
+        await flushPromises()
+      })
+
+      it('shows error for email', () => {
+        expect(wrapper.find('.v-messages__message').text()).toBe(
+          'Dieses Feld muss eine Email-Adresse sein',
+        )
+      })
+    })
+
+    describe('last name too long', () => {
+      beforeEach(async () => {
+        await wrapper.find('input[name="firstname"]').setValue('Peter')
+        await wrapper.find('input[name="email"]').setValue('peter@lustig.de')
+        await wrapper
+          .find('input[name="lastname"]')
+          .setValue(
+            'Stormborn of the House Targaryen, First of Her Name, the Unburnt, Queen of the Andals and the First Men, Khaleesi of the Great Grass Sea, Breaker of Chains, and Mother of Dragons',
+          )
+        await wrapper.find('textarea[name="message"]').setValue('Eine gute Frage.')
+        await wrapper.find('input[name="dataprivacy"]').setValue(true)
+        await wrapper.find('form').trigger('submit.prevent')
+        await flushPromises()
+      })
+
+      it('shows error for last name', () => {
+        expect(wrapper.find('.v-messages__message').text()).toBe('Dieses Feld ist zu lang')
+      })
+    })
+  })
+
   describe('submit', () => {
     describe('empty form', () => {
       beforeEach(async () => {
+        vi.clearAllMocks()
         await wrapper.find('form').trigger('submit.prevent')
         await flushPromises()
       })
@@ -119,15 +160,20 @@ describe('ContactForm', () => {
         const errorMessages = wrapper.findAll('.v-messages__message')
         expect(errorMessages).toHaveLength(5)
         // firstname
-        expect(errorMessages[0].text()).toBe("$t('menu.footer.contactForm.fieldRequired')")
+        expect(errorMessages[0].text()).toBe('Dieses Feld wird benötigt')
         // email
-        expect(errorMessages[1].text()).toBe("$t('menu.footer.contactForm.fieldRequired')")
+        expect(errorMessages[1].text()).toBe('Dieses Feld wird benötigt')
         // lastname
-        expect(errorMessages[2].text()).toBe("$t('menu.footer.contactForm.fieldRequired')")
+        expect(errorMessages[2].text()).toBe('Dieses Feld wird benötigt')
         // content
-        expect(errorMessages[3].text()).toBe("$t('menu.footer.contactForm.fieldRequired')")
+        expect(errorMessages[3].text()).toBe('Dieses Feld wird benötigt')
         // checkbox
-        expect(errorMessages[4].text()).toBe("$t('menu.footer.contactForm.fieldRequired')")
+        expect(errorMessages[4].text()).toBe("$t('validation.fieldRequired')")
+      })
+
+      it('user feedback not visible', () => {
+        expect(wrapper.find('span.info-text.form-success').exists()).toBe(false)
+        expect(wrapper.find('span.info-text.form-error').exists()).toBe(false)
       })
 
       it('does not call the API', () => {
@@ -164,6 +210,16 @@ describe('ContactForm', () => {
           expect(wrapper.find('input[name="lastname"]').element).toHaveProperty('value', '')
           expect(wrapper.find('textarea[name="message"]').element).toHaveProperty('value', '')
           expect(wrapper.find('input[name="dataprivacy"]').element).toHaveProperty('value', 'false')
+        })
+
+        describe('success message for user', () => {
+          it('shows message', () => {
+            expect(wrapper.find('span.info-text.form-success').exists()).toBeTruthy()
+
+            expect(wrapper.find('span.info-text.form-success').text()).toBe(
+              "$t('menu.footer.contactForm.successMsg')",
+            )
+          })
         })
       })
     })
