@@ -44,12 +44,20 @@ $mobile: 500px;
   text-align: center;
 
   .card-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 81px;
     font-size: 1.625rem;
     font-weight: 600;
     line-height: 125%; /* 2.03125rem */
     text-overflow: unset;
     text-transform: capitalize;
-    text-wrap: balance;
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
+    white-space: pre-wrap; /* css-3 */
+    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
   }
 }
 </style>

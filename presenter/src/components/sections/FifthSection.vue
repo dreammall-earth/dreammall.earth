@@ -13,7 +13,7 @@
       <v-col>
         <v-carousel hide-delimiter-background show-arrows="hover" color="#ABABAB" :height="650">
           <v-carousel-item draggable>
-            <v-sheet rounded="xl" color="#F5F5F5" border :height="600">
+            <v-sheet rounded="xl" color="#FFFFF" border :height="600">
               <div class="icon-container slide1">
                 <v-img class="w-100 icon-main main-slide-icon-1" :src="slideLogo1" />
                 <h3 class="w-100 slide-subheadline slide-subheadline-1">
@@ -33,7 +33,7 @@
           </v-carousel-item>
 
           <v-carousel-item draggable>
-            <v-sheet rounded="xl" color="#F5F5F5" border :height="600">
+            <v-sheet rounded="xl" color="#FFFFF" border :height="600">
               <div class="icon-container slide2">
                 <v-img class="w-100 icon-main main-slide-icon-2" :src="slideLogo2" />
                 <h3 class="w-100 slide-subheadline slide-subheadline-2">
@@ -52,7 +52,7 @@
           </v-carousel-item>
 
           <v-carousel-item draggable>
-            <v-sheet rounded="xl" color="#F5F5F5" border :height="600">
+            <v-sheet rounded="xl" color="#FFFFF" border :height="600">
               <div class="icon-container slide3">
                 <h3 class="w-100 slide-subheadline slide-subheadline-3">
                   {{ $t('home.section5.slide3.subheadline') }}
@@ -218,7 +218,7 @@ $tablet: 960px;
         }
 
         @media screen and (max-width: $mobile) {
-          max-width: 90px;
+          max-width: 80px;
         }
 
         &.icon-1 {
