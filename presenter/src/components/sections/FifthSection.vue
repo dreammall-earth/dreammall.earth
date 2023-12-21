@@ -218,7 +218,7 @@ $tablet: 960px;
         }
 
         @media screen and (max-width: $mobile) {
-          max-width: 90px;
+          max-width: 80px;
         }
 
         &.icon-1 {
