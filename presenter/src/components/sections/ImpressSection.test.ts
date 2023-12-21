@@ -15,7 +15,7 @@ describe('ImpressSection', () => {
 
   it('renders 6 cards', () => {
     expect(wrapper.find('.impress-section').exists()).toBeTruthy()
-    expect(wrapper.findAll('.v-col > .v-card')).toHaveLength(6)
+    expect(wrapper.findAll('.impress-section .content-card')).toHaveLength(6)
   })
 
   it('has h1 impress.headline', () => {
@@ -26,23 +26,23 @@ describe('ImpressSection', () => {
 
   describe('first card', () => {
     it('has h2 impress.data.headline', () => {
-      expect(wrapper.findAll('.v-col > .v-card')[0].findAll('h2.card-header')[0].text()).toBe(
-        "$t('impress.data.headline')",
-      )
+      expect(
+        wrapper.findAll('.impress-section .content-card')[0].findAll('h2.card-header')[0].text(),
+      ).toBe("$t('impress.data.headline')")
     })
 
     it('has h2 impress.data.personHeadline', () => {
-      expect(wrapper.findAll('.v-col > .v-card')[0].findAll('h2.card-header')[1].text()).toBe(
-        "$t('impress.data.personHeadline')",
-      )
+      expect(
+        wrapper.findAll('.impress-section .content-card')[0].findAll('h2.card-header')[1].text(),
+      ).toBe("$t('impress.data.personHeadline')")
     })
   })
 
   describe('second card', () => {
     it('has h2 impress.contact.headline', () => {
-      expect(wrapper.findAll('.v-col > .v-card')[1].find('h2.card-header').text()).toBe(
-        "$t('impress.contact.headline')",
-      )
+      expect(
+        wrapper.findAll('.impress-section .content-card')[1].find('h2.card-header').text(),
+      ).toBe("$t('impress.contact.headline')")
     })
   })
 

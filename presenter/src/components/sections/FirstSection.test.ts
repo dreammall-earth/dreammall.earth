@@ -34,7 +34,7 @@ describe('FirstSection', () => {
 
       it('has correct source', () => {
         expect(item.find('video').find('source').attributes('src')).toBe(
-          '/src/assets/video/header_video.mp4',
+          '/src/assets/video/intro_quer.mp4',
         )
       })
 

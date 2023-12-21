@@ -1,5 +1,5 @@
 <template>
-  <div class="data-protection-section pt-4 v-container">
+  <div class="data-protection-section my-16 v-container">
     <v-row class="section-header">
       <v-col>
         <h1 class="section-headline">
@@ -63,6 +63,7 @@
 
 <style scoped lang="scss">
 $mobile: 500px;
+$tablet: 900px;
 
 .data-protection-section {
   max-width: 1120px;
@@ -80,8 +81,12 @@ $mobile: 500px;
       line-height: 120%;
       text-transform: capitalize;
 
-      @media screen and (max-width: $mobile) {
+      @media screen and (max-width: $tablet) {
         font-size: 2.5rem;
+      }
+
+      @media screen and (max-width: $mobile) {
+        font-size: 2rem;
       }
     }
   }

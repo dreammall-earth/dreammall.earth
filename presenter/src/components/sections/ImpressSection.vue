@@ -1,5 +1,5 @@
 <template>
-  <div class="impress-section pt-4 v-container">
+  <div class="impress-section my-16 v-container">
     <v-row class="section-header">
       <v-col>
         <h1 class="section-headline">
@@ -8,7 +8,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col>
+      <v-col cols="12" sm="6">
         <v-card flat class="content-card mb-2 pa-4 pa-md-12">
           <template #text>
             <h2 class="card-header">{{ $t('impress.data.headline') }}</h2>
@@ -31,8 +31,8 @@
           </template>
         </v-card>
       </v-col>
-      <v-col>
-        <v-card flat class="content-card mb-2 pa-4 pa-md-10">
+      <v-col cols="12" sm="6">
+        <v-card flat class="content-card mb-2 pa-4 pa-md-9">
           <template #text>
             <h2 class="card-header">{{ $t('impress.contact.headline') }}</h2>
             <ul class="card-content mt-2 my-8">
@@ -48,7 +48,7 @@
           </template>
         </v-card>
 
-        <!--<v-card flat class="content-card mb-2 pa-4 pa-md-10 my-4">
+        <!--<v-card flat class="content-card mb-2 pa-4 pa-md-8">
           <template #text>
             <h2 class="card-header">{{ $t('impress.tax.headline') }}</h2>
             <p class="card-content mt-2">
