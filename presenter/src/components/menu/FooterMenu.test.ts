@@ -25,8 +25,8 @@ describe('FooterMenu', () => {
   describe('first column', () => {
     const column = wrapper.findAll('.v-row > div')[0]
 
-    it('contains 6 children -> AnchorLink', () => {
-      expect(column.findAllComponents(AnchorLink)).toHaveLength(6)
+    it('contains 3 children -> AnchorLink', () => {
+      expect(column.findAllComponents(AnchorLink)).toHaveLength(3)
     })
 
     it('has header menu.footer.sitemap', () => {
@@ -49,11 +49,11 @@ describe('FooterMenu', () => {
       const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[1]
 
       it('has href to /', () => {
-        expect(anchor.attributes('href')).toBe('/')
+        expect(anchor.attributes('href')).toBe('/#planning-section')
       })
 
-      it('has text menu.worldCoffeeHouse', () => {
-        expect(anchor.text()).toBe("$t('menu.footer.worldCoffeeHouse')")
+      it('has text menu.footer.planing', () => {
+        expect(anchor.text()).toBe("$t('menu.footer.planing')")
       })
     })
 
@@ -61,55 +61,11 @@ describe('FooterMenu', () => {
       const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[2]
 
       it('has href to /', () => {
-        expect(anchor.attributes('href')).toBe('/')
+        expect(anchor.attributes('href')).toBe('/#coffee-section')
       })
 
-      it('has class min-width-remover', () => {
-        expect(anchor.classes('min-width-remover')).toBe(true)
-      })
-
-      it('has text menu.mall', () => {
-        expect(anchor.text()).toBe("$t('menu.footer.mall')")
-      })
-    })
-
-    describe('fourth anchor link', () => {
-      const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[3]
-
-      it('has href to /', () => {
-        expect(anchor.attributes('href')).toBe('/')
-      })
-
-      it('has text menu.humansAndProjects', () => {
-        expect(anchor.text()).toBe("$t('menu.footer.humansAndProjects')")
-      })
-    })
-
-    it('has h3 header menu.footer.socialHeadline', () => {
-      expect(column.find('h3').text()).toBe("$t('menu.footer.socialHeadline')")
-    })
-
-    describe('fifth anchor link', () => {
-      const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[4]
-
-      it('has href to /', () => {
-        expect(anchor.attributes('href')).toBe('/')
-      })
-
-      it('has text menu.footer.instagram', () => {
-        expect(anchor.text()).toBe("$t('menu.footer.instagram')")
-      })
-    })
-
-    describe('sixth anchor link', () => {
-      const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[5]
-
-      it('has href to /', () => {
-        expect(anchor.attributes('href')).toBe('/')
-      })
-
-      it('has text menu.footer.telegram', () => {
-        expect(anchor.text()).toBe("$t('menu.footer.telegram')")
+      it('has text menu.worldCoffeeHouse', () => {
+        expect(anchor.text()).toBe("$t('menu.footer.worldCoffeeHouse')")
       })
     })
   })
@@ -121,8 +77,8 @@ describe('FooterMenu', () => {
       expect(column.findComponent(LogoImage)).toBeTruthy()
     })
 
-    it('contains 4 children -> AnchorLink', () => {
-      expect(column.findAllComponents(AnchorLink)).toHaveLength(4)
+    it('contains 3 children -> AnchorLink', () => {
+      expect(column.findAllComponents(AnchorLink)).toHaveLength(3)
     })
 
     it('has header menu.footer.privacyHeadline', () => {
@@ -145,19 +101,7 @@ describe('FooterMenu', () => {
       const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[1]
 
       it('has href to /', () => {
-        expect(anchor.attributes('href')).toBe('/')
-      })
-
-      it('has text menu.footer.cookies', () => {
-        expect(anchor.text()).toBe("$t('menu.footer.cookies')")
-      })
-    })
-
-    describe('third anchor link', () => {
-      const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[2]
-
-      it('has href to /', () => {
-        expect(anchor.attributes('href')).toBe('/')
+        expect(anchor.attributes('href')).toBe('/#newsletter-section')
       })
 
       it('has text menu.footer.newsletter', () => {
@@ -165,8 +109,8 @@ describe('FooterMenu', () => {
       })
     })
 
-    describe('fourth anchor link', () => {
-      const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[3]
+    describe('third anchor link', () => {
+      const anchor: VueWrapper = (column.findAllComponents(AnchorLink) as VueWrapper[])[2]
 
       it('has href to /', () => {
         expect(anchor.attributes('href')).toBe('datenschutz')
