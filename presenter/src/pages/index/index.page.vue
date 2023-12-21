@@ -37,8 +37,8 @@ import Section3 from '#root/src/components/sections/ThirdSection.vue'
 
 <style scoped lang="scss">
 .index-page {
-  background: #f5f5f5;
   overflow: hidden;
+  background: #f5f5f5;
 
   #about {
     background: #fff;
