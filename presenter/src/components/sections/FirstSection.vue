@@ -3,18 +3,18 @@
     <div class="section1">
       <v-carousel
         v-model="slide"
-        class="h-screen landing-slider"
+        class="landing-slider"
         hide-delimiter-background
         show-arrows="hover"
         color="#ffffff"
-        theme="dark"
+        height="100vh"
       >
         <v-carousel-item id="intro-video-slide" class="video-item">
-          <v-sheet class="video-item">
+          <v-sheet color="transparent" class="video-item h-100">
             <video
               :key="videoSrc"
               ref="video"
-              class="video w-100"
+              class="video w-100 h-100"
               :poster="posterSrc"
               autoplay
               muted
@@ -74,7 +74,7 @@ const videoSrc = ref('')
 const videoSrcAlt = ref('')
 const posterSrc = ref('')
 
-const mobileThreshold: number = 550
+const mobileThreshold: number = 750
 
 defineExpose({ slide })
 
@@ -145,8 +145,13 @@ onMounted(() => {
 
     .v-carousel-item {
       &:first-child {
-        .v-responsive__content {
-          align-self: center;
+        video {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          min-width: 100%;
+          min-height: 100%;
+          object-fit: fill;
         }
       }
     }
@@ -155,9 +160,9 @@ onMounted(() => {
   .v-window__controls {
     .v-btn {
       .v-btn__underlay {
-        background: rgb(255 255 255 / 15%);
-        backdrop-filter: blur(14px);
-        border-radius: 2.5rem;
+        // background: rgb(255 255 255 / 15%);
+        // backdrop-filter: blur(14px);
+        // border-radius: 2.5rem;
       }
     }
   }
