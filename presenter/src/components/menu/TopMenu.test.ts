@@ -4,11 +4,14 @@ import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 import AnchorLink from '#components/nav/AnchorLink.vue'
+import { setupIntersectionObserverMock } from '#root/scripts/tests/mock.IntersectionObserver'
 
 import LogoImage from './LogoImage.vue'
 import TopMenu from './TopMenu.vue'
 
-describe('FooterMenu', () => {
+setupIntersectionObserverMock()
+
+describe('TopMenu', () => {
   const wrapper = mount(VApp, {
     slots: {
       default: h(TopMenu as Component),
@@ -72,7 +75,7 @@ describe('FooterMenu', () => {
 
   describe('third column', () => {
     it('is placeholder', () => {
-      expect(wrapper.findAll('.v-row > div')[2].findAll('div')).toHaveLength(0)
+      expect(wrapper.findAll('.v-row > div')[2].findAll('.v-img')).toHaveLength(1)
     })
   })
 })

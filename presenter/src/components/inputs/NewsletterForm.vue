@@ -84,7 +84,7 @@
             >{{ $t('home.newsletterSection.newsletterForm.privacy') }}
             <AnchorLink
               class=""
-              href="/#"
+              href="/datenschutz"
               variant="text"
               :label="$t('home.newsletterSection.newsletterForm.privacyLinkLabel')"
             ></AnchorLink

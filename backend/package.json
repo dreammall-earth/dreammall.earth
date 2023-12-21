@@ -1,6 +1,6 @@
 {
   "name": "boilerplate-backend",
-  "version": "0.9.3",
+  "version": "1.0.0",
   "description": "The IT4C Boilerplate for backends",
   "main": "build/index.ts",
   "repository": {
@@ -25,7 +25,7 @@
     "test:lint": "npm run test:lint:eslint && npm run test:lint:remark",
     "test:lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.cjs,.mjs,.json,.yml,.yaml --max-warnings 0 .",
     "test:lint:remark": "remark . --quiet --frail",
-    "test:unit": "DOTENV_CONFIG_PATH=.env.dist TZ=UTC jest --runInBand --forceExit --detectOpenHandles",
+    "test:unit": "TZ=UTC jest --runInBand --forceExit --detectOpenHandles",
     "test": "npm run test:lint && npm run test:unit",
     "docs:dev": "vuepress dev .",
     "docs:build": "vuepress build .",

@@ -108,7 +108,7 @@
             >{{ $t('menu.footer.contactForm.privacy') }}
             <AnchorLink
               class=""
-              href="/#"
+              href="/datenschutz"
               variant="text"
               :label="$t('menu.footer.contactForm.privacyLinkLabel')"
             ></AnchorLink

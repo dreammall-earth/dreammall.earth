@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout class="index-page">
-    <div id="section1">
+    <div id="section1" class="h-screen mb-4">
       <Section1 />
     </div>
     <div id="about" class="py-16 px-4 d-flex justify-center">
@@ -9,13 +9,13 @@
     <div id="products" class="py-16 px-4">
       <Section3 />
     </div>
-    <div id="section4" class="py-16 px-4">
+    <div id="planning-section" class="py-16 px-4">
       <Section4 />
     </div>
     <div id="newsletter-section" class="py-16 px-4">
       <NewsletterSection />
     </div>
-    <div id="section5" class="py-16 px-4">
+    <div id="coffee-section" class="py-16 px-4">
       <Section5 />
     </div>
     <div id="section6" class="py-16 px-4">
@@ -37,6 +37,7 @@ import Section3 from '#root/src/components/sections/ThirdSection.vue'
 
 <style scoped lang="scss">
 .index-page {
+  overflow: hidden;
   background: #f5f5f5;
 
   #about {

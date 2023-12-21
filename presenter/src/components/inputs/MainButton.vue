@@ -108,6 +108,7 @@ const onClick = () => {
   color: white;
   text-align: center;
   border-radius: 80px;
+  box-shadow: none;
 
   &--primary {
     color: white !important;

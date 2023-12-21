@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mb-2" flat color="transparent">
+  <v-card class="mb-2 w-100" width="375" flat color="transparent">
     <v-img height="100" :src="props.imageSrc" class="text-white"></v-img>
     <v-card-title class="card-title mt-8">{{ props.cardTitle }}</v-card-title>
     <v-card-text class="card-text mt-8">{{ props.cardText }}</v-card-text>
@@ -34,7 +34,7 @@ const props = withDefaults(
 $mobile: 500px;
 
 .v-card {
-  max-width: 320px;
+  max-width: 375px;
   font-family: Poppins, sans-serif;
   font-size: 1.25rem;
   font-style: normal;
@@ -44,15 +44,20 @@ $mobile: 500px;
   text-align: center;
 
   .card-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 81px;
     font-size: 1.625rem;
     font-weight: 600;
     line-height: 125%; /* 2.03125rem */
+    text-overflow: unset;
     text-transform: capitalize;
-
-    @media screen and (max-width: $mobile) {
-      text-overflow: unset;
-      text-wrap: balance;
-    }
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
+    white-space: pre-wrap; /* css-3 */
+    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
   }
 }
 </style>

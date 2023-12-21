@@ -1,5 +1,5 @@
 <template>
-  <div ref="target">
+  <div ref="target" class="px-4">
     <v-row class="section2 py-16">
       <v-col cols="12" md="7">
         <div class="section-left-part" :class="{ show: animate }">
@@ -51,7 +51,7 @@ onBeforeMount(() => {
       }
     },
     {
-      threshold: 0.5,
+      threshold: 0.3,
     },
   )
 })
@@ -64,6 +64,7 @@ onMounted(() => {
 
 <style scoped lang="scss">
 $mobile: 500px;
+$tablet: 960px;
 
 .section2 {
   max-width: 1440px;
@@ -91,6 +92,12 @@ $mobile: 500px;
     &.show {
       transform: translateX(0%);
     }
+
+    @media screen and (max-width: $mobile) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   .section-right-part {
@@ -99,6 +106,20 @@ $mobile: 500px;
 
     &.show {
       transform: rotate(0deg) translateX(0%);
+    }
+
+    @media screen and (max-width: $tablet) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 3em;
+    }
+
+    @media screen and (max-width: $mobile) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 3em;
     }
   }
 
@@ -118,6 +139,7 @@ $mobile: 500px;
     max-width: 24.7268rem;
 
     @media screen and (max-width: $mobile) {
+      max-width: 10.5rem;
       padding: 10px;
     }
   }
