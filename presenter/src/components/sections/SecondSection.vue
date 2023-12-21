@@ -1,5 +1,5 @@
 <template>
-  <div ref="target">
+  <div ref="target" class="px-4">
     <v-row class="section2 py-16">
       <v-col cols="12" md="7">
         <div class="section-left-part" :class="{ show: animate }">
