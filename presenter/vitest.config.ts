@@ -19,7 +19,7 @@ export default mergeConfig(
         ],
         statements: 97,
         branches: 91,
-        // functions: 73, // has problems
+        // functions: 73, // has problems see https://github.com/vitest-dev/vitest/issues/3607
         lines: 97,
       },
     },

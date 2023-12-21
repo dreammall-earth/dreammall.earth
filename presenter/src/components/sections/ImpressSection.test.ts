@@ -48,57 +48,57 @@ describe('ImpressSection', () => {
 
   describe('third card', () => {
     it('has h2 impress.liabilityContent.headline', () => {
-      expect(wrapper.findAll('.v-col > .v-card')[2].find('h2.card-header').text()).toBe(
-        "$t('impress.liabilityContent.headline')",
-      )
+      expect(
+        wrapper.findAll('.impress-section .content-card')[2].find('h2.card-header').text(),
+      ).toBe("$t('impress.liabilityContent.headline')")
     })
 
     it('has p impress.liabilityContent.content', () => {
-      expect(wrapper.findAll('.v-col > .v-card')[2].find('p.card-content').text()).toBe(
-        "$t('impress.liabilityContent.content')",
-      )
+      expect(
+        wrapper.findAll('.impress-section .content-card')[2].find('p.card-content').text(),
+      ).toBe("$t('impress.liabilityContent.content')")
     })
   })
 
   describe('fourth card', () => {
     it('has h2 impress.liabilityLinks.headline', () => {
-      expect(wrapper.findAll('.v-col > .v-card')[3].find('h2.card-header').text()).toBe(
-        "$t('impress.liabilityLinks.headline')",
-      )
+      expect(
+        wrapper.findAll('.impress-section .content-card')[3].find('h2.card-header').text(),
+      ).toBe("$t('impress.liabilityLinks.headline')")
     })
 
     it('has p impress.liabilityLinks.content', () => {
-      expect(wrapper.findAll('.v-col > .v-card')[3].find('p.card-content').text()).toBe(
-        "$t('impress.liabilityLinks.content')",
-      )
+      expect(
+        wrapper.findAll('.impress-section .content-card')[3].find('p.card-content').text(),
+      ).toBe("$t('impress.liabilityLinks.content')")
     })
   })
 
   describe('fifth card', () => {
     it('has h2 impress.copyright.headline', () => {
-      expect(wrapper.findAll('.v-col > .v-card')[4].find('h2.card-header').text()).toBe(
-        "$t('impress.copyright.headline')",
-      )
+      expect(
+        wrapper.findAll('.impress-section .content-card')[4].find('h2.card-header').text(),
+      ).toBe("$t('impress.copyright.headline')")
     })
 
     it('has p impress.copyright.content', () => {
-      expect(wrapper.findAll('.v-col > .v-card')[4].find('p.card-content').text()).toBe(
-        "$t('impress.copyright.content')",
-      )
+      expect(
+        wrapper.findAll('.impress-section .content-card')[4].find('p.card-content').text(),
+      ).toBe("$t('impress.copyright.content')")
     })
   })
 
   describe('sixth card', () => {
     it('has h2 impress.legalDisclaimer.headline', () => {
-      expect(wrapper.findAll('.v-col > .v-card')[5].find('h2.card-header').text()).toBe(
-        "$t('impress.legalDisclaimer.headline')",
-      )
+      expect(
+        wrapper.findAll('.impress-section .content-card')[5].find('h2.card-header').text(),
+      ).toBe("$t('impress.legalDisclaimer.headline')")
     })
 
     it('has p impress.legalDisclaimer.content', () => {
-      expect(wrapper.findAll('.v-col > .v-card')[5].find('p.card-content').text()).toBe(
-        "$t('impress.legalDisclaimer.content')",
-      )
+      expect(
+        wrapper.findAll('.impress-section .content-card')[5].find('p.card-content').text(),
+      ).toBe("$t('impress.legalDisclaimer.content')")
     })
   })
 })
