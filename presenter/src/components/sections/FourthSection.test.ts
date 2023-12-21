@@ -27,7 +27,7 @@ describe('FourthSection', () => {
 
   it('has correct source', () => {
     expect(wrapper.find('video').find('source').attributes('src')).toBe(
-      '/src/assets/video/timeline.mp4',
+      '/src/assets/video/timeline_quer.mp4',
     )
   })
   it('reload button hidden', () => {

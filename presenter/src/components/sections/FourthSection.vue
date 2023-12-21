@@ -10,15 +10,18 @@
     <v-row class="mt-12">
       <v-col>
         <video
+          :key="videoSrc"
           ref="video"
           class="video w-100"
+          :poster="posterSrc"
           autoplay
           muted
           preload="auto"
           playsinline
           @ended="triggerButtonVisibility"
         >
-          <source :src="Video" type="video/mp4" />
+          <source :src="videoSrc" type="video/mp4" />
+          <source :src="videoSrcAlt" type="video/webm" />
         </video>
       </v-col>
     </v-row>
@@ -40,13 +43,23 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
-import Video from '#assets/video/timeline.mp4'
+import VideoPosterMobile from '#assets/img/timeline_thumbnail_hoch.jpg'
+import VideoPoster from '#assets/img/timeline_thumbnail_quer.jpg'
+import VideoMobileMp4 from '#assets/video/timeline_hoch.mp4'
+import VideoMobileWebm from '#assets/video/timeline_hoch.webm'
+import VideoMp4 from '#assets/video/timeline_quer.mp4'
+import VideoWebm from '#assets/video/timeline_quer.webm'
 import MainButton from '#components/inputs/MainButton.vue'
 
 const showButton = ref(false)
 const video = ref<HTMLFormElement>()
+const videoSrc = ref('')
+const videoSrcAlt = ref('')
+const posterSrc = ref('')
+
+const mobileThreshold: number = 550
 
 function triggerButtonVisibility() {
   showButton.value = true
@@ -57,6 +70,29 @@ function playVideo() {
     video.value.play()
   }
 }
+
+function isMobile() {
+  return window.innerWidth <= mobileThreshold
+}
+
+function setVideoSrc() {
+  if (isMobile()) {
+    videoSrc.value = VideoMobileMp4
+    videoSrcAlt.value = VideoMobileWebm
+    posterSrc.value = VideoPosterMobile
+  } else {
+    videoSrc.value = VideoMp4
+    videoSrcAlt.value = VideoWebm
+    posterSrc.value = VideoPoster
+  }
+}
+
+onMounted(() => {
+  setVideoSrc()
+  window.addEventListener('resize', () => {
+    setVideoSrc()
+  })
+})
 </script>
 
 <style scoped lang="scss">
