@@ -24,6 +24,7 @@ const props = withDefaults(
      * The label of the button
      */
     label: string
+    href?: string
     /**
      * primary or secondary button
      */
@@ -45,7 +46,7 @@ const props = withDefaults(
      */
     isLoading?: boolean
   }>(),
-  { variant: 'primary', size: 'medium', isLoading: false },
+  { href: undefined, variant: 'primary', size: 'medium', isLoading: false },
 )
 
 const emit = defineEmits<{
@@ -85,9 +86,15 @@ const setColor = computed(() => {
   }
 })
 
+const hasHref = computed(() => {
+  return props.href !== undefined
+})
+
 const onClick = () => {
   emit('click', 1)
-  return navigate(props.href)
+  if (hasHref.value) {
+    navigate(props.href as string)
+  }
 }
 </script>
 
