@@ -5,7 +5,7 @@ import { VApp } from 'vuetify/components'
 
 import DataProtectionSection from '#components/sections/DataProtectionSection.vue'
 
-import DataPrivacyPage from './datenschutz.page.vue'
+import DataPrivacyPage from './+Page.vue'
 
 describe('DataPrivacyPage', () => {
   const wrapper = mount(VApp, {
