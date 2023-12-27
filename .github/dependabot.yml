@@ -9,7 +9,7 @@ updates:
     timezone: "Europe/Berlin"
     time: "03:00"
 - package-ecosystem: npm
-  directory: "/"
+  directory: "/presenter"
   rebase-strategy: "disabled"
   schedule:
     interval: weekly
@@ -18,6 +18,14 @@ updates:
     time: "03:00"
 - package-ecosystem: docker
   directory: "/"
+  rebase-strategy: "disabled"
+  schedule:
+    interval: weekly
+    day: "saturday"
+    timezone: "Europe/Berlin"
+    time: "03:00"
+- package-ecosystem: docker
+  directory: "/presenter"
   rebase-strategy: "disabled"
   schedule:
     interval: weekly
