@@ -15,9 +15,6 @@ import type { App } from 'vue'
 // running this here fixes the warning and should not impact anything due to prerender setting.
 resolveComponent('nothing')
 
-// See https://vike.dev/data-fetching
-export const passToClient = ['pageProps', /* 'urlPathname', */ 'routeParams']
-
 async function render(pageContext: PageContextServer & PageContext) {
   const { app, i18n } = createApp(pageContext, false)
 
@@ -63,4 +60,4 @@ async function renderToString(app: App) {
   return appHtml
 }
 
-export { render }
+export default render
