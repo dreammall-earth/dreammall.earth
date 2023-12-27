@@ -20,8 +20,6 @@ The Dreammall presenter.
 
 ![](src/assets/dreammall-logo.svg)
 
-![](src/assets/it4c-logo2-clean-bg_alpha-128x128.png)
-
 ## Requirements & Technology
 
 To be able to build this project you need `nodejs`, `npm` and optional `docker` and `jq`.
