@@ -150,6 +150,7 @@ onMounted(() => {
   .nav-drawer {
     top: 95px !important;
     height: fit-content !important;
+    min-height: 256px;
   }
 }
 </style>
