@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach } from 'vitest'
 
-import ErrorPage from './_error.page.vue'
+import ErrorPage from './+Page.vue'
 
 describe('ErrorPage', () => {
   const Wrapper = () => {

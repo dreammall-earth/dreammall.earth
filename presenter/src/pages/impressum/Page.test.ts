@@ -5,7 +5,7 @@ import { VApp } from 'vuetify/components'
 
 import ImpressSection from '#components/sections/ImpressSection.vue'
 
-import ImpressumPage from './impressum.page.vue'
+import ImpressumPage from './+Page.vue'
 
 describe('ImpressumPage', () => {
   const wrapper = mount(VApp, {
