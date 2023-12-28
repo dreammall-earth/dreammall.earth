@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+// eslint-disable-next-line import/no-namespace
 import * as vike from 'vike/client/router'
 import { afterEach, describe, it, expect, beforeEach, vi } from 'vitest'
 
