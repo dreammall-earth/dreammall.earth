@@ -86,14 +86,10 @@ const setColor = computed(() => {
   }
 })
 
-const hasHref = computed(() => {
-  return props.href !== undefined
-})
-
 const onClick = () => {
   emit('click', 1)
-  if (hasHref.value) {
-    navigate(props.href as string)
+  if (props.href) {
+    navigate(props.href)
   }
 }
 </script>
