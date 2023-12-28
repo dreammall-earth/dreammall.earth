@@ -87,10 +87,10 @@ const setColor = computed(() => {
 })
 
 const onClick = () => {
-  emit('click', 1)
   if (props.href) {
     navigate(props.href)
   }
+  emit('click', 1)
 }
 </script>
 
