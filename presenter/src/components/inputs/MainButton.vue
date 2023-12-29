@@ -15,6 +15,7 @@
 </template>
 
 <script lang="ts" setup>
+import { navigate } from 'vike/client/router'
 import { computed } from 'vue'
 
 const props = withDefaults(
@@ -23,6 +24,7 @@ const props = withDefaults(
      * The label of the button
      */
     label: string
+    href?: string
     /**
      * primary or secondary button
      */
@@ -44,7 +46,7 @@ const props = withDefaults(
      */
     isLoading?: boolean
   }>(),
-  { variant: 'primary', size: 'medium', isLoading: false },
+  { href: undefined, variant: 'primary', size: 'medium', isLoading: false },
 )
 
 const emit = defineEmits<{
@@ -85,6 +87,9 @@ const setColor = computed(() => {
 })
 
 const onClick = () => {
+  if (props.href) {
+    navigate(props.href)
+  }
   emit('click', 1)
 }
 </script>
