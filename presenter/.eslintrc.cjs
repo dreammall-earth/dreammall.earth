@@ -22,7 +22,7 @@ module.exports = {
     parser: '@typescript-eslint/parser',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'import', 'promise', 'security', 'vue', 'storybook'],
+  plugins: ['@typescript-eslint', 'import', 'promise', 'security', 'vue', 'storybook', 'local-rules'],
   settings: {
     'import/resolver': {
       typescript: true,
