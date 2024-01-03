@@ -1,5 +1,7 @@
 import { mount } from '@vue/test-utils'
-import { describe, it, expect, beforeEach } from 'vitest'
+// eslint-disable-next-line import/no-namespace
+import * as vike from 'vike/client/router'
+import { afterEach, describe, it, expect, beforeEach, vi } from 'vitest'
 
 import MainButton from './MainButton.vue'
 
@@ -31,6 +33,35 @@ describe('MainButton', () => {
     it('emits click event', async () => {
       await wrapper.find('button').trigger('click')
       expect(wrapper.emitted()).toHaveProperty('click', [[1]])
+    })
+
+    describe('when href is provided', () => {
+      const navigationSpy = vi.spyOn(vike, 'navigate')
+
+      beforeEach(() => {
+        wrapper = mount(MainButton, {
+          props: {
+            label: 'My Button',
+            href: '/some-path',
+            variant: 'primary',
+            size: 'large',
+          },
+        })
+      })
+
+      afterEach(() => {
+        vi.restoreAllMocks()
+      })
+
+      it('calls navigate method with given href', async () => {
+        await wrapper.find('button').trigger('click')
+        expect(navigationSpy).toHaveBeenCalledWith('/some-path')
+      })
+
+      it('emits click event', async () => {
+        await wrapper.find('button').trigger('click')
+        expect(wrapper.emitted()).toHaveProperty('click', [[1]])
+      })
     })
   })
 
