@@ -22,7 +22,15 @@ module.exports = {
     parser: '@typescript-eslint/parser',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'import', 'promise', 'security', 'vue', 'storybook', 'local-rules'],
+  plugins: [
+    '@typescript-eslint',
+    'import',
+    'promise',
+    'security',
+    'vue',
+    'storybook',
+    'eslint-plugin-local-rules',
+  ],
   settings: {
     'import/resolver': {
       typescript: true,
@@ -165,6 +173,9 @@ module.exports = {
     {
       files: ['*.vue'],
       plugins: ['vuetify'],
+      rules: {
+        'local-rules/href-pattern': 'error',
+      },
       extends: ['plugin:vuetify/recommended'],
     },
     {
