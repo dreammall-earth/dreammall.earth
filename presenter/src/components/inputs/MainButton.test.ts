@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { navigate } from 'vike/client/router'
-import { afterEach, describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 
 import MainButton from './MainButton.vue'
 
