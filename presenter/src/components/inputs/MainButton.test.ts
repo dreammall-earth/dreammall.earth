@@ -1,9 +1,11 @@
 import { mount } from '@vue/test-utils'
-// eslint-disable-next-line import/no-namespace
-import * as vike from 'vike/client/router'
-import { afterEach, describe, it, expect, beforeEach, vi } from 'vitest'
+import { navigate } from 'vike/client/router'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 
 import MainButton from './MainButton.vue'
+
+vi.mock('vike/client/router')
+vi.mocked(navigate).mockResolvedValue()
 
 describe('MainButton', () => {
   const Wrapper = () => {
@@ -36,8 +38,6 @@ describe('MainButton', () => {
     })
 
     describe('when href is provided', () => {
-      const navigationSpy = vi.spyOn(vike, 'navigate')
-
       beforeEach(() => {
         wrapper = mount(MainButton, {
           props: {
@@ -49,13 +49,9 @@ describe('MainButton', () => {
         })
       })
 
-      afterEach(() => {
-        vi.restoreAllMocks()
-      })
-
       it('calls navigate method with given href', async () => {
         await wrapper.find('button').trigger('click')
-        expect(navigationSpy).toHaveBeenCalledWith('/some-path')
+        expect(navigate).toHaveBeenCalledWith('/some-path')
       })
 
       it('emits click event', async () => {
