@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-adb7537c","path":"/backend/LICENSE/","title":"","lang":"en-US","frontmatter":{},"headers":[],"git":{"updatedTime":1704567844000,"contributors":[{"name":"Ulf Gebhardt","email":"ulf.gebhardt@webcraft-media.de","commits":1}]},"filePathRelative":"backend/LICENSE"}');export{e as data};
