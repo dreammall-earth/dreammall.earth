@@ -11,7 +11,7 @@ jobs:
     outputs:
       changes: ${{ steps.changes.outputs.presenter-test-unit-code }}
     steps:
-      - uses: actions/checkout@v3.3.0
+      - uses: actions/checkout@v4
 
       - name: Check for presenter file changes
         uses: dorny/paths-filter@v2.11.1

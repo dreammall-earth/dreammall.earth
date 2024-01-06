@@ -20,7 +20,7 @@ jobs:
       # CHECKOUT CODE ##########################################################
       ##########################################################################
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Fetch full History for changelog
       ##########################################################################
