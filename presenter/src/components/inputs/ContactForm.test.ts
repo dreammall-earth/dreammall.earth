@@ -34,78 +34,7 @@ describe('ContactForm', () => {
   })
 
   it('renders form', () => {
-    expect(wrapper.find('form').exists()).toBeTruthy()
-  })
-
-  describe('inputs', () => {
-    describe('firstname', () => {
-      it('has text input', () => {
-        expect(wrapper.find('input[name="firstname"][type="text"]').exists()).toBeTruthy()
-      })
-
-      it('has label menu.footer.contactForm.firstName', () => {
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[0].text()).toBe(
-          "$t('menu.footer.contactForm.firstName')",
-        )
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[1].text()).toBe(
-          "$t('menu.footer.contactForm.firstName')",
-        )
-      })
-    })
-
-    describe('lastname', () => {
-      it('has text input', () => {
-        expect(wrapper.find('input[name="lastname"][type="text"]').exists()).toBeTruthy()
-      })
-
-      it('has label menu.footer.contactForm.lastName', () => {
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[2].text()).toBe(
-          "$t('menu.footer.contactForm.lastName')",
-        )
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[3].text()).toBe(
-          "$t('menu.footer.contactForm.lastName')",
-        )
-      })
-    })
-
-    describe('email', () => {
-      it('has email input', () => {
-        expect(wrapper.find('input[name="email"][type="email"]').exists()).toBeTruthy()
-      })
-
-      it('has label menu.footer.contactForm.mail', () => {
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[4].text()).toBe(
-          "$t('menu.footer.contactForm.mail')",
-        )
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[5].text()).toBe(
-          "$t('menu.footer.contactForm.mail')",
-        )
-      })
-    })
-
-    describe('message', () => {
-      it('has textarea input', () => {
-        expect(wrapper.find('textarea[name="message"]').exists()).toBeTruthy()
-      })
-
-      it('has label menu.footer.contactForm.message', () => {
-        expect(wrapper.find('form .v-textarea.v-text-field label').text()).toBe(
-          "$t('menu.footer.contactForm.message')",
-        )
-      })
-    })
-
-    describe('dataprivacy', () => {
-      it('has checkbox input', () => {
-        expect(wrapper.find('input[type="checkbox"][name="dataprivacy"]').exists()).toBeTruthy()
-      })
-
-      it('has label menu.footer.contactForm.message', () => {
-        expect(wrapper.find('form .v-row .v-col span.contact-agb').text()).toBe(
-          "$t('menu.footer.contactForm.privacy') $t('menu.footer.contactForm.privacyLinkLabel')",
-        )
-      })
-    })
+    expect(wrapper.element).toMatchSnapshot()
   })
 
   describe('form validation', () => {

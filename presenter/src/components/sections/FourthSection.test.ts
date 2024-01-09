@@ -14,22 +14,9 @@ describe('FourthSection', () => {
   })
 
   it('renders', () => {
-    expect(wrapper.find('.section4').exists()).toBeTruthy()
+    expect(wrapper.element).toMatchSnapshot()
   })
 
-  it('has section-headline home.section4.headline', () => {
-    expect(wrapper.find('h2.section-headline').text()).toBe("$t('home.section4.headline')")
-  })
-
-  it('contains a video', () => {
-    expect(wrapper.find('video').exists()).toBe(true)
-  })
-
-  it('has correct source', () => {
-    expect(wrapper.find('video').find('source').attributes('src')).toBe(
-      '/src/assets/video/timeline_quer.mp4',
-    )
-  })
   it('reload button hidden', () => {
     expect(wrapper.findComponent({ name: 'MainButton' }).exists()).toBe(false)
   })

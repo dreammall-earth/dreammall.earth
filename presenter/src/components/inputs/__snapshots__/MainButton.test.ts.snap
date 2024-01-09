@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MainButton > renders 1`] = `
+<button
+  class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--size-large v-btn--variant-elevated main-button main-button--primary main-button-large"
+  data-v-9518dada=""
+  style="background-color: #f09630; color: #000; caret-color: #000;"
+  type="button"
+>
+  
+  <span
+    class="v-btn__overlay"
+  />
+  <span
+    class="v-btn__underlay"
+  />
+  
+  <!---->
+  <span
+    class="v-btn__content"
+    data-no-activator=""
+  >
+    
+    
+    <!--v-if-->
+    <span
+      class="main-button-content"
+      data-v-9518dada=""
+    >
+      My Button 
+      <!--v-if-->
+    </span>
+    
+    
+  </span>
+  <!---->
+  <!---->
+</button>
+`;
