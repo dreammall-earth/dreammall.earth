@@ -7,6 +7,6 @@ describe('SectionColumnCard', () => {
   const wrapper = mount(SectionColumnCard)
 
   it('renders SectionColumnCard with all elements', () => {
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.element).toMatchSnapshot()
   })
 })
