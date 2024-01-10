@@ -1,7 +1,11 @@
 import { mount } from '@vue/test-utils'
-import { describe, it, expect, beforeEach } from 'vitest'
+import { navigate } from 'vike/client/router'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 
 import MainButton from './MainButton.vue'
+
+vi.mock('vike/client/router')
+vi.mocked(navigate).mockResolvedValue()
 
 describe('MainButton', () => {
   const Wrapper = () => {
@@ -31,6 +35,29 @@ describe('MainButton', () => {
     it('emits click event', async () => {
       await wrapper.find('button').trigger('click')
       expect(wrapper.emitted()).toHaveProperty('click', [[1]])
+    })
+
+    describe('when href is provided', () => {
+      beforeEach(() => {
+        wrapper = mount(MainButton, {
+          props: {
+            label: 'My Button',
+            href: '/some-path',
+            variant: 'primary',
+            size: 'large',
+          },
+        })
+      })
+
+      it('calls navigate method with given href', async () => {
+        await wrapper.find('button').trigger('click')
+        expect(navigate).toHaveBeenCalledWith('/some-path')
+      })
+
+      it('emits click event', async () => {
+        await wrapper.find('button').trigger('click')
+        expect(wrapper.emitted()).toHaveProperty('click', [[1]])
+      })
     })
   })
 

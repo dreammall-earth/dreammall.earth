@@ -17,10 +17,12 @@ export default mergeConfig(
           // storybook
           '**/*{.,-}stories.?(c|m)[jt]s?(x)',
         ],
-        statements: 97,
-        branches: 91,
-        // functions: 73, // has problems see https://github.com/vitest-dev/vitest/issues/3607
-        lines: 97,
+        thresholds: {
+          lines: 97,
+          // functions: 73, // has problems see https://github.com/vitest-dev/vitest/issues/3607
+          branches: 91,
+          statements: 97,
+        },
       },
     },
   }),

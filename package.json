@@ -1,6 +1,6 @@
 {
   "name": "dreammall.earth",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Dreammall.earth website & product page",
   "main": "build/index.js",
   "type": "module",

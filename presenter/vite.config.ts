@@ -45,6 +45,7 @@ const config: UserConfig = {
       '#root': __dirname,
     },
   },
+  assetsInclude: isStorybook() ? ['/sb-preview/runtime.js'] : [],
 }
 
 export default config
