@@ -8,30 +8,33 @@ datasource db {
 }
 
 model ContactForm {
-  id            Int      @id @default(autoincrement())
-  firstName     String   @db.VarChar(50)
-  lastName      String   @db.VarChar(50)
-  email         String   @db.VarChar(100)
-  content       String   @db.VarChar(255)
-  createdAt     DateTime @default(now())
-  brevoSuccess  DateTime?
+  id                Int      @id @default(autoincrement())
+  firstName         String   @db.VarChar(50)
+  lastName          String   @db.VarChar(50)
+  email             String   @db.VarChar(100)
+  content           String   @db.VarChar(255)
+  createdAt         DateTime @default(now())
+  brevoSuccess      DateTime?
 }
 
 model NewsletterSubscription {
-  id            Int      @id @default(autoincrement())
-  firstName     String   @db.VarChar(50)
-  lastName      String   @db.VarChar(50)
-  email         String   @db.VarChar(254)
-  createdAt     DateTime @default(now())
-  brevoSuccess  DateTime?
+  id                Int      @id @default(autoincrement())
+  firstName         String   @db.VarChar(50)
+  lastName          String   @db.VarChar(50)
+  email             String   @db.VarChar(254)
+  createdAt         DateTime @default(now())
+  deletedAt         DateTime?
 }
 
-model NewsletterDoubleOptIn {
-  id            Int      @id @default(autoincrement())
-  code          String   @db.VarChar(16) @unique
-  email         String   @db.VarChar(254)
-  createdAt     DateTime @default(now())
-  validTill     DateTime
-  deletedAt     DateTime?
-  brevoSuccess  DateTime?
+model NewsletterPreOptIn {
+  id                Int      @id @default(autoincrement())
+  firstName         String   @db.VarChar(50)
+  lastName          String   @db.VarChar(50)
+  email             String   @db.VarChar(254)
+  code              String   @db.VarChar(16) @unique
+  validTill         DateTime?
+  createdAt         DateTime @default(now())
+  deletedAt         DateTime?
+  brevoSuccessMail  DateTime?
+  brevoSuccessList  DateTime?
 }

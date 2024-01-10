@@ -6,7 +6,7 @@ const prismaClient = new PrismaClient()
 const prisma = prismaClient.$extends(
   createSoftDeleteExtension({
     models: {
-      NewsletterDoubleOptIn: true,
+      NewsletterPreOptIn: true,
     },
     defaultConfig: {
       field: 'deletedAt',
