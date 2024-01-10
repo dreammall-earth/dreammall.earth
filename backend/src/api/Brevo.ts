@@ -93,6 +93,7 @@ export const subscribeToNewsletter = async (
   // Send to Brevo
   const promise = apiInstance.createContact(contact)
 
+  /*
   // Update database once promise came back
   try {
     await promise
@@ -109,6 +110,7 @@ export const subscribeToNewsletter = async (
   } catch (error) {
     // TODO: logging or event
   }
+  */
 
   return promise
 }
