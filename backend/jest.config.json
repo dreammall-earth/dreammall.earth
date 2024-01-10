@@ -2,13 +2,13 @@
   "verbose": true,
   "preset": "ts-jest",
   "collectCoverage": true,
-  "collectCoverageFrom": ["src/**/*.ts", "!**/node_modules/**", "!src/index.ts", "!build/**"],
+  "collectCoverageFrom": ["src/**/*.ts", "!src/index.ts", "!src/prisma.ts", "!**/node_modules/**", "!build/**"],
   "coverageThreshold": {
     "global": {
-      "statements": 97,
-      "branches": 95,
-      "functions": 93,
-      "lines": 98
+      "statements": 100,
+      "branches": 100,
+      "functions": 100,
+      "lines": 100
     }
   },
   "setupFiles": ["./test/testSetup.ts"],
