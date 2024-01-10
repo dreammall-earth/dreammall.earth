@@ -14,7 +14,7 @@ describe('FirstSection', () => {
   })
 
   it('renders FirstSection', () => {
-    expect(wrapper.find('.section1').exists()).toBeTruthy()
+    expect(wrapper.element).toMatchSnapshot()
   })
 
   describe('carousel', () => {

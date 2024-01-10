@@ -34,66 +34,7 @@ describe('NewsletterForm', () => {
   })
 
   it('renders form', () => {
-    expect(wrapper.find('form').exists()).toBeTruthy()
-  })
-
-  describe('renders correct inputs', () => {
-    describe('firstname', () => {
-      it('has text input', () => {
-        expect(wrapper.find('input[name="firstname"][type="text"]').exists()).toBeTruthy()
-      })
-
-      it('has label home.newsletterSection.newsletterForm.firstname', () => {
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[0].text()).toBe(
-          "$t('home.newsletterSection.newsletterForm.firstname')",
-        )
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[1].text()).toBe(
-          "$t('home.newsletterSection.newsletterForm.firstname')",
-        )
-      })
-    })
-
-    describe('lastname', () => {
-      it('has text input', () => {
-        expect(wrapper.find('input[name="lastname"][type="text"]').exists()).toBeTruthy()
-      })
-
-      it('has label home.newsletterSection.newsletterForm.lastname', () => {
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[2].text()).toBe(
-          "$t('home.newsletterSection.newsletterForm.lastname')",
-        )
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[3].text()).toBe(
-          "$t('home.newsletterSection.newsletterForm.lastname')",
-        )
-      })
-    })
-
-    describe('email', () => {
-      it('has email input', () => {
-        expect(wrapper.find('input[name="email"][type="email"]').exists()).toBeTruthy()
-      })
-
-      it('has label home.newsletterSection.newsletterForm.email', () => {
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[4].text()).toBe(
-          "$t('home.newsletterSection.newsletterForm.email')",
-        )
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[5].text()).toBe(
-          "$t('home.newsletterSection.newsletterForm.email')",
-        )
-      })
-    })
-
-    describe('dataprivacy', () => {
-      it('has checkbox input', () => {
-        expect(wrapper.find('input[type="checkbox"][name="dataprivacy"]').exists()).toBeTruthy()
-      })
-
-      it('has label home.newsletterSection.newsletterForm.privacy & privacyLinkLabel', () => {
-        expect(wrapper.find('form .v-row .v-col span.newsletter-agb').text()).toBe(
-          "$t('home.newsletterSection.newsletterForm.privacy') $t('home.newsletterSection.newsletterForm.privacyLinkLabel')",
-        )
-      })
-    })
+    expect(wrapper.element).toMatchSnapshot()
   })
 
   describe('submit', () => {
