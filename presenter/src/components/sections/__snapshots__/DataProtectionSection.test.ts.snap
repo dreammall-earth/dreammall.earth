@@ -1,0 +1,375 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DataProtectionSection > renders 4 cards 1`] = `
+<div
+  class="data-protection-section my-16 v-container"
+  data-v-79122f6d=""
+>
+  <div
+    class="v-row section-header"
+    data-v-79122f6d=""
+  >
+    <div
+      class="v-col"
+      data-v-79122f6d=""
+    >
+      <h1
+        class="section-headline"
+        data-v-79122f6d=""
+      >
+        $t('dataProtection.headline')
+      </h1>
+    </div>
+  </div>
+  <div
+    class="v-row"
+    data-v-79122f6d=""
+  >
+    <div
+      class="v-col"
+      data-v-79122f6d=""
+    >
+      <div
+        class="v-card v-card--flat v-theme--light v-card--density-default v-card--variant-elevated content-card mb-2 pa-4 pa-md-12 h-100"
+        data-v-79122f6d=""
+      >
+        <!---->
+        <div
+          class="v-card__loader"
+        >
+          <div
+            aria-hidden="true"
+            aria-valuemax="100"
+            aria-valuemin="0"
+            class="v-progress-linear v-theme--light v-locale--is-ltr"
+            role="progressbar"
+            style="top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);"
+          >
+            <!---->
+            <div
+              class="v-progress-linear__background"
+              style="width: 100%;"
+            />
+            <transition-stub
+              appear="false"
+              css="true"
+              name="fade-transition"
+              persisted="false"
+            >
+              <div
+                class="v-progress-linear__indeterminate"
+              >
+                
+                <div
+                  class="v-progress-linear__indeterminate long"
+                />
+                <div
+                  class="v-progress-linear__indeterminate short"
+                />
+                
+              </div>
+            </transition-stub>
+            <!---->
+          </div>
+        </div>
+        <!---->
+        <div
+          class="v-card-text"
+        >
+          
+          <h2
+            class="card-header"
+            data-v-79122f6d=""
+          >
+            $t('dataProtection.general.headline')
+          </h2>
+          <p
+            class="card-content my-4"
+            data-v-79122f6d=""
+          >
+            $t('dataProtection.general.infoStart')
+          </p>
+          <ul
+            class="card-content mt-2"
+            data-v-79122f6d=""
+          >
+            <li
+              data-v-79122f6d=""
+            >
+              $t('dataProtection.general.company')
+            </li>
+            <li
+              data-v-79122f6d=""
+            >
+              $t('dataProtection.general.person')
+            </li>
+            <li
+              data-v-79122f6d=""
+            >
+              $t('dataProtection.general.street')
+            </li>
+            <li
+              data-v-79122f6d=""
+            >
+              $t('dataProtection.general.zip') $t('dataProtection.general.city')
+            </li>
+          </ul>
+          <p
+            class="card-content my-4"
+            data-v-79122f6d=""
+          >
+            $t('dataProtection.general.infoEnd')
+          </p>
+          
+        </div>
+        <!---->
+        <!---->
+        
+        <!---->
+        <span
+          class="v-card__underlay"
+        />
+        
+      </div>
+    </div>
+    <div
+      class="v-col"
+      data-v-79122f6d=""
+    >
+      <div
+        class="v-card v-card--flat v-theme--light v-card--density-default v-card--variant-elevated content-card mb-2 pa-4 pa-md-10 h-100"
+        data-v-79122f6d=""
+      >
+        <!---->
+        <div
+          class="v-card__loader"
+        >
+          <div
+            aria-hidden="true"
+            aria-valuemax="100"
+            aria-valuemin="0"
+            class="v-progress-linear v-theme--light v-locale--is-ltr"
+            role="progressbar"
+            style="top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);"
+          >
+            <!---->
+            <div
+              class="v-progress-linear__background"
+              style="width: 100%;"
+            />
+            <transition-stub
+              appear="false"
+              css="true"
+              name="fade-transition"
+              persisted="false"
+            >
+              <div
+                class="v-progress-linear__indeterminate"
+              >
+                
+                <div
+                  class="v-progress-linear__indeterminate long"
+                />
+                <div
+                  class="v-progress-linear__indeterminate short"
+                />
+                
+              </div>
+            </transition-stub>
+            <!---->
+          </div>
+        </div>
+        <!---->
+        <div
+          class="v-card-text"
+        >
+          
+          <h2
+            class="card-header"
+            data-v-79122f6d=""
+          >
+            $t('dataProtection.processing.headline')
+          </h2>
+          <p
+            class="card-content my-4"
+            data-v-79122f6d=""
+          >
+            $t('dataProtection.processing.content')
+          </p>
+          
+        </div>
+        <!---->
+        <!---->
+        
+        <!---->
+        <span
+          class="v-card__underlay"
+        />
+        
+      </div>
+    </div>
+  </div>
+  <div
+    class="v-row"
+    data-v-79122f6d=""
+  >
+    <div
+      class="v-col"
+      data-v-79122f6d=""
+    >
+      <div
+        class="v-card v-card--flat v-theme--light v-card--density-default v-card--variant-elevated content-card mb-2 pa-4 pa-md-12"
+        data-v-79122f6d=""
+      >
+        <!---->
+        <div
+          class="v-card__loader"
+        >
+          <div
+            aria-hidden="true"
+            aria-valuemax="100"
+            aria-valuemin="0"
+            class="v-progress-linear v-theme--light v-locale--is-ltr"
+            role="progressbar"
+            style="top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);"
+          >
+            <!---->
+            <div
+              class="v-progress-linear__background"
+              style="width: 100%;"
+            />
+            <transition-stub
+              appear="false"
+              css="true"
+              name="fade-transition"
+              persisted="false"
+            >
+              <div
+                class="v-progress-linear__indeterminate"
+              >
+                
+                <div
+                  class="v-progress-linear__indeterminate long"
+                />
+                <div
+                  class="v-progress-linear__indeterminate short"
+                />
+                
+              </div>
+            </transition-stub>
+            <!---->
+          </div>
+        </div>
+        <!---->
+        <div
+          class="v-card-text"
+        >
+          
+          <h2
+            class="card-header"
+            data-v-79122f6d=""
+          >
+            $t('dataProtection.revocation.headline')
+          </h2>
+          <p
+            class="card-content mt-2"
+            data-v-79122f6d=""
+          >
+            $t('dataProtection.revocation.content')
+          </p>
+          
+        </div>
+        <!---->
+        <!---->
+        
+        <!---->
+        <span
+          class="v-card__underlay"
+        />
+        
+      </div>
+    </div>
+  </div>
+  <div
+    class="v-row"
+    data-v-79122f6d=""
+  >
+    <div
+      class="v-col"
+      data-v-79122f6d=""
+    >
+      <div
+        class="v-card v-card--flat v-theme--light v-card--density-default v-card--variant-elevated content-card mb-2 pa-4 pa-md-12"
+        data-v-79122f6d=""
+      >
+        <!---->
+        <div
+          class="v-card__loader"
+        >
+          <div
+            aria-hidden="true"
+            aria-valuemax="100"
+            aria-valuemin="0"
+            class="v-progress-linear v-theme--light v-locale--is-ltr"
+            role="progressbar"
+            style="top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);"
+          >
+            <!---->
+            <div
+              class="v-progress-linear__background"
+              style="width: 100%;"
+            />
+            <transition-stub
+              appear="false"
+              css="true"
+              name="fade-transition"
+              persisted="false"
+            >
+              <div
+                class="v-progress-linear__indeterminate"
+              >
+                
+                <div
+                  class="v-progress-linear__indeterminate long"
+                />
+                <div
+                  class="v-progress-linear__indeterminate short"
+                />
+                
+              </div>
+            </transition-stub>
+            <!---->
+          </div>
+        </div>
+        <!---->
+        <div
+          class="v-card-text"
+        >
+          
+          <h2
+            class="card-header"
+            data-v-79122f6d=""
+          >
+            $t('dataProtection.euDispute.headline')
+          </h2>
+          <p
+            class="card-content mt-2"
+            data-v-79122f6d=""
+          >
+            $t('dataProtection.euDispute.content')
+          </p>
+          
+        </div>
+        <!---->
+        <!---->
+        
+        <!---->
+        <span
+          class="v-card__underlay"
+        />
+        
+      </div>
+    </div>
+  </div>
+</div>
+`;

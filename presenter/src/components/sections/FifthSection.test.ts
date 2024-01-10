@@ -7,6 +7,6 @@ describe('renders FifthSection', () => {
   const wrapper = mount(FifthSection)
 
   it('renders FifthSection', () => {
-    expect(wrapper.find('.section5').exists()).toBeTruthy()
+    expect(wrapper.element).toMatchSnapshot()
   })
 })
