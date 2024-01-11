@@ -100,10 +100,10 @@ export const subscribeToNewsletter = async (
   }
 
   // find valid code
-  // TODO: increase database field to 32 chars, 16 bytes as 32hex or 24 bytes as base64
+  // TODO: increase database field to 32 chars, 16 bytes as 32hex
   let code = null
   while (!code) {
-    code = randomBytes(12).toString('base64')
+    code = randomBytes(8).toString('hex')
     if ((await prisma.newsletterPreOptIn.count({ where: { code } })) > 0) {
       code = null
     }
