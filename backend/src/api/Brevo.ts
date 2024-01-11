@@ -1,6 +1,9 @@
 import { randomBytes } from 'crypto'
 
 import {
+  ContactsApi,
+  ContactsApiApiKeys,
+  CreateContact,
   SendSmtpEmail,
   TransactionalEmailsApi,
   TransactionalEmailsApiApiKeys,
@@ -147,16 +150,66 @@ export const subscribeToNewsletter = async (
   smtpEmailToClient.sender = admin
   smtpEmailToClient.replyTo = admin
   smtpEmailToClient.params = params
-  const emailPromise = apiInstance.sendTransacEmail(smtpEmailToClient)
+  const promise = apiInstance.sendTransacEmail(smtpEmailToClient)
 
   // Detach waiting for brevo so we can return
   void (async () => {
     try {
-      const brevoResult = await emailPromise
+      const brevoResult = await promise
       if (brevoResult.response.statusCode === 200) {
         await prisma.newsletterPreOptIn.update({
           where: { id: params.id },
           data: { brevoSuccessMail: new Date() },
+        })
+      } else {
+        // TODO: logging or event
+      }
+    } catch (error) {
+      // TODO: logging or event
+    }
+  })()
+
+  return true
+}
+
+export const confirmNewsletter = async (code: string): Promise<boolean> => {
+  if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SUBSCRIBE_NEWSLETTER(CONFIG)) {
+    return false
+  }
+
+  // validate code
+  const optin = await prisma.newsletterPreOptIn.findFirst({
+    where: { code, validTill: { gte: new Date() }, deletedAt: null },
+  })
+  if (!optin) {
+    throw new Error('Code invalid')
+  }
+
+  // put in brevo list
+  const apiInstance = new ContactsApi()
+  apiInstance.setApiKey(ContactsApiApiKeys.apiKey, CONFIG.BREVO_KEY)
+
+  const contact = new CreateContact()
+  contact.email = optin.email
+  contact.listIds = [CONFIG.BREVO_NEWSLETTER_LIST]
+  contact.attributes = {
+    VORNAME: optin.firstName,
+    NACHNAME: optin.lastName,
+  }
+
+  const promise = apiInstance.createContact(contact)
+
+  // invalidate codes
+  await prisma.newsletterPreOptIn.delete({ where: { id: optin.id } })
+
+  // Detach waiting for brevo so we can return
+  void (async () => {
+    try {
+      const brevoResult = await promise
+      if (brevoResult.response.statusCode === 200) {
+        await prisma.newsletterPreOptIn.update({
+          where: { id: optin.id },
+          data: { brevoSuccessList: new Date() },
         })
       } else {
         // TODO: logging or event
