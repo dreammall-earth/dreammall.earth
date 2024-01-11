@@ -18,6 +18,7 @@ describe('validateConfig', () => {
       process.env.BREVO_ADMIN_EMAIL = 'peter@lustig.de'
       process.env.BREVO_CONTACT_TEMPLATE_ADMIN = 'not a number'
       process.env.BREVO_CONTACT_TEMPLATE_USER = 'not a number'
+      process.env.BREVO_NEWSLETTER_TEMPLATE_OPTIN = 'not a number'
       require('#config/config')
     })
 
