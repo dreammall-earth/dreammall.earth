@@ -103,7 +103,6 @@ export const subscribeToNewsletter = async (
   }
 
   // find valid code
-  // TODO: increase database field to 32 chars, 16 bytes as 32hex
   let code = null
   while (!code) {
     code = randomBytes(8).toString('hex')
@@ -150,24 +149,21 @@ export const subscribeToNewsletter = async (
   smtpEmailToClient.sender = admin
   smtpEmailToClient.replyTo = admin
   smtpEmailToClient.params = params
-  const promise = apiInstance.sendTransacEmail(smtpEmailToClient)
 
-  // Detach waiting for brevo so we can return
-  void (async () => {
-    try {
-      const brevoResult = await promise
-      if (brevoResult.response.statusCode === 200) {
-        await prisma.newsletterPreOptIn.update({
-          where: { id: params.id },
-          data: { brevoSuccessMail: new Date() },
-        })
-      } else {
-        // TODO: logging or event
-      }
-    } catch (error) {
+  // TODO: Detach waiting for brevo so we can return
+  try {
+    const brevoResult = await apiInstance.sendTransacEmail(smtpEmailToClient)
+    if (brevoResult.response.statusCode === 200) {
+      await prisma.newsletterPreOptIn.update({
+        where: { id: params.id },
+        data: { brevoSuccessMail: new Date() },
+      })
+    } else {
       // TODO: logging or event
     }
-  })()
+  } catch (error) {
+    // TODO: logging or event
+  }
 
   return true
 }
@@ -197,27 +193,21 @@ export const confirmNewsletter = async (code: string): Promise<boolean> => {
     NACHNAME: optin.lastName,
   }
 
-  const promise = apiInstance.createContact(contact)
-
-  // invalidate codes
-  await prisma.newsletterPreOptIn.delete({ where: { id: optin.id } })
-
-  // Detach waiting for brevo so we can return
-  void (async () => {
-    try {
-      const brevoResult = await promise
-      if (brevoResult.response.statusCode === 200) {
-        await prisma.newsletterPreOptIn.update({
-          where: { id: optin.id },
-          data: { brevoSuccessList: new Date() },
-        })
-      } else {
-        // TODO: logging or event
-      }
-    } catch (error) {
+  // TODO: Detach waiting for brevo so we can return
+  try {
+    const brevoResult = await apiInstance.createContact(contact)
+    if (brevoResult.response.statusCode === 200) {
+      const brevoSuccessDate = new Date()
+      await prisma.newsletterPreOptIn.update({
+        where: { id: optin.id },
+        data: { brevoSuccessList: brevoSuccessDate, deletedAt: brevoSuccessDate },
+      })
+    } else {
       // TODO: logging or event
     }
-  })()
+  } catch (error) {
+    // TODO: logging or event
+  }
 
   return true
 }
