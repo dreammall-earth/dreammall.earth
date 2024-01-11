@@ -21,6 +21,9 @@ const BREVO = {
   BREVO_CONTACT_TEMPLATE_USER: !isNaN(Number(process.env.BREVO_CONTACT_TEMPLATE_USER))
     ? Number(process.env.BREVO_CONTACT_TEMPLATE_USER)
     : undefined,
+  BREVO_NEWSLETTER_TEMPLATE_OPTIN: !isNaN(Number(process.env.BREVO_NEWSLETTER_TEMPLATE_OPTIN))
+  ? Number(process.env.BREVO_NEWSLETTER_TEMPLATE_OPTIN)
+  : undefined,
   BREVO_NEWSLETTER_LIST: !isNaN(Number(process.env.BREVO_NEWSLETTER_LIST))
     ? Number(process.env.BREVO_NEWSLETTER_LIST)
     : undefined,
@@ -46,8 +49,18 @@ export const CONFIG_CHECKS = {
     typeof config.BREVO_ADMIN_EMAIL === 'string',
   CONFIG_CHECK_BREVO_SUBSCRIBE_NEWSLETTER: (
     config: typeof CONFIG,
-  ): config is typeof CONFIG & { BREVO_KEY: string; BREVO_NEWSLETTER_LIST: number } =>
-    typeof config.BREVO_KEY === 'string' && typeof config.BREVO_NEWSLETTER_LIST === 'number',
+  ): config is typeof CONFIG & {
+    BREVO_KEY: string
+    BREVO_NEWSLETTER_LIST: number
+    BREVO_NEWSLETTER_TEMPLATE_OPTIN: number
+    BREVO_ADMIN_NAME: string
+    BREVO_ADMIN_EMAIL: string
+  } =>
+    typeof config.BREVO_KEY === 'string' &&
+    typeof config.BREVO_NEWSLETTER_LIST === 'number' &&
+    typeof config.BREVO_NEWSLETTER_TEMPLATE_OPTIN === 'number' &&
+    typeof config.BREVO_ADMIN_NAME === 'string' &&
+    typeof config.BREVO_ADMIN_EMAIL === 'string',
 }
 
 const validateConfig = () => {
