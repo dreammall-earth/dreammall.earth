@@ -137,7 +137,7 @@ describe('FirstSection', () => {
 
     describe('video ended', () => {
       beforeEach(async () => {
-        (wrapper.vm as unknown as { video: HTMLFormElement }).video.ended = true
+        ;(wrapper.vm as unknown as { video: HTMLFormElement }).video.ended = true
 
         spy = vi.spyOn((wrapper.vm as unknown as { video: HTMLFormElement }).video, 'play')
         await wrapper.find('video').trigger('click')
