@@ -1,17 +1,14 @@
+import { randomBytes } from 'crypto'
+
 import {
-  ContactsApi,
-  ContactsApiApiKeys,
-  CreateContact,
   SendSmtpEmail,
   TransactionalEmailsApi,
   TransactionalEmailsApiApiKeys,
 } from '@getbrevo/brevo'
-import { ContactForm, NewsletterSubscription } from '@prisma/client'
+import { ContactForm } from '@prisma/client'
 
 import { CONFIG, CONFIG_CHECKS } from '#config/config'
 import { prisma } from '#src/prisma'
-import { SubscribeToNewsletterInput } from '#graphql/inputs/SubscribeToNewsletterInput'
-import { randomBytes } from 'crypto'
 
 export const sendContactEmails = async (
   contactForm: ContactForm,
@@ -81,7 +78,6 @@ export const subscribeToNewsletter = async (
   if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SUBSCRIBE_NEWSLETTER(CONFIG)) {
     return false
   }
-
   // record time
   const time = new Date()
   const time10MinAgo = new Date(time.getTime() - 10 * 60 * 1000)
@@ -154,13 +150,17 @@ export const subscribeToNewsletter = async (
 
   // Detach waiting for brevo so we can return
   void (async () => {
-    const brevoResult = await emailPromise
-    if (brevoResult.response.statusCode === 200) {
-      await prisma.newsletterPreOptIn.update({
-        where: { id: params.id },
-        data: { brevoSuccessMail: new Date() },
-      })
-    } else {
+    try {
+      const brevoResult = await emailPromise
+      if (brevoResult.response.statusCode === 200) {
+        await prisma.newsletterPreOptIn.update({
+          where: { id: params.id },
+          data: { brevoSuccessMail: new Date() },
+        })
+      } else {
+        // TODO: logging or event
+      }
+    } catch (error) {
       // TODO: logging or event
     }
   })()
