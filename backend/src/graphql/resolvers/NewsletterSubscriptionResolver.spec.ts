@@ -1,6 +1,6 @@
 import { ApolloServer } from '@apollo/server'
 
-import { subscribeToNewsletter } from '#api/Brevo'
+import { confirmNewsletter, subscribeToNewsletter } from '#api/Brevo'
 import { CONFIG } from '#config/config'
 import { createServer } from '#src/server/server'
 
@@ -13,6 +13,7 @@ let testServer: ApolloServer
 
 jest.mock('#api/Brevo', () => ({
   subscribeToNewsletter: jest.fn().mockResolvedValue(true),
+  confirmNewsletter: jest.fn().mockResolvedValue(true),
 }))
 
 beforeAll(async () => {
@@ -163,6 +164,92 @@ describe('NewsletterSubscriptionResolver', () => {
           singleResult: {
             data: {
               subscribeToNewsletter: true,
+            },
+          },
+        })
+      })
+    })
+  })
+
+  describe('confirmNewsletter mutation', () => {
+    describe('code to long', () => {
+      it('throws schema error', async () => {
+        const response = await testServer.executeOperation({
+          query: `mutation($data: ConfirmNewsletterInput!) {
+                    confirmNewsletter(confirmNewsletterData: $data) 
+                  }`,
+          variables: {
+            data: {
+              code: '1234567890abcdef1',
+            },
+          },
+        })
+        expect(response.body).toMatchObject({
+          kind: 'single',
+          singleResult: {
+            data: null,
+            errors: [
+              {
+                message: 'Argument Validation Error',
+              },
+            ],
+          },
+        })
+      })
+    })
+
+    describe('code to short', () => {
+      it('throws schema error', async () => {
+        const response = await testServer.executeOperation({
+          query: `mutation($data: ConfirmNewsletterInput!) {
+                    confirmNewsletter(confirmNewsletterData: $data) 
+                  }`,
+          variables: {
+            data: {
+              code: '1234567890abcde',
+            },
+          },
+        })
+        expect(response.body).toMatchObject({
+          kind: 'single',
+          singleResult: {
+            data: null,
+            errors: [
+              {
+                message: 'Argument Validation Error',
+              },
+            ],
+          },
+        })
+      })
+    })
+
+    describe('with correct data', () => {
+      let response: Awaited<ReturnType<typeof testServer.executeOperation>>
+      beforeEach(async () => {
+        response = await testServer.executeOperation({
+          query: `mutation($data: ConfirmNewsletterInput!) {
+                    confirmNewsletter(confirmNewsletterData: $data) 
+                  }`,
+          variables: {
+            data: {
+              code: '1234567890abcdef',
+            },
+          },
+        })
+      })
+
+      it('calls confirmNewsletter', () => {
+        expect(confirmNewsletter).toHaveBeenCalledTimes(1)
+        expect(confirmNewsletter).toHaveBeenCalledWith('1234567890abcdef')
+      })
+
+      it('returns true', () => {
+        expect(response.body).toMatchObject({
+          kind: 'single',
+          singleResult: {
+            data: {
+              confirmNewsletter: true,
             },
           },
         })
