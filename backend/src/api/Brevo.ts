@@ -10,6 +10,8 @@ import { ContactForm, NewsletterSubscription } from '@prisma/client'
 
 import { CONFIG, CONFIG_CHECKS } from '#config/config'
 import { prisma } from '#src/prisma'
+import { SubscribeToNewsletterInput } from '#graphql/inputs/SubscribeToNewsletterInput'
+import { randomBytes } from 'crypto'
 
 export const sendContactEmails = async (
   contactForm: ContactForm,
@@ -72,45 +74,96 @@ export const sendContactEmails = async (
 }
 
 export const subscribeToNewsletter = async (
-  newsletterSubscription: NewsletterSubscription,
-): Promise<Awaited<ReturnType<typeof apiInstance.createContact>> | undefined> => {
+  firstName: string,
+  lastName: string,
+  email: string,
+): Promise<boolean> => {
   if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SUBSCRIBE_NEWSLETTER(CONFIG)) {
-    return undefined
+    return false
   }
 
-  const apiInstance = new ContactsApi()
-  apiInstance.setApiKey(ContactsApiApiKeys.apiKey, CONFIG.BREVO_KEY)
+  // record time
+  const time = new Date()
+  const time10MinAgo = new Date(time.getTime() - 10 * 60 * 1000)
+  const validTill = new Date(time)
+  validTill.setDate(validTill.getDate() + 30)
 
-  // Create ContactBREVO_CONTACT_LIST_ID
-  const contact = new CreateContact()
-  contact.email = newsletterSubscription.email
-  contact.listIds = [CONFIG.BREVO_NEWSLETTER_LIST]
-  contact.attributes = {
-    VORNAME: newsletterSubscription.firstName,
-    NACHNAME: newsletterSubscription.lastName,
-  }
-
-  // Send to Brevo
-  const promise = apiInstance.createContact(contact)
-
-  /*
-  // Update database once promise came back
-  try {
-    await promise
-
-    newsletterSubscription.brevoSuccess = new Date()
-    await prisma.newsletterSubscription.update({
-      where: {
-        id: newsletterSubscription.id,
+  // check for a code younger than 10min
+  const validCode = await prisma.newsletterPreOptIn.findFirst({
+    where: {
+      email,
+      createdAt: {
+        gte: time10MinAgo,
       },
-      data: {
-        ...newsletterSubscription,
-      },
-    })
-  } catch (error) {
-    // TODO: logging or event
+      deletedAt: null,
+    },
+  })
+  if (validCode) {
+    throw new Error('Please try later again')
   }
-  */
 
-  return promise
+  // find valid code
+  // TODO: increase random field to 16 bytes, 32hex
+  let code = null
+  while (!code) {
+    code = randomBytes(8).toString('hex')
+    if ((await prisma.newsletterPreOptIn.count({ where: { code } })) > 0) {
+      code = null
+    }
+  }
+
+  // softdelete all valid codes (older than 10min)
+  await prisma.newsletterPreOptIn.deleteMany({
+    where: {
+      email,
+    },
+  })
+
+  // insert new code
+  const params = await prisma.newsletterPreOptIn.create({
+    data: {
+      firstName,
+      lastName,
+      email,
+      code,
+      validTill,
+    },
+  })
+
+  // Send email
+  const apiInstance = new TransactionalEmailsApi()
+  apiInstance.setApiKey(TransactionalEmailsApiApiKeys.apiKey, CONFIG.BREVO_KEY)
+
+  const admin = {
+    name: CONFIG.BREVO_ADMIN_NAME,
+    email: CONFIG.BREVO_ADMIN_EMAIL,
+  }
+
+  const user = {
+    name: firstName + ' ' + lastName,
+    email,
+  }
+
+  const smtpEmailToClient = new SendSmtpEmail()
+  smtpEmailToClient.templateId = CONFIG.BREVO_NEWSLETTER_TEMPLATE_OPTIN
+  smtpEmailToClient.to = [user]
+  smtpEmailToClient.sender = admin
+  smtpEmailToClient.replyTo = admin
+  smtpEmailToClient.params = params
+  const emailPromise = apiInstance.sendTransacEmail(smtpEmailToClient)
+
+  // Detach waiting for brevo so we can return
+  void (async () => {
+    const brevoResult = await emailPromise
+    if (brevoResult.response.statusCode === 200) {
+      await prisma.newsletterPreOptIn.update({
+        where: { id: params.id },
+        data: { brevoSuccessMail: new Date() },
+      })
+    } else {
+      // TODO: logging or event
+    }
+  })()
+
+  return true
 }
