@@ -8,7 +8,7 @@ describe('FirstSection', () => {
     global.window.innerWidth = width
     return mount(FirstSection)
   }
-  let wrapper: ReturnType<typeof Wrapper>
+  let wrapper: VueWrapper<InstanceType<typeof FirstSection>>
 
   beforeEach(() => {
     wrapper = Wrapper()
@@ -126,7 +126,7 @@ describe('FirstSection', () => {
 
     describe.skip('video did not end', () => {
       beforeEach(async () => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         spy = vi.spyOn(wrapper.vm.video, 'play')
         await wrapper.find('video').trigger('click')
       })
@@ -140,7 +140,8 @@ describe('FirstSection', () => {
       beforeEach(async () => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         wrapper.vm.video.ended = true
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         spy = vi.spyOn(wrapper.vm.video, 'play')
         await wrapper.find('video').trigger('click')
       })
@@ -180,7 +181,8 @@ describe('FirstSection', () => {
   })
 
   describe('resize window', () => {
-    const events = {}
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const events: { [key: string]: any } = {}
     let spy: MockInstance
 
     beforeEach(() => {
@@ -190,7 +192,8 @@ describe('FirstSection', () => {
         events[event] = callback
       })
       wrapper = Wrapper()
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       spy = vi.spyOn(wrapper.vm.videoSrcControl, 'setVideoSrc')
     })
 
