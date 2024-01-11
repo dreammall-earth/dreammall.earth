@@ -22,8 +22,8 @@ const BREVO = {
     ? Number(process.env.BREVO_CONTACT_TEMPLATE_USER)
     : undefined,
   BREVO_NEWSLETTER_TEMPLATE_OPTIN: !isNaN(Number(process.env.BREVO_NEWSLETTER_TEMPLATE_OPTIN))
-  ? Number(process.env.BREVO_NEWSLETTER_TEMPLATE_OPTIN)
-  : undefined,
+    ? Number(process.env.BREVO_NEWSLETTER_TEMPLATE_OPTIN)
+    : undefined,
   BREVO_NEWSLETTER_LIST: !isNaN(Number(process.env.BREVO_NEWSLETTER_LIST))
     ? Number(process.env.BREVO_NEWSLETTER_LIST)
     : undefined,
