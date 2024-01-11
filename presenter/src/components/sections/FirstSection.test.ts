@@ -126,8 +126,7 @@ describe('FirstSection', () => {
 
     describe.skip('video did not end', () => {
       beforeEach(async () => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        spy = vi.spyOn(wrapper.vm.video, 'play')
+        spy = vi.spyOn((wrapper.vm as unknown as { video: HTMLFormElement }).video, 'play')
         await wrapper.find('video').trigger('click')
       })
 
@@ -138,11 +137,9 @@ describe('FirstSection', () => {
 
     describe('video ended', () => {
       beforeEach(async () => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        wrapper.vm.video.ended = true
+        (wrapper.vm as unknown as { video: HTMLFormElement }).video.ended = true
 
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        spy = vi.spyOn(wrapper.vm.video, 'play')
+        spy = vi.spyOn((wrapper.vm as unknown as { video: HTMLFormElement }).video, 'play')
         await wrapper.find('video').trigger('click')
       })
 
@@ -193,8 +190,10 @@ describe('FirstSection', () => {
       })
       wrapper = Wrapper()
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      spy = vi.spyOn(wrapper.vm.videoSrcControl, 'setVideoSrc')
+      spy = vi.spyOn(
+        (wrapper.vm as unknown as { videoSrcControl: { setVideoSrc: () => void } }).videoSrcControl,
+        'setVideoSrc',
+      )
     })
 
     it('calls etVideoSrc', () => {
