@@ -61,6 +61,7 @@ describe('validateConfig', () => {
       process.env.BREVO_CONTACT_TEMPLATE_ADMIN = '1'
       process.env.BREVO_CONTACT_TEMPLATE_USER = '2'
       process.env.BREVO_NEWSLETTER_LIST = '3'
+      process.env.BREVO_NEWSLETTER_TEMPLATE_OPTIN = '3'
       require('#config/config')
     })
 
