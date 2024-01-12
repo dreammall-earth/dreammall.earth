@@ -202,6 +202,15 @@ export const confirmNewsletter = async (code: string): Promise<boolean> => {
         where: { id: optin.id },
         data: { brevoSuccessList: brevoSuccessDate, deletedAt: brevoSuccessDate },
       })
+      // Insert into NewsletterSubscription
+      await prisma.newsletterSubscription.deleteMany({ where: { email: optin.email } })
+      await prisma.newsletterSubscription.create({
+        data: {
+          email: optin.email,
+          firstName: optin.firstName,
+          lastName: optin.lastName,
+        },
+      })
     } else {
       // TODO: logging or event
     }
