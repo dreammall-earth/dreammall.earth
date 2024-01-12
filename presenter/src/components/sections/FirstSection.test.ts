@@ -124,7 +124,7 @@ describe('FirstSection', () => {
       vi.clearAllMocks()
     })
 
-    describe.skip('video did not end', () => {
+    describe('video did not end', () => {
       beforeEach(async () => {
         spy = vi.spyOn((wrapper.vm as unknown as { video: HTMLFormElement }).video, 'play')
         await wrapper.find('video').trigger('click')
@@ -149,14 +149,17 @@ describe('FirstSection', () => {
     })
   })
 
-  describe('video source', () => {
+  describe('video source and poster', () => {
     describe('desktop', () => {
-      it('has desktop  video', () => {
+      it('has desktop video and poster', () => {
         expect(wrapper.find('source[type="video/mp4"]').attributes('src')).toBe(
           '/src/assets/video/intro_quer.mp4',
         )
         expect(wrapper.find('source[type="video/webm"]').attributes('src')).toBe(
           '/src/assets/video/intro_quer.webm',
+        )
+        expect(wrapper.find('video').attributes('poster')).toBe(
+          '/src/assets/img/intro_thumbnail_quer.jpg',
         )
       })
     })
@@ -166,12 +169,15 @@ describe('FirstSection', () => {
         wrapper = Wrapper(600)
       })
 
-      it('has mobile video', () => {
+      it('has mobile video and poster', () => {
         expect(wrapper.find('source[type="video/mp4"]').attributes('src')).toBe(
           '/src/assets/video/intro_hoch.mp4',
         )
         expect(wrapper.find('source[type="video/webm"]').attributes('src')).toBe(
           '/src/assets/video/intro_hoch.webm',
+        )
+        expect(wrapper.find('video').attributes('poster')).toBe(
+          '/src/assets/img/intro_thumbnail_hoch.jpg',
         )
       })
     })
