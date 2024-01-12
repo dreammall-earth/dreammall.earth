@@ -14,8 +14,7 @@ describe('LogoImage', () => {
   })
 
   it('renders Logo', () => {
-    expect(wrapper.find('.v-img').exists()).toBeTruthy()
-    expect(wrapper.find('.v-img__img').attributes().src).toBe('/src/assets/dreammall-logo.svg')
+    expect(wrapper.element).toMatchSnapshot()
   })
 
   describe('classes', () => {

@@ -3,8 +3,6 @@ import { describe, it, expect } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import DataProtectionSection from '#components/sections/DataProtectionSection.vue'
-
 import DataPrivacyPage from './+Page.vue'
 
 describe('DataPrivacyPage', () => {
@@ -15,6 +13,6 @@ describe('DataPrivacyPage', () => {
   })
 
   it('renders', () => {
-    expect(wrapper.find('#data-protection').findComponent(DataProtectionSection)).toBeTruthy()
+    expect(wrapper.element).toMatchSnapshot()
   })
 })

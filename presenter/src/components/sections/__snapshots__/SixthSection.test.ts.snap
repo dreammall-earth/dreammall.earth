@@ -1,0 +1,98 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders SixthSection > renders SixthSection 1`] = `
+<div
+  class="section6 v-container pa-16"
+  data-v-7331c7d7=""
+>
+  <div
+    class="v-row section-header"
+    data-v-7331c7d7=""
+  >
+    <div
+      class="v-col"
+      data-v-7331c7d7=""
+    >
+      <h2
+        class="section-headline"
+        data-v-7331c7d7=""
+      >
+        <span
+          class="prepend"
+          data-v-7331c7d7=""
+        >
+          $t('home.section6.headline')
+        </span>
+          
+        <span
+          class="append"
+          data-v-7331c7d7=""
+        >
+          $t('home.section6.headlineAppend')
+        </span>
+      </h2>
+    </div>
+  </div>
+  <div
+    class="v-row section-content"
+    data-v-7331c7d7=""
+  >
+    <div
+      class="v-col"
+      data-v-7331c7d7=""
+    >
+      <p
+        data-v-7331c7d7=""
+      >
+        $t('home.section6.content')
+      </p>
+    </div>
+  </div>
+  <div
+    class="v-row section-footer text-center"
+    data-v-7331c7d7=""
+  >
+    <div
+      class="v-col align-self-center"
+      data-v-7331c7d7=""
+    >
+      <button
+        class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--size-large v-btn--variant-elevated main-button main-button--primary main-button-large mt-8"
+        data-v-7331c7d7=""
+        data-v-9518dada=""
+        style="background-color: #f09630; color: #000; caret-color: #000;"
+        type="button"
+      >
+        
+        <span
+          class="v-btn__overlay"
+        />
+        <span
+          class="v-btn__underlay"
+        />
+        
+        <!---->
+        <span
+          class="v-btn__content"
+          data-no-activator=""
+        >
+          
+          
+          <!--v-if-->
+          <span
+            class="main-button-content"
+            data-v-9518dada=""
+          >
+            $t('home.section6.buttonText') 
+            <!--v-if-->
+          </span>
+          
+          
+        </span>
+        <!---->
+        <!---->
+      </button>
+    </div>
+  </div>
+</div>
+`;

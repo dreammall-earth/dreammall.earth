@@ -13,8 +13,7 @@ describe('TextButtonInput', () => {
   })
 
   it('TextButtonInput renders', () => {
-    expect(wrapper.find('.v-field__field > .v-field__input').exists()).toBeTruthy()
-    expect(wrapper.find('.v-field').findComponent(MainButton)).toBeTruthy()
+    expect(wrapper.element).toMatchSnapshot()
   })
 
   it('TextButtonInput emit click event', async () => {

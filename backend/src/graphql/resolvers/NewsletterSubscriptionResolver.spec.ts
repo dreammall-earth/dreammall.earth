@@ -168,7 +168,7 @@ describe('NewsletterSubscriptionResolver', () => {
             lastName: 'Lustig',
             email: 'peter@lustig.de',
             createdAt: expect.any(Date),
-            brevoSuccess: null,
+            deletedAt: null,
           },
         ])
       })
