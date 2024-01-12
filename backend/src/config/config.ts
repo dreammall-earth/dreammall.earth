@@ -47,7 +47,7 @@ export const CONFIG_CHECKS = {
     typeof config.BREVO_CONTACT_TEMPLATE_USER === 'number' &&
     typeof config.BREVO_ADMIN_NAME === 'string' &&
     typeof config.BREVO_ADMIN_EMAIL === 'string',
-  CONFIG_CHECK_BREVO_SUBSCRIBE_NEWSLETTER: (
+  CONFIG_CHECK_BREVO_NEWSLETTER: (
     config: typeof CONFIG,
   ): config is typeof CONFIG & {
     BREVO_KEY: string
@@ -70,10 +70,8 @@ const validateConfig = () => {
     )
   }
 
-  if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SUBSCRIBE_NEWSLETTER(CONFIG)) {
-    printConfigError(
-      'BREVO_SUBSCRIBE_NEWSLETTER functionality is disabled - some BREVO configs are missing',
-    )
+  if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_NEWSLETTER(CONFIG)) {
+    printConfigError('BREVO_NEWSLETTER functionality is disabled - some BREVO configs are missing')
   }
 }
 

@@ -29,7 +29,7 @@ describe('validateConfig', () => {
     })
   })
 
-  describe('check CONFIG_CHECK_BREVO_SUBSCRIBE_NEWSLETTER', () => {
+  describe('check CONFIG_CHECK_BREVO_NEWSLETTER', () => {
     beforeEach(() => {
       jest.clearAllMocks()
       jest.resetModules()

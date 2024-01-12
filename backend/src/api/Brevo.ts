@@ -78,7 +78,7 @@ export const subscribeToNewsletter = async (
   lastName: string,
   email: string,
 ): Promise<boolean> => {
-  if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SUBSCRIBE_NEWSLETTER(CONFIG)) {
+  if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_NEWSLETTER(CONFIG)) {
     return false
   }
 
@@ -169,7 +169,7 @@ export const subscribeToNewsletter = async (
 }
 
 export const confirmNewsletter = async (code: string): Promise<boolean> => {
-  if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SUBSCRIBE_NEWSLETTER(CONFIG)) {
+  if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_NEWSLETTER(CONFIG)) {
     return false
   }
 
