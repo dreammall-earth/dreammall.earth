@@ -150,7 +150,6 @@ export const subscribeToNewsletter = async (
   smtpEmailToClient.replyTo = admin
   smtpEmailToClient.params = params
 
-  // TODO: Detach waiting for brevo so we can return
   try {
     const brevoResult = await apiInstance.sendTransacEmail(smtpEmailToClient)
     if (brevoResult.response.statusCode === 200) {
@@ -193,7 +192,6 @@ export const confirmNewsletter = async (code: string): Promise<boolean> => {
     NACHNAME: optin.lastName,
   }
 
-  // TODO: Detach waiting for brevo so we can return
   try {
     const brevoResult = await apiInstance.createContact(contact)
     if (brevoResult.response.statusCode === 200) {
