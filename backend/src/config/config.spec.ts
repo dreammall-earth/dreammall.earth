@@ -43,7 +43,7 @@ describe('validateConfig', () => {
 
     it('fails the check', () => {
       expect(mockPrintConfigError).toHaveBeenCalledWith(
-        'BREVO_SUBSCRIBE_NEWSLETTER functionality is disabled - some BREVO configs are missing',
+        'BREVO_NEWSLETTER functionality is disabled - some BREVO configs are missing',
       )
     })
   })
