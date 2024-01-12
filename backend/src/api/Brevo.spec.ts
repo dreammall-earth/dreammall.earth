@@ -1,3 +1,5 @@
+import { randomBytes } from 'crypto'
+
 import { TransactionalEmailsApi } from '@getbrevo/brevo'
 import { ContactForm, NewsletterPreOptIn } from '@prisma/client'
 
@@ -5,7 +7,6 @@ import { CONFIG } from '#config/config'
 import { prisma } from '#src/prisma'
 
 import { confirmNewsletter, sendContactEmails, subscribeToNewsletter } from './Brevo'
-import { after } from 'node:test'
 
 CONFIG.BREVO_KEY = 'MY KEY'
 CONFIG.BREVO_ADMIN_NAME = 'Peter Lustig'
@@ -22,6 +23,17 @@ const mockSetApiKey = jest.fn()
 
 const mockCreateContact = jest.fn().mockResolvedValue({
   response: { statusCode: 200 },
+})
+
+const code = '1234567890abcdef'
+jest.mock('crypto', () => {
+  const originalModule = jest.requireActual<typeof import('crypto')>('crypto')
+  return {
+    randomBytes: jest
+      .fn()
+      .mockImplementationOnce(() => Buffer.from(code, 'hex'))
+      .mockImplementation((size: number) => originalModule.randomBytes(size)),
+  }
 })
 
 jest.mock('@getbrevo/brevo', () => {
@@ -219,6 +231,32 @@ describe('Brevo', () => {
     const email = 'bibi@bloxberg.de'
 
     describe('with brevo key given', () => {
+      // This must be the first test due to randomBytes mock implementation
+      describe('with duplicate code generation', () => {
+        beforeEach(async () => {
+          await prisma.$executeRaw`DELETE FROM NewsletterPreOptIn`
+          const time = new Date()
+          const validTill = new Date(time)
+          validTill.setDate(validTill.getDate() + 30)
+          await prisma.newsletterPreOptIn.create({
+            data: {
+              firstName: 'Peter',
+              lastName: 'Lustig',
+              email: 'peter@lustig.de',
+              code,
+              validTill,
+              brevoSuccessMail: time,
+            },
+          })
+          jest.clearAllMocks()
+          await subscribeToNewsletter(firstName, lastName, email)
+        })
+
+        it('calls randomBytes twice', () => {
+          expect(randomBytes).toHaveBeenCalledTimes(2)
+        })
+      })
+
       describe('with error from Brevo', () => {
         beforeAll(async () => {
           await prisma.$executeRaw`DELETE FROM NewsletterPreOptIn`
@@ -236,7 +274,7 @@ describe('Brevo', () => {
           )
         })
 
-        it('creates database entry with brevoSuccessMail', async () => {
+        it('creates database entry with brevoSuccessMail = null', async () => {
           const result: NewsletterPreOptIn[] = await prisma.newsletterPreOptIn.findMany()
           expect(result).toHaveLength(1)
           expect(result).toEqual([
@@ -257,6 +295,85 @@ describe('Brevo', () => {
               brevoSuccessList: null,
             },
           ])
+        })
+
+        afterAll(() => {
+          jest.clearAllMocks()
+          mockSendTransacEmail.mockResolvedValue({
+            response: {
+              statusCode: 200,
+            },
+          })
+        })
+      })
+
+      describe('with wrong statuscode from Brevo', () => {
+        beforeAll(async () => {
+          await prisma.$executeRaw`DELETE FROM NewsletterPreOptIn`
+          jest.clearAllMocks()
+          mockSendTransacEmail.mockResolvedValue({
+            response: {
+              statusCode: 400,
+            },
+          })
+        })
+
+        it('does not reject with error', async () => {
+          await expect(subscribeToNewsletter(firstName, lastName, email)).resolves.toStrictEqual(
+            true,
+          )
+        })
+
+        it('creates database entry with brevoSuccessMail = null', async () => {
+          const result: NewsletterPreOptIn[] = await prisma.newsletterPreOptIn.findMany()
+          expect(result).toHaveLength(1)
+          expect(result).toEqual([
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              firstName: 'Bibi',
+              lastName: 'Bloxberg',
+              email: 'bibi@bloxberg.de',
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              code: expect.any(String),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              validTill: expect.any(Date),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              deletedAt: null,
+              brevoSuccessMail: null,
+              brevoSuccessList: null,
+            },
+          ])
+        })
+
+        afterAll(() => {
+          jest.clearAllMocks()
+          mockSendTransacEmail.mockResolvedValue({
+            response: {
+              statusCode: 200,
+            },
+          })
+        })
+      })
+
+      describe('request twice within 10min', () => {
+        beforeEach(async () => {
+          await prisma.$executeRaw`DELETE FROM NewsletterPreOptIn`
+          jest.clearAllMocks()
+          await subscribeToNewsletter(firstName, lastName, email)
+        })
+
+        it('throws error', async () => {
+          await expect(subscribeToNewsletter(firstName, lastName, email)).rejects.toThrow(
+            'Please try later again',
+          )
+        })
+
+        it('does not throw on different email', async () => {
+          await expect(
+            subscribeToNewsletter(firstName, lastName, 'someother@email.de'),
+          ).resolves.toBe(true)
         })
 
         afterAll(() => {
@@ -330,7 +447,6 @@ describe('Brevo', () => {
   })
 
   describe('confirmNewsletter', () => {
-    const code = '1234567890abcdef'
     describe('with brevo key', () => {
       beforeEach(async () => {
         jest.clearAllMocks()
@@ -363,6 +479,52 @@ describe('Brevo', () => {
         beforeEach(() => {
           jest.clearAllMocks()
           mockCreateContact.mockRejectedValue({
+            response: {
+              statusCode: 400,
+            },
+          })
+        })
+
+        it('does not reject with error', async () => {
+          await expect(confirmNewsletter(code)).resolves.toStrictEqual(true)
+        })
+
+        it('does not update database entry', async () => {
+          const result: NewsletterPreOptIn[] = await prisma.newsletterPreOptIn.findMany()
+          expect(result).toHaveLength(1)
+          expect(result).toEqual([
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              firstName: 'Peter',
+              lastName: 'Lustig',
+              email: 'peter@lustig.de',
+              code: '1234567890abcdef',
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              validTill: expect.any(Date),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              deletedAt: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              brevoSuccessMail: expect.any(Date),
+              brevoSuccessList: null,
+            },
+          ])
+        })
+
+        afterAll(() => {
+          mockCreateContact.mockResolvedValue({
+            response: {
+              statusCode: 200,
+            },
+          })
+        })
+      })
+
+      describe('with wrong statuscode from Brevo', () => {
+        beforeEach(() => {
+          jest.clearAllMocks()
+          mockCreateContact.mockResolvedValue({
             response: {
               statusCode: 400,
             },
