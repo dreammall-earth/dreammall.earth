@@ -20,4 +20,8 @@ describe('PageShell', () => {
     expect(wrapper.find('.v-application').findComponent(TopMenu)).toBeTruthy()
     expect(wrapper.html()).toContain('Page Content')
   })
+
+  it('TODO why not use snapshot to test render?', () => {
+    expect(wrapper.element).toMatchSnapshot()
+  })
 })
