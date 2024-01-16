@@ -1,7 +1,6 @@
 import { Resolver, Mutation, Arg } from 'type-graphql'
 
 import { confirmNewsletter, subscribeToNewsletter } from '#api/Brevo'
-import { ConfirmNewsletterInput } from '#inputs/ConfirmNewsletterInput'
 import { SubscribeToNewsletterInput } from '#inputs/SubscribeToNewsletterInput'
 
 @Resolver()
@@ -18,9 +17,7 @@ export class NewsletterSubscriptionResolver {
   }
 
   @Mutation(() => Boolean)
-  async confirmNewsletter(
-    @Arg('confirmNewsletterData') confirmNewsletterData: ConfirmNewsletterInput,
-  ): Promise<boolean> {
-    return confirmNewsletter(confirmNewsletterData.code)
+  async confirmNewsletter(@Arg('code') code: string): Promise<boolean> {
+    return confirmNewsletter(code)
   }
 }

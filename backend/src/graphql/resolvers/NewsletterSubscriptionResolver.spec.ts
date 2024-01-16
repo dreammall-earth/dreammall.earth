@@ -172,87 +172,31 @@ describe('NewsletterSubscriptionResolver', () => {
   })
 
   describe('confirmNewsletter mutation', () => {
-    describe('code to long', () => {
-      it('throws schema error', async () => {
-        const response = await testServer.executeOperation({
-          query: `mutation($data: ConfirmNewsletterInput!) {
-                    confirmNewsletter(confirmNewsletterData: $data) 
-                  }`,
-          variables: {
-            data: {
-              code: '1234567890abcdef1',
-            },
-          },
-        })
-        expect(response.body).toMatchObject({
-          kind: 'single',
-          singleResult: {
-            data: null,
-            errors: [
-              {
-                message: 'Argument Validation Error',
-              },
-            ],
-          },
-        })
+    let response: Awaited<ReturnType<typeof testServer.executeOperation>>
+    beforeEach(async () => {
+      response = await testServer.executeOperation({
+        query: `mutation($code: String!) {
+                  confirmNewsletter(code: $code) 
+                }`,
+        variables: {
+          code: '1234567890abcdef',
+        },
       })
     })
 
-    describe('code to short', () => {
-      it('throws schema error', async () => {
-        const response = await testServer.executeOperation({
-          query: `mutation($data: ConfirmNewsletterInput!) {
-                    confirmNewsletter(confirmNewsletterData: $data) 
-                  }`,
-          variables: {
-            data: {
-              code: '1234567890abcde',
-            },
-          },
-        })
-        expect(response.body).toMatchObject({
-          kind: 'single',
-          singleResult: {
-            data: null,
-            errors: [
-              {
-                message: 'Argument Validation Error',
-              },
-            ],
-          },
-        })
-      })
+    it('calls confirmNewsletter', () => {
+      expect(confirmNewsletter).toHaveBeenCalledTimes(1)
+      expect(confirmNewsletter).toHaveBeenCalledWith('1234567890abcdef')
     })
 
-    describe('with correct data', () => {
-      let response: Awaited<ReturnType<typeof testServer.executeOperation>>
-      beforeEach(async () => {
-        response = await testServer.executeOperation({
-          query: `mutation($data: ConfirmNewsletterInput!) {
-                    confirmNewsletter(confirmNewsletterData: $data) 
-                  }`,
-          variables: {
-            data: {
-              code: '1234567890abcdef',
-            },
+    it('returns true', () => {
+      expect(response.body).toMatchObject({
+        kind: 'single',
+        singleResult: {
+          data: {
+            confirmNewsletter: true,
           },
-        })
-      })
-
-      it('calls confirmNewsletter', () => {
-        expect(confirmNewsletter).toHaveBeenCalledTimes(1)
-        expect(confirmNewsletter).toHaveBeenCalledWith('1234567890abcdef')
-      })
-
-      it('returns true', () => {
-        expect(response.body).toMatchObject({
-          kind: 'single',
-          singleResult: {
-            data: {
-              confirmNewsletter: true,
-            },
-          },
-        })
+        },
       })
     })
   })
