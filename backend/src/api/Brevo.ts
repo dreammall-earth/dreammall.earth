@@ -89,16 +89,17 @@ export const subscribeToNewsletter = async (
   validTill.setDate(validTill.getDate() + 30)
 
   // check for a code younger than 10min
-  const validCode = await prisma.newsletterPreOptIn.findFirst({
-    where: {
-      email,
-      createdAt: {
-        gte: time10MinAgo,
+  if (
+    await prisma.newsletterPreOptIn.findFirst({
+      where: {
+        email,
+        createdAt: {
+          gte: time10MinAgo,
+        },
+        deletedAt: null,
       },
-      deletedAt: null,
-    },
-  })
-  if (validCode) {
+    })
+  ) {
     throw new Error('Please try later again')
   }
 
