@@ -92,22 +92,24 @@ function isMobile() {
   return window.innerWidth <= mobileThreshold
 }
 
-function setVideoSrc() {
-  if (isMobile()) {
-    videoSrc.value = VideoMobileMp4
-    videoSrcAlt.value = VideoMobileWebm
-    posterSrc.value = VideoPosterMobile
-  } else {
-    videoSrc.value = VideoMp4
-    videoSrcAlt.value = VideoWebm
-    posterSrc.value = VideoPoster
-  }
+const videoSrcControl = {
+  setVideoSrc() {
+    if (isMobile()) {
+      videoSrc.value = VideoMobileMp4
+      videoSrcAlt.value = VideoMobileWebm
+      posterSrc.value = VideoPosterMobile
+    } else {
+      videoSrc.value = VideoMp4
+      videoSrcAlt.value = VideoWebm
+      posterSrc.value = VideoPoster
+    }
+  },
 }
 
 onMounted(() => {
-  setVideoSrc()
+  videoSrcControl.setVideoSrc()
   window.addEventListener('resize', () => {
-    setVideoSrc()
+    videoSrcControl.setVideoSrc()
   })
 })
 </script>
