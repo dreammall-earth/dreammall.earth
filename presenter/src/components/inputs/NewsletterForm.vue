@@ -3,55 +3,33 @@
     <v-form ref="form" class="newsletter-form" @submit.prevent="submitForm">
       <v-row>
         <v-col cols="12" sm="6">
-          <v-text-field
+          <NameInput
             v-model="firstname"
             name="firstname"
             class="newsletter-text"
             :label="$t('home.newsletterSection.newsletterForm.firstname')"
-            variant="solo"
-            color="#3D4753"
-            bg-color="rgba(174, 179, 189, 0.50)"
-            hide-details="auto"
-            flat
-            rounded="xl"
             required
-            :rules="nameRules"
-          ></v-text-field>
+          ></NameInput>
         </v-col>
         <v-col cols="12" sm="6">
-          <v-text-field
+          <NameInput
             v-model="lastname"
             name="lastname"
             class="newsletter-text"
             :label="$t('home.newsletterSection.newsletterForm.lastname')"
-            variant="solo"
-            color="#3D4753"
-            bg-color="rgba(174, 179, 189, 0.50)"
-            hide-details="auto"
-            flat
-            rounded="xl"
             required
-            :rules="nameRules"
-          ></v-text-field>
+          ></NameInput>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12" sm="6">
-          <v-text-field
+          <EmailInput
             v-model="email"
             name="email"
             class="newsletter-text"
             :label="$t('home.newsletterSection.newsletterForm.email')"
-            variant="solo"
-            color="#3D4753"
-            bg-color="rgba(174, 179, 189, 0.50)"
-            hide-details="auto"
-            flat
-            rounded="xl"
-            type="email"
             required
-            :rules="emailRules"
-          ></v-text-field>
+          ></EmailInput>
         </v-col>
         <v-col cols="12" sm="6 d-flex align-center">
           <MainButton
@@ -113,9 +91,10 @@ import { ref } from 'vue'
 
 import AnchorLink from '#components/nav/AnchorLink.vue'
 import { subscribeToNewsletterMutation } from '#mutations/subscribeToNewsletterMutation'
-import { nameRules, emailRules } from '#src/validation/validation'
 
+import EmailInput from './EmailInput.vue'
 import MainButton from './MainButton.vue'
+import NameInput from './NameInput.vue'
 
 const firstname = ref('')
 const lastname = ref('')

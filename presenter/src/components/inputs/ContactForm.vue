@@ -3,56 +3,34 @@
     <v-form ref="form" class="contact-form" @submit.prevent="submitForm">
       <v-row>
         <v-col cols="12" md="6">
-          <v-text-field
+          <NameInput
             id="contactname"
             v-model="firstname"
             name="firstname"
             class="contact-text"
             :label="$t('menu.footer.contactForm.firstName')"
-            variant="solo"
-            color="#3D4753"
-            bg-color="rgba(174, 179, 189, 0.50)"
-            hide-details="auto"
-            flat
-            rounded="xl"
             required
-            :rules="nameRules"
-          ></v-text-field>
+          ></NameInput>
         </v-col>
         <v-col cols="12" md="6">
-          <v-text-field
+          <NameInput
             v-model="lastname"
             name="lastname"
             class="contact-text"
             :label="$t('menu.footer.contactForm.lastName')"
-            variant="solo"
-            color="#3D4753"
-            bg-color="rgba(174, 179, 189, 0.50)"
-            hide-details="auto"
-            flat
-            rounded="xl"
             required
-            :rules="nameRules"
-          ></v-text-field>
+          ></NameInput>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12" md="6">
-          <v-text-field
+          <EmailInput
             v-model="email"
             name="email"
             class="contact-text mt-4"
             :label="$t('menu.footer.contactForm.mail')"
-            variant="solo"
-            color="#3D4753"
-            bg-color="rgba(174, 179, 189, 0.50)"
-            hide-details="auto"
-            flat
-            rounded="xl"
-            type="email"
             required
-            :rules="emailRules"
-          ></v-text-field>
+          ></EmailInput>
         </v-col>
         <v-col cols="12" md="6" class="pa-0 pa-md-3">
           <!-- <v-select
@@ -148,9 +126,11 @@ import { ref } from 'vue'
 
 import AnchorLink from '#components/nav/AnchorLink.vue'
 import { createContactFormMutation } from '#mutations/createContactForm'
-import { nameRules, messageRules, emailRules } from '#src/validation/validation'
+import { messageRules } from '#src/validation/validation'
 
+import EmailInput from './EmailInput.vue'
 import MainButton from './MainButton.vue'
+import NameInput from './NameInput.vue'
 
 const firstname = ref('')
 const lastname = ref('')
