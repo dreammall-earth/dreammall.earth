@@ -18,6 +18,7 @@ describe('validateConfig', () => {
       process.env.BREVO_ADMIN_EMAIL = 'peter@lustig.de'
       process.env.BREVO_CONTACT_TEMPLATE_ADMIN = 'not a number'
       process.env.BREVO_CONTACT_TEMPLATE_USER = 'not a number'
+      process.env.BREVO_NEWSLETTER_TEMPLATE_OPTIN = 'not a number'
       require('#config/config')
     })
 
@@ -28,7 +29,7 @@ describe('validateConfig', () => {
     })
   })
 
-  describe('check CONFIG_CHECK_BREVO_SUBSCRIBE_NEWSLETTER', () => {
+  describe('check CONFIG_CHECK_BREVO_NEWSLETTER', () => {
     beforeEach(() => {
       jest.clearAllMocks()
       jest.resetModules()
@@ -42,7 +43,7 @@ describe('validateConfig', () => {
 
     it('fails the check', () => {
       expect(mockPrintConfigError).toHaveBeenCalledWith(
-        'BREVO_SUBSCRIBE_NEWSLETTER functionality is disabled - some BREVO configs are missing',
+        'BREVO_NEWSLETTER functionality is disabled - some BREVO configs are missing',
       )
     })
   })
@@ -60,6 +61,7 @@ describe('validateConfig', () => {
       process.env.BREVO_CONTACT_TEMPLATE_ADMIN = '1'
       process.env.BREVO_CONTACT_TEMPLATE_USER = '2'
       process.env.BREVO_NEWSLETTER_LIST = '3'
+      process.env.BREVO_NEWSLETTER_TEMPLATE_OPTIN = '3'
       require('#config/config')
     })
 

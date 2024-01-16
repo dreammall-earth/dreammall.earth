@@ -1,13 +1,14 @@
 import { DOMWrapper, VueWrapper, mount } from '@vue/test-utils'
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach, vi, MockInstance } from 'vitest'
 
 import FirstSection from './FirstSection.vue'
 
 describe('FirstSection', () => {
-  const Wrapper = () => {
+  const Wrapper = (width: number = 1024) => {
+    global.window.innerWidth = width
     return mount(FirstSection)
   }
-  let wrapper: ReturnType<typeof Wrapper>
+  let wrapper: VueWrapper<InstanceType<typeof FirstSection>>
 
   beforeEach(() => {
     wrapper = Wrapper()
@@ -113,6 +114,98 @@ describe('FirstSection', () => {
           })
         })
       })
+    })
+  })
+
+  describe('play video', () => {
+    let spy: MockInstance
+
+    beforeEach(() => {
+      vi.clearAllMocks()
+    })
+
+    describe('video did not end', () => {
+      beforeEach(async () => {
+        spy = vi.spyOn((wrapper.vm as unknown as { video: HTMLFormElement }).video, 'play')
+        await wrapper.find('video').trigger('click')
+      })
+
+      it('does not play the video', () => {
+        expect(spy).not.toBeCalled()
+      })
+    })
+
+    describe('video ended', () => {
+      beforeEach(async () => {
+        ;(wrapper.vm as unknown as { video: HTMLFormElement }).video.ended = true
+
+        spy = vi.spyOn((wrapper.vm as unknown as { video: HTMLFormElement }).video, 'play')
+        await wrapper.find('video').trigger('click')
+      })
+
+      it('plays the video', () => {
+        expect(spy).toBeCalled()
+      })
+    })
+  })
+
+  describe('video source and poster', () => {
+    describe('desktop', () => {
+      it('has desktop video and poster', () => {
+        expect(wrapper.find('source[type="video/mp4"]').attributes('src')).toBe(
+          '/src/assets/video/intro_quer.mp4',
+        )
+        expect(wrapper.find('source[type="video/webm"]').attributes('src')).toBe(
+          '/src/assets/video/intro_quer.webm',
+        )
+        expect(wrapper.find('video').attributes('poster')).toBe(
+          '/src/assets/img/intro_thumbnail_quer.jpg',
+        )
+      })
+    })
+
+    describe('mobile', () => {
+      beforeEach(() => {
+        wrapper = Wrapper(600)
+      })
+
+      it('has mobile video and poster', () => {
+        expect(wrapper.find('source[type="video/mp4"]').attributes('src')).toBe(
+          '/src/assets/video/intro_hoch.mp4',
+        )
+        expect(wrapper.find('source[type="video/webm"]').attributes('src')).toBe(
+          '/src/assets/video/intro_hoch.webm',
+        )
+        expect(wrapper.find('video').attributes('poster')).toBe(
+          '/src/assets/img/intro_thumbnail_hoch.jpg',
+        )
+      })
+    })
+  })
+
+  describe('resize window', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const events: { [key: string]: any } = {}
+    let spy: MockInstance
+
+    beforeEach(() => {
+      // eslint-disable-next-line promise/prefer-await-to-callbacks
+      global.window.addEventListener = vi.fn((event, callback) => {
+        // eslint-disable-next-line security/detect-object-injection
+        events[event] = callback
+      })
+      wrapper = Wrapper()
+
+      spy = vi.spyOn(
+        (wrapper.vm as unknown as { videoSrcControl: { setVideoSrc: () => void } }).videoSrcControl,
+        'setVideoSrc',
+      )
+    })
+
+    it('calls etVideoSrc', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      events.resize()
+      expect(spy).toBeCalled()
     })
   })
 })
