@@ -182,14 +182,17 @@ const onClick = () => {
 
   &-large {
     width: 16rem;
+    height: auto;
   }
 
   &-medium {
     width: 8rem;
+    height: auto;
   }
 
   &-small {
     width: 4rem;
+    height: auto;
   }
 
   &-auto {

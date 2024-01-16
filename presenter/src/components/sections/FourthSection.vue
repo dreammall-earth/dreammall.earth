@@ -30,7 +30,7 @@
         <Transition>
           <MainButton
             v-if="showButton"
-            class="mt-8"
+            class="mt-8 anim-btn"
             :label="$t('home.section4.timelineBtn')"
             size="auto"
             variant="reload"
@@ -96,6 +96,9 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+$mobile: 500px;
+$tablet: 960px;
+
 .section4 {
   max-width: 1140px;
   background: #f5f5f5;
@@ -119,6 +122,12 @@ onMounted(() => {
 
   .anim-btn-col {
     min-height: 8rem;
+
+    .anim-btn {
+      @media screen and (max-width: $tablet) {
+        transform: scale(0.75);
+      }
+    }
   }
 
   .v-enter-active,

@@ -80,7 +80,7 @@
             :rules="[() => !!dataprivacy || $t('validation.fieldRequired')]"
           >
           </v-checkbox>
-          <span class="ml-4 pt-2 newsletter-agb"
+          <span class="ml-6 ml-sm-4 pt-2 newsletter-agb"
             >{{ $t('home.newsletterSection.newsletterForm.privacy') }}
             <AnchorLink
               class=""

@@ -116,6 +116,10 @@ $tablet: 960px;
 
       .append {
         color: #383838;
+
+        @media screen and (max-width: $tablet) {
+          white-space: nowrap;
+        }
       }
     }
   }
@@ -125,6 +129,7 @@ $tablet: 960px;
       .slide-icon {
         position: absolute;
         max-width: 150px;
+        transform: scale(0.9);
 
         @media screen and (max-width: $tablet) {
           max-width: 100px;
@@ -135,7 +140,7 @@ $tablet: 960px;
         }
 
         &.icon-1 {
-          top: 170px;
+          top: 370px;
           left: 50px;
 
           @media screen and (max-width: $tablet) {
@@ -144,13 +149,14 @@ $tablet: 960px;
           }
 
           @media screen and (max-width: $mobile) {
-            left: 5%;
+            top: 360px;
+            left: 10%;
           }
         }
 
         &.icon-2 {
-          top: 350px;
-          left: 200px;
+          top: 320px;
+          left: 240px;
 
           @media screen and (max-width: $tablet) {
             top: 460px;
@@ -163,22 +169,22 @@ $tablet: 960px;
         }
 
         &.icon-3 {
-          top: 300px;
+          top: 320px;
           right: 0;
           left: 0;
           margin-right: auto;
           margin-left: auto;
-          transform: scale(1.4);
+          transform: scale(1.2);
 
           @media screen and (max-width: $tablet) {
-            top: 390px;
-            transform: scale(1.4);
+            top: 395px;
+            transform: scale(1.2);
           }
         }
 
         &.icon-4 {
-          top: 270px;
-          right: 220px;
+          top: 320px;
+          right: 240px;
 
           @media screen and (max-width: $tablet) {
             top: 320px;
@@ -186,23 +192,24 @@ $tablet: 960px;
           }
 
           @media screen and (max-width: $mobile) {
-            right: 15%;
+            top: 330px;
+            right: 17%;
           }
         }
 
         &.icon-5 {
-          top: 360px;
+          top: 385px;
           right: 50px;
           transform: scale(1.2);
 
           @media screen and (max-width: $tablet) {
             top: 460px;
-            right: 10%;
-            transform: scale(1.3);
+            right: 15%;
+            transform: scale(1.2);
           }
 
           @media screen and (max-width: $mobile) {
-            right: 5%;
+            right: 10%;
           }
         }
       }
@@ -226,6 +233,7 @@ $tablet: 960px;
           left: 180px;
 
           @media screen and (max-width: $tablet) {
+            top: 380px;
             left: 10%;
           }
 
@@ -235,10 +243,11 @@ $tablet: 960px;
         }
 
         &.icon-2 {
-          top: 350px;
+          top: 320px;
           left: 370px;
 
           @media screen and (max-width: $tablet) {
+            top: 350px;
             left: 30%;
           }
 
@@ -248,10 +257,11 @@ $tablet: 960px;
         }
 
         &.icon-3 {
-          top: 350px;
+          top: 320px;
           right: 370px;
 
           @media screen and (max-width: $tablet) {
+            top: 350px;
             right: 30%;
           }
 
@@ -265,6 +275,7 @@ $tablet: 960px;
           right: 180px;
 
           @media screen and (max-width: $tablet) {
+            top: 380px;
             right: 10%;
           }
 
@@ -293,7 +304,7 @@ $tablet: 960px;
           left: 120px;
 
           @media screen and (max-width: $tablet) {
-            top: 350px;
+            top: 370px;
             left: 10%;
           }
 
@@ -310,7 +321,7 @@ $tablet: 960px;
           margin-left: auto;
 
           @media screen and (max-width: $tablet) {
-            top: 400px;
+            top: 420px;
           }
         }
 
@@ -319,7 +330,7 @@ $tablet: 960px;
           right: 120px;
 
           @media screen and (max-width: $tablet) {
-            top: 350px;
+            top: 370px;
             right: 10%;
           }
 

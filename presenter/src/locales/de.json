@@ -46,11 +46,11 @@
         "firstname": "Vorname",
         "lastname": "Nachname",
         "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unserer",
-        "privacyLinkLabel": "Datenschutzrichtlinie",
+        "privacyLinkLabel": "Datenschutzrichtlinie.",
         "submitBtn": "Absenden",
         "successMsg": "E-Mail gesendet"
       },
-      "subHeadline": "Immer auf dem laufenden bleiben"
+      "subHeadline": "Immer auf dem Laufenden bleiben"
     },
     "section1": {
       "headline": "DreamMall von Menschen für Menschen geschaffen",
@@ -59,7 +59,7 @@
     },
     "section2": {
       "buttonTxt": "Persönlicher Kontakt",
-      "contentFirstParagraph": "Die DreamMall Plattform bietet Euch Unternehmern, Unternehmergruppen sowie Jungunternehmern/Startups einen vertrauensvollen Raum der kreativen Vernetzung für Eure Ideen und Projekte.",
+      "contentFirstParagraph": "Die DreamMall Plattform bietet euch Unternehmern, Unternehmergruppen sowie Jungunternehmern/Startups einen vertrauensvollen Raum der kreativen Vernetzung für eure Ideen und Projekte.",
       "contentSecondParagraph": "Wir verwirklichen uns jetzt alle. Die DreamMall entwickelt sich mit jedem Einzelnen von uns für ein gemeinsames Wirtschaften und einer guten Lebensqualität. Unsere positive Energie vervielfältigt sich und gemeinsam blicken wir nur noch nach vorne. Weltweit!",
       "headline": "Respektvolles Miteinander macht ALLES möglich."
     },
@@ -76,7 +76,7 @@
       },
       "thirdColumn": {
         "headline": "Menschen und Projekte",
-        "text": "Dein Talent ist wichtig für die Welt. Verwirkliche deine Kreativität in die Realität."
+        "text": "Dein Talent ist wichtig für die Welt. Verwirkliche deine Kreativität in der Realität."
       }
     },
     "section4": {
@@ -171,7 +171,7 @@
         "mail": "E-Mail Adresse",
         "message": "Frag uns einfach …",
         "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unserer",
-        "privacyLinkLabel": "Datenschutzrichtlinie",
+        "privacyLinkLabel": "Datenschutzrichtlinie.",
         "submitBtn": "Absenden",
         "successMsg": "E-Mail gesendet",
         "topic": "Thema"
@@ -200,8 +200,8 @@
     }
   },
   "validation": {
-    "fieldNoEmail": "Dieses Feld muss eine Email-Adresse sein",
-    "fieldRequired": "Dieses Feld wird benötigt",
-    "fieldTooLong": "Dieses Feld ist zu lang"
+    "fieldNoEmail": "Dieses Feld muss eine Email-Adresse sein.",
+    "fieldRequired": "Dieses Feld wird benötigt.",
+    "fieldTooLong": "Dieses Feld ist zu lang."
   }
 }
