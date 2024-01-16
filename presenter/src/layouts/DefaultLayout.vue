@@ -37,5 +37,7 @@ const slots = useSlots()
 <style lang="scss">
 html {
   scroll-behavior: smooth;
+  // fixed header offset
+  scroll-padding-top: 95px;
 }
 </style>
