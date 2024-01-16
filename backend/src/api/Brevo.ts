@@ -178,7 +178,8 @@ export const confirmNewsletter = async (code: string): Promise<boolean> => {
     where: { code, validTill: { gte: new Date() }, deletedAt: null },
   })
   if (!optin) {
-    throw new Error('Code invalid')
+    // Code invalid
+    return false
   }
 
   // put in brevo list

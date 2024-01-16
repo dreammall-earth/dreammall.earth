@@ -468,10 +468,8 @@ describe('Brevo', () => {
       })
 
       describe('with invalid code', () => {
-        it('throws error', async () => {
-          await expect(confirmNewsletter('1234567890abcdefG')).rejects.toStrictEqual(
-            new Error('Code invalid'),
-          )
+        it('returns false', async () => {
+          await expect(confirmNewsletter('1234567890abcdefG')).resolves.toStrictEqual(false)
         })
       })
 
