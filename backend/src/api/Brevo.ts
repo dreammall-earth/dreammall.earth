@@ -107,7 +107,7 @@ export const subscribeToNewsletter = async (
   let code = null
   while (!code) {
     code = randomBytes(8).toString('hex')
-    if ((await prisma.newsletterPreOptIn.count({ where: { code } })) > 0) {
+    if (await prisma.newsletterPreOptIn.count({ where: { code } })) {
       code = null
     }
   }
