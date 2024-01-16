@@ -1,18 +1,20 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { ApolloServer } from '@apollo/server'
-import { NewsletterSubscription } from '@prisma/client'
 
-import { subscribeToNewsletter } from '#api/Brevo'
-import { prisma } from '#src/prisma'
+import { confirmNewsletter, subscribeToNewsletter } from '#api/Brevo'
+import { CONFIG } from '#config/config'
 import { createServer } from '#src/server/server'
+
+CONFIG.BREVO_KEY = 'MY KEY'
+CONFIG.BREVO_ADMIN_NAME = 'Bibi Bloxberg'
+CONFIG.BREVO_ADMIN_EMAIL = 'bibi@bloxberg.de'
+CONFIG.BREVO_NEWSLETTER_TEMPLATE_OPTIN = 3
 
 let testServer: ApolloServer
 
-jest.mock('#api/Brevo', () => {
-  return {
-    subscribeToNewsletter: jest.fn(),
-  }
-})
+jest.mock('#api/Brevo', () => ({
+  subscribeToNewsletter: jest.fn().mockResolvedValue(true),
+  confirmNewsletter: jest.fn().mockResolvedValue(true),
+}))
 
 beforeAll(async () => {
   testServer = await createServer()
@@ -135,8 +137,9 @@ describe('NewsletterSubscriptionResolver', () => {
     })
 
     describe('with correct data', () => {
-      it('returns true', async () => {
-        const response = await testServer.executeOperation({
+      let response: Awaited<ReturnType<typeof testServer.executeOperation>>
+      beforeEach(async () => {
+        response = await testServer.executeOperation({
           query: `mutation($data: SubscribeToNewsletterInput!) {
                     subscribeToNewsletter(subscribeToNewsletterData: $data) 
                   }`,
@@ -148,6 +151,14 @@ describe('NewsletterSubscriptionResolver', () => {
             },
           },
         })
+      })
+
+      it('calls subscribeToNewsletter', () => {
+        expect(subscribeToNewsletter).toHaveBeenCalledTimes(1)
+        expect(subscribeToNewsletter).toHaveBeenCalledWith('Peter', 'Lustig', 'peter@lustig.de')
+      })
+
+      it('returns true', () => {
         expect(response.body).toMatchObject({
           kind: 'single',
           singleResult: {
@@ -157,25 +168,36 @@ describe('NewsletterSubscriptionResolver', () => {
           },
         })
       })
+    })
+  })
 
-      it('has the newsletter subscription form stored in the database', async () => {
-        const result: NewsletterSubscription[] = await prisma.newsletterSubscription.findMany()
-        expect(result).toHaveLength(1)
-        expect(result).toEqual([
-          {
-            id: expect.any(Number),
-            firstName: 'Peter',
-            lastName: 'Lustig',
-            email: 'peter@lustig.de',
-            createdAt: expect.any(Date),
-            deletedAt: null,
-          },
-        ])
+  describe('confirmNewsletter mutation', () => {
+    let response: Awaited<ReturnType<typeof testServer.executeOperation>>
+    beforeEach(async () => {
+      response = await testServer.executeOperation({
+        query: `mutation($code: String!) {
+                  confirmNewsletter(code: $code) 
+                }`,
+        variables: {
+          code: '1234567890abcdef',
+        },
       })
     })
 
-    it('calls sendContactFormEmail', () => {
-      expect(subscribeToNewsletter).toHaveBeenCalled()
+    it('calls confirmNewsletter', () => {
+      expect(confirmNewsletter).toHaveBeenCalledTimes(1)
+      expect(confirmNewsletter).toHaveBeenCalledWith('1234567890abcdef')
+    })
+
+    it('returns true', () => {
+      expect(response.body).toMatchObject({
+        kind: 'single',
+        singleResult: {
+          data: {
+            confirmNewsletter: true,
+          },
+        },
+      })
     })
   })
 })
