@@ -116,17 +116,17 @@ describe('Brevo', () => {
             },
           ])
         })
+      })
 
-        afterAll(() => {
+      describe('with correct data', () => {
+        beforeAll(() => {
           mockSendTransacEmail.mockResolvedValue({
             response: {
               statusCode: 200,
             },
           })
         })
-      })
 
-      describe('with correct data', () => {
         beforeEach(async () => {
           jest.clearAllMocks()
           await sendContactEmails(contactForm)
@@ -296,15 +296,6 @@ describe('Brevo', () => {
             },
           ])
         })
-
-        afterAll(() => {
-          jest.clearAllMocks()
-          mockSendTransacEmail.mockResolvedValue({
-            response: {
-              statusCode: 200,
-            },
-          })
-        })
       })
 
       describe('with wrong statuscode from Brevo', () => {
@@ -346,8 +337,10 @@ describe('Brevo', () => {
             },
           ])
         })
+      })
 
-        afterAll(() => {
+      describe('request twice within 10min', () => {
+        beforeAll(() => {
           jest.clearAllMocks()
           mockSendTransacEmail.mockResolvedValue({
             response: {
@@ -355,9 +348,7 @@ describe('Brevo', () => {
             },
           })
         })
-      })
 
-      describe('request twice within 10min', () => {
         beforeEach(async () => {
           await prisma.$executeRaw`DELETE FROM NewsletterPreOptIn`
           jest.clearAllMocks()
@@ -375,8 +366,10 @@ describe('Brevo', () => {
             subscribeToNewsletter(firstName, lastName, 'someother@email.de'),
           ).resolves.toBe(true)
         })
+      })
 
-        afterAll(() => {
+      describe('with correct data', () => {
+        beforeAll(() => {
           jest.clearAllMocks()
           mockSendTransacEmail.mockResolvedValue({
             response: {
@@ -384,9 +377,7 @@ describe('Brevo', () => {
             },
           })
         })
-      })
 
-      describe('with correct data', () => {
         beforeEach(async () => {
           jest.clearAllMocks()
           await prisma.$executeRaw`DELETE FROM NewsletterPreOptIn`
@@ -509,14 +500,6 @@ describe('Brevo', () => {
             },
           ])
         })
-
-        afterAll(() => {
-          mockCreateContact.mockResolvedValue({
-            response: {
-              statusCode: 200,
-            },
-          })
-        })
       })
 
       describe('with wrong statuscode from Brevo', () => {
@@ -555,18 +538,19 @@ describe('Brevo', () => {
             },
           ])
         })
+      })
 
-        afterAll(() => {
+      describe('with correct data', () => {
+        let result: Awaited<ReturnType<typeof confirmNewsletter>>
+
+        beforeAll(() => {
           mockCreateContact.mockResolvedValue({
             response: {
               statusCode: 200,
             },
           })
         })
-      })
 
-      describe('with correct data', () => {
-        let result: Awaited<ReturnType<typeof confirmNewsletter>>
         beforeEach(async () => {
           jest.clearAllMocks()
           result = await confirmNewsletter(code)
