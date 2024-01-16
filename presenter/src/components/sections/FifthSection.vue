@@ -377,6 +377,10 @@ $tablet: 960px;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 
+    @media screen and (max-width: $mobile) {
+      font-size: 140%;
+    }
+
     &.slide-headline-1 {
       top: 220px;
     }
