@@ -1,7 +1,6 @@
 <template>
   <v-main class="main-layout">
     <v-container fluid class="pa-0">
-      <!-- <v-row class="my-0"> -->
       <v-row>
         <v-col v-if="slots.sidemenu" cols="2">
           <v-sheet rounded>
