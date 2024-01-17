@@ -459,12 +459,12 @@ exports[`NewsletterForm > renders form 1`] = `
           <!---->
         </div>
         <span
-          class="ml-6 ml-sm-4 pt-2 newsletter-agb"
+          class="ml-6 ml-sm-4 pt-2 newsletter-dataprivacy"
           data-v-81cc7c1c=""
         >
           $t('home.newsletterSection.newsletterForm.privacy') 
           <a
-            class="v-btn v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-plain anchor-link anchor-link--text"
+            class="v-btn v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-plain anchor-link anchor-link--text dataprivacy-link"
             data-v-1925b644=""
             data-v-81cc7c1c=""
             href="/datenschutz"
