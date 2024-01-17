@@ -16,7 +16,7 @@ exports[`ContactForm > renders form 1`] = `
       data-v-09656910=""
     >
       <div
-        class="v-col-md-6 v-col-12"
+        class="v-col-md-6 v-col-12 py-0 pt-1"
         data-v-09656910=""
       >
         <div
@@ -131,7 +131,7 @@ exports[`ContactForm > renders form 1`] = `
         </div>
       </div>
       <div
-        class="v-col-md-6 v-col-12"
+        class="v-col-md-6 v-col-12 py-0 pt-1"
         data-v-09656910=""
       >
         <div
@@ -247,11 +247,11 @@ exports[`ContactForm > renders form 1`] = `
       </div>
     </div>
     <div
-      class="v-row"
+      class="v-row mt-0"
       data-v-09656910=""
     >
       <div
-        class="v-col-md-6 v-col-12"
+        class="v-col-md-6 v-col-12 py-0 pt-1"
         data-v-09656910=""
       >
         <div
@@ -366,7 +366,7 @@ exports[`ContactForm > renders form 1`] = `
         </div>
       </div>
       <div
-        class="v-col-md-6 v-col-12 pa-0 pa-md-3"
+        class="v-col-md-6 v-col-12 py-0 pt-2 pa-md-3"
         data-v-09656910=""
       >
         <!-- &lt;v-select
@@ -392,7 +392,7 @@ exports[`ContactForm > renders form 1`] = `
       data-v-09656910=""
     >
       <div
-        class="v-col pb-0"
+        class="v-col pt-2 pb-0"
         data-v-09656910=""
       >
         <div
@@ -525,7 +525,7 @@ exports[`ContactForm > renders form 1`] = `
       </div>
     </div>
     <div
-      class="v-row"
+      class="v-row mt-0"
       data-v-09656910=""
     >
       <div
@@ -576,7 +576,7 @@ exports[`ContactForm > renders form 1`] = `
           <!---->
         </div>
         <span
-          class="ml-4 pt-2 contact-agb"
+          class="ml-6 ml-sm-4 pt-2 contact-agb"
           data-v-09656910=""
         >
           $t('menu.footer.contactForm.privacy') 
@@ -612,7 +612,7 @@ exports[`ContactForm > renders form 1`] = `
       </div>
     </div>
     <div
-      class="v-row"
+      class="v-row mt-0"
       data-v-09656910=""
     >
       <div

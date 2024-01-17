@@ -18,6 +18,7 @@ exports[`DefaultLayout > renders 1`] = `
         class="v-container v-container--fluid v-locale--is-ltr pa-0"
         data-v-75d0be1e=""
       >
+        <!-- &lt;v-row class="my-0"&gt; -->
         <div
           class="v-row"
           data-v-75d0be1e=""
@@ -51,7 +52,7 @@ exports[`DefaultLayout > renders 1`] = `
               data-v-b000eb4c=""
             >
               <h2
-                class="footer-header mb-3 text-left"
+                class="footer-header mb-6 text-left"
                 data-v-b000eb4c=""
               >
                 $t('menu.footer.sitemap')
@@ -157,7 +158,7 @@ exports[`DefaultLayout > renders 1`] = `
               data-v-b000eb4c=""
             >
               <h2
-                class="footer-header mb-3 text-left"
+                class="footer-header mb-6 text-left"
                 data-v-b000eb4c=""
               >
                 $t('menu.footer.privacyHeadline')
@@ -295,7 +296,7 @@ exports[`DefaultLayout > renders 1`] = `
               data-v-b000eb4c=""
             >
               <h2
-                class="footer-header mb-5 text-left"
+                class="footer-header mb-10 text-left"
                 data-v-b000eb4c=""
               >
                 $t('menu.footer.contact')
@@ -319,7 +320,7 @@ exports[`DefaultLayout > renders 1`] = `
                       data-v-09656910=""
                     >
                       <div
-                        class="v-col-md-6 v-col-12"
+                        class="v-col-md-6 v-col-12 py-0 pt-1"
                         data-v-09656910=""
                       >
                         <div
@@ -434,7 +435,7 @@ exports[`DefaultLayout > renders 1`] = `
                         </div>
                       </div>
                       <div
-                        class="v-col-md-6 v-col-12"
+                        class="v-col-md-6 v-col-12 py-0 pt-1"
                         data-v-09656910=""
                       >
                         <div
@@ -550,11 +551,11 @@ exports[`DefaultLayout > renders 1`] = `
                       </div>
                     </div>
                     <div
-                      class="v-row"
+                      class="v-row mt-0"
                       data-v-09656910=""
                     >
                       <div
-                        class="v-col-md-6 v-col-12"
+                        class="v-col-md-6 v-col-12 py-0 pt-1"
                         data-v-09656910=""
                       >
                         <div
@@ -669,7 +670,7 @@ exports[`DefaultLayout > renders 1`] = `
                         </div>
                       </div>
                       <div
-                        class="v-col-md-6 v-col-12 pa-0 pa-md-3"
+                        class="v-col-md-6 v-col-12 py-0 pt-2 pa-md-3"
                         data-v-09656910=""
                       >
                         <!-- &lt;v-select
@@ -695,7 +696,7 @@ exports[`DefaultLayout > renders 1`] = `
                       data-v-09656910=""
                     >
                       <div
-                        class="v-col pb-0"
+                        class="v-col pt-2 pb-0"
                         data-v-09656910=""
                       >
                         <div
@@ -828,7 +829,7 @@ exports[`DefaultLayout > renders 1`] = `
                       </div>
                     </div>
                     <div
-                      class="v-row"
+                      class="v-row mt-0"
                       data-v-09656910=""
                     >
                       <div
@@ -879,7 +880,7 @@ exports[`DefaultLayout > renders 1`] = `
                           <!---->
                         </div>
                         <span
-                          class="ml-4 pt-2 contact-agb"
+                          class="ml-6 ml-sm-4 pt-2 contact-agb"
                           data-v-09656910=""
                         >
                           $t('menu.footer.contactForm.privacy') 
@@ -915,7 +916,7 @@ exports[`DefaultLayout > renders 1`] = `
                       </div>
                     </div>
                     <div
-                      class="v-row"
+                      class="v-row mt-0"
                       data-v-09656910=""
                     >
                       <div

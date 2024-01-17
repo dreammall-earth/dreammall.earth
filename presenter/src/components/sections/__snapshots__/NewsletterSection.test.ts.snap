@@ -498,7 +498,7 @@ exports[`NewsletterSection > renders 1`] = `
                   <!---->
                 </div>
                 <span
-                  class="ml-4 pt-2 newsletter-agb"
+                  class="ml-6 ml-sm-4 pt-2 newsletter-agb"
                   data-v-81cc7c1c=""
                 >
                   $t('home.newsletterSection.newsletterForm.privacy') 
