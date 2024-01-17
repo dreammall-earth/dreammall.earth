@@ -18,7 +18,6 @@ exports[`DefaultLayout > renders 1`] = `
         class="v-container v-container--fluid v-locale--is-ltr pa-0"
         data-v-75d0be1e=""
       >
-        <!-- &lt;v-row class="my-0"&gt; -->
         <div
           class="v-row"
           data-v-75d0be1e=""
