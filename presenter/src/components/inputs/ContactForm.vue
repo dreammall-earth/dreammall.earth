@@ -70,18 +70,7 @@
       </v-row>
       <v-row>
         <v-col class="d-flex align-start">
-          <v-checkbox
-            v-model="dataprivacy"
-            name="dataprivacy"
-            color="rgba(174, 179, 189, 0.50)"
-            value="false"
-            hide-details="auto"
-            :center-affix="false"
-            density="compact"
-            required
-            :rules="[() => !!dataprivacy || $t('validation.fieldRequired')]"
-          >
-          </v-checkbox>
+          <DataPrivacyCheckbox></DataPrivacyCheckbox>
           <span class="ml-4 pt-2 contact-agb"
             >{{ $t('menu.footer.contactForm.privacy') }}
             <AnchorLink
@@ -124,6 +113,7 @@
 import { useMutation } from '@vue/apollo-composable'
 import { ref } from 'vue'
 
+import DataPrivacyCheckbox from '#components/controls/DataPrivacyCheckbox.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
 import { createContactFormMutation } from '#mutations/createContactForm'
 import { messageRules } from '#src/validation/validation'
@@ -136,7 +126,6 @@ const firstname = ref('')
 const lastname = ref('')
 const email = ref('')
 const message = ref('')
-const dataprivacy = ref(0)
 const formIsLoading = ref(false)
 const showFormError = ref(false)
 const showFormSuccess = ref(false)

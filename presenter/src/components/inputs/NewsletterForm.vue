@@ -46,18 +46,7 @@
 
       <v-row>
         <v-col cols="12" class="d-flex align-start">
-          <v-checkbox
-            v-model="dataprivacy"
-            name="dataprivacy"
-            color="rgba(174, 179, 189, 0.50)"
-            value="false"
-            hide-details="auto"
-            :center-affix="false"
-            density="compact"
-            required
-            :rules="[() => !!dataprivacy || $t('validation.fieldRequired')]"
-          >
-          </v-checkbox>
+          <DataPrivacyCheckbox></DataPrivacyCheckbox>
           <span class="ml-4 pt-2 newsletter-agb"
             >{{ $t('home.newsletterSection.newsletterForm.privacy') }}
             <AnchorLink
@@ -89,6 +78,7 @@
 import { useMutation } from '@vue/apollo-composable'
 import { ref } from 'vue'
 
+import DataPrivacyCheckbox from '#components/controls/DataPrivacyCheckbox.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
 import { subscribeToNewsletterMutation } from '#mutations/subscribeToNewsletterMutation'
 
@@ -99,7 +89,6 @@ import NameInput from './NameInput.vue'
 const firstname = ref('')
 const lastname = ref('')
 const email = ref('')
-const dataprivacy = ref(0)
 const formIsLoading = ref(false)
 const showFormError = ref(false)
 const showFormSuccess = ref(false)
