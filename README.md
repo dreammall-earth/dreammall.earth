@@ -41,6 +41,10 @@ The following commands are available:
 Generate a new version using `npm version --git-tag-version=false patch|minor|major`.
 Then run `npm run release` to propagate the new version and generate the changelog
 
+## External Tools
+
+This project is tested with Browserstack.
+
 ## License
 
 [Apache 2.0](./LICENSE)
