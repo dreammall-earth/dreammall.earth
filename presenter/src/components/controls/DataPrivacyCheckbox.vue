@@ -9,7 +9,7 @@
     density="compact"
     required
     :rules="[() => !!dataprivacy || $t('validation.fieldRequired')]"
-    @update:model-value="emit('modelValue:update', value)"
+    @update:model-value="emit('modelValue:update', dataprivacy)"
   >
   </v-checkbox>
 </template>
@@ -20,6 +20,6 @@ import { ref } from 'vue'
 const dataprivacy = ref(0)
 
 const emit = defineEmits<{
-  (e: 'modelValue:update', value: boolean): void
+  (e: 'modelValue:update', dataprivacy: number): void
 }>()
 </script>
