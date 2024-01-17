@@ -13,7 +13,7 @@
     type="email"
     :required="props.required"
     :rules="emailRules"
-    @update:model-value="$emit('update:modelValue', $event)"
+    @update:model-value="emit('update:modelValue', $event)"
   ></v-text-field>
 </template>
 
@@ -55,4 +55,8 @@ const props = withDefaults(
     required: false,
   },
 )
+
+const emit = defineEmits<{
+  (e: 'modelValue:updateupdate:modelValue', event: string): void
+}>()
 </script>
