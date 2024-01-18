@@ -15,7 +15,7 @@
       "street": "Rosenau 15",
       "zip": "DE-87437"
     },
-    "headline": "Datenschutzrichtlinie",
+    "headline": "Datenschutzrichtlinien",
     "processing": {
       "content": "Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder eMail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten können im Rahmen der Erfüllung des angebotenen Services an Dritte weitergegeben werden. Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.",
       "headline": "Einwilligung zur Datenverarbeitung"
@@ -45,8 +45,8 @@
         "errorMsg": "Das hat leider nicht funktioniert! Bitte erneut probieren",
         "firstname": "Vorname",
         "lastname": "Nachname",
-        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unserer",
-        "privacyLinkLabel": "Datenschutzrichtlinie.",
+        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unseren",
+        "privacyLinkLabel": "Datenschutzrichtlinien.",
         "submitBtn": "Absenden",
         "successMsg": "E-Mail gesendet"
       },
@@ -170,8 +170,8 @@
         "lastName": "Nachname",
         "mail": "E-Mail Adresse",
         "message": "Frag uns einfach …",
-        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unserer",
-        "privacyLinkLabel": "Datenschutzrichtlinie.",
+        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unseren",
+        "privacyLinkLabel": "Datenschutzrichtlinien.",
         "submitBtn": "Absenden",
         "successMsg": "E-Mail gesendet",
         "topic": "Thema"
