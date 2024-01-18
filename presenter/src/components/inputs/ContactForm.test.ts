@@ -3,7 +3,7 @@ import { mount, flushPromises } from '@vue/test-utils'
 import { createMockClient } from 'mock-apollo-client'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 
-import { createContactFormMutation } from '#mutations/createContactForm'
+import { createContactForm } from '#mutations/createContactForm'
 
 import ContactForm from './ContactForm.vue'
 
@@ -12,7 +12,7 @@ const mockClient = createMockClient()
 const createContactFormMutationMock = vi.fn()
 
 mockClient.setRequestHandler(
-  createContactFormMutation,
+  createContactForm,
   createContactFormMutationMock.mockResolvedValue({ data: { createContactForm: true } }),
 )
 
