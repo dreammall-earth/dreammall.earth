@@ -1,17 +1,17 @@
 import { randomBytes } from 'crypto'
 
 import {
-  ContactsApi,
   ContactsApiApiKeys,
   CreateContact,
   SendSmtpEmail,
-  TransactionalEmailsApi,
   TransactionalEmailsApiApiKeys,
 } from '@getbrevo/brevo'
 import { ContactForm } from '@prisma/client'
 
 import { CONFIG, CONFIG_CHECKS } from '#config/config'
 import { prisma } from '#src/prisma'
+
+import { ContactsApi, TransactionalEmailsApi } from './BrevoDebuggableApi'
 
 export const sendContactEmails = async (
   contactForm: ContactForm,
