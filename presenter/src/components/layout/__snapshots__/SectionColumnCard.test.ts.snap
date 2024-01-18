@@ -2,7 +2,7 @@
 
 exports[`SectionColumnCard > renders SectionColumnCard with all elements 1`] = `
 <div
-  class="v-card v-card--flat v-theme--light bg-transparent v-card--density-default v-card--variant-elevated mb-2 w-100"
+  class="v-card v-card--flat v-theme--light bg-transparent v-card--density-default v-card--variant-elevated mb-12 mb-md-2 w-100"
   data-v-e62ef3ea=""
   style="width: 375px;"
 >
@@ -75,13 +75,13 @@ exports[`SectionColumnCard > renders SectionColumnCard with all elements 1`] = `
     <!---->
   </div>
   <div
-    class="v-card-title card-title mt-8"
+    class="v-card-title card-title mt-0 mt-md-8"
     data-v-e62ef3ea=""
   >
     Title
   </div>
   <div
-    class="v-card-text card-text mt-8"
+    class="v-card-text card-text mt-0 mt-md-8"
     data-v-e62ef3ea=""
   >
     Lorem ipsum text

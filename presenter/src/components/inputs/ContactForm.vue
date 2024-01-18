@@ -2,7 +2,7 @@
   <v-sheet color="transparent">
     <v-form ref="form" class="contact-form" @submit.prevent="submitForm">
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col cols="12" md="6" class="py-0 pt-1">
           <v-text-field
             id="contactname"
             v-model="firstname"
@@ -19,7 +19,7 @@
             :rules="nameRules"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" md="6">
+        <v-col cols="12" md="6" class="py-0 pt-1">
           <v-text-field
             v-model="lastname"
             name="lastname"
@@ -36,8 +36,8 @@
           ></v-text-field>
         </v-col>
       </v-row>
-      <v-row>
-        <v-col cols="12" md="6">
+      <v-row class="mt-0">
+        <v-col cols="12" md="6" class="py-0 pt-1">
           <v-text-field
             v-model="email"
             name="email"
@@ -54,7 +54,7 @@
             :rules="emailRules"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" md="6" class="pa-0 pa-md-3">
+        <v-col cols="12" md="6" class="py-0 pt-2 pa-md-3">
           <!-- <v-select
                v-model="topic"
                name="topic"
@@ -74,7 +74,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col class="pb-0">
+        <v-col class="pt-2 pb-0">
           <v-textarea
             v-model="message"
             name="message"
@@ -90,7 +90,7 @@
           ></v-textarea>
         </v-col>
       </v-row>
-      <v-row>
+      <v-row class="mt-0">
         <v-col class="d-flex align-start">
           <v-checkbox
             v-model="dataprivacy"
@@ -104,10 +104,10 @@
             :rules="[() => !!dataprivacy || $t('validation.fieldRequired')]"
           >
           </v-checkbox>
-          <span class="ml-4 pt-2 contact-agb"
+          <span class="ml-6 ml-sm-4 pt-2 contact-dataprivacy"
             >{{ $t('menu.footer.contactForm.privacy') }}
             <AnchorLink
-              class=""
+              class="dataprivacy-link"
               href="/datenschutz"
               variant="text"
               :label="$t('menu.footer.contactForm.privacyLinkLabel')"
@@ -115,7 +115,7 @@
           ></span>
         </v-col>
       </v-row>
-      <v-row>
+      <v-row class="mt-0">
         <v-col>
           <MainButton
             class="my-2 w-100"
@@ -222,7 +222,7 @@ async function submitForm() {
     min-height: 7.5rem;
   }
 
-  .contact-agb {
+  .contact-dataprivacy {
     font-family: Poppins, sans-serif;
     font-size: 0.875rem;
     font-style: normal;
@@ -230,8 +230,8 @@ async function submitForm() {
     line-height: normal;
     color: #3d4753;
 
-    .agb-link {
-      padding-bottom: 2px;
+    .dataprivacy-link {
+      height: auto;
     }
   }
 

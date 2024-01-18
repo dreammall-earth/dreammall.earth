@@ -17,7 +17,7 @@
       </v-col>
     </v-row>
     <v-row class="section-footer text-center">
-      <v-col align-self="center">
+      <v-col>
         <MainButton
           class="mt-8"
           :label="$t('home.section6.buttonText')"

@@ -39,11 +39,11 @@ describe('NewsletterForm', () => {
         const errorMessages = wrapper.findAll('.v-messages__message')
         expect(errorMessages).toHaveLength(4)
         // firstname
-        expect(errorMessages[0].text()).toBe('Dieses Feld wird benötigt')
+        expect(errorMessages[0].text()).toBe('Dieses Feld wird benötigt.')
         // lastname
-        expect(errorMessages[1].text()).toBe('Dieses Feld wird benötigt')
+        expect(errorMessages[1].text()).toBe('Dieses Feld wird benötigt.')
         // email
-        expect(errorMessages[2].text()).toBe('Dieses Feld wird benötigt')
+        expect(errorMessages[2].text()).toBe('Dieses Feld wird benötigt.')
         // checkbox
         expect(errorMessages[3].text()).toBe("$t('validation.fieldRequired')")
       })
