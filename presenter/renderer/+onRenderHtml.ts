@@ -3,6 +3,7 @@ import { escapeInject, dangerouslySkipEscape } from 'vike/server'
 import { resolveComponent } from 'vue'
 
 import logoUrl from '#assets/favicon.ico'
+import image from '#assets/img/dreammall-logo_social.svg'
 import { META } from '#src/env'
 
 import { createApp } from './app'
@@ -34,6 +35,9 @@ async function render(pageContext: PageContextServer & PageContext) {
         <link rel="icon" href="${logoUrl}" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="${desc}" />
+        <meta property="og:image" content="${image}" />
+        <meta property="og:image:width" content="1200"/>
+        <meta property="og:image:height" content="601"/>
         <title>${title}</title>
       </head>
       <body>
