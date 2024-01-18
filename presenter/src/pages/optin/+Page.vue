@@ -13,6 +13,7 @@
 
 <script lang="ts" setup>
 import { useMutation } from '@vue/apollo-composable'
+import { navigate } from 'vike/client/router'
 import { onBeforeMount, ref } from 'vue'
 
 import { usePageContext } from '#context/usePageContext'
@@ -37,11 +38,12 @@ onBeforeMount(async () => {
   } catch (error) {
     isError.value = true
   }
+
   isLoading.value = !isLoading.value
 
   if (!isError.value) {
     setTimeout(() => {
-      window.location.href = '/'
+      navigate('/')
     }, 5000)
   }
 })
