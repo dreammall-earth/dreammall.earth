@@ -18,7 +18,7 @@ describe('DataPrivacyCheckbox', () => {
   })
 
   it('emits the modelValue:update event on checkbox change', async () => {
-    await wrapper.find('input[type="checkbox"]').trigger('change')
+    await wrapper.find('input[type="checkbox"]').setValue(true)
     expect(wrapper.emitted('modelValue:update')).toMatchObject([[1]])
   })
 })
