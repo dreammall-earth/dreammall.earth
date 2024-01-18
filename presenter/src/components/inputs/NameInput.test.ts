@@ -5,7 +5,7 @@ import NameInput from './NameInput.vue'
 
 describe('MainButton', () => {
   const Wrapper = () => {
-    return mount(NameInput)
+    return mount(NameInput, { props: { modelValue: '' } })
   }
   let wrapper: ReturnType<typeof Wrapper>
 
@@ -19,6 +19,6 @@ describe('MainButton', () => {
 
   it('emits the update:modelValue event on input', async () => {
     await wrapper.find('input').setValue('New Name')
-    expect(wrapper.emitted('update:modelValue')).toMatchObject([['New Name']])
+    expect(wrapper.emitted('update:modelValue')).toEqual([['New Name']])
   })
 })

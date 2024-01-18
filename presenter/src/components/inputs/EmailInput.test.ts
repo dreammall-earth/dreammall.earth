@@ -5,7 +5,7 @@ import EmailInput from './EmailInput.vue'
 
 describe('EmailInput', () => {
   const Wrapper = () => {
-    return mount(EmailInput)
+    return mount(EmailInput, { props: { modelValue: '' } })
   }
   let wrapper: ReturnType<typeof Wrapper>
 
@@ -19,6 +19,6 @@ describe('EmailInput', () => {
 
   it('emits the update:modelValue event on input', async () => {
     await wrapper.find('input').setValue('new@email.com')
-    expect(wrapper.emitted('update:modelValue')).toMatchObject([['new@email.com']])
+    expect(wrapper.emitted('update:modelValue')).toEqual([['new@email.com']])
   })
 })

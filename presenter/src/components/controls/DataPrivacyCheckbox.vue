@@ -3,7 +3,6 @@
     v-model="dataprivacy"
     name="dataprivacy"
     color="rgba(174, 179, 189, 0.50)"
-    value="false"
     hide-details="auto"
     :center-affix="false"
     density="compact"

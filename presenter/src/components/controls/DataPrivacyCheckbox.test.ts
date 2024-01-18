@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils'
+import { mount, flushPromises } from '@vue/test-utils'
 import { describe, it, expect, beforeEach } from 'vitest'
 
 import DataPrivacyCheckbox from './DataPrivacyCheckbox.vue'
@@ -19,6 +19,7 @@ describe('DataPrivacyCheckbox', () => {
 
   it('emits the modelValue:update event on checkbox change', async () => {
     await wrapper.find('input[type="checkbox"]').setValue(true)
-    expect(wrapper.emitted('modelValue:update')).toMatchObject([[1]])
+    await flushPromises()
+    expect(wrapper.emitted('modelValue:update')).toMatchObject([[true]])
   })
 })
