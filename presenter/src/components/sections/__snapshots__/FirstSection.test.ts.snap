@@ -2,17 +2,17 @@
 
 exports[`FirstSection > renders FirstSection 1`] = `
 <div
-  class=""
+  class="h-100"
   data-v-497259dd=""
 >
   <div
-    class="section1"
+    class="section1 h-100"
     data-v-497259dd=""
   >
     <div
       class="v-window v-window--show-arrows-on-hover v-theme--light v-carousel v-carousel--hide-delimiter-background landing-slider"
       data-v-497259dd=""
-      style="height: 100vh;"
+      style="height: 100%;"
     >
       <div
         class="v-window__container"

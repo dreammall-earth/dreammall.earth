@@ -41,7 +41,7 @@ exports[`ThirdSection > renders ThirdSection 1`] = `
       data-v-31f16c5e=""
     >
       <div
-        class="v-card v-card--flat v-theme--light bg-transparent v-card--density-default v-card--variant-elevated mb-2 w-100"
+        class="v-card v-card--flat v-theme--light bg-transparent v-card--density-default v-card--variant-elevated mb-12 mb-md-2 w-100"
         data-v-31f16c5e=""
         data-v-e62ef3ea=""
         style="width: 375px;"
@@ -126,13 +126,13 @@ exports[`ThirdSection > renders ThirdSection 1`] = `
           <!---->
         </div>
         <div
-          class="v-card-title card-title mt-8"
+          class="v-card-title card-title mt-0 mt-md-8"
           data-v-e62ef3ea=""
         >
           $t('home.section3.firstColumn.headline')
         </div>
         <div
-          class="v-card-text card-text mt-8"
+          class="v-card-text card-text mt-0 mt-md-8"
           data-v-e62ef3ea=""
         >
           $t('home.section3.firstColumn.text')
@@ -152,7 +152,7 @@ exports[`ThirdSection > renders ThirdSection 1`] = `
       data-v-31f16c5e=""
     >
       <div
-        class="v-card v-card--flat v-theme--light bg-transparent v-card--density-default v-card--variant-elevated mb-2 w-100"
+        class="v-card v-card--flat v-theme--light bg-transparent v-card--density-default v-card--variant-elevated mb-12 mb-md-2 w-100"
         data-v-31f16c5e=""
         data-v-e62ef3ea=""
         style="width: 375px;"
@@ -237,13 +237,13 @@ exports[`ThirdSection > renders ThirdSection 1`] = `
           <!---->
         </div>
         <div
-          class="v-card-title card-title mt-8"
+          class="v-card-title card-title mt-0 mt-md-8"
           data-v-e62ef3ea=""
         >
           $t('home.section3.secondColumn.headline')
         </div>
         <div
-          class="v-card-text card-text mt-8"
+          class="v-card-text card-text mt-0 mt-md-8"
           data-v-e62ef3ea=""
         >
           $t('home.section3.secondColumn.text')
@@ -263,7 +263,7 @@ exports[`ThirdSection > renders ThirdSection 1`] = `
       data-v-31f16c5e=""
     >
       <div
-        class="v-card v-card--flat v-theme--light bg-transparent v-card--density-default v-card--variant-elevated mb-2 w-100"
+        class="v-card v-card--flat v-theme--light bg-transparent v-card--density-default v-card--variant-elevated mb-12 mb-md-2 w-100"
         data-v-31f16c5e=""
         data-v-e62ef3ea=""
         style="width: 375px;"
@@ -348,13 +348,13 @@ exports[`ThirdSection > renders ThirdSection 1`] = `
           <!---->
         </div>
         <div
-          class="v-card-title card-title mt-8"
+          class="v-card-title card-title mt-0 mt-md-8"
           data-v-e62ef3ea=""
         >
           $t('home.section3.thirdColumn.headline')
         </div>
         <div
-          class="v-card-text card-text mt-8"
+          class="v-card-text card-text mt-0 mt-md-8"
           data-v-e62ef3ea=""
         >
           $t('home.section3.thirdColumn.text')
