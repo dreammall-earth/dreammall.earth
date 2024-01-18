@@ -3,7 +3,7 @@ import { mount, flushPromises } from '@vue/test-utils'
 import { createMockClient } from 'mock-apollo-client'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 
-import { subscribeToNewsletterMutation } from '#mutations/subscribeToNewsletterMutation'
+import { subscribeToNewsletter } from '#mutations/subscribeToNewsletter'
 
 import NewsletterForm from './NewsletterForm.vue'
 
@@ -23,7 +23,7 @@ describe('NewsletterForm', () => {
   }
 
   mockClient.setRequestHandler(
-    subscribeToNewsletterMutation,
+    subscribeToNewsletter,
     subscribeToNewsletterMutationMock.mockResolvedValue({ data: { subscribeToNewsletter: true } }),
   )
 
