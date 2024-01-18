@@ -1,6 +1,6 @@
 <template>
   <v-btn :color="setColor" :class="classes" :size="size" @click="onClick">
-    <v-icon v-if="props.variant === 'reload'" start class="pr-4" icon="mdi-reload"></v-icon>
+    <v-icon v-if="props.variant === 'reload'" start class="reload-icon" icon="mdi-reload"></v-icon>
     <span class="main-button-content"
       >{{ label }}
       <v-progress-circular
@@ -164,6 +164,18 @@ const onClick = () => {
     background: #fff;
     border: 1px solid #e3e3e3;
     border-radius: 3.25rem;
+
+    .reload-icon {
+      padding-right: 16px;
+    }
+
+    &.main-button-small {
+      font-size: 70%;
+
+      .reload-icon {
+        padding-right: 0;
+      }
+    }
   }
 
   &--reload:hover {
@@ -192,7 +204,8 @@ const onClick = () => {
 
   &-small {
     width: 4rem;
-    height: auto;
+    height: auto !important;
+    font-size: 100%;
   }
 
   &-auto {
