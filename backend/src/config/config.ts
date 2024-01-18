@@ -27,6 +27,7 @@ const BREVO = {
   BREVO_NEWSLETTER_LIST: !isNaN(Number(process.env.BREVO_NEWSLETTER_LIST))
     ? Number(process.env.BREVO_NEWSLETTER_LIST)
     : undefined,
+  BREVO_DEBUG: process.env.BREVO_DEBUG === 'true' ?? false,
 }
 
 export const CONFIG = { ...BREVO }
