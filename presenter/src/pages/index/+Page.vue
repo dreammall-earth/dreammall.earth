@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout class="index-page">
-    <div id="section1" class="h-screen mb-4">
+    <div id="section1" class="mb-4">
       <Section1 />
     </div>
     <div id="about" class="py-16 px-4 d-flex justify-center">
@@ -39,6 +39,11 @@ import Section3 from '#root/src/components/sections/ThirdSection.vue'
 .index-page {
   overflow: hidden;
   background: #f5f5f5;
+
+  #section1 {
+    // fix for vuetify negative margin
+    height: calc(100vh + 12px);
+  }
 
   #about {
     background: #fff;
