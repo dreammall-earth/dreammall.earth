@@ -24,7 +24,7 @@
       </v-row>
       <v-row class="mt-0">
         <v-col cols="12" md="6" class="py-0 pt-1">
-          EmailInput
+          <EmailInput
             v-model="email"
             name="email"
             class="contact-text mt-4"
