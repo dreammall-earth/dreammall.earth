@@ -51,7 +51,7 @@ describe('ContactForm', () => {
 
       it('shows error for email', () => {
         expect(wrapper.find('.v-messages__message').text()).toBe(
-          'Dieses Feld muss eine Email-Adresse sein',
+          'Dieses Feld muss eine Email-Adresse sein.',
         )
       })
     })
@@ -72,7 +72,7 @@ describe('ContactForm', () => {
       })
 
       it('shows error for last name', () => {
-        expect(wrapper.find('.v-messages__message').text()).toBe('Dieses Feld ist zu lang')
+        expect(wrapper.find('.v-messages__message').text()).toBe('Dieses Feld ist zu lang.')
       })
     })
   })
@@ -89,13 +89,13 @@ describe('ContactForm', () => {
         const errorMessages = wrapper.findAll('.v-messages__message')
         expect(errorMessages).toHaveLength(5)
         // firstname
-        expect(errorMessages[0].text()).toBe('Dieses Feld wird benötigt')
+        expect(errorMessages[0].text()).toBe('Dieses Feld wird benötigt.')
         // email
-        expect(errorMessages[1].text()).toBe('Dieses Feld wird benötigt')
+        expect(errorMessages[1].text()).toBe('Dieses Feld wird benötigt.')
         // lastname
-        expect(errorMessages[2].text()).toBe('Dieses Feld wird benötigt')
+        expect(errorMessages[2].text()).toBe('Dieses Feld wird benötigt.')
         // content
-        expect(errorMessages[3].text()).toBe('Dieses Feld wird benötigt')
+        expect(errorMessages[3].text()).toBe('Dieses Feld wird benötigt.')
         // checkbox
         expect(errorMessages[4].text()).toBe("$t('validation.fieldRequired')")
       })

@@ -53,7 +53,7 @@ exports[`renders SixthSection > renders SixthSection 1`] = `
     data-v-7331c7d7=""
   >
     <div
-      class="v-col align-self-center"
+      class="v-col"
       data-v-7331c7d7=""
     >
       <button
