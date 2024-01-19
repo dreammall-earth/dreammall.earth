@@ -22,7 +22,7 @@ import { emailRules } from '#src/validation/validation'
 
 const props = withDefaults(
   defineProps<{
-    modelValue: string
+    modelValue: string | null
     name?: string
     class?: string
     label?: string
