@@ -6,7 +6,7 @@ exports[`AboutSection > renders AboutSection 1`] = `
   data-v-5d1d9537=""
 >
   <div
-    class="v-row section2 py-16"
+    class="v-row about-section py-16"
     data-v-5d1d9537=""
   >
     <div
@@ -21,19 +21,19 @@ exports[`AboutSection > renders AboutSection 1`] = `
           class="section-headline"
           data-v-5d1d9537=""
         >
-          $t('home.section2.headline')
+          $t('home.aboutSection.headline')
         </h2>
         <p
           class="section-content mt-8"
           data-v-5d1d9537=""
         >
-          $t('home.section2.contentFirstParagraph')
+          $t('home.aboutSection.contentFirstParagraph')
         </p>
         <p
           class="section-content"
           data-v-5d1d9537=""
         >
-          $t('home.section2.contentSecondParagraph')
+          $t('home.aboutSection.contentSecondParagraph')
         </p>
         <button
           class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--fourth main-button-auto mt-8"
@@ -62,7 +62,7 @@ exports[`AboutSection > renders AboutSection 1`] = `
               class="main-button-content"
               data-v-9518dada=""
             >
-              $t('home.section2.buttonTxt') 
+              $t('home.aboutSection.buttonTxt') 
               <!--v-if-->
             </span>
             

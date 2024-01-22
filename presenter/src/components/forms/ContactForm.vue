@@ -146,11 +146,10 @@
 import { useMutation } from '@vue/apollo-composable'
 import { ref } from 'vue'
 
+import MainButton from '#components/buttons/MainButton.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
 import { createContactFormMutation } from '#mutations/createContactForm'
 import { nameRules, messageRules, emailRules } from '#src/validation/validation'
-
-import MainButton from './MainButton.vue'
 
 const firstname = ref('')
 const lastname = ref('')

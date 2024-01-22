@@ -282,7 +282,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                 data-v-5d1d9537=""
               >
                 <div
-                  class="v-row section2 py-16"
+                  class="v-row about-section py-16"
                   data-v-5d1d9537=""
                 >
                   <div
@@ -297,19 +297,19 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                         class="section-headline"
                         data-v-5d1d9537=""
                       >
-                        $t('home.section2.headline')
+                        $t('home.aboutSection.headline')
                       </h2>
                       <p
                         class="section-content mt-8"
                         data-v-5d1d9537=""
                       >
-                        $t('home.section2.contentFirstParagraph')
+                        $t('home.aboutSection.contentFirstParagraph')
                       </p>
                       <p
                         class="section-content"
                         data-v-5d1d9537=""
                       >
-                        $t('home.section2.contentSecondParagraph')
+                        $t('home.aboutSection.contentSecondParagraph')
                       </p>
                       <button
                         class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--fourth main-button-auto mt-8"
@@ -338,7 +338,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                             class="main-button-content"
                             data-v-9518dada=""
                           >
-                            $t('home.section2.buttonTxt') 
+                            $t('home.aboutSection.buttonTxt') 
                             <!--v-if-->
                           </span>
                           
@@ -404,7 +404,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
               id="products"
             >
               <div
-                class="section3 v-container"
+                class="products-section v-container"
                 data-v-07c017cc=""
                 data-v-31f16c5e=""
               >
@@ -424,13 +424,13 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                         class="prepend"
                         data-v-31f16c5e=""
                       >
-                        $t('home.section3.headline')
+                        $t('home.productsSection.headline')
                       </span>
                       <span
                         class="append"
                         data-v-31f16c5e=""
                       >
-                        $t('home.section3.headlineAppend')
+                        $t('home.productsSection.headlineAppend')
                       </span>
                     </h2>
                   </div>
@@ -532,13 +532,13 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                         class="v-card-title card-title mt-0 mt-md-8"
                         data-v-e62ef3ea=""
                       >
-                        $t('home.section3.firstColumn.headline')
+                        $t('home.productsSection.firstColumn.headline')
                       </div>
                       <div
                         class="v-card-text card-text mt-0 mt-md-8"
                         data-v-e62ef3ea=""
                       >
-                        $t('home.section3.firstColumn.text')
+                        $t('home.productsSection.firstColumn.text')
                       </div>
                       
                       <!---->
@@ -643,13 +643,13 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                         class="v-card-title card-title mt-0 mt-md-8"
                         data-v-e62ef3ea=""
                       >
-                        $t('home.section3.secondColumn.headline')
+                        $t('home.productsSection.secondColumn.headline')
                       </div>
                       <div
                         class="v-card-text card-text mt-0 mt-md-8"
                         data-v-e62ef3ea=""
                       >
-                        $t('home.section3.secondColumn.text')
+                        $t('home.productsSection.secondColumn.text')
                       </div>
                       
                       <!---->
@@ -754,13 +754,13 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                         class="v-card-title card-title mt-0 mt-md-8"
                         data-v-e62ef3ea=""
                       >
-                        $t('home.section3.thirdColumn.headline')
+                        $t('home.productsSection.thirdColumn.headline')
                       </div>
                       <div
                         class="v-card-text card-text mt-0 mt-md-8"
                         data-v-e62ef3ea=""
                       >
-                        $t('home.section3.thirdColumn.text')
+                        $t('home.productsSection.thirdColumn.text')
                       </div>
                       
                       <!---->
@@ -1440,7 +1440,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
               id="coffee-section"
             >
               <div
-                class="section5 pt-4 v-container"
+                class="coffee-section pt-4 v-container"
                 data-v-05d2e91a=""
                 data-v-07c017cc=""
               >
@@ -1460,14 +1460,14 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                         class="prepend"
                         data-v-05d2e91a=""
                       >
-                        $t('home.section5.headline')
+                        $t('home.coffeeSection.headline')
                       </span>
                         
                       <span
                         class="append"
                         data-v-05d2e91a=""
                       >
-                        $t('home.section5.headlineAppend')
+                        $t('home.coffeeSection.headlineAppend')
                       </span>
                     </h2>
                   </div>
@@ -1576,13 +1576,13 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                       class="w-100 slide-subheadline slide-subheadline-1"
                                       data-v-05d2e91a=""
                                     >
-                                      $t('home.section5.slide1.subheadline')
+                                      $t('home.coffeeSection.slide1.subheadline')
                                     </h3>
                                     <h3
                                       class="w-100 slide-headline slide-headline-1"
                                       data-v-05d2e91a=""
                                     >
-                                      $t('home.section5.slide1.headline')
+                                      $t('home.coffeeSection.slide1.headline')
                                     </h3>
                                     <div
                                       class="v-responsive v-img v-img--booting w-100 slide-icon icon-1"
@@ -1968,10 +1968,10 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
             <div
               class="py-16 px-4"
               data-v-07c017cc=""
-              id="section6"
+              id="cta-section"
             >
               <div
-                class="section6 v-container pa-16"
+                class="cta-section v-container pa-16"
                 data-v-07c017cc=""
                 data-v-7331c7d7=""
               >
@@ -1991,14 +1991,14 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                         class="prepend"
                         data-v-7331c7d7=""
                       >
-                        $t('home.section6.headline')
+                        $t('home.ctaSection.headline')
                       </span>
                         
                       <span
                         class="append"
                         data-v-7331c7d7=""
                       >
-                        $t('home.section6.headlineAppend')
+                        $t('home.ctaSection.headlineAppend')
                       </span>
                     </h2>
                   </div>
@@ -2014,7 +2014,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                     <p
                       data-v-7331c7d7=""
                     >
-                      $t('home.section6.content')
+                      $t('home.ctaSection.content')
                     </p>
                   </div>
                 </div>
@@ -2053,7 +2053,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                           class="main-button-content"
                           data-v-9518dada=""
                         >
-                          $t('home.section6.buttonText') 
+                          $t('home.ctaSection.buttonText') 
                           <!--v-if-->
                         </span>
                         

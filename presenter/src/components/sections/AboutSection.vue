@@ -1,25 +1,25 @@
 <template>
   <div ref="target" class="px-4">
-    <v-row class="section2 py-16">
+    <v-row class="about-section py-16">
       <v-col cols="12" md="7">
         <div class="section-left-part" :class="{ show: animate }">
           <h2 class="section-headline">
-            {{ $t('home.section2.headline') }}
+            {{ $t('home.aboutSection.headline') }}
           </h2>
           <p class="section-content mt-8">
-            {{ $t('home.section2.contentFirstParagraph') }}
+            {{ $t('home.aboutSection.contentFirstParagraph') }}
           </p>
           <p class="section-content">
-            {{ $t('home.section2.contentSecondParagraph') }}
+            {{ $t('home.aboutSection.contentSecondParagraph') }}
           </p>
 
           <MainButton
             class="mt-8"
-            :label="$t('home.section2.buttonTxt')"
+            :label="$t('home.aboutSection.buttonTxt')"
             size="auto"
             variant="fourth"
             href="/#contactname"
-            >{{ $t('home.section2.buttonTxt') }}</MainButton
+            >{{ $t('home.aboutSection.buttonTxt') }}</MainButton
           >
         </div>
       </v-col>
@@ -66,7 +66,7 @@ onMounted(() => {
 $mobile: 500px;
 $tablet: 960px;
 
-.section2 {
+.about-section {
   max-width: 1440px;
   min-height: 50rem;
   color: #3d4753;

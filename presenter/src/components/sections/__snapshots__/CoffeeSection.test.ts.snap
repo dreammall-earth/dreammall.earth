@@ -2,7 +2,7 @@
 
 exports[`renders CoffeeSection > renders CoffeeSection 1`] = `
 <div
-  class="section5 pt-4 v-container"
+  class="coffee-section pt-4 v-container"
   data-v-05d2e91a=""
 >
   <div
@@ -21,14 +21,14 @@ exports[`renders CoffeeSection > renders CoffeeSection 1`] = `
           class="prepend"
           data-v-05d2e91a=""
         >
-          $t('home.section5.headline')
+          $t('home.coffeeSection.headline')
         </span>
           
         <span
           class="append"
           data-v-05d2e91a=""
         >
-          $t('home.section5.headlineAppend')
+          $t('home.coffeeSection.headlineAppend')
         </span>
       </h2>
     </div>
@@ -137,13 +137,13 @@ exports[`renders CoffeeSection > renders CoffeeSection 1`] = `
                         class="w-100 slide-subheadline slide-subheadline-1"
                         data-v-05d2e91a=""
                       >
-                        $t('home.section5.slide1.subheadline')
+                        $t('home.coffeeSection.slide1.subheadline')
                       </h3>
                       <h3
                         class="w-100 slide-headline slide-headline-1"
                         data-v-05d2e91a=""
                       >
-                        $t('home.section5.slide1.headline')
+                        $t('home.coffeeSection.slide1.headline')
                       </h3>
                       <div
                         class="v-responsive v-img v-img--booting w-100 slide-icon icon-1"

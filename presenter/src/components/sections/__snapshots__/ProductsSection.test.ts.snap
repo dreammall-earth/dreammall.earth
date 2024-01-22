@@ -2,7 +2,7 @@
 
 exports[`ProductsSection > renders ProductsSection 1`] = `
 <div
-  class="section3 v-container"
+  class="products-section v-container"
   data-v-31f16c5e=""
 >
   <div
@@ -21,13 +21,13 @@ exports[`ProductsSection > renders ProductsSection 1`] = `
           class="prepend"
           data-v-31f16c5e=""
         >
-          $t('home.section3.headline')
+          $t('home.productsSection.headline')
         </span>
         <span
           class="append"
           data-v-31f16c5e=""
         >
-          $t('home.section3.headlineAppend')
+          $t('home.productsSection.headlineAppend')
         </span>
       </h2>
     </div>
@@ -129,13 +129,13 @@ exports[`ProductsSection > renders ProductsSection 1`] = `
           class="v-card-title card-title mt-0 mt-md-8"
           data-v-e62ef3ea=""
         >
-          $t('home.section3.firstColumn.headline')
+          $t('home.productsSection.firstColumn.headline')
         </div>
         <div
           class="v-card-text card-text mt-0 mt-md-8"
           data-v-e62ef3ea=""
         >
-          $t('home.section3.firstColumn.text')
+          $t('home.productsSection.firstColumn.text')
         </div>
         
         <!---->
@@ -240,13 +240,13 @@ exports[`ProductsSection > renders ProductsSection 1`] = `
           class="v-card-title card-title mt-0 mt-md-8"
           data-v-e62ef3ea=""
         >
-          $t('home.section3.secondColumn.headline')
+          $t('home.productsSection.secondColumn.headline')
         </div>
         <div
           class="v-card-text card-text mt-0 mt-md-8"
           data-v-e62ef3ea=""
         >
-          $t('home.section3.secondColumn.text')
+          $t('home.productsSection.secondColumn.text')
         </div>
         
         <!---->
@@ -351,13 +351,13 @@ exports[`ProductsSection > renders ProductsSection 1`] = `
           class="v-card-title card-title mt-0 mt-md-8"
           data-v-e62ef3ea=""
         >
-          $t('home.section3.thirdColumn.headline')
+          $t('home.productsSection.thirdColumn.headline')
         </div>
         <div
           class="v-card-text card-text mt-0 mt-md-8"
           data-v-e62ef3ea=""
         >
-          $t('home.section3.thirdColumn.text')
+          $t('home.productsSection.thirdColumn.text')
         </div>
         
         <!---->

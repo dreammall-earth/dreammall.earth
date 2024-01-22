@@ -1,11 +1,11 @@
 <template>
-  <div class="section5 pt-4 v-container">
+  <div class="coffee-section pt-4 v-container">
     <v-row class="section-header">
       <v-col>
         <h2 class="section-headline">
-          <span class="prepend">{{ $t('home.section5.headline') }}</span
+          <span class="prepend">{{ $t('home.coffeeSection.headline') }}</span
           >&nbsp;
-          <span class="append">{{ $t('home.section5.headlineAppend') }}</span>
+          <span class="append">{{ $t('home.coffeeSection.headlineAppend') }}</span>
         </h2>
       </v-col>
     </v-row>
@@ -17,10 +17,10 @@
               <div class="icon-container slide1">
                 <v-img class="w-100 icon-main main-slide-icon-1" :src="slideLogo1" />
                 <h3 class="w-100 slide-subheadline slide-subheadline-1">
-                  {{ $t('home.section5.slide1.subheadline') }}
+                  {{ $t('home.coffeeSection.slide1.subheadline') }}
                 </h3>
                 <h3 class="w-100 slide-headline slide-headline-1">
-                  {{ $t('home.section5.slide1.headline') }}
+                  {{ $t('home.coffeeSection.slide1.headline') }}
                 </h3>
 
                 <v-img class="w-100 slide-icon icon-1" :src="slide1Icon1" />
@@ -37,10 +37,10 @@
               <div class="icon-container slide2">
                 <v-img class="w-100 icon-main main-slide-icon-2" :src="slideLogo2" />
                 <h3 class="w-100 slide-subheadline slide-subheadline-2">
-                  {{ $t('home.section5.slide2.subheadline') }}
+                  {{ $t('home.coffeeSection.slide2.subheadline') }}
                 </h3>
                 <h3 class="w-100 slide-headline slide-headline-2">
-                  {{ $t('home.section5.slide2.headline') }}
+                  {{ $t('home.coffeeSection.slide2.headline') }}
                 </h3>
 
                 <v-img class="w-100 slide-icon icon-1" :src="slide2Icon1" />
@@ -55,10 +55,10 @@
             <v-sheet rounded="xl" color="#FFF" border :height="600">
               <div class="icon-container slide3">
                 <h3 class="w-100 slide-subheadline slide-subheadline-3">
-                  {{ $t('home.section5.slide3.subheadline') }}
+                  {{ $t('home.coffeeSection.slide3.subheadline') }}
                 </h3>
                 <h3 class="w-100 slide-headline slide-headline-3">
-                  {{ $t('home.section5.slide3.headline') }}
+                  {{ $t('home.coffeeSection.slide3.headline') }}
                 </h3>
                 <v-img class="w-100 icon-main main-slide-icon-3" :src="slideLogo3" />
 
@@ -96,7 +96,7 @@ import slide3Icon3 from '#assets/img/slides/slide3-search.svg'
 $mobile: 500px;
 $tablet: 960px;
 
-.section5 {
+.coffee-section {
   max-width: 1120px;
 
   .section-header {

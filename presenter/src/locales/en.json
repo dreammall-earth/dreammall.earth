@@ -36,54 +36,13 @@
     }
   },
   "home": {
-    "newsletterSection": {
-      "currentNewsletter": "Aktueller Newsletter",
-      "headline": "Newsletter",
-      "newsletterDownloadBtn": "Download",
-      "newsletterForm": {
-        "email": "E-Mail Adresse",
-        "errorMsg": "Das hat leider nicht funktioniert! Bitte erneut probieren",
-        "firstname": "Vorname",
-        "lastname": "Nachname",
-        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unserer",
-        "privacyLinkLabel": "Datenschutzrichtlinie",
-        "submitBtn": "Absenden",
-        "successMsg": "E-Mail gesendet"
-      },
-      "subHeadline": "Immer auf dem laufenden bleiben"
-    },
-    "introSection": {
-      "headline": "DreamMall von Menschen für Menschen geschaffen",
-      "preOrderBtn": "Mehr Informationen",
-      "subHeadline": "7 Tage kostenlos testen"
-    },
-    "section2": {
+    "aboutSection": {
       "buttonTxt": "Persönlicher Kontakt",
       "contentFirstParagraph": "Die DreamMall Plattform bietet Euch Unternehmern, Unternehmergruppen sowie Jungunternehmern/Startups einen vertrauensvollen Raum der kreativen Vernetzung für Eure Ideen und Projekte.",
       "contentSecondParagraph": "Wir verwirklichen uns jetzt alle. Die DreamMall entwickelt sich mit jedem Einzelnen von uns für ein gemeinsames Wirtschaften und einer guten Lebensqualität. Unsere positive Energie vervielfältigt sich und gemeinsam blicken wir nur noch nach vorne. Weltweit!",
       "headline": "Respektvolles Miteinander macht ALLES möglich."
     },
-    "section3": {
-      "firstColumn": {
-        "headline": "Mall",
-        "text": "Wir erschaffen eine Welt, ein Platz des gemeinsamen Lebens und der Wirtschaft."
-      },
-      "headline": "DreamMall.",
-      "headlineAppend": "Earth",
-      "secondColumn": {
-        "headline": "Weltencafé",
-        "text": "Wir finden uns, verbinden uns, vertrauen uns und fördern uns."
-      },
-      "thirdColumn": {
-        "headline": "Menschen und Projekte",
-        "text": "Dein Talent ist wichtig für die Welt. Verwirkliche deine Kreativität in die Realität."
-      }
-    },
-    "planningSection": {
-      "headline": "DreamMall Planning",
-      "timelineBtn": "Reload"
-    },
-    "section5": {
+    "coffeeSection": {
       "headline": "Deine Zutaten",
       "headlineAppend": "im Kaffee",
       "slide1": {
@@ -104,7 +63,48 @@
       "content": "Seien Sie Teil des Anfangs einer aufregenden Veränderung! Hinterlassen Sie uns einfach Ihren Namen und Ihre E-Mail Adresse, um exklusive Angebote und umfassende Details vor der offiziellen Veröffentlichung zu erhalten. Verpassen Sie nicht die Gelegenheit, Teil unserer einzigartigen Community zu werden und von unseren besonderen Starter-Angeboten zu profitieren!",
       "headline": "Veränderung",
       "headlineAppend": "Schaffen"
-    }
+    },
+    "introSection": {
+      "headline": "DreamMall von Menschen für Menschen geschaffen",
+      "preOrderBtn": "Mehr Informationen",
+      "subHeadline": "7 Tage kostenlos testen"
+    },
+    "newsletterSection": {
+      "currentNewsletter": "Aktueller Newsletter",
+      "headline": "Newsletter",
+      "newsletterDownloadBtn": "Download",
+      "newsletterForm": {
+        "email": "E-Mail Adresse",
+        "errorMsg": "Das hat leider nicht funktioniert! Bitte erneut probieren",
+        "firstname": "Vorname",
+        "lastname": "Nachname",
+        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unserer",
+        "privacyLinkLabel": "Datenschutzrichtlinie",
+        "submitBtn": "Absenden",
+        "successMsg": "E-Mail gesendet"
+      },
+      "subHeadline": "Immer auf dem laufenden bleiben"
+    },
+    "planningSection": {
+      "headline": "DreamMall Planning",
+      "timelineBtn": "Reload"
+    },
+    "productsSection": {
+      "firstColumn": {
+        "headline": "Mall",
+        "text": "Wir erschaffen eine Welt, ein Platz des gemeinsamen Lebens und der Wirtschaft."
+      },
+      "headline": "DreamMall.",
+      "headlineAppend": "Earth",
+      "secondColumn": {
+        "headline": "Weltencafé",
+        "text": "Wir finden uns, verbinden uns, vertrauen uns und fördern uns."
+      },
+      "thirdColumn": {
+        "headline": "Menschen und Projekte",
+        "text": "Dein Talent ist wichtig für die Welt. Verwirkliche deine Kreativität in die Realität."
+      }
+    }    
   },
   "impress": {
     "consumerDispute": {

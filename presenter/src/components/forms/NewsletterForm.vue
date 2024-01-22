@@ -111,11 +111,10 @@
 import { useMutation } from '@vue/apollo-composable'
 import { ref } from 'vue'
 
+import MainButton from '#components/buttons/MainButton.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
 import { subscribeToNewsletterMutation } from '#mutations/subscribeToNewsletterMutation'
 import { nameRules, emailRules } from '#src/validation/validation'
-
-import MainButton from './MainButton.vue'
 
 const firstname = ref('')
 const lastname = ref('')
