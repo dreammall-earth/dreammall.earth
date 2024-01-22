@@ -1,12 +1,12 @@
 import { mount } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
 
-import SixthSection from './SixthSection.vue'
+import CallToActionSection from './CallToActionSection.vue'
 
-describe('renders SixthSection', () => {
-  const wrapper = mount(SixthSection)
+describe('renders CallToActionSection', () => {
+  const wrapper = mount(CallToActionSection)
 
-  it('renders SixthSection', () => {
+  it('renders CallToActionSection', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 })

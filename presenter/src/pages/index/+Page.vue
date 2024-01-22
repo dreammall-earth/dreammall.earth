@@ -7,7 +7,7 @@
       <AboutSection />
     </div>
     <div id="products" class="py-16 px-4">
-      <TeaserSection />
+      <ProductsSection />
     </div>
     <div id="planning-section" class="py-16 px-4">
       <PlanningSection />
@@ -16,9 +16,9 @@
       <NewsletterSection />
     </div>
     <div id="coffee-section" class="py-16 px-4">
-      <ProjectSection />
+      <CoffeeSection />
     </div>
-    <div id="section6" class="py-16 px-4">
+    <div id="cta-section" class="py-16 px-4">
       <CallToActionSection />
     </div>
   </DefaultLayout>
@@ -28,11 +28,11 @@
 import DefaultLayout from '#layouts/DefaultLayout.vue'
 import AboutSection from '#root/src/components/sections/AboutSection.vue'
 import CallToActionSection from '#root/src/components/sections/CallToActionSection.vue'
+import CoffeeSection from '#root/src/components/sections/CoffeeSection.vue'
 import IntroSection from '#root/src/components/sections/IntroSection.vue'
 import NewsletterSection from '#root/src/components/sections/NewsletterSection.vue'
-import ProjectSection from '#root/src/components/sections/ProjectSection.vue'
-import TeaserSection from '#root/src/components/sections/TeaserSection.vue'
 import PlanningSection from '#root/src/components/sections/PlanningSection.vue'
+import ProductsSection from '#root/src/components/sections/ProductsSection.vue'
 </script>
 
 <style scoped lang="scss">

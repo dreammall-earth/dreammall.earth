@@ -1,18 +1,18 @@
 <template>
-  <div class="section6 v-container pa-16">
+  <div class="cta-section v-container pa-16">
     <v-row class="section-header">
       <v-col>
         <h2 class="section-headline">
-          <span class="prepend">{{ $t('home.section6.headline') }}</span
+          <span class="prepend">{{ $t('home.ctaSection.headline') }}</span
           >&nbsp;
-          <span class="append">{{ $t('home.section6.headlineAppend') }}</span>
+          <span class="append">{{ $t('home.ctaSection.headlineAppend') }}</span>
         </h2>
       </v-col>
     </v-row>
     <v-row class="section-content">
       <v-col>
         <p>
-          {{ $t('home.section6.content') }}
+          {{ $t('home.ctaSection.content') }}
         </p>
       </v-col>
     </v-row>
@@ -20,11 +20,11 @@
       <v-col>
         <MainButton
           class="mt-8"
-          :label="$t('home.section6.buttonText')"
+          :label="$t('home.ctaSection.buttonText')"
           size="large"
           variant="primary"
           href="/#contactname"
-          >{{ $t('home.section6.buttonText') }}</MainButton
+          >{{ $t('home.ctaSection.buttonText') }}</MainButton
         >
       </v-col>
     </v-row>
@@ -32,11 +32,11 @@
 </template>
 
 <script lang="ts" setup>
-import MainButton from '#components/inputs/MainButton.vue'
+import MainButton from '#components/buttons/MainButton.vue'
 </script>
 
 <style scoped lang="scss">
-.section6 {
+.cta-section {
   max-width: 960px;
 
   .section-header {

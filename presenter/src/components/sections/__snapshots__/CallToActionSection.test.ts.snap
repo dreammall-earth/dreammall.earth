@@ -1,8 +1,8 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renders SixthSection > renders SixthSection 1`] = `
+exports[`renders CallToActionSection > renders CallToActionSection 1`] = `
 <div
-  class="section6 v-container pa-16"
+  class="cta-section v-container pa-16"
   data-v-7331c7d7=""
 >
   <div
@@ -21,14 +21,14 @@ exports[`renders SixthSection > renders SixthSection 1`] = `
           class="prepend"
           data-v-7331c7d7=""
         >
-          $t('home.section6.headline')
+          $t('home.ctaSection.headline')
         </span>
           
         <span
           class="append"
           data-v-7331c7d7=""
         >
-          $t('home.section6.headlineAppend')
+          $t('home.ctaSection.headlineAppend')
         </span>
       </h2>
     </div>
@@ -44,7 +44,7 @@ exports[`renders SixthSection > renders SixthSection 1`] = `
       <p
         data-v-7331c7d7=""
       >
-        $t('home.section6.content')
+        $t('home.ctaSection.content')
       </p>
     </div>
   </div>
@@ -83,7 +83,7 @@ exports[`renders SixthSection > renders SixthSection 1`] = `
             class="main-button-content"
             data-v-9518dada=""
           >
-            $t('home.section6.buttonText') 
+            $t('home.ctaSection.buttonText') 
             <!--v-if-->
           </span>
           
