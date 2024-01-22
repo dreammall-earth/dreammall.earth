@@ -1,12 +1,12 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`FirstSection > renders FirstSection 1`] = `
+exports[`IntroSection > renders IntroSection 1`] = `
 <div
   class="h-100"
   data-v-497259dd=""
 >
   <div
-    class="section1 h-100"
+    class="intro-section h-100"
     data-v-497259dd=""
   >
     <div

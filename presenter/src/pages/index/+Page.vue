@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout class="index-page">
-    <div id="section1" class="mb-4">
+    <div id="intro-section" class="mb-4">
       <IntroSection />
     </div>
     <div id="about" class="py-16 px-4 d-flex justify-center">
@@ -40,7 +40,7 @@ import PlanningSection from '#root/src/components/sections/PlanningSection.vue'
   overflow: hidden;
   background: #f5f5f5;
 
-  #section1 {
+  #intro-section {
     // fix for vuetify negative margin
     height: calc(100vh + 12px);
   }

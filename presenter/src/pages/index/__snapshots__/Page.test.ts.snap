@@ -32,7 +32,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
             <div
               class="mb-4"
               data-v-07c017cc=""
-              id="section1"
+              id="intro-section"
             >
               <div
                 class="h-100"
@@ -40,7 +40,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                 data-v-497259dd=""
               >
                 <div
-                  class="section1 h-100"
+                  class="intro-section h-100"
                   data-v-497259dd=""
                 >
                   <div

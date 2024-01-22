@@ -1,20 +1,20 @@
 import { DOMWrapper, VueWrapper, mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach, vi, MockInstance } from 'vitest'
 
-import FirstSection from './FirstSection.vue'
+import IntroSection from './IntroSection.vue'
 
-describe('FirstSection', () => {
+describe('IntroSection', () => {
   const Wrapper = (width: number = 1024) => {
     global.window.innerWidth = width
-    return mount(FirstSection)
+    return mount(IntroSection)
   }
-  let wrapper: VueWrapper<InstanceType<typeof FirstSection>>
+  let wrapper: VueWrapper<InstanceType<typeof IntroSection>>
 
   beforeEach(() => {
     wrapper = Wrapper()
   })
 
-  it('renders FirstSection', () => {
+  it('renders IntroSection', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 
@@ -61,8 +61,8 @@ describe('FirstSection', () => {
         item = (wrapper.findAllComponents({ name: 'VCarouselItem' }) as VueWrapper[])[1]
       })
 
-      it('has section-headline home.section1.headline', () => {
-        expect(item.find('.section-headline').text()).toBe("$t('home.section1.headline')")
+      it('has section-headline home.introSection.headline', () => {
+        expect(item.find('.section-headline').text()).toBe("$t('home.introSection.headline')")
       })
 
       it('has a logo image with size large', () => {
@@ -70,13 +70,13 @@ describe('FirstSection', () => {
         expect(item.findComponent({ name: 'LogoImage' }).classes('logo-large')).toBe(true)
       })
 
-      it('has section-subheadline home.section1.subHeadline', () => {
-        expect(item.find('.section-subheadline').text()).toBe("$t('home.section1.subHeadline')")
+      it('has section-subheadline home.introSection.subHeadline', () => {
+        expect(item.find('.section-subheadline').text()).toBe("$t('home.introSection.subHeadline')")
       })
 
-      it('has a button with text home.section1.preOrderBtn', () => {
+      it('has a button with text home.introSection.preOrderBtn', () => {
         expect(item.find('.v-btn').find('.main-button-content').text()).toBe(
-          "$t('home.section1.preOrderBtn')",
+          "$t('home.introSection.preOrderBtn')",
         )
       })
     })

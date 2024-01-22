@@ -1,6 +1,6 @@
 <template>
   <div class="h-100">
-    <div class="section1 h-100">
+    <div class="intro-section h-100">
       <v-carousel
         v-model="slide"
         class="landing-slider"
@@ -34,20 +34,20 @@
             color="transparent"
             class="content-slide d-flex flex-column justify-center align-center text-center"
           >
-            <p class="section-headline mt-16">{{ $t('home.section1.headline') }}</p>
+            <p class="section-headline mt-16">{{ $t('home.introSection.headline') }}</p>
             <div class="w-100 mt-16 d-flex justify-center">
               <LogoImage size="large" />
             </div>
             <p class="section-subheadline mt-16">
-              {{ $t('home.section1.subHeadline') }}
+              {{ $t('home.introSection.subHeadline') }}
             </p>
             <MainButton
               class="mt-8"
-              :label="$t('home.section1.preOrderBtn')"
+              :label="$t('home.introSection.preOrderBtn')"
               size="auto"
               variant="primary"
               href="/#about"
-              >{{ $t('home.section1.preOrderBtn') }}</MainButton
+              >{{ $t('home.introSection.preOrderBtn') }}</MainButton
             >
           </v-sheet>
         </v-carousel-item>
@@ -65,8 +65,8 @@ import VideoMobileMp4 from '#assets/video/intro_hoch.mp4'
 import VideoMobileWebm from '#assets/video/intro_hoch.webm'
 import VideoMp4 from '#assets/video/intro_quer.mp4'
 import VideoWebm from '#assets/video/intro_quer.webm'
-import MainButton from '#components/inputs/MainButton.vue'
-import LogoImage from '#components/menu/LogoImage.vue'
+import MainButton from '#components/buttons/MainButton.vue'
+import LogoImage from '#components/LogoImage.vue'
 
 const slide = ref(0)
 const video = ref<HTMLFormElement>()
@@ -115,7 +115,7 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-.section1 {
+.intro-section {
   background: linear-gradient(0deg, #f5f5f5 0.06%, #d8d8d8 100%);
 
   .section-headline {
@@ -141,7 +141,7 @@ onMounted(() => {
 </style>
 
 <style lang="scss">
-.section1 {
+.intro-section {
   .v-carousel {
     background: transparent;
 
