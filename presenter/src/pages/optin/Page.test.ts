@@ -1,6 +1,6 @@
 import { mount, flushPromises } from '@vue/test-utils'
 import { navigate } from 'vike/client/router'
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect, beforeEach, vi, beforeAll, afterAll } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
@@ -31,9 +31,16 @@ describe('OptinPage', () => {
 
   let wrapper: ReturnType<typeof Wrapper>
 
-  beforeEach(() => {
+  beforeAll(() => {
     vi.useFakeTimers()
+  })
+
+  beforeEach(() => {
     wrapper = Wrapper()
+  })
+
+  afterAll(() => {
+    vi.useRealTimers()
   })
 
   it('route returns `/optin/@code', () => {
