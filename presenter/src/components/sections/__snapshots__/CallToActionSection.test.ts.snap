@@ -3,30 +3,30 @@
 exports[`renders CallToActionSection > renders CallToActionSection 1`] = `
 <div
   class="cta-section v-container pa-16"
-  data-v-7331c7d7=""
+  data-v-964af166=""
 >
   <div
     class="v-row section-header"
-    data-v-7331c7d7=""
+    data-v-964af166=""
   >
     <div
       class="v-col"
-      data-v-7331c7d7=""
+      data-v-964af166=""
     >
       <h2
         class="section-headline"
-        data-v-7331c7d7=""
+        data-v-964af166=""
       >
         <span
           class="prepend"
-          data-v-7331c7d7=""
+          data-v-964af166=""
         >
           $t('home.ctaSection.headline')
         </span>
           
         <span
           class="append"
-          data-v-7331c7d7=""
+          data-v-964af166=""
         >
           $t('home.ctaSection.headlineAppend')
         </span>
@@ -35,14 +35,14 @@ exports[`renders CallToActionSection > renders CallToActionSection 1`] = `
   </div>
   <div
     class="v-row section-content"
-    data-v-7331c7d7=""
+    data-v-964af166=""
   >
     <div
       class="v-col"
-      data-v-7331c7d7=""
+      data-v-964af166=""
     >
       <p
-        data-v-7331c7d7=""
+        data-v-964af166=""
       >
         $t('home.ctaSection.content')
       </p>
@@ -50,16 +50,16 @@ exports[`renders CallToActionSection > renders CallToActionSection 1`] = `
   </div>
   <div
     class="v-row section-footer text-center"
-    data-v-7331c7d7=""
+    data-v-964af166=""
   >
     <div
       class="v-col"
-      data-v-7331c7d7=""
+      data-v-964af166=""
     >
       <button
         class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--size-large v-btn--variant-elevated main-button main-button--primary main-button-large mt-8"
-        data-v-7331c7d7=""
-        data-v-9518dada=""
+        data-v-2b63c1fe=""
+        data-v-964af166=""
         style="background-color: #f09630; color: #000; caret-color: #000;"
         type="button"
       >
@@ -81,7 +81,7 @@ exports[`renders CallToActionSection > renders CallToActionSection 1`] = `
           <!--v-if-->
           <span
             class="main-button-content"
-            data-v-9518dada=""
+            data-v-2b63c1fe=""
           >
             $t('home.ctaSection.buttonText') 
             <!--v-if-->

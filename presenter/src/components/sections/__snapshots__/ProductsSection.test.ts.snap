@@ -3,29 +3,29 @@
 exports[`ProductsSection > renders ProductsSection 1`] = `
 <div
   class="products-section v-container"
-  data-v-31f16c5e=""
+  data-v-bd67e3e5=""
 >
   <div
     class="v-row section-header"
-    data-v-31f16c5e=""
+    data-v-bd67e3e5=""
   >
     <div
       class="v-col"
-      data-v-31f16c5e=""
+      data-v-bd67e3e5=""
     >
       <h2
         class="section-headline"
-        data-v-31f16c5e=""
+        data-v-bd67e3e5=""
       >
         <span
           class="prepend"
-          data-v-31f16c5e=""
+          data-v-bd67e3e5=""
         >
           $t('home.productsSection.headline')
         </span>
         <span
           class="append"
-          data-v-31f16c5e=""
+          data-v-bd67e3e5=""
         >
           $t('home.productsSection.headlineAppend')
         </span>
@@ -34,15 +34,15 @@ exports[`ProductsSection > renders ProductsSection 1`] = `
   </div>
   <div
     class="v-row mt-12 card-row justify-space-around"
-    data-v-31f16c5e=""
+    data-v-bd67e3e5=""
   >
     <div
       class="v-col-md-3 v-col-12 d-flex justify-center pa-0"
-      data-v-31f16c5e=""
+      data-v-bd67e3e5=""
     >
       <div
         class="v-card v-card--flat v-theme--light bg-transparent v-card--density-default v-card--variant-elevated mb-12 mb-md-2 w-100"
-        data-v-31f16c5e=""
+        data-v-bd67e3e5=""
         data-v-e62ef3ea=""
         style="width: 375px;"
       >
@@ -149,11 +149,11 @@ exports[`ProductsSection > renders ProductsSection 1`] = `
     </div>
     <div
       class="v-col-md-3 v-col-12 d-flex justify-center pa-0"
-      data-v-31f16c5e=""
+      data-v-bd67e3e5=""
     >
       <div
         class="v-card v-card--flat v-theme--light bg-transparent v-card--density-default v-card--variant-elevated mb-12 mb-md-2 w-100"
-        data-v-31f16c5e=""
+        data-v-bd67e3e5=""
         data-v-e62ef3ea=""
         style="width: 375px;"
       >
@@ -260,11 +260,11 @@ exports[`ProductsSection > renders ProductsSection 1`] = `
     </div>
     <div
       class="v-col-md-3 v-col-12 d-flex justify-center pa-0"
-      data-v-31f16c5e=""
+      data-v-bd67e3e5=""
     >
       <div
         class="v-card v-card--flat v-theme--light bg-transparent v-card--density-default v-card--variant-elevated mb-12 mb-md-2 w-100"
-        data-v-31f16c5e=""
+        data-v-bd67e3e5=""
         data-v-e62ef3ea=""
         style="width: 375px;"
       >

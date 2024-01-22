@@ -3,15 +3,15 @@
 exports[`IntroSection > renders IntroSection 1`] = `
 <div
   class="h-100"
-  data-v-497259dd=""
+  data-v-075f3340=""
 >
   <div
     class="intro-section h-100"
-    data-v-497259dd=""
+    data-v-075f3340=""
   >
     <div
       class="v-window v-window--show-arrows-on-hover v-theme--light v-carousel v-carousel--hide-delimiter-background landing-slider"
-      data-v-497259dd=""
+      data-v-075f3340=""
       style="height: 100%;"
     >
       <div
@@ -21,7 +21,7 @@ exports[`IntroSection > renders IntroSection 1`] = `
         <transition-stub
           appear="false"
           css="true"
-          data-v-497259dd=""
+          data-v-075f3340=""
           disabled="true"
           persisted="false"
         >
@@ -58,24 +58,24 @@ exports[`IntroSection > renders IntroSection 1`] = `
                 
                 <div
                   class="v-sheet v-theme--light bg-transparent video-item h-100"
-                  data-v-497259dd=""
+                  data-v-075f3340=""
                 >
                   <video
                     autoplay=""
                     class="video w-100 h-100"
-                    data-v-497259dd=""
+                    data-v-075f3340=""
                     muted=""
                     playsinline=""
                     poster="/src/assets/img/intro_thumbnail_quer.jpg"
                     preload="auto"
                   >
                     <source
-                      data-v-497259dd=""
+                      data-v-075f3340=""
                       src="/src/assets/video/intro_quer.mp4"
                       type="video/mp4"
                     />
                     <source
-                      data-v-497259dd=""
+                      data-v-075f3340=""
                       src="/src/assets/video/intro_quer.webm"
                       type="video/webm"
                     />
@@ -90,7 +90,7 @@ exports[`IntroSection > renders IntroSection 1`] = `
         <transition-stub
           appear="false"
           css="true"
-          data-v-497259dd=""
+          data-v-075f3340=""
           disabled="true"
           persisted="false"
         >
