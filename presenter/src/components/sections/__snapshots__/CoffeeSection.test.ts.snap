@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renders FifthSection > renders FifthSection 1`] = `
+exports[`renders CoffeeSection > renders CoffeeSection 1`] = `
 <div
   class="section5 pt-4 v-container"
   data-v-05d2e91a=""
