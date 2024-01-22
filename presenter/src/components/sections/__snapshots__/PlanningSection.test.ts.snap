@@ -1,8 +1,8 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`FourthSection > renders 1`] = `
+exports[`TimelineSection > renders 1`] = `
 <div
-  class="section4 v-container"
+  class="planning-section v-container"
   data-v-368a4e1d=""
 >
   <div
@@ -17,7 +17,7 @@ exports[`FourthSection > renders 1`] = `
         class="section-headline"
         data-v-368a4e1d=""
       >
-        $t('home.section4.headline')
+        $t('home.planningSection.headline')
       </h2>
     </div>
   </div>

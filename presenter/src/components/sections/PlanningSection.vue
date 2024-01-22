@@ -1,9 +1,9 @@
 <template>
-  <div class="section4 v-container">
+  <div class="planning-section v-container">
     <v-row class="section-header">
       <v-col>
         <h2 class="section-headline">
-          {{ $t('home.section4.headline') }}
+          {{ $t('home.planningSection.headline') }}
         </h2>
       </v-col>
     </v-row>
@@ -31,7 +31,7 @@
           <MainButton
             v-if="showButton"
             class="mt-8 anim-btn"
-            :label="$t('home.section4.timelineBtn')"
+            :label="$t('home.planningSection.timelineBtn')"
             size="auto"
             variant="reload"
             @click="playVideo"
@@ -51,7 +51,7 @@ import VideoMobileMp4 from '#assets/video/timeline_hoch.mp4'
 import VideoMobileWebm from '#assets/video/timeline_hoch.webm'
 import VideoMp4 from '#assets/video/timeline_quer.mp4'
 import VideoWebm from '#assets/video/timeline_quer.webm'
-import MainButton from '#components/inputs/MainButton.vue'
+import MainButton from '#components/buttons/MainButton.vue'
 
 const showButton = ref(false)
 const video = ref<HTMLFormElement>()
@@ -101,7 +101,7 @@ onMounted(() => {
 $mobile: 500px;
 $tablet: 960px;
 
-.section4 {
+.planning-section {
   max-width: 1140px;
   background: #f5f5f5;
 

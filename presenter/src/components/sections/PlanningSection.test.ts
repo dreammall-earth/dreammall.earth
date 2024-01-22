@@ -1,14 +1,14 @@
 import { mount, VueWrapper } from '@vue/test-utils'
 import { describe, it, expect, beforeEach, vi, MockInstance } from 'vitest'
 
-import FourthSection from './FourthSection.vue'
+import PlanningSection from './PlanningSection.vue'
 
-describe('FourthSection', () => {
+describe('PlanningSection', () => {
   const Wrapper = (width: number = 1024) => {
     global.window.innerWidth = width
-    return mount(FourthSection)
+    return mount(PlanningSection)
   }
-  let wrapper: VueWrapper<InstanceType<typeof FourthSection>>
+  let wrapper: VueWrapper<InstanceType<typeof PlanningSection>>
 
   beforeEach(() => {
     wrapper = Wrapper()
