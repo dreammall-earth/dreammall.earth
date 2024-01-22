@@ -157,6 +157,7 @@
     "#src/*": "./src/*",
     "#plugins/*": "./renderer/plugins/*",
     "#context/*": "./renderer/context/*",
+    "#tests/*": "./scripts/tests/*",
     "#types/*": "./types/*",
     "#root/*": "./*"
   }

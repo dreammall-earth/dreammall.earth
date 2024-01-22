@@ -1,30 +1,21 @@
-import { DefaultApolloClient } from '@vue/apollo-composable'
 import { mount, flushPromises } from '@vue/test-utils'
-import { createMockClient } from 'mock-apollo-client'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 
-import { createContactFormMutation } from '#mutations/createContactForm'
+import { createContactForm } from '#mutations/createContactForm'
+import { mockClient } from '#tests/mock.apolloClient'
 
 import ContactForm from './ContactForm.vue'
-
-const mockClient = createMockClient()
 
 const createContactFormMutationMock = vi.fn()
 
 mockClient.setRequestHandler(
-  createContactFormMutation,
+  createContactForm,
   createContactFormMutationMock.mockResolvedValue({ data: { createContactForm: true } }),
 )
 
 describe('ContactForm', () => {
   const Wrapper = () => {
-    return mount(ContactForm, {
-      global: {
-        provide: {
-          [DefaultApolloClient]: mockClient,
-        },
-      },
-    })
+    return mount(ContactForm)
   }
 
   let wrapper: ReturnType<typeof Wrapper>
