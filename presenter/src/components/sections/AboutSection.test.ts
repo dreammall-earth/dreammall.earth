@@ -3,14 +3,14 @@ import { describe, it, expect } from 'vitest'
 
 import { setupIntersectionObserverMock } from '#root/scripts/tests/mock.IntersectionObserver'
 
-import SecondSection from './SecondSection.vue'
+import AboutSection from './AboutSection.vue'
 
 setupIntersectionObserverMock()
 
-describe('SecondSection', () => {
-  const wrapper = mount(SecondSection)
+describe('AboutSection', () => {
+  const wrapper = mount(AboutSection)
 
-  it('renders SecondSection', () => {
+  it('renders AboutSection', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 })

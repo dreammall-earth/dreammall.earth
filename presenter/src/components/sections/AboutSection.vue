@@ -36,7 +36,7 @@
 import { onBeforeMount, onMounted, ref } from 'vue'
 
 import LogoPlain from '#assets/dreammall-logo-plain.svg'
-import MainButton from '#components/inputs/MainButton.vue'
+import MainButton from '#components/buttons/MainButton.vue'
 
 const target = ref()
 const animate = ref(false)
