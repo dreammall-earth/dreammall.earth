@@ -12,7 +12,7 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
       class="v-main main-layout"
       data-v-6e13aff2=""
       data-v-75d0be1e=""
-      style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: 0px; --v-layout-bottom: 0px; transition: none !important;"
+      style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: 0px; --v-layout-bottom: 0px;"
     >
       
       <div
@@ -1025,7 +1025,7 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
       class="v-main main-layout"
       data-v-6e13aff2=""
       data-v-75d0be1e=""
-      style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: 0px; --v-layout-bottom: 0px; transition: none !important;"
+      style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: 0px; --v-layout-bottom: 0px;"
     >
       
       <div
