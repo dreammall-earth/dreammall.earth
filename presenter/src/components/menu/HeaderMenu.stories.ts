@@ -1,16 +1,16 @@
 import { SBComp } from '#types/SBComp'
 
-import TopMenu from './TopMenu.vue'
+import HeaderMenu from './HeaderMenu.vue'
 
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 const meta = {
-  title: 'Menu/TopMenu',
-  component: TopMenu as SBComp,
+  title: 'Menu/HeaderMenu',
+  component: HeaderMenu as SBComp,
   tags: ['autodocs'],
   argTypes: {},
   args: {},
-} satisfies Meta<typeof TopMenu>
+} satisfies Meta<typeof HeaderMenu>
 
 export default meta
 type Story = StoryObj<typeof meta>

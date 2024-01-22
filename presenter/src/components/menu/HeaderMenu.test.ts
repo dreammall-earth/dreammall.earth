@@ -5,14 +5,14 @@ import { VApp } from 'vuetify/components'
 
 import { setupIntersectionObserverMock } from '#root/scripts/tests/mock.IntersectionObserver'
 
-import TopMenu from './TopMenu.vue'
+import HeaderMenu from './HeaderMenu.vue'
 
 setupIntersectionObserverMock()
 
-describe('TopMenu', () => {
+describe('HeaderMenu', () => {
   const wrapper = mount(VApp, {
     slots: {
-      default: h(TopMenu as Component),
+      default: h(HeaderMenu as Component),
     },
   })
 
