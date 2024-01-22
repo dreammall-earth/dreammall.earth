@@ -1,13 +1,13 @@
 <template>
-  <div class="">
-    <div class="section1">
+  <div class="h-100">
+    <div class="section1 h-100">
       <v-carousel
         v-model="slide"
         class="landing-slider"
         hide-delimiter-background
         show-arrows="hover"
         color="#ffffff"
-        height="100vh"
+        height="100%"
       >
         <v-carousel-item id="intro-video-slide" class="video-item">
           <v-sheet color="transparent" class="video-item h-100">

@@ -80,10 +80,10 @@
             :rules="[() => !!dataprivacy || $t('validation.fieldRequired')]"
           >
           </v-checkbox>
-          <span class="ml-4 pt-2 newsletter-agb"
+          <span class="ml-6 ml-sm-4 pt-2 newsletter-dataprivacy"
             >{{ $t('home.newsletterSection.newsletterForm.privacy') }}
             <AnchorLink
-              class=""
+              class="dataprivacy-link"
               href="/datenschutz"
               variant="text"
               :label="$t('home.newsletterSection.newsletterForm.privacyLinkLabel')"
@@ -182,7 +182,7 @@ async function submitForm() {
     }
   }
 
-  .newsletter-agb {
+  .newsletter-dataprivacy {
     font-family: Poppins, sans-serif;
     font-size: 0.875rem;
     font-style: normal;
@@ -190,8 +190,8 @@ async function submitForm() {
     line-height: normal;
     color: #3d4753;
 
-    .agb-link {
-      padding-bottom: 2px;
+    .dataprivacy-link {
+      height: auto;
     }
   }
 

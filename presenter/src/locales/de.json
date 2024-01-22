@@ -15,7 +15,7 @@
       "street": "Rosenau 15",
       "zip": "DE-87437"
     },
-    "headline": "Datenschutzrichtlinie",
+    "headline": "Datenschutzrichtlinien",
     "processing": {
       "content": "Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder eMail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten können im Rahmen der Erfüllung des angebotenen Services an Dritte weitergegeben werden. Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.",
       "headline": "Einwilligung zur Datenverarbeitung"
@@ -45,12 +45,12 @@
         "errorMsg": "Das hat leider nicht funktioniert! Bitte erneut probieren",
         "firstname": "Vorname",
         "lastname": "Nachname",
-        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unserer",
-        "privacyLinkLabel": "Datenschutzrichtlinie",
+        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unseren",
+        "privacyLinkLabel": "Datenschutzrichtlinien.",
         "submitBtn": "Absenden",
         "successMsg": "E-Mail gesendet"
       },
-      "subHeadline": "Immer auf dem laufenden bleiben"
+      "subHeadline": "Immer auf dem Laufenden bleiben"
     },
     "section1": {
       "headline": "DreamMall von Menschen für Menschen geschaffen",
@@ -59,7 +59,7 @@
     },
     "section2": {
       "buttonTxt": "Persönlicher Kontakt",
-      "contentFirstParagraph": "Die DreamMall Plattform bietet Euch Unternehmern, Unternehmergruppen sowie Jungunternehmern/Startups einen vertrauensvollen Raum der kreativen Vernetzung für Eure Ideen und Projekte.",
+      "contentFirstParagraph": "Die DreamMall Plattform bietet euch Unternehmern, Unternehmergruppen sowie Jungunternehmern/Startups einen vertrauensvollen Raum der kreativen Vernetzung für eure Ideen und Projekte.",
       "contentSecondParagraph": "Wir verwirklichen uns jetzt alle. Die DreamMall entwickelt sich mit jedem Einzelnen von uns für ein gemeinsames Wirtschaften und einer guten Lebensqualität. Unsere positive Energie vervielfältigt sich und gemeinsam blicken wir nur noch nach vorne. Weltweit!",
       "headline": "Respektvolles Miteinander macht ALLES möglich."
     },
@@ -170,8 +170,8 @@
         "lastName": "Nachname",
         "mail": "E-Mail Adresse",
         "message": "Frag uns einfach …",
-        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unserer",
-        "privacyLinkLabel": "Datenschutzrichtlinie",
+        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unseren",
+        "privacyLinkLabel": "Datenschutzrichtlinien.",
         "submitBtn": "Absenden",
         "successMsg": "E-Mail gesendet",
         "topic": "Thema"
@@ -200,8 +200,8 @@
     }
   },
   "validation": {
-    "fieldNoEmail": "Dieses Feld muss eine Email-Adresse sein",
-    "fieldRequired": "Dieses Feld wird benötigt",
-    "fieldTooLong": "Dieses Feld ist zu lang"
+    "fieldNoEmail": "Dieses Feld muss eine Email-Adresse sein.",
+    "fieldRequired": "Dieses Feld wird benötigt.",
+    "fieldTooLong": "Dieses Feld ist zu lang."
   }
 }
