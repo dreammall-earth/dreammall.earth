@@ -17,12 +17,13 @@
       </v-col>
     </v-row>
     <v-row class="section-footer text-center">
-      <v-col align-self="center">
+      <v-col>
         <MainButton
           class="mt-8"
           :label="$t('home.section6.buttonText')"
           size="large"
           variant="primary"
+          href="/#contactname"
           >{{ $t('home.section6.buttonText') }}</MainButton
         >
       </v-col>
@@ -36,6 +37,8 @@ import MainButton from '#components/inputs/MainButton.vue'
 
 <style scoped lang="scss">
 .section6 {
+  max-width: 960px;
+
   .section-header {
     text-align: center;
 

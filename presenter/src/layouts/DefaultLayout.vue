@@ -1,5 +1,5 @@
 <template>
-  <v-main class="bg-grey-lighten-3">
+  <v-main class="main-layout">
     <v-container fluid class="pa-0">
       <v-row>
         <v-col v-if="slots.sidemenu" cols="2">
@@ -8,7 +8,7 @@
           </v-sheet>
         </v-col>
 
-        <v-col>
+        <v-col class="pa-0 pa-sm-1 pt-0">
           <slot />
         </v-col>
       </v-row>
@@ -24,3 +24,20 @@ import FooterMenu from '#components/menu/FooterMenu.vue'
 
 const slots = useSlots()
 </script>
+
+<style scoped lang="scss">
+.main-layout {
+  padding-top: 0;
+  padding-right: 0;
+  background: #f5f5f5;
+}
+</style>
+
+<style lang="scss">
+html {
+  scroll-behavior: smooth;
+
+  // fixed header offset
+  scroll-padding-top: 95px;
+}
+</style>

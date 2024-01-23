@@ -10,7 +10,7 @@ BUILD_DIR=$PROJECT_ROOT/build/docs
 cd $PROJECT_ROOT
 rm -R $BUILD_DIR
 
-export VUEPRESS_BASE=/docs/
+export VUEPRESS_BASE=docs
 
-npm install
+npm install --include=dev
 npm run docs:build

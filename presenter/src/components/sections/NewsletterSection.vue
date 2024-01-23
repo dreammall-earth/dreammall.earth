@@ -17,13 +17,13 @@
         </div>
       </v-col>
     </v-row>
-    <v-row class="mt-12" align="center">
-      <v-col cols="4">
+    <!-- <v-row class="mt-12" align="center">
+      <v-col cols="5">
         <h3 class="section-subheadline">
           {{ $t('home.newsletterSection.currentNewsletter') }}
         </h3>
       </v-col>
-      <v-col cols="8">
+      <v-col cols="7">
         <MainButton
           variant="download"
           size="auto"
@@ -34,21 +34,21 @@
         >
         </MainButton>
       </v-col>
-    </v-row>
+    </v-row> -->
   </div>
 </template>
 
 <script lang="ts" setup>
-import MainButton from '#components/inputs/MainButton.vue'
+// import MainButton from '#components/inputs/MainButton.vue'
 import NewsletterForm from '#components/inputs/NewsletterForm.vue'
 
 // TODO insert link to newest newsletter
-const newsletterDownloadPath = '#'
+// const newsletterDownloadPath = '#'
 </script>
 
 <style scoped lang="scss">
 .newsletter-section {
-  max-width: 1120px;
+  max-width: 650px;
 
   .section-header {
     text-align: center;

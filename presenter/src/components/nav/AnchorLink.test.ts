@@ -1,25 +1,39 @@
 import { mount } from '@vue/test-utils'
-import { describe, it, expect } from 'vitest'
+import { navigate } from 'vike/client/router'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 
 import AnchorLink from './AnchorLink.vue'
 
+vi.mock('vike/client/router')
+vi.mocked(navigate).mockResolvedValue()
+
 describe('AnchorLink', () => {
-  const wrapper = mount(AnchorLink, {
-    props: {
-      label: 'AnchorLink',
-      href: 'someAnchorOrUrl',
-    },
+  const Wrapper = () => {
+    return mount(AnchorLink, {
+      props: {
+        label: 'AnchorLink',
+        href: 'someAnchorOrUrl',
+      },
+    })
+  }
+
+  let wrapper: ReturnType<typeof Wrapper>
+
+  beforeEach(() => {
+    wrapper = Wrapper()
   })
 
   it('renders Node with href', () => {
-    expect(wrapper.find('a.v-btn').exists()).toBeTruthy()
+    expect(wrapper.element).toMatchSnapshot()
   })
 
-  it('sets href accordingly', () => {
-    expect(wrapper.find('a.v-btn').attributes('href')).toBe('someAnchorOrUrl')
-  })
+  describe('click on button', () => {
+    beforeEach(async () => {
+      await wrapper.find('a').trigger('click')
+    })
 
-  it('sets label accordingly', () => {
-    expect(wrapper.find('a.v-btn').text()).toBe('AnchorLink')
+    it('calls navigate', () => {
+      expect(navigate).toBeCalledWith('someAnchorOrUrl')
+    })
   })
 })

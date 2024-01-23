@@ -1,28 +1,30 @@
 <template>
-  <div class="">
-    <div class="section1 pt-4">
+  <div class="h-100">
+    <div class="section1 h-100">
       <v-carousel
         v-model="slide"
-        class="h-screen"
+        class="landing-slider"
         hide-delimiter-background
         show-arrows="hover"
         color="#ffffff"
-        theme="dark"
+        height="100%"
       >
-        <v-carousel-item>
-          <v-sheet>
+        <v-carousel-item id="intro-video-slide" class="video-item">
+          <v-sheet color="transparent" class="video-item h-100">
             <video
+              :key="videoSrc"
               ref="video"
-              class="video w-100"
-              :poster="VideoPoster"
-              controls
+              class="video w-100 h-100"
+              :poster="posterSrc"
               autoplay
               muted
               preload="auto"
               playsinline
               @ended="triggerNextSlide"
+              @click="playVideo"
             >
-              <source :src="Video" type="video/mp4" />
+              <source :src="videoSrc" type="video/mp4" />
+              <source :src="videoSrcAlt" type="video/webm" />
             </video>
           </v-sheet>
         </v-carousel-item>
@@ -44,6 +46,7 @@
               :label="$t('home.section1.preOrderBtn')"
               size="auto"
               variant="primary"
+              href="/#about"
               >{{ $t('home.section1.preOrderBtn') }}</MainButton
             >
           </v-sheet>
@@ -54,34 +57,61 @@
 </template>
 
 <script lang="ts" setup>
-/* EXAMPLE QUERY
-import { useQuery } from "@vue/apollo-composable"
-import gql from 'graphql-tag'
-const HELLO_QUERY = gql`
-  {
-    hello {
-      hello
-    }
-  }
-`
+import { onMounted, ref } from 'vue'
 
-const { result, loading, error } = useQuery(HELLO_QUERY)
-*/
-
-import { ref } from 'vue'
-
-import VideoPoster from '#assets/img/video_placeholder.png'
-import Video from '#assets/video/header_video.mp4'
+import VideoPosterMobile from '#assets/img/intro_thumbnail_hoch.jpg'
+import VideoPoster from '#assets/img/intro_thumbnail_quer.jpg'
+import VideoMobileMp4 from '#assets/video/intro_hoch.mp4'
+import VideoMobileWebm from '#assets/video/intro_hoch.webm'
+import VideoMp4 from '#assets/video/intro_quer.mp4'
+import VideoWebm from '#assets/video/intro_quer.webm'
 import MainButton from '#components/inputs/MainButton.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 
 const slide = ref(0)
+const video = ref<HTMLFormElement>()
+const videoSrc = ref('')
+const videoSrcAlt = ref('')
+const posterSrc = ref('')
+
+const mobileThreshold: number = 750
 
 defineExpose({ slide })
 
 function triggerNextSlide() {
   slide.value++
 }
+
+function playVideo() {
+  if (video.value && video.value.ended) {
+    video.value.play()
+  }
+}
+
+function isMobile() {
+  return window.innerWidth <= mobileThreshold
+}
+
+const videoSrcControl = {
+  setVideoSrc() {
+    if (isMobile()) {
+      videoSrc.value = VideoMobileMp4
+      videoSrcAlt.value = VideoMobileWebm
+      posterSrc.value = VideoPosterMobile
+    } else {
+      videoSrc.value = VideoMp4
+      videoSrcAlt.value = VideoWebm
+      posterSrc.value = VideoPoster
+    }
+  },
+}
+
+onMounted(() => {
+  videoSrcControl.setVideoSrc()
+  window.addEventListener('resize', () => {
+    videoSrcControl.setVideoSrc()
+  })
+})
 </script>
 
 <style scoped lang="scss">
@@ -105,19 +135,36 @@ function triggerNextSlide() {
   }
 
   .content-slide {
-    padding: 2rem;
+    padding: 4rem 2rem 2rem;
   }
 }
 </style>
 
 <style lang="scss">
 .section1 {
+  .v-carousel {
+    background: transparent;
+
+    .v-carousel-item {
+      &:first-child {
+        video {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          min-width: 100%;
+          min-height: 100%;
+          object-fit: fill;
+        }
+      }
+    }
+  }
+
   .v-window__controls {
     .v-btn {
       .v-btn__underlay {
-        background: rgb(255 255 255 / 15%);
-        backdrop-filter: blur(14px);
-        border-radius: 2.5rem;
+        // background: rgb(255 255 255 / 15%);
+        // backdrop-filter: blur(14px);
+        // border-radius: 2.5rem;
       }
     }
   }

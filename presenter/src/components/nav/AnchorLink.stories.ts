@@ -1,3 +1,5 @@
+import { SBComp } from '#types/SBComp'
+
 import AnchorLink from './AnchorLink.vue'
 
 import type { Meta, StoryObj } from '@storybook/vue3'
@@ -5,12 +7,16 @@ import type { Meta, StoryObj } from '@storybook/vue3'
 // More on how to set up stories at: https://storybook.js.org/docs/vue/writing-stories/introduction
 const meta = {
   title: 'Nav/AnchorLink',
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  component: AnchorLink,
+  component: AnchorLink as SBComp,
   // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/vue/writing-docs/autodocs
   tags: ['autodocs'],
-  argTypes: {},
-  args: {}, // default value
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['default', 'text'],
+    },
+  },
+  args: { variant: 'text' }, // default value
 } satisfies Meta<typeof AnchorLink>
 
 export default meta

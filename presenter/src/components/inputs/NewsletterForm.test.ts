@@ -1,86 +1,167 @@
-import { mount } from '@vue/test-utils'
-import { describe, it, expect } from 'vitest'
-import { h } from 'vue'
-import { VApp } from 'vuetify/components'
+import { mount, flushPromises } from '@vue/test-utils'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+
+import { subscribeToNewsletter } from '#mutations/subscribeToNewsletter'
+import { mockClient } from '#tests/mock.apolloClient'
 
 import NewsletterForm from './NewsletterForm.vue'
 
+const subscribeToNewsletterMutationMock = vi.fn()
+
 describe('NewsletterForm', () => {
-  const wrapper = mount(VApp, {
-    slots: {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      default: h(NewsletterForm),
-    },
+  const Wrapper = () => {
+    return mount(NewsletterForm)
+  }
+
+  mockClient.setRequestHandler(
+    subscribeToNewsletter,
+    subscribeToNewsletterMutationMock.mockResolvedValue({ data: { subscribeToNewsletter: true } }),
+  )
+
+  let wrapper: ReturnType<typeof Wrapper>
+
+  beforeEach(() => {
+    wrapper = Wrapper()
   })
 
   it('renders form', () => {
-    expect(wrapper.find('form').exists()).toBeTruthy()
+    expect(wrapper.element).toMatchSnapshot()
   })
 
-  describe('renders correct inputs', () => {
-    describe('firstname', () => {
-      it('has text input', () => {
-        expect(wrapper.find('input[name="firstname"][type="text"]').exists()).toBeTruthy()
+  describe('submit', () => {
+    describe('empty form', () => {
+      beforeEach(async () => {
+        await wrapper.find('form').trigger('submit.prevent')
+        await flushPromises()
       })
 
-      it('has label home.newsletterSection.newsletterForm.firstname', () => {
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[0].text()).toBe(
-          "$t('home.newsletterSection.newsletterForm.firstname')",
-        )
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[1].text()).toBe(
-          "$t('home.newsletterSection.newsletterForm.firstname')",
-        )
-      })
-    })
-
-    describe('email', () => {
-      it('has email input', () => {
-        expect(wrapper.find('input[name="email"][type="email"]').exists()).toBeTruthy()
+      it('shows errors for all 4 fields', () => {
+        const errorMessages = wrapper.findAll('.v-messages__message')
+        expect(errorMessages).toHaveLength(4)
+        // firstname
+        expect(errorMessages[0].text()).toBe('Dieses Feld wird benötigt.')
+        // lastname
+        expect(errorMessages[1].text()).toBe('Dieses Feld wird benötigt.')
+        // email
+        expect(errorMessages[2].text()).toBe('Dieses Feld wird benötigt.')
+        // checkbox
+        expect(errorMessages[3].text()).toBe("$t('validation.fieldRequired')")
       })
 
-      it('has label home.newsletterSection.newsletterForm.email', () => {
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[2].text()).toBe(
-          "$t('home.newsletterSection.newsletterForm.email')",
-        )
-        expect(wrapper.findAll('form .v-text-field:not(.v-textarea) label')[3].text()).toBe(
-          "$t('home.newsletterSection.newsletterForm.email')",
-        )
-      })
-    })
-
-    describe('dataprivacy', () => {
-      it('has checkbox input', () => {
-        expect(wrapper.find('input[type="checkbox"][name="dataprivacy"]').exists()).toBeTruthy()
+      it('user feedback not visible', () => {
+        expect(wrapper.find('span.info-text.form-success').exists()).toBe(false)
+        expect(wrapper.find('span.info-text.form-error').exists()).toBe(false)
       })
 
-      it('has label home.newsletterSection.newsletterForm.privacy & privacyLinkLabel', () => {
-        expect(wrapper.find('form .v-row .v-col span.newsletter-agb').text()).toBe(
-          "$t('home.newsletterSection.newsletterForm.privacy') $t('home.newsletterSection.newsletterForm.privacyLinkLabel')",
-        )
+      it('does not call the API', () => {
+        expect(subscribeToNewsletterMutationMock).not.toBeCalled()
       })
     })
-  })
 
-  describe('form submit', () => {
-    it('inputs not filled', async () => {
-      // form is empty not to be submitted
-      await wrapper.find('form').trigger('submit.prevent')
-      expect(wrapper.emitted()).toHaveProperty('submit')
-    })
+    describe('valid form', () => {
+      beforeEach(async () => {
+        vi.useFakeTimers()
+        await wrapper.find('input[name="firstname"]').setValue('Peter')
+        await wrapper.find('input[name="lastname"]').setValue('Lustig')
+        await wrapper.find('input[name="email"]').setValue('peter@lustig.de')
+        await wrapper.find('input[name="dataprivacy"]').setValue(true)
+      })
 
-    it('data privacy checkbox not checked', async () => {
-      // form not to be submitted
-      await wrapper.find('input[type=text][name="firstname"]').setValue('John')
-      await wrapper.find('input[type=email]').setValue('john@doe.com')
+      afterEach(() => {
+        vi.useRealTimers()
+      })
 
-      await wrapper.find('form').trigger('submit.prevent')
-      expect(wrapper.emitted()).toHaveProperty('submit')
-    })
+      describe('with success', () => {
+        beforeEach(async () => {
+          await wrapper.find('form').trigger('submit.prevent')
+          await flushPromises()
+        })
 
-    it('form is valid', async () => {
-      // form be submitted if inputs filled
-      await wrapper.find('input[type="checkbox"][name="dataprivacy"]').setValue()
-      expect(wrapper.emitted()).toHaveProperty('submit')
+        it('calls the API', () => {
+          expect(subscribeToNewsletterMutationMock).toBeCalledWith({
+            data: {
+              firstName: 'Peter',
+              lastName: 'Lustig',
+              email: 'peter@lustig.de',
+            },
+          })
+        })
+
+        it('resets the form', () => {
+          expect(wrapper.find('input[name="firstname"]').element).toHaveProperty('value', '')
+          expect(wrapper.find('input[name="lastname"]').element).toHaveProperty('value', '')
+          expect(wrapper.find('input[name="email"]').element).toHaveProperty('value', '')
+          expect(wrapper.find('input[name="dataprivacy"]').element).toHaveProperty('value', 'false')
+        })
+
+        describe('success message for user', () => {
+          it('shows message', () => {
+            expect(wrapper.find('span.info-text.form-success').exists()).toBe(true)
+
+            expect(wrapper.find('span.info-text.form-success').text()).toBe(
+              "$t('home.newsletterSection.newsletterForm.successMsg')",
+            )
+          })
+
+          describe('run timers', () => {
+            beforeEach(() => {
+              vi.runAllTimers()
+            })
+
+            it('does not show the message anymore', () => {
+              expect(wrapper.find('span.info-text.form-success').exists()).toBe(false)
+            })
+          })
+        })
+      })
+
+      describe('with error', () => {
+        beforeEach(async () => {
+          subscribeToNewsletterMutationMock.mockRejectedValue({ message: 'Ouch!' })
+          await wrapper.find('form').trigger('submit.prevent')
+          await flushPromises()
+        })
+
+        it('calls the API', () => {
+          expect(subscribeToNewsletterMutationMock).toBeCalledWith({
+            data: {
+              firstName: 'Peter',
+              lastName: 'Lustig',
+              email: 'peter@lustig.de',
+            },
+          })
+        })
+
+        it('does not reset the form', () => {
+          expect(wrapper.find('input[name="firstname"]').element).toHaveProperty('value', 'Peter')
+          expect(wrapper.find('input[name="email"]').element).toHaveProperty(
+            'value',
+            'peter@lustig.de',
+          )
+          expect(wrapper.find('input[name="lastname"]').element).toHaveProperty('value', 'Lustig')
+
+          expect(wrapper.find('input[name="dataprivacy"]').element).toHaveProperty('checked', true)
+        })
+
+        describe('error message for user', () => {
+          it('shows error message', () => {
+            expect(wrapper.find('span.info-text.form-error').exists()).toBe(true)
+            expect(wrapper.find('span.info-text.form-error').text()).toBe(
+              "$t('home.newsletterSection.newsletterForm.errorMsg')",
+            )
+          })
+
+          describe('run timers', () => {
+            beforeEach(() => {
+              vi.runAllTimers()
+            })
+
+            it('does not show the message anymore', () => {
+              expect(wrapper.find('span.info-text.form-error').exists()).toBe(false)
+            })
+          })
+        })
+      })
     })
   })
 })

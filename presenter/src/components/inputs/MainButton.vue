@@ -1,8 +1,21 @@
 <template>
-  <v-btn :class="classes" :size="size" @click="onClick">{{ label }}</v-btn>
+  <v-btn :color="setColor" :class="classes" :size="size" @click="onClick">
+    <v-icon v-if="props.variant === 'reload'" start class="reload-icon" icon="mdi-reload"></v-icon>
+    <span class="main-button-content"
+      >{{ label }}
+      <v-progress-circular
+        v-if="props.isLoading"
+        indeterminate="disable-shrink"
+        width="1"
+        size="15"
+        class="btn-loading"
+      ></v-progress-circular
+    ></span>
+  </v-btn>
 </template>
 
 <script lang="ts" setup>
+import { navigate } from 'vike/client/router'
 import { computed } from 'vue'
 
 const props = withDefaults(
@@ -11,16 +24,29 @@ const props = withDefaults(
      * The label of the button
      */
     label: string
+    href?: string
     /**
      * primary or secondary button
      */
-    variant?: 'primary' | 'secondary' | 'third' | 'third-inverse' | 'fourth' | 'submit' | 'download'
+    variant?:
+      | 'primary'
+      | 'secondary'
+      | 'third'
+      | 'third-inverse'
+      | 'fourth'
+      | 'submit'
+      | 'download'
+      | 'reload'
     /**
      * size of the button
      */
     size?: 'small' | 'medium' | 'large' | 'auto'
+    /**
+     * show loading animation
+     */
+    isLoading?: boolean
   }>(),
-  { variant: 'primary', size: 'medium' },
+  { href: undefined, variant: 'primary', size: 'medium', isLoading: false },
 )
 
 const emit = defineEmits<{
@@ -36,10 +62,34 @@ const classes = computed(() => ({
   'main-button--fourth': props.variant === 'fourth',
   'main-button--form-submit': props.variant === 'submit',
   'main-button--download': props.variant === 'download',
+  'main-button--reload': props.variant === 'reload',
   [`main-button-${props.size}`]: true,
 }))
 
+const setColor = computed(() => {
+  if (props.variant === 'secondary') {
+    return '#767676'
+  } else if (props.variant === 'third') {
+    return '#3d4753'
+  } else if (props.variant === 'third-inverse') {
+    return 'transparent'
+  } else if (props.variant === 'fourth') {
+    return '#2ca5b1'
+  } else if (props.variant === 'submit') {
+    return '#23ad5b'
+  } else if (props.variant === 'download') {
+    return '#009dd9'
+  } else if (props.variant === 'reload') {
+    return '#fff'
+  } else {
+    return '#f09630'
+  }
+})
+
 const onClick = () => {
+  if (props.href) {
+    navigate(props.href)
+  }
   emit('click', 1)
 }
 </script>
@@ -54,9 +104,16 @@ const onClick = () => {
   color: white;
   text-align: center;
   border-radius: 80px;
+  box-shadow: none;
 
   &--primary {
+    color: white !important;
     background-color: #f09630;
+  }
+
+  &--primary:hover {
+    background: linear-gradient(98deg, #f09630 8.53%, rgb(75 84 96 / 69%) 107.12%);
+    box-shadow: 0 6px 24px 0 rgb(64 74 86 / 20%);
   }
 
   &--secondary {
@@ -83,9 +140,46 @@ const onClick = () => {
     background-color: #2ca5b1;
   }
 
+  &--fourth:hover {
+    background: linear-gradient(98deg, #009dd9 8.53%, rgb(75 84 96 / 69%) 107.12%);
+    box-shadow: 0 6px 24px 0 rgb(64 74 86 / 20%);
+  }
+
   &--form-submit {
     background: #23ad5b;
     border-radius: 15px;
+  }
+
+  &--form-submit:hover {
+    background: linear-gradient(98deg, #23ad5b 8.53%, rgb(75 84 96 / 69%) 107.12%);
+    box-shadow: 0 6px 24px 0 rgb(64 74 86 / 20%);
+  }
+
+  &--reload {
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 110%; /* 1.1rem */
+    color: #bcbcbc;
+    background: #fff;
+    border: 1px solid #e3e3e3;
+    border-radius: 3.25rem;
+
+    .reload-icon {
+      padding-right: 16px;
+    }
+
+    &.main-button-small {
+      font-size: 70%;
+
+      .reload-icon {
+        padding-right: 0;
+      }
+    }
+  }
+
+  &--reload:hover {
+    color: #545454;
   }
 
   &--download {
@@ -93,20 +187,39 @@ const onClick = () => {
     border-radius: 15px;
   }
 
+  &--download:hover {
+    background: linear-gradient(98deg, #009dd9 8.53%, rgb(75 84 96 / 69%) 107.12%);
+    box-shadow: 0 6px 24px 0 rgb(64 74 86 / 20%);
+  }
+
   &-large {
     width: 16rem;
+    height: auto;
   }
 
   &-medium {
     width: 8rem;
+    height: auto;
   }
 
   &-small {
     width: 4rem;
+    height: auto !important;
+    font-size: 100%;
   }
 
   &-auto {
     width: auto;
+  }
+
+  .main-button-content {
+    position: relative;
+
+    .btn-loading {
+      position: absolute;
+      top: 4px;
+      right: -20px;
+    }
   }
 }
 </style>

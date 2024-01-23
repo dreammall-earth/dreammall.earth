@@ -11,16 +11,18 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "paths": {
-      "#root/*": ["./*"],
-      "#src/*": ["./src/*"],
       "#components/*": ["./src/components/*"],
       "#pages/*": ["./src/pages/*"],
       "#assets/*": ["./src/assets/*"],
       "#layouts/*": ["./src/layouts/*"],
       "#stores/*": ["./src/stores/*"],
+      "#mutations/*": ["./src/graphql/mutations/*"],
+      "#src/*": ["./src/*"],
       "#plugins/*": ["./renderer/plugins/*"],
       "#context/*": ["./renderer/context/*"],
-      "#types/*": ["./types/*"]
+      "#tests/*": ["./scripts/tests/*"],
+      "#types/*": ["./types/*"],
+      "#root/*": ["./*"]
     }
   },
   "ts-node": {
