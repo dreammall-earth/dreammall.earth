@@ -199,6 +199,15 @@
       "sitemap": "Sitemap"
     }
   },
+  "optin": {
+    "error": {
+      "link": "Erneut eintragen",
+      "text": "Bei der Bestätigung ist ein Fehler aufgetreten. Bitte trage dich erneut in den Newsletter ein."
+    },
+    "success": {
+      "text": "Du hast dein Newsletterabbonoment erfolgreich bestätigt. Du wirst in Kürze auf die Startseite weitergeleitet."
+    }
+  },
   "validation": {
     "fieldNoEmail": "Dieses Feld muss eine Email-Adresse sein",
     "fieldRequired": "Dieses Feld wird benötigt",

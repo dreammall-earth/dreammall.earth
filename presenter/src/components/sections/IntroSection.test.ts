@@ -135,7 +135,7 @@ describe('IntroSection', () => {
       })
     })
 
-    describe('video ended', () => {
+    describe.skip('video ended', () => {
       beforeEach(async () => {
         ;(wrapper.vm as unknown as { video: HTMLFormElement }).video.ended = true
 

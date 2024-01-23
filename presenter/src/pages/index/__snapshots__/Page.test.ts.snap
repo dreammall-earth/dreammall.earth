@@ -143,7 +143,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                       >
                         
                         <button
-                          arialabel="Vorheriges Bild"
+                          aria-label="Vorheriges Bild"
                           class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-elevated v-window__left"
                           type="button"
                         >
@@ -169,7 +169,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                           <!---->
                         </button>
                         <button
-                          arialabel="Nächstes Bild"
+                          aria-label="Nächstes Bild"
                           class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-elevated v-window__right"
                           type="button"
                         >
@@ -1808,7 +1808,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                         >
                           
                           <button
-                            arialabel="Vorheriges Bild"
+                            aria-label="Vorheriges Bild"
                             class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-elevated v-window__left"
                             type="button"
                           >
@@ -1834,7 +1834,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                             <!---->
                           </button>
                           <button
-                            arialabel="Nächstes Bild"
+                            aria-label="Nächstes Bild"
                             class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-elevated v-window__right"
                             type="button"
                           >

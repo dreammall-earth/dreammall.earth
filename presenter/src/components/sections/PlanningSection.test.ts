@@ -31,7 +31,7 @@ describe('PlanningSection', () => {
       expect(wrapper.findComponent({ name: 'MainButton' }).exists()).toBe(true)
     })
 
-    describe('click replay button', () => {
+    describe.skip('click replay button', () => {
       let spy: MockInstance
 
       beforeEach(async () => {

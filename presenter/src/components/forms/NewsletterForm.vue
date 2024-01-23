@@ -113,7 +113,7 @@ import { ref } from 'vue'
 
 import MainButton from '#components/buttons/MainButton.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
-import { subscribeToNewsletterMutation } from '#mutations/subscribeToNewsletterMutation'
+import { subscribeToNewsletter } from '#mutations/subscribeToNewsletter'
 import { nameRules, emailRules } from '#src/validation/validation'
 
 const firstname = ref('')
@@ -128,7 +128,7 @@ const showInfoTime: number = 5000
 
 const form = ref<HTMLFormElement>()
 
-const { mutate: sendSubscribeToNewsletter } = useMutation(subscribeToNewsletterMutation)
+const { mutate: sendSubscribeToNewsletter } = useMutation(subscribeToNewsletter)
 
 // submit form with data
 async function submitForm() {

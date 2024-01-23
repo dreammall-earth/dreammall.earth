@@ -148,7 +148,7 @@ import { ref } from 'vue'
 
 import MainButton from '#components/buttons/MainButton.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
-import { createContactFormMutation } from '#mutations/createContactForm'
+import { createContactForm } from '#mutations/createContactForm'
 import { nameRules, messageRules, emailRules } from '#src/validation/validation'
 
 const firstname = ref('')
@@ -164,7 +164,7 @@ const showInfoTime: number = 5000
 
 const form = ref<HTMLFormElement>()
 
-const { mutate: sendContactForm } = useMutation(createContactFormMutation)
+const { mutate: sendContactForm } = useMutation(createContactForm)
 
 async function submitForm() {
   const isValid = await form.value?.validate()

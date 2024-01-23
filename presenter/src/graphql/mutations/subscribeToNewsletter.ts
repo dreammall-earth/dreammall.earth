@@ -1,6 +1,6 @@
 import { gql } from 'graphql-tag'
 
-export const subscribeToNewsletterMutation = gql`
+export const subscribeToNewsletter = gql`
   mutation subscribeToNewsletter($data: SubscribeToNewsletterInput!) {
     subscribeToNewsletter(subscribeToNewsletterData: $data)
   }
