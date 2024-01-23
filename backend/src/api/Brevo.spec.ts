@@ -22,7 +22,7 @@ const mockSendTransacEmail = jest.fn().mockResolvedValue({
 const mockSetApiKey = jest.fn()
 
 const mockCreateContact = jest.fn().mockResolvedValue({
-  response: { statusCode: 200 },
+  response: { statusCode: 201 },
 })
 
 const code = '1234567890abcdef'
@@ -546,7 +546,7 @@ describe('Brevo', () => {
         beforeAll(() => {
           mockCreateContact.mockResolvedValue({
             response: {
-              statusCode: 200,
+              statusCode: 201,
             },
           })
         })

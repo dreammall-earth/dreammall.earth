@@ -196,7 +196,7 @@ export const confirmNewsletter = async (code: string): Promise<boolean> => {
 
   try {
     const brevoResult = await apiInstance.createContact(contact)
-    if (brevoResult.response.statusCode === 200) {
+    if (brevoResult.response.statusCode === 201 || brevoResult.response.statusCode === 204) {
       const brevoSuccessDate = new Date()
       await prisma.newsletterPreOptIn.update({
         where: { id: optin.id },
