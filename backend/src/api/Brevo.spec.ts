@@ -17,7 +17,7 @@ CONFIG.BREVO_NEWSLETTER_TEMPLATE_OPTIN = 3
 CONFIG.BREVO_NEWSLETTER_LIST = 3
 
 const mockSendTransacEmail = jest.fn().mockResolvedValue({
-  response: { statusCode: 200 },
+  response: { statusCode: 201 },
 })
 const mockSetApiKey = jest.fn()
 
@@ -81,7 +81,7 @@ describe('Brevo', () => {
           mockSendTransacEmail
             .mockResolvedValueOnce({
               response: {
-                statusCode: 200,
+                statusCode: 201,
               },
             })
             .mockRejectedValue({
@@ -122,7 +122,7 @@ describe('Brevo', () => {
         beforeAll(() => {
           mockSendTransacEmail.mockResolvedValue({
             response: {
-              statusCode: 200,
+              statusCode: 201,
             },
           })
         })
@@ -344,7 +344,7 @@ describe('Brevo', () => {
           jest.clearAllMocks()
           mockSendTransacEmail.mockResolvedValue({
             response: {
-              statusCode: 200,
+              statusCode: 201,
             },
           })
         })
@@ -373,7 +373,7 @@ describe('Brevo', () => {
           jest.clearAllMocks()
           mockSendTransacEmail.mockResolvedValue({
             response: {
-              statusCode: 200,
+              statusCode: 201,
             },
           })
         })

@@ -153,7 +153,7 @@ export const subscribeToNewsletter = async (
 
   try {
     const brevoResult = await apiInstance.sendTransacEmail(smtpEmailToClient)
-    if (brevoResult.response.statusCode === 200) {
+    if (brevoResult.response.statusCode === 201 || brevoResult.response.statusCode === 202) {
       await prisma.newsletterPreOptIn.update({
         where: { id: params.id },
         data: { brevoSuccessMail: new Date() },
