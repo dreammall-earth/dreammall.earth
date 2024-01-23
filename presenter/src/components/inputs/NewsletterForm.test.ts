@@ -1,29 +1,20 @@
-import { DefaultApolloClient } from '@vue/apollo-composable'
 import { mount, flushPromises } from '@vue/test-utils'
-import { createMockClient } from 'mock-apollo-client'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 
-import { subscribeToNewsletterMutation } from '#mutations/subscribeToNewsletterMutation'
+import { subscribeToNewsletter } from '#mutations/subscribeToNewsletter'
+import { mockClient } from '#tests/mock.apolloClient'
 
 import NewsletterForm from './NewsletterForm.vue'
-
-const mockClient = createMockClient()
 
 const subscribeToNewsletterMutationMock = vi.fn()
 
 describe('NewsletterForm', () => {
   const Wrapper = () => {
-    return mount(NewsletterForm, {
-      global: {
-        provide: {
-          [DefaultApolloClient]: mockClient,
-        },
-      },
-    })
+    return mount(NewsletterForm)
   }
 
   mockClient.setRequestHandler(
-    subscribeToNewsletterMutation,
+    subscribeToNewsletter,
     subscribeToNewsletterMutationMock.mockResolvedValue({ data: { subscribeToNewsletter: true } }),
   )
 
