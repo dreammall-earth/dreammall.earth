@@ -93,29 +93,23 @@ import slide3Icon3 from '#assets/img/slides/slide3-search.svg'
 </script>
 
 <style scoped lang="scss">
-$mobile: 500px;
-$tablet: 960px;
+@import '#root/src/assets/scss/style';
 
 .section5 {
-  max-width: 1120px;
+  max-width: $page-max-width;
 
   .section-header {
     text-align: center;
 
     h2.section-headline {
-      font-family: Poppins, sans-serif;
-      font-size: 2.25rem;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      letter-spacing: -0.045rem;
+      @include section-content-headline-font;
 
       .prepend {
-        color: #f09630;
+        color: $primary-color;
       }
 
       .append {
-        color: #383838;
+        color: $font-color-dark;
 
         @media screen and (max-width: $tablet) {
           white-space: nowrap;
@@ -365,14 +359,11 @@ $tablet: 960px;
   }
 
   .slide-headline {
+    @include slide-headline-font;
+
     position: absolute;
-    font-family: Poppins, sans-serif;
-    font-size: 1.625rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 125%;
     text-align: center;
-    background: linear-gradient(264deg, #35a3aa 28.43%, #e47a24 72.25%);
+    background: linear-gradient(264deg, $color-blue-100 28.43%, $color-orange 72.25%);
     -webkit-background-clip: text; /* stylelint-disable-line */
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -400,13 +391,10 @@ $tablet: 960px;
   }
 
   .slide-subheadline {
+    @include slide-headline-font;
+
     position: absolute;
-    font-family: Poppins, sans-serif;
-    font-size: 1.625rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 125%; /* 2.03125rem */
-    color: #383838;
+    color: $font-color-dark;
     text-align: center;
     text-transform: capitalize;
 

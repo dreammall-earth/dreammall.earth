@@ -54,24 +54,20 @@ import LogoImage from './LogoImage.vue'
 </script>
 
 <style scoped lang="scss">
-$mobile: 500px;
+@import '#root/src/assets/scss/style';
 
 .gradient-bg {
   width: 100%;
   height: 10px;
-  background: linear-gradient(98.77deg, #3095d4 0%, rgb(249 196 81 / 55%) 99.16%);
+  background: linear-gradient(98.77deg, $secondary-color 0%, $secondary-color-transition 99.16%);
 }
 
 .footer {
-  max-width: 1200px;
+  max-width: $footer-max-width;
 }
 
 .footer-header {
-  font-family: Poppins, sans-serif;
-  font-size: 1.623rem;
-  font-weight: 600;
-  line-height: 2rem;
-  color: #3d4753;
+  @include footer-font;
 
   @media screen and (max-width: $mobile) {
     font-size: 130%;

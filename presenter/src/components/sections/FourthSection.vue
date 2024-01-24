@@ -98,24 +98,23 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-$mobile: 500px;
-$tablet: 960px;
+@import '#root/src/assets/scss/style';
 
 .section4 {
-  max-width: 1140px;
-  background: #f5f5f5;
+  max-width: $section-max-width;
+  background: $background-color-primary;
 
   .section-header {
     text-align: center;
 
     h2.section-headline {
-      font-family: Poppins, sans-serif;
-      font-size: 2.25rem;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      letter-spacing: -0.045rem;
-      background: linear-gradient(255deg, #2ca5b1 23.75%, #e47a24 66.34%);
+      @include section-content-headline;
+
+      background: linear-gradient(
+        255deg,
+        $font-color-headline-transition-start 23.75%,
+        $font-color-headline-transition-end 66.34%
+      );
       -webkit-background-clip: text; /* stylelint-disable-line */
       background-clip: text;
       -webkit-text-fill-color: transparent;
