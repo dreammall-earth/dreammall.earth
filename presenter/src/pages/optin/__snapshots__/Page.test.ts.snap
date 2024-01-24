@@ -1223,7 +1223,7 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                                     name="dataprivacy"
                                     required=""
                                     type="checkbox"
-                                    value="false"
+                                    value="true"
                                   />
                                   
                                 </div>
@@ -2573,7 +2573,7 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                                     name="dataprivacy"
                                     required=""
                                     type="checkbox"
-                                    value="false"
+                                    value="true"
                                   />
                                   
                                 </div>
@@ -3887,7 +3887,7 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                                     name="dataprivacy"
                                     required=""
                                     type="checkbox"
-                                    value="false"
+                                    value="true"
                                   />
                                   
                                 </div>
