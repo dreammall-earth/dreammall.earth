@@ -41,26 +41,26 @@ exports[`NewsletterSection > renders 1`] = `
       >
         <div
           class="v-sheet v-theme--light bg-transparent"
+          data-v-6ce24624=""
           data-v-7fdfb879=""
-          data-v-81cc7c1c=""
         >
           <form
             class="v-form newsletter-form"
-            data-v-81cc7c1c=""
+            data-v-6ce24624=""
             novalidate=""
           >
             
             <div
               class="v-row"
-              data-v-81cc7c1c=""
+              data-v-6ce24624=""
             >
               <div
                 class="v-col-sm-6 v-col-12"
-                data-v-81cc7c1c=""
+                data-v-6ce24624=""
               >
                 <div
                   class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-locale--is-ltr v-text-field newsletter-text"
-                  data-v-81cc7c1c=""
+                  data-v-6ce24624=""
                 >
                   <!---->
                   <div
@@ -171,11 +171,11 @@ exports[`NewsletterSection > renders 1`] = `
               </div>
               <div
                 class="v-col-sm-6 v-col-12"
-                data-v-81cc7c1c=""
+                data-v-6ce24624=""
               >
                 <div
                   class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-locale--is-ltr v-text-field newsletter-text"
-                  data-v-81cc7c1c=""
+                  data-v-6ce24624=""
                 >
                   <!---->
                   <div
@@ -287,15 +287,15 @@ exports[`NewsletterSection > renders 1`] = `
             </div>
             <div
               class="v-row"
-              data-v-81cc7c1c=""
+              data-v-6ce24624=""
             >
               <div
                 class="v-col-sm-6 v-col-12"
-                data-v-81cc7c1c=""
+                data-v-6ce24624=""
               >
                 <div
                   class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-locale--is-ltr v-text-field newsletter-text"
-                  data-v-81cc7c1c=""
+                  data-v-6ce24624=""
                 >
                   <!---->
                   <div
@@ -406,12 +406,12 @@ exports[`NewsletterSection > renders 1`] = `
               </div>
               <div
                 class="v-col-sm-6 d-flex align-center v-col-12"
-                data-v-81cc7c1c=""
+                data-v-6ce24624=""
               >
                 <button
                   class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--form-submit main-button-auto w-100"
-                  data-v-81cc7c1c=""
-                  data-v-9518dada=""
+                  data-v-2b63c1fe=""
+                  data-v-6ce24624=""
                   style="background-color: #23ad5b; color: #fff; caret-color: #fff; height: auto; width: auto;"
                   type="submit"
                 >
@@ -433,7 +433,7 @@ exports[`NewsletterSection > renders 1`] = `
                     <!--v-if-->
                     <span
                       class="main-button-content"
-                      data-v-9518dada=""
+                      data-v-2b63c1fe=""
                     >
                       $t('home.newsletterSection.newsletterForm.submitBtn') 
                       <!--v-if-->
@@ -448,15 +448,15 @@ exports[`NewsletterSection > renders 1`] = `
             </div>
             <div
               class="v-row"
-              data-v-81cc7c1c=""
+              data-v-6ce24624=""
             >
               <div
                 class="v-col v-col-12 d-flex align-start"
-                data-v-81cc7c1c=""
+                data-v-6ce24624=""
               >
                 <div
                   class="v-input v-input--horizontal v-input--density-compact v-locale--is-ltr v-input--dirty v-checkbox"
-                  data-v-81cc7c1c=""
+                  data-v-6ce24624=""
                 >
                   <!---->
                   <div
@@ -499,13 +499,13 @@ exports[`NewsletterSection > renders 1`] = `
                 </div>
                 <span
                   class="ml-6 ml-sm-4 pt-2 newsletter-dataprivacy"
-                  data-v-81cc7c1c=""
+                  data-v-6ce24624=""
                 >
                   $t('home.newsletterSection.newsletterForm.privacy') 
                   <a
                     class="v-btn v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-plain anchor-link anchor-link--text dataprivacy-link"
                     data-v-1925b644=""
-                    data-v-81cc7c1c=""
+                    data-v-6ce24624=""
                     href="/datenschutz"
                   >
                     
@@ -535,16 +535,16 @@ exports[`NewsletterSection > renders 1`] = `
             </div>
             <div
               class="v-row align-content-center mt-0"
-              data-v-81cc7c1c=""
+              data-v-6ce24624=""
             >
               <div
                 class="v-col pt-0"
-                data-v-81cc7c1c=""
+                data-v-6ce24624=""
               >
                 <transition-group-stub
                   appear="false"
                   css="true"
-                  data-v-81cc7c1c=""
+                  data-v-6ce24624=""
                   persisted="false"
                 >
                   <!--v-if-->

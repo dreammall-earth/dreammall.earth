@@ -47,10 +47,9 @@
 </template>
 
 <script lang="ts" setup>
-import ContactForm from '#components/inputs/ContactForm.vue'
+import ContactForm from '#components/forms/ContactForm.vue'
+import LogoImage from '#components/LogoImage.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
-
-import LogoImage from './LogoImage.vue'
 </script>
 
 <style scoped lang="scss">

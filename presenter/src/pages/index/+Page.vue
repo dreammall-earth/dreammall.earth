@@ -1,38 +1,38 @@
 <template>
   <DefaultLayout class="index-page">
-    <div id="section1" class="mb-4">
-      <Section1 />
+    <div id="intro-section" class="mb-4">
+      <IntroSection />
     </div>
     <div id="about" class="py-16 px-4 d-flex justify-center">
-      <Section2 />
+      <AboutSection />
     </div>
     <div id="products" class="py-16 px-4">
-      <Section3 />
+      <ProductsSection />
     </div>
     <div id="planning-section" class="py-16 px-4">
-      <Section4 />
+      <PlanningSection />
     </div>
     <div id="newsletter-section" class="py-16 px-4">
       <NewsletterSection />
     </div>
     <div id="coffee-section" class="py-16 px-4">
-      <Section5 />
+      <CoffeeSection />
     </div>
-    <div id="section6" class="py-16 px-4">
-      <Section6 />
+    <div id="cta-section" class="py-16 px-4">
+      <CallToActionSection />
     </div>
   </DefaultLayout>
 </template>
 
 <script lang="ts" setup>
 import DefaultLayout from '#layouts/DefaultLayout.vue'
-import Section5 from '#root/src/components/sections/FifthSection.vue'
-import Section1 from '#root/src/components/sections/FirstSection.vue'
-import Section4 from '#root/src/components/sections/FourthSection.vue'
+import AboutSection from '#root/src/components/sections/AboutSection.vue'
+import CallToActionSection from '#root/src/components/sections/CallToActionSection.vue'
+import CoffeeSection from '#root/src/components/sections/CoffeeSection.vue'
+import IntroSection from '#root/src/components/sections/IntroSection.vue'
 import NewsletterSection from '#root/src/components/sections/NewsletterSection.vue'
-import Section2 from '#root/src/components/sections/SecondSection.vue'
-import Section6 from '#root/src/components/sections/SixthSection.vue'
-import Section3 from '#root/src/components/sections/ThirdSection.vue'
+import PlanningSection from '#root/src/components/sections/PlanningSection.vue'
+import ProductsSection from '#root/src/components/sections/ProductsSection.vue'
 </script>
 
 <style scoped lang="scss">
@@ -42,7 +42,7 @@ import Section3 from '#root/src/components/sections/ThirdSection.vue'
   overflow: hidden;
   background: $background-color-primary;
 
-  #section1 {
+  #intro-section {
     // fix for vuetify negative margin
     height: calc(100vh + 12px);
   }

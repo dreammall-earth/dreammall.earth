@@ -39,8 +39,8 @@
 </template>
 
 <script lang="ts" setup>
-// import MainButton from '#components/inputs/MainButton.vue'
-import NewsletterForm from '#components/inputs/NewsletterForm.vue'
+// import MainButton from '#components/buttons/MainButton.vue'
+import NewsletterForm from '#components/forms/NewsletterForm.vue'
 
 // TODO insert link to newest newsletter
 // const newsletterDownloadPath = '#'

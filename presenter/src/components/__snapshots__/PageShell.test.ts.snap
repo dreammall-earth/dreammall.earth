@@ -10,11 +10,11 @@ exports[`PageShell > renders 1`] = `
     
     <div
       class="topmenu"
-      data-v-e787b5f9=""
+      data-v-5e2a2776=""
     >
       <header
         class="v-toolbar v-toolbar--flat v-toolbar--density-default v-theme--light v-locale--is-ltr v-app-bar"
-        data-v-e787b5f9=""
+        data-v-5e2a2776=""
         style="top: 0px; z-index: 1006; transform: translateY(0%); position: fixed; background-color: #f5f5f5; color: #000; caret-color: #000; left: 0px; width: calc(100% - 0px - 0px);"
       >
         <!---->
@@ -28,21 +28,21 @@ exports[`PageShell > renders 1`] = `
           
           <div
             class="v-row"
-            data-v-e787b5f9=""
+            data-v-5e2a2776=""
           >
             <div
               class="v-col d-flex align-center"
-              data-v-e787b5f9=""
+              data-v-5e2a2776=""
             >
               <a
                 class="w-100 ml-8"
-                data-v-e787b5f9=""
+                data-v-5e2a2776=""
                 href="/"
               >
                 <div
                   class="v-responsive v-img v-img--booting w-100 logo-medium"
-                  data-v-e787b5f9=""
-                  data-v-f6be2607=""
+                  data-v-5e2a2776=""
+                  data-v-916aa5dc=""
                 >
                   <div
                     class="v-responsive__sizer"
@@ -80,13 +80,13 @@ exports[`PageShell > renders 1`] = `
             </div>
             <div
               class="v-col d-none d-md-flex align-center justify-center grow"
-              data-v-e787b5f9=""
+              data-v-5e2a2776=""
             >
               <!-- TODO same as below: refactor -->
               <a
                 class="v-btn v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-plain anchor-link mx-4"
                 data-v-1925b644=""
-                data-v-e787b5f9=""
+                data-v-5e2a2776=""
                 href="/#about"
               >
                 
@@ -114,7 +114,7 @@ exports[`PageShell > renders 1`] = `
               <a
                 class="v-btn v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-plain anchor-link mx-4"
                 data-v-1925b644=""
-                data-v-e787b5f9=""
+                data-v-5e2a2776=""
                 href="/#products"
               >
                 
@@ -142,7 +142,7 @@ exports[`PageShell > renders 1`] = `
               <a
                 class="v-btn v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-plain anchor-link mx-4"
                 data-v-1925b644=""
-                data-v-e787b5f9=""
+                data-v-5e2a2776=""
                 href="/#contactname"
               >
                 
@@ -170,15 +170,15 @@ exports[`PageShell > renders 1`] = `
             </div>
             <div
               class="v-col d-flex"
-              data-v-e787b5f9=""
+              data-v-5e2a2776=""
             >
               <div
                 class="d-flex d-md-none align-center justify-end w-100 mr-8"
-                data-v-e787b5f9=""
+                data-v-5e2a2776=""
               >
                 <div
                   class="v-responsive v-img v-img--booting mobile-menu-icon w-100"
-                  data-v-e787b5f9=""
+                  data-v-5e2a2776=""
                 >
                   <div
                     class="v-responsive__sizer"
@@ -233,7 +233,7 @@ exports[`PageShell > renders 1`] = `
       
       <nav
         class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile nav-drawer d-flex d-md-none"
-        data-v-e787b5f9=""
+        data-v-5e2a2776=""
         style="background-color: #f5f5f5; color: #000; caret-color: #000; right: 0px; z-index: 1004; transform: translateX(110%); position: fixed; height: calc(100% - 64px - 0px); top: 64px; bottom: 0px; width: 256px;"
       >
         <!---->
@@ -244,13 +244,13 @@ exports[`PageShell > renders 1`] = `
           
           <div
             class="d-flex flex-column py-8"
-            data-v-e787b5f9=""
+            data-v-5e2a2776=""
           >
             <!-- TODO same as above: refactor -->
             <a
               class="v-btn v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-plain anchor-link ma-4"
               data-v-1925b644=""
-              data-v-e787b5f9=""
+              data-v-5e2a2776=""
               href="/#about"
             >
               
@@ -278,7 +278,7 @@ exports[`PageShell > renders 1`] = `
             <a
               class="v-btn v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-plain anchor-link ma-4"
               data-v-1925b644=""
-              data-v-e787b5f9=""
+              data-v-5e2a2776=""
               href="/#products"
             >
               
@@ -306,7 +306,7 @@ exports[`PageShell > renders 1`] = `
             <a
               class="v-btn v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-plain anchor-link ma-4"
               data-v-1925b644=""
-              data-v-e787b5f9=""
+              data-v-5e2a2776=""
               href="/#contactname"
             >
               
