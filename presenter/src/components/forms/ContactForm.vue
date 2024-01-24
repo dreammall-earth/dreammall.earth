@@ -70,7 +70,7 @@
       </v-row>
       <v-row class="mt-0">
         <v-col class="d-flex align-start">
-          <DataPrivacyCheckbox></DataPrivacyCheckbox>
+          <DataPrivacyCheckbox />
           <span class="ml-6 ml-sm-4 pt-2 contact-dataprivacy"
             >{{ $t('menu.footer.contactForm.privacy') }}
             <AnchorLink

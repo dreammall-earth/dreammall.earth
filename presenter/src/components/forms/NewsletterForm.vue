@@ -46,7 +46,7 @@
 
       <v-row>
         <v-col cols="12" class="d-flex align-start">
-          <DataPrivacyCheckbox></DataPrivacyCheckbox>
+          <DataPrivacyCheckbox />
           <span class="ml-6 ml-sm-4 pt-2 newsletter-dataprivacy"
             >{{ $t('home.newsletterSection.newsletterForm.privacy') }}
             <AnchorLink
