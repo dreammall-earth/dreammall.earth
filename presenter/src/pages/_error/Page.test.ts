@@ -15,7 +15,7 @@ describe('ErrorPage', () => {
   })
 
   it('title returns correct title', () => {
-    expect(title).toBe('DreamMall | Error')
+    expect(title).toBe('DreamMall | Fehler')
   })
 
   describe('no is404 property set', () => {

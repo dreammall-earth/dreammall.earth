@@ -1,1 +1,1 @@
-export const title = 'DreamMall | Error'
+export const title = 'DreamMall | Fehler'
