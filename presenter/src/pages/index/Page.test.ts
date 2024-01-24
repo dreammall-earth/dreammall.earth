@@ -3,12 +3,8 @@ import { describe, it, expect } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { setupIntersectionObserverMock } from '#root/scripts/tests/mock.IntersectionObserver'
-
 import IndexPage from './+Page.vue'
 import { title } from './+title'
-
-setupIntersectionObserverMock()
 
 describe('IndexPage', () => {
   const wrapper = mount(VApp, {

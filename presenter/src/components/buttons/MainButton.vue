@@ -95,9 +95,11 @@ const onClick = () => {
 </script>
 
 <style scoped lang="scss">
+@import '#root/src/assets/scss/style';
+
 .main-button {
   padding: 12px 39px;
-  font-family: Poppins, sans-serif;
+  font-family: $font-family-default;
   font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.6rem;
@@ -108,51 +110,60 @@ const onClick = () => {
 
   &--primary {
     color: white !important;
-    background-color: #f09630;
+    background-color: $main-button-primary-background;
   }
 
   &--primary:hover {
-    background: linear-gradient(98deg, #f09630 8.53%, rgb(75 84 96 / 69%) 107.12%);
-    box-shadow: 0 6px 24px 0 rgb(64 74 86 / 20%);
+    @include linear-gradient-btn-hover($primary-color, $primary-color-transition);
+
+    box-shadow: 0 6px 24px 0 $main-button-primary-shadow;
   }
 
   &--secondary {
-    color: #767676;
-    background-color: #fff;
+    color: $main-button-secondary-color;
+    background-color: $main-button-secondary-bg;
   }
 
   &--third {
     padding: 8px 38px;
-    background-color: #3d4753;
+    background-color: $main-button-third-bg;
     border-radius: 10px;
   }
 
   &--third-inverse {
     padding: 8px 38px;
-    color: #3d4753;
+    color: $font-color-default;
     background-color: transparent;
-    border: 1px solid #3d4753;
+    border: 1px solid $font-color-default;
     border-radius: 10px;
   }
 
   &--fourth {
     padding: 0.75rem 2.4375rem;
-    background-color: #2ca5b1;
+    background-color: $main-button-fourth-bg;
   }
 
   &--fourth:hover {
-    background: linear-gradient(98deg, #009dd9 8.53%, rgb(75 84 96 / 69%) 107.12%);
-    box-shadow: 0 6px 24px 0 rgb(64 74 86 / 20%);
+    @include linear-gradient-btn-hover(
+      $main-button-fourth-bg-hover-transition-start,
+      $main-button-fourth-bg-hover-transition-end
+    );
+
+    box-shadow: 0 6px 24px 0 $main-button-primary-shadow;
   }
 
   &--form-submit {
-    background: #23ad5b;
+    background: $main-button-submit-bg;
     border-radius: 15px;
   }
 
   &--form-submit:hover {
-    background: linear-gradient(98deg, #23ad5b 8.53%, rgb(75 84 96 / 69%) 107.12%);
-    box-shadow: 0 6px 24px 0 rgb(64 74 86 / 20%);
+    @include linear-gradient-btn-hover(
+      $main-button-submit-bg-hover-transition-start,
+      $main-button-submit-bg-hover-transition-end
+    );
+
+    box-shadow: 0 6px 24px 0 $main-button-primary-shadow;
   }
 
   &--reload {
@@ -161,7 +172,7 @@ const onClick = () => {
     font-weight: 400;
     line-height: 110%; /* 1.1rem */
     color: #bcbcbc;
-    background: #fff;
+    background: $background-color-alt;
     border: 1px solid #e3e3e3;
     border-radius: 3.25rem;
 
@@ -183,13 +194,17 @@ const onClick = () => {
   }
 
   &--download {
-    background: #009dd9;
+    background: $main-button-download-bg;
     border-radius: 15px;
   }
 
   &--download:hover {
-    background: linear-gradient(98deg, #009dd9 8.53%, rgb(75 84 96 / 69%) 107.12%);
-    box-shadow: 0 6px 24px 0 rgb(64 74 86 / 20%);
+    @include linear-gradient-btn-hover(
+      $main-button-download-bg-hover-transition-start,
+      $main-button-download-bg-hover-transition-end
+    );
+
+    box-shadow: 0 6px 24px 0 $main-button-primary-shadow;
   }
 
   &-large {

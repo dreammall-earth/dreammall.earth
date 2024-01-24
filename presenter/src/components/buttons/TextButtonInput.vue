@@ -46,11 +46,9 @@ const onClick = () => {
 </script>
 
 <style lang="scss">
+@import '#root/src/assets/scss/style';
+
 .custom-font .v-field__field {
-  font-family: Poppins, sans-serif;
-  font-size: 1.25rem;
-  font-weight: 300;
-  line-height: 1.7rem;
-  color: #3d4753 !important;
+  @include text-font-base;
 }
 </style>

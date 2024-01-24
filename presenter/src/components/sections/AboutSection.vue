@@ -63,22 +63,16 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-$mobile: 500px;
-$tablet: 960px;
+@import '#root/src/assets/scss/style';
 
 .about-section {
-  max-width: 1440px;
+  max-width: $section-max-width-big;
   min-height: 50rem;
-  color: #3d4753;
-  background: #fff;
+  color: $font-color-default;
+  background: $background-color-alt;
 
   h2.section-headline {
-    font-family: Poppins, sans-serif;
-    font-size: 3.875rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 120%;
-    text-transform: capitalize;
+    @include text-font-headline;
 
     @media screen and (max-width: $mobile) {
       font-size: 3rem;
@@ -114,21 +108,10 @@ $tablet: 960px;
       align-items: center;
       padding-top: 3em;
     }
-
-    @media screen and (max-width: $mobile) {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 3em;
-    }
   }
 
   .section-content {
-    font-family: Poppins, sans-serif;
-    font-size: 1.25rem;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
+    @include section-content-font;
 
     @media screen and (max-width: $mobile) {
       padding: 10px;

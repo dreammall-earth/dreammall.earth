@@ -1,0 +1,111 @@
+// fonts
+@mixin text-font-base($test-input-color: $font-color-default) {
+    font-family: $font-family-default;
+    font-size: $font-size-default;
+    font-weight: $font-weight-small;
+    line-height: $line-height-default;
+    color: $test-input-color !important;
+}
+
+@mixin text-font-small($font-color-checkbox: $font-color-default) {
+    font-family: $font-family-default;
+    font-size: $font-size-small;
+    font-style: $font-style-normal;
+    font-weight: $font-weight-small;
+    line-height: $line-height-normal;
+    color: $font-color-checkbox;
+}
+
+@mixin form-info-font() {
+    font-family: $font-family-default;
+    font-size: $font-size-default;
+    font-style: $font-style-normal;
+    font-weight: $font-weight-base;
+    line-height: $line-height-normal;
+}
+
+@mixin footer-font() {
+    font-family: $font-family-default;
+    font-size: $font-size-footer;
+    font-weight: $font-weight-large;
+    line-height: $line-height-x-large;
+    color: $font-color-default;
+}
+
+@mixin anchor-font() {
+    font-family: $font-family-default;
+    font-size: $font-size-default;
+    font-weight: $font-weight-small;
+    line-height: $line-height-large;
+    color: $font-color-default;
+}
+
+
+@mixin text-font-headline(){
+    font-family: $font-family-default;
+    font-size: $font-size-headline;
+    font-style: $font-style-normal;
+    font-weight: $font-weight-x-large;
+    line-height: $line-height-larger;
+    text-transform: $text-transform-capitalize;
+}
+
+@mixin slide-headline-font(){
+    font-family: $font-family-default;
+    font-size: $font-size-large;
+    font-style: $font-style-normal;
+    font-weight: $font-weight-large;
+    line-height: $line-height-x-larger;
+}
+
+@mixin section-content-headline-font() {
+    font-family: $font-family-default;
+    font-size: $font-size-x-large;
+    font-style: $font-style-normal;
+    font-weight: $font-weight-x-large;
+    line-height: $line-height-normal;
+    letter-spacing: $letter-spacing-negative-small;
+}
+
+@mixin section-content-font() {
+    font-family: $font-family-default;
+    font-size: $font-size-default;
+    font-style: $font-style-normal;
+    font-weight: $font-weight-small;
+    line-height: $line-height-normal;
+    color: $font-color-default;
+}
+
+// linear gradient for background effect
+@mixin linear-gradient-btn-hover($startColor, $endColor){
+    background: linear-gradient(
+      98deg,
+      $startColor 8.53%,
+      $endColor 107.12%
+    );
+}
+
+// layout definition for SectionColumnCard Component
+@mixin page-content-card-mixin(){
+    font-size: 1.25rem;
+    line-height: normal;
+    background: $background-color-alt;
+    border-radius: 1.875rem;
+
+    @media screen and (max-width: $mobile) {
+      font-size: 1rem;
+    }
+
+    .card-header {
+      font-weight: 700;
+
+      @media screen and (max-width: $mobile) {
+        font-size: 1rem;
+      }
+    }
+
+    .card-content {
+      font-weight: 300;
+      list-style: none;
+    }
+}

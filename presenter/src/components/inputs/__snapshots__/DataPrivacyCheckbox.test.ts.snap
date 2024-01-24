@@ -1,0 +1,46 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DataPrivacyCheckbox > renders 1`] = `
+<div
+  class="v-input v-input--horizontal v-input--density-compact v-locale--is-ltr v-input--dirty v-checkbox"
+>
+  <!---->
+  <div
+    class="v-input__control"
+  >
+    
+    <div
+      class="v-selection-control v-selection-control--density-compact v-checkbox-btn"
+    >
+      <div
+        class="v-selection-control__wrapper"
+      >
+        <!---->
+        <div
+          class="v-selection-control__input"
+        >
+          
+          <i
+            aria-hidden="true"
+            class="mdi-checkbox-blank-outline mdi v-icon notranslate v-theme--light v-icon--size-default"
+          />
+          <input
+            aria-describedby="checkbox-0-messages"
+            aria-disabled="false"
+            id="checkbox-0"
+            name="dataprivacy"
+            required=""
+            type="checkbox"
+            value="true"
+          />
+          
+        </div>
+      </div>
+      <!---->
+    </div>
+    
+  </div>
+  <!---->
+  <!---->
+</div>
+`;
