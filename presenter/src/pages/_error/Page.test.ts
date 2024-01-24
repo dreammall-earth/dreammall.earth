@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach } from 'vitest'
 
 import ErrorPage from './+Page.vue'
+import { title } from './+title'
 
 describe('ErrorPage', () => {
   const Wrapper = () => {
@@ -11,6 +12,10 @@ describe('ErrorPage', () => {
 
   beforeEach(() => {
     wrapper = Wrapper()
+  })
+
+  it('title returns correct title', () => {
+    expect(title).toBe('DreamMall | Error')
   })
 
   describe('no is404 property set', () => {
