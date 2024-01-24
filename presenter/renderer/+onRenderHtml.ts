@@ -1,5 +1,6 @@
 import { renderToString as renderToString_ } from '@vue/server-renderer'
 import { escapeInject, dangerouslySkipEscape } from 'vike/server'
+import { PageContext, PageContextServer } from 'vike/types'
 import { resolveComponent } from 'vue'
 
 import logoUrl from '#assets/favicon.ico'
@@ -9,8 +10,6 @@ import { createApp } from './app'
 import { getDescription, getTitle } from './utils'
 
 import type { App } from 'vue'
-
-import { PageContext, PageContextServer } from 'vike/types'
 
 // this fixes a warning which occurs when building
 // > "resolveComponent" is imported from external module "vue" but never used in ...
