@@ -57,18 +57,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                     />
                     
                     
-                    <transition-stub
-                      appear="true"
-                      css="true"
-                      name="fade-transition"
-                      persisted="false"
-                    >
-                      <img
-                        class="v-img__img v-img__img--contain"
-                        src="/src/assets/dreammall-logo.svg"
-                        style="display: none;"
-                      />
-                    </transition-stub>
+                    <!---->
                     <transition-stub
                       appear="false"
                       css="true"
@@ -193,18 +182,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                     />
                     
                     
-                    <transition-stub
-                      appear="true"
-                      css="true"
-                      name="fade-transition"
-                      persisted="false"
-                    >
-                      <img
-                        class="v-img__img v-img__img--contain"
-                        src="/src/assets/img/hamburger_mobile.svg"
-                        style="display: none;"
-                      />
-                    </transition-stub>
+                    <!---->
                     <transition-stub
                       appear="false"
                       css="true"
@@ -705,18 +683,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                         />
                         
                         
-                        <transition-stub
-                          appear="true"
-                          css="true"
-                          name="fade-transition"
-                          persisted="false"
-                        >
-                          <img
-                            class="v-img__img v-img__img--contain"
-                            src="/src/assets/dreammall-logo-plain.svg"
-                            style="display: none;"
-                          />
-                        </transition-stub>
+                        <!---->
                         <transition-stub
                           appear="false"
                           css="true"
@@ -840,18 +807,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                         />
                         
                         
-                        <transition-stub
-                          appear="true"
-                          css="true"
-                          name="fade-transition"
-                          persisted="false"
-                        >
-                          <img
-                            class="v-img__img v-img__img--contain"
-                            src="/src/assets/img/logo_mall.svg"
-                            style="display: none;"
-                          />
-                        </transition-stub>
+                        <!---->
                         <transition-stub
                           appear="false"
                           css="true"
@@ -951,18 +907,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                         />
                         
                         
-                        <transition-stub
-                          appear="true"
-                          css="true"
-                          name="fade-transition"
-                          persisted="false"
-                        >
-                          <img
-                            class="v-img__img v-img__img--contain"
-                            src="/src/assets/img/coffee_icon.svg"
-                            style="display: none;"
-                          />
-                        </transition-stub>
+                        <!---->
                         <transition-stub
                           appear="false"
                           css="true"
@@ -1062,18 +1007,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                         />
                         
                         
-                        <transition-stub
-                          appear="true"
-                          css="true"
-                          name="fade-transition"
-                          persisted="false"
-                        >
-                          <img
-                            class="v-img__img v-img__img--contain"
-                            src="/src/assets/img/menschen_projekte.svg"
-                            style="display: none;"
-                          />
-                        </transition-stub>
+                        <!---->
                         <transition-stub
                           appear="false"
                           css="true"
@@ -1884,18 +1818,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                       />
                                       
                                       
-                                      <transition-stub
-                                        appear="true"
-                                        css="true"
-                                        name="fade-transition"
-                                        persisted="false"
-                                      >
-                                        <img
-                                          class="v-img__img v-img__img--contain"
-                                          src="/src/assets/img/slides/slide1-logo.svg"
-                                          style="display: none;"
-                                        />
-                                      </transition-stub>
+                                      <!---->
                                       <transition-stub
                                         appear="false"
                                         css="true"
@@ -1932,18 +1855,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                       />
                                       
                                       
-                                      <transition-stub
-                                        appear="true"
-                                        css="true"
-                                        name="fade-transition"
-                                        persisted="false"
-                                      >
-                                        <img
-                                          class="v-img__img v-img__img--contain"
-                                          src="/src/assets/img/slides/slide1-social.svg"
-                                          style="display: none;"
-                                        />
-                                      </transition-stub>
+                                      <!---->
                                       <transition-stub
                                         appear="false"
                                         css="true"
@@ -1968,18 +1880,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                       />
                                       
                                       
-                                      <transition-stub
-                                        appear="true"
-                                        css="true"
-                                        name="fade-transition"
-                                        persisted="false"
-                                      >
-                                        <img
-                                          class="v-img__img v-img__img--contain"
-                                          src="/src/assets/img/slides/slide1-video-conf.svg"
-                                          style="display: none;"
-                                        />
-                                      </transition-stub>
+                                      <!---->
                                       <transition-stub
                                         appear="false"
                                         css="true"
@@ -2004,18 +1905,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                       />
                                       
                                       
-                                      <transition-stub
-                                        appear="true"
-                                        css="true"
-                                        name="fade-transition"
-                                        persisted="false"
-                                      >
-                                        <img
-                                          class="v-img__img v-img__img--contain"
-                                          src="/src/assets/img/slides/slide1-presentation.svg"
-                                          style="display: none;"
-                                        />
-                                      </transition-stub>
+                                      <!---->
                                       <transition-stub
                                         appear="false"
                                         css="true"
@@ -2040,18 +1930,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                       />
                                       
                                       
-                                      <transition-stub
-                                        appear="true"
-                                        css="true"
-                                        name="fade-transition"
-                                        persisted="false"
-                                      >
-                                        <img
-                                          class="v-img__img v-img__img--contain"
-                                          src="/src/assets/img/slides/slide1-calendar.svg"
-                                          style="display: none;"
-                                        />
-                                      </transition-stub>
+                                      <!---->
                                       <transition-stub
                                         appear="false"
                                         css="true"
@@ -2076,18 +1955,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                       />
                                       
                                       
-                                      <transition-stub
-                                        appear="true"
-                                        css="true"
-                                        name="fade-transition"
-                                        persisted="false"
-                                      >
-                                        <img
-                                          class="v-img__img v-img__img--contain"
-                                          src="/src/assets/img/slides/slide1-link-based.svg"
-                                          style="display: none;"
-                                        />
-                                      </transition-stub>
+                                      <!---->
                                       <transition-stub
                                         appear="false"
                                         css="true"
@@ -2639,18 +2507,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                 />
                 
                 
-                <transition-stub
-                  appear="true"
-                  css="true"
-                  name="fade-transition"
-                  persisted="false"
-                >
-                  <img
-                    class="v-img__img v-img__img--contain"
-                    src="/src/assets/dreammall-logo.svg"
-                    style="display: none;"
-                  />
-                </transition-stub>
+                <!---->
                 <transition-stub
                   appear="false"
                   css="true"
