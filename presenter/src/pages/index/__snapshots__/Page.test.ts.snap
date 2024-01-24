@@ -1341,7 +1341,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                           name="dataprivacy"
                                           required=""
                                           type="checkbox"
-                                          value="false"
+                                          value="true"
                                         />
                                         
                                       </div>
@@ -1480,6 +1480,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                     class="v-col"
                     data-v-ea36d7a0=""
                   >
+                    
                     <div
                       class="v-window v-window--show-arrows-on-hover v-theme--light v-carousel v-carousel--hide-delimiter-background"
                       data-v-ea36d7a0=""
@@ -1961,6 +1962,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                       
                       
                     </div>
+                    
                   </div>
                 </div>
               </div>
@@ -2904,7 +2906,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                     name="dataprivacy"
                                     required=""
                                     type="checkbox"
-                                    value="false"
+                                    value="true"
                                   />
                                   
                                 </div>

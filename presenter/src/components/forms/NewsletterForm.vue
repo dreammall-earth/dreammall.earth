@@ -3,55 +3,33 @@
     <v-form ref="form" class="newsletter-form" @submit.prevent="submitForm">
       <v-row>
         <v-col cols="12" sm="6">
-          <v-text-field
+          <NameInput
             v-model="firstname"
             name="firstname"
             class="newsletter-text"
             :label="$t('home.newsletterSection.newsletterForm.firstname')"
-            variant="solo"
-            color="#3D4753"
-            bg-color="rgba(174, 179, 189, 0.50)"
-            hide-details="auto"
-            flat
-            rounded="xl"
             required
-            :rules="nameRules"
-          ></v-text-field>
+          ></NameInput>
         </v-col>
         <v-col cols="12" sm="6">
-          <v-text-field
+          <NameInput
             v-model="lastname"
             name="lastname"
             class="newsletter-text"
             :label="$t('home.newsletterSection.newsletterForm.lastname')"
-            variant="solo"
-            color="#3D4753"
-            bg-color="rgba(174, 179, 189, 0.50)"
-            hide-details="auto"
-            flat
-            rounded="xl"
             required
-            :rules="nameRules"
-          ></v-text-field>
+          ></NameInput>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12" sm="6">
-          <v-text-field
+          <EmailInput
             v-model="email"
             name="email"
             class="newsletter-text"
             :label="$t('home.newsletterSection.newsletterForm.email')"
-            variant="solo"
-            color="#3D4753"
-            bg-color="rgba(174, 179, 189, 0.50)"
-            hide-details="auto"
-            flat
-            rounded="xl"
-            type="email"
             required
-            :rules="emailRules"
-          ></v-text-field>
+          ></EmailInput>
         </v-col>
         <v-col cols="12" sm="6 d-flex align-center">
           <MainButton
@@ -68,18 +46,7 @@
 
       <v-row>
         <v-col cols="12" class="d-flex align-start">
-          <v-checkbox
-            v-model="dataprivacy"
-            name="dataprivacy"
-            color="rgba(174, 179, 189, 0.50)"
-            value="false"
-            hide-details="auto"
-            :center-affix="false"
-            density="compact"
-            required
-            :rules="[() => !!dataprivacy || $t('validation.fieldRequired')]"
-          >
-          </v-checkbox>
+          <DataPrivacyCheckbox />
           <span class="ml-6 ml-sm-4 pt-2 newsletter-dataprivacy"
             >{{ $t('home.newsletterSection.newsletterForm.privacy') }}
             <AnchorLink
@@ -112,14 +79,15 @@ import { useMutation } from '@vue/apollo-composable'
 import { ref } from 'vue'
 
 import MainButton from '#components/buttons/MainButton.vue'
+import DataPrivacyCheckbox from '#components/inputs/DataPrivacyCheckbox.vue'
+import EmailInput from '#components/inputs/EmailInput.vue'
+import NameInput from '#components/inputs/NameInput.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
 import { subscribeToNewsletter } from '#mutations/subscribeToNewsletter'
-import { nameRules, emailRules } from '#src/validation/validation'
 
 const firstname = ref('')
 const lastname = ref('')
 const email = ref('')
-const dataprivacy = ref(0)
 const formIsLoading = ref(false)
 const showFormError = ref(false)
 const showFormSuccess = ref(false)
