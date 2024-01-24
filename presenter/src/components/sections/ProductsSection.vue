@@ -44,26 +44,23 @@ import SectionColumnCard from '#components/layout/SectionColumnCard.vue'
 <script lang="ts" setup></script>
 
 <style scoped lang="scss">
+@import '#root/src/assets/scss/style';
+
 .products-section {
-  max-width: 1248px;
+  max-width: $section-max-width-x-big;
 
   .section-header {
     text-align: center;
 
     h2.section-headline {
-      font-family: Poppins, sans-serif;
-      font-size: 2.25rem;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      letter-spacing: -0.045rem;
+      @include section-content-headline-font;
 
       .prepend {
-        color: #2ca5b1;
+        color: $font-color-headline-prepend;
       }
 
       .append {
-        color: #383838;
+        color: $font-color-headline-append;
       }
     }
   }

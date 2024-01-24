@@ -36,37 +36,30 @@ import MainButton from '#components/buttons/MainButton.vue'
 </script>
 
 <style scoped lang="scss">
+@import '#root/src/assets/scss/style';
+
 .cta-section {
-  max-width: 960px;
+  max-width: $section-max-width-small;
 
   .section-header {
     text-align: center;
 
     h2.section-headline {
-      font-family: Poppins, sans-serif;
-      font-size: 2.25rem;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      letter-spacing: -0.045rem;
+      @include section-content-headline-font;
 
       .prepend {
-        color: #2ca5b1;
+        color: $font-color-headline-prepend;
       }
 
       .append {
-        color: #f09630;
+        color: $font-color-headline-append;
       }
     }
   }
 
   .section-content {
-    font-family: Poppins, sans-serif;
-    font-size: 1.25rem;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
-    color: #3d4753;
+    @include section-content-font;
+
     text-align: center;
   }
 }
