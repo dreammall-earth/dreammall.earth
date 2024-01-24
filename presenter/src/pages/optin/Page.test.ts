@@ -9,6 +9,7 @@ import { mockClient } from '#tests/mock.apolloClient'
 
 import OptinPage from './+Page.vue'
 import route from './+route'
+import { title } from './+title'
 
 vi.mock('vike/client/router')
 vi.mocked(navigate).mockResolvedValue()
@@ -41,6 +42,10 @@ describe('OptinPage', () => {
 
   afterAll(() => {
     vi.useRealTimers()
+  })
+
+  it('title returns correct title', () => {
+    expect(title).toBe('DreamMall | Newsletter')
   })
 
   it('route returns `/optin/@code', () => {

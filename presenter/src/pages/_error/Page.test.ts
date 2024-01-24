@@ -4,8 +4,12 @@ import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 import ErrorPage from './+Page.vue'
+import { title } from './+title'
 
 describe('ErrorPage', () => {
+  it('title returns correct title', () => {
+    expect(title).toBe('DreamMall | Fehler')
+  })
   describe('500 Error', () => {
     const WrapperUndefined = () => {
       return mount(VApp, {
