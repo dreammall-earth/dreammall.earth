@@ -41,6 +41,7 @@ exports[`renders CoffeeSection > renders CoffeeSection 1`] = `
       class="v-col"
       data-v-ea36d7a0=""
     >
+      
       <div
         class="v-window v-window--show-arrows-on-hover v-theme--light v-carousel v-carousel--hide-delimiter-background"
         data-v-ea36d7a0=""
@@ -522,6 +523,7 @@ exports[`renders CoffeeSection > renders CoffeeSection 1`] = `
         
         
       </div>
+      
     </div>
   </div>
 </div>
