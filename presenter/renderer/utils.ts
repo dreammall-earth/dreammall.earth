@@ -1,5 +1,6 @@
+import { PageContext } from 'vike/types'
+
 import { META } from '#src/env'
-import { PageContext } from '#types/PageContext'
 
 function getTitle(pageContext: PageContext) {
   // The value exported by /pages/**/+title.js is available at pageContext.config.title

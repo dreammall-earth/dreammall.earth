@@ -8,8 +8,9 @@ import image from '#assets/img/dreammall-logo_social.svg'
 import { createApp } from './app'
 import { getDescription, getTitle } from './utils'
 
-import type { PageContextServer, PageContext } from '#types/PageContext'
 import type { App } from 'vue'
+
+import { PageContext, PageContextServer } from 'vike/types'
 
 // this fixes a warning which occurs when building
 // > "resolveComponent" is imported from external module "vue" but never used in ...
