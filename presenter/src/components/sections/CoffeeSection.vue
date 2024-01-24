@@ -11,64 +11,73 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-carousel hide-delimiter-background show-arrows="hover" color="#ABABAB" :height="650">
-          <v-carousel-item draggable>
-            <v-sheet rounded="xl" color="#FFF" border :height="600">
-              <div class="icon-container slide1">
-                <v-img class="w-100 icon-main main-slide-icon-1" :src="slideLogo1" />
-                <h3 class="w-100 slide-subheadline slide-subheadline-1">
-                  {{ $t('home.coffeeSection.slide1.subheadline') }}
-                </h3>
-                <h3 class="w-100 slide-headline slide-headline-1">
-                  {{ $t('home.coffeeSection.slide1.headline') }}
-                </h3>
+        <v-hover v-slot="{ isHovering, props }">
+          <v-carousel
+            v-bind="props"
+            hide-delimiter-background
+            :cycle="!isHovering"
+            show-arrows="hover"
+            color="#ABABAB"
+            :height="650"
+          >
+            <v-carousel-item draggable>
+              <v-sheet rounded="xl" color="#FFF" border :height="600">
+                <div class="icon-container slide1">
+                  <v-img class="w-100 icon-main main-slide-icon-1" :src="slideLogo1" />
+                  <h3 class="w-100 slide-subheadline slide-subheadline-1">
+                    {{ $t('home.coffeeSection.slide1.subheadline') }}
+                  </h3>
+                  <h3 class="w-100 slide-headline slide-headline-1">
+                    {{ $t('home.coffeeSection.slide1.headline') }}
+                  </h3>
 
-                <v-img class="w-100 slide-icon icon-1" :src="slide1Icon1" />
-                <v-img class="w-100 slide-icon icon-2" :src="slide1Icon2" />
-                <v-img class="w-100 slide-icon icon-3" :src="slide1Icon3" />
-                <v-img class="w-100 slide-icon icon-4" :src="slide1Icon4" />
-                <v-img class="w-100 slide-icon icon-5" :src="slide1Icon5" />
-              </div>
-            </v-sheet>
-          </v-carousel-item>
+                  <v-img class="w-100 slide-icon icon-1" :src="slide1Icon1" />
+                  <v-img class="w-100 slide-icon icon-2" :src="slide1Icon2" />
+                  <v-img class="w-100 slide-icon icon-3" :src="slide1Icon3" />
+                  <v-img class="w-100 slide-icon icon-4" :src="slide1Icon4" />
+                  <v-img class="w-100 slide-icon icon-5" :src="slide1Icon5" />
+                </div>
+              </v-sheet>
+            </v-carousel-item>
 
-          <v-carousel-item draggable>
-            <v-sheet rounded="xl" color="#FFF" border :height="600">
-              <div class="icon-container slide2">
-                <v-img class="w-100 icon-main main-slide-icon-2" :src="slideLogo2" />
-                <h3 class="w-100 slide-subheadline slide-subheadline-2">
-                  {{ $t('home.coffeeSection.slide2.subheadline') }}
-                </h3>
-                <h3 class="w-100 slide-headline slide-headline-2">
-                  {{ $t('home.coffeeSection.slide2.headline') }}
-                </h3>
+            <v-carousel-item draggable>
+              <v-sheet rounded="xl" color="#FFF" border :height="600">
+                <div class="icon-container slide2">
+                  <v-img class="w-100 icon-main main-slide-icon-2" :src="slideLogo2" />
+                  <h3 class="w-100 slide-subheadline slide-subheadline-2">
+                    {{ $t('home.coffeeSection.slide2.subheadline') }}
+                  </h3>
+                  <h3 class="w-100 slide-headline slide-headline-2">
+                    {{ $t('home.coffeeSection.slide2.headline') }}
+                  </h3>
 
-                <v-img class="w-100 slide-icon icon-1" :src="slide2Icon1" />
-                <v-img class="w-100 slide-icon icon-2" :src="slide2Icon2" />
-                <v-img class="w-100 slide-icon icon-3" :src="slide2Icon3" />
-                <v-img class="w-100 slide-icon icon-4" :src="slide2Icon4" />
-              </div>
-            </v-sheet>
-          </v-carousel-item>
+                  <v-img class="w-100 slide-icon icon-1" :src="slide2Icon1" />
+                  <v-img class="w-100 slide-icon icon-2" :src="slide2Icon2" />
+                  <v-img class="w-100 slide-icon icon-3" :src="slide2Icon3" />
+                  <v-img class="w-100 slide-icon icon-4" :src="slide2Icon4" />
+                </div>
+              </v-sheet>
+            </v-carousel-item>
 
-          <v-carousel-item draggable>
-            <v-sheet rounded="xl" color="#FFF" border :height="600">
-              <div class="icon-container slide3">
-                <h3 class="w-100 slide-subheadline slide-subheadline-3">
-                  {{ $t('home.coffeeSection.slide3.subheadline') }}
-                </h3>
-                <h3 class="w-100 slide-headline slide-headline-3">
-                  {{ $t('home.coffeeSection.slide3.headline') }}
-                </h3>
-                <v-img class="w-100 icon-main main-slide-icon-3" :src="slideLogo3" />
+            <v-carousel-item draggable>
+              <v-sheet rounded="xl" color="#FFF" border :height="600">
+                <div class="icon-container slide3">
+                  <h3 class="w-100 slide-subheadline slide-subheadline-3">
+                    {{ $t('home.coffeeSection.slide3.subheadline') }}
+                  </h3>
+                  <h3 class="w-100 slide-headline slide-headline-3">
+                    {{ $t('home.coffeeSection.slide3.headline') }}
+                  </h3>
+                  <v-img class="w-100 icon-main main-slide-icon-3" :src="slideLogo3" />
 
-                <v-img class="w-100 slide-icon icon-1" :src="slide3Icon1" />
-                <v-img class="w-100 slide-icon icon-2" :src="slide3Icon2" />
-                <v-img class="w-100 slide-icon icon-3" :src="slide3Icon3" />
-              </div>
-            </v-sheet>
-          </v-carousel-item>
-        </v-carousel>
+                  <v-img class="w-100 slide-icon icon-1" :src="slide3Icon1" />
+                  <v-img class="w-100 slide-icon icon-2" :src="slide3Icon2" />
+                  <v-img class="w-100 slide-icon icon-3" :src="slide3Icon3" />
+                </div>
+              </v-sheet>
+            </v-carousel-item>
+          </v-carousel>
+        </v-hover>
       </v-col>
     </v-row>
   </div>
