@@ -1341,7 +1341,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                           name="dataprivacy"
                                           required=""
                                           type="checkbox"
-                                          value="false"
+                                          value="true"
                                         />
                                         
                                       </div>
@@ -2906,7 +2906,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                     name="dataprivacy"
                                     required=""
                                     type="checkbox"
-                                    value="false"
+                                    value="true"
                                   />
                                   
                                 </div>

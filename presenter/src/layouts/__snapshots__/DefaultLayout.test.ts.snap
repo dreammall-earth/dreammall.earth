@@ -866,7 +866,7 @@ exports[`DefaultLayout > renders 1`] = `
                                     name="dataprivacy"
                                     required=""
                                     type="checkbox"
-                                    value="false"
+                                    value="true"
                                   />
                                   
                                 </div>
