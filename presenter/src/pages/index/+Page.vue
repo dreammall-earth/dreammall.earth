@@ -56,5 +56,17 @@ import ProductsSection from '#root/src/components/sections/ProductsSection.vue'
     background: $background-color-alt;
     box-shadow: $section-box-shadow;
   }
+
+  .page-container {
+    margin-top: 0;
+  }
+}
+</style>
+
+<style lang="scss">
+.index-page {
+  .page-container {
+    margin-top: 0 !important;
+  }
 }
 </style>

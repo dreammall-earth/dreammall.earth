@@ -98,18 +98,7 @@ exports[`ProductsSection > renders ProductsSection 1`] = `
           />
           
           
-          <transition-stub
-            appear="true"
-            css="true"
-            name="fade-transition"
-            persisted="false"
-          >
-            <img
-              class="v-img__img v-img__img--contain"
-              src="/src/assets/img/logo_mall.svg"
-              style="display: none;"
-            />
-          </transition-stub>
+          <!---->
           <transition-stub
             appear="false"
             css="true"
@@ -209,18 +198,7 @@ exports[`ProductsSection > renders ProductsSection 1`] = `
           />
           
           
-          <transition-stub
-            appear="true"
-            css="true"
-            name="fade-transition"
-            persisted="false"
-          >
-            <img
-              class="v-img__img v-img__img--contain"
-              src="/src/assets/img/coffee_icon.svg"
-              style="display: none;"
-            />
-          </transition-stub>
+          <!---->
           <transition-stub
             appear="false"
             css="true"
@@ -320,18 +298,7 @@ exports[`ProductsSection > renders ProductsSection 1`] = `
           />
           
           
-          <transition-stub
-            appear="true"
-            css="true"
-            name="fade-transition"
-            persisted="false"
-          >
-            <img
-              class="v-img__img v-img__img--contain"
-              src="/src/assets/img/menschen_projekte.svg"
-              style="display: none;"
-            />
-          </transition-stub>
+          <!---->
           <transition-stub
             appear="false"
             css="true"

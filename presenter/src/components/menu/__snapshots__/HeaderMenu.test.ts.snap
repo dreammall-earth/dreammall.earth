@@ -49,18 +49,7 @@ exports[`HeaderMenu > renders three columns 1`] = `
                   />
                   
                   
-                  <transition-stub
-                    appear="true"
-                    css="true"
-                    name="fade-transition"
-                    persisted="false"
-                  >
-                    <img
-                      class="v-img__img v-img__img--contain"
-                      src="/src/assets/dreammall-logo.svg"
-                      style="display: none;"
-                    />
-                  </transition-stub>
+                  <!---->
                   <transition-stub
                     appear="false"
                     css="true"
@@ -185,18 +174,7 @@ exports[`HeaderMenu > renders three columns 1`] = `
                   />
                   
                   
-                  <transition-stub
-                    appear="true"
-                    css="true"
-                    name="fade-transition"
-                    persisted="false"
-                  >
-                    <img
-                      class="v-img__img v-img__img--contain"
-                      src="/src/assets/img/hamburger_mobile.svg"
-                      style="display: none;"
-                    />
-                  </transition-stub>
+                  <!---->
                   <transition-stub
                     appear="false"
                     css="true"
