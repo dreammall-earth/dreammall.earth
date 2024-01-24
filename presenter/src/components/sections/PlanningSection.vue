@@ -108,7 +108,7 @@ onMounted(() => {
     text-align: center;
 
     h2.section-headline {
-      @include section-content-headline;
+      @include section-content-headline-font;
 
       background: linear-gradient(
         255deg,

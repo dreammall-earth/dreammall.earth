@@ -45,7 +45,7 @@ import MainButton from '#components/buttons/MainButton.vue'
     text-align: center;
 
     h2.section-headline {
-      @include section-content-headline;
+      @include section-content-headline-font;
 
       .prepend {
         color: $font-color-headline-prepend;
