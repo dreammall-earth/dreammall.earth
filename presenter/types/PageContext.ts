@@ -20,14 +20,8 @@ export type PageContext = {
   Page: Page
   pageProps?: PageProps
   urlPathname: string
-  exports: {
-    documentProps?: {
-      title?: string
-      description?: string
-    }
-  }
-  documentProps?: {
-    title: string
-    description?: string
+  config: {
+    title: string | ((pageContext: PageContext) => string) | undefined
+    description: string | ((pageContext: PageContext) => string) | undefined
   }
 }

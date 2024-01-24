@@ -1,4 +1,5 @@
 import { createApp } from './app'
+import { getTitle } from './utils'
 
 import type { PageContext, VikePageContext } from '#types/PageContext'
 
@@ -10,6 +11,8 @@ let instance: ReturnType<typeof createApp>
   } else {
     instance.app.changePage(pageContext)
   }
+
+  document.title = getTitle(pageContext)
 }
 
 export default render
