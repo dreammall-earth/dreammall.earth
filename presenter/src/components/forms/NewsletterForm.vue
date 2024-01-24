@@ -78,13 +78,12 @@
 import { useMutation } from '@vue/apollo-composable'
 import { ref } from 'vue'
 
+import MainButton from '#components/buttons/MainButton.vue'
+import DataPrivacyCheckbox from '#components/inputs/DataPrivacyCheckbox.vue'
+import EmailInput from '#components/inputs/EmailInput.vue'
+import NameInput from '#components/inputs/NameInput.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
-import { subscribeToNewsletterMutation } from '#mutations/subscribeToNewsletterMutation'
-
-import DataPrivacyCheckbox from './DataPrivacyCheckbox.vue'
-import EmailInput from './EmailInput.vue'
-import MainButton from './MainButton.vue'
-import NameInput from './NameInput.vue'
+import { subscribeToNewsletter } from '#mutations/subscribeToNewsletter'
 
 const firstname = ref('')
 const lastname = ref('')
@@ -97,7 +96,7 @@ const showInfoTime: number = 5000
 
 const form = ref<HTMLFormElement>()
 
-const { mutate: sendSubscribeToNewsletter } = useMutation(subscribeToNewsletterMutation)
+const { mutate: sendSubscribeToNewsletter } = useMutation(subscribeToNewsletter)
 
 // submit form with data
 async function submitForm() {

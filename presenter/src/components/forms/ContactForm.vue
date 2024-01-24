@@ -113,14 +113,13 @@
 import { useMutation } from '@vue/apollo-composable'
 import { ref } from 'vue'
 
+import MainButton from '#components/buttons/MainButton.vue'
+import DataPrivacyCheckbox from '#components/inputs/DataPrivacyCheckbox.vue'
+import EmailInput from '#components/inputs/EmailInput.vue'
+import NameInput from '#components/inputs/NameInput.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
-import { createContactFormMutation } from '#mutations/createContactForm'
+import { createContactForm } from '#mutations/createContactForm'
 import { messageRules } from '#src/validation/validation'
-
-import DataPrivacyCheckbox from './DataPrivacyCheckbox.vue'
-import EmailInput from './EmailInput.vue'
-import MainButton from './MainButton.vue'
-import NameInput from './NameInput.vue'
 
 const firstname = ref('')
 const lastname = ref('')
@@ -134,7 +133,7 @@ const showInfoTime: number = 5000
 
 const form = ref<HTMLFormElement>()
 
-const { mutate: sendContactForm } = useMutation(createContactFormMutation)
+const { mutate: sendContactForm } = useMutation(createContactForm)
 
 async function submitForm() {
   const isValid = await form.value?.validate()
