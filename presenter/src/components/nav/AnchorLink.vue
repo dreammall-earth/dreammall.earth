@@ -37,35 +37,29 @@ function onClick() {
 </script>
 
 <style scoped lang="scss">
+@import '#root/src/assets/scss/style';
+
 .anchor-link {
+  @include anchor-font;
+
   padding-right: 0;
   padding-left: 0;
-  font-family: Poppins, sans-serif;
-  font-size: 1.25rem;
-  font-weight: 300;
-  line-height: 1.9rem;
-  color: #3d4753;
   text-align: center;
   text-transform: unset !important;
   letter-spacing: 0;
 
   &:hover {
     font-weight: 400;
-    color: #3f454d;
+    color: $font-color-anchor-text-hover;
   }
 
   &--active {
     font-weight: 400;
-    color: rgb(121 121 121);
+    color: $font-color-anchor-text-active;
   }
 
   &--text {
-    font-family: Poppins, sans-serif;
-    font-size: 0.875rem;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
-    color: #009dd9;
+    @include text-font-small($font-color-link-text);
   }
 }
 </style>

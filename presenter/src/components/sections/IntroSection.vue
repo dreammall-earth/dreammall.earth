@@ -115,23 +115,29 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+@import '#root/src/assets/scss/style';
+
 .intro-section {
-  background: linear-gradient(0deg, #f5f5f5 0.06%, #d8d8d8 100%);
+  background: linear-gradient(
+    0deg,
+    $background-color-primary 0.06%,
+    $background-color-primary-transition 100%
+  );
 
   .section-headline {
-    font-family: Poppins, sans-serif;
+    font-family: $font-family-default;
     font-size: 1.25rem;
     font-weight: 300;
     line-height: 1.875;
-    color: #3d4753;
+    color: $font-color-default;
   }
 
   .section-subheadline {
-    font-family: Poppins, sans-serif;
+    font-family: $font-family-default;
     font-size: 1.125rem;
     font-weight: 400;
     line-height: 1.6875;
-    color: #797979;
+    color: $font-color-section-subheadline;
   }
 
   .content-slide {
@@ -155,16 +161,6 @@ onMounted(() => {
           min-height: 100%;
           object-fit: fill;
         }
-      }
-    }
-  }
-
-  .v-window__controls {
-    .v-btn {
-      .v-btn__underlay {
-        // background: rgb(255 255 255 / 15%);
-        // backdrop-filter: blur(14px);
-        // border-radius: 2.5rem;
       }
     }
   }

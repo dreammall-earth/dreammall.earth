@@ -123,22 +123,30 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+@import '#root/src/assets/scss/style';
+
 .topmenu {
-  background: linear-gradient(0deg, #f5f5f5 0.06%, #d8d8d8 100%);
+  background: linear-gradient(
+    0deg,
+    $background-color-primary 0.06%,
+    $background-color-primary-transition 100%
+  );
 }
 </style>
 
 <style lang="scss">
+@import '#root/src/assets/scss/style';
+
 .topmenu {
   .v-toolbar {
     transition: background-color 0.3s;
 
     .v-toolbar__content {
-      height: 95px !important;
+      height: $fixed-header-height !important;
     }
 
     .mobile-menu-icon {
-      max-width: 35px;
+      max-width: $mobile-menu-icon-max-width;
 
       &:hover {
         cursor: pointer;
@@ -147,7 +155,7 @@ onMounted(() => {
   }
 
   .nav-drawer {
-    top: 95px !important;
+    top: $fixed-header-height !important;
   }
 }
 </style>

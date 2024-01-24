@@ -26,18 +26,22 @@ const slots = useSlots()
 </script>
 
 <style scoped lang="scss">
+@import '#root/src/assets/scss/style';
+
 .main-layout {
   padding-top: 0;
   padding-right: 0;
-  background: #f5f5f5;
+  background: $background-color-primary;
 }
 </style>
 
 <style lang="scss">
+@import '#root/src/assets/scss/style';
+
 html {
   scroll-behavior: smooth;
 
   // fixed header offset
-  scroll-padding-top: 95px;
+  scroll-padding-top: $fixed-header-height;
 }
 </style>

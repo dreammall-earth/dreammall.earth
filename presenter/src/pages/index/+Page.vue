@@ -36,9 +36,11 @@ import ProductsSection from '#root/src/components/sections/ProductsSection.vue'
 </script>
 
 <style scoped lang="scss">
+@import '#root/src/assets/scss/style';
+
 .index-page {
   overflow: hidden;
-  background: #f5f5f5;
+  background: $background-color-primary;
 
   #intro-section {
     // fix for vuetify negative margin
@@ -46,13 +48,13 @@ import ProductsSection from '#root/src/components/sections/ProductsSection.vue'
   }
 
   #about {
-    background: #fff;
-    box-shadow: 0 5px 5px 0 rgb(0 0 0 / 25%);
+    background: $background-color-alt;
+    box-shadow: $section-box-shadow;
   }
 
   #newsletter-section {
-    background: #fff;
-    box-shadow: 0 5px 5px 0 rgb(0 0 0 / 25%);
+    background: $background-color-alt;
+    box-shadow: $section-box-shadow;
   }
 }
 </style>

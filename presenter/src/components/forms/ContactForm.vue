@@ -169,18 +169,20 @@ async function submitForm() {
 </script>
 
 <style scoped lang="scss">
+@import '#root/src/assets/scss/style';
+
 .contact-form {
   .contact-text {
-    border: 1px solid #fff;
-    border-radius: 15px;
+    border: $border-text-default;
+    border-radius: $border-radius-default;
 
     .v-field {
-      border: 1px solid #fff;
-      border-radius: 15px;
+      border: $border-text-default;
+      border-radius: $border-radius-default;
 
       .v-field__field {
         label.v-label {
-          color: #3d4753;
+          color: $font-color-default;
         }
       }
     }
@@ -191,12 +193,7 @@ async function submitForm() {
   }
 
   .contact-dataprivacy {
-    font-family: Poppins, sans-serif;
-    font-size: 0.875rem;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
-    color: #3d4753;
+    @include text-font-small;
 
     .dataprivacy-link {
       height: auto;
@@ -204,18 +201,14 @@ async function submitForm() {
   }
 
   .info-text {
-    font-family: Poppins, sans-serif;
-    font-size: 1.25rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+    @include form-info-font;
 
     &.form-success {
-      color: green;
+      color: $form-info-color-success;
     }
 
     &.form-error {
-      color: rgb(176 0 32);
+      color: $form-info-color-error;
     }
   }
 
