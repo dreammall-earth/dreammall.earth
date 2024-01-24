@@ -1,0 +1,124 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`AboutSection > renders AboutSection 1`] = `
+<div
+  class="px-4"
+  data-v-40d79059=""
+>
+  <div
+    class="v-row about-section py-16"
+    data-v-40d79059=""
+  >
+    <div
+      class="v-col-md-7 v-col-12"
+      data-v-40d79059=""
+    >
+      <div
+        class="section-left-part"
+        data-v-40d79059=""
+      >
+        <h2
+          class="section-headline"
+          data-v-40d79059=""
+        >
+          $t('home.aboutSection.headline')
+        </h2>
+        <p
+          class="section-content mt-8"
+          data-v-40d79059=""
+        >
+          $t('home.aboutSection.contentFirstParagraph')
+        </p>
+        <p
+          class="section-content"
+          data-v-40d79059=""
+        >
+          $t('home.aboutSection.contentSecondParagraph')
+        </p>
+        <button
+          class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--fourth main-button-auto mt-8"
+          data-v-2b63c1fe=""
+          data-v-40d79059=""
+          style="background-color: #2ca5b1; color: #fff; caret-color: #fff; height: auto; width: auto;"
+          type="button"
+        >
+          
+          <span
+            class="v-btn__overlay"
+          />
+          <span
+            class="v-btn__underlay"
+          />
+          
+          <!---->
+          <span
+            class="v-btn__content"
+            data-no-activator=""
+          >
+            
+            
+            <!--v-if-->
+            <span
+              class="main-button-content"
+              data-v-2b63c1fe=""
+            >
+              $t('home.aboutSection.buttonTxt') 
+              <!--v-if-->
+            </span>
+            
+            
+          </span>
+          <!---->
+          <!---->
+        </button>
+      </div>
+    </div>
+    <div
+      class="v-col-md-5 v-col-12 align-self-center d-flex justify-center align-center"
+      data-v-40d79059=""
+    >
+      <div
+        class="section-right-part w-100"
+        data-v-40d79059=""
+      >
+        <div
+          class="v-responsive v-img v-img--booting section-logo ma-2 pa-1 w-100"
+          data-v-40d79059=""
+        >
+          <div
+            class="v-responsive__sizer"
+          />
+          
+          
+          <transition-stub
+            appear="true"
+            css="true"
+            name="fade-transition"
+            persisted="false"
+          >
+            <img
+              class="v-img__img v-img__img--contain"
+              src="/src/assets/dreammall-logo-plain.svg"
+              style="display: none;"
+            />
+          </transition-stub>
+          <transition-stub
+            appear="false"
+            css="true"
+            name="fade-transition"
+            persisted="false"
+          >
+            <!---->
+          </transition-stub>
+          <!---->
+          <!---->
+          <!---->
+          
+          
+          <!---->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
