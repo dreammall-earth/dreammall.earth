@@ -137,7 +137,7 @@ describe('ContactForm', () => {
           expect(wrapper.find('input[name="email"]').element).toHaveProperty('value', '')
           expect(wrapper.find('input[name="lastname"]').element).toHaveProperty('value', '')
           expect(wrapper.find('textarea[name="message"]').element).toHaveProperty('value', '')
-          expect(wrapper.find('input[name="dataprivacy"]').element).toHaveProperty('value', 'false')
+          expect(wrapper.find('input[name="dataprivacy"]').element).toHaveProperty('checked', false)
         })
 
         describe('success message for user', () => {
