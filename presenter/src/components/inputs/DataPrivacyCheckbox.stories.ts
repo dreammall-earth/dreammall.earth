@@ -8,9 +8,6 @@ const meta = {
   title: 'Inputs/DataPrivacyCheckbox',
   component: DataPrivacyCheckbox as SBComp,
   tags: ['autodocs'],
-  argTypes: {
-    clicked: { control: 'boolean' },
-  },
 } satisfies Meta<typeof DataPrivacyCheckbox>
 
 export default meta
