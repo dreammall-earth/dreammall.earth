@@ -4,7 +4,7 @@ import { PageContext, PageContextServer } from 'vike/types'
 import { resolveComponent } from 'vue'
 
 import logoUrl from '#assets/favicon.ico'
-import image from '#assets/img/dreammall-logo_social.svg'
+import image from '#assets/img/dreammall-logo_social.png'
 import { META } from '#src/env'
 
 import { createApp } from './app'
