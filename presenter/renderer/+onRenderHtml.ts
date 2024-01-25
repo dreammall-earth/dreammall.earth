@@ -5,6 +5,7 @@ import { resolveComponent } from 'vue'
 
 import logoUrl from '#assets/favicon.ico'
 import image from '#assets/img/dreammall-logo_social.svg'
+import { META } from '#src/env'
 
 import { createApp } from './app'
 import { getDescription, getTitle } from './utils'
