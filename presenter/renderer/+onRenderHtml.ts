@@ -42,6 +42,12 @@ async function render(pageContext: PageContextServer & PageContext) {
         <meta property="og:image" content="${META.BASE_URL}${image}" />
         <meta property="og:image:width" content="1200"/>
         <meta property="og:image:height" content="601"/>
+        <meta name="twitter:card" content="app" />
+        <!--<meta name="twitter:site" content="@YourTwitterUsername" />-->
+        <meta name="twitter:title" content="${title}" />
+        <meta name="twitter:description" content="${description}" />
+        <meta name="twitter:image" content="${META.BASE_URL}${image}" />
+        <meta name="twitter:image:alt" content="${title}" />
         <title>${title}</title>
       </head>
       <body>
