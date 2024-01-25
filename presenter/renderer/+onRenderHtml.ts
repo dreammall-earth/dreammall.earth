@@ -35,6 +35,7 @@ async function render(pageContext: PageContextServer & PageContext) {
         <link rel="icon" href="${logoUrl}" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="${description}" />
+        <meta name="author" content="${META.DEFAULT_AUTHOR}">
         <meta property="og:title" content="${title}" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="${META.BASE_URL}" />
