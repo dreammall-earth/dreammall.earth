@@ -103,7 +103,7 @@
     "@storybook/vue3-vite": "^7.6.10",
     "@types/validator": "^13.11.7",
     "@typescript-eslint/eslint-plugin": "^6.19.0",
-    "@typescript-eslint/parser": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.1",
     "@vitest/coverage-v8": "^1.2.1",
     "@vue/test-utils": "^2.4.3",
     "@vuepress/bundler-vite": "^2.0.0-rc.0",
