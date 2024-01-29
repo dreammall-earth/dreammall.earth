@@ -38,7 +38,7 @@
   "home": {
     "aboutSection": {
       "buttonTxt": "Persönlicher Kontakt",
-      "contentFirstParagraph": "Die DreamMall Plattform bietet Euch Unternehmern, Unternehmergruppen sowie Jungunternehmern/Startups einen vertrauensvollen Raum der kreativen Vernetzung für Eure Ideen und Projekte.",
+      "contentFirstParagraph": "Die DreamMall Plattform bietet Ihnen als Unternehmern, Unternehmergruppen sowie Jungunternehmern/Startups einen vertrauensvollen Raum der kreativen Vernetzung für Ihre Ideen und Projekte.",
       "contentSecondParagraph": "Wir verwirklichen uns jetzt alle. Die DreamMall entwickelt sich mit jedem Einzelnen von uns für ein gemeinsames Wirtschaften und einer guten Lebensqualität. Unsere positive Energie vervielfältigt sich und gemeinsam blicken wir nur noch nach vorne. Weltweit!",
       "headline": "Respektvolles Miteinander macht ALLES möglich."
     },
@@ -163,13 +163,13 @@
   "menu": {
     "eMail": "E-Mail",
     "footer": {
-      "contact": "Kontaktiere uns",
+      "contact": "Kontaktieren Sie uns",
       "contactForm": {
         "errorMsg": "Das hat leider nicht funktioniert! Bitte erneut probieren",
         "firstName": "Vorname",
         "lastName": "Nachname",
         "mail": "E-Mail Adresse",
-        "message": "Frag uns einfach …",
+        "message": "Fragen Sie uns einfach …",
         "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen finden Sie in unserer",
         "privacyLinkLabel": "Datenschutzrichtlinie",
         "submitBtn": "Absenden",
@@ -202,7 +202,7 @@
   "optin": {
     "error": {
       "link": "Erneut eintragen",
-      "text": "Bei der Bestätigung ist ein Fehler aufgetreten. Bitte trage dich erneut in den Newsletter ein."
+      "text": "Bei der Bestätigung ist ein Fehler aufgetreten. Bitte tragen Sie sich erneut in den Newsletter ein."
     },
     "success": {
       "text": "Sie haben Ihr Newsletterabbonoment erfolgreich bestätigt. Sie werden in Kürze auf die Startseite weitergeleitet."
