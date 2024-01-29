@@ -43,10 +43,10 @@
       "headline": "Respektvolles Miteinander macht ALLES möglich."
     },
     "coffeeSection": {
-      "headline": "Deine Zutaten",
+      "headline": "Ihre Zutaten",
       "headlineAppend": "im Kaffee",
       "slide1": {
-        "headline": "Alle Funktionen die du brauchst.",
+        "headline": "Alle Funktionen die Sie brauchen.",
         "subheadline": "Weltencafé"
       },
       "slide2": {
@@ -78,7 +78,7 @@
         "errorMsg": "Das hat leider nicht funktioniert! Bitte erneut probieren",
         "firstname": "Vorname",
         "lastname": "Nachname",
-        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unseren",
+        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen finden Sie in unseren",
         "privacyLinkLabel": "Datenschutzrichtlinien.",
         "submitBtn": "Absenden",
         "successMsg": "E-Mail gesendet"
@@ -102,7 +102,7 @@
       },
       "thirdColumn": {
         "headline": "Menschen und Projekte",
-        "text": "Dein Talent ist wichtig für die Welt. Verwirkliche deine Kreativität in die Realität."
+        "text": "Ihr Talent ist wichtig für die Welt. Verwirklichen Sie Ihre Kreativität in die Realität."
       }
     }
   },
@@ -170,7 +170,7 @@
         "lastName": "Nachname",
         "mail": "E-Mail Adresse",
         "message": "Frag uns einfach …",
-        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unseren",
+        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen finden Sie in unseren",
         "privacyLinkLabel": "Datenschutzrichtlinien.",
         "submitBtn": "Absenden",
         "successMsg": "E-Mail gesendet",
@@ -205,7 +205,7 @@
       "text": "Bei der Bestätigung ist ein Fehler aufgetreten. Bitte trage dich erneut in den Newsletter ein."
     },
     "success": {
-      "text": "Du hast dein Newsletterabbonoment erfolgreich bestätigt. Du wirst in Kürze auf die Startseite weitergeleitet."
+      "text": "Sie haben Ihr Newsletterabbonoment erfolgreich bestätigt. Sie werden in Kürze auf die Startseite weitergeleitet."
     }
   },
   "validation": {
