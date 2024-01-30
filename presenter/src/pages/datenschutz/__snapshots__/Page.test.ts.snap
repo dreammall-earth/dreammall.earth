@@ -11,11 +11,328 @@ exports[`DataPrivacyPage > renders 1`] = `
     <main
       class="v-main main-layout"
       data-v-75d0be1e=""
-      style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: 0px; --v-layout-bottom: 0px;"
+      style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: 64px; --v-layout-bottom: 0px;"
     >
       
       <div
-        class="v-container v-container--fluid v-locale--is-ltr pa-0"
+        class="topmenu"
+        data-v-5e2a2776=""
+        data-v-75d0be1e=""
+      >
+        <header
+          class="v-toolbar v-toolbar--flat v-toolbar--density-default v-theme--light v-locale--is-ltr v-app-bar"
+          data-v-5e2a2776=""
+          style="top: 0px; z-index: 1008; transform: translateY(0%); position: fixed; background-color: #f5f5f5; color: #000; caret-color: #000; left: 0px; width: calc(100% - 0px - 0px);"
+        >
+          <!---->
+          
+          <div
+            class="v-toolbar__content"
+            style="height: 64px;"
+          >
+            <!---->
+            <!---->
+            
+            <div
+              class="v-row"
+              data-v-5e2a2776=""
+            >
+              <div
+                class="v-col d-flex align-center"
+                data-v-5e2a2776=""
+              >
+                <a
+                  class="w-100 ml-8"
+                  data-v-5e2a2776=""
+                  href="/"
+                >
+                  <div
+                    class="v-responsive v-img v-img--booting w-100 logo-medium"
+                    data-v-5e2a2776=""
+                    data-v-916aa5dc=""
+                  >
+                    <div
+                      class="v-responsive__sizer"
+                    />
+                    
+                    
+                    <!---->
+                    <transition-stub
+                      appear="false"
+                      css="true"
+                      name="fade-transition"
+                      persisted="false"
+                    >
+                      <!---->
+                    </transition-stub>
+                    <!---->
+                    <!---->
+                    <!---->
+                    
+                    
+                    <!---->
+                  </div>
+                </a>
+              </div>
+              <div
+                class="v-col d-none d-md-flex align-center justify-center grow"
+                data-v-5e2a2776=""
+              >
+                <!-- TODO same as below: refactor -->
+                <a
+                  class="v-btn v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-plain anchor-link mx-4"
+                  data-v-1925b644=""
+                  data-v-5e2a2776=""
+                  href="/#about"
+                >
+                  
+                  <span
+                    class="v-btn__overlay"
+                  />
+                  <span
+                    class="v-btn__underlay"
+                  />
+                  
+                  <!---->
+                  <span
+                    class="v-btn__content"
+                    data-no-activator=""
+                  >
+                    
+                    
+                    $t('menu.header.about')
+                    
+                    
+                  </span>
+                  <!---->
+                  <!---->
+                </a>
+                <a
+                  class="v-btn v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-plain anchor-link mx-4"
+                  data-v-1925b644=""
+                  data-v-5e2a2776=""
+                  href="/#products"
+                >
+                  
+                  <span
+                    class="v-btn__overlay"
+                  />
+                  <span
+                    class="v-btn__underlay"
+                  />
+                  
+                  <!---->
+                  <span
+                    class="v-btn__content"
+                    data-no-activator=""
+                  >
+                    
+                    
+                    $t('menu.header.products')
+                    
+                    
+                  </span>
+                  <!---->
+                  <!---->
+                </a>
+                <a
+                  class="v-btn v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-plain anchor-link mx-4"
+                  data-v-1925b644=""
+                  data-v-5e2a2776=""
+                  href="/#contactname"
+                >
+                  
+                  <span
+                    class="v-btn__overlay"
+                  />
+                  <span
+                    class="v-btn__underlay"
+                  />
+                  
+                  <!---->
+                  <span
+                    class="v-btn__content"
+                    data-no-activator=""
+                  >
+                    
+                    
+                    $t('menu.header.contact')
+                    
+                    
+                  </span>
+                  <!---->
+                  <!---->
+                </a>
+              </div>
+              <div
+                class="v-col d-flex"
+                data-v-5e2a2776=""
+              >
+                <div
+                  class="d-flex d-md-none align-center justify-end w-100 mr-8"
+                  data-v-5e2a2776=""
+                >
+                  <div
+                    class="v-responsive v-img v-img--booting mobile-menu-icon w-100"
+                    data-v-5e2a2776=""
+                  >
+                    <div
+                      class="v-responsive__sizer"
+                    />
+                    
+                    
+                    <!---->
+                    <transition-stub
+                      appear="false"
+                      css="true"
+                      name="fade-transition"
+                      persisted="false"
+                    >
+                      <!---->
+                    </transition-stub>
+                    <!---->
+                    <!---->
+                    <!---->
+                    
+                    
+                    <!---->
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!---->
+          </div>
+          
+          
+          <transition-stub
+            appear="false"
+            css="true"
+            name="expand-transition"
+            persisted="false"
+          >
+            <!---->
+          </transition-stub>
+          
+        </header>
+        
+        <nav
+          class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile nav-drawer d-flex d-md-none"
+          data-v-5e2a2776=""
+          style="background-color: #f5f5f5; color: #000; caret-color: #000; right: 0px; z-index: 1006; transform: translateX(110%); position: fixed; height: calc(100% - 64px - 0px); top: 64px; bottom: 0px; width: 256px;"
+        >
+          <!---->
+          <!---->
+          <div
+            class="v-navigation-drawer__content"
+          >
+            
+            <div
+              class="d-flex flex-column py-8"
+              data-v-5e2a2776=""
+            >
+              <!-- TODO same as above: refactor -->
+              <a
+                class="v-btn v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-plain anchor-link ma-4"
+                data-v-1925b644=""
+                data-v-5e2a2776=""
+                href="/#about"
+              >
+                
+                <span
+                  class="v-btn__overlay"
+                />
+                <span
+                  class="v-btn__underlay"
+                />
+                
+                <!---->
+                <span
+                  class="v-btn__content"
+                  data-no-activator=""
+                >
+                  
+                  
+                  $t('menu.header.about')
+                  
+                  
+                </span>
+                <!---->
+                <!---->
+              </a>
+              <a
+                class="v-btn v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-plain anchor-link ma-4"
+                data-v-1925b644=""
+                data-v-5e2a2776=""
+                href="/#products"
+              >
+                
+                <span
+                  class="v-btn__overlay"
+                />
+                <span
+                  class="v-btn__underlay"
+                />
+                
+                <!---->
+                <span
+                  class="v-btn__content"
+                  data-no-activator=""
+                >
+                  
+                  
+                  $t('menu.header.products')
+                  
+                  
+                </span>
+                <!---->
+                <!---->
+              </a>
+              <a
+                class="v-btn v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-plain anchor-link ma-4"
+                data-v-1925b644=""
+                data-v-5e2a2776=""
+                href="/#contactname"
+              >
+                
+                <span
+                  class="v-btn__overlay"
+                />
+                <span
+                  class="v-btn__underlay"
+                />
+                
+                <!---->
+                <span
+                  class="v-btn__content"
+                  data-no-activator=""
+                >
+                  
+                  
+                  $t('menu.header.contact')
+                  
+                  
+                </span>
+                <!---->
+                <!---->
+              </a>
+            </div>
+            
+          </div>
+          <!---->
+        </nav>
+        <transition-stub
+          appear="false"
+          css="true"
+          name="fade-transition"
+          persisted="false"
+        >
+          <!---->
+        </transition-stub>
+        
+      </div>
+      <div
+        class="v-container v-container--fluid v-locale--is-ltr page-container pa-0"
         data-v-75d0be1e=""
       >
         <div
@@ -29,7 +346,7 @@ exports[`DataPrivacyPage > renders 1`] = `
           >
             
             <div
-              class="pt-12"
+              class="pt-6"
               id="data-protection"
             >
               <div
@@ -638,18 +955,7 @@ exports[`DataPrivacyPage > renders 1`] = `
                 />
                 
                 
-                <transition-stub
-                  appear="true"
-                  css="true"
-                  name="fade-transition"
-                  persisted="false"
-                >
-                  <img
-                    class="v-img__img v-img__img--contain"
-                    src="/src/assets/dreammall-logo.svg"
-                    style="display: none;"
-                  />
-                </transition-stub>
+                <!---->
                 <transition-stub
                   appear="false"
                   css="true"
@@ -877,7 +1183,7 @@ exports[`DataPrivacyPage > renders 1`] = `
                                 <label
                                   aria-hidden="true"
                                   class="v-label v-field-label v-field-label--floating"
-                                  for="input-9"
+                                  for="input-17"
                                 >
                                   <!---->
                                   
@@ -886,7 +1192,7 @@ exports[`DataPrivacyPage > renders 1`] = `
                                 </label>
                                 <label
                                   class="v-label v-field-label"
-                                  for="input-9"
+                                  for="input-17"
                                 >
                                   <!---->
                                   
@@ -897,9 +1203,9 @@ exports[`DataPrivacyPage > renders 1`] = `
                                 
                                 <!---->
                                 <input
-                                  aria-describedby="input-9-messages"
+                                  aria-describedby="input-17-messages"
                                   class="v-field__input"
-                                  id="input-9"
+                                  id="input-17"
                                   name="lastname"
                                   required=""
                                   size="1"
@@ -997,7 +1303,7 @@ exports[`DataPrivacyPage > renders 1`] = `
                                 <label
                                   aria-hidden="true"
                                   class="v-label v-field-label v-field-label--floating"
-                                  for="input-11"
+                                  for="input-19"
                                 >
                                   <!---->
                                   
@@ -1006,7 +1312,7 @@ exports[`DataPrivacyPage > renders 1`] = `
                                 </label>
                                 <label
                                   class="v-label v-field-label"
-                                  for="input-11"
+                                  for="input-19"
                                 >
                                   <!---->
                                   
@@ -1017,9 +1323,9 @@ exports[`DataPrivacyPage > renders 1`] = `
                                 
                                 <!---->
                                 <input
-                                  aria-describedby="input-11-messages"
+                                  aria-describedby="input-19-messages"
                                   class="v-field__input"
-                                  id="input-11"
+                                  id="input-19"
                                   name="email"
                                   required=""
                                   size="1"
@@ -1138,7 +1444,7 @@ exports[`DataPrivacyPage > renders 1`] = `
                                 <label
                                   aria-hidden="true"
                                   class="v-label v-field-label v-field-label--floating"
-                                  for="input-13"
+                                  for="input-21"
                                 >
                                   <!---->
                                   
@@ -1147,7 +1453,7 @@ exports[`DataPrivacyPage > renders 1`] = `
                                 </label>
                                 <label
                                   class="v-label v-field-label"
-                                  for="input-13"
+                                  for="input-21"
                                 >
                                   <!---->
                                   
@@ -1158,9 +1464,9 @@ exports[`DataPrivacyPage > renders 1`] = `
                                 
                                 <!---->
                                 <textarea
-                                  aria-describedby="input-13-messages"
+                                  aria-describedby="input-21-messages"
                                   class="v-field__input"
-                                  id="input-13"
+                                  id="input-21"
                                   name="message"
                                   required=""
                                   rows="5"
@@ -1190,7 +1496,7 @@ exports[`DataPrivacyPage > renders 1`] = `
                               aria-live="polite"
                               class="v-messages"
                               css="true"
-                              id="input-13-messages"
+                              id="input-21-messages"
                               name="slide-y-transition"
                               persisted="false"
                               role="alert"
@@ -1236,13 +1542,13 @@ exports[`DataPrivacyPage > renders 1`] = `
                                     class="mdi-checkbox-blank-outline mdi v-icon notranslate v-theme--light v-icon--size-default"
                                   />
                                   <input
-                                    aria-describedby="checkbox-15-messages"
+                                    aria-describedby="checkbox-23-messages"
                                     aria-disabled="false"
-                                    id="checkbox-15"
+                                    id="checkbox-23"
                                     name="dataprivacy"
                                     required=""
                                     type="checkbox"
-                                    value="false"
+                                    value="true"
                                   />
                                   
                                 </div>

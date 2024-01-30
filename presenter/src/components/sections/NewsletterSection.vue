@@ -47,20 +47,22 @@ import NewsletterForm from '#components/forms/NewsletterForm.vue'
 </script>
 
 <style scoped lang="scss">
+@import '#root/src/assets/scss/style';
+
 .newsletter-section {
-  max-width: 650px;
+  max-width: $section-max-width-x-small;
 
   .section-header {
     text-align: center;
 
     h2.section-headline {
-      font-family: Poppins, sans-serif;
-      font-size: 2.25rem;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      letter-spacing: -0.045rem;
-      background: linear-gradient(255deg, #3d4753 23.75%, #e47a24 66.34%);
+      @include section-content-headline-font;
+
+      background: linear-gradient(
+        255deg,
+        $font-color-default 23.75%,
+        $font-color-headline-transition-end 66.34%
+      );
       -webkit-background-clip: text; /* stylelint-disable-line */
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -68,12 +70,12 @@ import NewsletterForm from '#components/forms/NewsletterForm.vue'
   }
 
   h3.section-subheadline {
-    font-family: Poppins, sans-serif;
+    font-family: $font-family-default;
     font-size: 1.25rem;
     font-style: normal;
     font-weight: 300;
     line-height: normal;
-    color: #3d4753;
+    color: $font-color-default;
   }
 }
 </style>

@@ -31,17 +31,12 @@ const props = withDefaults(
 </script>
 
 <style scoped lang="scss">
-$mobile: 500px;
-$tablet: 960px;
+@import '#root/src/assets/scss/style';
 
 .v-card {
-  max-width: 375px;
-  font-family: Poppins, sans-serif;
-  font-size: 1.25rem;
-  font-style: normal;
-  font-weight: 300;
-  line-height: normal;
-  color: #383838;
+  @include text-font-base($font-color-card);
+
+  max-width: $layout-column-card-max-width;
   text-align: center;
 
   .card-title {
@@ -49,10 +44,10 @@ $tablet: 960px;
     align-items: center;
     justify-content: center;
     min-height: 81px;
-    font-size: 1.625rem;
-    font-weight: 600;
+    font-size: $font-size-card;
+    font-weight: $font-weight-large;
     hyphens: none;
-    line-height: 125%; /* 2.03125rem */
+    line-height: $line-height-x-larger; /* 2.03125rem */
     text-overflow: unset;
     word-wrap: break-word; /* Internet Explorer 5.5+ */
     white-space: pre-wrap; /* css-3 */

@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <div id="impress" class="pt-12">
+    <div id="impress" class="pt-6">
       <ImpressSection />
     </div>
   </DefaultLayout>

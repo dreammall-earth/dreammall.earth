@@ -41,6 +41,7 @@ exports[`renders CoffeeSection > renders CoffeeSection 1`] = `
       class="v-col"
       data-v-ea36d7a0=""
     >
+      
       <div
         class="v-window v-window--show-arrows-on-hover v-theme--light v-carousel v-carousel--hide-delimiter-background"
         data-v-ea36d7a0=""
@@ -106,18 +107,7 @@ exports[`renders CoffeeSection > renders CoffeeSection 1`] = `
                         />
                         
                         
-                        <transition-stub
-                          appear="true"
-                          css="true"
-                          name="fade-transition"
-                          persisted="false"
-                        >
-                          <img
-                            class="v-img__img v-img__img--contain"
-                            src="/src/assets/img/slides/slide1-logo.svg"
-                            style="display: none;"
-                          />
-                        </transition-stub>
+                        <!---->
                         <transition-stub
                           appear="false"
                           css="true"
@@ -154,18 +144,7 @@ exports[`renders CoffeeSection > renders CoffeeSection 1`] = `
                         />
                         
                         
-                        <transition-stub
-                          appear="true"
-                          css="true"
-                          name="fade-transition"
-                          persisted="false"
-                        >
-                          <img
-                            class="v-img__img v-img__img--contain"
-                            src="/src/assets/img/slides/slide1-social.svg"
-                            style="display: none;"
-                          />
-                        </transition-stub>
+                        <!---->
                         <transition-stub
                           appear="false"
                           css="true"
@@ -190,18 +169,7 @@ exports[`renders CoffeeSection > renders CoffeeSection 1`] = `
                         />
                         
                         
-                        <transition-stub
-                          appear="true"
-                          css="true"
-                          name="fade-transition"
-                          persisted="false"
-                        >
-                          <img
-                            class="v-img__img v-img__img--contain"
-                            src="/src/assets/img/slides/slide1-video-conf.svg"
-                            style="display: none;"
-                          />
-                        </transition-stub>
+                        <!---->
                         <transition-stub
                           appear="false"
                           css="true"
@@ -226,18 +194,7 @@ exports[`renders CoffeeSection > renders CoffeeSection 1`] = `
                         />
                         
                         
-                        <transition-stub
-                          appear="true"
-                          css="true"
-                          name="fade-transition"
-                          persisted="false"
-                        >
-                          <img
-                            class="v-img__img v-img__img--contain"
-                            src="/src/assets/img/slides/slide1-presentation.svg"
-                            style="display: none;"
-                          />
-                        </transition-stub>
+                        <!---->
                         <transition-stub
                           appear="false"
                           css="true"
@@ -262,18 +219,7 @@ exports[`renders CoffeeSection > renders CoffeeSection 1`] = `
                         />
                         
                         
-                        <transition-stub
-                          appear="true"
-                          css="true"
-                          name="fade-transition"
-                          persisted="false"
-                        >
-                          <img
-                            class="v-img__img v-img__img--contain"
-                            src="/src/assets/img/slides/slide1-calendar.svg"
-                            style="display: none;"
-                          />
-                        </transition-stub>
+                        <!---->
                         <transition-stub
                           appear="false"
                           css="true"
@@ -298,18 +244,7 @@ exports[`renders CoffeeSection > renders CoffeeSection 1`] = `
                         />
                         
                         
-                        <transition-stub
-                          appear="true"
-                          css="true"
-                          name="fade-transition"
-                          persisted="false"
-                        >
-                          <img
-                            class="v-img__img v-img__img--contain"
-                            src="/src/assets/img/slides/slide1-link-based.svg"
-                            style="display: none;"
-                          />
-                        </transition-stub>
+                        <!---->
                         <transition-stub
                           appear="false"
                           css="true"
@@ -522,6 +457,7 @@ exports[`renders CoffeeSection > renders CoffeeSection 1`] = `
         
         
       </div>
+      
     </div>
   </div>
 </div>

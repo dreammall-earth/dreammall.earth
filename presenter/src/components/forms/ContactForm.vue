@@ -3,56 +3,34 @@
     <v-form ref="form" class="contact-form" @submit.prevent="submitForm">
       <v-row>
         <v-col cols="12" md="6" class="py-0 pt-1">
-          <v-text-field
+          <NameInput
             id="contactname"
             v-model="firstname"
             name="firstname"
             class="contact-text"
             :label="$t('menu.footer.contactForm.firstName')"
-            variant="solo"
-            color="#3D4753"
-            bg-color="rgba(174, 179, 189, 0.50)"
-            hide-details="auto"
-            flat
-            rounded="xl"
             required
-            :rules="nameRules"
-          ></v-text-field>
+          ></NameInput>
         </v-col>
         <v-col cols="12" md="6" class="py-0 pt-1">
-          <v-text-field
+          <NameInput
             v-model="lastname"
             name="lastname"
             class="contact-text"
             :label="$t('menu.footer.contactForm.lastName')"
-            variant="solo"
-            color="#3D4753"
-            bg-color="rgba(174, 179, 189, 0.50)"
-            hide-details="auto"
-            flat
-            rounded="xl"
             required
-            :rules="nameRules"
-          ></v-text-field>
+          ></NameInput>
         </v-col>
       </v-row>
       <v-row class="mt-0">
         <v-col cols="12" md="6" class="py-0 pt-1">
-          <v-text-field
+          <EmailInput
             v-model="email"
             name="email"
             class="contact-text mt-4"
             :label="$t('menu.footer.contactForm.mail')"
-            variant="solo"
-            color="#3D4753"
-            bg-color="rgba(174, 179, 189, 0.50)"
-            hide-details="auto"
-            flat
-            rounded="xl"
-            type="email"
             required
-            :rules="emailRules"
-          ></v-text-field>
+          ></EmailInput>
         </v-col>
         <v-col cols="12" md="6" class="py-0 pt-2 pa-md-3">
           <!-- <v-select
@@ -92,18 +70,7 @@
       </v-row>
       <v-row class="mt-0">
         <v-col class="d-flex align-start">
-          <v-checkbox
-            v-model="dataprivacy"
-            name="dataprivacy"
-            color="rgba(174, 179, 189, 0.50)"
-            value="false"
-            hide-details="auto"
-            :center-affix="false"
-            density="compact"
-            required
-            :rules="[() => !!dataprivacy || $t('validation.fieldRequired')]"
-          >
-          </v-checkbox>
+          <DataPrivacyCheckbox />
           <span class="ml-6 ml-sm-4 pt-2 contact-dataprivacy"
             >{{ $t('menu.footer.contactForm.privacy') }}
             <AnchorLink
@@ -147,15 +114,17 @@ import { useMutation } from '@vue/apollo-composable'
 import { ref } from 'vue'
 
 import MainButton from '#components/buttons/MainButton.vue'
+import DataPrivacyCheckbox from '#components/inputs/DataPrivacyCheckbox.vue'
+import EmailInput from '#components/inputs/EmailInput.vue'
+import NameInput from '#components/inputs/NameInput.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
 import { createContactForm } from '#mutations/createContactForm'
-import { nameRules, messageRules, emailRules } from '#src/validation/validation'
+import { messageRules } from '#src/validation/validation'
 
 const firstname = ref('')
 const lastname = ref('')
 const email = ref('')
 const message = ref('')
-const dataprivacy = ref(0)
 const formIsLoading = ref(false)
 const showFormError = ref(false)
 const showFormSuccess = ref(false)
@@ -200,18 +169,20 @@ async function submitForm() {
 </script>
 
 <style scoped lang="scss">
+@import '#root/src/assets/scss/style';
+
 .contact-form {
   .contact-text {
-    border: 1px solid #fff;
-    border-radius: 15px;
+    border: $border-text-default;
+    border-radius: $border-radius-default;
 
     .v-field {
-      border: 1px solid #fff;
-      border-radius: 15px;
+      border: $border-text-default;
+      border-radius: $border-radius-default;
 
       .v-field__field {
         label.v-label {
-          color: #3d4753;
+          color: $font-color-default;
         }
       }
     }
@@ -222,12 +193,7 @@ async function submitForm() {
   }
 
   .contact-dataprivacy {
-    font-family: Poppins, sans-serif;
-    font-size: 0.875rem;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
-    color: #3d4753;
+    @include text-font-small;
 
     .dataprivacy-link {
       height: auto;
@@ -235,18 +201,14 @@ async function submitForm() {
   }
 
   .info-text {
-    font-family: Poppins, sans-serif;
-    font-size: 1.25rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+    @include form-info-font;
 
     &.form-success {
-      color: green;
+      color: $form-info-color-success;
     }
 
     &.form-error {
-      color: rgb(176 0 32);
+      color: $form-info-color-error;
     }
   }
 
