@@ -3,11 +3,7 @@ import { describe, it, expect } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { setupIntersectionObserverMock } from '#root/scripts/tests/mock.IntersectionObserver'
-
 import HeaderMenu from './HeaderMenu.vue'
-
-setupIntersectionObserverMock()
 
 describe('HeaderMenu', () => {
   const wrapper = mount(VApp, {
