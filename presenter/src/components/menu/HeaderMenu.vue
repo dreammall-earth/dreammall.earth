@@ -21,8 +21,11 @@
             :label="$t('menu.header.contact')"
           ></AnchorLink>
         </v-col>
-        <v-col class="d-flex">
-          <div class="d-flex d-md-none align-center justify-end w-100 mr-8">
+        <v-col class="d-flex justify-end">
+          <div class="d-flex align-center mr-0 mr-md-8 language-column">
+            <LanguageSelector />
+          </div>
+          <div class="d-flex d-md-none align-center justify-end mr-8 mobile-column">
             <v-img class="mobile-menu-icon w-100" :src="MobileMenuIcon" @click="toggleNavBar" />
           </div>
         </v-col>
@@ -66,6 +69,7 @@ import { ref, onMounted, onBeforeMount } from 'vue'
 import MobileMenuIcon from '#assets/img/hamburger_mobile.svg'
 import LogoImage from '#components/LogoImage.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
+import LanguageSelector from '#components/language/LanguageSelector.vue'
 
 const appBackground = ref('transparent')
 const navBackground = ref('#d8d8d8')
@@ -151,6 +155,18 @@ onMounted(() => {
       &:hover {
         cursor: pointer;
       }
+    }
+  }
+  .language-column {
+    @media screen and (max-width: $tablet) {
+      width: 100%;
+      max-width: 80px;
+    }
+  }
+  .mobile-column {
+    @media screen and (max-width: $tablet) {
+      width: 100%;
+      max-width: 80px;
     }
   }
 
