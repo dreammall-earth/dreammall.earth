@@ -1,6 +1,6 @@
 <template>
   <v-select
-    v-model="locale"
+    v-model="$i18n.locale"
     density="compact"
     name="language"
     :items="languages"
@@ -12,7 +12,6 @@
     bg-color="transparent"
     hide-details="auto"
     flat
-    @update:model-value="changeLanguage"
   >
     <template #selection="{ item }">
       <span>{{ item.raw.locale.toUpperCase() }}</span>
@@ -30,16 +29,11 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-const locale = ref({ locale: 'de', title: 'Deutsch' })
+// TODO better place? maybe locales folder?
 const languages = ref([
   { locale: 'de', title: 'Deutsch' },
   { locale: 'en', title: 'Englisch' },
 ])
-
-// TODO check type
-function changeLanguage(selectedLocale: object) {
-  // TODO change language
-}
 </script>
 
 <style lang="scss">
