@@ -67,9 +67,9 @@
 import { ref, onMounted, onBeforeMount } from 'vue'
 
 import MobileMenuIcon from '#assets/img/hamburger_mobile.svg'
+import LanguageSelector from '#components/language/LanguageSelector.vue'
 import LogoImage from '#components/LogoImage.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
-import LanguageSelector from '#components/language/LanguageSelector.vue'
 
 const appBackground = ref('transparent')
 const navBackground = ref('#d8d8d8')
