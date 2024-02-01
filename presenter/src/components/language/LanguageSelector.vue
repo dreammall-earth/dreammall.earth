@@ -39,20 +39,18 @@ const languages = ref([
 <style lang="scss">
 @import '#root/src/assets/scss/style';
 
-.topmenu {
-  .v-select {
-    @include section-content-font;
-  }
+.language-select {
+  max-width: 80px;
 
-  .language-select {
-    @media screen and (max-width: $mobile) {
-      transform: translateX(40px);
-    }
-  }
+  @include section-content-font;
 
-  .v-select.v-select--active-menu {
-    color: $color-blue-300;
+  @media screen and (max-width: $mobile) {
+    transform: translateX(40px);
   }
+}
+
+.language-select.v-select.v-select--active-menu {
+  color: $color-blue-300;
 }
 
 .v-select__content {
