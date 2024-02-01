@@ -32,7 +32,7 @@ import { ref } from 'vue'
 // TODO better place? maybe locales folder?
 const languages = ref([
   { locale: 'de', title: 'Deutsch' },
-  { locale: 'en', title: 'Englisch' },
+  { locale: 'en', title: 'English' },
 ])
 </script>
 
@@ -54,43 +54,45 @@ const languages = ref([
     color: $color-blue-300;
   }
 }
+
 .v-select__content {
   .v-list {
-    padding: 0px;
+    padding: 0;
 
     .language-item {
+      min-width: 4.875rem;
       padding-inline: 24px !important;
       padding-left: 6px !important;
-      min-width: 4.875rem;
 
       .language-item-title {
-        font-family: Poppins;
+        font-family: $font-family-default;
         font-size: 1rem;
-        font-style: normal;
+        font-style: $font-style-normal;
         font-weight: 500;
-        line-height: normal;
+        line-height: $line-height-normal;
       }
 
-      &:before {
-        content: '';
+      &::before {
         display: inline-block;
         width: 2px;
         height: 25px;
-        background: transparent;
         margin-right: 20px;
+        content: '';
+        background: transparent;
       }
     }
 
     .language-item-active {
       color: $color-green-100 !important;
     }
-    .language-item-active:before {
-      content: '';
+
+    .language-item-active::before {
       display: inline-block;
       width: 2px;
       height: 25px;
-      background: $color-green-100;
       margin-right: 20px;
+      content: '';
+      background: $color-green-100;
     }
   }
 }
