@@ -157,12 +157,14 @@ onMounted(() => {
       }
     }
   }
+
   .language-column {
     @media screen and (max-width: $tablet) {
       width: 100%;
       max-width: 80px;
     }
   }
+
   .mobile-column {
     @media screen and (max-width: $tablet) {
       width: 100%;
