@@ -17,7 +17,7 @@ describe('IndexPage', () => {
     expect(title).toBe('DreamMall')
   })
 
-  it('renders IndexPage with sections', () => {
+  it('renders', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 })

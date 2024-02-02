@@ -12,7 +12,7 @@ describe('HeaderMenu', () => {
     },
   })
 
-  it('renders three columns', () => {
+  it('renders', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 })
