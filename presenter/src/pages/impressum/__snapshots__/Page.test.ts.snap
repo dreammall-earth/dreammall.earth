@@ -580,7 +580,7 @@ exports[`ImpressumPage > renders 1`] = `
                           $t('impress.data.headline')
                         </h2>
                         <ul
-                          class="card-content mt-2 my-8"
+                          class="card-content mt-2 my-6"
                           data-v-31cfb6bb=""
                         >
                           <li
@@ -732,14 +732,92 @@ exports[`ImpressumPage > renders 1`] = `
                       />
                       
                     </div>
-                    <!--&lt;v-card flat class="content-card mb-2 pa-4 pa-md-8"&gt;
-          &lt;template #text&gt;
-            &lt;h2 class="card-header"&gt;{{ $t('impress.tax.headline') }}&lt;/h2&gt;
-            &lt;p class="card-content mt-2"&gt;
-              {{ $t('impress.tax.content') }}&lt;br /&gt;{{ $t('impress.tax.id') }}
-            &lt;/p&gt;
-          &lt;/template&gt;
-        &lt;/v-card&gt;-->
+                  </div>
+                </div>
+                <div
+                  class="v-row"
+                  data-v-31cfb6bb=""
+                >
+                  <div
+                    class="v-col"
+                    data-v-31cfb6bb=""
+                  >
+                    <div
+                      class="v-card v-card--flat v-theme--light v-card--density-default v-card--variant-elevated content-card mb-2 pa-4 pa-md-12"
+                      data-v-31cfb6bb=""
+                    >
+                      <!---->
+                      <div
+                        class="v-card__loader"
+                      >
+                        <div
+                          aria-hidden="true"
+                          aria-valuemax="100"
+                          aria-valuemin="0"
+                          class="v-progress-linear v-theme--light v-locale--is-ltr"
+                          role="progressbar"
+                          style="top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);"
+                        >
+                          <!---->
+                          <div
+                            class="v-progress-linear__background"
+                            style="width: 100%;"
+                          />
+                          <transition-stub
+                            appear="false"
+                            css="true"
+                            name="fade-transition"
+                            persisted="false"
+                          >
+                            <div
+                              class="v-progress-linear__indeterminate"
+                            >
+                              
+                              <div
+                                class="v-progress-linear__indeterminate long"
+                              />
+                              <div
+                                class="v-progress-linear__indeterminate short"
+                              />
+                              
+                            </div>
+                          </transition-stub>
+                          <!---->
+                        </div>
+                      </div>
+                      <!---->
+                      <div
+                        class="v-card-text"
+                      >
+                        
+                        <h2
+                          class="card-header"
+                          data-v-31cfb6bb=""
+                        >
+                          $t('impress.tax.headline')
+                        </h2>
+                        <p
+                          class="card-content mt-2"
+                          data-v-31cfb6bb=""
+                        >
+                          $t('impress.tax.content') 
+                          <b
+                            data-v-31cfb6bb=""
+                          >
+                            $t('impress.tax.id')
+                          </b>
+                        </p>
+                        
+                      </div>
+                      <!---->
+                      <!---->
+                      
+                      <!---->
+                      <span
+                        class="v-card__underlay"
+                      />
+                      
+                    </div>
                   </div>
                 </div>
                 <div
