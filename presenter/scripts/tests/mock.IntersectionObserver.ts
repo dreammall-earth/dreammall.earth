@@ -29,3 +29,4 @@ export function setupIntersectionObserverMock({
     value: MockIntersectionObserver,
   })
 }
+setupIntersectionObserverMock()

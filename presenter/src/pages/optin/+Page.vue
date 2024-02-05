@@ -1,12 +1,20 @@
 <template>
   <DefaultLayout>
-    <div class="h-screen">
-      <p v-if="isError">
-        {{ $t('optin.error.text') }}
-        <br />
-        <a href="/#newsletter-section">{{ $t('optin.error.link') }}</a>
-      </p>
-      <p v-else>{{ $t('optin.success.text') }}</p>
+    <div class="h-screen optin-page py-12">
+      <div v-if="isError">
+        <p>{{ $t('optin.error.text') }}</p>
+        <MainButton
+          class="mt-8"
+          :label="$t('optin.error.link')"
+          size="auto"
+          variant="primary"
+          href="/#newsletter-section"
+          >{{ $t('optin.error.link') }}</MainButton
+        >
+      </div>
+      <div v-else>
+        <p>{{ $t('optin.success.text') }}</p>
+      </div>
     </div>
   </DefaultLayout>
 </template>
@@ -16,6 +24,7 @@ import { useMutation } from '@vue/apollo-composable'
 import { navigate } from 'vike/client/router'
 import { onBeforeMount, ref } from 'vue'
 
+import MainButton from '#components/buttons/MainButton.vue'
 import { usePageContext } from '#context/usePageContext'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
 import { confirmNewsletter } from '#mutations/confirmNewsletter'
@@ -50,8 +59,16 @@ onBeforeMount(async () => {
 </script>
 
 <style scoped lang="scss">
-.h-screen {
-  padding-top: 100px;
-  padding-left: 100px;
+.optin-page {
+  display: flex;
+  justify-content: center;
+
+  p {
+    display: flex;
+    font-size: 1.5em;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+  }
 }
 </style>

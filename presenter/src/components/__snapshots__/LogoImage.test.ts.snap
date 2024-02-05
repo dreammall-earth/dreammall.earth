@@ -1,0 +1,29 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LogoImage > renders Logo 1`] = `
+<div
+  class="v-responsive v-img v-img--booting w-100 logo-medium"
+  data-v-916aa5dc=""
+>
+  <div
+    class="v-responsive__sizer"
+  />
+  
+  
+  <!---->
+  <transition-stub
+    appear="false"
+    css="true"
+    name="fade-transition"
+    persisted="false"
+  >
+    <!---->
+  </transition-stub>
+  <!---->
+  <!---->
+  <!---->
+  
+  
+  <!---->
+</div>
+`;

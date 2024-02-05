@@ -36,6 +36,39 @@
     }
   },
   "home": {
+    "aboutSection": {
+      "buttonTxt": "Persönlicher Kontakt",
+      "contentFirstParagraph": "Die DreamMall Plattform bietet Ihnen als Unternehmern, Unternehmergruppen sowie Jungunternehmern/Startups einen vertrauensvollen Raum der kreativen Vernetzung für Ihre Ideen und Projekte.",
+      "contentSecondParagraph": "Wir verwirklichen uns jetzt alle. Die DreamMall entwickelt sich mit jedem Einzelnen von uns für ein gemeinsames Wirtschaften und einer guten Lebensqualität. Unsere positive Energie vervielfältigt sich und gemeinsam blicken wir nur noch nach vorne. Weltweit!",
+      "headline": "Respektvolles Miteinander macht ALLES möglich."
+    },
+    "coffeeSection": {
+      "headline": "Ihre Zutaten",
+      "headlineAppend": "im Kaffee",
+      "slide1": {
+        "headline": "Alle Funktionen die Sie brauchen.",
+        "subheadline": "Weltencafé"
+      },
+      "slide2": {
+        "headline": "Digitale Vielfalt",
+        "subheadline": "Mall"
+      },
+      "slide3": {
+        "headline": "Erfolgreiche Projekte suchen Talente, Ressourcen und Arbeit.",
+        "subheadline": "Menschen und Projekte"
+      }
+    },
+    "ctaSection": {
+      "buttonText": "weiter",
+      "content": "Seien Sie Teil des Anfangs einer aufregenden Veränderung! Hinterlassen Sie uns einfach Ihren Namen und Ihre E-Mail Adresse, um exklusive Angebote und umfassende Details vor der offiziellen Veröffentlichung zu erhalten. Verpassen Sie nicht die Gelegenheit, Teil unserer einzigartigen Community zu werden und von unseren besonderen Starter-Angeboten zu profitieren!",
+      "headline": "Veränderung",
+      "headlineAppend": "Schaffen"
+    },
+    "introSection": {
+      "headline": "DreamMall von Menschen für Menschen geschaffen",
+      "preOrderBtn": "Mehr Informationen",
+      "subHeadline": "7 Tage kostenlos testen"
+    },
     "newsletterSection": {
       "currentNewsletter": "Aktueller Newsletter",
       "headline": "Newsletter",
@@ -45,25 +78,18 @@
         "errorMsg": "Das hat leider nicht funktioniert! Bitte erneut probieren",
         "firstname": "Vorname",
         "lastname": "Nachname",
-        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unseren",
+        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen finden Sie in unseren",
         "privacyLinkLabel": "Datenschutzrichtlinien.",
         "submitBtn": "Absenden",
         "successMsg": "E-Mail gesendet"
       },
       "subHeadline": "Immer auf dem Laufenden bleiben"
     },
-    "section1": {
-      "headline": "DreamMall von Menschen für Menschen geschaffen",
-      "preOrderBtn": "Mehr Informationen",
-      "subHeadline": "7 Tage kostenlos testen"
+    "planningSection": {
+      "headline": "DreamMall Planning",
+      "timelineBtn": "Reload"
     },
-    "section2": {
-      "buttonTxt": "Persönlicher Kontakt",
-      "contentFirstParagraph": "Die DreamMall Plattform bietet euch Unternehmern, Unternehmergruppen sowie Jungunternehmern/Startups einen vertrauensvollen Raum der kreativen Vernetzung für eure Ideen und Projekte.",
-      "contentSecondParagraph": "Wir verwirklichen uns jetzt alle. Die DreamMall entwickelt sich mit jedem Einzelnen von uns für ein gemeinsames Wirtschaften und einer guten Lebensqualität. Unsere positive Energie vervielfältigt sich und gemeinsam blicken wir nur noch nach vorne. Weltweit!",
-      "headline": "Respektvolles Miteinander macht ALLES möglich."
-    },
-    "section3": {
+    "productsSection": {
       "firstColumn": {
         "headline": "Mall",
         "text": "Wir erschaffen eine Welt, ein Platz des gemeinsamen Lebens und der Wirtschaft."
@@ -76,34 +102,8 @@
       },
       "thirdColumn": {
         "headline": "Menschen und Projekte",
-        "text": "Dein Talent ist wichtig für die Welt. Verwirkliche deine Kreativität in die Realität."
+        "text": "Ihr Talent ist wichtig für die Welt. Verwirklichen Sie Ihre Kreativität in die Realität."
       }
-    },
-    "section4": {
-      "headline": "DreamMall Planning",
-      "timelineBtn": "Reload"
-    },
-    "section5": {
-      "headline": "Deine Zutaten",
-      "headlineAppend": "im Kaffee",
-      "slide1": {
-        "headline": "Alle Funktionen die du brauchst.",
-        "subheadline": "Weltencafé"
-      },
-      "slide2": {
-        "headline": "Digitale Vielfalt",
-        "subheadline": "Mall"
-      },
-      "slide3": {
-        "headline": "Erfolgreiche Projekte suchen Talente, Ressourcen und Arbeit.",
-        "subheadline": "Menschen und Projekte"
-      }
-    },
-    "section6": {
-      "buttonText": "weiter",
-      "content": "Seien Sie Teil des Anfangs einer aufregenden Veränderung! Hinterlassen Sie uns einfach Ihren Namen und Ihre E-Mail Adresse, um exklusive Angebote und umfassende Details vor der offiziellen Veröffentlichung zu erhalten. Verpassen Sie nicht die Gelegenheit, Teil unserer einzigartigen Community zu werden und von unseren besonderen Starter-Angeboten zu profitieren!",
-      "headline": "Veränderung",
-      "headlineAppend": "Schaffen"
     }
   },
   "impress": {
@@ -163,14 +163,14 @@
   "menu": {
     "eMail": "E-Mail",
     "footer": {
-      "contact": "Kontaktiere uns",
+      "contact": "Kontaktieren Sie uns",
       "contactForm": {
         "errorMsg": "Das hat leider nicht funktioniert! Bitte erneut probieren",
         "firstName": "Vorname",
         "lastName": "Nachname",
         "mail": "E-Mail Adresse",
-        "message": "Frag uns einfach …",
-        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unseren",
+        "message": "Fragen Sie uns einfach …",
+        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen finden Sie in unseren",
         "privacyLinkLabel": "Datenschutzrichtlinien.",
         "submitBtn": "Absenden",
         "successMsg": "E-Mail gesendet",
@@ -195,17 +195,17 @@
       "about": "über",
       "contact": "kontakt",
       "newsletter": "Newsletter abonnieren",
-      "products": "products",
+      "products": "produkte",
       "sitemap": "Sitemap"
     }
   },
   "optin": {
     "error": {
       "link": "Erneut eintragen",
-      "text": "Bei der Bestätigung ist ein Fehler aufgetreten. Bitte trage dich erneut in den Newsletter ein."
+      "text": "Bei der Bestätigung ist ein Fehler aufgetreten. Bitte tragen Sie sich erneut in den Newsletter ein."
     },
     "success": {
-      "text": "Du hast dein Newsletterabbonoment erfolgreich bestätigt. Du wirst in Kürze auf die Startseite weitergeleitet."
+      "text": "Sie haben Ihr Newsletterabbonoment erfolgreich bestätigt. Sie werden in Kürze auf die Startseite weitergeleitet."
     }
   },
   "validation": {

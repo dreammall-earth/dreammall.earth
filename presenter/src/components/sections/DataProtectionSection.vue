@@ -62,24 +62,19 @@
 <script lang="ts" setup></script>
 
 <style scoped lang="scss">
-$mobile: 500px;
-$tablet: 900px;
+@import '#root/src/assets/scss/style';
 
 .data-protection-section {
   max-width: 1120px;
-  font-family: Poppins, sans-serif;
-  color: #383838;
-  background: #f5f5f5;
+  font-family: $font-family-default;
+  color: $font-color-dark;
+  background: $background-color-primary;
 
   .section-header {
     text-align: center;
 
     h1.section-headline {
-      font-size: 3.875rem;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 120%;
-      text-transform: capitalize;
+      @include text-font-headline;
 
       @media screen and (max-width: $tablet) {
         font-size: 2.5rem;
@@ -92,27 +87,7 @@ $tablet: 900px;
   }
 
   .content-card {
-    font-size: 1.25rem;
-    line-height: normal;
-    background: #fff;
-    border-radius: 1.875rem;
-
-    @media screen and (max-width: $mobile) {
-      font-size: 1rem;
-    }
-
-    .card-header {
-      font-weight: 700;
-
-      @media screen and (max-width: $mobile) {
-        font-size: 1rem;
-      }
-    }
-
-    .card-content {
-      font-weight: 300;
-      list-style: none;
-    }
+    @include page-content-card-mixin;
   }
 }
 </style>

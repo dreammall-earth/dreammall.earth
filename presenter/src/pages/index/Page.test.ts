@@ -3,11 +3,8 @@ import { describe, it, expect } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { setupIntersectionObserverMock } from '#root/scripts/tests/mock.IntersectionObserver'
-
 import IndexPage from './+Page.vue'
-
-setupIntersectionObserverMock()
+import { title } from './+title'
 
 describe('IndexPage', () => {
   const wrapper = mount(VApp, {
@@ -16,7 +13,11 @@ describe('IndexPage', () => {
     },
   })
 
-  it('renders IndexPage with sections', () => {
+  it('title returns default title', () => {
+    expect(title).toBe('DreamMall')
+  })
+
+  it('renders', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 })
