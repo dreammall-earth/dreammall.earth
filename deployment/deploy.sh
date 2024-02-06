@@ -3,39 +3,38 @@
 # Find current directory & configure paths
 SCRIPT_PATH=$(realpath $0)
 SCRIPT_DIR=$(dirname $SCRIPT_PATH)
-LOG_DIR=$SCRIPT_DIR/../log/$(date +"%Y-%m-%d %T")
+LOG_FILE=$SCRIPT_DIR/../log/$(date +"%Y-%m-%d %T")_deploy.log
 
-# Create logfdir
-mkdir "$LOG_DIR"
+exec 3>&1 1>>${LOG_FILE} 2>&1
 
-echo 'Start Deploy' >> $LOG_DIR/deploy.log
+echo 'Start Deploy' | tee /dev/fd/3
 
 # Update git
 # assuming you are already on the right branch
-git pull -ff >> $LOG_DIR/deploy.log 2>> $LOG_DIR/deploy.error.log
+git pull -ff | tee /dev/fd/3
 
 # stop all services
-pm2 stop all >> $LOG_DIR/deploy.log 2>> $LOG_DIR/deploy.error.log
-pm2 delete all >> $LOG_DIR/deploy.log 2>> $LOG_DIR/deploy.error.log
-pm2 save >> $LOG_DIR/deploy.log 2>> $LOG_DIR/deploy.error.log
+pm2 stop all | tee /dev/fd/3
+pm2 delete all | tee /dev/fd/3
+pm2 save | tee /dev/fd/3
 
 # run as production
 BACKUP_NODE_ENV=$NODE_ENV
 export NODE_ENV=production
 
 # Backend & Database Migration
-$SCRIPT_DIR/build.backend.sh >> $LOG_DIR/deploy.backend.log 2>> $LOG_DIR/deploy.backend.error.log
-$SCRIPT_DIR/migrate.database.sh >> $LOG_DIR/deploy.backend.log 2>> $LOG_DIR/deploy.backend.error.log
-$SCRIPT_DIR/start.backend.sh >> $LOG_DIR/deploy.backend.log 2>> $LOG_DIR/deploy.backend.error.log
+$SCRIPT_DIR/build.backend.sh | tee /dev/fd/3
+$SCRIPT_DIR/migrate.database.sh | tee /dev/fd/3
+$SCRIPT_DIR/start.backend.sh | tee /dev/fd/3
 
 # Presenter
-$SCRIPT_DIR/build.presenter.sh >> $LOG_DIR/deploy.presenter.log 2>> $LOG_DIR/deploy.presenter.error.log
-$SCRIPT_DIR/start.presenter.sh >> $LOG_DIR/deploy.presenter.log 2>> $LOG_DIR/deploy.presenter.error.log
+$SCRIPT_DIR/build.presenter.sh | tee /dev/fd/3
+$SCRIPT_DIR/start.presenter.sh | tee /dev/fd/3
 
 # Docs
-$SCRIPT_DIR/build.docs.sh >> $LOG_DIR/deploy.docs.log 2>> $LOG_DIR/deploy.docs.error.log
+$SCRIPT_DIR/build.docs.sh | tee /dev/fd/3
 
 # restore node env
 NODE_ENV=$BACKUP_NODE_ENV
 
-echo 'Finish Deploy' >> $LOG_DIR/deploy.log
+echo 'Finish Deploy' | tee /dev/fd/3
