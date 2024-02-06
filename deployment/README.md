@@ -58,9 +58,10 @@ git clone https://github.com/dreammall-earth/dreammall.earth.git
 Configure nginx:
 ```bash
 # replace nginx config
-mv -f deployment/nginx/default.conf /etc/nginx/http.d/default.conf
+cp -f deployment/nginx/default.conf /etc/nginx/http.d/default.conf
 # adjust the nginx config accordingly
 vi /etc/nginx/http.d/default.conf
+# note: replace log paths according to your installation directory
 ```
 
 Create Database User:
