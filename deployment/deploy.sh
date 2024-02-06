@@ -6,7 +6,7 @@ SCRIPT_DIR=$(dirname $SCRIPT_PATH)
 LOG_DIR=$SCRIPT_DIR/../log/$(date +"%Y-%m-%d %T")
 
 # Create logfdir
-mkdir $LOG_DIR
+mkdir "$LOG_DIR"
 
 echo 'Start Deploy' >> $LOG_DIR/deploy.log
 
