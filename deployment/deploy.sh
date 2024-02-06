@@ -3,31 +3,41 @@
 # Find current directory & configure paths
 SCRIPT_PATH=$(realpath $0)
 SCRIPT_DIR=$(dirname $SCRIPT_PATH)
+LOG_FILE=$SCRIPT_DIR/../log/$(date +"%Y-%m-%d_%T")_deploy.log
+LOG_ERROR_FILE=$SCRIPT_DIR/../log/$(date +"%Y-%m-%d_%T")_deploy.error.log
 
-# Update git
-# assuming you are already on the right branch
-git pull -ff
+exec 3>&1 1>>${LOG_FILE} 2>&1 2>>${LOG_ERROR_FILE}
 
-# stop all services
-pm2 stop all
-pm2 delete all
-pm2 save
+{
+    echo 'Start Deploy' 
 
-# run as production
-BACKUP_NODE_ENV=$NODE_ENV
-export NODE_ENV=production
+    # Update git
+    # assuming you are already on the right branch
+    git pull -ff
 
-# Backend & Database Migration
-$SCRIPT_DIR/build.backend.sh
-$SCRIPT_DIR/migrate.database.sh
-$SCRIPT_DIR/start.backend.sh
+    # stop all services
+    pm2 stop all
+    pm2 delete all
+    pm2 save
 
-# Presenter
-$SCRIPT_DIR/build.presenter.sh
-$SCRIPT_DIR/start.presenter.sh
+    # run as production
+    BACKUP_NODE_ENV=$NODE_ENV
+    export NODE_ENV=production
 
-# Docs
-$SCRIPT_DIR/build.docs.sh
+    # Backend & Database Migration
+    $SCRIPT_DIR/build.backend.sh
+    $SCRIPT_DIR/migrate.database.sh
+    $SCRIPT_DIR/start.backend.sh
 
-# restore node env
-NODE_ENV=$BACKUP_NODE_ENV
+    # Presenter
+    $SCRIPT_DIR/build.presenter.sh
+    $SCRIPT_DIR/start.presenter.sh
+
+    # Docs
+    $SCRIPT_DIR/build.docs.sh
+
+    # restore node env
+    NODE_ENV=$BACKUP_NODE_ENV
+
+    echo 'Finish Deploy'
+} | tee /dev/fd/3
