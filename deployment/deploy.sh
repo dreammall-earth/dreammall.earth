@@ -3,9 +3,10 @@
 # Find current directory & configure paths
 SCRIPT_PATH=$(realpath $0)
 SCRIPT_DIR=$(dirname $SCRIPT_PATH)
-LOG_FILE=$SCRIPT_DIR/../log/$(date +"%Y-%m-%d %T")_deploy.log
+LOG_FILE=$SCRIPT_DIR/../log/$(date +"%Y-%m-%d_%T")_deploy.log
+LOG_ERROR_FILE=$SCRIPT_DIR/../log/$(date +"%Y-%m-%d_%T")_deploy.error.log
 
-exec 3>&1 1>>${LOG_FILE} 2>&1
+exec 3>&1 1>>${LOG_FILE} 2>&1 2>>${LOG_ERROR_FILE}
 
 echo 'Start Deploy' | tee /dev/fd/3
 
