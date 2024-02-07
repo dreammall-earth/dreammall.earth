@@ -8,15 +8,6 @@ LOG_PATH=$SCRIPT_DIR/../log
 LOG_FILE=$LOG_PATH/${TIMESTAMP}_deploy.log
 LOG_ERROR_FILE=$LOG_PATH/${TIMESTAMP}_deploy.error.log
 
-nginx.access.backend.log
-nginx.access.docs.log
-nginx.access.hooks.log
-nginx.access.presenter.log
-nginx.error.backend.log
-nginx.error.docs.log
-nginx.error.hooks.log
-nginx.error.presenter.log
-
 exec 3>&1 1>>${LOG_FILE} 2>&1 2>>${LOG_ERROR_FILE}
 
 {
