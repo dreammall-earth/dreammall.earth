@@ -14,9 +14,9 @@ exec 3>&1 1>>${LOG_FILE} 2>&1 2>>${LOG_ERROR_FILE}
     echo 'Start Deploy' 
 
     # Logrotate nginx logs
-    (cd $LOG_PATH; mv nginx.*.log ${TIMESTAMP}_nginx.*.log)
+    (cd $LOG_PATH; for filename in nginx.*.log; do mv "$filename" "${TIMESTAMP}_${filename}"; done;)
     # trigger nginx logfile reload
-    kill -USR1 `cat /var/run/nginx.pid`
+    kill -USR1 `cat /var/run/nginx/nginx.pid`
 
     # stop all services
     pm2 stop all
