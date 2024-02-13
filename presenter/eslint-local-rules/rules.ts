@@ -1,8 +1,9 @@
 /* eslint import/no-commonjs: 0 */
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const utils = require('./node_modules/eslint-plugin-vue/lib/utils')
+import utils from './node_modules/eslint-plugin-vue/lib/utils'
 
-function getName(attribute) {
+import type { Rule } from 'eslint'
+
+function getName(attribute: any) {
   if (!attribute.directive) {
     return attribute.key.name
   }
@@ -17,20 +18,19 @@ function getName(attribute) {
   return null
 }
 
-function getValue(attribute) {
+function getValue(attribute: any ) {
   return attribute.value.value
 }
 
-module.exports = {
+export default {
   'href-pattern': {
     meta: {
       type: 'problem',
       docs: {
         description: 'Enforce href attribute values to start with "/" or "https://" in .vue files',
       },
-      fixable: null,
+      fixable: undefined,
       schema: [],
-      context: ['vue'],
       messages: {
         invalidHrefValue:
           'Invalid href value: "{{hrefValue}}". In this project href values must start with "/" or "https://".',
@@ -39,7 +39,7 @@ module.exports = {
     create(context) {
       return utils.defineTemplateBodyVisitor(context, {
         VStartTag() {},
-        VAttribute(node) {
+        VAttribute(node: any) {
           const name = getName(node)
           if (name == null) {
             return
@@ -65,4 +65,4 @@ module.exports = {
       })
     },
   },
-}
+} satisfies Record<string, Rule.RuleModule>
