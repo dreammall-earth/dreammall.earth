@@ -8,14 +8,18 @@ import {
   TransactionalEmailsApi,
   TransactionalEmailsApiApiKeys,
 } from '@getbrevo/brevo'
-import { ContactForm } from '@prisma/client'
+import { NewsletterPreOptIn } from '@prisma/client'
 
 import { CONFIG, CONFIG_CHECKS } from '#config/config'
+import { ContactFormInput } from '#graphql/inputs/ContactFormInput'
 import { prisma } from '#src/prisma'
 
 export const sendContactEmails = async (
-  contactForm: ContactForm,
+  data: ContactFormInput,
 ): Promise<Awaited<ReturnType<typeof apiInstance.sendTransacEmail>>[] | undefined> => {
+  // We save this wether config is correctly set or not
+  const contactForm = await prisma.contactForm.create({ data })
+
   if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SEND_CONTACT(CONFIG)) {
     return undefined
   }
@@ -168,7 +172,7 @@ export const subscribeToNewsletter = async (
   return true
 }
 
-export const confirmNewsletter = async (code: string): Promise<boolean> => {
+export const confirmNewsletter = async (code: string): Promise<false | NewsletterPreOptIn> => {
   if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_NEWSLETTER(CONFIG)) {
     return false
   }
@@ -218,5 +222,5 @@ export const confirmNewsletter = async (code: string): Promise<boolean> => {
     // TODO: logging or event
   }
 
-  return true
+  return optin
 }
