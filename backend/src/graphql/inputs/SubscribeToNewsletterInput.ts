@@ -4,7 +4,7 @@ import { InputType, Field } from 'type-graphql'
 // values according to prisma/schema.prisma
 const MAX_CHARS_FIRST_NAME = 50
 const MAX_CHARS_LAST_NAME = 50
-const MAX_CHARS_EMAIL = 255
+const MAX_CHARS_EMAIL = 254
 
 @InputType({ description: 'Input for the newsletter subscription form' })
 export class SubscribeToNewsletterInput {
