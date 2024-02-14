@@ -1,22 +1,21 @@
 // `usePageContext` allows us to access `pageContext` in any Vue component.
 // See https://vike.dev/pageContext-anywhere
 
+import { PageContext } from 'vike/types'
 import { inject } from 'vue'
-
-import { PageContext, VikePageContext } from '#types/PageContext'
 
 import type { App, InjectionKey } from 'vue'
 
-const key: InjectionKey<VikePageContext & PageContext> = Symbol(undefined)
+export const vikePageContext: InjectionKey<PageContext> = Symbol('pageContext')
 
 function usePageContext() {
-  const pageContext = inject(key)
+  const pageContext = inject(vikePageContext)
   if (!pageContext) throw new Error('setPageContext() not called in parent')
   return pageContext
 }
 
-function setPageContext(app: App, pageContext: VikePageContext & PageContext) {
-  app.provide(key, pageContext)
+function setPageContext(app: App, pageContext: PageContext) {
+  app.provide(vikePageContext, pageContext)
 }
 
 export { usePageContext }

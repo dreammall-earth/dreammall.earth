@@ -1,10 +1,7 @@
 <template>
   <v-app>
-    <TopMenu />
     <slot />
   </v-app>
 </template>
 
-<script lang="ts" setup>
-import TopMenu from '#components/menu/TopMenu.vue'
-</script>
+<script lang="ts" setup></script>

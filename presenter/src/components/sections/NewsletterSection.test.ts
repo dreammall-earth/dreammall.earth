@@ -15,6 +15,6 @@ describe('NewsletterSection', () => {
   })
 
   it('renders', () => {
-    expect(wrapper.find('.newsletter-section').exists()).toBeTruthy()
+    expect(wrapper.element).toMatchSnapshot()
   })
 })

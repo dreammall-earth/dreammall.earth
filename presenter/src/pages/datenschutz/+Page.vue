@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <div id="data-protection" class="pt-12">
+    <div id="data-protection" class="pt-6">
       <DataProtectionSection />
     </div>
   </DefaultLayout>

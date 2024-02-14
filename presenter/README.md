@@ -51,6 +51,7 @@ The following commands are available:
 | `npm run test:lint:remark`  | Run linter remark                                |
 | `npm run test:lint:style`   | Run linter stylelint                             |
 | `npm run test:unit`         | Run all unit tests and generate coverage report  |
+| `npm run test:unit:update`  | Run unit tests, coverage and update snapshots    |
 | `npm run test:unit:dev`     | Run all unit tests in watch mode                 |
 | `npm test`                  | Run all tests & linters                          |
 | **Storybook**               |                                                  |
@@ -136,12 +137,6 @@ git commit -m "Updated boilerplate_frontend in subtree under xxx/."
 Where `xxx` refers to the folder and product part you want to use the boilerplate in. This assumes that you might need several copies of the frontend boilerplate for you product.
 
 This mechanic was taken from this [source](https://stackoverflow.com/questions/1683531/how-to-import-existing-git-repository-into-another/8396318#8396318)
-
-## TODO
-
-- [ ] tests
-- [ ] stories
-- [ ] responsive design
 
 ## Known Problems
 

@@ -12,7 +12,7 @@
         <v-card flat class="content-card mb-2 pa-4 pa-md-12">
           <template #text>
             <h2 class="card-header">{{ $t('impress.data.headline') }}</h2>
-            <ul class="card-content mt-2 my-8">
+            <ul class="card-content mt-2 my-6">
               <li>{{ $t('impress.data.name') }}</li>
               <li>{{ $t('impress.data.street') }}</li>
               <!--<li>{{ $t('impress.data.additional') }}</li>-->
@@ -47,15 +47,18 @@
             <p class="mt-2 my-14">{{ $t('impress.contact.additionalLaw') }}</p>
           </template>
         </v-card>
-
-        <!--<v-card flat class="content-card mb-2 pa-4 pa-md-8">
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-card flat class="content-card mb-2 pa-4 pa-md-12">
           <template #text>
             <h2 class="card-header">{{ $t('impress.tax.headline') }}</h2>
             <p class="card-content mt-2">
-              {{ $t('impress.tax.content') }}<br />{{ $t('impress.tax.id') }}
+              {{ $t('impress.tax.content') }} <b>{{ $t('impress.tax.id') }}</b>
             </p>
           </template>
-        </v-card>-->
+        </v-card>
       </v-col>
     </v-row>
     <v-row>
@@ -104,23 +107,19 @@
 <script lang="ts" setup></script>
 
 <style scoped lang="scss">
-$mobile: 500px;
+@import '#root/src/assets/scss/style';
 
 .impress-section {
-  max-width: 1120px;
-  font-family: Poppins, sans-serif;
-  color: #383838;
-  background: #f5f5f5;
+  max-width: $page-max-width;
+  font-family: $font-family-default;
+  color: $font-color-dark;
+  background: $background-color-primary;
 
   .section-header {
     text-align: center;
 
     h1.section-headline {
-      font-size: 3.875rem;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 120%;
-      text-transform: capitalize;
+      @include text-font-headline;
 
       @media screen and (max-width: $mobile) {
         font-size: 2.5rem;
@@ -129,27 +128,7 @@ $mobile: 500px;
   }
 
   .content-card {
-    font-size: 1.25rem;
-    line-height: normal;
-    background: #fff;
-    border-radius: 1.875rem;
-
-    @media screen and (max-width: $mobile) {
-      font-size: 1rem;
-    }
-
-    .card-header {
-      font-weight: 700;
-
-      @media screen and (max-width: $mobile) {
-        font-size: 1rem;
-      }
-    }
-
-    .card-content {
-      font-weight: 300;
-      list-style: none;
-    }
+    @include page-content-card-mixin;
   }
 }
 </style>

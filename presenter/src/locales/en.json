@@ -2,181 +2,181 @@
   "about": {},
   "dataProtection": {
     "euDispute": {
-      "content": "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr/. Unsere E-Mail Adresse finden Sie im Impressum.",
-      "headline": "EU-Streitschlichtung"
+      "content": "The European Commission provides a platform for online dispute resolution (OS): https://ec.europa.eu/consumers/odr/. You can find our e-mail address in the legal notice.",
+      "headline": "EU dispute settlement"
     },
     "general": {
       "city": "Kempten",
       "company": "DreamMall Verlag GbR",
-      "headline": "Allgemeiner Hinweis und Pflichtinformationen",
-      "infoEnd": "Die verantwortliche Stelle entscheidet allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z.B. Namen, Kontaktdaten o. Ä.).",
-      "infoStart": "Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:",
+      "headline": "General notice and mandatory information",
+      "infoEnd": "The controller decides alone or jointly with others on the purposes and means of processing personal data (e.g. names, contact details, etc.).",
+      "infoStart": "The controller responsible for data processing on this website is:",
       "person": "Sabine Laudien & Claudia Siebert",
       "street": "Rosenau 15",
       "zip": "DE-87437"
     },
-    "headline": "Datenschutzrichtlinie",
+    "headline": "Privacy policy",
     "processing": {
-      "content": "Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder eMail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten können im Rahmen der Erfüllung des angebotenen Services an Dritte weitergegeben werden. Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.",
-      "headline": "Einwilligung zur Datenverarbeitung"
+      "content": "The use of our website is generally possible without providing personal data. If personal data (e.g. name, address or e-mail addresses) is collected on our website, this is always done on a voluntary basis as far as possible. This data may be passed on to third parties as part of the fulfillment of the service offered. We would like to point out that data transmission over the Internet (e.g. when communicating by e-mail) may be subject to security vulnerabilities. Complete protection of data against access by third parties is not possible.",
+      "headline": "Consent to the processing of data"
     },
     "revocation": {
-      "content": "Nur mit Ihrer ausdrücklichen Einwilligung sind einige Vorgänge der Datenverarbeitung möglich. Ein Widerruf Ihrer bereits erteilten Einwilligung ist jederzeit möglich. Für den Widerruf genügt eine formlose Mitteilung per E-Mail. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.",
-      "headline": "Widerruf Ihrer Einwilligung zur Datenverarbeitung"
+      "content": "Some data processing operations are only possible with your express consent. You can withdraw your consent at any time. An informal notification by e-mail is sufficient for the revocation. The legality of the data processing carried out until the revocation remains unaffected by the revocation.",
+      "headline": "Withdrawal of your consent to data processing"
     }
   },
   "error": {
     "404": {
-      "h1": "404 Seite nicht gefunden",
-      "text": "Diese Seite konnte nicht gefunden werden."
+      "h1": "404 Page not found",
+      "text": "This page could not be found."
     },
     "500": {
-      "h1": "500 Interner Fehler",
-      "text": "Etwas ist schief gegangen."
+      "h1": "500 Internal error",
+      "text": "Something went wrong."
     }
   },
   "home": {
+    "aboutSection": {
+      "buttonTxt": "Personal contact",
+      "contentFirstParagraph": "The DreamMall platform offers you as entrepreneurs, groups of entrepreneurs and young entrepreneurs/start-ups a trustworthy space for creative networking for your ideas and projects.",
+      "contentSecondParagraph": "We are all realizing ourselves now. The DreamMall is developing with each and every one of us for a shared economy and a good quality of life. Our positive energy is multiplying and together we are only looking forward. Worldwide!",
+      "headline": "Respectful cooperation makes EVERYTHING possible."
+    },
+    "coffeeSection": {
+      "headline": "The ingredients",
+      "headlineAppend": "for your coffee",
+      "slide1": {
+        "headline": "All the features you need.",
+        "subheadline": "World Cafe"
+      },
+      "slide2": {
+        "headline": "Digital diversity",
+        "subheadline": "Mall"
+      },
+      "slide3": {
+        "headline": "Successful projects are looking for talent, resources and work.",
+        "subheadline": "Humans and projects"
+      }
+    },
+    "ctaSection": {
+      "buttonText": "more",
+      "content": "Be part of the beginning of an exciting change! Simply leave us your name and email address to receive exclusive offers and full details before the official release. Don't miss the opportunity to become part of our unique community and benefit from our special starter offers!",
+      "headline": "Change",
+      "headlineAppend": "Create"
+    },
+    "introSection": {
+      "headline": "DreamMall created by people for people",
+      "preOrderBtn": "More information",
+      "subHeadline": "7 days free trial"
+    },
     "newsletterSection": {
-      "currentNewsletter": "Aktueller Newsletter",
+      "currentNewsletter": "Current newsletter",
       "headline": "Newsletter",
       "newsletterDownloadBtn": "Download",
       "newsletterForm": {
-        "email": "E-Mail Adresse",
-        "errorMsg": "Das hat leider nicht funktioniert! Bitte erneut probieren",
-        "firstname": "Vorname",
-        "lastname": "Nachname",
-        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unserer",
-        "privacyLinkLabel": "Datenschutzrichtlinie",
-        "submitBtn": "Absenden",
-        "successMsg": "E-Mail gesendet"
+        "email": "E-mail address",
+        "errorMsg": "Unfortunately this did not work! Please try again",
+        "firstname": "First name",
+        "lastname": "Last Name",
+        "privacy": "I consent to the storage of data for processing in accordance with the GDPR. You can find further information in our",
+        "privacyLinkLabel": "Privacy policy",
+        "submitBtn": "Send",
+        "successMsg": "Email sent"
       },
-      "subHeadline": "Immer auf dem laufenden bleiben"
+      "subHeadline": "Always stay up to date"
     },
-    "section1": {
-      "headline": "DreamMall von Menschen für Menschen geschaffen",
-      "preOrderBtn": "Mehr Informationen",
-      "subHeadline": "7 Tage kostenlos testen"
+    "planningSection": {
+      "headline": "DreamMall Planning",
+      "timelineBtn": "Reload"
     },
-    "section2": {
-      "buttonTxt": "Persönlicher Kontakt",
-      "contentFirstParagraph": "Die DreamMall Plattform bietet Euch Unternehmern, Unternehmergruppen sowie Jungunternehmern/Startups einen vertrauensvollen Raum der kreativen Vernetzung für Eure Ideen und Projekte.",
-      "contentSecondParagraph": "Wir verwirklichen uns jetzt alle. Die DreamMall entwickelt sich mit jedem Einzelnen von uns für ein gemeinsames Wirtschaften und einer guten Lebensqualität. Unsere positive Energie vervielfältigt sich und gemeinsam blicken wir nur noch nach vorne. Weltweit!",
-      "headline": "Respektvolles Miteinander macht ALLES möglich."
-    },
-    "section3": {
+    "productsSection": {
       "firstColumn": {
         "headline": "Mall",
-        "text": "Wir erschaffen eine Welt, ein Platz des gemeinsamen Lebens und der Wirtschaft."
+        "text": "We are creating a world, a place of shared life and economy."
       },
       "headline": "DreamMall.",
       "headlineAppend": "Earth",
       "secondColumn": {
-        "headline": "Weltencafé",
-        "text": "Wir finden uns, verbinden uns, vertrauen uns und fördern uns."
+        "headline": "World Cafe",
+        "text": "We find each other, connect with each other, trust each other and support each other."
       },
       "thirdColumn": {
-        "headline": "Menschen und Projekte",
-        "text": "Dein Talent ist wichtig für die Welt. Verwirkliche deine Kreativität in die Realität."
+        "headline": "Humans and projects",
+        "text": "Your talent is important for the world. Turn your creativity into reality."
       }
-    },
-    "section4": {
-      "headline": "DreamMall Planning",
-      "timelineBtn": "Reload"
-    },
-    "section5": {
-      "headline": "Deine Zutaten",
-      "headlineAppend": "im Kaffee",
-      "slide1": {
-        "headline": "Alle Funktionen die du brauchst.",
-        "subheadline": "Weltencafé"
-      },
-      "slide2": {
-        "headline": "Digitale Vielfalt",
-        "subheadline": "Mall"
-      },
-      "slide3": {
-        "headline": "Erfolgreiche Projekte suchen Talente, Ressourcen und Arbeit.",
-        "subheadline": "Menschen und Projekte"
-      }
-    },
-    "section6": {
-      "buttonText": "weiter",
-      "content": "Seien Sie Teil des Anfangs einer aufregenden Veränderung! Hinterlassen Sie uns einfach Ihren Namen und Ihre E-Mail Adresse, um exklusive Angebote und umfassende Details vor der offiziellen Veröffentlichung zu erhalten. Verpassen Sie nicht die Gelegenheit, Teil unserer einzigartigen Community zu werden und von unseren besonderen Starter-Angeboten zu profitieren!",
-      "headline": "Veränderung",
-      "headlineAppend": "Schaffen"
     }
   },
   "impress": {
     "consumerDispute": {
-      "content": "Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.",
-      "headline": "Verbraucherstreitbeilegung / Universalschlichtungsstelle"
+      "content": "We are not willing or obliged to participate in dispute resolution proceedings before a consumer arbitration board.",
+      "headline": "Consumer dispute resolution / universal arbitration board"
     },
     "contact": {
-      "additionalLaw": "Verantwortlich i.S.d. von § 18 MStV ist Sabine Laudien, Rosenau 15, 87437 Kempten.",
+      "additionalLaw": "Responsible according to § 18 MStV is Sabine Laudien, Rosenau 15, 87437 Kempten.",
       "email": "kontakt (at) dreammall.earth",
       "emailLabel": "E-Mail:",
-      "headline": "Kontakt",
-      "lawHeadline": "Angaben gemäß § 18 MStV",
+      "headline": "Contact",
+      "lawHeadline": "Information according to § 18 MStV",
       "telefax": "+49 (0) 123 44 55 99",
-      "telefaxLabel": "Telefax:",
+      "telefaxLabel": "Fax:",
       "telephone": "+49 (0) 123 44 55 66",
-      "telephoneLabel": "Telefon:"
+      "telephoneLabel": "Phone:"
     },
     "copyright": {
-      "content": "Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.",
-      "headline": "Urheberrecht"
+      "content": "Insofar as the content on this site was not created by the operator, the copyrights of third parties are respected. In particular, third-party content is identified as such. Should you nevertheless become aware of a copyright infringement, please inform us accordingly. If we become aware of any infringements, we will remove such content immediately.",
+      "headline": "Copyright"
     },
     "data": {
-      "additional": "Gebäude 44",
+      "additional": "Building 44",
       "city": "Kempten",
-      "court": "Amtsgericht Musterstadt",
-      "courtLabel": "Registergericht:",
-      "headline": "Angaben gemäß § 5 TMG",
+      "court": "District Court of Musterstadt",
+      "courtLabel": "Register court:",
+      "headline": "Information according to § 5 TMG",
       "name": "DreamMall Verlag GbR",
       "person1": "Sabine Laudien",
       "person2": "Claudia Siebert",
-      "personHeadline": "vertreten durch die Gesellschafter",
+      "personHeadline": "represented by the shareholders",
       "register": "HRB 999999",
-      "registerLabel": "Handelsregister:",
+      "registerLabel": "Commercial register:",
       "street": "Rosenau 15",
       "zip": "DE-87437"
     },
-    "headline": "Impressum",
+    "headline": "Commercial register",
     "legalDisclaimer": {
-      "content": "Dieser Haftungsausschluss ist als Teil des Internetangebotes zu betrachten, von dem aus auf diese Seite verwiesen wurde. Sofern Teile oder einzelne Formulierungen dieses Textes der geltenden Rechtslage nicht, nicht mehr oder nicht vollständig entsprechen sollten, bleiben die übrigen Teile des Dokumentes in ihrem Inhalt und ihrer Gültigkeit davon unberührt.",
-      "headline": "Rechtswirksamkeit dieses Haftungsausschlusses"
+      "content": "This disclaimer is to be regarded as part of the internet publication which you were referred from. If sections or individual terms of this statement are not legal or correct, the content or validity of the other parts remain uninfluenced by this fact.",
+      "headline": "Legal validity of this disclaimer"
     },
     "liabilityContent": {
-      "content": "Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.",
-      "headline": "Haftung für Inhalte"
+      "content": "The contents of our pages have been created with the greatest care. However, we cannot assume any liability for the accuracy, completeness and topicality of the content. As a service provider, we are responsible for our own content on these pages in accordance with § 7 para. 1 TMG (German Telemedia Act) and general laws. According to §§ 8 to 10 TMG, however, we as a service provider are not obliged to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity. Obligations to remove or block the use of information in accordance with general legislation remain unaffected by this. However, liability in this respect is only possible from the time of knowledge of a specific infringement. As soon as we become aware of such infringements, we will remove this content immediately.",
+      "headline": "Liability for contents"
     },
     "liabilityLinks": {
-      "content": "Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.",
-      "headline": "Haftung für Links"
+      "content": "Our website contains links to external third-party websites over whose content we have no influence. Therefore, we cannot accept any liability for this third-party content. The respective provider or operator of the pages is always responsible for the content of the linked pages. The linked pages were checked for possible legal violations at the time of linking. Illegal content was not recognizable at the time of linking. However, permanent monitoring of the content of the linked pages is not reasonable without concrete evidence of an infringement. If we become aware of any legal infringements, we will remove such links immediately.",
+      "headline": "Liability for links"
     },
     "tax": {
-      "content": "Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:",
-      "headline": "Umsatzsteuer-ID",
-      "id": "DE999999999"
+      "content": "Sales tax identification number according to § 27 a sales tax law:",
+      "headline": "Sales tax ID",
+      "id": "DE356946303"
     }
   },
   "menu": {
     "eMail": "E-Mail",
     "footer": {
-      "contact": "Kontaktiere uns",
+      "contact": "Get in touch with us",
       "contactForm": {
-        "errorMsg": "Das hat leider nicht funktioniert! Bitte erneut probieren",
-        "firstName": "Vorname",
-        "lastName": "Nachname",
-        "mail": "E-Mail Adresse",
-        "message": "Frag uns einfach …",
-        "privacy": "Ich stimme der Speicherung der Daten zur Verarbeitung im Sinne der DSGVO zu. Weitere Informationen findest du in unserer",
-        "privacyLinkLabel": "Datenschutzrichtlinie",
-        "submitBtn": "Absenden",
-        "successMsg": "E-Mail gesendet",
-        "topic": "Thema"
+        "errorMsg": "Unfortunately this did not work! Please try again",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "mail": "E-mail address",
+        "message": "Simply ask us ...",
+        "privacy": "I consent to the storage of data for processing in accordance with the GDPR. You can find further information in our",
+        "privacyLinkLabel": "Privacy policy",
+        "submitBtn": "Send",
+        "successMsg": "Email sent",
+        "topic": "Topic"
       },
-      "cookies": "Cookie Optionen",
+      "cookies": "Cookie options",
       "home": "Home",
       "humansAndProjects": "Human and Projects",
       "impress": "Impressum",
@@ -184,24 +184,33 @@
       "mall": "Mall",
       "newsletter": "Newsletter",
       "planing": "DreamMall Planning",
-      "privacy": "Datenschutzrichtlinien",
-      "privacyHeadline": "Datenschutz",
+      "privacy": "Privacy policy",
+      "privacyHeadline": "Data protection",
       "sitemap": "Sitemap",
       "socialHeadline": "Social Media",
       "telegram": "Telegram",
       "worldCoffeeHouse": "World Coffee House"
     },
     "header": {
-      "about": "über",
-      "contact": "kontakt",
-      "newsletter": "Newsletter abonnieren",
+      "about": "about",
+      "contact": "contact",
+      "newsletter": "Subscribe to our newsletter",
       "products": "products",
       "sitemap": "Sitemap"
     }
   },
+  "optin": {
+    "error": {
+      "link": "Register again",
+      "text": "An error occurred during confirmation. Please subscribe to the newsletter again."
+    },
+    "success": {
+      "text": "You have successfully confirmed your newsletter subscription. You will be redirected to the start page shortly."
+    }
+  },
   "validation": {
-    "fieldNoEmail": "Dieses Feld muss eine Email-Adresse sein",
-    "fieldRequired": "Dieses Feld wird benötigt",
-    "fieldTooLong": "Dieses Feld ist zu lang"
+    "fieldNoEmail": "This field must be an email address",
+    "fieldRequired": "This field is required",
+    "fieldTooLong": "This field is too long"
   }
 }

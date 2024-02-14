@@ -10,8 +10,13 @@ const meta = {
   component: AnchorLink as SBComp,
   // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/vue/writing-docs/autodocs
   tags: ['autodocs'],
-  argTypes: {},
-  args: {}, // default value
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['default', 'text'],
+    },
+  },
+  args: { variant: 'text' }, // default value
 } satisfies Meta<typeof AnchorLink>
 
 export default meta
