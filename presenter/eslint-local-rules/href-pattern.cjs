@@ -1,9 +1,8 @@
-/* eslint import/no-commonjs: 0 */
-import utils from './node_modules/eslint-plugin-vue/lib/utils'
+/* eslint-disable import/no-commonjs */
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const utils = require('../node_modules/eslint-plugin-vue/lib/utils')
 
-import type { Rule } from 'eslint'
-
-function getName(attribute: any) {
+function getName(attribute) {
   if (!attribute.directive) {
     return attribute.key.name
   }
@@ -18,11 +17,11 @@ function getName(attribute: any) {
   return null
 }
 
-function getValue(attribute: any ) {
+function getValue(attribute) {
   return attribute.value.value
 }
 
-export default {
+module.exports = {
   'href-pattern': {
     meta: {
       type: 'problem',
@@ -39,7 +38,7 @@ export default {
     create(context) {
       return utils.defineTemplateBodyVisitor(context, {
         VStartTag() {},
-        VAttribute(node: any) {
+        VAttribute(node) {
           const name = getName(node)
           if (name == null) {
             return
@@ -65,4 +64,4 @@ export default {
       })
     },
   },
-} satisfies Record<string, Rule.RuleModule>
+}
