@@ -3,22 +3,29 @@
 # Find current directory & configure paths
 SCRIPT_PATH=$(realpath $0)
 SCRIPT_DIR=$(dirname $SCRIPT_PATH)
-LOG_FILE=$SCRIPT_DIR/../log/$(date +"%Y-%m-%d_%T")_deploy.log
-LOG_ERROR_FILE=$SCRIPT_DIR/../log/$(date +"%Y-%m-%d_%T")_deploy.error.log
+TIMESTAMP=$(date +"%Y-%m-%d_%T")
+LOG_PATH=$SCRIPT_DIR/../log
+LOG_FILE=$LOG_PATH/${TIMESTAMP}_deploy.log
+LOG_ERROR_FILE=$LOG_PATH/${TIMESTAMP}_deploy.error.log
 
 exec 3>&1 1>>${LOG_FILE} 2>&1 2>>${LOG_ERROR_FILE}
 
 {
     echo 'Start Deploy' 
 
-    # Update git
-    # assuming you are already on the right branch
-    git pull -ff
+    # Logrotate nginx logs
+    (cd $LOG_PATH; for filename in nginx.*.log; do mv "$filename" "${TIMESTAMP}_${filename}"; done;)
+    # trigger nginx logfile reload
+    kill -USR1 `cat /var/run/nginx/nginx.pid`
 
     # stop all services
     pm2 stop all
     pm2 delete all
     pm2 save
+
+    # Update git
+    # assuming you are already on the right branch
+    git pull -ff
 
     # run as production
     BACKUP_NODE_ENV=$NODE_ENV
