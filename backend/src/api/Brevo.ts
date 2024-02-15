@@ -14,11 +14,18 @@ import { CONFIG, CONFIG_CHECKS } from '#config/config'
 import { ContactFormInput } from '#graphql/inputs/ContactFormInput'
 import { prisma } from '#src/prisma'
 
-export const sendContactEmails = async (
-  data: ContactFormInput,
-): Promise<Awaited<ReturnType<typeof apiInstance.sendTransacEmail>>[] | undefined> => {
+export const sendContactEmails = async ({
+  firstName,
+  lastName,
+  email,
+  content,
+}: ContactFormInput): Promise<
+  Awaited<ReturnType<typeof apiInstance.sendTransacEmail>>[] | undefined
+> => {
   // We save this wether config is correctly set or not
-  const contactForm = await prisma.contactForm.create({ data })
+  const contactForm = await prisma.contactForm.create({
+    data: { firstName, lastName, email, content },
+  })
 
   if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SEND_CONTACT(CONFIG)) {
     return undefined

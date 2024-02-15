@@ -61,17 +61,14 @@ jest.mock('@getbrevo/brevo', () => {
 
 describe('Brevo', () => {
   describe('sendContactEmails', () => {
-    let contactForm: ContactForm
+    const contactFormData = {
+      firstName: 'Bibi',
+      lastName: 'Bloxberg',
+      content: 'Hello DreamMall!',
+      email: 'bibi@bloxberg.de',
+    }
     beforeEach(async () => {
       await prisma.contactForm.deleteMany()
-      contactForm = await prisma.contactForm.create({
-        data: {
-          firstName: 'Bibi',
-          lastName: 'Bloxberg',
-          content: 'Hello DreamMall!',
-          email: 'bibi@bloxberg.de',
-        },
-      })
     })
 
     describe('brevo key given', () => {
@@ -92,7 +89,7 @@ describe('Brevo', () => {
         })
 
         it('does reject with error', async () => {
-          await expect(sendContactEmails(contactForm)).rejects.toStrictEqual({
+          await expect(sendContactEmails(contactFormData)).rejects.toStrictEqual({
             response: {
               statusCode: 400,
             },
@@ -100,6 +97,7 @@ describe('Brevo', () => {
         })
 
         it('has the contact form stored in the database without brevo success date', async () => {
+          await expect(sendContactEmails(contactFormData)).rejects.toBeTruthy()
           const result: ContactForm[] = await prisma.contactForm.findMany()
           expect(result).toHaveLength(1)
           expect(result).toEqual([
@@ -129,7 +127,7 @@ describe('Brevo', () => {
 
         beforeEach(async () => {
           jest.clearAllMocks()
-          await sendContactEmails(contactForm)
+          await sendContactEmails(contactFormData)
         })
 
         it('calls TransactionalEmailsApi constructor', () => {
@@ -145,7 +143,8 @@ describe('Brevo', () => {
           expect(mockSendTransacEmail).toHaveBeenCalledTimes(2)
         })
 
-        it('sends email to admin', () => {
+        it('sends email to admin', async () => {
+          const contactForm = await prisma.contactForm.findFirst()
           expect(mockSendTransacEmail).toHaveBeenCalledWith({
             templateId: 1,
             to: [
@@ -166,7 +165,8 @@ describe('Brevo', () => {
           })
         })
 
-        it('sends email to user', () => {
+        it('sends email to user', async () => {
+          const contactForm = await prisma.contactForm.findFirst()
           expect(mockSendTransacEmail).toHaveBeenCalledWith({
             templateId: 2,
             to: [
@@ -212,7 +212,7 @@ describe('Brevo', () => {
       beforeEach(async () => {
         jest.clearAllMocks()
         CONFIG.BREVO_KEY = undefined
-        await sendContactEmails(contactForm)
+        await sendContactEmails(contactFormData)
       })
 
       it('does not call sendSmtpEmail', () => {
