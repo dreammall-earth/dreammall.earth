@@ -98,7 +98,7 @@ describe('Brevo', () => {
 
         it('has the contact form stored in the database without brevo success date', async () => {
           await expect(sendContactEmails(contactFormData)).rejects.toBeTruthy()
-          const result: ContactForm[] = await prisma.contactForm.findMany()
+          const result = await prisma.contactForm.findMany()
           expect(result).toHaveLength(1)
           expect(result).toEqual([
             {
@@ -188,7 +188,7 @@ describe('Brevo', () => {
         })
 
         it('has the contact form stored in the database with brevo success date', async () => {
-          const result: ContactForm[] = await prisma.contactForm.findMany()
+          const result = await prisma.contactForm.findMany()
           expect(result).toHaveLength(1)
           expect(result).toEqual([
             {
@@ -275,7 +275,7 @@ describe('Brevo', () => {
         })
 
         it('creates database entry with brevoSuccessMail = null', async () => {
-          const result: NewsletterPreOptIn[] = await prisma.newsletterPreOptIn.findMany()
+          const result = await prisma.newsletterPreOptIn.findMany()
           expect(result).toHaveLength(1)
           expect(result).toEqual([
             {
@@ -316,7 +316,7 @@ describe('Brevo', () => {
         })
 
         it('creates database entry with brevoSuccessMail = null', async () => {
-          const result: NewsletterPreOptIn[] = await prisma.newsletterPreOptIn.findMany()
+          const result = await prisma.newsletterPreOptIn.findMany()
           expect(result).toHaveLength(1)
           expect(result).toEqual([
             {
@@ -390,7 +390,7 @@ describe('Brevo', () => {
         })
 
         it('creates database entry', async () => {
-          const result: NewsletterPreOptIn[] = await prisma.newsletterPreOptIn.findMany()
+          const result = await prisma.newsletterPreOptIn.findMany()
           expect(result).toHaveLength(1)
           expect(result).toEqual([
             {
@@ -495,7 +495,7 @@ describe('Brevo', () => {
         })
 
         it('does not update database entry', async () => {
-          const result: NewsletterPreOptIn[] = await prisma.newsletterPreOptIn.findMany()
+          const result = await prisma.newsletterPreOptIn.findMany()
           expect(result).toHaveLength(1)
           expect(result).toEqual([
             {
@@ -549,7 +549,7 @@ describe('Brevo', () => {
         })
 
         it('does not update database entry', async () => {
-          const result: NewsletterPreOptIn[] = await prisma.newsletterPreOptIn.findMany()
+          const result = await prisma.newsletterPreOptIn.findMany()
           expect(result).toHaveLength(1)
           expect(result).toEqual([
             {
