@@ -13,7 +13,7 @@ let testServer: ApolloServer
 
 jest.mock('#api/Brevo', () => ({
   subscribeToNewsletter: jest.fn().mockResolvedValue(true),
-  confirmNewsletter: jest.fn().mockResolvedValue(true),
+  confirmNewsletter: jest.fn().mockResolvedValueOnce(false).mockResolvedValue('data'),
 }))
 
 beforeAll(async () => {
@@ -174,12 +174,24 @@ describe('NewsletterSubscriptionResolver', () => {
   describe('confirmNewsletter mutation', () => {
     let response: Awaited<ReturnType<typeof testServer.executeOperation>>
     beforeEach(async () => {
+      jest.clearAllMocks()
       response = await testServer.executeOperation({
         query: `mutation($code: String!) {
                   confirmNewsletter(code: $code) 
                 }`,
         variables: {
           code: '1234567890abcdef',
+        },
+      })
+    })
+
+    it('returns false on first call', () => {
+      expect(response.body).toMatchObject({
+        kind: 'single',
+        singleResult: {
+          data: {
+            confirmNewsletter: false,
+          },
         },
       })
     })
