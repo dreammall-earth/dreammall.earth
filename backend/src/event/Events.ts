@@ -1,5 +1,5 @@
-export { EventType } from './EventType'
-export { Event } from './Event'
+// export { EventType } from './EventType'
+// export { Event } from './Event'
 export { EVENT_CONTACTFORM_SEND } from './EVENT_CONTACTFORM_SEND'
 export { EVENT_NEWSLETTER_CONFIRM } from './EVENT_NEWSLETTER_CONFIRM'
 export { EVENT_NEWSLETTER_SUBSCRIBE } from './EVENT_NEWSLETTER_SUBSCRIBE'
