@@ -475,7 +475,23 @@ describe('Brevo', () => {
         })
 
         it('does not reject with error', async () => {
-          await expect(confirmNewsletter(code)).resolves.toStrictEqual(true)
+          await expect(confirmNewsletter(code)).resolves.toEqual({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            firstName: 'Peter',
+            lastName: 'Lustig',
+            email: 'peter@lustig.de',
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            code: expect.any(String),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            validTill: expect.any(Date),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            createdAt: expect.any(Date),
+            deletedAt: null,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            brevoSuccessMail: expect.any(Date),
+            brevoSuccessList: null,
+          })
         })
 
         it('does not update database entry', async () => {
@@ -513,7 +529,23 @@ describe('Brevo', () => {
         })
 
         it('does not reject with error', async () => {
-          await expect(confirmNewsletter(code)).resolves.toStrictEqual(true)
+          await expect(confirmNewsletter(code)).resolves.toEqual({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            firstName: 'Peter',
+            lastName: 'Lustig',
+            email: 'peter@lustig.de',
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            code: expect.any(String),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            validTill: expect.any(Date),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            createdAt: expect.any(Date),
+            deletedAt: null,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            brevoSuccessMail: expect.any(Date),
+            brevoSuccessList: null,
+          })
         })
 
         it('does not update database entry', async () => {
@@ -615,8 +647,24 @@ describe('Brevo', () => {
           ])
         })
 
-        it('returns true', () => {
-          expect(result).toBe(true)
+        it('returns database entry', () => {
+          expect(result).toEqual({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            firstName: 'Peter',
+            lastName: 'Lustig',
+            email: 'peter@lustig.de',
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            code: expect.any(String),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            validTill: expect.any(Date),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            createdAt: expect.any(Date),
+            deletedAt: null,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            brevoSuccessMail: expect.any(Date),
+            brevoSuccessList: null,
+          })
         })
       })
 
@@ -733,8 +781,24 @@ describe('Brevo', () => {
           ])
         })
 
-        it('returns true', () => {
-          expect(result).toBe(true)
+        it('returns database entry', () => {
+          expect(result).toEqual({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            firstName: 'Bibi',
+            lastName: 'Bloxberg',
+            email: 'peter@lustig.de',
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            code: expect.any(String),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            validTill: expect.any(Date),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            createdAt: expect.any(Date),
+            deletedAt: null,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            brevoSuccessMail: expect.any(Date),
+            brevoSuccessList: null,
+          })
         })
       })
     })
