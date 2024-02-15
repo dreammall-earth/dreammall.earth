@@ -1,6 +1,8 @@
 import { ApolloServer } from '@apollo/server'
 
 import { sendContactEmails } from '#api/Brevo'
+import { EventType } from '#src/event/EventType'
+import { prisma } from '#src/prisma'
 import { createServer } from '#src/server/server'
 
 let testServer: ApolloServer
@@ -194,6 +196,21 @@ weils nach Datum, Medium, Anlass und Kosten auflisten)?`,
 
       it('calls sendContactFormEmail', () => {
         expect(sendContactEmails).toHaveBeenCalled()
+      })
+
+      it('writes event to database', async () => {
+        const result = await prisma.event.findMany()
+        expect(result).toHaveLength(1)
+        expect(result).toEqual([
+          {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            type: EventType.CONTACTFORM_SEND,
+            involvedEmail: 'peter@lustig.de',
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            createdAt: expect.any(Date),
+          },
+        ])
       })
     })
   })
