@@ -1,7 +1,6 @@
 import { randomBytes } from 'crypto'
 
 import { TransactionalEmailsApi } from '@getbrevo/brevo'
-import { ContactForm, NewsletterPreOptIn } from '@prisma/client'
 
 import { CONFIG } from '#config/config'
 import { prisma } from '#src/prisma'

@@ -2,9 +2,9 @@ import { ApolloServer } from '@apollo/server'
 
 import { confirmNewsletter, subscribeToNewsletter } from '#api/Brevo'
 import { CONFIG } from '#config/config'
-import { createServer } from '#src/server/server'
-import { prisma } from '#src/prisma'
 import { EventType } from '#src/event/EventType'
+import { prisma } from '#src/prisma'
+import { createServer } from '#src/server/server'
 
 CONFIG.BREVO_KEY = 'MY KEY'
 CONFIG.BREVO_ADMIN_NAME = 'Bibi Bloxberg'
