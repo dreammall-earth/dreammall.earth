@@ -99,7 +99,7 @@ describe('Brevo', () => {
           })
         })
 
-        it('does not update the database', async () => {
+        it('has the contact form stored in the database without brevo success date', async () => {
           const result: ContactForm[] = await prisma.contactForm.findMany()
           expect(result).toHaveLength(1)
           expect(result).toEqual([
@@ -187,7 +187,7 @@ describe('Brevo', () => {
           })
         })
 
-        it('does update the database', async () => {
+        it('has the contact form stored in the database with brevo success date', async () => {
           const result: ContactForm[] = await prisma.contactForm.findMany()
           expect(result).toHaveLength(1)
           expect(result).toEqual([

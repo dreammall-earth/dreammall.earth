@@ -1,9 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { ApolloServer } from '@apollo/server'
-import { ContactForm } from '@prisma/client'
 
 import { sendContactEmails } from '#api/Brevo'
-import { prisma } from '#src/prisma'
 import { createServer } from '#src/server/server'
 
 let testServer: ApolloServer
@@ -193,22 +190,6 @@ weils nach Datum, Medium, Anlass und Kosten auflisten)?`,
             },
           },
         })
-      })
-
-      it('has the contact form stored in the database', async () => {
-        const result: ContactForm[] = await prisma.contactForm.findMany()
-        expect(result).toHaveLength(1)
-        expect(result).toEqual([
-          {
-            id: expect.any(Number),
-            firstName: 'Peter',
-            lastName: 'Lustig',
-            content: 'Hello DreamMall!',
-            email: 'peter@lustig.de',
-            createdAt: expect.any(Date),
-            brevoSuccess: null,
-          },
-        ])
       })
 
       it('calls sendContactFormEmail', () => {
