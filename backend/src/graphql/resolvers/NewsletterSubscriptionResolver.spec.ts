@@ -2,6 +2,8 @@ import { ApolloServer } from '@apollo/server'
 
 import { confirmNewsletter, subscribeToNewsletter } from '#api/Brevo'
 import { CONFIG } from '#config/config'
+import { EventType } from '#src/event/EventType'
+import { prisma } from '#src/prisma'
 import { createServer } from '#src/server/server'
 
 CONFIG.BREVO_KEY = 'MY KEY'
@@ -13,7 +15,10 @@ let testServer: ApolloServer
 
 jest.mock('#api/Brevo', () => ({
   subscribeToNewsletter: jest.fn().mockResolvedValue(true),
-  confirmNewsletter: jest.fn().mockResolvedValue(true),
+  confirmNewsletter: jest
+    .fn()
+    .mockResolvedValueOnce(false)
+    .mockResolvedValue({ email: 'peter@lustig.de' }),
 }))
 
 beforeAll(async () => {
@@ -139,6 +144,7 @@ describe('NewsletterSubscriptionResolver', () => {
     describe('with correct data', () => {
       let response: Awaited<ReturnType<typeof testServer.executeOperation>>
       beforeEach(async () => {
+        await prisma.event.deleteMany()
         response = await testServer.executeOperation({
           query: `mutation($data: SubscribeToNewsletterInput!) {
                     subscribeToNewsletter(subscribeToNewsletterData: $data) 
@@ -168,18 +174,46 @@ describe('NewsletterSubscriptionResolver', () => {
           },
         })
       })
+
+      it('writes event to database', async () => {
+        const result = await prisma.event.findMany()
+        expect(result).toHaveLength(1)
+        expect(result).toEqual([
+          {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            type: EventType.NEWSLETTER_SUBSCRIBE,
+            involvedEmail: 'peter@lustig.de',
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            createdAt: expect.any(Date),
+          },
+        ])
+      })
     })
   })
 
   describe('confirmNewsletter mutation', () => {
     let response: Awaited<ReturnType<typeof testServer.executeOperation>>
     beforeEach(async () => {
+      jest.clearAllMocks()
+      await prisma.event.deleteMany()
       response = await testServer.executeOperation({
         query: `mutation($code: String!) {
                   confirmNewsletter(code: $code) 
                 }`,
         variables: {
           code: '1234567890abcdef',
+        },
+      })
+    })
+
+    it('returns false on first call', () => {
+      expect(response.body).toMatchObject({
+        kind: 'single',
+        singleResult: {
+          data: {
+            confirmNewsletter: false,
+          },
         },
       })
     })
@@ -198,6 +232,21 @@ describe('NewsletterSubscriptionResolver', () => {
           },
         },
       })
+    })
+
+    it('writes event to database', async () => {
+      const result = await prisma.event.findMany()
+      expect(result).toHaveLength(1)
+      expect(result).toEqual([
+        {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          id: expect.any(Number),
+          type: EventType.NEWSLETTER_CONFIRM,
+          involvedEmail: 'peter@lustig.de',
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          createdAt: expect.any(Date),
+        },
+      ])
     })
   })
 })

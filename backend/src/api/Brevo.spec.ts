@@ -1,7 +1,6 @@
 import { randomBytes } from 'crypto'
 
 import { TransactionalEmailsApi } from '@getbrevo/brevo'
-import { ContactForm, NewsletterPreOptIn } from '@prisma/client'
 
 import { CONFIG } from '#config/config'
 import { prisma } from '#src/prisma'
@@ -61,17 +60,14 @@ jest.mock('@getbrevo/brevo', () => {
 
 describe('Brevo', () => {
   describe('sendContactEmails', () => {
-    let contactForm: ContactForm
+    const contactFormData = {
+      firstName: 'Bibi',
+      lastName: 'Bloxberg',
+      content: 'Hello DreamMall!',
+      email: 'bibi@bloxberg.de',
+    }
     beforeEach(async () => {
       await prisma.contactForm.deleteMany()
-      contactForm = await prisma.contactForm.create({
-        data: {
-          firstName: 'Bibi',
-          lastName: 'Bloxberg',
-          content: 'Hello DreamMall!',
-          email: 'bibi@bloxberg.de',
-        },
-      })
     })
 
     describe('brevo key given', () => {
@@ -92,15 +88,16 @@ describe('Brevo', () => {
         })
 
         it('does reject with error', async () => {
-          await expect(sendContactEmails(contactForm)).rejects.toStrictEqual({
+          await expect(sendContactEmails(contactFormData)).rejects.toStrictEqual({
             response: {
               statusCode: 400,
             },
           })
         })
 
-        it('does not update the database', async () => {
-          const result: ContactForm[] = await prisma.contactForm.findMany()
+        it('has the contact form stored in the database without brevo success date', async () => {
+          await expect(sendContactEmails(contactFormData)).rejects.toBeTruthy()
+          const result = await prisma.contactForm.findMany()
           expect(result).toHaveLength(1)
           expect(result).toEqual([
             {
@@ -129,7 +126,7 @@ describe('Brevo', () => {
 
         beforeEach(async () => {
           jest.clearAllMocks()
-          await sendContactEmails(contactForm)
+          await sendContactEmails(contactFormData)
         })
 
         it('calls TransactionalEmailsApi constructor', () => {
@@ -145,7 +142,8 @@ describe('Brevo', () => {
           expect(mockSendTransacEmail).toHaveBeenCalledTimes(2)
         })
 
-        it('sends email to admin', () => {
+        it('sends email to admin', async () => {
+          const contactForm = await prisma.contactForm.findFirst()
           expect(mockSendTransacEmail).toHaveBeenCalledWith({
             templateId: 1,
             to: [
@@ -166,7 +164,8 @@ describe('Brevo', () => {
           })
         })
 
-        it('sends email to user', () => {
+        it('sends email to user', async () => {
+          const contactForm = await prisma.contactForm.findFirst()
           expect(mockSendTransacEmail).toHaveBeenCalledWith({
             templateId: 2,
             to: [
@@ -187,8 +186,8 @@ describe('Brevo', () => {
           })
         })
 
-        it('does update the database', async () => {
-          const result: ContactForm[] = await prisma.contactForm.findMany()
+        it('has the contact form stored in the database with brevo success date', async () => {
+          const result = await prisma.contactForm.findMany()
           expect(result).toHaveLength(1)
           expect(result).toEqual([
             {
@@ -212,7 +211,7 @@ describe('Brevo', () => {
       beforeEach(async () => {
         jest.clearAllMocks()
         CONFIG.BREVO_KEY = undefined
-        await sendContactEmails(contactForm)
+        await sendContactEmails(contactFormData)
       })
 
       it('does not call sendSmtpEmail', () => {
@@ -275,7 +274,7 @@ describe('Brevo', () => {
         })
 
         it('creates database entry with brevoSuccessMail = null', async () => {
-          const result: NewsletterPreOptIn[] = await prisma.newsletterPreOptIn.findMany()
+          const result = await prisma.newsletterPreOptIn.findMany()
           expect(result).toHaveLength(1)
           expect(result).toEqual([
             {
@@ -316,7 +315,7 @@ describe('Brevo', () => {
         })
 
         it('creates database entry with brevoSuccessMail = null', async () => {
-          const result: NewsletterPreOptIn[] = await prisma.newsletterPreOptIn.findMany()
+          const result = await prisma.newsletterPreOptIn.findMany()
           expect(result).toHaveLength(1)
           expect(result).toEqual([
             {
@@ -390,7 +389,7 @@ describe('Brevo', () => {
         })
 
         it('creates database entry', async () => {
-          const result: NewsletterPreOptIn[] = await prisma.newsletterPreOptIn.findMany()
+          const result = await prisma.newsletterPreOptIn.findMany()
           expect(result).toHaveLength(1)
           expect(result).toEqual([
             {
@@ -475,11 +474,27 @@ describe('Brevo', () => {
         })
 
         it('does not reject with error', async () => {
-          await expect(confirmNewsletter(code)).resolves.toStrictEqual(true)
+          await expect(confirmNewsletter(code)).resolves.toEqual({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            firstName: 'Peter',
+            lastName: 'Lustig',
+            email: 'peter@lustig.de',
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            code: expect.any(String),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            validTill: expect.any(Date),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            createdAt: expect.any(Date),
+            deletedAt: null,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            brevoSuccessMail: expect.any(Date),
+            brevoSuccessList: null,
+          })
         })
 
         it('does not update database entry', async () => {
-          const result: NewsletterPreOptIn[] = await prisma.newsletterPreOptIn.findMany()
+          const result = await prisma.newsletterPreOptIn.findMany()
           expect(result).toHaveLength(1)
           expect(result).toEqual([
             {
@@ -513,11 +528,27 @@ describe('Brevo', () => {
         })
 
         it('does not reject with error', async () => {
-          await expect(confirmNewsletter(code)).resolves.toStrictEqual(true)
+          await expect(confirmNewsletter(code)).resolves.toEqual({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            firstName: 'Peter',
+            lastName: 'Lustig',
+            email: 'peter@lustig.de',
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            code: expect.any(String),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            validTill: expect.any(Date),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            createdAt: expect.any(Date),
+            deletedAt: null,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            brevoSuccessMail: expect.any(Date),
+            brevoSuccessList: null,
+          })
         })
 
         it('does not update database entry', async () => {
-          const result: NewsletterPreOptIn[] = await prisma.newsletterPreOptIn.findMany()
+          const result = await prisma.newsletterPreOptIn.findMany()
           expect(result).toHaveLength(1)
           expect(result).toEqual([
             {
@@ -615,8 +646,24 @@ describe('Brevo', () => {
           ])
         })
 
-        it('returns true', () => {
-          expect(result).toBe(true)
+        it('returns database entry', () => {
+          expect(result).toEqual({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            firstName: 'Peter',
+            lastName: 'Lustig',
+            email: 'peter@lustig.de',
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            code: expect.any(String),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            validTill: expect.any(Date),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            createdAt: expect.any(Date),
+            deletedAt: null,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            brevoSuccessMail: expect.any(Date),
+            brevoSuccessList: null,
+          })
         })
       })
 
@@ -733,8 +780,24 @@ describe('Brevo', () => {
           ])
         })
 
-        it('returns true', () => {
-          expect(result).toBe(true)
+        it('returns database entry', () => {
+          expect(result).toEqual({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            firstName: 'Bibi',
+            lastName: 'Bloxberg',
+            email: 'peter@lustig.de',
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            code: expect.any(String),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            validTill: expect.any(Date),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            createdAt: expect.any(Date),
+            deletedAt: null,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            brevoSuccessMail: expect.any(Date),
+            brevoSuccessList: null,
+          })
         })
       })
     })
