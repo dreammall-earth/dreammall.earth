@@ -195,7 +195,12 @@ weils nach Datum, Medium, Anlass und Kosten auflisten)?`,
       })
 
       it('calls sendContactFormEmail', () => {
-        expect(sendContactEmails).toHaveBeenCalled()
+        expect(sendContactEmails).toHaveBeenCalledWith({
+          firstName: 'Peter',
+          lastName: 'Lustig',
+          content: 'Hello DreamMall!',
+          email: 'peter@lustig.de',
+        })
       })
 
       it('writes event to database', async () => {
