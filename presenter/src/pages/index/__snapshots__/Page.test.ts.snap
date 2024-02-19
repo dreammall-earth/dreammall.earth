@@ -676,6 +676,7 @@ exports[`IndexPage > renders 1`] = `
                         id="carousel-item-11"
                         style="color: #ffffff; caret-color: #ffffff;"
                         type="button"
+                        value="0"
                       >
                         
                         <span
@@ -704,6 +705,7 @@ exports[`IndexPage > renders 1`] = `
                         id="carousel-item-12"
                         style="color: #ffffff; caret-color: #ffffff;"
                         type="button"
+                        value="1"
                       >
                         
                         <span
@@ -2232,6 +2234,7 @@ exports[`IndexPage > renders 1`] = `
                           id="carousel-item-27"
                           style="color: #ABABAB; caret-color: #ABABAB;"
                           type="button"
+                          value="0"
                         >
                           
                           <span
@@ -2260,6 +2263,7 @@ exports[`IndexPage > renders 1`] = `
                           id="carousel-item-28"
                           style="color: #ABABAB; caret-color: #ABABAB;"
                           type="button"
+                          value="1"
                         >
                           
                           <span
@@ -2288,6 +2292,7 @@ exports[`IndexPage > renders 1`] = `
                           id="carousel-item-29"
                           style="color: #ABABAB; caret-color: #ABABAB;"
                           type="button"
+                          value="2"
                         >
                           
                           <span
