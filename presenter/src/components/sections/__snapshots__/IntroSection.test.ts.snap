@@ -175,6 +175,7 @@ exports[`IntroSection > renders IntroSection 1`] = `
           id="carousel-item-0"
           style="color: #ffffff; caret-color: #ffffff;"
           type="button"
+          value="0"
         >
           
           <span
@@ -203,6 +204,7 @@ exports[`IntroSection > renders IntroSection 1`] = `
           id="carousel-item-1"
           style="color: #ffffff; caret-color: #ffffff;"
           type="button"
+          value="1"
         >
           
           <span
