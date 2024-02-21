@@ -12,3 +12,4 @@ Read the [documentation]()(https://goauthentik.io/docs/installation/docker-compo
  * create an LDAP outpost without integration (choose ------) and assign the DreamMall application to it
  * check the available outposts and click on `View deployment info` for the LDAP outpost. Copy the authentik token
  * paste the token in the `docker-compose.yml` for `AUTHENTIK_TOKEN` 
+ * restart docker compose
