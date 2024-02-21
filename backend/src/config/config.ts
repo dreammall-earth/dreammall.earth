@@ -35,7 +35,6 @@ const LDAP = {
   LDAP_ADMIN_PASSWORD: process.env.LDAP_ADMIN_PASSWORD || '',
 }
 
-
 export const CONFIG = { ...BREVO, ...LDAP }
 
 // Config Checks
