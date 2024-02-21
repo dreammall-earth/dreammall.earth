@@ -1,5 +1,13 @@
 /* eslint-disable n/no-process-env */
+import logger from '#src/logger'
+
 import { printConfigError } from './printConfigError'
+
+jest.mock('#src/logger', () => {
+  return {
+    warn: jest.fn(),
+  }
+})
 
 describe('printConfigError', () => {
   describe('with NODE_ENV = test', () => {
@@ -25,12 +33,11 @@ describe('printConfigError', () => {
   describe('with NODE_ENV = any other', () => {
     beforeEach(() => {
       process.env.NODE_ENV = 'any other'
-      global.console.warn = jest.fn()
       printConfigError('test message')
     })
 
     it('logs a warning', () => {
-      // eslint-disable-next-line no-console
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(logger.warn).toHaveBeenCalledWith('test message')
     })
   })
