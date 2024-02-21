@@ -28,7 +28,7 @@ export default {
         requestContext: GraphQLRequestContextWillSendResponse<GraphQLRequest>,
       ) {
         // eslint-disable-next-line no-console
-        console.log('Apollo Response', requestContext, requestContext.response.body)
+        console.log('Apollo Response', requestContext.request, requestContext.response.body)
       },
     }
   },
