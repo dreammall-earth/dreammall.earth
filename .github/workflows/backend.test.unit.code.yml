@@ -14,10 +14,10 @@ jobs:
     outputs:
       changes: ${{ steps.changes.outputs.backend-test-unit-code }}
     steps:
-      - uses: actions/checkout@v3.3.0
+      - uses: actions/checkout@v4
 
       - name: Check for backend file changes
-        uses: dorny/paths-filter@v2.11.1
+        uses: dorny/paths-filter@v3.0.1
         id: changes
         with:
           token: ${{ github.token }}
@@ -33,7 +33,7 @@ jobs:
       WORKING_DIRECTORY: ./backend
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Backend | docker-compose database
         run: docker-compose -f docker-compose.yml -f docker-compose.test.yml up --detach --no-deps database
