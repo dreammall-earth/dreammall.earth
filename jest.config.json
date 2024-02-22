@@ -8,6 +8,7 @@
       "lines": 100
     }
   },
+  "modulePathIgnorePatterns": ["<rootDir>/build/"],
   "setupFiles": ["./test/testSetup.ts"],
   "setupFilesAfterEnv": ["./test/testSetupAfterEnv.ts"]
 }
