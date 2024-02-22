@@ -1,8 +1,8 @@
 import { Resolver, Mutation, Arg } from 'type-graphql'
 
-import { sendContactToBrevo } from '#api/NewsletterBrevo'
+import { confirmNewsletter, subscribeToNewsletter } from '#api/Brevo'
 import { SubscribeToNewsletterInput } from '#inputs/SubscribeToNewsletterInput'
-import { prisma } from '#src/prisma'
+import { EVENT_NEWSLETTER_CONFIRM, EVENT_NEWSLETTER_SUBSCRIBE } from '#src/event/Events'
 
 @Resolver()
 export class NewsletterSubscriptionResolver {
@@ -10,10 +10,19 @@ export class NewsletterSubscriptionResolver {
   async subscribeToNewsletter(
     @Arg('subscribeToNewsletterData') subscribeToNewsletterData: SubscribeToNewsletterInput,
   ): Promise<boolean> {
-    const subscriber = await prisma.newsletterSubscription.create({
-      data: subscribeToNewsletterData,
-    })
-    void sendContactToBrevo(subscriber)
-    return true
+    const result = subscribeToNewsletter(
+      subscribeToNewsletterData.firstName,
+      subscribeToNewsletterData.lastName,
+      subscribeToNewsletterData.email,
+    )
+    void EVENT_NEWSLETTER_SUBSCRIBE(subscribeToNewsletterData.email)
+    return result
+  }
+
+  @Mutation(() => Boolean)
+  async confirmNewsletter(@Arg('code') code: string): Promise<boolean> {
+    const result = await confirmNewsletter(code)
+    void EVENT_NEWSLETTER_CONFIRM(result ? result.email : undefined)
+    return !!result
   }
 }

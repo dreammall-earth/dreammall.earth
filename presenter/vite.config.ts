@@ -23,7 +23,7 @@ const config: UserConfig = {
       typescript: true,
       vueTsc: true,
     }),
-    vuetify({ styles: { configFile: './src/assets/sass/style.scss' } }),
+    vuetify({ styles: { configFile: './src/assets/scss/style.scss' } }),
     viteCompression({ filter: /\.*$/i }),
   ],
   build: {
@@ -45,6 +45,7 @@ const config: UserConfig = {
       '#root': __dirname,
     },
   },
+  assetsInclude: isStorybook() ? ['/sb-preview/runtime.js'] : [],
 }
 
 export default config

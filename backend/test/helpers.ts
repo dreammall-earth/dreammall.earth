@@ -2,7 +2,9 @@ import { prisma } from '#src/prisma'
 
 export const deleteAll = async () => {
   await prisma.contactForm.deleteMany()
-  await prisma.newsletterSubscription.deleteMany()
+  await prisma.$executeRaw`DELETE FROM NewsletterPreOptIn`
+  await prisma.$executeRaw`DELETE FROM NewsletterSubscription`
+  await prisma.event.deleteMany()
 }
 
 export const disconnect = async () => {

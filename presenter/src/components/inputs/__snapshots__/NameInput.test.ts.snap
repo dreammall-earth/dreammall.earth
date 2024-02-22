@@ -1,0 +1,102 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MainButton > renders 1`] = `
+<div
+  class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-locale--is-ltr v-text-field"
+>
+  <!---->
+  <div
+    class="v-input__control"
+  >
+    
+    <div
+      class="v-field v-field--center-affix v-field--flat v-field--has-background v-field--no-label v-field--variant-solo v-theme--light rounded-xl v-locale--is-ltr"
+      style="background-color: rgba(174, 179, 189, 0.50);"
+    >
+      <div
+        class="v-field__overlay"
+      />
+      <div
+        class="v-field__loader"
+      >
+        <div
+          aria-hidden="true"
+          aria-valuemax="100"
+          aria-valuemin="0"
+          class="v-progress-linear v-theme--light v-locale--is-ltr"
+          role="progressbar"
+          style="top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);"
+        >
+          <!---->
+          <div
+            class="v-progress-linear__background"
+            style="background-color: #3D4753; color: #fff; caret-color: #fff; width: 100%;"
+          />
+          <transition-stub
+            appear="false"
+            css="true"
+            name="fade-transition"
+            persisted="false"
+          >
+            <div
+              class="v-progress-linear__indeterminate"
+            >
+              
+              <div
+                class="v-progress-linear__indeterminate long"
+                style="background-color: #3D4753; color: #fff; caret-color: #fff;"
+              />
+              <div
+                class="v-progress-linear__indeterminate short"
+                style="background-color: #3D4753; color: #fff; caret-color: #fff;"
+              />
+              
+            </div>
+          </transition-stub>
+          <!---->
+        </div>
+      </div>
+      <!---->
+      <div
+        class="v-field__field"
+        data-no-activator=""
+      >
+        <!---->
+        <label
+          class="v-label v-field-label"
+          for="input-0"
+        >
+          <!---->
+          
+          <!---->
+          
+        </label>
+        
+        
+        <!---->
+        <input
+          aria-describedby="input-0-messages"
+          class="v-field__input"
+          id="input-0"
+          size="1"
+          type="text"
+        />
+        <!---->
+        
+        
+      </div>
+      <!---->
+      <!---->
+      <div
+        class="v-field__outline"
+      >
+        <!---->
+        <!---->
+      </div>
+    </div>
+    
+  </div>
+  <!---->
+  <!---->
+</div>
+`;

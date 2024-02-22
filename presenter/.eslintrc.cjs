@@ -12,7 +12,7 @@ module.exports = {
     'plugin:import/recommended',
     'plugin:import/typescript',
     'plugin:promise/recommended',
-    'plugin:security/recommended',
+    'plugin:security/recommended-legacy',
     'plugin:vue/vue3-recommended',
     'plugin:@intlify/vue-i18n/recommended',
     'plugin:storybook/recommended',
@@ -22,7 +22,15 @@ module.exports = {
     parser: '@typescript-eslint/parser',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'import', 'promise', 'security', 'vue', 'storybook'],
+  plugins: [
+    '@typescript-eslint',
+    'import',
+    'promise',
+    'security',
+    'vue',
+    'storybook',
+    'eslint-plugin-local-rules',
+  ],
   settings: {
     'import/resolver': {
       typescript: true,
@@ -43,7 +51,7 @@ module.exports = {
     'vue/multi-word-component-names': [
       'error',
       {
-        ignores: ['default', 'index.page', 'datenschutz.page', 'impressum.page'],
+        ignores: ['+Page'],
       },
     ],
     // Optional eslint-comments rule
@@ -165,6 +173,9 @@ module.exports = {
     {
       files: ['*.vue'],
       plugins: ['vuetify'],
+      rules: {
+        'local-rules/href-pattern': 'error',
+      },
       extends: ['plugin:vuetify/recommended'],
     },
     {

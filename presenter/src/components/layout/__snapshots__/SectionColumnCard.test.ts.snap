@@ -1,0 +1,98 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SectionColumnCard > renders SectionColumnCard with all elements 1`] = `
+<div
+  class="v-card v-card--flat v-theme--light bg-transparent v-card--density-default v-card--variant-elevated mb-12 mb-md-2 w-100"
+  data-v-e62ef3ea=""
+  style="width: 375px;"
+>
+  <!---->
+  <div
+    class="v-card__loader"
+  >
+    <div
+      aria-hidden="true"
+      aria-valuemax="100"
+      aria-valuemin="0"
+      class="v-progress-linear v-theme--light v-locale--is-ltr"
+      role="progressbar"
+      style="top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);"
+    >
+      <!---->
+      <div
+        class="v-progress-linear__background"
+        style="width: 100%;"
+      />
+      <transition-stub
+        appear="false"
+        css="true"
+        name="fade-transition"
+        persisted="false"
+      >
+        <div
+          class="v-progress-linear__indeterminate"
+        >
+          
+          <div
+            class="v-progress-linear__indeterminate long"
+          />
+          <div
+            class="v-progress-linear__indeterminate short"
+          />
+          
+        </div>
+      </transition-stub>
+      <!---->
+    </div>
+  </div>
+  <!---->
+  <!---->
+  
+  <div
+    class="v-responsive v-img v-img--booting text-white"
+    data-v-e62ef3ea=""
+    style="height: 100px;"
+  >
+    <div
+      class="v-responsive__sizer"
+    />
+    
+    
+    <!---->
+    <transition-stub
+      appear="false"
+      css="true"
+      name="fade-transition"
+      persisted="false"
+    >
+      <!---->
+    </transition-stub>
+    <!---->
+    <!---->
+    <!---->
+    
+    
+    <!---->
+  </div>
+  <div
+    class="v-card-title card-title mt-0 mt-md-8"
+    data-v-e62ef3ea=""
+  >
+    Title
+  </div>
+  <div
+    class="v-card-text card-text mt-0 mt-md-8"
+    data-v-e62ef3ea=""
+  >
+    Lorem ipsum text
+  </div>
+  
+  <!---->
+  
+  <!---->
+  <span
+    class="v-card__underlay"
+  />
+  
+</div>
+`;

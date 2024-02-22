@@ -1,0 +1,73 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PlanningSection > renders 1`] = `
+<div
+  class="planning-section v-container"
+  data-v-e1784946=""
+>
+  <div
+    class="v-row section-header"
+    data-v-e1784946=""
+  >
+    <div
+      class="v-col"
+      data-v-e1784946=""
+    >
+      <h2
+        class="section-headline"
+        data-v-e1784946=""
+      >
+        $t('home.planningSection.headline')
+      </h2>
+    </div>
+  </div>
+  <div
+    class="v-row mt-12"
+    data-v-e1784946=""
+  >
+    <div
+      class="v-col"
+      data-v-e1784946=""
+    >
+      <video
+        autoplay=""
+        class="video w-100"
+        data-v-e1784946=""
+        muted=""
+        playsinline=""
+        poster="/src/assets/img/timeline_thumbnail_quer.jpg"
+        preload="auto"
+      >
+        <source
+          data-v-e1784946=""
+          src="/src/assets/video/timeline_quer.mp4"
+          type="video/mp4"
+        />
+        <source
+          data-v-e1784946=""
+          src="/src/assets/video/timeline_quer.webm"
+          type="video/webm"
+        />
+      </video>
+    </div>
+  </div>
+  <div
+    class="v-row"
+    data-v-e1784946=""
+  >
+    <div
+      class="v-col anim-btn-col text-center"
+      data-v-e1784946=""
+    >
+      <transition-stub
+        appear="false"
+        css="true"
+        data-v-e1784946=""
+        persisted="false"
+      >
+        <!--v-if-->
+      </transition-stub>
+    </div>
+  </div>
+</div>
+`;

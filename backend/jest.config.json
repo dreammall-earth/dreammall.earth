@@ -1,11 +1,15 @@
 {
   "verbose": true,
   "preset": "ts-jest",
+  "modulePathIgnorePatterns": ["<rootDir>/build/"],
   "collectCoverage": true,
-  "collectCoverageFrom": ["src/**/*.ts", "!**/node_modules/**", "!src/index.ts", "!build/**"],
+  "collectCoverageFrom": ["src/**/*.ts", "!src/index.ts", "!src/prisma.ts", "!**/node_modules/**", "!build/**"],
   "coverageThreshold": {
     "global": {
-      "lines": 97
+      "statements": 100,
+      "branches": 100,
+      "functions": 100,
+      "lines": 100
     }
   },
   "setupFiles": ["./test/testSetup.ts"],

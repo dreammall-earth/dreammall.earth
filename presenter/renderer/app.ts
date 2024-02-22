@@ -1,5 +1,6 @@
 import { DefaultApolloClient } from '@vue/apollo-composable'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import { PageContext } from 'vike/types'
 import { createSSRApp, defineComponent, h, markRaw, reactive, Component, provide } from 'vue'
 
 import PageShell from '#components/PageShell.vue'
@@ -9,11 +10,9 @@ import i18n from '#plugins/i18n'
 import pinia from '#plugins/pinia'
 import CreateVuetify from '#plugins/vuetify'
 
-import type { PageContext, VikePageContext } from '#types/PageContext'
-
 const vuetify = CreateVuetify(i18n)
 
-function createApp(pageContext: VikePageContext & PageContext, isClient = true) {
+function createApp(pageContext: PageContext, isClient = true) {
   // eslint-disable-next-line no-use-before-define
   let rootComponent: InstanceType<typeof PageWithWrapper>
   const PageWithWrapper = defineComponent({
@@ -52,18 +51,15 @@ function createApp(pageContext: VikePageContext & PageContext, isClient = true) 
   app.use(vuetify)
 
   objectAssign(app, {
-    changePage: (pageContext: VikePageContext & PageContext) => {
+    changePage: (pageContext: PageContext) => {
       Object.assign(pageContextReactive, pageContext)
       rootComponent.Page = markRaw(pageContext.Page)
       rootComponent.pageProps = markRaw(pageContext.pageProps || {})
     },
   })
 
-  // When doing Client Routing, we mutate pageContext (see usage of `app.changePage()` in `_default.page.client.js`).
-  // We therefore use a reactive pageContext.
   const pageContextReactive = reactive(pageContext)
 
-  // Make pageContext available from any Vue component
   setPageContext(app, pageContextReactive)
 
   return { app, i18n }

@@ -13,16 +13,19 @@ config({
 // Config
 const BREVO = {
   BREVO_KEY: process.env.BREVO_KEY,
-  BREVO_CONTACT_REQUEST_TO_NAME: process.env.BREVO_CONTACT_REQUEST_TO_NAME,
-  BREVO_CONTACT_REQUEST_TO_EMAIL: process.env.BREVO_CONTACT_REQUEST_TO_EMAIL,
-  BREVO_TEMPLATE_CONTACT_BASE: !isNaN(Number(process.env.BREVO_TEMPLATE_CONTACT_BASE))
-    ? Number(process.env.BREVO_TEMPLATE_CONTACT_BASE)
+  BREVO_ADMIN_NAME: process.env.BREVO_ADMIN_NAME,
+  BREVO_ADMIN_EMAIL: process.env.BREVO_ADMIN_EMAIL,
+  BREVO_CONTACT_TEMPLATE_ADMIN: !isNaN(Number(process.env.BREVO_CONTACT_TEMPLATE_ADMIN))
+    ? Number(process.env.BREVO_CONTACT_TEMPLATE_ADMIN)
     : undefined,
-  BREVO_TEMPLATE_CONTACT_USER: !isNaN(Number(process.env.BREVO_TEMPLATE_CONTACT_USER))
-    ? Number(process.env.BREVO_TEMPLATE_CONTACT_USER)
+  BREVO_CONTACT_TEMPLATE_USER: !isNaN(Number(process.env.BREVO_CONTACT_TEMPLATE_USER))
+    ? Number(process.env.BREVO_CONTACT_TEMPLATE_USER)
     : undefined,
-  BREVO_CONTACT_LIST_ID: !isNaN(Number(process.env.BREVO_CONTACT_LIST_ID))
-    ? Number(process.env.BREVO_CONTACT_LIST_ID)
+  BREVO_NEWSLETTER_TEMPLATE_OPTIN: !isNaN(Number(process.env.BREVO_NEWSLETTER_TEMPLATE_OPTIN))
+    ? Number(process.env.BREVO_NEWSLETTER_TEMPLATE_OPTIN)
+    : undefined,
+  BREVO_NEWSLETTER_LIST: !isNaN(Number(process.env.BREVO_NEWSLETTER_LIST))
+    ? Number(process.env.BREVO_NEWSLETTER_LIST)
     : undefined,
 }
 
@@ -34,20 +37,30 @@ export const CONFIG_CHECKS = {
     config: typeof CONFIG,
   ): config is typeof CONFIG & {
     BREVO_KEY: string
-    BREVO_TEMPLATE_CONTACT_BASE: number
-    BREVO_TEMPLATE_CONTACT_USER: number
-    BREVO_CONTACT_REQUEST_TO_NAME: string
-    BREVO_CONTACT_REQUEST_TO_EMAIL: string
+    BREVO_CONTACT_TEMPLATE_ADMIN: number
+    BREVO_CONTACT_TEMPLATE_USER: number
+    BREVO_ADMIN_NAME: string
+    BREVO_ADMIN_EMAIL: string
   } =>
     typeof config.BREVO_KEY === 'string' &&
-    typeof config.BREVO_TEMPLATE_CONTACT_BASE === 'number' &&
-    typeof config.BREVO_TEMPLATE_CONTACT_USER === 'number' &&
-    typeof config.BREVO_CONTACT_REQUEST_TO_NAME === 'string' &&
-    typeof config.BREVO_CONTACT_REQUEST_TO_EMAIL === 'string',
-  CONFIG_CHECK_BREVO_SUBSCRIBE_NEWSLETTER: (
+    typeof config.BREVO_CONTACT_TEMPLATE_ADMIN === 'number' &&
+    typeof config.BREVO_CONTACT_TEMPLATE_USER === 'number' &&
+    typeof config.BREVO_ADMIN_NAME === 'string' &&
+    typeof config.BREVO_ADMIN_EMAIL === 'string',
+  CONFIG_CHECK_BREVO_NEWSLETTER: (
     config: typeof CONFIG,
-  ): config is typeof CONFIG & { BREVO_KEY: string; BREVO_CONTACT_LIST_ID: number } =>
-    typeof config.BREVO_KEY === 'string' && typeof config.BREVO_CONTACT_LIST_ID === 'number',
+  ): config is typeof CONFIG & {
+    BREVO_KEY: string
+    BREVO_NEWSLETTER_LIST: number
+    BREVO_NEWSLETTER_TEMPLATE_OPTIN: number
+    BREVO_ADMIN_NAME: string
+    BREVO_ADMIN_EMAIL: string
+  } =>
+    typeof config.BREVO_KEY === 'string' &&
+    typeof config.BREVO_NEWSLETTER_LIST === 'number' &&
+    typeof config.BREVO_NEWSLETTER_TEMPLATE_OPTIN === 'number' &&
+    typeof config.BREVO_ADMIN_NAME === 'string' &&
+    typeof config.BREVO_ADMIN_EMAIL === 'string',
 }
 
 const validateConfig = () => {
@@ -57,10 +70,8 @@ const validateConfig = () => {
     )
   }
 
-  if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_SUBSCRIBE_NEWSLETTER(CONFIG)) {
-    printConfigError(
-      'BREVO_SUBSCRIBE_NEWSLETTER functionality is disabled - some BREVO configs are missing',
-    )
+  if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_NEWSLETTER(CONFIG)) {
+    printConfigError('BREVO_NEWSLETTER functionality is disabled - some BREVO configs are missing')
   }
 }
 

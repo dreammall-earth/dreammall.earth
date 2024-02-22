@@ -1,18 +1,25 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { ApolloServer } from '@apollo/server'
-import { NewsletterSubscription } from '@prisma/client'
 
-import { sendContactToBrevo } from '#api/NewsletterBrevo'
+import { confirmNewsletter, subscribeToNewsletter } from '#api/Brevo'
+import { CONFIG } from '#config/config'
+import { EventType } from '#src/event/EventType'
 import { prisma } from '#src/prisma'
 import { createServer } from '#src/server/server'
 
+CONFIG.BREVO_KEY = 'MY KEY'
+CONFIG.BREVO_ADMIN_NAME = 'Bibi Bloxberg'
+CONFIG.BREVO_ADMIN_EMAIL = 'bibi@bloxberg.de'
+CONFIG.BREVO_NEWSLETTER_TEMPLATE_OPTIN = 3
+
 let testServer: ApolloServer
 
-jest.mock('#api/NewsletterBrevo', () => {
-  return {
-    sendContactToBrevo: jest.fn(),
-  }
-})
+jest.mock('#api/Brevo', () => ({
+  subscribeToNewsletter: jest.fn().mockResolvedValue(true),
+  confirmNewsletter: jest
+    .fn()
+    .mockResolvedValueOnce(false)
+    .mockResolvedValue({ email: 'peter@lustig.de' }),
+}))
 
 beforeAll(async () => {
   testServer = await createServer()
@@ -135,8 +142,10 @@ describe('NewsletterSubscriptionResolver', () => {
     })
 
     describe('with correct data', () => {
-      it('returns true', async () => {
-        const response = await testServer.executeOperation({
+      let response: Awaited<ReturnType<typeof testServer.executeOperation>>
+      beforeEach(async () => {
+        await prisma.event.deleteMany()
+        response = await testServer.executeOperation({
           query: `mutation($data: SubscribeToNewsletterInput!) {
                     subscribeToNewsletter(subscribeToNewsletterData: $data) 
                   }`,
@@ -148,6 +157,14 @@ describe('NewsletterSubscriptionResolver', () => {
             },
           },
         })
+      })
+
+      it('calls subscribeToNewsletter', () => {
+        expect(subscribeToNewsletter).toHaveBeenCalledTimes(1)
+        expect(subscribeToNewsletter).toHaveBeenCalledWith('Peter', 'Lustig', 'peter@lustig.de')
+      })
+
+      it('returns true', () => {
         expect(response.body).toMatchObject({
           kind: 'single',
           singleResult: {
@@ -158,24 +175,78 @@ describe('NewsletterSubscriptionResolver', () => {
         })
       })
 
-      it('has the newsletter subscription form stored in the database', async () => {
-        const result: NewsletterSubscription[] = await prisma.newsletterSubscription.findMany()
+      it('writes event to database', async () => {
+        const result = await prisma.event.findMany()
         expect(result).toHaveLength(1)
         expect(result).toEqual([
           {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
-            firstName: 'Peter',
-            lastName: 'Lustig',
-            email: 'peter@lustig.de',
+            type: EventType.NEWSLETTER_SUBSCRIBE,
+            involvedEmail: 'peter@lustig.de',
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             createdAt: expect.any(Date),
-            brevoSuccess: null,
           },
         ])
       })
     })
+  })
 
-    it('calls sendContactFormEmail', () => {
-      expect(sendContactToBrevo).toBeCalled()
+  describe('confirmNewsletter mutation', () => {
+    let response: Awaited<ReturnType<typeof testServer.executeOperation>>
+    beforeEach(async () => {
+      jest.clearAllMocks()
+      await prisma.event.deleteMany()
+      response = await testServer.executeOperation({
+        query: `mutation($code: String!) {
+                  confirmNewsletter(code: $code) 
+                }`,
+        variables: {
+          code: '1234567890abcdef',
+        },
+      })
+    })
+
+    it('returns false on first call', () => {
+      expect(response.body).toMatchObject({
+        kind: 'single',
+        singleResult: {
+          data: {
+            confirmNewsletter: false,
+          },
+        },
+      })
+    })
+
+    it('calls confirmNewsletter', () => {
+      expect(confirmNewsletter).toHaveBeenCalledTimes(1)
+      expect(confirmNewsletter).toHaveBeenCalledWith('1234567890abcdef')
+    })
+
+    it('returns true', () => {
+      expect(response.body).toMatchObject({
+        kind: 'single',
+        singleResult: {
+          data: {
+            confirmNewsletter: true,
+          },
+        },
+      })
+    })
+
+    it('writes event to database', async () => {
+      const result = await prisma.event.findMany()
+      expect(result).toHaveLength(1)
+      expect(result).toEqual([
+        {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          id: expect.any(Number),
+          type: EventType.NEWSLETTER_CONFIRM,
+          involvedEmail: 'peter@lustig.de',
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          createdAt: expect.any(Date),
+        },
+      ])
     })
   })
 })

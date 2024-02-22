@@ -3,31 +3,48 @@
 # Find current directory & configure paths
 SCRIPT_PATH=$(realpath $0)
 SCRIPT_DIR=$(dirname $SCRIPT_PATH)
+TIMESTAMP=$(date +"%Y-%m-%d_%T")
+LOG_PATH=$SCRIPT_DIR/../log
+LOG_FILE=$LOG_PATH/${TIMESTAMP}_deploy.log
+LOG_ERROR_FILE=$LOG_PATH/${TIMESTAMP}_deploy.error.log
 
-# Update git
-# assuming you are already on the right branch
-git pull -ff
+exec 3>&1 1>>${LOG_FILE} 2>&1 2>>${LOG_ERROR_FILE}
 
-# stop all services
-pm2 stop all
-pm2 delete all
-pm2 save
+{
+    echo 'Start Deploy' 
 
-# run as production
-BACKUP_NODE_ENV=$NODE_ENV
-export NODE_ENV=production
+    # Logrotate nginx logs
+    (cd $LOG_PATH; for filename in nginx.*.log; do mv "$filename" "${TIMESTAMP}_${filename}"; done;)
+    # trigger nginx logfile reload
+    kill -USR1 `cat /var/run/nginx/nginx.pid`
 
-# Backend & Database Migration
-$SCRIPT_DIR/build.backend.sh
-$SCRIPT_DIR/migrate.database.sh
-$SCRIPT_DIR/start.backend.sh
+    # stop all services
+    pm2 stop all
+    pm2 delete all
+    pm2 save
 
-# Presenter
-$SCRIPT_DIR/build.presenter.sh
-$SCRIPT_DIR/start.presenter.sh
+    # Update git
+    # assuming you are already on the right branch
+    git pull -ff
 
-# Docs
-$SCRIPT_DIR/build.docs.sh
+    # run as production
+    BACKUP_NODE_ENV=$NODE_ENV
+    export NODE_ENV=production
 
-# restore node env
-NODE_ENV=$BACKUP_NODE_ENV
+    # Backend & Database Migration
+    $SCRIPT_DIR/build.backend.sh
+    $SCRIPT_DIR/migrate.database.sh
+    $SCRIPT_DIR/start.backend.sh
+
+    # Presenter
+    $SCRIPT_DIR/build.presenter.sh
+    $SCRIPT_DIR/start.presenter.sh
+
+    # Docs
+    $SCRIPT_DIR/build.docs.sh
+
+    # restore node env
+    NODE_ENV=$BACKUP_NODE_ENV
+
+    echo 'Finish Deploy'
+} | tee /dev/fd/3
