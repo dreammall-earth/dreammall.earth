@@ -3,9 +3,12 @@ import { startStandaloneServer } from '@apollo/server/standalone'
 
 import { schema } from '#graphql/schema'
 
+import logger from './logger'
+
 export const createServer = async (): Promise<ApolloServer> => {
   return new ApolloServer({
     schema: await schema(),
+    plugins: [logger],
   })
 }
 
