@@ -74,7 +74,7 @@
     "ts-node": "^10.9.2",
     "tsc-watch": "^6.0.4",
     "typescript": "^5.3.3",
-    "vuepress": "^2.0.0-rc.0"
+    "vuepress": "^2.0.0-rc.8"
   },
   "imports": {
     "#graphql/*": "./src/graphql/*",
