@@ -10,22 +10,31 @@ const prismaClient = new PrismaClient({
       level: 'query',
     },
     {
-      emit: 'stdout',
-      level: 'error',
-    },
-    {
-      emit: 'stdout',
+      emit: 'event',
       level: 'info',
     },
     {
-      emit: 'stdout',
+      emit: 'event',
       level: 'warn',
+    },
+    {
+      emit: 'event',
+      level: 'error',
     },
   ],
 })
 
 prismaClient.$on('query', (e) => {
   logger.debug('Prisma Query', e)
+})
+prismaClient.$on('info', (e) => {
+  logger.info('Prisma Info', e)
+})
+prismaClient.$on('warn', (e) => {
+  logger.warn('Prisma Warn', e)
+})
+prismaClient.$on('error', (e) => {
+  logger.error('Prisma Error', e)
 })
 
 const prisma = prismaClient.$extends(
