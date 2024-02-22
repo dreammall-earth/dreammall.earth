@@ -1,7 +1,6 @@
 {
   "verbose": true,
   "preset": "ts-jest",
-  "modulePathIgnorePatterns": ["<rootDir>/build/"],
   "collectCoverage": true,
   "collectCoverageFrom": ["src/**/*.ts", "!src/index.ts", "!src/prisma.ts", "!**/node_modules/**", "!build/**"],
   "coverageThreshold": {
