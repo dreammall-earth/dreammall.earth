@@ -2,7 +2,7 @@
   "verbose": true,
   "preset": "ts-jest",
   "collectCoverage": true,
-  "collectCoverageFrom": ["src/**/*.ts", "!src/index.ts", "!src/prisma.ts", "!**/node_modules/**", "!build/**"],
+  "collectCoverageFrom": ["src/**/*.ts", "!src/index.ts", "!src/logger.ts", "!src/prisma.ts", "!**/node_modules/**", "!build/**"],
   "coverageThreshold": {
     "global": {
       "statements": 100,

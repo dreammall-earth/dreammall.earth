@@ -1,6 +1,8 @@
 import { PrismaClient } from '@prisma/client'
 import { createSoftDeleteExtension } from 'prisma-extension-soft-delete'
 
+import logger from './logger'
+
 const prismaClient = new PrismaClient({
   log: [
     {
@@ -8,23 +10,31 @@ const prismaClient = new PrismaClient({
       level: 'query',
     },
     {
-      emit: 'stdout',
-      level: 'error',
-    },
-    {
-      emit: 'stdout',
+      emit: 'event',
       level: 'info',
     },
     {
-      emit: 'stdout',
+      emit: 'event',
       level: 'warn',
+    },
+    {
+      emit: 'event',
+      level: 'error',
     },
   ],
 })
 
 prismaClient.$on('query', (e) => {
-  // eslint-disable-next-line no-console
-  console.log('Prisma Query', e)
+  logger.debug('Prisma Query', e)
+})
+prismaClient.$on('info', (e) => {
+  logger.info('Prisma Info', e)
+})
+prismaClient.$on('warn', (e) => {
+  logger.warn('Prisma Warn', e)
+})
+prismaClient.$on('error', (e) => {
+  logger.error('Prisma Error', e)
 })
 
 const prisma = prismaClient.$extends(

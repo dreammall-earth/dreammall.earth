@@ -1,18 +1,17 @@
 // eslint-disable-next-line import/no-unassigned-import
 import 'reflect-metadata'
+import logger from './logger'
 import { prisma } from './prisma'
 import { listen } from './server/server'
 
 export const main = async (): Promise<void> => {
   const url = await listen(4000)
-  // eslint-disable-next-line no-console
-  console.log(`🚀 Server is ready at ${url}`)
+  logger.info(`🚀 Server is ready at ${url}`)
 }
 
 void main()
   .catch((e) => {
-    // eslint-disable-next-line no-console
-    console.error(e)
+    logger.error(e)
     throw e
   })
   .finally(() => {
