@@ -39,7 +39,7 @@
     "@getbrevo/brevo": "^2.0.0-beta.4",
     "@prisma/client": "^5.10.2",
     "@vuepress/theme-default": "^2.0.0-rc.17",
-    "class-validator": "^0.14.0",
+    "class-validator": "^0.14.1",
     "dotenv": "^16.4.5",
     "graphql": "^16.8.1",
     "graphql-scalars": "^1.22.5",
