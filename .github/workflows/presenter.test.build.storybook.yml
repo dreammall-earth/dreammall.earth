@@ -11,10 +11,10 @@ jobs:
     outputs:
       changes: ${{ steps.changes.outputs.presenter-test-build-storybook }}
     steps:
-      - uses: actions/checkout@v3.3.0
+      - uses: actions/checkout@v4
 
       - name: Check for presenter file changes
-        uses: dorny/paths-filter@v3.0.0
+        uses: dorny/paths-filter@v3.0.1
         id: changes
         with:
           token: ${{ github.token }}
