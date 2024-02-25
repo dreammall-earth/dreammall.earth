@@ -31,8 +31,6 @@ The following commands are available:
 | **Documentation**          |                                                |
 | `npm run docs:dev`         | Run Documentation in development mode          |
 | `npm run docs:build`       | Build static documentation                     |
-| **Maintenance**            |                                                |
-| `npx npm-check-update`     | Check for updates                              |
 | **Release**                |                                                |
 | `npm run release`          | Propagate release version & generate changelog |
 | **Maintenance**            |                                                |
