@@ -11,7 +11,7 @@ model ContactForm {
   id                Int      @id @default(autoincrement())
   firstName         String   @db.VarChar(50)
   lastName          String   @db.VarChar(50)
-  email             String   @db.VarChar(100)
+  email             String   @db.VarChar(254)
   content           String   @db.VarChar(255)
   createdAt         DateTime @default(now())
   brevoSuccess      DateTime?
@@ -37,4 +37,11 @@ model NewsletterPreOptIn {
   deletedAt         DateTime?
   brevoSuccessMail  DateTime?
   brevoSuccessList  DateTime?
+}
+
+model Event {
+  id                Int      @id @default(autoincrement())
+  type              String   @db.VarChar(100)
+  involvedEmail     String?  @db.VarChar(254)
+  createdAt         DateTime @default(now())
 }

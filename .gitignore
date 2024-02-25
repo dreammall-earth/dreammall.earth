@@ -3,3 +3,5 @@ build/
 !.vuepress/
 .vuepress/.temp/
 .vuepress/.cache/
+
+.DS_Store

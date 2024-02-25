@@ -84,20 +84,20 @@
 </template>
 
 <script lang="ts" setup>
+import slideLogo1 from '#assets/img/coffee_icon.svg'
+import slideLogo2 from '#assets/img/logo_mall.svg'
+import slideLogo3 from '#assets/img/menschen_projekte.svg'
 import slide1Icon4 from '#assets/img/slides/slide1-calendar.svg'
 import slide1Icon5 from '#assets/img/slides/slide1-link-based.svg'
-import slideLogo1 from '#assets/img/slides/slide1-logo.svg'
 import slide1Icon3 from '#assets/img/slides/slide1-presentation.svg'
 import slide1Icon1 from '#assets/img/slides/slide1-social.svg'
 import slide1Icon2 from '#assets/img/slides/slide1-video-conf.svg'
-import slideLogo2 from '#assets/img/slides/slide2-logo.svg'
 import slide2Icon1 from '#assets/img/slides/slide2-presenter.svg'
 import slide2Icon4 from '#assets/img/slides/slide2-selling.svg'
 import slide2Icon3 from '#assets/img/slides/slide2-shops.svg'
 import slide2Icon2 from '#assets/img/slides/slide2-trade.svg'
 import slide3Icon2 from '#assets/img/slides/slide3-dashboard.svg'
 import slide3Icon1 from '#assets/img/slides/slide3-invitation.svg'
-import slideLogo3 from '#assets/img/slides/slide3-logo.svg'
 import slide3Icon3 from '#assets/img/slides/slide3-search.svg'
 </script>
 
