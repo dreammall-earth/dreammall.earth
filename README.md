@@ -35,11 +35,25 @@ The following commands are available:
 | `npx npm-check-update`     | Check for updates                              |
 | **Release**                |                                                |
 | `npm run release`          | Propagate release version & generate changelog |
+| **Maintenance**            |                                                |
+| `npm run update`           | Check for updates                              |
 
 ## How to release
 
 Generate a new version using `npm version --git-tag-version=false patch|minor|major`.
 Then run `npm run release` to propagate the new version and generate the changelog
+
+## Update
+
+You can get a list of packages to update by running `npm run update`.
+
+Appending `-u ` will also update the packages in the `package.json`. You have to run `npm install` again after.
+
+```bash
+npm run update -- -u
+npm install
+```
+
 
 ## External Tools
 
