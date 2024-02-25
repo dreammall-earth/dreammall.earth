@@ -54,7 +54,6 @@ npm run update -- -u
 npm install
 ```
 
-
 ## External Tools
 
 This project is tested with Browserstack.
