@@ -59,7 +59,7 @@ services:
     ports:
       - 4000:4000
     environment:
-      - DATABASE_URL="mysql://root:@database:3306/dreammall.earth"
+      - DATABASE_URL=mysql://root:@database:3306/dreammall.earth
       # Envs used in Dockerfile
       # - DOCKER_WORKDIR="/server"
       # - PORT=4000
