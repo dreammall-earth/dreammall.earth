@@ -125,7 +125,7 @@
     "eslint-plugin-vue": "^9.22.0",
     "eslint-plugin-vuetify": "^2.1.1",
     "eslint-plugin-yml": "^1.12.2",
-    "happy-dom": "^13.5.0",
+    "happy-dom": "^13.6.0",
     "mock-apollo-client": "^1.2.1",
     "prettier": "^3.2.5",
     "react": "^18.2.0",
