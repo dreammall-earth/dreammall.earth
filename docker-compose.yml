@@ -1,10 +1,9 @@
 version: "3.4"
 
 services:
-
-  #########################################################
-  ## MARIADB ##############################################
-  #########################################################
+  ########################################################
+  # DATABASE #############################################
+  ########################################################
   database:
     build:
       context: ./database
@@ -20,15 +19,51 @@ services:
     volumes: 
       - db_vol:/var/lib/mysql
 
+  ########################################################
+  # PRESENTER ############################################
+  ########################################################
   presenter:
-    extends:
-      file: presenter/docker-compose.override.yml
-      service: frontend
+    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
+    image: dreammall/presenter:local-production
+    build:
+      context: ./presenter
+      target: production
+    networks:
+      - external-net
+      - internal-net
+    ports:
+      - 3000:3000
+    environment:
+      # Envs used in Dockerfile
+      # - DOCKER_WORKDIR="/app"
+      # - PORT=3000
+      # - BUILD_DATE="1970-01-01T00:00:00.00Z"
+      # - BUILD_VERSION="0.0.0.0"
+      # - BUILD_COMMIT="0000000"
+      - NODE_ENV=production
 
+  #######################################################
+  # BACKEND #############################################
+  #######################################################
   backend:
-    extends:
-      file: backend/docker-compose.override.yml
-      service: backend
+    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
+    image: it4c/backend:local-production
+    build:
+      context: ./backend
+      target: production
+    networks:
+      - external-net
+      - internal-net
+    ports:
+      - 4000:4000
+    environment:
+      # Envs used in Dockerfile
+      # - DOCKER_WORKDIR="/server"
+      # - PORT=4000
+      # - BUILD_DATE="1970-01-01T00:00:00.00Z"
+      # - BUILD_VERSION="0.0.0.0"
+      # - BUILD_COMMIT="0000000"
+      - NODE_ENV=production
 
 networks:
   external-net:
