@@ -26,7 +26,8 @@
     "test": "npm run test:lint",
     "docs:dev": "vuepress dev .",
     "docs:build": "vuepress build .",
-    "release": "scripts/release.sh"
+    "release": "scripts/release.sh",
+    "update": "npx npm-check-updates"
   },
   "dependencies": {},
   "devDependencies": {
