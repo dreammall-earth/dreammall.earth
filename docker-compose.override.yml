@@ -76,6 +76,7 @@ services:
     # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
     image: dreammall/backend:local-development
     build:
+      context: ./backend
       target: development
     environment:
       - NODE_ENV=development
