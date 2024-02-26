@@ -36,7 +36,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Backend | docker-compose database
-        run: docker-compose -f docker-compose.yml up --detach --no-deps database
+        run: docker-compose up --detach --no-deps database
 
       - name: Backend | Unit
         run: npm install && npm run db:migrate && npm run test:unit
