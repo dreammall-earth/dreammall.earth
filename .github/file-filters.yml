@@ -9,6 +9,9 @@ backend-test-unit-code: &backend-test-unit-code
 backend-test-build-code: &backend-test-build-code
   - '**/*'
 
+backend-test-build-docker: &backend-test-build-docker
+  - '**/*'
+
 backend-test-build-docs: &backend-test-build-docs
   - '**/*.md'
   - '.vuepress/*'
