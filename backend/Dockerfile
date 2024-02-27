@@ -63,7 +63,7 @@ FROM base as documentation
 # Run command
 # (for development we need to execute npm install since the
 #  node_modules are on another volume and need updating)
-# CMD /bin/sh -c "npm install && npm run docs:dev"
+CMD /bin/sh -c "npm install && npm run docs:dev"
 
 ##################################################################################
 # BUILD (Does contain all files and is therefore bloated) ########################
