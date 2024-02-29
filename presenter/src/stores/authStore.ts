@@ -2,7 +2,7 @@ import { User } from 'oidc-client-ts'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
-export const authStore = defineStore('auth', () => {
+export const useAuthStore = defineStore('auth', () => {
   const authUser = ref<User | null>(null)
 
   const accessToken = computed(() => authUser.value?.access_token ?? '')
@@ -26,5 +26,5 @@ export const authStore = defineStore('auth', () => {
 })
 
 if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(authStore, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(useAuthStore, import.meta.hot))
 }
