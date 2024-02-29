@@ -13,7 +13,6 @@ export default class AuthService {
       post_logout_redirect_uri: AUTH.POST_LOGOUT_REDIRECT_URI,
       response_type: AUTH.RESPONSE_TYPE,
       scope: AUTH.SCOPE,
-      // userStore: new WebStorageStateStore(),
       loadUserInfo: true,
     })
   }
