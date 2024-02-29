@@ -25,8 +25,19 @@
           <div class="d-flex align-center mr-0 mr-md-8 language-column">
             <LanguageSelector />
           </div>
-          <MainButton variant="third-inverse" label="Customer Login" size="small" @click="signIn" />
-          <MainButton variant="third" label="Sign up" size="small" @click="signUp" />
+          <div v-if="auth.isLoggedIn" class="d-flex align-center mr-0 mr-md-8">
+            <MainButton variant="third" label="Sign Out" size="small" @click="signOut" />
+          </div>
+          <div v-else class="d-flex align-center mr-0 mr-md-8">
+            <MainButton
+              variant="third-inverse"
+              class="mr-1"
+              label="Sign in"
+              size="small"
+              @click="signIn"
+            />
+            <MainButton variant="third" label="Sign up" size="small" @click="signUp" />
+          </div>
           <div class="d-flex d-md-none align-center justify-end mr-8 mobile-column">
             <v-img class="mobile-menu-icon w-100" :src="MobileMenuIcon" @click="toggleNavBar" />
           </div>
@@ -75,9 +86,13 @@ import LanguageSelector from '#components/language/LanguageSelector.vue'
 import LogoImage from '#components/LogoImage.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
 import AuthService from '#src/services/AuthService'
+import { useAuthStore } from '#stores/authStore'
 
 const authService = inject<AuthService>('authService')
 
+const auth = useAuthStore()
+
+// TODO what about the store?
 async function signIn() {
   try {
     await authService?.signIn()
@@ -90,6 +105,16 @@ async function signIn() {
 
 async function signUp() {
   await authService?.signUp()
+}
+
+async function signOut() {
+  try {
+    await authService?.signOut()
+    auth.clear()
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log('auth error', error)
+  }
 }
 
 const appBackground = ref('transparent')
