@@ -26,7 +26,7 @@ export const useAuthStore = defineStore(
       clear,
     }
   },
-  { persist: true},
+  { persist: true },
 )
 
 if (import.meta.hot) {
