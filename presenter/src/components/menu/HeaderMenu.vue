@@ -26,13 +26,13 @@
             <LanguageSelector />
           </div>
           <div v-if="auth.isLoggedIn" class="d-flex align-center mr-0 mr-md-8">
-            <MainButton
+            <!--<MainButton
               variant="third-inverse"
               class="mr-1"
               label="Query"
               size="small"
               @click="queryProtectedBackend"
-            />
+            />-->
             <MainButton variant="third" label="Sign Out" size="small" @click="signOut" />
           </div>
           <div v-else class="d-flex align-center mr-0 mr-md-8">
@@ -127,6 +127,7 @@ async function signOut() {
   }
 }
 
+/*
 const apolloClient = inject<ApolloClient<InMemoryCache>>(DefaultApolloClient)
 
 async function queryProtectedBackend() {
@@ -139,6 +140,7 @@ async function queryProtectedBackend() {
     console.log('error secret', error)
   }
 }
+*/
 
 const appBackground = ref('transparent')
 const navBackground = ref('#d8d8d8')
