@@ -26,6 +26,13 @@
             <LanguageSelector />
           </div>
           <div v-if="auth.isLoggedIn" class="d-flex align-center mr-0 mr-md-8">
+            <MainButton
+              variant="third-inverse"
+              class="mr-1"
+              label="Query"
+              size="small"
+              @click="queryProtectedBackend"
+            />
             <MainButton variant="third" label="Sign Out" size="small" @click="signOut" />
           </div>
           <div v-else class="d-flex align-center mr-0 mr-md-8">
@@ -77,6 +84,7 @@
 </template>
 
 <script lang="ts" setup>
+import { DefaultApolloClient, useQuery } from '@vue/apollo-composable'
 import { navigate } from 'vike/client/router'
 import { ref, onMounted, onBeforeMount, inject } from 'vue'
 
@@ -85,8 +93,10 @@ import MainButton from '#components/buttons/MainButton.vue'
 import LanguageSelector from '#components/language/LanguageSelector.vue'
 import LogoImage from '#components/LogoImage.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
+import { querySecret } from '#queries/querySecret'
 import AuthService from '#src/services/AuthService'
 import { useAuthStore } from '#stores/authStore'
+import { ApolloClient, InMemoryCache } from '@apollo/client/core'
 
 const authService = inject<AuthService>('authService')
 
@@ -114,6 +124,19 @@ async function signOut() {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log('auth error', error)
+  }
+}
+
+const apolloClient = inject<ApolloClient<InMemoryCache>>(DefaultApolloClient)
+
+async function queryProtectedBackend() {
+  try {
+    const secret = await apolloClient?.query({ query: querySecret })
+    // eslint-disable-next-line no-console
+    console.log(secret)
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log('error secret', error)
   }
 }
 

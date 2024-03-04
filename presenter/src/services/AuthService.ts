@@ -33,8 +33,10 @@ export default class AuthService {
     return this.userManager.signinSilentCallback()
   }
 
-  public signOut() {
+  public async signOut() {
     return this.userManager.signoutRedirect()
+    // return this.userManager.signoutPopup()
+    // return this.userManager.signoutSilent()
   }
 
   public getUser() {
