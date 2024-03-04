@@ -17,6 +17,7 @@
       "#layouts/*": ["./src/layouts/*"],
       "#stores/*": ["./src/stores/*"],
       "#mutations/*": ["./src/graphql/mutations/*"],
+      "#queries/*": ["./src/graphql/queries/*"],
       "#src/*": ["./src/*"],
       "#plugins/*": ["./renderer/plugins/*"],
       "#context/*": ["./renderer/context/*"],
