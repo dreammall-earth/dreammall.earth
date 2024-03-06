@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <div class="h-screen optin-page py-12">Logging in...</div>
+    <div class="h-screen auth-page py-12">{{ $t('auth.content') }}</div>
   </DefaultLayout>
 </template>
 
@@ -31,7 +31,7 @@ onBeforeMount(async () => {
 </script>
 
 <style scoped lang="scss">
-.optin-page {
+.auth-page {
   display: flex;
   justify-content: center;
 
