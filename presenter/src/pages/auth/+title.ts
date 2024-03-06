@@ -1,1 +1,1 @@
-export const title = 'DreamMall | Authentication'
+export const title = 'DreamMall | Authentifizierung'
