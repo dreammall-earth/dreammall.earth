@@ -317,6 +317,7 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                     <!---->
                   </div>
                 </div>
+                <!--v-if-->
                 <div
                   class="d-flex d-md-none align-center justify-end mr-8 mobile-column"
                   data-v-5e2a2776=""
@@ -1815,6 +1816,7 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                     <!---->
                   </div>
                 </div>
+                <!--v-if-->
                 <div
                   class="d-flex d-md-none align-center justify-end mr-8 mobile-column"
                   data-v-5e2a2776=""
@@ -3313,6 +3315,7 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                     <!---->
                   </div>
                 </div>
+                <!--v-if-->
                 <div
                   class="d-flex d-md-none align-center justify-end mr-8 mobile-column"
                   data-v-5e2a2776=""

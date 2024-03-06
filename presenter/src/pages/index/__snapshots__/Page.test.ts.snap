@@ -317,6 +317,7 @@ exports[`IndexPage > renders 1`] = `
                     <!---->
                   </div>
                 </div>
+                <!--v-if-->
                 <div
                   class="d-flex d-md-none align-center justify-end mr-8 mobile-column"
                   data-v-5e2a2776=""
