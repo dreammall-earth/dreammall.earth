@@ -125,8 +125,8 @@ const onClick = () => {
   }
 
   &--third {
-    color: white !important;
     padding: 8px 40px;
+    color: white !important;
     background-color: $main-button-third-bg;
     border-radius: 10px;
   }
