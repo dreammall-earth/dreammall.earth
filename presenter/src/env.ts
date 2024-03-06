@@ -1,7 +1,6 @@
 const AUTH = {
-  AUTHORITY: (import.meta.env.PUBLIC_ENV__AUTH__AUTHORITY ?? 'http://localhost:9000') as string,
-  AUTHORITY_SIGNUP_URI: (import.meta.env.PUBLIC_ENV__AUTH__AUTHORITY_SIGNUP_URI ??
-    'http://localhost:9000/signup') as string,
+  AUTHORITY: (import.meta.env.PUBLIC_ENV__AUTH__AUTHORITY ?? '') as string,
+  AUTHORITY_SIGNUP_URI: (import.meta.env.PUBLIC_ENV__AUTH__AUTHORITY_SIGNUP_URI ?? '') as string,
   CLIENT_ID: (import.meta.env.PUBLIC_ENV__AUTH__CLIENT_ID ?? 'dreammall-presenter') as string,
   REDIRECT_URI: (import.meta.env.PUBLIC_ENV__AUTH__REDIRECT_URI ??
     'http://localhost:3000/auth') as string,
