@@ -25,25 +25,27 @@
           <div class="d-flex align-center mr-0 mr-md-8 language-column">
             <LanguageSelector />
           </div>
-          <div v-if="auth.isLoggedIn" class="d-flex align-center mr-0 mr-md-8">
-            <!--<MainButton
-              variant="third-inverse"
-              class="mr-1"
-              label="Query"
-              size="small"
-              @click="queryProtectedBackend"
-            />-->
-            <MainButton variant="third" label="Sign Out" size="small" @click="signOut" />
-          </div>
-          <div v-else class="d-flex align-center mr-0 mr-md-8">
-            <MainButton
-              variant="third-inverse"
-              class="mr-1"
-              label="Sign in"
-              size="small"
-              @click="signIn"
-            />
-            <MainButton variant="third" label="Sign up" size="small" @click="signUp" />
+          <div v-if="showAuthentication" class="d-flex align-center mr-0 mr-md-8">
+            <div v-if="auth.isLoggedIn">
+              <!--<MainButton
+                variant="third-inverse"
+                class="mr-1"
+                label="Query"
+                size="small"
+                @click="queryProtectedBackend"
+              />-->
+              <MainButton variant="third" label="Sign Out" size="small" @click="signOut" />
+            </div>
+            <div v-else>
+              <MainButton
+                variant="third-inverse"
+                class="mr-1"
+                label="Sign in"
+                size="small"
+                @click="signIn"
+              />
+              <MainButton variant="third" label="Sign up" size="small" @click="signUp" />
+            </div>
           </div>
           <div class="d-flex d-md-none align-center justify-end mr-8 mobile-column">
             <v-img class="mobile-menu-icon w-100" :src="MobileMenuIcon" @click="toggleNavBar" />
@@ -84,7 +86,7 @@
 </template>
 
 <script lang="ts" setup>
-import { DefaultApolloClient, useQuery } from '@vue/apollo-composable'
+// import { DefaultApolloClient, useQuery } from '@vue/apollo-composable'
 import { navigate } from 'vike/client/router'
 import { ref, onMounted, onBeforeMount, inject } from 'vue'
 
@@ -93,14 +95,15 @@ import MainButton from '#components/buttons/MainButton.vue'
 import LanguageSelector from '#components/language/LanguageSelector.vue'
 import LogoImage from '#components/LogoImage.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
-import { querySecret } from '#queries/querySecret'
+// import { querySecret } from '#queries/querySecret'
+import { AUTH } from '#src/env'
 import AuthService from '#src/services/AuthService'
 import { useAuthStore } from '#stores/authStore'
-import { ApolloClient, InMemoryCache } from '@apollo/client/core'
+// import { ApolloClient, InMemoryCache } from '@apollo/client/core'
 
 const authService = inject<AuthService>('authService')
-
 const auth = useAuthStore()
+const showAuthentication = AUTH.AUTHORITY && AUTH.AUTHORITY_SIGNUP_URI
 
 // TODO what about the store?
 async function signIn() {
