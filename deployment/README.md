@@ -53,6 +53,7 @@ Clone the repository:
 ```bash
 cd /var/www/localhost/htdocs/
 git clone https://github.com/dreammall-earth/dreammall.earth.git
+cd dreammall.earth
 ```
 
 Configure nginx:
@@ -62,13 +63,18 @@ cp -f deployment/nginx/default.conf /etc/nginx/http.d/default.conf
 # adjust the nginx config accordingly
 vi /etc/nginx/http.d/default.conf
 # note: replace log paths according to your installation directory
+service nginx restart
 ```
 
 Create Database User:
+```bash
+mysql
+```
 ```sql
 CREATE USER 'dreammall'@'localhost' IDENTIFIED BY 'SECRET';
 GRANT ALL PRIVILEGES ON * . * TO 'dreammall'@'localhost';
 FLUSH PRIVILEGES;
+exit
 ```
 
 Configure database connection:
@@ -83,7 +89,7 @@ Configure backend connection:
 ```bash
 cp presenter/.env.dist presenter/.env
 # adjust the .env config as needed
-vi backend/.env
+vi presenter/.env
 # PUBLIC_ENV__ENDPOINTS__GRAPHQL_URI=http://localhost/api
 
 ## Deploy the project
@@ -127,8 +133,8 @@ vi /etc/init.d/webhook
 chmod +x /etc/init.d/webhook
 
 # start the webhook service
-service webhook start
 rc-update add webhook boot
+service webhook start
 ```
 
 In github configure a webhook pointing to the correct url with the following setting:
