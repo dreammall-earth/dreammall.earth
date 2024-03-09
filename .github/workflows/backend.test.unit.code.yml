@@ -32,6 +32,10 @@ jobs:
     env:
       WORKING_DIRECTORY: ./backend
     steps:
+      - name: Set Node.js version
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '>=21'
       - name: Checkout code
         uses: actions/checkout@v4
 
