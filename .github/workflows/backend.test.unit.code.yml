@@ -32,10 +32,6 @@ jobs:
     env:
       WORKING_DIRECTORY: ./backend
     steps:
-      - name: Set Node.js version
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '>=21'
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -43,5 +39,8 @@ jobs:
         run: docker-compose -f docker-compose.yml up --detach --no-deps database
 
       - name: Backend | Unit
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '>=21'
         run: npm install && npm run db:migrate && npm run test:unit
         working-directory: ${{env.WORKING_DIRECTORY}}
