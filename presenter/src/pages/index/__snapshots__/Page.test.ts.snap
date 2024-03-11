@@ -3198,7 +3198,7 @@ exports[`IndexPage > renders 1`] = `
                           <div
                             class="v-input__details"
                           >
-                            <transition-group-stub
+                            <transition-stub
                               appear="false"
                               aria-live="polite"
                               class="v-messages"
@@ -3210,7 +3210,7 @@ exports[`IndexPage > renders 1`] = `
                               tag="div"
                             >
                               <!---->
-                            </transition-group-stub>
+                            </transition-stub>
                             <!---->
                           </div>
                         </div>
