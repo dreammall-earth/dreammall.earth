@@ -116,8 +116,8 @@ async function signIn() {
   }
 }
 
-async function signUp() {
-  await authService?.signUp()
+function signUp() {
+  navigate(AUTH.AUTHORITY_SIGNUP_URI)
 }
 
 async function signOut() {
@@ -131,19 +131,19 @@ async function signOut() {
 }
 
 /*
-const apolloClient = inject<ApolloClient<InMemoryCache>>(DefaultApolloClient)
+    const apolloClient = inject<ApolloClient<InMemoryCache>>(DefaultApolloClient)
 
-async function queryProtectedBackend() {
-  try {
+    async function queryProtectedBackend() {
+    try {
     const secret = await apolloClient?.query({ query: querySecret })
     // eslint-disable-next-line no-console
     console.log(secret)
-  } catch (error) {
+    } catch (error) {
     // eslint-disable-next-line no-console
     console.log('error secret', error)
-  }
-}
-*/
+    }
+    }
+  */
 
 const appBackground = ref('transparent')
 const navBackground = ref('#d8d8d8')

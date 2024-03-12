@@ -26,14 +26,6 @@ describe('AuthService', () => {
     })
   })
 
-  /*
-  describe('signUp', () => {
-    beforeAll(() => {
-      
-    })
-  })
-  */
-
   describe('signIn', () => {
     it('calls signin redirect', async () => {
       await authService.signIn()
