@@ -1,6 +1,6 @@
 {
   "name": "dreammall.earth",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Dreammall.earth website & product page",
   "main": "build/index.js",
   "type": "module",
@@ -30,7 +30,7 @@
     "update": "npx npm-check-updates"
   },
   "dependencies": {
-    "@vuepress/theme-default": "^2.0.0-rc.17"
+    "@vuepress/theme-default": "^2.0.0-rc.18"
   },
   "devDependencies": {
     "@vuepress/bundler-vite": "^2.0.0-rc.8",

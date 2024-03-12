@@ -1,10 +1,9 @@
 version: "3.4"
 
 services:
-
-  #########################################################
-  ## MARIADB ##############################################
-  #########################################################
+  ########################################################
+  # DATABASE #############################################
+  ########################################################
   database:
     build:
       context: ./database
@@ -15,10 +14,48 @@ services:
       - MARIADB_USER=root
     networks: 
       - internal-net
+      - external-net
     ports: 
       - 3306:3306
     volumes: 
       - db_vol:/var/lib/mysql
+
+  ########################################################
+  # PRESENTER ############################################
+  ########################################################
+  presenter:
+    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
+    image: dreammall/presenter:local-production
+    build:
+      context: ./presenter
+      target: production
+    networks:
+      - external-net
+      - internal-net
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=production
+
+  #######################################################
+  # BACKEND #############################################
+  #######################################################
+  backend:
+    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
+    image: it4c/backend:local-production
+    build:
+      context: ./backend
+      target: production
+    depends_on:
+      - database
+    networks:
+      - external-net
+      - internal-net
+    ports:
+      - 4000:4000
+    environment:
+      - DATABASE_URL=mysql://root:@database:3306/dreammall.earth
+      - NODE_ENV=production
 
 networks:
   external-net:
@@ -27,3 +64,5 @@ networks:
 
 volumes:
   db_vol: 
+  frontend_node_modules:
+  backend_node_modules:
