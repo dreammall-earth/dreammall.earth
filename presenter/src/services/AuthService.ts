@@ -17,9 +17,11 @@ export default class AuthService {
     })
   }
 
+  /*
   public signUp() {
     window.location.href = AUTH.AUTHORITY_SIGNUP_URI
   }
+  */
 
   public signIn() {
     return this.userManager.signinRedirect()
