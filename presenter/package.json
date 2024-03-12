@@ -1,6 +1,6 @@
 {
   "name": "boilerplate-frontend",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "The IT4C Boilerplate for frontends",
   "main": "build/index.cjs",
   "type": "module",
