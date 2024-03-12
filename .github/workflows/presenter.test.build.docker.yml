@@ -1,4 +1,4 @@
-name: "presenter:test:build test code"
+name: "presenter:test:build test docker"
 
 on: push
 
@@ -6,16 +6,11 @@ jobs:
   # only (but most important) job from this workflow required for pull requests
   # check results serve as run conditions for all other jobs here
   files-changed:
-    name: Detect File Changes - presenter-test-build-code
+    name: Detect File Changes - presenter-test-build-docker
     runs-on: ubuntu-latest
     outputs:
-      changes: ${{ steps.changes.outputs.presenter-test-build-code }}
+      changes: ${{ steps.changes.outputs.presenter-test-build-docker }}
     steps:
-      - name: Set Node version
-        uses: actions/setup-node@v4
-        with:
-          node-version: '>=21'
-
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -27,9 +22,9 @@ jobs:
           filters: .github/file-filters.yml
           list-files: shell
 
-  build:
+  build-production:
     if: needs.files-changed.outputs.changes == 'true'
-    name: Build - Presenter
+    name: Build Docker Production - Presenter
     needs: files-changed
     runs-on: ubuntu-latest
     env:
@@ -38,6 +33,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Presenter | Build
-        run: npm install && npm run build
+      - name: Presenter | Build Docker Production
+        run: docker compose -f docker-compose.yml build
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  build-development:
+    if: needs.files-changed.outputs.changes == 'true'
+    name: Build Docker Development - Presenter
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./presenter
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Presenter | Build Docker Development
+        run: docker compose build
         working-directory: ${{env.WORKING_DIRECTORY}}

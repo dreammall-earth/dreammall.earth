@@ -13,6 +13,10 @@ presenter-test-unit-code: &presenter-test-unit-code
 presenter-test-build-code: &presenter-test-build-code
   - 'presenter/**/*'
 
+presenter-test-build-docker: &presenter-test-build-docker
+  - 'presenter/**/*'
+
+
 presenter-test-build-docs: &presenter-test-build-docs
   - 'presenter/**/*.md'
   - 'presenter/.vuepress/*'
@@ -28,6 +32,9 @@ backend-test-unit-code: &backend-test-unit-code
   - 'backend/**/*'
 
 backend-test-build-code: &backend-test-build-code
+  - 'backend/**/*'
+
+backend-test-build-docker: &backend-test-build-docker
   - 'backend/**/*'
 
 backend-test-build-docs: &backend-test-build-docs
