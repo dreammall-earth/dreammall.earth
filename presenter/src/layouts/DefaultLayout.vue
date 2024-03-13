@@ -2,7 +2,7 @@
   <v-main class="main-layout">
     <HeaderMenu />
     <v-container fluid class="page-container pa-0">
-      <v-row class="mx-0 mx-lg-n3 mx-xl-n3 mx-xxl-n3">
+      <v-row>
         <v-col v-if="slots.sidemenu" cols="2">
           <v-sheet rounded>
             <slot name="sidemenu"></slot>

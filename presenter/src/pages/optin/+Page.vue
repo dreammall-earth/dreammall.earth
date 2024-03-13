@@ -2,9 +2,9 @@
   <DefaultLayout>
     <div class="h-screen optin-page py-12">
       <div v-if="isError">
-        <p>{{ $t('optin.error.text') }}</p>
+        <p class="px-3">{{ $t('optin.error.text') }}</p>
         <MainButton
-          class="mt-8"
+          class="mt-8 ml-3"
           :label="$t('optin.error.link')"
           size="auto"
           variant="primary"
@@ -13,7 +13,7 @@
         >
       </div>
       <div v-else>
-        <p>{{ $t('optin.success.text') }}</p>
+        <p class="px-3">{{ $t('optin.success.text') }}</p>
       </div>
     </div>
   </DefaultLayout>
