@@ -50,17 +50,33 @@ describe('HeaderMenu', () => {
     describe('sign in button', () => {
       const authServiceSpy = vi.spyOn(authService, 'signIn')
 
-      beforeEach(async () => {
-        vi.clearAllMocks()
-        await wrapper.find('button.sign-in').trigger('click')
+      describe('without error', () => {
+        beforeEach(async () => {
+          vi.clearAllMocks()
+          await wrapper.find('button.sign-in').trigger('click')
+        })
+
+        it('calls sign in from auth service', () => {
+          expect(authServiceSpy).toBeCalled()
+        })
+
+        it('navigates to /', () => {
+          expect(navigate).toBeCalledWith('/')
+        })
       })
 
-      it('calls sign in from auth service', () => {
-        expect(authServiceSpy).toBeCalled()
-      })
+      describe('with error', () => {
+        const consoleSpy = vi.spyOn(global.console, 'log')
 
-      it('navigates to /', () => {
-        expect(navigate).toBeCalledWith('/')
+        beforeEach(async () => {
+          vi.clearAllMocks()
+          authServiceSpy.mockRejectedValue('Ouch!')
+          await wrapper.find('button.sign-in').trigger('click')
+        })
+
+        it('logs the error to console', () => {
+          expect(consoleSpy).toBeCalledWith('auth error', 'Ouch!')
+        })
       })
     })
 
