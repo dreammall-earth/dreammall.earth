@@ -1315,7 +1315,7 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                           <div
                             class="v-input__details"
                           >
-                            <transition-stub
+                            <transition-group-stub
                               appear="false"
                               aria-live="polite"
                               class="v-messages"
@@ -1327,7 +1327,7 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                               tag="div"
                             >
                               <!---->
-                            </transition-stub>
+                            </transition-group-stub>
                             <!---->
                           </div>
                         </div>
@@ -2814,7 +2814,7 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                           <div
                             class="v-input__details"
                           >
-                            <transition-stub
+                            <transition-group-stub
                               appear="false"
                               aria-live="polite"
                               class="v-messages"
@@ -2826,7 +2826,7 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                               tag="div"
                             >
                               <!---->
-                            </transition-stub>
+                            </transition-group-stub>
                             <!---->
                           </div>
                         </div>
@@ -4277,7 +4277,7 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                           <div
                             class="v-input__details"
                           >
-                            <transition-stub
+                            <transition-group-stub
                               appear="false"
                               aria-live="polite"
                               class="v-messages"
@@ -4289,7 +4289,7 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                               tag="div"
                             >
                               <!---->
-                            </transition-stub>
+                            </transition-group-stub>
                             <!---->
                           </div>
                         </div>

@@ -1,16 +1,18 @@
 import { mount } from '@vue/test-utils'
-import { navigate } from 'vike/client/router'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
-
 import { AUTH } from '#src/env'
 import { authService } from '#tests/mock.authService'
+import { navigate } from 'vike/client/router'
+import { useAuthStore } from '#stores/authStore'
 
 import HeaderMenu from './HeaderMenu.vue'
 
 vi.mock('vike/client/router')
 vi.mocked(navigate).mockResolvedValue()
+
+
 
 describe('HeaderMenu', () => {
   it('renders', () => {
@@ -36,7 +38,7 @@ describe('HeaderMenu', () => {
     }
 
     let wrapper: ReturnType<typeof Wrapper>
-
+    
     beforeEach(() => {
       AUTH.AUTHORITY = 'authority'
       AUTH.AUTHORITY_SIGNUP_URI = 'http://sign-up.uri'
@@ -49,10 +51,10 @@ describe('HeaderMenu', () => {
 
     describe('sign in button', () => {
       const authServiceSpy = vi.spyOn(authService, 'signIn')
-
-      beforeEach(async () => {
+      
+      beforeEach(() => {
         vi.clearAllMocks()
-        await wrapper.find('button.sign-in').trigger('click')
+        wrapper.find('button.sign-in').trigger('click')
       })
 
       it('calls sign in from auth service', () => {
@@ -64,7 +66,6 @@ describe('HeaderMenu', () => {
       })
     })
 
-    /*
     describe('sign up button', () => {
       beforeEach(() => {
         vi.clearAllMocks()
@@ -77,7 +78,7 @@ describe('HeaderMenu', () => {
       })
     })
 
-    describe('logged in', () => {})
-    */
+    describe('logged in', () => {
+    })
   })
 })

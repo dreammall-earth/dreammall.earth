@@ -13,9 +13,9 @@ exports[`HeaderMenu > renders 1`] = `
       data-v-5e2a2776=""
     >
       <header
-        class="v-toolbar v-toolbar--flat v-toolbar--density-default v-theme--light v-locale--is-ltr v-app-bar"
+        class="v-toolbar v-toolbar--flat v-toolbar--density-default bg-transparent v-theme--light v-locale--is-ltr v-app-bar"
         data-v-5e2a2776=""
-        style="top: 0px; z-index: 1006; transform: translateY(0%); position: fixed; background-color: #f5f5f5; color: #000; caret-color: #000; left: 0px; width: calc(100% - 0px - 0px);"
+        style="top: 0px; z-index: 1004; transform: translateY(0%); position: fixed; transition: none !important;"
       >
         <!---->
         
@@ -175,9 +175,6 @@ exports[`HeaderMenu > renders 1`] = `
                   >
                     
                     <div
-                      aria-expanded="false"
-                      aria-haspopup="listbox"
-                      aria-owns="v-menu-6"
                       class="v-field v-field--active v-field--appended v-field--center-affix v-field--dirty v-field--flat v-field--has-background v-field--no-label v-field--variant-solo v-theme--light bg-transparent v-locale--is-ltr"
                       role="combobox"
                     >
@@ -361,7 +358,7 @@ exports[`HeaderMenu > renders 1`] = `
       <nav
         class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile nav-drawer d-flex d-md-none"
         data-v-5e2a2776=""
-        style="background-color: #f5f5f5; color: #000; caret-color: #000; right: 0px; z-index: 1004; transform: translateX(110%); position: fixed; height: calc(100% - 64px - 0px); top: 64px; bottom: 0px; width: 256px;"
+        style="background-color: #d8d8d8; color: #000; caret-color: #000; right: 0px; z-index: 1004; transform: translateX(110%); position: fixed; transition: none !important;"
       >
         <!---->
         <!---->

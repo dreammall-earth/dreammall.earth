@@ -14,7 +14,6 @@ export default class AuthService {
       response_type: AUTH.RESPONSE_TYPE,
       scope: AUTH.SCOPE,
       loadUserInfo: true,
-      
     })
   }
 

@@ -34,17 +34,29 @@
                 size="small"
                 @click="queryProtectedBackend"
               />-->
-              <MainButton variant="third" label="Sign Out" size="small" @click="signOut" />
+              <MainButton
+                class="sign-out"
+                variant="third"
+                label="Sign Out"
+                size="small"
+                @click="signOut"
+              />
             </div>
             <div v-else>
               <MainButton
                 variant="third-inverse"
-                class="mr-1"
+                class="mr-1 sign-in"
                 label="Sign in"
                 size="small"
                 @click="signIn"
               />
-              <MainButton variant="third" label="Sign up" size="small" @click="signUp" />
+              <MainButton
+                class="sign-up"
+                variant="third"
+                label="Sign up"
+                size="small"
+                @click="signUp"
+              />
             </div>
           </div>
           <div class="d-flex d-md-none align-center justify-end mr-8 mobile-column">
@@ -117,7 +129,7 @@ async function signIn() {
 }
 
 function signUp() {
-  navigate(AUTH.AUTHORITY_SIGNUP_URI)
+  window.location.href = AUTH.AUTHORITY_SIGNUP_URI
 }
 
 async function signOut() {

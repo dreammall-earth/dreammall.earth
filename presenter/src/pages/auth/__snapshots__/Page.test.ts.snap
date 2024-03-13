@@ -1271,7 +1271,7 @@ exports[`AuthPage > renders 1`] = `
                           <div
                             class="v-input__details"
                           >
-                            <transition-stub
+                            <transition-group-stub
                               appear="false"
                               aria-live="polite"
                               class="v-messages"
@@ -1283,7 +1283,7 @@ exports[`AuthPage > renders 1`] = `
                               tag="div"
                             >
                               <!---->
-                            </transition-stub>
+                            </transition-group-stub>
                             <!---->
                           </div>
                         </div>
