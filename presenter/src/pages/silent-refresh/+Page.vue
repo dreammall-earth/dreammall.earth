@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { navigate } from 'vike/client/router';
+import { navigate } from 'vike/client/router'
 import { inject, onBeforeMount } from 'vue'
 
 import DefaultLayout from '#layouts/DefaultLayout.vue'
