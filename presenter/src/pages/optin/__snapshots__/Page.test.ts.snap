@@ -502,13 +502,13 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                 data-v-6e13aff2=""
               >
                 <p
-                  class="px-3"
+                  class="px-10"
                   data-v-6e13aff2=""
                 >
                   $t('optin.error.text')
                 </p>
                 <button
-                  class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--primary main-button-auto mt-8 ml-3"
+                  class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--primary main-button-auto mt-8 ml-10"
                   data-v-2b63c1fe=""
                   data-v-6e13aff2=""
                   style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
@@ -2001,13 +2001,13 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                 data-v-6e13aff2=""
               >
                 <p
-                  class="px-3"
+                  class="px-10"
                   data-v-6e13aff2=""
                 >
                   $t('optin.error.text')
                 </p>
                 <button
-                  class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--primary main-button-auto mt-8 ml-3"
+                  class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--primary main-button-auto mt-8 ml-10"
                   data-v-2b63c1fe=""
                   data-v-6e13aff2=""
                   style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
@@ -3500,7 +3500,7 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                 data-v-6e13aff2=""
               >
                 <p
-                  class="px-3"
+                  class="px-10"
                   data-v-6e13aff2=""
                 >
                   $t('optin.success.text')
