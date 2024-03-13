@@ -32,7 +32,6 @@ AUTH.AUTHORITY = 'authority'
 AUTH.CLIENT_ID = 'client_id'
 AUTH.REDIRECT_URI = 'redirect_uri'
 AUTH.SILENT_REDIRECT_URI = 'silent_redirect_uri'
-AUTH.POST_LOGOUT_REDIRECT_URI = 'post_logout_redirect_uri'
 AUTH.RESPONSE_TYPE = 'response_type'
 AUTH.SCOPE = 'scope'
 

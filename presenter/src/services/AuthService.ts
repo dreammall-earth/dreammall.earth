@@ -10,7 +10,6 @@ export default class AuthService {
       client_id: AUTH.CLIENT_ID,
       redirect_uri: AUTH.REDIRECT_URI,
       silent_redirect_uri: AUTH.SILENT_REDIRECT_URI,
-      post_logout_redirect_uri: AUTH.POST_LOGOUT_REDIRECT_URI,
       response_type: AUTH.RESPONSE_TYPE,
       scope: AUTH.SCOPE,
       loadUserInfo: true,
@@ -30,16 +29,7 @@ export default class AuthService {
   }
 
   public signOut() {
-    // return this.userManager.signoutRedirect()
-
-    window.location.href = `http://localhost/if/flow/default-invalidation-flow/`
-
-    // htis should be done in the redirect target
-    // await this.userManager.removeUser()
-    // await this.userManager.revokeTokens()
-
-    // return this.userManager.signoutPopup()
-    // return this.userManager.signoutSilent()
+    window.location.href = AUTH.AUTHORITY_SIGNOUT_URI
   }
 
   public getUser() {

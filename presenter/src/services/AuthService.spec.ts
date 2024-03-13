@@ -18,7 +18,6 @@ describe('AuthService', () => {
         client_id: 'client_id',
         redirect_uri: 'redirect_uri',
         silent_redirect_uri: 'silent_redirect_uri',
-        post_logout_redirect_uri: 'post_logout_redirect_uri',
         response_type: 'response_type',
         scope: 'scope',
         loadUserInfo: true,

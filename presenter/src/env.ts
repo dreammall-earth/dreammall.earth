@@ -1,13 +1,15 @@
 const AUTH = {
-  AUTHORITY: (import.meta.env.PUBLIC_ENV__AUTH__AUTHORITY ?? '') as string,
-  AUTHORITY_SIGNUP_URI: (import.meta.env.PUBLIC_ENV__AUTH__AUTHORITY_SIGNUP_URI ?? '') as string,
+  AUTHORITY: (import.meta.env.PUBLIC_ENV__AUTH__AUTHORITY ??
+    'http://localhost:9000/application/o/dreammall/') as string,
+  AUTHORITY_SIGNUP_URI: (import.meta.env.PUBLIC_ENV__AUTH__AUTHORITY_SIGNUP_URI ??
+    'http://localhost:9000/if/flow/default-source-enrollment/') as string,
+  AUTHORITY_SIGNOUT_URI: (import.meta.env.PUBLIC_ENV__AUTH__AUTHORITY_SIGNOUT_URI ??
+    'http://localhost:9000/if/flow/default-invalidation-flow/') as string,
   CLIENT_ID: (import.meta.env.PUBLIC_ENV__AUTH__CLIENT_ID ?? 'dreammall-presenter') as string,
   REDIRECT_URI: (import.meta.env.PUBLIC_ENV__AUTH__REDIRECT_URI ??
     'http://localhost:3000/auth') as string,
   SILENT_REDIRECT_URI: (import.meta.env.PUBLIC_ENV__AUTH__SILENT_REDIRECT_URI ??
     'http://localhost:3000/silent-refresh') as string,
-  POST_LOGOUT_REDIRECT_URI: (import.meta.env.PUBLIC_ENV__AUTH__POST_LOGOUT_REDIRECT_URI ??
-    'http://localhost:3000') as string,
   RESPONSE_TYPE: (import.meta.env.PUBLIC_ENV__AUTH__RESPONSE_TYPE ?? 'code') as string,
   SCOPE: (import.meta.env.PUBLIC_ENV__AUTH__SCOPE ?? 'openid profile posts') as string,
 }
