@@ -14,6 +14,7 @@ export default class AuthService {
       response_type: AUTH.RESPONSE_TYPE,
       scope: AUTH.SCOPE,
       loadUserInfo: true,
+      
     })
   }
 
@@ -29,8 +30,15 @@ export default class AuthService {
     return this.userManager.signinSilentCallback()
   }
 
-  public async signOut() {
-    return this.userManager.signoutRedirect()
+  public signOut() {
+    // return this.userManager.signoutRedirect()
+
+    window.location.href = `http://localhost/if/flow/default-invalidation-flow/`
+
+    // htis should be done in the redirect target
+    // await this.userManager.removeUser()
+    // await this.userManager.revokeTokens()
+
     // return this.userManager.signoutPopup()
     // return this.userManager.signoutSilent()
   }
