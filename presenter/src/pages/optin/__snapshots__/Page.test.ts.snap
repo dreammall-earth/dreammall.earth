@@ -317,86 +317,7 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                     <!---->
                   </div>
                 </div>
-                <div
-                  class="d-flex align-center mr-0 mr-md-8"
-                  data-v-5e2a2776=""
-                >
-                  <div
-                    data-v-5e2a2776=""
-                  >
-                    <button
-                      class="v-btn v-theme--light text-transparent v-btn--density-default v-btn--size-small v-btn--variant-text main-button main-button--third-inverse main-button-small mr-1 sign-in"
-                      data-v-2b63c1fe=""
-                      data-v-5e2a2776=""
-                      type="button"
-                    >
-                      
-                      <span
-                        class="v-btn__overlay"
-                      />
-                      <span
-                        class="v-btn__underlay"
-                      />
-                      
-                      <!---->
-                      <span
-                        class="v-btn__content"
-                        data-no-activator=""
-                      >
-                        
-                        
-                        <!--v-if-->
-                        <span
-                          class="main-button-content"
-                          data-v-2b63c1fe=""
-                        >
-                          Sign in 
-                          <!--v-if-->
-                        </span>
-                        
-                        
-                      </span>
-                      <!---->
-                      <!---->
-                    </button>
-                    <button
-                      class="v-btn v-theme--light v-btn--density-default v-btn--size-small v-btn--variant-text main-button main-button--third main-button-small sign-up"
-                      data-v-2b63c1fe=""
-                      data-v-5e2a2776=""
-                      style="color: #3d4753; caret-color: #3d4753;"
-                      type="button"
-                    >
-                      
-                      <span
-                        class="v-btn__overlay"
-                      />
-                      <span
-                        class="v-btn__underlay"
-                      />
-                      
-                      <!---->
-                      <span
-                        class="v-btn__content"
-                        data-no-activator=""
-                      >
-                        
-                        
-                        <!--v-if-->
-                        <span
-                          class="main-button-content"
-                          data-v-2b63c1fe=""
-                        >
-                          Sign up 
-                          <!--v-if-->
-                        </span>
-                        
-                        
-                      </span>
-                      <!---->
-                      <!---->
-                    </button>
-                  </div>
-                </div>
+                <!--v-if-->
                 <div
                   class="d-flex d-md-none align-center justify-end mr-8 mobile-column"
                   data-v-5e2a2776=""
@@ -1087,7 +1008,7 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                                 <label
                                   aria-hidden="true"
                                   class="v-label v-field-label v-field-label--floating"
-                                  for="input-22"
+                                  for="input-20"
                                 >
                                   <!---->
                                   
@@ -1096,7 +1017,7 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                                 </label>
                                 <label
                                   class="v-label v-field-label"
-                                  for="input-22"
+                                  for="input-20"
                                 >
                                   <!---->
                                   
@@ -1107,9 +1028,9 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                                 
                                 <!---->
                                 <input
-                                  aria-describedby="input-22-messages"
+                                  aria-describedby="input-20-messages"
                                   class="v-field__input"
-                                  id="input-22"
+                                  id="input-20"
                                   name="lastname"
                                   required=""
                                   size="1"
@@ -1207,7 +1128,7 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                                 <label
                                   aria-hidden="true"
                                   class="v-label v-field-label v-field-label--floating"
-                                  for="input-24"
+                                  for="input-22"
                                 >
                                   <!---->
                                   
@@ -1216,7 +1137,7 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                                 </label>
                                 <label
                                   class="v-label v-field-label"
-                                  for="input-24"
+                                  for="input-22"
                                 >
                                   <!---->
                                   
@@ -1227,9 +1148,9 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                                 
                                 <!---->
                                 <input
-                                  aria-describedby="input-24-messages"
+                                  aria-describedby="input-22-messages"
                                   class="v-field__input"
-                                  id="input-24"
+                                  id="input-22"
                                   name="email"
                                   required=""
                                   size="1"
@@ -1348,7 +1269,7 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                                 <label
                                   aria-hidden="true"
                                   class="v-label v-field-label v-field-label--floating"
-                                  for="input-26"
+                                  for="input-24"
                                 >
                                   <!---->
                                   
@@ -1357,7 +1278,7 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                                 </label>
                                 <label
                                   class="v-label v-field-label"
-                                  for="input-26"
+                                  for="input-24"
                                 >
                                   <!---->
                                   
@@ -1368,9 +1289,9 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                                 
                                 <!---->
                                 <textarea
-                                  aria-describedby="input-26-messages"
+                                  aria-describedby="input-24-messages"
                                   class="v-field__input"
-                                  id="input-26"
+                                  id="input-24"
                                   name="message"
                                   required=""
                                   rows="5"
@@ -1400,7 +1321,7 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                               aria-live="polite"
                               class="v-messages"
                               css="true"
-                              id="input-26-messages"
+                              id="input-24-messages"
                               name="slide-y-transition"
                               persisted="false"
                               role="alert"
@@ -1446,9 +1367,9 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                                     class="mdi-checkbox-blank-outline mdi v-icon notranslate v-theme--light v-icon--size-default"
                                   />
                                   <input
-                                    aria-describedby="checkbox-28-messages"
+                                    aria-describedby="checkbox-26-messages"
                                     aria-disabled="false"
-                                    id="checkbox-28"
+                                    id="checkbox-26"
                                     name="dataprivacy"
                                     required=""
                                     type="checkbox"
@@ -1896,86 +1817,7 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                     <!---->
                   </div>
                 </div>
-                <div
-                  class="d-flex align-center mr-0 mr-md-8"
-                  data-v-5e2a2776=""
-                >
-                  <div
-                    data-v-5e2a2776=""
-                  >
-                    <button
-                      class="v-btn v-theme--light text-transparent v-btn--density-default v-btn--size-small v-btn--variant-text main-button main-button--third-inverse main-button-small mr-1 sign-in"
-                      data-v-2b63c1fe=""
-                      data-v-5e2a2776=""
-                      type="button"
-                    >
-                      
-                      <span
-                        class="v-btn__overlay"
-                      />
-                      <span
-                        class="v-btn__underlay"
-                      />
-                      
-                      <!---->
-                      <span
-                        class="v-btn__content"
-                        data-no-activator=""
-                      >
-                        
-                        
-                        <!--v-if-->
-                        <span
-                          class="main-button-content"
-                          data-v-2b63c1fe=""
-                        >
-                          Sign in 
-                          <!--v-if-->
-                        </span>
-                        
-                        
-                      </span>
-                      <!---->
-                      <!---->
-                    </button>
-                    <button
-                      class="v-btn v-theme--light v-btn--density-default v-btn--size-small v-btn--variant-text main-button main-button--third main-button-small sign-up"
-                      data-v-2b63c1fe=""
-                      data-v-5e2a2776=""
-                      style="color: #3d4753; caret-color: #3d4753;"
-                      type="button"
-                    >
-                      
-                      <span
-                        class="v-btn__overlay"
-                      />
-                      <span
-                        class="v-btn__underlay"
-                      />
-                      
-                      <!---->
-                      <span
-                        class="v-btn__content"
-                        data-no-activator=""
-                      >
-                        
-                        
-                        <!--v-if-->
-                        <span
-                          class="main-button-content"
-                          data-v-2b63c1fe=""
-                        >
-                          Sign up 
-                          <!--v-if-->
-                        </span>
-                        
-                        
-                      </span>
-                      <!---->
-                      <!---->
-                    </button>
-                  </div>
-                </div>
+                <!--v-if-->
                 <div
                   class="d-flex d-md-none align-center justify-end mr-8 mobile-column"
                   data-v-5e2a2776=""
@@ -2666,7 +2508,7 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                                 <label
                                   aria-hidden="true"
                                   class="v-label v-field-label v-field-label--floating"
-                                  for="input-22"
+                                  for="input-20"
                                 >
                                   <!---->
                                   
@@ -2675,7 +2517,7 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                                 </label>
                                 <label
                                   class="v-label v-field-label"
-                                  for="input-22"
+                                  for="input-20"
                                 >
                                   <!---->
                                   
@@ -2686,9 +2528,9 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                                 
                                 <!---->
                                 <input
-                                  aria-describedby="input-22-messages"
+                                  aria-describedby="input-20-messages"
                                   class="v-field__input"
-                                  id="input-22"
+                                  id="input-20"
                                   name="lastname"
                                   required=""
                                   size="1"
@@ -2786,7 +2628,7 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                                 <label
                                   aria-hidden="true"
                                   class="v-label v-field-label v-field-label--floating"
-                                  for="input-24"
+                                  for="input-22"
                                 >
                                   <!---->
                                   
@@ -2795,7 +2637,7 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                                 </label>
                                 <label
                                   class="v-label v-field-label"
-                                  for="input-24"
+                                  for="input-22"
                                 >
                                   <!---->
                                   
@@ -2806,9 +2648,9 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                                 
                                 <!---->
                                 <input
-                                  aria-describedby="input-24-messages"
+                                  aria-describedby="input-22-messages"
                                   class="v-field__input"
-                                  id="input-24"
+                                  id="input-22"
                                   name="email"
                                   required=""
                                   size="1"
@@ -2927,7 +2769,7 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                                 <label
                                   aria-hidden="true"
                                   class="v-label v-field-label v-field-label--floating"
-                                  for="input-26"
+                                  for="input-24"
                                 >
                                   <!---->
                                   
@@ -2936,7 +2778,7 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                                 </label>
                                 <label
                                   class="v-label v-field-label"
-                                  for="input-26"
+                                  for="input-24"
                                 >
                                   <!---->
                                   
@@ -2947,9 +2789,9 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                                 
                                 <!---->
                                 <textarea
-                                  aria-describedby="input-26-messages"
+                                  aria-describedby="input-24-messages"
                                   class="v-field__input"
-                                  id="input-26"
+                                  id="input-24"
                                   name="message"
                                   required=""
                                   rows="5"
@@ -2979,7 +2821,7 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                               aria-live="polite"
                               class="v-messages"
                               css="true"
-                              id="input-26-messages"
+                              id="input-24-messages"
                               name="slide-y-transition"
                               persisted="false"
                               role="alert"
@@ -3025,9 +2867,9 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                                     class="mdi-checkbox-blank-outline mdi v-icon notranslate v-theme--light v-icon--size-default"
                                   />
                                   <input
-                                    aria-describedby="checkbox-28-messages"
+                                    aria-describedby="checkbox-26-messages"
                                     aria-disabled="false"
-                                    id="checkbox-28"
+                                    id="checkbox-26"
                                     name="dataprivacy"
                                     required=""
                                     type="checkbox"
@@ -3475,86 +3317,7 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                     <!---->
                   </div>
                 </div>
-                <div
-                  class="d-flex align-center mr-0 mr-md-8"
-                  data-v-5e2a2776=""
-                >
-                  <div
-                    data-v-5e2a2776=""
-                  >
-                    <button
-                      class="v-btn v-theme--light text-transparent v-btn--density-default v-btn--size-small v-btn--variant-text main-button main-button--third-inverse main-button-small mr-1 sign-in"
-                      data-v-2b63c1fe=""
-                      data-v-5e2a2776=""
-                      type="button"
-                    >
-                      
-                      <span
-                        class="v-btn__overlay"
-                      />
-                      <span
-                        class="v-btn__underlay"
-                      />
-                      
-                      <!---->
-                      <span
-                        class="v-btn__content"
-                        data-no-activator=""
-                      >
-                        
-                        
-                        <!--v-if-->
-                        <span
-                          class="main-button-content"
-                          data-v-2b63c1fe=""
-                        >
-                          Sign in 
-                          <!--v-if-->
-                        </span>
-                        
-                        
-                      </span>
-                      <!---->
-                      <!---->
-                    </button>
-                    <button
-                      class="v-btn v-theme--light v-btn--density-default v-btn--size-small v-btn--variant-text main-button main-button--third main-button-small sign-up"
-                      data-v-2b63c1fe=""
-                      data-v-5e2a2776=""
-                      style="color: #3d4753; caret-color: #3d4753;"
-                      type="button"
-                    >
-                      
-                      <span
-                        class="v-btn__overlay"
-                      />
-                      <span
-                        class="v-btn__underlay"
-                      />
-                      
-                      <!---->
-                      <span
-                        class="v-btn__content"
-                        data-no-activator=""
-                      >
-                        
-                        
-                        <!--v-if-->
-                        <span
-                          class="main-button-content"
-                          data-v-2b63c1fe=""
-                        >
-                          Sign up 
-                          <!--v-if-->
-                        </span>
-                        
-                        
-                      </span>
-                      <!---->
-                      <!---->
-                    </button>
-                  </div>
-                </div>
+                <!--v-if-->
                 <div
                   class="d-flex d-md-none align-center justify-end mr-8 mobile-column"
                   data-v-5e2a2776=""
@@ -4209,7 +3972,7 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                                 <label
                                   aria-hidden="true"
                                   class="v-label v-field-label v-field-label--floating"
-                                  for="input-22"
+                                  for="input-20"
                                 >
                                   <!---->
                                   
@@ -4218,7 +3981,7 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                                 </label>
                                 <label
                                   class="v-label v-field-label"
-                                  for="input-22"
+                                  for="input-20"
                                 >
                                   <!---->
                                   
@@ -4229,9 +3992,9 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                                 
                                 <!---->
                                 <input
-                                  aria-describedby="input-22-messages"
+                                  aria-describedby="input-20-messages"
                                   class="v-field__input"
-                                  id="input-22"
+                                  id="input-20"
                                   name="lastname"
                                   required=""
                                   size="1"
@@ -4329,7 +4092,7 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                                 <label
                                   aria-hidden="true"
                                   class="v-label v-field-label v-field-label--floating"
-                                  for="input-24"
+                                  for="input-22"
                                 >
                                   <!---->
                                   
@@ -4338,7 +4101,7 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                                 </label>
                                 <label
                                   class="v-label v-field-label"
-                                  for="input-24"
+                                  for="input-22"
                                 >
                                   <!---->
                                   
@@ -4349,9 +4112,9 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                                 
                                 <!---->
                                 <input
-                                  aria-describedby="input-24-messages"
+                                  aria-describedby="input-22-messages"
                                   class="v-field__input"
-                                  id="input-24"
+                                  id="input-22"
                                   name="email"
                                   required=""
                                   size="1"
@@ -4470,7 +4233,7 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                                 <label
                                   aria-hidden="true"
                                   class="v-label v-field-label v-field-label--floating"
-                                  for="input-26"
+                                  for="input-24"
                                 >
                                   <!---->
                                   
@@ -4479,7 +4242,7 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                                 </label>
                                 <label
                                   class="v-label v-field-label"
-                                  for="input-26"
+                                  for="input-24"
                                 >
                                   <!---->
                                   
@@ -4490,9 +4253,9 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                                 
                                 <!---->
                                 <textarea
-                                  aria-describedby="input-26-messages"
+                                  aria-describedby="input-24-messages"
                                   class="v-field__input"
-                                  id="input-26"
+                                  id="input-24"
                                   name="message"
                                   required=""
                                   rows="5"
@@ -4522,7 +4285,7 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                               aria-live="polite"
                               class="v-messages"
                               css="true"
-                              id="input-26-messages"
+                              id="input-24-messages"
                               name="slide-y-transition"
                               persisted="false"
                               role="alert"
@@ -4568,9 +4331,9 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                                     class="mdi-checkbox-blank-outline mdi v-icon notranslate v-theme--light v-icon--size-default"
                                   />
                                   <input
-                                    aria-describedby="checkbox-28-messages"
+                                    aria-describedby="checkbox-26-messages"
                                     aria-disabled="false"
-                                    id="checkbox-28"
+                                    id="checkbox-26"
                                     name="dataprivacy"
                                     required=""
                                     type="checkbox"
