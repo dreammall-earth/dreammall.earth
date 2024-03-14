@@ -1,12 +1,12 @@
 import { UserManager } from 'oidc-client-ts'
 import { describe, it, expect } from 'vitest'
 
+import { AUTH } from '#src/env'
 import {
   authService,
   signinSilentCallbackMock,
   signinRedirectMock,
   signinCallbackMock,
-  signoutRedirectMock,
   getUserMock,
 } from '#tests/mock.authService'
 
@@ -22,6 +22,13 @@ describe('AuthService', () => {
         scope: 'scope',
         loadUserInfo: true,
       })
+    })
+  })
+
+  describe('signUp', () => {
+    it('redirects to signup URI', () => {
+      authService.signUp()
+      expect(global.window.location.href).toBe(AUTH.AUTHORITY_SIGNUP_URI)
     })
   })
 
@@ -46,11 +53,10 @@ describe('AuthService', () => {
     })
   })
 
-  // how to redirect correctly in vike?
   describe('signOut', () => {
-    it.skip('calls signout redirect', () => {
+    it('redirects to signout URI', () => {
       authService.signOut()
-      expect(signoutRedirectMock).toBeCalled()
+      expect(global.window.location.href).toBe(AUTH.AUTHORITY_SIGNOUT_URI)
     })
   })
 

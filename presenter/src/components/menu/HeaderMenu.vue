@@ -28,12 +28,12 @@
           <div v-if="showAuthentication" class="d-flex align-center mr-0 mr-md-8">
             <div v-if="auth.isLoggedIn">
               <!--<MainButton
-                variant="third-inverse"
-                class="mr-1"
-                label="Query"
-                size="small"
-                @click="queryProtectedBackend"
-              />-->
+                   variant="third-inverse"
+                   class="mr-1"
+                   label="Query"
+                   size="small"
+                   @click="queryProtectedBackend"
+                   />-->
               <MainButton
                 class="sign-out"
                 variant="third"
@@ -128,8 +128,13 @@ async function signIn() {
   }
 }
 
-function signUp() {
-  window.location.href = AUTH.AUTHORITY_SIGNUP_URI
+async function signUp() {
+  try {
+    await authService?.signUp()
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log('auth error', error)
+  }
 }
 
 async function signOut() {
@@ -143,19 +148,19 @@ async function signOut() {
 }
 
 /*
-    const apolloClient = inject<ApolloClient<InMemoryCache>>(DefaultApolloClient)
+      const apolloClient = inject<ApolloClient<InMemoryCache>>(DefaultApolloClient)
 
-    async function queryProtectedBackend() {
-    try {
-    const secret = await apolloClient?.query({ query: querySecret })
-    // eslint-disable-next-line no-console
-    console.log(secret)
-    } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log('error secret', error)
-    }
-    }
-  */
+      async function queryProtectedBackend() {
+      try {
+      const secret = await apolloClient?.query({ query: querySecret })
+      // eslint-disable-next-line no-console
+      console.log(secret)
+      } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log('error secret', error)
+      }
+      }
+    */
 
 const appBackground = ref('transparent')
 const navBackground = ref('#d8d8d8')
