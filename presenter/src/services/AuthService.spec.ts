@@ -10,6 +10,8 @@ import {
   getUserMock,
 } from '#tests/mock.authService'
 
+AUTH.AUTHORITY_SIGNUP_URI = 'https://host/SOME_SIGNUP_URI'
+
 describe('AuthService', () => {
   describe('constructor', () => {
     it('creates user manager', () => {
