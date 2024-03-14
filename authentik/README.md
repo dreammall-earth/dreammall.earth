@@ -12,7 +12,17 @@ To extract the database use:
 ```
 (Note: make sure the database is not running before executing this command)
 
+## Start Docker
+
+To start the authentik server and its services run:
+```bash
+docker compose up
+```
+(Note: make sure to run this command in the authentik folder, since there is another docker-compose setup in the main folder)
+
 ## User Credentials
+
+You can navigate to the now running authentik by opening [http://localhost:9000](http://localhost:9000).
 
 To login you can use the superadmins credentials:
 
