@@ -12,6 +12,8 @@ To extract the database use:
 ```
 (Note: make sure the database is not running before executing this command)
 
+Alternatively you can not extract the database, which will start the service with an empty database. Use the [Docker Guide](https://goauthentik.io/docs/installation/docker-compose#preparation) from Authentik to get you going then.
+
 ## Start Docker
 
 To start the authentik server and its services run:
