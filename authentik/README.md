@@ -28,11 +28,11 @@ You can navigate to the now running authentik by opening [http://localhost:9000]
 
 To login you can use the superadmins credentials:
 
-| description | value                 |
-|-------------|-----------------------|
-| username    | akadmin               |
-| email       | admin@dreammall.earth |
-| password    | dreammall             |
+| description | value                                          |
+|-------------|------------------------------------------------|
+| username    | akadmin                                        |
+| email       | [admin@dreammall.earth](admin@dreammall.earth) |
+| password    | dreammall                                      |
 
 ## Publish changes
 
