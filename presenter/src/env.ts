@@ -1,11 +1,12 @@
 const AUTH = {
   AUTHORITY: (import.meta.env.PUBLIC_ENV__AUTH__AUTHORITY ??
-    'http://localhost:9000/application/o/dreammall/') as string,
+    'http://localhost:9000/application/o/dreammallearth/') as string,
   AUTHORITY_SIGNUP_URI: (import.meta.env.PUBLIC_ENV__AUTH__AUTHORITY_SIGNUP_URI ??
     'http://localhost:9000/if/flow/default-source-enrollment/') as string,
   AUTHORITY_SIGNOUT_URI: (import.meta.env.PUBLIC_ENV__AUTH__AUTHORITY_SIGNOUT_URI ??
-    'http://localhost:9000/if/flow/default-invalidation-flow/') as string,
-  CLIENT_ID: (import.meta.env.PUBLIC_ENV__AUTH__CLIENT_ID ?? 'dreammall-presenter') as string,
+    'http://localhost:9000/if/flow/dreammallearth-invalidation-flow/') as string,
+  CLIENT_ID: (import.meta.env.PUBLIC_ENV__AUTH__CLIENT_ID ??
+    'G3g0sjCjph1NAyGeeu5Te5ltx1I7WZ0DGB8i6vOI') as string,
   REDIRECT_URI: (import.meta.env.PUBLIC_ENV__AUTH__REDIRECT_URI ??
     'http://localhost:3000/auth') as string,
   SILENT_REDIRECT_URI: (import.meta.env.PUBLIC_ENV__AUTH__SILENT_REDIRECT_URI ??
