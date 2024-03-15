@@ -125,14 +125,15 @@ const onClick = () => {
   }
 
   &--third {
-    padding: 8px 38px;
+    padding: 8px 40px;
+    color: white !important;
     background-color: $main-button-third-bg;
     border-radius: 10px;
   }
 
   &--third-inverse {
     padding: 8px 38px;
-    color: $font-color-default;
+    color: $font-color-default !important;
     background-color: transparent;
     border: 1px solid $font-color-default;
     border-radius: 10px;

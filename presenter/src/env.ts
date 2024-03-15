@@ -1,3 +1,18 @@
+const AUTH = {
+  AUTHORITY: (import.meta.env.PUBLIC_ENV__AUTH__AUTHORITY ?? '') as string,
+  AUTHORITY_SIGNUP_URI: (import.meta.env.PUBLIC_ENV__AUTH__AUTHORITY_SIGNUP_URI ?? '') as string,
+  AUTHORITY_SIGNOUT_URI: (import.meta.env.PUBLIC_ENV__AUTH__AUTHORITY_SIGNOUT_URI ??
+    'http://localhost:9000/if/flow/dreammallearth-invalidation-flow/') as string,
+  CLIENT_ID: (import.meta.env.PUBLIC_ENV__AUTH__CLIENT_ID ??
+    'G3g0sjCjph1NAyGeeu5Te5ltx1I7WZ0DGB8i6vOI') as string,
+  REDIRECT_URI: (import.meta.env.PUBLIC_ENV__AUTH__REDIRECT_URI ??
+    'http://localhost:3000/auth') as string,
+  SILENT_REDIRECT_URI: (import.meta.env.PUBLIC_ENV__AUTH__SILENT_REDIRECT_URI ??
+    'http://localhost:3000/silent-refresh') as string,
+  RESPONSE_TYPE: (import.meta.env.PUBLIC_ENV__AUTH__RESPONSE_TYPE ?? 'code') as string,
+  SCOPE: (import.meta.env.PUBLIC_ENV__AUTH__SCOPE ?? 'openid profile posts') as string,
+}
+
 const ENDPOINTS = {
   GRAPHQL_URI: (import.meta.env.PUBLIC_ENV__ENDPOINTS__GRAPHQL_URI ??
     'http://localhost:4000/') as string,
@@ -12,4 +27,4 @@ const META = {
   DEFAULT_TITLE: (import.meta.env.PUBLIC_ENV__META__DEFAULT_TITLE ?? 'DreamMall') as string,
 }
 
-export { ENDPOINTS, META }
+export { AUTH, ENDPOINTS, META }

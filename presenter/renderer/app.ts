@@ -9,6 +9,7 @@ import { apolloClient } from '#plugins/apollo'
 import i18n from '#plugins/i18n'
 import pinia from '#plugins/pinia'
 import CreateVuetify from '#plugins/vuetify'
+import AuthService from '#src/services/AuthService'
 
 const vuetify = CreateVuetify(i18n)
 
@@ -18,6 +19,7 @@ function createApp(pageContext: PageContext, isClient = true) {
   const PageWithWrapper = defineComponent({
     setup: () => {
       provide(DefaultApolloClient, apolloClient)
+      provide('authService', new AuthService())
     },
     data: () => ({
       Page: markRaw(pageContext.Page),
