@@ -124,7 +124,7 @@
     "eslint-plugin-security": "^2.1.1",
     "eslint-plugin-storybook": "^0.8.0",
     "eslint-plugin-vitest": "^0.3.25",
-    "eslint-plugin-vue": "^9.22.0",
+    "eslint-plugin-vue": "^9.23.0",
     "eslint-plugin-vuetify": "^2.2.0",
     "eslint-plugin-yml": "^1.12.2",
     "happy-dom": "^13.7.3",
