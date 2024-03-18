@@ -1,0 +1,1 @@
+X_FRAME_OPTIONS = "allow-from *"

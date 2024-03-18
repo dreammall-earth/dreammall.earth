@@ -1,5 +1,8 @@
 {
   "about": {},
+  "auth": {
+    "content": "Logging in..."
+  },
   "dataProtection": {
     "euDispute": {
       "content": "The European Commission provides a platform for online dispute resolution (OS): https://ec.europa.eu/consumers/odr/. You can find our e-mail address in the legal notice.",
