@@ -15,7 +15,7 @@ export function onBeforeRoute(pageContext: PageContext) {
   return {
     pageContext: {
       // Make `locale` available as `pageContext.locale`
-      locale,
+      locale: locale,
       // Vike's router will use pageContext.urlLogical instead of pageContext.urlOriginal
       urlLogical: urlWithoutLocale,
     },
