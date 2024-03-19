@@ -16,13 +16,32 @@ presenter-test-build-code: &presenter-test-build-code
 presenter-test-build-docker: &presenter-test-build-docker
   - 'presenter/**/*'
 
-
 presenter-test-build-docs: &presenter-test-build-docs
   - 'presenter/**/*.md'
   - 'presenter/.vuepress/*'
 
 presenter-test-build-storybook: &presenter-test-build-storybook
   - 'presenter/**/*'
+
+# frontend
+frontend-test-lint-code: &frontend-test-lint-code
+  - 'frontend/**/*'
+
+frontend-test-unit-code: &frontend-test-unit-code
+  - 'frontend/**/*'
+
+frontend-test-build-code: &frontend-test-build-code
+  - 'frontend/**/*'
+
+frontend-test-build-docker: &frontend-test-build-docker
+  - 'frontend/**/*'
+
+frontend-test-build-docs: &frontend-test-build-docs
+  - 'frontend/**/*.md'
+  - 'frontend/.vuepress/*'
+
+frontend-test-build-storybook: &frontend-test-build-storybook
+  - 'frontend/**/*'
 
 # backend
 backend-test-lint-code: &backend-test-lint-code

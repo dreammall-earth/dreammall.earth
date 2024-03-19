@@ -8,7 +8,7 @@ jobs:
     name: Chromatic - Presenter
     runs-on: ubuntu-latest
     env:
-      CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN_PRESENTER }}
       WORKING_DIRECTORY: ./presenter
     steps:
       - name: Set Node version

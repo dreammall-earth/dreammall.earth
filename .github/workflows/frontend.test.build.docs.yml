@@ -1,4 +1,4 @@
-name: "frontend:test:build test code"
+name: "frontend:test:build test docs"
 
 on: push
 
@@ -6,10 +6,10 @@ jobs:
   # only (but most important) job from this workflow required for pull requests
   # check results serve as run conditions for all other jobs here
   files-changed:
-    name: Detect File Changes - frontend-test-build-code
+    name: Detect File Changes - frontend-test-build-docs
     runs-on: ubuntu-latest
     outputs:
-      changes: ${{ steps.changes.outputs.frontend-test-build-code }}
+      changes: ${{ steps.changes.outputs.frontend-test-build-docs }}
     steps:
       - uses: actions/checkout@v4
 
@@ -23,12 +23,15 @@ jobs:
 
   build:
     if: needs.files-changed.outputs.changes == 'true'
-    name: Build - Frontend
+    name: Build Docs - Frontend
     needs: files-changed
     runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./frontend
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Frontend | Build
-        run: npm install && npm run build
+      - name: Frontend | Build Docs
+        run: npm install && npm run docs:build
+        working-directory: ${{env.WORKING_DIRECTORY}}
