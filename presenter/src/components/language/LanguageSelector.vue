@@ -1,6 +1,6 @@
 <template>
   <v-select
-    v-model="$i18n.locale"
+    v-model="localeStore.locale"
     density="compact"
     name="language"
     :items="languages"
@@ -29,11 +29,14 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
+import { useLocaleStore } from '#stores/localeStore';
+
 // TODO better place? maybe locales folder?
 const languages = ref([
   { locale: 'de', title: 'Deutsch' },
   { locale: 'en', title: 'English' },
 ])
+const localeStore = useLocaleStore()
 </script>
 
 <style lang="scss">
