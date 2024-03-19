@@ -11,6 +11,7 @@ import { createApp } from './app'
 import { getDescription, getTitle } from './utils'
 
 import type { App } from 'vue'
+import { useLocaleStore } from '#stores/localeStore'
 
 // this fixes a warning which occurs when building
 // > "resolveComponent" is imported from external module "vue" but never used in ...
@@ -18,9 +19,10 @@ import type { App } from 'vue'
 resolveComponent('nothing')
 
 async function render(pageContext: PageContextServer & PageContext) {
-  const { app, i18n } = createApp(pageContext, false)
+  const { app /*, i18n */ } = createApp(pageContext, false)
 
-  const locale = i18n.global.locale.value
+  const localeStore = useLocaleStore()
+  const locale = localeStore.locale // i18n.global.locale.value
 
   const appHtml = await renderToString(app)
 
