@@ -5,7 +5,7 @@ import { createHttpLink } from '@apollo/client/link/http'
 
 import { ENDPOINTS } from '#src/env'
 
-const getAuthLink = (getToken: () => string) => {
+const createAuthLink = (getToken: () => string) => {
   return setContext((_, { headers }) => {
     const token = getToken()
     return {
@@ -37,10 +37,10 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
 const cache = new InMemoryCache()
 
-export const getApolloClient = (getToken: () => string) => {
+export const createApolloClient = (getToken: () => string) => {
   return new ApolloClient({
     ssrMode: true,
-    link: getAuthLink(getToken).concat(httpLink), // errorLink.concat(httpLink),
+    link: createAuthLink(getToken).concat(httpLink), // errorLink.concat(httpLink),
     cache,
   })
 }
