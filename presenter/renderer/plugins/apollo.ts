@@ -12,7 +12,7 @@ const createAuthLink = (getToken: () => string) => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       headers: {
         ...headers,
-        authorization: token ? `Bearer ${token}` : '',
+        ...(token && { authorization: `Bearer ${token}` }),
       },
     }
   })
