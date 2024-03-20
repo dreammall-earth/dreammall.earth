@@ -24,6 +24,7 @@ updates:
     day: "saturday"
     timezone: "Europe/Berlin"
     time: "03:00"
+
 # presenter
 - package-ecosystem: npm
   directory: "/presenter"
@@ -41,6 +42,25 @@ updates:
     day: "saturday"
     timezone: "Europe/Berlin"
     time: "03:00"
+
+# frontend
+- package-ecosystem: npm
+  directory: "/frontend"
+  rebase-strategy: "disabled"
+  schedule:
+    interval: weekly
+    day: "saturday"
+    timezone: "Europe/Berlin"
+    time: "03:00"
+- package-ecosystem: docker
+  directory: "/frontend"
+  rebase-strategy: "disabled"
+  schedule:
+    interval: weekly
+    day: "saturday"
+    timezone: "Europe/Berlin"
+    time: "03:00"
+
 # backend
 - package-ecosystem: npm
   directory: "/backend"
