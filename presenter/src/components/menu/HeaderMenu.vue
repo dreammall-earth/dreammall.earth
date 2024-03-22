@@ -25,7 +25,7 @@
           <div class="d-flex align-center mr-0 mr-md-8 language-column">
             <LanguageSelector />
           </div>
-          <div v-if="showAuthentication" class="d-flex align-center mr-0 mr-md-8">
+          <div v-if="showAuthentication" class="d-none d-md-flex align-center mr-0 mr-md-8">
             <div v-if="auth.isLoggedIn">
               <!--<MainButton
                    variant="third-inverse"
@@ -36,25 +36,27 @@
                    />-->
               <MainButton
                 class="sign-out"
+                :class="[buttonsInBackground ? 'video-helper' : '']"
                 variant="third"
                 label="Sign Out"
-                size="small"
+                size="auto"
                 @click="signOut"
               />
             </div>
-            <div v-else>
+            <div v-else class="d-flex">
               <MainButton
                 variant="third-inverse"
-                class="mr-1 sign-in"
+                class="mr-4 sign-in"
                 label="Sign in"
-                size="small"
+                size="auto"
                 @click="signIn"
               />
               <MainButton
                 class="sign-up"
+                :class="[buttonsInBackground ? 'video-helper' : '']"
                 variant="third"
                 label="Sign up"
-                size="small"
+                size="auto"
                 @click="signUp"
               />
             </div>
@@ -72,7 +74,7 @@
       location="right"
       class="nav-drawer d-flex d-md-none"
     >
-      <div class="d-flex flex-column py-8">
+      <div class="d-flex flex-column pt-8">
         <!-- TODO same as above: refactor -->
         <AnchorLink
           class="ma-4"
@@ -92,6 +94,34 @@
           :label="$t('menu.header.contact')"
           @click="mobileMenu = !mobileMenu"
         ></AnchorLink>
+      </div>
+      <div v-if="showAuthentication" class="">
+        <v-divider class="ma-4"></v-divider>
+        <div v-if="!auth.isLoggedIn" class="d-flex flex-column justify-center align-center">
+          <MainButton
+            class="sign-out ma-4"
+            variant="third"
+            label="Sign Out"
+            size="auto"
+            @click="signOut"
+          />
+        </div>
+        <div v-else class="d-flex flex-column justify-center align-center">
+          <MainButton
+            variant="third-inverse"
+            class="sign-in ma-4"
+            label="Sign in"
+            size="auto"
+            @click="signIn"
+          />
+          <MainButton
+            class="sign-up ma-4 video-helper"
+            variant="third"
+            label="Sign up"
+            size="auto"
+            @click="signUp"
+          />
+        </div>
       </div>
     </v-navigation-drawer>
   </div>
@@ -165,6 +195,7 @@ async function signOut() {
 const appBackground = ref('transparent')
 const navBackground = ref('#d8d8d8')
 const mobileMenu = ref(false)
+const buttonsInBackground = ref(true)
 
 let videoSlideObserver: IntersectionObserver
 
@@ -172,6 +203,8 @@ function changeAppBarBackground() {
   if (appBackground.value !== '#f5f5f5') {
     appBackground.value = '#f5f5f5'
     navBackground.value = '#f5f5f5'
+
+    buttonsInBackground.value = false
   }
 }
 
@@ -179,6 +212,8 @@ function resetAppBarBackground() {
   if (appBackground.value !== 'transparent') {
     appBackground.value = 'transparent'
     navBackground.value = 'transparent'
+
+    buttonsInBackground.value = true
   }
 }
 
@@ -226,6 +261,12 @@ onMounted(() => {
     $background-color-primary 0.06%,
     $background-color-primary-transition 100%
   );
+
+  .video-helper {
+    color: $font-color-default !important;
+    background-color: transparent !important;
+    border: 1px solid $font-color-default !important;
+  }
 }
 </style>
 

@@ -41,6 +41,7 @@ const languages = ref([
 
 .language-select {
   max-width: 80px;
+  min-width: 70px;
 
   @include section-content-font;
 
