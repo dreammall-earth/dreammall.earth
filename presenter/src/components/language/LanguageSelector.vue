@@ -30,7 +30,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import { usePageContext } from '#context/usePageContext';
+import { usePageContext } from '#context/usePageContext'
 import i18n from '#plugins/i18n'
 
 // TODO better place? maybe locales folder?
