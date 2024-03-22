@@ -97,7 +97,7 @@
       </div>
       <div v-if="showAuthentication" class="">
         <v-divider class="ma-4"></v-divider>
-        <div v-if="!auth.isLoggedIn" class="d-flex flex-column justify-center align-center">
+        <div v-if="auth.isLoggedIn" class="d-flex flex-column justify-center align-center">
           <MainButton
             class="sign-out ma-4"
             variant="third"
@@ -115,7 +115,7 @@
             @click="signIn"
           />
           <MainButton
-            class="sign-up ma-4 video-helper"
+            class="sign-up ma-4"
             variant="third"
             label="Sign up"
             size="auto"
