@@ -1,6 +1,6 @@
 <template>
   <v-select
-    v-model="localeStore.locale"
+    v-model="selectedLocale"
     density="compact"
     name="language"
     :items="languages"
@@ -12,6 +12,7 @@
     bg-color="transparent"
     hide-details="auto"
     flat
+    @update:model-value="updateLocale"
   >
     <template #selection="{ item }">
       <span>{{ item.raw.locale.toUpperCase() }}</span>
@@ -29,14 +30,28 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import { useLocaleStore } from '#stores/localeStore';
+import { usePageContext } from '#context/usePageContext';
+import i18n from '#plugins/i18n'
 
 // TODO better place? maybe locales folder?
 const languages = ref([
   { locale: 'de', title: 'Deutsch' },
   { locale: 'en', title: 'English' },
 ])
-const localeStore = useLocaleStore()
+
+const pageContext = usePageContext()
+
+if (pageContext.locale === 'de' || pageContext.locale === 'en') {
+  i18n.global.locale.value = pageContext.locale
+}
+
+const selectedLocale = ref(i18n.global.locale.value)
+
+function updateLocale() {
+  if (selectedLocale.value === 'de' || selectedLocale.value === 'en') {
+    i18n.global.locale.value = selectedLocale.value
+  }
+}
 </script>
 
 <style lang="scss">
