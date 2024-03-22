@@ -12,7 +12,7 @@
         <v-card flat class="content-card mb-2 pa-4 pa-md-12">
           <template #text>
             <h2 class="card-header">{{ $t('impress.data.headline') }}</h2>
-            <ul class="card-content mt-2 my-8">
+            <ul class="card-content mt-2 my-6">
               <li>{{ $t('impress.data.name') }}</li>
               <li>{{ $t('impress.data.street') }}</li>
               <!--<li>{{ $t('impress.data.additional') }}</li>-->
@@ -47,15 +47,18 @@
             <p class="mt-2 my-14">{{ $t('impress.contact.additionalLaw') }}</p>
           </template>
         </v-card>
-
-        <!--<v-card flat class="content-card mb-2 pa-4 pa-md-8">
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-card flat class="content-card mb-2 pa-4 pa-md-12">
           <template #text>
             <h2 class="card-header">{{ $t('impress.tax.headline') }}</h2>
             <p class="card-content mt-2">
-              {{ $t('impress.tax.content') }}<br />{{ $t('impress.tax.id') }}
+              {{ $t('impress.tax.content') }} <b>{{ $t('impress.tax.id') }}</b>
             </p>
           </template>
-        </v-card>-->
+        </v-card>
       </v-col>
     </v-row>
     <v-row>

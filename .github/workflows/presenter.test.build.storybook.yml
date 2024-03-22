@@ -11,10 +11,10 @@ jobs:
     outputs:
       changes: ${{ steps.changes.outputs.presenter-test-build-storybook }}
     steps:
-      - uses: actions/checkout@v3.3.0
+      - uses: actions/checkout@v4
 
       - name: Check for presenter file changes
-        uses: dorny/paths-filter@v2.11.1
+        uses: dorny/paths-filter@v3.0.2
         id: changes
         with:
           token: ${{ github.token }}
@@ -29,6 +29,11 @@ jobs:
     env:
       WORKING_DIRECTORY: ./presenter
     steps:
+      - name: Set Node version
+        uses: actions/setup-node@v4
+        with:
+          node-version: '>=21'
+
       - name: Checkout code
         uses: actions/checkout@v4
 

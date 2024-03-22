@@ -14,10 +14,10 @@ jobs:
     outputs:
       changes: ${{ steps.changes.outputs.backend-test-unit-code }}
     steps:
-      - uses: actions/checkout@v3.3.0
+      - uses: actions/checkout@v4
 
       - name: Check for backend file changes
-        uses: dorny/paths-filter@v2.11.1
+        uses: dorny/paths-filter@v3.0.2
         id: changes
         with:
           token: ${{ github.token }}
@@ -32,11 +32,16 @@ jobs:
     env:
       WORKING_DIRECTORY: ./backend
     steps:
+      - name: Set Node version
+        uses: actions/setup-node@v4
+        with:
+          node-version: '>=21'
+
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Backend | docker-compose database
-        run: docker-compose -f docker-compose.yml -f docker-compose.test.yml up --detach --no-deps database
+        run: docker-compose -f docker-compose.yml up --detach --no-deps database
 
       - name: Backend | Unit
         run: npm install && npm run db:migrate && npm run test:unit

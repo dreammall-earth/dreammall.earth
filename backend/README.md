@@ -13,7 +13,7 @@
 
 The Dreammall backend.
 
-![](../presenter/src/assets/dreammall-logo.svg)
+![](.vuepress/assets/dreammall-logo.svg)
 
 ## Requirements & Technology
 

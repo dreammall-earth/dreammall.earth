@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`IndexPage > renders IndexPage with sections 1`] = `
+exports[`IndexPage > renders 1`] = `
 <div
   class="v-application v-theme--light v-layout v-layout--full-height v-locale--is-ltr"
 >
@@ -166,11 +166,160 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                 </a>
               </div>
               <div
-                class="v-col d-flex"
+                class="v-col d-flex justify-end"
                 data-v-5e2a2776=""
               >
                 <div
-                  class="d-flex d-md-none align-center justify-end w-100 mr-8"
+                  class="d-flex align-center mr-0 mr-md-8 language-column"
+                  data-v-5e2a2776=""
+                >
+                  <div
+                    class="v-input v-input--horizontal v-input--center-affix v-input--density-compact v-locale--is-ltr v-input--dirty v-text-field v-select v-select--single v-select--selected v-select--selection-slot language-select"
+                    data-v-5e2a2776=""
+                  >
+                    <!---->
+                    <div
+                      class="v-input__control"
+                    >
+                      
+                      <div
+                        aria-expanded="false"
+                        aria-haspopup="listbox"
+                        aria-owns="v-menu-6"
+                        class="v-field v-field--active v-field--appended v-field--center-affix v-field--dirty v-field--flat v-field--has-background v-field--no-label v-field--variant-solo v-theme--light bg-transparent v-locale--is-ltr"
+                        role="combobox"
+                      >
+                        <div
+                          class="v-field__overlay"
+                        />
+                        <div
+                          class="v-field__loader"
+                        >
+                          <div
+                            aria-hidden="true"
+                            aria-valuemax="100"
+                            aria-valuemin="0"
+                            class="v-progress-linear v-theme--light v-locale--is-ltr"
+                            role="progressbar"
+                            style="top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);"
+                          >
+                            <!---->
+                            <div
+                              class="v-progress-linear__background"
+                              style="background-color: #3D4753; color: #fff; caret-color: #fff; width: 100%;"
+                            />
+                            <transition-stub
+                              appear="false"
+                              css="true"
+                              name="fade-transition"
+                              persisted="false"
+                            >
+                              <div
+                                class="v-progress-linear__indeterminate"
+                              >
+                                
+                                <div
+                                  class="v-progress-linear__indeterminate long"
+                                  style="background-color: #3D4753; color: #fff; caret-color: #fff;"
+                                />
+                                <div
+                                  class="v-progress-linear__indeterminate short"
+                                  style="background-color: #3D4753; color: #fff; caret-color: #fff;"
+                                />
+                                
+                              </div>
+                            </transition-stub>
+                            <!---->
+                          </div>
+                        </div>
+                        <!---->
+                        <div
+                          class="v-field__field"
+                          data-no-activator=""
+                        >
+                          <!---->
+                          <label
+                            class="v-label v-field-label"
+                            for="input-4"
+                          >
+                            <!---->
+                            
+                            <!---->
+                            
+                          </label>
+                          
+                          
+                          <!---->
+                          <div
+                            class="v-field__input"
+                            data-no-activator=""
+                          >
+                            
+                            
+                            
+                            <!---->
+                            <!---->
+                            
+                            
+                            <div
+                              class="v-select__selection"
+                            >
+                              
+                              <span>
+                                DE
+                              </span>
+                              
+                            </div>
+                            
+                            
+                            
+                            <input
+                              aria-describedby="input-4-messages"
+                              aria-label="Öffnen"
+                              id="input-4"
+                              inputmode="none"
+                              name="language"
+                              size="1"
+                              title="Öffnen"
+                              type="text"
+                            />
+                          </div>
+                          <!---->
+                          
+                          
+                        </div>
+                        <!---->
+                        <div
+                          class="v-field__append-inner"
+                        >
+                          
+                          
+                          <!---->
+                          <i
+                            aria-hidden="true"
+                            class="mdi-menu-down mdi v-icon notranslate v-theme--light v-icon--size-default v-select__menu-icon"
+                          />
+                          
+                          
+                          <!---->
+                        </div>
+                        <div
+                          class="v-field__outline"
+                          style="color: #3D4753; caret-color: #3D4753;"
+                        >
+                          <!---->
+                          <!---->
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <!---->
+                    <!---->
+                  </div>
+                </div>
+                <!--v-if-->
+                <div
+                  class="d-flex d-md-none align-center justify-end mr-8 mobile-column"
                   data-v-5e2a2776=""
                 >
                   <div
@@ -525,9 +674,10 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                       <button
                         aria-label="Element 1 von 2"
                         class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-x-small v-btn--variant-text v-carousel__controls__item v-btn--active"
-                        id="carousel-item-8"
+                        id="carousel-item-11"
                         style="color: #ffffff; caret-color: #ffffff;"
                         type="button"
+                        value="0"
                       >
                         
                         <span
@@ -553,9 +703,10 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                       <button
                         aria-label="Element 2 von 2"
                         class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-x-small v-btn--variant-text v-carousel__controls__item"
-                        id="carousel-item-9"
+                        id="carousel-item-12"
                         style="color: #ffffff; caret-color: #ffffff;"
                         type="button"
+                        value="1"
                       >
                         
                         <span
@@ -1251,7 +1402,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                       <label
                                         aria-hidden="true"
                                         class="v-label v-field-label v-field-label--floating"
-                                        for="input-13"
+                                        for="input-16"
                                       >
                                         <!---->
                                         
@@ -1260,7 +1411,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                       </label>
                                       <label
                                         class="v-label v-field-label"
-                                        for="input-13"
+                                        for="input-16"
                                       >
                                         <!---->
                                         
@@ -1271,9 +1422,9 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                       
                                       <!---->
                                       <input
-                                        aria-describedby="input-13-messages"
+                                        aria-describedby="input-16-messages"
                                         class="v-field__input"
-                                        id="input-13"
+                                        id="input-16"
                                         name="firstname"
                                         required=""
                                         size="1"
@@ -1366,7 +1517,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                       <label
                                         aria-hidden="true"
                                         class="v-label v-field-label v-field-label--floating"
-                                        for="input-15"
+                                        for="input-18"
                                       >
                                         <!---->
                                         
@@ -1375,7 +1526,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                       </label>
                                       <label
                                         class="v-label v-field-label"
-                                        for="input-15"
+                                        for="input-18"
                                       >
                                         <!---->
                                         
@@ -1386,9 +1537,9 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                       
                                       <!---->
                                       <input
-                                        aria-describedby="input-15-messages"
+                                        aria-describedby="input-18-messages"
                                         class="v-field__input"
-                                        id="input-15"
+                                        id="input-18"
                                         name="lastname"
                                         required=""
                                         size="1"
@@ -1486,7 +1637,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                       <label
                                         aria-hidden="true"
                                         class="v-label v-field-label v-field-label--floating"
-                                        for="input-17"
+                                        for="input-20"
                                       >
                                         <!---->
                                         
@@ -1495,7 +1646,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                       </label>
                                       <label
                                         class="v-label v-field-label"
-                                        for="input-17"
+                                        for="input-20"
                                       >
                                         <!---->
                                         
@@ -1506,9 +1657,9 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                       
                                       <!---->
                                       <input
-                                        aria-describedby="input-17-messages"
+                                        aria-describedby="input-20-messages"
                                         class="v-field__input"
-                                        id="input-17"
+                                        id="input-20"
                                         name="email"
                                         required=""
                                         size="1"
@@ -1608,9 +1759,9 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                           class="mdi-checkbox-blank-outline mdi v-icon notranslate v-theme--light v-icon--size-default"
                                         />
                                         <input
-                                          aria-describedby="checkbox-20-messages"
+                                          aria-describedby="checkbox-23-messages"
                                           aria-disabled="false"
-                                          id="checkbox-20"
+                                          id="checkbox-23"
                                           name="dataprivacy"
                                           required=""
                                           type="checkbox"
@@ -2081,9 +2232,10 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                         <button
                           aria-label="Element 1 von 3"
                           class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-x-small v-btn--variant-text v-carousel__controls__item v-btn--active"
-                          id="carousel-item-24"
+                          id="carousel-item-27"
                           style="color: #ABABAB; caret-color: #ABABAB;"
                           type="button"
+                          value="0"
                         >
                           
                           <span
@@ -2109,9 +2261,10 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                         <button
                           aria-label="Element 2 von 3"
                           class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-x-small v-btn--variant-text v-carousel__controls__item"
-                          id="carousel-item-25"
+                          id="carousel-item-28"
                           style="color: #ABABAB; caret-color: #ABABAB;"
                           type="button"
+                          value="1"
                         >
                           
                           <span
@@ -2137,9 +2290,10 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                         <button
                           aria-label="Element 3 von 3"
                           class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-x-small v-btn--variant-text v-carousel__controls__item"
-                          id="carousel-item-26"
+                          id="carousel-item-29"
                           style="color: #ABABAB; caret-color: #ABABAB;"
                           type="button"
+                          value="2"
                         >
                           
                           <span
@@ -2737,7 +2891,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                 <label
                                   aria-hidden="true"
                                   class="v-label v-field-label v-field-label--floating"
-                                  for="input-39"
+                                  for="input-42"
                                 >
                                   <!---->
                                   
@@ -2746,7 +2900,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                 </label>
                                 <label
                                   class="v-label v-field-label"
-                                  for="input-39"
+                                  for="input-42"
                                 >
                                   <!---->
                                   
@@ -2757,9 +2911,9 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                 
                                 <!---->
                                 <input
-                                  aria-describedby="input-39-messages"
+                                  aria-describedby="input-42-messages"
                                   class="v-field__input"
-                                  id="input-39"
+                                  id="input-42"
                                   name="lastname"
                                   required=""
                                   size="1"
@@ -2857,7 +3011,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                 <label
                                   aria-hidden="true"
                                   class="v-label v-field-label v-field-label--floating"
-                                  for="input-41"
+                                  for="input-44"
                                 >
                                   <!---->
                                   
@@ -2866,7 +3020,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                 </label>
                                 <label
                                   class="v-label v-field-label"
-                                  for="input-41"
+                                  for="input-44"
                                 >
                                   <!---->
                                   
@@ -2877,9 +3031,9 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                 
                                 <!---->
                                 <input
-                                  aria-describedby="input-41-messages"
+                                  aria-describedby="input-44-messages"
                                   class="v-field__input"
-                                  id="input-41"
+                                  id="input-44"
                                   name="email"
                                   required=""
                                   size="1"
@@ -2998,7 +3152,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                 <label
                                   aria-hidden="true"
                                   class="v-label v-field-label v-field-label--floating"
-                                  for="input-43"
+                                  for="input-46"
                                 >
                                   <!---->
                                   
@@ -3007,7 +3161,7 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                 </label>
                                 <label
                                   class="v-label v-field-label"
-                                  for="input-43"
+                                  for="input-46"
                                 >
                                   <!---->
                                   
@@ -3018,9 +3172,9 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                 
                                 <!---->
                                 <textarea
-                                  aria-describedby="input-43-messages"
+                                  aria-describedby="input-46-messages"
                                   class="v-field__input"
-                                  id="input-43"
+                                  id="input-46"
                                   name="message"
                                   required=""
                                   rows="5"
@@ -3045,19 +3199,19 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                           <div
                             class="v-input__details"
                           >
-                            <transition-group-stub
+                            <transition-stub
                               appear="false"
                               aria-live="polite"
                               class="v-messages"
                               css="true"
-                              id="input-43-messages"
+                              id="input-46-messages"
                               name="slide-y-transition"
                               persisted="false"
                               role="alert"
                               tag="div"
                             >
                               <!---->
-                            </transition-group-stub>
+                            </transition-stub>
                             <!---->
                           </div>
                         </div>
@@ -3096,9 +3250,9 @@ exports[`IndexPage > renders IndexPage with sections 1`] = `
                                     class="mdi-checkbox-blank-outline mdi v-icon notranslate v-theme--light v-icon--size-default"
                                   />
                                   <input
-                                    aria-describedby="checkbox-45-messages"
+                                    aria-describedby="checkbox-48-messages"
                                     aria-disabled="false"
-                                    id="checkbox-45"
+                                    id="checkbox-48"
                                     name="dataprivacy"
                                     required=""
                                     type="checkbox"

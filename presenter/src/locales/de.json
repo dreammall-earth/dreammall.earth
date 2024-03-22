@@ -1,5 +1,8 @@
 {
   "about": {},
+  "auth": {
+    "content": "Logge ein..."
+  },
   "dataProtection": {
     "euDispute": {
       "content": "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr/. Unsere E-Mail Adresse finden Sie im Impressum.",
@@ -157,7 +160,7 @@
     "tax": {
       "content": "Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:",
       "headline": "Umsatzsteuer-ID",
-      "id": "DE999999999"
+      "id": "DE356946303"
     }
   },
   "menu": {

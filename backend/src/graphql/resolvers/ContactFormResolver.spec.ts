@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { ApolloServer } from '@apollo/server'
-import { ContactForm } from '@prisma/client'
 
 import { sendContactEmails } from '#api/Brevo'
+import { EventType } from '#src/event/EventType'
 import { prisma } from '#src/prisma'
 import { createServer } from '#src/server/server'
 
@@ -195,24 +194,28 @@ weils nach Datum, Medium, Anlass und Kosten auflisten)?`,
         })
       })
 
-      it('has the contact form stored in the database', async () => {
-        const result: ContactForm[] = await prisma.contactForm.findMany()
+      it('calls sendContactFormEmail', () => {
+        expect(sendContactEmails).toHaveBeenCalledWith({
+          firstName: 'Peter',
+          lastName: 'Lustig',
+          content: 'Hello DreamMall!',
+          email: 'peter@lustig.de',
+        })
+      })
+
+      it('writes event to database', async () => {
+        const result = await prisma.event.findMany()
         expect(result).toHaveLength(1)
         expect(result).toEqual([
           {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
-            firstName: 'Peter',
-            lastName: 'Lustig',
-            content: 'Hello DreamMall!',
-            email: 'peter@lustig.de',
+            type: EventType.CONTACTFORM_SEND,
+            involvedEmail: 'peter@lustig.de',
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             createdAt: expect.any(Date),
-            brevoSuccess: null,
           },
         ])
-      })
-
-      it('calls sendContactFormEmail', () => {
-        expect(sendContactEmails).toHaveBeenCalled()
       })
     })
   })

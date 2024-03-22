@@ -18,6 +18,7 @@ const config: UserConfig = {
     vueI18n({
       ssr: true,
       include: path.resolve(__dirname, './src/locales/**'),
+      jitCompilation: false,
     }),
     checker({
       typescript: true,
@@ -38,6 +39,7 @@ const config: UserConfig = {
       '#layouts': path.join(__dirname, '/src/layouts'),
       '#stores': path.join(__dirname, '/src/stores'),
       '#mutations': path.join(__dirname, '/src/graphql/mutations'),
+      '#queries': path.join(__dirname, '/src/graphql/queries'),
       '#src': path.join(__dirname, '/src'),
       '#plugins': path.join(__dirname, '/renderer/plugins'),
       '#context': path.join(__dirname, '/renderer/context'),

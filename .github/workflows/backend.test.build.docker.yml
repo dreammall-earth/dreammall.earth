@@ -1,0 +1,53 @@
+name: "backend:test:build test docker"
+
+on: push
+
+jobs:
+  # only (but most important) job from this workflow required for pull requests
+  # check results serve as run conditions for all other jobs here
+  files-changed:
+    name: Detect File Changes - backend-test-build-docker
+    runs-on: ubuntu-latest
+    outputs:
+      changes: ${{ steps.changes.outputs.backend-test-build-docker }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check for backend file changes
+        uses: dorny/paths-filter@v3.0.2
+        id: changes
+        with:
+          token: ${{ github.token }}
+          filters: .github/file-filters.yml
+          list-files: shell
+
+  build-production:
+    if: needs.files-changed.outputs.changes == 'true'
+    name: Build Docker Production - Backend
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./backend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Backend | Build Docker Production
+        run: docker compose -f docker-compose.yml build
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  build-development:
+    if: needs.files-changed.outputs.changes == 'true'
+    name: Build Docker Development - Backend
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./backend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Backend | Build Docker Development
+        run: docker compose build
+        working-directory: ${{env.WORKING_DIRECTORY}}
