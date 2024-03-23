@@ -32,6 +32,7 @@ import { ref } from 'vue'
 
 import { usePageContext } from '#context/usePageContext'
 import i18n from '#plugins/i18n'
+import { locales } from '#root/locales'
 
 // TODO better place? maybe locales folder?
 const languages = ref([
@@ -41,14 +42,14 @@ const languages = ref([
 
 const pageContext = usePageContext()
 
-if (pageContext.locale === 'de' || pageContext.locale === 'en') {
+if (pageContext.locale !== undefined && locales.includes(pageContext.locale)) {
   i18n.global.locale.value = pageContext.locale
 }
 
 const selectedLocale = ref(i18n.global.locale.value)
 
 function updateLocale() {
-  if (selectedLocale.value === 'de' || selectedLocale.value === 'en') {
+  if (locales.includes(selectedLocale.value)) {
     i18n.global.locale.value = selectedLocale.value
   }
 }
