@@ -33,7 +33,7 @@
     "@vuepress/theme-default": "^2.0.0-rc.20"
   },
   "devDependencies": {
-    "@vuepress/bundler-vite": "^2.0.0-rc.8",
+    "@vuepress/bundler-vite": "^2.0.0-rc.9",
     "remark-cli": "^12.0.0",
     "remark-gfm": "^4.0.0",
     "remark-preset-lint-consistent": "^5.1.2",
