@@ -1,13 +1,13 @@
-import { locales, localeDefault } from './locales'
+import { locales, localeDefault, LocaleCode } from './locales'
 
 export function extractLocale(url: string) {
   const urlPaths = url.split('/')
-  let locale: 'en' | 'de'
+  let locale: LocaleCode
   let urlWithoutLocale
   // We remove the URL locale, for example `/de/about` => `/about`
-  const firstPath = urlPaths[1]
+  const firstPath = urlPaths[1] as LocaleCode
   if (locales.filter((locale) => locale !== localeDefault).includes(firstPath)) {
-    locale = 'en'
+    locale = firstPath
     urlWithoutLocale = '/' + urlPaths.slice(2).join('/')
   } else {
     locale = localeDefault
