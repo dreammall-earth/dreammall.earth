@@ -9,6 +9,7 @@ import { createApolloClient } from '#plugins/apollo'
 import i18n from '#plugins/i18n'
 import pinia from '#plugins/pinia'
 import CreateVuetify from '#plugins/vuetify'
+import { locales } from '#root/locales'
 import AuthService from '#src/services/AuthService'
 import { useAuthStore } from '#stores/authStore'
 
@@ -73,7 +74,7 @@ function createApp(pageContext: PageContext, isClient = true) {
 
   setPageContext(app, pageContextReactive)
 
-  if (pageContext.locale === 'de' || pageContext.locale === 'en') {
+  if (pageContext.locale !== undefined && locales.includes(pageContext.locale)) {
     i18n.global.locale.value = pageContext.locale
   }
 
