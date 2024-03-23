@@ -116,7 +116,7 @@
     "eslint-plugin-vitest": "^0.3.26",
     "eslint-plugin-vue": "^9.23.0",
     "eslint-plugin-vuetify": "^2.2.0",
-    "eslint-plugin-yml": "^1.12.2",
+    "eslint-plugin-yml": "^1.13.2",
     "happy-dom": "^13.8.6",
     "prettier": "^3.2.5",
     "react": "^18.2.0",
