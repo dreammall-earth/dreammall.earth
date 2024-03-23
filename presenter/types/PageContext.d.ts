@@ -1,3 +1,4 @@
+import { LocaleCode } from '#root/locales/locales'
 import { Page } from '#types/Page'
 import { PageProps } from '#types/PageProps'
 
@@ -11,7 +12,7 @@ declare global {
       }
       Page: Page
       pageProps?: PageProps
-      locale?: string
+      locale?: LocaleCode
     }
   }
 }
