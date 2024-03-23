@@ -1,9 +1,8 @@
 import { PageContextServer } from 'vike/types'
 
-export { onPrerenderStart }
+import { locales, localeDefault } from '#root/locales'
 
-const locales = ['en', 'de']
-const localeDefault = 'de'
+export { onPrerenderStart }
 
 function onPrerenderStart(prerenderContext: { pageContexts: PageContextServer[] }): {
   prerenderContext: {
