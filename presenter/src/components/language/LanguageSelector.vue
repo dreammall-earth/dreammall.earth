@@ -32,13 +32,9 @@ import { ref } from 'vue'
 
 import { usePageContext } from '#context/usePageContext'
 import i18n from '#plugins/i18n'
-import { locales } from '#root/locales'
+import { locales, localizedLocale } from '#root/locales'
 
-// TODO better place? maybe locales folder?
-const languages = ref([
-  { locale: 'de', title: 'Deutsch' },
-  { locale: 'en', title: 'English' },
-])
+const languages = ref(localizedLocale)
 
 const pageContext = usePageContext()
 
