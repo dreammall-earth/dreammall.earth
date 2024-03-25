@@ -46,6 +46,12 @@ const config: UserConfig = {
     },
   },
   assetsInclude: isStorybook() ? ['/sb-preview/runtime.js'] : [],
+  server: {
+    hmr: {
+      clientPort: isNaN(Number(process.env.PORT_HMR)) ? 24678 : Number(process.env.PORT_HMR),
+      port: isNaN(Number(process.env.PORT_HMR)) ? 24678 : Number(process.env.PORT_HMR),
+    },
+  },
 }
 
 export default config
