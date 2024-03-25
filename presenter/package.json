@@ -61,14 +61,14 @@
     "update": "npx npm-check-updates"
   },
   "dependencies": {
-    "@apollo/client": "^3.9.5",
+    "@apollo/client": "^3.9.9",
     "@intlify/unplugin-vue-i18n": "^3.0.1",
     "@mdi/font": "^7.4.47",
     "@types/compression": "^1.7.5",
     "@types/express": "^4.17.21",
     "@types/node": "^20.11.30",
     "@vitejs/plugin-vue": "^5.0.4",
-    "@vue/apollo-composable": "^4.0.1",
+    "@vue/apollo-composable": "^4.0.2",
     "@vue/apollo-option": "^4.0.0",
     "@vue/compiler-sfc": "^3.4.21",
     "@vue/server-renderer": "3.4.21",
