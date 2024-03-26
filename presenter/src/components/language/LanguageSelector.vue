@@ -93,4 +93,3 @@ const languages = ref(localizedLocale)
   }
 }
 </style>
-#src/locales
