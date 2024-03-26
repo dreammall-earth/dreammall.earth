@@ -31,7 +31,6 @@
     "title": "DreamMall {'|'} Privacy Policy"
   },
   "error": {
-    "title": "DreamMall {'|'} Error",
     "404": {
       "h1": "404 Page not found",
       "text": "This page could not be found."
@@ -39,7 +38,8 @@
     "500": {
       "h1": "500 Internal error",
       "text": "Something went wrong."
-    }
+    },
+    "title": "DreamMall {'|'} Error"
   },
   "home": {
     "aboutSection": {
@@ -214,7 +214,7 @@
     "success": {
       "text": "You have successfully confirmed your newsletter subscription. You will be redirected to the start page shortly."
     },
-    "title":"DreamMall {'|'} Newsletter"
+    "title": "DreamMall {'|'} Newsletter"
   },
   "title": "DreamMall",
   "validation": {

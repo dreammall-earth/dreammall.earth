@@ -31,7 +31,6 @@
     "title": "DreamMall {'|'} Datenschutz"
   },
   "error": {
-    "title": "DreamMall {'|'} Fehler",
     "404": {
       "h1": "404 Seite nicht gefunden",
       "text": "Diese Seite konnte nicht gefunden werden."
@@ -39,7 +38,8 @@
     "500": {
       "h1": "500 Interner Fehler",
       "text": "Etwas ist schief gegangen."
-    }
+    },
+    "title": "DreamMall {'|'} Fehler"
   },
   "home": {
     "aboutSection": {
@@ -214,7 +214,7 @@
     "success": {
       "text": "Sie haben Ihr Newsletterabbonoment erfolgreich bestätigt. Sie werden in Kürze auf die Startseite weitergeleitet."
     },
-    "title":"DreamMall {'|'} Newsletter"
+    "title": "DreamMall {'|'} Newsletter"
   },
   "title": "DreamMall",
   "validation": {
