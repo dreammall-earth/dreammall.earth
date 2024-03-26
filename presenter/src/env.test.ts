@@ -7,8 +7,6 @@ describe('env', () => {
     expect(META).toEqual({
       BASE_URL: 'http://localhost:3000',
       DEFAULT_AUTHOR: 'DreamMall Verlag GbR',
-      DEFAULT_DESCRIPTION:
-        'Deine Reichweite Erweitern Alle Möglichkeiten Miteinander Ausschöpfen Lebensqualität Leben',
     })
   })
 })
