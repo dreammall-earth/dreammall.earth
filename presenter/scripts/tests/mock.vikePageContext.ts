@@ -6,6 +6,7 @@ config.global.provide = {
   ...config.global.provide,
   [vikePageContext as symbol]: {
     urlPathname: '/some-url',
+    urlOriginal: '/some-url',
     routeParams: {
       code: 'my-code',
     },
