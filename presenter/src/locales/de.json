@@ -1,7 +1,8 @@
 {
   "about": {},
   "auth": {
-    "content": "Logge ein..."
+    "content": "Logge ein...",
+    "title": "DreamMall {'|'} Authentifizierung"
   },
   "dataProtection": {
     "euDispute": {
@@ -26,9 +27,11 @@
     "revocation": {
       "content": "Nur mit Ihrer ausdrücklichen Einwilligung sind einige Vorgänge der Datenverarbeitung möglich. Ein Widerruf Ihrer bereits erteilten Einwilligung ist jederzeit möglich. Für den Widerruf genügt eine formlose Mitteilung per E-Mail. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.",
       "headline": "Widerruf Ihrer Einwilligung zur Datenverarbeitung"
-    }
+    },
+    "title": "DreamMall {'|'} Datenschutz"
   },
   "error": {
+    "title": "DreamMall {'|'} Fehler",
     "404": {
       "h1": "404 Seite nicht gefunden",
       "text": "Diese Seite konnte nicht gefunden werden."
@@ -161,7 +164,8 @@
       "content": "Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:",
       "headline": "Umsatzsteuer-ID",
       "id": "DE356946303"
-    }
+    },
+    "title": "DreamMall {'|'} Impressum"
   },
   "menu": {
     "eMail": "E-Mail",
@@ -209,8 +213,10 @@
     },
     "success": {
       "text": "Sie haben Ihr Newsletterabbonoment erfolgreich bestätigt. Sie werden in Kürze auf die Startseite weitergeleitet."
-    }
+    },
+    "title":"DreamMall {'|'} Newsletter"
   },
+  "title": "DreamMall",
   "validation": {
     "fieldNoEmail": "Dieses Feld muss eine Email-Adresse sein.",
     "fieldRequired": "Dieses Feld wird benötigt.",

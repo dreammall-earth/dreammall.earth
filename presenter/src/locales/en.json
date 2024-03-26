@@ -1,7 +1,8 @@
 {
   "about": {},
   "auth": {
-    "content": "Logging in..."
+    "content": "Logging in...",
+    "title": "DreamMall {'|'} Authentication"
   },
   "dataProtection": {
     "euDispute": {
@@ -26,9 +27,11 @@
     "revocation": {
       "content": "Some data processing operations are only possible with your express consent. You can withdraw your consent at any time. An informal notification by e-mail is sufficient for the revocation. The legality of the data processing carried out until the revocation remains unaffected by the revocation.",
       "headline": "Withdrawal of your consent to data processing"
-    }
+    },
+    "title": "DreamMall {'|'} Privacy Policy"
   },
   "error": {
+    "title": "DreamMall {'|'} Error",
     "404": {
       "h1": "404 Page not found",
       "text": "This page could not be found."
@@ -161,7 +164,8 @@
       "content": "Sales tax identification number according to § 27 a sales tax law:",
       "headline": "Sales tax ID",
       "id": "DE356946303"
-    }
+    },
+    "title": "DreamMall {'|'} Imprint"
   },
   "menu": {
     "eMail": "E-Mail",
@@ -209,8 +213,10 @@
     },
     "success": {
       "text": "You have successfully confirmed your newsletter subscription. You will be redirected to the start page shortly."
-    }
+    },
+    "title":"DreamMall {'|'} Newsletter"
   },
+  "title": "DreamMall",
   "validation": {
     "fieldNoEmail": "This field must be an email address",
     "fieldRequired": "This field is required",
