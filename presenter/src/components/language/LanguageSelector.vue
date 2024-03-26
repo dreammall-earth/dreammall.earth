@@ -1,6 +1,6 @@
 <template>
   <v-select
-    v-model="$i18n.locale"
+    v-model="selectedLocale"
     density="compact"
     name="language"
     :items="languages"
@@ -37,12 +37,15 @@ import { localizedLocale } from '#src/locales'
 const pageContext = usePageContext()
 const languages = ref(localizedLocale)
 
+const selectedLocale = ref(i18n.global.locale.value)
+
 const updateLanguage = () => {
-  const { locale } = pageContext
-  window.location.href = window.location.href.replace(
-    `/${locale}/`,
-    `/${i18n.global.locale.value}/`,
-  )
+  const { locale, urlOriginal } = pageContext
+
+  window.location.href = urlOriginal
+    // eslint-disable-next-line security/detect-non-literal-regexp
+    .replace(new RegExp(`/(${locale})?(.*)`, 'g'), `/${selectedLocale.value}/$2`)
+    .replace(/(\/(#|\?))?/g, '$2')
 }
 </script>
 
