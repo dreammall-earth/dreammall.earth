@@ -206,6 +206,10 @@
       "sitemap": "Sitemap"
     }
   },
+  "meta": {
+    "defaultDescription": "Deine Reichweite Erweitern Alle Möglichkeiten Miteinander Ausschöpfen Lebensqualität Leben",
+    "defaultTitle": "DreamMall"
+  },
   "optin": {
     "error": {
       "link": "Erneut eintragen",
@@ -216,7 +220,6 @@
     },
     "title": "DreamMall {'|'} Newsletter"
   },
-  "title": "DreamMall",
   "validation": {
     "fieldNoEmail": "Dieses Feld muss eine Email-Adresse sein.",
     "fieldRequired": "Dieses Feld wird benötigt.",

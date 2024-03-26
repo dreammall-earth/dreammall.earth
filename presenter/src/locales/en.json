@@ -206,6 +206,10 @@
       "sitemap": "Sitemap"
     }
   },
+  "meta": {
+    "defaultDescription": "Expanding your reach Exploiting all possibilities together Quality of life",
+    "defaultTitle": "DreamMall"
+  },
   "optin": {
     "error": {
       "link": "Register again",
@@ -216,7 +220,6 @@
     },
     "title": "DreamMall {'|'} Newsletter"
   },
-  "title": "DreamMall",
   "validation": {
     "fieldNoEmail": "This field must be an email address",
     "fieldRequired": "This field is required",
