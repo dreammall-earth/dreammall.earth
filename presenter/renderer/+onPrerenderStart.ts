@@ -1,6 +1,6 @@
 import { PageContextServer } from 'vike/types'
 
-import { locales, localeDefault } from '#root/locales'
+import { locales } from '#src/locales'
 
 export { onPrerenderStart }
 
