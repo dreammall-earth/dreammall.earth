@@ -29,7 +29,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import { localizedLocale } from '#root/locales'
+import { localizedLocale } from '#src/locales'
 
 const languages = ref(localizedLocale)
 </script>

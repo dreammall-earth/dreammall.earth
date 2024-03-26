@@ -9,7 +9,7 @@ import { createApolloClient } from '#plugins/apollo'
 import i18n from '#plugins/i18n'
 import pinia from '#plugins/pinia'
 import CreateVuetify from '#plugins/vuetify'
-import { locales } from '#root/locales'
+import { locales } from '#src/locales'
 import AuthService from '#src/services/AuthService'
 import { useAuthStore } from '#stores/authStore'
 

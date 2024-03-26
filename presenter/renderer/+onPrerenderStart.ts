@@ -1,6 +1,6 @@
 import { PageContextServer } from 'vike/types'
 
-import { locales, localeDefault } from '#root/locales'
+import { locales } from '#src/locales'
 
 export { onPrerenderStart }
 
@@ -15,9 +15,7 @@ function onPrerenderStart(prerenderContext: { pageContexts: PageContextServer[] 
     locales.forEach((locale) => {
       // Localize URL
       let { urlOriginal } = pageContext
-      if (locale !== localeDefault) {
-        urlOriginal = `/${locale}${urlOriginal}`
-      }
+      urlOriginal = `/${locale}${urlOriginal}`
       storePageContexts.push({
         ...pageContext,
         urlOriginal,

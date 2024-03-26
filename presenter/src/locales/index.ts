@@ -1,4 +1,11 @@
-import { locales, localeDefault, LocaleCode } from './locales'
+export type LocaleCode = 'de' | 'en'
+export const locales: LocaleCode[] = ['de', 'en']
+export const localeDefault = 'de'
+export const fallbackLocale = 'en'
+export const localizedLocale = [
+  { locale: 'de', title: 'Deutsch' },
+  { locale: 'en', title: 'English' },
+]
 
 export function extractLocale(url: string) {
   const urlPaths = url.split('/')

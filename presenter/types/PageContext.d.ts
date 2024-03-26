@@ -1,4 +1,4 @@
-import { LocaleCode } from '#root/locales/locales'
+import { LocaleCode } from '#src/locales'
 import { Page } from '#types/Page'
 import { PageProps } from '#types/PageProps'
 
