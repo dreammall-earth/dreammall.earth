@@ -9,6 +9,7 @@ import { createApolloClient } from '#plugins/apollo'
 import i18n from '#plugins/i18n'
 import pinia from '#plugins/pinia'
 import CreateVuetify from '#plugins/vuetify'
+import { locales } from '#src/locales'
 import AuthService from '#src/services/AuthService'
 import { useAuthStore } from '#stores/authStore'
 
@@ -25,6 +26,7 @@ function createApp(pageContext: PageContext, isClient = true) {
     data: () => ({
       Page: markRaw(pageContext.Page),
       pageProps: markRaw(pageContext.pageProps || {}),
+      locale: markRaw(pageContext.locale || {}),
       isClient,
     }),
     created() {
@@ -64,12 +66,17 @@ function createApp(pageContext: PageContext, isClient = true) {
       Object.assign(pageContextReactive, pageContext)
       rootComponent.Page = markRaw(pageContext.Page)
       rootComponent.pageProps = markRaw(pageContext.pageProps || {})
+      rootComponent.locale = markRaw(pageContext.locale || {})
     },
   })
 
   const pageContextReactive = reactive(pageContext)
 
   setPageContext(app, pageContextReactive)
+
+  if (pageContext.locale && locales.includes(pageContext.locale)) {
+    i18n.global.locale.value = pageContext.locale
+  }
 
   return { app, i18n }
 }

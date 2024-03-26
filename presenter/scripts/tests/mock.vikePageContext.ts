@@ -9,5 +9,6 @@ config.global.provide = {
     routeParams: {
       code: 'my-code',
     },
+    locale: 'de',
   },
 }
