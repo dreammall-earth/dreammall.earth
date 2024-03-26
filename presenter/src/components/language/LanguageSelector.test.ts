@@ -23,12 +23,12 @@ describe('LanguageSelector', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 
-  describe('switch locale with existing locale', () => {
+  describe('switch locale', () => {
     beforeEach(async () => {
       await vSelect.setValue('en')
     })
 
-    it('change locale', () => {
+    it('to en', () => {
       expect(i18n.global.locale.value).toBe('en')
     })
   })
