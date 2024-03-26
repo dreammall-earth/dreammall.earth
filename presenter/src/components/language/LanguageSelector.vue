@@ -29,11 +29,9 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-// TODO better place? maybe locales folder?
-const languages = ref([
-  { locale: 'de', title: 'Deutsch' },
-  { locale: 'en', title: 'English' },
-])
+import { localizedLocale } from '#src/locales'
+
+const languages = ref(localizedLocale)
 </script>
 
 <style lang="scss">
