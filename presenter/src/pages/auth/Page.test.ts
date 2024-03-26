@@ -4,6 +4,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
+import i18n from '#plugins/i18n'
 import { useAuthStore } from '#stores/authStore'
 import { authService } from '#tests/mock.authService'
 
@@ -51,7 +52,7 @@ describe('AuthPage', () => {
     })
 
     it('title returns correct title', () => {
-      expect(title).toBe('DreamMall | Authentifizierung')
+      expect(title()).toBe(i18n.global.t('auth.title'))
     })
 
     it('renders', () => {
