@@ -1,6 +1,6 @@
 <template>
   <v-select
-    v-model="selectedLocale"
+    v-model="$i18n.locale"
     density="compact"
     name="language"
     :items="languages"
@@ -32,36 +32,17 @@ import { ref } from 'vue'
 
 import { usePageContext } from '#context/usePageContext'
 import i18n from '#plugins/i18n'
-import { LocaleCode, locales, localizedLocale } from '#src/locales'
+import { localizedLocale } from '#src/locales'
 
 const pageContext = usePageContext()
 const languages = ref(localizedLocale)
 
-const selectedLocale = ref(i18n.global.locale.value)
-
 const updateLanguage = () => {
-  if (locales.includes(selectedLocale.value)) {
-    i18n.global.locale.value = selectedLocale.value
-  }
-
-  let { urlOriginal } = pageContext
-  const urlPaths = urlOriginal.split('/')
-
-  let urlWithoutLocale = ''
-  let leadingSlash = '/'
-  if (urlPaths[1].indexOf('#') > -1) {
-    const hashUrl = urlPaths[1].split('#')
-    urlWithoutLocale = '#' + hashUrl[1]
-    leadingSlash = ''
-  } else if (!locales.includes(urlPaths[1] as LocaleCode)) {
-    urlWithoutLocale = leadingSlash + urlPaths[1]
-  }
-
-  if (locales.includes(selectedLocale.value)) {
-    urlWithoutLocale += leadingSlash + urlPaths.slice(2).join('/')
-    urlOriginal = '/' + selectedLocale.value + urlWithoutLocale
-  }
-  window.location.href = urlOriginal
+  const { locale } = pageContext
+  window.location.href = window.location.href.replace(
+    `/${locale}/`,
+    `/${i18n.global.locale.value}/`,
+  )
 }
 </script>
 
