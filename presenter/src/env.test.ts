@@ -9,7 +9,6 @@ describe('env', () => {
       DEFAULT_AUTHOR: 'DreamMall Verlag GbR',
       DEFAULT_DESCRIPTION:
         'Deine Reichweite Erweitern Alle Möglichkeiten Miteinander Ausschöpfen Lebensqualität Leben',
-      DEFAULT_TITLE: 'DreamMall',
     })
   })
 })

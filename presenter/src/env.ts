@@ -24,7 +24,6 @@ const META = {
     'DreamMall Verlag GbR') as string,
   DEFAULT_DESCRIPTION: (import.meta.env.PUBLIC_ENV__META__DEFAULT_DESCRIPTION ??
     'Deine Reichweite Erweitern Alle Möglichkeiten Miteinander Ausschöpfen Lebensqualität Leben') as string,
-  DEFAULT_TITLE: (import.meta.env.PUBLIC_ENV__META__DEFAULT_TITLE ?? 'DreamMall') as string,
 }
 
 export { AUTH, ENDPOINTS, META }
