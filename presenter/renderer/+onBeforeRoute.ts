@@ -3,9 +3,6 @@ import { PageContext } from 'vike/types'
 import { extractLocale } from '#root/locales/extractLocale'
 
 export function onBeforeRoute(pageContext: PageContext) {
-  if (pageContext.urlPathname.endsWith('.js')) {
-    return { pageContext: { urlLogical: pageContext.urlPathname } }
-  }
 
   const { urlWithoutLocale, locale } = extractLocale(pageContext.urlPathname)
 
