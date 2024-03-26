@@ -38,7 +38,7 @@ const languages = ref(localizedLocale)
 
 const pageContext = usePageContext()
 
-if (pageContext.locale !== undefined && locales.includes(pageContext.locale)) {
+if (pageContext.locale && locales.includes(pageContext.locale)) {
   i18n.global.locale.value = pageContext.locale
 }
 
