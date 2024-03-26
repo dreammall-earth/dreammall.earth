@@ -6,7 +6,7 @@ export function extractLocale(url: string) {
   let urlWithoutLocale
   // We remove the URL locale, for example `/de/about` => `/about`
   const firstPath = urlPaths[1] as LocaleCode
-  if (locales.filter((locale) => locale !== localeDefault).includes(firstPath)) {
+  if (locales.includes(firstPath)) {
     locale = firstPath
     urlWithoutLocale = '/' + urlPaths.slice(2).join('/')
   } else {
