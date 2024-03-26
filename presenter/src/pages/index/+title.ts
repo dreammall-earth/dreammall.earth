@@ -1,3 +1,5 @@
-import { META } from '#src/env'
+import i18n from '#plugins/i18n'
 
-export const title = META.DEFAULT_TITLE
+export const title = () => {
+  return i18n.global.t('title')
+}
