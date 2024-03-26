@@ -1,4 +1,4 @@
-# Backend
+# Dreammall Backend
 [![nodejs][badge-nodejs-img]][badge-nodejs-href]
 [![npm][badge-npm-img]][badge-npm-href]
 [![docker][badge-docker-img]][badge-docker-href]
@@ -45,6 +45,8 @@ The following commands are available:
 | **Documentation**          |                                                 |
 | `npm run docs:dev`         | Run Documentation in development mode           |
 | `npm run docs:build`       | Build static documentation                      |
+| **Maintenance**            |                                                 |
+| `npm run update`           | Check for updates                               |
 
 ### Docker
 
