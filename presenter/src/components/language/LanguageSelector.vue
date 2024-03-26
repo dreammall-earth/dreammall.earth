@@ -1,6 +1,6 @@
 <template>
   <v-select
-    v-model="$i18n.locale"
+    v-model="selectedLocale"
     density="compact"
     name="language"
     :items="languages"
@@ -12,6 +12,7 @@
     bg-color="transparent"
     hide-details="auto"
     flat
+    @update:model-value="updateLanguage"
   >
     <template #selection="{ item }">
       <span>{{ item.raw.locale.toUpperCase() }}</span>
@@ -29,9 +30,39 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import { localizedLocale } from '#src/locales'
+import { usePageContext } from '#context/usePageContext'
+import i18n from '#plugins/i18n'
+import { LocaleCode, locales, localizedLocale } from '#src/locales'
 
+const pageContext = usePageContext()
 const languages = ref(localizedLocale)
+
+const selectedLocale = ref(i18n.global.locale.value)
+
+const updateLanguage = () => {
+  if (locales.includes(selectedLocale.value)) {
+    i18n.global.locale.value = selectedLocale.value
+  }
+
+  let { urlOriginal } = pageContext
+  const urlPaths = urlOriginal.split('/')
+
+  let urlWithoutLocale = ''
+  let leadingSlash = '/'
+  if (urlPaths[1].indexOf('#') > -1) {
+    const hashUrl = urlPaths[1].split('#')
+    urlWithoutLocale = '#' + hashUrl[1]
+    leadingSlash = ''
+  } else if (!locales.includes(urlPaths[1] as LocaleCode)) {
+    urlWithoutLocale = leadingSlash + urlPaths[1]
+  }
+
+  if (locales.includes(selectedLocale.value)) {
+    urlWithoutLocale += leadingSlash + urlPaths.slice(2).join('/')
+    urlOriginal = '/' + selectedLocale.value + urlWithoutLocale
+  }
+  window.location.href = urlOriginal
+}
 </script>
 
 <style lang="scss">
