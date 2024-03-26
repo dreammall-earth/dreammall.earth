@@ -16,7 +16,7 @@ describe('IndexPage', () => {
   })
 
   it('title returns default title', () => {
-    expect(title()).toBe(i18n.global.t('title'))
+    expect(title()).toBe(i18n.global.t('meta.defaultTitle'))
   })
 
   it('renders', () => {
