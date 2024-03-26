@@ -5,6 +5,7 @@ import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 import { confirmNewsletter } from '#mutations/confirmNewsletter'
+import i18n from '#plugins/i18n'
 import { mockClient } from '#tests/mock.apolloClient'
 
 import OptinPage from './+Page.vue'
@@ -45,7 +46,7 @@ describe('OptinPage', () => {
   })
 
   it('title returns correct title', () => {
-    expect(title).toBe('DreamMall | Newsletter')
+    expect(title()).toBe(i18n.global.t('optin.title'))
   })
 
   it('route returns `/optin/@code', () => {
