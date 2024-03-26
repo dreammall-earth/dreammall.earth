@@ -3,6 +3,8 @@ import { describe, it, expect } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
+import i18n from '#plugins/i18n'
+
 import IndexPage from './+Page.vue'
 import { title } from './+title'
 
@@ -14,7 +16,7 @@ describe('IndexPage', () => {
   })
 
   it('title returns default title', () => {
-    expect(title).toBe('DreamMall')
+    expect(title()).toBe(i18n.global.t('title'))
   })
 
   it('renders', () => {

@@ -3,12 +3,14 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
+import i18n from '#plugins/i18n'
+
 import ErrorPage from './+Page.vue'
 import { title } from './+title'
 
 describe('ErrorPage', () => {
   it('title returns correct title', () => {
-    expect(title).toBe('DreamMall | Fehler')
+    expect(title()).toBe(i18n.global.t('error.title'))
   })
   describe('500 Error', () => {
     const WrapperUndefined = () => {
