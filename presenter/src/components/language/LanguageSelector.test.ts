@@ -29,7 +29,7 @@ describe('LanguageSelector', () => {
     })
 
     it('to en', () => {
-      expect(locationHrefSetSpy).toHaveBeenCalledWith('/en/some-url')
+      expect(locationHrefSetSpy).toHaveBeenCalledWith('/en/original-url')
     })
   })
 })
