@@ -5,6 +5,7 @@ import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 import { AUTH } from '#src/env'
+import { useAuthStore } from '#stores/authStore'
 import { authService } from '#tests/mock.authService'
 
 import HeaderMenu from './HeaderMenu.vue'
@@ -80,20 +81,104 @@ describe('HeaderMenu', () => {
       })
     })
 
-    /*
     describe('sign up button', () => {
+      const spy = vi.spyOn(authService, 'signUp')
+
       beforeEach(() => {
         vi.clearAllMocks()
-        wrapper.find('button.sign-up').trigger('click')
       })
 
-      // how to redirect correctly (navigate vs recirect)?
-      it('redirects to sign up url', () => {
-        expect(true).toBe(true)
+      describe('without error', () => {
+        beforeEach(async () => {
+          await wrapper.find('button.sign-up').trigger('click')
+        })
+
+        it('call auth service signUp', () => {
+          expect(spy).toBeCalled()
+        })
+      })
+
+      describe('with error', () => {
+        const consoleSpy = vi.spyOn(console, 'log')
+
+        beforeEach(async () => {
+          spy.mockRejectedValue('Oh no!')
+          await wrapper.find('button.sign-up').trigger('click')
+        })
+
+        it('logs the error', () => {
+          expect(consoleSpy).toBeCalledWith('auth error', 'Oh no!')
+        })
       })
     })
 
-    describe('logged in', () => {})
-    */
+    describe('logged in', () => {
+      const authStore = useAuthStore()
+
+      beforeEach(() => {
+        authStore.save({
+          access_token: 'access_token',
+          profile: {
+            aud: 'aud',
+            sub: 'sub',
+            exp: 1,
+            iat: 1,
+            iss: 'iss',
+          },
+          token_type: 'token_type',
+          session_state: null,
+          state: null,
+          expires_in: 0,
+          expired: false,
+          scopes: ['email'],
+          toStorageString: () => 'toStorageString',
+        })
+      })
+
+      it('has a sign out button', () => {
+        expect(wrapper.find('button.sign-out').exists()).toBe(true)
+      })
+
+      it('has no sign in/up button', () => {
+        expect(wrapper.find('button.sign-up').exists()).toBe(false)
+        expect(wrapper.find('button.sign-in').exists()).toBe(false)
+      })
+
+      describe('click sign out', () => {
+        const authSpy = vi.spyOn(authService, 'signOut')
+        const storeSpy = vi.spyOn(authStore, 'clear')
+
+        beforeEach(() => {
+          vi.clearAllMocks()
+        })
+
+        describe('without error', () => {
+          beforeEach(async () => {
+            await wrapper.find('button.sign-out').trigger('click')
+          })
+
+          it('calls auth service sign out', () => {
+            expect(authSpy).toBeCalled()
+          })
+
+          it('clears the store', () => {
+            expect(storeSpy).toBeCalled()
+          })
+        })
+
+        describe('with error', () => {
+          const consoleSpy = vi.spyOn(console, 'log')
+
+          beforeEach(async () => {
+            authSpy.mockRejectedValue('Error!')
+            await wrapper.find('button.sign-out').trigger('click')
+          })
+
+          it('logs the error', () => {
+            expect(consoleSpy).toBeCalledWith('auth error', 'Error!')
+          })
+        })
+      })
+    })
   })
 })
