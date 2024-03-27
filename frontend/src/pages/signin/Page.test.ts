@@ -4,10 +4,12 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
+import i18n from '#plugins/i18n'
 import { useAuthStore } from '#stores/authStore'
 import { authService } from '#tests/mock.authService'
 
 import SigninPage from './+Page.vue'
+import { title } from './+title'
 
 vi.mock('vike/client/router')
 vi.mocked(navigate).mockResolvedValue()
@@ -24,6 +26,10 @@ describe('SigninPage', () => {
   const authServiceSpy = vi.spyOn(authService, 'signIn')
 
   describe('not signed in', () => {
+    it('title returns correct title', () => {
+      expect(title()).toBe(i18n.global.t('auth.title'))
+    })
+
     describe('signin without error', () => {
       beforeEach(() => {
         vi.clearAllMocks()
