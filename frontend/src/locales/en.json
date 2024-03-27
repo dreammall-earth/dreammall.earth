@@ -23,6 +23,9 @@
       "text": "The current value of the counter is: {count}"
     }
   },
+  "auth": {
+    "signin": "Signing In"
+  },
   "error": {
     "404": {
       "h1": "404 Page Not Found",

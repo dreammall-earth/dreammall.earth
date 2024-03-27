@@ -23,6 +23,9 @@
       "text": "Der aktuelle Wert des Zählers lautet: {count}"
     }
   },
+  "auth": {
+    "signin": "Signing In"
+  },
   "error": {
     "404": {
       "h1": "404 Seite nicht gefunden",
