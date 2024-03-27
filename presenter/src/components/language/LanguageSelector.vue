@@ -54,6 +54,7 @@ const updateLanguage = () => {
 @import '#root/src/assets/scss/style';
 
 .language-select {
+  min-width: 70px;
   max-width: 80px;
 
   @include section-content-font;
