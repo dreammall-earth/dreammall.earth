@@ -11,6 +11,7 @@ export default mergeConfig(
       setupFiles: [
         'scripts/tests/mock.$t.ts',
         'scripts/tests/mock.vikePageContext.ts',
+        'scripts/tests/mock.apolloClient.ts',
         'scripts/tests/plugin.pinia.ts',
         'scripts/tests/plugin.i18n-vuetify.ts',
       ],
@@ -24,10 +25,10 @@ export default mergeConfig(
           'src/stories/**/*',
         ],
         thresholds: {
-          lines: 84,
+          lines: 85,
           // functions: 20, // has problems see https://github.com/vitest-dev/vitest/issues/3607
           branches: 92,
-          statements: 84,
+          statements: 85,
         },
       },
     },
