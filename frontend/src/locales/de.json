@@ -24,7 +24,9 @@
     }
   },
   "auth": {
-    "signin": "Signing In"
+    "content": "Logge ein...",
+    "signin": "Signing In",
+    "title": "DreamMall {'|'} Authentifizierung"
   },
   "error": {
     "404": {
