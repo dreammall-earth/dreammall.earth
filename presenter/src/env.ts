@@ -11,7 +11,7 @@ const AUTH = {
     'http://localhost:3000/silent-refresh') as string,
   RESPONSE_TYPE: (import.meta.env.PUBLIC_ENV__AUTH__RESPONSE_TYPE ?? 'code') as string,
   SIGNIN_REDIRECT_URI: (import.meta.env.PUBLIC_ENV__SIGNIN_REDIRECT_URI ??
-    'http://localhost:3001/signin') as string,
+    'http://localhost:3000/signin') as string,
   SCOPE: (import.meta.env.PUBLIC_ENV__AUTH__SCOPE ?? 'openid profile posts') as string,
 }
 
