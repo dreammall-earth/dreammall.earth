@@ -6,7 +6,6 @@
       </v-col>
       <v-col class="d-flex align-center justify-center grow">
         <VikeBtn href="/">{{ $t('menu.home') }}</VikeBtn>
-        <VikeBtn href="/app">{{ $t('menu.app') }}</VikeBtn>
         <VikeBtn href="/about">{{ $t('menu.about') }}</VikeBtn>
       </v-col>
       <v-col>
