@@ -1,11 +1,9 @@
 import { mount } from '@vue/test-utils'
-import { describe, it, expect, beforeEach, vi, beforeAll, afterAll } from 'vitest'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 
 import LanguageSelector from './LanguageSelector.vue'
 
-const { location } = window
-
-const setHrefSpy = vi.fn((href: string) => href)
+const locationHrefSetSpy = vi.spyOn(window.location, 'href', 'set')
 
 describe('LanguageSelector', () => {
   const Wrapper = () => {
@@ -15,18 +13,6 @@ describe('LanguageSelector', () => {
   }
   let wrapper: ReturnType<typeof Wrapper>
   let vSelect: ReturnType<typeof wrapper.findComponent>
-
-  beforeAll(() => {
-    window.location = {} as Location
-    Object.defineProperty(window.location, 'href', {
-      get: vi.fn(),
-      set: setHrefSpy,
-    })
-  })
-
-  afterAll(() => {
-    window.location = location
-  })
 
   beforeEach(() => {
     wrapper = Wrapper()
@@ -43,7 +29,7 @@ describe('LanguageSelector', () => {
     })
 
     it('to en', () => {
-      expect(setHrefSpy).toHaveBeenCalledWith('/en/some-url')
+      expect(locationHrefSetSpy).toHaveBeenCalledWith('/en/some-url')
     })
   })
 })
