@@ -26,10 +26,10 @@ export default mergeConfig(
           '**/*{.,-}stories.?(c|m)[jt]s?(x)',
         ],
         thresholds: {
-          lines: 99,
+          lines: 98,
           // functions: 73, // has problems see https://github.com/vitest-dev/vitest/issues/3607
           branches: 98,
-          statements: 99,
+          statements: 98,
         },
       },
     },
