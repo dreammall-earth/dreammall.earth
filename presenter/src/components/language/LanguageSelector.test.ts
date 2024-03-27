@@ -1,9 +1,11 @@
 import { mount } from '@vue/test-utils'
+import { navigate } from 'vike/client/router'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 
 import LanguageSelector from './LanguageSelector.vue'
 
-const locationHrefSetSpy = vi.spyOn(window.location, 'href', 'set')
+vi.mock('vike/client/router')
+vi.mocked(navigate).mockResolvedValue()
 
 describe('LanguageSelector', () => {
   const Wrapper = () => {
@@ -29,7 +31,7 @@ describe('LanguageSelector', () => {
     })
 
     it('to en', () => {
-      expect(locationHrefSetSpy).toHaveBeenCalledWith('/en/original-url')
+      expect(navigate).toHaveBeenCalledWith('/en/original-url')
     })
   })
 })
