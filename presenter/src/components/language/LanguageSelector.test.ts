@@ -1,9 +1,11 @@
 import { mount } from '@vue/test-utils'
-import { describe, it, expect, beforeEach } from 'vitest'
-
-import i18n from '#plugins/i18n'
+import { navigate } from 'vike/client/router'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 
 import LanguageSelector from './LanguageSelector.vue'
+
+vi.mock('vike/client/router')
+vi.mocked(navigate).mockResolvedValue()
 
 describe('LanguageSelector', () => {
   const Wrapper = () => {
@@ -29,7 +31,7 @@ describe('LanguageSelector', () => {
     })
 
     it('to en', () => {
-      expect(i18n.global.locale.value).toBe('en')
+      expect(navigate).toHaveBeenCalledWith('/en/original-url')
     })
   })
 })

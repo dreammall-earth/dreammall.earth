@@ -12,6 +12,7 @@
     bg-color="transparent"
     hide-details="auto"
     flat
+    @update:model-value="updateLanguage"
   >
     <template #selection="{ item }">
       <span>{{ item.raw.locale.toUpperCase() }}</span>
@@ -27,11 +28,26 @@
 </template>
 
 <script lang="ts" setup>
+import { navigate } from 'vike/client/router'
 import { ref } from 'vue'
 
+import { usePageContext } from '#context/usePageContext'
+import i18n from '#plugins/i18n'
 import { localizedLocale } from '#src/locales'
 
+const pageContext = usePageContext()
 const languages = ref(localizedLocale)
+
+const updateLanguage = () => {
+  const { locale, urlOriginal } = pageContext
+
+  navigate(
+    urlOriginal
+      // eslint-disable-next-line security/detect-non-literal-regexp
+      .replace(new RegExp(`/(${locale})?(.*)`, 'g'), `/${i18n.global.locale.value}/$2`)
+      .replace(/(\/(#|\?))?/g, '$2'),
+  )
+}
 </script>
 
 <style lang="scss">
