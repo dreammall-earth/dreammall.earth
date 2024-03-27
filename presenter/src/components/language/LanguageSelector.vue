@@ -1,6 +1,6 @@
 <template>
   <v-select
-    v-model="selectedLocale"
+    v-model="$i18n.locale"
     density="compact"
     name="language"
     :items="languages"
@@ -28,6 +28,7 @@
 </template>
 
 <script lang="ts" setup>
+import { navigate } from 'vike/client/router'
 import { ref } from 'vue'
 
 import { usePageContext } from '#context/usePageContext'
@@ -37,15 +38,15 @@ import { localizedLocale } from '#src/locales'
 const pageContext = usePageContext()
 const languages = ref(localizedLocale)
 
-const selectedLocale = ref(i18n.global.locale.value)
-
 const updateLanguage = () => {
   const { locale, urlOriginal } = pageContext
 
-  window.location.href = urlOriginal
-    // eslint-disable-next-line security/detect-non-literal-regexp
-    .replace(new RegExp(`/(${locale})?(.*)`, 'g'), `/${selectedLocale.value}/$2`)
-    .replace(/(\/(#|\?))?/g, '$2')
+  navigate(
+    urlOriginal
+      // eslint-disable-next-line security/detect-non-literal-regexp
+      .replace(new RegExp(`/(${locale})?(.*)`, 'g'), `/${i18n.global.locale.value}/$2`)
+      .replace(/(\/(#|\?))?/g, '$2'),
+  )
 }
 </script>
 
