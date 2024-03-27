@@ -9,6 +9,8 @@ import { createApolloClient } from '#plugins/apollo'
 import i18n from '#plugins/i18n'
 import pinia from '#plugins/pinia'
 import CreateVuetify from '#plugins/vuetify'
+import AuthService from '#src/services/AuthService'
+import { useAuthStore } from '#stores/authStore'
 
 const vuetify = CreateVuetify(i18n)
 
@@ -18,6 +20,7 @@ function createApp(pageContext: PageContext, isClient = true) {
   const PageWithWrapper = defineComponent({
     setup: () => {
       provide(DefaultApolloClient, createApolloClient(getToken))
+      provide('authService', new AuthService())
     },
     data: () => ({
       Page: markRaw(pageContext.Page),
@@ -50,8 +53,10 @@ function createApp(pageContext: PageContext, isClient = true) {
   app.use(i18n)
   app.use(vuetify)
 
+  const auth = useAuthStore()
+
   const getToken = (): string => {
-    return ''
+    return auth.accessToken
   }
 
   objectAssign(app, {
