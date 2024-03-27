@@ -54,5 +54,9 @@
     "about": "About",
     "app": "App",
     "home": "Home"
+  },
+  "meta": {
+    "defaultDescription": "Expanding your reach making the most of opportunities enhance quality of life together",
+    "defaultTitle": "DreamMall"
   }
 }

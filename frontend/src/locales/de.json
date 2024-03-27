@@ -54,5 +54,9 @@
     "about": "Über",
     "app": "Anwendung",
     "home": "Daheim"
+  },
+  "meta": {
+    "defaultDescription": "Deine Reichweite Erweitern Alle Möglichkeiten Miteinander Ausschöpfen Lebensqualität Leben",
+    "defaultTitle": "DreamMall"
   }
 }
