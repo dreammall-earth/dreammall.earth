@@ -19,6 +19,7 @@ const config: UserConfig = {
       ssr: true,
       include: path.resolve(__dirname, './src/locales/**.json'),
       jitCompilation: false,
+      runtimeOnly: false,
     }),
     checker({
       typescript: true,
