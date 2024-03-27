@@ -7,10 +7,17 @@ import { navigate } from 'vike/client/router'
 import { inject, onBeforeMount } from 'vue'
 
 import AuthService from '#src/services/AuthService'
+import { useAuthStore } from '#stores/authStore'
 
 const authService = inject<AuthService>('authService')
 
+const authStore = useAuthStore()
+
 onBeforeMount(async () => {
+  if (authStore.isLoggedIn) {
+    navigate('/')
+    return
+  }
   try {
     await authService?.signIn()
     navigate('/')

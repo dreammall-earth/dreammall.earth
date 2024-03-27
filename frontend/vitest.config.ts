@@ -26,10 +26,10 @@ export default mergeConfig(
           'src/stories/**/*',
         ],
         thresholds: {
-          lines: 89,
+          lines: 90,
           // functions: 20, // has problems see https://github.com/vitest-dev/vitest/issues/3607
           branches: 93,
-          statements: 89,
+          statements: 90,
         },
       },
     },
