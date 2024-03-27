@@ -33,7 +33,7 @@ services:
       - external-net
       - internal-net
     ports:
-      - 3000:3000
+      - 3001:3000
     environment:
       - NODE_ENV=production
 
@@ -50,7 +50,7 @@ services:
       - external-net
       - internal-net
     ports:
-      - 3001:3000
+      - 3000:3000
     environment:
       - NODE_ENV=production
 
