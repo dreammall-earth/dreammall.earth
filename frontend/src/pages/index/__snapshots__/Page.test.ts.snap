@@ -27,35 +27,6 @@ exports[`IndexPage > renders 1`] = `
               class="v-sheet v-theme--light v-sheet--rounded pa-3"
             >
               
-              <h1>
-                $t('home.h1')
-              </h1>
-              <p>
-                $t('home.text1')
-              </p>
-              <br />
-              <p>
-                $t('home.text2')
-              </p>
-              <br />
-              <p>
-                $t('home.text3')
-              </p>
-              <br />
-              <p>
-                $t('home.text4') 
-                <i
-                  aria-hidden="true"
-                  class="mdi-heart mdi v-icon notranslate v-theme--light v-icon--size-default text-red"
-                />
-              </p>
-              <br />
-              <p>
-                $t('home.greet1')
-              </p>
-              <p>
-                $t('home.greet2')
-              </p>
               
             </div>
           </div>
