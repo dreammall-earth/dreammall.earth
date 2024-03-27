@@ -1,3 +1,8 @@
+const ENDPOINTS = {
+  GRAPHQL_URI: (import.meta.env.PUBLIC_ENV__ENDPOINTS__GRAPHQL_URI ??
+    'http://localhost:4000/') as string,
+}
+
 const META = {
   BASE_URL: (import.meta.env.PUBLIC_ENV__META__BASE_URL ?? 'http://localhost:3000') as string,
   DEFAULT_AUTHOR: (import.meta.env.PUBLIC_ENV__META__DEFAULT_AUTHOR ??
@@ -7,4 +12,4 @@ const META = {
   DEFAULT_TITLE: (import.meta.env.PUBLIC_ENV__META__DEFAULT_TITLE ?? 'IT4C') as string,
 }
 
-export { META }
+export { ENDPOINTS, META }
