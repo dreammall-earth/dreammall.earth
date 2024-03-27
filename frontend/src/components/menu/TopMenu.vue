@@ -2,36 +2,30 @@
   <v-app-bar flat>
     <v-row>
       <v-col>
-        <LogoAvatar />
-      </v-col>
-      <v-col class="d-flex align-center justify-center grow">
-        <VikeBtn href="/">{{ $t('menu.home') }}</VikeBtn>
-        <VikeBtn href="/about">{{ $t('menu.about') }}</VikeBtn>
-      </v-col>
-      <v-col>
-        <v-switch
-          v-model="isEnabled"
-          class="d-flex justify-end mr-5"
-          :label="$t('language.german')"
-          color="success"
-          @update:model-value="onChange"
-        ></v-switch>
+        <v-btn class="sign-out" variants="outlined" label="Sign Out" size="auto" @click="signOut"
+          >{{ $t('buttons.signout') }}
+        </v-btn>
       </v-col>
     </v-row>
   </v-app-bar>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { useLocale } from 'vuetify'
+import { inject } from 'vue'
 
-import VikeBtn from '#components/VikeBtn.vue'
+import AuthService from '#src/services/AuthService'
+import { useAuthStore } from '#stores/authStore'
 
-import LogoAvatar from './LogoAvatar.vue'
+const authService = inject<AuthService>('authService')
+const auth = useAuthStore()
 
-const { current: locale } = useLocale()
-const isEnabled = ref(locale.value === 'de')
-const onChange = () => {
-  locale.value = isEnabled.value ? 'de' : 'en'
+async function signOut() {
+  try {
+    await authService?.signOut()
+    auth.clear()
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log('auth error', error)
+  }
 }
 </script>

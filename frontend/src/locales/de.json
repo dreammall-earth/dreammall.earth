@@ -28,6 +28,9 @@
     "signin": "Signing In",
     "title": "DreamMall {'|'} Authentifizierung"
   },
+  "buttons": {
+    "signout": "Sign Out"
+  },
   "error": {
     "404": {
       "h1": "404 Seite nicht gefunden",
