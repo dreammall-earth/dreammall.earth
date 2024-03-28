@@ -2,7 +2,13 @@
   <v-app-bar flat>
     <v-row>
       <v-col>
-        <v-btn class="sign-out" variants="outlined" label="Sign Out" size="auto" @click="signOut"
+        <v-btn
+          v-if="auth.isLoggedIn"
+          class="sign-out"
+          variants="outlined"
+          label="Sign Out"
+          size="auto"
+          @click="signOut"
           >{{ $t('buttons.signout') }}
         </v-btn>
       </v-col>
