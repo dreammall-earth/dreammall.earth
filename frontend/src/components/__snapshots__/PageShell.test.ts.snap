@@ -27,35 +27,7 @@ exports[`PageShell > renders 1`] = `
           <div
             class="v-col"
           >
-            <button
-              class="v-btn v-theme--light v-btn--density-default v-btn--variant-text sign-out"
-              label="Sign Out"
-              style="height: auto; width: auto;"
-              type="button"
-              variants="outlined"
-            >
-              
-              <span
-                class="v-btn__overlay"
-              />
-              <span
-                class="v-btn__underlay"
-              />
-              
-              <!---->
-              <span
-                class="v-btn__content"
-                data-no-activator=""
-              >
-                
-                
-                $t('buttons.signout')
-                
-                
-              </span>
-              <!---->
-              <!---->
-            </button>
+            <!--v-if-->
           </div>
         </div>
         

@@ -35,6 +35,23 @@ describe('TopMenu', () => {
 
     beforeEach(() => {
       vi.clearAllMocks()
+      authStore.save({
+        access_token: 'access_token',
+        profile: {
+          aud: 'aud',
+          sub: 'sub',
+          exp: 1,
+          iat: 1,
+          iss: 'iss',
+        },
+        token_type: 'token_type',
+        session_state: null,
+        state: null,
+        expires_in: 0,
+        expired: false,
+        scopes: ['email'],
+        toStorageString: () => 'toStorageString',
+      })
     })
 
     describe('without error', () => {
