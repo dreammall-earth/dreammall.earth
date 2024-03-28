@@ -1,19 +1,20 @@
 import { PageContext } from 'vike/types'
 
-import { META } from '#src/env'
+import i18n from '#plugins/i18n'
 
 function getTitle(pageContext: PageContext) {
   // The value exported by /pages/**/+title.js is available at pageContext.config.title
   const val = pageContext.config.title
   if (typeof val === 'string') return val
   if (typeof val === 'function') return String(val(pageContext))
-  return META.DEFAULT_TITLE
+  return i18n.global.t('meta.defaultTitle')
 }
+
 function getDescription(pageContext: PageContext) {
   const val = pageContext.config.description
   if (typeof val === 'string') return val
   if (typeof val === 'function') return val(pageContext)
-  return META.DEFAULT_DESCRIPTION
+  return i18n.global.t('meta.defaultDescription')
 }
 
 export { getTitle, getDescription }
