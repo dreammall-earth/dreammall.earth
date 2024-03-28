@@ -1,0 +1,197 @@
+context: {}
+entries:
+- attrs:
+    authentication: none
+    denied_action: message_continue
+    designation: enrollment
+    layout: stacked
+    name: dreammallearth-enrollment
+    policy_engine_mode: any
+    title: Dreammall Signup
+  conditions: []
+  id: null
+  identifiers:
+    pk: 96fa2a5c-b51b-4e71-9660-7781ace88b8b
+    slug: dreammallearth-enrollment
+  model: authentik_flows.flow
+  state: present
+- attrs:
+    field_key: password_repeat
+    label: Password (repeat)
+    name: default-password-change-field-password-repeat
+    order: 301
+    placeholder: Password (repeat)
+    required: true
+    type: password
+  conditions: []
+  id: null
+  identifiers:
+    pk: 174e369e-e07b-480d-bea1-05c3148db2cd
+  model: authentik_stages_prompt.prompt
+  state: present
+- attrs:
+    field_key: username
+    initial_value: "try:\n    return user.username\nexcept:\n    return ''"
+    initial_value_expression: true
+    label: Username
+    name: default-user-settings-field-username
+    order: 200
+    placeholder: Username
+    required: true
+    type: text
+  conditions: []
+  id: null
+  identifiers:
+    pk: bde82da3-035d-41fd-8616-d7798edc652a
+  model: authentik_stages_prompt.prompt
+  state: present
+- attrs:
+    field_key: name
+    initial_value: "try:\n    return user.name\nexcept:\n    return ''"
+    initial_value_expression: true
+    label: Name
+    name: default-user-settings-field-name
+    order: 201
+    placeholder: Name
+    required: true
+    type: text
+  conditions: []
+  id: null
+  identifiers:
+    pk: d5b0116c-3a02-4f88-84a8-c5904feaed0d
+  model: authentik_stages_prompt.prompt
+  state: present
+- attrs:
+    field_key: email
+    initial_value: "try:\n    return user.email\nexcept:\n    return ''"
+    initial_value_expression: true
+    label: Email
+    name: default-user-settings-field-email
+    order: 202
+    placeholder: Email
+    required: true
+    type: email
+  conditions: []
+  id: null
+  identifiers:
+    pk: fa0a8692-9a39-4856-91ad-68b5e1c783d5
+  model: authentik_stages_prompt.prompt
+  state: present
+- attrs:
+    field_key: password
+    label: Password
+    name: default-password-change-field-password
+    order: 300
+    placeholder: Password
+    required: true
+    type: password
+  conditions: []
+  id: null
+  identifiers:
+    pk: 917cfcfc-48f4-4ec8-aa0b-22f8daeedfbf
+  model: authentik_stages_prompt.prompt
+  state: present
+- attrs:
+    expression: 'context[''flow_plan''].context[''redirect''] = ''http://localhost:3000/signin''
+
+      return True'
+    name: dreammall.earth-redirect-frontend-signin
+  conditions: []
+  id: null
+  identifiers:
+    pk: c0f1fe81-ee06-43a8-ad75-0f87ef6d1492
+  model: authentik_policies_expression.expressionpolicy
+  state: present
+- attrs:
+    fields:
+    - 174e369e-e07b-480d-bea1-05c3148db2cd
+    - bde82da3-035d-41fd-8616-d7798edc652a
+    - d5b0116c-3a02-4f88-84a8-c5904feaed0d
+    - fa0a8692-9a39-4856-91ad-68b5e1c783d5
+    - 917cfcfc-48f4-4ec8-aa0b-22f8daeedfbf
+  conditions: []
+  id: null
+  identifiers:
+    name: default-source-enrollment-prompt
+    pk: 990b5d40-4236-444b-9e5b-30c016612f26
+  model: authentik_stages_prompt.promptstage
+  state: present
+- attrs:
+    geoip_binding: no_binding
+    network_binding: no_binding
+    remember_me_offset: seconds=0
+    session_duration: seconds=0
+  conditions: []
+  id: null
+  identifiers:
+    name: default-source-enrollment-login
+    pk: c02bff17-3a2f-4fe3-a639-b872a8947a58
+  model: authentik_stages_user_login.userloginstage
+  state: present
+- attrs:
+    create_users_group: 1c3afc69-3ef2-427f-a62e-4e4b11f3c669
+    user_creation_mode: always_create
+    user_type: external
+  conditions: []
+  id: null
+  identifiers:
+    name: default-source-enrollment-write
+    pk: eeff0c69-6f97-4ab6-98fd-90a23ad4f493
+  model: authentik_stages_user_write.userwritestage
+  state: present
+- attrs:
+    invalid_response_action: retry
+    policy_engine_mode: any
+    re_evaluate_policies: true
+  conditions: []
+  id: null
+  identifiers:
+    order: 10
+    pk: d09142b5-1f13-40ad-95a4-0d051bc177f7
+    stage: 990b5d40-4236-444b-9e5b-30c016612f26
+    target: 96fa2a5c-b51b-4e71-9660-7781ace88b8b
+  model: authentik_flows.flowstagebinding
+  state: present
+- attrs:
+    invalid_response_action: retry
+    policy_engine_mode: any
+    re_evaluate_policies: true
+  conditions: []
+  id: null
+  identifiers:
+    order: 20
+    pk: 5732f280-61ec-457b-a4b5-bb23ff0bd338
+    stage: eeff0c69-6f97-4ab6-98fd-90a23ad4f493
+    target: 96fa2a5c-b51b-4e71-9660-7781ace88b8b
+  model: authentik_flows.flowstagebinding
+  state: present
+- attrs:
+    invalid_response_action: retry
+    policy_engine_mode: any
+    re_evaluate_policies: true
+  conditions: []
+  id: null
+  identifiers:
+    order: 100
+    pk: 7af17c16-8209-44cd-84ba-122d8e37feb3
+    stage: c02bff17-3a2f-4fe3-a639-b872a8947a58
+    target: 96fa2a5c-b51b-4e71-9660-7781ace88b8b
+  model: authentik_flows.flowstagebinding
+  state: present
+- attrs:
+    enabled: true
+    timeout: 30
+  conditions: []
+  id: null
+  identifiers:
+    order: 0
+    pk: cfa2fae1-00d4-4387-ab9c-d3594ca12c7f
+    policy: c0f1fe81-ee06-43a8-ad75-0f87ef6d1492
+    target: 7af17c16-8209-44cd-84ba-122d8e37feb3
+  model: authentik_policies.policybinding
+  state: present
+metadata:
+  labels:
+    blueprints.goauthentik.io/generated: 'true'
+  name: authentik Export - 2024-03-28 11:33:55.824846+00:00
+version: 1

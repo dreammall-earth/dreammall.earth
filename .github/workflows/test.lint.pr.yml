@@ -32,6 +32,7 @@ jobs:
             backend
             presenter
             frontend
+            authentik
             docu
             docker
             release
