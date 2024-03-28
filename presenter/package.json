@@ -78,7 +78,6 @@
     "express": "^4.19.1",
     "graphql": "^16.8.1",
     "graphql-tag": "^2.12.6",
-    "oidc-client-ts": "^3.0.1",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
     "sass": "^1.72.0",
