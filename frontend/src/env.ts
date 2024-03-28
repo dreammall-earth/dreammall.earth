@@ -11,6 +11,8 @@ const AUTH = {
     'http://localhost:3001/silent-refresh') as string,
   RESPONSE_TYPE: (import.meta.env.PUBLIC_ENV__AUTH__RESPONSE_TYPE ?? 'code') as string,
   SCOPE: (import.meta.env.PUBLIC_ENV__AUTH__SCOPE ?? 'openid profile posts') as string,
+  UNAUTHORIZED_REDIRECT_URI: (import.meta.env.PUBLIC_ENV__AUTH__UNAUTHORIZED_REDIRECT_URI ??
+    'http://localhost:3001/') as string,
 }
 
 const ENDPOINTS = {
@@ -21,10 +23,7 @@ const ENDPOINTS = {
 const META = {
   BASE_URL: (import.meta.env.PUBLIC_ENV__META__BASE_URL ?? 'http://localhost:3000') as string,
   DEFAULT_AUTHOR: (import.meta.env.PUBLIC_ENV__META__DEFAULT_AUTHOR ??
-    'IT Team 4 Change') as string,
-  DEFAULT_DESCRIPTION: (import.meta.env.PUBLIC_ENV__META__DEFAULT_DESCRIPTION ??
-    'IT4C Frontend Boilerplate') as string,
-  DEFAULT_TITLE: (import.meta.env.PUBLIC_ENV__META__DEFAULT_TITLE ?? 'IT4C') as string,
+    'DreamMall Verlag GbR') as string,
 }
 
 export { AUTH, ENDPOINTS, META }
