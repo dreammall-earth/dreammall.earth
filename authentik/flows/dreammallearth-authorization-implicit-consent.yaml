@@ -1,0 +1,22 @@
+context: {}
+entries:
+- attrs:
+    authentication: require_authenticated
+    denied_action: message_continue
+    designation: authorization
+    layout: stacked
+    name: Authorize DreamMall
+    policy_engine_mode: any
+    title: Redirecting to DreamMall
+  conditions: []
+  id: null
+  identifiers:
+    pk: 1179d54d-2a3e-4bb4-91d5-252814138590
+    slug: dreammallearth-authorization-implicit-consent
+  model: authentik_flows.flow
+  state: present
+metadata:
+  labels:
+    blueprints.goauthentik.io/generated: 'true'
+  name: authentik Export - 2024-03-28 11:33:52.346568+00:00
+version: 1
