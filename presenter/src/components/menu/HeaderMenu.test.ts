@@ -41,6 +41,7 @@ describe('HeaderMenu', () => {
     beforeEach(() => {
       AUTH.AUTHORITY = 'authority'
       AUTH.AUTHORITY_SIGNUP_URI = 'http://sign-up.uri'
+      AUTH.SIGNIN_REDIRECT_URI = 'http://sigin-in.uri'
       wrapper = Wrapper()
     })
 
@@ -49,35 +50,13 @@ describe('HeaderMenu', () => {
     })
 
     describe('sign in button', () => {
-      const authServiceSpy = vi.spyOn(authService, 'signIn')
-
-      describe('without error', () => {
-        beforeEach(async () => {
-          vi.clearAllMocks()
-          await wrapper.find('button.sign-in').trigger('click')
-        })
-
-        it('calls sign in from auth service', () => {
-          expect(authServiceSpy).toBeCalled()
-        })
-
-        it('navigates to /', () => {
-          expect(navigate).toBeCalledWith('/')
-        })
+      beforeEach(async () => {
+        vi.clearAllMocks()
+        await wrapper.find('button.sign-in').trigger('click')
       })
 
-      describe('with error', () => {
-        const consoleSpy = vi.spyOn(global.console, 'log')
-
-        beforeEach(async () => {
-          vi.clearAllMocks()
-          authServiceSpy.mockRejectedValue('Ouch!')
-          await wrapper.find('button.sign-in').trigger('click')
-        })
-
-        it('logs the error to console', () => {
-          expect(consoleSpy).toBeCalledWith('auth error', 'Ouch!')
-        })
+      it('changes window location', () => {
+        expect(global.window.location.href).toBe('http://sigin-in.uri/')
       })
     })
 

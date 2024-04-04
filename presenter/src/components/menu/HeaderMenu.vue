@@ -129,7 +129,7 @@
 
 <script lang="ts" setup>
 // import { DefaultApolloClient, useQuery } from '@vue/apollo-composable'
-import { navigate } from 'vike/client/router'
+// import { navigate } from 'vike/client/router'
 import { ref, onMounted, onBeforeMount, inject } from 'vue'
 
 import MobileMenuIcon from '#assets/img/hamburger_mobile.svg'
@@ -147,15 +147,17 @@ const authService = inject<AuthService>('authService')
 const auth = useAuthStore()
 const showAuthentication = AUTH.AUTHORITY && AUTH.AUTHORITY_SIGNUP_URI
 
-// TODO what about the store?
 async function signIn() {
-  try {
-    await authService?.signIn()
-    navigate('/')
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log('auth error', error)
-  }
+  window.location.href = AUTH.SIGNIN_REDIRECT_URI
+  /*
+   try {
+     await authService?.signIn()
+     navigate('/')
+   } catch (error) {
+     // eslint-disable-next-line no-console
+     console.log('auth error', error)
+   }
+   */
 }
 
 async function signUp() {
@@ -178,19 +180,19 @@ async function signOut() {
 }
 
 /*
-      const apolloClient = inject<ApolloClient<InMemoryCache>>(DefaultApolloClient)
+    const apolloClient = inject<ApolloClient<InMemoryCache>>(DefaultApolloClient)
 
-      async function queryProtectedBackend() {
-      try {
-      const secret = await apolloClient?.query({ query: querySecret })
-      // eslint-disable-next-line no-console
-      console.log(secret)
-      } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log('error secret', error)
-      }
-      }
-    */
+    async function queryProtectedBackend() {
+    try {
+    const secret = await apolloClient?.query({ query: querySecret })
+    // eslint-disable-next-line no-console
+    console.log(secret)
+    } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log('error secret', error)
+    }
+    }
+  */
 
 const appBackground = ref('transparent')
 const navBackground = ref('#d8d8d8')
