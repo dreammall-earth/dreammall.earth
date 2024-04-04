@@ -40,7 +40,7 @@
     "build": "vite build  && npm run server:build",
     "server": "node --loader ts-node/esm ./server/index.ts",
     "server:dev": "npm run server",
-    "server:prod": "node ./build/index.cjs",
+    "server:prod": "cross-env NODE_ENV=production node ./build/index.cjs",
     "server:prod:ts": "cross-env NODE_ENV=production npm run server",
     "server:build": "tsx scripts/buildServer/buildServer",
     "storybook": "storybook dev -p 6006",
