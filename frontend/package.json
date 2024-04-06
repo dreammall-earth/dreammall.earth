@@ -79,7 +79,7 @@
     "oidc-client-ts": "^3.0.1",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
-    "sass": "^1.72.0",
+    "sass": "^1.74.1",
     "sass-loader": "^14.1.1",
     "sirv": "^2.0.4",
     "ts-node": "^10.9.2",
