@@ -15,7 +15,12 @@ const config: UserConfig = {
   base: process.env.BASE_URL,
   plugins: [
     vue(),
-    !isStorybook() && vike({ prerender: true }), // SSR only when storybook is not running
+    !isStorybook() &&
+      vike({
+        prerender: true,
+        // baseAssets: 'https://cdn.example.org/my-website-assets/',
+        baseServer: '/app/',
+      }), // SSR only when storybook is not running
     vueI18n({
       ssr: true,
       include: path.resolve(__dirname, './src/locales/**'),
