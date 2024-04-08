@@ -3,6 +3,7 @@ import { startStandaloneServer } from '@apollo/server/standalone'
 
 import { schema } from '#graphql/schema'
 
+import { Context } from './context'
 // import logger from './logger'
 
 export const createServer = async (): Promise<ApolloServer> => {
@@ -15,6 +16,11 @@ export const createServer = async (): Promise<ApolloServer> => {
 export async function listen(port: number) {
   const { url } = await startStandaloneServer(await createServer(), {
     listen: { port },
+    context: async ({ req }): Promise<Context> => ({
+      token: req.headers.authorization
+        ? req.headers.authorization.replace(/^[Bb]earer */, '')
+        : undefined,
+    }),
   })
 
   return url
