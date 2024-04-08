@@ -29,7 +29,14 @@ const BREVO = {
     : undefined,
 }
 
-export const CONFIG = { ...BREVO }
+const ROOMS = {
+  ROOM_LINK: (process.env.ROOM_LINK ?? 'http://bbb.dreammall.earth') as string,
+}
+
+export const CONFIG = {
+  ...BREVO,
+  ...ROOMS,
+}
 
 // Config Checks
 export const CONFIG_CHECKS = {
