@@ -5,6 +5,7 @@ SCRIPT_PATH=$(realpath $0)
 SCRIPT_DIR=$(dirname $SCRIPT_PATH)
 PROJECT_DIR="${SCRIPT_DIR}/../"
 PRESENTER_DIR="${PROJECT_DIR}/presenter/"
+FRONTEND_DIR="${PROJECT_DIR}/frontend/"
 BACKEND_DIR="${PROJECT_DIR}/backend/"
 
 # navigate to project directory
@@ -15,6 +16,8 @@ VERSION="$(node -p -e "require('./package.json').version")"
 
 # update version in sub projects
 cd ${PRESENTER_DIR}
+npm version ${VERSION}
+cd ${FRONTEND_DIR}
 npm version ${VERSION}
 cd ${BACKEND_DIR}
 npm version ${VERSION}
