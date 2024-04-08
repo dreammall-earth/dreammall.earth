@@ -1,7 +1,7 @@
 {
   "auth": {
     "content": "Logge ein...",
-    "signin": "Signing In",
+    "signin": "Anmeldung",
     "title": "DreamMall {'|'} Authentifizierung"
   },
   "buttons": {
