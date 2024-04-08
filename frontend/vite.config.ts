@@ -12,6 +12,7 @@ const isStorybook = () =>
   ['storybook', 'storybook:build'].includes(process.env.npm_lifecycle_event as string)
 
 const config: UserConfig = {
+  base: process.env.BASE_URL,
   plugins: [
     vue(),
     !isStorybook() && vike({ prerender: true }), // SSR only when storybook is not running
