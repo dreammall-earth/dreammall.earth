@@ -12,7 +12,7 @@ const isStorybook = () =>
   ['storybook', 'storybook:build'].includes(process.env.npm_lifecycle_event as string)
 
 const config: UserConfig = {
-  base: '/app/', // process.env.BASE_URL,
+  // base: '/app/', // process.env.BASE_URL,
   plugins: [
     vue(),
     !isStorybook() &&
