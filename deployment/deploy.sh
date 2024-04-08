@@ -32,16 +32,20 @@ exec 3>&1 1>>${LOG_FILE} 2>&1 2>>${LOG_ERROR_FILE}
     export NODE_ENV=production
 
     # Backend & Database Migration
-    $SCRIPT_DIR/build.backend.sh
-    $SCRIPT_DIR/migrate.database.sh
-    $SCRIPT_DIR/start.backend.sh
+    $SCRIPT_DIR/scripts/build.backend.sh
+    $SCRIPT_DIR/scripts/migrate.database.sh
+    $SCRIPT_DIR/scripts/start.backend.sh
+
+    # Frontend
+    $SCRIPT_DIR/scripts/build.frontend.sh
+    $SCRIPT_DIR/scripts/start.frontend.sh
 
     # Presenter
-    $SCRIPT_DIR/build.presenter.sh
-    $SCRIPT_DIR/start.presenter.sh
+    $SCRIPT_DIR/scripts/build.presenter.sh
+    $SCRIPT_DIR/scripts/start.presenter.sh
 
     # Docs
-    $SCRIPT_DIR/build.docs.sh
+    $SCRIPT_DIR/scripts/build.docs.sh
 
     # restore node env
     NODE_ENV=$BACKUP_NODE_ENV
