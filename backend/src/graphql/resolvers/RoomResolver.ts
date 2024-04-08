@@ -5,7 +5,8 @@ import { CONFIG } from '#config/config'
 @Resolver()
 export class RoomResolver {
   @Query(() => String)
-  getRoom(): Promise<string> {
+  // eslint-disable-next-line @typescript-eslint/require-await
+  async getRoom(): Promise<string> {
     return CONFIG.ROOM_LINK
   }
 }
