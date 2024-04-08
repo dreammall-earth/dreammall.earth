@@ -3,11 +3,14 @@
 # Find current directory & configure paths
 SCRIPT_PATH=$(realpath $0)
 SCRIPT_DIR=$(dirname $SCRIPT_PATH)
-PROJECT_ROOT=$SCRIPT_DIR/../backend
-BUILD_DIR=$PROJECT_ROOT/build
+PROJECT_ROOT=$SCRIPT_DIR/../..
+BUILD_DIR=$PROJECT_ROOT/build/docs
 
 # Build the project
 cd $PROJECT_ROOT
 rm -R $BUILD_DIR
+
+export VUEPRESS_BASE=docs
+
 npm install --include=dev
-npm run build
+npm run docs:build
