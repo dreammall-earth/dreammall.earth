@@ -8,6 +8,6 @@ LOG_FILE=$SCRIPT_DIR/../../log/$(date +"%Y-%m-%d_%T")_pm2.frontend.log
 
 cd $PROJECT_ROOT
 export PORT=3000
-export BASE_URL="/app/"
+export BASE_URL=/app/
 pm2 start --name frontend "build/index.cjs" -l $LOG_FILE --log-date-format 'YYYY-MM-DD HH:mm:ss.SSS'
 pm2 save
