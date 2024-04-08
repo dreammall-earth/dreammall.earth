@@ -18,8 +18,9 @@ const config: UserConfig = {
     !isStorybook() &&
       vike({
         prerender: true,
-        // baseAssets: 'https://cdn.example.org/my-website-assets/',
-        baseServer: '/app/',
+        // baseAssets: 'https://stage1.dreammall.earth/app/',
+        baseAssets: '/app/',
+        // baseServer: '/app/',
       }), // SSR only when storybook is not running
     vueI18n({
       ssr: true,
