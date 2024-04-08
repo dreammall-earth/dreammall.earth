@@ -30,7 +30,7 @@ const BREVO = {
 }
 
 const ROOMS = {
-  ROOM_LINK: (process.env.ROOM_LINK ?? 'http://bbb.dreammall.earth') as string,
+  ROOM_LINK: process.env.ROOM_LINK ?? 'http://bbb.dreammall.earth',
 }
 
 export const CONFIG = {
