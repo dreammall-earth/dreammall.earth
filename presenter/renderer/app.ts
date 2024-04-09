@@ -18,7 +18,7 @@ function createApp(pageContext: PageContext, isClient = true) {
   let rootComponent: InstanceType<typeof PageWithWrapper>
   const PageWithWrapper = defineComponent({
     setup: () => {
-      provide(DefaultApolloClient, createApolloClient(getToken))
+      provide(DefaultApolloClient, createApolloClient())
     },
     data: () => ({
       Page: markRaw(pageContext.Page),
@@ -51,10 +51,6 @@ function createApp(pageContext: PageContext, isClient = true) {
   app.use(pinia)
   app.use(i18n)
   app.use(vuetify)
-
-  const getToken = (): string => {
-    return ''
-  }
 
   objectAssign(app, {
     changePage: (pageContext: PageContext) => {
