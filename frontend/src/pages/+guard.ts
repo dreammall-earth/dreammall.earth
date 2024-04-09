@@ -6,6 +6,7 @@ import { useAuthStore } from '#stores/authStore'
 
 import type { GuardAsync } from 'vike/types'
 
+/*
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/require-await
 const guard: GuardAsync = async (pageContext): ReturnType<GuardAsync> => {
   const authStore = useAuthStore(pinia)
@@ -15,3 +16,4 @@ const guard: GuardAsync = async (pageContext): ReturnType<GuardAsync> => {
 }
 
 export { guard }
+*/
