@@ -152,6 +152,7 @@
     "#pages/*": "./src/pages/*",
     "#assets/*": "./src/assets/*",
     "#layouts/*": "./src/layouts/*",
+    "#queries/*": "./src/graphql/queries/*",
     "#stores/*": "./src/stores/*",
     "#src/*": "./src/*",
     "#plugins/*": "./renderer/plugins/*",
