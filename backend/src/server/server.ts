@@ -7,7 +7,7 @@ import { Context, getContextToken, GetConextToken } from './context'
 // import logger from './logger'
 
 export const createServer = async (): Promise<ApolloServer> => {
-  return new ApolloServer({
+  return new ApolloServer<Context>({
     schema: await schema(),
     // plugins: [logger],
   })
