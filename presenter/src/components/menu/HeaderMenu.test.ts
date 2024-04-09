@@ -9,8 +9,8 @@ import HeaderMenu from './HeaderMenu.vue'
 
 describe('HeaderMenu', () => {
   it('renders', () => {
-    AUTH.AUTHORITY = ''
-    AUTH.AUTHORITY_SIGNUP_URI = ''
+    AUTH.SIGNUP_URI = ''
+    AUTH.SIGNIN_URI = ''
 
     const wrapper = mount(VApp, {
       slots: {
@@ -33,9 +33,8 @@ describe('HeaderMenu', () => {
     let wrapper: ReturnType<typeof Wrapper>
 
     beforeEach(() => {
-      AUTH.AUTHORITY = 'authority'
-      AUTH.AUTHORITY_SIGNUP_URI = 'http://sign-up.uri'
-      AUTH.SIGNIN_REDIRECT_URI = 'http://sigin-in.uri'
+      AUTH.SIGNUP_URI = 'http://sign-up.uri'
+      AUTH.SIGNIN_URI = 'http://sigin-in.uri'
       wrapper = Wrapper()
     })
 

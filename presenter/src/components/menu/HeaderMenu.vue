@@ -28,6 +28,7 @@
           <div v-if="showAuthentication" class="d-none d-md-flex align-center mr-0 mr-md-8">
             <div class="d-flex">
               <MainButton
+                v-if="!!AUTH.SIGNIN_URI"
                 variant="third-inverse"
                 class="mr-4 sign-in"
                 label="Sign in"
@@ -35,6 +36,7 @@
                 @click="signIn"
               />
               <MainButton
+                v-if="!!AUTH.SIGNUP_URI"
                 class="sign-up"
                 :class="[buttonsInBackground ? 'video-helper' : '']"
                 variant="third"
@@ -82,6 +84,7 @@
         <v-divider class="ma-4"></v-divider>
         <div class="d-flex flex-column justify-center align-center">
           <MainButton
+            v-if="!!AUTH.SIGNIN_URI"
             variant="third-inverse"
             class="sign-in ma-4"
             label="Sign in"
@@ -89,6 +92,7 @@
             @click="signIn"
           />
           <MainButton
+            v-if="!!AUTH.SIGNUP_URI"
             class="sign-up ma-4"
             variant="third"
             label="Sign up"
@@ -115,14 +119,14 @@ import AnchorLink from '#components/nav/AnchorLink.vue'
 import { AUTH } from '#src/env'
 // import { ApolloClient, InMemoryCache } from '@apollo/client/core'
 
-const showAuthentication = AUTH.AUTHORITY && AUTH.AUTHORITY_SIGNUP_URI
+const showAuthentication = !!AUTH.SIGNUP_URI || !!AUTH.SIGNIN_URI
 
 async function signIn() {
-  window.location.href = AUTH.SIGNIN_REDIRECT_URI
+  window.location.href = AUTH.SIGNIN_URI
 }
 
 async function signUp() {
-  window.location.href = AUTH.AUTHORITY_SIGNUP_URI
+  window.location.href = AUTH.SIGNUP_URI
 }
 
 /*
