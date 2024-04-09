@@ -20,9 +20,9 @@ describe('global route guard', () => {
   })
 
   describe('unauthenticated', () => {
-    it('throws and redirects', async () => {
+    it('throws and redirects', () => {
       try {
-        await guard(pageContext)
+        guard(pageContext)
       } catch (error) {
         expect(redirect).toBeCalledWith('https://some.uri')
       }
@@ -52,8 +52,8 @@ describe('global route guard', () => {
       })
     })
 
-    it('does not redirect', async () => {
-      await guard(pageContext)
+    it('does not redirect', () => {
+      guard(pageContext)
       expect(redirect).not.toBeCalled()
     })
   })
