@@ -87,7 +87,6 @@ async function startServer() {
   // catch-all middleware superseding any middleware placed after it).
   app.get('*', (req, res, next) => {
     void (async (req, res, next) => {
-
       const pageContextInit = {
         urlOriginal: req.originalUrl,
         hasToken: hasToken(req.headers.cookie),
