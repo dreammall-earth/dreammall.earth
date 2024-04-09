@@ -12,16 +12,9 @@ const isStorybook = () =>
   ['storybook', 'storybook:build'].includes(process.env.npm_lifecycle_event as string)
 
 const config: UserConfig = {
-  base: '/app/', // process.env.BASE_URL,
   plugins: [
     vue(),
-    !isStorybook() &&
-      vike({
-        prerender: true,
-        // baseAssets: 'https://stage1.dreammall.earth/app/',
-        baseAssets: '/app/',
-        baseServer: '/app/',
-      }), // SSR only when storybook is not running
+    !isStorybook() && vike({ prerender: true }), // SSR only when storybook is not running
     vueI18n({
       ssr: true,
       include: path.resolve(__dirname, './src/locales/**'),
