@@ -3,7 +3,7 @@ import { startStandaloneServer } from '@apollo/server/standalone'
 
 import { schema } from '#graphql/schema'
 
-import { Context } from './context'
+import { Context, getContextToken, GetConextToken } from './context'
 // import logger from './logger'
 
 export const createServer = async (): Promise<ApolloServer> => {
@@ -13,13 +13,12 @@ export const createServer = async (): Promise<ApolloServer> => {
   })
 }
 
-export async function listen(port: number) {
+export async function listen(port: number, getToken: GetConextToken = getContextToken) {
   const { url } = await startStandaloneServer(await createServer(), {
     listen: { port },
+    // eslint-disable-next-line @typescript-eslint/require-await
     context: async ({ req }): Promise<Context> => ({
-      token: req.headers.authorization
-        ? req.headers.authorization.replace(/^[Bb]earer */, '')
-        : undefined,
+      token: getToken(req.headers.authorization),
     }),
   })
 
