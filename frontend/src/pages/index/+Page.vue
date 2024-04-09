@@ -16,21 +16,24 @@
 </template>
 
 <script lang="ts" setup>
-import { useQuery } from '@vue/apollo-composable'
+import { ApolloClient, InMemoryCache } from '@apollo/client/core'
+import { DefaultApolloClient } from '@vue/apollo-composable'
+import { inject } from 'vue'
 
 import DefaultLayout from '#layouts/DefaultLayout.vue'
 // eslint-disable-next-line import/no-relative-parent-imports
 import { getRoomQuery } from '#queries/getRoomQuery'
 
-const { result, refetch } = useQuery(getRoomQuery, null, { fetchPolicy: 'network-only' })
+const apolloClient = inject<ApolloClient<InMemoryCache>>(DefaultApolloClient)
 
 const enterRoom = async () => {
   try {
-    refetch()
-    window.location.href = result.value.getRoom
-  } catch (error) {
+    const result = await apolloClient?.query({ query: getRoomQuery, fetchPolicy: 'network-only' })
+    window.location.href = result?.data?.getRoom
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
     // eslint-disable-next-line no-console
-    console.log('auth error', error)
+    console.log('auth error', error.message ? error.message : error)
   }
 }
 </script>

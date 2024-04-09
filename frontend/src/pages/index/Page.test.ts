@@ -59,7 +59,7 @@ describe('IndexPage', () => {
       })
     })
 
-    describe.skip('with error', () => {
+    describe('with error', () => {
       beforeEach(() => {
         vi.clearAllMocks()
         getRoomQueryMock.mockRejectedValue({ message: 'Aua!' })
