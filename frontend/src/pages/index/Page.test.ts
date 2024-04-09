@@ -55,7 +55,7 @@ describe('IndexPage', () => {
       })
 
       it('redirects to url', () => {
-        expect(global.window.location.href).toBe('http://some.url')
+        expect(global.window.location.href).toBe('http://some.url/')
       })
     })
 
