@@ -20,6 +20,19 @@ import { root } from './root.js'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
+const cookieHasToken = (cookieString: string | undefined) => {
+  if (!cookieString) {
+    return false
+  }
+
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    return !!JSON.parse(parse(cookieString).auth).user
+  } catch (error) {
+    return false
+  }
+}
+
 void startServer()
 
 async function startServer() {
@@ -74,9 +87,7 @@ async function startServer() {
   // catch-all middleware superseding any middleware placed after it).
   app.get('*', (req, res, next) => {
     void (async (req, res, next) => {
-      const hasToken = req.headers.cookie
-        ? !!JSON.parse(parse(req.headers.cookie).auth).user // eslint-disable-line @typescript-eslint/no-unsafe-member-access
-        : false
+      const hasToken = cookieHasToken(req.headers.cookie)
 
       const pageContextInit = {
         urlOriginal: req.originalUrl,
