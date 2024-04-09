@@ -26,25 +26,9 @@
             <LanguageSelector />
           </div>
           <div v-if="showAuthentication" class="d-none d-md-flex align-center mr-0 mr-md-8">
-            <div v-if="auth.isLoggedIn">
-              <!--<MainButton
-                   variant="third-inverse"
-                   class="mr-1"
-                   label="Query"
-                   size="small"
-                   @click="queryProtectedBackend"
-                   />-->
+            <div class="d-flex">
               <MainButton
-                class="sign-out"
-                :class="[buttonsInBackground ? 'video-helper' : '']"
-                variant="third"
-                label="Sign Out"
-                size="auto"
-                @click="signOut"
-              />
-            </div>
-            <div v-else class="d-flex">
-              <MainButton
+                v-if="!!AUTH.SIGNIN_URI"
                 variant="third-inverse"
                 class="mr-4 sign-in"
                 label="Sign in"
@@ -52,6 +36,7 @@
                 @click="signIn"
               />
               <MainButton
+                v-if="!!AUTH.SIGNUP_URI"
                 class="sign-up"
                 :class="[buttonsInBackground ? 'video-helper' : '']"
                 variant="third"
@@ -97,17 +82,9 @@
       </div>
       <div v-if="showAuthentication" class="">
         <v-divider class="ma-4"></v-divider>
-        <div v-if="auth.isLoggedIn" class="d-flex flex-column justify-center align-center">
+        <div class="d-flex flex-column justify-center align-center">
           <MainButton
-            class="sign-out ma-4"
-            variant="third"
-            label="Sign Out"
-            size="auto"
-            @click="signOut"
-          />
-        </div>
-        <div v-else class="d-flex flex-column justify-center align-center">
-          <MainButton
+            v-if="!!AUTH.SIGNIN_URI"
             variant="third-inverse"
             class="sign-in ma-4"
             label="Sign in"
@@ -115,6 +92,7 @@
             @click="signIn"
           />
           <MainButton
+            v-if="!!AUTH.SIGNUP_URI"
             class="sign-up ma-4"
             variant="third"
             label="Sign up"
@@ -128,7 +106,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, onBeforeMount, inject } from 'vue'
+import { ref, onMounted, onBeforeMount } from 'vue'
+import { ref, onMounted, onBeforeMount } from 'vue'
 
 import MobileMenuIcon from '#assets/img/hamburger_mobile.svg'
 import MainButton from '#components/buttons/MainButton.vue'
@@ -136,34 +115,15 @@ import LanguageSelector from '#components/language/LanguageSelector.vue'
 import LogoImage from '#components/LogoImage.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
 import { AUTH } from '#src/env'
-import AuthService from '#src/services/AuthService'
-import { useAuthStore } from '#stores/authStore'
 
-const authService = inject<AuthService>('authService')
-const auth = useAuthStore()
-const showAuthentication = AUTH.AUTHORITY && AUTH.AUTHORITY_SIGNUP_URI
+const showAuthentication = !!AUTH.SIGNUP_URI || !!AUTH.SIGNIN_URI
 
 async function signIn() {
-  window.location.href = AUTH.SIGNIN_REDIRECT_URI
+  window.location.href = AUTH.SIGNIN_URI
 }
 
 async function signUp() {
-  try {
-    await authService?.signUp()
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log('auth error', error)
-  }
-}
-
-async function signOut() {
-  try {
-    await authService?.signOut()
-    auth.clear()
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log('auth error', error)
-  }
+  window.location.href = AUTH.SIGNUP_URI
 }
 
 const appBackground = ref('transparent')
