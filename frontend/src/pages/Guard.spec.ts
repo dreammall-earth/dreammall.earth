@@ -19,7 +19,7 @@ describe('global route guard', () => {
   describe('unauthenticated', () => {
     it('throws and redirects', () => {
       try {
-        guard({ hasToken: true } as PageContextServer)
+        expect(guard({ hasToken: false } as PageContextServer)).toThrow()
       } catch (error) {
         expect(redirect).toBeCalledWith('https://some.uri')
       }
