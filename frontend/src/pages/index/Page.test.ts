@@ -29,6 +29,7 @@ describe('IndexPage', () => {
   let wrapper: ReturnType<typeof Wrapper>
 
   beforeEach(() => {
+    vi.clearAllMocks()
     wrapper = Wrapper()
   })
 
@@ -45,6 +46,7 @@ describe('IndexPage', () => {
 
     describe('without error', () => {
       beforeEach(async () => {
+        vi.clearAllMocks()
         await wrapper.find('button.room-button').trigger('click')
       })
 
@@ -52,21 +54,24 @@ describe('IndexPage', () => {
         expect(getRoomQueryMock).toBeCalled()
       })
 
-      it('logs message', () => {
-        expect(consoleSpy).toBeCalledWith('Redirect to http://some.url')
+      it('redirects to url', () => {
+        expect(global.window.location.href).toBe('http://some.url')
       })
     })
 
     describe.skip('with error', () => {
-      beforeEach(async () => {
+      beforeEach(() => {
         vi.clearAllMocks()
         getRoomQueryMock.mockRejectedValue({ message: 'Aua!' })
-        wrapper = Wrapper()
-        await wrapper.find('button.room-button').trigger('click')
       })
 
-      it('logs error message', () => {
-        expect(consoleSpy).toBeCalledWith('auth error', 'Aua!')
+      it('logs error message', async () => {
+        try {
+          await wrapper.find('button.room-button').trigger('click')
+        } catch {
+          expect(wrapper).toThrowError()
+          expect(consoleSpy).toBeCalledWith('auth error', 'Aua!')
+        }
       })
     })
   })

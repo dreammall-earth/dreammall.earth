@@ -55,7 +55,7 @@ exports[`IndexPage > renders 1`] = `
                     >
                       
                       
-                      $t('buttons.signout')
+                      $t('buttons.toRoom')
                       
                       
                     </span>

@@ -8,7 +8,7 @@
           label="To Room"
           size="auto"
           @click="enterRoom"
-          >{{ $t('buttons.signout') }}</v-btn
+          >{{ $t('buttons.toRoom') }}</v-btn
         >
       </v-col>
     </v-row>
@@ -22,15 +22,15 @@ import DefaultLayout from '#layouts/DefaultLayout.vue'
 // eslint-disable-next-line import/no-relative-parent-imports
 import { getRoomQuery } from '#queries/getRoomQuery'
 
-const { result, error } = useQuery(getRoomQuery)
+const { result, refetch } = useQuery(getRoomQuery, null, { fetchPolicy: 'network-only' })
 
 const enterRoom = async () => {
-  if (error.value) {
+  try {
+    refetch()
+    window.location.href = result.value.getRoom
+  } catch (error) {
     // eslint-disable-next-line no-console
-    console.log('auth error', error.value)
-  } else {
-    // eslint-disable-next-line no-console
-    console.log(`Redirect to ${result.value.getRoom}`)
+    console.log('auth error', error)
   }
 }
 </script>
