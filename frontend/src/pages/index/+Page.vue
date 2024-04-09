@@ -22,15 +22,15 @@ import DefaultLayout from '#layouts/DefaultLayout.vue'
 // eslint-disable-next-line import/no-relative-parent-imports
 import { getRoomQuery } from '#queries/getRoomQuery'
 
-const { result } = useQuery(getRoomQuery)
+const { result, error } = useQuery(getRoomQuery)
 
 const enterRoom = async () => {
-  try {
+  if (error.value) {
+    // eslint-disable-next-line no-console
+    console.log('auth error', error.value)
+  } else {
     // eslint-disable-next-line no-console
     console.log(`Redirect to ${result.value.getRoom}`)
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log('auth error', error)
   }
 }
 </script>

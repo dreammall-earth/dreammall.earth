@@ -29,7 +29,6 @@ describe('IndexPage', () => {
   let wrapper: ReturnType<typeof Wrapper>
 
   beforeEach(() => {
-    vi.clearAllMocks()
     wrapper = Wrapper()
   })
 
@@ -46,7 +45,6 @@ describe('IndexPage', () => {
 
     describe('without error', () => {
       beforeEach(async () => {
-        vi.clearAllMocks()
         await wrapper.find('button.room-button').trigger('click')
       })
 
@@ -63,6 +61,7 @@ describe('IndexPage', () => {
       beforeEach(async () => {
         vi.clearAllMocks()
         getRoomQueryMock.mockRejectedValue({ message: 'Aua!' })
+        wrapper = Wrapper()
         await wrapper.find('button.room-button').trigger('click')
       })
 
