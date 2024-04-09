@@ -1,21 +1,20 @@
-import { ApolloError } from '@apollo/client/errors'
 import { mount } from '@vue/test-utils'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 // eslint-disable-next-line import/no-relative-parent-imports
-import { getRoom } from '#queries/getRoom'
+import { getRoomQuery } from '#queries/getRoomQuery'
 import { mockClient } from '#tests/mock.apolloClient'
 
 import IndexPage from './+Page.vue'
 import { title } from './+title'
 
-const getRoomMock = vi.fn()
+const getRoomQueryMock = vi.fn()
 
 mockClient.setRequestHandler(
-  getRoom,
-  getRoomMock.mockResolvedValue({ data: { getRoom: 'http://some.url' } }),
+  getRoomQuery,
+  getRoomQueryMock.mockResolvedValue({ data: { getRoom: 'http://some.url' } }),
 )
 
 describe('IndexPage', () => {
@@ -52,7 +51,7 @@ describe('IndexPage', () => {
       })
 
       it('calls the API', () => {
-        expect(getRoomMock).toBeCalled()
+        expect(getRoomQueryMock).toBeCalled()
       })
 
       it('logs message', () => {
@@ -63,12 +62,12 @@ describe('IndexPage', () => {
     describe.skip('with error', () => {
       beforeEach(async () => {
         vi.clearAllMocks()
-        getRoomMock.mockRejectedValue(new ApolloError('Aua!'))
+        getRoomQueryMock.mockRejectedValue({ message: 'Aua!' })
         await wrapper.find('button.room-button').trigger('click')
       })
 
       it('logs error message', () => {
-        expect(consoleSpy).toBeCalledWith('auth error', new ApolloError('Aua!'))
+        expect(consoleSpy).toBeCalledWith('auth error', 'Aua!')
       })
     })
   })

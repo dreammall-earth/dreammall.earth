@@ -16,21 +16,18 @@
 </template>
 
 <script lang="ts" setup>
-import { ApolloClient, InMemoryCache } from '@apollo/client/core'
-import { DefaultApolloClient } from '@vue/apollo-composable'
-import { inject } from 'vue'
+import { useQuery } from '@vue/apollo-composable'
 
 import DefaultLayout from '#layouts/DefaultLayout.vue'
 // eslint-disable-next-line import/no-relative-parent-imports
-import { getRoom } from '#queries/getRoom'
+import { getRoomQuery } from '#queries/getRoomQuery'
 
-const apolloClient = inject<ApolloClient<InMemoryCache>>(DefaultApolloClient)
+const { result } = useQuery(getRoomQuery)
 
 const enterRoom = async () => {
   try {
-    const result = await apolloClient?.query({ query: getRoom })
     // eslint-disable-next-line no-console
-    console.log(`Redirect to ${result?.data?.getRoom}`)
+    console.log(`Redirect to ${result.value.getRoom}`)
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log('auth error', error)

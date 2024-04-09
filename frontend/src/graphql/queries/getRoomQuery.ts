@@ -1,6 +1,6 @@
 import { gql } from 'graphql-tag'
 
-export const getRoom = gql`
+export const getRoomQuery = gql`
   query {
     getRoom
   }
