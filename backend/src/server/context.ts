@@ -4,6 +4,6 @@ export type Context = {
 
 export type GetConextToken = (authorization: string | undefined) => string | undefined
 
-export const getContextToken = (authorization: string | undefined): string | undefined => {
+export const getContextToken: GetConextToken = (authorization) => {
   return authorization ? authorization.replace(/^[Bb]earer */, '') : undefined
 }
