@@ -1,7 +1,6 @@
 const AUTH = {
   SIGNUP_URI: (import.meta.env.PUBLIC_ENV__SIGNUP_URI ?? '') as string,
-  SIGNIN_URI: (import.meta.env.PUBLIC_ENV__SIGNIN_REDIRECT_URI ??
-    'http://localhost:3000/signin') as string,
+  SIGNIN_URI: (import.meta.env.PUBLIC_ENV__SIGNIN_URI ?? '') as string,
 }
 
 const ENDPOINTS = {
