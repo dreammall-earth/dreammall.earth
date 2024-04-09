@@ -3,7 +3,7 @@ import { User } from 'oidc-client-ts'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
-export const cookiesStorage = {
+export const cookieStorage = {
   setItem(key: string, state: string) {
     Cookies.set('auth', state, { expires: 3 })
   },
@@ -37,7 +37,7 @@ export const useAuthStore = defineStore(
       clear,
     }
   },
-  { persist: { storage: cookiesStorage } },
+  { persist: { storage: cookieStorage } },
 )
 
 if (import.meta.hot) {
