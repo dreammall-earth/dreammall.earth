@@ -20,7 +20,7 @@ import { root } from './root.js'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
-const cookieHasToken = (cookieString: string | undefined) => {
+const hasToken = (cookieString: string | undefined) => {
   if (!cookieString) {
     return false
   }
@@ -87,11 +87,10 @@ async function startServer() {
   // catch-all middleware superseding any middleware placed after it).
   app.get('*', (req, res, next) => {
     void (async (req, res, next) => {
-      const hasToken = cookieHasToken(req.headers.cookie)
 
       const pageContextInit = {
         urlOriginal: req.originalUrl,
-        hasToken,
+        hasToken: hasToken(req.headers.cookie),
       }
       const pageContext = await renderPage(pageContextInit)
       const { httpResponse } = pageContext
