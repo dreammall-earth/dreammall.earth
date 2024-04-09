@@ -10,7 +10,7 @@ exports[`IndexPage > renders 1`] = `
     
     <main
       class="v-main bg-grey-lighten-3"
-      style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: 0px; --v-layout-bottom: 0px;"
+      style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: 0px; --v-layout-bottom: 0px; transition: none !important;"
     >
       
       <div
@@ -27,6 +27,43 @@ exports[`IndexPage > renders 1`] = `
               class="v-sheet v-theme--light v-sheet--rounded pa-3"
             >
               
+              <div
+                class="v-row"
+              >
+                <div
+                  class="v-col"
+                >
+                  <button
+                    class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated room-button"
+                    label="To Room"
+                    style="height: auto; width: auto;"
+                    type="button"
+                    variants="outlined"
+                  >
+                    
+                    <span
+                      class="v-btn__overlay"
+                    />
+                    <span
+                      class="v-btn__underlay"
+                    />
+                    
+                    <!---->
+                    <span
+                      class="v-btn__content"
+                      data-no-activator=""
+                    >
+                      
+                      
+                      $t('buttons.signout')
+                      
+                      
+                    </span>
+                    <!---->
+                    <!---->
+                  </button>
+                </div>
+              </div>
               
             </div>
           </div>

@@ -33,7 +33,7 @@ const enterRoom = async () => {
     console.log(`Redirect to ${result?.data?.getRoom}`)
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.log('error secret', error)
+    console.log('auth error', error)
   }
 }
 </script>
