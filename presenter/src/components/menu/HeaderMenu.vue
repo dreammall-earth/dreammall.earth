@@ -107,7 +107,6 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, onBeforeMount } from 'vue'
-import { ref, onMounted, onBeforeMount } from 'vue'
 
 import MobileMenuIcon from '#assets/img/hamburger_mobile.svg'
 import MainButton from '#components/buttons/MainButton.vue'
