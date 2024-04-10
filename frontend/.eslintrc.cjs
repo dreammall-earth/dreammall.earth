@@ -73,7 +73,11 @@ module.exports = {
     'import/no-relative-packages': 'error',
     'import/no-relative-parent-imports': [
       'error',
-      { ignore: ['#[src,root,components,pages,assets,layouts,stores,plugins,context,types]/*'] },
+      {
+        ignore: [
+          '#[src,root,components,pages,assets,layouts,queries,stores,plugins,context,types]/*',
+        ],
+      },
     ],
     'import/no-self-import': 'error',
     'import/no-unresolved': 'error',

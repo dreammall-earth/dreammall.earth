@@ -21,7 +21,6 @@ import { DefaultApolloClient } from '@vue/apollo-composable'
 import { inject } from 'vue'
 
 import DefaultLayout from '#layouts/DefaultLayout.vue'
-// eslint-disable-next-line import/no-relative-parent-imports
 import { getRoomQuery } from '#queries/getRoomQuery'
 
 const apolloClient = inject<ApolloClient<InMemoryCache>>(DefaultApolloClient)

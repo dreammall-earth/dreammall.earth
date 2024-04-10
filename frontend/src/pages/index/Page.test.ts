@@ -3,7 +3,6 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-// eslint-disable-next-line import/no-relative-parent-imports
 import { getRoomQuery } from '#queries/getRoomQuery'
 import { mockClient } from '#tests/mock.apolloClient'
 
