@@ -62,6 +62,10 @@ Configure nginx:
 cp -f deployment/nginx/default.conf /etc/nginx/http.d/default.conf
 # adjust the nginx config accordingly
 vi /etc/nginx/http.d/default.conf
+# frontend nginx config
+cp deployment/nginx/frontend.conf /etc/nginx/http.d/frontend.conf
+# adjust the frontend nginx config accordingly
+vi /etc/nginx/http.d/frontend.conf
 # note: replace log paths according to your installation directory
 service nginx restart
 ```
