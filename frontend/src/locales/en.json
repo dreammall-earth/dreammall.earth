@@ -5,7 +5,8 @@
     "title": "DreamMall {'|'} Authentication"
   },
   "buttons": {
-    "signout": "Sign Out"
+    "signout": "Sign Out",
+    "toRoom": "To the meeting"
   },
   "error": {
     "404": {

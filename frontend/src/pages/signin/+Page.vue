@@ -17,7 +17,11 @@ const authService = inject<AuthService>('authService')
 const authStore = useAuthStore()
 
 onBeforeMount(async () => {
-  if (authStore.isLoggedIn) {
+  if (
+    authStore.isLoggedIn &&
+    authStore.user?.expires_at &&
+    authStore.user.expires_at >= new Date().valueOf()
+  ) {
     navigate('/')
     return
   }
