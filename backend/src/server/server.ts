@@ -3,7 +3,7 @@ import { startStandaloneServer } from '@apollo/server/standalone'
 
 import { schema } from '#graphql/schema'
 
-import { Context, getContextToken, GetConextToken } from './context'
+import { Context, getContextToken, GetContextToken } from './context'
 // import logger from './logger'
 
 export const createServer = async (): Promise<ApolloServer> => {
