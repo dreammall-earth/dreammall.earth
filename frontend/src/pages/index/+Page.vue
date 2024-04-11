@@ -34,7 +34,7 @@ const enterRoom = async () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     // eslint-disable-next-line no-console
-    console.log('auth error', error.message ? error.message : error)
+    console.log('auth error', error)
   }
 }
 </script>
