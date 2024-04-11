@@ -7,7 +7,7 @@ entries:
     layout: sidebar_right
     name: dreammallearth-enrollment
     policy_engine_mode: any
-    title: Signup
+    title: Sign Up
   conditions: []
   id: null
   identifiers:
