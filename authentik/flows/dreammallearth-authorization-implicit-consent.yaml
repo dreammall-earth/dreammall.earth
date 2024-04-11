@@ -4,7 +4,7 @@ entries:
     authentication: require_authenticated
     denied_action: message_continue
     designation: authorization
-    layout: sidebar-right
+    layout: sidebar_right
     name: Authorize DreamMall
     policy_engine_mode: any
     title: Redirecting to DreamMall

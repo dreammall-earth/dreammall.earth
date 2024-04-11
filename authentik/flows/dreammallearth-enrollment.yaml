@@ -4,10 +4,10 @@ entries:
     authentication: none
     denied_action: message_continue
     designation: enrollment
-    layout: sidebar-right
+    layout: sidebar_right
     name: dreammallearth-enrollment
     policy_engine_mode: any
-    title: DreamMall Signup
+    title: Signup
   conditions: []
   id: null
   identifiers:
