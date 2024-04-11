@@ -9,24 +9,122 @@ exports[`IndexPage > renders 1`] = `
   >
     
     <main
-      class="v-main bg-grey-lighten-3"
-      style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: 0px; --v-layout-bottom: 0px; transition: none !important;"
+      class="v-main bg-grey-lighten-3 main-layout"
+      data-v-75d0be1e=""
+      style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: NaN; --v-layout-bottom: 0px; transition: none !important;"
     >
       
       <div
-        class="v-container v-locale--is-ltr"
+        class="topmenu"
+        data-v-75d0be1e=""
+      >
+        <header
+          class="v-toolbar v-toolbar--flat v-toolbar--density-default v-theme--light v-locale--is-ltr v-app-bar py-4"
+          style="top: 0px; z-index: 1004; transform: translateY(0%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
+        >
+          <!---->
+          
+          <div
+            class="v-toolbar__content"
+            style=""
+          >
+            <!---->
+            <!---->
+            
+            <div
+              class="v-row"
+            >
+              <div
+                class="v-col d-flex align-center"
+              >
+                <a
+                  class="w-100 ml-8"
+                  href="/"
+                >
+                  <div
+                    class="v-responsive v-img v-img--booting w-100 logo-medium"
+                    data-v-f6be2607=""
+                  >
+                    <div
+                      class="v-responsive__sizer"
+                    />
+                    
+                    
+                    <transition-stub
+                      appear="true"
+                      css="true"
+                      name="fade-transition"
+                      persisted="false"
+                    >
+                      <img
+                        class="v-img__img v-img__img--contain"
+                        src="/src/assets/dreammall-logo.svg"
+                        style="display: none;"
+                      />
+                    </transition-stub>
+                    <transition-stub
+                      appear="false"
+                      css="true"
+                      name="fade-transition"
+                      persisted="false"
+                    >
+                      <!---->
+                    </transition-stub>
+                    <!---->
+                    <!---->
+                    <!---->
+                    
+                    
+                    <!---->
+                  </div>
+                </a>
+              </div>
+              <div
+                class="v-col d-flex justify-end"
+              >
+                <!--v-if-->
+              </div>
+            </div>
+            
+            <!---->
+          </div>
+          
+          
+          <transition-stub
+            appear="false"
+            css="true"
+            name="expand-transition"
+            persisted="false"
+          >
+            <!---->
+          </transition-stub>
+          
+        </header>
+      </div>
+      <div
+        class="v-container v-container--fluid v-locale--is-ltr page-container px-8"
+        data-v-75d0be1e=""
       >
         <div
           class="v-row"
+          data-v-75d0be1e=""
         >
           <!--v-if-->
           <div
-            class="v-col"
+            class="v-col pa-0 pa-sm-1 pt-0"
+            data-v-75d0be1e=""
           >
             <div
               class="v-sheet v-theme--light v-sheet--rounded pa-3"
+              data-v-75d0be1e=""
+              style="top: 90px;"
             >
               
+              <h1
+                class="d-flex justify-center"
+              >
+                $t('cafe.welcome')
+              </h1>
               <div
                 class="v-row"
               >
@@ -34,11 +132,10 @@ exports[`IndexPage > renders 1`] = `
                   class="v-col"
                 >
                   <button
-                    class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated room-button"
-                    label="To Room"
-                    style="height: auto; width: auto;"
+                    class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--fourth main-button-auto room-button"
+                    data-v-2b63c1fe=""
+                    style="background-color: #2ca5b1; color: #fff; caret-color: #fff; height: auto; width: auto;"
                     type="button"
-                    variants="outlined"
                   >
                     
                     <span
@@ -55,7 +152,14 @@ exports[`IndexPage > renders 1`] = `
                     >
                       
                       
-                      $t('buttons.toRoom')
+                      <!--v-if-->
+                      <span
+                        class="main-button-content"
+                        data-v-2b63c1fe=""
+                      >
+                        To Room 
+                        <!--v-if-->
+                      </span>
                       
                       
                     </span>

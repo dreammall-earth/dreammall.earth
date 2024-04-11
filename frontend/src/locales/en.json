@@ -8,6 +8,9 @@
     "signout": "Sign Out",
     "toRoom": "To the meeting"
   },
+  "cafe": {
+    "welcome": "World Cafe"
+  },
   "error": {
     "404": {
       "h1": "404 Page Not Found",

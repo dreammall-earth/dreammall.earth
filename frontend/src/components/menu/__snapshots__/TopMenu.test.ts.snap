@@ -8,43 +8,92 @@ exports[`TopMenu > renders 1`] = `
     class="v-application__wrap"
   >
     
-    <header
-      class="v-toolbar v-toolbar--flat v-toolbar--density-default v-theme--light v-locale--is-ltr v-app-bar"
-      style="top: 0px; z-index: 1004; transform: translateY(0%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
+    <div
+      class="topmenu"
     >
-      <!---->
-      
-      <div
-        class="v-toolbar__content"
-        style="height: 64px;"
+      <header
+        class="v-toolbar v-toolbar--flat v-toolbar--density-default v-theme--light v-locale--is-ltr v-app-bar py-4"
+        style="top: 0px; z-index: 1004; transform: translateY(0%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
       >
-        <!---->
         <!---->
         
         <div
-          class="v-row"
+          class="v-toolbar__content"
+          style=""
         >
+          <!---->
+          <!---->
+          
           <div
-            class="v-col"
+            class="v-row"
           >
-            <!--v-if-->
+            <div
+              class="v-col d-flex align-center"
+            >
+              <a
+                class="w-100 ml-8"
+                href="/"
+              >
+                <div
+                  class="v-responsive v-img v-img--booting w-100 logo-medium"
+                  data-v-f6be2607=""
+                >
+                  <div
+                    class="v-responsive__sizer"
+                  />
+                  
+                  
+                  <transition-stub
+                    appear="true"
+                    css="true"
+                    name="fade-transition"
+                    persisted="false"
+                  >
+                    <img
+                      class="v-img__img v-img__img--contain"
+                      src="/src/assets/dreammall-logo.svg"
+                      style="display: none;"
+                    />
+                  </transition-stub>
+                  <transition-stub
+                    appear="false"
+                    css="true"
+                    name="fade-transition"
+                    persisted="false"
+                  >
+                    <!---->
+                  </transition-stub>
+                  <!---->
+                  <!---->
+                  <!---->
+                  
+                  
+                  <!---->
+                </div>
+              </a>
+            </div>
+            <div
+              class="v-col d-flex justify-end"
+            >
+              <!--v-if-->
+            </div>
           </div>
+          
+          <!---->
         </div>
         
-        <!---->
-      </div>
-      
-      
-      <transition-stub
-        appear="false"
-        css="true"
-        name="expand-transition"
-        persisted="false"
-      >
-        <!---->
-      </transition-stub>
-      
-    </header>
+        
+        <transition-stub
+          appear="false"
+          css="true"
+          name="expand-transition"
+          persisted="false"
+        >
+          <!---->
+        </transition-stub>
+        
+      </header>
+    </div>
     
   </div>
 </div>
