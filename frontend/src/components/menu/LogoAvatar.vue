@@ -3,5 +3,5 @@
 </template>
 
 <script lang="ts" setup>
-import Logo from '#assets/it4c-logo2-clean-bg_alpha-128x128.png'
+import Logo from '#assets/dreammall-logo.svg'
 </script>
