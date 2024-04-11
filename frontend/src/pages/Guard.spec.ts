@@ -3,6 +3,7 @@ import { PageContextServer } from 'vike/types'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
 import { AUTH } from '#src/env'
+import { useAuthStore } from '#stores/authStore.js'
 
 import { guard } from './+guard'
 
