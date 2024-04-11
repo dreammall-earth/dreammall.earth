@@ -10,7 +10,7 @@ export const useAuthStore = defineStore(
     const accessToken = computed(() => user.value?.access_token ?? '')
     const isLoggedIn = computed(() => !!user.value)
 
-    const save = (u: User) => {
+    const save = (u: User | null) => {
       user.value = u
     }
 
