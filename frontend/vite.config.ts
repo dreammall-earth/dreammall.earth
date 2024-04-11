@@ -24,7 +24,7 @@ const config: UserConfig = {
       typescript: true,
       vueTsc: true,
     }),
-    vuetify({ styles: { configFile: './src/assets/sass/style.scss' } }),
+    vuetify({ styles: { configFile: './src/assets/scss/style.scss' } }),
     viteCompression({ filter: /\.*$/i }),
   ],
   build: {

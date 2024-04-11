@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <TopMenu />
     <slot />
   </v-app>
 </template>
