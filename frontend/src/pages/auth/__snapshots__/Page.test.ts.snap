@@ -84,11 +84,10 @@ exports[`AuthPage > signin callback without error > renders 1`] = `
                 class="v-col d-flex justify-end"
               >
                 <button
-                  class="v-btn v-theme--light v-btn--density-default v-btn--variant-text main-button main-button--primary main-button-auto sign-out mr-4"
+                  class="v-btn v-theme--light v-btn--density-default v-btn--variant-text main-button main-button--third main-button-auto sign-out mr-4"
                   data-v-2b63c1fe=""
-                  style="color: #f09630; caret-color: #f09630; height: auto; width: auto;"
+                  style="color: #3d4753; caret-color: #3d4753; height: auto; width: auto;"
                   type="button"
-                  variants="third"
                 >
                   
                   <span

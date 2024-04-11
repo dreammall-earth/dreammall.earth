@@ -11,7 +11,7 @@
           <MainButton
             v-if="auth.isLoggedIn"
             class="sign-out mr-4"
-            variants="third"
+            variant="third"
             label="Sign Out"
             size="auto"
             @click="signOut"
