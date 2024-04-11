@@ -47,6 +47,7 @@ describe('TopMenu', () => {
         token_type: 'token_type',
         session_state: null,
         state: null,
+        expires_at: new Date().valueOf() + 100,
         expires_in: 0,
         expired: false,
         scopes: ['email'],

@@ -5,7 +5,11 @@
     "title": "DreamMall {'|'} Authentication"
   },
   "buttons": {
-    "signout": "Sign Out"
+    "signout": "Sign Out",
+    "toRoom": "To the meeting"
+  },
+  "cafe": {
+    "welcome": "World Cafe"
   },
   "error": {
     "404": {

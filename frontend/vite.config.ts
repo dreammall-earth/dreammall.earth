@@ -24,7 +24,7 @@ const config: UserConfig = {
       typescript: true,
       vueTsc: true,
     }),
-    vuetify({ styles: { configFile: './src/assets/sass/style.scss' } }),
+    vuetify({ styles: { configFile: './src/assets/scss/style.scss' } }),
     viteCompression({ filter: /\.*$/i }),
   ],
   build: {
@@ -37,6 +37,7 @@ const config: UserConfig = {
       '#pages': path.join(__dirname, '/src/pages'),
       '#assets': path.join(__dirname, '/src/assets'),
       '#layouts': path.join(__dirname, '/src/layouts'),
+      '#queries': path.join(__dirname, '/src/graphql/queries'),
       '#stores': path.join(__dirname, '/src/stores'),
       '#src': path.join(__dirname, '/src'),
       '#plugins': path.join(__dirname, '/renderer/plugins'),

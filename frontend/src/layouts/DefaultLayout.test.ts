@@ -5,7 +5,7 @@ import { VApp } from 'vuetify/components'
 
 import DefaultLayout from './DefaultLayout.vue'
 
-describe('LogoAvatar', () => {
+describe('DefaultLayout', () => {
   const Wrapper = () => {
     return mount(VApp, {
       slots: {
