@@ -8,7 +8,7 @@ entries:
     layout: stacked
     name: dreammallearth-enrollment-email
     policy_engine_mode: any
-    title: Dreammall Signup
+    title: DreamMall Signup
   conditions: []
   id: null
   identifiers:
