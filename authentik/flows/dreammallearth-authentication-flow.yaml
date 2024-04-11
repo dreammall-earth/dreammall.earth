@@ -4,7 +4,7 @@ entries:
     authentication: none
     denied_action: message_continue
     designation: authentication
-    layout: stacked
+    layout: sidebar-right
     name: Welcome to DreamMall!
     policy_engine_mode: any
     title: Welcome to DreamMall!
