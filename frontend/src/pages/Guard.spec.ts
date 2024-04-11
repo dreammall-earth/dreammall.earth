@@ -3,7 +3,6 @@ import { PageContextServer } from 'vike/types'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
 import { AUTH } from '#src/env'
-import { useAuthStore } from '#stores/authStore'
 
 import { guard } from './+guard'
 
@@ -12,17 +11,15 @@ AUTH.UNAUTHORIZED_REDIRECT_URI = 'https://some.uri'
 vi.mock('vike/abort')
 vi.mocked(redirect).mockResolvedValue(new Error(''))
 
-let pageContext: PageContextServer
-
 describe('global route guard', () => {
   beforeEach(() => {
     vi.clearAllMocks()
   })
 
   describe('unauthenticated', () => {
-    it('throws and redirects', async () => {
+    it('throws and redirects', () => {
       try {
-        await guard(pageContext)
+        expect(guard({ hasToken: false } as PageContextServer)).toThrow()
       } catch (error) {
         expect(redirect).toBeCalledWith('https://some.uri')
       }
@@ -53,8 +50,8 @@ describe('global route guard', () => {
       })
     })
 
-    it('does not redirect', async () => {
-      await guard(pageContext)
+    it('does not redirect', () => {
+      guard({ hasToken: true } as PageContextServer)
       expect(redirect).not.toBeCalled()
     })
   })
