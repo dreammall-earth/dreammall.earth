@@ -93,7 +93,7 @@ entries:
   model: authentik_stages_prompt.prompt
   state: present
 - attrs:
-    expression: 'context[''flow_plan''].context[''redirect''] = ''http://stage1.app.dreammall.earth/signin''
+    expression: 'context[''flow_plan''].context[''redirect''] = ''https://stage1.app.dreammall.earth/signin''
 
       return True'
     name: dreammall.earth-redirect-frontend-signin
@@ -196,8 +196,8 @@ entries:
     target: 71560401-adab-4888-bbef-7cc8597971e1
   model: authentik_policies.policybinding
   state: present
-  metadata:
+metadata:
   labels:
     blueprints.goauthentik.io/generated: 'true'
-  name: authentik Export - 2024-03-28 11:33:59.772129+00:00
+  name: authentik Export - 2024-04-11 21:36:30.569510+00:00
 version: 1
