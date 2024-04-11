@@ -13,7 +13,7 @@ export const createServer = async (): Promise<ApolloServer> => {
   })
 }
 
-export async function listen(port: number, getToken: GetConextToken = getContextToken) {
+export async function listen(port: number, getToken: GetContextToken = getContextToken) {
   const { url } = await startStandaloneServer(await createServer(), {
     listen: { port },
     // eslint-disable-next-line @typescript-eslint/require-await
