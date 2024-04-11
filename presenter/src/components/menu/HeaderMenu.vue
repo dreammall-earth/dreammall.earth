@@ -106,8 +106,6 @@
 </template>
 
 <script lang="ts" setup>
-// import { DefaultApolloClient, useQuery } from '@vue/apollo-composable'
-// import { navigate } from 'vike/client/router'
 import { ref, onMounted, onBeforeMount } from 'vue'
 
 import MobileMenuIcon from '#assets/img/hamburger_mobile.svg'
@@ -115,9 +113,7 @@ import MainButton from '#components/buttons/MainButton.vue'
 import LanguageSelector from '#components/language/LanguageSelector.vue'
 import LogoImage from '#components/LogoImage.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
-// import { querySecret } from '#queries/querySecret'
 import { AUTH } from '#src/env'
-// import { ApolloClient, InMemoryCache } from '@apollo/client/core'
 
 const showAuthentication = !!AUTH.SIGNUP_URI || !!AUTH.SIGNIN_URI
 
@@ -128,21 +124,6 @@ async function signIn() {
 async function signUp() {
   window.location.href = AUTH.SIGNUP_URI
 }
-
-/*
-    const apolloClient = inject<ApolloClient<InMemoryCache>>(DefaultApolloClient)
-
-    async function queryProtectedBackend() {
-    try {
-    const secret = await apolloClient?.query({ query: querySecret })
-    // eslint-disable-next-line no-console
-    console.log(secret)
-    } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log('error secret', error)
-    }
-    }
-  */
 
 const appBackground = ref('transparent')
 const navBackground = ref('#d8d8d8')

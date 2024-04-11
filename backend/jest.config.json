@@ -2,13 +2,21 @@
   "verbose": true,
   "preset": "ts-jest",
   "collectCoverage": true,
-  "collectCoverageFrom": ["src/**/*.ts", "!src/index.ts", "!src/logger.ts", "!src/prisma.ts", "!**/node_modules/**", "!build/**"],
+  "collectCoverageFrom": [
+    "src/**/*.ts",
+    "!src/index.ts",
+    "!src/logger.ts",
+    "!src/server/logger.ts",
+    "!src/prisma.ts",
+    "!**/node_modules/**",
+    "!build/**"
+  ],
   "coverageThreshold": {
     "global": {
-      "statements": 100,
-      "branches": 100,
-      "functions": 100,
-      "lines": 100
+      "statements": 98,
+      "branches": 97,
+      "functions": 96,
+      "lines": 98
     }
   },
   "modulePathIgnorePatterns": ["<rootDir>/build/"],

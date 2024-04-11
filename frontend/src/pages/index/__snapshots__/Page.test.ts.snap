@@ -11,7 +11,7 @@ exports[`IndexPage > renders 1`] = `
     <main
       class="v-main bg-grey-lighten-3 main-layout"
       data-v-75d0be1e=""
-      style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: NaN; --v-layout-bottom: 0px;"
+      style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: NaN; --v-layout-bottom: 0px; transition: none !important;"
     >
       
       <div
@@ -20,7 +20,7 @@ exports[`IndexPage > renders 1`] = `
       >
         <header
           class="v-toolbar v-toolbar--flat v-toolbar--density-default v-theme--light v-locale--is-ltr v-app-bar py-4"
-          style="top: 0px; z-index: 1004; transform: translateY(0%); position: fixed; left: 0px; width: calc(100% - 0px - 0px);"
+          style="top: 0px; z-index: 1004; transform: translateY(0%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
         >
           <!---->
           
@@ -125,6 +125,49 @@ exports[`IndexPage > renders 1`] = `
               >
                 $t('cafe.welcome')
               </h1>
+              <div
+                class="v-row"
+              >
+                <div
+                  class="v-col"
+                >
+                  <button
+                    class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--fourth main-button-auto room-button"
+                    data-v-2b63c1fe=""
+                    style="background-color: #2ca5b1; color: #fff; caret-color: #fff; height: auto; width: auto;"
+                    type="button"
+                  >
+                    
+                    <span
+                      class="v-btn__overlay"
+                    />
+                    <span
+                      class="v-btn__underlay"
+                    />
+                    
+                    <!---->
+                    <span
+                      class="v-btn__content"
+                      data-no-activator=""
+                    >
+                      
+                      
+                      <!--v-if-->
+                      <span
+                        class="main-button-content"
+                        data-v-2b63c1fe=""
+                      >
+                        To Room 
+                        <!--v-if-->
+                      </span>
+                      
+                      
+                    </span>
+                    <!---->
+                    <!---->
+                  </button>
+                </div>
+              </div>
               
             </div>
           </div>
