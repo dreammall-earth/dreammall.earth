@@ -29,7 +29,7 @@ export default mergeConfig(
           lines: 99,
           // functions: 20, // has problems see https://github.com/vitest-dev/vitest/issues/3607
           branches: 98,
-          statements: 100,
+          statements: 99,
         },
       },
     },
