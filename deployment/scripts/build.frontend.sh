@@ -3,7 +3,7 @@
 # Find current directory & configure paths
 SCRIPT_PATH=$(realpath $0)
 SCRIPT_DIR=$(dirname $SCRIPT_PATH)
-PROJECT_ROOT=$SCRIPT_DIR/../backend
+PROJECT_ROOT=$SCRIPT_DIR/../../frontend
 BUILD_DIR=$PROJECT_ROOT/build
 
 # Build the project

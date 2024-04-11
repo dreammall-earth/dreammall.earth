@@ -4,12 +4,13 @@ import pinia from '#plugins/pinia'
 import { AUTH } from '#src/env'
 import { useAuthStore } from '#stores/authStore'
 
-import type { GuardAsync } from 'vike/types'
+import type { GuardSync } from 'vike/types'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/require-await
-const guard: GuardAsync = async (pageContext): ReturnType<GuardAsync> => {
+const guard: GuardSync = (pageContext): ReturnType<GuardSync> => {
+  // the store is the client side part, pageContext the serverSide part
+  // there might be a better solution to combine both into pageContext
   const authStore = useAuthStore(pinia)
-  if (!authStore.isLoggedIn) {
+  if (!pageContext.hasToken && !authStore.isLoggedIn) {
     throw redirect(AUTH.UNAUTHORIZED_REDIRECT_URI)
   }
 }
