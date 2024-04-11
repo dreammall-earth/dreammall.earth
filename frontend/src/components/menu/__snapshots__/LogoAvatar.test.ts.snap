@@ -23,7 +23,7 @@ exports[`LogoAvatar > renders 1`] = `
       <img
         alt=""
         class="v-img__img v-img__img--cover"
-        src="/src/assets/it4c-logo2-clean-bg_alpha-128x128.png"
+        src="/src/assets/dreammall-logo.svg"
         style="display: none;"
       />
     </transition-stub>
