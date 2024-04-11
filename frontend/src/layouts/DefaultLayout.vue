@@ -22,8 +22,7 @@
 <script lang="ts" setup>
 import { useSlots } from 'vue'
 
-import TopMenu from '#components/menu/TopMenu.vue';
-
+import TopMenu from '#components/menu/TopMenu.vue'
 
 const slots = useSlots()
 </script>

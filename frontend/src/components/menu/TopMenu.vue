@@ -26,10 +26,10 @@
 <script lang="ts" setup>
 import { inject } from 'vue'
 
+import MainButton from '#components/buttons/MainButton.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 import AuthService from '#src/services/AuthService'
 import { useAuthStore } from '#stores/authStore'
-import MainButton from '#components/buttons/MainButton.vue';
 
 const authService = inject<AuthService>('authService')
 const auth = useAuthStore()
