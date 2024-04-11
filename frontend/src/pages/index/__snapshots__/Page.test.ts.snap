@@ -120,6 +120,11 @@ exports[`IndexPage > renders 1`] = `
               style="top: 90px;"
             >
               
+              <h1
+                class="d-flex justify-center"
+              >
+                $t('cafe.welcome')
+              </h1>
               
             </div>
           </div>

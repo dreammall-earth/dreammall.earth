@@ -1,5 +1,7 @@
 <template>
-  <DefaultLayout> </DefaultLayout>
+  <DefaultLayout>
+    <h1 class="d-flex justify-center">{{ $t('cafe.welcome') }}</h1>
+  </DefaultLayout>
 </template>
 
 <script lang="ts" setup>

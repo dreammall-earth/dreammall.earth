@@ -72,6 +72,16 @@ describe('MainButton', () => {
       await wrapper.setProps({ size: 'auto', variant: 'reload', label: 'My Button' })
       expect(wrapper.find('.v-icon').exists()).toBe(true)
     })
+
+    it('shows circular loading', async () => {
+      await wrapper.setProps({
+        size: 'auto',
+        variant: 'reload',
+        label: 'My Button',
+        isLoading: true,
+      })
+      expect(wrapper.find('.v-progress-circular').exists()).toBe(true)
+    })
   })
 
   describe('bg color', () => {
@@ -92,6 +102,16 @@ describe('MainButton', () => {
     it('sets variant to third-inverse', async () => {
       await wrapper.setProps({ label: 'My Button', variant: 'third-inverse', size: 'small' })
       expect(wrapper.find('.main-button--third-inverse').classes()).toContain('bg-transparent')
+    })
+
+    it('sets variant to fourth', async () => {
+      await wrapper.setProps({ label: 'My Button', variant: 'fourth', size: 'small' })
+      expect(wrapper.find('.main-button--fourth').attributes('style')).toContain('#2ca5b1')
+    })
+
+    it('sets variant to submit', async () => {
+      await wrapper.setProps({ label: 'My Button', variant: 'submit', size: 'small' })
+      expect(wrapper.find('.main-button--form-submit').attributes('style')).toContain('#23ad5b')
     })
 
     it('sets variant to download', async () => {
