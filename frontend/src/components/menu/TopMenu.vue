@@ -1,24 +1,33 @@
 <template>
-  <v-app-bar flat>
-    <v-row>
-      <v-col>
-        <v-btn
-          v-if="auth.isLoggedIn"
-          class="sign-out"
-          variants="outlined"
-          label="Sign Out"
-          size="auto"
-          @click="signOut"
-          >{{ $t('buttons.signout') }}
-        </v-btn>
-      </v-col>
-    </v-row>
-  </v-app-bar>
+  <div class="topmenu">
+    <v-app-bar flat class="py-4" height="70px">
+      <v-row>
+        <v-col class="d-flex align-center">
+          <a href="/" class="w-100 ml-8">
+            <LogoImage class="" />
+          </a>
+        </v-col>
+        <v-col class="d-flex justify-end">
+          <MainButton
+            v-if="auth.isLoggedIn"
+            class="sign-out mr-4"
+            variant="third"
+            label="Sign Out"
+            size="auto"
+            @click="signOut"
+            >{{ $t('buttons.signout') }}
+          </MainButton>
+        </v-col>
+      </v-row>
+    </v-app-bar>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { inject } from 'vue'
 
+import MainButton from '#components/buttons/MainButton.vue'
+import LogoImage from '#components/menu/LogoImage.vue'
 import AuthService from '#src/services/AuthService'
 import { useAuthStore } from '#stores/authStore'
 

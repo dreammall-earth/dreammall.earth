@@ -1,14 +1,15 @@
 <template>
   <DefaultLayout>
+    <h1 class="d-flex justify-center">{{ $t('cafe.welcome') }}</h1>
     <v-row>
       <v-col>
-        <v-btn
+        <MainButton
           class="room-button"
-          variants="outlined"
+          variant="fourth"
           label="To Room"
           size="auto"
           @click="enterRoom"
-          >{{ $t('buttons.toRoom') }}</v-btn
+          >{{ $t('buttons.toRoom') }}</MainButton
         >
       </v-col>
     </v-row>
@@ -20,6 +21,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client/core'
 import { DefaultApolloClient } from '@vue/apollo-composable'
 import { inject } from 'vue'
 
+import MainButton from '#components/buttons/MainButton.vue'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
 import { getRoomQuery } from '#queries/getRoomQuery'
 

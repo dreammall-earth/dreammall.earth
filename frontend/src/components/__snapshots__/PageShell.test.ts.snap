@@ -8,43 +8,6 @@ exports[`PageShell > renders 1`] = `
     class="v-application__wrap"
   >
     
-    <header
-      class="v-toolbar v-toolbar--flat v-toolbar--density-default v-theme--light v-locale--is-ltr v-app-bar"
-      style="top: 0px; z-index: 1004; transform: translateY(0%); position: fixed; left: 0px; width: calc(100% - 0px - 0px);"
-    >
-      <!---->
-      
-      <div
-        class="v-toolbar__content"
-        style="height: 64px;"
-      >
-        <!---->
-        <!---->
-        
-        <div
-          class="v-row"
-        >
-          <div
-            class="v-col"
-          >
-            <!--v-if-->
-          </div>
-        </div>
-        
-        <!---->
-      </div>
-      
-      
-      <transition-stub
-        appear="false"
-        css="true"
-        name="expand-transition"
-        persisted="false"
-      >
-        <!---->
-      </transition-stub>
-      
-    </header>
     
     Page Content
     
