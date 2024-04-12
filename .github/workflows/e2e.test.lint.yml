@@ -24,6 +24,8 @@ jobs:
     name: Lint - E2E files
     needs: files-changed
     runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./cypress
     steps:
       - name: Set Node version
         uses: actions/setup-node@v4
