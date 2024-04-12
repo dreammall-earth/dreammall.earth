@@ -59,3 +59,13 @@ backend-test-build-docker: &backend-test-build-docker
 backend-test-build-docs: &backend-test-build-docs
   - 'backend/**/*.md'
   - 'backend/.vuepress/*'
+
+# e2e
+e2e-all: &e2e-all
+  - 'cypress/ **/*'
+
+e2e-docs: &e2e-docs
+  - 'cypress/**/*.md'
+  - 'cypress/.github/workflows/e2e.deploy.docs.yml'
+  - 'cypress/.vuepress/*'
+  - 'cypress/package.json'
