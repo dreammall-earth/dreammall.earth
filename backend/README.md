@@ -26,7 +26,7 @@ The project sets up an apollo server. It uses `type-graphql`.
 The following commands are available:
 
 | Command                    | Description                                     |
-|----------------------------|-------------------------------------------------|
+| -------------------------- | ----------------------------------------------- |
 | `npm install`              | Project setup                                   |
 | `npm run build`            | Compiles and minifies for production            |
 | `npm run start`            | Runs productions server                         |
@@ -76,7 +76,7 @@ npm install
 The following endpoints are provided given the right command is executed or all three if `docker compose` is used:
 
 | Endpoint                                                             | Description        |
-|----------------------------------------------------------------------|--------------------|
+| -------------------------------------------------------------------- | ------------------ |
 | [http://localhost:4000/graphql](http://localhost:4000/graphql)       | GraphQL API        |
 | [http://localhost:4000/playground](http://localhost:4000/playground) | GraphQL Playground |
 
