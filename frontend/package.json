@@ -104,7 +104,7 @@
     "@storybook/test-runner": "^0.17.0",
     "@storybook/testing-library": "^0.2.2",
     "@storybook/vue3": "^8.0.6",
-    "@storybook/vue3-vite": "^8.0.6",
+    "@storybook/vue3-vite": "^8.0.8",
     "@types/cookie": "^0.6.0",
     "@types/js-cookie": "^3.0.6",
     "@typescript-eslint/eslint-plugin": "^7.5.0",
