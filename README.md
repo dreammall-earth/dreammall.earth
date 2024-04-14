@@ -22,7 +22,7 @@ Deploy instructions can be found in [deployment/](deplyoment/README.md)
 The following commands are available:
 
 | Command                    | Description                                    |
-|----------------------------|------------------------------------------------|
+| -------------------------- | ---------------------------------------------- |
 | `npm install`              | Project setup                                  |
 | **Test**                   |                                                |
 | `npm run test:lint`        | Run all linters                                |
@@ -41,7 +41,7 @@ The following commands are available:
 The following endpoints are provided if `docker compose` is used:
 
 | Endpoint                                                             | Description                |
-|----------------------------------------------------------------------|----------------------------|
+| -------------------------------------------------------------------- | -------------------------- |
 | [http://localhost:3306](http://localhost:3306)                       | MySQL Database             |
 | [http://localhost:3000](http://localhost:3000)                       | Presenter                  |
 | [http://localhost:8081](http://localhost:8081)                       | Presenter Documentation    |
