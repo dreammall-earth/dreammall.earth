@@ -7,7 +7,7 @@ import { Context } from '#src/server/context'
 
 let cert: Buffer
 
-const getCert = (): Buffer => {
+export const getCert = (): Buffer => {
   if (!cert) {
     // eslint-disable-next-line n/no-sync
     cert = fs.readFileSync('public.pem')
