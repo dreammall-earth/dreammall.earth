@@ -5,7 +5,11 @@ import { computed, ref } from 'vue'
 
 export const cookieStorage = {
   setItem(key: string, state: string) {
-    Cookies.set('auth', state, { expires: 3 })
+    Cookies.set('auth', state, {
+      expires: 3,
+      SameSite: 'none',
+      Secure: true,
+    })
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getItem(key: string) {
