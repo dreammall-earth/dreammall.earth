@@ -115,7 +115,7 @@ in the main folder to run the database inside docker. You need to copy the `.env
 
 ## Token validation
 
-If you use the authentik database from the zip file, link the `public.pem` in the main folder:
+If you use the authentik database from the zip file, link the `src/auth/public.pem` to the main folder:
 ```bash
 ln -s src/auth/public.pem public.pem
 ```
