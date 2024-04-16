@@ -5,17 +5,24 @@ import { AuthChecker } from 'type-graphql'
 
 import { Context } from '#src/server/context'
 
+let cert: Buffer
+
+export const getCert = (): Buffer => {
+  if (!cert) {
+    // eslint-disable-next-line n/no-sync
+    cert = fs.readFileSync('public.pem')
+  }
+  return cert
+}
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const authChecker: AuthChecker<Context> = ({ root, args, context, info }, roles) => {
   const { token } = context
 
   if (!token) return false
 
-  // eslint-disable-next-line n/no-sync
-  const cert = fs.readFileSync('public.pem')
-
   try {
-    const decoded = verify(token, cert)
+    const decoded = verify(token, getCert())
     if (decoded) {
       return true
     }

@@ -44,5 +44,5 @@ jobs:
         run: docker-compose -f docker-compose.yml up --detach --no-deps database
 
       - name: Backend | Unit
-        run: npm install && npm run db:migrate && npm run test:unit
+        run: npm install && cp src/auth/public.pem . && npm run db:migrate && npm run test:unit
         working-directory: ${{env.WORKING_DIRECTORY}}
