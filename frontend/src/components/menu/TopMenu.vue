@@ -37,7 +37,6 @@ const auth = useAuthStore()
 async function signOut() {
   try {
     await authService?.signOut()
-    auth.clear()
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log('auth error', error)
