@@ -6,6 +6,8 @@ import { config } from 'dotenv'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { verify } from 'jsonwebtoken'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { getCert } from '#src/auth/authChecker'
 import logger from '#src/logger'
 
 config({
@@ -38,5 +40,19 @@ jest.mock('jsonwebtoken', () => {
     __esModule: true,
     ...originalModule,
     verify: verifyTokenMock,
+  }
+})
+
+export const getCertMock = jest.fn().mockImplementation(() => {
+  return Buffer.from('token', 'hex')
+})
+
+jest.mock('#src/auth/authChecker', () => {
+  const originalModule =
+    jest.requireActual<typeof import('#src/auth/authChecker')>('#src/auth/authChecker')
+  return {
+    __esModule: true,
+    ...originalModule,
+    getCert: getCertMock,
   }
 })

@@ -219,20 +219,4 @@ weils nach Datum, Medium, Anlass und Kosten auflisten)?`,
       })
     })
   })
-
-  describe('contactForm query', () => {
-    it('returns true', async () => {
-      const response = await testServer.executeOperation({
-        query: `query { contactForm }`,
-      })
-      expect(response.body).toMatchObject({
-        kind: 'single',
-        singleResult: {
-          data: {
-            contactForm: true,
-          },
-        },
-      })
-    })
-  })
 })

@@ -5,6 +5,7 @@ coverage/
 .vuepress/.temp/
 .vuepress/.cache/
 .env
+public.pem
 
 # emacs
 *~
