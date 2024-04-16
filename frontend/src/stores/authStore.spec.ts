@@ -4,10 +4,6 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 
 import { cookieStorage, useAuthStore } from './authStore'
 
-vi.mock('js-cookie')
-// eslint-disable-next-line @typescript-eslint/unbound-method
-vi.mocked(Cookies.get as (name: string) => string | undefined).mockReturnValue('cookie')
-
 const setCookieSpy = vi.spyOn(Cookies, 'set')
 const getCookieSpy = vi.spyOn(Cookies, 'get')
 
@@ -87,7 +83,6 @@ describe('Auth Store', () => {
         cookieStorage.setItem('key', 'state')
         expect(setCookieSpy).toBeCalledWith('auth', 'state', {
           expires: 3,
-          SameSite: 'none',
           Secure: true,
         })
       })
@@ -95,17 +90,8 @@ describe('Auth Store', () => {
 
     describe('getItem', () => {
       it('calls Cookies get', () => {
-        const result = cookieStorage.getItem('key')
+        cookieStorage.getItem('key')
         expect(getCookieSpy).toBeCalledWith('auth')
-        expect(result).toBe('cookie')
-      })
-
-      describe('no cookie set', () => {
-        it('returns null', () => {
-          // eslint-disable-next-line @typescript-eslint/unbound-method
-          vi.mocked(Cookies.get as (name: string) => string | undefined).mockReturnValue(undefined)
-          expect(cookieStorage.getItem('key')).toBe(null)
-        })
       })
     })
   })

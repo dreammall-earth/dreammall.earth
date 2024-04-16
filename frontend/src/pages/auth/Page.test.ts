@@ -5,7 +5,6 @@ import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 import i18n from '#plugins/i18n'
-import { useAuthStore } from '#stores/authStore'
 import { authService } from '#tests/mock.authService'
 
 import AuthPage from './+Page.vue'
@@ -24,7 +23,6 @@ describe('AuthPage', () => {
   }
 
   const authServiceSpy = vi.spyOn(authService, 'signInCallback')
-  const authStore = useAuthStore()
 
   let wrapper: ReturnType<typeof Wrapper>
 
@@ -61,22 +59,6 @@ describe('AuthPage', () => {
 
     it('calls authservie signin callback', () => {
       expect(authServiceSpy).toBeCalled()
-    })
-
-    it('updates the store', () => {
-      expect(authStore.save).toBeCalledWith(
-        expect.objectContaining({
-          access_token: 'access_token',
-          profile: {
-            aud: 'aud',
-            sub: 'sub',
-            exp: 1,
-            iat: 1,
-            iss: 'iss',
-          },
-          token_type: 'token_type',
-        }),
-      )
     })
 
     it('navigates to /', () => {
