@@ -13,7 +13,6 @@ import AuthService from '#src/services/AuthService'
 
 const authService = inject<AuthService>('authService')
 
-
 onBeforeMount(async () => {
   try {
     await authService?.renewToken()
