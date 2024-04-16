@@ -1,7 +1,8 @@
 import { UserManager } from 'oidc-client-ts'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 
 import { AUTH } from '#src/env'
+import { useAuthStore } from '#stores/authStore'
 import {
   authService,
   signinSilentCallbackMock,
@@ -11,6 +12,8 @@ import {
 } from '#tests/mock.authService'
 
 AUTH.AUTHORITY_SIGNUP_URI = 'https://host/SOME_SIGNUP_URI'
+
+const authStore = useAuthStore()
 
 describe('AuthService', () => {
   describe('constructor', () => {
@@ -56,9 +59,19 @@ describe('AuthService', () => {
   })
 
   describe('signOut', () => {
-    it('redirects to signout URI', () => {
+    const authSpy = vi.spyOn(authStore, 'clear')
+
+    beforeEach(() => {
+      vi.clearAllMocks()
       authService.signOut()
+    })
+
+    it('redirects to signout URI', () => {
       expect(global.window.location.href).toBe(AUTH.AUTHORITY_SIGNOUT_URI)
+    })
+
+    it('calls auth store clear', () => {
+      expect(authSpy).toBeCalled()
     })
   })
 
@@ -66,6 +79,21 @@ describe('AuthService', () => {
     it('calls get user', async () => {
       await authService.getUser()
       expect(getUserMock).toBeCalled()
+    })
+  })
+
+  describe.skip('events', () => {
+    describe('addUserLoaded', () => {
+      // const authSpy = vi.spyOn(authStore, 'save')
+
+      beforeEach(() => {
+        vi.clearAllMocks()
+        // authService.events.addUserLoaded
+      })
+
+      it('happens', () => {
+        expect(true).toBe(true)
+      })
     })
   })
 })
