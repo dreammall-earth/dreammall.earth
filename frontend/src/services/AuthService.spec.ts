@@ -81,19 +81,4 @@ describe('AuthService', () => {
       expect(getUserMock).toBeCalled()
     })
   })
-
-  describe.skip('events', () => {
-    describe('addUserLoaded', () => {
-      // const authSpy = vi.spyOn(authStore, 'save')
-
-      beforeEach(() => {
-        vi.clearAllMocks()
-        // authService.events.addUserLoaded
-      })
-
-      it('happens', () => {
-        expect(true).toBe(true)
-      })
-    })
-  })
 })
