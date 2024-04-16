@@ -1,4 +1,6 @@
-import { GraphQLRequestContext, GraphQLRequestContextWillSendResponse } from '@apollo/server'
+import { randomBytes } from 'crypto'
+
+import { GraphQLRequestContext } from '@apollo/server'
 
 import logger from '#src/logger'
 
@@ -8,11 +10,19 @@ export default {
   // Fires whenever a GraphQL request is received from a client.
   // eslint-disable-next-line @typescript-eslint/require-await
   async requestDidStart(requestContext: GraphQLRequestContext<Context>) {
-    logger.debug('Apollo Request', requestContext.request)
+    const qID = randomBytes(4).toString('hex')
+    const logElements = ['Apollo Request', qID, requestContext.request.operationName]
+    if (requestContext.request.operationName !== 'IntrospectionQuery') {
+      logElements.push(JSON.stringify(requestContext.request.query))
+    }
+    if (requestContext.request.variables) {
+      logElements.push(JSON.stringify(requestContext.request.variables))
+    }
+    logger.debug(...logElements)
     return {
       // eslint-disable-next-line @typescript-eslint/require-await
-      async willSendResponse(requestContext: GraphQLRequestContextWillSendResponse<Context>) {
-        logger.debug('Apollo Response', requestContext.request, requestContext.response.body)
+      async willSendResponse() {
+        logger.debug('Apollo Response', qID)
       },
     }
   },
