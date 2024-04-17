@@ -98,11 +98,18 @@ const showInfoTime: number = 5000
 const form = ref<HTMLFormElement>()
 const inputFieldNewsletter = ref()
 
+const focusInput = () => {
+  if (inputFieldNewsletter.value) {
+    inputFieldNewsletter.value.focusInput()
+  }
+}
+
 const { mutate: sendSubscribeToNewsletter } = useMutation(subscribeToNewsletter)
 
 defineExpose({
   form,
   inputFieldNewsletter,
+  focusInput,
 })
 // submit form with data
 async function submitForm() {

@@ -1,5 +1,6 @@
 <template>
   <v-text-field
+    ref="inputField"
     :model-value="props.modelValue"
     :name="props.name"
     :class="props.class"
@@ -18,6 +19,8 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
+
 import { nameRules } from '#src/validation/validation'
 
 const props = withDefaults(
@@ -61,4 +64,15 @@ const props = withDefaults(
 const emit = defineEmits<{
   (e: 'update:modelValue', event: string): void
 }>()
+
+const inputField = ref()
+const focusInput = () => {
+  if (inputField.value) {
+    inputField.value.focus()
+  }
+}
+defineExpose({
+  inputField,
+  focusInput,
+})
 </script>

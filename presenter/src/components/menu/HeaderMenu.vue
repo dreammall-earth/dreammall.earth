@@ -17,7 +17,6 @@
           ></AnchorLink>
           <AnchorLink
             class="mx-4"
-            href="/#contactname"
             :label="$t('menu.header.contact')"
             @click.prevent="scrollToNewsletterAnchor"
           ></AnchorLink>
@@ -107,7 +106,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, onBeforeMount, nextTick } from 'vue'
+import { ref, onMounted, onBeforeMount } from 'vue'
 
 import MobileMenuIcon from '#assets/img/hamburger_mobile.svg'
 import MainButton from '#components/buttons/MainButton.vue'
@@ -121,9 +120,10 @@ const anchorNewsletter = ref()
 const scrollToNewsletterAnchor = () => {
   if (anchorNewsletter.value) {
     anchorNewsletter.value.scrollIntoView({ behavior: 'smooth' })
-    nextTick(() => {
-      anchorNewsletter.value.newsletterForm.value.inputFieldNewsletter.value.focus()
-    })
+    anchorNewsletter.value.focusInput()
+    // nextTick(() => {
+    //   anchorNewsletter.value.newsletterForm.value.inputFieldNewsletter.value.focus()
+    // })
   }
 }
 

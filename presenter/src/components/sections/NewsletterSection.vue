@@ -48,8 +48,15 @@ import NewsletterForm from '#components/forms/NewsletterForm.vue'
 // const newsletterDownloadPath = '#'
 const newsletterForm = ref()
 
+const focusInput = () => {
+  if (newsletterForm.value) {
+    newsletterForm.value.focusInput()
+  }
+}
+
 defineExpose({
   newsletterForm,
+  focusInput,
 })
 </script>
 

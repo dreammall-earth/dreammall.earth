@@ -12,8 +12,8 @@
     <div id="planning-section" class="py-16 px-4">
       <PlanningSection />
     </div>
-    <div id="newsletter-section" ref="anchorNewsletter" class="py-16 px-4">
-      <NewsletterSection />
+    <div id="newsletter-section" class="py-16 px-4">
+      <NewsletterSection ref="anchorNewsletter" />
     </div>
     <div id="coffee-section" class="py-16 px-4">
       <CoffeeSection />
@@ -37,9 +37,15 @@ import PlanningSection from '#root/src/components/sections/PlanningSection.vue'
 import ProductsSection from '#root/src/components/sections/ProductsSection.vue'
 
 const anchorNewsletter = ref()
+const focusInput = () => {
+  if (anchorNewsletter.value) {
+    anchorNewsletter.value.focusInput()
+  }
+}
 
 defineExpose({
   anchorNewsletter,
+  focusInput,
 })
 </script>
 
