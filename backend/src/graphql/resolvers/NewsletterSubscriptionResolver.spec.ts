@@ -4,7 +4,7 @@ import { confirmNewsletter, subscribeToNewsletter } from '#api/Brevo'
 import { CONFIG } from '#config/config'
 import { EventType } from '#src/event/EventType'
 import { prisma } from '#src/prisma'
-import { createServer } from '#src/server/server'
+import { createTestServer } from '#src/server/server'
 
 CONFIG.BREVO_KEY = 'MY KEY'
 CONFIG.BREVO_ADMIN_NAME = 'Bibi Bloxberg'
@@ -22,7 +22,7 @@ jest.mock('#api/Brevo', () => ({
 }))
 
 beforeAll(async () => {
-  testServer = await createServer()
+  testServer = await createTestServer()
 })
 
 describe('NewsletterSubscriptionResolver', () => {
