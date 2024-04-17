@@ -4,6 +4,7 @@
       <v-row>
         <v-col cols="12" sm="6">
           <NameInput
+            ref="inputFieldNewsletter"
             v-model="firstname"
             name="firstname"
             class="newsletter-text"
@@ -95,9 +96,14 @@ const showFormSuccess = ref(false)
 const showInfoTime: number = 5000
 
 const form = ref<HTMLFormElement>()
+const inputFieldNewsletter = ref()
 
 const { mutate: sendSubscribeToNewsletter } = useMutation(subscribeToNewsletter)
 
+defineExpose({
+  form,
+  inputFieldNewsletter,
+})
 // submit form with data
 async function submitForm() {
   const isValid = await form.value?.validate()

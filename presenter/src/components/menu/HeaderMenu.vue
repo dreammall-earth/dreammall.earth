@@ -19,6 +19,7 @@
             class="mx-4"
             href="/#contactname"
             :label="$t('menu.header.contact')"
+            @click.prevent="scrollToNewsletterAnchor"
           ></AnchorLink>
         </v-col>
         <v-col class="d-flex justify-end">
@@ -77,7 +78,7 @@
           class="ma-4"
           href="/#contactname"
           :label="$t('menu.header.contact')"
-          @click="mobileMenu = !mobileMenu"
+          @click.prevent="scrollToNewsletterAnchorMobile"
         ></AnchorLink>
       </div>
       <div v-if="showAuthentication" class="">
@@ -106,7 +107,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, onBeforeMount } from 'vue'
+import { ref, onMounted, onBeforeMount, nextTick } from 'vue'
 
 import MobileMenuIcon from '#assets/img/hamburger_mobile.svg'
 import MainButton from '#components/buttons/MainButton.vue'
@@ -114,6 +115,17 @@ import LanguageSelector from '#components/language/LanguageSelector.vue'
 import LogoImage from '#components/LogoImage.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
 import { AUTH } from '#src/env'
+
+const anchorNewsletter = ref()
+
+const scrollToNewsletterAnchor = () => {
+  if (anchorNewsletter.value) {
+    anchorNewsletter.value.scrollIntoView({ behavior: 'smooth' })
+    nextTick(() => {
+      anchorNewsletter.value.newsletterForm.value.inputFieldNewsletter.value.focus()
+    })
+  }
+}
 
 const showAuthentication = !!AUTH.SIGNUP_URI || !!AUTH.SIGNIN_URI
 
@@ -129,6 +141,11 @@ const appBackground = ref('transparent')
 const navBackground = ref('#d8d8d8')
 const mobileMenu = ref(false)
 const buttonsInBackground = ref(true)
+
+const scrollToNewsletterAnchorMobile = () => {
+  mobileMenu.value = !mobileMenu.value
+  scrollToNewsletterAnchor()
+}
 
 let videoSlideObserver: IntersectionObserver
 
