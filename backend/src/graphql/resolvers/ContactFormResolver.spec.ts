@@ -3,7 +3,7 @@ import { ApolloServer } from '@apollo/server'
 import { sendContactEmails } from '#api/Brevo'
 import { EventType } from '#src/event/EventType'
 import { prisma } from '#src/prisma'
-import { createServer } from '#src/server/server'
+import { createTestServer } from '#src/server/server'
 
 let testServer: ApolloServer
 
@@ -14,7 +14,7 @@ jest.mock('#api/Brevo', () => {
 })
 
 beforeAll(async () => {
-  testServer = await createServer()
+  testServer = await createTestServer()
 })
 
 describe('ContactFormResolver', () => {
