@@ -17,7 +17,7 @@ config({
 // Only display log level warn
 logger.settings.minLevel = 4
 
-export const verifyTokenMock = jest.fn().mockResolvedValue({
+export const verifyTokenMock = jest.fn(() => ({
   iss: 'issuer',
   sub: 'subject',
   aud: 'audience',
@@ -32,7 +32,7 @@ export const verifyTokenMock = jest.fn().mockResolvedValue({
   groups: ['User'],
   azp: 'azp',
   uid: 'uid',
-})
+}))
 
 jest.mock('jsonwebtoken', () => {
   const originalModule = jest.requireActual<typeof import('jsonwebtoken')>('jsonwebtoken')
