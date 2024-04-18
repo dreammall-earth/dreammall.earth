@@ -48,6 +48,26 @@ updates:
     timezone: "Europe/Berlin"
     time: "03:00"
 
+# admin
+- package-ecosystem: npm
+  open-pull-requests-limit: 999
+  directory: "/admin"
+  rebase-strategy: "disabled"
+  schedule:
+    interval: weekly
+    day: "saturday"
+    timezone: "Europe/Berlin"
+    time: "03:00"
+- package-ecosystem: docker
+  open-pull-requests-limit: 999
+  directory: "/admin"
+  rebase-strategy: "disabled"
+  schedule:
+    interval: weekly
+    day: "saturday"
+    timezone: "Europe/Berlin"
+    time: "03:00"
+
 # frontend
 - package-ecosystem: npm
   open-pull-requests-limit: 999
