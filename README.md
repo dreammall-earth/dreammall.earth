@@ -49,9 +49,12 @@ The following endpoints are provided if `docker compose` is used:
 | [http://localhost:3001](http://localhost:3001)                       | Frontend                   |
 | [http://localhost:8082](http://localhost:8082)                       | Frontend Documentation     |
 | [http://localhost:6007](http://localhost:6007)                       | Frontend Storybook         |
+| [http://localhost:3002](http://localhost:3002)                       | Admin                      |
+| [http://localhost:8083](http://localhost:8083)                       | Admin Documentation        |
+| [http://localhost:6008](http://localhost:6008)                       | Admin Storybook            |
 | [http://localhost:4000/graphql](http://localhost:4000/graphql)       | Backend GraphQL API        |
 | [http://localhost:4000/playground](http://localhost:4000/playground) | Backend GraphQL Playground |
-| [http://localhost:8083](http://localhost:8083)                       | Backend Documentation      |
+| [http://localhost:8084](http://localhost:8084)                       | Backend Documentation      |
 | [http://localhost:8080](http://localhost:8080)                       | Documentation              |
 
 ## How to release
