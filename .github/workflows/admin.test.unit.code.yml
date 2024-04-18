@@ -34,3 +34,4 @@ jobs:
 
       - name: Admin | Unit
         run: npm install && npm run test:unit
+        working-directory: ${{env.WORKING_DIRECTORY}}

@@ -48,3 +48,4 @@ jobs:
 
       - name: Admin | Build Docker Development
         run: docker compose build
+        working-directory: ${{env.WORKING_DIRECTORY}}
