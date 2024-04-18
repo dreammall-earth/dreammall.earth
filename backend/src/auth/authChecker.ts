@@ -1,9 +1,16 @@
 import fs from 'node:fs'
 
-import { verify } from 'jsonwebtoken'
+import { User } from '@prisma/client'
+import { verify, JwtPayload } from 'jsonwebtoken'
 import { AuthChecker } from 'type-graphql'
 
+import { prisma } from '#src/prisma'
 import { Context } from '#src/server/context'
+
+interface CustomJwtPayload extends JwtPayload {
+  nickname: string
+  name: string
+}
 
 let cert: Buffer
 
@@ -16,14 +23,17 @@ export const getCert = (): Buffer => {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const authChecker: AuthChecker<Context> = ({ root, args, context, info }, roles) => {
+export const authChecker: AuthChecker<Context> = async ({ root, args, context, info }, roles) => {
   const { token } = context
 
   if (!token) return false
 
   try {
-    const decoded = verify(token, getCert())
+    const decoded = verify(token, getCert()) as CustomJwtPayload
     if (decoded) {
+      const { nickname, name } = decoded
+      const user = await contextUser(nickname, name)
+      context.user = user
       return true
     }
   } catch {
@@ -31,4 +41,20 @@ export const authChecker: AuthChecker<Context> = ({ root, args, context, info },
   }
 
   return false
+}
+
+const contextUser = async (username: string, name: string): Promise<User> => {
+  let user: User | null = await prisma.user.findUnique({
+    where: {
+      username,
+    },
+  })
+  if (user) return user
+  user = await prisma.user.create({
+    data: {
+      username,
+      name,
+    },
+  })
+  return user
 }
