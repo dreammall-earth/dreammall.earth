@@ -4,6 +4,7 @@ import { User } from '@prisma/client'
 import { verify, JwtPayload } from 'jsonwebtoken'
 import { AuthChecker } from 'type-graphql'
 
+import { EVENT_CREATE_USER } from '#src/event/Events'
 import { prisma } from '#src/prisma'
 import { Context } from '#src/server/context'
 
@@ -56,5 +57,6 @@ const contextUser = async (username: string, name: string): Promise<User> => {
       name,
     },
   })
+  await EVENT_CREATE_USER(user.id)
   return user
 }

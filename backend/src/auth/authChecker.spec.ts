@@ -40,6 +40,8 @@ describe('authChecker', () => {
     })
 
     describe('first call', () => {
+      let userId: number
+
       it('creates user in database', async () => {
         await testServer.executeOperation(
           {
@@ -52,6 +54,7 @@ describe('authChecker', () => {
           },
         )
         const result = await prisma.user.findMany()
+        userId = result[0].id
         expect(result).toHaveLength(1)
         expect(result).toEqual([
           {
@@ -62,6 +65,21 @@ describe('authChecker', () => {
             name: 'User',
             username: 'mockedUser',
           },
+        ])
+      })
+
+      it('creates CREATE USER event', async () => {
+        const result = await prisma.event.findMany()
+        expect(result).toHaveLength(1)
+        expect(result).toEqual([
+          expect.objectContaining({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            createdAt: expect.any(Date),
+            type: 'CREATE_USER',
+            involvedUserId: userId,
+          }),
         ])
       })
     })
