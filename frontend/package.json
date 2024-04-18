@@ -70,7 +70,7 @@
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/apollo-composable": "^4.0.2",
     "@vue/apollo-option": "^4.0.0",
-    "@vue/compiler-sfc": "^3.4.21",
+    "@vue/compiler-sfc": "^3.4.23",
     "@vue/server-renderer": "3.4.21",
     "@vuepress/theme-default": "^2.0.0-rc.24",
     "compression": "^1.7.4",
