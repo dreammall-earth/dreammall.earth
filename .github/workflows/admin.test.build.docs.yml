@@ -1,4 +1,4 @@
-name: "frontend:test:build test docs"
+name: "admin:test:build test docs"
 
 on: push
 
@@ -6,14 +6,14 @@ jobs:
   # only (but most important) job from this workflow required for pull requests
   # check results serve as run conditions for all other jobs here
   files-changed:
-    name: Detect File Changes - frontend-test-build-docs
+    name: Detect File Changes - admin-test-build-docs
     runs-on: ubuntu-latest
     outputs:
-      changes: ${{ steps.changes.outputs.frontend-test-build-docs }}
+      changes: ${{ steps.changes.outputs.admin-test-build-docs }}
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check for frontend file changes
+      - name: Check for admin file changes
         uses: dorny/paths-filter@v3.0.2
         id: changes
         with:
@@ -23,12 +23,14 @@ jobs:
 
   build:
     if: needs.files-changed.outputs.changes == 'true'
-    name: Build Docs - Frontend
+    name: Build Docs - Admin
     needs: files-changed
     runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./admin
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Frontend | Build Docs
+      - name: Admin | Build Docs
         run: npm install && npm run docs:build
