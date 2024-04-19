@@ -43,6 +43,27 @@ frontend-test-build-docs: &frontend-test-build-docs
 frontend-test-build-storybook: &frontend-test-build-storybook
   - 'frontend/**/*'
 
+# admin
+admin-test-lint-code: &admin-test-lint-code
+  - 'admin/**/*'
+
+admin-test-unit-code: &admin-test-unit-code
+  - 'admin/**/*'
+
+admin-test-build-code: &admin-test-build-code
+  - 'admin/**/*'
+
+admin-test-build-docker: &admin-test-build-docker
+  - 'admin/**/*'
+
+admin-test-build-docs: &admin-test-build-docs
+  - 'admin/**/*.md'
+  - 'admin/.vuepress/*'
+
+admin-test-build-storybook: &admin-test-build-storybook
+  - 'admin/**/*'
+
+
 # backend
 backend-test-lint-code: &backend-test-lint-code
   - 'backend/**/*'
