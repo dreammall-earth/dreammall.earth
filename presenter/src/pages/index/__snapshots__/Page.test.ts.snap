@@ -201,7 +201,7 @@ exports[`IndexPage > renders 1`] = `
                             aria-valuemin="0"
                             class="v-progress-linear v-theme--light v-locale--is-ltr"
                             role="progressbar"
-                            style="top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);"
+                            style="height: 0px; --v-progress-linear-height: 2px;"
                           >
                             <!---->
                             <div
@@ -917,7 +917,7 @@ exports[`IndexPage > renders 1`] = `
                           aria-valuemin="0"
                           class="v-progress-linear v-theme--light v-locale--is-ltr"
                           role="progressbar"
-                          style="top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);"
+                          style="height: 0px; --v-progress-linear-height: 2px;"
                         >
                           <!---->
                           <div
@@ -1017,7 +1017,7 @@ exports[`IndexPage > renders 1`] = `
                           aria-valuemin="0"
                           class="v-progress-linear v-theme--light v-locale--is-ltr"
                           role="progressbar"
-                          style="top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);"
+                          style="height: 0px; --v-progress-linear-height: 2px;"
                         >
                           <!---->
                           <div
@@ -1117,7 +1117,7 @@ exports[`IndexPage > renders 1`] = `
                           aria-valuemin="0"
                           class="v-progress-linear v-theme--light v-locale--is-ltr"
                           role="progressbar"
-                          style="top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);"
+                          style="height: 0px; --v-progress-linear-height: 2px;"
                         >
                           <!---->
                           <div
@@ -1364,7 +1364,7 @@ exports[`IndexPage > renders 1`] = `
                                         aria-valuemin="0"
                                         class="v-progress-linear v-theme--light v-locale--is-ltr"
                                         role="progressbar"
-                                        style="top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);"
+                                        style="height: 0px; --v-progress-linear-height: 2px;"
                                       >
                                         <!---->
                                         <div
@@ -1479,7 +1479,7 @@ exports[`IndexPage > renders 1`] = `
                                         aria-valuemin="0"
                                         class="v-progress-linear v-theme--light v-locale--is-ltr"
                                         role="progressbar"
-                                        style="top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);"
+                                        style="height: 0px; --v-progress-linear-height: 2px;"
                                       >
                                         <!---->
                                         <div
@@ -1599,7 +1599,7 @@ exports[`IndexPage > renders 1`] = `
                                         aria-valuemin="0"
                                         class="v-progress-linear v-theme--light v-locale--is-ltr"
                                         role="progressbar"
-                                        style="top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);"
+                                        style="height: 0px; --v-progress-linear-height: 2px;"
                                       >
                                         <!---->
                                         <div
@@ -2738,7 +2738,7 @@ exports[`IndexPage > renders 1`] = `
                                   aria-valuemin="0"
                                   class="v-progress-linear v-theme--light v-locale--is-ltr"
                                   role="progressbar"
-                                  style="top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);"
+                                  style="height: 0px; --v-progress-linear-height: 2px;"
                                 >
                                   <!---->
                                   <div
@@ -2853,7 +2853,7 @@ exports[`IndexPage > renders 1`] = `
                                   aria-valuemin="0"
                                   class="v-progress-linear v-theme--light v-locale--is-ltr"
                                   role="progressbar"
-                                  style="top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);"
+                                  style="height: 0px; --v-progress-linear-height: 2px;"
                                 >
                                   <!---->
                                   <div
@@ -2973,7 +2973,7 @@ exports[`IndexPage > renders 1`] = `
                                   aria-valuemin="0"
                                   class="v-progress-linear v-theme--light v-locale--is-ltr"
                                   role="progressbar"
-                                  style="top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);"
+                                  style="height: 0px; --v-progress-linear-height: 2px;"
                                 >
                                   <!---->
                                   <div
@@ -3114,7 +3114,7 @@ exports[`IndexPage > renders 1`] = `
                                   aria-valuemin="0"
                                   class="v-progress-linear v-theme--light v-locale--is-ltr"
                                   role="progressbar"
-                                  style="top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);"
+                                  style="height: 0px; --v-progress-linear-height: 2px;"
                                 >
                                   <!---->
                                   <div
