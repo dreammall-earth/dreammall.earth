@@ -11,7 +11,7 @@ exports[`DataPrivacyPage > renders 1`] = `
     <main
       class="v-main main-layout"
       data-v-75d0be1e=""
-      style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: 64px; --v-layout-bottom: 0px; transition: none !important;"
+      style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: 64px; --v-layout-bottom: 0px;"
     >
       
       <div
@@ -22,7 +22,7 @@ exports[`DataPrivacyPage > renders 1`] = `
         <header
           class="v-toolbar v-toolbar--flat v-toolbar--density-default v-theme--light v-locale--is-ltr v-app-bar"
           data-v-5e2a2776=""
-          style="top: 0px; z-index: 1008; transform: translateY(0%); position: fixed; transition: none !important; background-color: #f5f5f5; color: #000; caret-color: #000; left: 0px; width: calc(100% - 0px - 0px);"
+          style="top: 0px; z-index: 1008; transform: translateY(0%); position: fixed; background-color: #f5f5f5; color: #000; caret-color: #000; left: 0px; width: calc(100% - 0px - 0px);"
         >
           <!---->
           
@@ -368,7 +368,7 @@ exports[`DataPrivacyPage > renders 1`] = `
         <nav
           class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile nav-drawer d-flex d-md-none"
           data-v-5e2a2776=""
-          style="background-color: #f5f5f5; color: #000; caret-color: #000; right: 0px; z-index: 1006; transform: translateX(110%); position: fixed; transition: none !important; height: calc(100% - 64px - 0px); top: 64px; bottom: 0px; width: 256px;"
+          style="background-color: #f5f5f5; color: #000; caret-color: #000; right: 0px; z-index: 1006; transform: translateX(110%); position: fixed; height: calc(100% - 64px - 0px); top: 64px; bottom: 0px; width: 256px;"
         >
           <!---->
           <!---->
