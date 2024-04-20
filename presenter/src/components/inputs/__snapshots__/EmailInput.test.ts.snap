@@ -25,7 +25,7 @@ exports[`EmailInput > renders 1`] = `
           aria-valuemin="0"
           class="v-progress-linear v-theme--light v-locale--is-ltr"
           role="progressbar"
-          style="height: 0px; --v-progress-linear-height: 2px;"
+          style="top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);"
         >
           <!---->
           <div
