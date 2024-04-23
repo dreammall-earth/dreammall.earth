@@ -11,6 +11,11 @@
   text-align: center;
 }
 
+/* form */
+.ak-login-container {
+  width: 699px;
+}
+
 /* input fields*/
 .pf-c-form input[type="text"],
 .pf-c-form input[type="email"],
