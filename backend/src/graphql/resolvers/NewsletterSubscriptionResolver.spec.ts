@@ -179,14 +179,14 @@ describe('NewsletterSubscriptionResolver', () => {
         const result = await prisma.event.findMany()
         expect(result).toHaveLength(1)
         expect(result).toEqual([
-          {
+          expect.objectContaining({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
             type: EventType.NEWSLETTER_SUBSCRIBE,
             involvedEmail: 'peter@lustig.de',
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             createdAt: expect.any(Date),
-          },
+          }),
         ])
       })
     })
@@ -238,14 +238,14 @@ describe('NewsletterSubscriptionResolver', () => {
       const result = await prisma.event.findMany()
       expect(result).toHaveLength(1)
       expect(result).toEqual([
-        {
+        expect.objectContaining({
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           id: expect.any(Number),
           type: EventType.NEWSLETTER_CONFIRM,
           involvedEmail: 'peter@lustig.de',
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           createdAt: expect.any(Date),
-        },
+        }),
       ])
     })
   })

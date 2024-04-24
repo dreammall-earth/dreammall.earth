@@ -207,14 +207,14 @@ weils nach Datum, Medium, Anlass und Kosten auflisten)?`,
         const result = await prisma.event.findMany()
         expect(result).toHaveLength(1)
         expect(result).toEqual([
-          {
+          expect.objectContaining({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
             type: EventType.CONTACTFORM_SEND,
             involvedEmail: 'peter@lustig.de',
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             createdAt: expect.any(Date),
-          },
+          }),
         ])
       })
     })
