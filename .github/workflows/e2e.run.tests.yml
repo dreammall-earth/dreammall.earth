@@ -1,38 +1,40 @@
-# name: e2e:run:tests
+name: e2e:test:all test the application end to end
 
-# on: push
+push:
+  branches:
+    - initial-e2e2-tests
 
-# jobs:
-#   e2e-tests:
-#     name: Run all E2E tests
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Set Node version
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: '>=21'
+jobs:
+  e2e-tests:
+    name: Run all E2E tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Node version
+        uses: actions/setup-node@v4
+        with:
+          node-version: '>=21'
 
-#       - name: Checkout
-#         uses: actions/checkout@master
+      - name: Checkout
+        uses: actions/checkout@master
 
-#       - name: E2E - Run all tests
-#         id: e2e-run
-#         uses: cypress-io/github-action@v6
+      - name: E2E - Run all tests
+        id: e2e-run
+        uses: cypress-io/github-action@v6
 
-#       - name: E2E | if tests failed, compile html report
-#         if: ${{ failure() && steps.e2e-run.conclusion == 'failure' }}
-#         run: |
-#           cd cypress/
-#           npx tsx create-cucumber-html-report.ts
+      - name: E2E | if tests failed, compile html report
+        if: ${{ failure() && steps.e2e-run.conclusion == 'failure' }}
+        run: |
+          cd cypress/
+          npx tsx create-cucumber-html-report.ts
 
-#       - name: Get PR number
-#         if: ${{ failure() && steps.e2e-run.conclusion == 'failure' }}
-#         uses: jwalton/gh-find-current-pr@master
-#         id: pr-number
+      - name: Get PR number
+        if: ${{ failure() && steps.e2e-run.conclusion == 'failure' }}
+        uses: jwalton/gh-find-current-pr@master
+        id: pr-number
 
-#       - name: E2E | if tests failed, upload report
-#         if: ${{ failure() && steps.e2e-run.conclusion == 'failure' }}
-#         uses: actions/upload-artifact@v4
-#         with:
-#           name: boilerplate-e2e-test-report-pr-${{ steps.pr-number.outputs.pr }}
-#           path: /home/runner/work/boilerplate-e2e-cypress-cucumber/boilerplate-e2e-cypress-cucumber/cypress/reports/e2e_html_report
+      - name: E2E | if tests failed, upload report
+        if: ${{ failure() && steps.e2e-run.conclusion == 'failure' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: boilerplate-e2e-test-report-pr-${{ steps.pr-number.outputs.pr }}
+          path: /home/runner/work/boilerplate-e2e-cypress-cucumber/boilerplate-e2e-cypress-cucumber/cypress/reports/e2e_html_report
