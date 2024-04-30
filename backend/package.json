@@ -42,6 +42,7 @@
     "axios": "^1.6.8",
     "class-validator": "^0.14.1",
     "dotenv": "^16.4.5",
+    "fast-xml-parser": "^4.3.6",
     "graphql": "^16.8.1",
     "graphql-scalars": "^1.23.0",
     "jsonwebtoken": "^9.0.2",
