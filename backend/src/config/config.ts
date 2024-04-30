@@ -33,9 +33,14 @@ const ROOMS = {
   ROOM_LINK: process.env.ROOM_LINK ?? 'http://my-room.earth',
 }
 
+const BBB = {
+  BBB_SHARED_SECRET: process.env.BBB_SHARED_SECRET ?? 'unknown',
+}
+
 export const CONFIG = {
   ...BREVO,
   ...ROOMS,
+  ...BBB,
 }
 
 // Config Checks
