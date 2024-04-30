@@ -1,6 +1,6 @@
 import { Resolver, Query, Authorized } from 'type-graphql'
 
-import { getMeetings } from '#api/BBB'
+import { createMeeting, getMeetings } from '#api/BBB'
 import { CONFIG } from '#config/config'
 
 @Resolver()
@@ -15,7 +15,10 @@ export class RoomResolver {
   @Query(() => Boolean)
   async test(): Promise<boolean> {
     try {
-      const result = await getMeetings()
+      const result = await createMeeting({
+        name: 'My Meeting ßß',
+        meetingID: 'xxx',
+      })
       console.log(result)
     } catch (err) {
       console.log(err)
