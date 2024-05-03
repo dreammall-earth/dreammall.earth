@@ -34,55 +34,24 @@ const activeItem = ref(1)
 <style scoped lang="scss">
 .icon {
   display: flex;
-  width: 30px;
-  height: 30px;
-  padding: 5px;
-  margin-right: 2px;
-  transition:
-    margin-right var(--animation-time),
-    background var(--animation-time);
-}
-
-.tabControl {
-  --animation-time: 0.3s;
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  border-radius: 27.067px;
-  border: 0.677px solid rgba(255, 255, 255, 0.78); // TODO use color variable
-  background: #e1e6ed; // TODO use color variable
-
-  &.open {
-    .item {
-      display: flex;
-      &.active {
-        border-radius: 27.067px;
-        border: 0.677px solid rgba(255, 255, 255, 0.78);
-        background: #fff;
-
-        .icon {
-          background: #e1e6ed;
-          border-radius: 50%;
-        }
-      }
-    }
-  }
-
-  &:not(.open) {
-    .item {
-      display: flex;
-    }
-    .item:not(.active) {
-      display: none;
-    }
-  }
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 5px;
+  margin-right: 5px;
+  border-radius: 50%;
+  transition: background-color var(--animation-time);
 }
 
 .item {
   align-items: center;
-  padding: 10px;
+  padding: 5px;
   width: fit-content; // TODO calculate width
+  height: calc(var(--height) - 2 * var(--tab-control-padding)); // TODO calculate height
+  transition:
+    height var(--animation-time),
+    background-color var(--animation-time);
   &.active {
     border-radius: 27.067px;
     border: 0.677px solid rgba(255, 255, 255, 0.78);
@@ -90,8 +59,53 @@ const activeItem = ref(1)
 
     .icon {
       background: #e1e6ed;
-      border-radius: 50%;
-      margin-right: 5px;
+    }
+  }
+}
+
+.tabControl {
+  --animation-time: 0.3s;
+  --height: 40px;
+  height: var(--height);
+  font-family: 'SF Pro Display';
+  font-size: 8.797px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #e1e6ed; // TODO use color variable
+  padding: var(--tab-control-padding);
+  border-radius: 27.067px;
+  border: none;
+  transition: padding var(--animation-time);
+
+  &.open {
+    --tab-control-padding: 5px;
+    border: 0.677px solid rgba(255, 255, 255, 0.78); // TODO use color variable etc
+
+    .item {
+      display: flex;
+      &.active {
+        .icon {
+          background-color: #e1e6ed;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+
+  &:not(.open) {
+    --tab-control-padding: 0px;
+    .item.active {
+      display: flex;
+      .icon {
+        background: none;
+      }
+    }
+    .item:not(.active) {
+      display: none;
     }
   }
 }
