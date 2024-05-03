@@ -16,12 +16,14 @@
         </v-col>
       </v-row>
     </v-container>
+    <BottomMenu class="d-flex d-sm-none" />
   </v-main>
 </template>
 
 <script lang="ts" setup>
 import { useSlots } from 'vue'
 
+import BottomMenu from '#components/menu/BottomMenu.vue'
 import TopMenu from '#components/menu/TopMenu.vue'
 
 const slots = useSlots()
