@@ -1,15 +1,15 @@
 <template>
-  <button class="tabControl" :class="{ open: isOpen }" @click="toggleOpen">
+  <button class="tabControl ma-auto" :class="{ open: isOpen }" @click="toggleOpen">
     <button class="item" :class="{ active: activeItem === 1 }" @click="activeItem = 1">
-      <div class="icon"><v-img class="w-100" :src="WorldCafeIcon" /></div>
+      <div class="icon d-flex"><v-img class="w-100" :src="WorldCafeIcon" /></div>
       Weltencafe
     </button>
     <button class="item" :class="{ active: activeItem === 2 }" @click="activeItem = 2">
-      <div class="icon"><v-img class="w-100" :src="MallIcon" /></div>
+      <div class="icon d-flex"><v-img class="w-100" :src="MallIcon" /></div>
       Mall
     </button>
     <button class="item" :class="{ active: activeItem === 3 }" @click="activeItem = 3">
-      <div class="icon"><v-img class="w-100" :src="CockpitIcon" /></div>
+      <div class="icon d-flex"><v-img class="w-100" :src="CockpitIcon" /></div>
       Cockpit
     </button>
   </button>
@@ -33,7 +33,6 @@ const activeItem = ref(1)
 
 <style scoped lang="scss">
 .icon {
-  display: flex;
   align-items: center;
   justify-content: center;
   width: 20px;
