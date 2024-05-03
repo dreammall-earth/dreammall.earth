@@ -3,8 +3,8 @@ Feature: Login
   I want to sign in
 
   Background:
-    Given The web browser is at the login page
+    Given The browser navigates to the login page
 
   Scenario: Successful Login
-    When I submit the credentials 'tomsmith' 'SuperSecretPassword!'
-    Then I am on the welcome page
+    When I submit the credentials 'akadmin' 'dreammall'
+    # Then I am on the worldcafe page
