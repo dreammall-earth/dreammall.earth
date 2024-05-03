@@ -45,13 +45,16 @@ const activeItem = ref(1)
 }
 
 .item {
+  display: flex;
+  overflow: hidden;
   align-items: center;
   padding: 5px;
-  width: fit-content; // TODO calculate width
+  max-width: 80px;
   height: calc(var(--height) - 2 * var(--tab-control-padding)); // TODO calculate height
   transition:
     height var(--animation-time),
-    background-color var(--animation-time);
+    background-color var(--animation-time),
+    max-width var(--animation-time);
   &.active {
     border-radius: 27.067px;
     border: 0.677px solid rgba(255, 255, 255, 0.78);
@@ -86,7 +89,6 @@ const activeItem = ref(1)
     border: 0.677px solid rgba(255, 255, 255, 0.78); // TODO use color variable etc
 
     .item {
-      display: flex;
       &.active {
         .icon {
           background-color: #e1e6ed;
@@ -99,13 +101,13 @@ const activeItem = ref(1)
   &:not(.open) {
     --tab-control-padding: 0px;
     .item.active {
-      display: flex;
       .icon {
         background: none;
       }
     }
     .item:not(.active) {
-      display: none;
+      max-width: 0;
+      padding: 0;
     }
   }
 }
