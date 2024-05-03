@@ -1,0 +1,140 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SilentRefreshPage > auth service with succes > renders 1`] = `
+<div
+  class="v-application v-theme--light v-layout v-layout--full-height v-locale--is-ltr"
+>
+  <div
+    class="v-application__wrap"
+  >
+    
+    <main
+      class="v-main bg-grey-lighten-3 main-layout"
+      data-v-75d0be1e=""
+      data-v-a3d38914=""
+      style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: NaN; --v-layout-bottom: 0px; transition: none !important;"
+    >
+      
+      <div
+        class="topmenu"
+        data-v-75d0be1e=""
+      >
+        <header
+          class="v-toolbar v-toolbar--flat v-toolbar--density-default v-theme--light v-locale--is-ltr v-app-bar py-4"
+          style="top: 0px; z-index: 1004; transform: translateY(0%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
+        >
+          <!---->
+          
+          <div
+            class="v-toolbar__content"
+            style=""
+          >
+            <!---->
+            <!---->
+            
+            <div
+              class="v-row"
+            >
+              <div
+                class="v-col d-flex align-center"
+              >
+                <a
+                  class="w-100 ml-8"
+                  href="/"
+                >
+                  <div
+                    class="v-responsive v-img v-img--booting w-100 logo-medium"
+                    data-v-f6be2607=""
+                  >
+                    <div
+                      class="v-responsive__sizer"
+                    />
+                    
+                    
+                    <transition-stub
+                      appear="true"
+                      css="true"
+                      name="fade-transition"
+                      persisted="false"
+                    >
+                      <img
+                        class="v-img__img v-img__img--contain"
+                        src="/src/assets/dreammall-logo.svg"
+                        style="display: none;"
+                      />
+                    </transition-stub>
+                    <transition-stub
+                      appear="false"
+                      css="true"
+                      name="fade-transition"
+                      persisted="false"
+                    >
+                      <!---->
+                    </transition-stub>
+                    <!---->
+                    <!---->
+                    <!---->
+                    
+                    
+                    <!---->
+                  </div>
+                </a>
+              </div>
+              <div
+                class="v-col d-flex justify-end"
+              >
+                <!--v-if-->
+              </div>
+            </div>
+            
+            <!---->
+          </div>
+          
+          
+          <transition-stub
+            appear="false"
+            css="true"
+            name="expand-transition"
+            persisted="false"
+          >
+            <!---->
+          </transition-stub>
+          
+        </header>
+      </div>
+      <div
+        class="v-container v-container--fluid v-locale--is-ltr page-container px-8"
+        data-v-75d0be1e=""
+      >
+        <div
+          class="v-row"
+          data-v-75d0be1e=""
+        >
+          <!--v-if-->
+          <div
+            class="v-col pa-0 pa-sm-1 pt-0"
+            data-v-75d0be1e=""
+          >
+            <div
+              class="v-sheet v-theme--light v-sheet--rounded pa-3"
+              data-v-75d0be1e=""
+              style="top: 90px;"
+            >
+              
+              <div
+                class="h-screen auth-page py-12"
+                data-v-a3d38914=""
+              >
+                $t('auth.content')
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </main>
+    
+  </div>
+</div>
+`;

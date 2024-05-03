@@ -12,12 +12,26 @@
 //    - You can use Bati (https://batijs.github.io/) to scaffold a Vike + HatTip app. Note that Bati generates apps that use the V1 design (https://vike.dev/migration/v1-design) and Vike packages (https://vike.dev/vike-packages)
 
 import compression from 'compression'
+import { parse } from 'cookie'
 import express from 'express'
 import { renderPage } from 'vike/server'
 
 import { root } from './root.js'
 
 const isProduction = process.env.NODE_ENV === 'production'
+
+const hasToken = (cookieString: string | undefined) => {
+  if (!cookieString) {
+    return false
+  }
+
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    return !!JSON.parse(parse(cookieString).auth).user
+  } catch (error) {
+    return false
+  }
+}
 
 void startServer()
 
@@ -38,6 +52,7 @@ async function startServer() {
         gzip: true,
       }),
     )
+    /*
     // cache things for 10min
     app.use(
       sirv(`${root}/build/client`, {
@@ -46,6 +61,7 @@ async function startServer() {
         gzip: true,
       }),
     )
+    */
   } else {
     // We instantiate Vite's development server and integrate its middleware to our server.
     // ⚠️ We instantiate it only in development. (It isn't needed in production and it
@@ -73,6 +89,7 @@ async function startServer() {
     void (async (req, res, next) => {
       const pageContextInit = {
         urlOriginal: req.originalUrl,
+        hasToken: hasToken(req.headers.cookie),
       }
       const pageContext = await renderPage(pageContextInit)
       const { httpResponse } = pageContext

@@ -1,19 +1,40 @@
 <template>
   <DefaultLayout>
-    <h1>{{ $t('home.h1') }}</h1>
-    <p>{{ $t('home.text1') }}</p>
-    <br />
-    <p>{{ $t('home.text2') }}</p>
-    <br />
-    <p>{{ $t('home.text3') }}</p>
-    <br />
-    <p>{{ $t('home.text4') }} <v-icon icon="mdi-heart" color="red" /></p>
-    <br />
-    <p>{{ $t('home.greet1') }}</p>
-    <p>{{ $t('home.greet2') }}</p>
+    <h1 class="d-flex justify-center">{{ $t('cafe.welcome') }}</h1>
+    <v-row>
+      <v-col>
+        <MainButton
+          class="room-button"
+          variant="fourth"
+          label="To Room"
+          size="auto"
+          @click="enterRoom"
+          >{{ $t('buttons.toRoom') }}</MainButton
+        >
+      </v-col>
+    </v-row>
   </DefaultLayout>
 </template>
 
 <script lang="ts" setup>
+import { ApolloClient, InMemoryCache } from '@apollo/client/core'
+import { DefaultApolloClient } from '@vue/apollo-composable'
+import { inject } from 'vue'
+
+import MainButton from '#components/buttons/MainButton.vue'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
+import { getRoomQuery } from '#queries/getRoomQuery'
+
+const apolloClient = inject<ApolloClient<InMemoryCache>>(DefaultApolloClient)
+
+const enterRoom = async () => {
+  try {
+    const result = await apolloClient?.query({ query: getRoomQuery, fetchPolicy: 'network-only' })
+    window.location.href = result?.data?.getRoom
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    // eslint-disable-next-line no-console
+    console.log('auth error', error)
+  }
+}
 </script>

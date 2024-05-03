@@ -1,27 +1,15 @@
 {
-  "about": {
-    "h1": "About",
-    "link1": "github.com",
-    "link2": "website",
-    "text1": "To find out more about this boilerplate you can look at the sources on {link}.",
-    "text2": "Want to get in touch? Find out how on our {link}."
+  "auth": {
+    "content": "Logging in...",
+    "signin": "Signing In",
+    "title": "DreamMall {'|'} Authentication"
   },
-  "app": {
-    "inc": {
-      "h1": "Increase the Counter",
-      "menu": "Increase",
-      "text": "Increase: {count}"
-    },
-    "reset": {
-      "h1": "Reset the Counter",
-      "menu": "Reset",
-      "text": "Reset: {count}"
-    },
-    "value": {
-      "h1": "The Counter",
-      "menu": "Value",
-      "text": "The current value of the counter is: {count}"
-    }
+  "buttons": {
+    "signout": "Sign Out",
+    "toRoom": "To the meeting"
+  },
+  "cafe": {
+    "welcome": "World Cafe"
   },
   "error": {
     "404": {
@@ -33,21 +21,8 @@
       "text": "Something went wrong."
     }
   },
-  "home": {
-    "greet1": "Sincerly",
-    "greet2": "Your IT Team For Change",
-    "h1": "IT4C Frontend Boilerplate",
-    "text1": "Welcome to this minimal starter for frontends.",
-    "text2": "This is just a basic example to demonstrate things - nothing fancy.",
-    "text3": "In the App Section you will find a counter example utilizing the local storage.",
-    "text4": "Happy Coding"
-  },
-  "language": {
-    "german": "German"
-  },
-  "menu": {
-    "about": "About",
-    "app": "App",
-    "home": "Home"
+  "meta": {
+    "defaultDescription": "Expanding your reach making the most of opportunities enhance quality of life together",
+    "defaultTitle": "DreamMall"
   }
 }

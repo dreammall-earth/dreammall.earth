@@ -17,8 +17,9 @@ const config: UserConfig = {
     !isStorybook() && vike({ prerender: true }), // SSR only when storybook is not running
     vueI18n({
       ssr: true,
-      include: path.resolve(__dirname, './src/locales/**'),
+      include: path.resolve(__dirname, './src/locales/**.json'),
       jitCompilation: false,
+      runtimeOnly: false,
     }),
     checker({
       typescript: true,

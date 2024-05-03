@@ -1,0 +1,21 @@
+name: "admin:deploy:chromatic"
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-and-deploy:
+    name: Chromatic - Admin
+    runs-on: ubuntu-latest
+    env:
+      CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN_ADMIN }}
+      WORKING_DIRECTORY: ./admin
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Admin | Build
+        run: npm install && npm run chromatic -- --exit-zero-on-changes
+        working-directory: ${{env.WORKING_DIRECTORY}}

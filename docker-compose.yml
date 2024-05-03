@@ -33,7 +33,41 @@ services:
       - external-net
       - internal-net
     ports:
+      - 3001:3000
+    environment:
+      - NODE_ENV=production
+
+  ########################################################
+  # FRONTEND #############################################
+  ########################################################
+  frontend:
+    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
+    image: dreammall/frontend:local-production
+    build:
+      context: ./frontend
+      target: production
+    networks:
+      - external-net
+      - internal-net
+    ports:
       - 3000:3000
+    environment:
+      - NODE_ENV=production
+
+  ########################################################
+  # ADMIN ################################################
+  ########################################################
+  admin:
+    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
+    image: dreammall/admin:local-production
+    build:
+      context: ./admin
+      target: production
+    networks:
+      - external-net
+      - internal-net
+    ports:
+      - 3002:3000
     environment:
       - NODE_ENV=production
 

@@ -62,6 +62,10 @@ Configure nginx:
 cp -f deployment/nginx/default.conf /etc/nginx/http.d/default.conf
 # adjust the nginx config accordingly
 vi /etc/nginx/http.d/default.conf
+# frontend nginx config
+cp deployment/nginx/frontend.conf /etc/nginx/http.d/frontend.conf
+# adjust the frontend nginx config accordingly
+vi /etc/nginx/http.d/frontend.conf
 # note: replace log paths according to your installation directory
 service nginx restart
 ```
@@ -104,7 +108,7 @@ This will build all projects parts and start a pm2 instance to serve the corresp
 Those services are:
 
 | Service             | URL                                        |
-|---------------------|--------------------------------------------|
+| ------------------- | ------------------------------------------ |
 | presenter           | [https://host/](https://host/)             |
 | backend             | [https://host/api](https://host/api)       |
 | docs                | [https://host/docs](https://host/docs)     |
@@ -140,7 +144,7 @@ service webhook start
 In github configure a webhook pointing to the correct url with the following setting:
 
 | Field                                                | Value                                                  |
-|------------------------------------------------------|--------------------------------------------------------|
+| ---------------------------------------------------- | ------------------------------------------------------ |
 | Payload URL                                          | [https://host/hooks/github](https://host/hooks/github) |
 | Content type                                         | application/json                                       |
 | Secret                                               | A SECRET                                               |

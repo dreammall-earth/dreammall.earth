@@ -1,38 +1,45 @@
 <template>
-  <v-app-bar flat>
-    <v-row>
-      <v-col>
-        <LogoAvatar />
-      </v-col>
-      <v-col class="d-flex align-center justify-center grow">
-        <VikeBtn href="/">{{ $t('menu.home') }}</VikeBtn>
-        <VikeBtn href="/app">{{ $t('menu.app') }}</VikeBtn>
-        <VikeBtn href="/about">{{ $t('menu.about') }}</VikeBtn>
-      </v-col>
-      <v-col>
-        <v-switch
-          v-model="isEnabled"
-          class="d-flex justify-end mr-5"
-          :label="$t('language.german')"
-          color="success"
-          @update:model-value="onChange"
-        ></v-switch>
-      </v-col>
-    </v-row>
-  </v-app-bar>
+  <div class="topmenu">
+    <v-app-bar flat class="py-4" height="70px">
+      <v-row>
+        <v-col class="d-flex align-center">
+          <a href="/" class="w-100 ml-8">
+            <LogoImage class="" />
+          </a>
+        </v-col>
+        <v-col class="d-flex justify-end">
+          <MainButton
+            v-if="auth.isLoggedIn"
+            class="sign-out mr-4"
+            variant="third"
+            label="Sign Out"
+            size="auto"
+            @click="signOut"
+            >{{ $t('buttons.signout') }}
+          </MainButton>
+        </v-col>
+      </v-row>
+    </v-app-bar>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { useLocale } from 'vuetify'
+import { inject } from 'vue'
 
-import VikeBtn from '#components/VikeBtn.vue'
+import MainButton from '#components/buttons/MainButton.vue'
+import LogoImage from '#components/menu/LogoImage.vue'
+import AuthService from '#src/services/AuthService'
+import { useAuthStore } from '#stores/authStore'
 
-import LogoAvatar from './LogoAvatar.vue'
+const authService = inject<AuthService>('authService')
+const auth = useAuthStore()
 
-const { current: locale } = useLocale()
-const isEnabled = ref(locale.value === 'de')
-const onChange = () => {
-  locale.value = isEnabled.value ? 'de' : 'en'
+async function signOut() {
+  try {
+    await authService?.signOut()
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log('auth error', error)
+  }
 }
 </script>

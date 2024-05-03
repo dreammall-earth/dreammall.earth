@@ -3,6 +3,8 @@ import { describe, it, expect } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
+import i18n from '#plugins/i18n'
+
 import ImpressumPage from './+Page.vue'
 import { title } from './+title'
 
@@ -14,7 +16,7 @@ describe('ImpressumPage', () => {
   })
 
   it('title returns correct title', () => {
-    expect(title).toBe('DreamMall | Impressum')
+    expect(title()).toBe(i18n.global.t('impress.title'))
   })
 
   it('renders', () => {

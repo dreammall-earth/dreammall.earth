@@ -377,7 +377,7 @@ exports[`ImpressumPage > renders 1`] = `
           >
             
             <div
-              class="d-flex flex-column py-8"
+              class="d-flex flex-column pt-8"
               data-v-5e2a2776=""
             >
               <!-- TODO same as above: refactor -->
@@ -466,6 +466,7 @@ exports[`ImpressumPage > renders 1`] = `
                 <!---->
               </a>
             </div>
+            <!--v-if-->
             
           </div>
           <!---->
@@ -1917,7 +1918,7 @@ exports[`ImpressumPage > renders 1`] = `
                           <div
                             class="v-input__details"
                           >
-                            <transition-stub
+                            <transition-group-stub
                               appear="false"
                               aria-live="polite"
                               class="v-messages"
@@ -1929,7 +1930,7 @@ exports[`ImpressumPage > renders 1`] = `
                               tag="div"
                             >
                               <!---->
-                            </transition-stub>
+                            </transition-group-stub>
                             <!---->
                           </div>
                         </div>

@@ -22,7 +22,7 @@ Deploy instructions can be found in [deployment/](deplyoment/README.md)
 The following commands are available:
 
 | Command                    | Description                                    |
-|----------------------------|------------------------------------------------|
+| -------------------------- | ---------------------------------------------- |
 | `npm install`              | Project setup                                  |
 | **Test**                   |                                                |
 | `npm run test:lint`        | Run all linters                                |
@@ -41,13 +41,20 @@ The following commands are available:
 The following endpoints are provided if `docker compose` is used:
 
 | Endpoint                                                             | Description                |
-|----------------------------------------------------------------------|----------------------------|
+| -------------------------------------------------------------------- | -------------------------- |
 | [http://localhost:3306](http://localhost:3306)                       | MySQL Database             |
-| [http://localhost:4000/graphql](http://localhost:4000/graphql)       | Backend GraphQL API        |
-| [http://localhost:4000/playground](http://localhost:4000/playground) | Backend GraphQL Playground |
-| [http://localhost:3000](http://localhost:3000)                       | Presenter Frontend         |
+| [http://localhost:3000](http://localhost:3000)                       | Presenter                  |
 | [http://localhost:8081](http://localhost:8081)                       | Presenter Documentation    |
 | [http://localhost:6006](http://localhost:6006)                       | Presenter Storybook        |
+| [http://localhost:3001](http://localhost:3001)                       | Frontend                   |
+| [http://localhost:8082](http://localhost:8082)                       | Frontend Documentation     |
+| [http://localhost:6007](http://localhost:6007)                       | Frontend Storybook         |
+| [http://localhost:3002](http://localhost:3002)                       | Admin                      |
+| [http://localhost:8083](http://localhost:8083)                       | Admin Documentation        |
+| [http://localhost:6008](http://localhost:6008)                       | Admin Storybook            |
+| [http://localhost:4000/graphql](http://localhost:4000/graphql)       | Backend GraphQL API        |
+| [http://localhost:4000/playground](http://localhost:4000/playground) | Backend GraphQL Playground |
+| [http://localhost:8084](http://localhost:8084)                       | Backend Documentation      |
 | [http://localhost:8080](http://localhost:8080)                       | Documentation              |
 
 ## How to release

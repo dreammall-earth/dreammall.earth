@@ -1,4 +1,4 @@
-# boilerplate-frontend
+# Dreammall Frontend
 [![nodejs][badge-nodejs-img]][badge-nodejs-href]
 [![npm][badge-npm-img]][badge-npm-href]
 [![docker][badge-docker-img]][badge-docker-href]
@@ -16,9 +16,9 @@
 [![vuepress][badge-vuepress-img]][badge-vuepress-href]
 [![chromatic][badge-chromatic-img]][badge-chromatic-href]
 
-The IT4C Boilerplate for frontends
+The Dreammall frontend.
 
-![](src/assets/it4c-logo2-clean-bg_alpha-128x128.png)
+![](src/assets/dreammall-logo.svg)
 
 ## Requirements & Technology
 
@@ -35,7 +35,7 @@ This projects utilizes `storybook` and `chromatic` to develop, document & test f
 The following commands are available:
 
 | Command                     | Description                                      |
-|-----------------------------|--------------------------------------------------|
+| --------------------------- | ------------------------------------------------ |
 | `npm install`               | Project setup                                    |
 | `npm run build`             | Compiles and minifies for production             |
 | `npm run server:prod`       | Runs productions server                          |
@@ -108,7 +108,7 @@ npm install
 The following endpoints are provided given the right command is executed or all three if `docker compose` is used:
 
 | Endpoint                                       | Description   |
-|------------------------------------------------|---------------|
+| ---------------------------------------------- | ------------- |
 | [http://localhost:3000](http://localhost:3000) | Web           |
 | [http://localhost:6006](http://localhost:6006) | Storybook     |
 | [http://localhost:8080](http://localhost:8080) | Documentation |

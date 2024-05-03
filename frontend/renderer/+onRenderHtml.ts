@@ -2,8 +2,8 @@ import { renderToString as renderToString_ } from '@vue/server-renderer'
 import { escapeInject, dangerouslySkipEscape } from 'vike/server'
 import { PageContext, PageContextServer } from 'vike/types'
 
+import image from '#assets/dreammall-logo.svg'
 import logoUrl from '#assets/favicon.ico'
-import image from '#assets/it4c-logo2-clean-bg_alpha-128x128.png'
 import { META } from '#src/env'
 
 import { createApp } from './app'
