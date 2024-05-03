@@ -1,11 +1,14 @@
 <template>
-  <div class="topmenu">
-    <v-app-bar flat class="py-4" height="70px">
+  <div class="top-menu mt-6 mt-sm-0">
+    <v-app-bar flat class="py-4 app-bar" height="70px">
       <v-row>
-        <v-col class="d-flex align-center">
+        <v-col class="d-none d-sm-flex align-center">
           <a href="/" class="w-100 ml-8">
-            <LogoImage class="" />
+            <LogoImage size="small" />
           </a>
+        </v-col>
+        <v-col class="d-flex align-center">
+          <TabControl />
         </v-col>
         <v-col class="d-flex justify-end">
           <MainButton
@@ -28,6 +31,7 @@ import { inject } from 'vue'
 
 import MainButton from '#components/buttons/MainButton.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
+import TabControl from '#components/tabControl/TabControl.vue'
 import AuthService from '#src/services/AuthService'
 import { useAuthStore } from '#stores/authStore'
 
@@ -43,3 +47,15 @@ async function signOut() {
   }
 }
 </script>
+
+<style scoped lang="scss">
+.app-bar {
+  background: transparent !important;
+  position: static !important;
+}
+.top-menu {
+  position: sticky;
+  top: 0;
+  margin-top: 30px;
+}
+</style>
