@@ -20,7 +20,7 @@ jobs:
 
       - name: E2E | Boot up test system
         run: |
-          docker-compose -f docker-compose.yml -f docker-compose.override.ym lup --detach frontend
+          docker-compose -f docker-compose.yml -f docker-compose.override.yml up --detach frontend
           cd authentik/
           ./database.unpack.sh
           docker compose -f docker-compose.yml up --detach
