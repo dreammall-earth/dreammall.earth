@@ -21,7 +21,6 @@ When('I submit the credentials {string} {string}', (username: string, password: 
 })
 
 Then('I am on the worldcafe page', () => {
-  cy.waitForNetworkIdle(30000)
-//   cy.url().should('eq', Cypress.config('baseUrl'))
+  cy.waitForNetworkIdle(20000)
   worldcafePage.signoutButtonIsVisible()
 })

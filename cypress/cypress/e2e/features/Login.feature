@@ -7,4 +7,4 @@ Feature: Login
 
   Scenario: Successful Login
     When I submit the credentials 'akadmin' 'dreammall'
-    # Then I am on the worldcafe page
+    Then I am on the worldcafe page
