@@ -1,8 +1,9 @@
 name: e2e:test:all test the application end to end
 
-push:
-  branches:
-    - initial-e2e2-tests
+on:
+  push:
+    branches:
+      - initial-e2e2-tests
 
 jobs:
   e2e-tests:
@@ -17,7 +18,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: E2E - Run all tests
+      - name: E2E | Boot up test system
+        run: |
+          docker-compose up --detach frontend
+          cd authentik/
+          ./database.unpack.sh
+          docker compose up --detach
+          sleep 2m
+
+      - name: E2E | Run all tests
         id: e2e-run
         uses: cypress-io/github-action@v6
 
