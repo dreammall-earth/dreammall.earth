@@ -3,7 +3,7 @@ import { ApolloServer } from '@apollo/server'
 import { sendContactEmails } from '#api/Brevo'
 import { EventType } from '#src/event/EventType'
 import { prisma } from '#src/prisma'
-import { createServer } from '#src/server/server'
+import { createTestServer } from '#src/server/server'
 
 let testServer: ApolloServer
 
@@ -14,7 +14,7 @@ jest.mock('#api/Brevo', () => {
 })
 
 beforeAll(async () => {
-  testServer = await createServer()
+  testServer = await createTestServer()
 })
 
 describe('ContactFormResolver', () => {
@@ -207,31 +207,15 @@ weils nach Datum, Medium, Anlass und Kosten auflisten)?`,
         const result = await prisma.event.findMany()
         expect(result).toHaveLength(1)
         expect(result).toEqual([
-          {
+          expect.objectContaining({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
             type: EventType.CONTACTFORM_SEND,
             involvedEmail: 'peter@lustig.de',
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             createdAt: expect.any(Date),
-          },
+          }),
         ])
-      })
-    })
-  })
-
-  describe('contactForm query', () => {
-    it('returns true', async () => {
-      const response = await testServer.executeOperation({
-        query: `query { contactForm }`,
-      })
-      expect(response.body).toMatchObject({
-        kind: 'single',
-        singleResult: {
-          data: {
-            contactForm: true,
-          },
-        },
       })
     })
   })

@@ -26,7 +26,7 @@ The project sets up an apollo server. It uses `type-graphql`.
 The following commands are available:
 
 | Command                    | Description                                     |
-|----------------------------|-------------------------------------------------|
+| -------------------------- | ----------------------------------------------- |
 | `npm install`              | Project setup                                   |
 | `npm run build`            | Compiles and minifies for production            |
 | `npm run start`            | Runs productions server                         |
@@ -76,7 +76,7 @@ npm install
 The following endpoints are provided given the right command is executed or all three if `docker compose` is used:
 
 | Endpoint                                                             | Description        |
-|----------------------------------------------------------------------|--------------------|
+| -------------------------------------------------------------------- | ------------------ |
 | [http://localhost:4000/graphql](http://localhost:4000/graphql)       | GraphQL API        |
 | [http://localhost:4000/playground](http://localhost:4000/playground) | GraphQL Playground |
 
@@ -112,6 +112,14 @@ The project is set up for a `mysql` database. Use
 docker-compose up database
 ```
 in the main folder to run the database inside docker. You need to copy the `.env.dist` file to `.env`.  Run `npm run db:migrate` to generate the database. It might be required to delete the migration folder beforehand.
+
+## Token validation
+
+If you use the authentik database from the zip file, link the `src/auth/public.pem` to the main folder:
+```bash
+ln -s src/auth/public.pem public.pem
+```
+Otherwise place the according certificate in the main folder with the name `public.pem`
 
 ## License
 

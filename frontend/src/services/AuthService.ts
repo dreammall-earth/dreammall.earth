@@ -1,6 +1,7 @@
 import { UserManager } from 'oidc-client-ts'
 
 import { AUTH } from '#src/env'
+import { useAuthStore } from '#stores/authStore.js'
 
 export default class AuthService {
   userManager: UserManager
@@ -13,6 +14,16 @@ export default class AuthService {
       response_type: AUTH.RESPONSE_TYPE,
       scope: AUTH.SCOPE,
       loadUserInfo: true,
+    })
+
+    this.userManager.events.addUserLoaded(async () => {
+      const auth = useAuthStore()
+      auth.save(await this.userManager.getUser())
+    })
+
+    this.userManager.events.addUserUnloaded(() => {
+      const auth = useAuthStore()
+      auth.clear()
     })
   }
 
@@ -33,6 +44,8 @@ export default class AuthService {
   }
 
   public signOut() {
+    const auth = useAuthStore()
+    auth.clear()
     window.location.href = AUTH.AUTHORITY_SIGNOUT_URI
   }
 

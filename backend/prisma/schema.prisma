@@ -44,5 +44,13 @@ model Event {
   id                Int      @id @default(autoincrement())
   type              String   @db.VarChar(100)
   involvedEmail     String?  @db.VarChar(254)
+  involvedUserId    Int?
+  createdAt         DateTime @default(now())
+}
+
+model User {
+  id                Int      @id @default(autoincrement())
+  username          String   @db.VarChar(100) @unique
+  name              String   @db.VarChar(254)
   createdAt         DateTime @default(now())
 }

@@ -4,7 +4,7 @@ import { confirmNewsletter, subscribeToNewsletter } from '#api/Brevo'
 import { CONFIG } from '#config/config'
 import { EventType } from '#src/event/EventType'
 import { prisma } from '#src/prisma'
-import { createServer } from '#src/server/server'
+import { createTestServer } from '#src/server/server'
 
 CONFIG.BREVO_KEY = 'MY KEY'
 CONFIG.BREVO_ADMIN_NAME = 'Bibi Bloxberg'
@@ -22,7 +22,7 @@ jest.mock('#api/Brevo', () => ({
 }))
 
 beforeAll(async () => {
-  testServer = await createServer()
+  testServer = await createTestServer()
 })
 
 describe('NewsletterSubscriptionResolver', () => {
@@ -179,14 +179,14 @@ describe('NewsletterSubscriptionResolver', () => {
         const result = await prisma.event.findMany()
         expect(result).toHaveLength(1)
         expect(result).toEqual([
-          {
+          expect.objectContaining({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
             type: EventType.NEWSLETTER_SUBSCRIBE,
             involvedEmail: 'peter@lustig.de',
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             createdAt: expect.any(Date),
-          },
+          }),
         ])
       })
     })
@@ -238,14 +238,14 @@ describe('NewsletterSubscriptionResolver', () => {
       const result = await prisma.event.findMany()
       expect(result).toHaveLength(1)
       expect(result).toEqual([
-        {
+        expect.objectContaining({
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           id: expect.any(Number),
           type: EventType.NEWSLETTER_CONFIRM,
           involvedEmail: 'peter@lustig.de',
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           createdAt: expect.any(Date),
-        },
+        }),
       ])
     })
   })

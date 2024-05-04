@@ -4,4 +4,6 @@ build/
 .vuepress/.temp/
 .vuepress/.cache/
 
+.vscode
+
 .DS_Store

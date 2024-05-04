@@ -1,14 +1,14 @@
 import { ApolloServer } from '@apollo/server'
 
 import { CONFIG } from '#config/config'
-import { createServer } from '#src/server/server'
+import { createTestServer } from '#src/server/server'
 
 CONFIG.ROOM_LINK = 'http://bbb.dreammall.earth'
 
 let testServer: ApolloServer
 
 beforeAll(async () => {
-  testServer = await createServer()
+  testServer = await createTestServer()
 })
 
 describe('RoomResolver', () => {
