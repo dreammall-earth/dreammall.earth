@@ -33,7 +33,7 @@ jobs:
       - name: E2E | if tests failed, compile html report
         if: ${{ failure() && steps.e2e-run.conclusion == 'failure' }}
         run: |
-          cd cypress/
+          cd cypress/cypress
           npx tsx create-cucumber-html-report.ts
 
       - name: Get PR number
