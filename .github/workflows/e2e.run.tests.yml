@@ -24,7 +24,7 @@ jobs:
           cd authentik/
           ./database.unpack.sh
           docker compose -f docker-compose.yml up --detach
-          sleep 3m
+          sleep 6m
 
       - name: E2E | Run all tests
         id: e2e-run
