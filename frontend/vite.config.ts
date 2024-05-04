@@ -53,6 +53,9 @@ const config: UserConfig = {
       port: isNaN(Number(process.env.PORT_HMR)) ? 24678 : Number(process.env.PORT_HMR),
     },
   },
+  optimizeDeps: {
+    include: ['vike'],
+  },
 }
 
 export default config
