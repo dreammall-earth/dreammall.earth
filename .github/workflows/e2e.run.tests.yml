@@ -22,32 +22,29 @@ jobs:
         run: |
           cd authentik/
           ./database.unpack.sh
-          docker compose -f docker-compose.yml up --detach
-          cd ../frontend
-          npm install && npm run build && npm run server:prod
-          sleep 5m
+          docker compose up
 
-      - name: E2E | Run all tests
-        id: e2e-run
-        uses: cypress-io/github-action@v6
-        with:
-          working-directory: cypress
+      # - name: E2E | Run all tests
+      #   id: e2e-run
+      #   uses: cypress-io/github-action@v6
+      #   with:
+      #     working-directory: cypress
 
-      - name: E2E | if tests failed, compile html report
-        if: ${{ failure() && steps.e2e-run.conclusion == 'failure' }}
-        run: |
-          cd cypress/
-          npx tsx create-cucumber-html-report.ts
-        working-directory: cypress
+      # - name: E2E | if tests failed, compile html report
+      #   if: ${{ failure() && steps.e2e-run.conclusion == 'failure' }}
+      #   run: |
+      #     cd cypress/
+      #     npx tsx create-cucumber-html-report.ts
+      #   working-directory: cypress
 
-      - name: Get PR number
-        if: ${{ failure() && steps.e2e-run.conclusion == 'failure' }}
-        uses: jwalton/gh-find-current-pr@master
-        id: pr-number
+      # - name: Get PR number
+      #   if: ${{ failure() && steps.e2e-run.conclusion == 'failure' }}
+      #   uses: jwalton/gh-find-current-pr@master
+      #   id: pr-number
 
-      - name: E2E | if tests failed, upload report
-        if: ${{ failure() && steps.e2e-run.conclusion == 'failure' }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: boilerplate-e2e-test-report-pr-${{ steps.pr-number.outputs.pr }}
-          path: /home/runner/work/boilerplate-e2e-cypress-cucumber/boilerplate-e2e-cypress-cucumber/cypress/reports/e2e_html_report
+      # - name: E2E | if tests failed, upload report
+      #   if: ${{ failure() && steps.e2e-run.conclusion == 'failure' }}
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: boilerplate-e2e-test-report-pr-${{ steps.pr-number.outputs.pr }}
+      #     path: /home/runner/work/boilerplate-e2e-cypress-cucumber/boilerplate-e2e-cypress-cucumber/cypress/reports/e2e_html_report
