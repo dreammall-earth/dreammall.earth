@@ -9,8 +9,8 @@ import { loginPage } from '../pages/LoginPage'
 import { worldcafePage } from '../pages/WorldcafePage'
 
 Given('The browser navigates to the login page', () => {
-  cy.visit('/signin', { timeout: 30000 })
-  cy.waitForNetworkIdle(10000)
+  cy.visit('/signin')
+  cy.waitForNetworkIdle(5000)
   loginPage.usernameFieldIsVisible()
 })
 
@@ -18,6 +18,11 @@ When('I submit the credentials {string} {string}', (username: string, password: 
   loginPage.submitUsername(username)
   cy.waitForNetworkIdle(5000)
   loginPage.submitPassword(password)
+})
+
+When('I agree to the consent', () => {
+  cy.url({ timeout: 8000 }).should('include', 'authorization-implicit-consent')
+  loginPage.agreeConsent()
 })
 
 Then('I am on the worldcafe page', () => {

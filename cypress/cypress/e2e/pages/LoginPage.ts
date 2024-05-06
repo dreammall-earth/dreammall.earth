@@ -16,6 +16,10 @@ class LoginPage {
     cy.get(this.passwordInput).type(password)
     cy.get(this.submitBtn).click()
   }
+
+  agreeConsent() {
+    cy.get(this.submitBtn).click()
+  }
 }
 
 export const loginPage = new LoginPage()
