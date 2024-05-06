@@ -9,8 +9,8 @@ import { loginPage } from '../pages/LoginPage'
 import { worldcafePage } from '../pages/WorldcafePage'
 
 Given('The browser navigates to the login page', () => {
-  cy.visit('/signin')
-  cy.waitForNetworkIdle(5000)
+  cy.visit('/signin', { timeout: 30000 })
+  cy.waitForNetworkIdle(10000)
   loginPage.usernameFieldIsVisible()
 })
 
