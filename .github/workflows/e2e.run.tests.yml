@@ -24,8 +24,8 @@ jobs:
           ./database.unpack.sh
           docker compose up -d
           cd ../frontend
-          docker compose up -d frontend 
-          sleep 10m
+          docker compose -f docker-compose.yml -f docker-compose.test.yml up -d frontend
+          sleep 5m
 
       - name: E2E | Run all tests
         id: e2e-run
