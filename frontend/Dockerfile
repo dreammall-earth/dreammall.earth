@@ -93,13 +93,10 @@ RUN npm run build
 ##################################################################################
 # TEST ###########################################################################
 ##################################################################################
-#FROM build as test
-
-# Install Additional Software
-# RUN apk add --no-cache bash jq
+FROM build as test
 
 # Run command
-#CMD /bin/sh -c "yarn run dev"
+CMD /bin/sh -c "npm run server:prod"
 
 ##################################################################################
 # PRODUCTION (Does contain only "binary"- and static-files to reduce image size) #
