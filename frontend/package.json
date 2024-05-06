@@ -1,5 +1,5 @@
 {
-  "name": "boilerplate-frontend",
+  "name": "dreammall-frontend",
   "version": "1.0.0",
   "description": "The IT4C Boilerplate for frontends",
   "main": "build/index.js",
@@ -89,6 +89,7 @@
     "typescript": "^5.4.5",
     "vike": "^0.4.168",
     "vite": "^5.2.10",
+    "vite-svg-loader": "^5.1.0",
     "vue": "3.4.23",
     "vue-i18n": "^9.13.1",
     "vuetify": "^3.5.16"
