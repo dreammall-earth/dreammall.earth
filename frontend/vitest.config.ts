@@ -15,6 +15,7 @@ export default mergeConfig(
         'scripts/tests/mock.authService.ts',
         'scripts/tests/plugin.pinia.ts',
         'scripts/tests/plugin.i18n-vuetify.ts',
+        'scripts/tests/stubs.transition.disable.ts',
       ],
       coverage: {
         all: true,

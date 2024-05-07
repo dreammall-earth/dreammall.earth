@@ -43,26 +43,12 @@ exports[`TopMenu > renders 1`] = `
                   />
                   
                   
-                  <transition-stub
-                    appear="true"
-                    css="true"
-                    name="fade-transition"
-                    persisted="false"
-                  >
-                    <img
-                      class="v-img__img v-img__img--contain"
-                      src="/src/assets/dreammall-logo.svg"
-                      style="display: none;"
-                    />
-                  </transition-stub>
-                  <transition-stub
-                    appear="false"
-                    css="true"
-                    name="fade-transition"
-                    persisted="false"
-                  >
-                    <!---->
-                  </transition-stub>
+                  <img
+                    class="v-img__img v-img__img--contain fade-transition-enter-from fade-transition-enter-active"
+                    src="/src/assets/dreammall-logo.svg"
+                    style="display: none;"
+                  />
+                  <!---->
                   <!---->
                   <!---->
                   <!---->
@@ -83,14 +69,7 @@ exports[`TopMenu > renders 1`] = `
         </div>
         
         
-        <transition-stub
-          appear="false"
-          css="true"
-          name="expand-transition"
-          persisted="false"
-        >
-          <!---->
-        </transition-stub>
+        <!---->
         
       </header>
     </div>
