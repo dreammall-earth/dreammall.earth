@@ -25,7 +25,7 @@ jobs:
           docker compose up -d
           cd ../frontend
           docker compose -f docker-compose.yml -f docker-compose.test.yml up -d frontend
-          sleep 10m
+          sleep 15m
 
       - name: E2E | Run all tests
         id: e2e-run

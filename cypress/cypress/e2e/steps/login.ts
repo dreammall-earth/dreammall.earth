@@ -11,13 +11,13 @@ import { worldcafePage } from '../pages/WorldcafePage'
 // Given('The browser navigates to the login page', () => {
 //   // signin langing page redirects to Authentik signin
 //   cy.visit('/signin')
-//   cy.waitForNetworkIdle(5000)
+//   cy.waitForNetworkIdle(10000)
 //   // loginPage.usernameFieldIsVisible()
 // })
 
 When('I submit the credentials {string} {string}', (username: string, password: string) => {
   cy.visit('/signin')
-  cy.waitForNetworkIdle(5000)
+  cy.waitForNetworkIdle(10000)
   // loginPage.usernameFieldIsVisible()
 
   cy.origin(
@@ -34,8 +34,8 @@ When('I submit the credentials {string} {string}', (username: string, password: 
       // loginPage.submitUsername(username)
       cy.get('input[name="uidField"]').type(username)
       cy.get('button[type="submit"]').click()
-      // cy.waitForNetworkIdle(5000)
-      cy.wait(5000)
+      // cy.waitForNetworkIdle(10000)
+      cy.wait(10000)
       // loginPage.submitPassword(password)
       cy.get('input[name="password"]').type(password)
       cy.get('button[type="submit"]').click()
