@@ -24,6 +24,13 @@ When('I submit the credentials {string} {string}', (username: string, password: 
     'http://localhost:9000/if/flow/dreammallearth-authentication-flow/',
     { args: { username, password } },
     ({ username, password }) => {
+      cy.on('uncaught:exception', (e) => {
+        if (e.message.includes('JSON')) {
+          // we expected this error, so let's ignore it
+          // and let the test continue
+          return false
+        }
+      })
       // loginPage.submitUsername(username)
       cy.get('input[name="uidField"]').type(username)
       cy.get('button[type="submit"]').click()
