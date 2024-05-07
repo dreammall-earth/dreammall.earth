@@ -24,6 +24,10 @@ export const useAuthStore = defineStore(
     const accessToken = computed(() => user.value?.access_token ?? '')
     const isLoggedIn = computed(() => !!user.value)
 
+    const isAdmin = computed(() =>
+      (user.value?.profile.groups as string[]).includes('authentik Admins'),
+    )
+
     const save = (u: User | null) => {
       user.value = u
     }
@@ -36,6 +40,7 @@ export const useAuthStore = defineStore(
       user,
       accessToken,
       isLoggedIn,
+      isAdmin,
       save,
       clear,
     }
