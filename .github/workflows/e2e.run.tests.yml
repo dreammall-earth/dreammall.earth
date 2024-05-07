@@ -20,12 +20,12 @@ jobs:
 
       - name: E2E | Boot up test system
         run: |
-          cd frontend
-          docker compose -f docker-compose.yml -f docker-compose.test.yml up -d frontend
-          cd ../authentik/
+          cd authentik/
           ./database.unpack.sh
-          docker compose up 
-          sleep 15m
+          docker compose up -d
+          cd ../frontend
+          docker compose -f docker-compose.yml -f docker-compose.test.yml up -d frontend
+          sleep 30m
 
       - name: E2E | Run all tests
         id: e2e-run
