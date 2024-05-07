@@ -36,6 +36,7 @@ import { inject } from 'vue'
 import MainButton from '#components/buttons/MainButton.vue'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
 import { getRoomQuery } from '#queries/getRoomQuery'
+import { AUTH } from '#src/env.js'
 import { useAuthStore } from '#stores/authStore.js'
 
 const auth = useAuthStore()
@@ -54,6 +55,6 @@ const enterRoom = async () => {
 }
 
 const enterAdmin = async () => {
-  window.location.href = 'http://localhost:3002'
+  window.location.href = AUTH.ADMIN_REDIRECT_URI
 }
 </script>
