@@ -46,12 +46,68 @@ export const createChecksum = (callName: string, params: string = ''): string =>
   return hash.digest('hex')
 }
 
+interface CreateMeetingResponse {
+  returncode: string
+  meetingID: string
+  internalMeetingID: string
+  parentMeetingID: string
+  attendeePW: string
+  moderatorPW: string
+  createTime: number
+  voiceBridge: number
+  dialNumber: string
+  createDate: Date
+  hasUserJoined: boolean
+  duration: number
+  hasBeenForciblyEnded: boolean
+  messageKey: string
+  message: string
+}
+
+interface MeetingInfo {
+  meetingName: string
+  meetingID: string
+  internalMeetingID: string
+  createTime: number
+  createDate: Date
+  voiceBridge: number
+  dialNumber: string
+  attendeePW: string
+  moderatorPW: string
+  running: boolean
+  duration: number
+  hasUserJoined: boolean
+  recording: boolean
+  hasBeenForciblyEnded: boolean
+  startTime: number
+  endTime: number
+  participantCount: number
+  listenerCount: number
+  voiceParticipantCount: number
+  videoCount: number
+  maxUsers: number
+  moderatorCount: number
+  attendees: string
+  metadata: string
+  isBreakout: string
+}
+
+interface GetMeetingsResponse {
+  returncode: string
+  meetings: string | { meeting: MeetingInfo[] }
+}
+
 export const getMeetings = async () => {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const { data } = await axiosInstance.get('/getMeetings')
-    const parsed = parser.parse(data)
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const parsed: {
+      response: GetMeetingsResponse
+    } = parser.parse(data as string)
     return parsed.response
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.log(err)
   }
 }
@@ -65,6 +121,7 @@ interface CreateMeetingOptions {
 export const createMeeting = async (options: CreateMeetingOptions) => {
   const { name, meetingID /*, welcome */ } = options
   try {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const { data } = await axiosInstance.post(
       '/create',
       {},
@@ -76,15 +133,18 @@ export const createMeeting = async (options: CreateMeetingOptions) => {
         },
       },
     )
-    console.log(data)
-    const parsed = parser.parse(data)
-    console.log(parsed)
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const parsed: {
+      response: CreateMeetingResponse
+    } = parser.parse(data as string)
     return parsed.response
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.log(err)
   }
 }
 
+/*
 export const listHooks = async () => {
   try {
     const result = await axiosInstance.get('/hooks/list')
@@ -93,3 +153,4 @@ export const listHooks = async () => {
     console.log(err)
   }
 }
+*/

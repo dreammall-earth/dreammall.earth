@@ -19,7 +19,12 @@ export class RoomResolver {
         name: 'My Meeting ßß',
         meetingID: 'xxx',
       })
-      console.log(result)
+      const result2 = await createMeeting({
+        name: 'My Meeting xx',
+        meetingID: 'xxz',
+      })
+      // console.log(result)
+      const test = await getMeetings()
     } catch (err) {
       console.log(err)
       return false
