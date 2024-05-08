@@ -38,6 +38,7 @@
     "@apollo/server": "^4.10.4",
     "@getbrevo/brevo": "^2.1.1",
     "@prisma/client": "^5.13.0",
+    "@types/uuid": "^9.0.8",
     "@vuepress/theme-default": "^2.0.0-rc.26",
     "axios": "^1.6.8",
     "class-validator": "^0.14.1",
@@ -51,7 +52,8 @@
     "reflect-metadata": "^0.2.2",
     "tsconfig-paths": "^4.2.0",
     "tslog": "^4.9.2",
-    "type-graphql": "^2.0.0-rc.1"
+    "type-graphql": "^2.0.0-rc.1",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@eslint-community/eslint-plugin-eslint-comments": "^4.3.0",
