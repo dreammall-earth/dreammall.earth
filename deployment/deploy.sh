@@ -36,6 +36,10 @@ exec 3>&1 1>>${LOG_FILE} 2>&1 2>>${LOG_ERROR_FILE}
     $SCRIPT_DIR/scripts/migrate.database.sh
     $SCRIPT_DIR/scripts/start.backend.sh
 
+    # Admin
+    $SCRIPT_DIR/scripts/build.admin.sh
+    $SCRIPT_DIR/scripts/start.admin.sh
+
     # Frontend
     $SCRIPT_DIR/scripts/build.frontend.sh
     $SCRIPT_DIR/scripts/start.frontend.sh

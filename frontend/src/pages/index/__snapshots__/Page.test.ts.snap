@@ -168,6 +168,7 @@ exports[`IndexPage > renders 1`] = `
                   </button>
                 </div>
               </div>
+              <!--v-if-->
               
             </div>
           </div>
