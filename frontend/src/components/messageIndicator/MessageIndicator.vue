@@ -1,7 +1,7 @@
 <template>
   <div class="message-indicator">
     <div class="icon-circle d-flex justify-center align-center">
-      <v-icon icon="mdi-message"></v-icon>
+      <v-icon icon="$message"></v-icon>
     </div>
     <div class="count d-flex justify-center align-center">{{ props.numberOfMessages }}</div>
   </div>
