@@ -10,7 +10,7 @@ const parser = new XMLParser()
 
 const axiosInstance = axios.create({
   baseURL: CONFIG.BBB_URL,
-  timeout: 2500,
+  timeout: 25000,
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded',
   },
@@ -80,6 +80,15 @@ export const createMeeting = async (options: CreateMeetingOptions) => {
     const parsed = parser.parse(data)
     console.log(parsed)
     return parsed.response
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const listHooks = async () => {
+  try {
+    const result = await axiosInstance.get('/hooks/list')
+    console.log(result)
   } catch (err) {
     console.log(err)
   }
