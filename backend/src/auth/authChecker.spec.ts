@@ -64,6 +64,7 @@ describe('authChecker', () => {
             createdAt: expect.any(Date),
             name: 'User',
             username: 'mockedUser',
+            meetingId: null,
           },
         ])
       })
