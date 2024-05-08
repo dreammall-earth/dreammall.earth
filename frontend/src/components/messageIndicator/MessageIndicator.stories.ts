@@ -9,12 +9,16 @@ const meta = {
   component: MessageIndicator as SBComp,
   tags: ['autodocs'],
   argTypes: {},
-  args: {},
+  args: { numberOfMessages: 3 },
 } satisfies Meta<typeof MessageIndicator>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Example: Story = {
+export const WithMessages: Story = {
   args: { numberOfMessages: 3 },
+}
+
+export const WithoutMessages: Story = {
+  args: { numberOfMessages: 0 },
 }

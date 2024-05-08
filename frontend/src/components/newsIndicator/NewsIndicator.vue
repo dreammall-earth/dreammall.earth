@@ -1,25 +1,20 @@
 <template>
-  <div class="message-indicator">
+  <div class="news-indicator">
     <div class="icon-circle d-flex justify-center align-center">
-      <v-icon icon="$message" color="#3D4753"></v-icon>
+      <v-icon icon="$bell"></v-icon>
     </div>
-    <div
-      class="count d-flex justify-center align-center"
-      :data-show-count="props.numberOfMessages > 0"
-    >
-      {{ props.numberOfMessages }}
-    </div>
+    <div class="marker d-flex justify-center align-center" :data-show-marker="props.hasNews"></div>
   </div>
 </template>
 
 <script lang="ts" setup>
 const props = defineProps<{
-  numberOfMessages: number
+  hasNews: boolean
 }>()
 </script>
 
 <style scoped lang="scss">
-.count {
+.marker {
   border-radius: 12px;
   background: #d02f44;
   width: 22px;
@@ -37,12 +32,12 @@ const props = defineProps<{
   opacity: 1;
   transition: opacity 0.3s;
 
-  &[data-show-count='false'] {
+  &[data-show-marker='false'] {
     opacity: 0;
   }
 }
 
-.message-indicator {
+.news-indicator {
   position: relative;
   width: fit-content;
 }
