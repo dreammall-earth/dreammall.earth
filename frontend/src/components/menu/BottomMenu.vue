@@ -3,7 +3,7 @@
     <v-icon icon="mdi-account"></v-icon>
     <v-icon icon="mdi-bell"></v-icon>
     <v-icon icon="mdi-magnify"></v-icon>
-    <UserInfo userName="Miro" />
+    <UserInfo user-name="Miro" />
   </div>
 </template>
 
