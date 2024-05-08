@@ -59,6 +59,7 @@ model User {
 
 model Meeting {
   id                Int      @id @default(autoincrement())
+  name              String   @db.VarChar(254)
   meetingID         String   @db.VarChar(36) @unique
   attendeePW        String   @db.VarChar(64)
   moderatorPW       String   @db.VarChar(64)
