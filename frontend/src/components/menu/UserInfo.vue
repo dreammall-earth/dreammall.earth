@@ -1,10 +1,10 @@
 <template>
   <div class="user-info d-flex flex-row">
-    <div class="d-flex flex-column justify-center text-right pa-3 w-100">
-      <div>{{ $t('menu.userPhrase') }}</div>
+    <div class="d-flex flex-column justify-center text-right pa-1 pl-3 w-100">
+      <div class="phrase">{{ $t('menu.userPhrase') }}</div>
       <div class="name">{{ props.userName }}</div>
     </div>
-    <div class="avatar d-flex align-center pa-1">
+    <div class="avatar d-flex align-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -50,6 +50,12 @@ const props = defineProps<{
   background: #fff;
 }
 .avatar svg {
-  height: 72px;
+  height: 48px;
+}
+.name {
+  font-size: 14px;
+}
+.phrase {
+  font-size: 12px;
 }
 </style>

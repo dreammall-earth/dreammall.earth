@@ -1,11 +1,9 @@
 <template>
   <div class="top-menu mt-6 mt-sm-0">
-    <v-app-bar flat class="py-4 app-bar" height="70px">
-      <v-row>
+    <v-app-bar flat class="app-bar" height="70px">
+      <v-row class="ma-1">
         <v-col class="d-none d-sm-flex align-center">
           <MessageIndicator :number-of-messages="3" />
-        </v-col>
-        <v-col class="d-none d-sm-flex align-center">
           <a href="/" class="w-100 ml-8">
             <LogoImage size="small" />
           </a>
@@ -13,9 +11,9 @@
         <v-col class="d-flex align-center">
           <TabControl />
         </v-col>
-        <v-col class="d-none d-sm-flex align-center">
+        <v-col class="d-none d-sm-flex align-center justify-end">
           <NewsIndicator :has-news="true" />
-          <UserInfo user-name="Miro" />
+          <UserInfo user-name="Miro" class="ml-4" />
         </v-col>
         <!--
         <v-col class="d-flex justify-end">

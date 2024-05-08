@@ -75,9 +75,8 @@ const activeItem = ref(1)
 
 .tabControl {
   --animation-time: 0.3s;
-  --height: 40px;
+  --height: min(60px, 100%);
   height: var(--height);
-  font-family: 'SF Pro Display';
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
