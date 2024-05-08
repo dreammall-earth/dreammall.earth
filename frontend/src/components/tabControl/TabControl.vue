@@ -4,19 +4,19 @@
       <div class="icon d-flex justify-center align-center">
         <v-icon icon="$world-cafe" class="w-100 world-cafe"></v-icon>
       </div>
-      Weltencafe
+      {{ $t('menu.worldCafe') }}
     </button>
     <button class="item" :class="{ active: activeItem === 2 }" @click="activeItem = 2">
       <div class="icon d-flex justify-center align-center">
         <v-icon icon="$mall" class="w-100 mall"></v-icon>
       </div>
-      Mall
+      {{ $t('menu.mall') }}
     </button>
     <button class="item" :class="{ active: activeItem === 3 }" @click="activeItem = 3">
       <div class="icon d-flex justify-center align-center">
         <v-icon icon="$cockpit" class="w-100"></v-icon>
       </div>
-      Cockpit
+      {{ $t('menu.cockpit') }}
     </button>
   </button>
 </template>

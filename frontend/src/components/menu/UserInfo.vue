@@ -1,7 +1,7 @@
 <template>
   <div class="user-info d-flex flex-row">
     <div class="d-flex flex-column justify-center text-right pa-3 w-100">
-      <div>Talk to your friends</div>
+      <div>{{ $t('menu.userPhrase') }}</div>
       <div class="name">{{ props.userName }}</div>
     </div>
     <div class="avatar d-flex align-center pa-1">

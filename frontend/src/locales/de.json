@@ -21,6 +21,12 @@
       "text": "Irgendetwas ist schief gegangen."
     }
   },
+  "menu": {
+    "worldCafe": "Weltencafé",
+    "mall": "Mall",
+    "cockpit": "Cockpit",
+    "userPhrase": "Talk to your friends"
+  },
   "meta": {
     "defaultDescription": "Deine Reichweite Erweitern Alle Möglichkeiten Miteinander Ausschöpfen Lebensqualität Leben",
     "defaultTitle": "DreamMall"
