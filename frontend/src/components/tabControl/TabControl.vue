@@ -82,6 +82,7 @@ const activeItem = ref(1)
   font-style: normal;
   font-weight: 600;
   line-height: 150%;
+  color: #222;
   display: flex;
   align-items: center;
   justify-content: space-between;
