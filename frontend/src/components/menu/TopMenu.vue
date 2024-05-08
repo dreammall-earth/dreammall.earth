@@ -3,6 +3,9 @@
     <v-app-bar flat class="py-4 app-bar" height="70px">
       <v-row>
         <v-col class="d-none d-sm-flex align-center">
+          <MessageIndicator :number-of-messages="3" />
+        </v-col>
+        <v-col class="d-none d-sm-flex align-center">
           <a href="/" class="w-100 ml-8">
             <LogoImage size="small" />
           </a>
@@ -10,6 +13,11 @@
         <v-col class="d-flex align-center">
           <TabControl />
         </v-col>
+        <v-col class="d-none d-sm-flex align-center">
+          <NewsIndicator :has-news="true" />
+          <UserInfo user-name="Miro" />
+        </v-col>
+        <!--
         <v-col class="d-flex justify-end">
           <MainButton
             v-if="auth.isLoggedIn"
@@ -21,21 +29,28 @@
             >{{ $t('buttons.signout') }}
           </MainButton>
         </v-col>
+        -->
       </v-row>
     </v-app-bar>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { inject } from 'vue'
+// import { inject } from 'vue'
 
-import MainButton from '#components/buttons/MainButton.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
-import TabControl from '#components/tabControl/TabControl.vue'
-import AuthService from '#src/services/AuthService'
-import { useAuthStore } from '#stores/authStore'
+import MessageIndicator from '#components/messageIndicator/MessageIndicator.vue'
+import NewsIndicator from '#components/newsIndicator/NewsIndicator.vue'
 
+import TabControl from './TabControl.vue'
+import UserInfo from './UserInfo.vue'
+
+// import AuthService from '#src/services/AuthService'
+// import { useAuthStore } from '#stores/authStore'
+
+/*
 const authService = inject<AuthService>('authService')
+
 const auth = useAuthStore()
 
 async function signOut() {
@@ -46,6 +61,7 @@ async function signOut() {
     console.log('auth error', error)
   }
 }
+*/
 </script>
 
 <style scoped lang="scss">
