@@ -14,6 +14,7 @@ import {
 import { v4 as uuidv4 } from 'uuid'
 
 // import { createMeeting, getMeetings } from '#api/BBB'
+import { createMeeting, joinMeetingLink } from '#api/BBB'
 import { CONFIG } from '#config/config'
 import { prisma } from '#src/prisma'
 import { Context } from '#src/server/context'
@@ -82,6 +83,25 @@ export class RoomResolver {
     return meeting
   }
 
+  @Authorized()
+  @Query(() => String, { nullable: true })
+  async joinMyRoom(@Ctx() context: Context): Promise<string | null> {
+    const { user } = context
+    if (!user) return null
+    const meeting = await createMeeting({
+      name: 'Dreammall Entwicklung',
+      meetingID: 'Dreammall-Entwicklung',
+    })
+    if (!meeting) return null
+    return joinMeetingLink({
+      fullName: user.name,
+      meetingID: 'Dreammall-Entwicklung',
+      role: 'MODERATOR',
+      createTime: meeting.createTime.toString(),
+      userID: user.id.toString(),
+    })
+  }
+
   /*
   @Query(() => Boolean)
   async test(): Promise<boolean> {
@@ -90,12 +110,8 @@ export class RoomResolver {
         name: 'My Meeting ßß',
         meetingID: 'xxx',
       })
-      const result2 = await createMeeting({
-        name: 'My Meeting xx',
-        meetingID: 'xxz',
-      })
-      // console.log(result)
-      const test = await getMeetings()
+      console.log(result)
+      // const test = await getMeetings()
     } catch (err) {
       console.log(err)
       return false
