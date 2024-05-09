@@ -3,7 +3,7 @@ import { AxiosHeaders, InternalAxiosRequestConfig } from 'axios'
 
 import { CONFIG } from '#config/config'
 
-import { createChecksum, addChecksumParam } from './BBB'
+import { createChecksum, addChecksumParam, joinMeetingLink } from './BBB'
 
 // values taken form https://docs.bigbluebutton.org/development/api/#usage
 CONFIG.BBB_SHARED_SECRET = '639259d4-9dd8-4b25-bf01-95f9567eaf4b'
@@ -81,5 +81,21 @@ describe('addChecksumParam', () => {
         })
       })
     })
+  })
+})
+
+describe('joinMeetingLink', () => {
+  it('returns a link to join the meeting', () => {
+    expect(
+      joinMeetingLink({
+        fullName: 'User',
+        meetingID: 'My Meeting',
+        role: 'MODERATOR',
+        createTime: 'now',
+        userID: '1234',
+      }),
+    ).toBe(
+      'https://my.url/join&fullName=User&meetingID=My+Meeting&role=MODERATOR&createTime=now&userID=1234&checksum=ffd418de872093554b4bb3dad454a226601476f6',
+    )
   })
 })

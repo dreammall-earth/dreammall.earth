@@ -144,6 +144,22 @@ export const createMeeting = async (options: CreateMeetingOptions) => {
   }
 }
 
+interface JoinMeetinLinkOptions {
+  fullName: string
+  meetingID: string
+  role: 'MODERATOR' | 'VIEWER'
+  createTime: string
+  userID: string
+}
+
+export const joinMeetingLink = (options: JoinMeetinLinkOptions): string => {
+  const params = new URLSearchParams({
+    ...options,
+  }).toString()
+  const checksum = createChecksum('join', params)
+  return CONFIG.BBB_URL + '/join&' + params + '&checksum=' + checksum
+}
+
 /*
 export const listHooks = async () => {
   try {
