@@ -1,11 +1,8 @@
 import { ApolloServer } from '@apollo/server'
 
-import { CONFIG } from '#config/config'
+import { createMeeting, joinMeetingLink } from '#api/BBB'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
-import { createMeeting, joinMeetingLink } from '#api/BBB'
-
-CONFIG.ROOM_LINK = 'http://bbb.dreammall.earth'
 
 jest.mock('#api/BBB')
 
@@ -20,29 +17,6 @@ beforeAll(async () => {
 
 describe('RoomResolver', () => {
   describe('unauthorized', () => {
-    describe('getRoom Quey', () => {
-      it('throws access denied error', async () => {
-        await expect(
-          testServer.executeOperation({
-            query: 'query { getRoom }',
-          }),
-        ).resolves.toMatchObject({
-          body: {
-            kind: 'single',
-            singleResult: {
-              data: null,
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              errors: expect.arrayContaining([
-                expect.objectContaining({
-                  message: 'Access denied! You need to be authenticated to perform this action!',
-                }),
-              ]),
-            },
-          },
-        })
-      })
-    })
-
     describe('createMyRoom', () => {
       it('throws access denied', async () => {
         await expect(
@@ -92,32 +66,6 @@ describe('RoomResolver', () => {
   })
 
   describe('authorized', () => {
-    describe('getRoom Quey', () => {
-      it('returns the room link', async () => {
-        await expect(
-          testServer.executeOperation(
-            {
-              query: 'query { getRoom }',
-            },
-            {
-              contextValue: {
-                token: 'token',
-              },
-            },
-          ),
-        ).resolves.toMatchObject({
-          body: {
-            kind: 'single',
-            singleResult: {
-              data: {
-                getRoom: 'http://bbb.dreammall.earth',
-              },
-            },
-          },
-        })
-      })
-    })
-
     describe('createMyRoom', () => {
       describe.skip('no user in context', () => {
         it('returns null', async () => {
@@ -243,7 +191,7 @@ describe('RoomResolver', () => {
                   token: 'token',
                 },
               },
-            )
+            ),
           ).resolves.toMatchObject({
             body: {
               kind: 'single',
@@ -256,7 +204,7 @@ describe('RoomResolver', () => {
         })
       })
 
-      describe('createMeeting returns meeting', () => {        
+      describe('createMeeting returns meeting', () => {
         it('returns link to the meeting', async () => {
           joinMeetingLinkMock.mockReturnValue('https://my-link')
           createMeetingMock.mockResolvedValue({
@@ -274,7 +222,7 @@ describe('RoomResolver', () => {
             duration: 0,
             hasBeenForciblyEnded: false,
             messageKey: '',
-            message: ''
+            message: '',
           })
 
           await expect(
@@ -287,7 +235,7 @@ describe('RoomResolver', () => {
                   token: 'token',
                 },
               },
-            )
+            ),
           ).resolves.toMatchObject({
             body: {
               kind: 'single',
@@ -298,7 +246,7 @@ describe('RoomResolver', () => {
             },
           })
         })
-      })      
+      })
     })
   })
 })

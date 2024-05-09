@@ -15,7 +15,6 @@ import { v4 as uuidv4 } from 'uuid'
 
 // import { createMeeting, getMeetings } from '#api/BBB'
 import { createMeeting, joinMeetingLink } from '#api/BBB'
-import { CONFIG } from '#config/config'
 import { prisma } from '#src/prisma'
 import { Context } from '#src/server/context'
 
@@ -36,13 +35,6 @@ class Room {
 
 @Resolver()
 export class RoomResolver {
-  @Authorized()
-  @Query(() => String)
-  // eslint-disable-next-line @typescript-eslint/require-await
-  async getRoom(): Promise<string> {
-    return CONFIG.ROOM_LINK
-  }
-
   @Authorized()
   @Mutation(() => Room, { nullable: true })
   async createMyRoom(@Arg('name') name: string, @Ctx() context: Context): Promise<Room | null> {

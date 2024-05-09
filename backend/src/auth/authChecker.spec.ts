@@ -1,7 +1,29 @@
 import { ApolloServer } from '@apollo/server'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import axios from 'axios'
 
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
+
+jest.mock('axios', () => {
+  return {
+    create: jest.fn().mockImplementation(() => {
+      return {
+        interceptors: {
+          request: {
+            use: jest.fn(),
+          },
+        },
+        post: jest.fn().mockImplementation(() => ({
+          data: {},
+        })),
+        get: jest.fn().mockImplementation(() => ({
+          data: {},
+        })),
+      }
+    }),
+  }
+})
 
 let testServer: ApolloServer
 
@@ -9,19 +31,21 @@ beforeAll(async () => {
   testServer = await createTestServer()
 })
 
-// uses getRoom query
+// uses joinMyRoom query
 describe('authChecker', () => {
   describe('no token in context', () => {
     it('returns access denied error', async () => {
       await expect(
         testServer.executeOperation({
-          query: 'query { getRoom }',
+          query: 'query { joinMyRoom }',
         }),
       ).resolves.toMatchObject({
         body: {
           kind: 'single',
           singleResult: {
-            data: null,
+            data: {
+              joinMyRoom: null,
+            },
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             errors: expect.arrayContaining([
               expect.objectContaining({
@@ -45,7 +69,7 @@ describe('authChecker', () => {
       it('creates user in database', async () => {
         await testServer.executeOperation(
           {
-            query: 'query { getRoom }',
+            query: 'query { joinMyRoom }',
           },
           {
             contextValue: {
@@ -93,7 +117,7 @@ describe('authChecker', () => {
       it('has the same user in database', async () => {
         await testServer.executeOperation(
           {
-            query: 'query { getRoom }',
+            query: 'query { joinMyRoom }',
           },
           {
             contextValue: {
