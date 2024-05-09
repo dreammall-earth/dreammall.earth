@@ -7,7 +7,7 @@ import { createChecksum, addChecksumParam, joinMeetingLink } from './BBB'
 
 // values taken form https://docs.bigbluebutton.org/development/api/#usage
 CONFIG.BBB_SHARED_SECRET = '639259d4-9dd8-4b25-bf01-95f9567eaf4b'
-CONFIG.BBB_URL = 'https://my.url'
+CONFIG.BBB_URL = 'https://my.url/'
 
 describe('createChecksum', () => {
   describe('callName without slash', () => {
@@ -90,12 +90,13 @@ describe('joinMeetingLink', () => {
       joinMeetingLink({
         fullName: 'User',
         meetingID: 'My Meeting',
-        role: 'MODERATOR',
-        createTime: 'now',
-        userID: '1234',
+        password: 'password',
+        // role: 'MODERATOR',
+        // createTime: 'now',
+        // userID: '1234',
       }),
     ).toBe(
-      'https://my.url/join&fullName=User&meetingID=My+Meeting&role=MODERATOR&createTime=now&userID=1234&checksum=ffd418de872093554b4bb3dad454a226601476f6',
+      'https://my.url/join?fullName=User&meetingID=My+Meeting&password=password&redirect=true&checksum=d7fdddda59b530a5acb56e77d5683c4324ceac4f',
     )
   })
 })

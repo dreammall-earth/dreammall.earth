@@ -88,9 +88,10 @@ export class RoomResolver {
     return joinMeetingLink({
       fullName: user.name,
       meetingID: 'Dreammall-Entwicklung',
-      role: 'MODERATOR',
-      createTime: meeting.createTime.toString(),
-      userID: user.id.toString(),
+      password: meeting.moderatorPW,
+      // role: 'MODERATOR',
+      // createTime: meeting.createTime.toString(),
+      // userID: user.id.toString(),
     })
   }
 
