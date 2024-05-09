@@ -1,5 +1,6 @@
 import Bell from './bell.svg?component'
 import Cockpit from './cockpit.svg?component'
+import Earth from './earth.svg?component'
 import Mall from './mall.svg?component'
 import Message from './message.svg?component'
 import WorldCafe from './worldCafe.svg?component'
@@ -10,6 +11,7 @@ const aliases: Partial<IconAliases> = {
   bell: Bell,
   mall: Mall,
   cockpit: Cockpit,
+  earth: Earth,
   message: Message,
   'world-cafe': WorldCafe,
 }

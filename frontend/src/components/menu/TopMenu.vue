@@ -12,7 +12,10 @@
           <TabControl />
         </v-col>
         <v-col class="d-none d-sm-flex align-center justify-end">
-          <NewsIndicator :has-news="true" />
+          <Circle>
+            <v-icon icon="$earth"></v-icon>
+          </Circle>
+          <NewsIndicator :has-news="true" class="ml-1" />
           <UserInfo user-name="Miro" class="ml-4" />
         </v-col>
         <!--
@@ -39,6 +42,7 @@
 import LogoImage from '#components/menu/LogoImage.vue'
 import MessageIndicator from '#components/messageIndicator/MessageIndicator.vue'
 import NewsIndicator from '#components/newsIndicator/NewsIndicator.vue'
+import Circle from '#components/circle/Circle.vue'
 
 import TabControl from './TabControl.vue'
 import UserInfo from './UserInfo.vue'
