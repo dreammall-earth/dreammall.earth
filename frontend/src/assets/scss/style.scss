@@ -2,3 +2,8 @@
 @import './imports/_fonts';
 @import './imports/_mixins';
 @import './imports/_typo';
+
+
+.border-sm {
+    border-width: .953px !important;
+}
