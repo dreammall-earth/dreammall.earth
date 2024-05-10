@@ -1,7 +1,7 @@
 import { gql } from 'graphql-tag'
 
-export const joinMyRoomQuery = gql`
+export const getRoomQuery = gql`
   query {
-    joinMyRoom
+    getRoom
   }
 `
