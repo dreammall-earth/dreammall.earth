@@ -35,7 +35,7 @@ import { inject } from 'vue'
 
 import MainButton from '#components/buttons/MainButton.vue'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
-import { getRoomQuery } from '#queries/getRoomQuery'
+import { joinMyRoomQuery } from '#queries/joinMyRoomQuery'
 import { AUTH } from '#src/env.js'
 import { useAuthStore } from '#stores/authStore.js'
 
@@ -45,8 +45,11 @@ const apolloClient = inject<ApolloClient<InMemoryCache>>(DefaultApolloClient)
 
 const enterRoom = async () => {
   try {
-    const result = await apolloClient?.query({ query: getRoomQuery, fetchPolicy: 'network-only' })
-    window.location.href = result?.data?.getRoom
+    const result = await apolloClient?.query({
+      query: joinMyRoomQuery,
+      fetchPolicy: 'network-only',
+    })
+    window.open(result?.data?.joinMyRoom, '_blank')
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     // eslint-disable-next-line no-console

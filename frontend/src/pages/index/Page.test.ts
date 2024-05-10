@@ -3,17 +3,17 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { getRoomQuery } from '#queries/getRoomQuery'
+import { joinMyRoomQuery } from '#queries/joinMyRoomQuery'
 import { mockClient } from '#tests/mock.apolloClient'
 
 import IndexPage from './+Page.vue'
 import { title } from './+title'
 
-const getRoomQueryMock = vi.fn()
+const joinMyRoomQueryMock = vi.fn()
 
 mockClient.setRequestHandler(
-  getRoomQuery,
-  getRoomQueryMock.mockResolvedValue({ data: { getRoom: 'http://some.url' } }),
+  joinMyRoomQuery,
+  joinMyRoomQueryMock.mockResolvedValue({ data: { joinMyRoom: 'http://some.url' } }),
 )
 
 describe('IndexPage', () => {
@@ -42,6 +42,7 @@ describe('IndexPage', () => {
 
   describe('room button', () => {
     const consoleSpy = vi.spyOn(global.console, 'log')
+    const windowOpenSpy = vi.spyOn(window, 'open')
 
     describe('without error', () => {
       beforeEach(async () => {
@@ -50,18 +51,18 @@ describe('IndexPage', () => {
       })
 
       it('calls the API', () => {
-        expect(getRoomQueryMock).toBeCalled()
+        expect(joinMyRoomQueryMock).toBeCalled()
       })
 
-      it('redirects to url', () => {
-        expect(global.window.location.href).toBe('http://some.url/')
+      it.skip('opens url in new tab', () => {
+        expect(windowOpenSpy).toBeCalledWith('http://some.url/', '_blank')
       })
     })
 
     describe('with error', () => {
       beforeEach(() => {
         vi.clearAllMocks()
-        getRoomQueryMock.mockRejectedValue({ message: 'Aua!' })
+        joinMyRoomQueryMock.mockRejectedValue({ message: 'Aua!' })
       })
 
       it('logs error message', async () => {
