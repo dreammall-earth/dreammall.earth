@@ -54,6 +54,7 @@ describe('IndexPage', () => {
         expect(joinMyRoomQueryMock).toBeCalled()
       })
 
+      // hallo
       it.skip('opens url in new tab', () => {
         expect(windowOpenSpy).toBeCalledWith('http://some.url/', '_blank')
       })
