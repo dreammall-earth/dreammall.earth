@@ -38,7 +38,7 @@
     "@apollo/server": "^4.10.4",
     "@getbrevo/brevo": "^2.1.1",
     "@prisma/client": "^5.13.0",
-    "@vuepress/theme-default": "^2.0.0-rc.26",
+    "@vuepress/theme-default": "^2.0.0-rc.28",
     "class-validator": "^0.14.1",
     "dotenv": "^16.4.5",
     "graphql": "^16.8.1",
