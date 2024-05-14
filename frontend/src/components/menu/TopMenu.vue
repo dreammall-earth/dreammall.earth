@@ -14,7 +14,7 @@
         <v-col class="d-none d-sm-flex align-center justify-end">
           <LightDarkSwitch />
           <Circle>
-            <v-icon icon="$camera"></v-icon>
+            <v-icon icon="$camera" color="secondary"></v-icon>
           </Circle>
           <NewsIndicator :has-news="true" class="ml-1" />
           <UserInfo user-name="Miro" class="ml-4" />

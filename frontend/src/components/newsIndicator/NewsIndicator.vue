@@ -1,7 +1,7 @@
 <template>
   <div class="news-indicator">
     <Circle>
-      <v-icon icon="$bell"></v-icon>
+      <v-icon icon="$bell" color="secondary"></v-icon>
     </Circle>
     <div
       class="marker d-flex justify-center align-center rounded-circle"
