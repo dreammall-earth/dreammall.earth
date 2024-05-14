@@ -13,7 +13,7 @@
         </v-col>
         <v-col class="d-none d-sm-flex align-center justify-end">
           <LightDarkSwitch />
-          <Circle>
+          <Circle class="ml-1">
             <v-icon icon="$camera" color="secondary"></v-icon>
           </Circle>
           <NewsIndicator :has-news="true" class="ml-1" />
