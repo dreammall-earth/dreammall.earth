@@ -8,6 +8,7 @@ $success-color: #4caf50;
 $warning-color: #ffeb3b;
 $border-color: #ffffff;
 $border-opacity: 1;
+$font-color: #222;
 
 :export {
     backgroundColor: $background-color;
@@ -20,4 +21,5 @@ $border-opacity: 1;
     warningColor: $warning-color;
     borderColor: $border-color;
     borderOpacity: $border-opacity;
+    fontColor: $font-color;
 }

@@ -23,6 +23,7 @@ const lightTheme: ThemeDefinition = {
     info: light.infoColor,
     warning: light.warningColor,
     error: light.errorColor,
+    font: light.fontColor,
   },
   variables: {
     'border-color': light.borderColor,
@@ -41,6 +42,7 @@ const darkTheme: ThemeDefinition = {
     info: dark.infoColor,
     warning: dark.warningColor,
     error: dark.errorColor,
+    font: dark.fontColor,
   },
   variables: {
     'border-color': dark.borderColor,

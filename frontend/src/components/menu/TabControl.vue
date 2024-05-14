@@ -1,5 +1,9 @@
 <template>
-  <button class="tabControl ma-auto" :class="{ open: isOpen }" @click="toggleOpen">
+  <button
+    class="tabControl ma-auto border-sm text-font"
+    :class="{ open: isOpen }"
+    @click="toggleOpen"
+  >
     <button class="item" :class="{ active: activeItem === 1 }" @click="activeItem = 1">
       <div class="icon d-flex justify-center align-center">
         <v-icon icon="$world-cafe" class="w-100 world-cafe"></v-icon>
@@ -68,7 +72,7 @@ const activeItem = ref(1)
     background: #fff;
 
     .icon {
-      background: #e1e6ed;
+      background: var(--background-color);
     }
   }
 }
@@ -76,29 +80,28 @@ const activeItem = ref(1)
 .tabControl {
   --animation-time: 0.3s;
   --height: min(60px, 100%);
+  --background-color: #e1e6ed;
   height: var(--height);
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
   line-height: 150%;
-  color: #222;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #e1e6ed; // TODO use color variable
+  background-color: var(--background-color);
   padding: var(--tab-control-padding);
   border-radius: 27.067px;
-  border: none;
   transition: padding var(--animation-time);
 
   &.open {
     --tab-control-padding: 2px;
-    border: 0.677px solid rgba(255, 255, 255, 0.78); // TODO use color variable etc
+    border-color: rgba(255, 255, 255, 0.78) !important;
 
     .item {
       &.active {
         .icon {
-          background-color: #e1e6ed;
+          background-color: var(--background-color);
           border-radius: 50%;
         }
       }
