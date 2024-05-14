@@ -1,6 +1,6 @@
 import Bell from './bell.svg?component'
+import Camera from './camera.svg?component'
 import Cockpit from './cockpit.svg?component'
-import Earth from './earth.svg?component'
 import Mall from './mall.svg?component'
 import Message from './message.svg?component'
 import WorldCafe from './worldCafe.svg?component'
@@ -9,9 +9,9 @@ import type { IconAliases } from 'vuetify'
 
 const aliases: Partial<IconAliases> = {
   bell: Bell,
-  mall: Mall,
+  camera: Camera,
   cockpit: Cockpit,
-  earth: Earth,
+  mall: Mall,
   message: Message,
   'world-cafe': WorldCafe,
 }
