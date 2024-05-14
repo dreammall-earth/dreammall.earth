@@ -62,6 +62,7 @@ const authStore = useAuthStore()
 }
 .phrase {
   font-size: 12px;
+  text-wrap: nowrap;
 }
 </style>
 m

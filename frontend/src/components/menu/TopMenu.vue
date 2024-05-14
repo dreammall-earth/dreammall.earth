@@ -2,17 +2,14 @@
   <div class="top-menu mt-6 mt-sm-0">
     <v-app-bar flat class="app-bar" height="70px">
       <v-row class="ma-1">
-        <v-col class="d-none d-sm-flex align-center">
+        <v-col class="d-none d-md-flex align-center">
           <MessageIndicator :number-of-messages="3" />
-          <a href="/" class="w-100 ml-8">
-            <LogoImage size="small" />
-          </a>
         </v-col>
         <v-col class="d-flex align-center">
           <TabControl />
         </v-col>
-        <v-col class="d-none d-sm-flex align-center justify-end">
-          <LightDarkSwitch />
+        <v-col class="d-none d-md-flex align-center justify-end">
+          <LightDarkSwitch class="d-none d-lg-flex" />
           <Circle class="ml-1">
             <v-icon icon="$camera" color="secondary"></v-icon>
           </Circle>
@@ -40,7 +37,6 @@
 <script lang="ts" setup>
 // import { inject } from 'vue'
 
-import LogoImage from '#components/menu/LogoImage.vue'
 import MessageIndicator from '#components/messageIndicator/MessageIndicator.vue'
 import NewsIndicator from '#components/newsIndicator/NewsIndicator.vue'
 import Circle from '#components/circle/Circle.vue'
@@ -75,7 +71,6 @@ async function signOut() {
 }
 .top-menu {
   position: sticky;
-  top: 0;
-  margin-top: 30px;
+  top: 0px;
 }
 </style>

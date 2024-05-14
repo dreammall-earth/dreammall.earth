@@ -2,7 +2,7 @@
   <v-switch
     :label="`${$t('menu.theme.light')} / ${$t('menu.theme.dark')}`"
     @click="toggleTheme"
-    class="light-dark-switch d-flex align-center justify-center px-1"
+    class="light-dark-switch align-center justify-center px-1"
   ></v-switch>
 </template>
 
@@ -18,8 +18,6 @@ function toggleTheme() {
 
 <style lang="scss">
 .light-dark-switch {
-  white-space: nowrap;
-
   label {
     opacity: 1 !important;
   }
