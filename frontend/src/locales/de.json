@@ -26,7 +26,11 @@
     "worldCafe": "Weltencafé",
     "mall": "Mall",
     "cockpit": "Cockpit",
-    "userPhrase": "Talk to your friends"
+    "userPhrase": "Talk to your friends",
+    "theme": {
+      "light": "Hell",
+      "dark": "Dunkel"
+    }
   },
   "meta": {
     "defaultDescription": "Deine Reichweite Erweitern Alle Möglichkeiten Miteinander Ausschöpfen Lebensqualität Leben",

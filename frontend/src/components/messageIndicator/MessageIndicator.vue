@@ -1,8 +1,8 @@
 <template>
   <div class="message-indicator">
-    <div class="icon-circle d-flex justify-center align-center">
-      <v-icon icon="$message" color="#3D4753"></v-icon>
-    </div>
+    <Circle>
+      <v-icon icon="$message" color="secondary"></v-icon>
+    </Circle>
     <div
       class="count d-flex justify-center align-center"
       :data-show-count="props.numberOfMessages > 0"
@@ -13,6 +13,7 @@
 </template>
 
 <script lang="ts" setup>
+import Circle from '#components/circle/Circle.vue';
 const props = defineProps<{
   numberOfMessages: number
 }>()
@@ -45,13 +46,5 @@ const props = defineProps<{
 .message-indicator {
   position: relative;
   width: fit-content;
-}
-
-.icon-circle {
-  border-radius: 47.637px;
-  border: 0.953px solid #d6dfe9;
-  background: #fff;
-  height: 42px;
-  width: 42px;
 }
 </style>

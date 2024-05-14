@@ -1,0 +1,23 @@
+$background-color: #000000;
+$surface-color: #121212;
+$primary-color: #2196f3;
+$secondary-color: #3D4753;
+$error-color: #f44336;
+$info-color: #2196f3;
+$success-color: #4caf50;
+$warning-color: #ffeb3b;
+$border-color: #ffffff;
+$border-opacity: 1;
+
+:export {
+    backgroundColor: $background-color;
+    surfaceColor: $surface-color;
+    primaryColor: $primary-color;
+    secondaryColor: $secondary-color;
+    errorColor: $error-color;
+    infoColor: $info-color;
+    successColor: $success-color;
+    warningColor: $warning-color;
+    borderColor: $border-color;
+    borderOpacity: $border-opacity;
+}

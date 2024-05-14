@@ -12,6 +12,7 @@
           <TabControl />
         </v-col>
         <v-col class="d-none d-sm-flex align-center justify-end">
+          <LightDarkSwitch />
           <Circle>
             <v-icon icon="$earth"></v-icon>
           </Circle>
@@ -46,6 +47,7 @@ import Circle from '#components/circle/Circle.vue'
 
 import TabControl from './TabControl.vue'
 import UserInfo from './UserInfo.vue'
+import LightDarkSwitch from './LightDarkSwitch.vue'
 
 // import AuthService from '#src/services/AuthService'
 // import { useAuthStore } from '#stores/authStore'
