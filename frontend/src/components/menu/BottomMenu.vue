@@ -3,7 +3,7 @@
     <MessageIndicator :number-of-messages="3" />
     <NewsIndicator :has-news="true" />
     <v-icon icon="mdi-magnify"></v-icon>
-    <UserInfo user-name="Miro" />
+    <UserInfo />
   </div>
 </template>
 

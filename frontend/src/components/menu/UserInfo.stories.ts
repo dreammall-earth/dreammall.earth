@@ -9,7 +9,7 @@ const meta = {
   component: UserInfo as SBComp,
   tags: ['autodocs'],
   argTypes: {},
-  args: { userName: 'John Doe' },
+  args: {},
 } satisfies Meta<typeof UserInfo>
 
 export default meta
