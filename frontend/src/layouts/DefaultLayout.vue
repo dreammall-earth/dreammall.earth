@@ -1,5 +1,5 @@
 <template>
-  <v-main class="bg-grey-lighten-3 main-layout">
+  <v-main class="bg-background main-layout">
     <TopMenu />
     <v-container fluid class="page-container px-8">
       <v-row>
