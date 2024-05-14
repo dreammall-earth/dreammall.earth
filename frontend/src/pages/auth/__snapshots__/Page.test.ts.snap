@@ -83,41 +83,7 @@ exports[`AuthPage > signin callback without error > renders 1`] = `
               <div
                 class="v-col d-flex justify-end"
               >
-                <button
-                  class="v-btn v-theme--light v-btn--density-default v-btn--variant-text main-button main-button--third main-button-auto sign-out mr-4"
-                  data-v-2b63c1fe=""
-                  style="color: #3d4753; caret-color: #3d4753; height: auto; width: auto;"
-                  type="button"
-                >
-                  
-                  <span
-                    class="v-btn__overlay"
-                  />
-                  <span
-                    class="v-btn__underlay"
-                  />
-                  
-                  <!---->
-                  <span
-                    class="v-btn__content"
-                    data-no-activator=""
-                  >
-                    
-                    
-                    <!--v-if-->
-                    <span
-                      class="main-button-content"
-                      data-v-2b63c1fe=""
-                    >
-                      Sign Out 
-                      <!--v-if-->
-                    </span>
-                    
-                    
-                  </span>
-                  <!---->
-                  <!---->
-                </button>
+                <!--v-if-->
               </div>
             </div>
             

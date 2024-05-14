@@ -10,10 +10,8 @@ import { inject, onBeforeMount } from 'vue'
 
 import DefaultLayout from '#layouts/DefaultLayout.vue'
 import AuthService from '#src/services/AuthService'
-import { useAuthStore } from '#stores/authStore'
 
 const authService = inject<AuthService>('authService')
-const auth = useAuthStore()
 
 onBeforeMount(async () => {
   try {
@@ -21,7 +19,6 @@ onBeforeMount(async () => {
     if (!user) {
       throw new Error('Could not Sign In')
     }
-    auth.save(user)
     navigate('/')
   } catch (error) {
     // eslint-disable-next-line no-console

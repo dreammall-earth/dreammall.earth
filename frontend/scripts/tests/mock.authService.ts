@@ -11,6 +11,8 @@ export const signinRedirectMock = vi.fn()
 export const signinCallbackMock = vi.fn()
 export const signoutRedirectMock = vi.fn()
 export const getUserMock = vi.fn()
+export const addUserUnloadedMock = vi.fn()
+export const addUserLoadedMock = vi.fn()
 
 vi.mock('oidc-client-ts', async (importOriginal) => {
   const mod = await importOriginal<typeof import('oidc-client-ts')>()
@@ -23,6 +25,10 @@ vi.mock('oidc-client-ts', async (importOriginal) => {
         signinCallback: signinCallbackMock,
         signoutRedirect: signoutRedirectMock,
         getUser: getUserMock,
+        events: {
+          addUserLoaded: addUserLoadedMock,
+          addUserUnloaded: addUserUnloadedMock,
+        },
       }
     }),
   }
