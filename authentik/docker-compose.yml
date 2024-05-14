@@ -44,7 +44,7 @@ services:
       - ./media:/media
       - ./custom-templates:/templates
       - ./data:/data
-      - ./custom.css:/web/dist/custom.css
+      - ./web/dist/custom.css:/web/dist/custom.css
     env_file:
       - .env
     ports:
