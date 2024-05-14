@@ -4,7 +4,7 @@
   >
     <div class="d-flex flex-column justify-center text-right pa-1 pl-3 w-100">
       <div class="phrase">{{ $t('menu.userPhrase') }}</div>
-      <div class="name">{{ authStore.user?.profile.nickname }}</div>
+      <div class="name">{{ nickname }}</div>
     </div>
     <v-avatar class="avatar d-flex align-center text-font border-sm bg-primary" size="48">
       <v-img v-if="userImage" :src="userImage" />
