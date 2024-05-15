@@ -1,7 +1,7 @@
 <template>
   <div class="message-indicator">
     <Circle>
-      <v-icon icon="$message" color="secondary"></v-icon>
+      <v-icon icon="$message"></v-icon>
     </Circle>
     <div
       class="count d-flex justify-center align-center"

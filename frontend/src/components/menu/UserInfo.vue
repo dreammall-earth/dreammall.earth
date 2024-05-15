@@ -1,6 +1,6 @@
 <template>
   <div
-    class="rounded-pill d-flex flex-row text-font bg-white border-sm align-center justify-center"
+    class="rounded-pill d-flex flex-row text-icon bg-icon-background border-sm align-center justify-center"
   >
     <div class="d-flex flex-column justify-center text-right pa-1 pl-3 w-100">
       <div class="phrase">{{ $t('menu.userPhrase') }}</div>

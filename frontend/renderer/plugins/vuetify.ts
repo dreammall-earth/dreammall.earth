@@ -24,6 +24,8 @@ const lightTheme: ThemeDefinition = {
     warning: light.warningColor,
     error: light.errorColor,
     font: light.fontColor,
+    icon: light.iconColor,
+    'icon-background': light.iconBackgroundColor,
   },
   variables: {
     'border-color': light.borderColor,
@@ -43,6 +45,8 @@ const darkTheme: ThemeDefinition = {
     warning: dark.warningColor,
     error: dark.errorColor,
     font: dark.fontColor,
+    icon: dark.iconColor,
+    'icon-background': dark.iconBackgroundColor,
   },
   variables: {
     'border-color': dark.borderColor,

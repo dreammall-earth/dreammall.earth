@@ -1,4 +1,4 @@
-$background-color: #FFFFFF;
+$background-color: #F5F5F5;
 $surface-color: #FFFFFF;
 $primary-color: #f09630;
 $secondary-color: #3D4753;
@@ -9,6 +9,8 @@ $warning-color: #FB8C00;
 $border-color: #d6dfe9;
 $border-opacity: 1;
 $font-color: #222;
+$icon-color: #3D4753;
+$icon-background-color: $background-color;
 
 :export {
     backgroundColor: $background-color;
@@ -22,5 +24,7 @@ $font-color: #222;
     borderColor: $border-color;
     borderOpacity: $border-opacity;
     fontColor: $font-color;
+    iconColor: $icon-color;
+    iconBackgroundColor: $icon-background-color;
 }
 
