@@ -2,12 +2,15 @@
   <div class="bottom-menu w-100 position-fixed bottom-0 justify-space-around align-center py-2">
     <MessageIndicator :number-of-messages="3" />
     <NewsIndicator :has-news="true" />
-    <v-icon icon="mdi-magnify"></v-icon>
+    <Circle>
+      <v-icon icon="$camera"></v-icon>
+    </Circle>
     <UserInfo />
   </div>
 </template>
 
 <script lang="ts" setup>
+import Circle from '#components/circle/Circle.vue'
 import MessageIndicator from '#components/messageIndicator/MessageIndicator.vue'
 import NewsIndicator from '#components/newsIndicator/NewsIndicator.vue'
 
