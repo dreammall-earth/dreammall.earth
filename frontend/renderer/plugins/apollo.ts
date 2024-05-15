@@ -22,6 +22,8 @@ const httpLink = createHttpLink({
   uri: ENDPOINTS.GRAPHQL_URI,
 })
 
+const cache = new InMemoryCache()
+
 /*
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
@@ -35,11 +37,9 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 })
 */
 
-const cache = new InMemoryCache()
-
-export const createApolloClient = (getToken: () => string) => {
+export const createApolloClient = (getToken: () => string, isClient: boolean) => {
   return new ApolloClient({
-    ssrMode: true,
+    ...(isClient ? { ssrForceFetchDelay: 100 } : { ssrMode: true }),
     link: createAuthLink(getToken).concat(httpLink), // errorLink.concat(httpLink),
     cache,
   })
