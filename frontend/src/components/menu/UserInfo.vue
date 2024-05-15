@@ -1,15 +1,14 @@
 <template>
   <div
-    class="rounded-pill d-flex flex-row text-icon bg-icon-background border-sm align-center justify-center"
+    class="user-info rounded-pill d-flex flex-row text-icon bg-icon-background border-sm align-center justify-center"
   >
-    <div class="d-flex flex-column justify-center text-right pa-1 pl-3 w-100">
-      <div class="phrase">{{ $t('menu.userPhrase') }}</div>
-      <div class="name">{{ nickname }}</div>
-    </div>
-    <v-avatar class="avatar d-flex align-center text-font border-sm bg-primary" size="48">
+    <v-avatar class="avatar d-flex align-center text-font border-sm bg-primary" size="44">
       <v-img v-if="userImage" :src="userImage" />
       <span v-else>{{ initals?.toUpperCase() }}</span>
     </v-avatar>
+    <div class="d-flex flex-column justify-center text-right pa-1 pl-3 w-100">
+      <v-icon icon="$ellipsis"></v-icon>
+    </div>
   </div>
 </template>
 
@@ -21,7 +20,6 @@ const id = Math.floor(Math.random() * 10e4)
 
 const authStore = useAuthStore()
 
-const nickname = authStore.user?.profile.nickname
 const name = authStore.user?.profile.name
 const initals = name
   ?.split(' ')
@@ -31,6 +29,9 @@ const userImage = authStore.user?.profile.picture
 </script>
 
 <style scoped lang="scss">
+.user-info {
+  height: var(--menu-icon-height);
+}
 .name {
   font-size: 14px;
 }

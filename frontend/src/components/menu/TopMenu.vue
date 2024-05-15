@@ -14,7 +14,7 @@
             <v-icon icon="$camera"></v-icon>
           </Circle>
           <NewsIndicator :has-news="true" class="ml-1" />
-          <UserInfo user-name="Miro" class="ml-4" />
+          <UserInfo class="ml-4" />
         </v-col>
         <!--
         <v-col class="d-flex justify-end">
