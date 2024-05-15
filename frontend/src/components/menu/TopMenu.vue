@@ -8,35 +8,26 @@
         <v-col class="d-flex align-center">
           <TabControl />
         </v-col>
-        <v-col class="d-none d-md-flex align-center justify-end">
-          <LightDarkSwitch class="d-none d-lg-flex" />
-          <Circle class="ml-1">
-            <v-icon icon="$camera"></v-icon>
-          </Circle>
-          <NewsIndicator :has-news="true" class="ml-1" />
-          <UserInfo class="ml-4" />
+        <v-col class="d-none d-md-flex align-center">
+          <v-row>
+            <v-col class="d-flex align-center">
+              <LightDarkSwitch class="d-none d-lg-flex" />
+            </v-col>
+            <v-col class="d-flex align-center justify-end">
+              <Circle>
+                <v-icon icon="$camera"></v-icon>
+              </Circle>
+              <NewsIndicator :has-news="true" class="ml-2" />
+              <UserInfo class="ml-2" />
+            </v-col>
+          </v-row>
         </v-col>
-        <!--
-        <v-col class="d-flex justify-end">
-          <MainButton
-            v-if="auth.isLoggedIn"
-            class="sign-out mr-4"
-            variant="third"
-            label="Sign Out"
-            size="auto"
-            @click="signOut"
-            >{{ $t('buttons.signout') }}
-          </MainButton>
-        </v-col>
-        -->
       </v-row>
     </v-app-bar>
   </div>
 </template>
 
 <script lang="ts" setup>
-// import { inject } from 'vue'
-
 import MessageIndicator from '#components/messageIndicator/MessageIndicator.vue'
 import NewsIndicator from '#components/newsIndicator/NewsIndicator.vue'
 import Circle from '#components/circle/Circle.vue'
@@ -44,24 +35,6 @@ import Circle from '#components/circle/Circle.vue'
 import TabControl from './TabControl.vue'
 import UserInfo from './UserInfo.vue'
 import LightDarkSwitch from './LightDarkSwitch.vue'
-
-// import AuthService from '#src/services/AuthService'
-// import { useAuthStore } from '#stores/authStore'
-
-/*
-const authService = inject<AuthService>('authService')
-
-const auth = useAuthStore()
-
-async function signOut() {
-  try {
-    await authService?.signOut()
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log('auth error', error)
-  }
-}
-*/
 </script>
 
 <style scoped lang="scss">

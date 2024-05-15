@@ -3,6 +3,7 @@
     <template v-slot:activator="{ props }">
       <button
         v-bind="props"
+        :class="$attrs.class"
         class="user-info rounded-pill d-flex flex-row text-icon bg-icon-background border-sm align-center justify-center"
       >
         <v-avatar class="avatar d-flex align-center text-font border-sm bg-primary" size="44">
