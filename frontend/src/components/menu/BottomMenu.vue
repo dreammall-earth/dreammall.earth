@@ -19,8 +19,8 @@ import UserInfo from './UserInfo.vue'
 <style scoped lang="scss">
 .bottom-menu {
   bottom: 0;
-  border-radius: 30px 30px 0px 0px;
-  background: rgba(78, 91, 107, 0.6);
+  background: rgb(78 91 107 / 60%);
   backdrop-filter: blur(20px);
+  border-radius: 30px 30px 0 0;
 }
 </style>

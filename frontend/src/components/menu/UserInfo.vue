@@ -61,15 +61,18 @@ async function signOut() {
 .user-info {
   height: var(--menu-icon-height);
 }
+
 .name {
   font-size: 14px;
 }
+
 .phrase {
   font-size: 12px;
   text-wrap: nowrap;
 }
+
 .avatar {
-  border-color: rgba(var(--v-theme-border), 0.8);
+  border-color: rgb(var(--v-theme-border) 0.8);
 }
 </style>
 m

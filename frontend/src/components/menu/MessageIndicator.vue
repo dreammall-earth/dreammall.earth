@@ -22,20 +22,20 @@ const props = defineProps<{
 
 <style scoped lang="scss">
 .count {
-  border-radius: 12px;
-  background: #d02f44;
-  width: 22px;
-  height: 22px;
   position: absolute;
   top: -8px;
   right: -8px;
-  color: white;
-  font-family: Roboto;
+  width: 22px;
+  height: 22px;
+  font-family: Roboto, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  color: white;
   letter-spacing: 0.1px;
+  background: #d02f44;
+  border-radius: 12px;
   opacity: 1;
   transition: opacity 0.3s;
 

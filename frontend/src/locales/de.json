@@ -23,14 +23,14 @@
     }
   },
   "menu": {
-    "worldCafe": "Weltencafé",
-    "mall": "Mall",
     "cockpit": "Cockpit",
-    "userPhrase": "Talk to your friends",
+    "mall": "Mall",
     "theme": {
-      "light": "Hell",
-      "dark": "Dunkel"
-    }
+      "dark": "Dunkel",
+      "light": "Hell"
+    },
+    "userPhrase": "Talk to your friends",
+    "worldCafe": "Weltencafé"
   },
   "meta": {
     "defaultDescription": "Deine Reichweite Erweitern Alle Möglichkeiten Miteinander Ausschöpfen Lebensqualität Leben",

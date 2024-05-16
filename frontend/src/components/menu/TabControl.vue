@@ -1,7 +1,7 @@
 <template>
   <button
     ref="tabControl"
-    class="tabControl ma-auto border-sm text-font"
+    class="tab-control ma-auto border-sm text-font"
     :class="{ open: isOpen, sliding: isSliding }"
     @click="() => !isOpen && open()"
   >
@@ -141,14 +141,14 @@ onUnmounted(() => {
 }
 
 .marker {
-  height: calc(100% - 2 * var(--tab-control-padding));
-  border-radius: 27.067px;
-  border: var(--item-border-width) solid rgba(255, 255, 255, 0.78);
-  background: #fff;
   position: absolute;
   top: 2px;
   left: 0;
   z-index: 0;
+  height: calc(100% - 2 * var(--tab-control-padding));
+  background: #fff;
+  border: var(--item-border-width) solid rgb(255 255 255 / 78%);
+  border-radius: 27.067px;
   opacity: 1;
   transition:
     opacity cubic-bezier(1, 0, 0, 1) var(--animation-time),
@@ -159,21 +159,22 @@ onUnmounted(() => {
 .item {
   z-index: 1;
   display: flex;
-  overflow: hidden;
   align-items: center;
-  padding: 5px 20px;
   max-width: 150px;
   height: 100%;
-  border-width: var(--item-border-width);
+  padding: 5px 20px;
+  overflow: hidden;
   border-color: transparent;
+  border-width: var(--item-border-width);
   transition:
     height var(--animation-time),
     max-width var(--animation-time),
     padding var(--animation-time);
+
   &.active {
-    border-radius: 27.067px;
-    border-color: rgba(255, 255, 255, 0.78);
     background: #fff;
+    border-color: rgb(255 255 255 / 78%);
+    border-radius: 27.067px;
 
     .icon {
       background-color: var(--background-color);
@@ -182,41 +183,44 @@ onUnmounted(() => {
 }
 
 .item:first-child,
-.tabControl:not(.open) .item.active {
+.tab-control:not(.open) .item.active {
   padding-left: 10px;
 }
 
 .item:last-child,
-.tabControl:not(.open) .item.active {
+.tab-control:not(.open) .item.active {
   padding-right: 15px;
 }
 
-.tabControl {
+.tab-control {
   --animation-time: 0.5s;
   --height: 50px;
   --background-color: #e1e6ed;
   --item-border-width: 0.677px;
+
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   height: var(--height);
+  padding: var(--tab-control-padding);
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
   line-height: 150%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   background-color: var(--background-color);
-  padding: var(--tab-control-padding);
   border-radius: 27.067px;
   transition: padding var(--animation-time);
 
   &.open {
     --tab-control-padding: 2px;
-    border-color: rgba(255, 255, 255, 0.78) !important;
+
+    border-color: rgb(255 255 255 / 78%) !important;
 
     .item {
       &.active {
         background-color: #fff;
+
         .icon {
           background-color: var(--background-color);
         }
@@ -231,16 +235,19 @@ onUnmounted(() => {
 
   &:not(.open) {
     --tab-control-padding: 0px;
+
     .item.active {
       .icon {
-        background: none;
         padding: 2px;
+        background: none;
       }
     }
+
     .item:not(.active) {
       max-width: 0;
       padding: 0;
     }
+
     .marker {
       opacity: 0;
     }

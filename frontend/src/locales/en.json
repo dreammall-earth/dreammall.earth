@@ -23,14 +23,14 @@
     }
   },
   "menu": {
-    "worldCafe": "World Cafe",
-    "mall": "Mall",
     "cockpit": "Cockpit",
-    "userPhrase": "Talk to your friends",
+    "mall": "Mall",
     "theme": {
-      "light": "Light",
-      "dark": "Dark"
-    }
+      "dark": "Dark",
+      "light": "Light"
+    },
+    "userPhrase": "Talk to your friends",
+    "worldCafe": "World Cafe"
   },
   "meta": {
     "defaultDescription": "Expanding your reach making the most of opportunities enhance quality of life together",

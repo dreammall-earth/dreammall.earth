@@ -38,11 +38,12 @@ import UserInfo from './UserInfo.vue'
 
 <style scoped lang="scss">
 .app-bar {
-  background: transparent !important;
   position: static !important;
+  background: transparent !important;
 }
+
 .top-menu {
   position: sticky;
-  top: 0px;
+  top: 0;
 }
 </style>

@@ -20,12 +20,12 @@ const props = defineProps<{
 
 <style scoped lang="scss">
 .marker {
-  background: #d02f44;
+  position: absolute;
+  top: 0;
+  right: 0;
   width: 10px;
   height: 10px;
-  position: absolute;
-  top: 0px;
-  right: 0px;
+  background: #d02f44;
   opacity: 1;
   transition: opacity 0.3s;
 
