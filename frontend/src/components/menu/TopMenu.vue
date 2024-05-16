@@ -5,7 +5,7 @@
         <v-col class="d-none d-md-flex align-center">
           <MessageIndicator :number-of-messages="3" />
         </v-col>
-        <v-col class="d-flex align-center">
+        <v-col class="d-flex align-center justify-center">
           <TabControl />
         </v-col>
         <v-col class="d-none d-md-flex align-center">
