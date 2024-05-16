@@ -3,7 +3,6 @@ import { User } from 'oidc-client-ts'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
-// This looks dangerous
 import { AUTH } from '#src/env'
 
 export const cookieStorage = {
