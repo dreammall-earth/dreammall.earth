@@ -8,37 +8,16 @@
     <div v-show="isSliding" ref="marker" class="marker"></div>
     <div class="d-flex align-center justify-center h-100 w-100">
       <button
-        ref="item1"
+        v-for="(item, index) in items"
+        ref="itemRefs"
         class="item"
-        :class="{ active: activeItem === 1 }"
-        @click="() => setItem(1)"
+        :class="{ active: activeItem === index }"
+        @click="() => setItem(index)"
       >
         <div class="icon d-flex justify-center align-center">
-          <v-icon icon="$world-cafe" class="w-100 world-cafe"></v-icon>
+          <v-icon :icon="item.icon" class="w-100" :class="item.class"></v-icon>
         </div>
-        {{ $t('menu.worldCafe') }}
-      </button>
-      <button
-        ref="item2"
-        class="item"
-        :class="{ active: activeItem === 2 }"
-        @click="() => setItem(2)"
-      >
-        <div class="icon d-flex justify-center align-center">
-          <v-icon icon="$mall" class="w-100 mall"></v-icon>
-        </div>
-        {{ $t('menu.mall') }}
-      </button>
-      <button
-        ref="item3"
-        class="item"
-        :class="{ active: activeItem === 3 }"
-        @click="() => setItem(3)"
-      >
-        <div class="icon d-flex justify-center align-center">
-          <v-icon icon="$cockpit" class="w-100"></v-icon>
-        </div>
-        {{ $t('menu.cockpit') }}
+        {{ $t(item.text) }}
       </button>
     </div>
   </button>
@@ -49,44 +28,68 @@ import { onMounted, onUnmounted, ref } from 'vue'
 
 import type { Ref } from 'vue'
 
-const closeDelay = 3000
-
 const isOpen = ref(true)
-
 const isSliding = ref(false)
-
-const activeItem = ref(1)
+const activeItem = ref(0)
 
 const tabControl: Ref<HTMLElement | null> = ref(null)
-
 const marker: Ref<HTMLElement | null> = ref(null)
 
-const item1: Ref<HTMLElement | null> = ref(null)
-const item2: Ref<HTMLElement | null> = ref(null)
-const item3: Ref<HTMLElement | null> = ref(null)
+const items = [
+  {
+    class: 'world-cafe',
+    icon: '$world-cafe',
+    text: 'menu.worldCafe',
+  },
+  {
+    class: 'mall',
+    icon: '$mall',
+    text: 'menu.mall',
+  },
+  {
+    class: 'cockpit',
+    icon: '$cockpit',
+    text: 'menu.cockpit',
+  },
+]
+
+const itemRefs = ref([] as HTMLElement[])
 
 let timer: ReturnType<typeof setTimeout>
 
+/**
+ * Open the tab control
+ */
 function open() {
   isOpen.value = true
   closeWithDelay()
 }
 
+/**
+ * Close the tab control after a delay
+ */
 function closeWithDelay() {
   timer = setTimeout(() => {
     isSliding.value = false
     isOpen.value = false
-  }, closeDelay)
+  }, 3000)
 }
 
-function setMarker(item: number) {
-  activeItem.value = item
-  const activeItemRef = activeItem.value === 1 ? item1 : activeItem.value === 2 ? item2 : item3
+/**
+ * Move the marker to the active item
+ * @param item
+ */
+function moveMarker() {
+  const itemRef = itemRefs.value[activeItem.value]
 
-  marker.value?.style.setProperty('width', `${activeItemRef.value?.clientWidth}px`)
-  marker.value?.style.setProperty('left', `${activeItemRef.value?.offsetLeft}px`)
+  marker.value?.style.setProperty('width', `${itemRef.clientWidth}px`)
+  marker.value?.style.setProperty('left', `${itemRef.offsetLeft}px`)
 }
 
+/**
+ * Set the active item
+ * @param item s
+ */
 function setItem(item: number) {
   if (!isOpen.value) return
 
@@ -95,23 +98,17 @@ function setItem(item: number) {
   isSliding.value = true
 
   activeItem.value = item
-  const activeItemRef = activeItem.value === 1 ? item1 : activeItem.value === 2 ? item2 : item3
 
   requestAnimationFrame(() => {
     // Move the marker to the active item
-
-    if (activeItemRef.value?.offsetLeft === undefined) {
-      throw new Error('activeItemRef.value?.offsetLeft is undefined')
-    }
-
-    setMarker(item)
+    moveMarker()
 
     closeWithDelay()
   })
 }
 
 onMounted(() => {
-  setMarker(activeItem.value)
+  moveMarker()
   closeWithDelay()
 })
 
