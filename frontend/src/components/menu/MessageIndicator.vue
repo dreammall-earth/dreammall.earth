@@ -13,7 +13,8 @@
 </template>
 
 <script lang="ts" setup>
-import Circle from '#components/circle/Circle.vue'
+import Circle from './CircleElement.vue'
+
 const props = defineProps<{
   numberOfMessages: number
 }>()

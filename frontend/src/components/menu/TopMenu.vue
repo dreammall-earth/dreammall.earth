@@ -28,13 +28,12 @@
 </template>
 
 <script lang="ts" setup>
-import MessageIndicator from '#components/messageIndicator/MessageIndicator.vue'
-import NewsIndicator from '#components/newsIndicator/NewsIndicator.vue'
-import Circle from '#components/circle/Circle.vue'
-
+import Circle from './CircleElement.vue'
+import LightDarkSwitch from './LightDarkSwitch.vue'
+import MessageIndicator from './MessageIndicator.vue'
+import NewsIndicator from './NewsIndicator.vue'
 import TabControl from './TabControl.vue'
 import UserInfo from './UserInfo.vue'
-import LightDarkSwitch from './LightDarkSwitch.vue'
 </script>
 
 <style scoped lang="scss">

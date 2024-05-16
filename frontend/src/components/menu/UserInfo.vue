@@ -1,6 +1,6 @@
 <template>
   <v-menu>
-    <template v-slot:activator="{ props }">
+    <template #activator="{ props }">
       <button
         v-bind="props"
         :class="$attrs.class"
@@ -29,12 +29,10 @@
 
 <script lang="ts" setup>
 import { inject } from 'vue'
-import { useAuthStore } from '#stores/authStore'
-import AuthService from '#src/services/AuthService'
-import MainButton from '#components/buttons/MainButton.vue'
 
-// Avoid problems when same svg is used several times by randomizing path and image ids
-const id = Math.floor(Math.random() * 10e4)
+import MainButton from '#components/buttons/MainButton.vue'
+import AuthService from '#src/services/AuthService'
+import { useAuthStore } from '#stores/authStore'
 
 const authStore = useAuthStore()
 

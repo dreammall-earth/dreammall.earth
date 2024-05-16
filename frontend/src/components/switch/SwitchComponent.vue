@@ -42,7 +42,7 @@ const props = withDefaults(
     defaultState: State
     label?: string
   }>(),
-  { defaultState: 'left' },
+  { defaultState: 'left', label: '' },
 )
 
 const state = ref<State>(props.defaultState)

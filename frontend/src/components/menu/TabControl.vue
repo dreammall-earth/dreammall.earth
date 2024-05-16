@@ -5,7 +5,7 @@
     :class="{ open: isOpen, sliding: isSliding }"
     @click="() => !isOpen && open()"
   >
-    <div ref="marker" class="marker" v-show="isSliding"></div>
+    <div v-show="isSliding" ref="marker" class="marker"></div>
     <div class="d-flex align-center justify-center h-100 w-100">
       <button
         ref="item1"
@@ -45,9 +45,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from 'vue'
-import { onUnmounted } from 'vue'
-import { ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 
 import type { Ref } from 'vue'
 
@@ -67,7 +65,7 @@ const item1: Ref<HTMLElement | null> = ref(null)
 const item2: Ref<HTMLElement | null> = ref(null)
 const item3: Ref<HTMLElement | null> = ref(null)
 
-let timer: number | NodeJS.Timeout
+let timer: ReturnType<typeof setTimeout>
 
 function open() {
   isOpen.value = true

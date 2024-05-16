@@ -1,16 +1,16 @@
 <template>
   <Switch
     class="light-dark-switch"
-    @change="setTheme"
-    :defaultState="theme.global.current.value.dark ? 'right' : 'left'"
+    :default-state="theme.global.current.value.dark ? 'right' : 'left'"
     :label="`${$t('menu.theme.light')} / ${$t('menu.theme.dark')}`"
+    @change="setTheme"
   />
 </template>
 
 <script lang="ts" setup>
 import { useTheme } from 'vuetify'
 
-import Switch, { State } from '#components/switch/Switch.vue'
+import Switch, { State } from '#components/switch/SwitchComponent.vue'
 
 const theme = useTheme()
 

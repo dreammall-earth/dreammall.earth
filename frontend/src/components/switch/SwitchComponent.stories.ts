@@ -1,6 +1,6 @@
 import { SBComp } from '#types/SBComp'
 
-import Switch from './Switch.vue'
+import Switch from './SwitchComponent.vue'
 
 import type { Meta, StoryObj } from '@storybook/vue3'
 

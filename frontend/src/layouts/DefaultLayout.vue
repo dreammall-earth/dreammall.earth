@@ -27,8 +27,8 @@
 import { useSlots } from 'vue'
 
 import BottomMenu from '#components/menu/BottomMenu.vue'
-import TopMenu from '#components/menu/TopMenu.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
+import TopMenu from '#components/menu/TopMenu.vue'
 
 const slots = useSlots()
 </script>
