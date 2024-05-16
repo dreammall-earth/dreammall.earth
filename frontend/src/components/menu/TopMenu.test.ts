@@ -1,8 +1,7 @@
-import { mount } from '@vue/test-utils'
+import { mount, flushPromises } from '@vue/test-utils'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { h } from 'vue'
 import { VApp } from 'vuetify/components'
-import { flushPromises } from '@vue/test-utils'
 
 import { useAuthStore } from '#stores/authStore'
 import { authService } from '#tests/mock.authService'

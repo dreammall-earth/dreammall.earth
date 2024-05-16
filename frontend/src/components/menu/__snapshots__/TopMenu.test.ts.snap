@@ -92,6 +92,7 @@ exports[`TopMenu > renders 1`] = `
                   class="d-flex align-center justify-center h-100 w-100"
                   data-v-d58c92bb=""
                 >
+                  
                   <button
                     class="item active"
                     data-v-d58c92bb=""
@@ -612,7 +613,7 @@ exports[`TopMenu > renders 1`] = `
                     >
                       <i
                         aria-hidden="true"
-                        class="v-icon notranslate v-theme--light v-icon--size-default w-100"
+                        class="v-icon notranslate v-theme--light v-icon--size-default w-100 cockpit"
                         data-v-d58c92bb=""
                       >
                         <svg
@@ -858,6 +859,7 @@ exports[`TopMenu > renders 1`] = `
                     </div>
                      $t('menu.cockpit')
                   </button>
+                  
                 </div>
               </button>
             </div>

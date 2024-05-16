@@ -9,6 +9,7 @@
     <div class="d-flex align-center justify-center h-100 w-100">
       <button
         v-for="(item, index) in items"
+        :key="index"
         ref="itemRefs"
         class="item"
         :class="{ active: activeItem === index }"
