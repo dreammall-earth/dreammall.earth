@@ -5,10 +5,10 @@ entries:
     compatibility_mode: true
     denied_action: message_continue
     designation: enrollment
-    layout: stacked
+    layout: sidebar_right
     name: dreammallearth-enrollment-email
     policy_engine_mode: any
-    title: Dreammall Signup
+    title: Sign Up
   conditions: []
   id: null
   identifiers:
@@ -93,6 +93,17 @@ entries:
   model: authentik_stages_prompt.prompt
   state: present
 - attrs:
+    expression: 'context[''flow_plan''].context[''redirect''] = ''https://stage1.app.dreammall.earth/signin''
+
+      return True'
+    name: dreammall.earth-redirect-frontend-signin
+  conditions: []
+  id: null
+  identifiers:
+    pk: c0f1fe81-ee06-43a8-ad75-0f87ef6d1492
+  model: authentik_policies_expression.expressionpolicy
+  state: present
+- attrs:
     fields:
     - 174e369e-e07b-480d-bea1-05c3148db2cd
     - bde82da3-035d-41fd-8616-d7798edc652a
@@ -173,8 +184,20 @@ entries:
     target: 20bd41d0-73cd-44a7-908f-691bc8d0363c
   model: authentik_flows.flowstagebinding
   state: present
+- attrs:
+    enabled: true
+    timeout: 30
+  conditions: []
+  id: null
+  identifiers:
+    order: 100
+    pk: 7ce6d02a-4c19-4895-bc43-899e15379a2b
+    policy: c0f1fe81-ee06-43a8-ad75-0f87ef6d1492
+    target: 71560401-adab-4888-bbef-7cc8597971e1
+  model: authentik_policies.policybinding
+  state: present
 metadata:
   labels:
     blueprints.goauthentik.io/generated: 'true'
-  name: authentik Export - 2024-03-28 11:33:59.772129+00:00
+  name: authentik Export - 2024-04-11 21:36:30.569510+00:00
 version: 1

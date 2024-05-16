@@ -1,0 +1,49 @@
+/* brand logo */
+.pf-c-brand {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 45%;
+}
+
+/* headline */
+.pf-c-title.pf-m-3xl {
+  text-align: center;
+}
+
+/* form */
+.ak-login-container {
+  height: 100%;
+  width: 699px;
+}
+
+/* input fields*/
+.pf-c-form input[type="text"],
+.pf-c-form input[type="email"],
+.pf-c-form input[type="password"] {
+  border-radius: 80px;
+  border: 1px solid #3D4753;
+}
+
+.pf-c-form input[type="text"]:focus,
+.pf-c-form input[type="email"]:focus,
+.pf-c-form input[type="password"]:focus {
+  outline: none;
+  border: 1px solid transparent;
+  border-radius: 80px;
+  background: linear-gradient(white, white) padding-box, linear-gradient(90deg, rgba(240, 150, 48, 1) 0%, rgba(44, 165, 177, 1) 100%) border-box;
+}
+
+/* sign in button */
+.pf-c-login__main-body .pf-c-button.pf-m-primary {
+  background-color: #23ad5b;
+  border-radius: 80px;
+  font-weight: 600;
+}
+
+/* sing up button */
+/* .pf-c-button.pf-m-primary {
+  background-color: #f5f5f5;
+  border-radius: 80px;
+  font-weight: 600;
+} */
