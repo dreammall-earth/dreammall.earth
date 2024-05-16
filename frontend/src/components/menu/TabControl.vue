@@ -185,12 +185,12 @@ onUnmounted(() => {
 
 .item:first-child,
 .tabControl:not(.open) .item.active {
-  padding-left: 5px;
+  padding-left: 10px;
 }
 
 .item:last-child,
 .tabControl:not(.open) .item.active {
-  padding-right: 5px;
+  padding-right: 15px;
 }
 
 .tabControl {
