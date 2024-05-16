@@ -2,11 +2,13 @@ import { mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { h } from 'vue'
 import { VApp } from 'vuetify/components'
+import { flushPromises } from '@vue/test-utils'
 
 import { useAuthStore } from '#stores/authStore'
 import { authService } from '#tests/mock.authService'
 
 import TopMenu from './TopMenu.vue'
+import UserDropdown from './UserDropdown.vue'
 
 describe('TopMenu', () => {
   const Wrapper = () => {
@@ -57,7 +59,9 @@ describe('TopMenu', () => {
 
     describe('without error', () => {
       beforeEach(async () => {
-        await wrapper.find('button').trigger('click')
+        await wrapper.find('button.user-info').trigger('click')
+        await flushPromises()
+        await wrapper.findComponent(UserDropdown).find('button.sign-out').trigger('click')
       })
 
       it('calls auth service sign out', () => {
@@ -74,7 +78,9 @@ describe('TopMenu', () => {
 
       beforeEach(async () => {
         authServiceSpy.mockRejectedValue('Error!')
-        await wrapper.find('button').trigger('click')
+        await wrapper.find('button.user-info').trigger('click')
+        await flushPromises()
+        await wrapper.findComponent(UserDropdown).find('button.sign-out').trigger('click')
       })
 
       it('logs the error', () => {

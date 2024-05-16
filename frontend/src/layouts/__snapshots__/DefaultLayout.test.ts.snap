@@ -930,7 +930,6 @@ exports[`DefaultLayout > renders 1`] = `
                       <svg
                         fill="none"
                         height="15"
-                        style="display: none;"
                         viewBox="0 0 28 15"
                         width="28"
                         xmlns="http://www.w3.org/2000/svg"
@@ -943,6 +942,7 @@ exports[`DefaultLayout > renders 1`] = `
                       <svg
                         fill="none"
                         height="15"
+                        style="display: none;"
                         viewBox="0 0 28 15"
                         width="28"
                         xmlns="http://www.w3.org/2000/svg"

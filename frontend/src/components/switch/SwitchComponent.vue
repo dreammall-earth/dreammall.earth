@@ -1,7 +1,7 @@
 <template>
   <button class="d-flex align-center justify-center" @click="toggle">
     <svg
-      v-show="state === 'right'"
+      v-show="state === 'left'"
       xmlns="http://www.w3.org/2000/svg"
       width="28"
       height="15"
@@ -14,7 +14,7 @@
       />
     </svg>
     <svg
-      v-show="state === 'left'"
+      v-show="state === 'right'"
       xmlns="http://www.w3.org/2000/svg"
       width="28"
       height="15"
