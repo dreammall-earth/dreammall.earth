@@ -2,7 +2,6 @@ import { DefaultApolloClient } from '@vue/apollo-composable'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { PageContext } from 'vike/types'
 import { createSSRApp, defineComponent, h, markRaw, reactive, Component, provide } from 'vue'
-import { BindOncePlugin } from 'vue-bind-once'
 
 import PageShell from '#components/PageShell.vue'
 import { setPageContext } from '#context/usePageContext'
@@ -53,7 +52,6 @@ function createApp(pageContext: PageContext, isClient = true) {
   app.use(pinia)
   app.use(i18n)
   app.use(vuetify)
-  app.use(BindOncePlugin)
 
   const auth = useAuthStore()
 
