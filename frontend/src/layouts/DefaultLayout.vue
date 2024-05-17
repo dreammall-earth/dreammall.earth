@@ -35,6 +35,7 @@ const slots = useSlots()
 
 <style scoped lang="scss">
 @import '#root/src/assets/scss/style';
+@import 'vuetify/lib/styles/settings/_variables';
 
 .main-layout {
   padding-top: 0;
@@ -43,6 +44,13 @@ const slots = useSlots()
 
   .page-container {
     margin-top: 110px;
+  }
+
+  @media #{map-get($display-breakpoints, 'sm-and-down')} {
+    .page-container {
+      margin-top: 20px;
+      margin-bottom: 50px;
+    }
   }
 }
 
