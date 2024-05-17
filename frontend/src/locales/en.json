@@ -6,6 +6,7 @@
   },
   "buttons": {
     "signout": "Sign Out",
+    "toAdmin": "To the admin",
     "toRoom": "To the meeting"
   },
   "cafe": {
