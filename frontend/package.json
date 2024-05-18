@@ -73,7 +73,7 @@
     "@vue/apollo-ssr": "^4.0.0",
     "@vue/compiler-sfc": "^3.4.27",
     "@vue/server-renderer": "3.4.27",
-    "@vuepress/theme-default": "^2.0.0-rc.28",
+    "@vuepress/theme-default": "^2.0.0-rc.30",
     "compression": "^1.7.4",
     "cookie": "^0.6.0",
     "cross-env": "^7.0.3",
