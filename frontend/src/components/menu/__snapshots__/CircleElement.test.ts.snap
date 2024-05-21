@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CircleElement > renders 1`] = `
+<div
+  class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
+  data-v-39e8094e=""
+>
+  
+  
+</div>
+`;

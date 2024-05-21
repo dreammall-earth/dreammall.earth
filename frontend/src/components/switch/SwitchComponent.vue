@@ -39,7 +39,7 @@ export type State = 'left' | 'right'
 
 const props = withDefaults(
   defineProps<{
-    defaultState: State
+    defaultState?: State
     label?: string
   }>(),
   { defaultState: 'left', label: '' },
