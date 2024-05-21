@@ -90,7 +90,7 @@ exports[`DefaultLayout > renders 1`] = `
                   data-v-e787b5f9=""
                 >
                   <div
-                    class="circle rounded-circle border-sm text-icon bg-icon-background pa-2 d-flex justify-center align-center"
+                    class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
                     data-v-39e8094e=""
                     data-v-6b63f7d9=""
                   >
@@ -966,7 +966,7 @@ exports[`DefaultLayout > renders 1`] = `
                     data-v-e787b5f9=""
                   >
                     <div
-                      class="circle rounded-circle border-sm text-icon bg-icon-background pa-2 d-flex justify-center align-center"
+                      class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
                       data-v-39e8094e=""
                       data-v-e787b5f9=""
                     >
@@ -997,7 +997,7 @@ exports[`DefaultLayout > renders 1`] = `
                       data-v-e787b5f9=""
                     >
                       <div
-                        class="circle rounded-circle border-sm text-icon bg-icon-background pa-2 d-flex justify-center align-center"
+                        class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
                         data-v-39e8094e=""
                         data-v-5cc937bd=""
                       >
@@ -1034,7 +1034,7 @@ exports[`DefaultLayout > renders 1`] = `
                       aria-expanded="false"
                       aria-haspopup="menu"
                       aria-owns="v-menu-1"
-                      class="ml-2 user-info rounded-pill d-flex flex-row text-icon bg-icon-background border-sm align-center justify-center"
+                      class="ml-2 user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
                       data-v-607bdd70=""
                       targetref="[object Object]"
                     >
@@ -1131,7 +1131,7 @@ exports[`DefaultLayout > renders 1`] = `
         </div>
       </div>
       <div
-        class="bottom-menu w-100 position-fixed bottom-0 justify-space-around align-center py-2 d-flex d-md-none"
+        class="bottom-menu w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface d-flex d-md-none"
         data-v-75d0be1e=""
         data-v-96a196cc=""
       >
@@ -1141,7 +1141,7 @@ exports[`DefaultLayout > renders 1`] = `
           data-v-96a196cc=""
         >
           <div
-            class="circle rounded-circle border-sm text-icon bg-icon-background pa-2 d-flex justify-center align-center"
+            class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
             data-v-39e8094e=""
             data-v-6b63f7d9=""
           >
@@ -1180,7 +1180,7 @@ exports[`DefaultLayout > renders 1`] = `
           data-v-96a196cc=""
         >
           <div
-            class="circle rounded-circle border-sm text-icon bg-icon-background pa-2 d-flex justify-center align-center"
+            class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
             data-v-39e8094e=""
             data-v-5cc937bd=""
           >
@@ -1212,7 +1212,7 @@ exports[`DefaultLayout > renders 1`] = `
           />
         </div>
         <div
-          class="circle rounded-circle border-sm text-icon bg-icon-background pa-2 d-flex justify-center align-center"
+          class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
           data-v-39e8094e=""
           data-v-96a196cc=""
         >
@@ -1243,7 +1243,7 @@ exports[`DefaultLayout > renders 1`] = `
           aria-expanded="false"
           aria-haspopup="menu"
           aria-owns="v-menu-2"
-          class="user-info rounded-pill d-flex flex-row text-icon bg-icon-background border-sm align-center justify-center"
+          class="user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
           data-v-607bdd70=""
           targetref="[object Object]"
         >

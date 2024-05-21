@@ -40,7 +40,7 @@ exports[`TopMenu > renders 1`] = `
                 data-v-e787b5f9=""
               >
                 <div
-                  class="circle rounded-circle border-sm text-icon bg-icon-background pa-2 d-flex justify-center align-center"
+                  class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
                   data-v-39e8094e=""
                   data-v-6b63f7d9=""
                 >
@@ -916,7 +916,7 @@ exports[`TopMenu > renders 1`] = `
                   data-v-e787b5f9=""
                 >
                   <div
-                    class="circle rounded-circle border-sm text-icon bg-icon-background pa-2 d-flex justify-center align-center"
+                    class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
                     data-v-39e8094e=""
                     data-v-e787b5f9=""
                   >
@@ -947,7 +947,7 @@ exports[`TopMenu > renders 1`] = `
                     data-v-e787b5f9=""
                   >
                     <div
-                      class="circle rounded-circle border-sm text-icon bg-icon-background pa-2 d-flex justify-center align-center"
+                      class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
                       data-v-39e8094e=""
                       data-v-5cc937bd=""
                     >
@@ -984,7 +984,7 @@ exports[`TopMenu > renders 1`] = `
                     aria-expanded="false"
                     aria-haspopup="menu"
                     aria-owns="v-menu-1"
-                    class="ml-2 user-info rounded-pill d-flex flex-row text-icon bg-icon-background border-sm align-center justify-center"
+                    class="ml-2 user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
                     data-v-607bdd70=""
                     targetref="[object Object]"
                   >

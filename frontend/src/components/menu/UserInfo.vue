@@ -4,7 +4,7 @@
       <button
         v-bind="props"
         :class="$attrs.class"
-        class="user-info rounded-pill d-flex flex-row text-icon bg-icon-background border-sm align-center justify-center"
+        class="user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
       >
         <v-avatar class="avatar d-flex align-center text-font border-sm bg-primary" size="44">
           <v-img v-if="userImage" :src="userImage" />
@@ -37,6 +37,7 @@ const userImage = authStore.user?.profile.picture
 <style scoped lang="scss">
 .user-info {
   height: var(--menu-icon-height);
+  background: var(--v-icon-background);
 }
 
 .name {

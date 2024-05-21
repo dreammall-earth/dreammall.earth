@@ -11,46 +11,35 @@ import { aliases as customAliases } from '#assets/icons'
 import dark from '#assets/scss/dark.module.scss'
 import light from '#assets/scss/light.module.scss'
 
-const lightTheme: ThemeDefinition = {
-  dark: false,
-  colors: {
-    background: light.backgroundColor,
-    surface: light.surfaceColor,
-    primary: light.primaryColor,
-    secondary: light.secondaryColor,
-    success: light.successColor,
-    info: light.infoColor,
-    warning: light.warningColor,
-    error: light.errorColor,
-    font: light.fontColor,
-    icon: light.iconColor,
-    'icon-background': light.iconBackgroundColor,
-  },
-  variables: {
-    'border-color': light.borderColor,
-    'border-opacity': light.borderOpacity,
-  },
+function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): ThemeDefinition {
+  return {
+    dark: isDark,
+    colors: {
+      background: theme.backgroundColor,
+      surface: theme.surfaceColor,
+      primary: theme.primaryColor,
+      secondary: theme.secondaryColor,
+      success: theme.successColor,
+      info: theme.infoColor,
+      warning: theme.warningColor,
+      error: theme.errorColor,
+      font: theme.fontColor,
+      icon: theme.iconColor,
+    },
+    variables: {
+      'border-color': theme.borderColor,
+      'border-opacity': theme.borderOpacity,
+      // Vuetify colors don't support opacity, so we use variables instead
+      'icon-background': theme.iconBackground,
+      'bottom-menu-background': theme.bottomMenuBackground,
+      'sidebar-background': theme.sidebarBackground,
+    },
+  }
 }
 
-const darkTheme: ThemeDefinition = {
-  dark: true,
-  colors: {
-    background: dark.backgroundColor,
-    surface: dark.surfaceColor,
-    primary: dark.primaryColor,
-    secondary: dark.secondaryColor,
-    success: dark.successColor,
-    info: dark.infoColor,
-    warning: dark.warningColor,
-    error: dark.errorColor,
-    font: dark.fontColor,
-    icon: dark.iconColor,
-    'icon-background': dark.iconBackgroundColor,
-  },
-  variables: {
-    'border-color': dark.borderColor,
-    'border-opacity': dark.borderOpacity,
-  },
+const themes = {
+  light: makeThemeFromCssModule(light, false),
+  dark: makeThemeFromCssModule(dark, true),
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -65,6 +54,6 @@ export default (i18n: I18n<any, NonNullable<unknown>, NonNullable<unknown>, stri
     },
     theme: {
       defaultTheme: 'light',
-      themes: { light: lightTheme, dark: darkTheme },
+      themes,
     },
   })

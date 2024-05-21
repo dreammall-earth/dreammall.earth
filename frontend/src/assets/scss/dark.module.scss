@@ -1,5 +1,5 @@
 $background-color: #000;
-$surface-color: #121212;
+$surface-color: #4e5b6b;
 $primary-color: #f09630;
 $secondary-color: #3D4753;
 $error-color: #f44336;
@@ -10,7 +10,9 @@ $border-color: #d6dfe9;
 $border-opacity: 0.1;
 $font-color: #222;
 $icon-color: #F5F5F5;
-$icon-background-color: #4A545F;
+$icon-background: rgb(61 71 83 / 85%);
+$bottom-menu-background: rgb(78 91 107 / 60%);
+$sidebar-background: rgb(61 71 83 / 60%);
 
 :export {
     backgroundColor: $background-color;
@@ -25,5 +27,7 @@ $icon-background-color: #4A545F;
     borderOpacity: $border-opacity;
     fontColor: $font-color;
     iconColor: $icon-color;
-    iconBackgroundColor: $icon-background-color;
+    iconBackground: $icon-background;
+    bottomMenuBackground: $bottom-menu-background;
+    sidebarBackground: $sidebar-background;
 }
