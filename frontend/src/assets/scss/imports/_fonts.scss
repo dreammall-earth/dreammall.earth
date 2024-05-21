@@ -1,13 +1,13 @@
 @font-face {
-  font-family: 'Helvetica';
+  font-family: Helvetica;
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
   src: url('/src/assets/fonts/Helvetica/HelveticaProRoman.woff2') format('woff2');
+  font-display: swap;
 }
 
 @font-face {
-  font-family: 'Helvetica';
+  font-family: Helvetica;
   font-style: normal;
   font-weight: 700;
   src: url('/src/assets/fonts/Helvetica/HelveticaProBold.woff2') format('woff2');
@@ -16,7 +16,7 @@
 
 /* light version */
 @font-face {
-  font-family: 'Helvetica';
+  font-family: Helvetica;
   font-style: normal;
   font-weight: 100;
   src: url('/src/assets/fonts/Helvetica/HelveticaProLight.woff2') format('woff2');

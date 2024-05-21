@@ -1,10 +1,8 @@
-@forward 'vuetify/settings' with (
-  $body-font-family: 'Helvetica'
-);
+$font-family-default: 'Helvetica', sans-serif;
 
+@forward 'vuetify/settings' with (
+  $body-font-family: $font-family-default,
+);
 @import './imports/config';  // TODO Remove and use vuetify variables instead
 @import './imports/_fonts';
 @import './imports/mixins'; // TODO Remove if not used
-
-// Only used in MainButton. TODO remove and use vuetify variable instead (if MainButton is kept at all?)
-$font-family-default: 'Helvetica', sans-serif;
