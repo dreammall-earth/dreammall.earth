@@ -29,7 +29,8 @@ function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): Theme
     variables: {
       'border-color': theme.borderColor,
       'border-opacity': theme.borderOpacity,
-      // Vuetify colors don't support opacity, so we use variables instead
+      // Vuetify colors don't support opacity, so we use variables instead.
+      // Beware that HEX values won't work.
       'icon-background': theme.iconBackground,
       'bottom-menu-background': theme.bottomMenuBackground,
       'sidebar-background': theme.sidebarBackground,
