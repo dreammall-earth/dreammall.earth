@@ -24,9 +24,9 @@ updates:
       patterns:
         - "remark*"
     vuepress:
-    applies-to: version-updates
-    patterns:
-    - "*vuepress*"
+      applies-to: version-updates
+      patterns:
+        - "*vuepress*"
 - package-ecosystem: docker
   open-pull-requests-limit: 99
   directory: "/"
