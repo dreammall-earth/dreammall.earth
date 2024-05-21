@@ -334,23 +334,25 @@ const onClick = (event: MouseEvent) => {
 
 <style scoped lang="scss">
 @import '#root/src/assets/scss/style';
+
 .create-button-container {
-  max-width: 350px;
   width: 100%;
+  max-width: 350px;
 }
 
 svg {
-  max-width: 550px;
   width: 100%;
+  max-width: 550px;
   height: 100%;
 
   #create-button {
+    pointer-events: all;
+    cursor: pointer;
     transition: transform 0.4s ease-in-out;
     transform-box: fill-box;
     transform-origin: center;
-    pointer-events: all;
-    cursor: pointer;
   }
+
   .create-button--turned {
     transform: rotate(-90deg);
   }
@@ -364,29 +366,31 @@ svg {
     opacity: 0.75;
   }
 }
+
 .button-wrapper {
   position: relative;
 }
+
 .button-list {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   gap: 15px;
+  justify-content: center;
   margin-top: -20px;
 
   .assistant-button {
-    transition-delay: 0.2s;
     margin: 0 40px;
+    transition-delay: 0.2s;
   }
 
   .new-project-button {
-    transition-delay: 0s;
     margin: 0 20px;
+    transition-delay: 0s;
   }
 
   .new-table-button {
-    transition-delay: 0.1s;
     margin: 0 20px;
+    transition-delay: 0.1s;
   }
 }
 
@@ -397,9 +401,9 @@ svg {
 
 .fade-enter-from,
 .fade-leave-to {
+  pointer-events: none;
   opacity: 0;
   transform: translateY(-200px) scale(0.8);
-  pointer-events: none;
 }
 </style>
 

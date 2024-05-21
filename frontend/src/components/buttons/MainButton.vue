@@ -207,8 +207,8 @@ const onClick = () => {
   }
 
   &--gradient {
-    background: linear-gradient(288.21deg, #2ca5b1 23.61%, #f09630 96.6%);
     color: white !important;
+    background: linear-gradient(288.21deg, #2ca5b1 23.61%, #f09630 96.6%);
   }
 
   &--download:hover {
