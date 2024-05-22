@@ -29,9 +29,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ApolloClient, InMemoryCache } from '@apollo/client/core'
-import { DefaultApolloClient } from '@vue/apollo-composable'
-import { inject } from 'vue'
+import { useQuery } from '@vue/apollo-composable'
 
 import MainButton from '#components/buttons/MainButton.vue'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
@@ -41,19 +39,21 @@ import { useAuthStore } from '#stores/authStore'
 
 const auth = useAuthStore()
 
-const apolloClient = inject<ApolloClient<InMemoryCache>>(DefaultApolloClient)
+const { result: joinMyRoomQueryResult, error: joinMyRoomQueryError } = useQuery(
+  joinMyRoomQuery,
+  null,
+  {
+    prefetch: false,
+    fetchPolicy: 'no-cache',
+  },
+)
 
 const enterRoom = async () => {
-  try {
-    const result = await apolloClient?.query({
-      query: joinMyRoomQuery,
-      fetchPolicy: 'network-only',
-    })
-    window.open(result?.data?.joinMyRoom, '_blank')
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
+  if (joinMyRoomQueryError.value) {
     // eslint-disable-next-line no-console
-    console.log('auth error', error)
+    console.log(joinMyRoomQueryError.value.message)
+  } else {
+    window.open(joinMyRoomQueryResult.value?.joinMyRoom, '_blank')
   }
 }
 
