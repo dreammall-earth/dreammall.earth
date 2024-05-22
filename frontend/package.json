@@ -1,5 +1,5 @@
 {
-  "name": "boilerplate-frontend",
+  "name": "dreammall-frontend",
   "version": "1.0.0",
   "description": "The IT4C Boilerplate for frontends",
   "main": "build/index.js",
@@ -47,6 +47,7 @@
     "storybook:build": "storybook build -o build/storybook",
     "storybook:test": "test-storybook",
     "test:lint": "npm run test:lint:eslint && npm run test:lint:remark && npm run test:lint:style && npm run test:lint:locales",
+    "test:lintfix": "npm run test:lint:eslint -- --fix && npm run test:lint:style -- --fix && npm run test:lint:locales -- --fix",
     "test:lint:eslint": "eslint --ext .vue,.ts,.tsx,.js,.jsx,.cjs,.mjs,.json,.yml,.yaml --max-warnings 0 .",
     "test:lint:locales": "scripts/locales/locales.sh src/locales",
     "test:lint:remark": "remark . --quiet --frail",
@@ -90,6 +91,7 @@
     "typescript": "^5.4.5",
     "vike": "^0.4.171",
     "vite": "^5.2.11",
+    "vite-svg-loader": "^5.1.0",
     "vue": "3.4.27",
     "vue-i18n": "^9.13.1",
     "vuetify": "^3.5.17"

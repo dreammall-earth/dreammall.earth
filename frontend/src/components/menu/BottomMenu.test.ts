@@ -1,30 +1,29 @@
-import { mount, flushPromises } from '@vue/test-utils'
+import { flushPromises, mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { useAuthStore } from '#stores/authStore'
-import { authService } from '#tests/mock.authService'
+import { useAuthStore } from '#stores/authStore.js'
+import { authService } from '#tests/mock.authService.js'
 
-import TopMenu from './TopMenu.vue'
+import BottomMenu from './BottomMenu.vue'
 import UserDropdown from './UserDropdown.vue'
 
-describe('TopMenu', () => {
+describe('BottomMenu', () => {
   const Wrapper = () => {
     return mount(VApp, {
       slots: {
-        default: h(TopMenu),
+        default: h(BottomMenu),
       },
     })
   }
-
   let wrapper: ReturnType<typeof Wrapper>
 
   beforeEach(() => {
     wrapper = Wrapper()
   })
 
-  it('renders', () => {
+  it('renders BottomMenu', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 
