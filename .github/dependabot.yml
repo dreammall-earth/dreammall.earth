@@ -18,6 +18,15 @@ updates:
     day: "saturday"
     timezone: "Europe/Berlin"
     time: "03:00"
+  groups:
+    remark:
+      applies-to: version-updates
+      patterns:
+        - "remark*"
+    vuepress:
+      applies-to: version-updates
+      patterns:
+        - "*vuepress*"
 - package-ecosystem: docker
   open-pull-requests-limit: 99
   directory: "/"

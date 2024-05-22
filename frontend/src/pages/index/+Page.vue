@@ -16,7 +16,7 @@
     <v-row v-if="auth.isAdmin">
       <v-col>
         <MainButton
-          class="room-button"
+          class="admin-button"
           variant="primary"
           label="To Admin"
           size="auto"
@@ -29,9 +29,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ApolloClient, InMemoryCache } from '@apollo/client/core'
-import { DefaultApolloClient } from '@vue/apollo-composable'
-import { inject } from 'vue'
+import { useQuery } from '@vue/apollo-composable'
 
 import MainButton from '#components/buttons/MainButton.vue'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
@@ -41,16 +39,17 @@ import { useAuthStore } from '#stores/authStore.js'
 
 const auth = useAuthStore()
 
-const apolloClient = inject<ApolloClient<InMemoryCache>>(DefaultApolloClient)
+const { result: getRoomQueryResult, error: getRoomQueryError } = useQuery(getRoomQuery, null, {
+  prefetch: false,
+  fetchPolicy: 'no-cache',
+})
 
 const enterRoom = async () => {
-  try {
-    const result = await apolloClient?.query({ query: getRoomQuery, fetchPolicy: 'network-only' })
-    window.location.href = result?.data?.getRoom
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
+  if (getRoomQueryError.value) {
     // eslint-disable-next-line no-console
-    console.log('auth error', error)
+    console.log(getRoomQueryError.value.message)
+  } else {
+    window.location.href = getRoomQueryResult.value?.getRoom
   }
 }
 
