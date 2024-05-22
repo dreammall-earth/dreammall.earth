@@ -336,13 +336,16 @@ const onClick = (event: MouseEvent) => {
 @import '#root/src/assets/scss/style';
 
 .create-button-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 100%;
-  max-width: 350px;
+  max-width: 400px;
+  transform: translate(-50%, -50%);
 }
 
 svg {
   width: 100%;
-  max-width: 550px;
   height: 100%;
 
   #create-button {
@@ -359,11 +362,16 @@ svg {
 
   .button-wave {
     opacity: 0;
-    transition: 1s all;
+    transition:
+      opacity 1s,
+      scale 0.7s;
+    transform-origin: center;
+    scale: 0;
   }
 
   .button-wave-on {
     opacity: 0.75;
+    scale: 1;
   }
 }
 
@@ -372,11 +380,13 @@ svg {
 }
 
 .button-list {
+  position: absolute;
   display: flex;
   flex-direction: column;
   gap: 15px;
   justify-content: center;
-  margin-top: -20px;
+  width: 100%;
+  margin-top: -5px;
 
   .assistant-button {
     margin: 0 40px;
