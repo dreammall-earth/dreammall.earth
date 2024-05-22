@@ -30,7 +30,7 @@
     "update": "npx npm-check-updates"
   },
   "dependencies": {
-    "@vuepress/theme-default": "^2.0.0-rc.26"
+    "@vuepress/theme-default": "^2.0.0-rc.30"
   },
   "devDependencies": {
     "@vuepress/bundler-vite": "^2.0.0-rc.8",

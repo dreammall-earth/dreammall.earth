@@ -16,7 +16,7 @@
     <v-row v-if="auth.isAdmin">
       <v-col>
         <MainButton
-          class="room-button"
+          class="admin-button"
           variant="primary"
           label="To Admin"
           size="auto"
@@ -36,8 +36,8 @@ import { inject } from 'vue'
 import MainButton from '#components/buttons/MainButton.vue'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
 import { joinMyRoomQuery } from '#queries/joinMyRoomQuery'
-import { AUTH } from '#src/env.js'
-import { useAuthStore } from '#stores/authStore.js'
+import { AUTH } from '#src/env'
+import { useAuthStore } from '#stores/authStore'
 
 const auth = useAuthStore()
 
