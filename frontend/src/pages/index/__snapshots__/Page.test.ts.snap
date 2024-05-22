@@ -153,6 +153,7 @@ exports[`IndexPage > renders 1`] = `
                       
                       
                       <!--v-if-->
+                      <!--v-if-->
                       <span
                         class="main-button-content"
                         data-v-2b63c1fe=""
