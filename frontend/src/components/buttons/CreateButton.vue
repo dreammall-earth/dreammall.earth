@@ -283,6 +283,7 @@
               label="New Table"
               size="auto"
               icon="plus"
+              @click="enterRoom"
               >{{ $t('buttons.newTable') }}
             </MainButton>
             <MainButton
@@ -303,9 +304,11 @@
 </template>
 
 <script lang="ts" setup>
+import { useQuery } from '@vue/apollo-composable'
 import { onMounted, ref } from 'vue'
 
 import MainButton from '#components/buttons/MainButton.vue'
+import { joinMyRoomQuery } from '#queries/joinMyRoomQuery'
 
 const buttonIsTurned = ref(false)
 
@@ -329,6 +332,25 @@ const onClick = (event: MouseEvent) => {
   parent.classList.toggle('create-button--turned')
   buttonIsTurned.value = !buttonIsTurned.value
   emit('click', 1)
+}
+
+const {
+  result: joinMyRoomQueryResult,
+  error: joinMyRoomQueryError,
+  refetch,
+} = useQuery(joinMyRoomQuery, null, {
+  prefetch: false,
+  fetchPolicy: 'no-cache',
+})
+
+const enterRoom = async () => {
+  await refetch()
+  if (joinMyRoomQueryError.value) {
+    // eslint-disable-next-line no-console
+    console.log(joinMyRoomQueryError.value.message)
+  } else {
+    window.open(joinMyRoomQueryResult.value?.joinMyRoom, '_blank')
+  }
 }
 </script>
 
