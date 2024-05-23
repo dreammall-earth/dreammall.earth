@@ -4,9 +4,7 @@
       <v-container>
         <div class="button-wrapper">
           <svg
-            width="206"
-            height="205"
-            viewBox="0 0 206 205"
+            width="214" height="212" viewBox="0 0 214 212"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -73,9 +71,9 @@
               filter="url(#filter0_f_1513_6933)"
             >
               <ellipse
-                cx="94"
-                cy="95"
-                rx="94"
+                cx="92"
+                cy="91"
+                rx="95"
                 ry="95"
                 transform="matrix(-4.37114e-08 1 1 4.37114e-08 12 12)"
                 stroke="#2CA5B1"
@@ -369,6 +367,8 @@ const enterRoom = async () => {
 svg {
   width: 100%;
   height: 100%;
+  // TODO just a quick fix. get better svg source from hardy
+  transform: translateX(5px);
 
   #create-button {
     pointer-events: all;
@@ -379,7 +379,7 @@ svg {
   }
 
   .create-button--turned {
-    transform: rotate(-90deg);
+    transform: rotate(-90deg) translateX(5px);
   }
 
   .button-wave {
@@ -392,7 +392,7 @@ svg {
   }
 
   .button-wave-on {
-    opacity: 0.75;
+    opacity: 0.5;
     scale: 1;
   }
 }

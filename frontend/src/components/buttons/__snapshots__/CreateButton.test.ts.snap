@@ -19,9 +19,9 @@ exports[`CreateButton > renders 1`] = `
         <svg
           data-v-dc035224=""
           fill="none"
-          height="205"
-          viewBox="0 0 206 205"
-          width="206"
+          height="212"
+          viewBox="0 0 214 212"
+          width="214"
           xmlns="http://www.w3.org/2000/svg"
         >
           <g
@@ -117,10 +117,10 @@ exports[`CreateButton > renders 1`] = `
             opacity="0.25"
           >
             <ellipse
-              cx="94"
-              cy="95"
+              cx="92"
+              cy="91"
               data-v-dc035224=""
-              rx="94"
+              rx="95"
               ry="95"
               stroke="#2CA5B1"
               stroke-width="4"
