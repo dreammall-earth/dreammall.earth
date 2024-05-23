@@ -7,7 +7,7 @@ import { useAuthStore } from '#stores/authStore'
 
 import UserInfo from './UserInfo.vue'
 
-describe('LightDarkSwitch', () => {
+describe('UserInfo', () => {
   const authStore = useAuthStore()
 
   const Wrapper = () => {
