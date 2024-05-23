@@ -15,7 +15,7 @@ Dreammall.earth websites & services
 
 ## Deploy
 
-Deploy instructions can be found in [deployment/](deplyoment/README.md)
+Deploy instructions can be found in [deployment/](deployment/README.md)
 
 ## Commands
 
