@@ -5,37 +5,44 @@ This document describes how to prepare a host to deploy from a specific branch a
 All instructions are for an `Alpine 3.18` and require adjustment if a different system is used.
 
 ## Update the system
+
 ```bash
 apk update
 apk upgrade
 ```
 
 ## Install Software
-Install nginx:
+
+### Install nginx
+
 ```bash
 apk add nginx
 rc-update add nginx boot
 service nginx start
 ```
 
-Install node & npm:
+### Install node & npm
+
 ```bash
 apk add nodejs npm
 ```
 
-Install pm2:
+### Install pm2
+
 ```bash
 npm install pm2 -g
 pm2 startup
 rc-update add pm2 boot
 ```
 
-Install git:
+### Install git
+
 ```bash
 apk add git
 ```
 
-Install mariadb:
+### Install mariadb
+
 ```bash
 apk add mysql mysql-client
 service mariadb setup
@@ -49,14 +56,16 @@ service mariadb start
 
 ## Install the project
 
-Clone the repository:
+### Clone the repository
+
 ```bash
 cd /var/www/localhost/htdocs/
 git clone https://github.com/dreammall-earth/dreammall.earth.git
 cd dreammall.earth
 ```
 
-Configure nginx:
+### Configure nginx
+
 ```bash
 # replace nginx config
 cp -f deployment/nginx/default.conf /etc/nginx/http.d/default.conf
@@ -74,10 +83,14 @@ vi /etc/nginx/http.d/admin.conf
 service nginx restart
 ```
 
-Create Database User:
+### Create Database User
+
 ```bash
 mysql
 ```
+
+### Create Database Tea
+
 ```sql
 CREATE USER 'dreammall'@'localhost' IDENTIFIED BY 'SECRET';
 GRANT ALL PRIVILEGES ON * . * TO 'dreammall'@'localhost';
@@ -85,7 +98,8 @@ FLUSH PRIVILEGES;
 exit
 ```
 
-Configure database connection:
+### Configure database connection
+
 ```bash
 cp backend/.env.dist backend/.env
 # adjust the .env config as needed
@@ -93,23 +107,26 @@ vi backend/.env
 # DATABASE_URL="mysql://dreammall:SECRET@localhost:3306/dreammall.earth"
 ```
 
-Configure backend connection:
+### Configure backend connection
+
 ```bash
 cp presenter/.env.dist presenter/.env
 # adjust the .env config as needed
 vi presenter/.env
 # PUBLIC_ENV__ENDPOINTS__GRAPHQL_URI=http://localhost/api
+```
 
 ## Deploy the project
 
-To deploy the project run
+### To deploy the project run
+
 ```bash
 deployment/deploy.sh
 ```
 
 This will build all projects parts and start a pm2 instance to serve the corresponding services currently defined in the nginx config found in `deployment/nginx/default.conf`.
 
-Those services are:
+### Those services are
 
 | Service             | URL                                        |
 | ------------------- | ------------------------------------------ |
@@ -122,12 +139,14 @@ Those services are:
 
 To enable autoupdate from a github branch do the following:
 
-Install webhook:
+### Install webhook
+
 ```bash
 apk add webhook
 ```
 
-Configure webhook:
+### Configure webhook
+
 ```bash
 cp deployment/webhooks/hooks.json.template deployment/webhooks/hooks.json
 vi deployment/webhooks/hooks.json

@@ -1,4 +1,5 @@
 # Dreammall.earth
+
 [![nodejs][badge-nodejs-img]][badge-nodejs-href]
 [![npm][badge-npm-img]][badge-npm-href]
 [![remark-cli][badge-remark-cli-img]][badge-remark-cli-href]
@@ -19,7 +20,7 @@ Deploy instructions can be found in [deployment/](deployment/README.md)
 
 ## Commands
 
-The following commands are available:
+### The following commands are available
 
 | Command                    | Description                                    |
 | -------------------------- | ---------------------------------------------- |
@@ -36,9 +37,77 @@ The following commands are available:
 | **Maintenance**            |                                                |
 | `npm run update`           | Check for updates                              |
 
+## Bare-metal
+
+### Install Authentik
+
+```bash
+cd authentik
+./database.unpack.sh
+docker compose up
+```
+
+### Start Database
+
+```bash
+cd $rootFolder
+docker compose up database
+```
+
+### Start Backend
+
+```bash
+cd $rootFolder/backend
+cp .env.dist .env
+ln -s src/auth/public.pem public.pem
+nvm use 21
+npm install
+npm run db:migrate
+npm run dev 
+```
+
+### Start Presenter
+
+```bash
+cd $rootFolder/presenter
+cp .env.dist .env
+nvm use 21
+npm install
+# Run dev mode
+# npm run dev
+# Run prod mode (faster)
+npm run prod
+```
+
+### Start Frontend
+
+```bash
+cd $rootFolder/frontend
+cp .env.dist .env
+nvm use 21
+npm install
+# Run dev mode
+# npm run dev
+# Run prod mode (faster)
+npm run prod
+```
+
+### Start Admin
+
+```bash
+cd $rootFolder/admin
+cp .env.dist .env
+nvm use 21
+npm install
+# Run dev mode
+# npm run dev
+# Run prod mode (faster)
+npm run prod
+```
+
 ## Docker
 
-The following endpoints are provided if `docker compose` is used:
+### The following endpoints are provided if `docker compose` is used
 
 | Endpoint                                                             | Description                |
 | -------------------------------------------------------------------- | -------------------------- |
@@ -66,7 +135,7 @@ Then run `npm run release` to propagate the new version and generate the changel
 
 You can get a list of packages to update by running `npm run update`.
 
-Appending `-u ` will also update the packages in the `package.json`. You have to run `npm install` again after.
+Appending `-u` will also update the packages in the `package.json`. You have to run `npm install` again after.
 
 ```bash
 npm run update -- -u
