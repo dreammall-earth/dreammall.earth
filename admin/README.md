@@ -69,7 +69,7 @@ This projects utilizes `storybook` and `chromatic` to develop, document & test f
 
 ### Docker
 
-### Docker can be run in development mode utilizing `docker-compose.overwrite.yml`
+### Docker development mode
 
 ```bash
 docker compose up

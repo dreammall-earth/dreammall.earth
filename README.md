@@ -42,7 +42,7 @@ Deploy instructions can be found in [deployment/](deployment/README.md)
 ### Install Authentik
 
 ```bash
-cd authentik
+cd $rootFolder/authentik
 ./database.unpack.sh
 docker compose up
 ```
@@ -62,8 +62,11 @@ cp .env.dist .env
 ln -s src/auth/public.pem public.pem
 nvm use 21
 npm install
-npm run db:migrate
-npm run dev 
+# Initializierung Datenbank
+npm run db:reset
+# Migration Datenbank
+# npm run db:migrate
+npm run dev
 ```
 
 ### Start Presenter
@@ -107,7 +110,7 @@ npm run prod
 
 ## Docker
 
-### The following endpoints are provided if `docker compose` is used
+### The following endpoints are provided for `docker compose`
 
 | Endpoint                                                             | Description                |
 | -------------------------------------------------------------------- | -------------------------- |
