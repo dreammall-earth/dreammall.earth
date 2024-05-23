@@ -7,6 +7,7 @@ describe('Switch', () => {
   const Wrapper = () => {
     return mount(Switch)
   }
+
   let wrapper: ReturnType<typeof Wrapper>
 
   beforeEach(() => {
@@ -23,19 +24,22 @@ describe('Switch', () => {
     expect(wrapper.find('span').text()).toBe('label')
   })
 
-  it('emits change event when clicked', async () => {
-    await wrapper.find('button').trigger('click')
+  describe('click switch', () => {
+    let stateBefore: string
 
-    expect(wrapper.emitted('change')).toBeTruthy()
-  })
+    beforeEach(async () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
+      stateBefore = (wrapper.vm as any).state
+      await wrapper.find('button').trigger('click')
+    })
 
-  it('changes state when clicked', async () => {
-    const hiddenElementBefore = wrapper.find('svg[style="display: none;"]')
+    it('emits change', () => {
+      expect(wrapper.emitted('change')).toEqual([['right']])
+    })
 
-    await wrapper.find('button').trigger('click')
-
-    const hiddenElementAfter = wrapper.find('svg[style="display: none;"]')
-
-    expect(hiddenElementBefore.html()).not.toBe(hiddenElementAfter.html())
+    it('changes state when clicked', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
+      expect((wrapper.vm as any).state).not.toBe(stateBefore)
+    })
   })
 })
