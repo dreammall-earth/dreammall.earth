@@ -7,6 +7,7 @@ import { UserConfig } from 'vite'
 import { checker } from 'vite-plugin-checker'
 import viteCompression from 'vite-plugin-compression'
 import vuetify from 'vite-plugin-vuetify'
+import svgLoader from 'vite-svg-loader'
 
 const isStorybook = () =>
   ['storybook', 'storybook:build'].includes(process.env.npm_lifecycle_event as string)
@@ -14,6 +15,10 @@ const isStorybook = () =>
 const config: UserConfig = {
   plugins: [
     vue(),
+    svgLoader({
+      defaultImport: 'url', // Preserve default behavior to not break anything
+      svgo: false, // SVGO is disabled because it breaks the SVGs. It seems to be unmaintained.
+    }),
     !isStorybook() && vike({ prerender: true }), // SSR only when storybook is not running
     vueI18n({
       ssr: true,

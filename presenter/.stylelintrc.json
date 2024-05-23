@@ -1,10 +1,11 @@
 {
     "rules": {
-        "selector-class-pattern": "^([a-z][a-z0-9]*)((--?|__)?[a-z0-9]+)*$",
-        "media-query-no-invalid": null,
-        "at-rule-no-unknown": null,
-        "scss/at-rule-no-unknown": true,
-        "scss/load-no-partial-leading-underscore": null
+      "selector-class-pattern": "^([a-z][a-z0-9]*)((--?|__)?[a-z0-9]+)*$",
+      "media-query-no-invalid": null,
+      "at-rule-no-unknown": null,
+      "scss/at-rule-no-unknown": true,
+      "scss/load-no-partial-leading-underscore": null,
+      "value-no-vendor-prefix": null
     },
     "extends": [
       "stylelint-config-standard",

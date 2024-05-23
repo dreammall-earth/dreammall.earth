@@ -1,5 +1,8 @@
 <template>
-  <v-main class="bg-grey-lighten-3 main-layout">
+  <v-main class="bg-background main-layout">
+    <a href="/" class="logo d-none d-md-flex">
+      <LogoImage size="small" />
+    </a>
     <TopMenu />
     <v-container fluid class="page-container px-8">
       <v-row>
@@ -16,12 +19,15 @@
         </v-col>
       </v-row>
     </v-container>
+    <BottomMenu class="d-flex d-md-none" />
   </v-main>
 </template>
 
 <script lang="ts" setup>
 import { useSlots } from 'vue'
 
+import BottomMenu from '#components/menu/BottomMenu.vue'
+import LogoImage from '#components/menu/LogoImage.vue'
 import TopMenu from '#components/menu/TopMenu.vue'
 
 const slots = useSlots()
@@ -29,6 +35,7 @@ const slots = useSlots()
 
 <style scoped lang="scss">
 @import '#root/src/assets/scss/style';
+@import 'vuetify/lib/styles/settings/_variables';
 
 .main-layout {
   padding-top: 0;
@@ -38,5 +45,19 @@ const slots = useSlots()
   .page-container {
     margin-top: 110px;
   }
+
+  @media #{map-get($display-breakpoints, 'sm-and-down')} {
+    .page-container {
+      margin-top: 20px;
+      margin-bottom: 50px;
+    }
+  }
+}
+
+.logo {
+  position: absolute;
+  top: 20px;
+  left: 90px;
+  width: 140px;
 }
 </style>

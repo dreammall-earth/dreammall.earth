@@ -6,6 +6,7 @@
   },
   "buttons": {
     "signout": "Sign Out",
+    "toAdmin": "To the admin",
     "toRoom": "To the meeting"
   },
   "cafe": {
@@ -20,6 +21,16 @@
       "h1": "500 Internal Error",
       "text": "Something went wrong."
     }
+  },
+  "menu": {
+    "cockpit": "Cockpit",
+    "mall": "Mall",
+    "theme": {
+      "dark": "Dark",
+      "light": "Light"
+    },
+    "userPhrase": "Talk to your friends",
+    "worldCafe": "World Cafe"
   },
   "meta": {
     "defaultDescription": "Expanding your reach making the most of opportunities enhance quality of life together",
