@@ -29,13 +29,14 @@ const BREVO = {
     : undefined,
 }
 
-const ROOMS = {
-  ROOM_LINK: process.env.ROOM_LINK ?? 'http://my-room.earth',
+const BBB = {
+  BBB_SHARED_SECRET: process.env.BBB_SHARED_SECRET ?? 'unknown',
+  BBB_URL: process.env.BBB_URL ?? 'https://my.url',
 }
 
 export const CONFIG = {
   ...BREVO,
-  ...ROOMS,
+  ...BBB,
 }
 
 // Config Checks
