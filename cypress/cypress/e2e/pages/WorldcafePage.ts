@@ -1,8 +1,8 @@
 class WorldcafePage {
-  signoutBtn: string = 'span[href="/logout"]'
+  userMenuBtn: string = '[data-test="user-menu-btn"]'
 
   signoutButtonIsVisible() {
-    cy.get('button').contains('Sign Out')
+    cy.get(this.userMenuBtn).should('be.visible')
   }
 }
 

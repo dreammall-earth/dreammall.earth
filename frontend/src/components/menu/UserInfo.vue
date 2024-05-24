@@ -5,6 +5,7 @@
         v-bind="props"
         :class="$attrs.class"
         class="user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
+        data-test="user-menu-btn"
       >
         <v-avatar class="avatar d-flex align-center text-font border-sm bg-primary" size="44">
           <v-img v-if="userImage" :src="userImage" />
