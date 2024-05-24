@@ -4,7 +4,9 @@
       <v-container>
         <div class="button-wrapper">
           <svg
-            width="214" height="212" viewBox="0 0 214 212"
+            width="214"
+            height="212"
+            viewBox="0 0 214 212"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -367,6 +369,7 @@ const enterRoom = async () => {
 svg {
   width: 100%;
   height: 100%;
+
   // TODO just a quick fix. get better svg source from hardy
   transform: translateX(5px);
 
