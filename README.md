@@ -18,9 +18,9 @@ Dreammall.earth websites & services
 ### Backend
 - [Backend](backend/README.md)
 
-## Deploy
+## Deployment
 
-Deploy instructions can be found in [deployment/](deplyoment/README.md)
+Instructions how to deploy this software are available [here](deplyoment/README.md)
 
 ## Commands
 
