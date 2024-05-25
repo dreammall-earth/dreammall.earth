@@ -39,7 +39,7 @@
     "@getbrevo/brevo": "^2.1.1",
     "@prisma/client": "^5.14.0",
     "@vuepress/theme-default": "^2.0.0-rc.30",
-    "axios": "^1.6.8",
+    "axios": "^1.7.2",
     "class-validator": "^0.14.1",
     "dotenv": "^16.4.5",
     "fast-xml-parser": "^4.4.0",
