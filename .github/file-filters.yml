@@ -18,7 +18,9 @@ presenter-test-build-docker: &presenter-test-build-docker
 
 presenter-test-build-docs: &presenter-test-build-docs
   - 'presenter/**/*.md'
+  - 'presenter/.github/workflows/presenter.deploy.docs.yml'
   - 'presenter/.vuepress/*'
+  - 'presenter/package.json'
 
 presenter-test-build-storybook: &presenter-test-build-storybook
   - 'presenter/**/*'
@@ -38,7 +40,9 @@ frontend-test-build-docker: &frontend-test-build-docker
 
 frontend-test-build-docs: &frontend-test-build-docs
   - 'frontend/**/*.md'
+  - 'frontend/.github/workflows/frontend.deploy.docs.yml'
   - 'frontend/.vuepress/*'
+  - 'frontend/package.json'
 
 frontend-test-build-storybook: &frontend-test-build-storybook
   - 'frontend/**/*'
@@ -58,7 +62,9 @@ admin-test-build-docker: &admin-test-build-docker
 
 admin-test-build-docs: &admin-test-build-docs
   - 'admin/**/*.md'
+  - 'admin/.github/workflows/admin.deploy.docs.yml'
   - 'admin/.vuepress/*'
+  - 'admin/package.json'
 
 admin-test-build-storybook: &admin-test-build-storybook
   - 'admin/**/*'
@@ -79,4 +85,6 @@ backend-test-build-docker: &backend-test-build-docker
 
 backend-test-build-docs: &backend-test-build-docs
   - 'backend/**/*.md'
+  - 'backend/.github/workflows/backend.deploy.docs.yml'
   - 'backend/.vuepress/*'
+  - 'backend/package.json'
