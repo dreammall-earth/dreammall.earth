@@ -10,9 +10,6 @@ presenter-test-lint-code: &presenter-test-lint-code
 presenter-test-unit-code: &presenter-test-unit-code
   - '.github/workflows/presenter.test.unit.code.yml'
   - '.github/file-filters.yml'
-  # all files in presenter, except
-  # - all in presenter/.vuepress
-  # - all .md files in presenter
   - 'presenter/!(.vuepress)/**/*!(.md)'
 
 presenter-test-build-code: &presenter-test-build-code
@@ -26,10 +23,9 @@ presenter-test-build-docker: &presenter-test-build-docker
   - 'presenter/!(.vuepress)/**/*!(.md)'
 
 presenter-test-build-docs: &presenter-test-build-docs
-  - '.github/workflows/presenter.deploy.docs.yml'
   - '.github/workflows/presenter.test.build.docs.yml'
-  - 'presenter/**/*.md'
   - '.github/file-filters.yml'
+  - 'presenter/**/*.md'
   - 'presenter/.vuepress/*'
   - 'presenter/package.json'
 
