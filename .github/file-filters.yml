@@ -9,12 +9,21 @@ presenter-test-lint-code: &presenter-test-lint-code
 
 presenter-test-unit-code: &presenter-test-unit-code
   - 'presenter/**/*'
+  - '!(presenter/**/*.md)'
+  - '!(presenter/.github/workflows/presenter.deploy.docs.yml)'
+  - '!(presenter/.vuepress/*)'
 
 presenter-test-build-code: &presenter-test-build-code
   - 'presenter/**/*'
+  - '!(presenter/**/*.md)'
+  - '!(presenter/.github/workflows/presenter.deploy.docs.yml)'
+  - '!(presenter/.vuepress/*)'
 
 presenter-test-build-docker: &presenter-test-build-docker
   - 'presenter/**/*'
+  - '!(presenter/**/*.md)'
+  - '!(presenter/.github/workflows/presenter.deploy.docs.yml)'
+  - '!(presenter/.vuepress/*)'
 
 presenter-test-build-docs: &presenter-test-build-docs
   - 'presenter/**/*.md'
