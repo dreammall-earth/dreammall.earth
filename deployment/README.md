@@ -126,7 +126,7 @@ cp frontend/.env.dist frontend/.env
 vi frontend/.env
 ```
 
-### Configure admin connection
+#### Admin
 
 ```bash
 cp admin/.env.dist admin/.env
