@@ -24,7 +24,7 @@ Dreammall.earth websites & services
 
 ## Deployment
 
-Instructions how to deploy this software are available [here](deplyoment/README.md)
+Instructions how to deploy this software are available [here](deployment/README.md)
 
 ## Commands
 
