@@ -118,7 +118,7 @@ vi presenter/.env
 # PUBLIC_ENV__ENDPOINTS__GRAPHQL_URI=http://localhost/api
 ```
 
-### Configure frontend connection
+#### Frontend
 
 ```bash
 cp frontend/.env.dist frontend/.env
