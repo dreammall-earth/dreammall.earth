@@ -12,11 +12,14 @@ Dreammall.earth websites & services
 ## Modules
 
 - [Presenter](presenter/README.md)
+- [Frontend](frontend/README.md)
+- [Admin](admin/README.md)
+- [Authentik](authentik/README.md)
 - [Backend](backend/README.md)
 
 ## Deploy
 
-Deploy instructions can be found in [deployment/](deployment/README.md)
+Instructions how to deploy this software are available [here](deployment/README.md)
 
 ## Commands
 

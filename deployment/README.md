@@ -116,6 +116,22 @@ vi presenter/.env
 # PUBLIC_ENV__ENDPOINTS__GRAPHQL_URI=http://localhost/api
 ```
 
+### Configure frontend connection
+
+```bash
+cp frontend/.env.dist frontend/.env
+# adjust the .env config as needed
+vi frontend/.env
+```
+
+### Configure admin connection
+
+```bash
+cp admin/.env.dist admin/.env
+# adjust the .env config as needed
+vi admin/.env
+```
+
 ## Deploy the project
 
 ### To deploy the project run
