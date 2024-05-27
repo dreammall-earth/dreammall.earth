@@ -107,7 +107,9 @@ vi backend/.env
 # DATABASE_URL="mysql://dreammall:SECRET@localhost:3306/dreammall.earth"
 ```
 
-### Configure backend connection
+### Configure backend connections
+
+#### Presenter
 
 ```bash
 cp presenter/.env.dist presenter/.env
