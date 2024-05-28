@@ -14,6 +14,8 @@ import AuthService from '#src/services/AuthService'
 const authService = inject<AuthService>('authService')
 
 onBeforeMount(async () => {
+  // eslint-disable-next-line no-console
+  console.log('silent-refresh')
   try {
     await authService?.renewToken()
     navigate('/')

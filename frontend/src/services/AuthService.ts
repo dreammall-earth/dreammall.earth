@@ -17,6 +17,8 @@ export default class AuthService {
     })
 
     this.userManager.events.addUserLoaded(async () => {
+      // eslint-disable-next-line no-console
+      console.log('addUserLoaded', await this.userManager.getUser())
       const auth = useAuthStore()
       auth.save(await this.userManager.getUser())
     })
@@ -39,7 +41,9 @@ export default class AuthService {
     return this.userManager.signinCallback()
   }
 
-  public renewToken() {
+  public async renewToken() {
+    // eslint-disable-next-line no-console
+    console.log('renewToken', await this.userManager.signinSilentCallback())
     return this.userManager.signinSilentCallback()
   }
 
