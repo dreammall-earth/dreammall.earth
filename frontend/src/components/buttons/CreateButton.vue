@@ -4,9 +4,15 @@
       <v-container>
         <div class="button-wrapper">
           <svg
+<<<<<<< HEAD
             width="1731"
             height="1719"
             viewBox="0 0 1731 1719"
+=======
+            width="214"
+            height="212"
+            viewBox="0 0 214 212"
+>>>>>>> c6bd661480d0daa29d7f800d7f8e606c65e93970
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -423,6 +429,12 @@ const enterRoom = async () => {
 svg {
   width: 100%;
   height: 100%;
+<<<<<<< HEAD
+=======
+
+  // TODO just a quick fix. get better svg source from hardy
+  transform: translateX(5px);
+>>>>>>> c6bd661480d0daa29d7f800d7f8e606c65e93970
 
   #create-button {
     pointer-events: all;

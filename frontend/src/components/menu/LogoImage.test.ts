@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 
 import LogoImage from './LogoImage.vue'
 
@@ -7,10 +7,15 @@ describe('LogoImage', () => {
   const Wrapper = () => {
     return mount(LogoImage)
   }
+
   let wrapper: ReturnType<typeof Wrapper>
 
   beforeEach(() => {
     wrapper = Wrapper()
+  })
+
+  afterEach(() => {
+    wrapper.unmount()
   })
 
   it('renders Logo', () => {
