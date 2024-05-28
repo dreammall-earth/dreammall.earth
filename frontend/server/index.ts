@@ -100,6 +100,7 @@ async function startServer() {
         if (process.env.EARLY_HINTS && res.writeEarlyHints)
           res.writeEarlyHints({ link: earlyHints.map((e) => e.earlyHintLink) })
         headers.forEach(([name, value]) => res.setHeader(name, value))
+        res.setHeader('X-Frame-Options', 'SAMEORIGIN')
         res.status(statusCode)
         // For HTTP streams use httpResponse.pipe() instead, see https://vike.dev/stream
         res.send(body)
