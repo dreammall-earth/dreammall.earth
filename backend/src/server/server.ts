@@ -2,7 +2,6 @@ import { createServer as createHttpServer } from 'http'
 
 import { ApolloServer, ApolloServerPlugin } from '@apollo/server'
 import { expressMiddleware } from '@apollo/server/express4'
-// import { startStandaloneServer } from '@apollo/server/standalone'
 import cors from 'cors'
 import express, { json, urlencoded } from 'express'
 
@@ -44,16 +43,6 @@ export async function listen(port: number, getToken: GetContextToken = getContex
       context: async ({ req }) => ({ token: getToken(req.headers.authorization) }),
     }),
   )
-
-  /*
-  const { url } = await startStandaloneServer(await createServer(), {
-    listen: { port },
-    // eslint-disable-next-line @typescript-eslint/require-await
-    context: async ({ req }): Promise<Context> => ({
-      token: getToken(req.headers.authorization),
-    }),
-  })
-  */
 
   httpServer.listen({ port })
 }
