@@ -18,6 +18,9 @@ services:
       POSTGRES_DB: ${PG_DB:-authentik}
     env_file:
       - .env
+    networks:
+      - external-net
+
   redis:
     image: docker.io/library/redis:alpine
     command: --save 60 1 --loglevel warning
@@ -30,6 +33,9 @@ services:
       timeout: 3s
     volumes:
       - redis:/data
+    networks:
+      - external-net
+
   server:
     image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-latest}
     restart: unless-stopped
@@ -53,6 +59,9 @@ services:
     depends_on:
       - postgresql
       - redis
+    networks:
+      - external-net
+
   worker:
     image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-latest}
     restart: unless-stopped
@@ -81,6 +90,24 @@ services:
     depends_on:
       - postgresql
       - redis
+    networks:
+      - external-net
+
+  mailserver:
+    image: axllent/mailpit
+    container_name: mailpit
+    restart: unless-stopped
+    ports:
+      - 8025:8025
+      - 1025:1025
+    networks:
+      - external-net
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+
+networks:
+  external-net:
 
 volumes:
   database:
