@@ -13,9 +13,7 @@
         </v-col>
 
         <v-col class="pa-0 pa-sm-1 pt-0">
-          <v-sheet rounded class="pa-3" style="top: 90px">
-            <slot />
-          </v-sheet>
+          <slot />
         </v-col>
       </v-row>
     </v-container>

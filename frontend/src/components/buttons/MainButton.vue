@@ -1,6 +1,8 @@
 <template>
   <v-btn :color="setColor" :class="classes" :size="size" @click="onClick">
     <v-icon v-if="props.variant === 'reload'" start class="reload-icon" icon="mdi-reload"></v-icon>
+    <v-icon v-if="props.icon !== ''" start class="icon" :icon="'mdi-' + props.icon"></v-icon>
+
     <span class="main-button-content"
       >{{ label }}
       <v-progress-circular
@@ -25,6 +27,7 @@ const props = withDefaults(
      */
     label: string
     href?: string
+    icon?: string
     /**
      * primary or secondary button
      */
@@ -37,6 +40,7 @@ const props = withDefaults(
       | 'submit'
       | 'download'
       | 'reload'
+      | 'gradient'
     /**
      * size of the button
      */
@@ -46,7 +50,7 @@ const props = withDefaults(
      */
     isLoading?: boolean
   }>(),
-  { href: undefined, variant: 'primary', size: 'medium', isLoading: false },
+  { href: undefined, icon: '', variant: 'primary', size: 'medium', isLoading: false },
 )
 
 const emit = defineEmits<{
@@ -63,6 +67,7 @@ const classes = computed(() => ({
   'main-button--form-submit': props.variant === 'submit',
   'main-button--download': props.variant === 'download',
   'main-button--reload': props.variant === 'reload',
+  'main-button--gradient': props.variant === 'gradient',
   [`main-button-${props.size}`]: true,
 }))
 
@@ -80,6 +85,8 @@ const setColor = computed(() => {
   } else if (props.variant === 'download') {
     return '#009dd9'
   } else if (props.variant === 'reload') {
+    return '#fff'
+  } else if (props.variant === 'gradient') {
     return '#fff'
   } else {
     return '#f09630'
@@ -197,6 +204,11 @@ const onClick = () => {
   &--download {
     background: $main-button-download-bg;
     border-radius: 15px;
+  }
+
+  &--gradient {
+    color: white !important;
+    background: linear-gradient(288.21deg, #2ca5b1 23.61%, #f09630 96.6%);
   }
 
   &--download:hover {
