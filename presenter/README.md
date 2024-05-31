@@ -1,4 +1,5 @@
 # Dreammall Presenter
+
 [![nodejs][badge-nodejs-img]][badge-nodejs-href]
 [![npm][badge-npm-img]][badge-npm-href]
 [![docker][badge-docker-img]][badge-docker-href]
@@ -32,7 +33,7 @@ This projects utilizes `storybook` and `chromatic` to develop, document & test f
 
 ## Commands
 
-The following commands are available:
+### The following commands are available
 
 | Command                     | Description                                      |
 | --------------------------- | ------------------------------------------------ |
