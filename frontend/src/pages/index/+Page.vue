@@ -16,7 +16,7 @@
     <v-row v-if="auth.isAdmin">
       <v-col>
         <MainButton
-          class="room-button"
+          class="admin-button"
           variant="primary"
           label="To Admin"
           size="auto"
@@ -29,28 +29,31 @@
 </template>
 
 <script lang="ts" setup>
-import { ApolloClient, InMemoryCache } from '@apollo/client/core'
-import { DefaultApolloClient } from '@vue/apollo-composable'
-import { inject } from 'vue'
+import { useQuery } from '@vue/apollo-composable'
 
 import MainButton from '#components/buttons/MainButton.vue'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
-import { getRoomQuery } from '#queries/getRoomQuery'
-import { AUTH } from '#src/env.js'
-import { useAuthStore } from '#stores/authStore.js'
+import { joinMyRoomQuery } from '#queries/joinMyRoomQuery'
+import { AUTH } from '#src/env'
+import { useAuthStore } from '#stores/authStore'
 
 const auth = useAuthStore()
 
-const apolloClient = inject<ApolloClient<InMemoryCache>>(DefaultApolloClient)
+const { result: joinMyRoomQueryResult, error: joinMyRoomQueryError } = useQuery(
+  joinMyRoomQuery,
+  null,
+  {
+    prefetch: false,
+    fetchPolicy: 'no-cache',
+  },
+)
 
 const enterRoom = async () => {
-  try {
-    const result = await apolloClient?.query({ query: getRoomQuery, fetchPolicy: 'network-only' })
-    window.location.href = result?.data?.getRoom
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
+  if (joinMyRoomQueryError.value) {
     // eslint-disable-next-line no-console
-    console.log('auth error', error)
+    console.log(joinMyRoomQueryError.value.message)
+  } else {
+    window.open(joinMyRoomQueryResult.value?.joinMyRoom, '_blank')
   }
 }
 

@@ -6,6 +6,7 @@ export default mergeConfig(
   viteConfig,
   defineConfig({
     test: {
+      css: true,
       globals: true,
       environment: 'happy-dom',
       setupFiles: [
@@ -28,7 +29,7 @@ export default mergeConfig(
         thresholds: {
           lines: 99,
           // functions: 20, // has problems see https://github.com/vitest-dev/vitest/issues/3607
-          branches: 97,
+          branches: 99,
           statements: 99,
         },
       },
