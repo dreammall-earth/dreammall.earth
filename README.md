@@ -123,6 +123,7 @@ npm run dev
 ### Start Admin
 
 ```bash
+# In new Terminal
 cd $rootFolder/admin
 cp .env.dist .env
 nvm use 21
