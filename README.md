@@ -55,7 +55,7 @@ Instructions how to deploy this software are available [here](deployment/README.
 ```bash
 # Go in authentik folder
 cd $rootFolder/authentik
-# delete existing database
+# Delete existing database
 rm -rf database
 # Unpack database in database folder
 ./database.unpack.sh
@@ -83,9 +83,9 @@ cp .env.dist .env
 ln -s src/auth/public.pem public.pem
 nvm use 21
 npm install
-# Initializierung Datenbank
+# Initialize Database
 npm run db:reset
-# Migration Datenbank
+# Migration Database
 # npm run db:migrate
 npm run dev
 ```
@@ -93,6 +93,7 @@ npm run dev
 ### Start Presenter
 
 ```bash
+# In new Terminal
 cd $rootFolder/presenter
 cp .env.dist .env
 nvm use 21
@@ -101,12 +102,13 @@ export PORT=3001
 # Run dev mode
 npm run dev
 # Run prod mode (faster)
-npm run prod
+# npm run prod
 ```
 
 ### Start Frontend
 
 ```bash
+# In new Terminal
 cd $rootFolder/frontend
 cp .env.dist .env
 nvm use 21
@@ -115,7 +117,7 @@ npm install
 # Run dev mode (for development)
 npm run dev
 # Run prod mode (faster)
-npm run prod
+# npm run prod
 ```
 
 ### Start Admin
@@ -129,7 +131,7 @@ export PORT=3002
 # Run dev mode
 npm run dev
 # Run prod mode (faster)
-npm run prod
+# npm run prod
 ```
 
 ## Docker
