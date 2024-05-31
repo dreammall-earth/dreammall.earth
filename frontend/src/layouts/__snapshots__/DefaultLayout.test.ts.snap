@@ -1119,14 +1119,8 @@ exports[`DefaultLayout > renders 1`] = `
             class="v-col pa-0 pa-sm-1 pt-0"
             data-v-75d0be1e=""
           >
-            <div
-              class="v-sheet v-theme--light v-sheet--rounded pa-3"
-              data-v-75d0be1e=""
-              style="top: 90px;"
-            >
-              
-              
-            </div>
+            
+            
           </div>
         </div>
       </div>

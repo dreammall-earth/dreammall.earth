@@ -19,13 +19,100 @@ exports[`CreateButton > renders 1`] = `
         <svg
           data-v-dc035224=""
           fill="none"
-          height="212"
-          viewBox="0 0 214 212"
-          width="214"
+          height="1719"
+          viewBox="0 0 1731 1719"
+          width="1731"
           xmlns="http://www.w3.org/2000/svg"
         >
           <g
-            clip-path="url(#clip0_1513_6616)"
+            data-v-dc035224=""
+            filter="url(#filter0_i_1513_6640)"
+            opacity="0.25"
+          >
+            <path
+              d="M866 938.727C821.781 938.727 786 903.016 786 859.046C786 815.075 821.781 779.364 866 779.364C910.219 779.364 946 815.075 946 859.046C946 903.016 910.219 938.727 866 938.727Z"
+              data-v-dc035224=""
+              stroke="url(#paint0_linear_1513_6640)"
+              stroke-width="22"
+            />
+          </g>
+          <g
+            data-v-dc035224=""
+            filter="url(#filter1_i_1513_6640)"
+          >
+            <circle
+              cx="866.318"
+              cy="859.045"
+              data-v-dc035224=""
+              r="61.5"
+              stroke="url(#paint1_linear_1513_6640)"
+              stroke-opacity="0.5"
+              stroke-width="24"
+              transform="rotate(90 866.318 859.045)"
+            />
+          </g>
+          <g
+            data-v-dc035224=""
+            filter="url(#filter2_i_1513_6640)"
+          >
+            <circle
+              cx="866.136"
+              cy="859.155"
+              data-v-dc035224=""
+              fill="#EEEFF0"
+              fill-opacity="0.0405"
+              r="59.9955"
+              transform="rotate(90 866.136 859.155)"
+            />
+          </g>
+          <circle
+            cx="866.136"
+            cy="859.155"
+            data-v-dc035224=""
+            r="49.9955"
+            stroke="url(#paint2_linear_1513_6640)"
+            stroke-width="20"
+            transform="rotate(90 866.136 859.155)"
+          />
+          <g
+            class="warp-ring button-warp-on"
+            data-v-dc035224=""
+            filter="url(#filter3_df_1513_6640)"
+            opacity="0.25"
+            style="transform: scale(0);"
+          >
+            <ellipse
+              cx="759"
+              cy="768"
+              data-v-dc035224=""
+              rx="759"
+              ry="768"
+              shape-rendering="crispEdges"
+              stroke="#2CA5B1"
+              stroke-opacity="0.3"
+              stroke-width="90"
+              transform="matrix(-4.37114e-08 1 1 4.37114e-08 98 100.364)"
+            />
+          </g>
+          <g
+            class="button-wave"
+            data-v-dc035224=""
+            filter="url(#filter0_f_1513_6933)"
+            opacity="0.25"
+          >
+            <ellipse
+              cx="759"
+              cy="768"
+              data-v-dc035224=""
+              rx="95"
+              ry="95"
+              stroke="#2CA5B1"
+              stroke-width="4"
+              transform="matrix(-4.37114e-08 1 1 4.37114e-08 98 100.364)"
+            />
+          </g>
+          <g
+            clip-path="url(#clip0_1513_6640)"
             data-v-dc035224=""
             id="create-button"
           >
@@ -36,95 +123,21 @@ exports[`CreateButton > renders 1`] = `
               width="100%"
             />
             <path
-              d="M102.772 92.0176H107C112.877 92.0176 117.727 96.7568 117.727 102.5C117.727 108.244 112.877 112.982 107 112.982H102.771H96.2733H92.5162H88.7581H85V124H107C119.101 124 129 114.325 129 102.5C129 90.6747 119.101 81 107 81H85V97.1057V99.3626H88.7581H92.5162H96.2743H100.032H103.79H107C108.728 99.3626 110.21 100.811 110.21 102.5C110.21 104.189 108.728 105.637 107 105.637H103.79H85V109.31H100.032H107C110.803 109.31 113.969 106.217 113.969 102.5C113.969 98.7839 110.803 95.6901 107 95.6901H100.031H96.2733H92.5162H88.7581V84.6725H92.5162H107C117.026 84.6725 125.243 92.7027 125.243 102.5C125.243 112.298 117.027 120.327 107 120.327H88.7581V116.655H92.5162H102.772H107C114.951 116.655 121.485 110.271 121.485 102.5C121.485 94.7297 114.951 88.346 107 88.346H102.771H93.617V92.0176H102.772Z"
+              d="M865.772 848.381H870C875.877 848.381 880.727 853.121 880.727 858.864C880.727 864.608 875.877 869.346 870 869.346H865.771H859.273H855.516H851.758H848V880.364H870C882.101 880.364 892 870.689 892 858.864C892 847.038 882.101 837.364 870 837.364H848V853.469V855.726H851.758H855.516H859.274H863.032H866.79H870C871.728 855.726 873.21 857.175 873.21 858.864C873.21 860.553 871.728 862.001 870 862.001H866.79H848V865.674H863.032H870C873.803 865.674 876.969 862.581 876.969 858.864C876.969 855.148 873.803 852.054 870 852.054H863.031H859.273H855.516H851.758V841.036H855.516H870C880.026 841.036 888.243 849.066 888.243 858.864C888.243 868.662 880.027 876.691 870 876.691H851.758V873.019H855.516H865.772H870C877.951 873.019 884.485 866.635 884.485 858.864C884.485 851.093 877.951 844.71 870 844.71H865.771H856.617V848.381H865.772Z"
               data-v-dc035224=""
-              fill="url(#paint0_linear_1513_6616)"
+              fill="url(#paint3_linear_1513_6640)"
             />
             <path
-              d="M89.537 99H101.921H103V96.0007H101.921L94.0749 96H89.537H85V99H89.537Z"
+              d="M856.537 855.364H868.921H870V852.365H868.921L861.075 852.364H856.537H852V855.364H856.537Z"
               data-v-dc035224=""
-              fill="url(#paint1_linear_1513_6616)"
+              fill="url(#paint4_linear_1513_6640)"
               opacity="0.75"
             />
             <path
-              d="M89.6397 116.88H102.304H103.407V113.001H102.304L94.2803 113H89.6397H85V116.88H89.6397Z"
+              d="M856.64 873.244H869.304H870.407V869.365H869.304L861.28 869.364H856.64H852V873.244H856.64Z"
               data-v-dc035224=""
-              fill="url(#paint2_linear_1513_6616)"
+              fill="url(#paint5_linear_1513_6640)"
               opacity="0.75"
-            />
-          </g>
-          <g
-            data-v-dc035224=""
-            filter="url(#filter0_i_1513_6616)"
-            opacity="0.25"
-          >
-            <path
-              d="M103 182.364C58.7808 182.364 23 146.653 23 102.682C23 58.7111 58.7808 23 103 23C147.219 23 183 58.7111 183 102.682C183 146.653 147.219 182.364 103 182.364Z"
-              data-v-dc035224=""
-              stroke="url(#paint3_linear_1513_6616)"
-              stroke-width="22"
-            />
-          </g>
-          <g
-            data-v-dc035224=""
-            filter="url(#filter1_i_1513_6616)"
-          >
-            <circle
-              cx="103.318"
-              cy="102.682"
-              data-v-dc035224=""
-              r="61.5"
-              stroke="url(#paint4_linear_1513_6616)"
-              stroke-opacity="0.5"
-              stroke-width="24"
-              transform="rotate(90 103.318 102.682)"
-            />
-          </g>
-          <g
-            data-v-dc035224=""
-            filter="url(#filter2_i_1513_6616)"
-          >
-            <circle
-              cx="103.136"
-              cy="102.791"
-              data-v-dc035224=""
-              r="49.9955"
-              stroke="url(#paint5_linear_1513_6616)"
-              stroke-width="20"
-              transform="rotate(90 103.136 102.791)"
-            />
-          </g>
-          <g
-            data-v-dc035224=""
-            filter="url(#filter3_f_1513_6616)"
-            opacity="0.25"
-          >
-            <ellipse
-              cx="103"
-              cy="102.5"
-              data-v-dc035224=""
-              rx="90.5"
-              ry="91"
-              stroke="#2CA5B1"
-              stroke-width="4"
-              transform="rotate(90 103 102.5)"
-            />
-          </g>
-          <g
-            class="button-wave"
-            data-v-dc035224=""
-            filter="url(#filter0_f_1513_6933)"
-            opacity="0.25"
-          >
-            <ellipse
-              cx="92"
-              cy="91"
-              data-v-dc035224=""
-              rx="95"
-              ry="95"
-              stroke="#2CA5B1"
-              stroke-width="4"
-              transform="matrix(-4.37114e-08 1 1 4.37114e-08 12 12)"
             />
           </g>
           <defs
@@ -134,65 +147,9 @@ exports[`CreateButton > renders 1`] = `
               color-interpolation-filters="sRGB"
               data-v-dc035224=""
               filterUnits="userSpaceOnUse"
-              height="183.364"
-              id="filter0_i_1513_6616"
-              width="182"
-              x="12"
-              y="12"
-            >
-              <feflood
-                data-v-dc035224=""
-                flood-opacity="0"
-                result="BackgroundImageFix"
-              />
-              <feblend
-                data-v-dc035224=""
-                in="SourceGraphic"
-                in2="BackgroundImageFix"
-                mode="normal"
-                result="shape"
-              />
-              <fecolormatrix
-                data-v-dc035224=""
-                in="SourceAlpha"
-                result="hardAlpha"
-                type="matrix"
-                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-              />
-              <feoffset
-                data-v-dc035224=""
-                dy="2"
-              />
-              <fegaussianblur
-                data-v-dc035224=""
-                stdDeviation="2.5"
-              />
-              <fecomposite
-                data-v-dc035224=""
-                in2="hardAlpha"
-                k2="-1"
-                k3="1"
-                operator="arithmetic"
-              />
-              <fecolormatrix
-                data-v-dc035224=""
-                type="matrix"
-                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-              />
-              <feblend
-                data-v-dc035224=""
-                in2="shape"
-                mode="normal"
-                result="effect1_innerShadow_1513_6616"
-              />
-            </filter>
-            <filter
-              color-interpolation-filters="sRGB"
-              data-v-dc035224=""
-              filterUnits="userSpaceOnUse"
-              height="212"
+              height="1719"
               id="filter0_f_1513_6933"
-              width="214"
+              width="1731"
               x="0"
               y="0"
             >
@@ -218,11 +175,11 @@ exports[`CreateButton > renders 1`] = `
               color-interpolation-filters="sRGB"
               data-v-dc035224=""
               filterUnits="userSpaceOnUse"
-              height="149"
-              id="filter1_i_1513_6616"
-              width="147"
-              x="29.8184"
-              y="29.1816"
+              height="183.364"
+              id="filter0_i_1513_6640"
+              width="182"
+              x="775"
+              y="768.364"
             >
               <feflood
                 data-v-dc035224=""
@@ -267,7 +224,63 @@ exports[`CreateButton > renders 1`] = `
                 data-v-dc035224=""
                 in2="shape"
                 mode="normal"
-                result="effect1_innerShadow_1513_6616"
+                result="effect1_innerShadow_1513_6640"
+              />
+            </filter>
+            <filter
+              color-interpolation-filters="sRGB"
+              data-v-dc035224=""
+              filterUnits="userSpaceOnUse"
+              height="149"
+              id="filter1_i_1513_6640"
+              width="147"
+              x="792.818"
+              y="785.545"
+            >
+              <feflood
+                data-v-dc035224=""
+                flood-opacity="0"
+                result="BackgroundImageFix"
+              />
+              <feblend
+                data-v-dc035224=""
+                in="SourceGraphic"
+                in2="BackgroundImageFix"
+                mode="normal"
+                result="shape"
+              />
+              <fecolormatrix
+                data-v-dc035224=""
+                in="SourceAlpha"
+                result="hardAlpha"
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+              />
+              <feoffset
+                data-v-dc035224=""
+                dy="2"
+              />
+              <fegaussianblur
+                data-v-dc035224=""
+                stdDeviation="2.5"
+              />
+              <fecomposite
+                data-v-dc035224=""
+                in2="hardAlpha"
+                k2="-1"
+                k3="1"
+                operator="arithmetic"
+              />
+              <fecolormatrix
+                data-v-dc035224=""
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+              />
+              <feblend
+                data-v-dc035224=""
+                in2="shape"
+                mode="normal"
+                result="effect1_innerShadow_1513_6640"
               />
             </filter>
             <filter
@@ -275,10 +288,10 @@ exports[`CreateButton > renders 1`] = `
               data-v-dc035224=""
               filterUnits="userSpaceOnUse"
               height="121.991"
-              id="filter2_i_1513_6616"
+              id="filter2_i_1513_6640"
               width="119.991"
-              x="43.1406"
-              y="42.7959"
+              x="806.141"
+              y="799.159"
             >
               <feflood
                 data-v-dc035224=""
@@ -323,45 +336,136 @@ exports[`CreateButton > renders 1`] = `
                 data-v-dc035224=""
                 in2="shape"
                 mode="normal"
-                result="effect1_innerShadow_1513_6616"
+                result="effect1_innerShadow_1513_6640"
               />
             </filter>
             <filter
               color-interpolation-filters="sRGB"
               data-v-dc035224=""
               filterUnits="userSpaceOnUse"
-              height="205"
-              id="filter3_f_1513_6616"
-              width="206"
-              x="0"
-              y="0"
+              height="1718"
+              id="filter3_df_1513_6640"
+              width="1736"
+              x="-2"
+              y="0.36377"
             >
               <feflood
                 data-v-dc035224=""
                 flood-opacity="0"
                 result="BackgroundImageFix"
               />
+              <fecolormatrix
+                data-v-dc035224=""
+                in="SourceAlpha"
+                result="hardAlpha"
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+              />
+              <feoffset
+                data-v-dc035224=""
+                dy="4"
+              />
+              <fegaussianblur
+                data-v-dc035224=""
+                stdDeviation="2"
+              />
+              <fecomposite
+                data-v-dc035224=""
+                in2="hardAlpha"
+                operator="out"
+              />
+              <fecolormatrix
+                data-v-dc035224=""
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+              />
+              <feblend
+                data-v-dc035224=""
+                in2="BackgroundImageFix"
+                mode="normal"
+                result="effect1_dropShadow_1513_6640"
+              />
               <feblend
                 data-v-dc035224=""
                 in="SourceGraphic"
-                in2="BackgroundImageFix"
+                in2="effect1_dropShadow_1513_6640"
                 mode="normal"
                 result="shape"
               />
               <fegaussianblur
                 data-v-dc035224=""
-                result="effect1_foregroundBlur_1513_6616"
-                stdDeviation="5"
+                result="effect2_foregroundBlur_1513_6640"
+                stdDeviation="25"
               />
             </filter>
             <lineargradient
               data-v-dc035224=""
               gradientUnits="userSpaceOnUse"
-              id="paint0_linear_1513_6616"
-              x1="117.448"
-              x2="87.1548"
-              y1="128.071"
-              y2="74.3785"
+              id="paint0_linear_1513_6640"
+              x1="973.763"
+              x2="767.395"
+              y1="791.929"
+              y2="936.983"
+            >
+              <stop
+                data-v-dc035224=""
+                offset="0.0149795"
+                stop-color="#2CA5B1"
+              />
+              <stop
+                data-v-dc035224=""
+                offset="1"
+                stop-color="#999999"
+              />
+            </lineargradient>
+            <lineargradient
+              data-v-dc035224=""
+              gradientUnits="userSpaceOnUse"
+              id="paint1_linear_1513_6640"
+              x1="811.919"
+              x2="928.938"
+              y1="772.006"
+              y2="939.073"
+            >
+              <stop
+                data-v-dc035224=""
+                offset="0.0149795"
+                stop-color="#2CA5B1"
+              />
+              <stop
+                data-v-dc035224=""
+                offset="1"
+                stop-color="#999999"
+              />
+            </lineargradient>
+            <lineargradient
+              data-v-dc035224=""
+              gradientUnits="userSpaceOnUse"
+              id="paint2_linear_1513_6640"
+              x1="821.732"
+              x2="917.251"
+              y1="788.108"
+              y2="924.479"
+            >
+              <stop
+                data-v-dc035224=""
+                offset="0.0149795"
+                stop-color="#2CA5B1"
+              />
+              <stop
+                data-v-dc035224=""
+                offset="1"
+                stop-color="#999999"
+              />
+            </lineargradient>
+            <lineargradient
+              data-v-dc035224=""
+              gradientUnits="userSpaceOnUse"
+              id="paint3_linear_1513_6640"
+              x1="880.448"
+              x2="850.155"
+              y1="884.434"
+              y2="830.742"
             >
               <stop
                 data-v-dc035224=""
@@ -377,11 +481,11 @@ exports[`CreateButton > renders 1`] = `
             <lineargradient
               data-v-dc035224=""
               gradientUnits="userSpaceOnUse"
-              id="paint1_linear_1513_6616"
-              x1="103"
-              x2="84.9996"
-              y1="97.5001"
-              y2="97.5001"
+              id="paint4_linear_1513_6640"
+              x1="870"
+              x2="852"
+              y1="853.864"
+              y2="853.864"
             >
               <stop
                 data-v-dc035224=""
@@ -439,11 +543,11 @@ exports[`CreateButton > renders 1`] = `
             <lineargradient
               data-v-dc035224=""
               gradientUnits="userSpaceOnUse"
-              id="paint2_linear_1513_6616"
-              x1="103.407"
-              x2="84.9995"
-              y1="114.94"
-              y2="114.94"
+              id="paint5_linear_1513_6640"
+              x1="870.407"
+              x2="852"
+              y1="871.304"
+              y2="871.304"
             >
               <stop
                 data-v-dc035224=""
@@ -496,77 +600,17 @@ exports[`CreateButton > renders 1`] = `
                 data-v-dc035224=""
                 offset="1"
                 stop-color="#3D4753"
-              />
-            </lineargradient>
-            <lineargradient
-              data-v-dc035224=""
-              gradientUnits="userSpaceOnUse"
-              id="paint3_linear_1513_6616"
-              x1="210.763"
-              x2="4.3952"
-              y1="35.5654"
-              y2="180.62"
-            >
-              <stop
-                data-v-dc035224=""
-                offset="0.0149795"
-                stop-color="#2CA5B1"
-              />
-              <stop
-                data-v-dc035224=""
-                offset="1"
-                stop-color="#999999"
-              />
-            </lineargradient>
-            <lineargradient
-              data-v-dc035224=""
-              gradientUnits="userSpaceOnUse"
-              id="paint4_linear_1513_6616"
-              x1="48.9187"
-              x2="165.938"
-              y1="15.6422"
-              y2="182.71"
-            >
-              <stop
-                data-v-dc035224=""
-                offset="0.0149795"
-                stop-color="#2CA5B1"
-              />
-              <stop
-                data-v-dc035224=""
-                offset="1"
-                stop-color="#999999"
-              />
-            </lineargradient>
-            <lineargradient
-              data-v-dc035224=""
-              gradientUnits="userSpaceOnUse"
-              id="paint5_linear_1513_6616"
-              x1="58.7317"
-              x2="154.251"
-              y1="31.7441"
-              y2="168.116"
-            >
-              <stop
-                data-v-dc035224=""
-                offset="0.0149795"
-                stop-color="#2CA5B1"
-              />
-              <stop
-                data-v-dc035224=""
-                offset="1"
-                stop-color="#999999"
               />
             </lineargradient>
             <clippath
               data-v-dc035224=""
-              id="clip0_1513_6616"
+              id="clip0_1513_6640"
             >
               <rect
                 data-v-dc035224=""
                 fill="white"
                 height="48"
-                transform="translate(81 78)"
+                transform="translate(844 834.364)"
                 width="48"
               />
             </clippath>

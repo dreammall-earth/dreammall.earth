@@ -1120,20 +1120,14 @@ exports[`SilentRefreshPage > auth service with succes > renders 1`] = `
             class="v-col pa-0 pa-sm-1 pt-0"
             data-v-75d0be1e=""
           >
+            
             <div
-              class="v-sheet v-theme--light v-sheet--rounded pa-3"
-              data-v-75d0be1e=""
-              style="top: 90px;"
+              class="h-screen auth-page py-12"
+              data-v-a3d38914=""
             >
-              
-              <div
-                class="h-screen auth-page py-12"
-                data-v-a3d38914=""
-              >
-                $t('auth.content')
-              </div>
-              
+              $t('auth.content')
             </div>
+            
           </div>
         </div>
       </div>
