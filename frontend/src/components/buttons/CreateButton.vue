@@ -1,7 +1,7 @@
 <template>
   <div class="create-button-container">
     <div>
-      <v-container>
+      <v-container fluid>
         <div class="button-wrapper">
           <svg
             width="1731"
@@ -416,13 +416,29 @@ const enterRoom = async () => {
   top: 50%;
   left: 50%;
   width: 100%;
-  max-width: 900px;
+  pointer-events: none;
   transform: translate(-50%, -50%);
+
+  @media screen and (max-width: $mobile) {
+    display: none;
+  }
 }
 
 svg {
   width: 100%;
   height: 100%;
+
+  @media screen and (min-width: $mobile) and (max-width: $tablet) {
+    transition: scale 1s;
+    transform: scale(3);
+    transform-origin: center;
+  }
+
+  @media screen and (min-width: $tablet) {
+    transition: scale 1s;
+    transform: scale(1);
+    transform-origin: center;
+  }
 
   #create-button {
     pointer-events: all;
@@ -453,7 +469,7 @@ svg {
 
   .button-warp-on {
     transform-origin: center;
-    animation: 12s warp cubic-bezier(0.68, -0.45, 0.27, 1.45) infinite;
+    animation: 12s warp cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
   }
 
   .button-warp-off {
@@ -473,7 +489,7 @@ svg {
 
 .button-list {
   position: absolute;
-  top: calc(50% + 10px);
+  top: calc(50% + 50px);
   left: calc(50% - 165px);
   display: flex;
   flex-direction: column;
@@ -515,7 +531,7 @@ svg {
   }
 
   50% {
-    transform: scale(0.96);
+    transform: scale(1.26);
   }
 
   100% {
