@@ -9,7 +9,7 @@ exports[`CreateButton > renders 1`] = `
     data-v-dc035224=""
   >
     <div
-      class="v-container v-locale--is-ltr"
+      class="v-container v-container--fluid v-locale--is-ltr"
       data-v-dc035224=""
     >
       <div
