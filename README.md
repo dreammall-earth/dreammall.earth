@@ -53,23 +53,33 @@ Instructions how to deploy this software are available [here](deployment/README.
 ### Install Authentik
 
 ```bash
+# Go in authentik folder
 cd $rootFolder/authentik
+# delete existing database
+rm -rf database
+# Unpack database in database folder
 ./database.unpack.sh
+# Start authentik docker
 docker compose up
 ```
 
 ### Start Database
 
 ```bash
+# In new Terminal
 cd $rootFolder
+# Start database in docker
 docker compose up database
 ```
 
 ### Start Backend
 
 ```bash
+# In new Terminal
 cd $rootFolder/backend
+# Copy .env.dist .env
 cp .env.dist .env
+# Symbolik for authentik key
 ln -s src/auth/public.pem public.pem
 nvm use 21
 npm install
@@ -87,10 +97,10 @@ cd $rootFolder/presenter
 cp .env.dist .env
 nvm use 21
 npm install
-# Run dev mode
-# npm run dev
-# Run prod mode (faster)
 export PORT=3001
+# Run dev mode
+npm run dev
+# Run prod mode (faster)
 npm run prod
 ```
 
@@ -101,10 +111,10 @@ cd $rootFolder/frontend
 cp .env.dist .env
 nvm use 21
 npm install
-# Run dev mode (for development)
-# npm run dev
-# Run prod mode (faster)
 # export PORT=3000(default)
+# Run dev mode (for development)
+npm run dev
+# Run prod mode (faster)
 npm run prod
 ```
 
@@ -115,10 +125,10 @@ cd $rootFolder/admin
 cp .env.dist .env
 nvm use 21
 npm install
-# Run dev mode
-# npm run dev
-# Run prod mode (faster)
 export PORT=3002
+# Run dev mode
+npm run dev
+# Run prod mode (faster)
 npm run prod
 ```
 
