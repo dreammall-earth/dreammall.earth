@@ -19,3 +19,11 @@ Feature: Login
     When I refresh the page
     Then I am on the worldcafe page
 
+  Scenario: Successful Logout
+    #Given I am logged in as 'akadmin' 'dreammall'
+    When I submit the credentials 'akadmin' 'dreammall'
+    Then I am on the worldcafe page
+    #
+    When I log out
+    Then I am on page 'presenter'
+
