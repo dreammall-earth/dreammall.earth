@@ -6,6 +6,7 @@ import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor'
 
 import 'cypress-network-idle'
 import { loginPage } from '../pages/LoginPage'
+import { presenterPage } from '../pages/PresenterPage'
 import { worldcafePage } from '../pages/WorldcafePage'
 
 Given('The browser navigates to the login page', () => {
@@ -40,4 +41,15 @@ When('I submit the credentials {string} {string}', (username: string, password: 
 Then('I am on the worldcafe page', () => {
   cy.waitForNetworkIdle(10000)
   worldcafePage.signoutButtonIsVisible()
+})
+
+When('I log out', () => {
+  worldcafePage.logout()
+})
+
+Then('I am on page {string}', (page: string) => {
+  if (page === 'presenter') {
+    cy.waitForNetworkIdle(5000)
+    presenterPage.signInButtonIsVisible()
+  }
 })
