@@ -90,6 +90,7 @@ npm install
 # Run dev mode
 # npm run dev
 # Run prod mode (faster)
+export PORT=3001
 npm run prod
 ```
 
@@ -100,9 +101,10 @@ cd $rootFolder/frontend
 cp .env.dist .env
 nvm use 21
 npm install
-# Run dev mode
+# Run dev mode (for development)
 # npm run dev
 # Run prod mode (faster)
+# export PORT=3000(default)
 npm run prod
 ```
 
@@ -116,6 +118,7 @@ npm install
 # Run dev mode
 # npm run dev
 # Run prod mode (faster)
+export PORT=3002
 npm run prod
 ```
 
