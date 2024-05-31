@@ -447,18 +447,18 @@ svg {
 
   .warp-ring {
     transition: transform 1s;
-    transform-origin: center;
     transform: scale(0);
+    transform-origin: center;
   }
 
   .button-warp-on {
-    animation: 12s warp cubic-bezier(0.68, -0.45, 0.27, 1.45) infinite;
     transform-origin: center;
+    animation: 12s warp cubic-bezier(0.68, -0.45, 0.27, 1.45) infinite;
   }
 
   .button-warp-off {
-    animation: 1s warp-off linear;
     transform-origin: center;
+    animation: 1s warp-off linear;
   }
 
   .button-wave-on {
@@ -473,12 +473,12 @@ svg {
 
 .button-list {
   position: absolute;
+  top: calc(50% + 10px);
+  left: calc(50% - 165px);
   display: flex;
   flex-direction: column;
   gap: 15px;
   justify-content: center;
-  top: calc(50% + 10px);
-  left: calc(50% - 165px);
   transform: scale(0.5);
 
   .assistant-button {
@@ -513,17 +513,17 @@ svg {
   0% {
     transform: scale(0);
   }
+
   50% {
     transform: scale(0.96);
   }
+
   100% {
     transform: scale(0);
   }
 }
 
 @keyframes warp-off {
-  0% {
-  }
   100% {
     transform: scale(0);
   }
