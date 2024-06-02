@@ -1,0 +1,34 @@
+$background-color: #F5F5F5;
+$surface-color: #e1e6ed;
+$primary-color: #f09630;
+$secondary-color: #3D4753;
+$error-color: #B00020;
+$info-color: #2196F3;
+$success-color: #4CAF50;
+$warning-color: #FB8C00;
+$border-color: #d6dfe9;
+$border-opacity: 1;
+$font-color: #222;
+$icon-color: #3D4753;
+$icon-background: rgb(255 255 255);
+$bottom-menu-background: rgb(225 230 237 / 60%);
+$sidebar-background: rgb(225 230 237);
+
+:export {
+    backgroundColor: $background-color;
+    surfaceColor: $surface-color;
+    primaryColor: $primary-color;
+    secondaryColor: $secondary-color;
+    errorColor: $error-color;
+    infoColor: $info-color;
+    successColor: $success-color;
+    warningColor: $warning-color;
+    borderColor: $border-color;
+    borderOpacity: $border-opacity;
+    fontColor: $font-color;
+    iconColor: $icon-color;
+    iconBackground: $icon-background;
+    bottomMenuBackground: $bottom-menu-background;
+    sidebarBackground: $sidebar-background;
+}
+

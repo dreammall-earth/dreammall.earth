@@ -1,4 +1,5 @@
 # boilerplate-frontend
+
 [![nodejs][badge-nodejs-img]][badge-nodejs-href]
 [![npm][badge-npm-img]][badge-npm-href]
 [![docker][badge-docker-img]][badge-docker-href]
@@ -32,7 +33,7 @@ This projects utilizes `storybook` and `chromatic` to develop, document & test f
 
 ## Commands
 
-The following commands are available:
+### The following commands are available
 
 | Command                     | Description                                      |
 | --------------------------- | ------------------------------------------------ |
@@ -68,12 +69,14 @@ The following commands are available:
 
 ### Docker
 
-Docker can be run in development mode utilizing `docker-compose.overwrite.yml`:
+### Docker development mode
+
 ```bash
 docker compose up
 ```
 
-Docker can be run in production mode:
+### Docker can be run in production mode
+
 ```bash
 docker compose -f docker-compose.yml up
 ```
@@ -83,11 +86,14 @@ docker compose -f docker-compose.yml up
 In order to use the chromatic workflow you need to provide a `CHROMATIC_PROJECT_TOKEN` in the repository secrets.
 
 If you want to run chromatic from the command line you either have to provide this variable as well
+
 ```bash
 export CHROMATIC_PROJECT_TOKEN=...
 npm run chromatic
 ```
+
 or you have to append it via parameter:
+
 ```bash
 npm run chromatic -- --project-token=...
 ```
@@ -96,7 +102,7 @@ npm run chromatic -- --project-token=...
 
 You can get a list of packes to update by running `npm run update`.
 
-Appending `-u ` will also update the packages in the `package.json`. You have to run `npm install` again after.
+Appending `-u` will also update the packages in the `package.json`. You have to run `npm install` again after.
 
 ```bash
 npm run update -- -u

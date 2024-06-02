@@ -33,23 +33,27 @@ import { useQuery } from '@vue/apollo-composable'
 
 import MainButton from '#components/buttons/MainButton.vue'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
-import { getRoomQuery } from '#queries/getRoomQuery'
-import { AUTH } from '#src/env.js'
-import { useAuthStore } from '#stores/authStore.js'
+import { joinMyRoomQuery } from '#queries/joinMyRoomQuery'
+import { AUTH } from '#src/env'
+import { useAuthStore } from '#stores/authStore'
 
 const auth = useAuthStore()
 
-const { result: getRoomQueryResult, error: getRoomQueryError } = useQuery(getRoomQuery, null, {
-  prefetch: false,
-  fetchPolicy: 'no-cache',
-})
+const { result: joinMyRoomQueryResult, error: joinMyRoomQueryError } = useQuery(
+  joinMyRoomQuery,
+  null,
+  {
+    prefetch: false,
+    fetchPolicy: 'no-cache',
+  },
+)
 
 const enterRoom = async () => {
-  if (getRoomQueryError.value) {
+  if (joinMyRoomQueryError.value) {
     // eslint-disable-next-line no-console
-    console.log(getRoomQueryError.value.message)
+    console.log(joinMyRoomQueryError.value.message)
   } else {
-    window.location.href = getRoomQueryResult.value?.getRoom
+    window.open(joinMyRoomQueryResult.value?.joinMyRoom, '_blank')
   }
 }
 

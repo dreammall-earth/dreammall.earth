@@ -1,4 +1,5 @@
 # Dreammall.earth
+
 [![nodejs][badge-nodejs-img]][badge-nodejs-href]
 [![npm][badge-npm-img]][badge-npm-href]
 [![remark-cli][badge-remark-cli-img]][badge-remark-cli-href]
@@ -10,16 +11,27 @@ Dreammall.earth websites & services
 
 ## Modules
 
+### Frontends
+
 - [Presenter](presenter/README.md)
+- [Frontend](frontend/README.md)
+- [Admin](admin/README.md)
+
+### Backend
+
 - [Backend](backend/README.md)
 
-## Deploy
+### Dev-Op
 
-Deploy instructions can be found in [deployment/](deplyoment/README.md)
+- [Authentik](authentik/README.md)
+
+## Deployment
+
+Instructions how to deploy this software are available [here](deployment/README.md)
 
 ## Commands
 
-The following commands are available:
+### The following commands are available
 
 | Command                    | Description                                    |
 | -------------------------- | ---------------------------------------------- |
@@ -36,9 +48,96 @@ The following commands are available:
 | **Maintenance**            |                                                |
 | `npm run update`           | Check for updates                              |
 
+## Bare-metal
+
+### Install Authentik
+
+```bash
+# Go in authentik folder
+cd $rootFolder/authentik
+# Delete existing database
+rm -rf database
+# Unpack database in database folder
+./database.unpack.sh
+# Start authentik docker
+docker compose up
+```
+
+### Start Database
+
+```bash
+# In new Terminal
+cd $rootFolder
+# Start database in docker
+docker compose up database
+```
+
+### Start Backend
+
+```bash
+# In new Terminal
+cd $rootFolder/backend
+# Copy .env.dist .env
+cp .env.dist .env
+# Symbolik for authentik key
+ln -s src/auth/public.pem public.pem
+nvm use 21
+npm install
+# Initialize Database
+npm run db:reset
+# Migration Database
+# npm run db:migrate
+npm run dev
+```
+
+### Start Presenter
+
+```bash
+# In new Terminal
+cd $rootFolder/presenter
+cp .env.dist .env
+nvm use 21
+npm install
+export PORT=3001
+# Run dev mode
+npm run dev
+# Run prod mode (faster)
+# npm run prod
+```
+
+### Start Frontend
+
+```bash
+# In new Terminal
+cd $rootFolder/frontend
+cp .env.dist .env
+nvm use 21
+npm install
+# export PORT=3000(default)
+# Run dev mode (for development)
+npm run dev
+# Run prod mode (faster)
+# npm run prod
+```
+
+### Start Admin
+
+```bash
+# In new Terminal
+cd $rootFolder/admin
+cp .env.dist .env
+nvm use 21
+npm install
+export PORT=3002
+# Run dev mode
+npm run dev
+# Run prod mode (faster)
+# npm run prod
+```
+
 ## Docker
 
-The following endpoints are provided if `docker compose` is used:
+### The following endpoints are provided for `docker compose`
 
 | Endpoint                                                             | Description                |
 | -------------------------------------------------------------------- | -------------------------- |
@@ -66,7 +165,7 @@ Then run `npm run release` to propagate the new version and generate the changel
 
 You can get a list of packages to update by running `npm run update`.
 
-Appending `-u ` will also update the packages in the `package.json`. You have to run `npm install` again after.
+Appending `-u` will also update the packages in the `package.json`. You have to run `npm install` again after.
 
 ```bash
 npm run update -- -u

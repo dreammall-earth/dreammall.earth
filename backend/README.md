@@ -107,18 +107,27 @@ This mechanic was taken from this [source](https://stackoverflow.com/questions/1
 
 ## Database setup
 
-The project is set up for a `mysql` database. Use
+### The project is set up for a `mysql` database
+
 ```bash
 docker-compose up database
 ```
-in the main folder to run the database inside docker. You need to copy the `.env.dist` file to `.env`.  Run `npm run db:migrate` to generate the database. It might be required to delete the migration folder beforehand.
+
+in the main folder to run the database inside docker.
+You need to copy the `.env.dist` file to `.env`.
+
+Run `npm run db:migrate` to generate the database.
+
+It might be required to delete the migration folder beforehand.
 
 ## Token validation
 
 If you use the authentik database from the zip file, link the `src/auth/public.pem` to the main folder:
+
 ```bash
 ln -s src/auth/public.pem public.pem
 ```
+
 Otherwise place the according certificate in the main folder with the name `public.pem`
 
 ## License
