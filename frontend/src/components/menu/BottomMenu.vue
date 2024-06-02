@@ -4,6 +4,7 @@
   >
     <MessageIndicator :number-of-messages="3" />
     <NewsIndicator :has-news="true" />
+    <CreateButtonMobile />
     <Circle>
       <v-icon icon="$camera"></v-icon>
     </Circle>
@@ -13,6 +14,7 @@
 
 <script lang="ts" setup>
 import Circle from './CircleElement.vue'
+import CreateButtonMobile from '#components/buttons/CreateButtonMobile.vue'
 import MessageIndicator from './MessageIndicator.vue'
 import NewsIndicator from './NewsIndicator.vue'
 import UserInfo from './UserInfo.vue'
@@ -24,5 +26,6 @@ import UserInfo from './UserInfo.vue'
   background: var(--v-bottom-menu-background) !important;
   backdrop-filter: blur(20px);
   border-radius: 30px 30px 0 0;
+  z-index: 1;
 }
 </style>
