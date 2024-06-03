@@ -62,7 +62,7 @@
     "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^7.10.0",
     "@typescript-eslint/parser": "^7.10.0",
-    "@vuepress/bundler-vite": "^2.0.0-rc.9",
+    "@vuepress/bundler-vite": "^2.0.0-rc.13",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard": "^17.1.0",
@@ -88,7 +88,7 @@
     "ts-node": "^10.9.2",
     "tsc-watch": "^6.2.0",
     "typescript": "^5.4.5",
-    "vuepress": "^2.0.0-rc.9"
+    "vuepress": "^2.0.0-rc.13"
   },
   "imports": {
     "#api/*": "./src/api/*",
