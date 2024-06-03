@@ -37,3 +37,4 @@ jobs:
 
       - name: E2E files | Lint
         run: npm install && npm run test:lint:eslint
+        working-directory: ${{env.WORKING_DIRECTORY}}

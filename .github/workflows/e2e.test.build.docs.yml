@@ -37,3 +37,4 @@ jobs:
 
       - name: E2E Testing | Build Docs
         run: npm install && npm run docs:build
+        working-directory: ${{env.WORKING_DIRECTORY}}
