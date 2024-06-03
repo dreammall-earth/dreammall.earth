@@ -1065,6 +1065,7 @@ exports[`SilentRefreshPage > auth service with succes > renders 1`] = `
                         <i
                           aria-hidden="true"
                           class="v-icon notranslate v-theme--light v-icon--size-default"
+                          data-test="user-dropdown"
                           data-v-607bdd70=""
                         >
                           <svg
@@ -1280,6 +1281,7 @@ exports[`SilentRefreshPage > auth service with succes > renders 1`] = `
             <i
               aria-hidden="true"
               class="v-icon notranslate v-theme--light v-icon--size-default"
+              data-test="user-dropdown"
               data-v-607bdd70=""
             >
               <svg
