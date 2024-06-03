@@ -121,3 +121,14 @@ backend-test-build-docs: &backend-test-build-docs
   - 'backend/**/*.md'
   - 'backend/.vuepress/*'
   - 'backend/package.json'
+
+# e2e - TODO refine separation of docs from code-related files
+e2e-all:
+  - 'cypress/**/*'
+
+e2e-docs:
+  - 'cypress/**/*.md'
+  - '.github/workflows/e2e.test.build.docs.yml'
+  - '.github/file-filter.yml'
+  - '.vuepress/*'
+  - 'package.json'
