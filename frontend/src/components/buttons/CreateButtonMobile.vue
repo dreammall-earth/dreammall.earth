@@ -3,32 +3,40 @@
     <div>
       <div class="button-wrapper" :class="[showButtonList ? 'button-wrapper--active' : '']">
         <Teleport v-if="teleportComponent" to="#teleported">
-          <div class="button-list" :class="[showButtonList ? 'button-list--active' : '']">
+          <div
+            class="button-list-mobile"
+            :class="[showButtonList ? 'button-list-mobile--active' : '']"
+          >
+            <v-img class="w-100 menu-divider" :src="Divider" />
+            <v-img
+              class="w-100 menu-triangle"
+              :class="[showButtonList ? 'menu-triangle--turned' : '']"
+              :src="Triangle"
+            />
             <MainButton
-              class="new-project-button"
-              variant="fourth"
-              label="New Project"
-              size="small"
-              icon="plus"
-              >{{ $t('buttons.newProject') }}
+              class="assistant-button"
+              variant="border-gradient"
+              label="Assistant"
+              size="auto"
+              icon="ear-hearing"
+              >{{ $t('buttons.toAssistant') }}
             </MainButton>
             <MainButton
-              key="2"
               class="new-table-button"
-              variant="primary"
+              variant="border-yellow"
               label="New Table"
-              size="small"
+              size="auto"
               icon="plus"
               @click="enterRoom"
               >{{ $t('buttons.newTable') }}
             </MainButton>
             <MainButton
-              class="assistant-button"
-              variant="gradient"
-              label="Assistant"
-              size="small"
-              icon="ear-hearing"
-              >{{ $t('buttons.toAssistant') }}
+              class="new-project-button"
+              variant="border-blue"
+              label="New Project"
+              size="auto"
+              icon="plus"
+              >{{ $t('buttons.newProject') }}
             </MainButton>
           </div>
         </Teleport>
@@ -40,8 +48,8 @@
           xmlns="http://www.w3.org/2000/svg"
         >
           <g
-            class="outer-rings"
-            :class="[showButtonList ? 'outer-rings--active' : '']"
+            class="most-outer-rings"
+            :class="[showButtonList ? 'most-outer-rings--active' : '']"
             opacity="0.25"
             filter="url(#filter0_i_1513_6638)"
           >
@@ -266,6 +274,8 @@
 import { useQuery } from '@vue/apollo-composable'
 import { onMounted, ref } from 'vue'
 
+import Divider from '#assets/img/divider.svg'
+import Triangle from '#assets/img/triangle.svg'
 import MainButton from '#components/buttons/MainButton.vue'
 import { joinMyRoomQuery } from '#queries/joinMyRoomQuery'
 
@@ -333,8 +343,8 @@ const enterRoom = async () => {
 
 svg {
   width: 100%;
-  height: 100%;
   max-width: 80px;
+  height: 100%;
 
   #create-button-mobile {
     pointer-events: all;
@@ -345,7 +355,16 @@ svg {
   }
 
   .outer-rings {
-    clip-path: inset(0 0 60% 0);
+    clip-path: inset(0 0 65% 0);
+    transition: clip-path 0.75s;
+
+    &--active {
+      clip-path: inset(0 0 50% 0);
+    }
+  }
+
+  .most-outer-rings {
+    clip-path: inset(0 0 62% 0);
     transition: clip-path 0.75s;
 
     &--active {
@@ -354,25 +373,54 @@ svg {
   }
 }
 
-.button-list {
+.button-list-mobile {
   position: absolute;
-  width: 180px;
-  height: 220px;
-  background: var(--v-bottom-menu-background) !important;
-  backdrop-filter: blur(20px);
-  top: calc(50% - 10px);
+  top: calc(50% - 0px);
   left: calc(50% - 90px);
+  z-index: -1;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  justify-content: center;
   align-items: center;
+  justify-content: start;
+  width: 180px;
+  height: 220px;
+  padding-top: 30px;
+  background: var(--v-bottom-menu-background) !important;
+  backdrop-filter: blur(20px);
   border-radius: 30px 30px 0 0;
   transition: top 0.75s;
-  z-index: -1;
+
+  @media screen and (min-width: $mobile) {
+    display: none;
+  }
 
   &--active {
     top: calc(50% - 280px);
+  }
+
+  .menu-triangle {
+    position: absolute;
+    top: -95px;
+    max-width: 10px;
+    transition:
+      0.75s transform,
+      0.75s 0.25s top;
+    transform-origin: center;
+
+    &--turned {
+      top: 10px;
+      transition:
+        0.75s rotate,
+        0.5s top;
+      transform: rotate(180deg);
+    }
+  }
+
+  .menu-divider {
+    position: absolute;
+    top: 0;
+    max-width: 60px;
   }
 
   .assistant-button {
@@ -405,7 +453,7 @@ svg {
 </style>
 
 <style lang="scss">
-.button-list {
+.button-list-mobile {
   .assistant-button {
     i {
       margin-right: 16px;

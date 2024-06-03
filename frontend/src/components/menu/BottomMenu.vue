@@ -5,7 +5,7 @@
     <MessageIndicator :number-of-messages="3" />
     <NewsIndicator :has-news="true" />
     <CreateButtonMobile />
-    <Circle>
+    <Circle class="camera-button">
       <v-icon icon="$camera"></v-icon>
     </Circle>
     <UserInfo />
@@ -13,8 +13,9 @@
 </template>
 
 <script lang="ts" setup>
-import Circle from './CircleElement.vue'
 import CreateButtonMobile from '#components/buttons/CreateButtonMobile.vue'
+
+import Circle from './CircleElement.vue'
 import MessageIndicator from './MessageIndicator.vue'
 import NewsIndicator from './NewsIndicator.vue'
 import UserInfo from './UserInfo.vue'
@@ -23,9 +24,13 @@ import UserInfo from './UserInfo.vue'
 <style scoped lang="scss">
 .bottom-menu {
   bottom: 0;
+  z-index: 1;
   background: var(--v-bottom-menu-background) !important;
   backdrop-filter: blur(20px);
   border-radius: 30px 30px 0 0;
-  z-index: 1;
+
+  .camera-button {
+    transform: translateX(20px);
+  }
 }
 </style>
