@@ -6,8 +6,6 @@ jobs:
   e2e-tests:
     name: Run all E2E tests
     runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: ./cypress
     steps:
       - name: Set Node version
         uses: actions/setup-node@v4
@@ -20,12 +18,15 @@ jobs:
       - name: E2E - Run all tests
         id: e2e-run
         uses: cypress-io/github-action@v6
+        with:
+          working-directory: cypress
 
       - name: E2E | if tests failed, compile html report
         if: ${{ failure() && steps.e2e-run.conclusion == 'failure' }}
         run: |
           cd cypress/
           npx tsx create-cucumber-html-report.ts
+        working-directory: cypress
 
       - name: Get PR number
         if: ${{ failure() && steps.e2e-run.conclusion == 'failure' }}
