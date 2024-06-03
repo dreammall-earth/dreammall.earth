@@ -341,38 +341,6 @@ const enterRoom = async () => {
   }
 }
 
-svg {
-  width: 100%;
-  max-width: 80px;
-  height: 100%;
-
-  #create-button-mobile {
-    pointer-events: all;
-    cursor: pointer;
-    transition: transform 0.4s ease-in-out;
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-
-  .outer-rings {
-    clip-path: inset(0 0 65% 0);
-    transition: clip-path 0.75s;
-
-    &--active {
-      clip-path: inset(0 0 50% 0);
-    }
-  }
-
-  .most-outer-rings {
-    clip-path: inset(0 0 62% 0);
-    transition: clip-path 0.75s;
-
-    &--active {
-      clip-path: inset(0 0 50% 0);
-    }
-  }
-}
-
 .button-list-mobile {
   position: absolute;
   top: calc(50% - 0px);
@@ -436,6 +404,38 @@ svg {
   .new-table-button {
     margin: 0 20px;
     transition-delay: 0.1s;
+  }
+}
+
+svg {
+  width: 100%;
+  max-width: 80px;
+  height: 100%;
+
+  #create-button-mobile {
+    pointer-events: all;
+    cursor: pointer;
+    transition: transform 0.4s ease-in-out;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .outer-rings {
+    clip-path: inset(0 0 65% 0);
+    transition: clip-path 0.75s;
+
+    &--active {
+      clip-path: inset(0 0 50% 0);
+    }
+  }
+
+  .most-outer-rings {
+    clip-path: inset(0 0 62% 0);
+    transition: clip-path 0.75s;
+
+    &--active {
+      clip-path: inset(0 0 50% 0);
+    }
   }
 }
 
