@@ -22,11 +22,14 @@ async function setupNodeEvents(
 export default defineConfig({
   e2e: {
     chromeWebSecurity: false,
-    baseUrl: 'https://the-internet.herokuapp.com/',
+    baseUrl: 'http://localhost:9000/',
     specPattern: 'cypress/e2e/features/*.feature',
     supportFile: false,
     retries: 0,
     video: false,
+    viewportHeight: 1080,
+    viewportWidth: 1920,
     setupNodeEvents,
   },
+  includeShadowDom: true,
 })

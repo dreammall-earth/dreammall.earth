@@ -1,6 +1,9 @@
-name: e2e:run:tests
+name: e2e:test:all test the application end to end
 
-on: push
+on:
+  push:
+    branches:
+      - initial-e2e2-tests
 
 jobs:
   e2e-tests:
@@ -10,12 +13,19 @@ jobs:
       - name: Set Node version
         uses: actions/setup-node@v4
         with:
-          node-version: '>=21'
+          node-version: 21
 
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: E2E - Run all tests
+      - name: E2E | Boot up test system
+        run: |
+          cd authentik/
+          ./database.unpack.sh
+          docker compose up -d
+          sleep 10m
+
+      - name: E2E | Run all tests
         id: e2e-run
         uses: cypress-io/github-action@v6
         with:
@@ -38,4 +48,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: boilerplate-e2e-test-report-pr-${{ steps.pr-number.outputs.pr }}
-          path: /home/runner/work/boilerplate-e2e-cypress-cucumber/boilerplate-e2e-cypress-cucumber/cypress/reports/e2e_html_report
+          path: /home/runner/work/dreammall.earth/dreammall.earth/cypress/reports/e2e_html_report
