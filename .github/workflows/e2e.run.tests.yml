@@ -1,9 +1,6 @@
 name: e2e:test:all test the application end to end
 
-on:
-  push:
-    branches:
-      - initial-e2e2-tests
+on: push
 
 jobs:
   e2e-tests:
