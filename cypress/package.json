@@ -1,0 +1,78 @@
+{
+  "name": "boilerplate-e2e-cypress-cucumber",
+  "version": "1.0.0",
+  "description": "A boilerplate for end-to-end testing with Cypress and Cucumber in Typescript",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IT4Change/boilerplate-e2e-cypress-cucumber.git"
+  },
+  "bugs": {
+    "url": "https://github.com/IT4Change/boilerplate-e2e-cypress-cucumber/issues"
+  },
+  "homepage": "https://github.com/IT4Change/boilerplate-e2e-cypress-cucumber#readme",
+  "keywords": [
+    "BDD",
+    "cypress",
+    "cucumber",
+    "docker",
+    "eslint",
+    "npm",
+    "nodejs",
+    "typescript",
+    "vuepress"
+  ],
+  "author": "mahula",
+  "license": "Apache-2.0",
+  "scripts": {
+    "cypress:open": "cypress open --e2e --browser electron",
+    "cypress:run": "cypress run --e2e --browser electron",
+    "docs:dev": "vuepress dev .",
+    "docs:build": "vuepress build .",
+    "test:lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.cjs,.json,.yml,.yaml --max-warnings 0 .",
+    "update": "npx npm-check-updates"
+  },
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^20.0.5",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
+    "@eslint-community/eslint-plugin-eslint-comments": "^4.3.0",
+    "@typescript-eslint/eslint-plugin": "^7.8.0",
+    "@typescript-eslint/parser": "^7.8.0",
+    "@vuepress/bundler-vite": "^2.0.0-rc.9",
+    "cypress": "^13.10.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-cypress": "^3.2.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-json": "^3.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-security": "^3.0.0",
+    "eslint-plugin-yml": "^1.14.0",
+    "multiple-cucumber-html-reporter": "^3.6.2",
+    "prettier": "^3.2.5",
+    "ts-loader": "^9.5.1",
+    "tsx": "^4.11.0",
+    "typescript": "^5.4.5",
+    "vuepress": "^2.0.0-rc.9",
+    "vuepress-plugin-search-pro": "^2.0.0-rc.43",
+    "vuepress-theme-hope": "^2.0.0-rc.43"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true,
+    "stepDefinitions": "cypress/e2e/steps/**/*.{js,ts}",
+    "json": {
+      "enabled": true,
+      "output": "cypress/reports/json/cucumber-report.json"
+    },
+    "messages": {
+      "enabled": true,
+      "output": "cypress/reports/messages/cucumber-messages.ndjson"
+    },
+    "engines": {
+      "node": ">=21"
+    }
+  }
+}
