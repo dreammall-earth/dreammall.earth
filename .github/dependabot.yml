@@ -85,6 +85,9 @@ updates:
       applies-to: version-updates
       patterns:
         - "*vite*"
+      exclude-patterns:
+        - "@vuepress/bundler-vite"
+        - "eslint-plugin-vitest"
     vue:
       applies-to: version-updates
       patterns:
@@ -155,6 +158,9 @@ updates:
       applies-to: version-updates
       patterns:
         - "*vite*"
+      exclude-patterns:
+        - "@vuepress/bundler-vite"
+        - "eslint-plugin-vitest"
     vue:
       applies-to: version-updates
       patterns:
@@ -225,6 +231,9 @@ updates:
       applies-to: version-updates
       patterns:
         - "*vite*"
+      exclude-patterns:
+        - "@vuepress/bundler-vite"
+        - "eslint-plugin-vitest"
     vue:
       applies-to: version-updates
       patterns:
