@@ -454,7 +454,9 @@ svg {
 
   .button-wave {
     opacity: 0;
-    transition: opacity 1s, scale 0.7s;
+    transition:
+      opacity 1s,
+      scale 0.7s;
     transform-origin: center;
     scale: 0;
   }
