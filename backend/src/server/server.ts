@@ -11,6 +11,7 @@ import { schema } from '#graphql/schema'
 
 import { Context, getContextToken, GetContextToken } from './context'
 import logger from './logger'
+import mainLogger from '#src/logger'
 import { CONFIG } from '#config/config'
 
 export const createServer = async (withLogger: boolean = true, httpServer: Server | undefined = undefined): Promise<ApolloServer> => {
@@ -44,9 +45,7 @@ export async function listen(port: number, getToken: GetContextToken = getContex
     methods: ['GET', 'POST', 'OPTIONS'],
     credentials: true,
     maxAge: 600,
-    origin: [
-      CONFIG.BBB_WEBHOOKS_ENDPOINT,
-    ],
+    origin: '*',
   }))
 
   app.use(
@@ -57,8 +56,8 @@ export async function listen(port: number, getToken: GetContextToken = getContex
   )
 
   app.post(CONFIG.BBB_WEBHOOKS_ENDPOINT +  '/BBBevents', (req, res) => {
-    console.log('hallo')
-    console.log(req.body)
+    mainLogger.info('hallo')
+    mainLogger.info(req.body)
     res.status(200).end()
   })
   
