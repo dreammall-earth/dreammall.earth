@@ -22,6 +22,12 @@ jobs:
           docker compose up -d
           sleep 10m
 
+      - name: Install cucumber-json-formatter
+        run: |
+          wget --no-verbose -O /opt/cucumber-json-formatter "https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-linux-386"
+          chmod +x /opt/cucumber-json-formatter
+          sudo ln -fs /opt/cucumber-json-formatter /usr/bin/cucumber-json-formatter
+
       - name: E2E | Run all tests
         id: e2e-run
         uses: cypress-io/github-action@v6
@@ -45,4 +51,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: boilerplate-e2e-test-report-pr-${{ steps.pr-number.outputs.pr }}
-          path: /home/runner/work/dreammall.earth/dreammall.earth/cypress/reports/e2e_html_report
+          path: /home/runner/work/dreammall.earth/dreammall.earth/cypress/reports/dreammall-e2e_html_report
