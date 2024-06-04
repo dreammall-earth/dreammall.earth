@@ -14,9 +14,10 @@ import {
 import { v4 as uuidv4 } from 'uuid'
 
 // import { createMeeting, getMeetings } from '#api/BBB'
-import { createMeeting, joinMeetingLink } from '#api/BBB'
+import { createMeeting, joinMeetingLink, listHooks, createHook } from '#api/BBB'
 import { prisma } from '#src/prisma'
 import { Context } from '#src/server/context'
+import logger from '#src/logger'
 
 @ObjectType()
 class Room {
@@ -95,21 +96,20 @@ export class RoomResolver {
     })
   }
 
-  /*
   @Query(() => Boolean)
   async test(): Promise<boolean> {
     try {
-      const result = await createMeeting({
-        name: 'My Meeting ßß',
-        meetingID: 'xxx',
-      })
-      console.log(result)
+      const xxx = await createHook()
+
+      logger.info(xxx)
+      
+      const result = await listHooks()
+      logger.info(result)
       // const test = await getMeetings()
     } catch (err) {
-      console.log(err)
+      logger.info(err)
       return false
     }
     return true
   }
-  */
 }
