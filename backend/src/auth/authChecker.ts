@@ -26,7 +26,7 @@ export const getCert = (): Buffer => {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const authChecker: AuthChecker<Context> = async ({ root, args, context, info }, roles) => {
   const { token } = context
-
+console.log(token)
   if (!token) return false
 
   try {
