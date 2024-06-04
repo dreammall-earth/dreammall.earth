@@ -454,9 +454,7 @@ svg {
 
   .button-wave {
     opacity: 0;
-    transition:
-      opacity 1s,
-      scale 0.7s;
+    transition: opacity 1s, scale 0.7s;
     transform-origin: center;
     scale: 0;
   }
@@ -495,6 +493,7 @@ svg {
   flex-direction: column;
   gap: 15px;
   justify-content: center;
+  pointer-events: all;
   transform: scale(0.5);
 
   .assistant-button {
