@@ -61,19 +61,7 @@
     "vuepress-plugin-search-pro": "^2.0.0-rc.43",
     "vuepress-theme-hope": "^2.0.0-rc.43"
   },
-  "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true,
-    "stepDefinitions": "cypress/e2e/steps/**/*.{js,ts}",
-    "json": {
-      "enabled": true,
-      "output": "cypress/reports/json/cucumber-report.json"
-    },
-    "messages": {
-      "enabled": true,
-      "output": "cypress/reports/messages/cucumber-messages.ndjson"
-    },
-    "engines": {
-      "node": ">=21"
-    }
+  "engines": {
+    "node": ">=21"
   }
 }
