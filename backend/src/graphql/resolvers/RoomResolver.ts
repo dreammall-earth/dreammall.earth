@@ -85,6 +85,7 @@ export class RoomResolver {
       name: 'Dreammall Entwicklung',
       meetingID: 'Dreammall-Entwicklung',
     })
+    logger.info(meeting)
     if (!meeting) return null
     return joinMeetingLink({
       fullName: user.name,
