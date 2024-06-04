@@ -32,6 +32,7 @@ const BREVO = {
 const BBB = {
   BBB_SHARED_SECRET: process.env.BBB_SHARED_SECRET ?? 'unknown',
   BBB_URL: process.env.BBB_URL ?? 'https://my.url',
+  BBB_WEBHOOKS_ENDPOINT: process.env.BBB_WEBHOOKS_ENDPOINT ?? 'http://localhost:4000/hooks/',
 }
 
 export const CONFIG = {
