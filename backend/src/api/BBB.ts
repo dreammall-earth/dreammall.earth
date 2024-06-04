@@ -5,6 +5,7 @@ import axios, { InternalAxiosRequestConfig } from 'axios'
 import { XMLParser } from 'fast-xml-parser'
 
 import { CONFIG } from '#config/config'
+import logger from '#src/logger'
 
 const parser = new XMLParser()
 
@@ -94,10 +95,10 @@ interface MeetingInfo {
 
 interface GetMeetingsResponse {
   returncode: string
-  meetings: string | { meeting: MeetingInfo[] }
+  meetings: { meeting: MeetingInfo[] } | string
 }
 
-export const getMeetings = async () => {
+export const getMeetings = async (): Promise<MeetingInfo[]> => {
   try {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const { data } = await axiosInstance.get('/getMeetings')
@@ -105,11 +106,25 @@ export const getMeetings = async () => {
     const parsed: {
       response: GetMeetingsResponse
     } = parser.parse(data as string)
-    return parsed.response
+    console.log(parsed.response.meetings)
+    if (parsed.response.returncode === 'SUCCESS') {
+      if (parsed.response.meetings === '') return []
+      console.log(Array.isArray(parsed.response.meetings))
+      /*
+      if (Array.isArray(parsed.response.meetings.meeting)) {
+        return parsed.response.meetings.meeting
+      } else {
+        return [parsed.response.meetings.meeting]
+      }
+      */
+    } else {
+      logger.error('getMeetings with error', parsed)
+    }
   } catch (err) {
     // eslint-disable-next-line no-console
     console.log(err)
   }
+  return []
 }
 
 interface CreateMeetingOptions {
@@ -160,6 +175,16 @@ export const joinMeetingLink = (options: JoinMeetinLinkOptions): string => {
   }).toString()
   const checksum = createChecksum('join', params)
   return CONFIG.BBB_URL + 'join?' + params + '&checksum=' + checksum
+}
+
+const handleOpenRomms = async (): Promise<void> => {
+  const rooms = await getMeetings()
+  console.log(rooms)
+}
+
+export const checkForOpenRooms = (): void => {
+  void handleOpenRomms()
+  setTimeout(checkForOpenRooms, 60 * 1000)
 }
 
 /*
