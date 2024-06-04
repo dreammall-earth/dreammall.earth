@@ -10,17 +10,17 @@ presenter-test-lint-code: &presenter-test-lint-code
 presenter-test-unit-code: &presenter-test-unit-code
   - '.github/workflows/presenter.test.unit.code.yml'
   - '.github/file-filters.yml'
-  - 'presenter/!(.vuepress)/**/*!(.md)'
+  - 'presenter/**/*'
 
 presenter-test-build-code: &presenter-test-build-code
   - '.github/workflows/presenter.test.build.code.yml'
   - '.github/file-filters.yml'
-  - 'presenter/!(.vuepress)/**/*!(.md)'
+  - 'presenter/**/*'
 
 presenter-test-build-docker: &presenter-test-build-docker
   - '.github/workflows/presenter.test.build.docker.yml'
   - '.github/file-filters.yml'
-  - 'presenter/!(.vuepress)/**/*!(.md)'
+  - 'presenter/**/*'
 
 presenter-test-build-docs: &presenter-test-build-docs
   - '.github/workflows/presenter.test.build.docs.yml'
@@ -32,7 +32,7 @@ presenter-test-build-docs: &presenter-test-build-docs
 presenter-test-build-storybook: &presenter-test-build-storybook
   - '.github/workflows/presenter.test.build.storybook.yml'
   - '.github/file-filters.yml'
-  - 'presenter/!(.vuepress)/**/*!(.md)'
+  - 'presenter/**/*'
 
 # frontend
 frontend-test-lint-code: &frontend-test-lint-code
@@ -41,17 +41,17 @@ frontend-test-lint-code: &frontend-test-lint-code
 frontend-test-unit-code: &frontend-test-unit-code
   - '.github/workflows/frontend.test.unit.code.yml'
   - '.github/file-filters.yml'
-  - 'frontend/!(.vuepress)/**/*!(.md)'
+  - 'frontend/**/*'
 
 frontend-test-build-code: &frontend-test-build-code
   - '.github/workflows/frontend.test.build.code.yml'
   - '.github/file-filters.yml'
-  - 'frontend/!(.vuepress)/**/*!(.md)'
+  - 'frontend/**/*'
 
 frontend-test-build-docker: &frontend-test-build-docker
   - '.github/workflows/frontend.test.build.docker.yml'
   - '.github/file-filters.yml'
-  - 'frontend/!(.vuepress)/**/*!(.md)'
+  - 'frontend/**/*'
 
 frontend-test-build-docs: &frontend-test-build-docs
   - '.github/workflows/frontend.test.build.docs.yml'
@@ -63,7 +63,7 @@ frontend-test-build-docs: &frontend-test-build-docs
 frontend-test-build-storybook: &frontend-test-build-storybook
   - '.github/workflows/frontend.test.build.storybook.yml'
   - '.github/file-filters.yml'
-  - 'frontend/!(.vuepress)/**/*!(.md)'
+  - 'frontend/**/*'
 
 # admin
 admin-test-lint-code: &admin-test-lint-code
@@ -72,17 +72,17 @@ admin-test-lint-code: &admin-test-lint-code
 admin-test-unit-code: &admin-test-unit-code
   - '.github/workflows/admin.test.unit.code.yml'
   - '.github/file-filters.yml'
-  - 'admin/!(.vuepress)/**/*!(.md)'
+  - 'admin/**/*'
 
 admin-test-build-code: &admin-test-build-code
   - '.github/workflows/admin.test.build.code.yml'
   - '.github/file-filters.yml'
-  - 'admin/!(.vuepress)/**/*!(.md)'
+  - 'admin/**/*'
 
 admin-test-build-docker: &admin-test-build-docker
   - '.github/workflows/admin.test.build.docker.yml'
   - '.github/file-filters.yml'
-  - 'admin/!(.vuepress)/**/*!(.md)'
+  - 'admin/**/*'
 
 admin-test-build-docs: &admin-test-build-docs
   - '.github/workflows/admin.test.build.docs.yml'
@@ -94,7 +94,7 @@ admin-test-build-docs: &admin-test-build-docs
 admin-test-build-storybook: &admin-test-build-storybook
   - '.github/workflows/admin.test.build.storybook.yml'
   - '.github/file-filters.yml'
-  - 'admin/!(.vuepress)/**/*!(.md)'
+  - 'admin/**/*'
 
 # backend
 backend-test-lint-code: &backend-test-lint-code
@@ -103,17 +103,17 @@ backend-test-lint-code: &backend-test-lint-code
 backend-test-unit-code: &backend-test-unit-code
   - '.github/workflows/backend.test.unit.code.yml'
   - '.github/file-filters.yml'
-  - 'backend/!(.vuepress)/**/*!(.md)'
+  - 'backend/**/*'
 
 backend-test-build-code: &backend-test-build-code
   - '.github/workflows/backend.test.build.code.yml'
   - '.github/file-filters.yml'
-  - 'backend/!(.vuepress)/**/*!(.md)'
+  - 'backend/**/*'
 
 backend-test-build-docker: &backend-test-build-docker
   - '.github/workflows/backend.test.build.docker.yml'
   - '.github/file-filters.yml'
-  - 'backend/!(.vuepress)/**/*!(.md)'
+  - 'backend/**/*'
 
 backend-test-build-docs: &backend-test-build-docs
   - 'backend/.github/workflows/backend.test.build.docs.yml'
