@@ -51,4 +51,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: boilerplate-e2e-test-report-pr-${{ steps.pr-number.outputs.pr }}
-          path: /home/runner/work/dreammall.earth/dreammall.earth/cypress/reports/dreammall-e2e_html_report
+          path: /home/runner/work/dreammall.earth/dreammall.earth/cypress/cypress/reports/dreammall-e2e_html_report
