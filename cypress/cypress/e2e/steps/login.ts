@@ -4,15 +4,15 @@
 import 'cypress-network-idle'
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor'
 
+import { loginPage } from '../pages/LoginPage'
+
 Given('I navigate to page {string}', (page: string) => {
   cy.visit(page)
 })
 
 When('I submit the credentials {string} {string}', (username: string, password: string) => {
   cy.waitForNetworkIdle(5000)
-  cy.get('input[name="uidField"]').type(username)
-  cy.get('input[name="password"]').type(password)
-  cy.get('button[type="submit"]').click()
+  loginPage.submitCredentials(username, password)
 })
 
 Then('I am on the {string} page', (page: string) => {

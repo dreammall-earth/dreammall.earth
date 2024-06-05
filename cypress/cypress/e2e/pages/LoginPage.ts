@@ -1,9 +1,13 @@
 class LoginPage {
-  usernameInput: string = '#username'
-  passwordInput: string = '#password'
-  submitBtn: string = 'button[type=submit]'
+  usernameInput: string = 'input[name="uidField"]'
+  passwordInput: string = 'input[name="password"]'
+  submitBtn: string = 'button[type="submit"]'
 
-  submitLogin(username: string, password: string) {
+  usernameFieldIsVisible() {
+    cy.get(this.usernameInput)
+  }
+
+  submitCredentials(username: string, password: string) {
     cy.get(this.usernameInput).type(username)
     cy.get(this.passwordInput).type(password)
     cy.get(this.submitBtn).click()
