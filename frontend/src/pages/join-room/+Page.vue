@@ -6,6 +6,7 @@
 
 <script lang="ts" setup>
 import { usePageContext } from '#context/usePageContext'
+import DefaultLayout from '#layouts/DefaultLayout.vue'
 
 // import { joinRoomQuery } from '#queries/joinRoomQuery'
 
