@@ -79,13 +79,11 @@ export class RoomResolver {
   @Query(() => String, { nullable: true })
   async joinMyRoom(@Ctx() context: Context): Promise<string | null> {
     const { user } = context
-    console.log(user)
     if (!user) return null
     const meeting = await createMeeting({
       name: 'Dreammall Entwicklung',
       meetingID: 'Dreammall-Entwicklung',
     })
-    console.log(meeting)
     if (!meeting) return null
     return joinMeetingLink({
       fullName: user.name,
@@ -97,10 +95,11 @@ export class RoomResolver {
     })
   }
 
-
   @Query(() => String, { nullable: true })
-  async joinRoom(@Arg('userName') userName: string, @Arg('roomId', ()=>Int) roomId: number): Promise<string | null> {
-    
+  async joinRoom(
+    @Arg('userName') userName: string,
+    @Arg('roomId', () => Int) roomId: number,
+  ): Promise<string | null> {
     const meeting = await prisma.meeting.findUnique({
       where: {
         id: roomId,
@@ -110,7 +109,7 @@ export class RoomResolver {
     return joinMeetingLink({
       fullName: userName,
       meetingID: meeting.meetingID,
-      password: (meeting.attendeePW ? meeting.attendeePW : ''),
+      password: meeting.attendeePW ? meeting.attendeePW : '',
     })
   }
   /*
