@@ -26,7 +26,9 @@ export const getCert = (): Buffer => {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const authChecker: AuthChecker<Context> = async ({ root, args, context, info }, roles) => {
   const { token } = context
+
   if (!token) return false
+  
   try {
     const decoded = verify(token, getCert()) as CustomJwtPayload
     if (decoded) {
