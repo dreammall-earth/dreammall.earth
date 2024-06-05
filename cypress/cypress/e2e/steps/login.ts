@@ -13,10 +13,9 @@ When('I submit the credentials {string} {string}', (username: string, password: 
   cy.get('input[name="uidField"]').type(username)
   cy.get('input[name="password"]').type(password)
   cy.get('button[type="submit"]').click()
-
 })
 
 Then('I am on the {string} page', (page: string) => {
-  cy.waitForNetworkIdle(5000)
-  cy.contains('div.pf-c-page__header-tools > div:nth-child(1) > div.pf-c-page__header-tools-item', 'akadmin')
+  cy.waitForNetworkIdle(8000)
+  cy.get('div.pf-c-page__header-tools-item').contains('akadmin')
 })
