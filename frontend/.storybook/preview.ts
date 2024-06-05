@@ -37,7 +37,23 @@ export const globalTypes = {
       dynamicTitle: true,
     },
   },
+  appHeight: {
+    name: 'App Height',
+    description: 'Height of the app container',
+    defaultValue: 'auto',
+    toolbar: {
+      icon: 'arrows-alt-v',
+      items: [
+        { value: '50vh', title: '50vh' },
+        { value: '75vh', title: '75vh' },
+        { value: '100vh', title: '100vh' },
+        { value: '100%', title: '100%' },
+      ],
+      dynamicTitle: true,
+    },
+  },
 }
+
 
 const preview: Preview = {
   parameters: {

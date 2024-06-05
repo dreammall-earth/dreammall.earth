@@ -1,6 +1,5 @@
-<!-- .storybook/StoryWrapper.vue -->
 <template>
-  <v-app :theme="themeName">
+  <v-app :theme="themeName" :style="{ height: appHeight }">
     <v-main>
       <slot name="story"></slot>
     </v-main>
@@ -9,10 +8,16 @@
 
 <script>
 export const DEFAULT_THEME = 'light'
+export const DEFAULT_HEIGHT = 'auto' // Fallback height
+
 export default {
   props: {
     themeName: {
       default: DEFAULT_THEME,
+      type: String,
+    },
+    appHeight: {
+      default: DEFAULT_HEIGHT,
       type: String,
     },
   },
@@ -24,3 +29,4 @@ export default {
   min-height: unset;
 }
 </style>
+
