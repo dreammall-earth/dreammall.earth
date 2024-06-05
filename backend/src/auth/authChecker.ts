@@ -28,7 +28,7 @@ export const authChecker: AuthChecker<Context> = async ({ root, args, context, i
   const { token } = context
 
   if (!token) return false
-  
+
   try {
     const decoded = verify(token, getCert()) as CustomJwtPayload
     if (decoded) {
