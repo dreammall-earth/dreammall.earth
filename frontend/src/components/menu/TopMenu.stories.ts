@@ -10,6 +10,9 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {},
   args: {},
+  parameters: {
+    appHeight: '50vh',
+  },
 } satisfies Meta<typeof TopMenu>
 
 export default meta

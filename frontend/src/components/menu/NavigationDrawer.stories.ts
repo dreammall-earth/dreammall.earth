@@ -1,16 +1,24 @@
 import { SBComp } from '#types/SBComp'
 import NavigationDrawer from './NavigationDrawer.vue'
-import ListElement from './ListElement.vue'
 import type { Meta, StoryObj } from '@storybook/vue3'
+import { VList, VListItem, VListItemTitle, VBtn, VIcon, VCard, VCardText, VCardActions, VTextField } from 'vuetify/components'
 
 const meta = {
   title: 'Navigation Drawer/NavigationDrawer',
   component: NavigationDrawer as SBComp,
   tags: ['autodocs'],
-  argTypes: {},
-  args: {},
+  argTypes: {
+    location: {
+      control: 'select',
+      options: ['left', 'right', 'top', 'bottom'],
+      description: 'Position of the drawer',
+    },
+  },
+  args: {
+    location: 'left',
+  },
   parameters: {
-    appHeight: '100vh', // Specific height for NavigationDrawer story
+    appHeight: '100vh',
   },
 } satisfies Meta<typeof NavigationDrawer>
 
@@ -19,33 +27,54 @@ type Story = StoryObj<typeof meta>
 
 export const Example: Story = {
   render: (args) => ({
-    components: { NavigationDrawer },
+    components: { NavigationDrawer, VList, VListItem, VListItemTitle, VBtn, VIcon },
     setup() {
       return { args }
     },
     template: `
       <NavigationDrawer v-bind="args">
-        <p>Ein beliebiger Inhalt</p>
+        <VList>
+          <VListItem>
+            <VListItemTitle>Home</VListItemTitle>
+            <VIcon>mdi-home</VIcon>
+          </VListItem>
+          <VListItem>
+            <VListItemTitle>Profile</VListItemTitle>
+            <VIcon>mdi-account</VIcon>
+          </VListItem>
+          <VListItem>
+            <VListItemTitle>Settings</VListItemTitle>
+            <VIcon>mdi-settings</VIcon>
+          </VListItem>
+          <VListItem>
+            <VListItemTitle>Logout</VListItemTitle>
+            <VIcon>mdi-logout</VIcon>
+          </VListItem>
+        </VList>
+        <VBtn color="primary" class="mt-4">Click Me</VBtn>
       </NavigationDrawer>
     `,
   }),
 }
 
-export const WithListElement: Story = {
+export const WithTextAndButton: Story = {
   render: (args) => ({
-    components: { NavigationDrawer, ListElement },
+    components: { NavigationDrawer, VCard, VCardText, VCardActions, VTextField, VBtn },
     setup() {
-      const items = [
-        { title: 'Beispiel Titel 1', fullWidth: false },
-        { title: 'Beispiel Titel 2', fullWidth: true },
-        { title: 'Beispiel Titel 3', fullWidth: false },
-        { title: 'Beispiel Titel 4', fullWidth: true },
-      ]
-      return { args, items }
+      return { args }
     },
     template: `
       <NavigationDrawer v-bind="args">
-        <ListElement :items="items" />
+        <VCard>
+          <VCardText>
+            <p>This is an example text inside the Navigation Drawer.</p>
+            <VTextField label="Input something" />
+          </VCardText>
+          <VCardActions>
+            <VBtn color="primary">Submit</VBtn>
+            <VBtn text>Cancel</VBtn>
+          </VCardActions>
+        </VCard>
       </NavigationDrawer>
     `,
   }),

@@ -3,7 +3,7 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import ListElement from './ListElement.vue'
 
 describe('ListElement', () => {
-  let wrapper
+  let wrapper: ReturnType<typeof mount>
 
   beforeEach(() => {
     wrapper = mount(ListElement, {

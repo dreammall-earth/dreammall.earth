@@ -3,7 +3,7 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import NavigationDrawer from './NavigationDrawer.vue'
 
 describe('NavigationDrawer', () => {
-  let wrapper
+  let wrapper: ReturnType<typeof mount>
 
   beforeEach(() => {
     wrapper = mount(NavigationDrawer, {
@@ -16,8 +16,7 @@ describe('NavigationDrawer', () => {
   })
 
   it('emits update:modelValue when drawer changes', async () => {
-    wrapper.setProps({ modelValue: false })
-    await wrapper.vm.$nextTick()
+    await wrapper.setProps({ modelValue: false })
     expect(wrapper.emitted('update:modelValue')).toBeTruthy()
   })
 })

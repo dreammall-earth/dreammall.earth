@@ -4,13 +4,18 @@
       v-for="(item, index) in items"
       :key="index"
       class="custom-list-item"
-      :class="{ 'full-width': item.fullWidth }"
+      :class="{ 'full-width': item.fullWidth, 'rounded': item.rounded }"
     >
-      <div class="list-item-content">
+      <v-list-item-avatar v-if="item.image" :src="item.image" />
+      <v-list-item-icon v-if="item.icon">
+        <v-icon>{{ item.icon }}</v-icon>
+      </v-list-item-icon>
+      <v-list-item-content>
         <v-list-item-title>{{ item.title }}</v-list-item-title>
-        <v-list-item-action v-if="!item.fullWidth" class="list-item-action ">
-          <v-btn icon="mdi-dots-vertical"></v-btn>
-        </v-list-item-action>
+        <v-list-item-subtitle v-if="item.subtitle">{{ item.subtitle }}</v-list-item-subtitle>
+      </v-list-item-content>
+      <div class="right-content" v-if="item.rightContent">
+        <component :is="item.rightContent" />
       </div>
     </v-list-item>
   </v-list>
@@ -21,7 +26,12 @@ import { PropType } from 'vue'
 
 interface Item {
   title: string
+  subtitle?: string
   fullWidth: boolean
+  rounded?: boolean
+  icon?: string
+  image?: string
+  rightContent?: string | object
 }
 
 const props = defineProps({
@@ -41,13 +51,18 @@ const props = defineProps({
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .full-width {
   width: 100%;
 }
 
-.list-item-content {
+.rounded {
+  border-radius: 16px;
+}
+
+.v-list-item-content {
   display: flex;
   align-items: center;
   flex-grow: 1;
@@ -59,21 +74,13 @@ const props = defineProps({
   margin-right: 8px;
 }
 
-.list-item-action {
-  display: flex;
-  align-items: center;
+.v-list-item-subtitle {
+  font-size: 14px;
+  color: gray;
 }
 
-.custom-chip {
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
+.right-content {
   display: flex;
-  justify-content: center;
   align-items: center;
-}
-
-.custom-chip .v-icon {
-  font-size: 16px;
 }
 </style>

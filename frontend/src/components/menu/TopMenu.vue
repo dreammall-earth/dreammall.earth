@@ -23,6 +23,7 @@
           </v-row>
         </v-col>
       </v-row>
+      
     </v-app-bar>
     <ListWithNavigationDrawer :drawer="drawer" @update:drawer="drawer = $event" />
   </div>
