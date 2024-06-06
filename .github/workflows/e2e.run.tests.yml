@@ -22,7 +22,7 @@ jobs:
           docker compose up -d
           cd ../frontend
           cp .env.dist .env
-          docker compose -f docker-compose.yml -f docker-compose.test.yml up frontend
+          docker compose -f docker-compose.yml -f docker-compose.test.yml up -d frontend
           sleep 10m
 
       - name: Install cucumber-json-formatter
