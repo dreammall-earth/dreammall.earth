@@ -1,6 +1,6 @@
 import { SBComp } from '#types/SBComp'
-
 import TopMenu from './TopMenu.vue'
+import { ref } from 'vue'
 
 import type { Meta, StoryObj } from '@storybook/vue3'
 
@@ -16,5 +16,20 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Example: Story = {
-  args: {},
+  render: (args) => ({
+    components: { TopMenu },
+    setup() {
+      const drawer = ref(false)
+      const toggleDrawer = () => {
+        drawer.value = !drawer.value
+      }
+      return { args, drawer, toggleDrawer }
+    },
+    template: `
+      <div>
+        <TopMenu @toggleDrawer="toggleDrawer" />
+        <ListWithNavigationDrawer :drawer="drawer" @update:drawer="drawer = $event" />
+      </div>
+    `,
+  }),
 }
