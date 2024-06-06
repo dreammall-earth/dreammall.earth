@@ -19,6 +19,11 @@ const props = defineProps({
   modelValue: {
     type: Boolean,
     required: true
+  },
+  location: {
+    type: String,
+    required: false,
+    default: 'right'
   }
 })
 
