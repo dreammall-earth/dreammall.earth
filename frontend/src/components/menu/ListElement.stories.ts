@@ -4,7 +4,7 @@ import { VIcon, VBtn, VAvatar } from 'vuetify/components'
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 const meta = {
-  title: 'List/ListElement',
+  title: 'MOLECULES/ListElement',
   component: ListElement as SBComp,
   tags: ['autodocs'],
   argTypes: {},

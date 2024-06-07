@@ -3,7 +3,7 @@ import ListWithNavigationDrawer from './ListWithNavigationDrawer.vue'
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 const meta = {
-  title: 'List/ListWithNavigationDrawer',
+  title: 'ORGANISMS/ListWithNavigationDrawer',
   component: ListWithNavigationDrawer as SBComp,
   tags: ['autodocs'],
   argTypes: {},

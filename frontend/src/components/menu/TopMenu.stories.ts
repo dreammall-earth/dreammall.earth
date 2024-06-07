@@ -5,7 +5,7 @@ import { ref } from 'vue'
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 const meta = {
-  title: 'Menu/TopMenu',
+  title: 'ORGANISMS/TopMenu',
   component: TopMenu as SBComp,
   tags: ['autodocs'],
   argTypes: {},

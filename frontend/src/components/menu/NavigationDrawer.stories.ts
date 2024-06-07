@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/vue3'
 import { VList, VListItem, VListItemTitle, VBtn, VIcon, VCard, VCardText, VCardActions, VTextField } from 'vuetify/components'
 
 const meta = {
-  title: 'Navigation Drawer/NavigationDrawer',
+  title: 'ORGANISMS/NavigationDrawer',
   component: NavigationDrawer as SBComp,
   tags: ['autodocs'],
   argTypes: {
