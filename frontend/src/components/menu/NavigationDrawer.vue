@@ -26,7 +26,9 @@ const props = defineProps({
     type: String as () => typeof validLocations[number],
     required: false,
     default: 'right'
-  }
+  },
+
+
 })
 
 const emits = defineEmits(['update:modelValue'])

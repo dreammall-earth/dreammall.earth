@@ -1,7 +1,6 @@
 <template>
-  <div class="top-menu mt-6 mt-sm-0">
-    
-    <v-app-bar flat class="app-bar" height="70px">
+  <div class="top-menu">
+    <v-app-bar flat class="app-bar">
       <v-row class="ma-1">
         <v-col class="d-none d-md-flex align-center">
           <MessageIndicator :number-of-messages="3" />
@@ -24,9 +23,17 @@
           </v-row>
         </v-col>
       </v-row>
-      
     </v-app-bar>
-    <ListWithNavigationDrawer :drawer="drawer" @update:drawer="drawer = $event" />
+    <v-navigation-drawer
+      v-model="drawer"
+      :location="location"
+      color="grey-lighten-4"
+      temporary
+      width="400"
+      class="custom-drawer"
+    >
+      <ListElement :items="items" @item-click="toggleDrawer" />
+    </v-navigation-drawer>
   </div>
 </template>
 
@@ -38,27 +45,44 @@ import MessageIndicator from './MessageIndicator.vue'
 import NewsIndicator from './NewsIndicator.vue'
 import TabControl from './TabControl.vue'
 import UserInfo from './UserInfo.vue'
-import ListWithNavigationDrawer from './ListWithNavigationDrawer.vue'
+import ListElement from './ListElement.vue'
 
 const drawer = ref(false)
+const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('right')
 
 const toggleDrawer = () => {
   drawer.value = !drawer.value
 }
+
+const items = ref([
+  { title: 'LOLLY Krypto Entwicklung', fullWidth: false },
+  { title: 'Aachener Freunde Treff', fullWidth: false },
+  { title: 'Building A Wooden Guitar', fullWidth: false },
+  { title: 'Co Working Space Manufaktur', fullWidth: true },
+  { title: 'Intervallfasten Kalender', fullWidth: false },
+  { title: 'Lomografie 2050', fullWidth: true },
+  { title: 'Freies Treffen U50', fullWidth: false },
+])
 </script>
+
 
 <style scoped lang="scss">
 v-app-bar {
   z-index: 10;
+  position: relative;
 }
 
 .app-bar {
-  position: static !important;
   background: transparent !important;
 }
 
 .top-menu {
-  position: sticky;
+  position: relative;
   top: 0;
+}
+
+.custom-drawer {
+  top: 70px; // Höhe der App-Bar
+  z-index: 9;
 }
 </style>
