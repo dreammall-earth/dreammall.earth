@@ -1,15 +1,16 @@
-import { flushPromises, mount } from '@vue/test-utils'
+import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { useAuthStore } from '#stores/authStore.js'
-import { authService } from '#tests/mock.authService.js'
-
 import BottomMenu from './BottomMenu.vue'
-import UserDropdown from './UserDropdown.vue'
+import Circle from './CircleElement.vue'
+import ListWithNavigationDrawer from './ListWithNavigationDrawer.vue'
 
 describe('BottomMenu', () => {
+  let wrapper: VueWrapper<any>
+  let toggleDrawer: ReturnType<typeof vi.fn>
+
   const Wrapper = () => {
     return mount(VApp, {
       slots: {
@@ -17,18 +18,44 @@ describe('BottomMenu', () => {
       },
     })
   }
-  let wrapper: ReturnType<typeof Wrapper>
 
   beforeEach(() => {
-    wrapper = Wrapper()
+    toggleDrawer = vi.fn()
+    wrapper = mount(BottomMenu, {
+      global: {
+        mocks: {
+          toggleDrawer,
+        },
+      },
+    })
   })
 
   it('renders BottomMenu', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 
+  it('toggles drawer on Circle click', async () => {
+    await wrapper.findComponent(Circle).trigger('click')
+    expect(toggleDrawer).toHaveBeenCalled()
+    await flushPromises()
+    expect(wrapper.findComponent(ListWithNavigationDrawer).props('drawer')).toBe(true)
+  })
+
+  it('passes location prop to ListWithNavigationDrawer', () => {
+    const listWithNavigationDrawer = wrapper.findComponent(ListWithNavigationDrawer)
+    expect(listWithNavigationDrawer.props('location')).toBe('bottom')
+  })
+
   describe('signout button', () => {
-    const authStore = useAuthStore()
+    // Mocking authStore and authService
+    const authStore = {
+      save: vi.fn(),
+      clear: vi.fn(),
+    }
+
+    const authService = {
+      signOut: vi.fn().mockResolvedValue('signed out'),
+    }
 
     const authServiceSpy = vi.spyOn(authService, 'signOut')
     const storeSpy = vi.spyOn(authStore, 'clear')
@@ -59,7 +86,7 @@ describe('BottomMenu', () => {
       beforeEach(async () => {
         await wrapper.find('button.user-info').trigger('click')
         await flushPromises()
-        await wrapper.findComponent(UserDropdown).find('button.sign-out').trigger('click')
+        await wrapper.find('button.sign-out').trigger('click')
       })
 
       it('calls auth service sign out', () => {
@@ -78,7 +105,7 @@ describe('BottomMenu', () => {
         authServiceSpy.mockRejectedValue('Error!')
         await wrapper.find('button.user-info').trigger('click')
         await flushPromises()
-        await wrapper.findComponent(UserDropdown).find('button.sign-out').trigger('click')
+        await wrapper.find('button.sign-out').trigger('click')
       })
 
       it('logs the error', () => {
