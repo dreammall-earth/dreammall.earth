@@ -17,6 +17,22 @@ const config: StorybookConfig = {
   core: {
     disableTelemetry: true, // 👈 Disables telemetry
   },
+  viteFinal: (config) => {
+    // Add your Vite configuration here, if necessary
+    return {
+      ...config,
+      css: {
+        preprocessorOptions: {
+          scss: {
+            additionalData: `
+              @import "@/styles/variables.scss";
+              @import "vuetify/src/styles/settings/_variables.scss";
+            `,
+          },
+        },
+      },
+    }
+  },
 }
 
 export default config

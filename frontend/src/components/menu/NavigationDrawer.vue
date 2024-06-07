@@ -4,7 +4,7 @@
     :location="computedLocation"
     color="grey-lighten-4"
     temporary
-    width="400"
+    width="300"
     class="custom-drawer"
   >
     <slot />

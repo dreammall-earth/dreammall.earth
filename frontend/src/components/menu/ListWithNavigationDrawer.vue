@@ -8,6 +8,7 @@
 import { ref, defineProps, defineEmits } from 'vue'
 import NavigationDrawer from './NavigationDrawer.vue'
 import ListElement from './ListElement.vue'
+import { VIcon } from 'vuetify/components'
 
 const props = defineProps({
   drawer: {
@@ -24,13 +25,13 @@ const props = defineProps({
 const emits = defineEmits(['update:drawer'])
 
 const items = ref([
-  { title: 'LOLLY Krypto Entwicklung', fullWidth: false },
-  { title: 'Aachener Freunde Treff', fullWidth: false },
-  { title: 'Building A Wooden Guitar', fullWidth: false },
-  { title: 'Co Working Space Manufaktur', fullWidth: true },
-  { title: 'Intervallfasten Kalender', fullWidth: false },
-  { title: 'Lomografie 2050', fullWidth: true },
-  { title: 'Freies Treffen U50', fullWidth: false },
+  { title: 'LOLLY Krypto Entwicklung', fullWidth: false, append: VIcon, appendProps: { icon: 'mdi-menu' } },
+  { title: 'Aachener Freunde Treff', fullWidth: false, append: VIcon, appendProps: { icon: 'mdi-menu' } },
+  { title: 'Building A Wooden Guitar', fullWidth: false, append: VIcon, appendProps: { icon: 'mdi-menu' } },
+  { title: 'Co Working Space Manufaktur', fullWidth: true, append: VIcon, appendProps: { icon: 'mdi-menu' } },
+  { title: 'Intervallfasten Kalender', fullWidth: false, append: VIcon, appendProps: { icon: 'mdi-menu' } },
+  { title: 'Lomografie 2050', fullWidth: true, append: VIcon, appendProps: { icon: 'mdi-menu' } },
+  { title: 'Freies Treffen U50', fullWidth: false, append: VIcon, appendProps: { icon: 'mdi-menu' } },
 ])
 
 const updateDrawer = (value: boolean) => {

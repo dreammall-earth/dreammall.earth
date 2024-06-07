@@ -4,6 +4,7 @@ import { createPinia } from 'pinia'
 import { setPageContext } from '#context/usePageContext'
 import i18n from '#plugins/i18n'
 import CreateVuetify from '#plugins/vuetify'
+import { aliases, mdi } from 'vuetify/lib/iconsets/mdi'
 
 import { withVuetifyTheme } from './withVuetifyTheme.decorator'
 
@@ -14,7 +15,15 @@ setup((app) => {
   const pinia = createPinia()
   app.use(pinia)
   app.use(i18n)
-  app.use(CreateVuetify(i18n))
+  app.use(CreateVuetify(i18n, {
+    icons: {
+      defaultSet: 'mdi',
+      aliases,
+      sets: {
+        mdi,
+      },
+    },
+  }))
 
   setPageContext(app, { urlPathname: '' })
 })
@@ -53,7 +62,6 @@ export const globalTypes = {
     },
   },
 }
-
 
 const preview: Preview = {
   parameters: {

@@ -1,25 +1,29 @@
 <template>
-  <v-list dense>
-    <v-list-item
-      v-for="(item, index) in items"
-      :key="index"
-      class="custom-list-item"
-      :class="{ 'full-width': item.fullWidth, 'rounded': item.rounded }"
-      @click="handleItemClick"
-    >
-      <v-list-item-avatar v-if="item.image" :src="item.image" />
-      <v-list-item-icon v-if="item.icon">
-        <v-icon>{{ item.icon }}</v-icon>
-      </v-list-item-icon>
-      <v-list-item-content>
-        <v-list-item-title>{{ item.title }}</v-list-item-title>
-        <v-list-item-subtitle v-if="item.subtitle">{{ item.subtitle }}</v-list-item-subtitle>
-      </v-list-item-content>
-      <div class="right-content" v-if="item.rightContent">
-        <component :is="item.rightContent" />
-      </div>
-    </v-list-item>
-  </v-list>
+  <v-card class="mx-auto" width="400">
+    <v-list dense>
+      <v-list-item
+        v-for="(item, index) in items"
+        :key="index"
+        variant="plain"
+        class="custom-list-item"
+        :class="{ 'full-width': item.fullWidth, 'rounded': item.rounded }"
+        @click="handleItemClick"
+      >
+        <template v-slot:prepend v-if="item.prepend">
+          <component :is="item.prepend" v-bind="item.prependProps" />
+        </template>
+
+        <v-list-item-content>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <v-list-item-subtitle v-if="item.subtitle">{{ item.subtitle }}</v-list-item-subtitle>
+        </v-list-item-content>
+
+        <template v-slot:append v-if="item.append">
+          <component :is="item.append" v-bind="item.appendProps" />
+        </template>
+      </v-list-item>
+    </v-list>
+  </v-card>
 </template>
 
 <script lang="ts" setup>
@@ -30,9 +34,10 @@ interface Item {
   subtitle?: string
   fullWidth: boolean
   rounded?: boolean
-  icon?: string
-  image?: string
-  rightContent?: string | object
+  prepend?: string | object
+  prependProps?: object
+  append?: string | object
+  appendProps?: object
 }
 
 const props = defineProps({
@@ -41,21 +46,20 @@ const props = defineProps({
     required: true,
   },
 })
-const emit = defineEmits(['item-click']);
+const emit = defineEmits(['item-click'])
 
 // Event-Handler-Funktion
 const handleItemClick = () => {
   // Logik zum Schließen des Menüs
-  // Diese Logik muss entsprechend der Menüimplementierung angepasst werden.
-  console.log('Listeneintrag wurde geklickt, Menü wird geschlossen');
-  closeMenu();
-  emit('item-click');
+  console.log('Listeneintrag wurde geklickt, Menü wird geschlossen')
+  closeMenu()
+  emit('item-click')
 }
 
 // Beispiel für die Menü-Schließen-Funktion
 const closeMenu = () => {
   // Hier die Logik einfügen, die das Menü schließt, z.B. einen Vuex-Status ändern oder einen Emit auslösen.
-  console.log('Menü wurde geschlossen');
+  console.log('Menü wurde geschlossen')
 }
 </script>
 
@@ -94,10 +98,5 @@ const closeMenu = () => {
 .v-list-item-subtitle {
   font-size: 14px;
   color: gray;
-}
-
-.right-content {
-  display: flex;
-  align-items: center;
 }
 </style>
