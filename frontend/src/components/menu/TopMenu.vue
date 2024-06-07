@@ -1,5 +1,6 @@
 <template>
   <div class="top-menu mt-6 mt-sm-0">
+    
     <v-app-bar flat class="app-bar" height="70px">
       <v-row class="ma-1">
         <v-col class="d-none d-md-flex align-center">
@@ -47,6 +48,10 @@ const toggleDrawer = () => {
 </script>
 
 <style scoped lang="scss">
+v-app-bar {
+  z-index: 10;
+}
+
 .app-bar {
   position: static !important;
   background: transparent !important;

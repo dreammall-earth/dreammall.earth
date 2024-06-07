@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer
     v-model="drawer"
-    :location="location"
+    :location="computedLocation"
     color="grey-lighten-4"
     temporary
     width="400"
@@ -15,13 +15,15 @@
 import { computed, ref, watch, defineProps, defineEmits } from 'vue'
 import { useDisplay } from 'vuetify'
 
+const validLocations = ['right', 'bottom', 'left', 'end', 'top', 'start'] as const
+
 const props = defineProps({
   modelValue: {
     type: Boolean,
     required: true
   },
   location: {
-    type: String,
+    type: String as () => typeof validLocations[number],
     required: false,
     default: 'right'
   }
@@ -31,7 +33,9 @@ const emits = defineEmits(['update:modelValue'])
 
 const display = useDisplay()
 const drawer = ref(props.modelValue)
-const location = computed(() => (display.mobile.value ? 'right' : undefined))
+
+// Behalten Sie die übergebene Location bei und überschreiben Sie nur, wenn der Bildschirm klein ist
+const computedLocation = computed(() => display.mobile.value ? 'bottom' : props.location)
 
 watch(() => props.modelValue, (newVal) => {
   drawer.value = newVal

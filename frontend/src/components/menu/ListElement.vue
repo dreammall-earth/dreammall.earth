@@ -5,6 +5,7 @@
       :key="index"
       class="custom-list-item"
       :class="{ 'full-width': item.fullWidth, 'rounded': item.rounded }"
+      @click="handleItemClick"
     >
       <v-list-item-avatar v-if="item.image" :src="item.image" />
       <v-list-item-icon v-if="item.icon">
@@ -40,6 +41,22 @@ const props = defineProps({
     required: true,
   },
 })
+const emit = defineEmits(['item-click']);
+
+// Event-Handler-Funktion
+const handleItemClick = () => {
+  // Logik zum Schließen des Menüs
+  // Diese Logik muss entsprechend der Menüimplementierung angepasst werden.
+  console.log('Listeneintrag wurde geklickt, Menü wird geschlossen');
+  closeMenu();
+  emit('item-click');
+}
+
+// Beispiel für die Menü-Schließen-Funktion
+const closeMenu = () => {
+  // Hier die Logik einfügen, die das Menü schließt, z.B. einen Vuex-Status ändern oder einen Emit auslösen.
+  console.log('Menü wurde geschlossen');
+}
 </script>
 
 <style scoped>

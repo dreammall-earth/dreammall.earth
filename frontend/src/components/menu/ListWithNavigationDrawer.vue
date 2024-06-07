@@ -1,6 +1,6 @@
 <template>
-  <NavigationDrawer :modelValue="drawer" @update:modelValue="updateDrawer">
-    <ListElement :items="items" />
+  <NavigationDrawer :modelValue="drawer" @update:modelValue="updateDrawer" :location="location">
+    <ListElement :items="items" @item-click="updateDrawer(false)" />
   </NavigationDrawer>
 </template>
 
@@ -13,6 +13,11 @@ const props = defineProps({
   drawer: {
     type: Boolean,
     required: true
+  },
+  location: {
+    type: String as () => 'right' | 'bottom' | 'left' | 'end' | 'top' | 'start' | undefined,
+    required: false,
+    default: 'right'
   }
 })
 
@@ -38,4 +43,3 @@ const updateDrawer = (value: boolean) => {
   margin-top: 20px;
 }
 </style>
-
