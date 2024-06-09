@@ -37,7 +37,7 @@
   "dependencies": {
     "@apollo/server": "^4.10.4",
     "@getbrevo/brevo": "^2.1.1",
-    "@prisma/client": "^5.14.0",
+    "@prisma/client": "^5.15.0",
     "@vuepress/theme-default": "^2.0.0-rc.33",
     "axios": "^1.7.2",
     "class-validator": "^0.14.1",
@@ -46,7 +46,7 @@
     "graphql": "^16.8.1",
     "graphql-scalars": "^1.23.0",
     "jsonwebtoken": "^9.0.2",
-    "prisma": "^5.14.0",
+    "prisma": "^5.15.0",
     "prisma-extension-soft-delete": "^1.0.1",
     "reflect-metadata": "^0.2.2",
     "tsconfig-paths": "^4.2.0",
