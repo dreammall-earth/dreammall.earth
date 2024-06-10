@@ -14,7 +14,7 @@ services:
       - external-net
       - internal-net
     ports:
-      - 3000:3000
+      - 3001:3001
     environment:
       # Envs used in Dockerfile
       # - DOCKER_WORKDIR="/app"
