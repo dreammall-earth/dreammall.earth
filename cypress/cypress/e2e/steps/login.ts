@@ -2,19 +2,10 @@
 /* eslint-disable  @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable import/no-relative-parent-imports */
 import 'cypress-network-idle'
-import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor'
+import { When, Then } from '@badeball/cypress-cucumber-preprocessor'
 
 import { loginPage } from '../pages/LoginPage'
 import { worldcafePage } from '../pages/WorldcafePage'
-
-Given('I navigate to page {string}', (page: string) => {
-  if (page === 'authentik') {
-    cy.visit(Cypress.env('authentikURL'))
-  } else {
-    cy.visit(page)
-  }
-  cy.waitForNetworkIdle(5000)
-})
 
 When('I submit the credentials {string} {string}', (username: string, password: string) => {
   loginPage.submitCredentials(username, password)
@@ -33,4 +24,8 @@ Then('I am on the {string} page', (page: string) => {
 Then('I am on the worldcafe page', () => {
   cy.waitForNetworkIdle(10000)
   worldcafePage.signoutButtonIsVisible()
+})
+
+When('I log out', () => {
+  worldcafePage.logout()
 })

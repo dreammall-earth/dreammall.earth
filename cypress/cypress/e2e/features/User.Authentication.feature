@@ -14,3 +14,19 @@ Feature: User authentication
     When I submit the credentials 'akadmin' 'dreammall'
     And I confirm the consent agreement
     Then I am on the worldcafe page
+
+  Scenario: DreamMall and stay logged in
+    Given I navigate to page '/signin'
+    When I submit the credentials 'akadmin' 'dreammall'
+    And I confirm the consent agreement
+    Then I am on the worldcafe page
+    When I refresh the page
+    Then I am on the worldcafe page
+
+  Scenario: DreamMall Logout
+    Given I navigate to page '/signin'
+    When I submit the credentials 'akadmin' 'dreammall'
+    And I confirm the consent agreement
+    Then I am on the worldcafe page
+    When I log out
+    Then I am on page 'presenter'
