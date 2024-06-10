@@ -23,10 +23,6 @@ Then('I am on the worldcafe page', () => {
   worldcafePage.signoutButtonIsVisible()
 })
 
-When('I log out', () => {
-  worldcafePage.logout()
-})
-
 Then('I am on page {string}', (page: string) => {
   cy.waitForNetworkIdle(5000)
   switch (page) {
@@ -35,6 +31,9 @@ Then('I am on page {string}', (page: string) => {
       break
     case 'presenter':
       presenterPage.signInButtonIsVisible()
+      break
+    case 'worldcafe':
+      worldcafePage.signoutButtonIsVisible()
       break
     default:
       cy.log(`Page '${page}' is not covered in step 'I am on page {string}'`)
