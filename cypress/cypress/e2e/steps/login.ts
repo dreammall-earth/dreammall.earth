@@ -4,7 +4,9 @@
 import 'cypress-network-idle'
 import { When, Then } from '@badeball/cypress-cucumber-preprocessor'
 
+import { authentikPage } from '../pages/AuthentikPage'
 import { loginPage } from '../pages/LoginPage'
+import { presenterPage } from '../pages/PresenterPage'
 import { worldcafePage } from '../pages/WorldcafePage'
 
 When('I submit the credentials {string} {string}', (username: string, password: string) => {
@@ -16,11 +18,6 @@ When('I confirm the consent agreement', () => {
   loginPage.agreeConsent()
 })
 
-Then('I am on the {string} page', (page: string) => {
-  cy.waitForNetworkIdle(6000)
-  cy.get('div.pf-c-page__header-tools-item').contains('akadmin')
-})
-
 Then('I am on the worldcafe page', () => {
   cy.waitForNetworkIdle(10000)
   worldcafePage.signoutButtonIsVisible()
@@ -28,4 +25,18 @@ Then('I am on the worldcafe page', () => {
 
 When('I log out', () => {
   worldcafePage.logout()
+})
+
+Then('I am on page {string}', (page: string) => {
+  cy.waitForNetworkIdle(5000)
+  switch (page) {
+    case 'authentik welcome':
+      authentikPage.userNameIsVisible('akadmin')
+      break
+    case 'presenter':
+      presenterPage.signInButtonIsVisible()
+      break
+    default:
+      cy.log(`Page '${page}' is not covered in step 'I am on page {string}'`)
+  }
 })

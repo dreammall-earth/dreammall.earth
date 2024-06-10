@@ -8,6 +8,19 @@ Feature: User authentication
     Given I navigate to page 'authentik'
     When I submit the credentials 'akadmin' 'dreammall'
     Then I am on the 'authentik welcome' page
+  
+  Scenario: Authentik Refresh and Stay logged in
+    Given I navigate to page 'authentik'
+    When I submit the credentials 'akadmin' 'dreammall'
+    Then I am on the 'authentik welcome' page
+    When I refresh the page
+    Then I am on the 'authentik welcome' page
+  
+  Scenario: Authentik Logout
+    Given I navigate to page 'authentik'
+    When I submit the credentials 'akadmin' 'dreammall'
+    Then I am on the 'authentik welcome' page
+    When I log out
 
   Scenario: DreamMall Login
     Given I navigate to page '/signin'
@@ -15,7 +28,7 @@ Feature: User authentication
     And I confirm the consent agreement
     Then I am on the worldcafe page
 
-  Scenario: DreamMall and stay logged in
+  Scenario: DreamMall Refresh and Stay logged in
     Given I navigate to page '/signin'
     When I submit the credentials 'akadmin' 'dreammall'
     And I confirm the consent agreement
@@ -29,4 +42,4 @@ Feature: User authentication
     And I confirm the consent agreement
     Then I am on the worldcafe page
     When I log out
-    Then I am on page 'presenter'
+    Then I am on the 'presenter' page
