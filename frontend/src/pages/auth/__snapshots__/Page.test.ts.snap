@@ -1035,7 +1035,7 @@ exports[`AuthPage > signin callback without error > renders 1`] = `
                       aria-expanded="false"
                       aria-haspopup="menu"
                       aria-owns="v-menu-1"
-                      class="ml-2 user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
+                      class="ml-2 user-info user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
                       data-v-607bdd70=""
                       targetref="[object Object]"
                     >
@@ -1108,15 +1108,16 @@ exports[`AuthPage > signin callback without error > renders 1`] = `
         </header>
         
         <nav
-          class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light bg-grey-lighten-4 v-navigation-drawer--mobile custom-drawer"
-          data-v-e787b5f9=""
-          style="right: 0px; z-index: 1008; transform: translateX(110%); position: fixed; transition: none !important; height: calc(100% - 64px - 0px); top: 64px; bottom: 0px; width: 400px;"
+          class="v-navigation-drawer v-navigation-drawer--bottom v-navigation-drawer--temporary v-theme--light bg-grey-lighten-4 v-navigation-drawer--mobile custom-drawer"
+          data-v-01d5ff9e=""
+          style="bottom: 0px; z-index: 1008; transform: translateY(110%); position: fixed; transition: none !important; height: 400px; left: 0px; width: calc(100% - 0px - 0px);"
         >
           <!---->
           <!---->
           <div
             class="v-navigation-drawer__content"
           >
+            
             
             <div
               class="v-card v-theme--light v-card--density-default v-card--variant-elevated mx-auto"
@@ -1410,6 +1411,7 @@ exports[`AuthPage > signin callback without error > renders 1`] = `
               />
               
             </div>
+            
             
           </div>
           <!---->

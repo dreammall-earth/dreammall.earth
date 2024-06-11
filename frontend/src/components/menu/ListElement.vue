@@ -7,7 +7,7 @@
         variant="plain"
         class="custom-list-item"
         :class="{ 'full-width': item.fullWidth, rounded: item.rounded }"
-        @click="handleItemClick(item)"
+        @click="handleItemClick"
       >
         <template v-if="item.prepend" #prepend>
           <component :is="item.prepend" v-bind="item.prependProps" />
@@ -46,9 +46,9 @@ defineProps({
 })
 const emit = defineEmits(['item-click'])
 
-const handleItemClick = (item: Item) => {
+const handleItemClick = () => {
   closeMenu()
-  emit('item-click', item)
+  emit('item-click')
 }
 
 const closeMenu = () => {

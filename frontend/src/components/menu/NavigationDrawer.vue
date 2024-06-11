@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, watch, defineProps, defineEmits } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useDisplay } from 'vuetify'
 
 const validLocations = ['right', 'bottom', 'left', 'end', 'top', 'start'] as const

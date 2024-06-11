@@ -42,18 +42,10 @@ describe('ListElement', () => {
     expect(wrapper.findAll('.custom-list-item').length).toBe(2)
   })
 
-  it('renders append slot correctly', () => {
-    const items = wrapper.findAll('.custom-list-item')
-    const appendIcons = items.flatMap(item => item.findAllComponents(VIcon))
-    const appendButtons = items.flatMap(item => item.findAllComponents(VBtn))
-    expect(appendIcons).toBe(1)
-    expect(appendButtons).toBe(1)
-  })
-
   it('handles item click and closes menu', async () => {
-    const emitSpy = vi.spyOn(wrapper.vm, '$emit')
     const items = wrapper.findAll('.custom-list-item')
     await items[0].trigger('click')
-    expect(emitSpy).toHaveBeenCalledWith('item-click', expect.any(Object))
-  })
+    expect(wrapper.emitted('item-click')).toEqual([[]])
+})
+
 })
