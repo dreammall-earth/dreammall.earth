@@ -1,7 +1,20 @@
+import {
+  VList,
+  VListItem,
+  VListItemTitle,
+  VBtn,
+  VIcon,
+  VCard,
+  VCardText,
+  VCardActions,
+  VTextField,
+} from 'vuetify/components'
+
 import { SBComp } from '#types/SBComp'
+
 import NavigationDrawer from './NavigationDrawer.vue'
+
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { VList, VListItem, VListItemTitle, VBtn, VIcon, VCard, VCardText, VCardActions, VTextField } from 'vuetify/components'
 
 const meta = {
   title: 'ORGANISMS/NavigationDrawer',
@@ -29,7 +42,7 @@ export const Example: Story = {
   render: (args) => ({
     components: { NavigationDrawer, VList, VListItem, VListItemTitle, VBtn, VIcon },
     setup() {
-      return { args }
+      return { args: args as Record<string, unknown> }
     },
     template: `
       <NavigationDrawer v-bind="args">
@@ -61,7 +74,7 @@ export const WithTextAndButton: Story = {
   render: (args) => ({
     components: { NavigationDrawer, VCard, VCardText, VCardActions, VTextField, VBtn },
     setup() {
-      return { args }
+      return { args: args as Record<string, unknown> }
     },
     template: `
       <NavigationDrawer v-bind="args">

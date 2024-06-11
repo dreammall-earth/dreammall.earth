@@ -1,5 +1,7 @@
 import { SBComp } from '#types/SBComp'
+
 import ListWithNavigationDrawer from './ListWithNavigationDrawer.vue'
+
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 const meta = {

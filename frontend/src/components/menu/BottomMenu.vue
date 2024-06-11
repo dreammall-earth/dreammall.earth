@@ -13,20 +13,25 @@
         </Circle>
       </v-btn>
       <v-btn value="rooms">
-        <UserInfo /> 
+        <UserInfo />
       </v-btn>
     </v-bottom-navigation>
-    <ListWithNavigationDrawer :drawer="drawer" @update:drawer="drawer = $event" :location="location" />
+    <ListWithNavigationDrawer
+      :drawer="drawer"
+      :location="location"
+      @update:drawer="drawer = $event"
+    />
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+
 import Circle from './CircleElement.vue'
+import ListWithNavigationDrawer from './ListWithNavigationDrawer.vue'
 import MessageIndicator from './MessageIndicator.vue'
 import NewsIndicator from './NewsIndicator.vue'
 import UserInfo from './UserInfo.vue'
-import ListWithNavigationDrawer from './ListWithNavigationDrawer.vue'
 
 const drawer = ref(false)
 

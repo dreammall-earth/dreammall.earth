@@ -1,37 +1,68 @@
 <template>
-  <NavigationDrawer :modelValue="drawer" @update:modelValue="updateDrawer" :location="location">
+  <NavigationDrawer :model-value="drawer" :location="location" @update:model-value="updateDrawer">
     <ListElement :items="items" @item-click="updateDrawer(false)" />
   </NavigationDrawer>
 </template>
 
 <script lang="ts" setup>
 import { ref, defineProps, defineEmits } from 'vue'
-import NavigationDrawer from './NavigationDrawer.vue'
-import ListElement from './ListElement.vue'
 import { VIcon } from 'vuetify/components'
 
-const props = defineProps({
+import ListElement from './ListElement.vue'
+import NavigationDrawer from './NavigationDrawer.vue'
+
+defineProps({
   drawer: {
     type: Boolean,
-    required: true
+    required: true,
   },
   location: {
     type: String as () => 'right' | 'bottom' | 'left' | 'end' | 'top' | 'start' | undefined,
     required: false,
-    default: 'right'
-  }
+    default: 'right',
+  },
 })
 
 const emits = defineEmits(['update:drawer'])
 
 const items = ref([
-  { title: 'LOLLY Krypto Entwicklung', fullWidth: false, append: VIcon, appendProps: { icon: 'mdi-menu' } },
-  { title: 'Aachener Freunde Treff', fullWidth: false, append: VIcon, appendProps: { icon: 'mdi-menu' } },
-  { title: 'Building A Wooden Guitar', fullWidth: false, append: VIcon, appendProps: { icon: 'mdi-menu' } },
-  { title: 'Co Working Space Manufaktur', fullWidth: true, append: VIcon, appendProps: { icon: 'mdi-menu' } },
-  { title: 'Intervallfasten Kalender', fullWidth: false, append: VIcon, appendProps: { icon: 'mdi-menu' } },
+  {
+    title: 'LOLLY Krypto Entwicklung',
+    fullWidth: false,
+    append: VIcon,
+    appendProps: { icon: 'mdi-menu' },
+  },
+  {
+    title: 'Aachener Freunde Treff',
+    fullWidth: false,
+    append: VIcon,
+    appendProps: { icon: 'mdi-menu' },
+  },
+  {
+    title: 'Building A Wooden Guitar',
+    fullWidth: false,
+    append: VIcon,
+    appendProps: { icon: 'mdi-menu' },
+  },
+  {
+    title: 'Co Working Space Manufaktur',
+    fullWidth: true,
+    append: VIcon,
+    appendProps: { icon: 'mdi-menu' },
+  },
+  {
+    title: 'Intervallfasten Kalender',
+    fullWidth: false,
+    append: VIcon,
+    appendProps: { icon: 'mdi-menu' },
+  },
   { title: 'Lomografie 2050', fullWidth: true, append: VIcon, appendProps: { icon: 'mdi-menu' } },
-  { title: 'Freies Treffen U50', fullWidth: false, append: VIcon, appendProps: { icon: 'mdi-menu' } },
+  {
+    title: 'Freies Treffen U50',
+    fullWidth: false,
+    append: VIcon,
+    appendProps: { icon: 'mdi-menu' },
+  },
 ])
 
 const updateDrawer = (value: boolean) => {

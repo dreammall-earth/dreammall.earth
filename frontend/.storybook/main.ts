@@ -25,7 +25,8 @@ const config: StorybookConfig = {
         preprocessorOptions: {
           scss: {
             additionalData: `
-              @import "@/styles/variables.scss";
+              @import "/dreammall.earth/frontend/src/assets/scss/mixins.scss";
+              @import "/dreammall.earth/frontend/src/assets/scss/style.scss";
               @import "vuetify/src/styles/settings/_variables.scss";
             `,
           },

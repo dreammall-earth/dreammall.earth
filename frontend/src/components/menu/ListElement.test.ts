@@ -1,5 +1,6 @@
 import { mount, VueWrapper } from '@vue/test-utils'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { createVuetify } from 'vuetify'
 import ListElement from './ListElement.vue'
 import { VIcon, VBtn } from 'vuetify/components'
 
@@ -15,10 +16,14 @@ interface Item {
 }
 
 describe('ListElement', () => {
-  let wrapper: VueWrapper<any>
+  let wrapper: VueWrapper<InstanceType<typeof ListElement>>
+  const vuetify = createVuetify()
 
   beforeEach(() => {
     wrapper = mount(ListElement, {
+      global: {
+        plugins: [vuetify],
+      },
       props: {
         items: [
           { title: 'Item 1', fullWidth: false, append: VBtn, appendProps: { icon: 'mdi-menu' } },
@@ -43,9 +48,9 @@ describe('ListElement', () => {
   })
 
   it('handles item click and closes menu', async () => {
-    const handleItemClick = vi.spyOn(wrapper.vm, 'handleItemClick')
+    const emitSpy = vi.spyOn(wrapper.vm, '$emit')
     await wrapper.findAll('.custom-list-item')[0].trigger('click')
-    expect(handleItemClick).toHaveBeenCalled()
+    expect(emitSpy).toHaveBeenCalledWith('item-click')
     // Sie können hier zusätzliche Tests hinzufügen, um zu prüfen, ob das Menü geschlossen wird.
   })
 })

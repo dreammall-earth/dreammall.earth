@@ -1,6 +1,9 @@
-import { SBComp } from '#types/SBComp'
-import TopMenu from './TopMenu.vue'
 import { ref } from 'vue'
+
+import { SBComp } from '#types/SBComp'
+
+import ListWithNavigationDrawer from './ListWithNavigationDrawer.vue'
+import TopMenu from './TopMenu.vue'
 
 import type { Meta, StoryObj } from '@storybook/vue3'
 
@@ -20,13 +23,13 @@ type Story = StoryObj<typeof meta>
 
 export const Example: Story = {
   render: (args) => ({
-    components: { TopMenu },
+    components: { TopMenu, ListWithNavigationDrawer },
     setup() {
-      const drawer = ref(false)
+      const drawer = ref<boolean>(false)
       const toggleDrawer = () => {
         drawer.value = !drawer.value
       }
-      return { args, drawer, toggleDrawer }
+      return { args: args as Record<string, unknown>, drawer, toggleDrawer }
     },
     template: `
       <div>

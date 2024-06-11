@@ -1,5 +1,6 @@
 import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { createVuetify } from 'vuetify'
 import { h } from 'vue'
 import { VApp } from 'vuetify/components'
 
@@ -8,21 +9,15 @@ import Circle from './CircleElement.vue'
 import ListWithNavigationDrawer from './ListWithNavigationDrawer.vue'
 
 describe('BottomMenu', () => {
-  let wrapper: VueWrapper<any>
+  let wrapper: VueWrapper<InstanceType<typeof BottomMenu>>
   let toggleDrawer: ReturnType<typeof vi.fn>
-
-  const Wrapper = () => {
-    return mount(VApp, {
-      slots: {
-        default: h(BottomMenu),
-      },
-    })
-  }
+  const vuetify = createVuetify()
 
   beforeEach(() => {
     toggleDrawer = vi.fn()
     wrapper = mount(BottomMenu, {
       global: {
+        plugins: [vuetify],
         mocks: {
           toggleDrawer,
         },
@@ -46,8 +41,15 @@ describe('BottomMenu', () => {
     expect(listWithNavigationDrawer.props('location')).toBe('bottom')
   })
 
+  it('handles item click and closes menu', async () => {
+    const listWithNavigationDrawer = wrapper.findComponent(ListWithNavigationDrawer)
+    const emitSpy = vi.spyOn(listWithNavigationDrawer.vm, '$emit')
+    await listWithNavigationDrawer.findAll('.custom-list-item')[0].trigger('click')
+    expect(emitSpy).toHaveBeenCalledWith('item-click', false)
+    // Hier können zusätzliche Tests hinzugefügt werden, um zu prüfen, ob das Menü geschlossen wird.
+  })
+
   describe('signout button', () => {
-    // Mocking authStore and authService
     const authStore = {
       save: vi.fn(),
       clear: vi.fn(),

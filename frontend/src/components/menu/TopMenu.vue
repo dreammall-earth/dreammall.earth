@@ -39,13 +39,14 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+
 import Circle from './CircleElement.vue'
 import LightDarkSwitch from './LightDarkSwitch.vue'
+import ListElement from './ListElement.vue'
 import MessageIndicator from './MessageIndicator.vue'
 import NewsIndicator from './NewsIndicator.vue'
 import TabControl from './TabControl.vue'
 import UserInfo from './UserInfo.vue'
-import ListElement from './ListElement.vue'
 
 const drawer = ref(false)
 const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('right')
@@ -64,7 +65,6 @@ const items = ref([
   { title: 'Freies Treffen U50', fullWidth: false },
 ])
 </script>
-
 
 <style scoped lang="scss">
 v-app-bar {

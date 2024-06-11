@@ -20,15 +20,13 @@ const validLocations = ['right', 'bottom', 'left', 'end', 'top', 'start'] as con
 const props = defineProps({
   modelValue: {
     type: Boolean,
-    required: true
+    required: true,
   },
   location: {
-    type: String as () => typeof validLocations[number],
+    type: String as () => (typeof validLocations)[number],
     required: false,
-    default: 'right'
+    default: 'right',
   },
-
-
 })
 
 const emits = defineEmits(['update:modelValue'])
@@ -37,17 +35,23 @@ const display = useDisplay()
 const drawer = ref(props.modelValue)
 
 // Behalten Sie die übergebene Location bei und überschreiben Sie nur, wenn der Bildschirm klein ist
-const computedLocation = computed(() => display.mobile.value ? 'bottom' : props.location)
+const computedLocation = computed(() => (display.mobile.value ? 'bottom' : props.location))
 
-watch(() => props.modelValue, (newVal) => {
-  drawer.value = newVal
-})
+watch(
+  () => props.modelValue,
+  (newVal) => {
+    drawer.value = newVal
+  },
+)
 
-watch(() => drawer.value, (newVal) => {
-  if (newVal !== props.modelValue) {
-    emits('update:modelValue', newVal)
-  }
-})
+watch(
+  () => drawer.value,
+  (newVal) => {
+    if (newVal !== props.modelValue) {
+      emits('update:modelValue', newVal)
+    }
+  },
+)
 </script>
 
 <style scoped>
