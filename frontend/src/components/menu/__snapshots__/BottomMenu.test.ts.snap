@@ -9,7 +9,7 @@ exports[`BottomMenu > renders BottomMenu 1`] = `
   >
     
     <div
-      class="bottom-menu w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface"
+      class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface"
       data-v-96a196cc=""
     >
       <div

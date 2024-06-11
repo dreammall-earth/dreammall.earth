@@ -1131,7 +1131,7 @@ exports[`DefaultLayout > renders 1`] = `
         </div>
       </div>
       <div
-        class="bottom-menu w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface d-flex d-md-none"
+        class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface d-md-none"
         data-v-75d0be1e=""
         data-v-96a196cc=""
       >
