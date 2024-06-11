@@ -8,8 +8,13 @@ const meta = {
   title: 'Buttons/Switch',
   component: Switch as SBComp,
   tags: ['autodocs'],
-  argTypes: { defaultState: { control: { type: 'select', options: ['left', 'right'] } } },
-  args: { defaultState: 'left' },
+  argTypes: {
+    defaultState: {
+      control: 'radio',
+      options: ['left', 'right'],
+    },
+  },
+  args: { label: 'Label' },
 } satisfies Meta<typeof Switch>
 
 export default meta
