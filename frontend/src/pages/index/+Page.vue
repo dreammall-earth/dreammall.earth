@@ -13,6 +13,19 @@
         >
       </v-col>
     </v-row>
+    <v-row>
+      <v-col>
+        <a href="/room" class="room-button">
+          <MainButton
+            class="room-button"
+            variant="fourth"
+            :label="$t('buttons.toRoomIframe')"
+            size="auto"
+            >{{ $t('buttons.toRoomIframe') }}</MainButton
+          >
+        </a>
+      </v-col>
+    </v-row>
     <v-row v-if="auth.isAdmin">
       <v-col>
         <MainButton
