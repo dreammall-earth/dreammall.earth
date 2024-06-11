@@ -9,6 +9,7 @@ import { navigate } from 'vike/client/router'
 import { inject, onBeforeMount } from 'vue'
 
 import DefaultLayout from '#layouts/DefaultLayout.vue'
+import GlobalErrorHandler from '#plugins/GlobalErrorHandler'
 import AuthService from '#src/services/AuthService'
 
 const authService = inject<AuthService>('authService')
@@ -18,8 +19,7 @@ onBeforeMount(async () => {
     await authService?.renewToken()
     navigate('/')
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log('auth error', error)
+    GlobalErrorHandler.error('auth error', error)
   }
 })
 </script>

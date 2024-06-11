@@ -6,6 +6,7 @@
 import { navigate } from 'vike/client/router'
 import { inject, onBeforeMount } from 'vue'
 
+import GlobalErrorHandler from '#plugins/GlobalErrorHandler'
 import AuthService from '#src/services/AuthService'
 import { useAuthStore } from '#stores/authStore'
 
@@ -26,8 +27,7 @@ onBeforeMount(async () => {
     await authService?.signIn()
     navigate('/')
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log('auth error', error)
+    GlobalErrorHandler.error('auth error', error)
   }
 })
 </script>
