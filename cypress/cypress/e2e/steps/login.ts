@@ -6,7 +6,6 @@ import { When, Then } from '@badeball/cypress-cucumber-preprocessor'
 
 import { authentikPage } from '../pages/AuthentikPage'
 import { loginPage } from '../pages/LoginPage'
-import { presenterPage } from '../pages/PresenterPage'
 import { worldcafePage } from '../pages/WorldcafePage'
 
 When('I submit the credentials {string} {string}', (username: string, password: string) => {
@@ -30,7 +29,9 @@ Then('I am on page {string}', (page: string) => {
       authentikPage.userNameIsVisible('akadmin')
       break
     case 'presenter':
-      presenterPage.signInButtonIsVisible()
+      cy.origin('http://localhost:3001', () => {
+        cy.get('button.sign-in').should('be.visible')
+      })
       break
     case 'worldcafe':
       worldcafePage.signoutButtonIsVisible()

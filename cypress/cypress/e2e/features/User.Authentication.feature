@@ -9,12 +9,12 @@ Feature: User authentication
     When I submit the credentials 'akadmin' 'dreammall'
     Then I am on page 'authentik welcome'
   
-  # Scenario: Authentik Refresh and Stay logged in
-  #   Given I navigate to page 'authentik'
-  #   When I submit the credentials 'akadmin' 'dreammall'
-  #   Then I am on page 'authentik welcome'
-  #   When I refresh the page
-  #   Then I am on page 'authentik welcome'
+  Scenario: Authentik Refresh and Stay logged in
+    Given I navigate to page 'authentik'
+    When I submit the credentials 'akadmin' 'dreammall'
+    Then I am on page 'authentik welcome'
+    When I refresh the page
+    Then I am on page 'authentik welcome'
   
   Scenario: Authentik Logout
     Given I navigate to page 'authentik'
