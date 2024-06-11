@@ -13,7 +13,7 @@ import DefaultLayout from '#layouts/DefaultLayout.vue'
 
 <style scoped>
 .container {
-  height: 80vh;
   width: 100%;
+  height: 80vh;
 }
 </style>
