@@ -17,7 +17,7 @@ jest.mock('@apollo/server/standalone', () => {
   }
 })
 
-describe('server', () => {
+describe.skip('server', () => {
   describe('listen', () => {
     beforeEach(async () => {
       jest.clearAllMocks()

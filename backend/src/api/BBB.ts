@@ -39,6 +39,7 @@ export const addChecksumParam = (
 axiosInstance.interceptors.request.use(addChecksumParam, null, { synchronous: true })
 
 export const createChecksum = (callName: string, params: string = ''): string => {
+  console.log('createChecksum', callName, params)
   const hash = createHash('sha1')
   hash.update(
     (callName[0] === '/' ? callName.substring(1) : callName) + params + CONFIG.BBB_SHARED_SECRET,
@@ -162,14 +163,34 @@ export const joinMeetingLink = (options: JoinMeetinLinkOptions): string => {
   return CONFIG.BBB_URL + 'join?' + params + '&checksum=' + checksum
 }
 
-/*
 export const listHooks = async () => {
   try {
-    const result = await axiosInstance.get('/hooks/list')
-    console.log(result)
+    const { data } = await axiosInstance.get('/hooks/list')
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const parsed = parser.parse(data as string)
+    return parsed?.response
   } catch (err) {
     console.log(err)
   }
 }
 
-*/
+export const createHook = async () => {
+  const callbackURL = 'https://aa1c-213-94-35-24.ngrok-free.app/BBBevents'
+  const { data } = await axiosInstance.get(
+    '/hooks/create',
+    {
+      params: {
+        callbackURL,
+      },
+    },
+  )
+  console.log(
+    new URLSearchParams({
+      callbackURL,
+    }).toString()
+  )
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const parsed = parser.parse(data as string)
+  return parsed?.response
+  // eventID
+}
