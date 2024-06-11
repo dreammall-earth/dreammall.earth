@@ -1,8 +1,6 @@
 import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { createVuetify } from 'vuetify'
-import { h } from 'vue'
-import { VApp } from 'vuetify/components'
 
 import BottomMenu from './BottomMenu.vue'
 import Circle from './CircleElement.vue'

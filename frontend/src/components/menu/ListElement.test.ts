@@ -1,8 +1,9 @@
 import { mount, VueWrapper } from '@vue/test-utils'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { createVuetify } from 'vuetify'
-import ListElement from './ListElement.vue'
 import { VIcon, VBtn } from 'vuetify/components'
+
+import ListElement from './ListElement.vue'
 
 interface Item {
   title: string
@@ -42,15 +43,17 @@ describe('ListElement', () => {
   })
 
   it('renders append slot correctly', () => {
-    const appendIcons = wrapper.findAllComponents(VIcon)
-    const appendButtons = wrapper.findAllComponents(VBtn)
-    expect(appendIcons.length + appendButtons.length).toBe(2)
+    const items = wrapper.findAll('.custom-list-item')
+    const appendIcons = items.flatMap(item => item.findAllComponents(VIcon))
+    const appendButtons = items.flatMap(item => item.findAllComponents(VBtn))
+    expect(appendIcons).toBe(1)
+    expect(appendButtons).toBe(1)
   })
 
   it('handles item click and closes menu', async () => {
     const emitSpy = vi.spyOn(wrapper.vm, '$emit')
-    await wrapper.findAll('.custom-list-item')[0].trigger('click')
-    expect(emitSpy).toHaveBeenCalledWith('item-click')
-    // Sie können hier zusätzliche Tests hinzufügen, um zu prüfen, ob das Menü geschlossen wird.
+    const items = wrapper.findAll('.custom-list-item')
+    await items[0].trigger('click')
+    expect(emitSpy).toHaveBeenCalledWith('item-click', expect.any(Object))
   })
 })

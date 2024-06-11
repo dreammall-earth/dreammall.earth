@@ -21,17 +21,16 @@ const config: StorybookConfig = {
     // Add your Vite configuration here, if necessary
     return {
       ...config,
-      css: {
-        preprocessorOptions: {
-          scss: {
-            additionalData: `
-              @import "/dreammall.earth/frontend/src/assets/scss/mixins.scss";
-              @import "/dreammall.earth/frontend/src/assets/scss/style.scss";
-              @import "vuetify/src/styles/settings/_variables.scss";
-            `,
-          },
-        },
-      },
+      // css: {
+      //   preprocessorOptions: {
+      //     scss: {
+      //       additionalData: `
+      //         @import "/dreammall.earth/frontend/src/assets/scss/mixins.scss";
+      //         @import "/dreammall.earth/frontend/src/assets/scss/style.scss";
+      //       `,
+      //     },
+      //   },
+      // },
     }
   },
 }

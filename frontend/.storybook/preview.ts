@@ -1,6 +1,5 @@
 import { setup } from '@storybook/vue3'
 import { createPinia } from 'pinia'
-
 import { setPageContext } from '#context/usePageContext'
 import i18n from '#plugins/i18n'
 import CreateVuetify from '#plugins/vuetify'
@@ -37,12 +36,10 @@ export const globalTypes = {
     defaultValue: 'light',
     toolbar: {
       icon: 'paintbrush',
-      // Array of plain string values or MenuItem shape
       items: [
         { value: 'light', title: 'Light', left: '🌞' },
         { value: 'dark', title: 'Dark', left: '🌛' },
       ],
-      // Change title based on selected value
       dynamicTitle: true,
     },
   },

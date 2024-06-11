@@ -16,7 +16,7 @@ import NavigationDrawer from './NavigationDrawer.vue'
 
 import type { Meta, StoryObj } from '@storybook/vue3'
 
-const meta = {
+const meta: Meta<typeof NavigationDrawer> = {
   title: 'ORGANISMS/NavigationDrawer',
   component: NavigationDrawer as SBComp,
   tags: ['autodocs'],
@@ -33,16 +33,16 @@ const meta = {
   parameters: {
     appHeight: '100vh',
   },
-} satisfies Meta<typeof NavigationDrawer>
+}
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Example: Story = {
-  render: (args) => ({
+  render: (args: Record<string, unknown>) => ({
     components: { NavigationDrawer, VList, VListItem, VListItemTitle, VBtn, VIcon },
     setup() {
-      return { args: args as Record<string, unknown> }
+      return { args }
     },
     template: `
       <NavigationDrawer v-bind="args">
@@ -71,10 +71,10 @@ export const Example: Story = {
 }
 
 export const WithTextAndButton: Story = {
-  render: (args) => ({
+  render: (args: Record<string, unknown>) => ({
     components: { NavigationDrawer, VCard, VCardText, VCardActions, VTextField, VBtn },
     setup() {
-      return { args: args as Record<string, unknown> }
+      return { args }
     },
     template: `
       <NavigationDrawer v-bind="args">

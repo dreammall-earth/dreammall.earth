@@ -18,13 +18,13 @@
                 <v-icon icon="$camera"></v-icon>
               </Circle>
               <NewsIndicator :has-news="true" class="ml-2" />
-              <UserInfo class="ml-2" />
+              <UserInfo class="ml-2 user-info" />
             </v-col>
           </v-row>
         </v-col>
       </v-row>
     </v-app-bar>
-    <v-navigation-drawer
+    <NavigationDrawer
       v-model="drawer"
       :location="location"
       color="grey-lighten-4"
@@ -33,7 +33,7 @@
       class="custom-drawer"
     >
       <ListElement :items="items" @item-click="toggleDrawer" />
-    </v-navigation-drawer>
+    </NavigationDrawer>
   </div>
 </template>
 
@@ -47,6 +47,7 @@ import MessageIndicator from './MessageIndicator.vue'
 import NewsIndicator from './NewsIndicator.vue'
 import TabControl from './TabControl.vue'
 import UserInfo from './UserInfo.vue'
+import NavigationDrawer from './NavigationDrawer.vue'
 
 const drawer = ref(false)
 const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('right')
@@ -55,7 +56,12 @@ const toggleDrawer = () => {
   drawer.value = !drawer.value
 }
 
-const items = ref([
+interface Item {
+  title: string
+  fullWidth: boolean
+}
+
+const items = ref<Item[]>([
   { title: 'LOLLY Krypto Entwicklung', fullWidth: false },
   { title: 'Aachener Freunde Treff', fullWidth: false },
   { title: 'Building A Wooden Guitar', fullWidth: false },

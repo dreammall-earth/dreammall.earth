@@ -6,7 +6,7 @@
     // Doesn't apply to server/, see ts-node config down below and server/tsconfig.json
     "moduleResolution": "Bundler",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": ["vite/client"],
+    "types": ["vite/client", "vitest/globals"],
     "skipLibCheck": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,

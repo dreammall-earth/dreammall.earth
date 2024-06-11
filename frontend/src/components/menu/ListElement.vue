@@ -7,7 +7,7 @@
         variant="plain"
         class="custom-list-item"
         :class="{ 'full-width': item.fullWidth, rounded: item.rounded }"
-        @click="handleItemClick"
+        @click="handleItemClick(item)"
       >
         <template v-if="item.prepend" #prepend>
           <component :is="item.prepend" v-bind="item.prependProps" />
@@ -46,15 +46,13 @@ defineProps({
 })
 const emit = defineEmits(['item-click'])
 
-// Event-Handler-Funktion
-const handleItemClick = () => {
+const handleItemClick = (item: Item) => {
   closeMenu()
-  emit('item-click')
+  emit('item-click', item)
 }
 
-// Beispiel für die Menü-Schließen-Funktion
 const closeMenu = () => {
-  // Hier die Logik einfügen, die das Menü schließt, z.B. einen Vuex-Status ändern oder einen Emit auslösen.
+  // Logik zum Schließen des Menüs hinzufügen, falls erforderlich
 }
 </script>
 

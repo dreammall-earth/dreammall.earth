@@ -7,7 +7,8 @@ import TopMenu from './TopMenu.vue'
 
 import type { Meta, StoryObj } from '@storybook/vue3'
 
-const meta = {
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const meta: Meta<typeof TopMenu> = {
   title: 'ORGANISMS/TopMenu',
   component: TopMenu as SBComp,
   tags: ['autodocs'],
@@ -16,7 +17,7 @@ const meta = {
   parameters: {
     appHeight: '50vh',
   },
-} satisfies Meta<typeof TopMenu>
+}
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -29,7 +30,9 @@ export const Example: Story = {
       const toggleDrawer = () => {
         drawer.value = !drawer.value
       }
-      return { args: args as Record<string, unknown>, drawer, toggleDrawer }
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const argTypes = args as { [key: string]: unknown }
+      return { args: argTypes, drawer, toggleDrawer }
     },
     template: `
       <div>
