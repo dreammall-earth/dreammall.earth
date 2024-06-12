@@ -9,6 +9,8 @@ import { withVuetifyTheme } from './withVuetifyTheme.decorator'
 
 import type { Preview } from '@storybook/vue3'
 
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
+
 setup((app) => {
   // Registers your app's plugins into Storybook
   const pinia = createPinia()
@@ -47,6 +49,9 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/i,
       },
+    },
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
     },
   },
 }

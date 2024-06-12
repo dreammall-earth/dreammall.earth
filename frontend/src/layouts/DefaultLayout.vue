@@ -19,7 +19,7 @@
         </v-col>
       </v-row>
     </v-container>
-    <BottomMenu class="d-flex d-md-none" />
+    <BottomMenu class="d-md-none" />
   </v-main>
 </template>
 
