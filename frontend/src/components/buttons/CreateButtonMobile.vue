@@ -299,8 +299,13 @@ onMounted(() => {
 })
 
 const onClick = () => {
-  showButtonList.value = !showButtonList.value
-  emit('click', 1)
+  try {
+    showButtonList.value = !showButtonList.value
+    emit('click', 1)
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error while CreateButtonMobile click', error)
+  }
 }
 
 const {
@@ -313,12 +318,17 @@ const {
 })
 
 const enterRoom = async () => {
-  await refetch()
-  if (joinMyRoomQueryError.value) {
+  try {
+    await refetch()
+    if (joinMyRoomQueryError.value) {
+      // eslint-disable-next-line no-console
+      console.log(joinMyRoomQueryError.value.message)
+    } else {
+      window.open(joinMyRoomQueryResult.value?.joinMyRoom, '_blank')
+    }
+  } catch (error) {
     // eslint-disable-next-line no-console
-    console.log(joinMyRoomQueryError.value.message)
-  } else {
-    window.open(joinMyRoomQueryResult.value?.joinMyRoom, '_blank')
+    console.error('Error while entering room - mobile', error)
   }
 }
 </script>

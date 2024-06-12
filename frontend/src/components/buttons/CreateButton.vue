@@ -364,28 +364,33 @@ const emit = defineEmits<{
 onMounted(() => {})
 
 const onClick = (event: MouseEvent) => {
-  const node = event.target as HTMLElement
-  const parent = node.parentNode as SVGElement
+  try {
+    const node = event.target as HTMLElement
+    const parent = node.parentNode as SVGElement
 
-  parent.classList.toggle('create-button--turned')
-  buttonIsTurned.value = !buttonIsTurned.value
+    parent.classList.toggle('create-button--turned')
+    buttonIsTurned.value = !buttonIsTurned.value
 
-  if (warp.value) {
-    const style = window.getComputedStyle(warp.value)
-    const matrix = style.transform
-    const matrixArray = matrix.replace('matrix(', '').split(',')
-    const scaleX = parseFloat(matrixArray[0])
-    const scaleY = parseFloat(matrixArray[3])
-    warp.value.style.transform = 'scale(' + scaleX + ',' + scaleY + ')'
-    // TODO better solution maybe animationend
-    setTimeout(function () {
-      if (warp.value) {
-        warp.value.style.transform = 'scale(' + 0 + ',' + 0 + ')'
-      }
-    }, 1000)
+    if (warp.value) {
+      const style = window.getComputedStyle(warp.value)
+      const matrix = style.transform
+      const matrixArray = matrix.replace('matrix(', '').split(',')
+      const scaleX = parseFloat(matrixArray[0])
+      const scaleY = parseFloat(matrixArray[3])
+      warp.value.style.transform = 'scale(' + scaleX + ',' + scaleY + ')'
+      // TODO better solution maybe animationend
+      setTimeout(function () {
+        if (warp.value) {
+          warp.value.style.transform = 'scale(' + 0 + ',' + 0 + ')'
+        }
+      }, 1000)
+    }
+
+    emit('click', 1)
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error on CreateButton Click', error)
   }
-
-  emit('click', 1)
 }
 
 const {
@@ -398,12 +403,17 @@ const {
 })
 
 const enterRoom = async () => {
-  await refetch()
-  if (joinMyRoomQueryError.value) {
+  try {
+    await refetch()
+    if (joinMyRoomQueryError.value) {
+      // eslint-disable-next-line no-console
+      console.log(joinMyRoomQueryError.value.message)
+    } else {
+      window.open(joinMyRoomQueryResult.value?.joinMyRoom, '_blank')
+    }
+  } catch (error) {
     // eslint-disable-next-line no-console
-    console.log(joinMyRoomQueryError.value.message)
-  } else {
-    window.open(joinMyRoomQueryResult.value?.joinMyRoom, '_blank')
+    console.error('Error while entering room', error)
   }
 }
 </script>
