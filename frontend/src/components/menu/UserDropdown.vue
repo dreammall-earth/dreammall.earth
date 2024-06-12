@@ -20,8 +20,11 @@ import { inject } from 'vue'
 import MainButton from '#components/buttons/MainButton.vue'
 import { AUTH } from '#src/env'
 import AuthService from '#src/services/AuthService'
+import { useAuthStore } from '#stores/authStore'
 
 const authService = inject<AuthService>('authService')
+
+const auth = useAuthStore()
 
 async function signOut() {
   try {
