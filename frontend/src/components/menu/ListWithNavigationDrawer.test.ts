@@ -1,13 +1,13 @@
-import { mount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach } from 'vitest'
 
 import ListWithNavigationDrawer from './ListWithNavigationDrawer.vue'
 
 describe('ListWithNavigationDrawer', () => {
-  let wrapper: ReturnType<typeof mount>
+  let wrapper: ReturnType<typeof shallowMount>
 
   beforeEach(() => {
-    wrapper = mount(ListWithNavigationDrawer, {
+    wrapper = shallowMount(ListWithNavigationDrawer, {
       props: { drawer: true },
     })
   })

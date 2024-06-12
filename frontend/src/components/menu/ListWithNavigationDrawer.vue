@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+// import { ref } from 'vue'
 import { VIcon } from 'vuetify/components'
 
 import ListElement from './ListElement.vue'
@@ -25,7 +25,7 @@ defineProps({
 
 const emits = defineEmits(['update:drawer'])
 
-const items = ref([
+const items = [
   {
     title: 'LOLLY Krypto Entwicklung',
     fullWidth: false,
@@ -63,7 +63,7 @@ const items = ref([
     append: VIcon,
     appendProps: { icon: 'mdi-menu' },
   },
-])
+]
 
 const updateDrawer = (value: boolean) => {
   emits('update:drawer', value)
