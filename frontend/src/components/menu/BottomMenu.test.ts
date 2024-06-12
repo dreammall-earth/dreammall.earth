@@ -7,6 +7,7 @@ import { useAuthStore } from '#stores/authStore.js'
 import { authService } from '#tests/mock.authService.js'
 
 import BottomMenu from './BottomMenu.vue'
+import Circle from './CircleElement.vue'
 import UserDropdown from './UserDropdown.vue'
 
 describe('BottomMenu', () => {
@@ -34,9 +35,9 @@ describe('BottomMenu', () => {
       )
     })
 
-    describe.skip('Click Component', () => {
+    describe('Click Component', () => {
       beforeEach(async () => {
-        await wrapper.find('div.circle.v-icon').trigger('click')
+        await wrapper.findComponent(Circle).trigger('click')
       })
 
       it('has drawer', () => {
