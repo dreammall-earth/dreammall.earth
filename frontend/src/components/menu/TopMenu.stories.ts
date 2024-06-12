@@ -7,7 +7,6 @@ import TopMenu from './TopMenu.vue'
 
 import type { Meta, StoryObj } from '@storybook/vue3'
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const meta: Meta<typeof TopMenu> = {
   title: 'ORGANISMS/TopMenu',
   component: TopMenu as SBComp,
@@ -30,7 +29,7 @@ export const Example: Story = {
       const toggleDrawer = () => {
         drawer.value = !drawer.value
       }
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
       const argTypes = args as { [key: string]: unknown }
       return { args: argTypes, drawer, toggleDrawer }
     },

@@ -44,10 +44,10 @@ import Circle from './CircleElement.vue'
 import LightDarkSwitch from './LightDarkSwitch.vue'
 import ListElement from './ListElement.vue'
 import MessageIndicator from './MessageIndicator.vue'
+import NavigationDrawer from './NavigationDrawer.vue'
 import NewsIndicator from './NewsIndicator.vue'
 import TabControl from './TabControl.vue'
 import UserInfo from './UserInfo.vue'
-import NavigationDrawer from './NavigationDrawer.vue'
 
 const drawer = ref(false)
 const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('right')

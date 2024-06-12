@@ -46,6 +46,5 @@ describe('ListElement', () => {
     const items = wrapper.findAll('.custom-list-item')
     await items[0].trigger('click')
     expect(wrapper.emitted('item-click')).toEqual([[]])
-})
-
+  })
 })
