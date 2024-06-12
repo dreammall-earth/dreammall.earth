@@ -28,27 +28,20 @@ describe('BottomMenu', () => {
   })
 
   describe('Circle Button ', () => {
-
-   
-   
-    it ('has no drawer', () => {
-     expect(wrapper.find('.custom-drawer').exists()).toBe(false)
+    it('has no drawer', () => {
+      expect(wrapper.find('.custom-drawer').exists()).toBe(false)
     })
 
-
     describe('Click Circle', () => {
-
       beforeEach(async () => {
         await wrapper.findComponent({ name: 'Circle' }).trigger('click')
       })
-    
-      it ('has drawer', () => {
-       
-      expect(wrapper.find('.v-navigation-drawer').exists()).toBe(true)
+
+      it('has drawer', () => {
+        expect(wrapper.find('.v-navigation-drawer').exists()).toBe(true)
       })
     })
   })
-
 
   describe('signout button', () => {
     const authStore = useAuthStore()
