@@ -342,7 +342,7 @@ const enterRoom = async () => {
   left: calc(50% - 40px);
   transition: top 0.75s;
 
-  @media screen and (min-width: $mobile) {
+  @media screen and (min-width: $tablet) {
     display: none;
   }
 
@@ -369,7 +369,7 @@ const enterRoom = async () => {
   border-radius: 30px 30px 0 0;
   transition: top 0.75s;
 
-  @media screen and (min-width: $mobile) {
+  @media screen and (min-width: $tablet) {
     display: none;
   }
 

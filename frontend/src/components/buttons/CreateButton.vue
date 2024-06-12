@@ -429,7 +429,7 @@ const enterRoom = async () => {
   pointer-events: none;
   transform: translate(-50%, -50%);
 
-  @media screen and (max-width: $mobile) {
+  @media screen and (max-width: $tablet) {
     display: none;
   }
 }
