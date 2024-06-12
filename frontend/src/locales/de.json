@@ -22,6 +22,9 @@
       "text": "Irgendetwas ist schief gegangen."
     }
   },
+  "joinRoomPage": {
+    "header": "Raum betreten als:"
+  },
   "menu": {
     "cockpit": "Cockpit",
     "mall": "Mall",

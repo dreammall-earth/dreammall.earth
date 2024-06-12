@@ -22,6 +22,9 @@
       "text": "Something went wrong."
     }
   },
+  "joinRoomPage": {
+    "header": "Join Room as:"
+  },
   "menu": {
     "cockpit": "Cockpit",
     "mall": "Mall",

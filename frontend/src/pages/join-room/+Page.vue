@@ -1,71 +1,79 @@
 <template>
   <DefaultLayout>
-    
     <div class="d-flex bg-white text-center pa-6 v-container">
       <v-row class="section-header newsletter-section">
         <v-col>
-          <h2 class="section-headline">Raum betreten als: </h2>
-        <!-- </v-col> 
-      </v-row>
-      <v-row>
-        <v-col> -->
+          <h2 class="section-headline">{{ $t('joinRoomPage.header') }}</h2>
           <div class="mt-8 d-flex justify-center">
-            <v-form  ref="form" class="w-25" @submit.prevent="submitJoinRoomForm">
-                <v-text-field
-                    class="pb-3"
-                    v-model="username"
-                    :counter="10"
-                    :rules="nameRules"
-                    label="Name"
-                    hide-details
-                    required
-                  ></v-text-field>
-                  <MainButton
-                    variant="submit"
-                    size="auto"
-                    label="Bestätigen"
-                    type="submit"
-                    :is-loading="formIsLoading">
-                  </MainButton>
-            </v-form> 
+            <v-form ref="form" class="w-25" @submit.prevent="getRoomLink">
+              <v-text-field
+                id="userName"
+                v-model="userName"
+                class="pb-3"
+                :counter="10"
+                label="Name"
+                hide-details
+                required
+              ></v-text-field>
+              <MainButton
+                variant="submit"
+                size="auto"
+                label="Bestätigen"
+                type="submit"
+                :is-loading="loading"
+              >
+              </MainButton>
+            </v-form>
           </div>
         </v-col>
       </v-row>
-         
-     
     </div>
   </DefaultLayout>
 </template>
 
 <script lang="ts" setup>
-  import { useMutation } from '@vue/apollo-composable'
-  import { ref } from 'vue'
+import { useQuery } from '@vue/apollo-composable'
+import { ref } from 'vue'
 
-  import { usePageContext } from '#context/usePageContext'
-  import DefaultLayout from '#layouts/DefaultLayout.vue'
-  import { joinRoomQuery } from '#queries/joinRoomQuery'
-  import MainButton from '#components/buttons/MainButton.vue'
+import MainButton from '#components/buttons/MainButton.vue'
+import { usePageContext } from '#context/usePageContext'
+import DefaultLayout from '#layouts/DefaultLayout.vue'
+import { joinRoomQuery } from '#queries/joinRoomQuery'
 
-  const pageContext = usePageContext()
-  const id = pageContext.routeParams?.id
-  const formIsLoading = ref(false)
-  const username = ref('')
+const pageContext = usePageContext()
+const roomId = Number(pageContext.routeParams?.id)
+const userName = ref('')
 
+const form = ref<HTMLFormElement>()
+const {
+  result: joinRoomQueryResult,
+  error: joinRoomQueryError,
+  refetch: joinRoomQueryRefetch,
+  loading,
+} = useQuery(
+  joinRoomQuery,
+  {
+    userName: userName.value,
+    roomId,
+  },
+  {
+    prefetch: false,
+    fetchPolicy: 'no-cache',
+  },
+)
 
-  const form = ref<HTMLFormElement>()
-
-  const { mutate: sendJoinRoom } = useMutation(joinRoomQuery)
-
-  async function submitJoinRoomForm() {
-    const isValid = await form.value?.validate()
-    if (isValid?.valid) {
-      formIsLoading.value = !formIsLoading.value
-      try {
-        await sendJoinRoom({ 
-          data:{
-            id: id, 
-            name: username.value} })
-      }
-      catch{}
-  }}
+const getRoomLink = async () => {
+  await joinRoomQueryRefetch()
+  if (joinRoomQueryError.value) {
+    // eslint-disable-next-line no-console
+    console.log('Error', joinRoomQueryError.value.message)
+  } else {
+    if (joinRoomQueryResult.value.joinRoom) {
+      window.location.href = joinRoomQueryResult.value.joinRoom
+    } else {
+      // eslint-disable-next-line no-console
+      console.log('Room not found')
+    }
+  }
+}
 </script>

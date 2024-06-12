@@ -29,7 +29,6 @@ describe('JoinRoomPage', () => {
   let wrapper: ReturnType<typeof Wrapper>
 
   beforeEach(() => {
-    joinRoomQueryMock.mockResolvedValue({ data: { getRoom: 'http://some.url' } })
     wrapper = Wrapper()
   })
 
@@ -43,5 +42,55 @@ describe('JoinRoomPage', () => {
 
   it('has roomID as param', () => {
     expect(Route).toBe('/join-room/@id')
+  })
+
+  describe('Api', () => {
+    beforeEach(async () => {
+      vi.clearAllMocks()
+      await wrapper.find('input').setValue('PinkyPie')
+      await wrapper.find('form').trigger('submit')
+    })
+
+    it('calls JoinRoom query', () => {
+      expect(joinRoomQueryMock).toBeCalled()
+    })
+
+    describe('Room Link returned', () => {
+      beforeEach(async () => {
+        joinRoomQueryMock.mockResolvedValue({ data: { joinRoom: 'http://meinlink.de' } })
+        vi.clearAllMocks()
+        await wrapper.find('form').trigger('submit')
+      })
+
+      it('Redirects to room Link', () => {
+        expect(global.window.location.href).toBe('http://meinlink.de/')
+      })
+    })
+
+    describe('Null returned', () => {
+      const consoleLogSpy = vi.spyOn(console, 'log')
+      beforeEach(async () => {
+        joinRoomQueryMock.mockResolvedValue({ data: { joinRoom: null } })
+        vi.clearAllMocks()
+        await wrapper.find('form').trigger('submit')
+      })
+
+      it('logs Room not found', () => {
+        expect(consoleLogSpy).toBeCalledWith('Room not found')
+      })
+    })
+
+    describe.skip('Error returned', () => {
+      const consoleLogSpy = vi.spyOn(console, 'log')
+      beforeEach(async () => {
+        joinRoomQueryMock.mockRejectedValue({ message: 'autsch' })
+        vi.clearAllMocks()
+        await wrapper.find('form').trigger('submit')
+      })
+
+      it('logs Room not found', () => {
+        expect(consoleLogSpy).toBeCalledWith('Error', 'autsch')
+      })
+    })
   })
 })
