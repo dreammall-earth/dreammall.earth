@@ -30,7 +30,6 @@ Then('I am on page {string}', (page: string) => {
       authentikPage.userNameIsVisible('akadmin')
       break
     case 'presenter':
-      cy.get('button.sign-in').should('be.visible')
       presenterPage.signinButtonIsVisible()
       break
     case 'worldcafe':
