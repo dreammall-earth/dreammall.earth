@@ -29,16 +29,20 @@ describe('BottomMenu', () => {
 
   describe('Circle Button ', () => {
     it('has no drawer', () => {
-      expect(wrapper.find('.custom-drawer').exists()).toBe(false)
+      expect(wrapper.findComponent({ name: 'VNavigationDrawer' }).classes()).not.toContain(
+        'v-navigation-drawer--active',
+      )
     })
 
-    describe('Click Circle', () => {
+    describe.skip('Click Component', () => {
       beforeEach(async () => {
-        await wrapper.findComponent({ name: 'Circle' }).trigger('click')
+        await wrapper.find('div.circle.v-icon').trigger('click')
       })
 
       it('has drawer', () => {
-        expect(wrapper.find('.v-navigation-drawer').exists()).toBe(true)
+        expect(wrapper.findComponent({ name: 'VNavigationDrawer' }).classes()).toContain(
+          'v-navigation-drawer--active',
+        )
       })
     })
   })

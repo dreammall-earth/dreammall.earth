@@ -1,20 +1,21 @@
 <template>
-  <div
-    class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface"
-  >
-    <MessageIndicator :number-of-messages="3" />
-    <NewsIndicator :has-news="true" />
+  <div>
+    <div
+      class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface"
+    >
+      <MessageIndicator :number-of-messages="3" />
+      <NewsIndicator :has-news="true" />
 
-    <Circle @click="toggleDrawer">
-      <v-icon icon="$camera"></v-icon>
-    </Circle>
+      <Circle @click="toggleDrawer">
+        <v-icon icon="$camera"></v-icon>
+      </Circle>
 
-    <UserInfo />
-
+      <UserInfo />
+    </div>
     <ListWithNavigationDrawer
       :drawer="drawer"
       :location="location"
-      @update:drawer="drawer = $event"
+      @update:drawer="updateDrawer($event)"
     />
   </div>
 </template>
@@ -34,13 +35,17 @@ const toggleDrawer = () => {
   drawer.value = !drawer.value
 }
 
+const updateDrawer = (event: boolean) => {
+  drawer.value = event
+}
+
 const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('bottom')
 </script>
 
 <style scoped lang="scss">
-/*v-bottom-navigation {
-  z-index: 10;
-}*/
+// v-bottom-navigation {
+//   z-index: 10;
+// }
 .bottom-menu {
   bottom: 0;
   left: 0;
