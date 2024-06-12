@@ -7,8 +7,7 @@
   "buttons": {
     "signout": "Sign Out",
     "toAdmin": "To the admin",
-    "toRoom": "To the meeting",
-    "toRoomIframe": "To the meeting (iframe)"
+    "toRoom": "To the meeting"
   },
   "cafe": {
     "welcome": "World Cafe"
