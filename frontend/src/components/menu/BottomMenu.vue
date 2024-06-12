@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bottom-menu w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface"
+    class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface"
   >
     <MessageIndicator :number-of-messages="3" />
     <NewsIndicator :has-news="true" />
@@ -24,6 +24,7 @@ import UserInfo from './UserInfo.vue'
 <style scoped lang="scss">
 .bottom-menu {
   bottom: 0;
+  left: 0;
   z-index: 1;
   background: var(--v-bottom-menu-background) !important;
   backdrop-filter: blur(20px);
