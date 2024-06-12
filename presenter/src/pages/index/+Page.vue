@@ -13,7 +13,7 @@
       <PlanningSection />
     </div>
     <div id="newsletter-section" class="py-16 px-4">
-      <NewsletterSection />
+      <NewsletterSection ref="anchorNewsletter" />
     </div>
     <div id="coffee-section" class="py-16 px-4">
       <CoffeeSection />
@@ -25,6 +25,8 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
+
 import DefaultLayout from '#layouts/DefaultLayout.vue'
 import AboutSection from '#root/src/components/sections/AboutSection.vue'
 import CallToActionSection from '#root/src/components/sections/CallToActionSection.vue'
@@ -33,6 +35,18 @@ import IntroSection from '#root/src/components/sections/IntroSection.vue'
 import NewsletterSection from '#root/src/components/sections/NewsletterSection.vue'
 import PlanningSection from '#root/src/components/sections/PlanningSection.vue'
 import ProductsSection from '#root/src/components/sections/ProductsSection.vue'
+
+const anchorNewsletter = ref()
+const focusInput = () => {
+  if (anchorNewsletter.value) {
+    anchorNewsletter.value.focusInput()
+  }
+}
+
+defineExpose({
+  anchorNewsletter,
+  focusInput,
+})
 </script>
 
 <style scoped lang="scss">

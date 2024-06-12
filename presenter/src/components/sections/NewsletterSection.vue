@@ -13,7 +13,7 @@
           {{ $t('home.newsletterSection.subHeadline') }}
         </h3>
         <div class="mt-8">
-          <NewsletterForm />
+          <NewsletterForm ref="newsletterForm" />
         </div>
       </v-col>
     </v-row>
@@ -40,10 +40,24 @@
 
 <script lang="ts" setup>
 // import MainButton from '#components/buttons/MainButton.vue'
+import { ref } from 'vue'
+
 import NewsletterForm from '#components/forms/NewsletterForm.vue'
 
 // TODO insert link to newest newsletter
 // const newsletterDownloadPath = '#'
+const newsletterForm = ref()
+
+const focusInput = () => {
+  if (newsletterForm.value) {
+    newsletterForm.value.focusInput()
+  }
+}
+
+defineExpose({
+  newsletterForm,
+  focusInput,
+})
 </script>
 
 <style scoped lang="scss">

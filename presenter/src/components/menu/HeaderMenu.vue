@@ -17,8 +17,8 @@
           ></AnchorLink>
           <AnchorLink
             class="mx-4"
-            href="/#contactname"
             :label="$t('menu.header.contact')"
+            @click.prevent="scrollToNewsletterAnchor"
           ></AnchorLink>
         </v-col>
         <v-col class="d-flex justify-end">
@@ -77,7 +77,7 @@
           class="ma-4"
           href="/#contactname"
           :label="$t('menu.header.contact')"
-          @click="mobileMenu = !mobileMenu"
+          @click.prevent="scrollToNewsletterAnchorMobile"
         ></AnchorLink>
       </div>
       <div v-if="showAuthentication" class="">
@@ -115,6 +115,18 @@ import LogoImage from '#components/LogoImage.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
 import { AUTH } from '#src/env'
 
+const anchorNewsletter = ref()
+
+const scrollToNewsletterAnchor = () => {
+  if (anchorNewsletter.value) {
+    anchorNewsletter.value.scrollIntoView({ behavior: 'smooth' })
+    anchorNewsletter.value.focusInput()
+    // nextTick(() => {
+    //   anchorNewsletter.value.newsletterForm.value.inputFieldNewsletter.value.focus()
+    // })
+  }
+}
+
 const showAuthentication = !!AUTH.SIGNUP_URI || !!AUTH.SIGNIN_URI
 
 async function signIn() {
@@ -129,6 +141,11 @@ const appBackground = ref('transparent')
 const navBackground = ref('#d8d8d8')
 const mobileMenu = ref(false)
 const buttonsInBackground = ref(true)
+
+const scrollToNewsletterAnchorMobile = () => {
+  mobileMenu.value = !mobileMenu.value
+  scrollToNewsletterAnchor()
+}
 
 let videoSlideObserver: IntersectionObserver
 
