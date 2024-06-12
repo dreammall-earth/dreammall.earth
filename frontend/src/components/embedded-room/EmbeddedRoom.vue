@@ -5,7 +5,6 @@
     height="100%"
     :src="props.url"
     allow="camera;microphone;fullscreen;display-capture *;"
-    allowfullscreen
   ></iframe>
 </template>
 
