@@ -1,5 +1,6 @@
 <template>
   <iframe
+    v-if="props.url"
     width="100%"
     height="100%"
     :src="props.url"
@@ -13,6 +14,6 @@ const props = defineProps<{
   /**
    * The url of the BigBlueButton meeting room (CSP should allow only specific hosts)
    */
-  url: string
+  url: string | null
 }>()
 </script>

@@ -1,14 +1,17 @@
 <template>
   <DefaultLayout>
     <div class="container">
-      <MyRoom />
+      <EmbeddedRoom :url="roomUrl" />
     </div>
   </DefaultLayout>
 </template>
 
 <script setup lang="ts">
-import MyRoom from '#components/embedded-room/MyRoom.vue'
+import EmbeddedRoom from '#components/embedded-room/EmbeddedRoom.vue'
+import useMyRoom from '#components/embedded-room/useMyRoom'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
+
+const { roomUrl } = useMyRoom()
 </script>
 
 <style scoped>
