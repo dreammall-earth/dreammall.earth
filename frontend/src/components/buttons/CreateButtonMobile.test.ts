@@ -40,6 +40,8 @@ describe('CreateButton', () => {
 
   it('button list content is hidden', () => {
     expect(wrapper.find('.button-list-mobile').classes('button-list-mobile--active')).toBe(false)
+    expect(wrapper.find('svg g.outer-rings').classes('outer-rings--active')).toBe(false)
+    expect(wrapper.find('svg g.most-outer-rings').classes('most-outer-rings--active')).toBe(false)
   })
 
   describe('click on create button', () => {
@@ -51,6 +53,8 @@ describe('CreateButton', () => {
     it('button list visible', async () => {
       await wrapper.find('#create-button-mobile').trigger('click')
       expect(wrapper.find('.button-list-mobile').classes('button-list-mobile--active')).toBe(true)
+      expect(wrapper.find('svg g.outer-rings').classes('outer-rings--active')).toBe(true)
+      expect(wrapper.find('svg g.most-outer-rings').classes('most-outer-rings--active')).toBe(true)
     })
   })
 
