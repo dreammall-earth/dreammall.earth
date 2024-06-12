@@ -43,7 +43,16 @@ const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('bot
 </script>
 
 <style scoped lang="scss">
+
 v-bottom-navigation {
   z-index: 10;
+}
+.bottom-menu {
+  bottom: 0;
+  left: 0;
+  background: var(--v-bottom-menu-background) !important;
+  backdrop-filter: blur(20px);
+  border-radius: 30px 30px 0 0;
+
 }
 </style>
