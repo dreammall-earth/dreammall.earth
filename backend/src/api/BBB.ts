@@ -9,7 +9,7 @@ import logger from '#src/logger'
 
 const parser = new XMLParser()
 
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
   baseURL: CONFIG.BBB_URL,
   timeout: 25000,
   headers: {

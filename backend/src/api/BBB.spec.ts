@@ -2,8 +2,16 @@
 import { AxiosHeaders, InternalAxiosRequestConfig } from 'axios'
 
 import { CONFIG } from '#config/config'
+import logger from '#src/logger'
 
-import { createChecksum, addChecksumParam, joinMeetingLink } from './BBB'
+import {
+  createChecksum,
+  addChecksumParam,
+  joinMeetingLink,
+  axiosInstance,
+  getMeetings,
+  MeetingInfo,
+} from './BBB'
 
 // values taken form https://docs.bigbluebutton.org/development/api/#usage
 CONFIG.BBB_SHARED_SECRET = '639259d4-9dd8-4b25-bf01-95f9567eaf4b'
@@ -98,5 +106,355 @@ describe('joinMeetingLink', () => {
     ).toBe(
       'https://my.url/join?fullName=User&meetingID=My+Meeting&password=password&redirect=true&checksum=d7fdddda59b530a5acb56e77d5683c4324ceac4f',
     )
+  })
+})
+
+describe('getMeetings', () => {
+  const loggerErrorSpy = jest.spyOn(logger, 'error')
+  const axiosInstanceGetSpy = jest.spyOn(axiosInstance, 'get')
+
+  let result: MeetingInfo[]
+
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
+  describe('with axios error', () => {
+    beforeEach(async () => {
+      axiosInstanceGetSpy.mockRejectedValue('Ouch!')
+      await getMeetings()
+    })
+
+    it('logs get meetings error', () => {
+      expect(loggerErrorSpy).toBeCalledWith('getMeetings with error', 'Ouch!')
+    })
+  })
+
+  describe('with parser error', () => {
+    beforeEach(async () => {
+      axiosInstanceGetSpy.mockResolvedValue({ data: 'No XML!' })
+      await getMeetings()
+    })
+
+    it('logs get meetings error with type error', () => {
+      expect(loggerErrorSpy).toBeCalledWith(
+        'getMeetings with error',
+        new TypeError(`Cannot read properties of undefined (reading 'returncode')`),
+      )
+    })
+  })
+
+  describe('with no meeting', () => {
+    beforeEach(async () => {
+      axiosInstanceGetSpy.mockResolvedValue({
+        data: `
+<response>
+  <returncode>SUCCESS</returncode>
+  <meetings/>
+  <messageKey>noMeetings</messageKey>
+  <message>no meetings were found on this server</message>
+</response>
+`,
+      })
+      result = await getMeetings()
+    })
+
+    it('logs get meetings error with type error', () => {
+      expect(result).toEqual([])
+    })
+  })
+
+  describe('with one meeting', () => {
+    beforeEach(async () => {
+      axiosInstanceGetSpy.mockResolvedValue({
+        data: `
+<response>
+  <returncode>SUCCESS</returncode>
+  <meetings>
+    <meeting>
+      <meetingName>Dreammall Entwicklung</meetingName>
+      <meetingID>Dreammall-Entwicklung</meetingID>
+      <internalMeetingID>258ea7269760758304b6b8494f17e9bf69dc1efe-1718196455938</internalMeetingID>
+      <createTime>1718196455938</createTime>
+      <createDate>Wed Jun 12 12:47:35 UTC 2024</createDate>
+      <voiceBridge>29682</voiceBridge>
+      <dialNumber>613-555-1234</dialNumber>
+      <attendeePW>2HZnUWpn</attendeePW>
+      <moderatorPW>sVNzFAOV</moderatorPW>
+      <running>true</running>
+      <duration>0</duration>
+      <hasUserJoined>true</hasUserJoined>
+      <recording>false</recording>
+      <hasBeenForciblyEnded>false</hasBeenForciblyEnded>
+      <startTime>1718196455941</startTime>
+      <endTime>0</endTime>
+      <participantCount>1</participantCount>
+      <listenerCount>1</listenerCount>
+      <voiceParticipantCount>0</voiceParticipantCount>
+      <videoCount>0</videoCount>
+      <maxUsers>0</maxUsers>
+      <moderatorCount>1</moderatorCount>
+      <attendees>
+        <attendee>
+          <userID>w_wqbogvg9stgr</userID>
+          <fullName>Peter Lustig</fullName>
+          <role>MODERATOR</role>
+          <isPresenter>true</isPresenter>
+          <isListeningOnly>true</isListeningOnly>
+          <hasJoinedVoice>false</hasJoinedVoice>
+          <hasVideo>false</hasVideo>
+          <clientType>HTML5</clientType>
+        </attendee>
+      </attendees>
+      <metadata>
+      </metadata>
+      <isBreakout>false</isBreakout>
+    </meeting>
+  </meetings>
+</response>
+`,
+      })
+      result = await getMeetings()
+    })
+
+    it('returns the meeting', () => {
+      expect(result).toEqual([
+        {
+          attendeePW: '2HZnUWpn',
+          attendees: {
+            attendee: {
+              clientType: 'HTML5',
+              fullName: 'Peter Lustig',
+              hasJoinedVoice: false,
+              hasVideo: false,
+              isListeningOnly: true,
+              isPresenter: true,
+              role: 'MODERATOR',
+              userID: 'w_wqbogvg9stgr',
+            },
+          },
+          createDate: 'Wed Jun 12 12:47:35 UTC 2024',
+          createTime: 1718196455938,
+          dialNumber: '613-555-1234',
+          duration: 0,
+          endTime: 0,
+          hasBeenForciblyEnded: false,
+          hasUserJoined: true,
+          internalMeetingID: '258ea7269760758304b6b8494f17e9bf69dc1efe-1718196455938',
+          isBreakout: false,
+          listenerCount: 1,
+          maxUsers: 0,
+          meetingID: 'Dreammall-Entwicklung',
+          meetingName: 'Dreammall Entwicklung',
+          metadata: '',
+          moderatorCount: 1,
+          moderatorPW: 'sVNzFAOV',
+          participantCount: 1,
+          recording: false,
+          running: true,
+          startTime: 1718196455941,
+          videoCount: 0,
+          voiceBridge: 29682,
+          voiceParticipantCount: 0,
+        },
+      ])
+    })
+  })
+
+  describe('with two meetings', () => {
+    beforeEach(async () => {
+      axiosInstanceGetSpy.mockResolvedValue({
+        data: `
+<response>
+  <returncode>SUCCESS</returncode>
+  <meetings>
+    <meeting>
+      <meetingName>Dreammall Entwicklung</meetingName>
+      <meetingID>Dreammall-Entwicklung</meetingID>
+      <internalMeetingID>258ea7269760758304b6b8494f17e9bf69dc1efe-1718196455938</internalMeetingID>
+      <createTime>1718196455938</createTime>
+      <createDate>Wed Jun 12 12:47:35 UTC 2024</createDate>
+      <voiceBridge>29682</voiceBridge>
+      <dialNumber>613-555-1234</dialNumber>
+      <attendeePW>2HZnUWpn</attendeePW>
+      <moderatorPW>sVNzFAOV</moderatorPW>
+      <running>true</running>
+      <duration>0</duration>
+      <hasUserJoined>true</hasUserJoined>
+      <recording>false</recording>
+      <hasBeenForciblyEnded>false</hasBeenForciblyEnded>
+      <startTime>1718196455941</startTime>
+      <endTime>0</endTime>
+      <participantCount>1</participantCount>
+      <listenerCount>1</listenerCount>
+      <voiceParticipantCount>0</voiceParticipantCount>
+      <videoCount>0</videoCount>
+      <maxUsers>0</maxUsers>
+      <moderatorCount>1</moderatorCount>
+      <attendees>
+        <attendee>
+          <userID>w_wqbogvg9stgr</userID>
+          <fullName>Peter Lustig</fullName>
+          <role>MODERATOR</role>
+          <isPresenter>true</isPresenter>
+          <isListeningOnly>true</isListeningOnly>
+          <hasJoinedVoice>false</hasJoinedVoice>
+          <hasVideo>false</hasVideo>
+          <clientType>HTML5</clientType>
+        </attendee>
+      </attendees>
+      <metadata>
+      </metadata>
+      <isBreakout>false</isBreakout>
+    </meeting>
+    <meeting>
+      <meetingName>Dreammall Entwicklung</meetingName>
+      <meetingID>Dreammall-Entwicklung</meetingID>
+      <internalMeetingID>258ea7269760758304b6b8494f17e9bf69dc1efe-1718196455938</internalMeetingID>
+      <createTime>1718196455938</createTime>
+      <createDate>Wed Jun 12 12:47:35 UTC 2024</createDate>
+      <voiceBridge>29682</voiceBridge>
+      <dialNumber>613-555-1234</dialNumber>
+      <attendeePW>2HZnUWpn</attendeePW>
+      <moderatorPW>sVNzFAOV</moderatorPW>
+      <running>true</running>
+      <duration>0</duration>
+      <hasUserJoined>true</hasUserJoined>
+      <recording>false</recording>
+      <hasBeenForciblyEnded>false</hasBeenForciblyEnded>
+      <startTime>1718196455941</startTime>
+      <endTime>0</endTime>
+      <participantCount>1</participantCount>
+      <listenerCount>1</listenerCount>
+      <voiceParticipantCount>0</voiceParticipantCount>
+      <videoCount>0</videoCount>
+      <maxUsers>0</maxUsers>
+      <moderatorCount>1</moderatorCount>
+      <attendees>
+        <attendee>
+          <userID>w_wqbogvg9stgr</userID>
+          <fullName>Peter Lustig</fullName>
+          <role>MODERATOR</role>
+          <isPresenter>true</isPresenter>
+          <isListeningOnly>true</isListeningOnly>
+          <hasJoinedVoice>false</hasJoinedVoice>
+          <hasVideo>false</hasVideo>
+          <clientType>HTML5</clientType>
+        </attendee>
+      </attendees>
+      <metadata>
+      </metadata>
+      <isBreakout>false</isBreakout>
+    </meeting>
+  </meetings>
+</response>
+`,
+      })
+      result = await getMeetings()
+    })
+
+    it('returns the meeting', () => {
+      expect(result).toEqual([
+        {
+          attendeePW: '2HZnUWpn',
+          attendees: {
+            attendee: {
+              clientType: 'HTML5',
+              fullName: 'Peter Lustig',
+              hasJoinedVoice: false,
+              hasVideo: false,
+              isListeningOnly: true,
+              isPresenter: true,
+              role: 'MODERATOR',
+              userID: 'w_wqbogvg9stgr',
+            },
+          },
+          createDate: 'Wed Jun 12 12:47:35 UTC 2024',
+          createTime: 1718196455938,
+          dialNumber: '613-555-1234',
+          duration: 0,
+          endTime: 0,
+          hasBeenForciblyEnded: false,
+          hasUserJoined: true,
+          internalMeetingID: '258ea7269760758304b6b8494f17e9bf69dc1efe-1718196455938',
+          isBreakout: false,
+          listenerCount: 1,
+          maxUsers: 0,
+          meetingID: 'Dreammall-Entwicklung',
+          meetingName: 'Dreammall Entwicklung',
+          metadata: '',
+          moderatorCount: 1,
+          moderatorPW: 'sVNzFAOV',
+          participantCount: 1,
+          recording: false,
+          running: true,
+          startTime: 1718196455941,
+          videoCount: 0,
+          voiceBridge: 29682,
+          voiceParticipantCount: 0,
+        },
+        {
+          attendeePW: '2HZnUWpn',
+          attendees: {
+            attendee: {
+              clientType: 'HTML5',
+              fullName: 'Peter Lustig',
+              hasJoinedVoice: false,
+              hasVideo: false,
+              isListeningOnly: true,
+              isPresenter: true,
+              role: 'MODERATOR',
+              userID: 'w_wqbogvg9stgr',
+            },
+          },
+          createDate: 'Wed Jun 12 12:47:35 UTC 2024',
+          createTime: 1718196455938,
+          dialNumber: '613-555-1234',
+          duration: 0,
+          endTime: 0,
+          hasBeenForciblyEnded: false,
+          hasUserJoined: true,
+          internalMeetingID: '258ea7269760758304b6b8494f17e9bf69dc1efe-1718196455938',
+          isBreakout: false,
+          listenerCount: 1,
+          maxUsers: 0,
+          meetingID: 'Dreammall-Entwicklung',
+          meetingName: 'Dreammall Entwicklung',
+          metadata: '',
+          moderatorCount: 1,
+          moderatorPW: 'sVNzFAOV',
+          participantCount: 1,
+          recording: false,
+          running: true,
+          startTime: 1718196455941,
+          videoCount: 0,
+          voiceBridge: 29682,
+          voiceParticipantCount: 0,
+        },
+      ])
+    })
+  })
+
+  describe('with returncode ERROR', () => {
+    beforeEach(async () => {
+      axiosInstanceGetSpy.mockResolvedValue({
+        data: `
+<response>
+  <returncode>ERROR</returncode>
+  <message>Something went wrong</message>
+</response>
+`,
+      })
+      await getMeetings()
+    })
+
+    it('logs parser error', () => {
+      expect(loggerErrorSpy).toBeCalledWith('parse getMeetings with error', {
+        response: {
+          message: 'Something went wrong',
+          returncode: 'ERROR',
+        },
+      })
+    })
   })
 })
