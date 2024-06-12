@@ -65,7 +65,18 @@ interface CreateMeetingResponse {
   message: string
 }
 
-interface MeetingInfo {
+export type AttendeeInfo = {
+  userID: string
+  fullName: string
+  role: string
+  isPresenter: boolean
+  isListeningOnly: boolean
+  hasJoinedVoice: boolean
+  hasVideo: boolean
+  clientType: string
+}
+
+export type MeetingInfo = {
   meetingName: string
   meetingID: string
   internalMeetingID: string
@@ -88,12 +99,12 @@ interface MeetingInfo {
   videoCount: number
   maxUsers: number
   moderatorCount: number
-  attendees: string
+  attendees: string | { attendee: AttendeeInfo[] | AttendeeInfo }
   metadata: string
-  isBreakout: string
+  isBreakout: boolean
 }
 
-interface GetMeetingsResponse {
+type GetMeetingsResponse = {
   returncode: string
   meetings: { meeting: MeetingInfo[] } | string
 }
@@ -106,23 +117,18 @@ export const getMeetings = async (): Promise<MeetingInfo[]> => {
     const parsed: {
       response: GetMeetingsResponse
     } = parser.parse(data as string)
-    console.log(parsed.response.meetings)
     if (parsed.response.returncode === 'SUCCESS') {
-      if (parsed.response.meetings === '') return []
-      console.log(Array.isArray(parsed.response.meetings))
-      /*
-      if (Array.isArray(parsed.response.meetings.meeting)) {
+      if (typeof parsed.response.meetings === 'string') return []
+      if (Array.isArray(parsed.response.meetings?.meeting)) {
         return parsed.response.meetings.meeting
       } else {
         return [parsed.response.meetings.meeting]
       }
-      */
     } else {
-      logger.error('getMeetings with error', parsed)
+      logger.error('parse getMeetings with error', parsed)
     }
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.log(err)
+    logger.error('getMeetings with error', err)
   }
   return []
 }
@@ -154,8 +160,7 @@ export const createMeeting = async (options: CreateMeetingOptions) => {
     } = parser.parse(data as string)
     return parsed.response
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.log(err)
+    logger.error('createMeeting with error', err)
   }
 }
 
@@ -178,8 +183,9 @@ export const joinMeetingLink = (options: JoinMeetinLinkOptions): string => {
 }
 
 const handleOpenRomms = async (): Promise<void> => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const rooms = await getMeetings()
-  console.log(rooms)
+  // console.log(rooms.map((m) => m.attendees?.attendee))
 }
 
 export const checkForOpenRooms = (): void => {
@@ -196,5 +202,6 @@ export const listHooks = async () => {
     console.log(err)
   }
 }
+
 
 */

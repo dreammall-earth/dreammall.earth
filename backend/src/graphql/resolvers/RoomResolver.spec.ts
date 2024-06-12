@@ -1,6 +1,6 @@
 import { ApolloServer } from '@apollo/server'
 
-import { createMeeting, joinMeetingLink } from '#api/BBB'
+import { createMeeting, joinMeetingLink, getMeetings } from '#api/BBB'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
 
@@ -8,6 +8,7 @@ jest.mock('#api/BBB')
 
 const createMeetingMock = createMeeting as jest.MockedFunction<typeof createMeeting>
 const joinMeetingLinkMock = joinMeetingLink as jest.MockedFunction<typeof joinMeetingLink>
+const getMeetingsMock = getMeetings as jest.MockedFunction<typeof getMeetings>
 
 let testServer: ApolloServer
 
@@ -52,6 +53,29 @@ describe('RoomResolver', () => {
             kind: 'single',
             singleResult: {
               data: { joinMyRoom: null },
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('openRooms', () => {
+      it('throws access denied', async () => {
+        await expect(
+          testServer.executeOperation({
+            query: 'query { openRooms { meetingName } }',
+          }),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               errors: expect.arrayContaining([
                 expect.objectContaining({
@@ -248,5 +272,319 @@ describe('RoomResolver', () => {
         })
       })
     })
+
+    describe('openRooms', () => {
+      describe('no meetings', () => {
+        beforeEach(() => {
+          getMeetingsMock.mockResolvedValue([])
+        })
+
+        it('returns empty array', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query: 'query { openRooms { meetingName } }',
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: { openRooms: [] },
+                errors: undefined,
+              },
+            },
+          })
+        })
+      })
+
+      describe('no attendees', () => {
+        beforeEach(() => {
+          getMeetingsMock.mockResolvedValue([
+            {
+              meetingName: 'Dreammall Entwicklung',
+              meetingID: 'Dreammall-Entwicklung',
+              internalMeetingID: '258ea7269760758304b6b8494f17e9bf69dc1efe-1718189921310',
+              createTime: 1718189921310,
+              createDate: new Date('Wed Jun 12 10:58:41 UTC 2024'),
+              voiceBridge: 96378,
+              dialNumber: '613-555-1234',
+              attendeePW: 'MqgUFwdD',
+              moderatorPW: 'mTtxYGo2',
+              running: true,
+              duration: 0,
+              hasUserJoined: true,
+              recording: false,
+              hasBeenForciblyEnded: false,
+              startTime: 1718189,
+              endTime: 0,
+              participantCount: 0,
+              listenerCount: 1,
+              voiceParticipantCount: 0,
+              videoCount: 0,
+              maxUsers: 0,
+              moderatorCount: 1,
+              attendees: '',
+              metadata: '',
+              isBreakout: false,
+            },
+          ])
+        })
+
+        it('returns empty array', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query:
+                  'query { openRooms { meetingName meetingID participantCount startTime attendees { fullName } } }',
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  openRooms: [
+                    {
+                      meetingName: 'Dreammall Entwicklung',
+                      meetingID: 'Dreammall-Entwicklung',
+                      participantCount: 0,
+                      startTime: 1718189,
+                      attendees: [],
+                    },
+                  ],
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+      })
+
+      describe('one attendee', () => {
+        beforeEach(() => {
+          getMeetingsMock.mockResolvedValue([
+            {
+              meetingName: 'Dreammall Entwicklung',
+              meetingID: 'Dreammall-Entwicklung',
+              internalMeetingID: '258ea7269760758304b6b8494f17e9bf69dc1efe-1718189921310',
+              createTime: 1718189921310,
+              createDate: new Date('Wed Jun 12 10:58:41 UTC 2024'),
+              voiceBridge: 96378,
+              dialNumber: '613-555-1234',
+              attendeePW: 'MqgUFwdD',
+              moderatorPW: 'mTtxYGo2',
+              running: true,
+              duration: 0,
+              hasUserJoined: true,
+              recording: false,
+              hasBeenForciblyEnded: false,
+              startTime: 1718189,
+              endTime: 0,
+              participantCount: 0,
+              listenerCount: 1,
+              voiceParticipantCount: 0,
+              videoCount: 0,
+              maxUsers: 0,
+              moderatorCount: 1,
+              attendees: {
+                attendee: {
+                  userID: '1234',
+                  fullName: 'Peter Lustig',
+                  role: 'moderator',
+                  isPresenter: false,
+                  isListeningOnly: false,
+                  hasJoinedVoice: true,
+                  hasVideo: true,
+                  clientType: 'html5',
+                },
+              },
+              metadata: '',
+              isBreakout: false,
+            },
+          ])
+        })
+
+        it('returns empty array', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query:
+                  'query { openRooms { meetingName meetingID participantCount startTime attendees { fullName } } }',
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  openRooms: [
+                    {
+                      meetingName: 'Dreammall Entwicklung',
+                      meetingID: 'Dreammall-Entwicklung',
+                      participantCount: 0,
+                      startTime: 1718189,
+                      attendees: [
+                        {
+                          fullName: 'Peter Lustig',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+      })
+
+      describe('some attendee', () => {
+        beforeEach(() => {
+          getMeetingsMock.mockResolvedValue([
+            {
+              meetingName: 'Dreammall Entwicklung',
+              meetingID: 'Dreammall-Entwicklung',
+              internalMeetingID: '258ea7269760758304b6b8494f17e9bf69dc1efe-1718189921310',
+              createTime: 1718189921310,
+              createDate: new Date('Wed Jun 12 10:58:41 UTC 2024'),
+              voiceBridge: 96378,
+              dialNumber: '613-555-1234',
+              attendeePW: 'MqgUFwdD',
+              moderatorPW: 'mTtxYGo2',
+              running: true,
+              duration: 0,
+              hasUserJoined: true,
+              recording: false,
+              hasBeenForciblyEnded: false,
+              startTime: 1718189,
+              endTime: 0,
+              participantCount: 0,
+              listenerCount: 1,
+              voiceParticipantCount: 0,
+              videoCount: 0,
+              maxUsers: 0,
+              moderatorCount: 1,
+              attendees: {
+                attendee: [
+                  {
+                    userID: '1234',
+                    fullName: 'Peter Lustig',
+                    role: 'moderator',
+                    isPresenter: false,
+                    isListeningOnly: false,
+                    hasJoinedVoice: true,
+                    hasVideo: true,
+                    clientType: 'html5',
+                  },
+                  {
+                    userID: '4321',
+                    fullName: 'Bibi Bloxberg',
+                    role: 'attendee',
+                    isPresenter: false,
+                    isListeningOnly: false,
+                    hasJoinedVoice: true,
+                    hasVideo: true,
+                    clientType: 'html5',
+                  },
+                ],
+              },
+              metadata: '',
+              isBreakout: false,
+            },
+          ])
+        })
+
+        it('returns empty array', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query:
+                  'query { openRooms { meetingName meetingID participantCount startTime attendees { fullName } } }',
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  openRooms: [
+                    {
+                      meetingName: 'Dreammall Entwicklung',
+                      meetingID: 'Dreammall-Entwicklung',
+                      participantCount: 0,
+                      startTime: 1718189,
+                      attendees: [
+                        {
+                          fullName: 'Peter Lustig',
+                        },
+                        {
+                          fullName: 'Bibi Bloxberg',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+      })
+    })
   })
 })
+
+/*
+
+[
+  {
+    meetingName: 'Dreammall Entwicklung',
+    meetingID: 'Dreammall-Entwicklung',
+    internalMeetingID: '258ea7269760758304b6b8494f17e9bf69dc1efe-1718189921310',
+    createTime: 1718189921310,
+    createDate: 'Wed Jun 12 10:58:41 UTC 2024',
+    voiceBridge: 96378,
+    dialNumber: '613-555-1234',
+    attendeePW: 'MqgUFwdD',
+    moderatorPW: 'mTtxYGo2',
+    running: true,
+    duration: 0,
+    hasUserJoined: true,
+    recording: false,
+    hasBeenForciblyEnded: false,
+    startTime: 1718189921314,
+    endTime: 0,
+    participantCount: 1,
+    listenerCount: 1,
+    voiceParticipantCount: 0,
+    videoCount: 0,
+    maxUsers: 0,
+    moderatorCount: 1,
+    attendees: { attendee: [Object] },
+    metadata: '',
+    isBreakout: false
+  }
+]
+
+*/

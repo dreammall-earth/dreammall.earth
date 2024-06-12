@@ -1,37 +1,11 @@
-import { Meeting } from '@prisma/client'
-import {
-  ObjectType,
-  Field,
-  Int,
-  Resolver,
-  Mutation,
-  Query,
-  Authorized,
-  Ctx,
-  Arg,
-} from 'type-graphql'
+import { Resolver, Mutation, Query, Authorized, Ctx, Arg } from 'type-graphql'
 // eslint-disable-next-line import/named
 import { v4 as uuidv4 } from 'uuid'
 
-// import { createMeeting, getMeetings } from '#api/BBB'
-import { createMeeting, joinMeetingLink } from '#api/BBB'
+import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo } from '#api/BBB'
+import { Room, OpenRoom } from '#models/RoomModel'
 import { prisma } from '#src/prisma'
 import { Context } from '#src/server/context'
-
-@ObjectType()
-class Room {
-  constructor(meeting: Meeting) {
-    this.id = meeting.id
-    this.name = meeting.name
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @Field((type) => Int)
-  id: number
-
-  @Field()
-  name: string
-}
 
 @Resolver()
 export class RoomResolver {
@@ -93,6 +67,13 @@ export class RoomResolver {
       // createTime: meeting.createTime.toString(),
       // userID: user.id.toString(),
     })
+  }
+
+  @Authorized()
+  @Query(() => [OpenRoom])
+  async openRooms(): Promise<OpenRoom[]> {
+    const meetings = await getMeetings()
+    return meetings.map((m: MeetingInfo) => new OpenRoom(m))
   }
 
   /*
