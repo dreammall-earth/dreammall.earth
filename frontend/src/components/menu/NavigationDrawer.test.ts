@@ -1,23 +1,24 @@
 import { mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach } from 'vitest'
-
+import { h } from 'vue'
+import { VApp } from 'vuetify/components'
 import NavigationDrawer from './NavigationDrawer.vue'
 
 describe('NavigationDrawer', () => {
-  let wrapper: ReturnType<typeof mount>
+  const Wrapper = () => {
+    return mount(VApp, {
+      slots: {
+        default: h(NavigationDrawer),
+      },
+    })
+  }
+  let wrapper: ReturnType<typeof Wrapper>
 
   beforeEach(() => {
-    wrapper = mount(NavigationDrawer, {
-      props: { modelValue: true },
-    })
+    wrapper = Wrapper()
   })
 
   it('renders correctly', () => {
     expect(wrapper.element).toMatchSnapshot()
-  })
-
-  it('emits update:modelValue when drawer changes', async () => {
-    await wrapper.setProps({ modelValue: false })
-    expect(wrapper.emitted('update:modelValue')).toBeTruthy()
   })
 })

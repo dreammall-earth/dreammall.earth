@@ -1,0 +1,41 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`NavigationDrawer > renders correctly 1`] = `
+<div
+  class="v-application v-theme--light v-layout v-layout--full-height v-locale--is-ltr"
+>
+  <div
+    class="v-application__wrap"
+  >
+    
+    
+    <nav
+      class="v-navigation-drawer v-navigation-drawer--bottom v-navigation-drawer--temporary v-theme--light bg-grey-lighten-4 v-navigation-drawer--mobile custom-drawer"
+      data-v-01d5ff9e=""
+      style="bottom: 0px; z-index: 1004; transform: translateY(110%); position: fixed; transition: none !important; height: 300px; left: 0px; width: calc(100% - 0px - 0px);"
+    >
+      <!---->
+      <!---->
+      <div
+        class="v-navigation-drawer__content"
+      >
+        
+        
+        
+        
+      </div>
+      <!---->
+    </nav>
+    <transition-stub
+      appear="false"
+      css="true"
+      name="fade-transition"
+      persisted="false"
+    >
+      <!---->
+    </transition-stub>
+    
+    
+  </div>
+</div>
+`;

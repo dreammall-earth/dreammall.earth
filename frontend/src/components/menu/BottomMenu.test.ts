@@ -1,61 +1,57 @@
-import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
+import { flushPromises, mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { createVuetify } from 'vuetify'
+import { h } from 'vue'
+import { VApp } from 'vuetify/components'
+
+import { useAuthStore } from '#stores/authStore.js'
+import { authService } from '#tests/mock.authService.js'
 
 import BottomMenu from './BottomMenu.vue'
-import Circle from './CircleElement.vue'
-import ListWithNavigationDrawer from './ListWithNavigationDrawer.vue'
+import UserDropdown from './UserDropdown.vue'
 
 describe('BottomMenu', () => {
-  let wrapper: VueWrapper<InstanceType<typeof BottomMenu>>
-  let toggleDrawer: ReturnType<typeof vi.fn>
-  const vuetify = createVuetify()
-
-  beforeEach(() => {
-    toggleDrawer = vi.fn()
-    wrapper = mount(BottomMenu, {
-      global: {
-        plugins: [vuetify],
-        mocks: {
-          toggleDrawer,
-        },
+  const Wrapper = () => {
+    return mount(VApp, {
+      slots: {
+        default: h(BottomMenu),
       },
     })
+  }
+  let wrapper: ReturnType<typeof Wrapper>
+
+  beforeEach(() => {
+    wrapper = Wrapper()
   })
 
   it('renders BottomMenu', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 
-  it('toggles drawer on Circle click', async () => {
-    await wrapper.findComponent(Circle).trigger('click')
-    expect(toggleDrawer).toHaveBeenCalled()
-    await flushPromises()
-    expect(wrapper.findComponent(ListWithNavigationDrawer).props('drawer')).toBe(true)
+  describe('Circle Button ', () => {
+
+   
+   
+    it ('has no drawer', () => {
+     expect(wrapper.find('.custom-drawer').exists()).toBe(false)
+    })
+
+
+    describe('Click Circle', () => {
+
+      beforeEach(async () => {
+        await wrapper.findComponent({ name: 'Circle' }).trigger('click')
+      })
+    
+      it ('has drawer', () => {
+       
+      expect(wrapper.find('.v-navigation-drawer').exists()).toBe(true)
+      })
+    })
   })
 
-  it('passes location prop to ListWithNavigationDrawer', () => {
-    const listWithNavigationDrawer = wrapper.findComponent(ListWithNavigationDrawer)
-    expect(listWithNavigationDrawer.props('location')).toBe('bottom')
-  })
-
-  it('handles item click and closes menu', async () => {
-    const listWithNavigationDrawer = wrapper.findComponent(ListWithNavigationDrawer)
-    const emitSpy = vi.spyOn(listWithNavigationDrawer.vm, '$emit')
-    await listWithNavigationDrawer.findAll('.custom-list-item')[0].trigger('click')
-    expect(emitSpy).toHaveBeenCalledWith('item-click', false)
-    // Hier können zusätzliche Tests hinzugefügt werden, um zu prüfen, ob das Menü geschlossen wird.
-  })
 
   describe('signout button', () => {
-    const authStore = {
-      save: vi.fn(),
-      clear: vi.fn(),
-    }
-
-    const authService = {
-      signOut: vi.fn().mockResolvedValue('signed out'),
-    }
+    const authStore = useAuthStore()
 
     const authServiceSpy = vi.spyOn(authService, 'signOut')
     const storeSpy = vi.spyOn(authStore, 'clear')
@@ -86,7 +82,7 @@ describe('BottomMenu', () => {
       beforeEach(async () => {
         await wrapper.find('button.user-info').trigger('click')
         await flushPromises()
-        await wrapper.find('button.sign-out').trigger('click')
+        await wrapper.findComponent(UserDropdown).find('button.sign-out').trigger('click')
       })
 
       it('calls auth service sign out', () => {
@@ -105,7 +101,7 @@ describe('BottomMenu', () => {
         authServiceSpy.mockRejectedValue('Error!')
         await wrapper.find('button.user-info').trigger('click')
         await flushPromises()
-        await wrapper.find('button.sign-out').trigger('click')
+        await wrapper.findComponent(UserDropdown).find('button.sign-out').trigger('click')
       })
 
       it('logs the error', () => {

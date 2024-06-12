@@ -1,21 +1,16 @@
 <template>
-  <div>
-    <v-bottom-navigation>
-      <v-btn value="message">
+  <div  class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface">
+ 
         <MessageIndicator :number-of-messages="3" />
-      </v-btn>
-      <v-btn value="news">
         <NewsIndicator :has-news="true" />
-      </v-btn>
-      <v-btn value="rooms">
+     
         <Circle @click="toggleDrawer">
           <v-icon icon="$camera"></v-icon>
         </Circle>
-      </v-btn>
-      <v-btn value="rooms">
-        <UserInfo />
-      </v-btn>
-    </v-bottom-navigation>
+      
+      <UserInfo />
+  
+   
     <ListWithNavigationDrawer
       :drawer="drawer"
       :location="location"
@@ -43,9 +38,9 @@ const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('bot
 </script>
 
 <style scoped lang="scss">
-v-bottom-navigation {
+/*v-bottom-navigation {
   z-index: 10;
-}
+}*/
 .bottom-menu {
   bottom: 0;
   left: 0;

@@ -38,13 +38,6 @@ const drawer = ref(props.modelValue)
 const computedLocation = computed(() => (display.mobile.value ? 'bottom' : props.location))
 
 watch(
-  () => props.modelValue,
-  (newVal) => {
-    drawer.value = newVal
-  },
-)
-
-watch(
   () => drawer.value,
   (newVal) => {
     if (newVal !== props.modelValue) {
