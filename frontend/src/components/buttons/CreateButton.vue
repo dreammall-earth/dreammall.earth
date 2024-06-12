@@ -1,7 +1,7 @@
 <template>
   <div class="create-button-container">
     <div>
-      <v-container fluid>
+      <v-container fluid class="pa-0">
         <div class="button-wrapper">
           <svg
             width="1731"
@@ -435,8 +435,8 @@ const enterRoom = async () => {
 }
 
 svg {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: calc(100vh - 10px);
 
   @media screen and (min-width: $mobile) and (max-width: $tablet) {
     transition: scale 1s;
@@ -499,7 +499,7 @@ svg {
 
 .button-list {
   position: absolute;
-  top: calc(50% + 50px);
+  top: calc(50% + 40px);
   left: calc(50% - 165px);
   display: flex;
   flex-direction: column;
@@ -542,7 +542,7 @@ svg {
   }
 
   50% {
-    transform: scale(1.26);
+    transform: scale(2.25);
   }
 
   100% {
