@@ -11,7 +11,7 @@
           <span v-else>{{ initals?.toUpperCase() }}</span>
         </v-avatar>
         <div class="d-flex flex-column justify-center text-right pa-1 pl-3 w-100">
-          <v-icon icon="$ellipsis"></v-icon>
+          <v-icon icon="$ellipsis" data-test="user-dropdown"></v-icon>
         </div>
       </button>
     </template>

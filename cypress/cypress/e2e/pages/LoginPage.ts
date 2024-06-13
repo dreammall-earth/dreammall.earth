@@ -12,6 +12,11 @@ class LoginPage {
     cy.get(this.passwordInput).type(password)
     cy.get(this.submitBtn).click()
   }
+
+  agreeConsent() {
+    cy.url('include', 'dreammallearth-authorization-implicit-consent')
+    cy.get(this.submitBtn).click()
+  }
 }
 
 export const loginPage = new LoginPage()

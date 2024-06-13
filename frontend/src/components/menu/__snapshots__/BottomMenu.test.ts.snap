@@ -9,7 +9,7 @@ exports[`BottomMenu > renders BottomMenu 1`] = `
   >
     
     <div
-      class="bottom-menu w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface"
+      class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface"
       data-v-96a196cc=""
     >
       <div
@@ -150,6 +150,7 @@ exports[`BottomMenu > renders BottomMenu 1`] = `
           <i
             aria-hidden="true"
             class="v-icon notranslate v-theme--light v-icon--size-default"
+            data-test="user-dropdown"
             data-v-607bdd70=""
           >
             <svg
