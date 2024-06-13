@@ -71,9 +71,21 @@ export class RoomResolver {
 
   @Authorized()
   @Query(() => [OpenRoom])
-  async openRooms(): Promise<OpenRoom[]> {
+  async openRooms(@Ctx() context: Context): Promise<OpenRoom[]> {
+    const { user } = context
+    if (!user) return []
     const meetings = await getMeetings()
-    return meetings.map((m: MeetingInfo) => new OpenRoom(m))
+    return meetings.map(
+      (m: MeetingInfo) =>
+        new OpenRoom(
+          m,
+          joinMeetingLink({
+            fullName: user.name,
+            meetingID: m.meetingID,
+            password: '',
+          }),
+        ),
+    )
   }
 
   /*

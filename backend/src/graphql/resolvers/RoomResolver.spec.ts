@@ -341,7 +341,7 @@ describe('RoomResolver', () => {
             testServer.executeOperation(
               {
                 query:
-                  'query { openRooms { meetingName meetingID participantCount startTime attendees { fullName } } }',
+                  'query { openRooms { meetingName meetingID participantCount startTime joinLink attendees { fullName } } }',
               },
               {
                 contextValue: {
@@ -361,6 +361,7 @@ describe('RoomResolver', () => {
                       participantCount: 0,
                       startTime: 1718189,
                       attendees: [],
+                      joinLink: 'https://my-link',
                     },
                   ],
                 },
@@ -420,7 +421,7 @@ describe('RoomResolver', () => {
             testServer.executeOperation(
               {
                 query:
-                  'query { openRooms { meetingName meetingID participantCount startTime attendees { fullName } } }',
+                  'query { openRooms { meetingName meetingID participantCount startTime joinLink attendees { fullName } } }',
               },
               {
                 contextValue: {
@@ -439,6 +440,7 @@ describe('RoomResolver', () => {
                       meetingID: 'Dreammall-Entwicklung',
                       participantCount: 0,
                       startTime: 1718189,
+                      joinLink: 'https://my-link',
                       attendees: [
                         {
                           fullName: 'Peter Lustig',
@@ -515,7 +517,7 @@ describe('RoomResolver', () => {
             testServer.executeOperation(
               {
                 query:
-                  'query { openRooms { meetingName meetingID participantCount startTime attendees { fullName } } }',
+                  'query { openRooms { meetingName meetingID participantCount startTime joinLink attendees { fullName } } }',
               },
               {
                 contextValue: {
@@ -534,6 +536,7 @@ describe('RoomResolver', () => {
                       meetingID: 'Dreammall-Entwicklung',
                       participantCount: 0,
                       startTime: 1718189,
+                      joinLink: 'https://my-link',
                       attendees: [
                         {
                           fullName: 'Peter Lustig',

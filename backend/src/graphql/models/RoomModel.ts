@@ -21,7 +21,7 @@ export class Room {
 
 @ObjectType()
 export class OpenRoom {
-  constructor(meeting: MeetingInfo) {
+  constructor(meeting: MeetingInfo, link: string) {
     this.meetingID = meeting.meetingID
     this.meetingName = meeting.meetingName
     this.startTime = meeting.startTime
@@ -32,6 +32,7 @@ export class OpenRoom {
           ? meeting.attendees.attendee.map((a: AttendeeInfo) => new Attendee(a))
           : [meeting.attendees.attendee]
         : []
+    this.joinLink = link
   }
 
   @Field()
@@ -48,4 +49,7 @@ export class OpenRoom {
 
   @Field(() => [Attendee])
   attendees: Attendee[]
+
+  @Field()
+  joinLink: string
 }
