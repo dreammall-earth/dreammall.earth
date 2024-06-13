@@ -22,6 +22,9 @@
       "text": "Something went wrong."
     }
   },
+  "joinRoomPage": {
+    "header": "Join Room as:"
+  },
   "menu": {
     "cockpit": "Cockpit",
     "mall": "Mall",
@@ -34,6 +37,7 @@
   },
   "meta": {
     "defaultDescription": "Expanding your reach making the most of opportunities enhance quality of life together",
-    "defaultTitle": "DreamMall"
+    "defaultTitle": "DreamMall",
+    "joinRoomTitle": "Enter Room"
   }
 }
