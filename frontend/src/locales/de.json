@@ -5,8 +5,11 @@
     "title": "DreamMall {'|'} Authentifizierung"
   },
   "buttons": {
+    "newProject": "Neues Projekt",
+    "newTable": "Neuer Tisch",
     "signout": "Sign Out",
     "toAdmin": "Zum Admin",
+    "toAssistant": "Assistent",
     "toRoom": "Zum Treffen"
   },
   "cafe": {
