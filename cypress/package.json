@@ -29,7 +29,7 @@
     "cypress:run": "cypress run --e2e --browser electron",
     "docs:dev": "vuepress dev .",
     "docs:build": "vuepress build .",
-    "test:lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.cjs,.json,.yml,.yaml --max-warnings 0 .",
+    "test:lint": "eslint --ext .ts,.tsx,.js,.jsx,.cjs,.json,.yml,.yaml --max-warnings 0 .",
     "update": "npx npm-check-updates"
   },
   "devDependencies": {
