@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`SilentRefreshPage > auth service with succes > renders 1`] = `
+exports[`Room Page > without apollo error > renders 1`] = `
 <div
   class="v-application v-theme--light v-layout v-layout--full-height v-locale--is-ltr"
 >
@@ -11,7 +11,7 @@ exports[`SilentRefreshPage > auth service with succes > renders 1`] = `
     <main
       class="v-main bg-background main-layout"
       data-v-75d0be1e=""
-      data-v-a3d38914=""
+      data-v-d68296eb=""
       style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: NaN; --v-layout-bottom: 0px; transition: none !important;"
     >
       
@@ -1122,10 +1122,10 @@ exports[`SilentRefreshPage > auth service with succes > renders 1`] = `
           >
             
             <div
-              class="h-screen auth-page py-12"
-              data-v-a3d38914=""
+              class="container"
+              data-v-d68296eb=""
             >
-              $t('auth.content')
+              <!--v-if-->
             </div>
             
           </div>
