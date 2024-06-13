@@ -66,7 +66,7 @@ describe('CreateButton', () => {
       })
       describe('enter room', () => {
         // const consoleSpy = vi.spyOn(global.console, 'log')
-        const windowOpenSpy = vi.spyOn(window, 'open')
+        const windowOpenSpy = vi.spyOn(global.window, 'open')
 
         beforeEach(async () => {
           await wrapper.find('#create-button-mobile').trigger('click')
