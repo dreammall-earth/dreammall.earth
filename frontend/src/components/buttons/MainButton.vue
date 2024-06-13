@@ -1,6 +1,8 @@
 <template>
   <v-btn :color="setColor" :class="classes" :size="size" @click="onClick">
     <v-icon v-if="props.variant === 'reload'" start class="reload-icon" icon="mdi-reload"></v-icon>
+    <v-icon v-if="props.icon !== ''" start class="icon pb-1" :icon="'mdi-' + props.icon"></v-icon>
+
     <span class="main-button-content"
       >{{ label }}
       <v-progress-circular
@@ -25,6 +27,7 @@ const props = withDefaults(
      */
     label: string
     href?: string
+    icon?: string
     /**
      * primary or secondary button
      */
@@ -37,6 +40,10 @@ const props = withDefaults(
       | 'submit'
       | 'download'
       | 'reload'
+      | 'gradient'
+      | 'border-gradient'
+      | 'border-yellow'
+      | 'border-blue'
     /**
      * size of the button
      */
@@ -46,7 +53,7 @@ const props = withDefaults(
      */
     isLoading?: boolean
   }>(),
-  { href: undefined, variant: 'primary', size: 'medium', isLoading: false },
+  { href: undefined, icon: '', variant: 'primary', size: 'medium', isLoading: false },
 )
 
 const emit = defineEmits<{
@@ -63,6 +70,10 @@ const classes = computed(() => ({
   'main-button--form-submit': props.variant === 'submit',
   'main-button--download': props.variant === 'download',
   'main-button--reload': props.variant === 'reload',
+  'main-button--gradient': props.variant === 'gradient',
+  'main-button--border-gradient': props.variant === 'border-gradient',
+  'main-button--border-yellow': props.variant === 'border-yellow',
+  'main-button--border-blue': props.variant === 'border-blue',
   [`main-button-${props.size}`]: true,
 }))
 
@@ -80,6 +91,8 @@ const setColor = computed(() => {
   } else if (props.variant === 'download') {
     return '#009dd9'
   } else if (props.variant === 'reload') {
+    return '#fff'
+  } else if (props.variant === 'gradient') {
     return '#fff'
   } else {
     return '#f09630'
@@ -199,6 +212,11 @@ const onClick = () => {
     border-radius: 15px;
   }
 
+  &--gradient {
+    color: white !important;
+    background: linear-gradient(288.21deg, #2ca5b1 23.61%, #f09630 96.6%);
+  }
+
   &--download:hover {
     @include linear-gradient-btn-hover(
       $main-button-download-bg-hover-transition-start,
@@ -206,6 +224,49 @@ const onClick = () => {
     );
 
     box-shadow: 0 6px 24px 0 $main-button-primary-shadow;
+  }
+
+  &--border-gradient {
+    max-width: 145px;
+    max-height: 38px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.1px;
+    text-align: left;
+    letter-spacing: 0.1px;
+    background:
+      linear-gradient(0deg, var(--v-bottom-menu-background), var(--v-bottom-menu-background))
+        padding-box,
+      linear-gradient(90deg, rgb(240 150 48 / 100%) 0%, rgb(44 165 177 / 100%) 100%) border-box;
+    border: 1px solid transparent;
+    border-radius: 80px;
+    outline: none;
+  }
+
+  &--border-yellow {
+    max-width: 145px;
+    max-height: 38px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.1px;
+    color: #f09630 !important;
+    text-align: left;
+    letter-spacing: 0.1px;
+    background: transparent !important;
+    border: 1px solid #f09630;
+  }
+
+  &--border-blue {
+    max-width: 145px;
+    max-height: 38px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.1px;
+    color: #2ca5b1 !important;
+    text-align: left;
+    letter-spacing: 0.1px;
+    background: transparent !important;
+    border: 1px solid #2ca5b1;
   }
 
   &-large {

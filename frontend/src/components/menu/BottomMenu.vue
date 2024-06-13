@@ -5,7 +5,7 @@
     >
       <MessageIndicator :number-of-messages="3" />
       <NewsIndicator :has-news="true" />
-
+      <CreateButtonMobile />
       <Circle @click="toggleDrawer">
         <v-icon icon="$camera"></v-icon>
       </Circle>
@@ -23,6 +23,8 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+
+import CreateButtonMobile from '#components/buttons/CreateButtonMobile.vue'
 
 import Circle from './CircleElement.vue'
 import ListWithNavigationDrawer from './ListWithNavigationDrawer.vue'
@@ -56,8 +58,13 @@ const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('bot
 .bottom-menu {
   bottom: 0;
   left: 0;
+  z-index: 1;
   background: var(--v-bottom-menu-background) !important;
   backdrop-filter: blur(20px);
   border-radius: 30px 30px 0 0;
+
+  .camera-button {
+    transform: translateX(20px);
+  }
 }
 </style>
