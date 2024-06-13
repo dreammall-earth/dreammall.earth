@@ -298,7 +298,7 @@ updates:
 
 - package-ecosystem: npm
   open-pull-requests-limit: 99
-  directory: "/cypress"
+  directory: "/tests"
   rebase-strategy: "disabled"
   schedule:
     interval: weekly

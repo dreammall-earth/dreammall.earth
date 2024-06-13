@@ -124,10 +124,10 @@ backend-test-build-docs: &backend-test-build-docs
 
 # e2e - TODO refine separation of docs from code-related files
 e2e-all:
-  - 'cypress/**/*'
+  - 'tests/**/*'
 
 e2e-docs:
-  - 'cypress/**/*.md'
+  - 'tests/**/*.md'
   - '.github/workflows/e2e.test.build.docs.yml'
   - '.github/file-filter.yml'
   - '.vuepress/*'
