@@ -409,12 +409,7 @@ const enterRoom = async () => {
       // eslint-disable-next-line no-console
       console.log(joinMyRoomQueryError.value.message)
     } else {
-      if (joinMyRoomQueryResult.value) {
-        window.open(joinMyRoomQueryResult.value.joinMyRoom, '_blank')
-      } else {
-        // eslint-disable-next-line no-console
-        console.log('JoinMyRoomQueryResult.value', joinMyRoomQueryResult.value.joinMyRoom)
-      }
+      window.open(joinMyRoomQueryResult.value?.joinMyRoom, '_blank')
     }
   } catch (error) {
     // eslint-disable-next-line no-console
