@@ -5,10 +5,11 @@ import axios, { InternalAxiosRequestConfig } from 'axios'
 import { XMLParser } from 'fast-xml-parser'
 
 import { CONFIG } from '#config/config'
+import logger from '#src/logger'
 
 const parser = new XMLParser()
 
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
   baseURL: CONFIG.BBB_URL,
   timeout: 25000,
   headers: {
@@ -64,7 +65,18 @@ interface CreateMeetingResponse {
   message: string
 }
 
-interface MeetingInfo {
+export type AttendeeInfo = {
+  userID: string
+  fullName: string
+  role: string
+  isPresenter: boolean
+  isListeningOnly: boolean
+  hasJoinedVoice: boolean
+  hasVideo: boolean
+  clientType: string
+}
+
+export type MeetingInfo = {
   meetingName: string
   meetingID: string
   internalMeetingID: string
@@ -87,17 +99,17 @@ interface MeetingInfo {
   videoCount: number
   maxUsers: number
   moderatorCount: number
-  attendees: string
+  attendees: string | { attendee: AttendeeInfo[] | AttendeeInfo }
   metadata: string
-  isBreakout: string
+  isBreakout: boolean
 }
 
-interface GetMeetingsResponse {
+type GetMeetingsResponse = {
   returncode: string
-  meetings: string | { meeting: MeetingInfo[] }
+  meetings: { meeting: MeetingInfo[] } | string
 }
 
-export const getMeetings = async () => {
+export const getMeetings = async (): Promise<MeetingInfo[]> => {
   try {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const { data } = await axiosInstance.get('/getMeetings')
@@ -105,11 +117,20 @@ export const getMeetings = async () => {
     const parsed: {
       response: GetMeetingsResponse
     } = parser.parse(data as string)
-    return parsed.response
+    if (parsed.response.returncode === 'SUCCESS') {
+      if (typeof parsed.response.meetings === 'string') return []
+      if (Array.isArray(parsed.response.meetings?.meeting)) {
+        return parsed.response.meetings.meeting
+      } else {
+        return [parsed.response.meetings.meeting]
+      }
+    } else {
+      logger.error('parse getMeetings with error', parsed)
+    }
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.log(err)
+    logger.error('getMeetings with error', err)
   }
+  return []
 }
 
 interface CreateMeetingOptions {
@@ -118,7 +139,9 @@ interface CreateMeetingOptions {
   // welcome?: string
 }
 
-export const createMeeting = async (options: CreateMeetingOptions) => {
+export const createMeeting = async (
+  options: CreateMeetingOptions,
+): Promise<CreateMeetingResponse | null> => {
   const { name, meetingID /*, welcome */ } = options
   try {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -139,8 +162,8 @@ export const createMeeting = async (options: CreateMeetingOptions) => {
     } = parser.parse(data as string)
     return parsed.response
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.log(err)
+    logger.error('createMeeting with error', err)
+    return null
   }
 }
 
@@ -162,6 +185,17 @@ export const joinMeetingLink = (options: JoinMeetinLinkOptions): string => {
   return CONFIG.BBB_URL + 'join?' + params + '&checksum=' + checksum
 }
 
+const handleOpenRomms = async (): Promise<void> => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const rooms = await getMeetings()
+  // console.log(rooms.map((m) => m.attendees?.attendee))
+}
+
+export const checkForOpenRooms = (): void => {
+  void handleOpenRomms()
+  setTimeout(checkForOpenRooms, 60 * 1000)
+}
+
 /*
 export const listHooks = async () => {
   try {
@@ -171,5 +205,6 @@ export const listHooks = async () => {
     console.log(err)
   }
 }
+
 
 */
