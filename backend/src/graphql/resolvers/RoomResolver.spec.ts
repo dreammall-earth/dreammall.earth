@@ -557,37 +557,3 @@ describe('RoomResolver', () => {
     })
   })
 })
-
-/*
-
-[
-  {
-    meetingName: 'Dreammall Entwicklung',
-    meetingID: 'Dreammall-Entwicklung',
-    internalMeetingID: '258ea7269760758304b6b8494f17e9bf69dc1efe-1718189921310',
-    createTime: 1718189921310,
-    createDate: 'Wed Jun 12 10:58:41 UTC 2024',
-    voiceBridge: 96378,
-    dialNumber: '613-555-1234',
-    attendeePW: 'MqgUFwdD',
-    moderatorPW: 'mTtxYGo2',
-    running: true,
-    duration: 0,
-    hasUserJoined: true,
-    recording: false,
-    hasBeenForciblyEnded: false,
-    startTime: 1718189921314,
-    endTime: 0,
-    participantCount: 1,
-    listenerCount: 1,
-    voiceParticipantCount: 0,
-    videoCount: 0,
-    maxUsers: 0,
-    moderatorCount: 1,
-    attendees: { attendee: [Object] },
-    metadata: '',
-    isBreakout: false
-  }
-]
-
-*/
