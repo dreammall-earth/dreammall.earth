@@ -1,4 +1,4 @@
-# DreamMall End-to-End Testing
+# End-to-End Testing
 
 [![nodejs][badge-nodejs-img]][badge-nodejs-href]
 [![npm][badge-npm-img]][badge-npm-href]
@@ -7,12 +7,14 @@
 
 ![](../presenter/src/assets/dreammall-logo.svg)
 
-End-to-End Testing with Cypress utilizing
+End-to-End Testing the DreamMall Software with Cypress utilizing
 - [cypress-io/github-action](https://github.com/marketplace/actions/cypress-io) caching the Cypress installation and dependencies for fast Cypress CI initialization
 - [Cucumber](https://cucumber.io/docs/gherkin/reference/) for human-readable test specifications
 - [Multiple Cucumber HTML Reporter](https://github.com/WasiqB/multiple-cucumber-html-reporter/tree/main) to create easy readable, and searchable HTML reports enriched with metadata
 
 ## What is covered
+The tested features are organized in [feature files](cypress/e2e/features) written in [Gherkin syntax](https://cucumber.io/docs/gherkin/).
+
 These features of the DreamMall software are covered by the end-to-end tests:
 - [User.Authentication](cypress/e2e/features/User.Authentication.feature)
   - Authentik
