@@ -1,7 +1,7 @@
 <template>
   <DefaultLayout>
     <div class="container">
-      <EmbeddedRoom :url="roomUrl.value" />
+      <EmbeddedRoom :url="roomUrl" />
     </div>
   </DefaultLayout>
 </template>
