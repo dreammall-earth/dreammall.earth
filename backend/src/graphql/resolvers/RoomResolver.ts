@@ -1,37 +1,11 @@
-import { Meeting } from '@prisma/client'
-import {
-  ObjectType,
-  Field,
-  Int,
-  Resolver,
-  Mutation,
-  Query,
-  Authorized,
-  Ctx,
-  Arg,
-} from 'type-graphql'
+import { Resolver, Mutation, Query, Authorized, Ctx, Arg, Int } from 'type-graphql'
 // eslint-disable-next-line import/named
 import { v4 as uuidv4 } from 'uuid'
 
-// import { createMeeting, getMeetings } from '#api/BBB'
-import { createMeeting, joinMeetingLink } from '#api/BBB'
+import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo } from '#api/BBB'
+import { Room, OpenRoom } from '#models/RoomModel'
 import { prisma } from '#src/prisma'
 import { Context } from '#src/server/context'
-
-@ObjectType()
-class Room {
-  constructor(meeting: Meeting) {
-    this.id = meeting.id
-    this.name = meeting.name
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @Field((type) => Int)
-  id: number
-
-  @Field()
-  name: string
-}
 
 @Resolver()
 export class RoomResolver {
@@ -95,6 +69,25 @@ export class RoomResolver {
     })
   }
 
+  @Authorized()
+  @Query(() => [OpenRoom])
+  async openRooms(@Ctx() context: Context): Promise<OpenRoom[]> {
+    const { user } = context
+    if (!user) return []
+    const meetings = await getMeetings()
+    return meetings.map(
+      (m: MeetingInfo) =>
+        new OpenRoom(
+          m,
+          joinMeetingLink({
+            fullName: user.name,
+            meetingID: m.meetingID,
+            password: '',
+          }),
+        ),
+    )
+  }
+
   @Query(() => String, { nullable: true })
   async joinRoom(
     @Arg('userName') userName: string,
@@ -112,6 +105,7 @@ export class RoomResolver {
       password: meeting.attendeePW ? meeting.attendeePW : '',
     })
   }
+
   /*
   @Query(() => Boolean)
   async test(): Promise<boolean> {
