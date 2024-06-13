@@ -1128,7 +1128,7 @@ exports[`IndexPage > without apollo error > renders 1`] = `
                 data-v-dc035224=""
               >
                 <div
-                  class="v-container v-container--fluid v-locale--is-ltr"
+                  class="v-container v-container--fluid v-locale--is-ltr pa-0"
                   data-v-dc035224=""
                 >
                   <div
