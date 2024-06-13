@@ -346,6 +346,7 @@ import { onMounted, ref } from 'vue'
 
 import MainButton from '#components/buttons/MainButton.vue'
 import { joinMyRoomQuery } from '#queries/joinMyRoomQuery'
+import { navigate } from 'vike/client/router';
 
 const buttonIsTurned = ref(false)
 const warp = ref<HTMLInputElement | null>(null)
@@ -393,28 +394,8 @@ const onClick = (event: MouseEvent) => {
   }
 }
 
-const {
-  result: joinMyRoomQueryResult,
-  error: joinMyRoomQueryError,
-  refetch,
-} = useQuery(joinMyRoomQuery, null, {
-  prefetch: false,
-  fetchPolicy: 'no-cache',
-})
-
-const enterRoom = async () => {
-  try {
-    await refetch()
-    if (joinMyRoomQueryError.value) {
-      // eslint-disable-next-line no-console
-      console.log(joinMyRoomQueryError.value.message)
-    } else {
-      window.open(joinMyRoomQueryResult.value?.joinMyRoom, '_blank')
-    }
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error('Error while entering room', error)
-  }
+const enterRoom = () => {
+  navigate('/room/')
 }
 </script>
 
