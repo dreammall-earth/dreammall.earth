@@ -13,7 +13,7 @@ const testUrl = 'http://some.url'
 
 mockClient.setRequestHandler(joinMyRoomQuery, joinMyRoomQueryMock)
 
-describe('useMyRoom', () => {
+describe('Room Page', () => {
   const TestComponent = defineComponent({
     setup() {
       return {

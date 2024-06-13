@@ -55,6 +55,7 @@ describe('Room Page', () => {
     const errorMessage = 'Aua!'
 
     beforeEach(() => {
+      wrapper.unmount()
       vi.clearAllMocks()
       joinMyRoomQueryMock.mockRejectedValue({ message: errorMessage, data: undefined })
       wrapper = Wrapper()
