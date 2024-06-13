@@ -24,7 +24,7 @@
         </v-col>
       </v-row>
     </v-app-bar>
-    <NavigationDrawer
+    <!-- <NavigationDrawer
       v-model="drawer"
       :location="location"
       color="grey-lighten-4"
@@ -33,7 +33,12 @@
       class="custom-drawer"
     >
       <ListElement :items="items" @item-click="toggleDrawer" />
-    </NavigationDrawer>
+    </NavigationDrawer> -->
+    <ListWithNavigationDrawer
+      :drawer="drawer"
+      :location="location"
+      @update:drawer="updateDrawer($event)"
+    />
   </div>
 </template>
 
@@ -42,34 +47,26 @@ import { ref } from 'vue'
 
 import Circle from './CircleElement.vue'
 import LightDarkSwitch from './LightDarkSwitch.vue'
-import ListElement from './ListElement.vue'
 import MessageIndicator from './MessageIndicator.vue'
-import NavigationDrawer from './NavigationDrawer.vue'
 import NewsIndicator from './NewsIndicator.vue'
 import TabControl from './TabControl.vue'
 import UserInfo from './UserInfo.vue'
+import ListWithNavigationDrawer from './ListWithNavigationDrawer.vue'
+
 
 const drawer = ref(false)
-const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('right')
 
 const toggleDrawer = () => {
   drawer.value = !drawer.value
 }
 
-interface Item {
-  title: string
-  fullWidth: boolean
+const updateDrawer = (event: boolean) => {
+  drawer.value = event
 }
 
-const items = ref<Item[]>([
-  { title: 'LOLLY Krypto Entwicklung', fullWidth: false },
-  { title: 'Aachener Freunde Treff', fullWidth: false },
-  { title: 'Building A Wooden Guitar', fullWidth: false },
-  { title: 'Co Working Space Manufaktur', fullWidth: true },
-  { title: 'Intervallfasten Kalender', fullWidth: false },
-  { title: 'Lomografie 2050', fullWidth: true },
-  { title: 'Freies Treffen U50', fullWidth: false },
-])
+const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('right')
+ 
+ 
 </script>
 
 <style scoped lang="scss">

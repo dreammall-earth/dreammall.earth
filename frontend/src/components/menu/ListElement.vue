@@ -1,20 +1,20 @@
 <template>
   <v-card class="mx-auto" width="400">
-    <v-list density="compact">
+    <v-list lines="two">
       <v-list-item
         v-for="(item, index) in items"
-        :key="index"
-        variant="plain"
-        class="custom-list-item"
-        :class="{ 'full-width': item.fullWidth, rounded: item.rounded }"
+        :key="index"        
+        :class="{ 'full-width': item.fullWidth, rounded: item.rounded, 'custom-list-item': true }"
         @click="handleItemClick"
+        :title="item.title"
+        :subtitle="item.subtitle"
       >
         <template v-if="item.prepend" #prepend>
           <component :is="item.prepend" v-bind="item.prependProps" />
         </template>
 
-        <v-list-item-title>{{ item.title }}</v-list-item-title>
-        <v-list-item-subtitle v-if="item.subtitle">{{ item.subtitle }}</v-list-item-subtitle>
+        <!-- <v-list-item-title>{{ item.title }}</v-list-item-title>
+        <v-list-item-subtitle v-if="item.subtitle">{{ item.subtitle }}</v-list-item-subtitle> -->
 
         <template v-if="item.append" #append>
           <component :is="item.append" v-bind="item.appendProps" />
