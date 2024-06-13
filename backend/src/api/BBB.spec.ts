@@ -11,7 +11,14 @@ import {
   axiosInstance,
   getMeetings,
   MeetingInfo,
+  createMeeting,
 } from './BBB'
+
+jest.mock('#src/logger', () => {
+  return {
+    error: jest.fn(),
+  }
+})
 
 // values taken form https://docs.bigbluebutton.org/development/api/#usage
 CONFIG.BBB_SHARED_SECRET = '639259d4-9dd8-4b25-bf01-95f9567eaf4b'
@@ -110,7 +117,6 @@ describe('joinMeetingLink', () => {
 })
 
 describe('getMeetings', () => {
-  const loggerErrorSpy = jest.spyOn(logger, 'error')
   const axiosInstanceGetSpy = jest.spyOn(axiosInstance, 'get')
 
   let result: MeetingInfo[]
@@ -126,7 +132,8 @@ describe('getMeetings', () => {
     })
 
     it('logs get meetings error', () => {
-      expect(loggerErrorSpy).toBeCalledWith('getMeetings with error', 'Ouch!')
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.error).toBeCalledWith('getMeetings with error', 'Ouch!')
     })
   })
 
@@ -137,7 +144,8 @@ describe('getMeetings', () => {
     })
 
     it('logs get meetings error with type error', () => {
-      expect(loggerErrorSpy).toBeCalledWith(
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.error).toBeCalledWith(
         'getMeetings with error',
         new TypeError(`Cannot read properties of undefined (reading 'returncode')`),
       )
@@ -449,12 +457,84 @@ describe('getMeetings', () => {
     })
 
     it('logs parser error', () => {
-      expect(loggerErrorSpy).toBeCalledWith('parse getMeetings with error', {
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.error).toBeCalledWith('parse getMeetings with error', {
         response: {
           message: 'Something went wrong',
           returncode: 'ERROR',
         },
       })
+    })
+  })
+})
+
+describe('createMeeting', () => {
+  const axiosInstancePostSpy = jest.spyOn(axiosInstance, 'post')
+
+  describe('with success', () => {
+    beforeEach(() => {
+      jest.clearAllMocks()
+      axiosInstancePostSpy.mockResolvedValue({
+        data: `
+<response>
+  <returncode>SUCCESS</returncode>
+  <meetingID>Dreammall-Entwicklung</meetingID>
+  <internalMeetingID>258ea7269760758304b6b8494f17e9bf69dc1efe-1718289413143</internalMeetingID>
+  <parentMeetingID>bbb-none</parentMeetingID>
+  <attendeePW>5ixnD4hJ</attendeePW>
+  <moderatorPW>cakLrzBr</moderatorPW>
+  <createTime>1718289413143</createTime>
+  <voiceBridge>09746</voiceBridge>
+  <dialNumber>613-555-1234</dialNumber>
+  <createDate>Thu Jun 13 14:36:53 UTC 2024</createDate>
+  <hasUserJoined>false</hasUserJoined>
+  <duration>0</duration>
+  <hasBeenForciblyEnded>false</hasBeenForciblyEnded>
+  <messageKey></messageKey>
+  <message></message>
+</response>
+`,
+      })
+    })
+
+    it('returns create meeting response', async () => {
+      await expect(
+        createMeeting({
+          name: 'Peter Lustig',
+          meetingID: 'Peters Raum',
+        }),
+      ).resolves.toEqual({
+        returncode: 'SUCCESS',
+        meetingID: 'Dreammall-Entwicklung',
+        internalMeetingID: '258ea7269760758304b6b8494f17e9bf69dc1efe-1718289413143',
+        parentMeetingID: 'bbb-none',
+        attendeePW: '5ixnD4hJ',
+        moderatorPW: 'cakLrzBr',
+        createTime: 1718289413143,
+        voiceBridge: 9746,
+        dialNumber: '613-555-1234',
+        createDate: 'Thu Jun 13 14:36:53 UTC 2024',
+        hasUserJoined: false,
+        duration: 0,
+        hasBeenForciblyEnded: false,
+        messageKey: '',
+        message: '',
+      })
+    })
+  })
+
+  describe('with error', () => {
+    beforeEach(() => {
+      axiosInstancePostSpy.mockRejectedValue('Aua!')
+    })
+
+    it('logs create meeting error', async () => {
+      await createMeeting({
+        name: 'Peter Lustig',
+        meetingID: 'Peters Raum',
+      })
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.error).toBeCalledWith('createMeeting with error', 'Aua!')
     })
   })
 })

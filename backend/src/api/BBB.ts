@@ -139,7 +139,9 @@ interface CreateMeetingOptions {
   // welcome?: string
 }
 
-export const createMeeting = async (options: CreateMeetingOptions) => {
+export const createMeeting = async (
+  options: CreateMeetingOptions,
+): Promise<CreateMeetingResponse | null> => {
   const { name, meetingID /*, welcome */ } = options
   try {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -161,6 +163,7 @@ export const createMeeting = async (options: CreateMeetingOptions) => {
     return parsed.response
   } catch (err) {
     logger.error('createMeeting with error', err)
+    return null
   }
 }
 

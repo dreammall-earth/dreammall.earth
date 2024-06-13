@@ -204,7 +204,7 @@ describe('RoomResolver', () => {
     describe('joinMyRoom', () => {
       describe('createMeeting returns undefined', () => {
         it('returns null', async () => {
-          createMeetingMock.mockResolvedValue(undefined)
+          createMeetingMock.mockResolvedValue(null)
           await expect(
             testServer.executeOperation(
               {
