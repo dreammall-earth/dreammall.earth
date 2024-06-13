@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Query, Authorized, Ctx, Arg } from 'type-graphql'
+import { Resolver, Mutation, Query, Authorized, Ctx, Arg, Int } from 'type-graphql'
 // eslint-disable-next-line import/named
 import { v4 as uuidv4 } from 'uuid'
 
@@ -86,6 +86,24 @@ export class RoomResolver {
           }),
         ),
     )
+  }
+
+  @Query(() => String, { nullable: true })
+  async joinRoom(
+    @Arg('userName') userName: string,
+    @Arg('roomId', () => Int) roomId: number,
+  ): Promise<string | null> {
+    const meeting = await prisma.meeting.findUnique({
+      where: {
+        id: roomId,
+      },
+    })
+    if (!meeting) return null
+    return joinMeetingLink({
+      fullName: userName,
+      meetingID: meeting.meetingID,
+      password: meeting.attendeePW ? meeting.attendeePW : '',
+    })
   }
 
   /*

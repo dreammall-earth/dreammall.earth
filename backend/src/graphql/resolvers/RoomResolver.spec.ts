@@ -1,4 +1,6 @@
 import { ApolloServer } from '@apollo/server'
+// eslint-disable-next-line n/no-unpublished-import
+import { gql } from 'graphql-tag'
 
 import { createMeeting, joinMeetingLink, getMeetings } from '#api/BBB'
 import { prisma } from '#src/prisma'
@@ -84,6 +86,90 @@ describe('RoomResolver', () => {
               ]),
             },
           },
+        })
+      })
+    })
+
+    describe('joinRoom', () => {
+      const query = gql`
+        query ($roomId: Int!, $userName: String!) {
+          joinRoom(roomId: $roomId, userName: $userName)
+        }
+      `
+      describe('No room in DB', () => {
+        it('returns null', async () => {
+          await expect(
+            testServer.executeOperation({
+              query,
+              variables: {
+                userName: 'Pinky Pie',
+                roomId: 25,
+              },
+            }),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: { joinRoom: null },
+
+                errors: undefined,
+              },
+            },
+          })
+        })
+      })
+
+      describe('room in DB', () => {
+        let roomId: number
+        beforeEach(async () => {
+          joinMeetingLinkMock.mockReturnValue('https://my-link')
+          const meeting = await prisma.meeting.create({
+            data: {
+              name: 'Pony Ville',
+              meetingID: 'Pony Ville',
+            },
+          })
+          roomId = meeting.id
+        })
+
+        afterEach(async () => {
+          await prisma.meeting.deleteMany()
+        })
+
+        it('returns link to room', async () => {
+          await expect(
+            testServer.executeOperation({
+              query,
+              variables: {
+                userName: 'Pinky Pie',
+                roomId,
+              },
+            }),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: { joinRoom: 'https://my-link' },
+
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it('calls join meeting link', async () => {
+          await testServer.executeOperation({
+            query,
+            variables: {
+              userName: 'Pinky Pie',
+              roomId,
+            },
+          })
+          expect(joinMeetingLinkMock).toHaveBeenCalledWith({
+            fullName: 'Pinky Pie',
+            meetingID: 'Pony Ville',
+            password: '',
+          })
         })
       })
     })
