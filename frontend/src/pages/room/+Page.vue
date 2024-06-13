@@ -26,6 +26,7 @@ const roomUrl = ref<string | null>(null)
 
 watch(joinMyRoomQueryResult, () => {
   if (joinMyRoomQueryResult.value) {
+    console.log(joinMyRoomQueryResult.value.joinMyRoom)
     roomUrl.value = joinMyRoomQueryResult.value.joinMyRoom
   }
 })
