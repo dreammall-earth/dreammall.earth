@@ -5,3 +5,7 @@ export const joinMyRoomQuery = gql`
     joinMyRoom
   }
 `
+
+export type JoinMyRoomQueryResult = {
+  joinMyRoom: string
+}

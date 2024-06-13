@@ -21,7 +21,7 @@ describe('IndexPage', () => {
     beforeEach(() => {
       wrapper = Wrapper()
     })
-
+  
     it('title returns default title', () => {
       expect(title()).toBe('DreamMall')
     })
