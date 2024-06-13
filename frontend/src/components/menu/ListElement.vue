@@ -4,7 +4,7 @@
       <v-list-item
         v-for="(item, index) in items"
         :key="index"        
-        :class="{ 'full-width': item.fullWidth, rounded: item.rounded, 'custom-list-item': true }"
+        :class="{  rounded: item.rounded, 'custom-list-item': true }"
         @click="handleItemClick"
         :title="item.title"
         :subtitle="item.subtitle"
@@ -30,7 +30,6 @@ import { PropType } from 'vue'
 interface Item {
   title: string
   subtitle?: string
-  fullWidth: boolean
   rounded?: boolean
   prepend?: string | object
   prependProps?: object

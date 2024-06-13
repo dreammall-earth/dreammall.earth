@@ -1,19 +1,16 @@
 <template>
   <NavigationDrawer :model-value="drawer" :location="location" @update:model-value="updateDrawer">
-    <v-input>
-    <v-text-field
+    <SearchField
       v-model="search"
       label="Open Tables, Jobs"
       prepend-inner-icon="mdi-tune"
-      class="mx-4 mt-4 SearchDrawer"
       clearable
       density="comfortable"
       flat
       loading
       rounded
-       variant="outlined"
-    ></v-text-field>
-  </v-input>
+      variant="outlined"
+    ></SearchField>
     <v-list>
       <div class="mx-4">OPEN TABLES</div>
       <ListElement :items="filteredItems" @item-click="updateDrawer(false)" />
@@ -23,10 +20,10 @@
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
-import { VAvatar, VIcon, VImg, VTextField, VList } from 'vuetify/components'
-
+import { VAvatar, VIcon, VImg, VList } from 'vuetify/components'
 import ListElement from './ListElement.vue'
 import NavigationDrawer from './NavigationDrawer.vue'
+import SearchField from './SearchField.vue'
 
 defineProps({
   drawer: {
@@ -115,5 +112,16 @@ const updateDrawer = (value: boolean) => {
 </script>
 
 <style scoped>
+.mx-4 {
+  margin-left: 16px;
+  margin-right: 16px;
+}
 
+.mt-4 {
+  margin-top: 16px;
+}
+
+.append-icon {
+  color: orange;
+}
 </style>

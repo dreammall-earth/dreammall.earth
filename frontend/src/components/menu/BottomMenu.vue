@@ -16,6 +16,7 @@
       :drawer="drawer"
       :location="location"
       @update:drawer="updateDrawer($event)"
+      class="navigation-drawer"
     />
   </div>
 </template>
@@ -46,6 +47,9 @@ const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('bot
 // v-bottom-navigation {
 //   z-index: 10;
 // }
+.navigation-drawer {
+  bottom: 65px;
+}
 .bottom-menu {
   bottom: 0;
   left: 0;
