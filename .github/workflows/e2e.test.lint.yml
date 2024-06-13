@@ -36,5 +36,5 @@ jobs:
         uses: actions/checkout@master
 
       - name: E2E files | Lint
-        run: npm install && npm run test:lint:eslint
+        run: npm install && npm run test:lint
         working-directory: ${{env.WORKING_DIRECTORY}}
