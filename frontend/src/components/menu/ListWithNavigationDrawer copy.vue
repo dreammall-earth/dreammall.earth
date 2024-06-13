@@ -12,7 +12,7 @@
       variant="outlined"
     ></SearchField>
     <v-list>
-      <div class="mx-4">OPEN TABLES</div>
+      <div class="mx-4">{{ $t('menu.roomList') }}</div>
       <ListElement :items="filteredItems" @item-click="updateDrawer(false)" />
     </v-list>
   </NavigationDrawer>
@@ -140,8 +140,8 @@ const updateDrawer = (value: boolean) => {
 
 <style scoped>
 .mx-4 {
-  margin-left: 16px;
   margin-right: 16px;
+  margin-left: 16px;
 }
 
 .mt-4 {

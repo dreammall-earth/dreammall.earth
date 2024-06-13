@@ -68,8 +68,8 @@ const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('rig
 
 <style scoped lang="scss">
 v-app-bar {
-  z-index: 10;
   position: relative;
+  z-index: 10;
 }
 
 .app-bar {

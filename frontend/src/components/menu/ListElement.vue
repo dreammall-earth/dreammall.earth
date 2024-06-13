@@ -57,14 +57,14 @@ const closeMenu = () => {
 
 <style scoped>
 .custom-list-item {
-  margin-bottom: 8px;
-  padding: 8px 16px;
-  border-radius: 8px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 8px 16px;
+  margin-bottom: 8px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
 }
 
 .full-width {
@@ -77,14 +77,14 @@ const closeMenu = () => {
 
 .v-list-item-content {
   display: flex;
-  align-items: center;
   flex-grow: 1;
+  align-items: center;
 }
 
 .v-list-item-title {
-  font-weight: 500;
-  font-size: 16px;
   margin-right: 8px;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .v-list-item-subtitle {

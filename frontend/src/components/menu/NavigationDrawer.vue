@@ -56,6 +56,6 @@ watch(
 
 <style scoped>
 .custom-drawer {
-  background-color: #ffffff;
+  background-color: #fff;
 }
 </style>

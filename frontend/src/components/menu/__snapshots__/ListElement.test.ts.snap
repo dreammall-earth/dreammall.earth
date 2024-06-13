@@ -49,7 +49,7 @@ exports[`ListElement > renders correctly 1`] = `
   <!---->
   
   <div
-    class="v-list v-theme--light v-list--density-compact v-list--one-line"
+    class="v-list v-theme--light v-list--density-default v-list--two-line"
     data-v-e7d277f5=""
     role="listbox"
     tabindex="0"
@@ -57,7 +57,7 @@ exports[`ListElement > renders correctly 1`] = `
     
     
     <div
-      class="v-list-item v-list-item--link v-theme--light v-list-item--density-compact v-list-item--one-line rounded-0 v-list-item--variant-plain custom-list-item"
+      class="v-list-item v-list-item--link v-theme--light v-list-item--density-default v-list-item--two-line rounded-0 v-list-item--variant-text custom-list-item"
       data-v-e7d277f5=""
       tabindex="-2"
     >
@@ -74,17 +74,13 @@ exports[`ListElement > renders correctly 1`] = `
         class="v-list-item__content"
         data-no-activator=""
       >
-        <!---->
-        <!---->
-        
         <div
           class="v-list-item-title"
-          data-v-e7d277f5=""
         >
           Item 1
         </div>
-        <!--v-if-->
-        
+        <!---->
+        <!---->
       </div>
       <div
         class="v-list-item__append"
@@ -125,7 +121,7 @@ exports[`ListElement > renders correctly 1`] = `
       </div>
     </div>
     <div
-      class="v-list-item v-list-item--link v-theme--light v-list-item--density-compact v-list-item--one-line rounded-0 v-list-item--variant-plain custom-list-item full-width"
+      class="v-list-item v-list-item--link v-theme--light v-list-item--density-default v-list-item--two-line rounded-0 v-list-item--variant-text custom-list-item"
       data-v-e7d277f5=""
       tabindex="-2"
     >
@@ -142,17 +138,13 @@ exports[`ListElement > renders correctly 1`] = `
         class="v-list-item__content"
         data-no-activator=""
       >
-        <!---->
-        <!---->
-        
         <div
           class="v-list-item-title"
-          data-v-e7d277f5=""
         >
           Item 2
         </div>
-        <!--v-if-->
-        
+        <!---->
+        <!---->
       </div>
       <div
         class="v-list-item__append"

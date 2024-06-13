@@ -6,21 +6,21 @@ import { VApp } from 'vuetify/components'
 
  
 describe('SearchField', () => {
-    const Wrapper = () => {
-      return mount(VApp, {
-        slots: {
-          default: h(SearchField),
-        },
-      })
-    }
-  
-    let wrapper: ReturnType<typeof Wrapper>
-  
-    beforeEach(() => {
-      wrapper = Wrapper()
+  const Wrapper = () => {
+    return mount(VApp, {
+      slots: {
+        default: h(SearchField),
+      },
     })
-  
-    it('renders', () => {
-      expect(wrapper.element).toMatchSnapshot()
-    })
+  }
+
+  let wrapper: ReturnType<typeof Wrapper>
+
+  beforeEach(() => {
+    wrapper = Wrapper()
   })
+
+  it('renders', () => {
+    expect(wrapper.element).toMatchSnapshot()
+  })
+})

@@ -15,7 +15,7 @@
       ></v-text-field>
     </v-input>
     <v-list>
-      <div class="mx-4">OPEN TABLES</div>
+      <div class="mx-4">{{ $t('menu.roomList') }}</div>
       <ListElement :items="filteredItems" @item-click="updateDrawer(false)" />
     </v-list>
   </NavigationDrawer>
@@ -138,5 +138,3 @@ const updateDrawer = (value: boolean) => {
   emits('update:drawer', value)
 }
 </script>
-
-<style scoped></style>

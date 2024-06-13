@@ -2,7 +2,6 @@
 
 exports[`ListWithNavigationDrawer > renders correctly 1`] = `
 <navigation-drawer-stub
-  data-v-74568a56=""
   location="right"
   modelvalue="true"
 />

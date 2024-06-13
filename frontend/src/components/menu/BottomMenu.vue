@@ -55,6 +55,7 @@ const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('bot
 .v-navigation-drawer--active {
   bottom: 65px;
 }
+
 .bottom-menu {
   bottom: 0;
   left: 0;
