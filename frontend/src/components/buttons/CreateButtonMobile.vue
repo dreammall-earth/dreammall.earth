@@ -271,12 +271,13 @@
 </template>
 
 <script lang="ts" setup>
-import { navigate } from 'vike/client/router'
+import { useQuery } from '@vue/apollo-composable'
 import { onMounted, ref } from 'vue'
 
 import Divider from '#assets/img/divider.svg'
 import Triangle from '#assets/img/triangle.svg'
 import MainButton from '#components/buttons/MainButton.vue'
+import { joinMyRoomQuery } from '#queries/joinMyRoomQuery'
 
 const showButtonList = ref(false)
 const teleportComponent = ref(false)
@@ -307,8 +308,28 @@ const onClick = () => {
   }
 }
 
-const enterRoom = () => {
-  navigate('/room/')
+const {
+  result: joinMyRoomQueryResult,
+  error: joinMyRoomQueryError,
+  refetch,
+} = useQuery(joinMyRoomQuery, null, {
+  prefetch: false,
+  fetchPolicy: 'no-cache',
+})
+
+const enterRoom = async () => {
+  try {
+    await refetch()
+    if (joinMyRoomQueryError.value) {
+      // eslint-disable-next-line no-console
+      console.log(joinMyRoomQueryError.value.message)
+    } else {
+      window.open(joinMyRoomQueryResult.value?.joinMyRoom, '_blank')
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error while entering room - mobile', error)
+  }
 }
 </script>
 

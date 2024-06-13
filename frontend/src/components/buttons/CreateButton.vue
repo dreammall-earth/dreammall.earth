@@ -341,10 +341,11 @@
 </template>
 
 <script lang="ts" setup>
-import { navigate } from 'vike/client/router'
+import { useQuery } from '@vue/apollo-composable'
 import { onMounted, ref } from 'vue'
 
 import MainButton from '#components/buttons/MainButton.vue'
+import { joinMyRoomQuery } from '#queries/joinMyRoomQuery'
 
 const buttonIsTurned = ref(false)
 const warp = ref<HTMLInputElement | null>(null)
@@ -392,8 +393,28 @@ const onClick = (event: MouseEvent) => {
   }
 }
 
-const enterRoom = () => {
-  navigate('/room/')
+const {
+  result: joinMyRoomQueryResult,
+  error: joinMyRoomQueryError,
+  refetch,
+} = useQuery(joinMyRoomQuery, null, {
+  prefetch: false,
+  fetchPolicy: 'no-cache',
+})
+
+const enterRoom = async () => {
+  try {
+    await refetch()
+    if (joinMyRoomQueryError.value) {
+      // eslint-disable-next-line no-console
+      console.log(joinMyRoomQueryError.value.message)
+    } else {
+      window.open(joinMyRoomQueryResult.value?.joinMyRoom, '_blank')
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error while entering room', error)
+  }
 }
 </script>
 
