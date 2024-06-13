@@ -341,12 +341,10 @@
 </template>
 
 <script lang="ts" setup>
-import { useQuery } from '@vue/apollo-composable'
+import { navigate } from 'vike/client/router'
 import { onMounted, ref } from 'vue'
 
 import MainButton from '#components/buttons/MainButton.vue'
-import { joinMyRoomQuery } from '#queries/joinMyRoomQuery'
-import { navigate } from 'vike/client/router';
 
 const buttonIsTurned = ref(false)
 const warp = ref<HTMLInputElement | null>(null)
