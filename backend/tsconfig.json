@@ -12,6 +12,7 @@
       "#config/*": ["./src/config/*"],
       "#graphql/*": ["./src/graphql/*"],
       "#inputs/*": ["./src/graphql/inputs/*"],
+      "#models/*": ["./src/graphql/models/*"],
       "#src/*": ["./src/*"],
       "#test/*": ["./test/*"],
       "#types/*": ["./src/graphql/types/*"]
