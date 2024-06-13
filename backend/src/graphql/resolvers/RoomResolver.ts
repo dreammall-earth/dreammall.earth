@@ -95,6 +95,23 @@ export class RoomResolver {
     })
   }
 
+  @Query(() => String, { nullable: true })
+  async joinRoom(
+    @Arg('userName') userName: string,
+    @Arg('roomId', () => Int) roomId: number,
+  ): Promise<string | null> {
+    const meeting = await prisma.meeting.findUnique({
+      where: {
+        id: roomId,
+      },
+    })
+    if (!meeting) return null
+    return joinMeetingLink({
+      fullName: userName,
+      meetingID: meeting.meetingID,
+      password: meeting.attendeePW ? meeting.attendeePW : '',
+    })
+  }
   /*
   @Query(() => Boolean)
   async test(): Promise<boolean> {
