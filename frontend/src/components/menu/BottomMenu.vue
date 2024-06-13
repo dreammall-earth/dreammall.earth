@@ -15,8 +15,8 @@
     <ListWithNavigationDrawer
       :drawer="drawer"
       :location="location"
-      @update:drawer="updateDrawer($event)"
       class="navigation-drawer"
+      @update:drawer="updateDrawer($event)"
     />
   </div>
 </template>
@@ -47,7 +47,10 @@ const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('bot
 // v-bottom-navigation {
 //   z-index: 10;
 // }
-.navigation-drawer {
+// .navigation-drawer {
+//   bottom: 65px;
+// }
+.v-navigation-drawer--active {
   bottom: 65px;
 }
 .bottom-menu {

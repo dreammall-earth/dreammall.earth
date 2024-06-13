@@ -23,6 +23,7 @@ type Story = StoryObj<typeof meta>
 
 export const Example: Story = {
   render: (args) => ({
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     components: { TopMenu, ListWithNavigationDrawer },
     setup() {
       const drawer = ref<boolean>(false)

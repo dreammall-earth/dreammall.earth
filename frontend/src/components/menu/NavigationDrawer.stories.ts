@@ -40,6 +40,7 @@ type Story = StoryObj<typeof meta>
 
 export const Example: Story = {
   render: (args: Record<string, unknown>) => ({
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     components: { NavigationDrawer, VList, VListItem, VListItemTitle, VBtn, VIcon },
     setup() {
       return { args }
@@ -72,6 +73,7 @@ export const Example: Story = {
 
 export const WithTextAndButton: Story = {
   render: (args: Record<string, unknown>) => ({
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     components: { NavigationDrawer, VCard, VCardText, VCardActions, VTextField, VBtn },
     setup() {
       return { args }

@@ -5,7 +5,6 @@
     color="grey-lighten-4"
     temporary
     width="400"
-    height="50%"
     class="custom-drawer"
   >
     <slot />

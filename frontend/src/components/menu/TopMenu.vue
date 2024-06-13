@@ -47,12 +47,11 @@ import { ref } from 'vue'
 
 import Circle from './CircleElement.vue'
 import LightDarkSwitch from './LightDarkSwitch.vue'
+import ListWithNavigationDrawer from './ListWithNavigationDrawer.vue'
 import MessageIndicator from './MessageIndicator.vue'
 import NewsIndicator from './NewsIndicator.vue'
 import TabControl from './TabControl.vue'
 import UserInfo from './UserInfo.vue'
-import ListWithNavigationDrawer from './ListWithNavigationDrawer.vue'
-
 
 const drawer = ref(false)
 
@@ -65,8 +64,6 @@ const updateDrawer = (event: boolean) => {
 }
 
 const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('right')
- 
- 
 </script>
 
 <style scoped lang="scss">

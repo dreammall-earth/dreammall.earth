@@ -3,11 +3,11 @@
     <v-list lines="two">
       <v-list-item
         v-for="(item, index) in items"
-        :key="index"        
-        :class="{  rounded: item.rounded, 'custom-list-item': true }"
-        @click="handleItemClick"
+        :key="index"
+        :class="{ rounded: item.rounded, 'custom-list-item': true }"
         :title="item.title"
         :subtitle="item.subtitle"
+        @click="handleItemClick"
       >
         <template v-if="item.prepend" #prepend>
           <component :is="item.prepend" v-bind="item.prependProps" />

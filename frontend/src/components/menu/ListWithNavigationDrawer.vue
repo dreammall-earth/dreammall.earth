@@ -1,19 +1,19 @@
 <template>
   <NavigationDrawer :model-value="drawer" :location="location" @update:model-value="updateDrawer">
     <v-input>
-    <v-text-field
-      v-model="search"
-      label="Open Tables, Jobs"
-      prepend-inner-icon="mdi-tune"
-      class="mx-4 mt-4 SearchDrawer"
-      clearable
-      density="comfortable"
-      flat
-      loading
-      rounded
-       variant="outlined"
-    ></v-text-field>
-  </v-input>
+      <v-text-field
+        v-model="search"
+        label="Open Tables, Jobs"
+        prepend-inner-icon="mdi-tune"
+        class="mx-4 mt-4 SearchDrawer"
+        clearable
+        density="comfortable"
+        flat
+        loading
+        rounded
+        variant="outlined"
+      ></v-text-field>
+    </v-input>
     <v-list>
       <div class="mx-4">OPEN TABLES</div>
       <ListElement :items="filteredItems" @item-click="updateDrawer(false)" />
@@ -56,7 +56,12 @@ const items = [
     title: 'Aachener Freunde Treff',
     subtitle: 'Aachener Freunde Treff',
     prepend: VImg,
-    prependProps: { src: 'https://picsum.photos/40', referrerpolicy: 'no-referrer', width: 40, height: 40 },
+    prependProps: {
+      src: 'https://picsum.photos/40',
+      referrerpolicy: 'no-referrer',
+      width: 40,
+      height: 40,
+    },
     append: VIcon,
     appendProps: { icon: 'mdi-dots-vertical', class: 'append-icon' },
   },
@@ -64,7 +69,12 @@ const items = [
     title: 'Building A Wooden Guitar',
     subtitle: 'Building A Wooden Guitar',
     prepend: VImg,
-    prependProps: { src: 'https://picsum.photos/39', referrerpolicy: 'no-referrer', width: 40, height: 40 },
+    prependProps: {
+      src: 'https://picsum.photos/39',
+      referrerpolicy: 'no-referrer',
+      width: 40,
+      height: 40,
+    },
     append: VIcon,
     appendProps: { icon: 'mdi-dots-vertical', class: 'append-icon' },
   },
@@ -72,7 +82,12 @@ const items = [
     title: 'Co Working Space Manufaktur',
     subtitle: 'Co Working Space Manufaktur',
     prepend: VImg,
-    prependProps: { src: 'https://picsum.photos/41', referrerpolicy: 'no-referrer', width: 40, height: 40 },
+    prependProps: {
+      src: 'https://picsum.photos/41',
+      referrerpolicy: 'no-referrer',
+      width: 40,
+      height: 40,
+    },
     append: VIcon,
     appendProps: { icon: 'mdi-dots-vertical', class: 'append-icon' },
   },
@@ -80,15 +95,25 @@ const items = [
     title: 'Intervallfasten Kalender',
     subtitle: 'Intervallfasten Kalender',
     prepend: VImg,
-    prependProps: { src: 'https://picsum.photos/42', referrerpolicy: 'no-referrer', width: 40, height: 40 },
+    prependProps: {
+      src: 'https://picsum.photos/42',
+      referrerpolicy: 'no-referrer',
+      width: 40,
+      height: 40,
+    },
     append: VIcon,
     appendProps: { icon: 'mdi-dots-vertical-circle', class: 'append-icon' },
   },
-  { 
+  {
     title: 'Lomografie 2050',
-    subtitle: 'Lomografie 2050',    
+    subtitle: 'Lomografie 2050',
     prepend: VImg,
-    prependProps: { src: 'https://picsum.photos/46', referrerpolicy: 'no-referrer', width: 40, height: 40 },
+    prependProps: {
+      src: 'https://picsum.photos/46',
+      referrerpolicy: 'no-referrer',
+      width: 40,
+      height: 40,
+    },
     append: VIcon,
     appendProps: { icon: 'mdi-dots-vertical-circle', class: 'append-icon' },
   },
@@ -96,7 +121,7 @@ const items = [
     title: 'Freies Treffen U50',
     subtitle: 'Freies Treffen U50',
     prepend: VAvatar,
-    prependProps: { color: 'primary', image: 'https://picsum.photos/46', },
+    prependProps: { color: 'primary', image: 'https://picsum.photos/46' },
     append: VIcon,
     appendProps: { icon: 'mdi-dots-vertical', class: 'append-icon' },
   },
@@ -106,7 +131,7 @@ const filteredItems = computed(() => {
   if (!search.value) {
     return items
   }
-  return items.filter(item => item.title.toLowerCase().includes(search.value.toLowerCase()))
+  return items.filter((item) => item.title.toLowerCase().includes(search.value.toLowerCase()))
 })
 
 const updateDrawer = (value: boolean) => {
@@ -114,6 +139,4 @@ const updateDrawer = (value: boolean) => {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
