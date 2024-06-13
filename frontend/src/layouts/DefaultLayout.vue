@@ -58,6 +58,7 @@ const slots = useSlots()
   position: absolute;
   top: 20px;
   left: 90px;
+  z-index: 1;
   width: 140px;
 }
 </style>
