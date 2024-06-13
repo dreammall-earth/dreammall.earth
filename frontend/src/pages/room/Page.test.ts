@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils'
+import { flushPromises, mount } from '@vue/test-utils'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
@@ -13,10 +13,7 @@ const joinMyRoomQueryMock = vi.fn()
 
 const testUrl = 'http://some.url'
 
-mockClient.setRequestHandler(
-  joinMyRoomQuery,
-  joinMyRoomQueryMock.mockResolvedValue({ data: { joinMyRoom: testUrl } }),
-)
+mockClient.setRequestHandler(joinMyRoomQuery, joinMyRoomQueryMock)
 
 describe('Room Page', () => {
   const Wrapper = () => {
@@ -31,7 +28,7 @@ describe('Room Page', () => {
 
   describe('without apollo error', () => {
     beforeEach(() => {
-      joinMyRoomQueryMock.mockResolvedValue({ data: { getRoom: testUrl } })
+      joinMyRoomQueryMock.mockResolvedValue({ data: { joinMyRoom: testUrl } })
       wrapper = Wrapper()
     })
 
@@ -47,13 +44,14 @@ describe('Room Page', () => {
       expect(joinMyRoomQueryMock).toBeCalled()
     })
 
-    it('shows iframe with correct url', () => {
+    it('shows iframe with correct url', async () => {
+      await flushPromises()
       expect(wrapper.find('iframe').exists()).toBe(true)
       expect(wrapper.find('iframe').attributes('src')).toBe(testUrl)
     })
   })
 
-  describe.skip('with apollo error', () => {
+  describe('with apollo error', () => {
     const errorMessage = 'Aua!'
 
     beforeEach(() => {
@@ -63,8 +61,9 @@ describe('Room Page', () => {
       wrapper = Wrapper()
     })
 
-    it('logs error message', () => {
+    it('logs error message', async () => {
       const consoleSpy = vi.spyOn(global.console, 'log')
+      await flushPromises()
       expect(consoleSpy).toBeCalledWith(errorMessage)
     })
   })

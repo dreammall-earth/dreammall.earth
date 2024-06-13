@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`IndexPage > without apollo error > renders 1`] = `
+exports[`IndexPage > renders 1`] = `
 <div
   class="v-application v-theme--light v-layout v-layout--full-height v-locale--is-ltr"
 >
@@ -1136,41 +1136,46 @@ exports[`IndexPage > without apollo error > renders 1`] = `
                 <div
                   class="v-col"
                 >
-                  <button
-                    class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--fourth main-button-auto room-button"
-                    data-v-2b63c1fe=""
-                    style="background-color: #2ca5b1; color: #fff; caret-color: #fff; height: auto; width: auto;"
-                    type="button"
+                  <a
+                    class="room-button"
+                    href="/room"
                   >
-                    
-                    <span
-                      class="v-btn__overlay"
-                    />
-                    <span
-                      class="v-btn__underlay"
-                    />
-                    
-                    <!---->
-                    <span
-                      class="v-btn__content"
-                      data-no-activator=""
+                    <button
+                      class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--fourth main-button-auto room-button"
+                      data-v-2b63c1fe=""
+                      style="background-color: #2ca5b1; color: #fff; caret-color: #fff; height: auto; width: auto;"
+                      type="button"
                     >
                       
-                      
-                      <!--v-if-->
                       <span
-                        class="main-button-content"
-                        data-v-2b63c1fe=""
+                        class="v-btn__overlay"
+                      />
+                      <span
+                        class="v-btn__underlay"
+                      />
+                      
+                      <!---->
+                      <span
+                        class="v-btn__content"
+                        data-no-activator=""
                       >
-                        To Room 
+                        
+                        
                         <!--v-if-->
+                        <span
+                          class="main-button-content"
+                          data-v-2b63c1fe=""
+                        >
+                          $t('buttons.toRoom') 
+                          <!--v-if-->
+                        </span>
+                        
+                        
                       </span>
-                      
-                      
-                    </span>
-                    <!---->
-                    <!---->
-                  </button>
+                      <!---->
+                      <!---->
+                    </button>
+                  </a>
                 </div>
               </div>
               <!--v-if-->
