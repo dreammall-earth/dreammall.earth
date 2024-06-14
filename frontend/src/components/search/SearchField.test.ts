@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach } from 'vitest'
-import SearchField from './SearchField.vue'
 import { h } from 'vue'
 import { VApp } from 'vuetify/components'
 
- 
+import SearchField from './SearchField.vue'
+
 describe('SearchField', () => {
   const Wrapper = () => {
     return mount(VApp, {

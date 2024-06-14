@@ -5,7 +5,6 @@
     :prepend-inner-icon="prependInnerIcon"
     clearable
     :flat="flat"
- 
     rounded
     :variant="variant"
     class="mx-4 mt-4 SearchDrawer"
@@ -40,7 +39,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
- 
+
   rounded: {
     type: Boolean,
     default: true,
@@ -59,9 +58,12 @@ watch(internalValue, (newValue) => {
   emits('update:modelValue', newValue)
 })
 
-watch(() => props.modelValue, (newValue) => {
-  internalValue.value = newValue
-})
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    internalValue.value = newValue
+  },
+)
 </script>
 
 <style scoped>

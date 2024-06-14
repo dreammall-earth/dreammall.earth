@@ -26,3 +26,4 @@
 //   rounded: true,
 //   variant: 'outlined',
 // }
+export default {}

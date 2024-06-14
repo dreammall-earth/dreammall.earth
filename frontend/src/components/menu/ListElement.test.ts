@@ -39,7 +39,12 @@ describe('ListElement', () => {
             title: 'Aachener Freunde Treff',
             subtitle: 'Aachener Freunde Treff',
             prepend: VImg,
-            prependProps: { src: 'https://picsum.photos/40', referrerpolicy: 'no-referrer', width: 40, height: 40 },
+            prependProps: {
+              src: 'https://picsum.photos/40',
+              referrerpolicy: 'no-referrer',
+              width: 40,
+              height: 40,
+            },
             append: VIcon,
             appendProps: { icon: 'mdi-dots-vertical', class: 'append-icon' },
           },
