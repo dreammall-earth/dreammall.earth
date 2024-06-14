@@ -50,7 +50,7 @@
     "prisma-extension-soft-delete": "^1.0.1",
     "reflect-metadata": "^0.2.2",
     "tsconfig-paths": "^4.2.0",
-    "tslog": "^4.9.2",
+    "tslog": "^4.9.3",
     "type-graphql": "^2.0.0-rc.1",
     "uuid": "^9.0.1"
   },
