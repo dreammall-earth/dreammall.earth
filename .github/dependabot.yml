@@ -295,3 +295,37 @@ updates:
     day: "saturday"
     timezone: "Europe/Berlin"
     time: "03:00"
+
+- package-ecosystem: npm
+  open-pull-requests-limit: 99
+  directory: "/tests"
+  rebase-strategy: "disabled"
+  schedule:
+    interval: weekly
+    day: "saturday"
+    timezone: "Europe/Berlin"
+    time: "03:00"
+  groups:
+    cypress:
+      applies-to: version-updates
+      patterns:
+        - "*cypress*"
+        - "*cucumber*"
+    linting:
+      applies-to: version-updates
+      patterns:
+        - "@eslint-community/eslint-plugin-eslint-comments"
+        - "@typescript-eslint/*"
+        - "eslint-*"
+        - "prettier"
+      exclude-patterns:
+        - "eslint"
+    typescript:
+      applies-to: version-updates
+      patterns:
+        - "typescript"
+        - "ts*"
+    vuepress:
+      applies-to: version-updates
+      patterns:
+        - "*vuepress*"
