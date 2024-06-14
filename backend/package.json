@@ -52,7 +52,7 @@
     "tsconfig-paths": "^4.2.0",
     "tslog": "^4.9.2",
     "type-graphql": "^2.0.0-rc.1",
-    "uuid": "^9.0.1"
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@eslint-community/eslint-plugin-eslint-comments": "^4.3.0",
