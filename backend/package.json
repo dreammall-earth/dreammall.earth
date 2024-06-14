@@ -43,7 +43,7 @@
     "class-validator": "^0.14.1",
     "dotenv": "^16.4.5",
     "fast-xml-parser": "^4.4.0",
-    "graphql": "^16.8.1",
+    "graphql": "^16.8.2",
     "graphql-scalars": "^1.23.0",
     "jsonwebtoken": "^9.0.2",
     "prisma": "^5.15.0",
