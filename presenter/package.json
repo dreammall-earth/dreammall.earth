@@ -71,7 +71,7 @@
     "@vue/apollo-composable": "^4.0.2",
     "@vue/apollo-option": "^4.0.0",
     "@vue/compiler-sfc": "^3.4.27",
-    "@vue/server-renderer": "3.4.27",
+    "@vue/server-renderer": "3.4.28",
     "@vuepress/theme-default": "^2.0.0-rc.35",
     "compression": "^1.7.4",
     "cross-env": "^7.0.3",
@@ -88,7 +88,7 @@
     "validator": "^13.12.0",
     "vike": "^0.4.174",
     "vite": "^5.2.13",
-    "vue": "3.4.27",
+    "vue": "3.4.28",
     "vue-i18n": "^9.13.1",
     "vuetify": "^3.5.15"
   },
