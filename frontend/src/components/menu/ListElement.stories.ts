@@ -15,7 +15,6 @@ const meta: Meta<typeof ListElement> = {
     items: [
       {
         title: 'Beispiel Titel 1',
-        // fullWidth: false,
         rounded: true,
         prepend: VIcon,
         prependProps: { icon: 'mdi-home' },
@@ -24,7 +23,6 @@ const meta: Meta<typeof ListElement> = {
       },
       {
         title: 'Beispiel Titel 2',
-        // fullWidth: true,
         rounded: true,
         prepend: VAvatar,
         prependProps: { src: 'https://via.placeholder.com/40' },
@@ -46,13 +44,11 @@ export const Basic: Story = {
     items: [
       {
         title: 'Beispiel Titel 1',
-        // fullWidth: false,
         append: VBtn,
         appendProps: { icon: 'mdi-menu' },
       },
       {
         title: 'Beispiel Titel 2',
-        // fullWidth: true,
         append: VIcon,
         appendProps: { icon: 'mdi-menu' },
       },
@@ -65,7 +61,6 @@ export const WithIcons: Story = {
     items: [
       {
         title: 'Home',
-        // fullWidth: false,
         prepend: VIcon,
         prependProps: { icon: 'mdi-home' },
         append: VIcon,
@@ -73,7 +68,6 @@ export const WithIcons: Story = {
       },
       {
         title: 'Profile',
-        // fullWidth: true,
         prepend: VIcon,
         prependProps: { icon: 'mdi-account' },
         append: VIcon,
@@ -81,7 +75,6 @@ export const WithIcons: Story = {
       },
       {
         title: 'Settings',
-        // fullWidth: false,
         prepend: VIcon,
         prependProps: { icon: 'mdi-settings' },
         append: VIcon,
@@ -89,7 +82,6 @@ export const WithIcons: Story = {
       },
       {
         title: 'Logout',
-        // fullWidth: true,
         prepend: VIcon,
         prependProps: { icon: 'mdi-logout' },
         append: VIcon,
@@ -105,7 +97,6 @@ export const WithImages: Story = {
       {
         title: 'Item 1',
         subtitle: 'Subtitle 1',
-        // fullWidth: false,
         prepend: VImg,
         prependProps: { src: 'https://via.placeholder.com/40' },
         append: VIcon,
@@ -114,7 +105,6 @@ export const WithImages: Story = {
       {
         title: 'Item 2',
         subtitle: 'Subtitle 2',
-        // fullWidth: true,
         prepend: VImg,
         prependProps: { src: 'https://via.placeholder.com/40' },
         append: VIcon,
@@ -123,7 +113,6 @@ export const WithImages: Story = {
       {
         title: 'Item 3',
         subtitle: 'Subtitle 3',
-        // fullWidth: false,
         prepend: VImg,
         prependProps: { src: 'https://via.placeholder.com/40' },
         append: VIcon,
@@ -132,7 +121,6 @@ export const WithImages: Story = {
       {
         title: 'Item 4',
         subtitle: 'Subtitle 4',
-        // fullWidth: true,
         prepend: VImg,
         prependProps: { src: 'https://via.placeholder.com/40' },
         append: VIcon,

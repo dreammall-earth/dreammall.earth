@@ -1,19 +1,17 @@
 <template>
   <NavigationDrawer :model-value="drawer" :location="location" @update:model-value="updateDrawer">
-    <v-input>
-      <v-text-field
-        v-model="search"
-        label="Open Tables, Jobs"
-        prepend-inner-icon="mdi-tune"
-        class="mx-4 mt-4 SearchDrawer"
-        clearable
-        density="comfortable"
-        flat
-        loading
-        rounded
-        variant="outlined"
-      ></v-text-field>
-    </v-input>
+
+    <SearchField
+      v-model="search"
+      label="Open Tables, Jobs"
+      prepend-inner-icon="mdi-tune"
+      clearable
+      density="comfortable"
+      flat
+      loading
+      rounded
+      variant="outlined"
+    ></SearchField>
     <v-list>
       <div class="mx-4">{{ $t('menu.roomList') }}</div>
       <ListElement :items="filteredItems" @item-click="updateDrawer(false)" />
@@ -23,10 +21,11 @@
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
-import { VAvatar, VIcon, VImg, VTextField, VList } from 'vuetify/components'
+import { VAvatar, VIcon, VImg } from 'vuetify/components'
 
 import ListElement from './ListElement.vue'
 import NavigationDrawer from './NavigationDrawer.vue'
+import SearchField from '../search/SearchField.vue'
 
 defineProps({
   drawer: {
