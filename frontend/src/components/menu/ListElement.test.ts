@@ -1,7 +1,7 @@
 import { mount, VueWrapper } from '@vue/test-utils'
 import { describe, it, expect, beforeEach } from 'vitest'
 import { createVuetify } from 'vuetify'
-import { VIcon, VBtn } from 'vuetify/components'
+import { VIcon, VAvatar, VImg } from 'vuetify/components'
 
 import ListElement from './ListElement.vue'
 
@@ -27,8 +27,22 @@ describe('ListElement', () => {
       },
       props: {
         items: [
-          { title: 'Item 1', fullWidth: false, append: VBtn, appendProps: { icon: 'mdi-menu' } },
-          { title: 'Item 2', fullWidth: true, append: VIcon, appendProps: { icon: 'mdi-menu' } },
+          {
+            title: 'LOLLY Krypto Entwicklung',
+            subtitle: 'Krypto für Alle',
+            prepend: VAvatar,
+            prependProps: { color: 'primary', icon: 'mdi-lock' },
+            append: VIcon,
+            appendProps: { icon: 'mdi-dots-vertical', class: 'append-icon' },
+          },
+          {
+            title: 'Aachener Freunde Treff',
+            subtitle: 'Aachener Freunde Treff',
+            prepend: VImg,
+            prependProps: { src: 'https://picsum.photos/40', referrerpolicy: 'no-referrer', width: 40, height: 40 },
+            append: VIcon,
+            appendProps: { icon: 'mdi-dots-vertical', class: 'append-icon' },
+          },
         ] as Item[],
       },
     })

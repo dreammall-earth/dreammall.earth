@@ -6,6 +6,8 @@
     temporary
     width="400"
     class="custom-drawer"
+    mobile
+    mobile-breakpoint="md"
   >
     <slot />
   </v-navigation-drawer>

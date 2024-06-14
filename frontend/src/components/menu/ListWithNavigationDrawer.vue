@@ -5,12 +5,6 @@
       v-model="search"
       label="Open Tables, Jobs"
       prepend-inner-icon="mdi-tune"
-      clearable
-      density="comfortable"
-      flat
-      loading
-      rounded
-      variant="outlined"
     ></SearchField>
     <v-list>
       <div class="mx-4">{{ $t('menu.roomList') }}</div>

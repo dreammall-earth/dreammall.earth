@@ -1,24 +1,24 @@
 <template>
-  <div>
+   <div class="navigation-drawer-box d-md-none d-lg-none position-fixed mb-5 pb-5">
+    <ListWithNavigationDrawer
+      :drawer="drawer"
+      :location="location"
+      @update:drawer="updateDrawer($event)"
+    />
+  </div>
     <div
-      class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface"
+      class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface d-md-none d-lg-none"
     >
+ 
+  
       <MessageIndicator :number-of-messages="3" />
       <NewsIndicator :has-news="true" />
       <CreateButtonMobile />
       <Circle @click="toggleDrawer">
         <v-icon icon="$camera"></v-icon>
       </Circle>
-
       <UserInfo />
     </div>
-    <ListWithNavigationDrawer
-      :drawer="drawer"
-      :location="location"
-      class="navigation-drawer"
-      @update:drawer="updateDrawer($event)"
-    />
-  </div>
 </template>
 
 <script lang="ts" setup>
@@ -49,10 +49,11 @@ const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('bot
 // v-bottom-navigation {
 //   z-index: 10;
 // }
-// .navigation-drawer {
-//   bottom: 65px;
-// }
-.v-navigation-drawer--active {
+.create-button-mobile {
+  transform: translate(20px, 30px);
+    z-index: 1;
+}
+.navigation-drawer-box {
   bottom: 65px;
 }
 
@@ -67,5 +68,14 @@ const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('bot
   .camera-button {
     transform: translateX(20px);
   }
+}
+.v-navigation-drawer {
+  scrollbar-width: thin;
+}
+</style>
+<style>
+ 
+.v-navigation-drawer__content {
+  scrollbar-width: thin;
 }
 </style>

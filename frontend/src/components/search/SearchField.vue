@@ -5,7 +5,7 @@
     :prepend-inner-icon="prependInnerIcon"
     clearable
     :flat="flat"
-    loading
+ 
     rounded
     :variant="variant"
     class="mx-4 mt-4 SearchDrawer"
@@ -40,17 +40,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  loading: {
-    type: Boolean,
-    default: false,
-  },
+ 
   rounded: {
     type: Boolean,
     default: true,
   },
   variant: {
     type: String as () => 'solo' | 'outlined' | 'filled' | 'underlined',
-    default: 'outlined',
+    default: 'solo',
   },
 })
 
