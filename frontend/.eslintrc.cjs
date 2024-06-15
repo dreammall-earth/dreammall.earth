@@ -65,7 +65,7 @@ module.exports = {
     'import/unambiguous': 'off', // not compatible with scriptless vue files
     'import/default': 'error',
     'import/named': 'error',
-    'import/namespace': 'error',
+    'import/namespace': 'off',
     'import/no-absolute-path': 'error',
     'import/no-cycle': 'error',
     'import/no-dynamic-require': 'error',
