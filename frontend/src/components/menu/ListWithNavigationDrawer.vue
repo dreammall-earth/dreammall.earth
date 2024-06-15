@@ -1,6 +1,5 @@
 <template>
   <NavigationDrawer :model-value="drawer" :location="location" @update:model-value="updateDrawer">
-
     <SearchField
       v-model="search"
       label="Open Tables, Jobs"

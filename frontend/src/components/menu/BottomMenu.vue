@@ -65,6 +65,7 @@ const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('bot
 
   .camera-button {
     transform: translateX(20px);
+    cursor: pointer;
   }
 }
 .v-navigation-drawer {

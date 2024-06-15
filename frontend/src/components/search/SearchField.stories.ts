@@ -1,29 +1,22 @@
-// import SearchDrawerField from './SearchField.vue'
-// import { Meta, Story } from '@storybook/vue3'
+import { Meta, StoryFn } from '@storybook/vue3'
 
-// export default {
-//   title: 'Components/SearchField',
-//   component: SearchDrawerField,
-// } as Meta<typeof SearchDrawerField>
+import SearchDrawerField from './SearchField.vue'
 
-// const Template: Story<typeof SearchDrawerField> = (args) => ({
-//   components: { SearchDrawerField },
-//   setup() {
-//     return { args }
-//   },
-//   template: '<SearchDrawerField v-bind="args" />',
-// })
+export default {
+  title: 'Components/SearchField',
+  component: SearchDrawerField,
+} as Meta<typeof SearchDrawerField>
 
-// export const Default = Template.bind({})
-// Default.args = {
-//   modelValue: '',
-//   label: 'Search',
-//   prependInnerIcon: 'mdi-magnify',
-//   clearable: true,
-//   density: 'comfortable',
-//   flat: true,
-//   loading: false,
-//   rounded: true,
-//   variant: 'outlined',
-// }
-export default {}
+const Template: StoryFn<typeof SearchDrawerField> = (args: any) => ({
+  components: { SearchDrawerField },
+  setup() {
+    return { args }
+  },
+  template: '<SearchDrawerField v-bind="args" />',
+})
+
+export const Default = Template.bind({})
+Default.args = {
+  label: 'Search',
+  prependInnerIcon: 'mdi-tune',
+}
