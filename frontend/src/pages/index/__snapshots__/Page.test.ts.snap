@@ -1064,6 +1064,7 @@ exports[`IndexPage > without apollo error > renders 1`] = `
                         <i
                           aria-hidden="true"
                           class="v-icon notranslate v-theme--light v-icon--size-default"
+                          data-test="user-dropdown"
                           data-v-607bdd70=""
                         >
                           <svg
@@ -3311,7 +3312,12 @@ exports[`IndexPage > without apollo error > renders 1`] = `
             <i
               aria-hidden="true"
               class="v-icon notranslate v-theme--light v-icon--size-default"
+<<<<<<< HEAD
               data-v-96a196cc=""
+=======
+              data-test="user-dropdown"
+              data-v-607bdd70=""
+>>>>>>> master
             >
               <svg
                 fill="none"
