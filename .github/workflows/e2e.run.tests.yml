@@ -18,6 +18,7 @@ jobs:
       - name: E2E | Boot up test system
         run: |
           cd authentik/
+          rm -rf database
           ./database.unpack.sh
           docker compose up -d
           cd ../frontend
