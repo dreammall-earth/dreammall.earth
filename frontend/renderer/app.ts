@@ -3,6 +3,7 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { PageContext } from 'vike/types'
 import { createSSRApp, defineComponent, h, markRaw, reactive, Component, provide } from 'vue'
 import Vue3Toasity from 'vue3-toastify'
+// eslint-disable-next-line import/no-unassigned-import
 import 'vue3-toastify/dist/index.css'
 
 import PageShell from '#components/PageShell.vue'
