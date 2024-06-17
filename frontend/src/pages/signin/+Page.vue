@@ -1,14 +1,11 @@
 <template>
-  <DefaultLayout>
-    <div class="h-screen auth-page py-12">{{ $t('auth.signin') }}</div>
-  </DefaultLayout>
+  <div></div>
 </template>
 
 <script lang="ts" setup>
 import { navigate } from 'vike/client/router'
 import { inject, onBeforeMount } from 'vue'
 
-import DefaultLayout from '#layouts/DefaultLayout.vue'
 import AuthService from '#src/services/AuthService'
 import { useAuthStore } from '#stores/authStore'
 
