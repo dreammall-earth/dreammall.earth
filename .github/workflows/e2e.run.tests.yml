@@ -27,7 +27,15 @@ jobs:
           cd  ../presenter
           cp .env.dist .env
           docker compose -f docker-compose.test.yml up -d presenter
-          sleep 4m
+          cd ../
+          docker compose up -d database
+          cd backend
+          cp .env.dist .env
+          ln -s src/auth/public.pem public.pem
+          npm install
+          npm run db:reset
+          docker compose -f docker-compose.test.yml up -d backend
+          sleep 2m
 
       - name: Install cucumber-json-formatter
         run: |
