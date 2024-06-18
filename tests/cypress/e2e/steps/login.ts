@@ -14,11 +14,6 @@ When('I submit the credentials {string} {string}', (username: string, password: 
   loginPage.submitCredentials(username, password)
 })
 
-When('I confirm the consent agreement', () => {
-  cy.waitForNetworkIdle(2000)
-  loginPage.agreeConsent()
-})
-
 Then('I am on the worldcafe page', () => {
   cy.waitForNetworkIdle(10000)
   worldcafePage.signoutButtonIsVisible()
