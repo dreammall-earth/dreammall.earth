@@ -1,6 +1,7 @@
 import { useQuery } from '@vue/apollo-composable'
 import { watch, ref } from 'vue'
 
+import GlobalErrorHandler from '#plugins/GlobalErrorHandler'
 import { JoinMyRoomQueryResult, joinMyRoomQuery } from '#queries/joinMyRoomQuery'
 
 export default function useMyRoom() {
@@ -20,8 +21,7 @@ export default function useMyRoom() {
 
   watch(joinMyRoomQueryError, () => {
     if (joinMyRoomQueryError.value) {
-      // eslint-disable-next-line no-console
-      console.log(joinMyRoomQueryError.value.message)
+      GlobalErrorHandler.error(joinMyRoomQueryError.value.message)
     }
   })
 
