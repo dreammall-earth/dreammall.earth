@@ -49,7 +49,7 @@ describe('SilentRefreshPage', () => {
   })
 
   describe('auth service throws', () => {
-    const consoleSpy = vi.spyOn(global.console, 'log')
+    const consoleSpy = vi.spyOn(global.console, 'error')
 
     beforeEach(() => {
       authServiceSpy.mockRejectedValue('Ouch!')
@@ -57,7 +57,7 @@ describe('SilentRefreshPage', () => {
     })
 
     it('logs error to console', () => {
-      expect(consoleSpy).toBeCalledWith('auth error', 'Ouch!')
+      expect(consoleSpy).toBeCalledWith('error: auth error', 'Ouch!')
     })
   })
 })

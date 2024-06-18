@@ -82,7 +82,7 @@ describe('AuthPage', () => {
   })
 
   describe('signin callback with error', () => {
-    const consoleSpy = vi.spyOn(global.console, 'log')
+    const consoleSpy = vi.spyOn(global.console, 'error')
 
     beforeEach(() => {
       vi.clearAllMocks()
@@ -91,7 +91,7 @@ describe('AuthPage', () => {
     })
 
     it('logs the error on console', () => {
-      expect(consoleSpy).toBeCalledWith('auth error', 'Ouch!')
+      expect(consoleSpy).toBeCalledWith('error: auth error', 'Ouch!')
     })
   })
 })

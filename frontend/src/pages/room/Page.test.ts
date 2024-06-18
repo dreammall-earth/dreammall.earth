@@ -61,9 +61,9 @@ describe('Room Page', () => {
     })
 
     it('logs error message', async () => {
-      const consoleSpy = vi.spyOn(global.console, 'log')
+      const consoleSpy = vi.spyOn(global.console, 'error')
       await flushPromises()
-      expect(consoleSpy).toBeCalledWith(errorMessage)
+      expect(consoleSpy).toBeCalledWith('error: ' + errorMessage)
     })
   })
 })

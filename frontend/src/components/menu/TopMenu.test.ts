@@ -74,7 +74,7 @@ describe('TopMenu', () => {
     })
 
     describe('with error', () => {
-      const consoleSpy = vi.spyOn(console, 'log')
+      const consoleSpy = vi.spyOn(console, 'error')
 
       beforeEach(async () => {
         authServiceSpy.mockRejectedValue('Error!')
@@ -84,7 +84,7 @@ describe('TopMenu', () => {
       })
 
       it('logs the error', () => {
-        expect(consoleSpy).toBeCalledWith('auth error', 'Error!')
+        expect(consoleSpy).toBeCalledWith('error: auth error', 'Error!')
       })
     })
   })
