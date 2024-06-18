@@ -3,7 +3,9 @@
     <v-app-bar flat class="app-bar" height="70px">
       <v-row class="ma-1">
         <v-col class="d-none d-md-flex align-center">
-          <MessageIndicator :number-of-messages="3" />
+          <a href="/" class="logo">
+            <LogoImage size="small" />
+          </a>
         </v-col>
         <v-col class="d-flex align-center justify-center">
           <TabControl />
@@ -30,7 +32,7 @@
 <script lang="ts" setup>
 import Circle from './CircleElement.vue'
 import LightDarkSwitch from './LightDarkSwitch.vue'
-import MessageIndicator from './MessageIndicator.vue'
+import LogoImage from './LogoImage.vue'
 import NewsIndicator from './NewsIndicator.vue'
 import TabControl from './TabControl.vue'
 import UserInfo from './UserInfo.vue'
@@ -40,6 +42,10 @@ import UserInfo from './UserInfo.vue'
 .app-bar {
   position: static !important;
   background: transparent !important;
+}
+
+.logo {
+  width: 140px;
 }
 
 .top-menu {
