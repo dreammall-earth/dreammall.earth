@@ -9,7 +9,9 @@ describe('NavigationDrawer', () => {
   const Wrapper = () => {
     return mount(VApp, {
       slots: {
-        default: h(NavigationDrawer),
+        default: h(NavigationDrawer, {
+          modelValue: true, // Setzen Sie den erforderlichen Prop-Wert
+        }),
       },
     })
   }
