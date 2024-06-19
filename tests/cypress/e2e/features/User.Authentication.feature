@@ -25,13 +25,11 @@ Feature: User authentication
   Scenario: DreamMall Login
     Given I navigate to page '/signin'
     When I submit the credentials 'akadmin' 'dreammall'
-    And I confirm the consent agreement
     Then I am on page 'worldcafe'
 
   Scenario: DreamMall Refresh and Stay logged in
     Given I navigate to page '/signin'
     When I submit the credentials 'akadmin' 'dreammall'
-    And I confirm the consent agreement
     Then I am on page 'worldcafe'
     When I refresh the page
     Then I am on page 'worldcafe'
@@ -39,7 +37,6 @@ Feature: User authentication
   Scenario: DreamMall Logout
     Given I navigate to page '/signin'
     When I submit the credentials 'akadmin' 'dreammall'
-    And I confirm the consent agreement
     Then I am on page 'worldcafe'
     When I log out from DreamMall
     Then I am on page 'presenter' 
