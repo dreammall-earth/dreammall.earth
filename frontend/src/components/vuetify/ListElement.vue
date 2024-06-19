@@ -63,24 +63,4 @@ const closeMenu = () => {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
 }
-.full-width {
-  width: 100%;
-}
-.rounded {
-  border-radius: 16px;
-}
-.v-list-item-content {
-  display: flex;
-  flex-grow: 1;
-  align-items: center;
-}
-.v-list-item-title {
-  margin-right: 8px;
-  font-size: 16px;
-  font-weight: 500;
-}
-.v-list-item-subtitle {
-  font-size: 14px;
-  color: gray;
-}
 </style>
