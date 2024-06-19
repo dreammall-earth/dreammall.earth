@@ -4,7 +4,7 @@
     :location="computedLocation"
     color="grey-lighten-4"
     temporary
-    width="400"
+    width="auto"
     class="custom-drawer"
     mobile
     mobile-breakpoint="md"
@@ -52,6 +52,7 @@ watch(
 
 <style scoped>
 .custom-drawer {
+  margin-top: 81px !important;
   background-color: #fff;
 }
 </style>

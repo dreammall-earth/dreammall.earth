@@ -14,7 +14,7 @@
               <LightDarkSwitch class="d-none d-lg-flex" />
             </v-col>
             <v-col class="d-flex align-center justify-end">
-              <Circle>
+              <Circle @click="toggleDrawer">
                 <v-icon icon="$camera"></v-icon>
               </Circle>
               <NewsIndicator :has-news="true" class="ml-2" />
@@ -24,16 +24,34 @@
         </v-col>
       </v-row>
     </v-app-bar>
+  
   </div>
+  <ListWithNavigationDrawer
+      :drawer="drawer"
+      :location="location"
+      @update:drawer="updateDrawer($event)"
+    />
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
 import Circle from './CircleElement.vue'
-import LightDarkSwitch from './LightDarkSwitch.vue'
-import MessageIndicator from './MessageIndicator.vue'
-import NewsIndicator from './NewsIndicator.vue'
-import TabControl from './TabControl.vue'
-import UserInfo from './UserInfo.vue'
+import LightDarkSwitch from '#components/menu/LightDarkSwitch.vue'
+import MessageIndicator from '#components/menu/MessageIndicator.vue'
+import NewsIndicator from '#components/menu/NewsIndicator.vue'
+import TabControl from '#components/menu/TabControl.vue'
+import UserInfo from '#components/menu/UserInfo.vue'
+import ListWithNavigationDrawer from "#components/vuetify/Organisms/ListWithNavigationDrawer.vue"
+
+
+const drawer = ref(false)
+const toggleDrawer = () => {
+  drawer.value = !drawer.value
+}
+const updateDrawer = (event: boolean) => {
+  drawer.value = event
+}
+const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('right')
 </script>
 
 <style scoped lang="scss">
