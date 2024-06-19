@@ -28,7 +28,8 @@ const props = defineProps({
     type: String as PropType<ValidLocation>,
     required: false,
     default: 'right',
-    validator: (value: string) => ['right', 'bottom', 'left', 'end', 'top', 'start'].includes(value as ValidLocation),
+    validator: (value: string) =>
+      ['right', 'bottom', 'left', 'end', 'top', 'start'].includes(value as ValidLocation),
   },
 })
 
@@ -37,7 +38,11 @@ const display = useDisplay()
 const drawer = ref(props.modelValue)
 
 const computedLocation = computed(() => {
-  return display.mobile.value ? 'bottom' : (['right', 'bottom', 'left', 'end', 'top', 'start'].includes(props.location) ? props.location : 'right')
+  return display.mobile.value
+    ? 'bottom'
+    : ['right', 'bottom', 'left', 'end', 'top', 'start'].includes(props.location)
+      ? props.location
+      : 'right'
 })
 
 watch(
