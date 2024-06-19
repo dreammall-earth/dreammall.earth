@@ -10,10 +10,10 @@ exports[`NavigationDrawer > renders correctly 1`] = `
     
     
     <nav
-      class="v-navigation-drawer v-navigation-drawer--bottom v-navigation-drawer--temporary v-navigation-drawer--active v-theme--light bg-grey-lighten-4 custom-drawer"
+      class="v-navigation-drawer v-navigation-drawer--bottom v-navigation-drawer--temporary v-theme--light bg-grey-lighten-4 custom-drawer"
       data-v-1af10226=""
       mobile=""
-      style="bottom: 0px; z-index: 1004; transform: translateY(0%); position: fixed; transition: none !important; height: 400px; left: 0px; width: calc(100% - 0px - 0px);"
+      style="bottom: 0px; z-index: 1004; transform: translateY(110%); position: fixed; transition: none !important; height: 400px; left: 0px; width: calc(100% - 0px - 0px);"
     >
       <!---->
       <!---->
@@ -33,11 +33,7 @@ exports[`NavigationDrawer > renders correctly 1`] = `
       name="fade-transition"
       persisted="false"
     >
-      <div
-        class="v-navigation-drawer__scrim"
-        data-v-1af10226=""
-        style="z-index: 1003;"
-      />
+      <!---->
     </transition-stub>
     
     

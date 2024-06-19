@@ -14,32 +14,39 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, PropType } from 'vue'
 import { useDisplay } from 'vuetify'
 
-type validLocations = 'right' | 'bottom' | 'left' | 'end' | 'top' | 'start'
+type ValidLocation = 'right' | 'bottom' | 'left' | 'end' | 'top' | 'start'
+
 const props = defineProps({
   modelValue: {
     type: Boolean,
     required: true,
   },
   location: {
-    type: validLocations,
+    type: String as PropType<ValidLocation>,
     required: false,
     default: 'right',
+    validator: (value: string) => ['right', 'bottom', 'left', 'end', 'top', 'start'].includes(value as ValidLocation),
   },
 })
+
 const emits = defineEmits(['update:modelValue'])
 const display = useDisplay()
 const drawer = ref(props.modelValue)
-// Behalten Sie die übergebene Location bei und überschreiben Sie nur, wenn der Bildschirm klein ist
-const computedLocation = computed(() => (display.mobile.value ? 'bottom' : props.location))
+
+const computedLocation = computed(() => {
+  return display.mobile.value ? 'bottom' : (['right', 'bottom', 'left', 'end', 'top', 'start'].includes(props.location) ? props.location : 'right')
+})
+
 watch(
   () => props.modelValue,
   (newVal) => {
     drawer.value = newVal
   },
 )
+
 watch(
   () => drawer.value,
   (newVal) => {
