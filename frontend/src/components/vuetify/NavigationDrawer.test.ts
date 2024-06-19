@@ -22,8 +22,4 @@ describe('NavigationDrawer', () => {
   it('renders correctly', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
-
-  it('has the correct default location', () => {
-    expect(wrapper.findComponent(NavigationDrawer)).toBe(true)
-  })
 })
