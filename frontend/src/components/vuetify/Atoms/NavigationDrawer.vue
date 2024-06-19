@@ -24,7 +24,7 @@ const props = defineProps({
     required: true,
   },
   location: {
-    type: String as () => (typeof validLocations)[number],
+    type: validLocations,
     required: false,
     default: 'right',
   },
