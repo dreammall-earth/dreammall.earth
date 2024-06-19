@@ -15,6 +15,7 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
 import { VAvatar, VIcon, VImg } from 'vuetify/components'
+
 import ListElement from '#components/vuetify/Atoms/ListElement.vue'
 import NavigationDrawer from '#components/vuetify/Atoms/NavigationDrawer.vue'
 import SearchField from '#components/vuetify/Molecules/SearchField.vue'
