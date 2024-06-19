@@ -5,6 +5,7 @@ import { VApp } from 'vuetify/components'
 
 import { useAuthStore } from '#stores/authStore.js'
 import { authService } from '#tests/mock.authService.js'
+import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
 import BottomMenu from './BottomMenu.vue'
 import UserDropdown from './UserDropdown.vue'
@@ -72,8 +73,6 @@ describe('BottomMenu', () => {
     })
 
     describe('with error', () => {
-      const consoleSpy = vi.spyOn(console, 'error')
-
       beforeEach(async () => {
         authServiceSpy.mockRejectedValue('Error!')
         await wrapper.find('button.user-info').trigger('click')
@@ -82,7 +81,7 @@ describe('BottomMenu', () => {
       })
 
       it('logs the error', () => {
-        expect(consoleSpy).toBeCalledWith('error: auth error', 'Error!')
+        expect(errorHandlerSpy).toBeCalledWith('auth error', 'Error!')
       })
     })
   })

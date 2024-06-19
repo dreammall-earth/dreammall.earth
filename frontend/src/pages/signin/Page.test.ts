@@ -7,6 +7,7 @@ import { VApp } from 'vuetify/components'
 import i18n from '#plugins/i18n'
 import { useAuthStore } from '#stores/authStore'
 import { authService } from '#tests/mock.authService'
+import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
 import SigninPage from './+Page.vue'
 import { title } from './+title'
@@ -46,8 +47,6 @@ describe('SigninPage', () => {
     })
 
     describe('signin with error', () => {
-      const consoleSpy = vi.spyOn(global.console, 'error')
-
       beforeEach(() => {
         vi.clearAllMocks()
         authServiceSpy.mockRejectedValue('Ouch!')
@@ -55,7 +54,7 @@ describe('SigninPage', () => {
       })
 
       it('logs the error on console', () => {
-        expect(consoleSpy).toBeCalledWith('error: auth error', 'Ouch!')
+        expect(errorHandlerSpy).toBeCalledWith('auth error', 'Ouch!')
       })
     })
   })

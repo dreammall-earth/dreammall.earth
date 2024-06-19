@@ -5,6 +5,7 @@ import { VApp } from 'vuetify/components'
 
 import { joinMyRoomQuery } from '#queries/joinMyRoomQuery'
 import { mockClient } from '#tests/mock.apolloClient'
+import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
 import RoomPage from './+Page.vue'
 import { title } from './+title'
@@ -52,78 +53,15 @@ describe('Room Page', () => {
   })
 
   describe('with apollo error', () => {
-    const errorMessage = 'Aua!'
-
     beforeEach(() => {
       vi.clearAllMocks()
-      joinMyRoomQueryMock.mockRejectedValue({ message: errorMessage, data: undefined })
+      joinMyRoomQueryMock.mockRejectedValue({ message: 'Aua!', data: undefined })
       wrapper = Wrapper()
     })
 
     it('logs error message', async () => {
-      const consoleSpy = vi.spyOn(global.console, 'error')
       await flushPromises()
-      expect(consoleSpy).toBeCalledWith('error: ' + errorMessage)
+      expect(errorHandlerSpy).toBeCalledWith('Aua!')
     })
   })
-
-  describe('with error and toast popup', () => {
-    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => undefined)
-    const consoleLog = vi.spyOn(console, 'log').mockImplementation(() => undefined)
-    const closeButtonSelector = 'button.Toastify__close-button'
-
-    // vi.useFakeTimers()
-
-    beforeEach(() => {
-      vi.clearAllMocks()
-      joinMyRoomQueryMock.mockRejectedValue({ message: 'Aua!' })
-    })
-
-    beforeEach(async () => {
-      await wrapper.find('button.room-button').trigger('click')
-      // await flushPromises()
-      // await vi.advanceTimersByTimeAsync(1000)
-    })
-
-    it('exists', () => {
-      // await new Promise((resolve) => setTimeout(resolve, 1000))
-      // expect(consoleError).toBeCalledWith('test')
-      // expect(consoleError).toHaveBeenCalledOnce()
-      expect(consoleError).toHaveBeenLastCalledWith('error: test', undefined)
-      expect(consoleLog).toHaveBeenCalledTimes(0)
-
-      expect(wrapper.find('div.Toastify').exists()).toBe(true)
-      expect(wrapper.find(closeButtonSelector).exists()).toBe(true)
-    })
-
-    describe('close by click', () => {
-      beforeEach(async () => {
-        await wrapper.find(closeButtonSelector).trigger('click')
-      })
-
-      it('does not exist', () => {
-        expect(wrapper.find(closeButtonSelector).exists()).toBe(false)
-      })
-    })
-  })
-
-  // describe('Toastify plugin', () => {
-  //   it('shows a toast message', async () => {
-  //     const wrapper = mount(VApp, {
-  //       global: {
-  //         plugins: [Vue3Toasity],
-  //       },
-  //     })
-  //
-  //     vi.useFakeTimers()
-  //
-  //     toast.error('Test Toast')
-  //     await vi.advanceTimersByTimeAsync(1000)
-  //
-  //     // await new Promise((resolve) => setTimeout(resolve, 1000))
-  //     await flushPromises()
-  //
-  //     expect(wrapper.find('div.Toastify').exists()).toBe(true)
-  //   })
-  // })
 })

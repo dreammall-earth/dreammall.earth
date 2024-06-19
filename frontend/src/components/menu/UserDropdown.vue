@@ -18,7 +18,7 @@
 import { inject } from 'vue'
 
 import MainButton from '#components/buttons/MainButton.vue'
-import GlobalErrorHandler from '#plugins/GlobalErrorHandler'
+import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { AUTH } from '#src/env'
 import AuthService from '#src/services/AuthService'
 import { useAuthStore } from '#stores/authStore'
