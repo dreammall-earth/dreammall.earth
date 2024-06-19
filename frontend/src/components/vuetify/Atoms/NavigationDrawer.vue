@@ -17,7 +17,7 @@
 import { computed, ref, watch } from 'vue'
 import { useDisplay } from 'vuetify'
 
-const validLocations = ['right', 'bottom', 'left', 'end', 'top', 'start'] as const
+type validLocations = 'right' | 'bottom' | 'left' | 'end' | 'top' | 'start'
 const props = defineProps({
   modelValue: {
     type: Boolean,
