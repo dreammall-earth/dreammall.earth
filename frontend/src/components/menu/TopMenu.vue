@@ -24,25 +24,25 @@
         </v-col>
       </v-row>
     </v-app-bar>
-  
   </div>
   <ListWithNavigationDrawer
-      :drawer="drawer"
-      :location="location"
-      @update:drawer="updateDrawer($event)"
-    />
+    :drawer="drawer"
+    :location="location"
+    @update:drawer="updateDrawer($event)"
+  />
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import Circle from './CircleElement.vue'
+
 import LightDarkSwitch from '#components/menu/LightDarkSwitch.vue'
 import MessageIndicator from '#components/menu/MessageIndicator.vue'
 import NewsIndicator from '#components/menu/NewsIndicator.vue'
 import TabControl from '#components/menu/TabControl.vue'
 import UserInfo from '#components/menu/UserInfo.vue'
-import ListWithNavigationDrawer from "#components/vuetify/Organisms/ListWithNavigationDrawer.vue"
+import ListWithNavigationDrawer from '#components/vuetify/Organisms/ListWithNavigationDrawer.vue'
 
+import Circle from './CircleElement.vue'
 
 const drawer = ref(false)
 const toggleDrawer = () => {
