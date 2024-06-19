@@ -16,8 +16,8 @@
   import { ref, computed } from 'vue'
   import { VAvatar, VIcon, VImg } from 'vuetify/components'
   import SearchField from '../search/SearchField.vue'
-  import ListElement from './ListElement.vue'
-  import NavigationDrawer from './NavigationDrawer.vue'
+  import ListElement from './../Atoms/ListElement.vue'
+  import NavigationDrawer from './../Atoms/NavigationDrawer.vue'
   defineProps({
     drawer: {
       type: Boolean,
