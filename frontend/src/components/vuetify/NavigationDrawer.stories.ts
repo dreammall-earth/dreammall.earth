@@ -1,51 +1,51 @@
 import {
-    VList,
-    VListItem,
-    VListItemTitle,
-    VBtn,
-    VIcon,
-    VCard,
-    VCardText,
-    VCardActions,
-    VTextField,
-  } from 'vuetify/components'
-  
-  import { SBComp } from '#types/SBComp'
-  
-  import NavigationDrawer from './NavigationDrawer.vue'
-  
-  import type { Meta, StoryObj } from '@storybook/vue3'
-  
-  const meta: Meta<typeof NavigationDrawer> = {
-    title: 'ORGANISMS/NavigationDrawer',
-    component: NavigationDrawer as SBComp,
-    tags: ['autodocs'],
-    argTypes: {
-      location: {
-        control: 'select',
-        options: ['left', 'right', 'top', 'bottom'],
-        description: 'Position of the drawer',
-      },
+  VList,
+  VListItem,
+  VListItemTitle,
+  VBtn,
+  VIcon,
+  VCard,
+  VCardText,
+  VCardActions,
+  VTextField,
+} from 'vuetify/components'
+
+import { SBComp } from '#types/SBComp'
+
+import NavigationDrawer from './NavigationDrawer.vue'
+
+import type { Meta, StoryObj } from '@storybook/vue3'
+
+const meta: Meta<typeof NavigationDrawer> = {
+  title: 'ORGANISMS/NavigationDrawer',
+  component: NavigationDrawer as SBComp,
+  tags: ['autodocs'],
+  argTypes: {
+    location: {
+      control: 'select',
+      options: ['left', 'right', 'top', 'bottom'],
+      description: 'Position of the drawer',
     },
-    args: {
-      location: 'left',
+  },
+  args: {
+    location: 'left',
+  },
+  parameters: {
+    appHeight: '100vh',
+  },
+}
+
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const Example: Story = {
+  render: (args: Record<string, unknown>) => ({
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    components: { NavigationDrawer, VList, VListItem, VListItemTitle, VBtn, VIcon },
+    setup() {
+      return { args }
     },
-    parameters: {
-      appHeight: '100vh',
-    },
-  }
-  
-  export default meta
-  type Story = StoryObj<typeof meta>
-  
-  export const Example: Story = {
-    render: (args: Record<string, unknown>) => ({
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      components: { NavigationDrawer, VList, VListItem, VListItemTitle, VBtn, VIcon },
-      setup() {
-        return { args }
-      },
-      template: `
+    template: `
         <NavigationDrawer v-bind="args">
           <VList>
             <VListItem>
@@ -68,17 +68,17 @@ import {
           <VBtn color="primary" class="mt-4">Click Me</VBtn>
         </NavigationDrawer>
       `,
-    }),
-  }
-  
-  export const WithTextAndButton: Story = {
-    render: (args: Record<string, unknown>) => ({
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      components: { NavigationDrawer, VCard, VCardText, VCardActions, VTextField, VBtn },
-      setup() {
-        return { args }
-      },
-      template: `
+  }),
+}
+
+export const WithTextAndButton: Story = {
+  render: (args: Record<string, unknown>) => ({
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    components: { NavigationDrawer, VCard, VCardText, VCardActions, VTextField, VBtn },
+    setup() {
+      return { args }
+    },
+    template: `
         <NavigationDrawer v-bind="args">
           <VCard>
             <VCardText>
@@ -92,5 +92,5 @@ import {
           </VCard>
         </NavigationDrawer>
       `,
-    }),
-  }
+  }),
+}

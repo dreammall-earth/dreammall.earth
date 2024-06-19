@@ -21,5 +21,5 @@ describe('NavigationDrawer', () => {
 
   it('renders correctly', () => {
     expect(wrapper.element).toMatchSnapshot()
-})
+  })
 })
