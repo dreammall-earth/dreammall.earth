@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ListWithNavigationDrawer > renders correctly 1`] = `
+<navigation-drawer-stub
+  location="right"
+  modelvalue="true"
+/>
+`;
