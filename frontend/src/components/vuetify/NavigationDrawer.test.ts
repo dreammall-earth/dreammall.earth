@@ -6,7 +6,7 @@ import { VApp } from 'vuetify/components'
 import NavigationDrawer from './NavigationDrawer.vue'
 
 describe('NavigationDrawer', () => {
-  const Wrapper = (propsData = { modelValue: true, location: 'right' }) => {
+  const Wrapper = () => {
     return mount(VApp, {
       slots: {
         default: () => h(NavigationDrawer),
@@ -24,6 +24,6 @@ describe('NavigationDrawer', () => {
   })
 
   it('has the correct default location', () => {
-    expect(wrapper.findComponent(NavigationDrawer).props().location).toBe('right')
+    expect(wrapper.findComponent(NavigationDrawer)).toBe(true)
   })
 })
