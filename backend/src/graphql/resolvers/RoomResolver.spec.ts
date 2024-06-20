@@ -72,20 +72,28 @@ describe('RoomResolver', () => {
         }
       `
       describe('No room in DB', () => {
-        // beforeEach(()=> {
-        //   joinMeetingLinkMock.mockRejectedValue({ errors: [{ message:'Error' }] }) 
-        // })
         it('throws an Error', async () => {
-           expect(await testServer.executeOperation({
-            query,
-            variables: {
-              userName: 'Pinky Pie',
-              roomId: 25,
+          await expect(
+            testServer.executeOperation({
+              query,
+              variables: {
+                userName: 'Pinky Pie',
+                roomId: 25,
+              },
+            }),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                errors: [expect.objectContaining({ message: 'Room does not exist' })],
+              },
             },
-          }),
-          ).resolves.toEqual(
-             expect.objectContaining({ errors:[{message: 'Room does not exist'}]})
-           )
+          })
+
+          // .resolves.toEqual(
+          //   expect.objectContaining({ errors: [{ message: 'Room does not exist' }] }),
+          // )
         })
       })
 
