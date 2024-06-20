@@ -95,7 +95,7 @@ export class RoomResolver {
     })
   }
 
-  @Query(() => String, { nullable: true })
+  @Query(() => String)
   async joinRoom(
     @Arg('userName') userName: string,
     @Arg('roomId', () => Int) roomId: number,
