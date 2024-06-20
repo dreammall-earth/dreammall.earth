@@ -92,13 +92,13 @@ export class RoomResolver {
   async joinRoom(
     @Arg('userName') userName: string,
     @Arg('roomId', () => Int) roomId: number,
-  ): Promise<string | null> {
+  ): Promise<string> {
     const meeting = await prisma.meeting.findUnique({
       where: {
         id: roomId,
       },
     })
-    if (!meeting) return null
+    if (!meeting) throw new Error('Room does not exist')
     return joinMeetingLink({
       fullName: userName,
       meetingID: meeting.meetingID,
