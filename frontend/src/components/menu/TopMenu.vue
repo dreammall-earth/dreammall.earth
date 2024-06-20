@@ -19,7 +19,6 @@
               <Circle>
                 <v-icon icon="$camera"></v-icon>
               </Circle>
-              <NewsIndicator :has-news="true" class="ml-2" />
               <UserInfo class="ml-2" />
             </v-col>
           </v-row>
@@ -33,7 +32,6 @@
 import Circle from './CircleElement.vue'
 import LightDarkSwitch from './LightDarkSwitch.vue'
 import LogoImage from './LogoImage.vue'
-import NewsIndicator from './NewsIndicator.vue'
 import TabControl from './TabControl.vue'
 import UserInfo from './UserInfo.vue'
 </script>
