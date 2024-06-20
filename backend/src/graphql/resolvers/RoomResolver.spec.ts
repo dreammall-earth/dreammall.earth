@@ -115,10 +115,6 @@ describe('RoomResolver', () => {
               },
             },
           })
-
-          // .resolves.toEqual(
-          //   expect.objectContaining({ errors: [{ message: 'Room does not exist' }] }),
-          // )
         })
       })
 
