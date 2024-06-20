@@ -68,7 +68,7 @@ describe('JoinRoomPage', () => {
     })
 
     describe('Null returned', () => {
-      const consoleLogSpy = vi.spyOn(console, 'log')
+      const consoleLogSpy = vi.spyOn(global.console, 'log')
       beforeEach(async () => {
         joinRoomQueryMock.mockResolvedValue({ data: { joinRoom: null } })
         vi.clearAllMocks()
@@ -80,8 +80,8 @@ describe('JoinRoomPage', () => {
       })
     })
 
-    describe.skip('Error returned', () => {
-      const consoleLogSpy = vi.spyOn(console, 'log')
+    describe('Error returned', () => {
+      const consoleLogSpy = vi.spyOn(global.console, 'log')
       beforeEach(async () => {
         joinRoomQueryMock.mockRejectedValue({ message: 'autsch' })
         vi.clearAllMocks()

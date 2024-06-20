@@ -74,7 +74,7 @@ describe('TopMenu', () => {
     })
 
     describe('with error', () => {
-      const consoleSpy = vi.spyOn(console, 'log')
+      const consoleSpy = vi.spyOn(global.console, 'log')
 
       beforeEach(async () => {
         authServiceSpy.mockRejectedValue('Error!')
