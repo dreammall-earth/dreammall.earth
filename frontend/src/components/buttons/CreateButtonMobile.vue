@@ -414,7 +414,7 @@ svg {
     transition: clip-path 0.75s;
 
     &--active {
-      clip-path: inset(0 0 50% 0);
+      clip-path: inset(0 0 0 0);
     }
   }
 
@@ -423,7 +423,7 @@ svg {
     transition: clip-path 0.75s;
 
     &--active {
-      clip-path: inset(0 0 50% 0);
+      clip-path: inset(0 0 0 0);
     }
   }
 }
