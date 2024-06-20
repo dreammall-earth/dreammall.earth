@@ -75,12 +75,14 @@ export class RoomResolver {
     const { user } = context
     if (!user) return []
     const meetings = await getMeetings()
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
     return meetings.map(
       (m: MeetingInfo) =>
         new OpenRoom(
           m,
           joinMeetingLink({
             fullName: user.name,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
             meetingID: m.meetingID,
             password: '',
           }),
@@ -88,7 +90,7 @@ export class RoomResolver {
     )
   }
 
-  @Query(() => String, { nullable: true })
+  @Query(() => String)
   async joinRoom(
     @Arg('userName') userName: string,
     @Arg('roomId', () => Int) roomId: number,
