@@ -54,15 +54,18 @@ const items = [
     class: 'cockpit',
     icon: '$cockpit',
     text: 'menu.cockpit',
-    link: '/room',
+    link: '/cockpit',
   },
 ]
 
 const isOpen = ref(true)
 const isSliding = ref(false)
-const activeItem = ref(
-  items.findIndex((i) => (i.link === '/' ? urlPathname === '/' : urlPathname.startsWith(i.link))),
+
+let defaultItem = items.findIndex((i) =>
+  i.link === '/' ? urlPathname === '/' : urlPathname.startsWith(i.link),
 )
+defaultItem = defaultItem < 0 ? 0 : defaultItem
+const activeItem = ref(defaultItem)
 
 const tabControl: Ref<HTMLElement | null> = ref(null)
 const marker: Ref<HTMLElement | null> = ref(null)
@@ -107,10 +110,6 @@ function moveMarker() {
  * @param item s
  */
 function setItem(item: number) {
-  if (item < 0) {
-    throw new Error('Item index cannot be less than 0')
-  }
-
   if (!isOpen.value) return
 
   clearTimeout(timer)
@@ -121,11 +120,12 @@ function setItem(item: number) {
 
   // After the animation is done, navigate to the new route if necessary
   const itemRef = itemRefs.value[activeItem.value]
-  const listener = itemRef.addEventListener('transitionend', (event) => {
+  const listener = (event: TransitionEvent) => {
     if (event.propertyName !== 'background-color') return
     itemRef.removeEventListener('transitionend', listener)
     navigate(items[activeItem.value].link)
-  })
+  }
+  itemRef.addEventListener('transitionend', listener)
 
   requestAnimationFrame(() => {
     // Move the marker to the active item
