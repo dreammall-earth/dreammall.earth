@@ -1,4 +1,5 @@
-import { mount } from '@vue/test-utils'
+import { ApolloError } from '@apollo/client/errors'
+import { flushPromises, mount } from '@vue/test-utils'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
@@ -67,29 +68,17 @@ describe('JoinRoomPage', () => {
       })
     })
 
-    describe('Null returned', () => {
-      const consoleLogSpy = vi.spyOn(console, 'log')
-      beforeEach(async () => {
-        joinRoomQueryMock.mockResolvedValue({ data: { joinRoom: null } })
-        vi.clearAllMocks()
-        await wrapper.find('form').trigger('submit')
-      })
-
-      it('logs Room not found', () => {
-        expect(consoleLogSpy).toBeCalledWith('Room not found')
-      })
-    })
-
-    describe.skip('Error returned', () => {
+    describe('Error returned', () => {
       const consoleLogSpy = vi.spyOn(console, 'log')
       beforeEach(async () => {
         joinRoomQueryMock.mockRejectedValue({ message: 'autsch' })
+        await flushPromises()
         vi.clearAllMocks()
         await wrapper.find('form').trigger('submit')
       })
 
       it('logs Room not found', () => {
-        expect(consoleLogSpy).toBeCalledWith('Error', 'autsch')
+        expect(consoleLogSpy).toBeCalledWith('Error', new ApolloError({ errorMessage: 'autsch' }))
       })
     })
   })
