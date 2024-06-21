@@ -9,7 +9,7 @@ import 'vue3-toastify/dist/index.css'
 import PageShell from '#components/PageShell.vue'
 import { setPageContext } from '#context/usePageContext'
 import { createApolloClient } from '#plugins/apollo'
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
+import globalErrorHandler from '#plugins/globalErrorHandler'
 import i18n from '#plugins/i18n'
 import pinia from '#plugins/pinia'
 import CreateVuetify from '#plugins/vuetify'
@@ -65,7 +65,7 @@ function createApp(pageContext: PageContext, isClient = true) {
       userSelect: 'initial',
     },
   } as ToastContainerOptions)
-  app.use(GlobalErrorHandler)
+  app.use(globalErrorHandler)
 
   const auth = useAuthStore()
 

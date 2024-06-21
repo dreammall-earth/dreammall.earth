@@ -1,7 +1,7 @@
 import { useQuery } from '@vue/apollo-composable'
 import { watch, ref } from 'vue'
 
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
+import globalErrorHandler from '#plugins/globalErrorHandler'
 import { JoinMyRoomQueryResult, joinMyRoomQuery } from '#queries/joinMyRoomQuery'
 
 export default function useMyRoom() {
@@ -21,7 +21,7 @@ export default function useMyRoom() {
 
   watch(joinMyRoomQueryError, () => {
     if (joinMyRoomQueryError.value) {
-      GlobalErrorHandler.error(joinMyRoomQueryError.value.message)
+      globalErrorHandler.error(joinMyRoomQueryError.value.message)
     }
   })
 
