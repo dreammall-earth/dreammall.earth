@@ -25,7 +25,7 @@ const props = defineProps({
     required: true,
   },
   location: {
-    type: String as PropType<ValidLocation>,
+    type: String as PropType<NavigationDrawerLocation>,
     required: false,
     default: 'right',
     validator: (value: string) =>
