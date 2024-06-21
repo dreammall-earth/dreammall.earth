@@ -6,6 +6,7 @@ import { VApp } from 'vuetify/components'
 import { AUTH } from '#src/env'
 import { useAuthStore } from '#stores/authStore'
 import { authService } from '#tests/mock.authService'
+import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
 import TopMenu from './TopMenu.vue'
 import UserDropdown from './UserDropdown.vue'
@@ -74,8 +75,6 @@ describe('TopMenu', () => {
     })
 
     describe('with error', () => {
-      const consoleSpy = vi.spyOn(console, 'log')
-
       beforeEach(async () => {
         authServiceSpy.mockRejectedValue('Error!')
         await wrapper.find('button.user-info').trigger('click')
@@ -84,7 +83,7 @@ describe('TopMenu', () => {
       })
 
       it('logs the error', () => {
-        expect(consoleSpy).toBeCalledWith('auth error', 'Error!')
+        expect(errorHandlerSpy).toBeCalledWith('auth error', 'Error!')
       })
     })
   })

@@ -18,6 +18,7 @@
 import { inject } from 'vue'
 
 import MainButton from '#components/buttons/MainButton.vue'
+import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { AUTH } from '#src/env'
 import AuthService from '#src/services/AuthService'
 import { useAuthStore } from '#stores/authStore'
@@ -30,8 +31,7 @@ async function signOut() {
   try {
     await authService?.signOut()
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log('auth error', error)
+    GlobalErrorHandler.error('auth error', error)
   }
 }
 

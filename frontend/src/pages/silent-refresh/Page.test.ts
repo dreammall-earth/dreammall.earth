@@ -6,6 +6,7 @@ import { VApp } from 'vuetify/components'
 
 import i18n from '#plugins/i18n'
 import { authService } from '#tests/mock.authService'
+import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
 import SilentRefreshPage from './+Page.vue'
 import { title } from './+title'
@@ -49,15 +50,13 @@ describe('SilentRefreshPage', () => {
   })
 
   describe('auth service throws', () => {
-    const consoleSpy = vi.spyOn(global.console, 'log')
-
     beforeEach(() => {
       authServiceSpy.mockRejectedValue('Ouch!')
       wrapper = Wrapper()
     })
 
     it('logs error to console', () => {
-      expect(consoleSpy).toBeCalledWith('auth error', 'Ouch!')
+      expect(errorHandlerSpy).toBeCalledWith('auth error', 'Ouch!')
     })
   })
 })

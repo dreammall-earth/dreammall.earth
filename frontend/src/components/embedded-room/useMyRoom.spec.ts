@@ -4,6 +4,7 @@ import { defineComponent } from 'vue'
 
 import { joinMyRoomQuery } from '#queries/joinMyRoomQuery'
 import { mockClient } from '#tests/mock.apolloClient'
+import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
 import useMyRoom from './useMyRoom'
 
@@ -44,19 +45,16 @@ describe('useMyRoom', () => {
   })
 
   describe('with apollo error', () => {
-    const errorMessage = 'Aua!'
-
     beforeEach(() => {
       wrapper.unmount()
       vi.clearAllMocks()
-      joinMyRoomQueryMock.mockRejectedValue({ message: errorMessage, data: undefined })
+      joinMyRoomQueryMock.mockRejectedValue({ message: 'Aua!', data: undefined })
       wrapper = Wrapper()
     })
 
     it('logs error message', async () => {
-      const consoleSpy = vi.spyOn(global.console, 'log')
       await flushPromises()
-      expect(consoleSpy).toBeCalledWith(errorMessage)
+      expect(errorHandlerSpy).toBeCalledWith('Aua!')
     })
   })
 })
