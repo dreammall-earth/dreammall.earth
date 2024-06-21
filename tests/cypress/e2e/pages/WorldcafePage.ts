@@ -14,18 +14,8 @@ class WorldcafePage {
   }
 
   enterMyRoom() {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    // cy.intercept('POST', Cypress.env('backendURL'), (req) => {
-    //   // eslint-disable-next-line @typescript-eslint/no-unsafe-call, no-prototype-builtins, @typescript-eslint/no-unsafe-member-access
-    //   if (req.body.hasOwnProperty('query') && req.body.query.includes('joinMyRoom')) {
-    //     req.alias = 'postJoinMyRoomQuery'
-    //   }
-    // })
-
     cy.get(this.centerBtn).click()
     cy.get(this.newTableBtnBtn).click()
-    // cy.url().should('contain', '/room/')
-    // cy.wait('@postJoinMyRoomQuery')
   }
 }
 

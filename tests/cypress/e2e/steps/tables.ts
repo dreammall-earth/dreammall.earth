@@ -1,5 +1,6 @@
 import { Then, When } from '@badeball/cypress-cucumber-preprocessor'
 
+// eslint-disable-next-line import/no-relative-parent-imports
 import { worldcafePage } from '../pages/WorldcafePage'
 
 When('I click the enter my room button', () => {
