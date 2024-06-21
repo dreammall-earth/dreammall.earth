@@ -5,6 +5,7 @@ import { VApp } from 'vuetify/components'
 
 import { joinMyRoomQuery } from '#queries/joinMyRoomQuery'
 import { mockClient } from '#tests/mock.apolloClient'
+import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
 import RoomPage from './+Page.vue'
 import { title } from './+title'
@@ -52,18 +53,15 @@ describe('Room Page', () => {
   })
 
   describe('with apollo error', () => {
-    const errorMessage = 'Aua!'
-
     beforeEach(() => {
       vi.clearAllMocks()
-      joinMyRoomQueryMock.mockRejectedValue({ message: errorMessage, data: undefined })
+      joinMyRoomQueryMock.mockRejectedValue({ message: 'Aua!', data: undefined })
       wrapper = Wrapper()
     })
 
     it('logs error message', async () => {
-      const consoleSpy = vi.spyOn(global.console, 'log')
       await flushPromises()
-      expect(consoleSpy).toBeCalledWith(errorMessage)
+      expect(errorHandlerSpy).toBeCalledWith('Aua!')
     })
   })
 })
