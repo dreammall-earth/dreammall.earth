@@ -3,7 +3,12 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
+import { usePageContext } from '#root/renderer/context/usePageContext'
+
 import TabControl from './TabControl.vue'
+
+vi.mock('#root/renderer/context/usePageContext')
+const mockedUsePageContext = vi.mocked(usePageContext)
 
 describe('TabControl', () => {
   const Wrapper = () => {
@@ -18,6 +23,11 @@ describe('TabControl', () => {
 
   beforeEach(() => {
     vi.useFakeTimers()
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    mockedUsePageContext.mockReturnValue({
+      urlPathname: '/',
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any)
     wrapper = Wrapper()
     vi.runAllTimers()
   })
@@ -26,33 +36,65 @@ describe('TabControl', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 
+  describe('set active item by route', () => {
+    it('sets first item active for /', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      mockedUsePageContext.mockReturnValue({
+        urlPathname: '/',
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any)
+      wrapper = Wrapper()
+      expect(wrapper.find('button.tab-control').findAll('a.item')[0].classes('active')).toBe(true)
+    })
+
+    it('sets second item active for /cockpit', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      mockedUsePageContext.mockReturnValue({
+        urlPathname: '/cockpit',
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any)
+      wrapper = Wrapper()
+      expect(wrapper.find('button.tab-control').findAll('a.item')[1].classes('active')).toBe(true)
+    })
+
+    it('sets first item active for /somerandomroute', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      mockedUsePageContext.mockReturnValue({
+        urlPathname: '/somerandomroute',
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any)
+      wrapper = Wrapper()
+      expect(wrapper.find('button.tab-control').findAll('a.item')[0].classes('active')).toBe(true)
+    })
+  })
+
   describe('click tab control button', () => {
     beforeEach(async () => {
       await wrapper.find('button.tab-control').trigger('click')
     })
 
-    it('has three menu buttons', () => {
-      expect(wrapper.find('button.tab-control').findAll('button')).toHaveLength(3)
+    it('has two menu items', () => {
+      expect(wrapper.find('button.tab-control').findAll('a.item')).toHaveLength(2)
     })
 
     describe('set item', () => {
       beforeEach(async () => {
-        await wrapper.findAll('button.item')[1].trigger('click')
+        await wrapper.findAll('a.item')[1].trigger('click')
       })
 
       it('changes active item', () => {
-        expect(wrapper.findAll('button.item')[1].classes('active')).toBe(true)
+        expect(wrapper.findAll('a.item')[1].classes('active')).toBe(true)
       })
     })
 
     describe('set item with menu closed', () => {
       beforeEach(async () => {
         vi.runAllTimers()
-        await wrapper.findAll('button.item')[1].trigger('click')
+        await wrapper.findAll('a.item')[1].trigger('click')
       })
 
       it('does not change the active item', () => {
-        expect(wrapper.findAll('button.item')[0].classes('active')).toBe(true)
+        expect(wrapper.findAll('a.item')[0].classes('active')).toBe(true)
       })
     })
   })
@@ -64,7 +106,7 @@ describe('TabControl', () => {
       wrapper.unmount()
     })
 
-    it('clears timouts', () => {
+    it('clears timeouts', () => {
       expect(timeOutSpy).toBeCalled()
     })
   })
