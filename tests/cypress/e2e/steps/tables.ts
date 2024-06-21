@@ -9,13 +9,6 @@ When('I click the enter my room button', () => {
 })
 
 Then('I am navigated to page where my room is queried', () => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-  cy.intercept('POST', Cypress.env('backendURL'), (req) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, no-prototype-builtins, @typescript-eslint/no-unsafe-member-access
-    if (req.body.hasOwnProperty('query') && req.body.query.includes('joinMyRoom')) {
-      req.alias = 'postJoinMyRoomQuery'
-    }
-  })
-
+  cy.url().should('contain', '/room/')
   cy.wait('@postJoinMyRoomQuery')
 })
