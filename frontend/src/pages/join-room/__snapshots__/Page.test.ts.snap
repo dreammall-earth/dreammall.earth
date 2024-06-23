@@ -14,49 +14,6 @@ exports[`JoinRoomPage > renders 1`] = `
       style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: NaN; --v-layout-bottom: 0px; transition: none !important;"
     >
       
-      <a
-        class="logo d-none d-md-flex"
-        data-v-75d0be1e=""
-        href="/"
-      >
-        <div
-          class="v-responsive v-img v-img--booting w-100 logo-small"
-          data-v-75d0be1e=""
-          data-v-f6be2607=""
-        >
-          <div
-            class="v-responsive__sizer"
-          />
-          
-          
-          <transition-stub
-            appear="true"
-            css="true"
-            name="fade-transition"
-            persisted="false"
-          >
-            <img
-              class="v-img__img v-img__img--contain"
-              src="/src/assets/dreammall-logo.svg"
-              style="display: none;"
-            />
-          </transition-stub>
-          <transition-stub
-            appear="false"
-            css="true"
-            name="fade-transition"
-            persisted="false"
-          >
-            <!---->
-          </transition-stub>
-          <!---->
-          <!---->
-          <!---->
-          
-          
-          <!---->
-        </div>
-      </a>
       <div
         class="top-menu mt-6 mt-sm-0"
         data-v-75d0be1e=""
@@ -84,45 +41,49 @@ exports[`JoinRoomPage > renders 1`] = `
                 class="v-col d-none d-md-flex align-center"
                 data-v-e787b5f9=""
               >
-                <div
-                  class="message-indicator"
-                  data-v-6b63f7d9=""
+                <a
+                  class="logo"
                   data-v-e787b5f9=""
+                  href="/"
                 >
                   <div
-                    class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
-                    data-v-39e8094e=""
-                    data-v-6b63f7d9=""
+                    class="v-responsive v-img v-img--booting w-100 logo-small"
+                    data-v-e787b5f9=""
+                    data-v-f6be2607=""
                   >
+                    <div
+                      class="v-responsive__sizer"
+                    />
                     
-                    <i
-                      aria-hidden="true"
-                      class="v-icon notranslate v-theme--light v-icon--size-default"
-                      data-v-6b63f7d9=""
+                    
+                    <transition-stub
+                      appear="true"
+                      css="true"
+                      name="fade-transition"
+                      persisted="false"
                     >
-                      <svg
-                        fill="none"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        width="20"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M17.6199 4.28609H16.6675V11.9051C16.6675 12.4289 16.239 12.8575 15.7151 12.8575H4.28657V13.8099C4.28657 14.8575 5.14372 15.7147 6.19134 15.7147H15.7151L19.5247 19.5242V6.19085C19.5247 5.14323 18.6675 4.28609 17.6199 4.28609ZM14.7628 9.04799V2.38132C14.7628 1.33371 13.9056 0.476562 12.858 0.476562H2.38181C1.33419 0.476562 0.477051 1.33371 0.477051 2.38132V14.7623L4.28657 10.9528H12.858C13.9056 10.9528 14.7628 10.0956 14.7628 9.04799Z"
-                          fill="currentColor"
-                        />
-                      </svg>
-                    </i>
+                      <img
+                        class="v-img__img v-img__img--contain"
+                        src="/src/assets/dreammall-logo.svg"
+                        style="display: none;"
+                      />
+                    </transition-stub>
+                    <transition-stub
+                      appear="false"
+                      css="true"
+                      name="fade-transition"
+                      persisted="false"
+                    >
+                      <!---->
+                    </transition-stub>
+                    <!---->
+                    <!---->
+                    <!---->
                     
+                    
+                    <!---->
                   </div>
-                  <div
-                    class="count d-flex justify-center align-center"
-                    data-show-count="true"
-                    data-v-6b63f7d9=""
-                  >
-                    3
-                  </div>
-                </div>
+                </a>
               </div>
               <div
                 class="v-col d-flex align-center justify-center"
@@ -710,43 +671,6 @@ exports[`JoinRoomPage > renders 1`] = `
                       </i>
                       
                     </div>
-                    <div
-                      class="news-indicator ml-2"
-                      data-v-5cc937bd=""
-                      data-v-e787b5f9=""
-                    >
-                      <div
-                        class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
-                        data-v-39e8094e=""
-                        data-v-5cc937bd=""
-                      >
-                        
-                        <i
-                          aria-hidden="true"
-                          class="v-icon notranslate v-theme--light v-icon--size-default"
-                          data-v-5cc937bd=""
-                        >
-                          <svg
-                            fill="none"
-                            height="20"
-                            viewBox="0 0 16 20"
-                            width="16"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M0.381348 16.7172V14.8088H2.28971V8.12956C2.28971 6.80961 2.68729 5.63676 3.48244 4.61101C4.2776 3.58526 5.31129 2.91336 6.58354 2.5953V1.92737C6.58354 1.52979 6.72269 1.19185 7.00099 0.913549C7.2793 0.635245 7.61724 0.496094 8.01481 0.496094C8.41239 0.496094 8.75033 0.635245 9.02863 0.913549C9.30694 1.19185 9.44609 1.52979 9.44609 1.92737V2.5953C10.7183 2.91336 11.752 3.58526 12.5472 4.61101C13.3423 5.63676 13.7399 6.80961 13.7399 8.12956V14.8088H15.6483V16.7172H0.381348ZM8.01481 19.5798C7.49001 19.5798 7.04075 19.3929 6.66703 19.0192C6.29331 18.6455 6.10645 18.1962 6.10645 17.6714H9.92318C9.92318 18.1962 9.73632 18.6455 9.3626 19.0192C8.98888 19.3929 8.53961 19.5798 8.01481 19.5798ZM4.19808 14.8088H11.8315V8.12956C11.8315 7.07996 11.4578 6.18143 10.7104 5.43399C9.96294 4.68655 9.06441 4.31283 8.01481 4.31283C6.96521 4.31283 6.06669 4.68655 5.31925 5.43399C4.5718 6.18143 4.19808 7.07996 4.19808 8.12956V14.8088Z"
-                              fill="currentColor"
-                            />
-                          </svg>
-                        </i>
-                        
-                      </div>
-                      <div
-                        class="marker d-flex justify-center align-center rounded-circle"
-                        data-show-marker="true"
-                        data-v-5cc937bd=""
-                      />
-                    </div>
                     
                     
                     <button
@@ -1054,80 +978,30 @@ exports[`JoinRoomPage > renders 1`] = `
         data-v-96a196cc=""
       >
         <div
-          class="message-indicator"
-          data-v-6b63f7d9=""
+          class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center camera-button"
+          data-v-39e8094e=""
           data-v-96a196cc=""
         >
-          <div
-            class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
-            data-v-39e8094e=""
-            data-v-6b63f7d9=""
+          
+          <i
+            aria-hidden="true"
+            class="v-icon notranslate v-theme--light v-icon--size-default"
+            data-v-96a196cc=""
           >
-            
-            <i
-              aria-hidden="true"
-              class="v-icon notranslate v-theme--light v-icon--size-default"
-              data-v-6b63f7d9=""
+            <svg
+              fill="none"
+              height="17"
+              viewBox="0 0 21 17"
+              width="21"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <svg
-                fill="none"
-                height="20"
-                viewBox="0 0 20 20"
-                width="20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M17.6199 4.28609H16.6675V11.9051C16.6675 12.4289 16.239 12.8575 15.7151 12.8575H4.28657V13.8099C4.28657 14.8575 5.14372 15.7147 6.19134 15.7147H15.7151L19.5247 19.5242V6.19085C19.5247 5.14323 18.6675 4.28609 17.6199 4.28609ZM14.7628 9.04799V2.38132C14.7628 1.33371 13.9056 0.476562 12.858 0.476562H2.38181C1.33419 0.476562 0.477051 1.33371 0.477051 2.38132V14.7623L4.28657 10.9528H12.858C13.9056 10.9528 14.7628 10.0956 14.7628 9.04799Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </i>
-            
-          </div>
-          <div
-            class="count d-flex justify-center align-center"
-            data-show-count="true"
-            data-v-6b63f7d9=""
-          >
-            3
-          </div>
-        </div>
-        <div
-          class="news-indicator"
-          data-v-5cc937bd=""
-          data-v-96a196cc=""
-        >
-          <div
-            class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
-            data-v-39e8094e=""
-            data-v-5cc937bd=""
-          >
-            
-            <i
-              aria-hidden="true"
-              class="v-icon notranslate v-theme--light v-icon--size-default"
-              data-v-5cc937bd=""
-            >
-              <svg
-                fill="none"
-                height="20"
-                viewBox="0 0 16 20"
-                width="16"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M0.381348 16.7172V14.8088H2.28971V8.12956C2.28971 6.80961 2.68729 5.63676 3.48244 4.61101C4.2776 3.58526 5.31129 2.91336 6.58354 2.5953V1.92737C6.58354 1.52979 6.72269 1.19185 7.00099 0.913549C7.2793 0.635245 7.61724 0.496094 8.01481 0.496094C8.41239 0.496094 8.75033 0.635245 9.02863 0.913549C9.30694 1.19185 9.44609 1.52979 9.44609 1.92737V2.5953C10.7183 2.91336 11.752 3.58526 12.5472 4.61101C13.3423 5.63676 13.7399 6.80961 13.7399 8.12956V14.8088H15.6483V16.7172H0.381348ZM8.01481 19.5798C7.49001 19.5798 7.04075 19.3929 6.66703 19.0192C6.29331 18.6455 6.10645 18.1962 6.10645 17.6714H9.92318C9.92318 18.1962 9.73632 18.6455 9.3626 19.0192C8.98888 19.3929 8.53961 19.5798 8.01481 19.5798ZM4.19808 14.8088H11.8315V8.12956C11.8315 7.07996 11.4578 6.18143 10.7104 5.43399C9.96294 4.68655 9.06441 4.31283 8.01481 4.31283C6.96521 4.31283 6.06669 4.68655 5.31925 5.43399C4.5718 6.18143 4.19808 7.07996 4.19808 8.12956V14.8088Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </i>
-            
-          </div>
-          <div
-            class="marker d-flex justify-center align-center rounded-circle"
-            data-show-marker="true"
-            data-v-5cc937bd=""
-          />
+              <path
+                d="M7.68844 12.4824H9.66834V9.51172H12.6382V7.53125H9.66834V4.56055H7.68844V7.53125H4.71859V9.51172H7.68844V12.4824ZM2.73869 16.4434C2.19422 16.4434 1.72812 16.2494 1.34038 15.8616C0.952654 15.4738 0.758789 15.0075 0.758789 14.4629V2.58008C0.758789 2.03545 0.952654 1.56921 1.34038 1.18137C1.72812 0.79353 2.19422 0.599609 2.73869 0.599609H14.6181C15.1626 0.599609 15.6287 0.79353 16.0164 1.18137C16.4041 1.56921 16.598 2.03545 16.598 2.58008V7.03613L20.5578 3.0752V13.9678L16.598 10.0068V14.4629C16.598 15.0075 16.4041 15.4738 16.0164 15.8616C15.6287 16.2494 15.1626 16.4434 14.6181 16.4434H2.73869ZM2.73869 14.4629H14.6181V2.58008H2.73869V14.4629Z"
+                fill="currentColor"
+              />
+            </svg>
+          </i>
+          
         </div>
         <div
           class="create-button-container"
@@ -1624,32 +1498,6 @@ exports[`JoinRoomPage > renders 1`] = `
               </svg>
             </div>
           </div>
-        </div>
-        <div
-          class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center camera-button"
-          data-v-39e8094e=""
-          data-v-96a196cc=""
-        >
-          
-          <i
-            aria-hidden="true"
-            class="v-icon notranslate v-theme--light v-icon--size-default"
-            data-v-96a196cc=""
-          >
-            <svg
-              fill="none"
-              height="17"
-              viewBox="0 0 21 17"
-              width="21"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M7.68844 12.4824H9.66834V9.51172H12.6382V7.53125H9.66834V4.56055H7.68844V7.53125H4.71859V9.51172H7.68844V12.4824ZM2.73869 16.4434C2.19422 16.4434 1.72812 16.2494 1.34038 15.8616C0.952654 15.4738 0.758789 15.0075 0.758789 14.4629V2.58008C0.758789 2.03545 0.952654 1.56921 1.34038 1.18137C1.72812 0.79353 2.19422 0.599609 2.73869 0.599609H14.6181C15.1626 0.599609 15.6287 0.79353 16.0164 1.18137C16.4041 1.56921 16.598 2.03545 16.598 2.58008V7.03613L20.5578 3.0752V13.9678L16.598 10.0068V14.4629C16.598 15.0075 16.4041 15.4738 16.0164 15.8616C15.6287 16.2494 15.1626 16.4434 14.6181 16.4434H2.73869ZM2.73869 14.4629H14.6181V2.58008H2.73869V14.4629Z"
-                fill="currentColor"
-              />
-            </svg>
-          </i>
-          
         </div>
         
         
