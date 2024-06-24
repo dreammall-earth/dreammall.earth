@@ -2,237 +2,80 @@
 
 exports[`ListElement > renders correctly 1`] = `
 <div
-  class="v-card v-theme--light v-card--density-default v-card--variant-elevated mx-auto"
-  data-v-fce026f9=""
-  style="width: 400px;"
+  class="v-application v-theme--light v-layout v-layout--full-height v-locale--is-ltr"
 >
-  <!---->
   <div
-    class="v-card__loader"
-  >
-    <div
-      aria-hidden="true"
-      aria-valuemax="100"
-      aria-valuemin="0"
-      class="v-progress-linear v-theme--light v-locale--is-ltr"
-      role="progressbar"
-      style="top: 0px; height: 0px; --v-progress-linear-height: 2px;"
-    >
-      <!---->
-      <div
-        class="v-progress-linear__background"
-        style="width: 100%;"
-      />
-      <transition-stub
-        appear="false"
-        css="true"
-        name="fade-transition"
-        persisted="false"
-      >
-        <div
-          class="v-progress-linear__indeterminate"
-        >
-          
-          <div
-            class="v-progress-linear__indeterminate long"
-          />
-          <div
-            class="v-progress-linear__indeterminate short"
-          />
-          
-        </div>
-      </transition-stub>
-      <!---->
-    </div>
-  </div>
-  <!---->
-  <!---->
-  
-  <div
-    class="v-list v-theme--light v-list--density-default v-list--two-line"
-    data-v-fce026f9=""
-    role="listbox"
-    tabindex="0"
+    class="v-application__wrap"
   >
     
-    
     <div
-      class="v-list-item v-list-item--link v-theme--light v-list-item--density-default v-list-item--two-line rounded-0 v-list-item--variant-text custom-list-item"
+      class="v-card v-theme--light v-card--density-default v-card--variant-elevated mx-auto"
       data-v-fce026f9=""
-      tabindex="-2"
+      style="width: 400px;"
     >
-      
-      <span
-        class="v-list-item__overlay"
-      />
-      <span
-        class="v-list-item__underlay"
-      />
-      
+      <!---->
       <div
-        class="v-list-item__prepend"
-      >
-        
-        
-        <div
-          class="v-avatar v-theme--light bg-primary v-avatar--density-default v-avatar--size-default v-avatar--variant-flat"
-          data-v-fce026f9=""
-        >
-          <i
-            aria-hidden="true"
-            class="mdi-lock mdi v-icon notranslate v-theme--light v-icon--size-default"
-          />
-          
-          <!---->
-          <span
-            class="v-avatar__underlay"
-          />
-          
-        </div>
-        
-        
-        <div
-          class="v-list-item__spacer"
-        />
-      </div>
-      <div
-        class="v-list-item__content"
-        data-no-activator=""
+        class="v-card__loader"
       >
         <div
-          class="v-list-item-title"
-        >
-          LOLLY Krypto Entwicklung
-        </div>
-        <div
-          class="v-list-item-subtitle"
-        >
-          Krypto für Alle
-        </div>
-        <!---->
-      </div>
-      <div
-        class="v-list-item__append"
-      >
-        
-        
-        <i
           aria-hidden="true"
-          class="mdi-dots-vertical mdi v-icon notranslate v-theme--light v-icon--size-default append-icon"
-          data-v-fce026f9=""
-        />
-        
-        
-        <div
-          class="v-list-item__spacer"
-        />
-      </div>
-    </div>
-    <div
-      class="v-list-item v-list-item--link v-theme--light v-list-item--density-default v-list-item--two-line rounded-0 v-list-item--variant-text custom-list-item"
-      data-v-fce026f9=""
-      tabindex="-2"
-    >
-      
-      <span
-        class="v-list-item__overlay"
-      />
-      <span
-        class="v-list-item__underlay"
-      />
-      
-      <div
-        class="v-list-item__prepend"
-      >
-        
-        
-        <div
-          class="v-responsive v-img v-img--booting"
-          data-v-fce026f9=""
-          style="height: 40px; width: 40px;"
+          aria-valuemax="100"
+          aria-valuemin="0"
+          class="v-progress-linear v-theme--light v-locale--is-ltr"
+          role="progressbar"
+          style="top: 0px; height: 0px; --v-progress-linear-height: 2px;"
         >
+          <!---->
           <div
-            class="v-responsive__sizer"
+            class="v-progress-linear__background"
+            style="width: 100%;"
           />
-          
-          
-          <transition-stub
-            appear="true"
-            css="true"
-            name="fade-transition"
-            persisted="false"
-          >
-            <img
-              class="v-img__img v-img__img--contain"
-              referrerpolicy="no-referrer"
-              src="https://picsum.photos/40"
-              style="display: none;"
-            />
-          </transition-stub>
           <transition-stub
             appear="false"
             css="true"
             name="fade-transition"
             persisted="false"
           >
-            <!---->
+            <div
+              class="v-progress-linear__indeterminate"
+            >
+              
+              <div
+                class="v-progress-linear__indeterminate long"
+              />
+              <div
+                class="v-progress-linear__indeterminate short"
+              />
+              
+            </div>
           </transition-stub>
           <!---->
-          <!---->
-          <!---->
-          
-          
-          <!---->
         </div>
-        
-        
-        <div
-          class="v-list-item__spacer"
-        />
       </div>
+      <!---->
+      <!---->
+      
       <div
-        class="v-list-item__content"
-        data-no-activator=""
-      >
-        <div
-          class="v-list-item-title"
-        >
-          Aachener Freunde Treff
-        </div>
-        <div
-          class="v-list-item-subtitle"
-        >
-          Aachener Freunde Treff
-        </div>
-        <!---->
-      </div>
-      <div
-        class="v-list-item__append"
+        class="v-list v-theme--light v-list--density-default v-list--two-line"
+        data-v-fce026f9=""
+        role="listbox"
+        tabindex="0"
       >
         
         
-        <i
-          aria-hidden="true"
-          class="mdi-dots-vertical mdi v-icon notranslate v-theme--light v-icon--size-default append-icon"
-          data-v-fce026f9=""
-        />
         
         
-        <div
-          class="v-list-item__spacer"
-        />
       </div>
+      
+      <!---->
+      
+      <!---->
+      <span
+        class="v-card__underlay"
+      />
+      
     </div>
     
-    
   </div>
-  
-  <!---->
-  
-  <!---->
-  <span
-    class="v-card__underlay"
-  />
-  
 </div>
 `;
