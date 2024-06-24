@@ -170,10 +170,10 @@ export const createMeeting = async (
 interface JoinMeetinLinkOptions {
   fullName: string
   meetingID: string
-  // role: 'MODERATOR' | 'VIEWER'
-  password: string
-  // createTime: string
-  // userID: string
+  role?: 'MODERATOR' | 'VIEWER'
+  password?: string
+  createTime?: string
+  userID?: string
 }
 
 export const joinMeetingLink = (options: JoinMeetinLinkOptions): string => {
