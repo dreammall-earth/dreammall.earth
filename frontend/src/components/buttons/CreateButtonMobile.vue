@@ -315,21 +315,6 @@ const enterRoom = () => {
 <style scoped lang="scss">
 @import '#root/src/assets/scss/style';
 
-.button-wrapper {
-  position: absolute;
-  top: calc(50% - 60px);
-  left: calc(50% - 40px);
-  transition: top 0.75s;
-
-  @media screen and (min-width: $tablet) {
-    display: none;
-  }
-
-  &--active {
-    top: calc(50% - 70px);
-  }
-}
-
 .button-list-mobile {
   position: absolute;
   top: calc(50% - 0px);
@@ -400,6 +385,7 @@ svg {
   width: 100%;
   max-width: 80px;
   height: 100%;
+  transition: max-width 0.75s;
 
   #create-button-mobile {
     pointer-events: all;
@@ -414,7 +400,7 @@ svg {
     transition: clip-path 0.75s;
 
     &--active {
-      clip-path: inset(0 0 50% 0);
+      clip-path: inset(0 0 0 0);
     }
   }
 
@@ -423,21 +409,31 @@ svg {
     transition: clip-path 0.75s;
 
     &--active {
-      clip-path: inset(0 0 50% 0);
+      clip-path: inset(0 0 0 0);
     }
   }
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.4s ease-in-out;
-}
+.button-wrapper {
+  position: absolute;
+  top: calc(50% - 60px);
+  left: calc(50% - 40px);
+  transition:
+    top 0.75s,
+    left 0.75s;
 
-.fade-enter-from,
-.fade-leave-to {
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(-100px) scale(0.8);
+  @media screen and (min-width: $tablet) {
+    display: none;
+  }
+
+  &--active {
+    top: calc(50% - 70px);
+    left: calc(50% - 30px);
+
+    svg {
+      max-width: 60px;
+    }
+  }
 }
 </style>
 
