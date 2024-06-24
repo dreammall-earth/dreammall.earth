@@ -37,8 +37,8 @@
   "dependencies": {
     "@apollo/server": "^4.10.4",
     "@getbrevo/brevo": "^2.1.1",
-    "@prisma/client": "^5.15.0",
-    "@vuepress/theme-default": "^2.0.0-rc.35",
+    "@prisma/client": "^5.15.1",
+    "@vuepress/theme-default": "^2.0.0-rc.37",
     "axios": "^1.7.2",
     "class-validator": "^0.14.1",
     "dotenv": "^16.4.5",
