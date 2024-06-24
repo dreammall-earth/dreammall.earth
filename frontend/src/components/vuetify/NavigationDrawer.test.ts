@@ -1,40 +1,26 @@
-import { mount, VueWrapper } from '@vue/test-utils'
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { mount } from '@vue/test-utils'
+import { describe, it, expect, beforeEach} from 'vitest'
 import { h } from 'vue'
 import { VApp } from 'vuetify/components'
+
 import NavigationDrawer from './NavigationDrawer.vue'
 
-// Mock für useDisplay
-vi.mock('vuetify', () => ({
-  useDisplay: () => ({
-    mobile: { value: false },
-  }),
-}))
-
 describe('NavigationDrawer', () => {
-  interface NavigationDrawerProps {
-    modelValue: boolean
-    location: string
-  }
-
-  let wrapper: VueWrapper<any>
-
-  const Wrapper = (props: NavigationDrawerProps) => {
+  const Wrapper = () => {
     return mount(VApp, {
       slots: {
-        default: () => h(NavigationDrawer),
+        default: h(NavigationDrawer),
       },
-      props,
-      attachTo: document.body,
     })
   }
 
+  let wrapper: ReturnType<typeof Wrapper>
+
   beforeEach(() => {
-    wrapper = Wrapper({ modelValue: false, location: 'right' })
+    wrapper = Wrapper()
   })
 
   it('renders correctly', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
-
 })
