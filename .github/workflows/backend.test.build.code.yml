@@ -1,6 +1,6 @@
 name: "backend:test:build test code"
 
-on: push
+on: [push,pull_request_target]
 
 jobs:
   # only (but most important) job from this workflow required for pull requests
