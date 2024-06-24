@@ -6,6 +6,7 @@ import { VApp } from 'vuetify/components'
 
 import i18n from '#plugins/i18n'
 import { authService } from '#tests/mock.authService'
+import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
 import AuthPage from './+Page.vue'
 import { title } from './+title'
@@ -82,8 +83,6 @@ describe('AuthPage', () => {
   })
 
   describe('signin callback with error', () => {
-    const consoleSpy = vi.spyOn(global.console, 'log')
-
     beforeEach(() => {
       vi.clearAllMocks()
       authServiceSpy.mockRejectedValue('Ouch!')
@@ -91,7 +90,7 @@ describe('AuthPage', () => {
     })
 
     it('logs the error on console', () => {
-      expect(consoleSpy).toBeCalledWith('auth error', 'Ouch!')
+      expect(errorHandlerSpy).toBeCalledWith('auth error', 'Ouch!')
     })
   })
 })
