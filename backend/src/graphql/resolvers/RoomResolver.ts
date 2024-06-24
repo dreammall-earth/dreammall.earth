@@ -52,7 +52,7 @@ export class RoomResolver {
   }
 
   @Authorized()
-  @Query(() => String)
+  @Mutation(() => String)
   async joinMyRoom(@Ctx() context: Context): Promise<string> {
     const { user } = context
     if (!user) throw new Error('User not found!')
