@@ -29,6 +29,7 @@ const meta: Meta<typeof NavigationDrawer> = {
   },
   args: {
     location: 'left',
+    modelValue: true,
   },
   parameters: {
     appHeight: '100vh',
