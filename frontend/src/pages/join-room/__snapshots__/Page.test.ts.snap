@@ -701,7 +701,7 @@ exports[`JoinRoomPage > renders 1`] = `
                         
                       </div>
                       <div
-                        class="d-flex flex-column justify-center text-right pa-1 pl-3 w-100"
+                        class="d-flex flex-column justify-center text-right pa-3 pl-4 w-100"
                         data-v-607bdd70=""
                       >
                         <i
@@ -1529,7 +1529,7 @@ exports[`JoinRoomPage > renders 1`] = `
             
           </div>
           <div
-            class="d-flex flex-column justify-center text-right pa-1 pl-3 w-100"
+            class="d-flex flex-column justify-center text-right pa-3 pl-4 w-100"
             data-v-607bdd70=""
           >
             <i
