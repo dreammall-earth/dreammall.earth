@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { describe, it, expect, beforeEach} from 'vitest'
+import { describe, it, expect, beforeEach } from 'vitest'
 import { h } from 'vue'
 import { VApp } from 'vuetify/components'
 
