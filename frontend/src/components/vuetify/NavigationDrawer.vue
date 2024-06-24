@@ -18,18 +18,7 @@ const props = withDefaults(
   {
     location: 'right',
   },
-<<<<<<< HEAD
-  location: {
-    type: String as PropType<NavigationDrawerLocation>,
-    required: false,
-    default: 'right',
-    validator: (value: string) =>
-      ['right', 'bottom', 'left', 'end', 'top', 'start'].includes(value as ValidLocation),
-  },
-})
-=======
 )
->>>>>>> 8bf62c91 (fix lint, fix test)
 
 const emits = defineEmits(['update:modelValue'])
 const display = useDisplay()
