@@ -33,7 +33,7 @@
     "update": "npx npm-check-updates"
   },
   "devDependencies": {
-    "@badeball/cypress-cucumber-preprocessor": "^20.0.7",
+    "@badeball/cypress-cucumber-preprocessor": "^20.1.0",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.1",
     "@eslint-community/eslint-plugin-eslint-comments": "^4.3.0",
     "@typescript-eslint/eslint-plugin": "^7.8.0",
