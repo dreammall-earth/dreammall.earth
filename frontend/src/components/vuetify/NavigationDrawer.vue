@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="drawer" :location="computedLocation" temporary width="400">
+  <v-navigation-drawer v-model="isOpen" :location="computedLocation" temporary width="400">
     <slot />
   </v-navigation-drawer>
 </template>
@@ -22,7 +22,7 @@ const props = withDefaults(
 
 const emits = defineEmits(['update:modelValue'])
 const display = useDisplay()
-const drawer = ref(props.modelValue)
+const isOpen = ref(props.modelValue)
 
 const computedLocation = computed(() => {
   return display.mobile.value ? 'bottom' : props.location
@@ -31,12 +31,12 @@ const computedLocation = computed(() => {
 watch(
   () => props.modelValue,
   (newVal) => {
-    drawer.value = newVal
+    isOpen.value = newVal
   },
 )
 
 watch(
-  () => drawer.value,
+  () => isOpen.value,
   (newVal) => {
     if (newVal !== props.modelValue) {
       emits('update:modelValue', newVal)
