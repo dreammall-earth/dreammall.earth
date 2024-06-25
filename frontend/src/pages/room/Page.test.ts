@@ -3,18 +3,18 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { joinMyRoomQuery } from '#queries/joinMyRoomQuery'
+import { joinMyRoomMutation } from '#mutations/joinMyRoomMutation'
 import { mockClient } from '#tests/mock.apolloClient'
 import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
 import RoomPage from './+Page.vue'
 import { title } from './+title'
 
-const joinMyRoomQueryMock = vi.fn()
+const joinMyRoomMutationMock = vi.fn()
 
 const testUrl = 'http://some.url'
 
-mockClient.setRequestHandler(joinMyRoomQuery, joinMyRoomQueryMock)
+mockClient.setRequestHandler(joinMyRoomMutation, joinMyRoomMutationMock)
 
 describe('Room Page', () => {
   const Wrapper = () => {
@@ -29,7 +29,7 @@ describe('Room Page', () => {
 
   describe('without apollo error', () => {
     beforeEach(() => {
-      joinMyRoomQueryMock.mockResolvedValue({ data: { joinMyRoom: testUrl } })
+      joinMyRoomMutationMock.mockResolvedValue({ data: { joinMyRoom: testUrl } })
       wrapper = Wrapper()
     })
 
@@ -42,7 +42,7 @@ describe('Room Page', () => {
     })
 
     it('calls the API', () => {
-      expect(joinMyRoomQueryMock).toBeCalled()
+      expect(joinMyRoomMutationMock).toBeCalled()
     })
 
     it('shows iframe with correct url', async () => {
@@ -55,7 +55,7 @@ describe('Room Page', () => {
   describe('with apollo error', () => {
     beforeEach(() => {
       vi.clearAllMocks()
-      joinMyRoomQueryMock.mockRejectedValue({ message: 'Aua!', data: undefined })
+      joinMyRoomMutationMock.mockRejectedValue({ message: 'Aua!', data: undefined })
       wrapper = Wrapper()
     })
 

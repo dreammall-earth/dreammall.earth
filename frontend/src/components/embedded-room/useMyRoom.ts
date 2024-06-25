@@ -1,27 +1,26 @@
-import { useQuery } from '@vue/apollo-composable'
+import { useMutation } from '@vue/apollo-composable'
 import { watch, ref } from 'vue'
 
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
-import { JoinMyRoomQueryResult, joinMyRoomQuery } from '#queries/joinMyRoomQuery'
+import { JoinMyRoomMutationResult, joinMyRoomMutation } from '#mutations/joinMyRoomMutation'
 
-export default function useMyRoom() {
-  const { result: joinMyRoomQueryResult, error: joinMyRoomQueryError } =
-    useQuery<JoinMyRoomQueryResult>(joinMyRoomQuery, null, {
-      prefetch: false,
+export default async function useMyRoom() {
+  const { mutate: joinMyRoomMutationResult, error: joinMyRoomMutationError } =
+    useMutation<JoinMyRoomMutationResult>(joinMyRoomMutation, {
       fetchPolicy: 'no-cache',
     })
-
+  
   const roomUrl = ref<string | null>(null)
 
-  watch(joinMyRoomQueryResult, () => {
-    if (joinMyRoomQueryResult.value) {
-      roomUrl.value = joinMyRoomQueryResult.value.joinMyRoom
-    }
-  })
+  const result = await joinMyRoomMutationResult()
 
-  watch(joinMyRoomQueryError, () => {
-    if (joinMyRoomQueryError.value) {
-      GlobalErrorHandler.error(joinMyRoomQueryError.value.message)
+  if (result?.data) {
+    roomUrl.value = result.data.joinMyRoom
+  }
+
+  watch(joinMyRoomMutationError, () => {
+    if (joinMyRoomMutationError.value) {
+      GlobalErrorHandler.error(joinMyRoomMutationError.value.message)
     }
   })
 

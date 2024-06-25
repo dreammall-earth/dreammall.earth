@@ -2,17 +2,17 @@ import { flushPromises, mount } from '@vue/test-utils'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { defineComponent } from 'vue'
 
-import { joinMyRoomQuery } from '#queries/joinMyRoomQuery'
+import { joinMyRoomMutation } from '#mutations/joinMyRoomMutation'
 import { mockClient } from '#tests/mock.apolloClient'
 import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
 import useMyRoom from './useMyRoom'
 
-const joinMyRoomQueryMock = vi.fn()
+const joinMyRoomMutationMock = vi.fn()
 
 const testUrl = 'http://some.url'
 
-mockClient.setRequestHandler(joinMyRoomQuery, joinMyRoomQueryMock)
+mockClient.setRequestHandler(joinMyRoomMutation, joinMyRoomMutationMock)
 
 describe('useMyRoom', () => {
   const TestComponent = defineComponent({
@@ -30,12 +30,12 @@ describe('useMyRoom', () => {
 
   describe('without apollo error', () => {
     beforeEach(() => {
-      joinMyRoomQueryMock.mockResolvedValue({ data: { joinMyRoom: testUrl } })
+      joinMyRoomMutationMock.mockResolvedValue({ data: { joinMyRoom: testUrl } })
       wrapper = Wrapper()
     })
 
     it('calls the API', () => {
-      expect(joinMyRoomQueryMock).toBeCalled()
+      expect(joinMyRoomMutationMock).toBeCalled()
     })
 
     it('returns correct url', async () => {
@@ -48,7 +48,7 @@ describe('useMyRoom', () => {
     beforeEach(() => {
       wrapper.unmount()
       vi.clearAllMocks()
-      joinMyRoomQueryMock.mockRejectedValue({ message: 'Aua!', data: undefined })
+      joinMyRoomMutationMock.mockRejectedValue({ message: 'Aua!', data: undefined })
       wrapper = Wrapper()
     })
 
