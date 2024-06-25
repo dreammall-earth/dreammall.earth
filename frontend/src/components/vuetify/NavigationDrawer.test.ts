@@ -6,10 +6,10 @@ import { VApp } from 'vuetify/components'
 import NavigationDrawer from './NavigationDrawer.vue'
 
 describe('NavigationDrawer', () => {
-  const Wrapper = () => {
+  const Wrapper = (props = {}) => {
     return mount(VApp, {
       slots: {
-        default: h(NavigationDrawer),
+        default: h(NavigationDrawer, { modelValue: false, ...props }), // initiale Props setzen
       },
     })
   }
@@ -22,5 +22,16 @@ describe('NavigationDrawer', () => {
 
   it('renders correctly', () => {
     expect(wrapper.element).toMatchSnapshot()
+  })
+
+  it('is closed by default', () => {
+    const drawer = wrapper.findComponent(NavigationDrawer)
+    expect(drawer.props('modelValue')).toBe(false)
+  })
+
+  it('opens when modelValue prop is set to true', async () => {
+    wrapper = Wrapper({ modelValue: true }) 
+    const drawer = wrapper.findComponent(NavigationDrawer)
+    expect(drawer.props('modelValue')).toBe(true) 
   })
 })
