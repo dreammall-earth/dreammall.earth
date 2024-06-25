@@ -1,13 +1,9 @@
 {
-  "name": "boilerplate-frontend",
+  "name": "dreammall-admin",
   "version": "1.0.0",
-  "description": "The IT4C Boilerplate for frontends",
+  "description": "The DreamMall admin interface",
   "main": "build/index.js",
   "type": "module",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/IT4Change/boilerplate-frontend.git"
-  },
   "keywords": [
     "nodejs",
     "npm",
@@ -31,9 +27,9 @@
   },
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/IT4Change/boilerplate-frontend/issues"
+    "url": "https://github.com/dreammall-earth/dreammall.earth/issues"
   },
-  "homepage": "https://github.com/IT4Change/boilerplate-frontend#readme",
+  "homepage": "https://github.com/dreammall-earth/dreammall.earth/blob/master/frontend/README.md",
   "scripts": {
     "dev": "npm run server:dev",
     "prod": "npm run build && npm run server:prod",
