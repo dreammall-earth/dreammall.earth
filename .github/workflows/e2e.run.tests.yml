@@ -26,6 +26,7 @@ jobs:
           npm run prod &
           cd  ../presenter
           cp .env.dist .env
+          export PORT=3001
           npm install
           npm run prod &
 
