@@ -1,4 +1,4 @@
-# boilerplate-frontend
+# DreamMall Admin Interface
 
 [![nodejs][badge-nodejs-img]][badge-nodejs-href]
 [![npm][badge-npm-img]][badge-npm-href]
@@ -17,7 +17,7 @@
 [![vuepress][badge-vuepress-img]][badge-vuepress-href]
 [![chromatic][badge-chromatic-img]][badge-chromatic-href]
 
-The IT4C Boilerplate for frontends
+The DreamMall admin interface
 
 ![](src/assets/it4c-logo2-clean-bg_alpha-128x128.png)
 
