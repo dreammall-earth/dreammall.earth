@@ -1,18 +1,14 @@
 {
-  "name": "boilerplate-backend",
+  "name": "dreammall-backend",
   "version": "1.2.1",
-  "description": "The IT4C Boilerplate for backends",
+  "description": "The DreamMall backend",
   "main": "build/index.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/IT4Change/boilerplate-backend.git"
-  },
   "author": {
     "name": "Moriz Wahl"
   },
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/IT4Change/boilerplate-backend/issues"
+    "url": "https://github.com/dreammall-earth/dreammall.earth/issues"
   },
   "scripts": {
     "build": "tsc",
