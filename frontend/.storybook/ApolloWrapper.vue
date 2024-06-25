@@ -6,7 +6,7 @@
 import { defineComponent, provide } from 'vue'
 import { DefaultApolloClient } from '@vue/apollo-composable'
 
-import { joinMyRoomMutation } from '#queries/joinMyRoomMutation'
+import { joinMyRoomMutation } from '#mutations/joinMyRoomMutation'
 import { MockedProvider } from '@apollo/client/testing'
 
 const apolloClient = new MockedProvider({
