@@ -1,16 +1,12 @@
 {
-  "name": "boilerplate-e2e-cypress-cucumber",
+  "name": "dreammall-e2e-testing",
   "version": "1.0.0",
-  "description": "A boilerplate for end-to-end testing with Cypress and Cucumber in Typescript",
+  "description": "The DreamMall End-to-End Testing",
   "type": "module",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/IT4Change/boilerplate-e2e-cypress-cucumber.git"
-  },
   "bugs": {
-    "url": "https://github.com/IT4Change/boilerplate-e2e-cypress-cucumber/issues"
+    "url": "https://github.com/dreammall-earth/dreammall.earth/issues"
   },
-  "homepage": "https://github.com/IT4Change/boilerplate-e2e-cypress-cucumber#readme",
+  "homepage": "https://github.com/dreammall-earth/dreammall.earth/blob/master/tests/README.md",
   "keywords": [
     "BDD",
     "cypress",
