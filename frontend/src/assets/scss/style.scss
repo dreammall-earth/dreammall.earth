@@ -19,3 +19,8 @@ $font-family-default: 'Helvetica', sans-serif;
 :root {
   --menu-icon-height: 44px;
 }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
