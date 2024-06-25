@@ -7,8 +7,6 @@ import { XMLParser } from 'fast-xml-parser'
 import { CONFIG } from '#config/config'
 import logger from '#src/logger'
 
-import { prisma } from '#src/prisma'
-
 const parser = new XMLParser()
 
 export const axiosInstance = axios.create({
@@ -185,36 +183,6 @@ export const joinMeetingLink = (options: JoinMeetinLinkOptions): string => {
   }).toString()
   const checksum = createChecksum('join', params)
   return CONFIG.BBB_URL + 'join?' + params + '&checksum=' + checksum
-}
-
-const handleOpenRomms = async (): Promise<void> => {
-  const rooms = await getMeetings()
-  console.log(rooms)
-  if (rooms.length) {
-    await prisma.meeting.updateMany({
-      where: {
-        createTime: { not: null },
-        meetingID: {
-          not: {
-              in: rooms.map((m: MeetingInfo) => m.meetingID)
-          },
-        },
-      },
-      data: {
-        attendeePW: null,
-        moderatorPW: null,
-        voiceBridge: null,
-        dialNumber: null,
-        createTime: null,
-        createDate: null,
-      },
-    })
-  }
-}
-
-export const checkForOpenRooms = (): void => {
-  void handleOpenRomms()
-  setTimeout(checkForOpenRooms, 60 * 1000)
 }
 
 /*
