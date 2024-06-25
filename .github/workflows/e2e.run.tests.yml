@@ -22,10 +22,12 @@ jobs:
           docker compose up -d
           cd ../frontend
           cp .env.dist .env
-          docker compose -f docker-compose.test.yml up -d frontend
+          npm install
+          npm run prod &
           cd  ../presenter
           cp .env.dist .env
-          docker compose -f docker-compose.test.yml up -d presenter
+          npm install
+          npm run prod &
           sleep 4m
 
       - name: Install cucumber-json-formatter
