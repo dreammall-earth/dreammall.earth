@@ -6,14 +6,14 @@
 import { defineComponent, provide } from 'vue'
 import { DefaultApolloClient } from '@vue/apollo-composable'
 
-import { joinMyRoomQuery } from '#queries/joinMyRoomQuery'
+import { joinMyRoomMutation } from '#queries/joinMyRoomMutation'
 import { MockedProvider } from '@apollo/client/testing'
 
 const apolloClient = new MockedProvider({
   mocks: [
     {
       request: {
-        query: joinMyRoomQuery,
+        mutation: joinMyRoomMutation,
       },
       result: {
         data: {
