@@ -7,11 +7,19 @@
 </template>
 
 <script setup lang="ts">
-import EmbeddedRoom from '#components/embedded-room/EmbeddedRoom.vue'
-import useMyRoom from '#components/embedded-room/useMyRoom'
-import DefaultLayout from '#layouts/DefaultLayout.vue'
+import { watch, ref } from 'vue'
 
-const { roomUrl } = useMyRoom()
+import EmbeddedRoom from '#components/embedded-room/EmbeddedRoom.vue'
+import DefaultLayout from '#layouts/DefaultLayout.vue'
+import { useActiveRoomStore } from '#stores/activeRoomStore'
+
+const activeRoomStore = useActiveRoomStore()
+
+const roomUrl = ref<string | null>(null)
+
+watch(activeRoomStore, () => {
+  roomUrl.value = activeRoomStore?.activeRoom
+})
 </script>
 
 <style scoped>

@@ -1,5 +1,5 @@
 import { setActivePinia, createPinia } from 'pinia'
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect } from 'vitest'
 
 import { useActiveRoomStore } from './activeRoomStore'
 
@@ -15,7 +15,7 @@ describe('Active Room Store', () => {
 
   describe('set active room action', () => {
     it('updates the store', () => {
-      activeRoomStore.setActiveRoom( 'https://link-to-my.room')
+      activeRoomStore.setActiveRoom('https://link-to-my.room')
       expect(activeRoomStore.activeRoom).toBe('https://link-to-my.room')
     })
   })
