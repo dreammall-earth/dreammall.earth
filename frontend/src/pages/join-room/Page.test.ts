@@ -6,6 +6,7 @@ import { VApp } from 'vuetify/components'
 
 import { joinRoomQuery } from '#queries/joinRoomQuery'
 import { mockClient } from '#tests/mock.apolloClient'
+import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
 import JoinRoomPage from './+Page.vue'
 import Route from './+route'
@@ -69,7 +70,6 @@ describe('JoinRoomPage', () => {
     })
 
     describe('Error returned', () => {
-      const consoleLogSpy = vi.spyOn(console, 'log')
       beforeEach(async () => {
         joinRoomQueryMock.mockRejectedValue({ message: 'autsch' })
         await flushPromises()
@@ -78,7 +78,10 @@ describe('JoinRoomPage', () => {
       })
 
       it('logs Room not found', () => {
-        expect(consoleLogSpy).toBeCalledWith('Error', new ApolloError({ errorMessage: 'autsch' }))
+        expect(errorHandlerSpy).toBeCalledWith(
+          'room link not found',
+          new ApolloError({ errorMessage: 'autsch' }),
+        )
       })
     })
   })

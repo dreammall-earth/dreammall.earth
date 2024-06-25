@@ -38,6 +38,7 @@ import { ref } from 'vue'
 import MainButton from '#components/buttons/MainButton.vue'
 import { usePageContext } from '#context/usePageContext'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
+import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { joinRoomQuery } from '#queries/joinRoomQuery'
 
 const pageContext = usePageContext()
@@ -68,8 +69,7 @@ const getRoomLink = async () => {
       window.location.href = joinRoomQueryResult.value.joinRoom
     }
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log('Error', error)
+    GlobalErrorHandler.error('room link not found', error)
   }
 }
 </script>
