@@ -1,13 +1,14 @@
 <template>
   <DefaultLayout>
     <div class="container">
-      <EmbeddedRoom :url="roomUrl" />
+      <EmbeddedRoom :url="roomUrl" @closed="() => navigate('/')" />
     </div>
   </DefaultLayout>
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import { navigate } from 'vike/client/router'
 
 import EmbeddedRoom from '#components/embedded-room/EmbeddedRoom.vue'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
