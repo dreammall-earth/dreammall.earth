@@ -1,8 +1,10 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 export const useActiveRoomStore = defineStore('activeRoom', () => {
   const activeRoom = ref<string | null>(null)
+
+  const getActiveRoom = computed(() => activeRoom.value)
 
   const setActiveRoom = (room: string | null) => {
     activeRoom.value = room
@@ -11,6 +13,7 @@ export const useActiveRoomStore = defineStore('activeRoom', () => {
   return {
     activeRoom,
     setActiveRoom,
+    getActiveRoom,
   }
 })
 
