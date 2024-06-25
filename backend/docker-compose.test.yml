@@ -23,8 +23,3 @@ services:
       # - BUILD_VERSION="0.0.0.0"
       # - BUILD_COMMIT="0000000"
       - NODE_ENV=test
-
-networks:
-  external-net:
-  internal-net:
-    internal: true
