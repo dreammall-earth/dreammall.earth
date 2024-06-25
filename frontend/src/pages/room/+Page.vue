@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch, ref } from 'vue'
+import { storeToRefs } from 'pinia'
 
 import EmbeddedRoom from '#components/embedded-room/EmbeddedRoom.vue'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
@@ -15,11 +15,7 @@ import { useActiveRoomStore } from '#stores/activeRoomStore'
 
 const activeRoomStore = useActiveRoomStore()
 
-const roomUrl = ref<string | null>(null)
-
-watch(activeRoomStore, () => {
-  roomUrl.value = activeRoomStore?.activeRoom
-})
+const { activeRoom: roomUrl } = storeToRefs(activeRoomStore)
 </script>
 
 <style scoped>
