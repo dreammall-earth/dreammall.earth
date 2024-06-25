@@ -28,7 +28,6 @@ jobs:
           cp .env.dist .env
           npm install
           npm run prod &
-          sleep 4m
 
       - name: Install cucumber-json-formatter
         run: |
