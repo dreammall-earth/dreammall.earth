@@ -11,7 +11,7 @@ import EmbeddedRoom from '#components/embedded-room/EmbeddedRoom.vue'
 import useMyRoom from '#components/embedded-room/useMyRoom'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
 
-const { roomUrl } = await useMyRoom()
+const { roomUrl } = useMyRoom()
 </script>
 
 <style scoped>
