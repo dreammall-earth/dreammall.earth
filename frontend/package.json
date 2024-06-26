@@ -158,6 +158,7 @@
     "#assets/*": "./src/assets/*",
     "#layouts/*": "./src/layouts/*",
     "#queries/*": "./src/graphql/queries/*",
+    "#mutations/*": "./src/graphql/mutations/*",
     "#stores/*": "./src/stores/*",
     "#src/*": "./src/*",
     "#plugins/*": "./renderer/plugins/*",
