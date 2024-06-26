@@ -135,17 +135,31 @@ export class RoomResolver {
     const { user } = context
     if (!user) return []
     const meetings = await getMeetings()
-    return meetings.map(
-      (m: MeetingInfo) =>
-        new OpenRoom(
+
+    if (meetings.length) {
+      const dbMeetingsPwMap = await prisma.meeting.findMany({
+        where: {
+          meetingID: { in: meetings.map((m: MeetingInfo) => m.meetingID) },
+        },
+        select: {
+          meetingID: true,
+          attendeePW: true,
+        },
+      })
+
+      return meetings.map((m: MeetingInfo) => {
+        const pw = dbMeetingsPwMap.find((pw) => pw.meetingID === m.meetingID)
+        return new OpenRoom(
           m,
           joinMeetingLink({
             fullName: user.name,
             meetingID: m.meetingID,
-            password: '',
+            password: pw?.attendeePW ? pw.attendeePW : '',
           }),
-        ),
-    )
+        )
+      })
+    }
+    return []
   }
 
   @Query(() => String, { nullable: true })
