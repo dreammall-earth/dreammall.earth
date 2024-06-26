@@ -20,7 +20,7 @@ describe('ListWithNavigationDrawer', () => {
     wrapper = Wrapper()
   })
 
-  it.only('renders correctly', () => {
+  it('renders correctly', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 })
