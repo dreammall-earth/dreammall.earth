@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 import { Meta, StoryFn } from '@storybook/vue3'
 
 import SearchDrawerField from './SearchField.vue'
