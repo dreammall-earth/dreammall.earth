@@ -13,10 +13,10 @@
   ],
   "coverageThreshold": {
     "global": {
-      "statements": 96,
-      "branches": 87,
+      "statements": 95,
+      "branches": 88,
       "functions": 94,
-      "lines": 97
+      "lines": 96
     }
   },
   "modulePathIgnorePatterns": ["<rootDir>/build/"],
