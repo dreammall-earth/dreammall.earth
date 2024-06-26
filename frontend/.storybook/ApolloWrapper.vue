@@ -13,7 +13,7 @@ const apolloClient = new MockedProvider({
   mocks: [
     {
       request: {
-        mutate: joinMyRoomMutation,
+        query: joinMyRoomMutation,
       },
       result: {
         data: {
