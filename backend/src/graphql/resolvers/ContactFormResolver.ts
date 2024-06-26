@@ -9,7 +9,7 @@ export class ContactFormResolver {
   @Mutation(() => Boolean)
   createContactForm(@Arg('contactFormData') contactFormData: ContactFormInput): boolean {
     void sendContactEmails(contactFormData)
-    void EVENT_CONTACTFORM_SEND(contactFormData.email)
+    await EVENT_CONTACTFORM_SEND(contactFormData.email)
     return true
   }
 }

@@ -15,14 +15,14 @@ export class NewsletterSubscriptionResolver {
       subscribeToNewsletterData.lastName,
       subscribeToNewsletterData.email,
     )
-    void EVENT_NEWSLETTER_SUBSCRIBE(subscribeToNewsletterData.email)
+    await EVENT_NEWSLETTER_SUBSCRIBE(subscribeToNewsletterData.email)
     return result
   }
 
   @Mutation(() => Boolean)
   async confirmNewsletter(@Arg('code') code: string): Promise<boolean> {
     const result = await confirmNewsletter(code)
-    void EVENT_NEWSLETTER_CONFIRM(result ? result.email : undefined)
+    await EVENT_NEWSLETTER_CONFIRM(result ? result.email : undefined)
     return !!result
   }
 }
