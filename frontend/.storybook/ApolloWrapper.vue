@@ -2,7 +2,7 @@
   <div><slot /></div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, provide } from 'vue'
 import { DefaultApolloClient } from '@vue/apollo-composable'
 
@@ -19,7 +19,6 @@ const apolloClient = new MockedProvider({
         data: {
           joinMyRoom: 'https://meet.jit.si/room',
         },
-        joinMyRoom: 'https://meet.jit.si/room',
       },
     },
   ],
