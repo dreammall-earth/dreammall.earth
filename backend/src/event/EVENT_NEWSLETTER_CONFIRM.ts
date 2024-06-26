@@ -1,5 +1,5 @@
 import { Event } from './Event'
 import { EventType } from './EventType'
 
-export const EVENT_NEWSLETTER_CONFIRM = (involvedEmail?: string) =>
-  Event(EventType.NEWSLETTER_CONFIRM, { involvedEmail })
+export const EVENT_NEWSLETTER_CONFIRM = async (involvedEmail?: string) =>
+  await Event(EventType.NEWSLETTER_CONFIRM, { involvedEmail })
