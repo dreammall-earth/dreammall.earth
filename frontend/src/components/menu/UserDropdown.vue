@@ -1,23 +1,19 @@
 <template>
-  <MainButton class="sign-out mr-4" variant="third" label="Sign Out" size="auto" @click="signOut"
-    >{{ $t('buttons.signout') }}
-  </MainButton>
-  <MainButton
-    v-if="auth.isAdmin"
-    class="admin-button mr-4"
-    variant="third"
-    label="To Admin"
-    size="auto"
-    @click="enterAdmin"
-  >
-    {{ $t('buttons.toAdmin') }}
-  </MainButton>
+  <ul class="dropdown border-sm pa-2 my-2">
+    <li class="dropdown-element">
+      <button @click="signOut"><v-icon icon="$logout"></v-icon> {{ $t('buttons.signout') }}</button>
+    </li>
+    <li v-if="auth.isAdmin">
+      <button @click="enterAdmin">
+        <v-icon icon="$admin"></v-icon>{{ $t('buttons.toAdmin') }}
+      </button>
+    </li>
+  </ul>
 </template>
 
 <script lang="ts" setup>
 import { inject } from 'vue'
 
-import MainButton from '#components/buttons/MainButton.vue'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { AUTH } from '#src/env'
 import AuthService from '#src/services/AuthService'
@@ -39,3 +35,17 @@ const enterAdmin = async () => {
   window.location.href = AUTH.ADMIN_REDIRECT_URI
 }
 </script>
+
+<style scoped lang="scss">
+.dropdown {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 20px;
+  background: #3d4753;
+  font-size: 14px;
+}
+.dropdown-element {
+  padding: 5px;
+}
+</style>
