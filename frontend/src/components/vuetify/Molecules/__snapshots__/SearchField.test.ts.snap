@@ -8,9 +8,8 @@ exports[`SearchField > renders 1`] = `
     class="v-application__wrap"
   >
     
-    
     <div
-      class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-text-field mx-4 mt-4 SearchDrawer"
+      class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-text-field mx-4 mt-4 search-drawer"
       data-v-6d3ee220=""
     >
       <!---->
@@ -38,11 +37,7 @@ exports[`SearchField > renders 1`] = `
               <!---->
               <div
                 class="v-progress-linear__background"
-                style="opacity: NaN;"
-              />
-              <div
-                class="v-progress-linear__buffer"
-                style="opacity: NaN; width: 0%;"
+                style="width: 100%;"
               />
               <transition-stub
                 appear="false"
@@ -168,7 +163,6 @@ exports[`SearchField > renders 1`] = `
         <!---->
       </div>
     </div>
-    
     
   </div>
 </div>

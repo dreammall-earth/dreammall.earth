@@ -8,7 +8,6 @@ exports[`Room Page > renders 1`] = `
     class="v-application__wrap"
   >
     
-    
     <main
       class="v-main bg-background main-layout"
       data-v-75d0be1e=""
@@ -67,7 +66,7 @@ exports[`Room Page > renders 1`] = `
         <header
           class="v-toolbar v-toolbar--flat v-toolbar--density-default v-theme--light v-locale--is-ltr v-app-bar app-bar"
           data-v-e787b5f9=""
-          style="top: 0px; z-index: 1004; transform: translateY(0px); position: fixed; left: 0px; width: calc(100% - 0px - 0px); transition: none !important;"
+          style="top: 0px; z-index: 1004; transform: translateY(0%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
         >
           <!---->
           
@@ -138,7 +137,7 @@ exports[`Room Page > renders 1`] = `
                   <div
                     class="marker"
                     data-v-d58c92bb=""
-                    style="display: none;"
+                    style="display: none; width: 0px; left: 0px;"
                   />
                   <div
                     class="d-flex align-center justify-center h-100 w-100"
@@ -754,9 +753,10 @@ exports[`Room Page > renders 1`] = `
                     <button
                       aria-expanded="false"
                       aria-haspopup="menu"
-                      aria-owns="v-menu-2"
+                      aria-owns="v-menu-1"
                       class="ml-2 user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
                       data-v-607bdd70=""
+                      targetref="[object Object]"
                     >
                       <div
                         class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm bg-primary"
@@ -944,7 +944,8 @@ exports[`Room Page > renders 1`] = `
               class="button-wrapper"
               data-v-1c60eb53=""
             >
-              <!--v-if-->
+              <!--teleport start-->
+              <!--teleport end-->
               <svg
                 data-v-1c60eb53=""
                 fill="none"
@@ -1458,9 +1459,10 @@ exports[`Room Page > renders 1`] = `
         <button
           aria-expanded="false"
           aria-haspopup="menu"
-          aria-owns="v-menu-1"
+          aria-owns="v-menu-2"
           class="user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
           data-v-607bdd70=""
+          targetref="[object Object]"
         >
           <div
             class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm bg-primary"
@@ -1518,7 +1520,6 @@ exports[`Room Page > renders 1`] = `
       />
       
     </main>
-    
     
   </div>
 </div>
