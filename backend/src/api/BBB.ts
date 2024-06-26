@@ -170,10 +170,10 @@ export const createMeeting = async (
 interface JoinMeetinLinkOptions {
   fullName: string
   meetingID: string
-  // role: 'MODERATOR' | 'VIEWER'
-  password: string
-  // createTime: string
-  // userID: string
+  role?: 'MODERATOR' | 'VIEWER'
+  password?: string
+  createTime?: string
+  userID?: string
 }
 
 export const joinMeetingLink = (options: JoinMeetinLinkOptions): string => {
@@ -183,17 +183,6 @@ export const joinMeetingLink = (options: JoinMeetinLinkOptions): string => {
   }).toString()
   const checksum = createChecksum('join', params)
   return CONFIG.BBB_URL + 'join?' + params + '&checksum=' + checksum
-}
-
-const handleOpenRomms = async (): Promise<void> => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const rooms = await getMeetings()
-  // console.log(rooms.map((m) => m.attendees?.attendee))
-}
-
-export const checkForOpenRooms = (): void => {
-  void handleOpenRomms()
-  setTimeout(checkForOpenRooms, 60 * 1000)
 }
 
 /*
