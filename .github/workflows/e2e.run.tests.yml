@@ -28,8 +28,8 @@ jobs:
           ln -s src/auth/public.pem public.pem
           npm install
           npm run db:reset
-          npm install
-          npm run prod &
+          npm run build
+          npm run start &
           cd ../frontend
           cp .env.dist .env
           npm install
