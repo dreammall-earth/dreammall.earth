@@ -573,7 +573,17 @@ describe('RoomResolver', () => {
         })
       })
 
-      describe('one attendee', () => {
+      describe('one attendee and meeting in DB', () => {
+        beforeAll(async () => {
+          await prisma.meeting.create({
+            data: {
+              name: 'Dreammall Entwicklung',
+              meetingID: 'Dreammall-Entwicklung',
+              attendeePW: '1234',
+            },
+          })
+        })
+
         beforeEach(() => {
           getMeetingsMock.mockResolvedValue([
             {
@@ -617,7 +627,8 @@ describe('RoomResolver', () => {
           ])
         })
 
-        it('returns empty array', async () => {
+        it('returns room with attendee', async () => {
+          jest.clearAllMocks()
           await expect(
             testServer.executeOperation(
               {
@@ -653,6 +664,14 @@ describe('RoomResolver', () => {
                 errors: undefined,
               },
             },
+          })
+        })
+
+        it('calls joinMeetingLink with correct PW', () => {
+          expect(joinMeetingLinkMock).toBeCalledWith({
+            fullName: 'User',
+            meetingID: 'Dreammall-Entwicklung',
+            password: '1234',
           })
         })
       })
