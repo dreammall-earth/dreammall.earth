@@ -8,6 +8,7 @@ exports[`LightDarkSwitch > renders 1`] = `
     class="v-application__wrap"
   >
     
+    
     <button
       class="d-flex align-center justify-center light-dark-switch"
     >
@@ -42,6 +43,7 @@ exports[`LightDarkSwitch > renders 1`] = `
         $t('menu.theme.light') / $t('menu.theme.dark')
       </span>
     </button>
+    
     
   </div>
 </div>

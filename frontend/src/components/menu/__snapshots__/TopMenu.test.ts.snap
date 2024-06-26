@@ -8,6 +8,7 @@ exports[`TopMenu > renders 1`] = `
     class="v-application__wrap"
   >
     
+    
     <div
       class="top-menu mt-6 mt-sm-0"
       data-v-e787b5f9=""
@@ -15,7 +16,7 @@ exports[`TopMenu > renders 1`] = `
       <header
         class="v-toolbar v-toolbar--flat v-toolbar--density-default v-theme--light v-locale--is-ltr v-app-bar app-bar"
         data-v-e787b5f9=""
-        style="top: 0px; z-index: 1004; transform: translateY(0%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
+        style="top: 0px; z-index: 1004; transform: translateY(0px); position: fixed; left: 0px; width: calc(100% - 0px - 0px); transition: none !important;"
       >
         <!---->
         
@@ -705,7 +706,6 @@ exports[`TopMenu > renders 1`] = `
                     aria-owns="v-menu-1"
                     class="ml-2 user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
                     data-v-607bdd70=""
-                    targetref="[object Object]"
                   >
                     <div
                       class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm bg-primary"
@@ -776,6 +776,7 @@ exports[`TopMenu > renders 1`] = `
         
       </header>
     </div>
+    
     
   </div>
 </div>

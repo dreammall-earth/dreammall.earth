@@ -8,6 +8,7 @@ exports[`BottomMenu > renders BottomMenu 1`] = `
     class="v-application__wrap"
   >
     
+    
     <div
       class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface"
       data-v-96a196cc=""
@@ -618,7 +619,6 @@ exports[`BottomMenu > renders BottomMenu 1`] = `
         aria-owns="v-menu-0"
         class="user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
         data-v-607bdd70=""
-        targetref="[object Object]"
       >
         <div
           class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm bg-primary"
@@ -670,6 +670,7 @@ exports[`BottomMenu > renders BottomMenu 1`] = `
       <!---->
       
     </div>
+    
     
   </div>
 </div>

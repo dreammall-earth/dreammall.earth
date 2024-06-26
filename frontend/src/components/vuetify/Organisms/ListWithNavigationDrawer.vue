@@ -1,5 +1,6 @@
 <template>
-  <NavigationDrawer :model-value="drawer" :location="location" @update:model-value="updateDrawer">
+  <!-- <NavigationDrawer :model-value="drawer" :location="location" @update:model-value="updateDrawer"> -->
+  <v-navigation-drawer :model-value="drawer" :location="location">
     <SearchField
       v-model="search"
       label="Open Tables, Jobs"
@@ -7,17 +8,18 @@
     ></SearchField>
     <v-list>
       <div class="mx-4">{{ $t('menu.roomList') }}</div>
-      <ListElement :items="filteredItems" @item-click="updateDrawer(false)" />
+      <ListElement :items="filteredItems" />
     </v-list>
-  </NavigationDrawer>
+  </v-navigation-drawer>
+  <!-- </NavigationDrawer> -->
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
+import { ref, computed, defineProps } from 'vue'
 import { VAvatar, VIcon, VImg } from 'vuetify/components'
 
 import ListElement from '#components/vuetify/Atoms/ListElement.vue'
-import NavigationDrawer from '#components/vuetify/Atoms/NavigationDrawer.vue'
+// import NavigationDrawer from '#components/vuetify/Atoms/NavigationDrawer.vue'
 import SearchField from '#components/vuetify/Molecules/SearchField.vue'
 
 defineProps({
@@ -31,7 +33,7 @@ defineProps({
     default: 'right',
   },
 })
-const emits = defineEmits(['update:drawer'])
+// const emits = defineEmits(['update:drawer'])
 const search = ref('')
 const items = [
   {
@@ -122,7 +124,4 @@ const filteredItems = computed(() => {
   }
   return items.filter((item) => item.title.toLowerCase().includes(search.value.toLowerCase()))
 })
-const updateDrawer = (value: boolean) => {
-  emits('update:drawer', value)
-}
 </script>

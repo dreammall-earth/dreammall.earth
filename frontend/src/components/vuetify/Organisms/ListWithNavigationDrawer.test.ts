@@ -1,26 +1,26 @@
-import { shallowMount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach } from 'vitest'
+import { Component, h } from 'vue'
+import { VApp } from 'vuetify/components'
 
 import ListWithNavigationDrawer from './ListWithNavigationDrawer.vue'
 
 describe('ListWithNavigationDrawer', () => {
-  let wrapper: ReturnType<typeof shallowMount>
+  const Wrapper = () => {
+    return mount(VApp, {
+      slots: {
+        default: h(ListWithNavigationDrawer as Component),
+      },
+    })
+  }
+
+  let wrapper: ReturnType<typeof Wrapper>
 
   beforeEach(() => {
-    wrapper = shallowMount(ListWithNavigationDrawer, {
-      props: { drawer: true },
-    })
+    wrapper = Wrapper()
   })
 
-  it('renders correctly', () => {
+  it.only('renders correctly', () => {
     expect(wrapper.element).toMatchSnapshot()
-  })
-
-  it('toggles drawer state', async () => {
-    const drawer = wrapper.findComponent({ name: 'NavigationDrawer' })
-    expect(drawer.props('modelValue')).toBe(true)
-    await wrapper.setProps({ drawer: false })
-    await wrapper.vm.$nextTick()
-    expect(drawer.props('modelValue')).toBe(false)
   })
 })

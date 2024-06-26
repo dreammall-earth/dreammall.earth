@@ -8,6 +8,7 @@ exports[`TabControl > renders 1`] = `
     class="v-application__wrap"
   >
     
+    
     <button
       class="tab-control ma-auto border-sm text-font"
       data-v-d58c92bb=""
@@ -510,6 +511,7 @@ exports[`TabControl > renders 1`] = `
         
       </div>
     </button>
+    
     
   </div>
 </div>

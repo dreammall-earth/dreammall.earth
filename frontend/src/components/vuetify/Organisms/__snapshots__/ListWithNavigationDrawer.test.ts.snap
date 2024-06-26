@@ -1,8 +1,939 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`ListWithNavigationDrawer > renders correctly 1`] = `
-<navigation-drawer-stub
-  location="right"
-  modelvalue="true"
-/>
+<div
+  class="v-application v-theme--light v-layout v-layout--full-height v-locale--is-ltr"
+>
+  <div
+    class="v-application__wrap"
+  >
+    
+    
+    
+    <!-- &lt;NavigationDrawer :model-value="drawer" :location="location" @update:model-value="updateDrawer"&gt; -->
+    
+    <nav
+      class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile"
+      style="right: 0px; z-index: 1004; transform: translateX(256px); position: fixed; height: calc(100% - 0px - 0px); top: 0px; bottom: 0px; width: 256px; transition: none !important;"
+    >
+      <!---->
+      <!---->
+      <div
+        class="v-navigation-drawer__content"
+      >
+        
+        <div
+          class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-text-field mx-4 mt-4 SearchDrawer"
+          data-v-6d3ee220=""
+        >
+          <!---->
+          <div
+            class="v-input__control"
+          >
+            
+            <div
+              class="v-field v-field--appended v-field--center-affix v-field--prepended v-field--variant-solo v-theme--light v-field--rounded v-locale--is-ltr"
+            >
+              <div
+                class="v-field__overlay"
+              />
+              <div
+                class="v-field__loader"
+              >
+                <div
+                  aria-hidden="true"
+                  aria-valuemax="100"
+                  aria-valuemin="0"
+                  class="v-progress-linear v-theme--light v-locale--is-ltr"
+                  role="progressbar"
+                  style="top: 0px; height: 0px; --v-progress-linear-height: 2px;"
+                >
+                  <!---->
+                  <div
+                    class="v-progress-linear__background"
+                    style="opacity: NaN;"
+                  />
+                  <div
+                    class="v-progress-linear__buffer"
+                    style="opacity: NaN; width: 0%;"
+                  />
+                  <transition-stub
+                    appear="false"
+                    css="true"
+                    name="fade-transition"
+                    persisted="false"
+                  >
+                    <div
+                      class="v-progress-linear__indeterminate"
+                    >
+                      
+                      <div
+                        class="v-progress-linear__indeterminate long"
+                      />
+                      <div
+                        class="v-progress-linear__indeterminate short"
+                      />
+                      
+                    </div>
+                  </transition-stub>
+                  <!---->
+                </div>
+              </div>
+              <div
+                class="v-field__prepend-inner"
+              >
+                <i
+                  aria-hidden="true"
+                  class="mdi-tune mdi v-icon notranslate v-theme--light v-icon--size-default"
+                />
+                <!---->
+              </div>
+              <div
+                class="v-field__field"
+                data-no-activator=""
+              >
+                <label
+                  aria-hidden="true"
+                  class="v-label v-field-label v-field-label--floating"
+                  for="input-1"
+                >
+                  <!---->
+                  
+                  Open Tables, Jobs
+                  
+                </label>
+                <label
+                  class="v-label v-field-label"
+                  for="input-1"
+                >
+                  <!---->
+                  
+                  Open Tables, Jobs
+                  
+                </label>
+                
+                
+                <!---->
+                <input
+                  aria-describedby="input-1-messages"
+                  class="v-field__input"
+                  id="input-1"
+                  size="1"
+                  type="text"
+                />
+                <!---->
+                
+                
+              </div>
+              <transition-stub
+                appear="false"
+                css="true"
+                name="expand-x-transition"
+                persisted="false"
+              >
+                <div
+                  class="v-field__clearable"
+                  style="display: none;"
+                >
+                  
+                  <i
+                    aria-hidden="false"
+                    aria-label="$vuetify.input.clear"
+                    class="mdi-close-circle mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--clickable"
+                    role="button"
+                    tabindex="0"
+                  />
+                  
+                </div>
+              </transition-stub>
+              <div
+                class="v-field__append-inner"
+              >
+                <!---->
+                <!---->
+              </div>
+              <div
+                class="v-field__outline"
+              >
+                <!---->
+                <!---->
+              </div>
+            </div>
+            
+          </div>
+          <!---->
+          <div
+            class="v-input__details"
+          >
+            <transition-group-stub
+              appear="false"
+              aria-live="polite"
+              class="v-messages"
+              css="true"
+              id="input-1-messages"
+              name="slide-y-transition"
+              persisted="false"
+              role="alert"
+              tag="div"
+            >
+              <!---->
+            </transition-group-stub>
+            <!---->
+          </div>
+        </div>
+        <div
+          class="v-list v-theme--light bg-transparent v-list--density-default v-list--one-line"
+          role="listbox"
+          tabindex="0"
+        >
+          
+          <div
+            class="mx-4"
+          >
+            $t('menu.roomList')
+          </div>
+          <div
+            class="v-card v-theme--light v-card--density-default v-card--variant-elevated mx-auto"
+            data-v-fd6c8fbc=""
+            style="width: 400px;"
+          >
+            <!---->
+            <div
+              class="v-card__loader"
+            >
+              <div
+                aria-hidden="true"
+                aria-valuemax="100"
+                aria-valuemin="0"
+                class="v-progress-linear v-theme--light v-locale--is-ltr"
+                role="progressbar"
+                style="top: 0px; height: 0px; --v-progress-linear-height: 2px;"
+              >
+                <!---->
+                <div
+                  class="v-progress-linear__background"
+                  style="opacity: NaN;"
+                />
+                <div
+                  class="v-progress-linear__buffer"
+                  style="opacity: NaN; width: 0%;"
+                />
+                <transition-stub
+                  appear="false"
+                  css="true"
+                  name="fade-transition"
+                  persisted="false"
+                >
+                  <div
+                    class="v-progress-linear__indeterminate"
+                  >
+                    
+                    <div
+                      class="v-progress-linear__indeterminate long"
+                    />
+                    <div
+                      class="v-progress-linear__indeterminate short"
+                    />
+                    
+                  </div>
+                </transition-stub>
+                <!---->
+              </div>
+            </div>
+            <!---->
+            <!---->
+            
+            <div
+              class="v-list v-theme--light bg-transparent v-list--density-default v-list--two-line"
+              data-v-fd6c8fbc=""
+              role="listbox"
+              tabindex="0"
+            >
+              
+              
+              <div
+                class="v-list-item v-list-item--link v-theme--light v-list-item--density-default v-list-item--two-line rounded-0 v-list-item--variant-text custom-list-item"
+                data-v-fd6c8fbc=""
+                tabindex="-2"
+              >
+                
+                <span
+                  class="v-list-item__overlay"
+                />
+                <span
+                  class="v-list-item__underlay"
+                />
+                
+                <div
+                  class="v-list-item__prepend"
+                >
+                  
+                  
+                  <div
+                    class="v-avatar v-theme--light bg-primary v-avatar--density-default v-avatar--size-default v-avatar--variant-flat"
+                    data-v-fd6c8fbc=""
+                  >
+                    <i
+                      aria-hidden="true"
+                      class="mdi-lock mdi v-icon notranslate v-theme--light v-icon--size-default"
+                    />
+                    
+                    <!---->
+                    <span
+                      class="v-avatar__underlay"
+                    />
+                    
+                  </div>
+                  
+                  
+                  <div
+                    class="v-list-item__spacer"
+                  />
+                </div>
+                <div
+                  class="v-list-item__content"
+                  data-no-activator=""
+                >
+                  <div
+                    class="v-list-item-title"
+                  >
+                    LOLLY Krypto Entwicklung
+                  </div>
+                  <div
+                    class="v-list-item-subtitle"
+                  >
+                    Krypto für Alle
+                  </div>
+                  <!---->
+                </div>
+                <div
+                  class="v-list-item__append"
+                >
+                  
+                  
+                  <i
+                    aria-hidden="true"
+                    class="mdi-dots-vertical mdi v-icon notranslate v-theme--light v-icon--size-default append-icon"
+                    data-v-fd6c8fbc=""
+                  />
+                  
+                  
+                  <div
+                    class="v-list-item__spacer"
+                  />
+                </div>
+              </div>
+              <div
+                class="v-list-item v-list-item--link v-theme--light v-list-item--density-default v-list-item--two-line rounded-0 v-list-item--variant-text custom-list-item"
+                data-v-fd6c8fbc=""
+                tabindex="-2"
+              >
+                
+                <span
+                  class="v-list-item__overlay"
+                />
+                <span
+                  class="v-list-item__underlay"
+                />
+                
+                <div
+                  class="v-list-item__prepend"
+                >
+                  
+                  
+                  <div
+                    class="v-responsive v-img v-img--booting"
+                    data-v-fd6c8fbc=""
+                    style="height: 40px; width: 40px;"
+                  >
+                    <div
+                      class="v-responsive__sizer"
+                    />
+                    
+                    
+                    <transition-stub
+                      appear="true"
+                      css="true"
+                      name="fade-transition"
+                      persisted="false"
+                    >
+                      <img
+                        class="v-img__img v-img__img--contain"
+                        referrerpolicy="no-referrer"
+                        src="https://picsum.photos/40"
+                        style="display: none;"
+                      />
+                    </transition-stub>
+                    <transition-stub
+                      appear="false"
+                      css="true"
+                      name="fade-transition"
+                      persisted="false"
+                    >
+                      <!---->
+                    </transition-stub>
+                    <!---->
+                    <!---->
+                    <!---->
+                    
+                    
+                    <!---->
+                  </div>
+                  
+                  
+                  <div
+                    class="v-list-item__spacer"
+                  />
+                </div>
+                <div
+                  class="v-list-item__content"
+                  data-no-activator=""
+                >
+                  <div
+                    class="v-list-item-title"
+                  >
+                    Aachener Freunde Treff
+                  </div>
+                  <div
+                    class="v-list-item-subtitle"
+                  >
+                    Aachener Freunde Treff
+                  </div>
+                  <!---->
+                </div>
+                <div
+                  class="v-list-item__append"
+                >
+                  
+                  
+                  <i
+                    aria-hidden="true"
+                    class="mdi-dots-vertical mdi v-icon notranslate v-theme--light v-icon--size-default append-icon"
+                    data-v-fd6c8fbc=""
+                  />
+                  
+                  
+                  <div
+                    class="v-list-item__spacer"
+                  />
+                </div>
+              </div>
+              <div
+                class="v-list-item v-list-item--link v-theme--light v-list-item--density-default v-list-item--two-line rounded-0 v-list-item--variant-text custom-list-item"
+                data-v-fd6c8fbc=""
+                tabindex="-2"
+              >
+                
+                <span
+                  class="v-list-item__overlay"
+                />
+                <span
+                  class="v-list-item__underlay"
+                />
+                
+                <div
+                  class="v-list-item__prepend"
+                >
+                  
+                  
+                  <div
+                    class="v-responsive v-img v-img--booting"
+                    data-v-fd6c8fbc=""
+                    style="height: 40px; width: 40px;"
+                  >
+                    <div
+                      class="v-responsive__sizer"
+                    />
+                    
+                    
+                    <transition-stub
+                      appear="true"
+                      css="true"
+                      name="fade-transition"
+                      persisted="false"
+                    >
+                      <img
+                        class="v-img__img v-img__img--contain"
+                        referrerpolicy="no-referrer"
+                        src="https://picsum.photos/39"
+                        style="display: none;"
+                      />
+                    </transition-stub>
+                    <transition-stub
+                      appear="false"
+                      css="true"
+                      name="fade-transition"
+                      persisted="false"
+                    >
+                      <!---->
+                    </transition-stub>
+                    <!---->
+                    <!---->
+                    <!---->
+                    
+                    
+                    <!---->
+                  </div>
+                  
+                  
+                  <div
+                    class="v-list-item__spacer"
+                  />
+                </div>
+                <div
+                  class="v-list-item__content"
+                  data-no-activator=""
+                >
+                  <div
+                    class="v-list-item-title"
+                  >
+                    Building A Wooden Guitar
+                  </div>
+                  <div
+                    class="v-list-item-subtitle"
+                  >
+                    Building A Wooden Guitar
+                  </div>
+                  <!---->
+                </div>
+                <div
+                  class="v-list-item__append"
+                >
+                  
+                  
+                  <i
+                    aria-hidden="true"
+                    class="mdi-dots-vertical mdi v-icon notranslate v-theme--light v-icon--size-default append-icon"
+                    data-v-fd6c8fbc=""
+                  />
+                  
+                  
+                  <div
+                    class="v-list-item__spacer"
+                  />
+                </div>
+              </div>
+              <div
+                class="v-list-item v-list-item--link v-theme--light v-list-item--density-default v-list-item--two-line rounded-0 v-list-item--variant-text custom-list-item"
+                data-v-fd6c8fbc=""
+                tabindex="-2"
+              >
+                
+                <span
+                  class="v-list-item__overlay"
+                />
+                <span
+                  class="v-list-item__underlay"
+                />
+                
+                <div
+                  class="v-list-item__prepend"
+                >
+                  
+                  
+                  <div
+                    class="v-responsive v-img v-img--booting"
+                    data-v-fd6c8fbc=""
+                    style="height: 40px; width: 40px;"
+                  >
+                    <div
+                      class="v-responsive__sizer"
+                    />
+                    
+                    
+                    <transition-stub
+                      appear="true"
+                      css="true"
+                      name="fade-transition"
+                      persisted="false"
+                    >
+                      <img
+                        class="v-img__img v-img__img--contain"
+                        referrerpolicy="no-referrer"
+                        src="https://picsum.photos/41"
+                        style="display: none;"
+                      />
+                    </transition-stub>
+                    <transition-stub
+                      appear="false"
+                      css="true"
+                      name="fade-transition"
+                      persisted="false"
+                    >
+                      <!---->
+                    </transition-stub>
+                    <!---->
+                    <!---->
+                    <!---->
+                    
+                    
+                    <!---->
+                  </div>
+                  
+                  
+                  <div
+                    class="v-list-item__spacer"
+                  />
+                </div>
+                <div
+                  class="v-list-item__content"
+                  data-no-activator=""
+                >
+                  <div
+                    class="v-list-item-title"
+                  >
+                    Co Working Space Manufaktur
+                  </div>
+                  <div
+                    class="v-list-item-subtitle"
+                  >
+                    Co Working Space Manufaktur
+                  </div>
+                  <!---->
+                </div>
+                <div
+                  class="v-list-item__append"
+                >
+                  
+                  
+                  <i
+                    aria-hidden="true"
+                    class="mdi-dots-vertical mdi v-icon notranslate v-theme--light v-icon--size-default append-icon"
+                    data-v-fd6c8fbc=""
+                  />
+                  
+                  
+                  <div
+                    class="v-list-item__spacer"
+                  />
+                </div>
+              </div>
+              <div
+                class="v-list-item v-list-item--link v-theme--light v-list-item--density-default v-list-item--two-line rounded-0 v-list-item--variant-text custom-list-item"
+                data-v-fd6c8fbc=""
+                tabindex="-2"
+              >
+                
+                <span
+                  class="v-list-item__overlay"
+                />
+                <span
+                  class="v-list-item__underlay"
+                />
+                
+                <div
+                  class="v-list-item__prepend"
+                >
+                  
+                  
+                  <div
+                    class="v-responsive v-img v-img--booting"
+                    data-v-fd6c8fbc=""
+                    style="height: 40px; width: 40px;"
+                  >
+                    <div
+                      class="v-responsive__sizer"
+                    />
+                    
+                    
+                    <transition-stub
+                      appear="true"
+                      css="true"
+                      name="fade-transition"
+                      persisted="false"
+                    >
+                      <img
+                        class="v-img__img v-img__img--contain"
+                        referrerpolicy="no-referrer"
+                        src="https://picsum.photos/42"
+                        style="display: none;"
+                      />
+                    </transition-stub>
+                    <transition-stub
+                      appear="false"
+                      css="true"
+                      name="fade-transition"
+                      persisted="false"
+                    >
+                      <!---->
+                    </transition-stub>
+                    <!---->
+                    <!---->
+                    <!---->
+                    
+                    
+                    <!---->
+                  </div>
+                  
+                  
+                  <div
+                    class="v-list-item__spacer"
+                  />
+                </div>
+                <div
+                  class="v-list-item__content"
+                  data-no-activator=""
+                >
+                  <div
+                    class="v-list-item-title"
+                  >
+                    Intervallfasten Kalender
+                  </div>
+                  <div
+                    class="v-list-item-subtitle"
+                  >
+                    Intervallfasten Kalender
+                  </div>
+                  <!---->
+                </div>
+                <div
+                  class="v-list-item__append"
+                >
+                  
+                  
+                  <i
+                    aria-hidden="true"
+                    class="mdi-dots-vertical-circle mdi v-icon notranslate v-theme--light v-icon--size-default append-icon"
+                    data-v-fd6c8fbc=""
+                  />
+                  
+                  
+                  <div
+                    class="v-list-item__spacer"
+                  />
+                </div>
+              </div>
+              <div
+                class="v-list-item v-list-item--link v-theme--light v-list-item--density-default v-list-item--two-line rounded-0 v-list-item--variant-text custom-list-item"
+                data-v-fd6c8fbc=""
+                tabindex="-2"
+              >
+                
+                <span
+                  class="v-list-item__overlay"
+                />
+                <span
+                  class="v-list-item__underlay"
+                />
+                
+                <div
+                  class="v-list-item__prepend"
+                >
+                  
+                  
+                  <div
+                    class="v-responsive v-img v-img--booting"
+                    data-v-fd6c8fbc=""
+                    style="height: 40px; width: 40px;"
+                  >
+                    <div
+                      class="v-responsive__sizer"
+                    />
+                    
+                    
+                    <transition-stub
+                      appear="true"
+                      css="true"
+                      name="fade-transition"
+                      persisted="false"
+                    >
+                      <img
+                        class="v-img__img v-img__img--contain"
+                        referrerpolicy="no-referrer"
+                        src="https://picsum.photos/46"
+                        style="display: none;"
+                      />
+                    </transition-stub>
+                    <transition-stub
+                      appear="false"
+                      css="true"
+                      name="fade-transition"
+                      persisted="false"
+                    >
+                      <!---->
+                    </transition-stub>
+                    <!---->
+                    <!---->
+                    <!---->
+                    
+                    
+                    <!---->
+                  </div>
+                  
+                  
+                  <div
+                    class="v-list-item__spacer"
+                  />
+                </div>
+                <div
+                  class="v-list-item__content"
+                  data-no-activator=""
+                >
+                  <div
+                    class="v-list-item-title"
+                  >
+                    Lomografie 2050
+                  </div>
+                  <div
+                    class="v-list-item-subtitle"
+                  >
+                    Lomografie 2050
+                  </div>
+                  <!---->
+                </div>
+                <div
+                  class="v-list-item__append"
+                >
+                  
+                  
+                  <i
+                    aria-hidden="true"
+                    class="mdi-dots-vertical-circle mdi v-icon notranslate v-theme--light v-icon--size-default append-icon"
+                    data-v-fd6c8fbc=""
+                  />
+                  
+                  
+                  <div
+                    class="v-list-item__spacer"
+                  />
+                </div>
+              </div>
+              <div
+                class="v-list-item v-list-item--link v-theme--light v-list-item--density-default v-list-item--two-line rounded-0 v-list-item--variant-text custom-list-item"
+                data-v-fd6c8fbc=""
+                tabindex="-2"
+              >
+                
+                <span
+                  class="v-list-item__overlay"
+                />
+                <span
+                  class="v-list-item__underlay"
+                />
+                
+                <div
+                  class="v-list-item__prepend"
+                >
+                  
+                  
+                  <div
+                    class="v-avatar v-theme--light bg-primary v-avatar--density-default v-avatar--size-default v-avatar--variant-flat"
+                    data-v-fd6c8fbc=""
+                  >
+                    <div
+                      aria-label=""
+                      class="v-responsive v-img v-img--booting"
+                    >
+                      <div
+                        class="v-responsive__sizer"
+                      />
+                      
+                      
+                      <transition-stub
+                        appear="true"
+                        css="true"
+                        name="fade-transition"
+                        persisted="false"
+                      >
+                        <img
+                          alt=""
+                          class="v-img__img v-img__img--cover"
+                          src="https://picsum.photos/46"
+                          style="display: none;"
+                        />
+                      </transition-stub>
+                      <transition-stub
+                        appear="false"
+                        css="true"
+                        name="fade-transition"
+                        persisted="false"
+                      >
+                        <!---->
+                      </transition-stub>
+                      <!---->
+                      <!---->
+                      <!---->
+                      
+                      
+                      <!---->
+                    </div>
+                    
+                    <!---->
+                    <span
+                      class="v-avatar__underlay"
+                    />
+                    
+                  </div>
+                  
+                  
+                  <div
+                    class="v-list-item__spacer"
+                  />
+                </div>
+                <div
+                  class="v-list-item__content"
+                  data-no-activator=""
+                >
+                  <div
+                    class="v-list-item-title"
+                  >
+                    Freies Treffen U50
+                  </div>
+                  <div
+                    class="v-list-item-subtitle"
+                  >
+                    Freies Treffen U50
+                  </div>
+                  <!---->
+                </div>
+                <div
+                  class="v-list-item__append"
+                >
+                  
+                  
+                  <i
+                    aria-hidden="true"
+                    class="mdi-dots-vertical mdi v-icon notranslate v-theme--light v-icon--size-default append-icon"
+                    data-v-fd6c8fbc=""
+                  />
+                  
+                  
+                  <div
+                    class="v-list-item__spacer"
+                  />
+                </div>
+              </div>
+              
+              
+            </div>
+            
+            <!---->
+            
+            <!---->
+            <span
+              class="v-card__underlay"
+            />
+            
+          </div>
+          
+        </div>
+        
+      </div>
+      <!---->
+    </nav>
+    <transition-stub
+      appear="false"
+      css="true"
+      name="fade-transition"
+      persisted="false"
+    >
+      <!---->
+    </transition-stub>
+    
+    <!-- &lt;/NavigationDrawer&gt; -->
+    
+    
+    
+  </div>
+</div>
 `;
