@@ -78,21 +78,6 @@ RUN npm install --include=dev --frozen-lockfile --non-interactive
 RUN npm run build
 
 ##################################################################################
-# TEST ###########################################################################
-##################################################################################
-FROM base as test
-
-# Copy everything
-COPY . .
-# npm install including dev dependencies to be able to compile
-RUN npm install --include=dev --frozen-lockfile --non-interactive
-# npm build
-RUN npm run build
-
-# Run command
-CMD /bin/sh -c "npm run start"
-
-##################################################################################
 # PRODUCTION (Does contain only "binary"- and static-files to reduce image size) #
 ##################################################################################
 FROM base as production
