@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Room Page > without apollo error > renders 1`] = `
+exports[`Room Page > renders 1`] = `
 <div
   class="v-application v-theme--light v-layout v-layout--full-height v-locale--is-ltr"
 >
