@@ -1,20 +1,14 @@
 import { flushPromises, mount } from '@vue/test-utils'
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { joinMyRoomQuery } from '#queries/joinMyRoomQuery'
-import { mockClient } from '#tests/mock.apolloClient'
-import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
+import { useActiveRoomStore } from '#stores/activeRoomStore'
 
 import RoomPage from './+Page.vue'
 import { title } from './+title'
 
-const joinMyRoomQueryMock = vi.fn()
-
-const testUrl = 'http://some.url'
-
-mockClient.setRequestHandler(joinMyRoomQuery, joinMyRoomQueryMock)
+const activeRoomStore = useActiveRoomStore()
 
 describe('Room Page', () => {
   const Wrapper = () => {
@@ -27,41 +21,27 @@ describe('Room Page', () => {
 
   let wrapper: ReturnType<typeof Wrapper>
 
-  describe('without apollo error', () => {
+  beforeEach(() => {
+    wrapper = Wrapper()
+  })
+
+  it('title returns default title', () => {
+    expect(title()).toBe('DreamMall')
+  })
+
+  it('renders', () => {
+    expect(wrapper.element).toMatchSnapshot()
+  })
+
+  describe('active room store updates', () => {
     beforeEach(() => {
-      joinMyRoomQueryMock.mockResolvedValue({ data: { joinMyRoom: testUrl } })
-      wrapper = Wrapper()
-    })
-
-    it('title returns default title', () => {
-      expect(title()).toBe('DreamMall')
-    })
-
-    it('renders', () => {
-      expect(wrapper.element).toMatchSnapshot()
-    })
-
-    it('calls the API', () => {
-      expect(joinMyRoomQueryMock).toBeCalled()
+      activeRoomStore.setActiveRoom('https://my-room.link')
     })
 
     it('shows iframe with correct url', async () => {
       await flushPromises()
       expect(wrapper.find('iframe').exists()).toBe(true)
-      expect(wrapper.find('iframe').attributes('src')).toBe(testUrl)
-    })
-  })
-
-  describe('with apollo error', () => {
-    beforeEach(() => {
-      vi.clearAllMocks()
-      joinMyRoomQueryMock.mockRejectedValue({ message: 'Aua!', data: undefined })
-      wrapper = Wrapper()
-    })
-
-    it('logs error message', async () => {
-      await flushPromises()
-      expect(errorHandlerSpy).toBeCalledWith('Aua!')
+      expect(wrapper.find('iframe').attributes('src')).toBe('https://my-room.link')
     })
   })
 })

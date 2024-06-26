@@ -3,7 +3,7 @@ name: "backend:test:unit test code with defined suites"
 env:
   DATABASE_URL: mysql://root:@localhost:3306/dreammall.earth
 
-on: push
+on: [push,pull_request_target]
 
 jobs:
   # only (but most important) job from this workflow required for pull requests

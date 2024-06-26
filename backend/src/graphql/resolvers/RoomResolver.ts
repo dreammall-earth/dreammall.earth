@@ -111,7 +111,7 @@ export class RoomResolver {
           voiceBridge: meeting.voiceBridge,
           dialNumber: meeting.dialNumber,
           createTime: meeting.createTime,
-          createDate: meeting.createDate,
+          createDate: new Date(meeting.createDate).toISOString(),
         },
       })
     } catch (err) {
