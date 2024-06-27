@@ -38,6 +38,7 @@ import { ref } from 'vue'
 import MainButton from '#components/buttons/MainButton.vue'
 import { usePageContext } from '#context/usePageContext'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
+import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { joinRoomQuery } from '#queries/joinRoomQuery'
 
 const pageContext = usePageContext()
@@ -47,7 +48,6 @@ const userName = ref('')
 const form = ref<HTMLFormElement>()
 const {
   result: joinRoomQueryResult,
-  error: joinRoomQueryError,
   refetch: joinRoomQueryRefetch,
   loading,
 } = useQuery(
@@ -63,17 +63,13 @@ const {
 )
 
 const getRoomLink = async () => {
-  await joinRoomQueryRefetch()
-  if (joinRoomQueryError.value) {
-    // eslint-disable-next-line no-console
-    console.log('Error', joinRoomQueryError.value.message)
-  } else {
-    if (joinRoomQueryResult.value.joinRoom) {
+  try {
+    await joinRoomQueryRefetch()
+    if (joinRoomQueryResult.value) {
       window.location.href = joinRoomQueryResult.value.joinRoom
-    } else {
-      // eslint-disable-next-line no-console
-      console.log('Room not found')
     }
+  } catch (error) {
+    GlobalErrorHandler.error('room link not found', error)
   }
 }
 </script>
