@@ -14,7 +14,7 @@ const checkForOpenRooms = (): void => {
 export const main = async (): Promise<void> => {
   const url = await listen(4000)
   logger.info(`🚀 Server is ready at ${url}`)
-  checkForOpenRooms()
+  setTimeout(checkForOpenRooms, 60 * 1000)
 }
 
 void main()
