@@ -97,7 +97,7 @@ describe('RoomResolver', () => {
         }
       `
       describe('No room in DB', () => {
-        it('returns null', async () => {
+        it('throws an Error', async () => {
           await expect(
             testServer.executeOperation({
               query,
@@ -110,9 +110,8 @@ describe('RoomResolver', () => {
             body: {
               kind: 'single',
               singleResult: {
-                data: { joinRoom: null },
-
-                errors: undefined,
+                data: null,
+                errors: [expect.objectContaining({ message: 'Room does not exist' })],
               },
             },
           })
