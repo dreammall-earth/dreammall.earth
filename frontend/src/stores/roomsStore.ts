@@ -2,8 +2,8 @@ import { useQuery } from '@vue/apollo-composable'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
-import { openRoomsQuery } from '#src/graphql/queries/openRoomsQuery'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
+import { openRoomsQuery } from '#src/graphql/queries/openRoomsQuery'
 
 type Attendee = {
   fullName: string
@@ -39,10 +39,10 @@ export const useRoomsStore = defineStore('rooms', () => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
         rooms.value = openRoomsQueryResult.value.openRooms
       }
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     } catch (error) {
       GlobalErrorHandler.error('Error refetching open rooms!', error)
     }
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     setTimeout(refetchRooms, 60 * 1000)
   }
 
