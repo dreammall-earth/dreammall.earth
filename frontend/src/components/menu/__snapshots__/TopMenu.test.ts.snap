@@ -778,11 +778,14 @@ exports[`TopMenu > renders 1`] = `
     </div>
     
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    <!-- &lt;NavigationDrawer :model-value="drawer" :location="location" @update:model-value="updateDrawer"&gt; -->
+    
+>>>>>>> 469e74c7 (coverage to 96%)
     <nav
-      class="v-navigation-drawer v-navigation-drawer--bottom v-navigation-drawer--temporary v-theme--light bg-grey-lighten-4 custom-drawer"
-      data-v-5cadcb8f=""
-      mobile=""
-      style="bottom: 0px; z-index: 1004; transform: translateY(110%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
+      class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile"
+      style="right: 0px; z-index: 1004; transform: translateX(110%); position: fixed; transition: none !important; height: calc(100% - NaNpx - 0px); bottom: 0px; width: 256px;"
     >
       <!---->
       <!---->
@@ -790,9 +793,8 @@ exports[`TopMenu > renders 1`] = `
         class="v-navigation-drawer__content"
       >
         
-        
         <div
-          class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-text-field mx-4 mt-4 SearchDrawer"
+          class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-text-field mx-4 mt-4 search-drawer"
           data-v-6d3ee220=""
         >
           <!---->
@@ -1679,7 +1681,6 @@ exports[`TopMenu > renders 1`] = `
           
         </div>
         
-        
       </div>
       <!---->
     </nav>
@@ -1691,6 +1692,8 @@ exports[`TopMenu > renders 1`] = `
     >
       <!---->
     </transition-stub>
+    
+    <!-- &lt;/NavigationDrawer&gt; -->
     
     
 =======
