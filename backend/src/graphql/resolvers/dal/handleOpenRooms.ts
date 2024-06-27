@@ -22,3 +22,8 @@ export const handleOpenRooms = async (): Promise<void> => {
     },
   })
 }
+
+export const checkForOpenRooms = (): void => {
+  void handleOpenRooms()
+  setTimeout(checkForOpenRooms, 60 * 1000)
+}
