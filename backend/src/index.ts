@@ -1,13 +1,13 @@
 // eslint-disable-next-line import/no-unassigned-import
 import 'reflect-metadata'
-import { handleOpenRooms } from '#graphql/resolvers/dal/handleOpenRooms'
+// import { handleOpenRooms } from '#graphql/resolvers/dal/handleOpenRooms'
 
 import logger from './logger'
 import { prisma } from './prisma'
 import { listen } from './server/server'
 
 const checkForOpenRooms = (): void => {
-  void handleOpenRooms()
+  // void handleOpenRooms()
   setTimeout(checkForOpenRooms, 60 * 1000)
 }
 
