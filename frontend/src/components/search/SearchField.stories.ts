@@ -1,13 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 import { Meta, StoryFn } from '@storybook/vue3'
 
 import SearchDrawerField from './SearchField.vue'
 
 export default {
-  title: 'Components/SearchField',
+  title: 'Molecules/SearchField',
   component: SearchDrawerField,
 } as Meta<typeof SearchDrawerField>
 
-const Template: StoryFn<typeof SearchDrawerField> = (args: any) => ({
+const Template: StoryFn<typeof SearchDrawerField> = (args) => ({
   components: { SearchDrawerField },
   setup() {
     return { args }
