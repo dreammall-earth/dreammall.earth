@@ -6,7 +6,7 @@
   </v-app>
 </template>
 
-<script>
+<script lang="ts">
 export const DEFAULT_THEME = 'light'
 export const DEFAULT_HEIGHT = 'auto' // Fallback height
 
