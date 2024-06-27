@@ -7,7 +7,7 @@
     :flat="flat"
     rounded
     :variant="variant"
-    class="mx-4 mt-4 SearchDrawer"
+    class="mx-4 mt-4 search-drawer"
   ></v-text-field>
 </template>
 
@@ -62,7 +62,7 @@ watch(
 </script>
 
 <style scoped>
-.SearchDrawer {
+.search-drawer {
   border-radius: 25px;
 }
 </style>
