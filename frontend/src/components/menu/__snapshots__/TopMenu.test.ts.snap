@@ -16,11 +16,7 @@ exports[`TopMenu > renders 1`] = `
       <header
         class="v-toolbar v-toolbar--flat v-toolbar--density-default v-theme--light v-locale--is-ltr v-app-bar app-bar"
         data-v-e787b5f9=""
-<<<<<<< HEAD
-        style="top: 0px; z-index: 1006; transform: translateY(0%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
-=======
         style="top: 0px; z-index: 1004; transform: translateY(0px); position: fixed; left: 0px; width: calc(100% - 0px - 0px); transition: none !important;"
->>>>>>> 545991c3 (delete navigationDrawer component)
       >
         <!---->
         

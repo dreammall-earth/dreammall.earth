@@ -9,12 +9,11 @@ exports[`ListWithNavigationDrawer > renders correctly 1`] = `
   >
     
     
-    
     <!-- &lt;NavigationDrawer :model-value="drawer" :location="location" @update:model-value="updateDrawer"&gt; -->
     
     <nav
       class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile"
-      style="right: 0px; z-index: 1004; transform: translateX(256px); position: fixed; height: calc(100% - 0px - 0px); top: 0px; bottom: 0px; width: 256px; transition: none !important;"
+      style="right: 0px; z-index: 1004; transform: translateX(110%); position: fixed; transition: none !important; height: calc(100% - 0px - 0px); top: 0px; bottom: 0px; width: 256px;"
     >
       <!---->
       <!---->
@@ -23,7 +22,7 @@ exports[`ListWithNavigationDrawer > renders correctly 1`] = `
       >
         
         <div
-          class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-text-field mx-4 mt-4 SearchDrawer"
+          class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-text-field mx-4 mt-4 search-drawer"
           data-v-6d3ee220=""
         >
           <!---->
@@ -51,11 +50,7 @@ exports[`ListWithNavigationDrawer > renders correctly 1`] = `
                   <!---->
                   <div
                     class="v-progress-linear__background"
-                    style="opacity: NaN;"
-                  />
-                  <div
-                    class="v-progress-linear__buffer"
-                    style="opacity: NaN; width: 0%;"
+                    style="width: 100%;"
                   />
                   <transition-stub
                     appear="false"
@@ -212,11 +207,7 @@ exports[`ListWithNavigationDrawer > renders correctly 1`] = `
                 <!---->
                 <div
                   class="v-progress-linear__background"
-                  style="opacity: NaN;"
-                />
-                <div
-                  class="v-progress-linear__buffer"
-                  style="opacity: NaN; width: 0%;"
+                  style="width: 100%;"
                 />
                 <transition-stub
                   appear="false"
@@ -931,7 +922,6 @@ exports[`ListWithNavigationDrawer > renders correctly 1`] = `
     </transition-stub>
     
     <!-- &lt;/NavigationDrawer&gt; -->
-    
     
     
   </div>

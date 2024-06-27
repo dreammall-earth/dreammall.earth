@@ -8,7 +8,6 @@ exports[`ListElement > renders correctly 1`] = `
     class="v-application__wrap"
   >
     
-    
     <div
       class="v-card v-theme--light v-card--density-default v-card--variant-elevated mx-auto"
       data-v-fd6c8fbc=""
@@ -29,11 +28,7 @@ exports[`ListElement > renders correctly 1`] = `
           <!---->
           <div
             class="v-progress-linear__background"
-            style="opacity: NaN;"
-          />
-          <div
-            class="v-progress-linear__buffer"
-            style="opacity: NaN; width: 0%;"
+            style="width: 100%;"
           />
           <transition-stub
             appear="false"
@@ -80,7 +75,6 @@ exports[`ListElement > renders correctly 1`] = `
       />
       
     </div>
-    
     
   </div>
 </div>
