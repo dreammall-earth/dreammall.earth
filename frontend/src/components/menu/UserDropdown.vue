@@ -1,11 +1,11 @@
 <template>
-  <ul class="dropdown border-sm pa-2 my-2">
-    <li class="dropdown-element">
-      <button @click="signOut"><v-icon icon="$logout"></v-icon> {{ $t('buttons.signout') }}</button>
+  <ul class="dropdown border-sm pa-3 pb-2 my-2 bg-dropdown-background">
+    <li>
+      <button @click="signOut"><v-icon icon="$logout"></v-icon>{{ $t('buttons.signout') }}</button>
     </li>
     <li v-if="auth.isAdmin">
       <button @click="enterAdmin">
-        <v-icon icon="$admin"></v-icon>{{ $t('buttons.toAdmin') }}
+        <v-icon icon="$logout"></v-icon>{{ $t('buttons.toAdmin') }}
       </button>
     </li>
   </ul>
@@ -38,14 +38,23 @@ const enterAdmin = async () => {
 
 <style scoped lang="scss">
 .dropdown {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  border-radius: 20px;
-  background: #3d4753;
   font-size: 14px;
+  list-style: none;
+  border-radius: 20px;
 }
-.dropdown-element {
+
+.dropdown li {
   padding: 5px;
+}
+
+.dropdown button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.dropdown button i {
+  margin-top: -2px;
+  margin-right: 8px;
 }
 </style>
