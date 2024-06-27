@@ -2,7 +2,6 @@
   <v-navigation-drawer
     :model-value="drawer"
     :location="location"
-    app
     width="auto"
     class="menu-drawer-top"
     @update:model-value="updateDrawer"
@@ -26,6 +25,7 @@ import { VAvatar, VIcon, VImg } from 'vuetify/components'
 import ListElement from '#components/vuetify/Atoms/ListElement.vue'
 import SearchField from '#components/vuetify/Molecules/SearchField.vue'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps({
   drawer: {
     type: Boolean,

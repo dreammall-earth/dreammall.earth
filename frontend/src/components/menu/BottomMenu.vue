@@ -53,16 +53,20 @@ const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('bot
     transform: translateX(20px);
   }
 }
+
 .create-button-mobile {
-  transform: translate(20px, 30px);
   z-index: 1;
+  transform: translate(20px, 30px);
 }
+
 .navigation-drawer-box {
   bottom: 65px;
 }
+
 .v-navigation-drawer {
   scrollbar-width: thin;
 }
+
 .v-navigation-drawer__content {
   scrollbar-width: thin;
 }
