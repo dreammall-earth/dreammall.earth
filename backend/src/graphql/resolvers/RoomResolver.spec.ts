@@ -48,13 +48,13 @@ describe('RoomResolver', () => {
       it('throws access denied', async () => {
         await expect(
           testServer.executeOperation({
-            query: 'query { joinMyRoom }',
+            query: 'mutation { joinMyRoom }',
           }),
         ).resolves.toMatchObject({
           body: {
             kind: 'single',
             singleResult: {
-              data: { joinMyRoom: null },
+              data: null,
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               errors: expect.arrayContaining([
                 expect.objectContaining({
@@ -287,17 +287,43 @@ describe('RoomResolver', () => {
     })
 
     describe('joinMyRoom', () => {
-      describe('createMeeting returns undefined', () => {
-        it('returns null', async () => {
-          createMeetingMock.mockResolvedValue(null)
+      beforeAll(async () => {
+        await prisma.meeting.deleteMany()
+        await prisma.user.deleteMany()
+      })
+
+      let meetingId: string | undefined
+
+      describe('meeting does not exist', () => {
+        joinMeetingLinkMock.mockReturnValue('https://my-link')
+        createMeetingMock.mockResolvedValue({
+          returncode: 'SUCCESS',
+          meetingID: 'xxx',
+          internalMeetingID: 'b60d121b438a380c343d5ec3c2037564b82ffef3-1715231322715',
+          parentMeetingID: 'bbb-none',
+          attendeePW: 'w3VUvMcp',
+          moderatorPW: 'MyPp9Zfq',
+          createTime: 1718189921310,
+          voiceBridge: 255,
+          dialNumber: '613-555-1234',
+          createDate: new Date(),
+          hasUserJoined: false,
+          duration: 0,
+          hasBeenForciblyEnded: false,
+          messageKey: '',
+          message: '',
+        })
+
+        it('returns link to room', async () => {
           await expect(
             testServer.executeOperation(
               {
-                query: 'query { joinMyRoom }',
+                query: 'mutation { joinMyRoom }',
               },
               {
                 contextValue: {
                   token: 'token',
+                  user: undefined,
                 },
               },
             ),
@@ -305,39 +331,123 @@ describe('RoomResolver', () => {
             body: {
               kind: 'single',
               singleResult: {
-                data: { joinMyRoom: null },
+                data: {
+                  joinMyRoom: 'https://my-link',
+                },
                 errors: undefined,
               },
             },
           })
         })
+
+        it('creates meeting in database', async () => {
+          const result = await prisma.user.findFirst({
+            include: {
+              meeting: true,
+            },
+          })
+          meetingId = result?.meeting?.meetingID
+          expect(result).toMatchObject({
+            meeting: {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              name: 'mockedUser',
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              meetingID: expect.any(String),
+              attendeePW: 'w3VUvMcp',
+              moderatorPW: 'MyPp9Zfq',
+              voiceBridge: 255,
+              dialNumber: '613-555-1234',
+              createTime: 1718189921310n,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createDate: expect.any(Date),
+            },
+          })
+        })
       })
 
-      describe('createMeeting returns meeting', () => {
-        it('returns link to the meeting', async () => {
-          joinMeetingLinkMock.mockReturnValue('https://my-link')
-          createMeetingMock.mockResolvedValue({
-            returncode: 'SUCCESS',
-            meetingID: 'xxx',
-            internalMeetingID: 'b60d121b438a380c343d5ec3c2037564b82ffef3-1715231322715',
-            parentMeetingID: 'bbb-none',
-            attendeePW: 'w3VUvMcp',
-            moderatorPW: 'MyPp9Zfq',
-            createTime: 1715231322715,
-            voiceBridge: 255,
-            dialNumber: '613-555-1234',
-            createDate: new Date(),
-            hasUserJoined: false,
-            duration: 0,
-            hasBeenForciblyEnded: false,
-            messageKey: '',
-            message: '',
-          })
+      describe('meeting exists in DB', () => {
+        beforeAll(() => {
+          jest.clearAllMocks()
+        })
 
+        joinMeetingLinkMock.mockReturnValue('https://my-link')
+        createMeetingMock.mockResolvedValue({
+          returncode: 'SUCCESS',
+          meetingID: 'xxx',
+          internalMeetingID: 'b60d121b438a380c343d5ec3c2037564b82ffef3-1715231322715',
+          parentMeetingID: 'bbb-none',
+          attendeePW: 'w3VUvMcp',
+          moderatorPW: 'MyPp9Zfq',
+          createTime: 1718189921310,
+          voiceBridge: 255,
+          dialNumber: '613-555-1234',
+          createDate: new Date(),
+          hasUserJoined: false,
+          duration: 0,
+          hasBeenForciblyEnded: false,
+          messageKey: '',
+          message: '',
+        })
+
+        it('returns link to room', async () => {
           await expect(
             testServer.executeOperation(
               {
-                query: 'query { joinMyRoom }',
+                query: 'mutation { joinMyRoom }',
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  user: undefined,
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  joinMyRoom: 'https://my-link',
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it('updates meeting in database', async () => {
+          await expect(
+            prisma.user.findFirst({
+              include: {
+                meeting: true,
+              },
+            }),
+          ).resolves.toMatchObject({
+            meeting: {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              name: 'mockedUser',
+              meetingID: meetingId,
+              attendeePW: 'w3VUvMcp',
+              moderatorPW: 'MyPp9Zfq',
+              voiceBridge: 255,
+              dialNumber: '613-555-1234',
+              createTime: 1718189921310n,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createDate: expect.any(Date),
+            },
+          })
+        })
+      })
+
+      describe('createMeeting returns undefined', () => {
+        it('throws meeting error', async () => {
+          createMeetingMock.mockResolvedValue(null)
+          await expect(
+            testServer.executeOperation(
+              {
+                query: 'mutation { joinMyRoom }',
               },
               {
                 contextValue: {
@@ -349,8 +459,13 @@ describe('RoomResolver', () => {
             body: {
               kind: 'single',
               singleResult: {
-                data: { joinMyRoom: 'https://my-link' },
-                errors: undefined,
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Could not create meeting!',
+                  }),
+                ]),
               },
             },
           })
@@ -457,7 +572,17 @@ describe('RoomResolver', () => {
         })
       })
 
-      describe('one attendee', () => {
+      describe('one attendee and meeting in DB', () => {
+        beforeAll(async () => {
+          await prisma.meeting.create({
+            data: {
+              name: 'Dreammall Entwicklung',
+              meetingID: 'Dreammall-Entwicklung',
+              attendeePW: '1234',
+            },
+          })
+        })
+
         beforeEach(() => {
           getMeetingsMock.mockResolvedValue([
             {
@@ -501,7 +626,8 @@ describe('RoomResolver', () => {
           ])
         })
 
-        it('returns empty array', async () => {
+        it('returns room with attendee', async () => {
+          jest.clearAllMocks()
           await expect(
             testServer.executeOperation(
               {
@@ -537,6 +663,14 @@ describe('RoomResolver', () => {
                 errors: undefined,
               },
             },
+          })
+        })
+
+        it('calls joinMeetingLink with correct PW', () => {
+          expect(joinMeetingLinkMock).toBeCalledWith({
+            fullName: 'User',
+            meetingID: 'Dreammall-Entwicklung',
+            password: '1234',
           })
         })
       })
