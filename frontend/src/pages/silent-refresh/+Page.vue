@@ -1,7 +1,5 @@
 <template>
-  <DefaultLayout>
-    <div class="h-screen auth-page py-12">{{ $t('auth.content') }}</div>
-  </DefaultLayout>
+  <div class="h-screen auth-page py-12">{{ $t('auth.content') }}</div>
 </template>
 
 <script lang="ts" setup>
