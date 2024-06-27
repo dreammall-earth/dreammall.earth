@@ -25,11 +25,7 @@
       </v-row>
     </v-app-bar>
   </div>
-    <ListWithNavigationDrawer
-      :drawer="drawer"
-      :location="location"
-      @update:drawer="updateDrawer"
-    />
+  <ListWithNavigationDrawer :drawer="drawer" :location="location" @update:drawer="updateDrawer" />
 </template>
 
 <script lang="ts" setup>
@@ -41,6 +37,7 @@ import NewsIndicator from '#components/menu/NewsIndicator.vue'
 import TabControl from '#components/menu/TabControl.vue'
 import UserInfo from '#components/menu/UserInfo.vue'
 import ListWithNavigationDrawer from '#components/vuetify/Organisms/ListWithNavigationDrawer.vue'
+
 import Circle from './CircleElement.vue'
 
 const drawer = ref(false)
