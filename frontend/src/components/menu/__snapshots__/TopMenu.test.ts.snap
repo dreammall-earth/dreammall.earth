@@ -16,7 +16,11 @@ exports[`TopMenu > renders 1`] = `
       <header
         class="v-toolbar v-toolbar--flat v-toolbar--density-default v-theme--light v-locale--is-ltr v-app-bar app-bar"
         data-v-e787b5f9=""
+<<<<<<< HEAD
         style="top: 0px; z-index: 1006; transform: translateY(0%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
+=======
+        style="top: 0px; z-index: 1004; transform: translateY(0px); position: fixed; left: 0px; width: calc(100% - 0px - 0px); transition: none !important;"
+>>>>>>> 545991c3 (delete navigationDrawer component)
       >
         <!---->
         
@@ -706,7 +710,6 @@ exports[`TopMenu > renders 1`] = `
                     aria-owns="v-menu-1"
                     class="ml-2 user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
                     data-v-607bdd70=""
-                    targetref="[object Object]"
                   >
                     <div
                       class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm bg-primary"
@@ -778,6 +781,7 @@ exports[`TopMenu > renders 1`] = `
       </header>
     </div>
     
+<<<<<<< HEAD
     <nav
       class="v-navigation-drawer v-navigation-drawer--bottom v-navigation-drawer--temporary v-theme--light bg-grey-lighten-4 custom-drawer"
       data-v-5cadcb8f=""
@@ -1693,6 +1697,8 @@ exports[`TopMenu > renders 1`] = `
     </transition-stub>
     
     
+=======
+>>>>>>> 545991c3 (delete navigationDrawer component)
     
   </div>
 </div>
