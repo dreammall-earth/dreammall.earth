@@ -200,7 +200,7 @@ export class RoomResolver {
   }
 
   @Query(() => Boolean)
-  test(): Promise<boolean> {
+  test(): boolean {
     pubSub.publish('OPEN_ROOM_SUBSCRIPTION', 'Hallo')
     return true
   }
