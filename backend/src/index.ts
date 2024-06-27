@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-unassigned-import
 import 'reflect-metadata'
+import { CONFIG } from '#config/config'
 import { handleOpenRooms } from '#graphql/resolvers/dal/handleOpenRooms'
 
 import logger from './logger'
@@ -14,7 +15,7 @@ const checkForOpenRooms = (): void => {
 export const main = async (): Promise<void> => {
   const url = await listen(4000)
   logger.info(`🚀 Server is ready at ${url}`)
-  setTimeout(checkForOpenRooms, 60 * 1000)
+  if (CONFIG.BBB_URL) setTimeout(checkForOpenRooms, 60 * 1000)
 }
 
 void main()
