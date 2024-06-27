@@ -34,11 +34,12 @@ export const useRoomsStore = defineStore('rooms', () => {
 
   const refetchRooms = async () => {
     try {
-      await openRoomsQueryRefetch()
+      const test = await openRoomsQueryRefetch()
+      console.log('test', test)
       console.log('refetchRooms', openRoomsQueryResult.value)
       if (openRoomsQueryResult.value) {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-        rooms.value = openRoomsQueryResult.value.openRooms
+        setRooms(openRoomsQueryResult.value.openRooms)
       }
     } catch (error) {
       GlobalErrorHandler.error('Error refetching open rooms!', error)
