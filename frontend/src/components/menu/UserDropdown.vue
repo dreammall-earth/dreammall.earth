@@ -1,10 +1,12 @@
 <template>
   <ul class="dropdown border-sm pa-3 pb-2 my-2 bg-dropdown-background">
     <li>
-      <button @click="signOut"><v-icon icon="$logout"></v-icon>{{ $t('buttons.signout') }}</button>
+      <button class="sign-out" @click="signOut">
+        <v-icon icon="$logout"></v-icon>{{ $t('buttons.signout') }}
+      </button>
     </li>
     <li v-if="auth.isAdmin">
-      <button @click="enterAdmin">
+      <button class="admin-button" @click="enterAdmin">
         <v-icon icon="$logout"></v-icon>{{ $t('buttons.toAdmin') }}
       </button>
     </li>
