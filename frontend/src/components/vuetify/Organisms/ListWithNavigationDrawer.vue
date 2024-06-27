@@ -1,6 +1,5 @@
 <template>
-  <!-- <NavigationDrawer :model-value="drawer" :location="location" @update:model-value="updateDrawer"> -->
-  <v-navigation-drawer :model-value="drawer" :location="location">
+  <v-navigation-drawer :model-value="drawer" :location="location" @update:model-value="updateDrawer" app width="auto" class="menu-drawer-top">
     <SearchField
       v-model="search"
       label="Open Tables, Jobs"
@@ -11,18 +10,16 @@
       <ListElement :items="filteredItems" />
     </v-list>
   </v-navigation-drawer>
-  <!-- </NavigationDrawer> -->
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, defineProps } from 'vue'
+import { ref, computed } from 'vue'
 import { VAvatar, VIcon, VImg } from 'vuetify/components'
 
 import ListElement from '#components/vuetify/Atoms/ListElement.vue'
-// import NavigationDrawer from '#components/vuetify/Atoms/NavigationDrawer.vue'
 import SearchField from '#components/vuetify/Molecules/SearchField.vue'
 
-defineProps({
+const props = defineProps({
   drawer: {
     type: Boolean,
     required: true,
@@ -33,7 +30,9 @@ defineProps({
     default: 'right',
   },
 })
-// const emits = defineEmits(['update:drawer'])
+
+const emits = defineEmits(['update:drawer'])
+
 const search = ref('')
 const items = [
   {
@@ -118,10 +117,20 @@ const items = [
     appendProps: { icon: 'mdi-dots-vertical', class: 'append-icon' },
   },
 ]
+
 const filteredItems = computed(() => {
   if (!search.value) {
     return items
   }
   return items.filter((item) => item.title.toLowerCase().includes(search.value.toLowerCase()))
 })
+
+const updateDrawer = (value: boolean) => {
+  emits('update:drawer', value)
+}
 </script>
+<style scoped>
+.menu-drawer-top {
+  margin-top: 74px;
+}
+</style>

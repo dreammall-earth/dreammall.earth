@@ -25,11 +25,11 @@
       </v-row>
     </v-app-bar>
   </div>
-  <ListWithNavigationDrawer
-    :drawer="drawer"
-    :location="location"
-    @update:drawer="updateDrawer($event)"
-  />
+    <ListWithNavigationDrawer
+      :drawer="drawer"
+      :location="location"
+      @update:drawer="updateDrawer"
+    />
 </template>
 
 <script lang="ts" setup>
@@ -41,27 +41,28 @@ import NewsIndicator from '#components/menu/NewsIndicator.vue'
 import TabControl from '#components/menu/TabControl.vue'
 import UserInfo from '#components/menu/UserInfo.vue'
 import ListWithNavigationDrawer from '#components/vuetify/Organisms/ListWithNavigationDrawer.vue'
-
 import Circle from './CircleElement.vue'
 
 const drawer = ref(false)
 const toggleDrawer = () => {
   drawer.value = !drawer.value
 }
-const updateDrawer = (event: boolean) => {
-  drawer.value = event
+const updateDrawer = (value: boolean) => {
+  drawer.value = value
 }
 const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('right')
 </script>
 
 <style scoped lang="scss">
 .app-bar {
-  position: static !important;
+  position: sticky;
+  top: 0;
   background: transparent !important;
 }
 
 .top-menu {
   position: sticky;
   top: 0;
+  z-index: 1000;
 }
 </style>
