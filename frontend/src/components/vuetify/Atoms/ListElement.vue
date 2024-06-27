@@ -7,7 +7,7 @@
         :class="{ 'custom-list-item': true }"
         :title="item.meetingName"
         :subtitle="$t('rooms.participantCount', { count: item.participantCount })"
-        @click="handleItemClick"
+        @click="handleItemClick(item.joinLink)"
       >
         <!-- 
         <template v-if="item.prepend" #prepend>
@@ -28,9 +28,13 @@
 </template>
 
 <script lang="ts" setup>
+import { navigate } from 'vike/client/router'
 import { PropType } from 'vue'
 
+import { useActiveRoomStore } from '#stores/activeRoomStore'
 import { Room } from '#stores/roomsStore'
+
+const activeRoomStore = useActiveRoomStore()
 
 /*
     export interface Item {
@@ -51,11 +55,13 @@ defineProps({
   },
 })
 
-const emit = defineEmits(['item-click'])
+// const emit = defineEmits(['item-click'])
 
-const handleItemClick = () => {
+const handleItemClick = (link: string) => {
   closeMenu()
-  emit('item-click')
+  activeRoomStore.setActiveRoom(link)
+  navigate('/room/')
+  // emit('item-click')
 }
 const closeMenu = () => {
   // Logik zum Schließen des Menüs hinzufügen, falls erforderlich
