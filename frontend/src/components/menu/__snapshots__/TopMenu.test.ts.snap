@@ -778,11 +778,10 @@ exports[`TopMenu > renders 1`] = `
       </header>
     </div>
     
-    <!-- &lt;NavigationDrawer :model-value="drawer" :location="location" @update:model-value="updateDrawer"&gt; -->
-    
     <nav
-      class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile"
-      style="right: 0px; z-index: 1004; transform: translateX(110%); position: fixed; transition: none !important; height: calc(100% - NaNpx - 0px); bottom: 0px; width: 256px;"
+      class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer-top"
+      data-v-3308ee86=""
+      style="right: 0px; z-index: 1004; transform: translateX(110%); position: fixed; transition: none !important; height: calc(100% - NaNpx - 0px); bottom: 0px;"
     >
       <!---->
       <!---->
@@ -792,6 +791,7 @@ exports[`TopMenu > renders 1`] = `
         
         <div
           class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-text-field mx-4 mt-4 search-drawer"
+          data-v-3308ee86=""
           data-v-6d3ee220=""
         >
           <!---->
@@ -947,17 +947,20 @@ exports[`TopMenu > renders 1`] = `
         </div>
         <div
           class="v-list v-theme--light bg-transparent v-list--density-default v-list--one-line"
+          data-v-3308ee86=""
           role="listbox"
           tabindex="0"
         >
           
           <div
             class="mx-4"
+            data-v-3308ee86=""
           >
             $t('menu.roomList')
           </div>
           <div
             class="v-card v-theme--light v-card--density-default v-card--variant-elevated mx-auto"
+            data-v-3308ee86=""
             data-v-fd6c8fbc=""
             style="width: 400px;"
           >
@@ -1689,8 +1692,6 @@ exports[`TopMenu > renders 1`] = `
     >
       <!---->
     </transition-stub>
-    
-    <!-- &lt;/NavigationDrawer&gt; -->
     
     
     
