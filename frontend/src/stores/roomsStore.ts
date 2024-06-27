@@ -35,6 +35,7 @@ export const useRoomsStore = defineStore('rooms', () => {
   const refetchRooms = async () => {
     try {
       await openRoomsQueryRefetch()
+      console.log('refetchRooms', openRoomsQueryResult.value)
       if (openRoomsQueryResult.value) {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
         rooms.value = openRoomsQueryResult.value.openRooms
@@ -46,7 +47,8 @@ export const useRoomsStore = defineStore('rooms', () => {
     setTimeout(refetchRooms, 60 * 1000)
   }
 
-  void refetchRooms()
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  void setTimeout(refetchRooms, 60 * 1000)
 
   const rooms = ref<Room[]>([])
 
