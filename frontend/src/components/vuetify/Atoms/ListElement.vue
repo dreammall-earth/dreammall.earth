@@ -33,16 +33,16 @@ import { PropType } from 'vue'
 import { Room } from '#stores/roomsStore'
 
 /*
- export interface Item {
-   title: string
-   subtitle?: string
-   rounded?: boolean
-   prepend?: string | object
-   prependProps?: object
-   append?: string | object
-   appendProps?: object
- }
- */
+    export interface Item {
+    title: string
+    subtitle?: string
+    rounded?: boolean
+    prepend?: string | object
+    prependProps?: object
+    append?: string | object
+    appendProps?: object
+    }
+  */
 
 defineProps({
   items: {
@@ -50,7 +50,9 @@ defineProps({
     required: true,
   },
 })
+
 const emit = defineEmits(['item-click'])
+
 const handleItemClick = () => {
   closeMenu()
   emit('item-click')

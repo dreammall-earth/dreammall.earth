@@ -16,7 +16,7 @@ const meta: Meta<typeof ListElement> = {
       {
         meetingName: 'Beispiel Titel 1',
         meetingID: 'xxx',
-        startTime: 1234,
+        startTime: '1234',
         participantCount: 4,
         attendees: [],
         joinLink: 'https://my.link',
@@ -29,7 +29,7 @@ const meta: Meta<typeof ListElement> = {
       {
         meetingName: 'Beispiel Titel 2',
         meetingID: 'xxx',
-        startTime: 1234,
+        startTime: '1234',
         participantCount: 4,
         attendees: [],
         joinLink: 'https://my.link',
@@ -55,7 +55,7 @@ export const Basic: Story = {
       {
         meetingName: 'Beispiel Titel 1',
         meetingID: 'xxx',
-        startTime: 1234,
+        startTime: '1234',
         participantCount: 4,
         attendees: [],
         joinLink: 'https://my.link',
@@ -65,7 +65,7 @@ export const Basic: Story = {
       {
         meetingName: 'Beispiel Titel 2',
         meetingID: 'xxx',
-        startTime: 1234,
+        startTime: '1234',
         participantCount: 4,
         attendees: [],
         joinLink: 'https://my.link',

@@ -11,7 +11,7 @@ type Attendee = {
 export type Room = {
   meetingID: string
   meetingName: string
-  startTime: number
+  startTime: string
   participantCount: number
   attendees: Attendee[]
   joinLink: string

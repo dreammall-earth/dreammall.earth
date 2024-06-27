@@ -47,7 +47,7 @@ describe('Rooms Store', () => {
         {
           meetingID: 'my-meeting',
           meetingName: 'my meeting',
-          startTime: 1234,
+          startTime: '1234',
           participantCount: 1,
           attendees: [
             {
@@ -61,7 +61,7 @@ describe('Rooms Store', () => {
         {
           meetingID: 'my-meeting',
           meetingName: 'my meeting',
-          startTime: 1234,
+          startTime: '1234',
           participantCount: 1,
           attendees: [
             {
