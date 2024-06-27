@@ -1,10 +1,25 @@
 import { mount } from '@vue/test-utils'
+import { gql } from 'graphql-tag'
+import { createMockSubscription, IMockSubscription } from 'mock-apollo-client'
 import { describe, it, expect, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
+import { mockClient } from '#tests/mock.apolloClient'
+
 import IndexPage from './+Page.vue'
 import { title } from './+title'
+
+const mockSubscription: IMockSubscription = createMockSubscription()
+
+mockClient.setRequestHandler(
+  gql`
+    subscription {
+      updateOpenRooms
+    }
+  `,
+  () => mockSubscription,
+)
 
 describe('IndexPage', () => {
   const Wrapper = () => {
