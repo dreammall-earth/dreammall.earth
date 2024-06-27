@@ -1,6 +1,6 @@
 name: e2e:test:build test docs
 
-on: push
+on: [push,pull_request_target]
 
 jobs:
   files-changed:

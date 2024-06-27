@@ -37,15 +37,13 @@ describe('authChecker', () => {
     it('returns access denied error', async () => {
       await expect(
         testServer.executeOperation({
-          query: 'query { joinMyRoom }',
+          query: 'mutation { joinMyRoom }',
         }),
       ).resolves.toMatchObject({
         body: {
           kind: 'single',
           singleResult: {
-            data: {
-              joinMyRoom: null,
-            },
+            data: null,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             errors: expect.arrayContaining([
               expect.objectContaining({
@@ -69,7 +67,7 @@ describe('authChecker', () => {
       it('creates user in database', async () => {
         await testServer.executeOperation(
           {
-            query: 'query { joinMyRoom }',
+            query: 'mutation { joinMyRoom }',
           },
           {
             contextValue: {
@@ -88,7 +86,8 @@ describe('authChecker', () => {
             createdAt: expect.any(Date),
             name: 'User',
             username: 'mockedUser',
-            meetingId: null,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            meetingId: expect.any(Number),
           },
         ])
       })
@@ -117,7 +116,7 @@ describe('authChecker', () => {
       it('has the same user in database', async () => {
         await testServer.executeOperation(
           {
-            query: 'query { joinMyRoom }',
+            query: 'mutation { joinMyRoom }',
           },
           {
             contextValue: {

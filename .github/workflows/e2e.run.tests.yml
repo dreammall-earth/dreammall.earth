@@ -1,6 +1,6 @@
 name: e2e:test:all test the application end to end
 
-on: push
+on: [push,pull_request_target]
 
 jobs:
   e2e-tests:
@@ -22,11 +22,13 @@ jobs:
           docker compose up -d
           cd ../frontend
           cp .env.dist .env
-          docker compose -f docker-compose.test.yml up -d frontend
+          npm install
+          npm run prod &
           cd  ../presenter
           cp .env.dist .env
-          docker compose -f docker-compose.test.yml up -d presenter
-          sleep 4m
+          export PORT=3001
+          npm install
+          npm run prod &
 
       - name: Install cucumber-json-formatter
         run: |
@@ -56,5 +58,5 @@ jobs:
         if: ${{ failure() && steps.e2e-run.conclusion == 'failure' }}
         uses: actions/upload-artifact@v4
         with:
-          name: boilerplate-e2e-test-report-pr-${{ steps.pr-number.outputs.pr }}
+          name: dreammall-e2e-test-report-pr-${{ steps.pr-number.outputs.pr }}
           path: /home/runner/work/dreammall.earth/dreammall.earth/tests/cypress/reports/dreammall-e2e_html_report

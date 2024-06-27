@@ -10,6 +10,12 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {},
   args: {},
+  decorators: [
+    (story) => ({
+      components: { story },
+      template: '<div id="teleported"></div><story />',
+    }),
+  ],
 } satisfies Meta<typeof BottomMenu>
 
 export default meta

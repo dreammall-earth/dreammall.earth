@@ -7,11 +7,15 @@
 </template>
 
 <script setup lang="ts">
-import EmbeddedRoom from '#components/embedded-room/EmbeddedRoom.vue'
-import useMyRoom from '#components/embedded-room/useMyRoom'
-import DefaultLayout from '#layouts/DefaultLayout.vue'
+import { storeToRefs } from 'pinia'
 
-const { roomUrl } = useMyRoom()
+import EmbeddedRoom from '#components/embedded-room/EmbeddedRoom.vue'
+import DefaultLayout from '#layouts/DefaultLayout.vue'
+import { useActiveRoomStore } from '#stores/activeRoomStore'
+
+const activeRoomStore = useActiveRoomStore()
+
+const { activeRoom: roomUrl } = storeToRefs(activeRoomStore)
 </script>
 
 <style scoped>

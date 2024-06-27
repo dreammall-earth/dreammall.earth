@@ -43,6 +43,7 @@ const config: UserConfig = {
       '#assets': path.join(__dirname, '/src/assets'),
       '#layouts': path.join(__dirname, '/src/layouts'),
       '#queries': path.join(__dirname, '/src/graphql/queries'),
+      '#mutations': path.join(__dirname, '/src/graphql/mutations'),
       '#stores': path.join(__dirname, '/src/stores'),
       '#src': path.join(__dirname, '/src'),
       '#plugins': path.join(__dirname, '/renderer/plugins'),

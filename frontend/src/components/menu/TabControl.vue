@@ -7,53 +7,68 @@
   >
     <div v-show="isSliding" ref="marker" class="marker"></div>
     <div class="d-flex align-center justify-center h-100 w-100">
-      <button
+      <a
         v-for="(item, index) in items"
-        :key="index"
+        :key="item.text"
         ref="itemRefs"
         class="item"
         :class="{ active: activeItem === index }"
-        @click="() => setItem(index)"
+        @click.prevent="() => setItem(index)"
       >
         <div class="icon d-flex justify-center align-center">
           <v-icon :icon="item.icon" class="w-100" :class="item.class"></v-icon>
         </div>
         {{ $t(item.text) }}
-      </button>
+      </a>
     </div>
   </button>
 </template>
 
 <script lang="ts" setup>
+import { navigate } from 'vike/client/router'
 import { onMounted, onUnmounted, ref } from 'vue'
+
+import { usePageContext } from '#root/renderer/context/usePageContext'
 
 import type { Ref } from 'vue'
 
-const isOpen = ref(true)
-const isSliding = ref(false)
-const activeItem = ref(0)
+const pageContext = usePageContext()
 
-const tabControl: Ref<HTMLElement | null> = ref(null)
-const marker: Ref<HTMLElement | null> = ref(null)
+const { urlPathname } = pageContext
 
 const items = [
   {
     class: 'world-cafe',
     icon: '$world-cafe',
     text: 'menu.worldCafe',
+    link: '/',
   },
+  /*
   {
     class: 'mall',
     icon: '$mall',
     text: 'menu.mall',
   },
+  */
   {
     class: 'cockpit',
     icon: '$cockpit',
     text: 'menu.cockpit',
+    link: '/cockpit',
   },
 ]
 
+const isOpen = ref(true)
+const isSliding = ref(false)
+
+let defaultItem = items.findIndex((i) =>
+  i.link === '/' ? urlPathname === '/' : urlPathname.startsWith(i.link),
+)
+defaultItem = defaultItem < 0 ? 0 : defaultItem
+const activeItem = ref(defaultItem)
+
+const tabControl: Ref<HTMLElement | null> = ref(null)
+const marker: Ref<HTMLElement | null> = ref(null)
 const itemRefs = ref([] as HTMLElement[])
 
 let timer: ReturnType<typeof setTimeout>
@@ -81,6 +96,9 @@ function closeWithDelay() {
  * @param item
  */
 function moveMarker() {
+  // For some reason, this function is called before the refs are set
+  if (activeItem.value < 0) return
+
   const itemRef = itemRefs.value[activeItem.value]
 
   marker.value?.style.setProperty('width', `${itemRef.clientWidth}px`)
@@ -99,6 +117,15 @@ function setItem(item: number) {
   isSliding.value = true
 
   activeItem.value = item
+
+  // After the animation is done, navigate to the new route if necessary
+  const itemRef = itemRefs.value[activeItem.value]
+  const listener = (event: TransitionEvent) => {
+    if (event.propertyName !== 'background-color') return
+    itemRef.removeEventListener('transitionend', listener)
+    navigate(items[activeItem.value].link)
+  }
+  itemRef.addEventListener('transitionend', listener)
 
   requestAnimationFrame(() => {
     // Move the marker to the active item
@@ -134,9 +161,11 @@ onUnmounted(() => {
   transform: scale(0.7);
 }
 
+/*
 .mall {
   transform: scale(1.1);
 }
+*/
 
 .marker {
   position: absolute;
