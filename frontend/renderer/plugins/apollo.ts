@@ -31,15 +31,6 @@ const wsLink = new GraphQLWsLink(
   }),
 )
 
-/*
-const wsLink = new WebSocketLink({
-  url: ENDPOINTS.GRAPHQL_URI + 'subscriptions',
-  options: {
-    reconnect: true,
-  },
-})
-*/
-
 const httpLink = createHttpLink({
   uri: ENDPOINTS.GRAPHQL_URI,
 })
