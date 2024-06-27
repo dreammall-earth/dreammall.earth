@@ -3,6 +3,7 @@ import { acceptHMRUpdate, defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
 import { openRoomsQuery } from '#src/graphql/queries/openRoomsQuery'
+import GlobalErrorHandler from '#plugins/globalErrorHandler'
 
 type Attendee = {
   fullName: string
@@ -32,12 +33,16 @@ export const useRoomsStore = defineStore('rooms', () => {
   )
 
   const refetchRooms = async () => {
-    await openRoomsQueryRefetch()
-    if (openRoomsQueryResult.value) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-      rooms.value = openRoomsQueryResult.value.openRooms
-    }
+    try {
+      await openRoomsQueryRefetch()
+      if (openRoomsQueryResult.value) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+        rooms.value = openRoomsQueryResult.value.openRooms
+      }
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    } catch (error) {
+      GlobalErrorHandler.error('Error refetching open rooms!', error)
+    }
     setTimeout(refetchRooms, 60 * 1000)
   }
 
