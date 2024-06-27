@@ -48,8 +48,7 @@ export const useRoomsStore = defineStore('rooms', () => {
     setTimeout(refetchRooms, 60 * 1000)
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  void setTimeout(refetchRooms, 60 * 1000)
+  void refetchRooms()
 
   const rooms = ref<Room[]>([])
 
