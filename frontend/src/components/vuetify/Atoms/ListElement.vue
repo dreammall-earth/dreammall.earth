@@ -4,21 +4,24 @@
       <v-list-item
         v-for="(item, index) in items"
         :key="index"
-        :class="{ rounded: item.rounded, 'custom-list-item': true }"
-        :title="item.title"
-        :subtitle="item.subtitle"
+        :class="{ 'custom-list-item': true }"
+        :title="item.meetingName"
+        :subtitle="$t('rooms.participantCount', { count: item.participantCount })"
         @click="handleItemClick"
       >
+        <!-- 
         <template v-if="item.prepend" #prepend>
           <component :is="item.prepend" v-bind="item.prependProps" />
         </template>
+        -->
 
         <!-- <v-list-item-title>{{ item.title }}</v-list-item-title>
-          <v-list-item-subtitle v-if="item.subtitle">{{ item.subtitle }}</v-list-item-subtitle> -->
-
+             <v-list-item-subtitle v-if="item.subtitle">{{ item.subtitle }}</v-list-item-subtitle> -->
+        <!-- 
         <template v-if="item.append" #append>
           <component :is="item.append" v-bind="item.appendProps" />
         </template>
+        -->
       </v-list-item>
     </v-list>
   </v-card>
@@ -27,18 +30,23 @@
 <script lang="ts" setup>
 import { PropType } from 'vue'
 
-interface Item {
-  title: string
-  subtitle?: string
-  rounded?: boolean
-  prepend?: string | object
-  prependProps?: object
-  append?: string | object
-  appendProps?: object
-}
+import { Room } from '#stores/roomsStore'
+
+/*
+ export interface Item {
+   title: string
+   subtitle?: string
+   rounded?: boolean
+   prepend?: string | object
+   prependProps?: object
+   append?: string | object
+   appendProps?: object
+ }
+ */
+
 defineProps({
   items: {
-    type: Array as PropType<Item[]>,
+    type: Array as PropType<Room[]>,
     required: true,
   },
 })

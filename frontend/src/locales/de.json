@@ -43,5 +43,8 @@
     "defaultDescription": "Deine Reichweite Erweitern Alle Möglichkeiten Miteinander Ausschöpfen Lebensqualität Leben",
     "defaultTitle": "DreamMall",
     "joinRoomTitle": "Raum beitreten"
+  },
+  "rooms": {
+    "participantCount": "{count} Teilnehmer"
   }
 }

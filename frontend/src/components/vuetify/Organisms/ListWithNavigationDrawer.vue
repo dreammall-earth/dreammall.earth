@@ -6,24 +6,31 @@
     class="menu-drawer-top"
     @update:model-value="updateDrawer"
   >
+    <!--
     <SearchField
       v-model="search"
       label="Open Tables, Jobs"
       prepend-inner-icon="mdi-tune"
     ></SearchField>
+    -->
     <v-list>
       <div class="mx-4">{{ $t('menu.roomList') }}</div>
-      <ListElement :items="filteredItems" />
+      <ListElement :items="items" />
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
-import { VAvatar, VIcon, VImg } from 'vuetify/components'
+import { storeToRefs } from 'pinia'
+// import { VAvatar, VIcon, VImg } from 'vuetify/components'
 
 import ListElement from '#components/vuetify/Atoms/ListElement.vue'
-import SearchField from '#components/vuetify/Molecules/SearchField.vue'
+// import SearchField from '#components/vuetify/Molecules/SearchField.vue'
+import { useRoomsStore } from '#stores/roomsStore'
+
+const roomsStore = useRoomsStore()
+
+const { rooms: items } = storeToRefs(roomsStore)
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps({
@@ -40,97 +47,16 @@ const props = defineProps({
 
 const emits = defineEmits(['update:drawer'])
 
-const search = ref('')
-const items = [
-  {
-    title: 'LOLLY Krypto Entwicklung',
-    subtitle: 'Krypto für Alle',
-    prepend: VAvatar,
-    prependProps: { color: 'primary', icon: 'mdi-lock' },
-    append: VIcon,
-    appendProps: { icon: 'mdi-dots-vertical', class: 'append-icon' },
-  },
-  {
-    title: 'Aachener Freunde Treff',
-    subtitle: 'Aachener Freunde Treff',
-    prepend: VImg,
-    prependProps: {
-      src: 'https://picsum.photos/40',
-      referrerpolicy: 'no-referrer',
-      width: 40,
-      height: 40,
-    },
-    append: VIcon,
-    appendProps: { icon: 'mdi-dots-vertical', class: 'append-icon' },
-  },
-  {
-    title: 'Building A Wooden Guitar',
-    subtitle: 'Building A Wooden Guitar',
-    prepend: VImg,
-    prependProps: {
-      src: 'https://picsum.photos/39',
-      referrerpolicy: 'no-referrer',
-      width: 40,
-      height: 40,
-    },
-    append: VIcon,
-    appendProps: { icon: 'mdi-dots-vertical', class: 'append-icon' },
-  },
-  {
-    title: 'Co Working Space Manufaktur',
-    subtitle: 'Co Working Space Manufaktur',
-    prepend: VImg,
-    prependProps: {
-      src: 'https://picsum.photos/41',
-      referrerpolicy: 'no-referrer',
-      width: 40,
-      height: 40,
-    },
-    append: VIcon,
-    appendProps: { icon: 'mdi-dots-vertical', class: 'append-icon' },
-  },
-  {
-    title: 'Intervallfasten Kalender',
-    subtitle: 'Intervallfasten Kalender',
-    prepend: VImg,
-    prependProps: {
-      src: 'https://picsum.photos/42',
-      referrerpolicy: 'no-referrer',
-      width: 40,
-      height: 40,
-    },
-    append: VIcon,
-    appendProps: { icon: 'mdi-dots-vertical-circle', class: 'append-icon' },
-  },
-  {
-    title: 'Lomografie 2050',
-    subtitle: 'Lomografie 2050',
-    prepend: VImg,
-    prependProps: {
-      src: 'https://picsum.photos/46',
-      referrerpolicy: 'no-referrer',
-      width: 40,
-      height: 40,
-    },
-    append: VIcon,
-    appendProps: { icon: 'mdi-dots-vertical-circle', class: 'append-icon' },
-  },
-  {
-    title: 'Freies Treffen U50',
-    subtitle: 'Freies Treffen U50',
-    prepend: VAvatar,
-    prependProps: { color: 'primary', image: 'https://picsum.photos/46' },
-    append: VIcon,
-    appendProps: { icon: 'mdi-dots-vertical', class: 'append-icon' },
-  },
-]
+/*
+    const search = ref('')
 
-const filteredItems = computed(() => {
-  if (!search.value) {
+    const filteredItems = computed(() => {
+    if (!search.value) {
     return items
-  }
-  return items.filter((item) => item.title.toLowerCase().includes(search.value.toLowerCase()))
-})
+    }
+    return items.filter((item) => item.title.toLowerCase().includes(search.value.toLowerCase()))
+    })
+  */
 
 const updateDrawer = (value: boolean) => {
   emits('update:drawer', value)

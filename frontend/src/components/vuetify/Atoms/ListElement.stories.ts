@@ -1,4 +1,4 @@
-import { VIcon, VBtn, VAvatar, VImg } from 'vuetify/components'
+// import { VIcon, VBtn, VAvatar, VImg } from 'vuetify/components'
 
 import { SBComp } from '#types/SBComp'
 
@@ -14,20 +14,30 @@ const meta: Meta<typeof ListElement> = {
   args: {
     items: [
       {
-        title: 'Beispiel Titel 1',
-        rounded: true,
-        prepend: VIcon,
-        prependProps: { icon: 'mdi-home' },
-        append: VBtn,
-        appendProps: { icon: 'mdi-menu' },
+        meetingName: 'Beispiel Titel 1',
+        meetingID: 'xxx',
+        startTime: 1234,
+        participantCount: 4,
+        attendees: [],
+        joinLink: 'https://my.link',
+        // rounded: true,
+        // prepend: VIcon,
+        // prependProps: { icon: 'mdi-home' },
+        // append: VBtn,
+        // appendProps: { icon: 'mdi-menu' },
       },
       {
-        title: 'Beispiel Titel 2',
-        rounded: true,
-        prepend: VAvatar,
-        prependProps: { src: 'https://via.placeholder.com/40' },
-        append: VIcon,
-        appendProps: { icon: 'mdi-menu' },
+        meetingName: 'Beispiel Titel 2',
+        meetingID: 'xxx',
+        startTime: 1234,
+        participantCount: 4,
+        attendees: [],
+        joinLink: 'https://my.link',
+        // rounded: true,
+        // prepend: VAvatar,
+        // prependProps: { src: 'https://via.placeholder.com/40' },
+        // append: VIcon,
+        // appendProps: { icon: 'mdi-menu' },
       },
     ],
   },
@@ -43,19 +53,30 @@ export const Basic: Story = {
   args: {
     items: [
       {
-        title: 'Beispiel Titel 1',
-        append: VBtn,
-        appendProps: { icon: 'mdi-menu' },
+        meetingName: 'Beispiel Titel 1',
+        meetingID: 'xxx',
+        startTime: 1234,
+        participantCount: 4,
+        attendees: [],
+        joinLink: 'https://my.link',
+        // append: VBtn,
+        // appendProps: { icon: 'mdi-menu' },
       },
       {
-        title: 'Beispiel Titel 2',
-        append: VIcon,
-        appendProps: { icon: 'mdi-menu' },
+        meetingName: 'Beispiel Titel 2',
+        meetingID: 'xxx',
+        startTime: 1234,
+        participantCount: 4,
+        attendees: [],
+        joinLink: 'https://my.link',
+        // append: VIcon,
+        // appendProps: { icon: 'mdi-menu' },
       },
     ],
   },
 }
 
+/*
 export const WithIcons: Story = {
   args: {
     items: [
@@ -129,3 +150,4 @@ export const WithImages: Story = {
     ],
   },
 }
+*/
