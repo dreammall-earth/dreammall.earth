@@ -117,7 +117,7 @@ describe('joinMeetingLink', () => {
 })
 
 describe('getMeetings', () => {
-  const axiosInstanceGetSpy = jest.spyOn(axiosInstance, 'get')
+  const axiosInstanceGetSpy = jest.spyOn(axiosInstance, 'post')
 
   let result: MeetingInfo[]
 

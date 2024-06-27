@@ -112,7 +112,7 @@ type GetMeetingsResponse = {
 export const getMeetings = async (): Promise<MeetingInfo[]> => {
   try {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const { data } = await axiosInstance.get('/getMeetings')
+    const { data } = await axiosInstance.post('/getMeetings')
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const parsed: {
       response: GetMeetingsResponse
