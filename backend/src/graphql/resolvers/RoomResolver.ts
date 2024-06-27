@@ -153,6 +153,7 @@ export class RoomResolver {
           m,
           joinMeetingLink({
             fullName: user.name,
+
             meetingID: m.meetingID,
             password: pw?.attendeePW ? pw.attendeePW : '',
           }),
@@ -162,17 +163,17 @@ export class RoomResolver {
     return []
   }
 
-  @Query(() => String, { nullable: true })
+  @Query(() => String)
   async joinRoom(
     @Arg('userName') userName: string,
     @Arg('roomId', () => Int) roomId: number,
-  ): Promise<string | null> {
+  ): Promise<string> {
     const meeting = await prisma.meeting.findUnique({
       where: {
         id: roomId,
       },
     })
-    if (!meeting) return null
+    if (!meeting) throw new Error('Room does not exist')
     return joinMeetingLink({
       fullName: userName,
       meetingID: meeting.meetingID,
