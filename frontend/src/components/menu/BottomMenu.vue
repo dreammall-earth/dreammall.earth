@@ -1,17 +1,5 @@
 <template>
   <div class="navigation-drawer-box d-md-none d-lg-none position-fixed mb-5 pb-5">
-    <!-- <v-navigation-drawer
-      :model-value="drawer"
-      :location="location"
-      width="300px"
-      overlay
-      @update:model-value="updateDrawer"
-    >
-      <v-list>
-        <div class="mx-4">{{ $t('menu.roomList') }}</div>
-        <ListElement :items="items" />
-      </v-list>
-    </v-navigation-drawer> -->
     <ListWithNavigationDrawer :drawer="drawer" :location="location" @update:drawer="updateDrawer" />
   </div>
   <div
@@ -71,6 +59,7 @@ const updateDrawer = (value: boolean) => {
 
   .camera-button {
     transform: translateX(20px);
+    cursor: pointer;
   }
 }
 
