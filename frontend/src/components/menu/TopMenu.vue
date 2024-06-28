@@ -33,8 +33,8 @@
 import { ref } from 'vue'
 
 import LightDarkSwitch from '#components/menu/LightDarkSwitch.vue'
-import MessageIndicator from '#components/menu/MessageIndicator.vue'
-import NewsIndicator from '#components/menu/NewsIndicator.vue'
+// import MessageIndicator from '#components/menu/MessageIndicator.vue'
+// import NewsIndicator from '#components/menu/NewsIndicator.vue'
 import TabControl from '#components/menu/TabControl.vue'
 import UserInfo from '#components/menu/UserInfo.vue'
 import ListWithNavigationDrawer from '#components/vuetify/Organisms/ListWithNavigationDrawer.vue'
