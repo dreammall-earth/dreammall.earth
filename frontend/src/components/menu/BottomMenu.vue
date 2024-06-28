@@ -8,7 +8,7 @@
     <MessageIndicator :number-of-messages="3" />
     <NewsIndicator :has-news="true" />
     <CreateButtonMobile />
-    <Circle @click="toggleDrawer">
+    <Circle @click="toggleDrawer" class="camera-button">
       <v-icon icon="$camera"></v-icon>
     </Circle>
     <CreateButtonMobile />
@@ -56,12 +56,11 @@ const updateDrawer = (value: boolean) => {
   background: var(--v-bottom-menu-background) !important;
   backdrop-filter: blur(20px);
   border-radius: 30px 30px 0 0;
+}
 
-  .camera-button {
-    transform: translateX(20px);
+ .camera-button {
     cursor: pointer;
   }
-}
 
 .create-button-mobile {
   z-index: 1;
