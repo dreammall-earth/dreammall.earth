@@ -8,7 +8,7 @@
     <MessageIndicator :number-of-messages="3" />
     <NewsIndicator :has-news="true" />
     <CreateButtonMobile />
-    <Circle @click="toggleDrawer" class="camera-button">
+    <Circle class="camera-button" @click="toggleDrawer">
       <v-icon icon="$camera"></v-icon>
     </Circle>
     <CreateButtonMobile />
@@ -21,16 +21,14 @@ import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 
 import CreateButtonMobile from '#components/buttons/CreateButtonMobile.vue'
+import MessageIndicator from '#components/menu/MessageIndicator.vue'
+import NewsIndicator from '#components/menu/NewsIndicator.vue'
 import ListElement from '#components/vuetify/Atoms/ListElement.vue'
+import ListWithNavigationDrawer from '#components/vuetify/Organisms/ListWithNavigationDrawer.vue'
 import { useRoomsStore } from '#stores/roomsStore'
 
 import Circle from './CircleElement.vue'
 import UserInfo from './UserInfo.vue'
-
-import MessageIndicator from '#components/menu/MessageIndicator.vue'
-import NewsIndicator from '#components/menu/NewsIndicator.vue'
-import ListWithNavigationDrawer from '#components/vuetify/Organisms/ListWithNavigationDrawer.vue'
-
 
 const roomsStore = useRoomsStore()
 const { rooms: items } = storeToRefs(roomsStore)
@@ -45,7 +43,6 @@ const toggleDrawer = () => {
 const updateDrawer = (value: boolean) => {
   drawer.value = value
 }
-
 </script>
 
 <style scoped lang="scss">
@@ -58,9 +55,9 @@ const updateDrawer = (value: boolean) => {
   border-radius: 30px 30px 0 0;
 }
 
- .camera-button {
-    cursor: pointer;
-  }
+.camera-button {
+  cursor: pointer;
+}
 
 .create-button-mobile {
   z-index: 1;

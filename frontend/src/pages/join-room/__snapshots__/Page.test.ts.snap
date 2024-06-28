@@ -613,7 +613,7 @@ exports[`JoinRoomPage > renders 1`] = `
                     data-v-e787b5f9=""
                   >
                     <div
-                      class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
+                      class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center camera-button"
                       data-v-39e8094e=""
                       data-v-e787b5f9=""
                     >
@@ -1060,18 +1060,6 @@ exports[`JoinRoomPage > renders 1`] = `
         class="navigation-drawer-box d-md-none d-lg-none position-fixed mb-5 pb-5"
         data-v-96a196cc=""
       >
-        <!-- &lt;v-navigation-drawer
-      :model-value="drawer"
-      :location="location"
-      width="300px"
-      overlay
-      @update:model-value="updateDrawer"
-    &gt;
-      &lt;v-list&gt;
-        &lt;div class="mx-4"&gt;{{ $t('menu.roomList') }}&lt;/div&gt;
-        &lt;ListElement :items="items" /&gt;
-      &lt;/v-list&gt;
-    &lt;/v-navigation-drawer&gt; -->
         
         <nav
           class="v-navigation-drawer v-navigation-drawer--bottom v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer-top"
@@ -1765,7 +1753,7 @@ exports[`JoinRoomPage > renders 1`] = `
           </div>
         </div>
         <div
-          class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
+          class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center camera-button"
           data-v-39e8094e=""
           data-v-96a196cc=""
         >
