@@ -32,6 +32,7 @@ const BREVO = {
 const BBB = {
   BBB_SHARED_SECRET: process.env.BBB_SHARED_SECRET ?? 'unknown',
   BBB_URL: process.env.BBB_URL ?? 'https://my.url',
+  BBB_PULL_MEETINGS: process.env.NODE_ENV !== 'test' && process.env.BBB_URL,
 }
 
 export const CONFIG = {
