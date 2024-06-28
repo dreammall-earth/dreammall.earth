@@ -4,7 +4,6 @@
       :model-value="drawer"
       :location="location"
       width="300px"
-      class="menu-drawer-top"
       @update:model-value="updateDrawer"
     >
       <v-list>

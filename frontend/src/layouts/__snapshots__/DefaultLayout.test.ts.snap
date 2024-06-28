@@ -967,7 +967,7 @@ exports[`DefaultLayout > renders 1`] = `
       >
         
         <nav
-          class="v-navigation-drawer v-navigation-drawer--bottom v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer-top"
+          class="v-navigation-drawer v-navigation-drawer--bottom v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile"
           data-v-96a196cc=""
           style="bottom: 0px; z-index: 1004; transform: translateY(110%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
         >

@@ -35,7 +35,7 @@ describe('BottomMenu', () => {
 
   //     // Initialzustand des Drawers überprüfen
   //     expect(drawerComponent.vm.modelValue).toBe(false)
-      
+
   //     // Circle-Element klicken und Drawer-Status überprüfen
   //     await circleButton.trigger('click')
   //     await flushPromises()
