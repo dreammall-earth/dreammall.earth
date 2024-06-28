@@ -17,21 +17,15 @@
 </template>
 
 <script lang="ts" setup>
-import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 
 import CreateButtonMobile from '#components/buttons/CreateButtonMobile.vue'
 import MessageIndicator from '#components/menu/MessageIndicator.vue'
 import NewsIndicator from '#components/menu/NewsIndicator.vue'
-import ListElement from '#components/vuetify/Atoms/ListElement.vue'
 import ListWithNavigationDrawer from '#components/vuetify/Organisms/ListWithNavigationDrawer.vue'
-import { useRoomsStore } from '#stores/roomsStore'
 
 import Circle from './CircleElement.vue'
 import UserInfo from './UserInfo.vue'
-
-const roomsStore = useRoomsStore()
-const { rooms: items } = storeToRefs(roomsStore)
 
 const drawer = ref(false)
 const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('bottom')
