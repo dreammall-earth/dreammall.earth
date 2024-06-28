@@ -37,6 +37,9 @@ import { useRoomsStore } from '#stores/roomsStore'
 import Circle from './CircleElement.vue'
 import UserInfo from './UserInfo.vue'
 
+import MessageIndicator from '#components/menu/MessageIndicator.vue'
+import NewsIndicator from '#components/menu/NewsIndicator.vue'
+
 const roomsStore = useRoomsStore()
 const { rooms: items } = storeToRefs(roomsStore)
 
