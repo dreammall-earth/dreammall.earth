@@ -84,4 +84,4 @@ const validateConfig = () => {
   }
 }
 
-validateConfig()
+// validateConfig()
