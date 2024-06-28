@@ -829,7 +829,6 @@ exports[`Room Page > renders 1`] = `
       </div>
       
       <nav
-        app=""
         class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer-top"
         data-v-3308ee86=""
         style="right: 0px; z-index: 1006; transform: translateX(110%); position: fixed; transition: none !important; height: calc(100% - NaNpx - 0px); bottom: 0px;"
@@ -975,9 +974,8 @@ exports[`Room Page > renders 1`] = `
       >
         
         <nav
-          app=""
           class="v-navigation-drawer v-navigation-drawer--bottom v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer-top"
-          data-v-3308ee86=""
+          data-v-96a196cc=""
           style="bottom: 0px; z-index: 1004; transform: translateY(110%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
         >
           <!---->
@@ -986,29 +984,22 @@ exports[`Room Page > renders 1`] = `
             class="v-navigation-drawer__content"
           >
             
-            <!--
-    &lt;SearchField
-      v-model="search"
-      label="Open Tables, Jobs"
-      prepend-inner-icon="mdi-tune"
-    &gt;&lt;/SearchField&gt;
-    -->
             <div
               class="v-list v-theme--light bg-transparent v-list--density-default v-list--one-line"
-              data-v-3308ee86=""
+              data-v-96a196cc=""
               role="listbox"
               tabindex="0"
             >
               
               <div
                 class="mx-4"
-                data-v-3308ee86=""
+                data-v-96a196cc=""
               >
                 $t('menu.roomList')
               </div>
               <div
                 class="v-card v-theme--light v-card--density-default v-card--variant-elevated mx-auto"
-                data-v-3308ee86=""
+                data-v-96a196cc=""
                 data-v-fd6c8fbc=""
                 style="width: 400px;"
               >

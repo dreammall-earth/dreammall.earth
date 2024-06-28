@@ -2,12 +2,11 @@
   <v-navigation-drawer
     :model-value="drawer"
     :location="location"
-    app
     width="auto"
     class="menu-drawer-top"
     @update:model-value="updateDrawer"
   >
-  <!--
+    <!--
     <SearchField
       v-model="search"
       label="Open Tables, Jobs"

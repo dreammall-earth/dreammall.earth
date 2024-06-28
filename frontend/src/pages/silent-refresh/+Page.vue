@@ -6,7 +6,7 @@
 import { navigate } from 'vike/client/router'
 import { inject, onBeforeMount } from 'vue'
 
-import DefaultLayout from '#layouts/DefaultLayout.vue'
+// import DefaultLayout from '#layouts/DefaultLayout.vue'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import AuthService from '#src/services/AuthService'
 

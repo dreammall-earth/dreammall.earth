@@ -779,7 +779,6 @@ exports[`TopMenu > renders 1`] = `
     </div>
     
     <nav
-      app=""
       class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer-top"
       data-v-3308ee86=""
       style="right: 0px; z-index: 1004; transform: translateX(110%); position: fixed; transition: none !important; height: calc(100% - NaNpx - 0px); bottom: 0px;"

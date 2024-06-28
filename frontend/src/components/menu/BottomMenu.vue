@@ -3,8 +3,7 @@
     <v-navigation-drawer
       :model-value="drawer"
       :location="location"
-      app
-      width="auto"
+      width="300px"
       class="menu-drawer-top"
       @update:model-value="updateDrawer"
     >
@@ -28,16 +27,17 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
+import { ref } from 'vue'
 
 import CreateButtonMobile from '#components/buttons/CreateButtonMobile.vue'
 import ListElement from '#components/vuetify/Atoms/ListElement.vue'
+import { useRoomsStore } from '#stores/roomsStore'
+
 import Circle from './CircleElement.vue'
 import MessageIndicator from './MessageIndicator.vue'
 import NewsIndicator from './NewsIndicator.vue'
 import UserInfo from './UserInfo.vue'
-import { useRoomsStore } from '#stores/roomsStore'
 
 const roomsStore = useRoomsStore()
 const { rooms: items } = storeToRefs(roomsStore)
@@ -53,7 +53,7 @@ const updateDrawer = (value: boolean) => {
   drawer.value = value
 }
 
-const emits = defineEmits(['update:drawer'])
+// const emits = defineEmits(['update:drawer'])
 </script>
 
 <style scoped lang="scss">
