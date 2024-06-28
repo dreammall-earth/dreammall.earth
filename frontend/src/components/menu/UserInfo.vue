@@ -10,7 +10,7 @@
           <v-img v-if="userImage" :src="userImage" />
           <span v-else>{{ initals?.toUpperCase() }}</span>
         </v-avatar>
-        <div class="d-flex flex-column justify-center text-right pa-1 pl-3 w-100">
+        <div class="d-flex flex-column justify-center text-right pa-3 pl-4 w-100">
           <v-icon icon="$ellipsis" data-test="user-dropdown"></v-icon>
         </div>
       </button>
@@ -50,6 +50,9 @@ const userImage = authStore.user?.profile.picture
 }
 
 .avatar {
+  width: calc(var(--menu-icon-height) - 6px) !important;
+  height: calc(var(--menu-icon-height) - 6px) !important;
+  margin: 3px !important;
   border-color: rgb(var(--v-theme-border) 0.8);
 }
 </style>

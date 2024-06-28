@@ -21,6 +21,7 @@
     <Circle @click="toggleDrawer">
       <v-icon icon="$camera"></v-icon>
     </Circle>
+    <CreateButtonMobile />
     <UserInfo />
   </div>
 </template>
@@ -34,8 +35,6 @@ import ListElement from '#components/vuetify/Atoms/ListElement.vue'
 import { useRoomsStore } from '#stores/roomsStore'
 
 import Circle from './CircleElement.vue'
-import MessageIndicator from './MessageIndicator.vue'
-import NewsIndicator from './NewsIndicator.vue'
 import UserInfo from './UserInfo.vue'
 
 const roomsStore = useRoomsStore()

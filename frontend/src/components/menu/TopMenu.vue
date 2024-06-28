@@ -3,7 +3,9 @@
     <v-app-bar flat class="app-bar" height="70px">
       <v-row class="ma-1">
         <v-col class="d-none d-md-flex align-center">
-          <MessageIndicator :number-of-messages="3" />
+          <a href="/" class="logo">
+            <LogoImage size="small" />
+          </a>
         </v-col>
         <v-col class="d-flex align-center justify-center">
           <TabControl />
@@ -17,7 +19,6 @@
               <Circle @click="toggleDrawer">
                 <v-icon icon="$camera"></v-icon>
               </Circle>
-              <NewsIndicator :has-news="true" class="ml-2" />
               <UserInfo class="ml-2" />
             </v-col>
           </v-row>
@@ -55,6 +56,10 @@ const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('rig
   position: sticky;
   top: 0;
   background: transparent !important;
+}
+
+.logo {
+  width: 140px;
 }
 
 .top-menu {

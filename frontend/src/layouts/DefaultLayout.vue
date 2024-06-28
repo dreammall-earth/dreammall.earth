@@ -1,8 +1,5 @@
 <template>
   <v-main class="bg-background main-layout">
-    <a href="/" class="logo d-none d-md-flex">
-      <LogoImage size="small" />
-    </a>
     <TopMenu />
     <v-container fluid class="page-container px-8">
       <v-row>
@@ -26,7 +23,6 @@
 import { useSlots } from 'vue'
 
 import BottomMenu from '#components/menu/BottomMenu.vue'
-import LogoImage from '#components/menu/LogoImage.vue'
 import TopMenu from '#components/menu/TopMenu.vue'
 
 const slots = useSlots()
@@ -57,13 +53,5 @@ const slots = useSlots()
       margin-bottom: 50px;
     }
   }
-}
-
-.logo {
-  position: absolute;
-  top: 20px;
-  left: 90px;
-  z-index: 1;
-  width: 140px;
 }
 </style>
