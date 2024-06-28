@@ -59,6 +59,9 @@ const isOpen = ref(false)
 }
 
 .avatar {
+  width: calc(var(--menu-icon-height) - 6px) !important;
+  height: calc(var(--menu-icon-height) - 6px) !important;
+  margin: 3px !important;
   border-color: rgb(var(--v-theme-border) 0.8);
 }
 
@@ -70,4 +73,3 @@ const isOpen = ref(false)
   transform: rotate(90deg);
 }
 </style>
-m
