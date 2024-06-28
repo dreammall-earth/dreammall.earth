@@ -15,6 +15,7 @@ exports[`BottomMenu > renders BottomMenu 1`] = `
     >
       
       <nav
+        app=""
         class="v-navigation-drawer v-navigation-drawer--bottom v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer-top"
         data-v-3308ee86=""
         style="bottom: 0px; z-index: 1004; transform: translateY(110%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
