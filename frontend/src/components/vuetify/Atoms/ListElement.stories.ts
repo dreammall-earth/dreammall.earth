@@ -6,7 +6,7 @@ import ListElement from './ListElement.vue'
 
 import type { Meta, StoryObj } from '@storybook/vue3'
 
-const meta: Meta<typeof ListElement> = {
+const meta = {
   title: 'MOLECULES/ListElement',
   component: ListElement as SBComp,
   tags: ['autodocs'],
