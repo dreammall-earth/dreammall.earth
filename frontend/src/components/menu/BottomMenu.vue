@@ -50,9 +50,9 @@ const updateDrawer = (value: boolean) => {
 }
 
 .camera-button {
-  cursor: pointer;
-  right: 31%;
   position: absolute;
+  right: 31%;
+  cursor: pointer;
 }
 
 .create-button-mobile {
