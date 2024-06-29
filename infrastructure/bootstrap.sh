@@ -6,7 +6,9 @@ apk update
 apk upgrade
 apk add nginx openrc nodejs npm git mysql mysql-client
 
-npm install -g pnpm pm2
+npm install -g pm2
+corepack enable pnpm
+
 pm2 startup
 
 rc-update add pm2 boot

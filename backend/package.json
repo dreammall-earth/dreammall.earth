@@ -14,15 +14,14 @@
     "build": "tsc",
     "start": "TZ=UTC TS_NODE_BASEURL=./build node -r tsconfig-paths/register build/src/index.js",
     "dev": "TZ=UTC nodemon -w src --ext ts,json --exec ts-node -r tsconfig-paths/register src/index.ts",
-    "db:migrate": "TZ=UTC npx prisma migrate dev",
-    "db:migrate:deploy": "TZ=UTC npx prisma migrate deploy",
-    "db:reset": "TZ=UTC npx prisma migrate reset --force",
-    "db:seed": "TZ=UTC npx prisma db seed",
-    "test:lint": "npm run test:lint:eslint",
+    "db:migrate": "TZ=UTC pnpm dlx prisma migrate dev",
+    "db:migrate:deploy": "TZ=UTC pnpm dlx prisma migrate deploy",
+    "db:reset": "TZ=UTC pnpm dlx prisma migrate reset --force",
+    "db:seed": "TZ=UTC pnpm dlx prisma db seed",
+    "test:lint": "pnpm run test:lint:eslint",
     "test:lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.cjs,.mjs,.json,.yml,.yaml --max-warnings 0 .",
     "test:unit": "TZ=UTC jest --runInBand --forceExit --detectOpenHandles",
-    "test": "npm run test:lint && npm run test:unit",
-    "update": "npx npm-check-updates"
+    "test": "pnpm run test:lint && pnpm run test:unit",
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
