@@ -25,6 +25,7 @@ function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): Theme
       error: theme.errorColor,
       font: theme.fontColor,
       icon: theme.iconColor,
+      'dropdown-background': theme.dropdownBackgroundColor,
     },
     variables: {
       'border-color': theme.borderColor,

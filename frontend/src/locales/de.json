@@ -7,7 +7,7 @@
   "buttons": {
     "newProject": "Neues Projekt",
     "newTable": "Neuer Tisch",
-    "signout": "Sign Out",
+    "signout": "Logout",
     "toAdmin": "Zum Admin",
     "toAssistant": "Assistent",
     "toRoom": "Zum Treffen"

@@ -13,6 +13,7 @@ $icon-color: #3D4753;
 $icon-background: rgb(255 255 255);
 $bottom-menu-background: rgb(225 230 237 / 60%);
 $sidebar-background: rgb(225 230 237);
+$dropdown-background-color: #fff;
 
 :export {
     backgroundColor: $background-color;
@@ -30,5 +31,6 @@ $sidebar-background: rgb(225 230 237);
     iconBackground: $icon-background;
     bottomMenuBackground: $bottom-menu-background;
     sidebarBackground: $sidebar-background;
+    dropdownBackgroundColor: $dropdown-background-color;
 }
 
