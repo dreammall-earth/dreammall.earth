@@ -97,6 +97,9 @@
     "#test/*": "./test/*",
     "#types/*": "./src/graphql/types/*"
   },
+  "engines": {
+    "node": ">=20"
+  },
   "overrides": {
     "eslint-plugin-type-graphql": {
       "@typescript-eslint/parser": "$@typescript-eslint/parser",

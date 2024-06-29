@@ -31,12 +31,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version-file: './.tool-versions'
+          cache: 'pnpm'
+      - run: pnpm install
       - name: Admin | Build
-        run: npm install && npm run build
-        working-directory: ./admin
+        run: pnpm run --filter dreammall-admin build
 
   docker-production:
     if: needs.files-changed.outputs.admin == 'true'
@@ -65,12 +67,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version-file: './.tool-versions'
+          cache: 'pnpm'
+      - run: pnpm install
       - name: Admin | Build Docs
-        run: npm install && npm run docs:build
-        working-directory: ./admin
+        run: pnpm run --filter dreammall-admin docs:build
 
   storybook:
     if: needs.files-changed.outputs.admin == 'true'
@@ -79,12 +83,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version-file: './.tool-versions'
+          cache: 'pnpm'
+      - run: pnpm install
       - name: Admin | Build Storybook
-        run: npm install && npm run storybook:build
-        working-directory: ./admin
+        run: pnpm run --filter dreammall-admin storybook:build
 
   lint:
     if: needs.files-changed.outputs.admin == 'true'
@@ -93,12 +99,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version-file: './.tool-versions'
+          cache: 'pnpm'
+      - run: pnpm install
       - name: Admin | Lint
-        run: npm install && npm run test:lint
-        working-directory: ./admin
+        run: pnpm run --filter dreammall-admin test:lint
 
   unit:
     if: needs.files-changed.outputs.admin == 'true'
@@ -107,9 +115,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version-file: './.tool-versions'
+          cache: 'pnpm'
+      - run: pnpm install
       - name: Admin | Unit
-        run: npm install && npm run test:unit
-        working-directory: ./admin
+        run: pnpm run --filter dreammall-admin test:unit

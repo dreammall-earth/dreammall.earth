@@ -13,9 +13,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version-file: './.tool-versions'
+          cache: 'pnpm'
+      - run: pnpm install
       - name: Admin | Build
-        run: npm install && npm run chromatic -- --exit-zero-on-changes
-        working-directory: ./admin
+        run: pnpm run --filter dreammall-admin chromatic -- --exit-zero-on-changes
