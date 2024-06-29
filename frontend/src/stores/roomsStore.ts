@@ -40,7 +40,7 @@ export const useRoomsStore = defineStore('rooms', () => {
       // console.log('refetchRooms', openRoomsQueryResult.value)
       if (openRoomsQueryResult.value) {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        setRooms(openRoomsQueryResult.value.openRooms as Room)
+        setRooms(openRoomsQueryResult.value.openRooms)
       }
     } catch (error) {
       GlobalErrorHandler.error('Error refetching open rooms!', error)
