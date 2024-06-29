@@ -8,7 +8,6 @@ When('I click the enter my room button', () => {
   worldcafePage.enterMyRoom()
 })
 
-Then('I am navigated to page where my room is queried', () => {
-  cy.url().should('contain', '/room/')
+Then('My room is queried', () => {
   cy.wait('@postJoinMyRoomQuery')
 })

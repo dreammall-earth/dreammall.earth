@@ -8,4 +8,4 @@ Feature: Tables
     When I submit the credentials 'akadmin' 'dreammall'
     Then I am on page 'worldcafe'
     When I click the enter my room button
-    Then I am navigated to page where my room is queried 
+    Then My room is queried 
