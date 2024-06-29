@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable no-prototype-builtins */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 class WorldcafePage {
   userMenuBtn: string = '.user-info'
   signOutBtn: string = '.sign-out'
@@ -19,10 +16,8 @@ class WorldcafePage {
   enterMyRoom() {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     cy.intercept('POST', Cypress.env('backendURL'), (req) => {
-      if (
-        req.body.hasOwnProperty('query') &&
-        req.body.query.includes('{ mutation {\n  joinMyRoom\n}')
-      ) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, no-prototype-builtins, @typescript-eslint/no-unsafe-member-access
+      if (req.body.hasOwnProperty('query') && req.body.query.includes('joinMyRoom')) {
         req.alias = 'postJoinMyRoomQuery'
       }
     })
