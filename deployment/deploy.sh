@@ -1,8 +1,11 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
+set -euxo pipefail
 
 # Find current directory & configure paths
 SCRIPT_PATH=$(realpath $0)
 SCRIPT_DIR=$(dirname $SCRIPT_PATH)
+PROJECT_ROOT=$SCRIPT_DIR/../../
 TIMESTAMP=$(date +"%Y-%m-%d_%T")
 LOG_PATH=$SCRIPT_DIR/../log
 LOG_FILE=$LOG_PATH/${TIMESTAMP}_deploy.log
@@ -30,6 +33,9 @@ exec 3>&1 1>>${LOG_FILE} 2>&1 2>>${LOG_ERROR_FILE}
     # run as production
     BACKUP_NODE_ENV=$NODE_ENV
     export NODE_ENV=production
+
+    cd $PROJECT_ROOT
+    pnpm install --include=dev
 
     # Backend & Database Migration
     $SCRIPT_DIR/scripts/build.backend.sh
