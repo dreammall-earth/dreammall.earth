@@ -30,7 +30,8 @@ export default defineConfig({
     viewportHeight: 1080,
     viewportWidth: 1920,
     env: {
-      authentikURL: 'http://localhost:9000',
+      authentikURL: 'http://localhost:9000/',
+      backendURL: 'http://localhost:4000/',
     },
     setupNodeEvents,
   },
