@@ -109,6 +109,7 @@ exports[`LanguageSelector > renders 1`] = `
             size="1"
             title="Öffnen"
             type="text"
+            value="de"
           />
         </div>
         <!---->

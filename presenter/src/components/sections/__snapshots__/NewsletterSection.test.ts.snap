@@ -149,6 +149,7 @@ exports[`NewsletterSection > renders 1`] = `
                           required=""
                           size="1"
                           type="text"
+                          value=""
                         />
                         <!---->
                         
@@ -264,6 +265,7 @@ exports[`NewsletterSection > renders 1`] = `
                           required=""
                           size="1"
                           type="text"
+                          value=""
                         />
                         <!---->
                         
@@ -384,6 +386,7 @@ exports[`NewsletterSection > renders 1`] = `
                           required=""
                           size="1"
                           type="email"
+                          value=""
                         />
                         <!---->
                         
