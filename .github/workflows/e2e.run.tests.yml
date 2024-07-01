@@ -18,8 +18,18 @@ jobs:
       - name: E2E | Boot up test system
         run: |
           cd authentik/
+          rm -rf database
           ./database.unpack.sh
           docker compose up -d
+          cd ../
+          docker compose up -d database
+          cd backend
+          cp .env.dist .env
+          ln -s src/auth/public.pem public.pem
+          npm install
+          npm run db:reset
+          npm run build
+          npm run start &
           cd ../frontend
           cp .env.dist .env
           npm install
