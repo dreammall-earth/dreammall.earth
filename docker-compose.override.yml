@@ -11,8 +11,6 @@ services:
   # PRESENTER ############################################
   ########################################################
   presenter:
-    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
-    image: dreammall/presenter:local-development
     build:
       target: development
     ports:
@@ -31,8 +29,6 @@ services:
   # PRESENTER STORYBOOK #################################
   #######################################################
   presenter-storybook:
-    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
-    image: dreammall/presenter:local-storybook
     build:
       context: ./presenter
       target: storybook
@@ -51,8 +47,6 @@ services:
   # PRESENTER DOCUMENTATION #############################
   #######################################################
   presenter-documentation:
-    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
-    image: dreammall/presenter:local-documentation
     build:
       context: ./presenter
       target: documentation
@@ -71,8 +65,6 @@ services:
   # FRONTEND #############################################
   ########################################################
   frontend:
-    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
-    image: dreammall/frontend:local-development
     build:
       target: development
     ports:
@@ -92,8 +84,6 @@ services:
   # FRONTEND STORYBOOK ##################################
   #######################################################
   frontend-storybook:
-    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
-    image: dreammall/frontend:local-storybook
     build:
       context: ./frontend
       target: storybook
@@ -112,8 +102,6 @@ services:
   # FRONTEND DOCUMENTATION ##############################
   #######################################################
   frontend-documentation:
-    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
-    image: dreammall/frontend:local-documentation
     build:
       context: ./frontend
       target: documentation
@@ -132,8 +120,6 @@ services:
   # ADMIN ################################################
   ########################################################
   admin:
-    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
-    image: dreammall/admin:local-development
     build:
       target: development
     ports:
@@ -153,8 +139,6 @@ services:
   # ADMIN STORYBOOK #####################################
   #######################################################
   admin-storybook:
-    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
-    image: dreammall/admin:local-storybook
     build:
       context: ./admin
       target: storybook
@@ -173,8 +157,6 @@ services:
   # ADMIN DOCUMENTATION #################################
   #######################################################
   admin-documentation:
-    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
-    image: dreammall/admin:local-documentation
     build:
       context: ./admin
       target: documentation
@@ -193,8 +175,6 @@ services:
   # BACKEND #############################################
   #######################################################
   backend:
-    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
-    image: dreammall/backend:local-development
     build:
       context: ./backend
       target: development
@@ -211,8 +191,6 @@ services:
   # BACKEND DOCUMENTATION ###############################
   #######################################################
   backend-documentation:
-    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
-    image: dreammall/backend:local-documentation
     build:
       context: ./backend
       target: documentation
@@ -231,8 +209,6 @@ services:
   # DOCUMENTATION ########################################
   ########################################################
   documentation:
-    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
-    image: dreammall/dreammall:local-documentation
     build:
       target: documentation
     ports:
