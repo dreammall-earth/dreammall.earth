@@ -142,10 +142,10 @@ npm run dev
 | Endpoint                                                             | Description                |
 | -------------------------------------------------------------------- | -------------------------- |
 | [http://localhost:3306](http://localhost:3306)                       | MySQL Database             |
-| [http://localhost:3000](http://localhost:3000)                       | Presenter                  |
+| [http://localhost:3000](http://localhost:3001)                       | Presenter                  |
 | [http://localhost:8081](http://localhost:8081)                       | Presenter Documentation    |
 | [http://localhost:6006](http://localhost:6006)                       | Presenter Storybook        |
-| [http://localhost:3001](http://localhost:3001)                       | Frontend                   |
+| [http://localhost:3001](http://localhost:3000)                       | Frontend                   |
 | [http://localhost:8082](http://localhost:8082)                       | Frontend Documentation     |
 | [http://localhost:6007](http://localhost:6007)                       | Frontend Storybook         |
 | [http://localhost:3002](http://localhost:3002)                       | Admin                      |
