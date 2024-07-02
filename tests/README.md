@@ -31,69 +31,7 @@ These features of the DreamMall software are covered by the end-to-end tests:
 Running and testing the application requires `nodejs` (`>= v21`), `npm` and `docker`.
 
 ### Boot up the test system
-For local testing there are two ways to boot up the test system.
-
-#### a) As in the Github CI
-Except the host OS, this approach is exactly the same as we run in the [end-to-end test workflow](.github/workflows/e2e.run.tests.yml).
-
-```bash
-# Boot up Authentik via Docker ##########################
-# change to Authentik directory
-cd authentik/
-# unpack database
-./database.unpack.sh
-# boot up Authentik via Docker
-docker compose up -d
-
-# Boot up Frontend via Docker ###########################
-# change to frontend directory
-cd ../frontend/
-# copy .env file
-cp .env.dist .env
-# boot up frontend via Docker
-docker compose -f docker-compose.test.yml up -d frontend
-
-# Boot up Presenter via Docker ##########################
-# change to presenter directory
-cd  ../presenter/
-# copy .env file
-cp .env.dist .env
-# boot up presenter via Docker
-docker compose -f docker-compose.test.yml up -d presenter
-```
-
-#### b) Less resource-intense
-This approach requires less resources and time to boot up the test system and is suitable for local debugging. 
-But keep in mind that here the underlying technical infrastructure differes from the infrastructure in the Github CI.
-
-```bash
-# Boot up Authentik via Docker ##########################
-# change to Authentik directory
-cd authentik/
-# unpack database
-./database.unpack.sh
-# boot up Authentik via Docker
-docker compose up -d
-
-# Boot up Frontend via npm ##############################
-# in separate console change to frontend directory
-cd frontend/
-# copy .env file
-cp .env.dist .env
-# install packages
-npm install
-# run frontend in production mode
-npm run prod
-
-# Boot up Presenter via npm #############################
-# in separate console change to presenter directory
-cd  presenter/
-# copy .env file
-# install packages
-npm install
-# run frontend in production mode
-npm run prod
-```
+Follow the setup in the [end-to-end test workflow](.github/workflows/e2e.run.tests.yml).
 
 ### Run the tests
 At first the required packages have to be install 

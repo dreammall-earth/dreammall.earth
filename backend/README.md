@@ -48,18 +48,6 @@ The following commands are available:
 | **Maintenance**            |                                                 |
 | `npm run update`           | Check for updates                               |
 
-### Docker
-
-Docker can be run in development mode utilizing `docker-compose.overwrite.yml`:
-```bash
-docker compose up
-```
-
-Docker can be run in production mode:
-```bash
-docker compose -f docker-compose.yml up
-```
-
 ### Update
 
 You can get a list of packes to update by running `npm run update`.

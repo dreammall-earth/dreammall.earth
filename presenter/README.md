@@ -67,18 +67,6 @@ This projects utilizes `storybook` and `chromatic` to develop, document & test f
 | **Maintenance**             |                                                  |
 | `npm run update`            | Check for updates                                |
 
-### Docker
-
-Docker can be run in development mode utilizing `docker-compose.overwrite.yml`:
-```bash
-docker compose up
-```
-
-Docker can be run in production mode:
-```bash
-docker compose -f docker-compose.yml up
-```
-
 ### Chromatic
 
 In order to use the chromatic workflow you need to provide a `CHROMATIC_PROJECT_TOKEN` in the repository secrets.
