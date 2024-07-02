@@ -56,8 +56,5 @@
     "vuepress": "^2.0.0-rc.14",
     "vuepress-plugin-search-pro": "^2.0.0-rc.50",
     "vuepress-theme-hope": "^2.0.0-rc.50"
-  },
-  "engines": {
-    "node": ">=21"
   }
 }

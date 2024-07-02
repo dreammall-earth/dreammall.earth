@@ -16,15 +16,16 @@ jobs:
           filters: |
             markdown:
               - '/**/*.md'
-  
+
   test:
     if: needs.files-changed.outputs.markdown == 'true'
     name: Test - Code
     needs: files-changed
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: './.tool-versions'
       - name: Code | Test
         run: npm install && npm test
