@@ -1,0 +1,10 @@
+version: "3.4"
+
+services:
+  mailserver:
+    image: axllent/mailpit
+    container_name: mailpit
+    restart: unless-stopped
+    ports:
+      - 8025:8025
+      - 1025:1025
