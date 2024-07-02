@@ -73,7 +73,6 @@ docker-compose -f docker-compose.yml -f docker-compose.test.yml up
 
 The given setup can be tested via [Authentik's e-mail testing tool](https://github.com/goauthentik/authentik/blob/main/authentik/stages/email/management/commands/test_email.py)
 
-
 ```bash
 # in the authentik directory execute the email test
 docker compose exec worker ak test_email test@example.com
