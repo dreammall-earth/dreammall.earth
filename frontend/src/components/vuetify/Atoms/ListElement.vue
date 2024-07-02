@@ -58,7 +58,7 @@ defineProps({
 // const emit = defineEmits(['item-click'])
 
 const handleItemClick = (link: string) => {
-  console.log('handleItemClick', link)
+  // console.log('handleItemClick', link)
   closeMenu()
   activeRoomStore.setActiveRoom(link)
   navigate('/room/')
