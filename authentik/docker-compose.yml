@@ -1,6 +1,4 @@
-version: "3.4"
-
-services:
+vservices:
   postgresql:
     image: docker.io/library/postgres:12-alpine
     restart: unless-stopped
