@@ -48,3 +48,26 @@ If you want to publish changes to the database you can use the following command
 
 (Note: this assumes you are not root and sets the permissions of the database files via sudo)
 (Note: make sure to shut down the database first before you run the script)
+
+## E-Mail testing
+
+Authentik e-mails can be checked locally via [Mailpit mailserver](https://mailpit.axllent.org/).
+
+### Prepare and start
+
+In the `authentik/` directory start authentik and mailserver:
+
+```bash
+docker-compose -f docker-compose.yml -f docker-compose.test.yml up
+```
+
+### Example
+
+The given setup can be tested via [Authentik's e-mail testing tool](https://github.com/goauthentik/authentik/blob/main/authentik/stages/email/management/commands/test_email.py)
+
+Send a test email with:
+```bash
+docker compose exec worker ak test_email test@example.com
+```
+
+Visit [Mailpit](http://localhost:8025) and see your test email.
