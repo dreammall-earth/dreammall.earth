@@ -55,17 +55,9 @@ Authentik e-mails can be checked locally via [Mailpit mailserver](https://mailpi
 
 ### Prepare and start
 
-```bash
-# in the authentik directory
-# get hostname and write e-mail environment variables to .env
-echo -e "\n\nAUTHENTIK_EMAIL__HOST=$(hostname)
-AUTHENTIK_EMAIL__PORT=1025
-AUTHENTIK_EMAIL__USE_TLS=false
-AUTHENTIK_EMAIL__USE_SSL=false
-AUTHENTIK_EMAIL__TIMEOUT=10
-AUTHENTIK_EMAIL__FROM=authentik@example.com" >> .env
+In the `authentik/` directory start authentik and mailserver:
 
-# start authentik and mailserver
+```bash
 docker-compose -f docker-compose.yml -f docker-compose.test.yml up
 ```
 
@@ -73,12 +65,9 @@ docker-compose -f docker-compose.yml -f docker-compose.test.yml up
 
 The given setup can be tested via [Authentik's e-mail testing tool](https://github.com/goauthentik/authentik/blob/main/authentik/stages/email/management/commands/test_email.py)
 
+Send a test email with:
 ```bash
-# in the authentik directory execute the email test
 docker compose exec worker ak test_email test@example.com
-
-# in the browser see the Mailpit inbox
-<your_machine_name>:8025
-# or
-localhost:8025
 ```
+
+Visit [Mailpit](http://localhost:8025) and see your test email.
