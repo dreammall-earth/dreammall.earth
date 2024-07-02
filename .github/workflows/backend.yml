@@ -1,0 +1,139 @@
+name: backend
+
+on: [push,pull_request_target]
+
+jobs:
+  files-changed:
+    name: Detect File Changes - backend/
+    runs-on: ubuntu-latest
+    outputs:
+      backend: ${{ steps.filter.outputs.backend }}
+      backend-docs: ${{ steps.filter.outputs.backend-docs }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3.0.2
+        id: filter
+        with:
+          filters: |
+            backend:
+              - '.github/workflows/**/*'
+              - 'backend/**/*'
+            backend-docs:
+              - '.github/workflows/**/*'
+              - 'backend/**/*.md'
+              - 'backend/.vuepress/*'
+              - 'backend/package.json'
+
+  build:
+    if: needs.files-changed.outputs.backend == 'true'
+    name: Build - Backend
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./backend
+    steps:
+      - name: Set Node version
+        uses: actions/setup-node@v4
+        with:
+          node-version: '>=21'
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Backend | Build
+        run: npm install && npm run build
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  docker-production:
+    if: needs.files-changed.outputs.backend == 'true'
+    name: Build Docker Production - Backend
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./backend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Backend | Build Docker Production
+        run: docker compose -f docker-compose.yml build
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  docker-development:
+    if: needs.files-changed.outputs.backend == 'true'
+    name: Build Docker Development - Backend
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./backend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Backend | Build Docker Development
+        run: docker compose build
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  docs:
+    if: needs.files-changed.outputs.backend-docs == 'true'
+    name: Build Docs - Backend
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./backend
+    steps:
+      - name: Set Node version
+        uses: actions/setup-node@v4
+        with:
+          node-version: '>=21'
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Backend | Build Docs
+        run: npm install && npm run docs:build
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  lint:
+    if: needs.files-changed.outputs.backend == 'true'
+    name: Lint - Backend
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./backend
+    steps:
+      - name: Set Node version
+        uses: actions/setup-node@v4
+        with:
+          node-version: '>=21'
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Backend | Lint
+        run: npm install && npm run test:lint
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  unit:
+    if: needs.files-changed.outputs.backend == 'true'
+    name: Unit - Backend
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./backend
+      DATABASE_URL: mysql://root:@localhost:3306/dreammall.earth
+    steps:
+      - name: Set Node version
+        uses: actions/setup-node@v4
+        with:
+          node-version: '>=21'
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Backend | docker-compose database
+        run: docker-compose -f docker-compose.yml up --detach --no-deps database
+
+      - name: Backend | Unit
+        run: npm install && cp src/auth/public.pem . && npm run db:migrate && npm run test:unit
+        working-directory: ${{env.WORKING_DIRECTORY}}
