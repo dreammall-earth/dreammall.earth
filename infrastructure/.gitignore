@@ -1,0 +1,3 @@
+packer-output/
+archive/**/*
+!archive/.gitkeep
