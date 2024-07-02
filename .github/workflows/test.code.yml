@@ -4,7 +4,7 @@ on: [push,pull_request_target]
 
 jobs:
   files-changed:
-    name: Detect File Changes - admin/
+    name: Detect File Changes
     runs-on: ubuntu-latest
     outputs:
       markdown: ${{ steps.filter.outputs.markdown }}
@@ -18,7 +18,7 @@ jobs:
               - '/**/*.md'
   
   test:
-  if: needs.files-changed.outputs.markdown == 'true'
+    if: needs.files-changed.outputs.markdown == 'true'
     name: Test - Code
     needs: files-changed
     runs-on: ubuntu-latest
