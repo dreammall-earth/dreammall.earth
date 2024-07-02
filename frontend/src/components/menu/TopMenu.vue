@@ -16,7 +16,7 @@
               <LightDarkSwitch class="d-none d-lg-flex" />
             </v-col>
             <v-col class="d-flex align-center justify-end">
-              <Circle>
+              <Circle @click="toggleDrawer">
                 <v-icon icon="$camera"></v-icon>
               </Circle>
               <UserInfo class="ml-2" />
@@ -26,19 +26,34 @@
       </v-row>
     </v-app-bar>
   </div>
+  <ListWithNavigationDrawer :drawer="drawer" :location="location" @update:drawer="updateDrawer" />
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
+
+import ListWithNavigationDrawer from '#components/vuetify/Organisms/ListWithNavigationDrawer.vue'
+
 import Circle from './CircleElement.vue'
 import LightDarkSwitch from './LightDarkSwitch.vue'
 import LogoImage from './LogoImage.vue'
 import TabControl from './TabControl.vue'
 import UserInfo from './UserInfo.vue'
+
+const drawer = ref(false)
+const toggleDrawer = () => {
+  drawer.value = !drawer.value
+}
+const updateDrawer = (value: boolean) => {
+  drawer.value = value
+}
+const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('right')
 </script>
 
 <style scoped lang="scss">
 .app-bar {
-  position: static !important;
+  position: sticky;
+  top: 0;
   background: transparent !important;
 }
 
@@ -49,5 +64,6 @@ import UserInfo from './UserInfo.vue'
 .top-menu {
   position: sticky;
   top: 0;
+  z-index: 1000;
 }
 </style>

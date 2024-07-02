@@ -31,6 +31,7 @@
   "menu": {
     "cockpit": "Cockpit",
     "mall": "Mall",
+    "roomList": "Offene Räume",
     "theme": {
       "dark": "Dunkel",
       "light": "Hell"
@@ -42,5 +43,8 @@
     "defaultDescription": "Deine Reichweite Erweitern Alle Möglichkeiten Miteinander Ausschöpfen Lebensqualität Leben",
     "defaultTitle": "DreamMall",
     "joinRoomTitle": "Raum beitreten"
+  },
+  "rooms": {
+    "participantCount": "{count} Teilnehmer"
   }
 }
