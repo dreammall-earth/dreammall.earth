@@ -29,20 +29,14 @@ jobs:
     name: Build - Backend
     needs: files-changed
     runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: ./backend
     steps:
-      - name: Set Node version
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '>=21'
-
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+          node-version-file: './.tool-versions'
       - name: Backend | Build
         run: npm install && npm run build
-        working-directory: ${{env.WORKING_DIRECTORY}}
+        working-directory: ./backend
 
   docker-production:
     if: needs.files-changed.outputs.backend == 'true'
@@ -50,9 +44,7 @@ jobs:
     needs: files-changed
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Backend | Build Docker Production
         run: docker compose -f docker-compose.yml build backend
 
@@ -62,9 +54,7 @@ jobs:
     needs: files-changed
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Backend | Build Docker Development
         run: docker compose build backend backend-documentation
 
@@ -73,40 +63,28 @@ jobs:
     name: Build Docs - Backend
     needs: files-changed
     runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: ./backend
     steps:
-      - name: Set Node version
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '>=21'
-
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+          node-version-file: './.tool-versions'
       - name: Backend | Build Docs
         run: npm install && npm run docs:build
-        working-directory: ${{env.WORKING_DIRECTORY}}
+        working-directory: ./backend
 
   lint:
     if: needs.files-changed.outputs.backend == 'true'
     name: Lint - Backend
     needs: files-changed
     runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: ./backend
     steps:
-      - name: Set Node version
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '>=21'
-
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+          node-version-file: './.tool-versions'
       - name: Backend | Lint
         run: npm install && npm run test:lint
-        working-directory: ${{env.WORKING_DIRECTORY}}
+        working-directory: ./backend
 
   unit:
     if: needs.files-changed.outputs.backend == 'true'
@@ -114,20 +92,14 @@ jobs:
     needs: files-changed
     runs-on: ubuntu-latest
     env:
-      WORKING_DIRECTORY: ./backend
       DATABASE_URL: mysql://root:@localhost:3306/dreammall.earth
     steps:
-      - name: Set Node version
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '>=21'
-
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+          node-version-file: './.tool-versions'
       - name: Backend | docker-compose database
         run: docker-compose -f docker-compose.yml up --detach --no-deps database
-
       - name: Backend | Unit
         run: npm install && cp src/auth/public.pem . && npm run db:migrate && npm run test:unit
-        working-directory: ${{env.WORKING_DIRECTORY}}
+        working-directory: ./backend

@@ -29,15 +29,14 @@ jobs:
     name: Build - Admin
     needs: files-changed
     runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: ./admin
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: './.tool-versions'
       - name: Admin | Build
         run: npm install && npm run build
-        working-directory: ${{env.WORKING_DIRECTORY}}
+        working-directory: ./admin
 
   docker-production:
     if: needs.files-changed.outputs.admin == 'true'
@@ -45,9 +44,7 @@ jobs:
     needs: files-changed
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Admin | Build Docker Production
         run: docker compose -f docker-compose.yml build admin
 
@@ -57,9 +54,7 @@ jobs:
     needs: files-changed
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Admin | Build Docker Development
         run: docker compose build admin admin-documentation admin-storybook
 
@@ -68,57 +63,53 @@ jobs:
     name: Build Docs - Admin
     needs: files-changed
     runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: ./admin
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: './.tool-versions'
       - name: Admin | Build Docs
         run: npm install && npm run docs:build
-        working-directory: ${{env.WORKING_DIRECTORY}}
+        working-directory: ./admin
 
   storybook:
     if: needs.files-changed.outputs.admin == 'true'
     name: Build Storybook - Admin
     needs: files-changed
     runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: ./admin
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: './.tool-versions'
       - name: Admin | Build Storybook
         run: npm install && npm run storybook:build
-        working-directory: ${{env.WORKING_DIRECTORY}}
+        working-directory: ./admin
 
   lint:
     if: needs.files-changed.outputs.admin == 'true'
     name: Lint - Admin
     needs: files-changed
     runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: ./admin
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: './.tool-versions'
       - name: Admin | Lint
         run: npm install && npm run test:lint
-        working-directory: ${{env.WORKING_DIRECTORY}}
+        working-directory: ./admin
 
   unit:
     if: needs.files-changed.outputs.admin == 'true'
     name: Unit - Admin
     needs: files-changed
     runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: ./admin
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: './.tool-versions'
       - name: Admin | Unit
         run: npm install && npm run test:unit
-        working-directory: ${{env.WORKING_DIRECTORY}}
+        working-directory: ./admin

@@ -19,8 +19,7 @@ jobs:
       ##########################################################################
       # CHECKOUT CODE ##########################################################
       ##########################################################################
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Fetch full History for changelog
       ##########################################################################
@@ -60,8 +59,7 @@ jobs:
       ##########################################################################
       # Push release tag to GitHub #############################################
       ##########################################################################
-      - name: npm install
-        run: npm install
+      - run: npm install
       - name: generate changelog
         run: npx --yes auto-changelog --commit-limit 0 --latest-version ${{ env.VERSION }} --unreleased-only
       - name: package-version-to-git-release

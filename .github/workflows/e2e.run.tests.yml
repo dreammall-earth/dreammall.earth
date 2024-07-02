@@ -7,13 +7,11 @@ jobs:
     name: Run all E2E tests
     runs-on: ubuntu-latest
     steps:
-      - name: Set Node version
-        uses: actions/setup-node@v4
-        with:
-          node-version: 21
+      - uses: actions/checkout@master
 
-      - name: Checkout
-        uses: actions/checkout@master
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: './.tool-versions'
 
       - name: E2E | Boot up test system
         run: |
