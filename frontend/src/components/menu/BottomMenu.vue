@@ -1,8 +1,14 @@
 <template>
+  <div class="navigation-drawer-box d-md-none d-lg-none position-fixed mb-5 pb-5">
+    <ListWithNavigationDrawer :drawer="drawer" :location="location" @update:drawer="updateDrawer" />
+  </div>
   <div
-    class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface"
+    class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface d-md-none d-lg-none"
   >
-    <Circle class="camera-button">
+    <MessageIndicator :number-of-messages="3" />
+    <NewsIndicator :has-news="true" />
+    <CreateButtonMobile />
+    <Circle class="camera-button" @click="toggleDrawer">
       <v-icon icon="$camera"></v-icon>
     </Circle>
     <CreateButtonMobile />
@@ -11,10 +17,26 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
+
 import CreateButtonMobile from '#components/buttons/CreateButtonMobile.vue'
+import MessageIndicator from '#components/menu/MessageIndicator.vue'
+import NewsIndicator from '#components/menu/NewsIndicator.vue'
+import ListWithNavigationDrawer from '#components/vuetify/Organisms/ListWithNavigationDrawer.vue'
 
 import Circle from './CircleElement.vue'
 import UserInfo from './UserInfo.vue'
+
+const drawer = ref(false)
+const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('bottom')
+
+const toggleDrawer = () => {
+  drawer.value = !drawer.value
+}
+
+const updateDrawer = (value: boolean) => {
+  drawer.value = value
+}
 </script>
 
 <style scoped lang="scss">
@@ -25,9 +47,28 @@ import UserInfo from './UserInfo.vue'
   background: var(--v-bottom-menu-background) !important;
   backdrop-filter: blur(20px);
   border-radius: 30px 30px 0 0;
+}
 
-  .camera-button {
-    transform: translateX(20px);
-  }
+.camera-button {
+  position: absolute;
+  right: 31%;
+  cursor: pointer;
+}
+
+.create-button-mobile {
+  z-index: 1;
+  transform: translate(20px, 30px);
+}
+
+.navigation-drawer-box {
+  bottom: 65px;
+}
+
+.v-navigation-drawer {
+  scrollbar-width: thin;
+}
+
+.v-navigation-drawer__content {
+  scrollbar-width: thin;
 }
 </style>

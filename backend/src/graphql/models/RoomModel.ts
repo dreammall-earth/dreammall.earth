@@ -24,7 +24,7 @@ export class OpenRoom {
   constructor(meeting: MeetingInfo, link: string) {
     this.meetingID = meeting.meetingID
     this.meetingName = meeting.meetingName
-    this.startTime = meeting.startTime
+    this.startTime = meeting.startTime.toString()
     this.participantCount = meeting.participantCount
     this.attendees =
       typeof meeting.attendees !== 'string'
@@ -41,8 +41,8 @@ export class OpenRoom {
   @Field()
   meetingName: string
 
-  @Field(() => Int)
-  startTime: number
+  @Field(() => String)
+  startTime: string
 
   @Field(() => Int)
   participantCount: number

@@ -16,7 +16,19 @@ const config: StorybookConfig = {
     autodocs: 'tag',
   },
   core: {
+    builder: '@storybook/builder-vite',
     disableTelemetry: true, // 👈 Disables telemetry
+  },
+  async viteFinal(config) {
+    // Merge custom configuration into the default config
+    const { mergeConfig } = await import('vite');
+ 
+    return mergeConfig(config, {
+      // Add dependencies to pre-optimization
+      optimizeDeps: {
+        include: ['storybook-dark-mode'],
+      },
+    });
   },
 }
 

@@ -28,6 +28,22 @@ describe('BottomMenu', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 
+  // describe.only('drawer functionality', async() => {
+  //   it('opens the drawer when Circle element is clicked', async () => {
+  //     const circleButton = wrapper.findComponent({ name: 'Circle' })
+  //     const drawerComponent = wrapper.findComponent({ name: 'VNavigationDrawer' })
+
+  //     // Initialzustand des Drawers überprüfen
+  //     expect(drawerComponent.vm.modelValue).toBe(false)
+
+  //     // Circle-Element klicken und Drawer-Status überprüfen
+  //     await circleButton.trigger('click')
+  //     await flushPromises()
+
+  //     expect(drawerComponent.vm.modelValue).toBe(true)
+  //   })
+  // })
+
   describe('signout button', () => {
     const authStore = useAuthStore()
 
