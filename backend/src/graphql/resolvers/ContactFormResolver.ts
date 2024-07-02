@@ -7,9 +7,11 @@ import { EVENT_CONTACTFORM_SEND } from '#src/event/Events'
 @Resolver()
 export class ContactFormResolver {
   @Mutation(() => Boolean)
-  createContactForm(@Arg('contactFormData') contactFormData: ContactFormInput): boolean {
+  async createContactForm(
+    @Arg('contactFormData') contactFormData: ContactFormInput,
+  ): Promise<boolean> {
     void sendContactEmails(contactFormData)
-    void EVENT_CONTACTFORM_SEND(contactFormData.email)
+    await EVENT_CONTACTFORM_SEND(contactFormData.email)
     return true
   }
 }
