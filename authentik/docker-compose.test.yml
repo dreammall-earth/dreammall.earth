@@ -1,4 +1,4 @@
-ervices:
+services:
   mailserver:
     image: axllent/mailpit
     container_name: mailpit
