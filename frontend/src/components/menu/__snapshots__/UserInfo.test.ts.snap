@@ -43,7 +43,7 @@ exports[`UserInfo > renders 1`] = `
       >
         <i
           aria-hidden="true"
-          class="v-icon notranslate v-theme--light v-icon--size-default"
+          class="v-icon notranslate v-theme--light v-icon--size-default ellipsis-icon"
           data-test="user-dropdown"
           data-v-607bdd70=""
         >

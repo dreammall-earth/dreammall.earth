@@ -97,7 +97,7 @@ describe('RoomResolver', () => {
         }
       `
       describe('No room in DB', () => {
-        it('returns null', async () => {
+        it('throws an Error', async () => {
           await expect(
             testServer.executeOperation({
               query,
@@ -110,9 +110,8 @@ describe('RoomResolver', () => {
             body: {
               kind: 'single',
               singleResult: {
-                data: { joinRoom: null },
-
-                errors: undefined,
+                data: null,
+                errors: [expect.objectContaining({ message: 'Room does not exist' })],
               },
             },
           })
@@ -560,7 +559,7 @@ describe('RoomResolver', () => {
                       meetingName: 'Dreammall Entwicklung',
                       meetingID: 'Dreammall-Entwicklung',
                       participantCount: 0,
-                      startTime: 1718189,
+                      startTime: '1718189',
                       attendees: [],
                       joinLink: 'https://my-link',
                     },
@@ -651,7 +650,7 @@ describe('RoomResolver', () => {
                       meetingName: 'Dreammall Entwicklung',
                       meetingID: 'Dreammall-Entwicklung',
                       participantCount: 0,
-                      startTime: 1718189,
+                      startTime: '1718189',
                       joinLink: 'https://my-link',
                       attendees: [
                         {
@@ -755,7 +754,7 @@ describe('RoomResolver', () => {
                       meetingName: 'Dreammall Entwicklung',
                       meetingID: 'Dreammall-Entwicklung',
                       participantCount: 0,
-                      startTime: 1718189,
+                      startTime: '1718189',
                       joinLink: 'https://my-link',
                       attendees: [
                         {

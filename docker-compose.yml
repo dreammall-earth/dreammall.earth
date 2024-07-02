@@ -22,8 +22,6 @@ services:
   # PRESENTER ############################################
   ########################################################
   presenter:
-    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
-    image: dreammall/presenter:local-production
     build:
       context: ./presenter
       target: production
@@ -39,8 +37,6 @@ services:
   # FRONTEND #############################################
   ########################################################
   frontend:
-    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
-    image: dreammall/frontend:local-production
     build:
       context: ./frontend
       target: production
@@ -56,8 +52,6 @@ services:
   # ADMIN ################################################
   ########################################################
   admin:
-    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
-    image: dreammall/admin:local-production
     build:
       context: ./admin
       target: production
@@ -73,8 +67,6 @@ services:
   # BACKEND #############################################
   #######################################################
   backend:
-    # name the image so that it cannot be found in a DockerHub repository, otherwise it will not be built locally from the 'dockerfile' but pulled from there
-    image: it4c/backend:local-production
     build:
       context: ./backend
       target: production

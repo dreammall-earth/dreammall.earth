@@ -2,12 +2,10 @@
   <div
     class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface"
   >
-    <MessageIndicator :number-of-messages="3" />
-    <NewsIndicator :has-news="true" />
-    <CreateButtonMobile />
     <Circle class="camera-button">
       <v-icon icon="$camera"></v-icon>
     </Circle>
+    <CreateButtonMobile />
     <UserInfo />
   </div>
 </template>
@@ -16,8 +14,6 @@
 import CreateButtonMobile from '#components/buttons/CreateButtonMobile.vue'
 
 import Circle from './CircleElement.vue'
-import MessageIndicator from './MessageIndicator.vue'
-import NewsIndicator from './NewsIndicator.vue'
 import UserInfo from './UserInfo.vue'
 </script>
 
