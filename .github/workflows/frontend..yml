@@ -1,0 +1,130 @@
+name: frontend
+
+on: [push,pull_request_target]
+
+jobs:
+  files-changed:
+    name: Detect File Changes - frontend/
+    runs-on: ubuntu-latest
+    outputs:
+      frontend: ${{ steps.filter.outputs.frontend }}
+      frontend-docs: ${{ steps.filter.outputs.frontend-docs }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3.0.2
+        id: filter
+        with:
+          filters: |
+            frontend:
+              - '.github/workflows/**/*'
+              - 'frontend/**/*'
+            frontend-docs:
+              - '.github/workflows/**/*'
+              - 'frontend/**/*.md'
+              - 'frontend/.vuepress/*'
+              - 'frontend/package.json'
+
+  build:
+    if: needs.files-changed.outputs.frontend == 'true'
+    name: Build - Frontend
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./frontend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Frontend | Build
+        run: npm install && npm run build
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  docker-production:
+    if: needs.files-changed.outputs.frontend == 'true'
+    name: Build Docker Production - Frontend
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./frontend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Frontend | Build Docker Production
+        run: docker compose -f docker-compose.yml build
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  docker-development:
+    if: needs.files-changed.outputs.frontend == 'true'
+    name: Build Docker Development - Frontend
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./frontend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Frontend | Build Docker Development
+        run: docker compose build
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  docs:
+    if: needs.files-changed.outputs.frontend-docs == 'true'
+    name: Build Docs - Frontend
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./frontend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Frontend | Build Docs
+        run: npm install && npm run docs:build
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  storybook:
+    if: needs.files-changed.outputs.frontend == 'true'
+    name: Build Storybook - Frontend
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./frontend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Frontend | Build Storybook
+        run: npm install && npm run storybook:build
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  lint:
+    if: needs.files-changed.outputs.frontend == 'true'
+    name: Lint - Frontend
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./frontend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Frontend | Lint
+        run: npm install && npm run test:lint
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  unit:
+    if: needs.files-changed.outputs.frontend == 'true'
+    name: Unit - Frontend
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./frontend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Frontend | Unit
+        run: npm install && npm run test:unit
+        working-directory: ${{env.WORKING_DIRECTORY}}

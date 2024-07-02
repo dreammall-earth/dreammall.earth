@@ -1,0 +1,150 @@
+name: presenter
+
+on: [push,pull_request_target]
+
+jobs:
+  files-changed:
+    name: Detect File Changes - presenter/
+    runs-on: ubuntu-latest
+    outputs:
+      presenter: ${{ steps.filter.outputs.presenter }}
+      presenter-docs: ${{ steps.filter.outputs.presenter-docs }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3.0.2
+        id: filter
+        with:
+          filters: |
+            presenter:
+              - '.github/workflows/**/*'
+              - 'presenter/**/*'
+            presenter-docs:
+              - '.github/workflows/**/*'
+              - 'presenter/**/*.md'
+              - 'presenter/.vuepress/*'
+              - 'presenter/package.json'
+
+  build:
+    if: needs.files-changed.outputs.presenter == 'true'
+    name: Build - Presenter
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./presenter
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Presenter | Build
+        run: npm install && npm run build
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  docker-production:
+    if: needs.files-changed.outputs.presenter == 'true'
+    name: Build Docker Production - Presenter
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./presenter
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Presenter | Build Docker Production
+        run: docker compose -f docker-compose.yml build
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  docker-development:
+    if: needs.files-changed.outputs.presenter == 'true'
+    name: Build Docker Development - Presenter
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./presenter
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Presenter | Build Docker Development
+        run: docker compose build
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  docs:
+    if: needs.files-changed.outputs.presenter-docs == 'true'
+    name: Build Docs - Presenter
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./presenter
+    steps:
+      - name: Set Node version
+        uses: actions/setup-node@v4
+        with:
+          node-version: '>=21'
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Presenter | Build Docs
+        run: npm install && npm run docs:build
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  storybook:
+    if: needs.files-changed.outputs.presenter == 'true'
+    name: Build Storybook - Presenter
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./presenter
+    steps:
+      - name: Set Node version
+        uses: actions/setup-node@v4
+        with:
+          node-version: '>=21'
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Presenter | Build Storybook
+        run: npm install && npm run storybook:build
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  lint:
+    if: needs.files-changed.outputs.presenter == 'true'
+    name: Lint - Presenter
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./presenter
+    steps:
+      - name: Set Node version
+        uses: actions/setup-node@v4
+        with:
+          node-version: '>=21'
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Presenter | Lint
+        run: npm install && npm run test:lint
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  unit:
+    if: needs.files-changed.outputs.presenter == 'true'
+    name: Unit - Presenter
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./presenter
+    steps:
+      - name: Set Node version
+        uses: actions/setup-node@v4
+        with:
+          node-version: '>=21'
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Presenter | Unit
+        run: npm install && npm run test:unit
+        working-directory: ${{env.WORKING_DIRECTORY}}

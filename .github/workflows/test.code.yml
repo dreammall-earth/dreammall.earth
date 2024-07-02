@@ -3,28 +3,8 @@ name: "dreammall:test:code with defined tests & linters"
 on: [push,pull_request_target]
 
 jobs:
-  # only (but most important) job from this workflow required for pull requests
-  # check results serve as run conditions for all other jobs here
-  files-changed:
-    name: Detect File Changes - test-code
-    runs-on: ubuntu-latest
-    outputs:
-      changes: ${{ steps.changes.outputs.test-code }}
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Check for Code file changes
-        uses: dorny/paths-filter@v3.0.2
-        id: changes
-        with:
-          token: ${{ github.token }}
-          filters: .github/file-filters.yml
-          list-files: shell
-
   test:
-    if: needs.files-changed.outputs.changes == 'true'
     name: Test - Code
-    needs: files-changed
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
