@@ -1,0 +1,129 @@
+name: admin
+
+on: [push,pull_request_target]
+
+jobs:
+  files-changed:
+    name: Detect File Changes - admin/
+    runs-on: ubuntu-latest
+    outputs:
+      admin: ${{ steps.filter.outputs.admin }}
+      admin-docs: ${{ steps.filter.outputs.admin-docs }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3.0.2
+        id: filter
+        with:
+          filters: |
+            admin:
+              - '.github/workflows/**/*'
+              - 'admin/**/*'
+            admin-docs:
+              - '.github/workflows/**/*'
+              - 'admin/**/*.md'
+              - 'admin/.vuepress/*'
+              - 'admin/package.json'
+
+  build:
+    if: needs.files-changed.outputs.admin == 'true'
+    name: Build - Admin
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./admin
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Admin | Build
+        run: npm install && npm run build
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  docker-production:
+    if: needs.files-changed.outputs.admin == 'true'
+    name: Build Docker Production - Admin
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./admin
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Admin | Build Docker Production
+        run: docker compose -f docker-compose.yml build
+
+  docker-development:
+    if: needs.files-changed.outputs.admin == 'true'
+    name: Build Docker Development - Admin
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./admin
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Admin | Build Docker Development
+        run: docker compose build
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  docs:
+    if: needs.files-changed.outputs.admin-docs == 'true'
+    name: Build Docs - Admin
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./admin
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Admin | Build Docs
+        run: npm install && npm run docs:build
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  storybook:
+    if: needs.files-changed.outputs.admin == 'true'
+    name: Build Storybook - Admin
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./admin
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Admin | Build Storybook
+        run: npm install && npm run storybook:build
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  lint:
+    if: needs.files-changed.outputs.admin == 'true'
+    name: Lint - Admin
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./admin
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Admin | Lint
+        run: npm install && npm run test:lint
+        working-directory: ${{env.WORKING_DIRECTORY}}
+
+  unit:
+    if: needs.files-changed.outputs.admin == 'true'
+    name: Unit - Admin
+    needs: files-changed
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: ./admin
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Admin | Unit
+        run: npm install && npm run test:unit
+        working-directory: ${{env.WORKING_DIRECTORY}}
