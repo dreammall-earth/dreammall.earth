@@ -21,9 +21,7 @@
   },
   "homepage": "https://dreammall.earth",
   "scripts": {
-    "test:lint": "npm run test:lint:remark",
-    "test:lint:remark": "remark . --quiet --frail",
-    "test": "npm run test:lint",
+    "remark": "remark . --quiet --frail",
     "docs:dev": "vuepress dev .",
     "docs:build": "vuepress build .",
     "release": "scripts/release.sh"

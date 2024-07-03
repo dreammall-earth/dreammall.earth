@@ -1,4 +1,4 @@
-name: "dreammall:test:code with defined tests & linters"
+name: root
 
 on: [push,pull_request_target]
 
@@ -20,23 +20,20 @@ jobs:
               - '.vuepress/*'
               - 'package.json'
 
-  test:
+  markdown:
     if: needs.files-changed.outputs.docs == 'true'
-    name: Root - Test
-    needs: files-changed
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Test | Root
-        run: npm install && npm test
-
-  docs:
-    if: needs.files-changed.outputs.docs == 'true'
-    name: Build Docs - Root
+    name: Lint Markdown Files
     needs: files-changed
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Root | Build Docs
-        run: npm install && npm run docs:build
+      - run: npm install && npm run remark
+
+  docs:
+    if: needs.files-changed.outputs.docs == 'true'
+    name: Build Docs
+    needs: files-changed
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install && npm run docs:build
