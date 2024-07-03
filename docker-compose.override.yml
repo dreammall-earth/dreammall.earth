@@ -3,7 +3,7 @@ services:
   # DATABASE #############################################
   ########################################################
   database:
-    networks: 
+    networks:
       - internal-net
       - external-net
 
@@ -40,24 +40,6 @@ services:
       # This makes sure the docker container has its own node modules.
       # Therefore it is possible to have a different node version on the host machine
       #- presenter_storybook_node_modules:/app/node_modules
-      # bind the local folder to the docker to allow live reload
-      - ./presenter:/app
-
-  #######################################################
-  # PRESENTER DOCUMENTATION #############################
-  #######################################################
-  presenter-documentation:
-    build:
-      context: ./presenter
-      target: documentation
-    ports:
-      - 8081:8080
-    environment:
-      - NODE_ENV=development
-    volumes:
-      # This makes sure the docker container has its own node modules.
-      # Therefore it is possible to have a different node version on the host machine
-      #- presenter_documentation_node_modules:/app/node_modules
       # bind the local folder to the docker to allow live reload
       - ./presenter:/app
 
@@ -98,24 +80,6 @@ services:
       # bind the local folder to the docker to allow live reload
       - ./frontend:/app
 
-  #######################################################
-  # FRONTEND DOCUMENTATION ##############################
-  #######################################################
-  frontend-documentation:
-    build:
-      context: ./frontend
-      target: documentation
-    ports:
-      - 8082:8080
-    environment:
-      - NODE_ENV=development
-    volumes:
-      # This makes sure the docker container has its own node modules.
-      # Therefore it is possible to have a different node version on the host machine
-      #- frontend_documentation_node_modules:/app/node_modules
-      # bind the local folder to the docker to allow live reload
-      - ./frontend:/app
-
   ########################################################
   # ADMIN ################################################
   ########################################################
@@ -150,24 +114,6 @@ services:
       # This makes sure the docker container has its own node modules.
       # Therefore it is possible to have a different node version on the host machine
       #- admin_storybook_node_modules:/app/node_modules
-      # bind the local folder to the docker to allow live reload
-      - ./admin:/app
-
-  #######################################################
-  # ADMIN DOCUMENTATION #################################
-  #######################################################
-  admin-documentation:
-    build:
-      context: ./admin
-      target: documentation
-    ports:
-      - 8083:8080
-    environment:
-      - NODE_ENV=development
-    volumes:
-      # This makes sure the docker container has its own node modules.
-      # Therefore it is possible to have a different node version on the host machine
-      #- admin_documentation_node_modules:/app/node_modules
       # bind the local folder to the docker to allow live reload
       - ./admin:/app
 
@@ -225,13 +171,9 @@ services:
 volumes:
   presenter_node_modules:
   presenter_storybook_node_modules:
-  presenter_documentation_node_modules:
   frontend_node_modules:
   frontend_storybook_node_modules:
-  frontend_documentation_node_modules:
   admin_node_modules:
   admin_storybook_node_modules:
-  admin_documentation_node_modules:
   backend_node_modules:
-  backend_documentation_node_modules:
   documentation_node_modules:

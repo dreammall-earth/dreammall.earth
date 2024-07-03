@@ -8,7 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       frontend: ${{ steps.filter.outputs.frontend }}
-      frontend-docs: ${{ steps.filter.outputs.frontend-docs }}
     steps:
       - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3.0.2
@@ -18,11 +17,6 @@ jobs:
             frontend:
               - '.github/workflows/**/*'
               - 'frontend/**/*'
-            frontend-docs:
-              - '.github/workflows/**/*'
-              - 'frontend/**/*.md'
-              - 'frontend/.vuepress/*'
-              - 'frontend/package.json'
 
   build:
     if: needs.files-changed.outputs.frontend == 'true'
@@ -61,22 +55,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Frontend | Build Docker Development
-        run: docker compose build frontend frontend-documentation frontend-storybook
-
-  docs:
-    if: needs.files-changed.outputs.frontend-docs == 'true'
-    name: Build Docs - Frontend
-    needs: files-changed
-    runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: ./frontend
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Frontend | Build Docs
-        run: npm install && npm run docs:build
-        working-directory: ${{env.WORKING_DIRECTORY}}
+        run: docker compose build frontend frontend-storybook
 
   storybook:
     if: needs.files-changed.outputs.frontend == 'true'

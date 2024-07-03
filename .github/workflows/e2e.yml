@@ -8,7 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       e2e: ${{ steps.filter.outputs.e2e }}
-      e2e-docs: ${{ steps.filter.outputs.e2e-docs }}
     steps:
       - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3.0.2
@@ -18,32 +17,6 @@ jobs:
             e2e:
               - '.github/workflows/**/*'
               - 'tests/**/*'
-            e2e-docs:
-              - 'tests/**/*.md'
-              - '.github/workflows/e2e.test.build.docs.yml'
-              - '.github/file-filter.yml'
-              - '.vuepress/*'
-              - 'package.json'
-
-  docs:
-    if: needs.files-changed.outputs.e2e-docs  == 'true'
-    name: Build Docs - E2E Testing
-    needs: files-changed
-    runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: ./tests
-    steps:
-      - name: Set Node version
-        uses: actions/setup-node@v4
-        with:
-          node-version: '>=21'
-
-      - name: Checkout code
-        uses: actions/checkout@master
-
-      - name: E2E Testing | Build Docs
-        run: npm install && npm run docs:build
-        working-directory: ${{env.WORKING_DIRECTORY}}
 
   lint:
     if: needs.files-changed.outputs.e2e == 'true'
