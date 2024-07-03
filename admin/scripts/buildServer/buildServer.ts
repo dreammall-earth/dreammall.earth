@@ -1,9 +1,7 @@
 import path from 'node:path'
 import { fileURLToPath } from 'url'
 
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { build } from 'esbuild'
-// eslint-disable-next-line import/no-extraneous-dependencies
 import fs, { ensureDir, remove } from 'fs-extra'
 
 const __filename = fileURLToPath(import.meta.url)
