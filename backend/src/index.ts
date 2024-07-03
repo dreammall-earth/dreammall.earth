@@ -2,7 +2,7 @@
 import 'reflect-metadata'
 
 import { CONFIG } from '#config/config'
-import { handleOpenRooms } from '#graphql/resolvers/dal/handleOpenRooms'
+import { checkForOpenRooms } from '#graphql/resolvers/dal/handleOpenRooms'
 
 import logger from './logger'
 import { prisma } from './prisma'
