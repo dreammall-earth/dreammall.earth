@@ -20,6 +20,11 @@
   "cafe": {
     "welcome": "Weltencafé"
   },
+  "cockpit": {
+    "about-me": {
+      "header": "Über mich"
+    }
+  },
   "error": {
     "404": {
       "h1": "404 Seite nicht gefunden",
