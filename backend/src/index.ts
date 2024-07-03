@@ -6,8 +6,9 @@ import { prisma } from './prisma'
 import { listen } from './server/server'
 
 export const main = async (): Promise<void> => {
-  const url = await listen(4000)
-  logger.info(`🚀 Server is ready at ${url}`)
+  await listen(4000)
+  logger.info(`🚀 Server is ready at http://localhost:4000/`)
+  checkForOpenRooms()
 }
 
 void main()
