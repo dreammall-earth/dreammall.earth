@@ -5,6 +5,8 @@ import { expressMiddleware } from '@apollo/server/express4'
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer'
 import cors from 'cors'
 import express, { json, urlencoded } from 'express'
+import { useServer } from 'graphql-ws/lib/use/ws'
+import { WebSocketServer } from 'ws'
 
 import { schema } from '#graphql/schema'
 
@@ -14,15 +16,28 @@ import logger from './logger'
 export const createServer = async (
   withLogger: boolean = true,
   httpServer: Server | undefined = undefined,
+  wsServer: ReturnType<typeof useServer> | undefined = undefined,
 ): Promise<ApolloServer> => {
   const plugins: ApolloServerPlugin<Context>[] = []
   if (withLogger) plugins.push(logger)
   if (httpServer) plugins.push(ApolloServerPluginDrainHttpServer({ httpServer }))
+  if (wsServer)
+    plugins.push({
+      // eslint-disable-next-line @typescript-eslint/require-await
+      async serverWillStart() {
+        return {
+          async drainServer() {
+            await wsServer.dispose()
+          },
+        }
+      },
+    })
   return new ApolloServer<Context>({
     schema: await schema(),
     plugins,
   })
 }
+
 export const createTestServer = async () => {
   return await createServer(false)
 }
@@ -32,7 +47,14 @@ export async function listen(port: number, getToken: GetContextToken = getContex
 
   const httpServer = createHttpServer(app)
 
-  const apolloServer = await createServer(true, httpServer)
+  const wsServer = new WebSocketServer({
+    server: httpServer,
+    path: '/subscriptions',
+  })
+
+  const serverCleanup = useServer({ schema }, wsServer)
+
+  const apolloServer = await createServer(true, httpServer, serverCleanup)
 
   await apolloServer.start()
 
