@@ -8,7 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       presenter: ${{ steps.filter.outputs.presenter }}
-      presenter-docs: ${{ steps.filter.outputs.presenter-docs }}
     steps:
       - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3.0.2
@@ -18,11 +17,6 @@ jobs:
             presenter:
               - '.github/workflows/**/*'
               - 'presenter/**/*'
-            presenter-docs:
-              - '.github/workflows/**/*'
-              - 'presenter/**/*.md'
-              - 'presenter/.vuepress/*'
-              - 'presenter/package.json'
 
   build:
     if: needs.files-changed.outputs.presenter == 'true'
@@ -61,27 +55,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Presenter | Build Docker Development
-        run: docker compose build presenter presenter-documentation presenter-storybook
-
-  docs:
-    if: needs.files-changed.outputs.presenter-docs == 'true'
-    name: Build Docs - Presenter
-    needs: files-changed
-    runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: ./presenter
-    steps:
-      - name: Set Node version
-        uses: actions/setup-node@v4
-        with:
-          node-version: '>=21'
-
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Presenter | Build Docs
-        run: npm install && npm run docs:build
-        working-directory: ${{env.WORKING_DIRECTORY}}
+        run: docker compose build presenter presenter-storybook
 
   storybook:
     if: needs.files-changed.outputs.presenter == 'true'

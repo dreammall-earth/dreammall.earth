@@ -2,8 +2,5 @@ node_modules/
 build/
 coverage/
 !.storybook/
-!.vuepress/
-.vuepress/.temp/
-.vuepress/.cache/
 build-storybook.log
 .env

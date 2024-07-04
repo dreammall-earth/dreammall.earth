@@ -9,11 +9,8 @@
 [![eslint][badge-eslint-img]][badge-eslint-href]
 [![remark-cli][badge-remark-cli-img]][badge-remark-cli-href]
 [![jest][badge-jest-img]][badge-jest-href]
-[![vuepress][badge-vuepress-img]][badge-vuepress-href]
 
 The Dreammall backend.
-
-![](.vuepress/assets/dreammall-logo.svg)
 
 ## Requirements & Technology
 
@@ -42,9 +39,6 @@ The following commands are available:
 | `npm run test:lint:remark` | Run linter remark                               |
 | `npm run test:unit`        | Run all unit tests and generate coverage report |
 | `npm test`                 | Run all tests & linters                         |
-| **Documentation**          |                                                 |
-| `npm run docs:dev`         | Run Documentation in development mode           |
-| `npm run docs:build`       | Build static documentation                      |
 | **Maintenance**            |                                                 |
 | `npm run update`           | Check for updates                               |
 
@@ -152,6 +146,3 @@ Otherwise place the according certificate in the main folder with the name `publ
 
 [badge-jest-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fbackend%2Fpackage.json&query=devDependencies.jest&label=jest&color=yellow
 [badge-jest-href]: https://jestjs.io/
-
-[badge-vuepress-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fbackend%2Fpackage.json&query=devDependencies.vuepress&label=vuepress&color=orange
-[badge-vuepress-href]: https://vuepress.vuejs.org/

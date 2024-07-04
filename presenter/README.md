@@ -14,7 +14,6 @@
 [![stylelint][badge-stylelint-img]][badge-stylelint-href]
 [![vitest][badge-vitest-img]][badge-vitest-href]
 [![storybook][badge-storybook-img]][badge-storybook-href]
-[![vuepress][badge-vuepress-img]][badge-vuepress-href]
 [![chromatic][badge-chromatic-img]][badge-chromatic-href]
 
 The Dreammall presenter.
@@ -29,7 +28,7 @@ The project uses `vite` as builder, `vike` to do the SSR. The design framework i
 
 Testing is done with `vitest` and code style is enforced with `eslint`, `remark-cli` and `stylelint`.
 
-This projects utilizes `storybook` and `chromatic` to develop, document & test frontend components and `vuepress` for static documentation generation.
+This projects utilizes `storybook` and `chromatic` to develop, document & test frontend components.
 
 ## Commands
 
@@ -59,9 +58,6 @@ This projects utilizes `storybook` and `chromatic` to develop, document & test f
 | `npm run storybook`         | Run Storybook                                    |
 | `npm run storybook:build`   | Build static storybook                           |
 | `npm run storybook:test`    | Run tests against all storybook stories          |
-| **Documentation**           |                                                  |
-| `npm run docs:dev`          | Run Documentation in development mode            |
-| `npm run docs:build`        | Build static documentation                       |
 | **Chromatic**               |                                                  |
 | `npm run chromatic`         | Run Chromatic. See Chromatic section for details |
 | **Maintenance**             |                                                  |
@@ -178,9 +174,6 @@ This mechanic was taken from this [source](https://stackoverflow.com/questions/1
 
 [badge-storybook-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fpresenter%2Fpackage.json&query=devDependencies.storybook&label=storybook&color=orange
 [badge-storybook-href]: https://storybook.js.org/
-
-[badge-vuepress-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fpresenter%2Fpackage.json&query=devDependencies.vuepress&label=vuepress&color=orange
-[badge-vuepress-href]: https://vuepress.vuejs.org/
 
 [badge-chromatic-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fpresenter%2Fpackage.json&query=devDependencies.chromatic&label=chromatic&color=orange
 [badge-chromatic-href]: https://www.chromatic.com/

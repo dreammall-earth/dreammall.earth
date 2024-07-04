@@ -3,7 +3,6 @@
 [![nodejs][badge-nodejs-img]][badge-nodejs-href]
 [![npm][badge-npm-img]][badge-npm-href]
 [![eslint][badge-eslint-img]][badge-eslint-href]
-[![vuepress][badge-vuepress-img]][badge-vuepress-href]
 
 ![](../presenter/src/assets/dreammall-logo.svg)
 
@@ -59,9 +58,6 @@ npm run cypress:open
 | `npm run cypress:run`      | Run all Cypress tests headless in CLI         |
 | **Linting*-                |                                               |
 | `npm run test:lint`        | Run Eslint                                    |
-| **Documentation*-          |                                               |
-| `npm run docs:dev`         | Run documentation locally in development mode |
-| `npm run docs:build`       | Build static documentation                    |
 | **Maintenance*-            |                                               |
 | `npm run update`           | Check for updates                             |
 
@@ -90,6 +86,3 @@ npm install
 
 [badge-eslint-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fpresenter%2Fpackage.json&query=devDependencies.eslint&label=eslint&color=yellow
 [badge-eslint-href]: https://eslint.org/
-
-[badge-vuepress-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fpresenter%2Fpackage.json&query=devDependencies.vuepress&label=vuepress&color=orange
-[badge-vuepress-href]: https://vuepress.vuejs.org/

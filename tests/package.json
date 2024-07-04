@@ -15,16 +15,13 @@
     "eslint",
     "npm",
     "nodejs",
-    "typescript",
-    "vuepress"
+    "typescript"
   ],
   "author": "mahula",
   "license": "Apache-2.0",
   "scripts": {
     "cypress:open": "cypress open --e2e --browser electron",
     "cypress:run": "cypress run --e2e --browser electron",
-    "docs:dev": "vuepress dev .",
-    "docs:build": "vuepress build .",
     "test:lint": "eslint --ext .ts,.tsx,.js,.jsx,.cjs,.json,.yml,.yaml --max-warnings 0 .",
     "update": "npx npm-check-updates"
   },
@@ -34,7 +31,6 @@
     "@eslint-community/eslint-plugin-eslint-comments": "^4.3.0",
     "@typescript-eslint/eslint-plugin": "^7.8.0",
     "@typescript-eslint/parser": "^7.8.0",
-    "@vuepress/bundler-vite": "^2.0.0-rc.14",
     "cypress": "^13.12.0",
     "cypress-network-idle": "^1.14.2",
     "eslint": "^8.57.0",
@@ -52,10 +48,7 @@
     "prettier": "^3.3.2",
     "ts-loader": "^9.5.1",
     "tsx": "^4.16.0",
-    "typescript": "^5.5.2",
-    "vuepress": "^2.0.0-rc.14",
-    "vuepress-plugin-search-pro": "^2.0.0-rc.50",
-    "vuepress-theme-hope": "^2.0.0-rc.50"
+    "typescript": "^5.5.2"
   },
   "engines": {
     "node": ">=21"

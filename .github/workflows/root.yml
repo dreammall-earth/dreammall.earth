@@ -1,0 +1,39 @@
+name: root
+
+on: [push,pull_request_target]
+
+jobs:
+  files-changed:
+    name: Detect File Changes
+    runs-on: ubuntu-latest
+    outputs:
+      docs: ${{ steps.filter.outputs.docs }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3.0.2
+        id: filter
+        with:
+          filters: |
+            docs:
+              - '.github/workflows/**/*'
+              - '**/*.md'
+              - '.vuepress/*'
+              - 'package.json'
+
+  markdown:
+    if: needs.files-changed.outputs.docs == 'true'
+    name: Lint Markdown Files
+    needs: files-changed
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install && npm run remark
+
+  docs:
+    if: needs.files-changed.outputs.docs == 'true'
+    name: Build Docs
+    needs: files-changed
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install && npm run docs:build
