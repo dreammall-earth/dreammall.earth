@@ -1,0 +1,129 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ListWithNavigationDrawer > renders correctly 1`] = `
+<div
+  class="v-application v-theme--light v-layout v-layout--full-height v-locale--is-ltr"
+>
+  <div
+    class="v-application__wrap"
+  >
+    
+    
+    <nav
+      class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer-top"
+      data-v-3308ee86=""
+      style="right: 0px; z-index: 1004; transform: translateX(110%); position: fixed; transition: none !important; height: calc(100% - 0px - 0px); top: 0px; bottom: 0px;"
+    >
+      <!---->
+      <!---->
+      <div
+        class="v-navigation-drawer__content"
+      >
+        
+        <!--
+    &lt;SearchField
+      v-model="search"
+      label="Open Tables, Jobs"
+      prepend-inner-icon="mdi-tune"
+    &gt;&lt;/SearchField&gt;
+    -->
+        <div
+          class="v-list v-theme--light bg-transparent v-list--density-default v-list--one-line"
+          data-v-3308ee86=""
+          role="listbox"
+          tabindex="0"
+        >
+          
+          <div
+            class="mx-4"
+            data-v-3308ee86=""
+          >
+            $t('menu.roomList')
+          </div>
+          <div
+            class="v-card v-theme--light v-card--density-default v-card--variant-elevated mx-auto"
+            data-v-3308ee86=""
+            data-v-fd6c8fbc=""
+            style="width: 400px;"
+          >
+            <!---->
+            <div
+              class="v-card__loader"
+            >
+              <div
+                aria-hidden="true"
+                aria-valuemax="100"
+                aria-valuemin="0"
+                class="v-progress-linear v-theme--light v-locale--is-ltr"
+                role="progressbar"
+                style="top: 0px; height: 0px; --v-progress-linear-height: 2px;"
+              >
+                <!---->
+                <div
+                  class="v-progress-linear__background"
+                  style="width: 100%;"
+                />
+                <transition-stub
+                  appear="false"
+                  css="true"
+                  name="fade-transition"
+                  persisted="false"
+                >
+                  <div
+                    class="v-progress-linear__indeterminate"
+                  >
+                    
+                    <div
+                      class="v-progress-linear__indeterminate long"
+                    />
+                    <div
+                      class="v-progress-linear__indeterminate short"
+                    />
+                    
+                  </div>
+                </transition-stub>
+                <!---->
+              </div>
+            </div>
+            <!---->
+            <!---->
+            
+            <div
+              class="v-list v-theme--light bg-transparent v-list--density-default v-list--two-line"
+              data-v-fd6c8fbc=""
+              role="listbox"
+              tabindex="0"
+            >
+              
+              
+              
+              
+            </div>
+            
+            <!---->
+            
+            <!---->
+            <span
+              class="v-card__underlay"
+            />
+            
+          </div>
+          
+        </div>
+        
+      </div>
+      <!---->
+    </nav>
+    <transition-stub
+      appear="false"
+      css="true"
+      name="fade-transition"
+      persisted="false"
+    >
+      <!---->
+    </transition-stub>
+    
+    
+  </div>
+</div>
+`;

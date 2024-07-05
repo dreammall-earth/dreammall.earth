@@ -8,8 +8,129 @@ exports[`BottomMenu > renders BottomMenu 1`] = `
     class="v-application__wrap"
   >
     
+    
     <div
-      class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface"
+      class="navigation-drawer-box d-md-none d-lg-none position-fixed mb-5 pb-5"
+      data-v-96a196cc=""
+    >
+      
+      <nav
+        class="v-navigation-drawer v-navigation-drawer--bottom v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer-top"
+        data-v-3308ee86=""
+        style="bottom: 0px; z-index: 1004; transform: translateY(110%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
+      >
+        <!---->
+        <!---->
+        <div
+          class="v-navigation-drawer__content"
+        >
+          
+          <!--
+    &lt;SearchField
+      v-model="search"
+      label="Open Tables, Jobs"
+      prepend-inner-icon="mdi-tune"
+    &gt;&lt;/SearchField&gt;
+    -->
+          <div
+            class="v-list v-theme--light bg-transparent v-list--density-default v-list--one-line"
+            data-v-3308ee86=""
+            role="listbox"
+            tabindex="0"
+          >
+            
+            <div
+              class="mx-4"
+              data-v-3308ee86=""
+            >
+              $t('menu.roomList')
+            </div>
+            <div
+              class="v-card v-theme--light v-card--density-default v-card--variant-elevated mx-auto"
+              data-v-3308ee86=""
+              data-v-fd6c8fbc=""
+              style="width: 400px;"
+            >
+              <!---->
+              <div
+                class="v-card__loader"
+              >
+                <div
+                  aria-hidden="true"
+                  aria-valuemax="100"
+                  aria-valuemin="0"
+                  class="v-progress-linear v-theme--light v-locale--is-ltr"
+                  role="progressbar"
+                  style="top: 0px; height: 0px; --v-progress-linear-height: 2px;"
+                >
+                  <!---->
+                  <div
+                    class="v-progress-linear__background"
+                    style="width: 100%;"
+                  />
+                  <transition-stub
+                    appear="false"
+                    css="true"
+                    name="fade-transition"
+                    persisted="false"
+                  >
+                    <div
+                      class="v-progress-linear__indeterminate"
+                    >
+                      
+                      <div
+                        class="v-progress-linear__indeterminate long"
+                      />
+                      <div
+                        class="v-progress-linear__indeterminate short"
+                      />
+                      
+                    </div>
+                  </transition-stub>
+                  <!---->
+                </div>
+              </div>
+              <!---->
+              <!---->
+              
+              <div
+                class="v-list v-theme--light bg-transparent v-list--density-default v-list--two-line"
+                data-v-fd6c8fbc=""
+                role="listbox"
+                tabindex="0"
+              >
+                
+                
+                
+                
+              </div>
+              
+              <!---->
+              
+              <!---->
+              <span
+                class="v-card__underlay"
+              />
+              
+            </div>
+            
+          </div>
+          
+        </div>
+        <!---->
+      </nav>
+      <transition-stub
+        appear="false"
+        css="true"
+        name="fade-transition"
+        persisted="false"
+      >
+        <!---->
+      </transition-stub>
+      
+    </div>
+    <div
+      class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface d-md-none d-lg-none"
       data-v-96a196cc=""
     >
       <div
@@ -539,7 +660,7 @@ exports[`BottomMenu > renders BottomMenu 1`] = `
       <button
         aria-expanded="false"
         aria-haspopup="menu"
-        aria-owns="v-menu-0"
+        aria-owns="v-menu-1"
         class="user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
         data-v-607bdd70=""
         targetref="[object Object]"
@@ -594,6 +715,7 @@ exports[`BottomMenu > renders BottomMenu 1`] = `
       <!---->
       
     </div>
+    
     
   </div>
 </div>
