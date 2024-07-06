@@ -1,11 +1,11 @@
 <template>
-  <div class="cockpit-card">
+  <section class="cockpit-card">
     <div class="header">
       <slot name="header"></slot>
     </div>
     <hr />
     <slot></slot>
-  </div>
+  </section>
 </template>
 
 <style scoped lang="scss">
