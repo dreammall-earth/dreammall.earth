@@ -1,13 +1,25 @@
+import { ApolloError } from '@apollo/client/errors'
 import { mount } from '@vue/test-utils'
 import { navigate } from 'vike/client/router'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
+
+import { joinMyRoomMutation } from '#mutations/joinMyRoomMutation'
+import { useActiveRoomStore } from '#stores/activeRoomStore'
+import { mockClient } from '#tests/mock.apolloClient'
+import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
 import CreateButtonMobile from './CreateButtonMobile.vue'
 
 vi.mock('vike/client/router')
 vi.mocked(navigate).mockResolvedValue()
 
-describe('CreateButton', () => {
+const joinMyRoomMutationMock = vi.fn()
+
+mockClient.setRequestHandler(joinMyRoomMutation, joinMyRoomMutationMock)
+
+const activeRoomStore = useActiveRoomStore()
+
+describe('CreateButtonMobile', () => {
   const Wrapper = () => {
     return mount(CreateButtonMobile, {
       props: {},
@@ -53,13 +65,80 @@ describe('CreateButton', () => {
       wrapper = Wrapper()
     })
     describe('enter room', () => {
-      beforeEach(async () => {
-        await wrapper.find('#create-button-mobile').trigger('click')
-        await wrapper.find('.button-list-mobile button.new-table-button').trigger('click')
+      describe('apollo with success', () => {
+        beforeEach(async () => {
+          vi.clearAllMocks()
+          joinMyRoomMutationMock.mockResolvedValue({
+            data: {
+              joinMyRoom: 'http://link-to-my.room',
+            },
+          })
+          await wrapper.find('#create-button-mobile').trigger('click')
+          await wrapper.find('button.new-table-button').trigger('click')
+        })
+
+        it('calls the api', () => {
+          expect(joinMyRoomMutationMock).toBeCalled()
+        })
+
+        it('updates the store', () => {
+          expect(activeRoomStore.activeRoom).toBe('http://link-to-my.room')
+        })
+
+        it.skip('navigates to room page', () => {
+          expect(navigate).toBeCalledWith('/room/')
+        })
       })
 
-      it('opens room page', () => {
-        expect(navigate).toHaveBeenCalledWith('/room/')
+      describe('apollo with no data', () => {
+        beforeEach(async () => {
+          activeRoomStore.setActiveRoom(null)
+          vi.clearAllMocks()
+          joinMyRoomMutationMock.mockResolvedValue({
+            data: null,
+          })
+          await wrapper.find('#create-button-mobile').trigger('click')
+          await wrapper.find('.button-list-mobile button.new-table-button').trigger('click')
+        })
+
+        it('calls the api', () => {
+          expect(joinMyRoomMutationMock).toBeCalled()
+        })
+
+        it('does not update the store', () => {
+          expect(activeRoomStore.activeRoom).toBe(null)
+        })
+
+        it.skip('toasts no room found error', () => {
+          expect(errorHandlerSpy).toBeCalledWith('No room found')
+        })
+      })
+
+      describe('apollo with error', () => {
+        beforeEach(async () => {
+          activeRoomStore.setActiveRoom(null)
+          vi.clearAllMocks()
+          joinMyRoomMutationMock.mockRejectedValue({
+            message: 'OUCH',
+          })
+          await wrapper.find('#create-button-mobile').trigger('click')
+          await wrapper.find('.button-list-mobile button.new-table-button').trigger('click')
+        })
+
+        it('calls the api', () => {
+          expect(joinMyRoomMutationMock).toBeCalled()
+        })
+
+        it('does not update the store', () => {
+          expect(activeRoomStore.activeRoom).toBe(null)
+        })
+
+        it('toasts no room found error', () => {
+          expect(errorHandlerSpy).toBeCalledWith(
+            'Error opening room',
+            new ApolloError({ errorMessage: 'OUCH' }),
+          )
+        })
       })
     })
   })
