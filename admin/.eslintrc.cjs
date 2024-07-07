@@ -168,7 +168,7 @@ module.exports = {
       extends: ['plugin:vuetify/recommended'],
     },
     {
-      files: ['*.[test,spec].[tj]s'],
+      files: ['*.{test,spec}.[tj]s'],
       plugins: ['vitest'],
       extends: ['plugin:vitest/all'],
     },

@@ -190,7 +190,7 @@ module.exports = {
       extends: ['plugin:json/recommended-with-comments'],
     },
     {
-      files: ['*.[test,spec].[tj]s'],
+      files: ['*.{test,spec}.[tj]s'],
       plugins: ['jest'],
       extends: ['plugin:jest/all'],
     },
