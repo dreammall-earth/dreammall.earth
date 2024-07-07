@@ -22,8 +22,9 @@ const { activeRoom: roomUrl } = storeToRefs(activeRoomStore)
 @import 'vuetify/lib/styles/settings/_variables';
 
 .container {
-  width: 100%;
   --bottom-height: 16px;
+
+  width: 100%;
   height: calc(100vh - var(--v-layout-top) - var(--bottom-height));
 }
 
