@@ -18,9 +18,18 @@ const activeRoomStore = useActiveRoomStore()
 const { activeRoom: roomUrl } = storeToRefs(activeRoomStore)
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import 'vuetify/lib/styles/settings/_variables';
+
 .container {
   width: 100%;
-  height: 80vh;
+  --bottom-height: 16px;
+  height: calc(100vh - var(--v-layout-top) - var(--bottom-height));
+}
+
+@media #{map-get($display-breakpoints, 'sm-and-down')} {
+  .container {
+    --bottom-height: 85px;
+  }
 }
 </style>
