@@ -271,12 +271,16 @@
 </template>
 
 <script lang="ts" setup>
+import { useMutation } from '@vue/apollo-composable'
 import { navigate } from 'vike/client/router'
 import { onMounted, ref } from 'vue'
 
 import Divider from '#assets/img/divider.svg'
 import Triangle from '#assets/img/triangle.svg'
 import MainButton from '#components/buttons/MainButton.vue'
+import { JoinMyRoomMutationResult, joinMyRoomMutation } from '#mutations/joinMyRoomMutation'
+import GlobalErrorHandler from '#plugins/globalErrorHandler'
+import { useActiveRoomStore } from '#stores/activeRoomStore'
 
 const showButtonList = ref(false)
 const teleportComponent = ref(false)
@@ -307,8 +311,28 @@ const onClick = () => {
   }
 }
 
-const enterRoom = () => {
-  navigate('/room/')
+const activeRoomStore = useActiveRoomStore()
+
+const { mutate: joinMyRoomMutationResult } = useMutation<JoinMyRoomMutationResult>(
+  joinMyRoomMutation,
+  {
+    fetchPolicy: 'no-cache',
+  },
+)
+
+const enterRoom = async () => {
+  try {
+    const result = await joinMyRoomMutationResult()
+
+    if (result?.data?.joinMyRoom) {
+      activeRoomStore.setActiveRoom(result.data.joinMyRoom)
+      navigate('/room/')
+    } else {
+      GlobalErrorHandler.error('No room found')
+    }
+  } catch (error) {
+    GlobalErrorHandler.error('Error opening room', error)
+  }
 }
 </script>
 
