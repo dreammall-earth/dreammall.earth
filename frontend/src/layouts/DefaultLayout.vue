@@ -14,7 +14,7 @@
         </v-col>
       </v-row>
     </v-container>
-    <BottomMenu class="d-md-none" />
+    <BottomMenu />
     <div id="teleported"></div>
   </v-main>
 </template>
