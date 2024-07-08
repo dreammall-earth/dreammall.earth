@@ -2,13 +2,13 @@ import { getMeetings, MeetingInfo } from '#api/BBB'
 import { prisma } from '#src/prisma'
 
 export const handleOpenRooms = async (): Promise<void> => {
-  const rooms = await getMeetings()
+  const meetings = await getMeetings()
   await prisma.meeting.updateMany({
     where: {
       createTime: { not: null },
       meetingID: {
         not: {
-          in: rooms.map((m: MeetingInfo) => m.meetingID),
+          in: meetings.map((m: MeetingInfo) => m.meetingID),
         },
       },
     },
