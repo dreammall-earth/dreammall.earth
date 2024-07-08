@@ -12,7 +12,7 @@ exports[`Room Page > renders 1`] = `
       class="v-main bg-background main-layout"
       data-v-75d0be1e=""
       data-v-d68296eb=""
-      style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: NaN; --v-layout-bottom: 0px; transition: none !important;"
+      style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: 70px; --v-layout-bottom: 0px; transition: none !important;"
     >
       
       
@@ -29,7 +29,7 @@ exports[`Room Page > renders 1`] = `
           
           <div
             class="v-toolbar__content"
-            style=""
+            style="height: 70px;"
           >
             <!---->
             <!---->
@@ -755,7 +755,7 @@ exports[`Room Page > renders 1`] = `
       <nav
         class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer-top"
         data-v-3308ee86=""
-        style="right: 0px; z-index: 1006; transform: translateX(110%); position: fixed; transition: none !important; height: calc(100% - NaNpx - 0px); bottom: 0px;"
+        style="right: 0px; z-index: 1006; transform: translateX(110%); position: fixed; transition: none !important; height: calc(100% - 70px - 0px); top: 70px; bottom: 0px;"
       >
         <!---->
         <!---->
@@ -893,7 +893,7 @@ exports[`Room Page > renders 1`] = `
       </div>
       
       <div
-        class="navigation-drawer-box d-md-none d-lg-none position-fixed mb-5 pb-5"
+        class="navigation-drawer-box d-md-none position-fixed mb-5 pb-5"
         data-v-96a196cc=""
       >
         
@@ -1013,7 +1013,7 @@ exports[`Room Page > renders 1`] = `
         
       </div>
       <div
-        class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface d-md-none d-lg-none"
+        class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface d-md-none"
         data-v-96a196cc=""
       >
         <div

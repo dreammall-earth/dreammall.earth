@@ -1,10 +1,21 @@
 import { Meeting } from '@prisma/client'
-import { Resolver, Mutation, Query, Authorized, Ctx, Arg, Int } from 'type-graphql'
+import {
+  Resolver,
+  Mutation,
+  Query,
+  Authorized,
+  Ctx,
+  Arg,
+  Int,
+  Subscription,
+  Root,
+} from 'type-graphql'
 // eslint-disable-next-line import/named
 import { v4 as uuidv4 } from 'uuid'
 
 import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo } from '#api/BBB'
 import { Room, OpenRoom } from '#models/RoomModel'
+import { pubSub } from '#src/graphql/pubSub'
 import logger from '#src/logger'
 import { prisma } from '#src/prisma'
 import { Context } from '#src/server/context'
@@ -181,21 +192,16 @@ export class RoomResolver {
     })
   }
 
-  /*
+  @Subscription({
+    topics: 'OPEN_ROOM_SUBSCRIPTION',
+  })
+  updateOpenRooms(@Root() openMeetings: string): string {
+    return openMeetings
+  }
+
   @Query(() => Boolean)
-  async test(): Promise<boolean> {
-    try {
-      const result = await createMeeting({
-        name: 'My Meeting ßß',
-        meetingID: 'xxx',
-      })
-      console.log(result)
-      // const test = await getMeetings()
-    } catch (err) {
-      console.log(err)
-      return false
-    }
+  test(): boolean {
+    pubSub.publish('OPEN_ROOM_SUBSCRIPTION', 'Hallo')
     return true
   }
-  */
 }
