@@ -1,6 +1,6 @@
 <template>
   <div class="top-menu mt-6 mt-sm-0">
-    <v-app-bar flat class="app-bar" height="70px">
+    <v-app-bar flat class="app-bar" height="70">
       <v-row class="ma-1">
         <v-col class="d-none d-md-flex align-center">
           <a href="/" class="logo">
