@@ -1,5 +1,5 @@
 <template>
-  <div class="navigation-drawer-box d-md-none d-lg-none position-fixed mb-5 pb-5">
+  <div class="navigation-drawer-box d-md-none position-fixed mb-5 pb-5">
     <ListWithNavigationDrawer
       :drawer="drawer"
       :location="location"
@@ -7,7 +7,7 @@
     />
   </div>
   <div
-    class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface d-md-none d-lg-none"
+    class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface d-md-none"
   >
     <Circle class="camera-button" @click="toggleDrawer">
       <v-icon icon="$camera"></v-icon>
