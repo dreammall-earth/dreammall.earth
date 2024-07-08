@@ -27,7 +27,7 @@ const createAuthLink = (getToken: () => string) => {
 const wsLink = new GraphQLWsLink(
   createClient({
     webSocketImpl: WebSocket,
-    url: ENDPOINTS.GRAPHQL_URI + 'subscriptions',
+    url: ENDPOINTS.WEBSOCKET_URI,
   }),
 )
 
