@@ -1,8 +1,7 @@
 import { useQuery } from '@vue/apollo-composable'
 import { acceptHMRUpdate, defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { openRoomsQuery } from '#src/graphql/queries/openRoomsQuery'
 
 type Attendee = {
@@ -18,55 +17,41 @@ export type Room = {
   joinLink: string
 }
 
-export const useRoomsStore = defineStore('rooms', () => {
-  const {
-    result: openRoomsQueryResult,
-    refetch: openRoomsQueryRefetch,
-    loading,
-  } = useQuery(
-    openRoomsQuery,
-    {},
-    {
-      prefetch: false,
-      fetchPolicy: 'no-cache',
-    },
-  )
+export const useRoomsStore = defineStore(
+  'rooms',
+  () => {
+    const { result: openRoomsQueryResult, loading } = useQuery(
+      openRoomsQuery,
+      {},
+      {
+        prefetch: false,
+        fetchPolicy: 'no-cache',
+      },
+    )
 
-  const refetchRooms = async () => {
-    try {
-      await openRoomsQueryRefetch()
-      // console.log('test', test)
-      // console.log('refetchRooms', openRoomsQueryResult.value)
-      if (openRoomsQueryResult.value) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
-        setRooms(openRoomsQueryResult.value.openRooms)
-      }
-    } catch (error) {
-      GlobalErrorHandler.error('Error refetching open rooms!', error)
+    watch(openRoomsQueryResult, (data: { openRooms: Room[] }) => {
+      setRooms(data.openRooms)
+    })
+
+    const rooms = ref<Room[]>([])
+
+    const getRooms = computed(() => rooms.value)
+
+    const isLoading = computed(() => loading)
+
+    const setRooms = (newRooms: Room[]) => {
+      rooms.value = newRooms
     }
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    setTimeout(refetchRooms, 60 * 1000)
-  }
 
-  void refetchRooms()
-
-  const rooms = ref<Room[]>([])
-
-  const getRooms = computed(() => rooms.value)
-
-  const isLoading = computed(() => loading)
-
-  const setRooms = (newRooms: Room[]) => {
-    rooms.value = newRooms
-  }
-
-  return {
-    rooms,
-    setRooms,
-    getRooms,
-    isLoading,
-  }
-})
+    return {
+      rooms,
+      setRooms,
+      getRooms,
+      isLoading,
+    }
+  },
+  { persist: true },
+)
 
 if (import.meta.hot) {
   import.meta.hot.accept(acceptHMRUpdate(useRoomsStore, import.meta.hot))

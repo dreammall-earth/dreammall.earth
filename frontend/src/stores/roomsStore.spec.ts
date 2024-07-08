@@ -1,6 +1,6 @@
 import { provideApolloClient } from '@vue/apollo-composable'
 import { setActivePinia, createPinia } from 'pinia'
-import { describe, it, expect, vi, beforeEach, afterAll } from 'vitest'
+import { describe, it, expect } from 'vitest'
 
 import { mockClient, openRoomsQueryMock } from '#tests/mock.apolloClient'
 
@@ -22,22 +22,6 @@ describe('Rooms Store', () => {
   describe('api', () => {
     it('calls the API', () => {
       expect(openRoomsQueryMock).toBeCalledTimes(1)
-    })
-
-    describe.skip('run timers', () => {
-      beforeEach(() => {
-        vi.useFakeTimers()
-        // vi.clearAllMocks()
-        vi.runAllTimers()
-      })
-
-      afterAll(() => {
-        vi.useRealTimers()
-      })
-
-      it('calls the API again', () => {
-        expect(openRoomsQueryMock).toBeCalledTimes(2)
-      })
     })
   })
 
