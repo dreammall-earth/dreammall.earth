@@ -1,8 +1,10 @@
-import { useQuery } from '@vue/apollo-composable'
+import { useQuery, useSubscription } from '@vue/apollo-composable'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { computed, ref, watch } from 'vue'
 
 import { openRoomsQuery } from '#src/graphql/queries/openRoomsQuery'
+import { useAuthStore } from '#stores/authStore'
+import { updateOpenRoomsSubscription } from '#subscriptions/updateOpenRoomsSubscription'
 
 type Attendee = {
   fullName: string
@@ -20,6 +22,10 @@ export type Room = {
 export const useRoomsStore = defineStore(
   'rooms',
   () => {
+    const authStore = useAuthStore()
+
+    const name = authStore.user?.profile.name
+
     const { result: openRoomsQueryResult, loading } = useQuery(
       openRoomsQuery,
       {},
@@ -31,6 +37,16 @@ export const useRoomsStore = defineStore(
 
     watch(openRoomsQueryResult, (data: { openRooms: Room[] }) => {
       setRooms(data.openRooms)
+    })
+
+    const { result: updateOpenRoomsSubscriptionResult } = useSubscription(
+      updateOpenRoomsSubscription,
+      { username: name || 'Unknown User' },
+      { fetchPolicy: 'no-cache' },
+    )
+
+    watch(updateOpenRoomsSubscriptionResult, (data: { updateOpenRooms: Room[] }) => {
+      setRooms(data.updateOpenRooms)
     })
 
     const rooms = ref<Room[]>([])
