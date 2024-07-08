@@ -21,7 +21,7 @@ describe('Rooms Store', () => {
 
   describe('api', () => {
     it('calls the API', () => {
-      expect(openRoomsQueryMock).toBeCalledTimes(1)
+      expect(openRoomsQueryMock).toHaveBeenCalledTimes(1)
     })
 
     describe.skip('run timers', () => {
@@ -36,7 +36,7 @@ describe('Rooms Store', () => {
       })
 
       it('calls the API again', () => {
-        expect(openRoomsQueryMock).toBeCalledTimes(2)
+        expect(openRoomsQueryMock).toHaveBeenCalledTimes(2)
       })
     })
   })

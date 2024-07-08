@@ -57,7 +57,7 @@ describe('IndexPage', () => {
       const consoleSpy = vi.spyOn(global.console, 'log')
 
       it('logs data to console', () => {
-        expect(consoleSpy).toBeCalledWith('Subscription received:', {
+        expect(consoleSpy).toHaveBeenCalledWith('Subscription received:', {
           updateOpenRooms: 'Hallo',
         })
       })

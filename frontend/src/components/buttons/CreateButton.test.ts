@@ -36,9 +36,9 @@ describe('CreateButton', () => {
   })
 
   it('button list content is hidden', () => {
-    expect(wrapper.find('.new-project-button').exists()).toBe(false)
-    expect(wrapper.find('.new-table-button').exists()).toBe(false)
-    expect(wrapper.find('.assistent-button').exists()).toBe(false)
+    expect(wrapper.find('.new-project-button').exists()).toBeFalsy()
+    expect(wrapper.find('.new-table-button').exists()).toBeFalsy()
+    expect(wrapper.find('.assistent-button').exists()).toBeFalsy()
   })
 
   describe('click on create button', () => {
@@ -49,9 +49,9 @@ describe('CreateButton', () => {
 
     it('button list visible', async () => {
       await wrapper.find('#create-button').trigger('click')
-      expect(wrapper.find('.new-project-button').exists()).toBe(true)
-      expect(wrapper.find('.new-table-button').exists()).toBe(true)
-      expect(wrapper.find('.assistant-button').exists()).toBe(true)
+      expect(wrapper.find('.new-project-button').exists()).toBeTruthy()
+      expect(wrapper.find('.new-table-button').exists()).toBeTruthy()
+      expect(wrapper.find('.assistant-button').exists()).toBeTruthy()
     })
   })
 
@@ -74,7 +74,7 @@ describe('CreateButton', () => {
         })
 
         it('calls the api', () => {
-          expect(joinMyRoomMutationMock).toBeCalled()
+          expect(joinMyRoomMutationMock).toHaveBeenCalledWith()
         })
 
         it('updates the store', () => {
@@ -82,7 +82,7 @@ describe('CreateButton', () => {
         })
 
         it.skip('navigates to room page', () => {
-          expect(navigate).toBeCalledWith('/room/')
+          expect(navigate).toHaveBeenCalledWith('/room/')
         })
       })
 
@@ -98,15 +98,15 @@ describe('CreateButton', () => {
         })
 
         it('calls the api', () => {
-          expect(joinMyRoomMutationMock).toBeCalled()
+          expect(joinMyRoomMutationMock).toHaveBeenCalledWith()
         })
 
         it('does not update the store', () => {
-          expect(activeRoomStore.activeRoom).toBe(null)
+          expect(activeRoomStore.activeRoom).toBeNull()
         })
 
         it.skip('toasts no room found error', () => {
-          expect(errorHandlerSpy).toBeCalledWith('No room found')
+          expect(errorHandlerSpy).toHaveBeenCalledWith('No room found')
         })
       })
 
@@ -122,15 +122,15 @@ describe('CreateButton', () => {
         })
 
         it('calls the api', () => {
-          expect(joinMyRoomMutationMock).toBeCalled()
+          expect(joinMyRoomMutationMock).toHaveBeenCalledWith()
         })
 
         it('does not update the store', () => {
-          expect(activeRoomStore.activeRoom).toBe(null)
+          expect(activeRoomStore.activeRoom).toBeNull()
         })
 
         it('toasts no room found error', () => {
-          expect(errorHandlerSpy).toBeCalledWith(
+          expect(errorHandlerSpy).toHaveBeenCalledWith(
             'Error opening room',
             new ApolloError({ errorMessage: 'OUCH' }),
           )

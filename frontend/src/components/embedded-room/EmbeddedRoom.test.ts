@@ -24,12 +24,12 @@ describe('EmbeddedRoom', () => {
   })
 
   it('shows iframe with correct url', () => {
-    expect(wrapper.find('iframe').exists()).toBe(true)
+    expect(wrapper.find('iframe').exists()).toBeTruthy()
     expect(wrapper.find('iframe').attributes('src')).toBe(testUrl)
   })
 
   it('does not show iframe when url is not provided', async () => {
     await wrapper.setProps({ url: null })
-    expect(wrapper.find('iframe').exists()).toBe(false)
+    expect(wrapper.find('iframe').exists()).toBeFalsy()
   })
 })

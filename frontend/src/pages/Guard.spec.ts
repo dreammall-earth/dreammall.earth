@@ -22,7 +22,7 @@ describe('global route guard', () => {
       try {
         expect(guard({ hasToken: false } as PageContextServer)).toThrow()
       } catch (error) {
-        expect(redirect).toBeCalledWith('https://some.uri')
+        expect(redirect).toHaveBeenCalledWith('https://some.uri')
       }
     })
   })
@@ -53,7 +53,7 @@ describe('global route guard', () => {
 
     it('does not redirect', () => {
       guard({ hasToken: true } as PageContextServer)
-      expect(redirect).not.toBeCalled()
+      expect(redirect).not.toHaveBeenCalled()
     })
   })
 })

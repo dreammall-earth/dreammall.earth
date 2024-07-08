@@ -13,9 +13,9 @@ describe('Auth Store', () => {
 
   describe('defaults', () => {
     it('has defaults set correctly', () => {
-      expect(authStore.user).toBe(null)
+      expect(authStore.user).toBeNull()
       expect(authStore.accessToken).toBe('')
-      expect(authStore.isLoggedIn).toBe(false)
+      expect(authStore.isLoggedIn).toBeFalsy()
     })
   })
 
@@ -60,15 +60,15 @@ describe('Auth Store', () => {
         */
       })
       expect(authStore.accessToken).toBe('access_token')
-      expect(authStore.isLoggedIn).toBe(true)
+      expect(authStore.isLoggedIn).toBeTruthy()
     })
 
     describe('clear action', () => {
       it('resets the store', () => {
         authStore.clear()
-        expect(authStore.user).toBe(null)
+        expect(authStore.user).toBeNull()
         expect(authStore.accessToken).toBe('')
-        expect(authStore.isLoggedIn).toBe(false)
+        expect(authStore.isLoggedIn).toBeFalsy()
       })
     })
   })
@@ -81,7 +81,7 @@ describe('Auth Store', () => {
     describe('setItem', () => {
       it('calls Cookies set', () => {
         cookieStorage.setItem('key', 'state')
-        expect(setCookieSpy).toBeCalledWith('auth', 'state', {
+        expect(setCookieSpy).toHaveBeenCalledWith('auth', 'state', {
           expires: 3,
           Secure: true,
         })
@@ -91,7 +91,7 @@ describe('Auth Store', () => {
     describe('getItem', () => {
       it('calls Cookies get', () => {
         cookieStorage.getItem('key')
-        expect(getCookieSpy).toBeCalledWith('auth')
+        expect(getCookieSpy).toHaveBeenCalledWith('auth')
       })
     })
   })

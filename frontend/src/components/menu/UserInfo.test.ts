@@ -33,7 +33,7 @@ describe('UserInfo', () => {
       expect(wrapper.findComponent({ name: 'VAvatar' }).text()).toBe('')
       expect(
         wrapper.findComponent({ name: 'VAvatar' }).findComponent({ name: 'VImg' }).exists(),
-      ).toBe(false)
+      ).toBeFalsy()
     })
   })
 
@@ -65,7 +65,7 @@ describe('UserInfo', () => {
       expect(wrapper.findComponent({ name: 'VAvatar' }).text()).toBe('PL')
       expect(
         wrapper.findComponent({ name: 'VAvatar' }).findComponent({ name: 'VImg' }).exists(),
-      ).toBe(false)
+      ).toBeFalsy()
     })
   })
 
@@ -98,7 +98,7 @@ describe('UserInfo', () => {
       expect(wrapper.findComponent({ name: 'VAvatar' }).text()).toBe('')
       expect(
         wrapper.findComponent({ name: 'VAvatar' }).findComponent({ name: 'VImg' }).exists(),
-      ).toBe(true)
+      ).toBeTruthy()
     })
   })
 })

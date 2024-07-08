@@ -59,11 +59,11 @@ describe('AuthPage', () => {
     })
 
     it('calls authservie signin callback', () => {
-      expect(authServiceSpy).toBeCalled()
+      expect(authServiceSpy).toHaveBeenCalledWith()
     })
 
     it('navigates to /', () => {
-      expect(navigate).toBeCalledWith('/')
+      expect(navigate).toHaveBeenCalledWith('/')
     })
   })
 
@@ -90,7 +90,7 @@ describe('AuthPage', () => {
     })
 
     it('logs the error on console', () => {
-      expect(errorHandlerSpy).toBeCalledWith('auth error', 'Ouch!')
+      expect(errorHandlerSpy).toHaveBeenCalledWith('auth error', 'Ouch!')
     })
   })
 })

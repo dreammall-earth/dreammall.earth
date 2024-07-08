@@ -54,7 +54,7 @@ describe('JoinRoomPage', () => {
     })
 
     it('calls JoinRoom query', () => {
-      expect(joinRoomQueryMock).toBeCalled()
+      expect(joinRoomQueryMock).toHaveBeenCalledWith()
     })
 
     describe('Room Link returned', () => {
@@ -78,7 +78,7 @@ describe('JoinRoomPage', () => {
       })
 
       it('logs Room not found', () => {
-        expect(errorHandlerSpy).toBeCalledWith(
+        expect(errorHandlerSpy).toHaveBeenCalledWith(
           'room link not found',
           new ApolloError({ errorMessage: 'autsch' }),
         )

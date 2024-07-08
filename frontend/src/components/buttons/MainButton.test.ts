@@ -28,7 +28,7 @@ describe('MainButton', () => {
   })
 
   it('icon is hidden', () => {
-    expect(wrapper.find('.v-icon').exists()).toBe(false)
+    expect(wrapper.find('.v-icon').exists()).toBeFalsy()
   })
 
   describe('click on button', () => {
@@ -63,14 +63,14 @@ describe('MainButton', () => {
 
   describe('label', () => {
     it('renders My Button', () => {
-      expect(wrapper.find('.v-btn').text()).toEqual('My Button')
+      expect(wrapper.find('.v-btn').text()).toBe('My Button')
     })
   })
 
   describe('variant reload', () => {
     it('icon is visible', async () => {
       await wrapper.setProps({ size: 'auto', variant: 'reload', label: 'My Button' })
-      expect(wrapper.find('.v-icon').exists()).toBe(true)
+      expect(wrapper.find('.v-icon').exists()).toBeTruthy()
     })
 
     it('shows circular loading', async () => {
@@ -80,7 +80,7 @@ describe('MainButton', () => {
         label: 'My Button',
         isLoading: true,
       })
-      expect(wrapper.find('.v-progress-circular').exists()).toBe(true)
+      expect(wrapper.find('.v-progress-circular').exists()).toBeTruthy()
     })
   })
 
