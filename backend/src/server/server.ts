@@ -1,14 +1,37 @@
+import { createServer as createHttpServer, Server } from 'http'
+
 import { ApolloServer, ApolloServerPlugin } from '@apollo/server'
-import { startStandaloneServer } from '@apollo/server/standalone'
+import { expressMiddleware } from '@apollo/server/express4'
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer'
+import cors from 'cors'
+import express, { json, urlencoded } from 'express'
+import { useServer } from 'graphql-ws/lib/use/ws'
+import { WebSocketServer } from 'ws'
 
 import { schema } from '#graphql/schema'
 
 import { Context, getContextToken, GetContextToken } from './context'
 import logger from './logger'
 
-export const createServer = async (withLogger: boolean = true): Promise<ApolloServer> => {
+export const createServer = async (
+  withLogger: boolean = true,
+  httpServer: Server | undefined = undefined,
+  wsServer: ReturnType<typeof useServer> | undefined = undefined,
+): Promise<ApolloServer> => {
   const plugins: ApolloServerPlugin<Context>[] = []
   if (withLogger) plugins.push(logger)
+  if (httpServer) plugins.push(ApolloServerPluginDrainHttpServer({ httpServer }))
+  if (wsServer)
+    plugins.push({
+      // eslint-disable-next-line @typescript-eslint/require-await
+      async serverWillStart() {
+        return {
+          async drainServer() {
+            await wsServer.dispose()
+          },
+        }
+      },
+    })
   return new ApolloServer<Context>({
     schema: await schema(),
     plugins,
@@ -20,13 +43,32 @@ export const createTestServer = async () => {
 }
 
 export async function listen(port: number, getToken: GetContextToken = getContextToken) {
-  const { url } = await startStandaloneServer(await createServer(), {
-    listen: { port },
-    // eslint-disable-next-line @typescript-eslint/require-await
-    context: async ({ req }): Promise<Context> => ({
-      token: getToken(req.headers.authorization),
-    }),
+  const app = express()
+
+  const httpServer = createHttpServer(app)
+
+  const wsServer = new WebSocketServer({
+    server: httpServer,
+    path: '/subscriptions',
   })
 
-  return url
+  const serverCleanup = useServer({ schema }, wsServer)
+
+  const apolloServer = await createServer(true, httpServer, serverCleanup)
+
+  await apolloServer.start()
+
+  app.use(json())
+  app.use(urlencoded({ extended: true }))
+
+  app.use(cors<cors.CorsRequest>())
+
+  app.use(
+    expressMiddleware(apolloServer, {
+      // eslint-disable-next-line @typescript-eslint/require-await
+      context: async ({ req }) => ({ token: getToken(req.headers.authorization) }),
+    }),
+  )
+
+  httpServer.listen({ port })
 }
