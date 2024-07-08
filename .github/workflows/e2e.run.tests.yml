@@ -1,6 +1,6 @@
 name: e2e:test:all test the application end to end
 
-on: [push,pull_request_target]
+on: pull_request_target
 
 jobs:
   e2e-tests:

@@ -23,6 +23,8 @@ const AUTH = {
 const ENDPOINTS = {
   GRAPHQL_URI: (import.meta.env.PUBLIC_ENV__ENDPOINTS__GRAPHQL_URI ??
     'http://localhost:4000/') as string,
+  WEBSOCKET_URI: (import.meta.env.PUBLIC_ENV__ENDPOINTS__WEBSOCKET_URI ??
+    'http://localhost:4000/subscriptions') as string,
 }
 
 const META = {
