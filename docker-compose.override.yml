@@ -1,15 +1,4 @@
 services:
-  ########################################################
-  # DATABASE #############################################
-  ########################################################
-  database:
-    networks:
-      - internal-net
-      - external-net
-
-  ########################################################
-  # PRESENTER ############################################
-  ########################################################
   presenter:
     build:
       target: development
@@ -25,9 +14,6 @@ services:
       # bind the local folder to the docker to allow live reload
       - ./presenter:/app
 
-  #######################################################
-  # PRESENTER STORYBOOK #################################
-  #######################################################
   presenter-storybook:
     build:
       context: ./presenter
@@ -43,9 +29,6 @@ services:
       # bind the local folder to the docker to allow live reload
       - ./presenter:/app
 
-  ########################################################
-  # FRONTEND #############################################
-  ########################################################
   frontend:
     build:
       target: development
@@ -62,9 +45,6 @@ services:
       # bind the local folder to the docker to allow live reload
       - ./frontend:/app
 
-  #######################################################
-  # FRONTEND STORYBOOK ##################################
-  #######################################################
   frontend-storybook:
     build:
       context: ./frontend
@@ -80,9 +60,6 @@ services:
       # bind the local folder to the docker to allow live reload
       - ./frontend:/app
 
-  ########################################################
-  # ADMIN ################################################
-  ########################################################
   admin:
     build:
       target: development
@@ -99,9 +76,6 @@ services:
       # bind the local folder to the docker to allow live reload
       - ./admin:/app
 
-  #######################################################
-  # ADMIN STORYBOOK #####################################
-  #######################################################
   admin-storybook:
     build:
       context: ./admin
@@ -117,9 +91,6 @@ services:
       # bind the local folder to the docker to allow live reload
       - ./admin:/app
 
-  #######################################################
-  # BACKEND #############################################
-  #######################################################
   backend:
     build:
       context: ./backend
@@ -133,9 +104,6 @@ services:
       # bind the local folder to the docker to allow live reload
       - ./backend:/server
 
-  ########################################################
-  # DOCUMENTATION ########################################
-  ########################################################
   documentation:
     build:
       target: documentation
