@@ -38,7 +38,7 @@ const slots = useSlots()
   background: $background-color-primary;
 
   .page-container {
-    margin-top: 110px;
+    margin-top: 70px;
   }
 
   #teleported {
@@ -49,7 +49,6 @@ const slots = useSlots()
 
   @media #{map-get($display-breakpoints, 'sm-and-down')} {
     .page-container {
-      margin-top: 20px;
       margin-bottom: 50px;
     }
   }

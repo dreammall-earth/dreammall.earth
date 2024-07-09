@@ -66,7 +66,9 @@ export const useRoomsStore = defineStore(
       isLoading,
     }
   },
-  { persist: true },
+  {
+    persist: true,
+  },
 )
 
 if (import.meta.hot) {
