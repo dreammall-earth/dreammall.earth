@@ -61,7 +61,10 @@ const {
 
 const getRoomLink = async () => {
   try {
-    await joinRoomQueryRefetch()
+    await joinRoomQueryRefetch({
+      userName: userName.value,
+      roomId,
+    })
     if (joinRoomQueryResult.value) {
       window.location.href = joinRoomQueryResult.value.joinRoom
     }
