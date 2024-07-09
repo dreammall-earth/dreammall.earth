@@ -23,7 +23,6 @@
     "cypress:open": "cypress open --e2e --browser electron",
     "cypress:run": "cypress run --e2e --browser electron",
     "test:lint": "eslint --ext .ts,.tsx,.js,.jsx,.cjs,.json,.yml,.yaml --max-warnings 0 .",
-    "update": "npx npm-check-updates"
   },
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^20.1.0",
