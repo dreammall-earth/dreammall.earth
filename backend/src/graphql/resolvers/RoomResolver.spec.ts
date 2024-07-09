@@ -3,10 +3,9 @@ import { ApolloServer } from '@apollo/server'
 import { gql } from 'graphql-tag'
 
 import { createMeeting, joinMeetingLink, getMeetings } from '#api/BBB'
-import { prisma } from '#src/prisma'
-import { User, Meeting } from '@prisma/client'
-import { createTestServer } from '#src/server/server'
 import { CONFIG } from '#config/config'
+import { prisma } from '#src/prisma'
+import { createTestServer } from '#src/server/server'
 
 jest.mock('#api/BBB')
 
@@ -375,7 +374,7 @@ describe('RoomResolver', () => {
             {
               moderatorOnlyMessage: `Use this link to invite more people:<br/>/${result?.meeting?.id}`,
             },
-          )          
+          )
         })
       })
 
