@@ -1,8 +1,10 @@
 import { getMeetings, MeetingInfo } from '#api/BBB'
+import { pubSub } from '#src/graphql/pubSub'
 import { prisma } from '#src/prisma'
 
 export const handleOpenRooms = async (): Promise<void> => {
   const meetings = await getMeetings()
+  pubSub.publish('OPEN_ROOM_SUBSCRIPTION', meetings)
   await prisma.meeting.updateMany({
     where: {
       createTime: { not: null },
