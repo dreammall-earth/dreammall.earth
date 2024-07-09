@@ -1,8 +1,6 @@
 services:
   database:
-    build:
-      context: ./database
-      target: mariadb_server
+    image: mariadb:10.5
     environment:
       - MARIADB_ALLOW_EMPTY_PASSWORD=1
       - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=1
