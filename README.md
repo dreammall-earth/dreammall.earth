@@ -50,6 +50,9 @@ Instructions how to deploy this software are available [here](deployment/README.
 
 ## Bare-metal
 
+Ensure you are using a `node --version` that matches the one specified in [.tool-versions](.tool-versions).
+E.g. you could install [asdf-vm](https://asdf-vm.com/guide/getting-started.html).
+
 ### Install Authentik
 
 ```bash
@@ -81,7 +84,6 @@ cd $rootFolder/backend
 cp .env.dist .env
 # Symbolik for authentik key
 ln -s src/auth/public.pem public.pem
-nvm use 21
 npm install
 # Initialize Database
 npm run db:reset
@@ -96,7 +98,6 @@ npm run dev
 # In new Terminal
 cd $rootFolder/presenter
 cp .env.dist .env
-nvm use 21
 npm install
 export PORT=3001
 # Run dev mode
@@ -111,7 +112,6 @@ npm run dev
 # In new Terminal
 cd $rootFolder/frontend
 cp .env.dist .env
-nvm use 21
 npm install
 # export PORT=3000(default)
 # Run dev mode (for development)
@@ -126,7 +126,6 @@ npm run dev
 # In new Terminal
 cd $rootFolder/admin
 cp .env.dist .env
-nvm use 21
 npm install
 export PORT=3002
 # Run dev mode

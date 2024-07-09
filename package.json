@@ -26,11 +26,9 @@
     "docs:build": "vuepress build .",
     "release": "scripts/release.sh"
   },
-  "dependencies": {
-    "@vuepress/theme-default": "^2.0.0-rc.35"
-  },
   "devDependencies": {
     "@vuepress/bundler-vite": "^2.0.0-rc.11",
+    "@vuepress/theme-default": "^2.0.0-rc.35",
     "remark-cli": "^12.0.1",
     "remark-gfm": "^4.0.0",
     "remark-lint-list-item-indent": "^4.0.0",

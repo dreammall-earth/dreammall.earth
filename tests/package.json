@@ -49,8 +49,5 @@
     "ts-loader": "^9.5.1",
     "tsx": "^4.16.0",
     "typescript": "^5.5.2"
-  },
-  "engines": {
-    "node": ">=21"
   }
 }

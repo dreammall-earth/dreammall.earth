@@ -23,17 +23,13 @@ jobs:
     name: Lint - E2E files
     needs: files-changed
     runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: ./tests
     steps:
-      - name: Set Node version
-        uses: actions/setup-node@v4
-        with:
-          node-version: '>=21'
+      - uses: actions/checkout@master
 
-      - name: Checkout code
-        uses: actions/checkout@master
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: './.tool-versions'
 
       - name: E2E files | Lint
         run: npm install && npm run test:lint
-        working-directory: ${{env.WORKING_DIRECTORY}}
+        working-directory: ./tests
