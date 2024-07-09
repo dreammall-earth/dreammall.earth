@@ -1,9 +1,10 @@
-import { useQuery } from '@vue/apollo-composable'
+import { useQuery, useSubscription } from '@vue/apollo-composable'
 import { acceptHMRUpdate, defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { openRoomsQuery } from '#src/graphql/queries/openRoomsQuery'
+import { useAuthStore } from '#stores/authStore'
+import { updateOpenRoomsSubscription } from '#subscriptions/updateOpenRoomsSubscription'
 
 type Attendee = {
   fullName: string
@@ -21,11 +22,11 @@ export type Room = {
 export const useRoomsStore = defineStore(
   'rooms',
   () => {
-    const {
-      result: openRoomsQueryResult,
-      refetch: openRoomsQueryRefetch,
-      loading,
-    } = useQuery(
+    const authStore = useAuthStore()
+
+    const name = authStore.user?.profile.name
+
+    const { result: openRoomsQueryResult, loading } = useQuery(
       openRoomsQuery,
       {},
       {
@@ -34,23 +35,19 @@ export const useRoomsStore = defineStore(
       },
     )
 
-    const refetchRooms = async () => {
-      try {
-        await openRoomsQueryRefetch()
-        // console.log('test', test)
-        // console.log('refetchRooms', openRoomsQueryResult.value)
-        if (openRoomsQueryResult.value) {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
-          setRooms(openRoomsQueryResult.value.openRooms)
-        }
-      } catch (error) {
-        GlobalErrorHandler.error('Error refetching open rooms!', error)
-      }
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      setTimeout(refetchRooms, 60 * 1000)
-    }
+    watch(openRoomsQueryResult, (data: { openRooms: Room[] }) => {
+      setRooms(data.openRooms)
+    })
 
-    void refetchRooms()
+    const { result: updateOpenRoomsSubscriptionResult } = useSubscription(
+      updateOpenRoomsSubscription,
+      { username: name || 'Unknown User' },
+      { fetchPolicy: 'no-cache' },
+    )
+
+    watch(updateOpenRoomsSubscriptionResult, (data: { updateOpenRooms: Room[] }) => {
+      setRooms(data.updateOpenRooms)
+    })
 
     const rooms = ref<Room[]>([])
 
