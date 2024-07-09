@@ -14,7 +14,11 @@ import {
 
 export { MeetingInfo, AttendeeInfo } from './BBB/types'
 
-const parser = new XMLParser()
+const alwaysArray = ['response.meetings.meeting']
+
+const parser = new XMLParser({
+  isArray: (_, jpath) => alwaysArray.indexOf(jpath) !== -1,
+})
 
 export const getMeetings = async (): Promise<MeetingInfo[]> => {
   try {
@@ -26,11 +30,7 @@ export const getMeetings = async (): Promise<MeetingInfo[]> => {
     } = parser.parse(data as string)
     if (parsed.response.returncode === 'SUCCESS') {
       if (typeof parsed.response.meetings === 'string') return []
-      if (Array.isArray(parsed.response.meetings?.meeting)) {
-        return parsed.response.meetings.meeting
-      } else {
-        return [parsed.response.meetings.meeting]
-      }
+      return parsed.response.meetings.meeting
     } else {
       logger.error('parse getMeetings with error', parsed)
     }
