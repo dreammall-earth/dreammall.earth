@@ -14,6 +14,7 @@ import {
 import { v4 as uuidv4 } from 'uuid'
 
 import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo } from '#api/BBB'
+import { CONFIG } from '#config/config'
 import { Room, OpenRoom } from '#models/RoomModel'
 import { pubSub } from '#src/graphql/pubSub'
 import logger from '#src/logger'
@@ -106,10 +107,17 @@ export class RoomResolver {
       throw new Error('Could not create Meeting in DB!')
     }
 
-    const meeting = await createMeeting({
-      name: dbMeeting.name,
-      meetingID: dbMeeting.meetingID,
-    })
+    const inviteLink = CONFIG.FRONTEND_INVITE_LINK_URL + dbMeeting.id
+
+    const meeting = await createMeeting(
+      {
+        name: dbMeeting.name,
+        meetingID: dbMeeting.meetingID,
+      },
+      {
+        moderatorOnlyMessage: `Use this link to invite more people:<br/>${inviteLink}`,
+      },
+    )
 
     if (!meeting) throw new Error('Could not create meeting!')
 

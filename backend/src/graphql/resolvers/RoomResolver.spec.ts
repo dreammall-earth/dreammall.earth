@@ -4,7 +4,9 @@ import { gql } from 'graphql-tag'
 
 import { createMeeting, joinMeetingLink, getMeetings } from '#api/BBB'
 import { prisma } from '#src/prisma'
+import { User, Meeting } from '@prisma/client'
 import { createTestServer } from '#src/server/server'
+import { CONFIG } from '#config/config'
 
 jest.mock('#api/BBB')
 
@@ -13,6 +15,8 @@ const joinMeetingLinkMock = joinMeetingLink as jest.MockedFunction<typeof joinMe
 const getMeetingsMock = getMeetings as jest.MockedFunction<typeof getMeetings>
 
 let testServer: ApolloServer
+
+CONFIG.FRONTEND_INVITE_LINK_URL = '/'
 
 beforeAll(async () => {
   testServer = await createTestServer()
@@ -340,7 +344,7 @@ describe('RoomResolver', () => {
           })
         })
 
-        it('creates meeting in database', async () => {
+        it('creates meeting in database and calls createMeeting', async () => {
           const result = await prisma.user.findFirst({
             include: {
               meeting: true,
@@ -363,6 +367,15 @@ describe('RoomResolver', () => {
               createDate: expect.any(Date),
             },
           })
+          expect(createMeetingMock).toBeCalledWith(
+            {
+              name: 'mockedUser',
+              meetingID: result?.meeting?.meetingID,
+            },
+            {
+              moderatorOnlyMessage: `Use this link to invite more people:<br/>/${result?.meeting?.id}`,
+            },
+          )          
         })
       })
 
