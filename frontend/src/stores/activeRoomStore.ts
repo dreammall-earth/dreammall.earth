@@ -9,7 +9,6 @@ export const useActiveRoomStore = defineStore(
     const getActiveRoom = computed(() => activeRoom.value)
 
     const setActiveRoom = (room: string | null) => {
-      // console.log('setActiveRoom', room)
       activeRoom.value = room
     }
 

@@ -27,13 +27,15 @@ import Circle from './CircleElement.vue'
 import UserInfo from './UserInfo.vue'
 
 const drawer = ref(false)
+const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('bottom')
+
 const toggleDrawer = () => {
   drawer.value = !drawer.value
 }
+
 const updateDrawer = (value: boolean) => {
   drawer.value = value
 }
-const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('bottom')
 </script>
 
 <style scoped lang="scss">
