@@ -1,4 +1,9 @@
 {
+  "$vuetify": {
+    "input:": {
+      "clear": "Löschen",
+    },
+  },
   "auth": {
     "content": "Logge ein...",
     "signin": "Anmeldung",
