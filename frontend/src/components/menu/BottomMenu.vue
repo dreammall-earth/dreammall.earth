@@ -50,6 +50,7 @@ const updateDrawer = (value: boolean) => {
 
 .camera-button {
   cursor: pointer;
+  transform: translate(20px);
 }
 
 .create-button-mobile {
