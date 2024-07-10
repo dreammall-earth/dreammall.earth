@@ -1,5 +1,8 @@
+import { wrap } from 'module'
+
 import { flushPromises, mount } from '@vue/test-utils'
 import { setActivePinia, createPinia } from 'pinia'
+import { navigate } from 'vike/client/router'
 import { vi, describe, it, expect, beforeEach } from 'vitest'
 import { h } from 'vue'
 import { VApp } from 'vuetify/components'
@@ -7,6 +10,8 @@ import { VApp } from 'vuetify/components'
 import { useActiveRoomStore } from '#stores/activeRoomStore'
 
 import TableList from './TableList.vue'
+
+vi.mock('vike/client/router')
 
 const testTables = [
   {
@@ -50,9 +55,6 @@ describe('TableList', () => {
   let wrapper: ReturnType<typeof Wrapper>
 
   setActivePinia(createPinia())
-  const activeRoomStore = useActiveRoomStore()
-
-  const setActiveRoomSpy = vi.spyOn(activeRoomStore, 'setActiveRoom')
 
   beforeEach(() => {
     wrapper = Wrapper()
@@ -66,20 +68,27 @@ describe('TableList', () => {
     expect(wrapper.find('.v-list--density-default').exists()).toBe(true)
   })
 
+  it('sets active room', async () => {
+    const setActiveRoomSpy = vi.spyOn(useActiveRoomStore(), 'setActiveRoom')
+    await wrapper.find('.table').trigger('click')
+
+    expect(setActiveRoomSpy).toHaveBeenCalledWith(testTables[0].joinLink)
+  })
+
   describe('when a table is clicked', () => {
     beforeEach(async () => {
-      vi.resetAllMocks()
+      wrapper = Wrapper()
       await wrapper.find('.table').trigger('click')
       await flushPromises()
-    })
-
-    it('active Room is set to opened Room', () => {
-      expect(setActiveRoomSpy).toHaveBeenCalledWith(testTables[0].joinLink)
     })
 
     it('emit event "openRoom"', () => {
       const tableList = wrapper.findComponent(TableList)
       expect(tableList.emitted('openRoom')).toBeTruthy()
+    })
+
+    it('navigates to opened Room', () => {
+      expect(navigate).toHaveBeenCalledWith('/room/')
     })
   })
 })
