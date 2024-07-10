@@ -5,9 +5,11 @@
   <div
     class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface d-md-none"
   >
-    <Circle class="camera-button" @click="toggleDrawer">
-      <v-icon icon="$camera"></v-icon>
-    </Circle>
+    <button class="camera-button" @click="toggleDrawer">
+      <Circle>
+        <v-icon icon="$camera"></v-icon>
+      </Circle>
+    </button>
     <CreateButtonMobile />
     <UserInfo />
   </div>

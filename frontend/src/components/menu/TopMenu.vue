@@ -16,9 +16,11 @@
               <LightDarkSwitch class="d-none d-lg-flex" />
             </v-col>
             <v-col class="d-flex align-center justify-end">
-              <Circle @click="toggleDrawer">
-                <v-icon icon="$camera"></v-icon>
-              </Circle>
+              <button @click="toggleDrawer">
+                <Circle>
+                  <v-icon icon="$camera"></v-icon>
+                </Circle>
+              </button>
               <UserInfo class="ml-2" />
             </v-col>
           </v-row>

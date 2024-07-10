@@ -645,32 +645,36 @@ exports[`DefaultLayout > renders 1`] = `
                     class="v-col d-flex align-center justify-end"
                     data-v-e787b5f9=""
                   >
-                    <div
-                      class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
-                      data-v-39e8094e=""
+                    <button
                       data-v-e787b5f9=""
                     >
-                      
-                      <i
-                        aria-hidden="true"
-                        class="v-icon notranslate v-theme--light v-icon--size-default"
+                      <div
+                        class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
+                        data-v-39e8094e=""
                         data-v-e787b5f9=""
                       >
-                        <svg
-                          fill="none"
-                          height="17"
-                          viewBox="0 0 21 17"
-                          width="21"
-                          xmlns="http://www.w3.org/2000/svg"
+                        
+                        <i
+                          aria-hidden="true"
+                          class="v-icon notranslate v-theme--light v-icon--size-default"
+                          data-v-e787b5f9=""
                         >
-                          <path
-                            d="M7.68844 12.4824H9.66834V9.51172H12.6382V7.53125H9.66834V4.56055H7.68844V7.53125H4.71859V9.51172H7.68844V12.4824ZM2.73869 16.4434C2.19422 16.4434 1.72812 16.2494 1.34038 15.8616C0.952654 15.4738 0.758789 15.0075 0.758789 14.4629V2.58008C0.758789 2.03545 0.952654 1.56921 1.34038 1.18137C1.72812 0.79353 2.19422 0.599609 2.73869 0.599609H14.6181C15.1626 0.599609 15.6287 0.79353 16.0164 1.18137C16.4041 1.56921 16.598 2.03545 16.598 2.58008V7.03613L20.5578 3.0752V13.9678L16.598 10.0068V14.4629C16.598 15.0075 16.4041 15.4738 16.0164 15.8616C15.6287 16.2494 15.1626 16.4434 14.6181 16.4434H2.73869ZM2.73869 14.4629H14.6181V2.58008H2.73869V14.4629Z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                      </i>
-                      
-                    </div>
+                          <svg
+                            fill="none"
+                            height="17"
+                            viewBox="0 0 21 17"
+                            width="21"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M7.68844 12.4824H9.66834V9.51172H12.6382V7.53125H9.66834V4.56055H7.68844V7.53125H4.71859V9.51172H7.68844V12.4824ZM2.73869 16.4434C2.19422 16.4434 1.72812 16.2494 1.34038 15.8616C0.952654 15.4738 0.758789 15.0075 0.758789 14.4629V2.58008C0.758789 2.03545 0.952654 1.56921 1.34038 1.18137C1.72812 0.79353 2.19422 0.599609 2.73869 0.599609H14.6181C15.1626 0.599609 15.6287 0.79353 16.0164 1.18137C16.4041 1.56921 16.598 2.03545 16.598 2.58008V7.03613L20.5578 3.0752V13.9678L16.598 10.0068V14.4629C16.598 15.0075 16.4041 15.4738 16.0164 15.8616C15.6287 16.2494 15.1626 16.4434 14.6181 16.4434H2.73869ZM2.73869 14.4629H14.6181V2.58008H2.73869V14.4629Z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                        </i>
+                        
+                      </div>
+                    </button>
                     
                     
                     <button
@@ -1305,32 +1309,37 @@ exports[`DefaultLayout > renders 1`] = `
         class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface d-md-none"
         data-v-96a196cc=""
       >
-        <div
-          class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center camera-button"
-          data-v-39e8094e=""
+        <button
+          class="camera-button"
           data-v-96a196cc=""
         >
-          
-          <i
-            aria-hidden="true"
-            class="v-icon notranslate v-theme--light v-icon--size-default"
+          <div
+            class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
+            data-v-39e8094e=""
             data-v-96a196cc=""
           >
-            <svg
-              fill="none"
-              height="17"
-              viewBox="0 0 21 17"
-              width="21"
-              xmlns="http://www.w3.org/2000/svg"
+            
+            <i
+              aria-hidden="true"
+              class="v-icon notranslate v-theme--light v-icon--size-default"
+              data-v-96a196cc=""
             >
-              <path
-                d="M7.68844 12.4824H9.66834V9.51172H12.6382V7.53125H9.66834V4.56055H7.68844V7.53125H4.71859V9.51172H7.68844V12.4824ZM2.73869 16.4434C2.19422 16.4434 1.72812 16.2494 1.34038 15.8616C0.952654 15.4738 0.758789 15.0075 0.758789 14.4629V2.58008C0.758789 2.03545 0.952654 1.56921 1.34038 1.18137C1.72812 0.79353 2.19422 0.599609 2.73869 0.599609H14.6181C15.1626 0.599609 15.6287 0.79353 16.0164 1.18137C16.4041 1.56921 16.598 2.03545 16.598 2.58008V7.03613L20.5578 3.0752V13.9678L16.598 10.0068V14.4629C16.598 15.0075 16.4041 15.4738 16.0164 15.8616C15.6287 16.2494 15.1626 16.4434 14.6181 16.4434H2.73869ZM2.73869 14.4629H14.6181V2.58008H2.73869V14.4629Z"
-                fill="currentColor"
-              />
-            </svg>
-          </i>
-          
-        </div>
+              <svg
+                fill="none"
+                height="17"
+                viewBox="0 0 21 17"
+                width="21"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7.68844 12.4824H9.66834V9.51172H12.6382V7.53125H9.66834V4.56055H7.68844V7.53125H4.71859V9.51172H7.68844V12.4824ZM2.73869 16.4434C2.19422 16.4434 1.72812 16.2494 1.34038 15.8616C0.952654 15.4738 0.758789 15.0075 0.758789 14.4629V2.58008C0.758789 2.03545 0.952654 1.56921 1.34038 1.18137C1.72812 0.79353 2.19422 0.599609 2.73869 0.599609H14.6181C15.1626 0.599609 15.6287 0.79353 16.0164 1.18137C16.4041 1.56921 16.598 2.03545 16.598 2.58008V7.03613L20.5578 3.0752V13.9678L16.598 10.0068V14.4629C16.598 15.0075 16.4041 15.4738 16.0164 15.8616C15.6287 16.2494 15.1626 16.4434 14.6181 16.4434H2.73869ZM2.73869 14.4629H14.6181V2.58008H2.73869V14.4629Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </i>
+            
+          </div>
+        </button>
         <div
           class="create-button-container"
           data-v-1c60eb53=""
