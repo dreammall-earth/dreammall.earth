@@ -1,12 +1,10 @@
-// import { VIcon, VBtn, VAvatar, VImg } from 'vuetify/components'
-
 import { SBComp } from '#types/SBComp'
 
 import ListElement from './ListElement.vue'
 
 import type { Meta, StoryObj } from '@storybook/vue3'
 
-const meta: Meta<typeof ListElement> = {
+const meta = {
   title: 'MOLECULES/ListElement',
   component: ListElement as SBComp,
   tags: ['autodocs'],
@@ -20,11 +18,6 @@ const meta: Meta<typeof ListElement> = {
         participantCount: 4,
         attendees: [],
         joinLink: 'https://my.link',
-        // rounded: true,
-        // prepend: VIcon,
-        // prependProps: { icon: 'mdi-home' },
-        // append: VBtn,
-        // appendProps: { icon: 'mdi-menu' },
       },
       {
         meetingName: 'Beispiel Titel 2',
@@ -33,11 +26,6 @@ const meta: Meta<typeof ListElement> = {
         participantCount: 4,
         attendees: [],
         joinLink: 'https://my.link',
-        // rounded: true,
-        // prepend: VAvatar,
-        // prependProps: { src: 'https://via.placeholder.com/40' },
-        // append: VIcon,
-        // appendProps: { icon: 'mdi-menu' },
       },
     ],
   },
@@ -59,8 +47,6 @@ export const Basic: Story = {
         participantCount: 4,
         attendees: [],
         joinLink: 'https://my.link',
-        // append: VBtn,
-        // appendProps: { icon: 'mdi-menu' },
       },
       {
         meetingName: 'Beispiel Titel 2',
@@ -69,85 +55,7 @@ export const Basic: Story = {
         participantCount: 4,
         attendees: [],
         joinLink: 'https://my.link',
-        // append: VIcon,
-        // appendProps: { icon: 'mdi-menu' },
       },
     ],
   },
 }
-
-/*
-export const WithIcons: Story = {
-  args: {
-    items: [
-      {
-        title: 'Home',
-        prepend: VIcon,
-        prependProps: { icon: 'mdi-home' },
-        append: VIcon,
-        appendProps: { icon: 'mdi-menu' },
-      },
-      {
-        title: 'Profile',
-        prepend: VIcon,
-        prependProps: { icon: 'mdi-account' },
-        append: VIcon,
-        appendProps: { icon: 'mdi-menu' },
-      },
-      {
-        title: 'Settings',
-        prepend: VIcon,
-        prependProps: { icon: 'mdi-settings' },
-        append: VIcon,
-        appendProps: { icon: 'mdi-menu' },
-      },
-      {
-        title: 'Logout',
-        prepend: VIcon,
-        prependProps: { icon: 'mdi-logout' },
-        append: VIcon,
-        appendProps: { icon: 'mdi-menu' },
-      },
-    ],
-  },
-}
-
-export const WithImages: Story = {
-  args: {
-    items: [
-      {
-        title: 'Item 1',
-        subtitle: 'Subtitle 1',
-        prepend: VImg,
-        prependProps: { src: 'https://via.placeholder.com/40' },
-        append: VIcon,
-        appendProps: { icon: 'mdi-menu' },
-      },
-      {
-        title: 'Item 2',
-        subtitle: 'Subtitle 2',
-        prepend: VImg,
-        prependProps: { src: 'https://via.placeholder.com/40' },
-        append: VIcon,
-        appendProps: { icon: 'mdi-menu' },
-      },
-      {
-        title: 'Item 3',
-        subtitle: 'Subtitle 3',
-        prepend: VImg,
-        prependProps: { src: 'https://via.placeholder.com/40' },
-        append: VIcon,
-        appendProps: { icon: 'mdi-menu' },
-      },
-      {
-        title: 'Item 4',
-        subtitle: 'Subtitle 4',
-        prepend: VImg,
-        prependProps: { src: 'https://via.placeholder.com/40' },
-        append: VIcon,
-        appendProps: { icon: 'mdi-menu' },
-      },
-    ],
-  },
-}
-*/

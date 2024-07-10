@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`CreateButton > renders 1`] = `
+exports[`CreateButtonMobile > renders 1`] = `
 <div
   class="create-button-container"
   data-v-1c60eb53=""
