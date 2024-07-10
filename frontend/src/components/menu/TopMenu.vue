@@ -16,7 +16,7 @@
               <LightDarkSwitch class="d-none d-lg-flex" />
             </v-col>
             <v-col class="d-flex align-center justify-end">
-              <Circle @click="toggleDrawer">
+              <Circle class="camera-button" @click="toggleDrawer">
                 <v-icon icon="$camera"></v-icon>
               </Circle>
               <UserInfo class="ml-2" />
@@ -32,13 +32,13 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
+import LightDarkSwitch from '#components/menu/LightDarkSwitch.vue'
+import LogoImage from '#components/menu/LogoImage.vue'
+import TabControl from '#components/menu/TabControl.vue'
+import UserInfo from '#components/menu/UserInfo.vue'
 import ListWithNavigationDrawer from '#components/vuetify/Organisms/ListWithNavigationDrawer.vue'
 
 import Circle from './CircleElement.vue'
-import LightDarkSwitch from './LightDarkSwitch.vue'
-import LogoImage from './LogoImage.vue'
-import TabControl from './TabControl.vue'
-import UserInfo from './UserInfo.vue'
 
 const drawer = ref(false)
 const toggleDrawer = () => {
@@ -65,5 +65,9 @@ const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('rig
   position: sticky;
   top: 0;
   z-index: 1000;
+}
+
+.camera-button {
+  cursor: pointer;
 }
 </style>

@@ -647,7 +647,7 @@ exports[`Room Page > renders 1`] = `
                     data-v-e787b5f9=""
                   >
                     <div
-                      class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
+                      class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center camera-button"
                       data-v-39e8094e=""
                       data-v-e787b5f9=""
                     >
