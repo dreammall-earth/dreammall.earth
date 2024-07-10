@@ -11,7 +11,7 @@
     ></v-text-field>
     <v-list>
       <h2 class="mx-4">{{ $t('tablesDrawer.header') }}</h2>
-      <OpenTable :items="filteredItems" />
+      <OpenTable :items="filteredItems" @open-room="closeDrawer" />
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -40,6 +40,10 @@ withDefaults(
 )
 
 const isVisible = defineModel<boolean>()
+
+const closeDrawer = () => {
+  isVisible.value = false
+}
 
 const searchValue = ref('')
 

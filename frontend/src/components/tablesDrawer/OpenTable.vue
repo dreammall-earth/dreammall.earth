@@ -37,13 +37,12 @@ defineProps<{
   items: Room[]
 }>()
 
+const emit = defineEmits(['openRoom'])
+
 const handleItemClick = (link: string) => {
-  closeMenu()
+  emit('openRoom')
   activeRoomStore.setActiveRoom(link)
   navigate('/room/')
-}
-const closeMenu = () => {
-  // Logik zum Schließen des Menüs hinzufügen, falls erforderlich
 }
 </script>
 
