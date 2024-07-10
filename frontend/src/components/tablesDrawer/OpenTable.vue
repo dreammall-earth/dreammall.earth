@@ -4,20 +4,18 @@
       <v-list-item
         v-for="(item, index) in items"
         :key="index"
-        :class="{ 'custom-list-item': true }"
+        class="open-table"
         :title="item.meetingName"
         :subtitle="$t('rooms.participantCount', { count: item.participantCount })"
         @click="handleItemClick(item.joinLink)"
       >
-        <!-- 
+        <!--
         <template v-if="item.prepend" #prepend>
           <component :is="item.prepend" v-bind="item.prependProps" />
         </template>
         -->
 
-        <!-- <v-list-item-title>{{ item.title }}</v-list-item-title>
-             <v-list-item-subtitle v-if="item.subtitle">{{ item.subtitle }}</v-list-item-subtitle> -->
-        <!-- 
+        <!--
         <template v-if="item.append" #append>
           <component :is="item.append" v-bind="item.appendProps" />
         </template>
@@ -29,40 +27,20 @@
 
 <script lang="ts" setup>
 import { navigate } from 'vike/client/router'
-import { PropType } from 'vue'
 
 import { useActiveRoomStore } from '#stores/activeRoomStore'
 import { Room } from '#stores/roomsStore'
 
 const activeRoomStore = useActiveRoomStore()
 
-/*
-    export interface Item {
-    title: string
-    subtitle?: string
-    rounded?: boolean
-    prepend?: string | object
-    prependProps?: object
-    append?: string | object
-    appendProps?: object
-    }
-  */
-
-defineProps({
-  items: {
-    type: Array as PropType<Room[]>,
-    required: true,
-  },
-})
-
-// const emit = defineEmits(['item-click'])
+defineProps<{
+  items: Room[]
+}>()
 
 const handleItemClick = (link: string) => {
-  // console.log('handleItemClick', link)
   closeMenu()
   activeRoomStore.setActiveRoom(link)
   navigate('/room/')
-  // emit('item-click')
 }
 const closeMenu = () => {
   // Logik zum Schließen des Menüs hinzufügen, falls erforderlich
@@ -70,7 +48,7 @@ const closeMenu = () => {
 </script>
 
 <style scoped>
-.custom-list-item {
+.open-table {
   display: flex;
   align-items: center;
   justify-content: space-between;

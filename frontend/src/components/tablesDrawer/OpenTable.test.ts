@@ -1,15 +1,15 @@
 import { mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach } from 'vitest'
-import { Component, h } from 'vue'
+import { h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import ListWithNavigationDrawer from './ListWithNavigationDrawer.vue'
+import OpenTable from './OpenTable.vue'
 
-describe('ListWithNavigationDrawer', () => {
+describe('OpenTable', () => {
   const Wrapper = () => {
     return mount(VApp, {
       slots: {
-        default: h(ListWithNavigationDrawer as Component, { drawer: true }),
+        default: h(OpenTable),
       },
     })
   }
@@ -22,5 +22,9 @@ describe('ListWithNavigationDrawer', () => {
 
   it('renders correctly', () => {
     expect(wrapper.element).toMatchSnapshot()
+  })
+
+  it('renders list', () => {
+    expect(wrapper.find('.v-list--density-default').exists()).toBe(true)
   })
 })

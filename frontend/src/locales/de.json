@@ -31,7 +31,6 @@
   "menu": {
     "cockpit": "Cockpit",
     "mall": "Mall",
-    "roomList": "Offene Räume",
     "theme": {
       "dark": "Dunkel",
       "light": "Hell"
@@ -46,5 +45,9 @@
   },
   "rooms": {
     "participantCount": "{count} Teilnehmer"
+  },
+  "tablesDrawer": {
+    "header": "Offene Tische",
+    "searchPlaceholder": "Offene Tische, Teilnehmer"
   }
 }

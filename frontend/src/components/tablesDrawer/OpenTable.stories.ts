@@ -1,11 +1,11 @@
 import { SBComp } from '#types/SBComp'
 
-import ListElement from './ListElement.vue'
+import ListElement from './OpenTable.vue'
 
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 const meta = {
-  title: 'MOLECULES/ListElement',
+  title: 'tablesDrawer/OpenTable',
   component: ListElement as SBComp,
   tags: ['autodocs'],
   argTypes: {},
