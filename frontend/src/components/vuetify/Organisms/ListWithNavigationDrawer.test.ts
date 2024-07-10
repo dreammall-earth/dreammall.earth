@@ -9,7 +9,7 @@ describe('ListWithNavigationDrawer', () => {
   const Wrapper = () => {
     return mount(VApp, {
       slots: {
-        default: h(ListWithNavigationDrawer as Component, { drawer: true }),
+        default: h(ListWithNavigationDrawer as Component),
       },
     })
   }

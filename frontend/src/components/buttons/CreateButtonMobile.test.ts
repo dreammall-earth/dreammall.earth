@@ -7,7 +7,7 @@ import CreateButtonMobile from './CreateButtonMobile.vue'
 vi.mock('vike/client/router')
 vi.mocked(navigate).mockResolvedValue()
 
-describe('CreateButtonMobile', () => {
+describe('CreateButton', () => {
   const Wrapper = () => {
     return mount(CreateButtonMobile, {
       props: {},
@@ -49,14 +49,18 @@ describe('CreateButtonMobile', () => {
   })
 
   describe('new table button', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
       wrapper = Wrapper()
-      await wrapper.find('#create-button-mobile').trigger('click')
     })
+    describe('enter room', () => {
+      beforeEach(async () => {
+        await wrapper.find('#create-button-mobile').trigger('click')
+        await wrapper.find('.button-list-mobile button.new-table-button').trigger('click')
+      })
 
-    it('opens room page', async () => {
-      await wrapper.find('.button-list-mobile button.new-table-button').trigger('click')
-      expect(navigate).toHaveBeenCalledWith('/room/')
+      it('opens room page', () => {
+        expect(navigate).toHaveBeenCalledWith('/room/')
+      })
     })
   })
 })

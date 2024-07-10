@@ -32,13 +32,13 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import LightDarkSwitch from '#components/menu/LightDarkSwitch.vue'
-import LogoImage from '#components/menu/LogoImage.vue'
-import TabControl from '#components/menu/TabControl.vue'
-import UserInfo from '#components/menu/UserInfo.vue'
 import ListWithNavigationDrawer from '#components/vuetify/Organisms/ListWithNavigationDrawer.vue'
 
 import Circle from './CircleElement.vue'
+import LightDarkSwitch from './LightDarkSwitch.vue'
+import LogoImage from './LogoImage.vue'
+import TabControl from './TabControl.vue'
+import UserInfo from './UserInfo.vue'
 
 const drawer = ref(false)
 const toggleDrawer = () => {
