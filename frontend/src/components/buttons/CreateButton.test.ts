@@ -1,5 +1,5 @@
 import { ApolloError } from '@apollo/client/errors'
-import { mount } from '@vue/test-utils'
+import { flushPromises, mount } from '@vue/test-utils'
 import { navigate } from 'vike/client/router'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 
@@ -81,7 +81,8 @@ describe('CreateButton', () => {
           expect(activeRoomStore.activeRoom).toBe('http://link-to-my.room')
         })
 
-        it.skip('navigates to room page', () => {
+        it('navigates to room page', async () => {
+          await flushPromises()
           expect(navigate).toBeCalledWith('/room/')
         })
       })
@@ -105,7 +106,8 @@ describe('CreateButton', () => {
           expect(activeRoomStore.activeRoom).toBe(null)
         })
 
-        it.skip('toasts no room found error', () => {
+        it('toasts no room found error', async () => {
+          await flushPromises()
           expect(errorHandlerSpy).toBeCalledWith('No room found')
         })
       })

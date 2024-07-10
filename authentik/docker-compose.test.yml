@@ -1,6 +1,6 @@
 x-mail-settings: &x-mail-settings
   environment:
-    - AUTHENTIK_EMAIL__HOST=mailserver
+    - AUTHENTIK_EMAIL__HOST=mailpit
     - AUTHENTIK_EMAIL__PORT=1025
     - AUTHENTIK_EMAIL__USE_TLS=false
     - AUTHENTIK_EMAIL__USE_SSL=false
@@ -8,15 +8,14 @@ x-mail-settings: &x-mail-settings
     - AUTHENTIK_EMAIL__FROM=authentik@example.com
 
 services:
-  mailserver:
+  mailpit:
     image: axllent/mailpit
-    container_name: mailpit
-    restart: unless-stopped
     ports:
       - 8025:8025
       - 1025:1025
 
-  server:
+  authentik:
     <<: *x-mail-settings
-  worker:
+
+  authentik-worker:
     <<: *x-mail-settings

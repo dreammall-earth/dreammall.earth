@@ -51,11 +51,11 @@ If you want to publish changes to the database you can use the following command
 
 ## E-Mail testing
 
-Authentik e-mails can be checked locally via [Mailpit mailserver](https://mailpit.axllent.org/).
+Authentik e-mails can be checked locally via [Mailpit](https://mailpit.axllent.org/).
 
 ### Prepare and start
 
-In the `authentik/` directory start authentik and mailserver:
+In the `authentik/` directory start authentik and mailpit:
 
 ```bash
 docker-compose -f docker-compose.yml -f docker-compose.test.yml up
