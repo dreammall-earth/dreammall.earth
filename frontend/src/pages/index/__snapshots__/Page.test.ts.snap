@@ -932,8 +932,8 @@ exports[`IndexPage > without apollo error > renders 1`] = `
             </h2>
             <div
               class="v-card v-theme--light v-card--density-default v-card--variant-elevated mx-auto"
-              data-v-4e81c11b=""
               data-v-cf2c9067=""
+              data-v-de37061b=""
               style="width: 400px;"
             >
               <!---->
@@ -980,7 +980,7 @@ exports[`IndexPage > without apollo error > renders 1`] = `
               
               <div
                 class="v-list v-theme--light bg-transparent v-list--density-default v-list--two-line"
-                data-v-4e81c11b=""
+                data-v-de37061b=""
                 role="listbox"
                 tabindex="0"
               >
@@ -1851,8 +1851,8 @@ exports[`IndexPage > without apollo error > renders 1`] = `
               </h2>
               <div
                 class="v-card v-theme--light v-card--density-default v-card--variant-elevated mx-auto"
-                data-v-4e81c11b=""
                 data-v-cf2c9067=""
+                data-v-de37061b=""
                 style="width: 400px;"
               >
                 <!---->
@@ -1899,7 +1899,7 @@ exports[`IndexPage > without apollo error > renders 1`] = `
                 
                 <div
                   class="v-list v-theme--light bg-transparent v-list--density-default v-list--two-line"
-                  data-v-4e81c11b=""
+                  data-v-de37061b=""
                   role="listbox"
                   tabindex="0"
                 >
