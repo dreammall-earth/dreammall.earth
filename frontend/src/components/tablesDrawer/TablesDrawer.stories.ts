@@ -1,3 +1,4 @@
+import { withApollo } from '#root/.storybook/withApollo.decorator.js'
 import { SBComp } from '#types/SBComp'
 
 import TablesDrawer from './TablesDrawer.vue'
@@ -15,6 +16,7 @@ const meta = {
   parameters: {
     appHeight: '100vh',
   },
+  decorators: [withApollo],
 } satisfies Meta<typeof TablesDrawer>
 
 export default meta
@@ -22,6 +24,6 @@ type Story = StoryObj<typeof meta>
 
 export const Example: Story = {
   args: {
-    drawer: false,
+    modelValue: true,
   },
 }
