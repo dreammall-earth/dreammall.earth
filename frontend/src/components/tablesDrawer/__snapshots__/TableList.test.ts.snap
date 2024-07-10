@@ -1,0 +1,247 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`OpenTable > renders correctly 1`] = `
+<div
+  class="v-application v-theme--light v-layout v-layout--full-height v-locale--is-ltr"
+>
+  <div
+    class="v-application__wrap"
+  >
+    
+    <div
+      class="v-card v-theme--light v-card--density-default v-card--variant-elevated mx-auto"
+      data-v-de37061b=""
+      style="width: 400px;"
+    >
+      <!---->
+      <div
+        class="v-card__loader"
+      >
+        <div
+          aria-hidden="true"
+          aria-valuemax="100"
+          aria-valuemin="0"
+          class="v-progress-linear v-theme--light v-locale--is-ltr"
+          role="progressbar"
+          style="top: 0px; height: 0px; --v-progress-linear-height: 2px;"
+        >
+          <!---->
+          <div
+            class="v-progress-linear__background"
+            style="width: 100%;"
+          />
+          <transition-stub
+            appear="false"
+            css="true"
+            name="fade-transition"
+            persisted="false"
+          >
+            <div
+              class="v-progress-linear__indeterminate"
+            >
+              
+              <div
+                class="v-progress-linear__indeterminate long"
+              />
+              <div
+                class="v-progress-linear__indeterminate short"
+              />
+              
+            </div>
+          </transition-stub>
+          <!---->
+        </div>
+      </div>
+      <!---->
+      <!---->
+      
+      <div
+        class="v-list v-theme--light v-list--density-default v-list--two-line"
+        data-v-de37061b=""
+        role="listbox"
+        tabindex="0"
+      >
+        
+        
+        
+        
+      </div>
+      
+      <!---->
+      
+      <!---->
+      <span
+        class="v-card__underlay"
+      />
+      
+    </div>
+    
+  </div>
+</div>
+`;
+
+exports[`TableList > renders correctly 1`] = `
+<div
+  class="v-application v-theme--light v-layout v-layout--full-height v-locale--is-ltr"
+>
+  <div
+    class="v-application__wrap"
+  >
+    
+    <div
+      class="v-card v-theme--light v-card--density-default v-card--variant-elevated mx-auto"
+      data-v-de37061b=""
+      style="width: 400px;"
+    >
+      <!---->
+      <div
+        class="v-card__loader"
+      >
+        <div
+          aria-hidden="true"
+          aria-valuemax="100"
+          aria-valuemin="0"
+          class="v-progress-linear v-theme--light v-locale--is-ltr"
+          role="progressbar"
+          style="top: 0px; height: 0px; --v-progress-linear-height: 2px;"
+        >
+          <!---->
+          <div
+            class="v-progress-linear__background"
+            style="width: 100%;"
+          />
+          <transition-stub
+            appear="false"
+            css="true"
+            name="fade-transition"
+            persisted="false"
+          >
+            <div
+              class="v-progress-linear__indeterminate"
+            >
+              
+              <div
+                class="v-progress-linear__indeterminate long"
+              />
+              <div
+                class="v-progress-linear__indeterminate short"
+              />
+              
+            </div>
+          </transition-stub>
+          <!---->
+        </div>
+      </div>
+      <!---->
+      <!---->
+      
+      <div
+        class="v-list v-theme--light v-list--density-default v-list--two-line"
+        data-v-de37061b=""
+        role="listbox"
+        tabindex="0"
+      >
+        
+        
+        <div
+          class="v-list-item v-list-item--link v-theme--light v-list-item--density-default v-list-item--two-line rounded-0 v-list-item--variant-text open-table"
+          data-v-de37061b=""
+          tabindex="-2"
+        >
+          
+          <span
+            class="v-list-item__overlay"
+          />
+          <span
+            class="v-list-item__underlay"
+          />
+          
+          <!---->
+          <div
+            class="v-list-item__content"
+            data-no-activator=""
+          >
+            <div
+              class="v-list-item-title"
+            >
+              my meeting
+            </div>
+            <div
+              class="v-list-item-subtitle"
+            >
+              $t('rooms.participantCount')
+            </div>
+            
+            <!--
+        &lt;template v-if="item.prepend" #prepend&gt;
+          &lt;component :is="item.prepend" v-bind="item.prependProps" /&gt;
+        &lt;/template&gt;
+        -->
+            <!--
+        &lt;template v-if="item.append" #append&gt;
+          &lt;component :is="item.append" v-bind="item.appendProps" /&gt;
+        &lt;/template&gt;
+        -->
+            
+          </div>
+          <!---->
+        </div>
+        <div
+          class="v-list-item v-list-item--link v-theme--light v-list-item--density-default v-list-item--two-line rounded-0 v-list-item--variant-text open-table"
+          data-v-de37061b=""
+          tabindex="-2"
+        >
+          
+          <span
+            class="v-list-item__overlay"
+          />
+          <span
+            class="v-list-item__underlay"
+          />
+          
+          <!---->
+          <div
+            class="v-list-item__content"
+            data-no-activator=""
+          >
+            <div
+              class="v-list-item-title"
+            >
+              my meeting
+            </div>
+            <div
+              class="v-list-item-subtitle"
+            >
+              $t('rooms.participantCount')
+            </div>
+            
+            <!--
+        &lt;template v-if="item.prepend" #prepend&gt;
+          &lt;component :is="item.prepend" v-bind="item.prependProps" /&gt;
+        &lt;/template&gt;
+        -->
+            <!--
+        &lt;template v-if="item.append" #append&gt;
+          &lt;component :is="item.append" v-bind="item.appendProps" /&gt;
+        &lt;/template&gt;
+        -->
+            
+          </div>
+          <!---->
+        </div>
+        
+        
+      </div>
+      
+      <!---->
+      
+      <!---->
+      <span
+        class="v-card__underlay"
+      />
+      
+    </div>
+    
+  </div>
+</div>
+`;

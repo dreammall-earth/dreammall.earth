@@ -4,10 +4,10 @@
       <v-list-item
         v-for="(item, index) in items"
         :key="index"
-        class="open-table"
+        class="table"
         :title="item.meetingName"
         :subtitle="$t('rooms.participantCount', { count: item.participantCount })"
-        @click="handleItemClick(item.joinLink)"
+        @click="openRoom(item.joinLink)"
       >
         <!--
         <template v-if="item.prepend" #prepend>
@@ -39,7 +39,7 @@ defineProps<{
 
 const emit = defineEmits(['openRoom'])
 
-const handleItemClick = (link: string) => {
+const openRoom = (link: string) => {
   emit('openRoom')
   activeRoomStore.setActiveRoom(link)
   navigate('/room/')
@@ -47,7 +47,7 @@ const handleItemClick = (link: string) => {
 </script>
 
 <style scoped>
-.open-table {
+.table {
   display: flex;
   align-items: center;
   justify-content: space-between;

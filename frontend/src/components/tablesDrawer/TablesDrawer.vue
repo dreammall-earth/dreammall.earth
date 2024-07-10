@@ -11,7 +11,7 @@
     ></v-text-field>
     <v-list>
       <h2 class="mx-4">{{ $t('tablesDrawer.header') }}</h2>
-      <OpenTable :items="filteredItems" @open-room="closeDrawer" />
+      <TableList :items="filteredItems" @open-room="closeDrawer" />
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -22,7 +22,7 @@ import { ref, computed } from 'vue'
 
 import { useRoomsStore } from '#stores/roomsStore'
 
-import OpenTable from './OpenTable.vue'
+import TableList from './TableList.vue'
 
 const roomsStore = useRoomsStore()
 
