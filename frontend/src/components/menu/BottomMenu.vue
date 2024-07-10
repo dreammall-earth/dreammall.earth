@@ -46,11 +46,10 @@ const updateDrawer = (value: boolean) => {
   background: var(--v-bottom-menu-background) !important;
   backdrop-filter: blur(20px);
   border-radius: 30px 30px 0 0;
-}
 
-.camera-button {
-  cursor: pointer;
-  transform: translate(20px);
+  .camera-button {
+    transform: translateX(20px);
+  }
 }
 
 .create-button-mobile {

@@ -16,7 +16,7 @@
               <LightDarkSwitch class="d-none d-lg-flex" />
             </v-col>
             <v-col class="d-flex align-center justify-end">
-              <Circle class="camera-button" @click="toggleDrawer">
+              <Circle @click="toggleDrawer">
                 <v-icon icon="$camera"></v-icon>
               </Circle>
               <UserInfo class="ml-2" />
@@ -65,9 +65,5 @@ const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('rig
   position: sticky;
   top: 0;
   z-index: 1000;
-}
-
-.camera-button {
-  cursor: pointer;
 }
 </style>
