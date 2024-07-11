@@ -1,6 +1,5 @@
 import { ApolloServer } from '@apollo/server'
 
-import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
 
 let testServer: ApolloServer
@@ -16,7 +15,7 @@ describe('UserResolver', () => {
         const response = await testServer.executeOperation({
           query: `{users {id name username}}`,
         })
-        expect(response.body).toMatchObject({
+        expect(response).toMatchObject({
           body: {
             kind: 'single',
             singleResult: {
@@ -32,18 +31,36 @@ describe('UserResolver', () => {
         })
       })
     })
+
     describe('authenticated', () => {
       it('returns a list of users', async () => {
-        const response = await testServer.executeOperation({
-          query: `{users {id name username}}`,
-        })
-        expect(response.body).toMatchObject({
-          kind: 'single',
-          singleResult: {
-            data: {
-              users: [],
+        const response = await testServer.executeOperation(
+          {
+            query: `{users {id name username}}`,
+          },
+          {
+            contextValue: {
+              token: 'token',
+              user: undefined,
             },
-            errors: undefined,
+          },
+        )
+        expect(response).toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: {
+                users: [
+                  {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    name: 'User',
+                    username: 'mockedUser',
+                  },
+                ],
+              },
+              errors: undefined,
+            },
           },
         })
       })
