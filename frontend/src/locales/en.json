@@ -1,8 +1,8 @@
 {
   "$vuetify": {
     "input:": {
-      "clear": "Clear",
-    },
+      "clear": "Clear"
+    }
   },
   "auth": {
     "content": "Logging in...",
