@@ -74,3 +74,16 @@ export interface JoinMeetinLinkOptions {
   createTime?: string
   userID?: string
 }
+
+export enum MeetingLayouts {
+  CUSTOM_LAYOUT = 'CUSTOM_LAYOUT',
+  SMART_LAYOUT = 'SMART_LAYOUT',
+  PRESENTATION_FOCUS = 'PRESENTATION_FOCUS',
+  VIDEO_FOCUS = 'VIDEO_FOCUS',
+}
+
+export interface CreateMeetingBodyOptions {
+  welcome?: string
+  meetingLayout?: MeetingLayouts
+  moderatorOnlyMessage?: string
+}
