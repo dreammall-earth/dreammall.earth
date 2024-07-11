@@ -1,5 +1,3 @@
-import { wrap } from 'module'
-
 import { flushPromises, mount } from '@vue/test-utils'
 import { setActivePinia, createPinia } from 'pinia'
 import { navigate } from 'vike/client/router'
