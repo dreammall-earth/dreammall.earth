@@ -10,6 +10,8 @@ import {
   GetMeetingsResponse,
   CreateMeetingOptions,
   JoinMeetinLinkOptions,
+  CreateMeetingBodyOptions,
+  MeetingLayouts,
 } from './BBB/types'
 
 export { MeetingInfo, AttendeeInfo } from './BBB/types'
@@ -19,6 +21,11 @@ const alwaysArray = ['response.meetings.meeting']
 const parser = new XMLParser({
   isArray: (_, jpath) => alwaysArray.indexOf(jpath) !== -1,
 })
+
+const defaultCreateMeetingBodyOptions = {
+  welcome: '<div></div>',
+  meetingLayout: MeetingLayouts.VIDEO_FOCUS,
+}
 
 export const getMeetings = async (): Promise<MeetingInfo[]> => {
   try {
@@ -42,18 +49,21 @@ export const getMeetings = async (): Promise<MeetingInfo[]> => {
 
 export const createMeeting = async (
   options: CreateMeetingOptions,
+  bodyOptions: CreateMeetingBodyOptions = {},
 ): Promise<CreateMeetingResponse | null> => {
-  const { name, meetingID /*, welcome */ } = options
+  const { name, meetingID } = options
   try {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const { data } = await axiosInstance.post(
       '/create',
-      {},
+      {
+        ...defaultCreateMeetingBodyOptions,
+        ...bodyOptions,
+      },
       {
         params: {
           name,
           meetingID,
-          // welcome,
         },
       },
     )

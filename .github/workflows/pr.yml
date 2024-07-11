@@ -1,7 +1,7 @@
 name: pr
 
 on:
-  pull_request_target:
+  push:
     types:
       - opened
       - edited
