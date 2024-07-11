@@ -1,4 +1,4 @@
-//import { wrap } from 'module'
+import { wrap } from 'module'
 
 import { flushPromises, mount } from '@vue/test-utils'
 import { setActivePinia, createPinia } from 'pinia'
