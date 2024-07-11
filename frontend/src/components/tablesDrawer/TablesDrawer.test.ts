@@ -1,15 +1,15 @@
 import { mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach } from 'vitest'
-import { h } from 'vue'
+import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import SearchField from './SearchField.vue'
+import TablesDrawer from './TablesDrawer.vue'
 
-describe('SearchField', () => {
+describe('TablesDrawer', () => {
   const Wrapper = () => {
     return mount(VApp, {
       slots: {
-        default: h(SearchField),
+        default: h(TablesDrawer as Component, { drawer: true }),
       },
     })
   }
@@ -20,7 +20,7 @@ describe('SearchField', () => {
     wrapper = Wrapper()
   })
 
-  it('renders', () => {
+  it('renders correctly', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 })
