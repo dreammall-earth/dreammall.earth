@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`ListElement > renders correctly 1`] = `
+exports[`OpenTable > renders correctly 1`] = `
 <div
   class="v-application v-theme--light v-layout v-layout--full-height v-locale--is-ltr"
 >
@@ -10,7 +10,7 @@ exports[`ListElement > renders correctly 1`] = `
     
     <div
       class="v-card v-theme--light v-card--density-default v-card--variant-elevated mx-auto"
-      data-v-fce026f9=""
+      data-v-4e81c11b=""
       style="width: 400px;"
     >
       <!---->
@@ -57,7 +57,7 @@ exports[`ListElement > renders correctly 1`] = `
       
       <div
         class="v-list v-theme--light v-list--density-default v-list--two-line"
-        data-v-fce026f9=""
+        data-v-4e81c11b=""
         role="listbox"
         tabindex="0"
       >

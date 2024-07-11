@@ -1,90 +1,56 @@
+include:
+  - ./authentik/docker-compose.yml
+
 services:
-  ########################################################
-  # DATABASE #############################################
-  ########################################################
   database:
-    build:
-      context: ./database
-      target: mariadb_server
+    image: mariadb:10.5
     environment:
       - MARIADB_ALLOW_EMPTY_PASSWORD=1
       - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=1
       - MARIADB_USER=root
-    networks:
-      - internal-net
-      - external-net
     ports:
       - 3306:3306
     volumes:
       - db_vol:/var/lib/mysql
 
-  ########################################################
-  # PRESENTER ############################################
-  ########################################################
   presenter:
     build:
       context: ./presenter
       target: production
-    networks:
-      - external-net
-      - internal-net
     ports:
       - 3001:3000
     environment:
       - NODE_ENV=production
 
-  ########################################################
-  # FRONTEND #############################################
-  ########################################################
   frontend:
     build:
       context: ./frontend
       target: production
-    networks:
-      - external-net
-      - internal-net
     ports:
       - 3000:3000
     environment:
       - NODE_ENV=production
 
-  ########################################################
-  # ADMIN ################################################
-  ########################################################
   admin:
     build:
       context: ./admin
       target: production
-    networks:
-      - external-net
-      - internal-net
     ports:
       - 3002:3000
     environment:
       - NODE_ENV=production
 
-  #######################################################
-  # BACKEND #############################################
-  #######################################################
   backend:
     build:
       context: ./backend
       target: production
     depends_on:
       - database
-    networks:
-      - external-net
-      - internal-net
     ports:
       - 4000:4000
     environment:
       - DATABASE_URL=mysql://root:@database:3306/dreammall.earth
       - NODE_ENV=production
-
-networks:
-  external-net:
-  internal-net:
-    internal: true
 
 volumes:
   db_vol:
