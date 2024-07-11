@@ -86,7 +86,11 @@ const filteredItems = computed(() => {
 @media #{map-get($display-breakpoints, 'sm-and-down')} {
   .menu-drawer {
     z-index: 2000 !important;
-    padding-top: 0;
+    padding-top: 20px;
+    --sides: 12px;
+    left: var(--sides) !important;
+    width: calc(100% - (2 * var(--sides))) !important;
+    border-radius: 30px 30px 0px 0px;
   }
 }
 
