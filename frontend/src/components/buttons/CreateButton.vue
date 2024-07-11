@@ -436,18 +436,12 @@ const enterRoom = async () => {
   }
 }
 
-.button-wrapper {
-  position: relative;
-  display: flex;
-  justify-content: center;
-}
-
 svg {
-  width: 100vw;
-  height: calc(100vh - 10px);
   position: absolute;
   top: 50%;
   left: 50%;
+  width: 100vw;
+  height: calc(100vh - 10px);
   transform: translate(-50%, -50%);
 
   @media screen and (min-width: $mobile) and (max-width: $tablet) {
@@ -504,6 +498,8 @@ svg {
 
 .button-wrapper {
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .button-list {
@@ -511,25 +507,25 @@ svg {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  margin-top: 25px;
   pointer-events: all;
   transform: scale(0.5);
-  margin-top: 25px;
 
   .assistant-button,
   .new-project-button,
   .new-table-button {
-    margin: 0;
-    transition-delay: 0.1s;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0;
+    transition-delay: 0.1s;
 
     :deep(i) {
-      margin-right: 8px;
       display: flex;
       align-items: center;
+      margin-right: 8px;
     }
   }
 
