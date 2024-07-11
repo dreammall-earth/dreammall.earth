@@ -391,8 +391,7 @@ const onClick = (event: MouseEvent) => {
 
     emit('click', 1)
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error('Error on CreateButton Click', error)
+    GlobalErrorHandler.error('Error on CreateButton Click', error)
   }
 }
 
@@ -478,6 +477,7 @@ svg {
     transition: transform 1s;
     transform: scale(0);
     transform-origin: center;
+    transform-box: fill-box;
   }
 
   .button-warp-on {
@@ -545,7 +545,7 @@ svg {
   }
 
   50% {
-    transform: scale(2.25);
+    transform: scale(0.3);
   }
 
   100% {
