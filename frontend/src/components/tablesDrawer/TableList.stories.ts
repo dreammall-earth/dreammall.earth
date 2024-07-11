@@ -1,12 +1,12 @@
 import { SBComp } from '#types/SBComp'
 
-import ListElement from './ListElement.vue'
+import TableList from './TableList.vue'
 
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 const meta = {
-  title: 'MOLECULES/ListElement',
-  component: ListElement as SBComp,
+  title: 'tablesDrawer/TableList',
+  component: TableList as SBComp,
   tags: ['autodocs'],
   argTypes: {},
   args: {
@@ -16,14 +16,19 @@ const meta = {
         meetingID: 'xxx',
         startTime: '1234',
         participantCount: 4,
-        attendees: [],
+        attendees: [
+          { fullName: 'John Doe' },
+          { fullName: 'Max Mustermann' },
+          { fullName: 'Jane Doe' },
+          { fullName: 'Elfriede Müller' },
+        ],
         joinLink: 'https://my.link',
       },
       {
         meetingName: 'Beispiel Titel 2',
         meetingID: 'xxx',
         startTime: '1234',
-        participantCount: 4,
+        participantCount: 0,
         attendees: [],
         joinLink: 'https://my.link',
       },
@@ -32,7 +37,7 @@ const meta = {
   parameters: {
     appHeight: '100vh',
   },
-} satisfies Meta<typeof ListElement>
+} satisfies Meta<typeof TableList>
 
 export default meta
 type Story = StoryObj<typeof meta>
