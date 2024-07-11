@@ -36,7 +36,7 @@ const BBB = {
 }
 
 const FRONTEND = {
-  FORNTEND_URL: process.env.FORNTEND_URL ?? 'http://localhost:3000/',
+  FRONTEND_URL: process.env.FRONTEND_URL ?? 'http://localhost:3000/',
   FRONTEND_INVITE_LINK_URL:
     process.env.FRONTEND_INVITE_LINK_URL ?? 'http://localhost:3000/join-room/',
 }
