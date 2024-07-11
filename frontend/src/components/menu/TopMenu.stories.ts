@@ -15,6 +15,10 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Example: Story = {
-  args: {},
+export const WithDrawer: Story = {
+  args: { drawer: true },
+}
+
+export const WithoutDrawer: Story = {
+  args: { drawer: false },
 }

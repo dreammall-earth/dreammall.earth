@@ -1,3 +1,6 @@
+include:
+  - ./authentik/docker-compose.yml
+
 services:
   database:
     image: mariadb:10.5

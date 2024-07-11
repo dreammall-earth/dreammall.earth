@@ -1,39 +1,32 @@
 <template>
   <div class="navigation-drawer-box d-md-none position-fixed mb-5 pb-5">
-    <ListWithNavigationDrawer
-      :drawer="drawer"
-      :location="location"
-      @update:drawer="updateDrawer($event)"
-    />
+    <TablesDrawer v-model="isTablesDrawerVisible" location="bottom" />
   </div>
   <div
     class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface d-md-none"
   >
-    <Circle class="camera-button" @click="toggleDrawer">
-      <v-icon icon="$camera"></v-icon>
-    </Circle>
+    <button class="camera-button" @click="toggleDrawer">
+      <Circle>
+        <v-icon icon="$camera"></v-icon>
+      </Circle>
+    </button>
     <CreateButtonMobile />
     <UserInfo />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-
 import CreateButtonMobile from '#components/buttons/CreateButtonMobile.vue'
-import ListWithNavigationDrawer from '#components/vuetify/Organisms/ListWithNavigationDrawer.vue'
+import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
 
 import Circle from './CircleElement.vue'
 import UserInfo from './UserInfo.vue'
 
-const drawer = ref(false)
+const isTablesDrawerVisible = defineModel<boolean>()
+
 const toggleDrawer = () => {
-  drawer.value = !drawer.value
+  isTablesDrawerVisible.value = !isTablesDrawerVisible.value
 }
-const updateDrawer = (value: boolean) => {
-  drawer.value = value
-}
-const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('bottom')
 </script>
 
 <style scoped lang="scss">
@@ -57,13 +50,5 @@ const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('bot
 
 .navigation-drawer-box {
   bottom: 65px;
-}
-
-.v-navigation-drawer {
-  scrollbar-width: thin;
-}
-
-.v-navigation-drawer__content {
-  scrollbar-width: thin;
 }
 </style>
