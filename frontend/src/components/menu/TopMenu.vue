@@ -16,9 +16,11 @@
               <LightDarkSwitch class="d-none d-lg-flex" />
             </v-col>
             <v-col class="d-flex align-center justify-end">
-              <Circle @click="toggleDrawer">
-                <v-icon icon="$camera"></v-icon>
-              </Circle>
+              <button @click="toggleDrawer">
+                <Circle>
+                  <v-icon icon="$camera"></v-icon>
+                </Circle>
+              </button>
               <UserInfo class="ml-2" />
             </v-col>
           </v-row>
@@ -26,28 +28,23 @@
       </v-row>
     </v-app-bar>
   </div>
-  <ListWithNavigationDrawer :drawer="drawer" :location="location" @update:drawer="updateDrawer" />
+  <TablesDrawer v-model="isTablesDrawerVisible" location="right" />
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-
 import LightDarkSwitch from '#components/menu/LightDarkSwitch.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 import TabControl from '#components/menu/TabControl.vue'
 import UserInfo from '#components/menu/UserInfo.vue'
-import ListWithNavigationDrawer from '#components/vuetify/Organisms/ListWithNavigationDrawer.vue'
+import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
 
 import Circle from './CircleElement.vue'
 
-const drawer = ref(false)
+const isTablesDrawerVisible = defineModel<boolean>()
+
 const toggleDrawer = () => {
-  drawer.value = !drawer.value
+  isTablesDrawerVisible.value = !isTablesDrawerVisible.value
 }
-const updateDrawer = (value: boolean) => {
-  drawer.value = value
-}
-const location = ref<'bottom' | 'right' | 'left' | 'end' | 'top' | 'start'>('right')
 </script>
 
 <style scoped lang="scss">
