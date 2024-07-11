@@ -436,20 +436,28 @@ const enterRoom = async () => {
   }
 }
 
+.button-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
 svg {
   width: 100vw;
   height: calc(100vh - 10px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   @media screen and (min-width: $mobile) and (max-width: $tablet) {
     transition: scale 1s;
-    transform: scale(3);
-    transform-origin: center;
+    transform: translate(-50%, -50%) scale(3);
   }
 
   @media screen and (min-width: $tablet) {
     transition: scale 1s;
-    transform: scale(1);
-    transform-origin: center;
+    transform: translate(-50%, -50%) scale(1);
   }
 
   #create-button {
@@ -481,12 +489,10 @@ svg {
   }
 
   .button-warp-on {
-    transform-origin: center;
     animation: 12s warp cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
   }
 
   .button-warp-off {
-    transform-origin: center;
     animation: 1s warp-off linear;
   }
 
@@ -502,28 +508,37 @@ svg {
 
 .button-list {
   position: absolute;
-  top: calc(50% + 40px);
-  left: calc(50% - 165px);
   display: flex;
   flex-direction: column;
   gap: 15px;
   justify-content: center;
+  align-items: center;
   pointer-events: all;
   transform: scale(0.5);
+  margin-top: 25px;
+
+  .assistant-button,
+  .new-project-button,
+  .new-table-button {
+    margin: 0;
+    transition-delay: 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    :deep(i) {
+      margin-right: 8px;
+      display: flex;
+      align-items: center;
+    }
+  }
 
   .assistant-button {
-    margin: 0 40px;
     transition-delay: 0.2s;
   }
 
   .new-project-button {
-    margin: 0 20px;
     transition-delay: 0s;
-  }
-
-  .new-table-button {
-    margin: 0 20px;
-    transition-delay: 0.1s;
   }
 }
 
@@ -556,28 +571,6 @@ svg {
 @keyframes warp-off {
   100% {
     transform: scale(0);
-  }
-}
-</style>
-
-<style lang="scss">
-.button-list {
-  .assistant-button {
-    i {
-      margin-right: 16px;
-    }
-  }
-
-  .project-button {
-    i {
-      margin-right: 16px;
-    }
-  }
-
-  .table-button {
-    i {
-      margin-right: 16px;
-    }
   }
 }
 </style>
