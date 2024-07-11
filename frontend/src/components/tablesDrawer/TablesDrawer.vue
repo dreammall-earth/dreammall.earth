@@ -76,28 +76,29 @@ const filteredItems = computed(() => {
 @import 'vuetify/lib/styles/settings/_variables';
 
 .menu-drawer {
-  height: 100% !important;
   top: 0 !important;
   z-index: 1006 !important;
-  padding-top: 70px;
   width: 308px;
+  height: 100% !important;
+  padding-top: 70px;
 }
 
 @media #{map-get($display-breakpoints, 'sm-and-down')} {
   .menu-drawer {
-    z-index: 2000 !important;
-    padding-top: 20px;
-    --sides: 12px;
     left: var(--sides) !important;
+    z-index: 2000 !important;
     width: calc(100% - (2 * var(--sides))) !important;
-    border-radius: 30px 30px 0px 0px;
+    padding-top: 20px;
+    border-radius: 30px 30px 0 0;
+
+    --sides: 12px;
   }
 }
 
 .search {
   :deep(.v-input__control) {
-    border-radius: 20px;
     border: 1px solid #3d4753;
+    border-radius: 20px;
   }
 }
 

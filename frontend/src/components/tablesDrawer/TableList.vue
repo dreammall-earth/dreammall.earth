@@ -37,29 +37,29 @@ const openRoom = (link: string) => {
 
 <style scoped>
 .list {
-  list-style: none;
-  padding: 0;
   display: flex;
   flex-flow: column;
   gap: 8px;
+  padding: 0;
+  list-style: none;
 }
 
 .table {
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 8px;
+  align-items: center;
+  justify-content: center;
 }
 
 .table-info {
   display: flex;
   flex-flow: column;
   justify-content: space-between;
-  padding: 8px 16px;
-  border-radius: 16px 0px 0px 16px;
-  height: 42px;
-  font-size: 13px;
   width: 100%;
+  height: 42px;
+  padding: 8px 16px;
+  font-size: 13px;
+  border-radius: 16px 0 0 16px;
 }
 
 .subtitle {
@@ -67,15 +67,15 @@ const openRoom = (link: string) => {
 }
 
 .action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 41px;
   min-width: 41px;
   height: 42px;
-  border-radius: 0px 16px 16px 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f09630;
   color: #fff;
+  background-color: #f09630;
+  border-radius: 0 16px 16px 0;
 }
 
 .icon {
