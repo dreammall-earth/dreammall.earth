@@ -1,6 +1,6 @@
 name: e2e
 
-on: pull_request_target
+on: push
 
 jobs:
   files-changed:

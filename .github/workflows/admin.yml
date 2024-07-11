@@ -1,6 +1,6 @@
 name: admin
 
-on: pull_request_target
+on: push
 
 jobs:
   files-changed:
