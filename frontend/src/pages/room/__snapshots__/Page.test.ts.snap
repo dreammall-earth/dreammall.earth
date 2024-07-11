@@ -757,7 +757,7 @@ exports[`Room Page > renders 1`] = `
       </div>
       
       <nav
-        class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer"
+        class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer px-4"
         data-v-cf2c9067=""
         style="right: 0px; z-index: 1006; transform: translateX(110%); position: fixed; transition: none !important; height: calc(100% - 70px - 0px); top: 70px; bottom: 0px;"
       >
@@ -768,7 +768,7 @@ exports[`Room Page > renders 1`] = `
         >
           
           <div
-            class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-text-field mx-4 mt-4 search"
+            class="v-input v-input--horizontal v-input--center-affix v-input--density-compact v-theme--light v-locale--is-ltr v-text-field search"
             data-v-cf2c9067=""
           >
             <!---->
@@ -777,7 +777,7 @@ exports[`Room Page > renders 1`] = `
             >
               
               <div
-                class="v-field v-field--appended v-field--center-affix v-field--prepended v-field--variant-solo v-theme--light v-field--rounded v-locale--is-ltr"
+                class="v-field v-field--appended v-field--center-affix v-field--flat v-field--prepended v-field--variant-solo v-theme--light v-field--rounded v-locale--is-ltr"
               >
                 <div
                   class="v-field__overlay"
@@ -930,78 +930,15 @@ exports[`Room Page > renders 1`] = `
           >
             
             <h2
-              class="mx-4"
+              class="header mb-4"
               data-v-cf2c9067=""
             >
               $t('tablesDrawer.header')
             </h2>
             <div
-              class="v-card v-theme--light v-card--density-default v-card--variant-elevated mx-auto"
               data-v-cf2c9067=""
-              data-v-de37061b=""
-              style="width: 400px;"
             >
-              <!---->
-              <div
-                class="v-card__loader"
-              >
-                <div
-                  aria-hidden="true"
-                  aria-valuemax="100"
-                  aria-valuemin="0"
-                  class="v-progress-linear v-theme--light v-locale--is-ltr"
-                  role="progressbar"
-                  style="top: 0px; height: 0px; --v-progress-linear-height: 2px;"
-                >
-                  <!---->
-                  <div
-                    class="v-progress-linear__background"
-                    style="width: 100%;"
-                  />
-                  <transition-stub
-                    appear="false"
-                    css="true"
-                    name="fade-transition"
-                    persisted="false"
-                  >
-                    <div
-                      class="v-progress-linear__indeterminate"
-                    >
-                      
-                      <div
-                        class="v-progress-linear__indeterminate long"
-                      />
-                      <div
-                        class="v-progress-linear__indeterminate short"
-                      />
-                      
-                    </div>
-                  </transition-stub>
-                  <!---->
-                </div>
-              </div>
-              <!---->
-              <!---->
-              
-              <div
-                class="v-list v-theme--light bg-transparent v-list--density-default v-list--two-line"
-                data-v-de37061b=""
-                role="listbox"
-                tabindex="0"
-              >
-                
-                
-                
-                
-              </div>
-              
-              <!---->
-              
-              <!---->
-              <span
-                class="v-card__underlay"
-              />
-              
+              $t('tablesDrawer.noTables')
             </div>
             
           </div>
@@ -1044,199 +981,35 @@ exports[`Room Page > renders 1`] = `
         </div>
       </div>
       
-      <div
-        class="navigation-drawer-box d-md-none position-fixed mb-5 pb-5"
-        data-v-96a196cc=""
+      
+      <nav
+        class="v-navigation-drawer v-navigation-drawer--bottom v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer px-4 d-md-none"
+        data-v-cf2c9067=""
+        style="bottom: 0px; z-index: 1004; transform: translateY(110%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
       >
-        
-        <nav
-          class="v-navigation-drawer v-navigation-drawer--bottom v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer"
-          data-v-cf2c9067=""
-          style="bottom: 0px; z-index: 1004; transform: translateY(110%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
+        <!---->
+        <!---->
+        <div
+          class="v-navigation-drawer__content"
         >
-          <!---->
-          <!---->
+          
           <div
-            class="v-navigation-drawer__content"
+            class="v-input v-input--horizontal v-input--center-affix v-input--density-compact v-theme--light v-locale--is-ltr v-text-field search"
+            data-v-cf2c9067=""
           >
-            
+            <!---->
             <div
-              class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-text-field mx-4 mt-4 search"
-              data-v-cf2c9067=""
-            >
-              <!---->
-              <div
-                class="v-input__control"
-              >
-                
-                <div
-                  class="v-field v-field--appended v-field--center-affix v-field--prepended v-field--variant-solo v-theme--light v-field--rounded v-locale--is-ltr"
-                >
-                  <div
-                    class="v-field__overlay"
-                  />
-                  <div
-                    class="v-field__loader"
-                  >
-                    <div
-                      aria-hidden="true"
-                      aria-valuemax="100"
-                      aria-valuemin="0"
-                      class="v-progress-linear v-theme--light v-locale--is-ltr"
-                      role="progressbar"
-                      style="top: 0px; height: 0px; --v-progress-linear-height: 2px;"
-                    >
-                      <!---->
-                      <div
-                        class="v-progress-linear__background"
-                        style="width: 100%;"
-                      />
-                      <transition-stub
-                        appear="false"
-                        css="true"
-                        name="fade-transition"
-                        persisted="false"
-                      >
-                        <div
-                          class="v-progress-linear__indeterminate"
-                        >
-                          
-                          <div
-                            class="v-progress-linear__indeterminate long"
-                          />
-                          <div
-                            class="v-progress-linear__indeterminate short"
-                          />
-                          
-                        </div>
-                      </transition-stub>
-                      <!---->
-                    </div>
-                  </div>
-                  <div
-                    class="v-field__prepend-inner"
-                  >
-                    <i
-                      aria-hidden="true"
-                      class="mdi-tune mdi v-icon notranslate v-theme--light v-icon--size-default"
-                    />
-                    <!---->
-                  </div>
-                  <div
-                    class="v-field__field"
-                    data-no-activator=""
-                  >
-                    <label
-                      aria-hidden="true"
-                      class="v-label v-field-label v-field-label--floating"
-                      for="input-6"
-                    >
-                      <!---->
-                      
-                      $t('tablesDrawer.searchPlaceholder')
-                      
-                    </label>
-                    <label
-                      class="v-label v-field-label"
-                      for="input-6"
-                    >
-                      <!---->
-                      
-                      $t('tablesDrawer.searchPlaceholder')
-                      
-                    </label>
-                    
-                    
-                    <!---->
-                    <input
-                      aria-describedby="input-6-messages"
-                      class="v-field__input"
-                      id="input-6"
-                      size="1"
-                      type="text"
-                    />
-                    <!---->
-                    
-                    
-                  </div>
-                  <transition-stub
-                    appear="false"
-                    css="true"
-                    name="expand-x-transition"
-                    persisted="false"
-                  >
-                    <div
-                      class="v-field__clearable"
-                      style="display: none;"
-                    >
-                      
-                      <i
-                        aria-hidden="false"
-                        aria-label="$vuetify.input.clear"
-                        class="mdi-close-circle mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--clickable"
-                        role="button"
-                        tabindex="0"
-                      />
-                      
-                    </div>
-                  </transition-stub>
-                  <div
-                    class="v-field__append-inner"
-                  >
-                    <!---->
-                    <!---->
-                  </div>
-                  <div
-                    class="v-field__outline"
-                  >
-                    <!---->
-                    <!---->
-                  </div>
-                </div>
-                
-              </div>
-              <!---->
-              <div
-                class="v-input__details"
-              >
-                <transition-group-stub
-                  appear="false"
-                  aria-live="polite"
-                  class="v-messages"
-                  css="true"
-                  id="input-6-messages"
-                  name="slide-y-transition"
-                  persisted="false"
-                  role="alert"
-                  tag="div"
-                >
-                  <!---->
-                </transition-group-stub>
-                <!---->
-              </div>
-            </div>
-            <div
-              class="v-list v-theme--light bg-transparent v-list--density-default v-list--one-line"
-              data-v-cf2c9067=""
-              role="listbox"
-              tabindex="0"
+              class="v-input__control"
             >
               
-              <h2
-                class="mx-4"
-                data-v-cf2c9067=""
-              >
-                $t('tablesDrawer.header')
-              </h2>
               <div
-                class="v-card v-theme--light v-card--density-default v-card--variant-elevated mx-auto"
-                data-v-cf2c9067=""
-                data-v-de37061b=""
-                style="width: 400px;"
+                class="v-field v-field--appended v-field--center-affix v-field--flat v-field--prepended v-field--variant-solo v-theme--light v-field--rounded v-locale--is-ltr"
               >
-                <!---->
                 <div
-                  class="v-card__loader"
+                  class="v-field__overlay"
+                />
+                <div
+                  class="v-field__loader"
                 >
                   <div
                     aria-hidden="true"
@@ -1273,45 +1046,141 @@ exports[`Room Page > renders 1`] = `
                     <!---->
                   </div>
                 </div>
-                <!---->
-                <!---->
-                
                 <div
-                  class="v-list v-theme--light bg-transparent v-list--density-default v-list--two-line"
-                  data-v-de37061b=""
-                  role="listbox"
-                  tabindex="0"
+                  class="v-field__prepend-inner"
                 >
+                  <i
+                    aria-hidden="true"
+                    class="mdi-tune mdi v-icon notranslate v-theme--light v-icon--size-default"
+                  />
+                  <!---->
+                </div>
+                <div
+                  class="v-field__field"
+                  data-no-activator=""
+                >
+                  <label
+                    aria-hidden="true"
+                    class="v-label v-field-label v-field-label--floating"
+                    for="input-6"
+                  >
+                    <!---->
+                    
+                    $t('tablesDrawer.searchPlaceholder')
+                    
+                  </label>
+                  <label
+                    class="v-label v-field-label"
+                    for="input-6"
+                  >
+                    <!---->
+                    
+                    $t('tablesDrawer.searchPlaceholder')
+                    
+                  </label>
                   
                   
+                  <!---->
+                  <input
+                    aria-describedby="input-6-messages"
+                    class="v-field__input"
+                    id="input-6"
+                    size="1"
+                    type="text"
+                  />
+                  <!---->
                   
                   
                 </div>
-                
-                <!---->
-                
-                <!---->
-                <span
-                  class="v-card__underlay"
-                />
-                
+                <transition-stub
+                  appear="false"
+                  css="true"
+                  name="expand-x-transition"
+                  persisted="false"
+                >
+                  <div
+                    class="v-field__clearable"
+                    style="display: none;"
+                  >
+                    
+                    <i
+                      aria-hidden="false"
+                      aria-label="$vuetify.input.clear"
+                      class="mdi-close-circle mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--clickable"
+                      role="button"
+                      tabindex="0"
+                    />
+                    
+                  </div>
+                </transition-stub>
+                <div
+                  class="v-field__append-inner"
+                >
+                  <!---->
+                  <!---->
+                </div>
+                <div
+                  class="v-field__outline"
+                >
+                  <!---->
+                  <!---->
+                </div>
               </div>
               
             </div>
+            <!---->
+            <div
+              class="v-input__details"
+            >
+              <transition-group-stub
+                appear="false"
+                aria-live="polite"
+                class="v-messages"
+                css="true"
+                id="input-6-messages"
+                name="slide-y-transition"
+                persisted="false"
+                role="alert"
+                tag="div"
+              >
+                <!---->
+              </transition-group-stub>
+              <!---->
+            </div>
+          </div>
+          <div
+            class="v-list v-theme--light bg-transparent v-list--density-default v-list--one-line"
+            data-v-cf2c9067=""
+            role="listbox"
+            tabindex="0"
+          >
+            
+            <h2
+              class="header mb-4"
+              data-v-cf2c9067=""
+            >
+              $t('tablesDrawer.header')
+            </h2>
+            <div
+              data-v-cf2c9067=""
+            >
+              $t('tablesDrawer.noTables')
+            </div>
             
           </div>
-          <!---->
-        </nav>
-        <transition-stub
-          appear="false"
-          css="true"
-          name="fade-transition"
-          persisted="false"
-        >
-          <!---->
-        </transition-stub>
-        
-      </div>
+          
+        </div>
+        <!---->
+      </nav>
+      <transition-stub
+        appear="false"
+        css="true"
+        name="fade-transition"
+        persisted="false"
+      >
+        <!---->
+      </transition-stub>
+      
       <div
         class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface d-md-none"
         data-v-96a196cc=""
