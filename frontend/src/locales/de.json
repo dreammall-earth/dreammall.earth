@@ -1,6 +1,6 @@
 {
   "$vuetify": {
-    "input:": {
+    "input": {
       "clear": "Löschen"
     }
   },
