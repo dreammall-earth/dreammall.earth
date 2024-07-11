@@ -1,17 +1,28 @@
 <template>
-  <v-navigation-drawer v-model="isVisible" :location="location" width="auto" class="menu-drawer">
+  <v-navigation-drawer
+    v-model="isVisible"
+    :location="location"
+    width="auto"
+    class="menu-drawer px-4"
+  >
     <v-text-field
       v-model="searchValue"
       :label="$t('tablesDrawer.searchPlaceholder')"
       prepend-inner-icon="mdi-tune"
       clearable
       rounded
+      flat
+      density="compact"
       variant="solo"
-      class="mx-4 mt-4 search"
+      class="search"
     ></v-text-field>
     <v-list>
-      <h2 class="mx-4">{{ $t('tablesDrawer.header') }}</h2>
-      <TableList :items="filteredItems" @open-room="closeDrawer" />
+      <h2 class="header mb-4">{{ $t('tablesDrawer.header') }}</h2>
+      <div v-if="!items.length">{{ $t('tablesDrawer.noTables') }}</div>
+      <div v-else-if="!filteredItems.length">
+        {{ $t('tablesDrawer.noResults') }}
+      </div>
+      <TableList v-else :items="filteredItems" @open-room="closeDrawer" />
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -61,12 +72,33 @@ const filteredItems = computed(() => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import 'vuetify/lib/styles/settings/_variables';
+
 .menu-drawer {
-  z-index: 0 !important;
+  height: 100% !important;
+  top: 0 !important;
+  z-index: 1006 !important;
+  padding-top: 70px;
+  width: 308px;
+}
+
+@media #{map-get($display-breakpoints, 'sm-and-down')} {
+  .menu-drawer {
+    z-index: 2000 !important;
+    padding-top: 0;
+  }
 }
 
 .search {
-  border-radius: 25px;
+  :deep(.v-input__control) {
+    border-radius: 20px;
+    border: 1px solid #3d4753;
+  }
+}
+
+.header {
+  font-size: 14px;
+  text-transform: uppercase;
 }
 </style>

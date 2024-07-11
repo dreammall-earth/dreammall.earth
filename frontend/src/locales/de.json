@@ -53,6 +53,8 @@
   },
   "tablesDrawer": {
     "header": "Offene Tische",
-    "searchPlaceholder": "Offene Tische, Teilnehmer"
+    "searchPlaceholder": "Offene Tische, Teilnehmer",
+    "noResults": "Keine Ergebnisse gefunden",
+    "noTables": "Keine Tische verfügbar"
   }
 }

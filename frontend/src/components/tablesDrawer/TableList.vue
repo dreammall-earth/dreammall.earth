@@ -1,28 +1,17 @@
 <template>
-  <v-card class="mx-auto" width="400">
-    <v-list lines="two">
-      <v-list-item
-        v-for="(item, index) in items"
-        :key="index"
-        class="table"
-        :title="item.meetingName"
-        :subtitle="$t('rooms.participantCount', { count: item.participantCount })"
-        @click="openRoom(item.joinLink)"
-      >
-        <!--
-        <template v-if="item.prepend" #prepend>
-          <component :is="item.prepend" v-bind="item.prependProps" />
-        </template>
-        -->
-
-        <!--
-        <template v-if="item.append" #append>
-          <component :is="item.append" v-bind="item.appendProps" />
-        </template>
-        -->
-      </v-list-item>
-    </v-list>
-  </v-card>
+  <ul class="list">
+    <li v-for="item in items" :key="item.meetingID" class="table">
+      <div class="table-info bg-dropdown-background">
+        <span>{{ item.meetingName }}</span>
+        <span class="subtitle">
+          {{ $t('rooms.participantCount', { count: item.participantCount }) }}
+        </span>
+      </div>
+      <button class="action" @click="openRoom(item.joinLink)">
+        <v-icon class="icon" icon="$camera" />
+      </button>
+    </li>
+  </ul>
 </template>
 
 <script lang="ts" setup>
@@ -47,14 +36,49 @@ const openRoom = (link: string) => {
 </script>
 
 <style scoped>
+.list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-flow: column;
+  gap: 8px;
+}
+
 .table {
   display: flex;
+  justify-content: center;
   align-items: center;
+  gap: 8px;
+}
+
+.table-info {
+  display: flex;
+  flex-flow: column;
   justify-content: space-between;
   padding: 8px 16px;
-  margin-bottom: 8px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+  border-radius: 16px 0px 0px 16px;
+  height: 42px;
+  font-size: 13px;
+  width: 100%;
+}
+
+.subtitle {
+  font-size: 10px;
+}
+
+.action {
+  width: 41px;
+  min-width: 41px;
+  height: 42px;
+  border-radius: 0px 16px 16px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f09630;
+  color: #fff;
+}
+
+.icon {
+  transform: scale(0.8);
 }
 </style>

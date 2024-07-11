@@ -53,6 +53,8 @@
   },
   "tablesDrawer": {
     "header": "Open Tables",
-    "searchPlaceholder": "Open tables, attendees"
+    "searchPlaceholder": "Open tables, attendees",
+    "noResults": "No results found",
+    "noTables": "No tables available"
   }
 }
