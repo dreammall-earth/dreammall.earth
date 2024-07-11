@@ -1,15 +1,14 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client/core'
 import { setContext } from '@apollo/client/link/context'
 import { split } from '@apollo/client/link/core'
+import { onError } from '@apollo/client/link/error'
 import { createHttpLink } from '@apollo/client/link/http'
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { createClient } from 'graphql-ws'
 import { WebSocket } from 'ws'
 
-// import { onError } from '@apollo/client/link/error'
-
-import { ENDPOINTS } from '#src/env'
+import { ENDPOINTS, AUTH } from '#src/env'
 
 const createAuthLink = (getToken: () => string) => {
   return setContext((_, { headers }) => {
@@ -47,23 +46,22 @@ const splitLink = split(
 
 const cache = new InMemoryCache()
 
-/*
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors)
-    graphQLErrors.map(({ message, locations, path }) =>
-      console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-      ),
-    )
-
-  if (networkError) console.log(`[Network error]: ${networkError}`)
+const errorLink = onError(({ graphQLErrors }) => {
+  if (graphQLErrors) {
+    graphQLErrors.forEach(({ extensions }) => {
+      if (extensions.code === 'UNAUTHENTICATED') {
+        window.location.href = AUTH.UNAUTHORIZED_REDIRECT_URI
+      }
+    })
+  }
 })
-*/
 
 export const createApolloClient = (getToken: () => string, isClient: boolean) => {
   return new ApolloClient({
     ...(isClient ? { ssrForceFetchDelay: 100 } : { ssrMode: true }),
-    link: createAuthLink(getToken).concat(isClient ? splitLink : httpLink), // errorLink.concat(httpLink),
+    link: createAuthLink(getToken)
+      .concat(errorLink)
+      .concat(isClient ? splitLink : httpLink),
     cache,
   })
 }
