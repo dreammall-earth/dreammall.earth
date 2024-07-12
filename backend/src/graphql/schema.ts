@@ -9,12 +9,13 @@ import { ContactFormResolver } from './resolvers/ContactFormResolver'
 import { checkForOpenRooms } from './resolvers/dal/handleOpenRooms'
 import { NewsletterSubscriptionResolver } from './resolvers/NewsletterSubscriptionResolver'
 import { RoomResolver } from './resolvers/RoomResolver'
+import { UserResolver } from './resolvers/UserResolver'
 
 if (CONFIG.BBB_PULL_MEETINGS) void checkForOpenRooms()
 
 export const schema = async (): Promise<GraphQLSchema> => {
   return buildSchema({
-    resolvers: [ContactFormResolver, NewsletterSubscriptionResolver, RoomResolver],
+    resolvers: [ContactFormResolver, NewsletterSubscriptionResolver, RoomResolver, UserResolver],
     pubSub,
     validate: {
       validationError: { target: false },
