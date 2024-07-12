@@ -58,7 +58,7 @@ Authentik e-mails can be checked locally via [Mailpit](https://mailpit.axllent.o
 In the `authentik/` directory start authentik and mailpit:
 
 ```bash
-docker-compose -f docker-compose.yml -f docker-compose.test.yml up
+docker-compose up
 ```
 
 ### Example
