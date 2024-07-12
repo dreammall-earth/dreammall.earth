@@ -65,7 +65,7 @@ describe('CreateButtonMobile', () => {
       wrapper = Wrapper()
       await wrapper.find('#create-button-mobile').trigger('click')
     })
-    
+
     describe('enter room', () => {
       describe('apollo with success', () => {
         beforeEach(async () => {
@@ -144,5 +144,6 @@ describe('CreateButtonMobile', () => {
           )
         })
       })
+    })
   })
 })
