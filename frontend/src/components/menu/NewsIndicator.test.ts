@@ -5,7 +5,7 @@ import NewsIndicator from './NewsIndicator.vue'
 
 describe('LogoImage', () => {
   const Wrapper = () => {
-    return mount(NewsIndicator)
+    return mount(NewsIndicator, { hasNews: true })
   }
 
   let wrapper: ReturnType<typeof Wrapper>

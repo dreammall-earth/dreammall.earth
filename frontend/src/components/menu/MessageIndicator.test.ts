@@ -5,7 +5,7 @@ import MessageIndicator from './MessageIndicator.vue'
 
 describe('LogoImage', () => {
   const Wrapper = () => {
-    return mount(MessageIndicator)
+    return mount(MessageIndicator, { numberOfMessages: 1 })
   }
 
   let wrapper: ReturnType<typeof Wrapper>
