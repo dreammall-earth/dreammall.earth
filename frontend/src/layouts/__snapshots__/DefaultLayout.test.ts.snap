@@ -1823,12 +1823,11 @@ exports[`DefaultLayout > renders 1`] = `
                     data-v-1c60eb53=""
                     id="clip0_1513_6638"
                   >
-                    <rect
+                    <circle
+                      cx="91"
+                      cy="91"
                       data-v-1c60eb53=""
-                      fill="white"
-                      height="48"
-                      transform="translate(69 66)"
-                      width="48"
+                      r="60"
                     />
                   </clippath>
                 </defs>
