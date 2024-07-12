@@ -65,7 +65,7 @@ describe('JoinRoomPage', () => {
       })
 
       it('Redirects to room Link', () => {
-        expect(global.window.location.href).toBe('http://meinlink.de/')
+        expect(global.window.location.href).toBe('http://meinlink.de')
       })
     })
 

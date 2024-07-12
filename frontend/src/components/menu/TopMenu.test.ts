@@ -145,7 +145,7 @@ describe('TopMenu', () => {
           })
 
           it('redirects to admin url', () => {
-            expect(global.window.location.href).toBe('https://url-to-admin.com/')
+            expect(global.window.location.href).toBe('https://url-to-admin.com')
           })
         })
       })
