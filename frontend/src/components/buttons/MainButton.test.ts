@@ -7,6 +7,16 @@ import MainButton from './MainButton.vue'
 vi.mock('vike/client/router')
 vi.mocked(navigate).mockResolvedValue()
 
+function hexToRgb(hex: string): string {
+  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
+  hex = hex.replace(shorthandRegex, (_m, r, g, b) => (r + r + g + g + b + b) as string)
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+  if (!result) {
+    return ''
+  }
+  return `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`
+}
+
 describe('MainButton', () => {
   const Wrapper = () => {
     return mount(MainButton, {
@@ -86,17 +96,23 @@ describe('MainButton', () => {
 
   describe('bg color', () => {
     it('is primary bg color', () => {
-      expect(wrapper.find('.v-btn.main-button--primary').attributes('style')).toContain('#f09630')
+      expect(wrapper.find('.v-btn.main-button--primary').attributes('style')).toContain(
+        hexToRgb('#f09630'),
+      )
     })
 
     it('sets variant to secondary', async () => {
       await wrapper.setProps({ label: 'My Button', variant: 'secondary', size: 'small' })
-      expect(wrapper.find('.v-btn.main-button--secondary').attributes('style')).toContain('#767676')
+      expect(wrapper.find('.v-btn.main-button--secondary').attributes('style')).toContain(
+        hexToRgb('#767676'),
+      )
     })
 
     it('sets variant to third', async () => {
       await wrapper.setProps({ label: 'My Button', variant: 'third', size: 'small' })
-      expect(wrapper.find('.v-btn.main-button--third').attributes('style')).toContain('#3d4753')
+      expect(wrapper.find('.v-btn.main-button--third').attributes('style')).toContain(
+        hexToRgb('#3d4753'),
+      )
     })
 
     it('sets variant to third-inverse', async () => {
@@ -106,22 +122,28 @@ describe('MainButton', () => {
 
     it('sets variant to fourth', async () => {
       await wrapper.setProps({ label: 'My Button', variant: 'fourth', size: 'small' })
-      expect(wrapper.find('.main-button--fourth').attributes('style')).toContain('#2ca5b1')
+      expect(wrapper.find('.main-button--fourth').attributes('style')).toContain(
+        hexToRgb('#2ca5b1'),
+      )
     })
 
     it('sets variant to submit', async () => {
       await wrapper.setProps({ label: 'My Button', variant: 'submit', size: 'small' })
-      expect(wrapper.find('.main-button--form-submit').attributes('style')).toContain('#23ad5b')
+      expect(wrapper.find('.main-button--form-submit').attributes('style')).toContain(
+        hexToRgb('#23ad5b'),
+      )
     })
 
     it('sets variant to download', async () => {
       await wrapper.setProps({ label: 'My Button', variant: 'download', size: 'small' })
-      expect(wrapper.find('.v-btn.main-button--download').attributes('style')).toContain('#009dd9')
+      expect(wrapper.find('.v-btn.main-button--download').attributes('style')).toContain(
+        hexToRgb('#009dd9'),
+      )
     })
 
     it('sets variant to undefined value', async () => {
       await wrapper.setProps({ label: 'My Button', variant: undefined, size: 'small' })
-      expect(wrapper.find('.v-btn.main-button').attributes('style')).toContain('#f09630')
+      expect(wrapper.find('.v-btn.main-button').attributes('style')).toContain(hexToRgb('#f09630'))
     })
   })
 
