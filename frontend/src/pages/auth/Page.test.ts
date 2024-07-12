@@ -14,6 +14,11 @@ import { title } from './+title'
 vi.mock('vike/client/router')
 vi.mocked(navigate).mockResolvedValue()
 
+/*
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, import/no-commonjs
+global.ResizeObserver = require('resize-observer-polyfill')
+*/
+
 describe('AuthPage', () => {
   const Wrapper = () => {
     return mount(VApp, {

@@ -96,7 +96,7 @@ exports[`CreateButtonMobile > renders 1`] = `
             class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--border-gradient main-button-auto assistant-button"
             data-v-1c60eb53=""
             data-v-2b63c1fe=""
-            style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
+            style="background-color: rgb(240, 150, 48); color: rgb(0, 0, 0); caret-color: #000; height: auto; width: auto;"
             type="button"
           >
             
@@ -137,7 +137,7 @@ exports[`CreateButtonMobile > renders 1`] = `
             class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--border-yellow main-button-auto new-table-button"
             data-v-1c60eb53=""
             data-v-2b63c1fe=""
-            style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
+            style="background-color: rgb(240, 150, 48); color: rgb(0, 0, 0); caret-color: #000; height: auto; width: auto;"
             type="button"
           >
             
@@ -178,7 +178,7 @@ exports[`CreateButtonMobile > renders 1`] = `
             class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--border-blue main-button-auto new-project-button"
             data-v-1c60eb53=""
             data-v-2b63c1fe=""
-            style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
+            style="background-color: rgb(240, 150, 48); color: rgb(0, 0, 0); caret-color: #000; height: auto; width: auto;"
             type="button"
           >
             

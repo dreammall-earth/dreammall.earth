@@ -4,7 +4,7 @@ exports[`MainButton > renders 1`] = `
 <button
   class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--size-large v-btn--variant-elevated main-button main-button--primary main-button-large"
   data-v-2b63c1fe=""
-  style="background-color: #f09630; color: #000; caret-color: #000;"
+  style="background-color: rgb(240, 150, 48); color: rgb(0, 0, 0); caret-color: #000;"
   type="button"
 >
   
