@@ -60,7 +60,7 @@ describe('BottomMenu', () => {
       beforeEach(async () => {
         await wrapper.find('button.user-info').trigger('click')
         await flushPromises()
-        await wrapper.findComponent(UserDropdown).find('button.sign-out').trigger('click')
+        await wrapper.findComponent(UserDropdown).find('button.sign-out-fail').trigger('click')
       })
 
       it('calls auth service sign out', () => {

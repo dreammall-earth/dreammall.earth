@@ -5,6 +5,7 @@
   <div
     class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface d-md-none"
   >
+    <button class="camera-button" @click="toggleDrawer">
       <Circle>
         <v-icon icon="$camera"></v-icon>
       </Circle>
