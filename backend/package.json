@@ -52,7 +52,7 @@
     "tslog": "^4.9.3",
     "type-graphql": "^2.0.0-rc.1",
     "uuid": "^10.0.0",
-    "ws": "^8.17.1"
+    "ws": "^8.18.0"
   },
   "devDependencies": {
     "@eslint-community/eslint-plugin-eslint-comments": "^4.3.0",
