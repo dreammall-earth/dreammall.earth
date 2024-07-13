@@ -16,6 +16,8 @@ services:
 
   authentik:
     <<: *x-mail-settings
+    depends_on:
+      - mailpit
 
   authentik-worker:
     <<: *x-mail-settings
