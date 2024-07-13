@@ -2,6 +2,8 @@ import { ApolloError } from '@apollo/client/errors'
 import { flushPromises, mount } from '@vue/test-utils'
 import { navigate } from 'vike/client/router'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { h } from 'vue'
+import { VApp } from 'vuetify/components'
 
 import { joinMyRoomMutation } from '#mutations/joinMyRoomMutation'
 import { useActiveRoomStore } from '#stores/activeRoomStore'
@@ -21,8 +23,10 @@ const activeRoomStore = useActiveRoomStore()
 
 describe('CreateButtonMobile', () => {
   const Wrapper = () => {
-    return mount(CreateButtonMobile, {
-      props: {},
+    return mount(VApp, {
+      slots: {
+        default: h(CreateButtonMobile),
+      },
       global: {
         stubs: {
           teleport: true,
@@ -37,7 +41,7 @@ describe('CreateButtonMobile', () => {
   })
 
   it('renders', () => {
-    expect(wrapper.element).toMatchSnapshot()
+    expect(wrapper.findComponent(CreateButtonMobile).element).toMatchSnapshot()
   })
 
   it('button list content is hidden', () => {
@@ -49,7 +53,8 @@ describe('CreateButtonMobile', () => {
   describe('click on create button', () => {
     it('emits click event', async () => {
       await wrapper.find('#create-button-mobile').trigger('click')
-      expect(wrapper.emitted()).toHaveProperty('click', [[1]])
+      const component = wrapper.findComponent(CreateButtonMobile)
+      expect(component.emitted()).toHaveProperty('click', [[1]])
     })
 
     it('button list visible', async () => {
