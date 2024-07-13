@@ -1,11 +1,12 @@
 import { mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
+import { h } from 'vue'
 
 import NewsIndicator from './NewsIndicator.vue'
 
-describe('LogoImage', () => {
+describe('NewsIndicator', () => {
   const Wrapper = () => {
-    return mount(NewsIndicator, { hasNews: true })
+    return mount(h(NewsIndicator, { hasNews: true }))
   }
 
   let wrapper: ReturnType<typeof Wrapper>

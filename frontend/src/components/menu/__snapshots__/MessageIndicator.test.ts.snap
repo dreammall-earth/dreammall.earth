@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`LogoImage > renders 1`] = `
+exports[`MessageIndicator > renders 1`] = `
 <div
   class="message-indicator"
   data-v-6b63f7d9=""

@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`LogoImage > renders 1`] = `
+exports[`NewsIndicator > renders 1`] = `
 <div
   class="news-indicator"
   data-v-5cc937bd=""

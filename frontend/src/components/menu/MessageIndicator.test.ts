@@ -1,11 +1,12 @@
 import { mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
+import { h } from 'vue'
 
 import MessageIndicator from './MessageIndicator.vue'
 
-describe('LogoImage', () => {
+describe('MessageIndicator', () => {
   const Wrapper = () => {
-    return mount(MessageIndicator, { numberOfMessages: 1 })
+    return mount(h(MessageIndicator, { numberOfMessages: 1 }))
   }
 
   let wrapper: ReturnType<typeof Wrapper>
