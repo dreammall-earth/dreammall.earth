@@ -33,7 +33,7 @@ exports[`NewsIndicator > renders 1`] = `
   </div>
   <div
     class="marker d-flex justify-center align-center rounded-circle"
-    data-show-marker="false"
+    data-show-marker="true"
     data-v-5cc937bd=""
   />
 </div>
