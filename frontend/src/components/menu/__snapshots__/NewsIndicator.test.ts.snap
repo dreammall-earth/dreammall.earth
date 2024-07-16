@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`NewsIndicator > renders 1`] = `
+exports[`NewsIndicator > renders with news 1`] = `
 <div
   class="news-indicator"
   data-v-5cc937bd=""
@@ -34,6 +34,45 @@ exports[`NewsIndicator > renders 1`] = `
   <div
     class="marker d-flex justify-center align-center rounded-circle"
     data-show-marker="true"
+    data-v-5cc937bd=""
+  />
+</div>
+`;
+
+exports[`NewsIndicator > renders without news 1`] = `
+<div
+  class="news-indicator"
+  data-v-5cc937bd=""
+>
+  <div
+    class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
+    data-v-39e8094e=""
+    data-v-5cc937bd=""
+  >
+    
+    <i
+      aria-hidden="true"
+      class="v-icon notranslate v-theme--light v-icon--size-default"
+      data-v-5cc937bd=""
+    >
+      <svg
+        fill="none"
+        height="20"
+        viewBox="0 0 16 20"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0.381348 16.7172V14.8088H2.28971V8.12956C2.28971 6.80961 2.68729 5.63676 3.48244 4.61101C4.2776 3.58526 5.31129 2.91336 6.58354 2.5953V1.92737C6.58354 1.52979 6.72269 1.19185 7.00099 0.913549C7.2793 0.635245 7.61724 0.496094 8.01481 0.496094C8.41239 0.496094 8.75033 0.635245 9.02863 0.913549C9.30694 1.19185 9.44609 1.52979 9.44609 1.92737V2.5953C10.7183 2.91336 11.752 3.58526 12.5472 4.61101C13.3423 5.63676 13.7399 6.80961 13.7399 8.12956V14.8088H15.6483V16.7172H0.381348ZM8.01481 19.5798C7.49001 19.5798 7.04075 19.3929 6.66703 19.0192C6.29331 18.6455 6.10645 18.1962 6.10645 17.6714H9.92318C9.92318 18.1962 9.73632 18.6455 9.3626 19.0192C8.98888 19.3929 8.53961 19.5798 8.01481 19.5798ZM4.19808 14.8088H11.8315V8.12956C11.8315 7.07996 11.4578 6.18143 10.7104 5.43399C9.96294 4.68655 9.06441 4.31283 8.01481 4.31283C6.96521 4.31283 6.06669 4.68655 5.31925 5.43399C4.5718 6.18143 4.19808 7.07996 4.19808 8.12956V14.8088Z"
+          fill="currentColor"
+        />
+      </svg>
+    </i>
+    
+  </div>
+  <div
+    class="marker d-flex justify-center align-center rounded-circle"
+    data-show-marker="false"
     data-v-5cc937bd=""
   />
 </div>
