@@ -52,7 +52,6 @@ async function startServer() {
         gzip: true,
       }),
     )
-    /*
     // cache things for 10min
     app.use(
       sirv(`${root}/build/client`, {
@@ -61,7 +60,6 @@ async function startServer() {
         gzip: true,
       }),
     )
-    */
   } else {
     // We instantiate Vite's development server and integrate its middleware to our server.
     // ⚠️ We instantiate it only in development. (It isn't needed in production and it
