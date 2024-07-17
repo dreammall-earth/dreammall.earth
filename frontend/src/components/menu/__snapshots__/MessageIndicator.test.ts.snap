@@ -33,10 +33,10 @@ exports[`MessageIndicator > renders with 0 messages 1`] = `
   </div>
   <div
     class="count d-flex justify-center align-center"
-    data-show-count="true"
+    data-show-count="false"
     data-v-6b63f7d9=""
   >
-    2
+    0
   </div>
 </div>
 `;

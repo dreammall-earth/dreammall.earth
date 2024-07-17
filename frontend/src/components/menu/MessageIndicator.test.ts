@@ -25,7 +25,7 @@ describe('MessageIndicator', () => {
   })
 
   it('renders with 0 messages', () => {
-    wrapper = Wrapper({ props: { numberOfMessages: 2 } })
+    wrapper = Wrapper({ props: { numberOfMessages: 0 } })
     expect(wrapper.element).toMatchSnapshot()
   })
 
