@@ -84,6 +84,7 @@ describe('Auth Store', () => {
         expect(setCookieSpy).toBeCalledWith('auth', 'state', {
           expires: 3,
           Secure: true,
+          SameSite: 'None',
         })
       })
     })
