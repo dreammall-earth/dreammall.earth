@@ -1,20 +1,20 @@
 <template>
   <MobileCreateButtonActions :is-visible="isButtonListVisible" />
-  <div class="d-md-none position-fixed mb-5 pb-5" :class="$style['navigation-drawer-box']">
+  <div class="navigation-drawer-box d-md-none position-fixed mb-5 pb-5">
     <TablesDrawer v-model="isTablesDrawerVisible" location="bottom" />
   </div>
-  <div class="w-100 position-fixed bottom-0 py-2 d-md-none" :class="$style['bottom-menu']">
-    <button :class="[$style['menu-item'], $style['camera-button']]" @click="toggleDrawer">
+  <div class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none">
+    <button class="camera-button mx-auto" @click="toggleDrawer">
       <Circle>
         <v-icon icon="$camera"></v-icon>
       </Circle>
     </button>
     <MobileCreateButton
-      :class="$style['menu-item']"
+      class="mx-auto"
       :is-active="isButtonListVisible"
       @button-click="toggleButtonList"
     />
-    <UserInfo :class="$style['menu-item']" />
+    <UserInfo class="mx-auto" />
   </div>
 </template>
 
@@ -46,7 +46,7 @@ const toggleButtonList = () => {
 }
 </script>
 
-<style module lang="scss">
+<style scoped lang="scss">
 .bottom-menu {
   display: grid;
   grid-template-columns: repeat(3, 33.3333%);
@@ -69,9 +69,5 @@ const toggleButtonList = () => {
 
 .navigation-drawer-box {
   bottom: 65px;
-}
-
-.menu-item {
-  margin-inline: auto;
 }
 </style>
