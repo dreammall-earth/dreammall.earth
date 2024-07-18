@@ -81,23 +81,23 @@ const enterRoom = async () => {
 .button-list-mobile {
   --height: 220px;
   --width: 180px;
-  height: var(--height);
-  width: var(--width);
+
   position: fixed;
   bottom: calc(var(--height) * -1);
   left: calc(50% - var(--width) / 2);
-  z-index: -1;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 15px;
   align-items: center;
   justify-content: start;
+  width: var(--width);
+  height: var(--height);
   padding-top: 30px;
   background: var(--v-bottom-menu-background) !important;
   backdrop-filter: blur(20px);
   border-radius: 30px 30px 0 0;
   transition: bottom 0.75s;
-  z-index: 1;
 
   &--active {
     bottom: 60px;

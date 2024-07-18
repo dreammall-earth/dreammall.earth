@@ -240,12 +240,12 @@ defineEmits(['button-click'])
 .create-button-svg {
   width: 100%;
   max-width: 80px;
-  min-height: 80px;
   height: 100%;
+  min-height: 80px;
+  margin-top: -38px;
   transition:
     max-width 0.75s,
     margin-top 0.75s;
-  margin-top: -38px;
 
   &--active {
     max-width: 60px;

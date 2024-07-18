@@ -48,11 +48,11 @@ const toggleButtonList = () => {
 
 <style scoped lang="scss">
 .bottom-menu {
-  display: grid;
-  grid-template-columns: repeat(3, 33.3333%);
   bottom: 0;
   left: 0;
   z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 33.3333%);
   background: var(--v-bottom-menu-background);
   backdrop-filter: blur(20px);
   border-radius: 30px 30px 0 0;
