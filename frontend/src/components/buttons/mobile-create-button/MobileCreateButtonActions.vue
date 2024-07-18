@@ -1,5 +1,8 @@
 <template>
-  <div class="button-list-mobile" :class="[isVisible ? 'button-list-mobile--active' : '']">
+  <div
+    class="button-list-mobile d-md-none"
+    :class="[isVisible ? 'button-list-mobile--active' : '']"
+  >
     <v-img class="w-100 menu-divider" :src="Divider" />
     <v-img
       class="w-100 menu-triangle"
@@ -137,14 +140,6 @@ const enterRoom = async () => {
   .new-table-button {
     margin: 0 20px;
     transition-delay: 0.1s;
-  }
-
-  .assistant-button,
-  .new-project-button,
-  .new-table-button {
-    :deep(i) {
-      margin-right: 16px;
-    }
   }
 }
 </style>
