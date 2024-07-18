@@ -1,8 +1,8 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`MobileCreateButtonActions > renders 1`] = `
+exports[`MobileCreateButtonActions > renders closed 1`] = `
 <div
-  class="button-list-mobile button-list-mobile--active"
+  class="button-list-mobile d-md-none"
   data-v-1479d999=""
 >
   <div
@@ -42,7 +42,7 @@ exports[`MobileCreateButtonActions > renders 1`] = `
     <!---->
   </div>
   <div
-    class="v-responsive v-img v-img--booting w-100 menu-triangle menu-triangle--turned"
+    class="v-responsive v-img v-img--booting w-100 menu-triangle"
     data-v-1479d999=""
   >
     <div
@@ -203,9 +203,9 @@ exports[`MobileCreateButtonActions > renders 1`] = `
 </div>
 `;
 
-exports[`MobileCreateButtonActions > renders closed 1`] = `
+exports[`MobileCreateButtonActions > renders open 1`] = `
 <div
-  class="button-list-mobile"
+  class="button-list-mobile d-md-none button-list-mobile--active"
   data-v-1479d999=""
 >
   <div
@@ -245,7 +245,7 @@ exports[`MobileCreateButtonActions > renders closed 1`] = `
     <!---->
   </div>
   <div
-    class="v-responsive v-img v-img--booting w-100 menu-triangle"
+    class="v-responsive v-img v-img--booting w-100 menu-triangle menu-triangle--turned"
     data-v-1479d999=""
   >
     <div

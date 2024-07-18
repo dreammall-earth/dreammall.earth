@@ -1,7 +1,9 @@
 import { ApolloError } from '@apollo/client/errors'
 import { flushPromises, mount } from '@vue/test-utils'
 import { navigate } from 'vike/client/router'
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest'
+import { h } from 'vue'
+import { VApp } from 'vuetify/components'
 
 import { joinMyRoomMutation } from '#mutations/joinMyRoomMutation'
 import { useActiveRoomStore } from '#stores/activeRoomStore'
@@ -20,22 +22,27 @@ mockClient.setRequestHandler(joinMyRoomMutation, joinMyRoomMutationMock)
 const activeRoomStore = useActiveRoomStore()
 
 describe('MobileCreateButtonActions', () => {
-  const Wrapper = () => {
-    return mount(MobileCreateButtonActions, { props: { isVisible: true } })
+  const Wrapper = (props = { isVisible: true }) => {
+    return mount(VApp, {
+      slots: {
+        default: h(MobileCreateButtonActions, props),
+      },
+    })
   }
   let wrapper: ReturnType<typeof Wrapper>
 
-  beforeEach(() => {
-    wrapper = Wrapper()
+  afterEach(() => {
+    wrapper.unmount()
   })
 
-  it('renders', () => {
+  it('renders open', () => {
+    wrapper = Wrapper()
     expect(wrapper.findComponent(MobileCreateButtonActions).element).toMatchSnapshot()
   })
 
-  it('renders closed', async () => {
-    await wrapper.setProps({ isVisible: false })
-    expect(wrapper.element).toMatchSnapshot()
+  it('renders closed', () => {
+    wrapper = Wrapper({ isVisible: false })
+    expect(wrapper.findComponent(MobileCreateButtonActions).element).toMatchSnapshot()
   })
 
   describe('new table button', () => {

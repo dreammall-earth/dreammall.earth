@@ -1,7 +1,8 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`MobileCreateButton > renders 1`] = `
+exports[`MobileCreateButton > renders active 1`] = `
 <svg
+  class="create-button-svg create-button-svg--active"
   data-v-91b3d3fa=""
   fill="none"
   height="182"
@@ -10,7 +11,7 @@ exports[`MobileCreateButton > renders 1`] = `
   xmlns="http://www.w3.org/2000/svg"
 >
   <g
-    class="most-outer-rings"
+    class="most-outer-rings most-outer-rings--active"
     data-v-91b3d3fa=""
     filter="url(#filter0_i_1513_6638)"
     opacity="0.25"
@@ -23,7 +24,7 @@ exports[`MobileCreateButton > renders 1`] = `
     />
   </g>
   <g
-    class="outer-rings"
+    class="outer-rings outer-rings--active"
     data-v-91b3d3fa=""
     filter="url(#filter1_i_1513_6638)"
   >
@@ -481,8 +482,9 @@ exports[`MobileCreateButton > renders 1`] = `
 </svg>
 `;
 
-exports[`MobileCreateButton > renders active 1`] = `
+exports[`MobileCreateButton > renders inactive 1`] = `
 <svg
+  class="create-button-svg"
   data-v-91b3d3fa=""
   fill="none"
   height="182"
@@ -491,7 +493,7 @@ exports[`MobileCreateButton > renders active 1`] = `
   xmlns="http://www.w3.org/2000/svg"
 >
   <g
-    class="most-outer-rings most-outer-rings--active"
+    class="most-outer-rings"
     data-v-91b3d3fa=""
     filter="url(#filter0_i_1513_6638)"
     opacity="0.25"
@@ -504,7 +506,7 @@ exports[`MobileCreateButton > renders active 1`] = `
     />
   </g>
   <g
-    class="outer-rings outer-rings--active"
+    class="outer-rings"
     data-v-91b3d3fa=""
     filter="url(#filter1_i_1513_6638)"
   >
