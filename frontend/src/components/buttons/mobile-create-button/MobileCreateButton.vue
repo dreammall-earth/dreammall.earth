@@ -5,6 +5,8 @@
     viewBox="0 0 182 182"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    class="create-button-svg"
+    :class="[isActive ? 'create-button-svg--active' : '']"
   >
     <g
       class="most-outer-rings"
@@ -235,11 +237,20 @@ defineEmits(['button-click'])
 </script>
 
 <style scoped lang="scss">
-svg {
+.create-button-svg {
   width: 100%;
   max-width: 80px;
+  min-height: 80px;
   height: 100%;
-  transition: max-width 0.75s;
+  transition:
+    max-width 0.75s,
+    margin-top 0.75s;
+  margin-top: -38px;
+
+  &--active {
+    max-width: 60px;
+    margin-top: -58px;
+  }
 
   #create-button-mobile {
     pointer-events: all;
