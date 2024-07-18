@@ -130,6 +130,10 @@ const enterRoom = async () => {
   .assistant-button {
     margin: 0 40px;
     transition-delay: 0.2s;
+
+    :deep(i) {
+      margin-right: 16px;
+    }
   }
 
   .new-project-button {
