@@ -104,8 +104,12 @@ const filteredItems = computed(() => {
 
 .search {
   :deep(.v-input__control) {
-    border: 1px solid #3d4753;
+    border: 1px solid rgb(var(--v-theme-icon));
     border-radius: 20px;
+  }
+
+  :deep(.v-field--variant-solo) {
+    background-color: transparent !important;
   }
 }
 
