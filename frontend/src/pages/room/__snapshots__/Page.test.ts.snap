@@ -879,7 +879,7 @@ exports[`Room Page > renders 1`] = `
                     
                     <i
                       aria-hidden="false"
-                      aria-label="$vuetify.input.clear"
+                      aria-label="Löschen"
                       class="mdi-close-circle mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--clickable"
                       role="button"
                       tabindex="0"
@@ -1105,7 +1105,7 @@ exports[`Room Page > renders 1`] = `
                     
                     <i
                       aria-hidden="false"
-                      aria-label="$vuetify.input.clear"
+                      aria-label="Löschen"
                       class="mdi-close-circle mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--clickable"
                       role="button"
                       tabindex="0"

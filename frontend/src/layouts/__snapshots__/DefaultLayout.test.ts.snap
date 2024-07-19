@@ -758,7 +758,7 @@ exports[`DefaultLayout > renders 1`] = `
       <nav
         class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer px-4"
         data-v-cf2c9067=""
-        style="right: 0px; z-index: 1006; transform: translateX(110%); position: fixed; transition: none !important; height: calc(100% - 70px - 0px); top: 70px; bottom: 0px;"
+        style="right: 0px; z-index: 1006; transform: translateX(110%); position: fixed; height: calc(100% - 70px - 0px); top: 70px; bottom: 0px; transition: none !important;"
       >
         <!---->
         <!---->
@@ -835,7 +835,7 @@ exports[`DefaultLayout > renders 1`] = `
                   <label
                     aria-hidden="true"
                     class="v-label v-field-label v-field-label--floating"
-                    for="input-3"
+                    for="input-7"
                   >
                     <!---->
                     
@@ -844,7 +844,7 @@ exports[`DefaultLayout > renders 1`] = `
                   </label>
                   <label
                     class="v-label v-field-label"
-                    for="input-3"
+                    for="input-7"
                   >
                     <!---->
                     
@@ -855,9 +855,9 @@ exports[`DefaultLayout > renders 1`] = `
                   
                   <!---->
                   <input
-                    aria-describedby="input-3-messages"
+                    aria-describedby="input-7-messages"
                     class="v-field__input"
-                    id="input-3"
+                    id="input-7"
                     size="1"
                     type="text"
                   />
@@ -878,7 +878,7 @@ exports[`DefaultLayout > renders 1`] = `
                     
                     <i
                       aria-hidden="false"
-                      aria-label="$vuetify.input.clear"
+                      aria-label="Löschen"
                       class="mdi-close-circle mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--clickable"
                       role="button"
                       tabindex="0"
@@ -910,7 +910,7 @@ exports[`DefaultLayout > renders 1`] = `
                 aria-live="polite"
                 class="v-messages"
                 css="true"
-                id="input-3-messages"
+                id="input-7-messages"
                 name="slide-y-transition"
                 persisted="false"
                 role="alert"
@@ -1055,7 +1055,7 @@ exports[`DefaultLayout > renders 1`] = `
                   <label
                     aria-hidden="true"
                     class="v-label v-field-label v-field-label--floating"
-                    for="input-6"
+                    for="input-3"
                   >
                     <!---->
                     
@@ -1064,7 +1064,7 @@ exports[`DefaultLayout > renders 1`] = `
                   </label>
                   <label
                     class="v-label v-field-label"
-                    for="input-6"
+                    for="input-3"
                   >
                     <!---->
                     
@@ -1075,9 +1075,9 @@ exports[`DefaultLayout > renders 1`] = `
                   
                   <!---->
                   <input
-                    aria-describedby="input-6-messages"
+                    aria-describedby="input-3-messages"
                     class="v-field__input"
-                    id="input-6"
+                    id="input-3"
                     size="1"
                     type="text"
                   />
@@ -1098,7 +1098,7 @@ exports[`DefaultLayout > renders 1`] = `
                     
                     <i
                       aria-hidden="false"
-                      aria-label="$vuetify.input.clear"
+                      aria-label="Löschen"
                       class="mdi-close-circle mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--clickable"
                       role="button"
                       tabindex="0"
@@ -1130,7 +1130,7 @@ exports[`DefaultLayout > renders 1`] = `
                 aria-live="polite"
                 class="v-messages"
                 css="true"
-                id="input-6-messages"
+                id="input-3-messages"
                 name="slide-y-transition"
                 persisted="false"
                 role="alert"
@@ -1709,7 +1709,7 @@ exports[`DefaultLayout > renders 1`] = `
         <button
           aria-expanded="false"
           aria-haspopup="menu"
-          aria-owns="v-menu-8"
+          aria-owns="v-menu-5"
           class="user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
           data-v-607bdd70=""
           targetref="[object Object]"

@@ -22,6 +22,7 @@ exports[`TableList > renders correctly 1`] = `
           data-v-de37061b=""
         >
           <span
+            class="name"
             data-v-de37061b=""
           >
             my meeting
@@ -66,6 +67,7 @@ exports[`TableList > renders correctly 1`] = `
           data-v-de37061b=""
         >
           <span
+            class="name"
             data-v-de37061b=""
           >
             my meeting
