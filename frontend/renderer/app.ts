@@ -85,7 +85,7 @@ function createApp(pageContext: PageContext, isClient = true) {
 
   setPageContext(app, pageContextReactive)
 
-  return { app, i18n }
+  return { app, i18n, pinia }
 }
 
 // Same as `Object.assign()` but with type inference

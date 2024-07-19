@@ -56,6 +56,7 @@
     "@apollo/client": "^3.10.6",
     "@intlify/unplugin-vue-i18n": "^4.0.0",
     "@mdi/font": "^7.4.47",
+    "@nuxt/devalue": "^2.0.2",
     "@types/compression": "^1.7.5",
     "@types/express": "^4.17.21",
     "@types/node": "^20.14.8",

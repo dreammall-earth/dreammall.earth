@@ -1,9 +1,11 @@
+import devalue from '@nuxt/devalue'
 import { renderToString as renderToString_ } from '@vue/server-renderer'
 import { escapeInject, dangerouslySkipEscape } from 'vike/server'
 import { PageContext, PageContextServer } from 'vike/types'
 
 import image from '#assets/dreammall-logo.svg'
 import logoUrl from '#assets/favicon.ico'
+import pinia from '#plugins/pinia'
 import { META } from '#src/env'
 
 import { createApp } from './app'
@@ -55,6 +57,7 @@ async function render(pageContext: PageContextServer & PageContext) {
   return {
     documentHtml,
     pageContext: {
+      initialStoreState: devalue(pinia.state.value),
       // We can add some `pageContext` here, which is useful if we want to do page redirection https://vike.dev/page-redirection
     },
   }
