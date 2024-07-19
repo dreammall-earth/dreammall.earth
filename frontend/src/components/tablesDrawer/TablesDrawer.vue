@@ -81,6 +81,7 @@ const filteredItems = computed(() => {
   width: 308px;
   height: 100% !important;
   padding-top: 70px;
+  background: var(--v-sidebar-background) !important;
 }
 
 @media #{map-get($display-breakpoints, 'sm-and-down')} {
@@ -92,6 +93,12 @@ const filteredItems = computed(() => {
     border-radius: 30px 30px 0 0;
 
     --sides: 12px;
+  }
+}
+
+@media #{map-get($display-breakpoints, 'md-and-up')} {
+  .menu-drawer {
+    border-radius: 20px 0px 0px 20px;
   }
 }
 
