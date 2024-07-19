@@ -28,7 +28,11 @@
       </v-row>
     </v-app-bar>
   </div>
-  <TablesDrawer v-model="isTablesDrawerVisible" location="right" />
+  <TablesDrawer
+    v-if="!$vuetify.display.smAndDown"
+    v-model="isTablesDrawerVisible"
+    location="right"
+  />
 </template>
 
 <script lang="ts" setup>
