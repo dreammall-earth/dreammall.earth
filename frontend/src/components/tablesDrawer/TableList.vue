@@ -2,7 +2,7 @@
   <ul class="list">
     <li v-for="item in items" :key="item.meetingID" class="table">
       <div class="table-info bg-dropdown-background">
-        <span>{{ item.meetingName }}</span>
+        <span class="name">{{ item.meetingName }}</span>
         <span class="subtitle">
           {{ $t('rooms.participantCount', { count: item.participantCount }) }}
         </span>
@@ -57,13 +57,18 @@ const openRoom = (link: string) => {
   justify-content: space-between;
   width: 100%;
   height: 42px;
-  padding: 8px 16px;
-  font-size: 13px;
+  padding: 5px 24px;
   border-radius: 16px 0 0 16px;
 }
 
+.name {
+  height: 18px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
 .subtitle {
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .action {
