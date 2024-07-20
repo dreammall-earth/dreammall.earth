@@ -31,7 +31,7 @@
     "@eslint-community/eslint-plugin-eslint-comments": "^4.3.0",
     "@typescript-eslint/eslint-plugin": "^7.8.0",
     "@typescript-eslint/parser": "^7.8.0",
-    "cypress": "^13.12.0",
+    "cypress": "^13.13.1",
     "cypress-network-idle": "^1.14.2",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
