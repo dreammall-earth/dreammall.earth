@@ -5,8 +5,9 @@ import { verify, JwtPayload } from 'jsonwebtoken'
 import { AuthChecker } from 'type-graphql'
 
 import { EVENT_CREATE_USER } from '#src/event/Events'
-import { prisma } from '#src/prisma'
 import { Context } from '#src/server/context'
+
+import type { prisma as Prisma } from '#src/prisma'
 
 interface CustomJwtPayload extends JwtPayload {
   nickname: string
@@ -23,40 +24,44 @@ export const getCert = (): Buffer => {
   return cert
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const authChecker: AuthChecker<Context> = async ({ root, args, context, info }, roles) => {
-  const { token } = context
+export const authChecker: AuthChecker<Context> = async ({ context }) => {
+  const { token, dataSources } = context
+  const { prisma } = dataSources
 
   if (!token) return false
 
+  let decoded
   try {
-    const decoded = verify(token, getCert()) as CustomJwtPayload
-    if (decoded) {
-      const { nickname, name } = decoded
-      const user = await contextUser(nickname, name)
-      context.user = user
-      return true
-    }
-  } catch {
+    decoded = verify(token, getCert()) as CustomJwtPayload
+  } catch (err) {
     return false
+  }
+
+  if (decoded) {
+    const { nickname, name } = decoded
+    const user = await contextUser(prisma)(nickname, name)
+    context.user = user
+    return true
   }
 
   return false
 }
 
-const contextUser = async (username: string, name: string): Promise<User> => {
-  let user: User | null = await prisma.user.findUnique({
-    where: {
-      username,
-    },
-  })
-  if (user) return user
-  user = await prisma.user.create({
-    data: {
-      username,
-      name,
-    },
-  })
-  await EVENT_CREATE_USER(user.id)
-  return user
-}
+const contextUser =
+  (prisma: typeof Prisma) =>
+  async (username: string, name: string): Promise<User> => {
+    let user: User | null = await prisma.user.findUnique({
+      where: {
+        username,
+      },
+    })
+    if (user) return user
+    user = await prisma.user.create({
+      data: {
+        username,
+        name,
+      },
+    })
+    void EVENT_CREATE_USER(user.id)
+    return user
+  }

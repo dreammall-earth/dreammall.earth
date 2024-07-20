@@ -6,12 +6,14 @@ import { EventType } from '#src/event/EventType'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
 
+import type { Context } from '#src/server/context'
+
 CONFIG.BREVO_KEY = 'MY KEY'
 CONFIG.BREVO_ADMIN_NAME = 'Bibi Bloxberg'
 CONFIG.BREVO_ADMIN_EMAIL = 'bibi@bloxberg.de'
 CONFIG.BREVO_NEWSLETTER_TEMPLATE_OPTIN = 3
 
-let testServer: ApolloServer
+let testServer: ApolloServer<Context>
 
 jest.mock('#api/Brevo', () => ({
   subscribeToNewsletter: jest.fn().mockResolvedValue(true),
