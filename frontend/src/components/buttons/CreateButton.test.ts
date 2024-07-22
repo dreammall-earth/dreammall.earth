@@ -74,6 +74,7 @@ describe('CreateButton', () => {
         })
 
         it('calls the api', () => {
+          // eslint-disable-next-line vitest/prefer-called-with
           expect(joinMyRoomMutationMock).toHaveBeenCalled()
         })
 
@@ -99,6 +100,7 @@ describe('CreateButton', () => {
         })
 
         it('calls the api', () => {
+          // eslint-disable-next-line vitest/prefer-called-with
           expect(joinMyRoomMutationMock).toHaveBeenCalled()
         })
 
@@ -107,7 +109,7 @@ describe('CreateButton', () => {
         })
 
         it.skip('toasts no room found error', () => {
-          expect(errorHandlerSpy).toBeCalledWith('No room found')
+          expect(errorHandlerSpy).toHaveBeenCalledWith('No room found')
         })
       })
 
@@ -123,7 +125,7 @@ describe('CreateButton', () => {
         })
 
         it('calls the api', () => {
-          expect(joinMyRoomMutationMock).toHaveBeenCalled()
+          expect(joinMyRoomMutationMock).toHaveBeenCalledWith({})
         })
 
         it('does not update the store', () => {

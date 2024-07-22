@@ -366,7 +366,7 @@ describe('RoomResolver', () => {
               createDate: expect.any(Date),
             },
           })
-          expect(createMeetingMock).toBeCalledWith(
+          expect(createMeetingMock).toHaveBeenCalledWith(
             {
               name: 'mockedUser',
               meetingID: result?.meeting?.meetingID,
@@ -679,7 +679,7 @@ describe('RoomResolver', () => {
         })
 
         it('calls joinMeetingLink with correct PW', () => {
-          expect(joinMeetingLinkMock).toBeCalledWith({
+          expect(joinMeetingLinkMock).toHaveBeenCalledWith({
             fullName: 'User',
             meetingID: 'Dreammall-Entwicklung',
             password: '1234',

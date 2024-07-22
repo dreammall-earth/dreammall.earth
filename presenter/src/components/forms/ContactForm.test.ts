@@ -97,7 +97,7 @@ describe('ContactForm', () => {
       })
 
       it('does not call the API', () => {
-        expect(createContactFormMutationMock).not.toBeCalled()
+        expect(createContactFormMutationMock).not.toHaveBeenCalled()
       })
     })
 
@@ -122,7 +122,7 @@ describe('ContactForm', () => {
         })
 
         it('calls the API', () => {
-          expect(createContactFormMutationMock).toBeCalledWith({
+          expect(createContactFormMutationMock).toHaveBeenCalledWith({
             data: {
               firstName: 'Peter',
               lastName: 'Lustig',
@@ -168,7 +168,7 @@ describe('ContactForm', () => {
         })
 
         it('calls the API', () => {
-          expect(createContactFormMutationMock).toBeCalledWith({
+          expect(createContactFormMutationMock).toHaveBeenCalledWith({
             data: {
               firstName: 'Peter',
               lastName: 'Lustig',

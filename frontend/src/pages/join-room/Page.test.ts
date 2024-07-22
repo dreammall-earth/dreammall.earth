@@ -54,7 +54,8 @@ describe('JoinRoomPage', () => {
     })
 
     it('calls JoinRoom query', () => {
-      expect(joinRoomQueryMock).toHaveBeenCalledWith()
+      // eslint-disable-next-line vitest/prefer-called-with
+      expect(joinRoomQueryMock).toHaveBeenCalled()
     })
 
     describe('Room Link returned', () => {

@@ -54,7 +54,7 @@ describe('NewsletterForm', () => {
       })
 
       it('does not call the API', () => {
-        expect(subscribeToNewsletterMutationMock).not.toBeCalled()
+        expect(subscribeToNewsletterMutationMock).not.toHaveBeenCalled()
       })
     })
 
@@ -78,7 +78,7 @@ describe('NewsletterForm', () => {
         })
 
         it('calls the API', () => {
-          expect(subscribeToNewsletterMutationMock).toBeCalledWith({
+          expect(subscribeToNewsletterMutationMock).toHaveBeenCalledWith({
             data: {
               firstName: 'Peter',
               lastName: 'Lustig',
@@ -123,7 +123,7 @@ describe('NewsletterForm', () => {
         })
 
         it('calls the API', () => {
-          expect(subscribeToNewsletterMutationMock).toBeCalledWith({
+          expect(subscribeToNewsletterMutationMock).toHaveBeenCalledWith({
             data: {
               firstName: 'Peter',
               lastName: 'Lustig',

@@ -42,7 +42,8 @@ describe('PlanningSection', () => {
       })
 
       it('plays video again', () => {
-        expect(spy).toBeCalled()
+        // eslint-disable-next-line vitest/prefer-called-with
+        expect(spy).toHaveBeenCalled()
       })
     })
   })
@@ -103,7 +104,8 @@ describe('PlanningSection', () => {
     it('calls etVideoSrc', () => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       events.resize()
-      expect(spy).toBeCalled()
+      // eslint-disable-next-line vitest/prefer-called-with
+      expect(spy).toHaveBeenCalled()
     })
   })
 })

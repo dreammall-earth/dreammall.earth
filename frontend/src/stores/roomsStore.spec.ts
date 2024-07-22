@@ -51,7 +51,7 @@ describe('Rooms Store', () => {
       })
 
       it('calls the API again', () => {
-        expect(openRoomsQueryMock).toBeCalledTimes(2)
+        expect(openRoomsQueryMock).toHaveBeenCalledTimes(2)
       })
     })
   })

@@ -182,6 +182,18 @@ module.exports = {
       files: ['*.{test,spec}.[tj]s'],
       plugins: ['vitest'],
       extends: ['plugin:vitest/all'],
+      rules: {
+        'vitest/prefer-lowercase-title': 'off',
+        'vitest/no-hooks': 'off',
+        'vitest/consistent-test-filename': 'off',
+        'vitest/prefer-expect-assertions': [
+          'off',
+          {
+            onlyFunctionsWithExpectInLoop: true,
+            onlyFunctionsWithExpectInCallback: true,
+          },
+        ],
+      },
     },
     {
       files: ['*.yaml', '*.yml'],

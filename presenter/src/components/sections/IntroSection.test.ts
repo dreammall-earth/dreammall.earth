@@ -131,7 +131,7 @@ describe('IntroSection', () => {
       })
 
       it('does not play the video', () => {
-        expect(spy).not.toBeCalled()
+        expect(spy).not.toHaveBeenCalled()
       })
     })
 
@@ -144,7 +144,8 @@ describe('IntroSection', () => {
       })
 
       it('plays the video', () => {
-        expect(spy).toBeCalled()
+        // eslint-disable-next-line vitest/prefer-called-with
+        expect(spy).toHaveBeenCalled()
       })
     })
   })
@@ -205,7 +206,8 @@ describe('IntroSection', () => {
     it('calls etVideoSrc', () => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       events.resize()
-      expect(spy).toBeCalled()
+      // eslint-disable-next-line vitest/prefer-called-with
+      expect(spy).toHaveBeenCalled()
     })
   })
 })
