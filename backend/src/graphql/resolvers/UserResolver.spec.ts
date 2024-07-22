@@ -33,7 +33,6 @@ describe('UserResolver', () => {
     })
 
     describe('authenticated', () => {
-
       describe('include self is false', () => {
         it('returns an empty list of users', async () => {
           const response = await testServer.executeOperation(
