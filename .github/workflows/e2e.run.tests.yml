@@ -15,8 +15,7 @@ jobs:
 
       - name: E2E | Boot up test system
         run: |
-          docker compose up -d --wait database authentik
-          docker compose exec -T postgresql psql authentik --username authentik < authentik/dump.sql
+          docker compose up -d --wait database authentik authentik-worker
           cd backend
           cp .env.dist .env
           npm install
