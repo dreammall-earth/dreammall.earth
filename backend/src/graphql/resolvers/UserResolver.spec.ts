@@ -33,35 +33,66 @@ describe('UserResolver', () => {
     })
 
     describe('authenticated', () => {
-      it('returns a list of users', async () => {
-        const response = await testServer.executeOperation(
-          {
-            query: `{users {id name username}}`,
-          },
-          {
-            contextValue: {
-              token: 'token',
-              user: undefined,
+
+      describe('include self is false', () => {
+        it('returns an empty list of users', async () => {
+          const response = await testServer.executeOperation(
+            {
+              query: `{users {id name username}}`,
             },
-          },
-        )
-        expect(response).toMatchObject({
-          body: {
-            kind: 'single',
-            singleResult: {
-              data: {
-                users: [
-                  {
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                    id: expect.any(Number),
-                    name: 'User',
-                    username: 'mockedUser',
-                  },
-                ],
+            {
+              contextValue: {
+                token: 'token',
+                user: undefined,
               },
-              errors: undefined,
             },
-          },
+          )
+          expect(response).toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  users: [],
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+      })
+
+      describe('include self is true', () => {
+        it('returns a list of users', async () => {
+          const response = await testServer.executeOperation(
+            {
+              query: `query ($includeSelf: Boolean) {users(includeSelf: $includeSelf) {id name username}}`,
+              variables: { includeSelf: true },
+            },
+            {
+              contextValue: {
+                token: 'token',
+                user: undefined,
+              },
+            },
+          )
+          expect(response).toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  users: [
+                    {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'User',
+                      username: 'mockedUser',
+                    },
+                  ],
+                },
+                errors: undefined,
+              },
+            },
+          })
         })
       })
     })
