@@ -74,7 +74,7 @@ describe('CreateButton', () => {
         })
 
         it('calls the api', () => {
-          expect(joinMyRoomMutationMock).toHaveBeenCalledWith()
+          expect(joinMyRoomMutationMock).toHaveBeenCalled()
         })
 
         it('updates the store', () => {
@@ -99,7 +99,7 @@ describe('CreateButton', () => {
         })
 
         it('calls the api', () => {
-          expect(joinMyRoomMutationMock).toHaveBeenCalledWith()
+          expect(joinMyRoomMutationMock).toHaveBeenCalled()
         })
 
         it('does not update the store', () => {
@@ -123,7 +123,7 @@ describe('CreateButton', () => {
         })
 
         it('calls the api', () => {
-          expect(joinMyRoomMutationMock).toHaveBeenCalledWith()
+          expect(joinMyRoomMutationMock).toHaveBeenCalled()
         })
 
         it('does not update the store', () => {

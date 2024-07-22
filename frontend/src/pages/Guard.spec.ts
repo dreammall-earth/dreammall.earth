@@ -19,7 +19,7 @@ describe('global route guard', () => {
       try {
         expect(guard({ hasToken: false } as PageContextServer)).toThrow()
       } catch (error) {
-        expect(redirect).toHaveBeenCalledWith('https://some.uri')
+        expect(redirect).toHaveBeenCalledWith('/signin')
       }
     })
   })

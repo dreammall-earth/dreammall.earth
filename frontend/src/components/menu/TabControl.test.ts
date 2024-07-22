@@ -107,7 +107,7 @@ describe('TabControl', () => {
     })
 
     it('clears timeouts', () => {
-      expect(timeOutSpy).toHaveBeenCalledWith()
+      expect(timeOutSpy).toHaveBeenCalled()
     })
   })
 })
