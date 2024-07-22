@@ -1,0 +1,8 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "packer_dreammall"
+  config.vm.box_url = "file://../packer-output/package.box"
+  config.vm.synced_folder '.', '/vagrant', disabled: true
+  config.vm.network "forwarded_port", guest: 80, host: 8000
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
+  config.vm.network "forwarded_port", guest: 8082, host: 8082
+end

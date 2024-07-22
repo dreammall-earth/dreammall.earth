@@ -1,6 +1,6 @@
 name: presenter
 
-on: pull_request_target
+on: push
 
 jobs:
   files-changed:
@@ -23,15 +23,14 @@ jobs:
     name: Build - Presenter
     needs: files-changed
     runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: ./presenter
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: './.tool-versions'
       - name: Presenter | Build
         run: npm install && npm run build
-        working-directory: ${{env.WORKING_DIRECTORY}}
+        working-directory: ./presenter
 
   docker-production:
     if: needs.files-changed.outputs.presenter == 'true'
@@ -39,9 +38,7 @@ jobs:
     needs: files-changed
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Presenter | Build Docker Production
         run: docker compose -f docker-compose.yml build presenter
 
@@ -51,9 +48,7 @@ jobs:
     needs: files-changed
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Presenter | Build Docker Development
         run: docker compose build presenter presenter-storybook
 
@@ -62,57 +57,39 @@ jobs:
     name: Build Storybook - Presenter
     needs: files-changed
     runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: ./presenter
     steps:
-      - name: Set Node version
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '>=21'
-
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+          node-version-file: './.tool-versions'
       - name: Presenter | Build Storybook
         run: npm install && npm run storybook:build
-        working-directory: ${{env.WORKING_DIRECTORY}}
+        working-directory: ./presenter
 
   lint:
     if: needs.files-changed.outputs.presenter == 'true'
     name: Lint - Presenter
     needs: files-changed
     runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: ./presenter
     steps:
-      - name: Set Node version
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '>=21'
-
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+          node-version-file: './.tool-versions'
       - name: Presenter | Lint
         run: npm install && npm run test:lint
-        working-directory: ${{env.WORKING_DIRECTORY}}
+        working-directory: ./presenter
 
   unit:
     if: needs.files-changed.outputs.presenter == 'true'
     name: Unit - Presenter
     needs: files-changed
     runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: ./presenter
     steps:
-      - name: Set Node version
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '>=21'
-
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+          node-version-file: './.tool-versions'
       - name: Presenter | Unit
         run: npm install && npm run test:unit
-        working-directory: ${{env.WORKING_DIRECTORY}}
+        working-directory: ./presenter

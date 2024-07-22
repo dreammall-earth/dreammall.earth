@@ -1,8 +1,12 @@
 import { provideApolloClient } from '@vue/apollo-composable'
 import { setActivePinia, createPinia } from 'pinia'
-import { describe, it, expect, vi, beforeEach, afterAll } from 'vitest'
+import { describe, it, expect, beforeEach } from 'vitest'
 
-import { mockClient, openRoomsQueryMock } from '#tests/mock.apolloClient'
+import {
+  mockClient,
+  openRoomsQueryMock,
+  updateOpenRoomsSubscriptionMock,
+} from '#tests/mock.apolloClient'
 
 import { useRoomsStore } from './roomsStore'
 
@@ -20,23 +24,34 @@ describe('Rooms Store', () => {
   })
 
   describe('api', () => {
-    it('calls the API', () => {
+    it('queries the API', () => {
       expect(openRoomsQueryMock).toHaveBeenCalledTimes(1)
     })
 
-    describe.skip('run timers', () => {
+    describe('subscription', () => {
       beforeEach(() => {
-        vi.useFakeTimers()
-        // vi.clearAllMocks()
-        vi.runAllTimers()
-      })
-
-      afterAll(() => {
-        vi.useRealTimers()
+        updateOpenRoomsSubscriptionMock.next({
+          data: {
+            updateOpenRooms: [
+              {
+                meetingID: 'my-meeting',
+                meetingName: 'My meeting',
+                startTime: '1234',
+                participantCount: 1,
+                attendees: [
+                  {
+                    fullName: 'Peter Lustig',
+                  },
+                ],
+                joinLink: 'https://my.link',
+              },
+            ],
+          },
+        })
       })
 
       it('calls the API again', () => {
-        expect(openRoomsQueryMock).toHaveBeenCalledTimes(2)
+        expect(openRoomsQueryMock).toBeCalledTimes(2)
       })
     })
   })

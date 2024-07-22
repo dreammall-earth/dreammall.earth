@@ -2,12 +2,9 @@ import { redirect } from 'vike/abort'
 import { PageContextServer } from 'vike/types'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
-import { AUTH } from '#src/env'
 import { useAuthStore } from '#stores/authStore.js'
 
 import { guard } from './+guard'
-
-AUTH.UNAUTHORIZED_REDIRECT_URI = 'https://some.uri'
 
 vi.mock('vike/abort')
 vi.mocked(redirect).mockResolvedValue(new Error(''))

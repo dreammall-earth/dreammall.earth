@@ -1,4 +1,9 @@
 {
+  "$vuetify": {
+    "input:": {
+      "clear": "Clear"
+    }
+  },
   "auth": {
     "content": "Logging in...",
     "signin": "Signing In",
@@ -31,7 +36,6 @@
   "menu": {
     "cockpit": "Cockpit",
     "mall": "Mall",
-    "roomList": "Open rooms",
     "theme": {
       "dark": "Dark",
       "light": "Light"
@@ -46,5 +50,9 @@
   },
   "rooms": {
     "participantCount": "{count} participants"
+  },
+  "tablesDrawer": {
+    "header": "Open Tables",
+    "searchPlaceholder": "Open tables, attendees"
   }
 }

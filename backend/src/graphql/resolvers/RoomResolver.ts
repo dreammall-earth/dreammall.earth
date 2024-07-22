@@ -14,8 +14,8 @@ import {
 import { v4 as uuidv4 } from 'uuid'
 
 import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo } from '#api/BBB'
+import { CONFIG } from '#config/config'
 import { Room, OpenRoom } from '#models/RoomModel'
-import { pubSub } from '#src/graphql/pubSub'
 import logger from '#src/logger'
 import { prisma } from '#src/prisma'
 import { Context } from '#src/server/context'
@@ -106,10 +106,17 @@ export class RoomResolver {
       throw new Error('Could not create Meeting in DB!')
     }
 
-    const meeting = await createMeeting({
-      name: dbMeeting.name,
-      meetingID: dbMeeting.meetingID,
-    })
+    const inviteLink = CONFIG.FRONTEND_INVITE_LINK_URL + dbMeeting.id
+
+    const meeting = await createMeeting(
+      {
+        name: dbMeeting.name,
+        meetingID: dbMeeting.meetingID,
+      },
+      {
+        moderatorOnlyMessage: `Use this link to invite more people:<br/>${inviteLink}`,
+      },
+    )
 
     if (!meeting) throw new Error('Could not create meeting!')
 
@@ -147,31 +154,7 @@ export class RoomResolver {
     if (!user) return []
     const meetings = await getMeetings()
 
-    if (meetings.length) {
-      const dbMeetingsPwMap = await prisma.meeting.findMany({
-        where: {
-          meetingID: { in: meetings.map((m: MeetingInfo) => m.meetingID) },
-        },
-        select: {
-          meetingID: true,
-          attendeePW: true,
-        },
-      })
-
-      return meetings.map((m: MeetingInfo) => {
-        const pw = dbMeetingsPwMap.find((pw) => pw.meetingID === m.meetingID)
-        return new OpenRoom(
-          m,
-          joinMeetingLink({
-            fullName: user.name,
-
-            meetingID: m.meetingID,
-            password: pw?.attendeePW ? pw.attendeePW : '',
-          }),
-        )
-      })
-    }
-    return []
+    return openRoomsFromOpenMeetings(meetings, user.name)
   }
 
   @Query(() => String)
@@ -192,16 +175,56 @@ export class RoomResolver {
     })
   }
 
-  @Subscription({
+  @Subscription(() => [OpenRoom], {
     topics: 'OPEN_ROOM_SUBSCRIPTION',
   })
-  updateOpenRooms(@Root() openMeetings: string): string {
-    return openMeetings
+  async updateOpenRooms(
+    @Root() meetings: MeetingInfo[],
+    @Arg('username') username: string,
+  ): Promise<OpenRoom[]> {
+    return openRoomsFromOpenMeetings(meetings, username)
   }
 
+  /*
   @Query(() => Boolean)
   test(): boolean {
-    pubSub.publish('OPEN_ROOM_SUBSCRIPTION', 'Hallo')
+    try {
+      pubSub.publish('OPEN_ROOM_SUBSCRIPTION', 'Hallo')
+    } catch (err) {
+      console.log(err)
+    }
     return true
   }
+  */
+}
+
+const openRoomsFromOpenMeetings = async (
+  meetings: MeetingInfo[],
+  username: string,
+): Promise<OpenRoom[]> => {
+  if (meetings.length) {
+    const dbMeetingsPwMap = await prisma.meeting.findMany({
+      where: {
+        meetingID: { in: meetings.map((m: MeetingInfo) => m.meetingID) },
+      },
+      select: {
+        meetingID: true,
+        attendeePW: true,
+      },
+    })
+    return meetings.map((m: MeetingInfo) => {
+      const pw = dbMeetingsPwMap.find((pw) => pw.meetingID === m.meetingID)
+      return new OpenRoom(
+        m,
+        joinMeetingLink({
+          fullName: username,
+
+          meetingID: m.meetingID,
+          password: pw?.attendeePW ? pw.attendeePW : '',
+        }),
+      )
+    })
+  }
+
+  return []
 }

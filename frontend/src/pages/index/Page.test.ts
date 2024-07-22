@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { gql } from 'graphql-tag'
 import { createMockSubscription, IMockSubscription } from 'mock-apollo-client'
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
@@ -43,24 +43,6 @@ describe('IndexPage', () => {
 
     it('renders', () => {
       expect(wrapper.element).toMatchSnapshot()
-    })
-
-    describe('receive subscription', () => {
-      beforeEach(() => {
-        mockSubscription.next({
-          data: {
-            updateOpenRooms: 'Hallo',
-          },
-        })
-      })
-
-      const consoleSpy = vi.spyOn(global.console, 'log')
-
-      it('logs data to console', () => {
-        expect(consoleSpy).toHaveBeenCalledWith('Subscription received:', {
-          updateOpenRooms: 'Hallo',
-        })
-      })
     })
   })
 })

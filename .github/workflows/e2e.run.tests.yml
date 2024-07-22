@@ -1,28 +1,22 @@
 name: e2e:test:all test the application end to end
 
-on: pull_request_target
+on: push
 
 jobs:
   e2e-tests:
     name: Run all E2E tests
     runs-on: ubuntu-latest
     steps:
-      - name: Set Node version
-        uses: actions/setup-node@v4
-        with:
-          node-version: 21
+      - uses: actions/checkout@master
 
-      - name: Checkout
-        uses: actions/checkout@master
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: './.tool-versions'
 
       - name: E2E | Boot up test system
         run: |
-          cd authentik/
-          rm -rf database
-          ./database.unpack.sh
-          docker compose up -d
-          cd ../
-          docker compose up -d database
+          docker compose up -d --wait database authentik
+          docker compose exec -T postgresql psql authentik --username authentik < authentik/dump.sql
           cd backend
           cp .env.dist .env
           ln -s src/auth/public.pem public.pem

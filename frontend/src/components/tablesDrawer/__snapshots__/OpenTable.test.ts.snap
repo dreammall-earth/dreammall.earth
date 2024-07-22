@@ -1,0 +1,81 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`OpenTable > renders correctly 1`] = `
+<div
+  class="v-application v-theme--light v-layout v-layout--full-height v-locale--is-ltr"
+>
+  <div
+    class="v-application__wrap"
+  >
+    
+    <div
+      class="v-card v-theme--light v-card--density-default v-card--variant-elevated mx-auto"
+      data-v-4e81c11b=""
+      style="width: 400px;"
+    >
+      <!---->
+      <div
+        class="v-card__loader"
+      >
+        <div
+          aria-hidden="true"
+          aria-valuemax="100"
+          aria-valuemin="0"
+          class="v-progress-linear v-theme--light v-locale--is-ltr"
+          role="progressbar"
+          style="top: 0px; height: 0px; --v-progress-linear-height: 2px;"
+        >
+          <!---->
+          <div
+            class="v-progress-linear__background"
+            style="width: 100%;"
+          />
+          <transition-stub
+            appear="false"
+            css="true"
+            name="fade-transition"
+            persisted="false"
+          >
+            <div
+              class="v-progress-linear__indeterminate"
+            >
+              
+              <div
+                class="v-progress-linear__indeterminate long"
+              />
+              <div
+                class="v-progress-linear__indeterminate short"
+              />
+              
+            </div>
+          </transition-stub>
+          <!---->
+        </div>
+      </div>
+      <!---->
+      <!---->
+      
+      <div
+        class="v-list v-theme--light v-list--density-default v-list--two-line"
+        data-v-4e81c11b=""
+        role="listbox"
+        tabindex="0"
+      >
+        
+        
+        
+        
+      </div>
+      
+      <!---->
+      
+      <!---->
+      <span
+        class="v-card__underlay"
+      />
+      
+    </div>
+    
+  </div>
+</div>
+`;

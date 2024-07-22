@@ -1,6 +1,6 @@
 name: frontend
 
-on: pull_request_target
+on: push
 
 jobs:
   files-changed:
@@ -23,15 +23,14 @@ jobs:
     name: Build - Frontend
     needs: files-changed
     runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: ./frontend
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: './.tool-versions'
       - name: Frontend | Build
         run: npm install && npm run build
-        working-directory: ${{env.WORKING_DIRECTORY}}
+        working-directory: ./frontend
 
   docker-production:
     if: needs.files-changed.outputs.frontend == 'true'
@@ -39,9 +38,7 @@ jobs:
     needs: files-changed
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Frontend | Build Docker Production
         run: docker compose -f docker-compose.yml build frontend
 
@@ -51,9 +48,7 @@ jobs:
     needs: files-changed
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Frontend | Build Docker Development
         run: docker compose build frontend frontend-storybook
 
@@ -62,42 +57,39 @@ jobs:
     name: Build Storybook - Frontend
     needs: files-changed
     runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: ./frontend
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: './.tool-versions'
       - name: Frontend | Build Storybook
         run: npm install && npm run storybook:build
-        working-directory: ${{env.WORKING_DIRECTORY}}
+        working-directory: ./frontend
 
   lint:
     if: needs.files-changed.outputs.frontend == 'true'
     name: Lint - Frontend
     needs: files-changed
     runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: ./frontend
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: './.tool-versions'
       - name: Frontend | Lint
         run: npm install && npm run test:lint
-        working-directory: ${{env.WORKING_DIRECTORY}}
+        working-directory: ./frontend
 
   unit:
     if: needs.files-changed.outputs.frontend == 'true'
     name: Unit - Frontend
     needs: files-changed
     runs-on: ubuntu-latest
-    env:
-      WORKING_DIRECTORY: ./frontend
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: './.tool-versions'
       - name: Frontend | Unit
         run: npm install && npm run test:unit
-        working-directory: ${{env.WORKING_DIRECTORY}}
+        working-directory: ./frontend

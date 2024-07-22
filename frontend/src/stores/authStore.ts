@@ -10,6 +10,7 @@ export const cookieStorage = {
     Cookies.set('auth', state, {
       expires: 3,
       Secure: true,
+      SameSite: 'None',
     })
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
