@@ -48,7 +48,7 @@ const toggleButtonList = () => {
 .bottom-menu {
   bottom: 0;
   left: 0;
-  z-index: 1;
+  z-index: 3000;
   display: grid;
   grid-template-columns: repeat(3, 33.3333%);
   background: var(--v-bottom-menu-background);
