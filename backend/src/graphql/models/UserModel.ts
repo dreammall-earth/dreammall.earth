@@ -1,12 +1,9 @@
-import { User as DbUser } from '@prisma/client'
-import { ObjectType, Field, Int, registerEnumType } from 'type-graphql'
+import { User as DbUser, Meeting } from '@prisma/client'
+import { ObjectType, Field, Int } from 'type-graphql'
 
-import { AttendeeRole } from '#api/BBB'
+import { UsersWithMeetings } from '#src/prisma'
 
-registerEnumType(AttendeeRole, {
-  name: 'AttendeeRole',
-  description: 'Role of the user in the meeting',
-})
+import { Room } from './RoomModel'
 
 @ObjectType()
 export class User {
@@ -28,29 +25,11 @@ export class User {
 
 @ObjectType()
 export class CurrentUser {
-  constructor(user: DbUser) {
+  constructor(user: DbUser, meeting: Meeting | null, users: UsersWithMeetings[]) {
     this.id = user.id
     this.username = user.username
     this.name = user.name
-  }
-
-  @Field(() => Int)
-  id: number
-
-  @Field()
-  username: string
-
-  @Field()
-  name: string
-}
-
-@ObjectType()
-export class UserInMeeting {
-  constructor(user: DbUser, role: AttendeeRole) {
-    this.id = user.id
-    this.username = user.username
-    this.name = user.name
-    this.role = role
+    this.room = meeting ? new Room(meeting, users) : null
   }
 
   @Field(() => Int)
@@ -62,6 +41,6 @@ export class UserInMeeting {
   @Field()
   name: string
 
-  @Field(() => AttendeeRole)
-  role: AttendeeRole
+  @Field(() => Room, { nullable: true })
+  room: Room | null
 }
