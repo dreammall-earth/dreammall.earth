@@ -25,6 +25,8 @@ const mockCreateContact = jest.fn().mockResolvedValue({
 })
 
 const code = '1234567890abcdef'
+
+// eslint-disable-next-line jest/no-untyped-mock-factory
 jest.mock('crypto', () => {
   const originalModule = jest.requireActual<typeof import('crypto')>('crypto')
   return {
@@ -35,6 +37,7 @@ jest.mock('crypto', () => {
   }
 })
 
+// eslint-disable-next-line jest/no-untyped-mock-factory
 jest.mock('@getbrevo/brevo', () => {
   const originalModule = jest.requireActual<typeof import('@getbrevo/brevo')>('@getbrevo/brevo')
   return {
@@ -214,12 +217,12 @@ describe('Brevo', () => {
         await sendContactEmails(contactFormData)
       })
 
-      it('does not call sendSmtpEmail', () => {
-        expect(mockSendTransacEmail).not.toHaveBeenCalled()
-      })
-
       afterAll(() => {
         CONFIG.BREVO_KEY = 'MY KEY'
+      })
+
+      it('does not call sendSmtpEmail', () => {
+        expect(mockSendTransacEmail).not.toHaveBeenCalled()
       })
     })
   })
@@ -268,9 +271,7 @@ describe('Brevo', () => {
         })
 
         it('does not reject with error', async () => {
-          await expect(subscribeToNewsletter(firstName, lastName, email)).resolves.toStrictEqual(
-            true,
-          )
+          await expect(subscribeToNewsletter(firstName, lastName, email)).resolves.toBe(true)
         })
 
         it('creates database entry with brevoSuccessMail = null', async () => {
@@ -309,9 +310,7 @@ describe('Brevo', () => {
         })
 
         it('does not reject with error', async () => {
-          await expect(subscribeToNewsletter(firstName, lastName, email)).resolves.toStrictEqual(
-            true,
-          )
+          await expect(subscribeToNewsletter(firstName, lastName, email)).resolves.toBe(true)
         })
 
         it('creates database entry with brevoSuccessMail = null', async () => {
@@ -422,16 +421,16 @@ describe('Brevo', () => {
         result = await subscribeToNewsletter(firstName, lastName, email)
       })
 
+      afterAll(() => {
+        CONFIG.BREVO_KEY = 'MY KEY'
+      })
+
       it('returns false', () => {
         expect(result).toBe(false)
       })
 
       it('does not call sendTransacEmail', () => {
         expect(mockSendTransacEmail).not.toHaveBeenCalled()
-      })
-
-      afterAll(() => {
-        CONFIG.BREVO_KEY = 'MY KEY'
       })
     })
   })
@@ -459,7 +458,7 @@ describe('Brevo', () => {
 
       describe('with invalid code', () => {
         it('returns false', async () => {
-          await expect(confirmNewsletter('1234567890abcdefG')).resolves.toStrictEqual(false)
+          await expect(confirmNewsletter('1234567890abcdefG')).resolves.toBe(false)
         })
       })
 
