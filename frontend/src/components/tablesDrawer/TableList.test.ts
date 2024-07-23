@@ -82,7 +82,7 @@ describe('TableList', () => {
 
     it('emit event "openRoom"', () => {
       const tableList = wrapper.findComponent(TableList)
-      expect(tableList.emitted('openRoom')).toBe(true)
+      expect(tableList.emitted('openRoom')).toBeTruthy()
     })
 
     it('navigates to opened Room', () => {
