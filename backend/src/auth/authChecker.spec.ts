@@ -58,7 +58,7 @@ describe('authChecker', () => {
 
   describe('valid token in context', () => {
     it('has no user in database', async () => {
-      expect(await prisma.user.findMany()).toHaveLength(0)
+      await expect(prisma.user.findMany()).resolves.toHaveLength(0)
     })
 
     describe('first call', () => {
@@ -110,7 +110,7 @@ describe('authChecker', () => {
 
     describe('second call', () => {
       it('has the user in database', async () => {
-        expect(await prisma.user.findMany()).toHaveLength(1)
+        await expect(prisma.user.findMany()).resolves.toHaveLength(1)
       })
 
       it('has the same user in database', async () => {
@@ -124,7 +124,7 @@ describe('authChecker', () => {
             },
           },
         )
-        expect(await prisma.user.findMany()).toHaveLength(1)
+        await expect(prisma.user.findMany()).resolves.toHaveLength(1)
       })
     })
   })
