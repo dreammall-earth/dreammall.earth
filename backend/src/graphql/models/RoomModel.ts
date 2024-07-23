@@ -1,15 +1,23 @@
-import { Meeting } from '@prisma/client'
+import { Meeting, User as DbUser } from '@prisma/client'
 import { ObjectType, Field, Int } from 'type-graphql'
 
-import { MeetingInfo, AttendeeInfo } from '#src/api/BBB'
+import { MeetingInfo, AttendeeInfo, AttendeeRole } from '#src/api/BBB'
 
 import { Attendee } from './AttendeeModel'
+import { UserInMeeting } from './UserModel'
+
+interface UserWithRole {
+  user: DbUser
+  role: AttendeeRole
+}
 
 @ObjectType()
 export class Room {
-  constructor(meeting: Meeting) {
+  constructor(meeting: Meeting, users: UserWithRole[]) {
     this.id = meeting.id
     this.name = meeting.name
+    this.public = meeting.public
+    this.users = users.map((u) => new UserInMeeting(u.user, u.role))
   }
 
   @Field(() => Int)
@@ -17,6 +25,12 @@ export class Room {
 
   @Field()
   name: string
+
+  @Field()
+  public: boolean
+
+  @Field(() => [UserInMeeting])
+  users: UserInMeeting[]
 }
 
 @ObjectType()

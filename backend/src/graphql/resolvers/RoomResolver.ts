@@ -13,15 +13,16 @@ import {
 // eslint-disable-next-line import/named
 import { v4 as uuidv4 } from 'uuid'
 
-import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo } from '#api/BBB'
+import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo, AttendeeRole } from '#api/BBB'
 import { CONFIG } from '#config/config'
-import { Room, OpenRoom } from '#models/RoomModel'
+import { OpenRoom } from '#models/RoomModel'
 import logger from '#src/logger'
 import { prisma } from '#src/prisma'
 import { Context } from '#src/server/context'
 
 @Resolver()
 export class RoomResolver {
+  /*
   @Authorized()
   @Mutation(() => Room, { nullable: true })
   async createMyRoom(@Arg('name') name: string, @Ctx() context: Context): Promise<Room | null> {
@@ -61,6 +62,7 @@ export class RoomResolver {
     })
     return meeting
   }
+  */
 
   @Authorized()
   @Mutation(() => String)
@@ -141,7 +143,7 @@ export class RoomResolver {
       fullName: user.name,
       meetingID: meeting.meetingID,
       password: meeting.moderatorPW,
-      role: 'MODERATOR',
+      role: AttendeeRole.MODERATOR,
       createTime: meeting.createTime.toString(),
       userID: user.id.toString(),
     })

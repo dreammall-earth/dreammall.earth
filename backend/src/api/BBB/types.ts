@@ -66,10 +66,15 @@ export interface CreateMeetingOptions {
   // welcome?: string
 }
 
+export enum AttendeeRole {
+  MODERATOR = 'MODERATOR',
+  VIEWER = 'VIEWER',
+}
+
 export interface JoinMeetinLinkOptions {
   fullName: string
   meetingID: string
-  role?: 'MODERATOR' | 'VIEWER'
+  role?: AttendeeRole
   password?: string
   createTime?: string
   userID?: string

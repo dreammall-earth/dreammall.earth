@@ -23,6 +23,7 @@ beforeAll(async () => {
 
 describe('RoomResolver', () => {
   describe('unauthorized', () => {
+    /*
     describe('createMyRoom', () => {
       it('throws access denied', async () => {
         await expect(
@@ -46,6 +47,7 @@ describe('RoomResolver', () => {
         })
       })
     })
+    */
 
     describe('joinMyRoom', () => {
       it('throws access denied', async () => {
@@ -178,6 +180,7 @@ describe('RoomResolver', () => {
   })
 
   describe('authorized', () => {
+    /*
     describe('createMyRoom', () => {
       describe.skip('no user in context', () => {
         it('returns null', async () => {
@@ -288,6 +291,7 @@ describe('RoomResolver', () => {
         })
       })
     })
+    */
 
     describe('joinMyRoom', () => {
       beforeAll(async () => {
