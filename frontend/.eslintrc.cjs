@@ -191,7 +191,11 @@ module.exports = {
         'vitest/require-hook': [
           'error',
           {
-            allowedFunctionCalls: ['mockClient.setRequestHandler', 'setActivePinia'],
+            allowedFunctionCalls: [
+              'mockClient.setRequestHandler',
+              'setActivePinia',
+              'provideApolloClient',
+            ],
           },
         ],
       },
