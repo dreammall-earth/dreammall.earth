@@ -17,6 +17,7 @@ describe('global route guard', () => {
   describe('unauthenticated', () => {
     it('throws and redirects', () => {
       try {
+        // eslint-disable-next-line vitest/require-to-throw-message
         expect(guard({ hasToken: false } as PageContextServer)).toThrow()
       } catch (error) {
         // eslint-disable-next-line vitest/no-conditional-expect
