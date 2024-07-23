@@ -19,6 +19,7 @@ describe('global route guard', () => {
       try {
         expect(guard({ hasToken: false } as PageContextServer)).toThrow()
       } catch (error) {
+        // eslint-disable-next-line vitest/no-conditional-expect
         expect(redirect).toHaveBeenCalledWith('/signin')
       }
     })

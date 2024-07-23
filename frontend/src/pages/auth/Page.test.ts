@@ -77,6 +77,7 @@ describe('AuthPage', () => {
       try {
         wrapper = Wrapper()
       } catch (err) {
+        // eslint-disable-next-line vitest/no-conditional-expect
         expect(err).toBe('Could not Sign In')
       }
     })
