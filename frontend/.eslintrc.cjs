@@ -191,7 +191,7 @@ module.exports = {
         'vitest/require-hook': [
           'error',
           {
-            allowedFunctionCalls: ['mockClient.setRequestHandler'],
+            allowedFunctionCalls: ['mockClient.setRequestHandler', 'setActivePinia'],
           },
         ],
       },
