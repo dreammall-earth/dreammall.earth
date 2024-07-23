@@ -16,6 +16,7 @@ describe('printConfigError', () => {
     })
 
     it('return undefined', () => {
+      // eslint-disable-next-line jest/prefer-to-be
       expect(printConfigError('test messsage')).toEqual(undefined)
     })
   })

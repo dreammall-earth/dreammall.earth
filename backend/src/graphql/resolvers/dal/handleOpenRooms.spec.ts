@@ -5,7 +5,7 @@ import { handleOpenRooms } from './handleOpenRooms'
 
 jest.mock('#api/BBB')
 
-const getMeetingsMock = getMeetings as jest.MockedFunction<typeof getMeetings>
+const getMeetingsMock = jest.mocked(getMeetings)
 
 describe('handleOpenRooms', () => {
   describe('two meetings in db', () => {

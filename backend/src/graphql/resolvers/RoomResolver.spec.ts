@@ -9,9 +9,9 @@ import { createTestServer } from '#src/server/server'
 
 jest.mock('#api/BBB')
 
-const createMeetingMock = createMeeting as jest.MockedFunction<typeof createMeeting>
-const joinMeetingLinkMock = joinMeetingLink as jest.MockedFunction<typeof joinMeetingLink>
-const getMeetingsMock = getMeetings as jest.MockedFunction<typeof getMeetings>
+const createMeetingMock = jest.mocked(createMeeting)
+const joinMeetingLinkMock = jest.mocked(joinMeetingLink)
+const getMeetingsMock = jest.mocked(getMeetings)
 
 let testServer: ApolloServer
 
