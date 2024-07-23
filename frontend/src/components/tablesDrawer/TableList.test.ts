@@ -62,13 +62,9 @@ describe('TableList', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 
-  it('renders list', () => {
-    expect(wrapper.find('.v-list--density-default').exists()).toBe(true)
-  })
-
   it('sets active room', async () => {
     const setActiveRoomSpy = vi.spyOn(useActiveRoomStore(), 'setActiveRoom')
-    await wrapper.find('.table').trigger('click')
+    await wrapper.find('.table .action').trigger('click')
 
     expect(setActiveRoomSpy).toHaveBeenCalledWith(testTables[0].joinLink)
   })
@@ -76,7 +72,7 @@ describe('TableList', () => {
   describe('when a table is clicked', () => {
     beforeEach(async () => {
       wrapper = Wrapper()
-      await wrapper.find('.table').trigger('click')
+      await wrapper.find('.table .action').trigger('click')
       await flushPromises()
     })
 

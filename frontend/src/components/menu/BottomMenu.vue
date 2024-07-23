@@ -1,8 +1,6 @@
 <template>
   <MobileCreateButtonActions :is-visible="isButtonListVisible" />
-  <div class="navigation-drawer-box d-md-none position-fixed mb-5 pb-5">
-    <TablesDrawer v-model="isTablesDrawerVisible" location="bottom" />
-  </div>
+  <TablesDrawer v-model="isTablesDrawerVisible" location="bottom" />
   <div class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none">
     <button class="camera-button mx-auto" @click="toggleDrawer">
       <Circle>
@@ -65,9 +63,5 @@ const toggleButtonList = () => {
 .create-button-mobile {
   z-index: 1;
   transform: translate(20px, 30px);
-}
-
-.navigation-drawer-box {
-  bottom: 65px;
 }
 </style>
