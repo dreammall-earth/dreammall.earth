@@ -88,6 +88,7 @@ describe('ContactForm', () => {
         // content
         expect(errorMessages[3].text()).toBe('Dieses Feld wird benötigt.')
         // checkbox
+        // eslint-disable-next-line vitest/max-expects
         expect(errorMessages[4].text()).toBe("$t('validation.fieldRequired')")
       })
 

@@ -201,6 +201,12 @@ module.exports = {
             allowedFunctionCalls: ['mockClient.setRequestHandler'],
           },
         ],
+        'vitest/max-nested-describe': [
+          'error',
+          {
+            max: 6,
+          },
+        ],
       },
     },
     {
