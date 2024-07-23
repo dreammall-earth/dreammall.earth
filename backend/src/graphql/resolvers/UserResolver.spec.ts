@@ -1,20 +1,26 @@
 import { ApolloServer } from '@apollo/server'
 
+import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
 
-let testServer: ApolloServer
+import type { Context } from '#src/server/context'
 
-beforeAll(async () => {
-  testServer = await createTestServer()
-})
+let testServer: ApolloServer<Context>
 
 describe('UserResolver', () => {
+  beforeAll(async () => {
+    testServer = await createTestServer()
+  })
+
   describe('users query', () => {
     describe('unauthenticated', () => {
       it('returns an unauthenticated error', async () => {
-        const response = await testServer.executeOperation({
-          query: `{users {id name username}}`,
-        })
+        const response = await testServer.executeOperation(
+          {
+            query: `{users {id name username}}`,
+          },
+          { contextValue: { dataSources: { prisma } } },
+        )
         expect(response).toMatchObject({
           body: {
             kind: 'single',
@@ -42,6 +48,7 @@ describe('UserResolver', () => {
             contextValue: {
               token: 'token',
               user: undefined,
+              dataSources: { prisma },
             },
           },
         )

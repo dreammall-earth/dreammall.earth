@@ -7,29 +7,34 @@ import { CONFIG } from '#config/config'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
 
+import type { Context } from '#src/server/context'
+
 jest.mock('#api/BBB')
 
-const createMeetingMock = createMeeting as jest.MockedFunction<typeof createMeeting>
-const joinMeetingLinkMock = joinMeetingLink as jest.MockedFunction<typeof joinMeetingLink>
-const getMeetingsMock = getMeetings as jest.MockedFunction<typeof getMeetings>
+const createMeetingMock = jest.mocked(createMeeting)
+const joinMeetingLinkMock = jest.mocked(joinMeetingLink)
+const getMeetingsMock = jest.mocked(getMeetings)
 
-let testServer: ApolloServer
+let testServer: ApolloServer<Context>
 
 CONFIG.FRONTEND_INVITE_LINK_URL = '/'
 
-beforeAll(async () => {
-  testServer = await createTestServer()
-})
-
 describe('RoomResolver', () => {
+  beforeAll(async () => {
+    testServer = await createTestServer()
+  })
+
   describe('unauthorized', () => {
     describe('createMyRoom', () => {
       it('throws access denied', async () => {
         await expect(
-          testServer.executeOperation({
-            query: 'mutation($name: String!) { createMyRoom(name: $name) { id } }',
-            variables: { name: 'My Room' },
-          }),
+          testServer.executeOperation(
+            {
+              query: 'mutation($name: String!) { createMyRoom(name: $name) { id } }',
+              variables: { name: 'My Room' },
+            },
+            { contextValue: { dataSources: { prisma } } },
+          ),
         ).resolves.toMatchObject({
           body: {
             kind: 'single',
@@ -50,9 +55,12 @@ describe('RoomResolver', () => {
     describe('joinMyRoom', () => {
       it('throws access denied', async () => {
         await expect(
-          testServer.executeOperation({
-            query: 'mutation { joinMyRoom }',
-          }),
+          testServer.executeOperation(
+            {
+              query: 'mutation { joinMyRoom }',
+            },
+            { contextValue: { dataSources: { prisma } } },
+          ),
         ).resolves.toMatchObject({
           body: {
             kind: 'single',
@@ -73,9 +81,12 @@ describe('RoomResolver', () => {
     describe('openRooms', () => {
       it('throws access denied', async () => {
         await expect(
-          testServer.executeOperation({
-            query: 'query { openRooms { meetingName } }',
-          }),
+          testServer.executeOperation(
+            {
+              query: 'query { openRooms { meetingName } }',
+            },
+            { contextValue: { dataSources: { prisma } } },
+          ),
         ).resolves.toMatchObject({
           body: {
             kind: 'single',
@@ -102,13 +113,16 @@ describe('RoomResolver', () => {
       describe('No room in DB', () => {
         it('throws an Error', async () => {
           await expect(
-            testServer.executeOperation({
-              query,
-              variables: {
-                userName: 'Pinky Pie',
-                roomId: 25,
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  userName: 'Pinky Pie',
+                  roomId: 25,
+                },
               },
-            }),
+              { contextValue: { dataSources: { prisma } } },
+            ),
           ).resolves.toMatchObject({
             body: {
               kind: 'single',
@@ -140,13 +154,16 @@ describe('RoomResolver', () => {
 
         it('returns link to room', async () => {
           await expect(
-            testServer.executeOperation({
-              query,
-              variables: {
-                userName: 'Pinky Pie',
-                roomId,
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  userName: 'Pinky Pie',
+                  roomId,
+                },
               },
-            }),
+              { contextValue: { dataSources: { prisma } } },
+            ),
           ).resolves.toMatchObject({
             body: {
               kind: 'single',
@@ -160,13 +177,16 @@ describe('RoomResolver', () => {
         })
 
         it('calls join meeting link', async () => {
-          await testServer.executeOperation({
-            query,
-            variables: {
-              userName: 'Pinky Pie',
-              roomId,
+          await testServer.executeOperation(
+            {
+              query,
+              variables: {
+                userName: 'Pinky Pie',
+                roomId,
+              },
             },
-          })
+            { contextValue: { dataSources: { prisma } } },
+          )
           expect(joinMeetingLinkMock).toHaveBeenCalledWith({
             fullName: 'Pinky Pie',
             meetingID: 'Pony Ville',
@@ -191,6 +211,7 @@ describe('RoomResolver', () => {
                 contextValue: {
                   token: 'token',
                   user: undefined,
+                  dataSources: { prisma },
                 },
               },
             ),
@@ -218,6 +239,7 @@ describe('RoomResolver', () => {
                 contextValue: {
                   token: 'token',
                   user: undefined,
+                  dataSources: { prisma },
                 },
               },
             ),
@@ -267,6 +289,7 @@ describe('RoomResolver', () => {
                 contextValue: {
                   token: 'token',
                   user: undefined,
+                  dataSources: { prisma },
                 },
               },
             ),
@@ -298,23 +321,26 @@ describe('RoomResolver', () => {
       let meetingId: string | undefined
 
       describe('meeting does not exist', () => {
-        joinMeetingLinkMock.mockReturnValue('https://my-link')
-        createMeetingMock.mockResolvedValue({
-          returncode: 'SUCCESS',
-          meetingID: 'xxx',
-          internalMeetingID: 'b60d121b438a380c343d5ec3c2037564b82ffef3-1715231322715',
-          parentMeetingID: 'bbb-none',
-          attendeePW: 'w3VUvMcp',
-          moderatorPW: 'MyPp9Zfq',
-          createTime: 1718189921310,
-          voiceBridge: 255,
-          dialNumber: '613-555-1234',
-          createDate: new Date(),
-          hasUserJoined: false,
-          duration: 0,
-          hasBeenForciblyEnded: false,
-          messageKey: '',
-          message: '',
+        beforeEach(() => {
+          joinMeetingLinkMock.mockReturnValue('https://my-link')
+
+          createMeetingMock.mockResolvedValue({
+            returncode: 'SUCCESS',
+            meetingID: 'xxx',
+            internalMeetingID: 'b60d121b438a380c343d5ec3c2037564b82ffef3-1715231322715',
+            parentMeetingID: 'bbb-none',
+            attendeePW: 'w3VUvMcp',
+            moderatorPW: 'MyPp9Zfq',
+            createTime: 1718189921310,
+            voiceBridge: 255,
+            dialNumber: '613-555-1234',
+            createDate: new Date(),
+            hasUserJoined: false,
+            duration: 0,
+            hasBeenForciblyEnded: false,
+            messageKey: '',
+            message: '',
+          })
         })
 
         it('returns link to room', async () => {
@@ -327,6 +353,7 @@ describe('RoomResolver', () => {
                 contextValue: {
                   token: 'token',
                   user: undefined,
+                  dataSources: { prisma },
                 },
               },
             ),
@@ -366,7 +393,7 @@ describe('RoomResolver', () => {
               createDate: expect.any(Date),
             },
           })
-          expect(createMeetingMock).toBeCalledWith(
+          expect(createMeetingMock).toHaveBeenCalledWith(
             {
               name: 'mockedUser',
               meetingID: result?.meeting?.meetingID,
@@ -383,23 +410,25 @@ describe('RoomResolver', () => {
           jest.clearAllMocks()
         })
 
-        joinMeetingLinkMock.mockReturnValue('https://my-link')
-        createMeetingMock.mockResolvedValue({
-          returncode: 'SUCCESS',
-          meetingID: 'xxx',
-          internalMeetingID: 'b60d121b438a380c343d5ec3c2037564b82ffef3-1715231322715',
-          parentMeetingID: 'bbb-none',
-          attendeePW: 'w3VUvMcp',
-          moderatorPW: 'MyPp9Zfq',
-          createTime: 1718189921310,
-          voiceBridge: 255,
-          dialNumber: '613-555-1234',
-          createDate: new Date(),
-          hasUserJoined: false,
-          duration: 0,
-          hasBeenForciblyEnded: false,
-          messageKey: '',
-          message: '',
+        beforeEach(() => {
+          joinMeetingLinkMock.mockReturnValue('https://my-link')
+          createMeetingMock.mockResolvedValue({
+            returncode: 'SUCCESS',
+            meetingID: 'xxx',
+            internalMeetingID: 'b60d121b438a380c343d5ec3c2037564b82ffef3-1715231322715',
+            parentMeetingID: 'bbb-none',
+            attendeePW: 'w3VUvMcp',
+            moderatorPW: 'MyPp9Zfq',
+            createTime: 1718189921310,
+            voiceBridge: 255,
+            dialNumber: '613-555-1234',
+            createDate: new Date(),
+            hasUserJoined: false,
+            duration: 0,
+            hasBeenForciblyEnded: false,
+            messageKey: '',
+            message: '',
+          })
         })
 
         it('returns link to room', async () => {
@@ -412,6 +441,7 @@ describe('RoomResolver', () => {
                 contextValue: {
                   token: 'token',
                   user: undefined,
+                  dataSources: { prisma },
                 },
               },
             ),
@@ -464,6 +494,7 @@ describe('RoomResolver', () => {
               {
                 contextValue: {
                   token: 'token',
+                  dataSources: { prisma },
                 },
               },
             ),
@@ -500,6 +531,7 @@ describe('RoomResolver', () => {
               {
                 contextValue: {
                   token: 'token',
+                  dataSources: { prisma },
                 },
               },
             ),
@@ -558,6 +590,7 @@ describe('RoomResolver', () => {
               {
                 contextValue: {
                   token: 'token',
+                  dataSources: { prisma },
                 },
               },
             ),
@@ -649,6 +682,7 @@ describe('RoomResolver', () => {
               {
                 contextValue: {
                   token: 'token',
+                  dataSources: { prisma },
                 },
               },
             ),
@@ -679,7 +713,7 @@ describe('RoomResolver', () => {
         })
 
         it('calls joinMeetingLink with correct PW', () => {
-          expect(joinMeetingLinkMock).toBeCalledWith({
+          expect(joinMeetingLinkMock).toHaveBeenCalledWith({
             fullName: 'User',
             meetingID: 'Dreammall-Entwicklung',
             password: '1234',
@@ -753,6 +787,7 @@ describe('RoomResolver', () => {
               {
                 contextValue: {
                   token: 'token',
+                  dataSources: { prisma },
                 },
               },
             ),

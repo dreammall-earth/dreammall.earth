@@ -1,34 +1,32 @@
 <template>
-  <div class="top-menu mt-6 mt-sm-0">
-    <v-app-bar flat class="app-bar" height="70">
-      <v-row class="ma-1">
-        <v-col class="d-none d-md-flex align-center">
-          <a href="/" class="logo">
-            <LogoImage size="small" />
-          </a>
-        </v-col>
-        <v-col class="d-flex align-center justify-center">
-          <TabControl />
-        </v-col>
-        <v-col class="d-none d-md-flex align-center">
-          <v-row>
-            <v-col class="d-flex align-center">
-              <LightDarkSwitch class="d-none d-lg-flex" />
-            </v-col>
-            <v-col class="d-flex align-center justify-end">
-              <button @click="toggleDrawer">
-                <Circle>
-                  <v-icon icon="$camera"></v-icon>
-                </Circle>
-              </button>
-              <UserInfo class="ml-2" />
-            </v-col>
-          </v-row>
-        </v-col>
-      </v-row>
-    </v-app-bar>
-  </div>
-  <TablesDrawer v-model="isTablesDrawerVisible" location="right" />
+  <v-app-bar flat class="app-bar" height="70">
+    <v-row class="ma-1">
+      <v-col class="d-none d-md-flex align-center">
+        <a href="/" class="logo">
+          <LogoImage size="small" />
+        </a>
+      </v-col>
+      <v-col class="d-flex align-center justify-center">
+        <TabControl />
+      </v-col>
+      <v-col class="d-none d-md-flex align-center">
+        <v-row>
+          <v-col class="d-flex align-center">
+            <LightDarkSwitch class="d-none d-lg-flex" />
+          </v-col>
+          <v-col class="d-flex align-center justify-end">
+            <button @click="toggleDrawer">
+              <Circle>
+                <v-icon icon="$camera"></v-icon>
+              </Circle>
+            </button>
+            <UserInfo class="ml-2" />
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-row>
+  </v-app-bar>
+  <TablesDrawer v-model="isTablesDrawerVisible" class="hide-on-mobile" location="right" />
 </template>
 
 <script lang="ts" setup>
@@ -48,9 +46,9 @@ const toggleDrawer = () => {
 </script>
 
 <style scoped lang="scss">
+@import 'vuetify/lib/styles/settings/_variables';
+
 .app-bar {
-  position: sticky;
-  top: 0;
   background: transparent !important;
 }
 
@@ -58,9 +56,9 @@ const toggleDrawer = () => {
   width: 140px;
 }
 
-.top-menu {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+.hide-on-mobile {
+  @media #{map-get($display-breakpoints, 'md-and-down')} {
+    display: none;
+  }
 }
 </style>

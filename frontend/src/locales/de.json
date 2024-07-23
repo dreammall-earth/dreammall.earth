@@ -1,6 +1,6 @@
 {
   "$vuetify": {
-    "input:": {
+    "input": {
       "clear": "Löschen"
     }
   },
@@ -53,6 +53,8 @@
   },
   "tablesDrawer": {
     "header": "Offene Tische",
+    "noResults": "Keine Ergebnisse gefunden",
+    "noTables": "Keine Tische verfügbar",
     "searchPlaceholder": "Offene Tische, Teilnehmer"
   }
 }
