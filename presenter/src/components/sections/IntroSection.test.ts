@@ -191,7 +191,7 @@ describe('IntroSection', () => {
 
     beforeEach(() => {
       // eslint-disable-next-line promise/prefer-await-to-callbacks
-      global.window.addEventListener = vi.fn((event, callback) => {
+      vi.spyOn(global.window, 'addEventListener').mockImplementation((event, callback) => {
         // eslint-disable-next-line security/detect-object-injection
         events[event] = callback
       })
