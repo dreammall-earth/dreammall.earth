@@ -194,6 +194,8 @@ module.exports = {
       plugins: ['jest'],
       extends: ['plugin:jest/all'],
       rules: {
+        'jest/max-expects': 'off',
+        'jest/no-disabled-tests': 'off',
         'jest/no-hooks': 'off',
         'jest/prefer-expect-assertions': [
           'off',
