@@ -49,8 +49,8 @@ describe('NewsletterForm', () => {
       })
 
       it('user feedback not visible', () => {
-        expect(wrapper.find('span.info-text.form-success').exists()).toBeFalsy()
-        expect(wrapper.find('span.info-text.form-error').exists()).toBeFalsy()
+        expect(wrapper.find('span.info-text.form-success').exists()).toBe(false)
+        expect(wrapper.find('span.info-text.form-error').exists()).toBe(false)
       })
 
       it('does not call the API', () => {
@@ -109,7 +109,7 @@ describe('NewsletterForm', () => {
             })
 
             it('does not show the message anymore', () => {
-              expect(wrapper.find('span.info-text.form-success').exists()).toBeFalsy()
+              expect(wrapper.find('span.info-text.form-success').exists()).toBe(false)
             })
           })
         })
@@ -157,7 +157,7 @@ describe('NewsletterForm', () => {
             })
 
             it('does not show the message anymore', () => {
-              expect(wrapper.find('span.info-text.form-error').exists()).toBeFalsy()
+              expect(wrapper.find('span.info-text.form-error').exists()).toBe(false)
             })
           })
         })

@@ -30,6 +30,6 @@ describe('EmbeddedRoom', () => {
 
   it('does not show iframe when url is not provided', async () => {
     await wrapper.setProps({ url: null })
-    expect(wrapper.find('iframe').exists()).toBeFalsy()
+    expect(wrapper.find('iframe').exists()).toBe(false)
   })
 })

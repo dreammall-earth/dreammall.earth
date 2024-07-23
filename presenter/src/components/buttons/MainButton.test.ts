@@ -28,7 +28,7 @@ describe('MainButton', () => {
   })
 
   it('icon is hidden', () => {
-    expect(wrapper.find('.v-icon').exists()).toBeFalsy()
+    expect(wrapper.find('.v-icon').exists()).toBe(false)
   })
 
   describe('click on button', () => {

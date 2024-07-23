@@ -426,7 +426,7 @@ describe('Brevo', () => {
       })
 
       it('returns false', () => {
-        expect(result).toBeFalsy()
+        expect(result).toBe(false)
       })
 
       it('does not call sendTransacEmail', () => {
@@ -810,7 +810,7 @@ describe('Brevo', () => {
       })
 
       it('returns false', () => {
-        expect(result).toBeFalsy()
+        expect(result).toBe(false)
       })
 
       it('does not call createContact', () => {

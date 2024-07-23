@@ -15,7 +15,7 @@ describe('Auth Store', () => {
     it('has defaults set correctly', () => {
       expect(authStore.user).toBeNull()
       expect(authStore.accessToken).toBe('')
-      expect(authStore.isLoggedIn).toBeFalsy()
+      expect(authStore.isLoggedIn).toBe(false)
     })
   })
 
@@ -68,7 +68,7 @@ describe('Auth Store', () => {
         authStore.clear()
         expect(authStore.user).toBeNull()
         expect(authStore.accessToken).toBe('')
-        expect(authStore.isLoggedIn).toBeFalsy()
+        expect(authStore.isLoggedIn).toBe(false)
       })
     })
   })

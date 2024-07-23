@@ -24,7 +24,7 @@ describe('VikeBtn', () => {
   })
 
   it('icon is hidden', () => {
-    expect(wrapper.find('.v-icon').exists()).toBeFalsy()
+    expect(wrapper.find('.v-icon').exists()).toBe(false)
   })
 
   describe('with href attribute app', () => {

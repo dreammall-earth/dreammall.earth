@@ -19,7 +19,7 @@ describe('PlanningSection', () => {
   })
 
   it('reload button hidden', () => {
-    expect(wrapper.findComponent({ name: 'MainButton' }).exists()).toBeFalsy()
+    expect(wrapper.findComponent({ name: 'MainButton' }).exists()).toBe(false)
   })
 
   describe('video ends', () => {

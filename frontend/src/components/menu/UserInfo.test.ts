@@ -33,7 +33,7 @@ describe('UserInfo', () => {
       expect(wrapper.findComponent({ name: 'VAvatar' }).text()).toBe('')
       expect(
         wrapper.findComponent({ name: 'VAvatar' }).findComponent({ name: 'VImg' }).exists(),
-      ).toBeFalsy()
+      ).toBe(false)
     })
   })
 
@@ -65,7 +65,7 @@ describe('UserInfo', () => {
       expect(wrapper.findComponent({ name: 'VAvatar' }).text()).toBe('PL')
       expect(
         wrapper.findComponent({ name: 'VAvatar' }).findComponent({ name: 'VImg' }).exists(),
-      ).toBeFalsy()
+      ).toBe(false)
     })
   })
 

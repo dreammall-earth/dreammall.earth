@@ -187,6 +187,7 @@ module.exports = {
           },
         ],
         'vitest/prefer-strict-equal': 'off',
+        'vitest/prefer-to-be-falsy': 'off',
         'vitest/prefer-to-be-truthy': 'off',
         'vitest/require-hook': [
           'error',

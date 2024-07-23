@@ -102,9 +102,9 @@ describe('TopMenu', () => {
 
       describe('as normal user', () => {
         it('does not exist', () => {
-          expect(
-            wrapper.findComponent(UserDropdown).find('button.admin-button').exists(),
-          ).toBeFalsy()
+          expect(wrapper.findComponent(UserDropdown).find('button.admin-button').exists()).toBe(
+            false,
+          )
         })
       })
 

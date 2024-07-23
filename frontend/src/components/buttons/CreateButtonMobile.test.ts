@@ -45,9 +45,9 @@ describe('CreateButtonMobile', () => {
   })
 
   it('button list content is hidden', () => {
-    expect(wrapper.find('.button-list-mobile').classes('button-list-mobile--active')).toBeFalsy()
-    expect(wrapper.find('svg g.outer-rings').classes('outer-rings--active')).toBeFalsy()
-    expect(wrapper.find('svg g.most-outer-rings').classes('most-outer-rings--active')).toBeFalsy()
+    expect(wrapper.find('.button-list-mobile').classes('button-list-mobile--active')).toBe(false)
+    expect(wrapper.find('svg g.outer-rings').classes('outer-rings--active')).toBe(false)
+    expect(wrapper.find('svg g.most-outer-rings').classes('most-outer-rings--active')).toBe(false)
   })
 
   describe('click on create button', () => {

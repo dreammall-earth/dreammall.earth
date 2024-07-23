@@ -36,9 +36,9 @@ describe('CreateButton', () => {
   })
 
   it('button list content is hidden', () => {
-    expect(wrapper.find('.new-project-button').exists()).toBeFalsy()
-    expect(wrapper.find('.new-table-button').exists()).toBeFalsy()
-    expect(wrapper.find('.assistent-button').exists()).toBeFalsy()
+    expect(wrapper.find('.new-project-button').exists()).toBe(false)
+    expect(wrapper.find('.new-table-button').exists()).toBe(false)
+    expect(wrapper.find('.assistent-button').exists()).toBe(false)
   })
 
   describe('click on create button', () => {
