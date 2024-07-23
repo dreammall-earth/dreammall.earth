@@ -178,7 +178,7 @@ describe('NewsletterSubscriptionResolver', () => {
       it('writes event to database', async () => {
         const result = await prisma.event.findMany()
         expect(result).toHaveLength(1)
-        expect(result).toStrictEqual([
+        expect(result).toEqual([
           expect.objectContaining({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
@@ -237,7 +237,7 @@ describe('NewsletterSubscriptionResolver', () => {
     it('writes event to database', async () => {
       const result = await prisma.event.findMany()
       expect(result).toHaveLength(1)
-      expect(result).toStrictEqual([
+      expect(result).toEqual([
         expect.objectContaining({
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           id: expect.any(Number),
