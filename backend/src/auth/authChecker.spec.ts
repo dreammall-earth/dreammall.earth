@@ -3,6 +3,8 @@ import { ApolloServer } from '@apollo/server'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
 
+import type { Context } from '#src/server/context'
+
 // eslint-disable-next-line jest/no-untyped-mock-factory
 jest.mock('axios', () => {
   return {
