@@ -5,6 +5,7 @@ import axios from 'axios'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
 
+// eslint-disable-next-line jest/no-untyped-mock-factory
 jest.mock('axios', () => {
   return {
     create: jest.fn().mockImplementation(() => {

@@ -25,6 +25,8 @@ const mockCreateContact = jest.fn().mockResolvedValue({
 })
 
 const code = '1234567890abcdef'
+
+// eslint-disable-next-line jest/no-untyped-mock-factory
 jest.mock('crypto', () => {
   const originalModule = jest.requireActual<typeof import('crypto')>('crypto')
   return {
@@ -35,6 +37,7 @@ jest.mock('crypto', () => {
   }
 })
 
+// eslint-disable-next-line jest/no-untyped-mock-factory
 jest.mock('@getbrevo/brevo', () => {
   const originalModule = jest.requireActual<typeof import('@getbrevo/brevo')>('@getbrevo/brevo')
   return {

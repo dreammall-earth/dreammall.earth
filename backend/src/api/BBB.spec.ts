@@ -4,6 +4,7 @@ import logger from '#src/logger'
 import { joinMeetingLink, getMeetings, MeetingInfo, createMeeting } from './BBB'
 import { axiosInstance } from './BBB/axios'
 
+// eslint-disable-next-line jest/no-untyped-mock-factory
 jest.mock('#src/logger', () => {
   return {
     error: jest.fn(),

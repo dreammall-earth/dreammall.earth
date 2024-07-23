@@ -13,6 +13,7 @@ CONFIG.BREVO_NEWSLETTER_TEMPLATE_OPTIN = 3
 
 let testServer: ApolloServer
 
+// eslint-disable-next-line jest/no-untyped-mock-factory
 jest.mock('#api/Brevo', () => ({
   subscribeToNewsletter: jest.fn().mockResolvedValue(true),
   confirmNewsletter: jest

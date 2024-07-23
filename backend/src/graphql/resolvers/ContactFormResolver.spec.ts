@@ -7,6 +7,7 @@ import { createTestServer } from '#src/server/server'
 
 let testServer: ApolloServer
 
+// eslint-disable-next-line jest/no-untyped-mock-factory
 jest.mock('#api/Brevo', () => {
   return {
     sendContactEmails: jest.fn(),
