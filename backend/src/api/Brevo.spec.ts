@@ -99,7 +99,7 @@ describe('Brevo', () => {
           await expect(sendContactEmails(contactFormData)).rejects.toBeTruthy()
           const result = await prisma.contactForm.findMany()
           expect(result).toHaveLength(1)
-          expect(result).toEqual([
+          expect(result).toStrictEqual([
             {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(Number),
@@ -189,7 +189,7 @@ describe('Brevo', () => {
         it('has the contact form stored in the database with brevo success date', async () => {
           const result = await prisma.contactForm.findMany()
           expect(result).toHaveLength(1)
-          expect(result).toEqual([
+          expect(result).toStrictEqual([
             {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(Number),
@@ -276,7 +276,7 @@ describe('Brevo', () => {
         it('creates database entry with brevoSuccessMail = null', async () => {
           const result = await prisma.newsletterPreOptIn.findMany()
           expect(result).toHaveLength(1)
-          expect(result).toEqual([
+          expect(result).toStrictEqual([
             {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(Number),
@@ -317,7 +317,7 @@ describe('Brevo', () => {
         it('creates database entry with brevoSuccessMail = null', async () => {
           const result = await prisma.newsletterPreOptIn.findMany()
           expect(result).toHaveLength(1)
-          expect(result).toEqual([
+          expect(result).toStrictEqual([
             {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(Number),
@@ -391,7 +391,7 @@ describe('Brevo', () => {
         it('creates database entry', async () => {
           const result = await prisma.newsletterPreOptIn.findMany()
           expect(result).toHaveLength(1)
-          expect(result).toEqual([
+          expect(result).toStrictEqual([
             {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(Number),
@@ -474,7 +474,7 @@ describe('Brevo', () => {
         })
 
         it('does not reject with error', async () => {
-          await expect(confirmNewsletter(code)).resolves.toEqual({
+          await expect(confirmNewsletter(code)).resolves.toStrictEqual({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
             firstName: 'Peter',
@@ -496,7 +496,7 @@ describe('Brevo', () => {
         it('does not update database entry', async () => {
           const result = await prisma.newsletterPreOptIn.findMany()
           expect(result).toHaveLength(1)
-          expect(result).toEqual([
+          expect(result).toStrictEqual([
             {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(Number),
@@ -528,7 +528,7 @@ describe('Brevo', () => {
         })
 
         it('does not reject with error', async () => {
-          await expect(confirmNewsletter(code)).resolves.toEqual({
+          await expect(confirmNewsletter(code)).resolves.toStrictEqual({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
             firstName: 'Peter',
@@ -550,7 +550,7 @@ describe('Brevo', () => {
         it('does not update database entry', async () => {
           const result = await prisma.newsletterPreOptIn.findMany()
           expect(result).toHaveLength(1)
-          expect(result).toEqual([
+          expect(result).toStrictEqual([
             {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(Number),
@@ -607,7 +607,7 @@ describe('Brevo', () => {
           const resultOptIn = await prisma.$queryRaw`SELECT * FROM NewsletterPreOptIn`
           expect(countOptIn).toBe(0)
           expect(resultOptIn).toHaveLength(1)
-          expect(resultOptIn).toEqual([
+          expect(resultOptIn).toStrictEqual([
             {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(Number),
@@ -632,7 +632,7 @@ describe('Brevo', () => {
           const resultSubscription = await prisma.$queryRaw`SELECT * FROM NewsletterSubscription`
           expect(countSubscription).toBe(1)
           expect(resultSubscription).toHaveLength(1)
-          expect(resultSubscription).toEqual([
+          expect(resultSubscription).toStrictEqual([
             {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(Number),
@@ -647,7 +647,7 @@ describe('Brevo', () => {
         })
 
         it('returns database entry', () => {
-          expect(result).toEqual({
+          expect(result).toStrictEqual({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
             firstName: 'Peter',
@@ -712,7 +712,7 @@ describe('Brevo', () => {
           const resultOptIn = await prisma.$queryRaw`SELECT * FROM NewsletterPreOptIn`
           expect(countOptIn).toBe(0)
           expect(resultOptIn).toHaveLength(2)
-          expect(resultOptIn).toEqual([
+          expect(resultOptIn).toStrictEqual([
             {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(Number),
@@ -755,7 +755,7 @@ describe('Brevo', () => {
           const resultSubscription = await prisma.$queryRaw`SELECT * FROM NewsletterSubscription`
           expect(countSubscription).toBe(1)
           expect(resultSubscription).toHaveLength(2)
-          expect(resultSubscription).toEqual([
+          expect(resultSubscription).toStrictEqual([
             {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(Number),
@@ -781,7 +781,7 @@ describe('Brevo', () => {
         })
 
         it('returns database entry', () => {
-          expect(result).toEqual({
+          expect(result).toStrictEqual({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
             firstName: 'Bibi',

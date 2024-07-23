@@ -91,7 +91,7 @@ describe('handleOpenRooms', () => {
       it('does not alter the DB', async () => {
         const meetings = await prisma.meeting.findMany()
         expect(meetings).toHaveLength(2)
-        expect(meetings).toEqual(
+        expect(meetings).toStrictEqual(
           expect.arrayContaining([
             expect.objectContaining({
               name: 'Meeting 1',
@@ -144,7 +144,7 @@ describe('handleOpenRooms', () => {
       it('resets the missing meeting in DB', async () => {
         const meetings = await prisma.meeting.findMany()
         expect(meetings).toHaveLength(2)
-        expect(meetings).toEqual(
+        expect(meetings).toStrictEqual(
           expect.arrayContaining([
             expect.objectContaining({
               name: 'Meeting 1',
@@ -171,7 +171,7 @@ describe('handleOpenRooms', () => {
       it('resets the meetings in DB', async () => {
         const meetings = await prisma.meeting.findMany()
         expect(meetings).toHaveLength(2)
-        expect(meetings).toEqual(
+        expect(meetings).toStrictEqual(
           expect.arrayContaining([
             expect.objectContaining({
               name: 'Meeting 1',

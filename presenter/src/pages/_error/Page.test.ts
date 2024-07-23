@@ -36,8 +36,8 @@ describe('ErrorPage', () => {
     })
     describe('no is404 property set', () => {
       it('renders error 500', () => {
-        expect(wrapper.find('h1').text()).toEqual("$t('error.500.h1')")
-        expect(wrapper.find('p').text()).toEqual("$t('error.500.text')")
+        expect(wrapper.find('h1').text()).toStrictEqual("$t('error.500.h1')")
+        expect(wrapper.find('p').text()).toStrictEqual("$t('error.500.text')")
       })
     })
 
@@ -47,8 +47,8 @@ describe('ErrorPage', () => {
       })
 
       it('renders error 500', () => {
-        expect(wrapper.find('h1').text()).toEqual("$t('error.500.h1')")
-        expect(wrapper.find('p').text()).toEqual("$t('error.500.text')")
+        expect(wrapper.find('h1').text()).toStrictEqual("$t('error.500.h1')")
+        expect(wrapper.find('p').text()).toStrictEqual("$t('error.500.text')")
       })
     })
   })
@@ -68,8 +68,8 @@ describe('ErrorPage', () => {
     })
     describe('is404 property is true', () => {
       it('renders error 400', () => {
-        expect(wrapper.find('h1').text()).toEqual("$t('error.404.h1')")
-        expect(wrapper.find('p').text()).toEqual("$t('error.404.text')")
+        expect(wrapper.find('h1').text()).toStrictEqual("$t('error.404.h1')")
+        expect(wrapper.find('p').text()).toStrictEqual("$t('error.404.text')")
       })
     })
   })

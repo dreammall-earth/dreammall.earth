@@ -19,6 +19,6 @@ describe('EmailInput', () => {
 
   it('emits the update:modelValue event on input', async () => {
     await wrapper.find('input').setValue('new@email.com')
-    expect(wrapper.emitted('update:modelValue')).toEqual([['new@email.com']])
+    expect(wrapper.emitted('update:modelValue')).toStrictEqual([['new@email.com']])
   })
 })

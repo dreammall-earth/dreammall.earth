@@ -78,7 +78,7 @@ describe('authChecker', () => {
         const result = await prisma.user.findMany()
         userId = result[0].id
         expect(result).toHaveLength(1)
-        expect(result).toEqual([
+        expect(result).toStrictEqual([
           {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
@@ -95,7 +95,7 @@ describe('authChecker', () => {
       it('creates CREATE USER event', async () => {
         const result = await prisma.event.findMany()
         expect(result).toHaveLength(1)
-        expect(result).toEqual([
+        expect(result).toStrictEqual([
           expect.objectContaining({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),

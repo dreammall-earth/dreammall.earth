@@ -19,6 +19,6 @@ describe('MainButton', () => {
 
   it('emits the update:modelValue event on input', async () => {
     await wrapper.find('input').setValue('New Name')
-    expect(wrapper.emitted('update:modelValue')).toEqual([['New Name']])
+    expect(wrapper.emitted('update:modelValue')).toStrictEqual([['New Name']])
   })
 })

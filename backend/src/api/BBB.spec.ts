@@ -83,7 +83,7 @@ describe('getMeetings', () => {
     })
 
     it('logs get meetings error with type error', () => {
-      expect(result).toEqual([])
+      expect(result).toStrictEqual([])
     })
   })
 
@@ -141,7 +141,7 @@ describe('getMeetings', () => {
     })
 
     it('returns the meeting', () => {
-      expect(result).toEqual([
+      expect(result).toStrictEqual([
         {
           attendeePW: '2HZnUWpn',
           attendees: {
@@ -277,7 +277,7 @@ describe('getMeetings', () => {
     })
 
     it('returns the meeting', () => {
-      expect(result).toEqual([
+      expect(result).toStrictEqual([
         {
           attendeePW: '2HZnUWpn',
           attendees: {
@@ -418,7 +418,7 @@ describe('createMeeting', () => {
           name: 'Peter Lustig',
           meetingID: 'Peters Raum',
         }),
-      ).resolves.toEqual({
+      ).resolves.toStrictEqual({
         returncode: 'SUCCESS',
         meetingID: 'Dreammall-Entwicklung',
         internalMeetingID: '258ea7269760758304b6b8494f17e9bf69dc1efe-1718289413143',

@@ -16,7 +16,7 @@ describe('printConfigError', () => {
     })
 
     it('return undefined', () => {
-      expect(printConfigError('test messsage')).toEqual(undefined)
+      expect(printConfigError('test messsage')).toStrictEqual(undefined)
     })
   })
 

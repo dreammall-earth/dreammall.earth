@@ -20,6 +20,6 @@ describe('DataPrivacyCheckbox', () => {
   it('emits the modelValue:update event on checkbox change', async () => {
     await wrapper.find('input[type="checkbox"]').setValue(true)
     await flushPromises()
-    expect(wrapper.emitted('modelValue:update')).toEqual([[true]])
+    expect(wrapper.emitted('modelValue:update')).toStrictEqual([[true]])
   })
 })

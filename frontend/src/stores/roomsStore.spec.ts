@@ -51,7 +51,7 @@ describe('Rooms Store', () => {
       })
 
       it('updates the store', () => {
-        expect(roomsStore.getRooms).toEqual([
+        expect(roomsStore.getRooms).toStrictEqual([
           {
             meetingID: 'my-meeting',
             meetingName: 'My meeting',
