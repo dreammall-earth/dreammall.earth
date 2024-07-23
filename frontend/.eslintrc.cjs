@@ -186,6 +186,7 @@ module.exports = {
             onlyFunctionsWithExpectInCallback: true,
           },
         ],
+        'vitest/prefer-strict-equal': 'off',
       },
     },
     {
