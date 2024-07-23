@@ -96,9 +96,10 @@ describe('UserResolver', () => {
 
     describe('unauthenticated', () => {
       it('returns an unauthenticated error', async () => {
-        const response = await testServer.executeOperation({
-          query,
-        })
+        const response = await testServer.executeOperation(
+          { query },
+          { contextValue: { dataSources: { prisma } } },
+        )
         expect(response).toMatchObject({
           body: {
             kind: 'single',
@@ -130,6 +131,7 @@ describe('UserResolver', () => {
             {
               contextValue: {
                 token: 'token',
+                dataSources: { prisma },
               },
             },
           )
@@ -177,6 +179,7 @@ describe('UserResolver', () => {
             {
               contextValue: {
                 token: 'token',
+                dataSources: { prisma },
               },
             },
           )
@@ -279,6 +282,7 @@ describe('UserResolver', () => {
             {
               contextValue: {
                 token: 'token',
+                dataSources: { prisma },
               },
             },
           )
