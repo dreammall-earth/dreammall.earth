@@ -18,8 +18,8 @@ describe('Rooms Store', () => {
 
   describe('defaults', () => {
     it('has defaults set correctly', () => {
-      expect(roomsStore.rooms).toBe([])
-      expect(roomsStore.getRooms).toBe([])
+      expect(roomsStore.rooms).toEqual([])
+      expect(roomsStore.getRooms).toEqual([])
     })
   })
 
@@ -85,7 +85,7 @@ describe('Rooms Store', () => {
           joinLink: 'https://my.link',
         },
       ])
-      expect(roomsStore.rooms).toBe([
+      expect(roomsStore.rooms).toEqual([
         {
           meetingID: 'my-meeting',
           meetingName: 'my meeting',
