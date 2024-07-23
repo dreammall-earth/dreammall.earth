@@ -99,7 +99,7 @@ describe('Brevo', () => {
         })
 
         it('has the contact form stored in the database without brevo success date', async () => {
-          await expect(sendContactEmails(contactFormData)).rejects.toBe(true)
+          await expect(sendContactEmails(contactFormData)).rejects.toBeTruthy()
           const result = await prisma.contactForm.findMany()
           expect(result).toHaveLength(1)
           expect(result).toEqual([
