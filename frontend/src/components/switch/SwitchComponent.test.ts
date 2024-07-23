@@ -34,7 +34,7 @@ describe('Switch', () => {
     })
 
     it('emits change', () => {
-      expect(wrapper.emitted('change')).toEqual([['right']])
+      expect(wrapper.emitted('change')).toBe([['right']])
     })
 
     it('changes state when clicked', () => {

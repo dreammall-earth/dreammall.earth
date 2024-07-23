@@ -118,7 +118,7 @@ describe('CreateButtonMobile', () => {
         })
 
         it('does not update the store', () => {
-          expect(activeRoomStore.activeRoom).toBe(null)
+          expect(activeRoomStore.activeRoom).toBeNull()
         })
 
         it('toasts no room found error', async () => {
@@ -144,7 +144,7 @@ describe('CreateButtonMobile', () => {
         })
 
         it('does not update the store', () => {
-          expect(activeRoomStore.activeRoom).toBe(null)
+          expect(activeRoomStore.activeRoom).toBeNull()
         })
 
         it('toasts no room found error', () => {

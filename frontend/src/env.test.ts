@@ -4,7 +4,7 @@ import { META } from './env'
 
 describe('env', () => {
   it('has correct default values', () => {
-    expect(META).toEqual({
+    expect(META).toBe({
       BASE_URL: 'http://localhost:3000',
       DEFAULT_AUTHOR: 'DreamMall Verlag GbR',
     })

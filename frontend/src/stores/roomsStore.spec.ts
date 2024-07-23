@@ -18,8 +18,8 @@ describe('Rooms Store', () => {
 
   describe('defaults', () => {
     it('has defaults set correctly', () => {
-      expect(roomsStore.rooms).toEqual([])
-      expect(roomsStore.getRooms).toEqual([])
+      expect(roomsStore.rooms).toBe([])
+      expect(roomsStore.getRooms).toBe([])
     })
   })
 
@@ -50,8 +50,21 @@ describe('Rooms Store', () => {
         })
       })
 
-      it('calls the API again', () => {
-        expect(openRoomsQueryMock).toHaveBeenCalledTimes(2)
+      it('updates the store', () => {
+        expect(roomsStore.getRooms).toEqual([
+          {
+            meetingID: 'my-meeting',
+            meetingName: 'My meeting',
+            startTime: '1234',
+            participantCount: 1,
+            attendees: [
+              {
+                fullName: 'Peter Lustig',
+              },
+            ],
+            joinLink: 'https://my.link',
+          },
+        ])
       })
     })
   })
@@ -72,7 +85,7 @@ describe('Rooms Store', () => {
           joinLink: 'https://my.link',
         },
       ])
-      expect(roomsStore.rooms).toEqual([
+      expect(roomsStore.rooms).toBe([
         {
           meetingID: 'my-meeting',
           meetingName: 'my meeting',
