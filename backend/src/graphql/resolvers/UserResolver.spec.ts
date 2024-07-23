@@ -7,11 +7,11 @@ import type { Context } from '#src/server/context'
 
 let testServer: ApolloServer<Context>
 
-beforeAll(async () => {
-  testServer = await createTestServer()
-})
-
 describe('UserResolver', () => {
+  beforeAll(async () => {
+    testServer = await createTestServer()
+  })
+
   describe('users query', () => {
     describe('unauthenticated', () => {
       it('returns an unauthenticated error', async () => {

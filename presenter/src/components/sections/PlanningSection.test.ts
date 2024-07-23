@@ -31,20 +31,21 @@ describe('PlanningSection', () => {
       expect(wrapper.findComponent({ name: 'MainButton' }).exists()).toBe(true)
     })
 
-    describe.skip('click replay button', () => {
-      let spy: MockInstance
+    // describe('click replay button', () => {
+    //   let spy: MockInstance
 
-      beforeEach(async () => {
-        vi.clearAllMocks()
-        ;(wrapper.vm as unknown as { video: HTMLFormElement }).video.ended = true
-        spy = vi.spyOn((wrapper.vm as unknown as { video: HTMLFormElement }).video, 'play')
-        await wrapper.findComponent({ name: 'MainButton' }).trigger('click')
-      })
+    //   beforeEach(async () => {
+    //     vi.clearAllMocks()
+    //     ;(wrapper.vm as unknown as { video: HTMLFormElement }).video.ended = true
+    //     spy = vi.spyOn((wrapper.vm as unknown as { video: HTMLFormElement }).video, 'play')
+    //     await wrapper.findComponent({ name: 'MainButton' }).trigger('click')
+    //   })
 
-      it('plays video again', () => {
-        expect(spy).toBeCalled()
-      })
-    })
+    //   it('plays video again', () => {
+    //     // eslint-disable-next-line vitest/prefer-called-with
+    //     expect(spy).toHaveBeenCalled()
+    //   })
+    // })
   })
 
   describe('video source and poster', () => {
@@ -88,7 +89,7 @@ describe('PlanningSection', () => {
 
     beforeEach(() => {
       // eslint-disable-next-line promise/prefer-await-to-callbacks
-      global.window.addEventListener = vi.fn((event, callback) => {
+      vi.spyOn(global.window, 'addEventListener').mockImplementation((event, callback) => {
         // eslint-disable-next-line security/detect-object-injection
         events[event] = callback
       })
@@ -103,7 +104,8 @@ describe('PlanningSection', () => {
     it('calls etVideoSrc', () => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       events.resize()
-      expect(spy).toBeCalled()
+      // eslint-disable-next-line vitest/prefer-called-with
+      expect(spy).toHaveBeenCalled()
     })
   })
 })
