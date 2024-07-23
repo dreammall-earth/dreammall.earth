@@ -17,11 +17,11 @@ let testServer: ApolloServer
 
 CONFIG.FRONTEND_INVITE_LINK_URL = '/'
 
-beforeAll(async () => {
-  testServer = await createTestServer()
-})
-
 describe('RoomResolver', () => {
+  beforeAll(async () => {
+    testServer = await createTestServer()
+  })
+
   describe('unauthorized', () => {
     describe('createMyRoom', () => {
       it('throws access denied', async () => {

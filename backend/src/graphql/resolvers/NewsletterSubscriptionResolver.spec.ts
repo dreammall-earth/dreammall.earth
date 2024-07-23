@@ -21,11 +21,11 @@ jest.mock('#api/Brevo', () => ({
     .mockResolvedValue({ email: 'peter@lustig.de' }),
 }))
 
-beforeAll(async () => {
-  testServer = await createTestServer()
-})
-
 describe('NewsletterSubscriptionResolver', () => {
+  beforeAll(async () => {
+    testServer = await createTestServer()
+  })
+
   describe('subscribeToNewsletter mutation', () => {
     describe('email is no email', () => {
       it('throws schema error', async () => {

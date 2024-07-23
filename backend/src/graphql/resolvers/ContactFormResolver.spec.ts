@@ -13,11 +13,11 @@ jest.mock('#api/Brevo', () => {
   }
 })
 
-beforeAll(async () => {
-  testServer = await createTestServer()
-})
-
 describe('ContactFormResolver', () => {
+  beforeAll(async () => {
+    testServer = await createTestServer()
+  })
+
   describe('createContactForm mutation', () => {
     describe('email is no email', () => {
       it('throws schema error', async () => {

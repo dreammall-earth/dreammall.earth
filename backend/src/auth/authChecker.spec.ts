@@ -27,12 +27,12 @@ jest.mock('axios', () => {
 
 let testServer: ApolloServer
 
-beforeAll(async () => {
-  testServer = await createTestServer()
-})
-
 // uses joinMyRoom query
 describe('authChecker', () => {
+  beforeAll(async () => {
+    testServer = await createTestServer()
+  })
+
   describe('no token in context', () => {
     it('returns access denied error', async () => {
       await expect(

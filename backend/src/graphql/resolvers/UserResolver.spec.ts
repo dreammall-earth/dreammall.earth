@@ -4,11 +4,11 @@ import { createTestServer } from '#src/server/server'
 
 let testServer: ApolloServer
 
-beforeAll(async () => {
-  testServer = await createTestServer()
-})
-
 describe('UserResolver', () => {
+  beforeAll(async () => {
+    testServer = await createTestServer()
+  })
+
   describe('users query', () => {
     describe('unauthenticated', () => {
       it('returns an unauthenticated error', async () => {
