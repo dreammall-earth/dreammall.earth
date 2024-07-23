@@ -193,6 +193,17 @@ module.exports = {
       files: ['*.{test,spec}.[tj]s'],
       plugins: ['jest'],
       extends: ['plugin:jest/all'],
+      rules: {
+        'jest/no-hooks': 'off',
+        'jest/prefer-expect-assertions': [
+          'off',
+          {
+            onlyFunctionsWithExpectInLoop: true,
+            onlyFunctionsWithExpectInCallback: true,
+          },
+        ],
+        'jest/prefer-lowercase-title': 'off',
+      },
     },
     {
       files: ['*.yaml', '*.yml'],
