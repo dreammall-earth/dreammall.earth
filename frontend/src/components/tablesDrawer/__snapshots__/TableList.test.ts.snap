@@ -8,159 +8,103 @@ exports[`TableList > renders correctly 1`] = `
     class="v-application__wrap"
   >
     
-    <div
-      class="v-card v-theme--light v-card--density-default v-card--variant-elevated mx-auto"
+    <ul
+      class="list"
       data-v-de37061b=""
-      style="width: 400px;"
     >
-      <!---->
-      <div
-        class="v-card__loader"
-      >
-        <div
-          aria-hidden="true"
-          aria-valuemax="100"
-          aria-valuemin="0"
-          class="v-progress-linear v-theme--light v-locale--is-ltr"
-          role="progressbar"
-          style="top: 0px; height: 0px; --v-progress-linear-height: 2px;"
-        >
-          <!---->
-          <div
-            class="v-progress-linear__background"
-            style="width: 100%;"
-          />
-          <transition-stub
-            appear="false"
-            css="true"
-            name="fade-transition"
-            persisted="false"
-          >
-            <div
-              class="v-progress-linear__indeterminate"
-            >
-              
-              <div
-                class="v-progress-linear__indeterminate long"
-              />
-              <div
-                class="v-progress-linear__indeterminate short"
-              />
-              
-            </div>
-          </transition-stub>
-          <!---->
-        </div>
-      </div>
-      <!---->
-      <!---->
       
-      <div
-        class="v-list v-theme--light v-list--density-default v-list--two-line"
+      <li
+        class="table"
         data-v-de37061b=""
-        role="listbox"
-        tabindex="0"
       >
-        
-        
         <div
-          class="v-list-item v-list-item--link v-theme--light v-list-item--density-default v-list-item--two-line rounded-0 v-list-item--variant-text table"
+          class="table-info bg-dropdown-background"
           data-v-de37061b=""
-          tabindex="-2"
         >
-          
           <span
-            class="v-list-item__overlay"
-          />
-          <span
-            class="v-list-item__underlay"
-          />
-          
-          <!---->
-          <div
-            class="v-list-item__content"
-            data-no-activator=""
+            class="name"
+            data-v-de37061b=""
           >
-            <div
-              class="v-list-item-title"
-            >
-              my meeting
-            </div>
-            <div
-              class="v-list-item-subtitle"
-            >
-              $t('rooms.participantCount')
-            </div>
-            
-            <!--
-        &lt;template v-if="item.prepend" #prepend&gt;
-          &lt;component :is="item.prepend" v-bind="item.prependProps" /&gt;
-        &lt;/template&gt;
-        -->
-            <!--
-        &lt;template v-if="item.append" #append&gt;
-          &lt;component :is="item.append" v-bind="item.appendProps" /&gt;
-        &lt;/template&gt;
-        -->
-            
-          </div>
-          <!---->
+            my meeting
+          </span>
+          <span
+            class="subtitle"
+            data-v-de37061b=""
+          >
+            $t('rooms.participantCount')
+          </span>
         </div>
+        <button
+          class="action"
+          data-v-de37061b=""
+        >
+          <i
+            aria-hidden="true"
+            class="v-icon notranslate v-theme--light v-icon--size-default icon"
+            data-v-de37061b=""
+          >
+            <svg
+              fill="none"
+              height="17"
+              viewBox="0 0 21 17"
+              width="21"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7.68844 12.4824H9.66834V9.51172H12.6382V7.53125H9.66834V4.56055H7.68844V7.53125H4.71859V9.51172H7.68844V12.4824ZM2.73869 16.4434C2.19422 16.4434 1.72812 16.2494 1.34038 15.8616C0.952654 15.4738 0.758789 15.0075 0.758789 14.4629V2.58008C0.758789 2.03545 0.952654 1.56921 1.34038 1.18137C1.72812 0.79353 2.19422 0.599609 2.73869 0.599609H14.6181C15.1626 0.599609 15.6287 0.79353 16.0164 1.18137C16.4041 1.56921 16.598 2.03545 16.598 2.58008V7.03613L20.5578 3.0752V13.9678L16.598 10.0068V14.4629C16.598 15.0075 16.4041 15.4738 16.0164 15.8616C15.6287 16.2494 15.1626 16.4434 14.6181 16.4434H2.73869ZM2.73869 14.4629H14.6181V2.58008H2.73869V14.4629Z"
+                fill="currentColor"
+              />
+            </svg>
+          </i>
+        </button>
+      </li>
+      <li
+        class="table"
+        data-v-de37061b=""
+      >
         <div
-          class="v-list-item v-list-item--link v-theme--light v-list-item--density-default v-list-item--two-line rounded-0 v-list-item--variant-text table"
+          class="table-info bg-dropdown-background"
           data-v-de37061b=""
-          tabindex="-2"
         >
-          
           <span
-            class="v-list-item__overlay"
-          />
-          <span
-            class="v-list-item__underlay"
-          />
-          
-          <!---->
-          <div
-            class="v-list-item__content"
-            data-no-activator=""
+            class="name"
+            data-v-de37061b=""
           >
-            <div
-              class="v-list-item-title"
-            >
-              my meeting
-            </div>
-            <div
-              class="v-list-item-subtitle"
-            >
-              $t('rooms.participantCount')
-            </div>
-            
-            <!--
-        &lt;template v-if="item.prepend" #prepend&gt;
-          &lt;component :is="item.prepend" v-bind="item.prependProps" /&gt;
-        &lt;/template&gt;
-        -->
-            <!--
-        &lt;template v-if="item.append" #append&gt;
-          &lt;component :is="item.append" v-bind="item.appendProps" /&gt;
-        &lt;/template&gt;
-        -->
-            
-          </div>
-          <!---->
+            my meeting
+          </span>
+          <span
+            class="subtitle"
+            data-v-de37061b=""
+          >
+            $t('rooms.participantCount')
+          </span>
         </div>
-        
-        
-      </div>
+        <button
+          class="action"
+          data-v-de37061b=""
+        >
+          <i
+            aria-hidden="true"
+            class="v-icon notranslate v-theme--light v-icon--size-default icon"
+            data-v-de37061b=""
+          >
+            <svg
+              fill="none"
+              height="17"
+              viewBox="0 0 21 17"
+              width="21"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7.68844 12.4824H9.66834V9.51172H12.6382V7.53125H9.66834V4.56055H7.68844V7.53125H4.71859V9.51172H7.68844V12.4824ZM2.73869 16.4434C2.19422 16.4434 1.72812 16.2494 1.34038 15.8616C0.952654 15.4738 0.758789 15.0075 0.758789 14.4629V2.58008C0.758789 2.03545 0.952654 1.56921 1.34038 1.18137C1.72812 0.79353 2.19422 0.599609 2.73869 0.599609H14.6181C15.1626 0.599609 15.6287 0.79353 16.0164 1.18137C16.4041 1.56921 16.598 2.03545 16.598 2.58008V7.03613L20.5578 3.0752V13.9678L16.598 10.0068V14.4629C16.598 15.0075 16.4041 15.4738 16.0164 15.8616C15.6287 16.2494 15.1626 16.4434 14.6181 16.4434H2.73869ZM2.73869 14.4629H14.6181V2.58008H2.73869V14.4629Z"
+                fill="currentColor"
+              />
+            </svg>
+          </i>
+        </button>
+      </li>
       
-      <!---->
-      
-      <!---->
-      <span
-        class="v-card__underlay"
-      />
-      
-    </div>
+    </ul>
     
   </div>
 </div>

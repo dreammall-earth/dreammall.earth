@@ -9,8 +9,8 @@ describe('Active Room Store', () => {
 
   describe('defaults', () => {
     it('has defaults set correctly', () => {
-      expect(activeRoomStore.activeRoom).toBe(null)
-      expect(activeRoomStore.getActiveRoom).toBe(null)
+      expect(activeRoomStore.activeRoom).toBeNull()
+      expect(activeRoomStore.getActiveRoom).toBeNull()
     })
   })
 

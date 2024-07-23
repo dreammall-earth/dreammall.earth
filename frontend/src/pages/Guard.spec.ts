@@ -17,9 +17,11 @@ describe('global route guard', () => {
   describe('unauthenticated', () => {
     it('throws and redirects', () => {
       try {
+        // eslint-disable-next-line vitest/require-to-throw-message
         expect(guard({ hasToken: false } as PageContextServer)).toThrow()
       } catch (error) {
-        expect(redirect).toBeCalledWith('/signin')
+        // eslint-disable-next-line vitest/no-conditional-expect
+        expect(redirect).toHaveBeenCalledWith('/signin')
       }
     })
   })
@@ -50,7 +52,7 @@ describe('global route guard', () => {
 
     it('does not redirect', () => {
       guard({ hasToken: true } as PageContextServer)
-      expect(redirect).not.toBeCalled()
+      expect(redirect).not.toHaveBeenCalled()
     })
   })
 })

@@ -15,6 +15,7 @@ CONFIG.BREVO_NEWSLETTER_TEMPLATE_OPTIN = 3
 
 let testServer: ApolloServer<Context>
 
+// eslint-disable-next-line jest/no-untyped-mock-factory
 jest.mock('#api/Brevo', () => ({
   subscribeToNewsletter: jest.fn().mockResolvedValue(true),
   confirmNewsletter: jest
@@ -23,11 +24,11 @@ jest.mock('#api/Brevo', () => ({
     .mockResolvedValue({ email: 'peter@lustig.de' }),
 }))
 
-beforeAll(async () => {
-  testServer = await createTestServer()
-})
-
 describe('NewsletterSubscriptionResolver', () => {
+  beforeAll(async () => {
+    testServer = await createTestServer()
+  })
+
   describe('subscribeToNewsletter mutation', () => {
     describe('email is no email', () => {
       it('throws schema error', async () => {

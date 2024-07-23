@@ -4,6 +4,7 @@ import logger from '#src/logger'
 import { joinMeetingLink, getMeetings, MeetingInfo, createMeeting } from './BBB'
 import { axiosInstance } from './BBB/axios'
 
+// eslint-disable-next-line jest/no-untyped-mock-factory
 jest.mock('#src/logger', () => {
   return {
     error: jest.fn(),
@@ -48,7 +49,7 @@ describe('getMeetings', () => {
 
     it('logs get meetings error', () => {
       // eslint-disable-next-line @typescript-eslint/unbound-method
-      expect(logger.error).toBeCalledWith('getMeetings with error', 'Ouch!')
+      expect(logger.error).toHaveBeenCalledWith('getMeetings with error', 'Ouch!')
     })
   })
 
@@ -60,7 +61,7 @@ describe('getMeetings', () => {
 
     it('logs get meetings error with type error', () => {
       // eslint-disable-next-line @typescript-eslint/unbound-method
-      expect(logger.error).toBeCalledWith(
+      expect(logger.error).toHaveBeenCalledWith(
         'getMeetings with error',
         new TypeError(`Cannot read properties of undefined (reading 'returncode')`),
       )
@@ -373,7 +374,7 @@ describe('getMeetings', () => {
 
     it('logs parser error', () => {
       // eslint-disable-next-line @typescript-eslint/unbound-method
-      expect(logger.error).toBeCalledWith('parse getMeetings with error', {
+      expect(logger.error).toHaveBeenCalledWith('parse getMeetings with error', {
         response: {
           message: 'Something went wrong',
           returncode: 'ERROR',
@@ -449,7 +450,7 @@ describe('createMeeting', () => {
         meetingID: 'Peters Raum',
       })
       // eslint-disable-next-line @typescript-eslint/unbound-method
-      expect(logger.error).toBeCalledWith('createMeeting with error', 'Aua!')
+      expect(logger.error).toHaveBeenCalledWith('createMeeting with error', 'Aua!')
     })
   })
 })
