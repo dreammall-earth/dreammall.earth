@@ -271,9 +271,7 @@ describe('Brevo', () => {
         })
 
         it('does not reject with error', async () => {
-          await expect(subscribeToNewsletter(firstName, lastName, email)).resolves.toStrictEqual(
-            true,
-          )
+          await expect(subscribeToNewsletter(firstName, lastName, email)).resolves.toBe(true)
         })
 
         it('creates database entry with brevoSuccessMail = null', async () => {
@@ -312,9 +310,7 @@ describe('Brevo', () => {
         })
 
         it('does not reject with error', async () => {
-          await expect(subscribeToNewsletter(firstName, lastName, email)).resolves.toStrictEqual(
-            true,
-          )
+          await expect(subscribeToNewsletter(firstName, lastName, email)).resolves.toBe(true)
         })
 
         it('creates database entry with brevoSuccessMail = null', async () => {
@@ -462,7 +458,7 @@ describe('Brevo', () => {
 
       describe('with invalid code', () => {
         it('returns false', async () => {
-          await expect(confirmNewsletter('1234567890abcdefG')).resolves.toStrictEqual(false)
+          await expect(confirmNewsletter('1234567890abcdefG')).resolves.toBe(false)
         })
       })
 
