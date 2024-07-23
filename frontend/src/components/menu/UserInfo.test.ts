@@ -98,7 +98,7 @@ describe('UserInfo', () => {
       expect(wrapper.findComponent({ name: 'VAvatar' }).text()).toBe('')
       expect(
         wrapper.findComponent({ name: 'VAvatar' }).findComponent({ name: 'VImg' }).exists(),
-      ).toBeTruthy()
+      ).toBe(true)
     })
   })
 })

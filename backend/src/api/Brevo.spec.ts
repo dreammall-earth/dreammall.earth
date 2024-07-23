@@ -99,7 +99,7 @@ describe('Brevo', () => {
         })
 
         it('has the contact form stored in the database without brevo success date', async () => {
-          await expect(sendContactEmails(contactFormData)).rejects.toBeTruthy()
+          await expect(sendContactEmails(contactFormData)).rejects.toBe(true)
           const result = await prisma.contactForm.findMany()
           expect(result).toHaveLength(1)
           expect(result).toEqual([
@@ -362,7 +362,7 @@ describe('Brevo', () => {
         it('does not throw on different email', async () => {
           await expect(
             subscribeToNewsletter(firstName, lastName, 'someother@email.de'),
-          ).resolves.toBeTruthy()
+          ).resolves.toBe(true)
         })
       })
 

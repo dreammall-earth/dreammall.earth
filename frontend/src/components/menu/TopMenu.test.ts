@@ -134,9 +134,9 @@ describe('TopMenu', () => {
         })
 
         it('exists', () => {
-          expect(
-            wrapper.findComponent(UserDropdown).find('button.admin-button').exists(),
-          ).toBeTruthy()
+          expect(wrapper.findComponent(UserDropdown).find('button.admin-button').exists()).toBe(
+            true,
+          )
         })
 
         describe('click', () => {

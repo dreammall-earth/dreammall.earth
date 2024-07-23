@@ -70,7 +70,7 @@ describe('MainButton', () => {
   describe('variant reload', () => {
     it('icon is visible', async () => {
       await wrapper.setProps({ size: 'auto', variant: 'reload', label: 'My Button' })
-      expect(wrapper.find('.v-icon').exists()).toBeTruthy()
+      expect(wrapper.find('.v-icon').exists()).toBe(true)
     })
 
     it('shows circular loading', async () => {
@@ -80,7 +80,7 @@ describe('MainButton', () => {
         label: 'My Button',
         isLoading: true,
       })
-      expect(wrapper.find('.v-progress-circular').exists()).toBeTruthy()
+      expect(wrapper.find('.v-progress-circular').exists()).toBe(true)
     })
   })
 

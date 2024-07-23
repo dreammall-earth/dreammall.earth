@@ -59,11 +59,9 @@ describe('CreateButtonMobile', () => {
 
     it('button list visible', async () => {
       await wrapper.find('#create-button-mobile').trigger('click')
-      expect(wrapper.find('.button-list-mobile').classes('button-list-mobile--active')).toBeTruthy()
-      expect(wrapper.find('svg g.outer-rings').classes('outer-rings--active')).toBeTruthy()
-      expect(
-        wrapper.find('svg g.most-outer-rings').classes('most-outer-rings--active'),
-      ).toBeTruthy()
+      expect(wrapper.find('.button-list-mobile').classes('button-list-mobile--active')).toBe(true)
+      expect(wrapper.find('svg g.outer-rings').classes('outer-rings--active')).toBe(true)
+      expect(wrapper.find('svg g.most-outer-rings').classes('most-outer-rings--active')).toBe(true)
     })
   })
 

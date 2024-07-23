@@ -63,7 +63,7 @@ describe('TableList', () => {
   })
 
   it('renders list', () => {
-    expect(wrapper.find('.v-list--density-default').exists()).toBeTruthy()
+    expect(wrapper.find('.v-list--density-default').exists()).toBe(true)
   })
 
   it('sets active room', async () => {
@@ -82,7 +82,7 @@ describe('TableList', () => {
 
     it('emit event "openRoom"', () => {
       const tableList = wrapper.findComponent(TableList)
-      expect(tableList.emitted('openRoom')).toBeTruthy()
+      expect(tableList.emitted('openRoom')).toBe(true)
     })
 
     it('navigates to opened Room', () => {

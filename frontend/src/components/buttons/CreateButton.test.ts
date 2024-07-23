@@ -49,9 +49,9 @@ describe('CreateButton', () => {
 
     it('button list visible', async () => {
       await wrapper.find('#create-button').trigger('click')
-      expect(wrapper.find('.new-project-button').exists()).toBeTruthy()
-      expect(wrapper.find('.new-table-button').exists()).toBeTruthy()
-      expect(wrapper.find('.assistant-button').exists()).toBeTruthy()
+      expect(wrapper.find('.new-project-button').exists()).toBe(true)
+      expect(wrapper.find('.new-table-button').exists()).toBe(true)
+      expect(wrapper.find('.assistant-button').exists()).toBe(true)
     })
   })
 

@@ -24,7 +24,7 @@ describe('EmbeddedRoom', () => {
   })
 
   it('shows iframe with correct url', () => {
-    expect(wrapper.find('iframe').exists()).toBeTruthy()
+    expect(wrapper.find('iframe').exists()).toBe(true)
     expect(wrapper.find('iframe').attributes('src')).toBe(testUrl)
   })
 

@@ -40,7 +40,7 @@ describe('Room Page', () => {
 
     it('shows iframe with correct url', async () => {
       await flushPromises()
-      expect(wrapper.find('iframe').exists()).toBeTruthy()
+      expect(wrapper.find('iframe').exists()).toBe(true)
       expect(wrapper.find('iframe').attributes('src')).toBe('https://my-room.link')
     })
   })

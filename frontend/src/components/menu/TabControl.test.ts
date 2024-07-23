@@ -44,7 +44,7 @@ describe('TabControl', () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any)
       wrapper = Wrapper()
-      expect(wrapper.find('button.tab-control').findAll('a.item')[0].classes('active')).toBeTruthy()
+      expect(wrapper.find('button.tab-control').findAll('a.item')[0].classes('active')).toBe(true)
     })
 
     it('sets second item active for /cockpit', () => {
@@ -54,7 +54,7 @@ describe('TabControl', () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any)
       wrapper = Wrapper()
-      expect(wrapper.find('button.tab-control').findAll('a.item')[1].classes('active')).toBeTruthy()
+      expect(wrapper.find('button.tab-control').findAll('a.item')[1].classes('active')).toBe(true)
     })
 
     it('sets first item active for /somerandomroute', () => {
@@ -64,7 +64,7 @@ describe('TabControl', () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any)
       wrapper = Wrapper()
-      expect(wrapper.find('button.tab-control').findAll('a.item')[0].classes('active')).toBeTruthy()
+      expect(wrapper.find('button.tab-control').findAll('a.item')[0].classes('active')).toBe(true)
     })
   })
 
@@ -83,7 +83,7 @@ describe('TabControl', () => {
       })
 
       it('changes active item', () => {
-        expect(wrapper.findAll('a.item')[1].classes('active')).toBeTruthy()
+        expect(wrapper.findAll('a.item')[1].classes('active')).toBe(true)
       })
     })
 
@@ -94,7 +94,7 @@ describe('TabControl', () => {
       })
 
       it('does not change the active item', () => {
-        expect(wrapper.findAll('a.item')[0].classes('active')).toBeTruthy()
+        expect(wrapper.findAll('a.item')[0].classes('active')).toBe(true)
       })
     })
   })

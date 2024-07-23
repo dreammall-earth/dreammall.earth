@@ -60,7 +60,7 @@ describe('Auth Store', () => {
         */
       })
       expect(authStore.accessToken).toBe('access_token')
-      expect(authStore.isLoggedIn).toBeTruthy()
+      expect(authStore.isLoggedIn).toBe(true)
     })
 
     describe('clear action', () => {
