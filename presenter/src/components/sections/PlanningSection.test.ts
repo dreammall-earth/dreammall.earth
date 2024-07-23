@@ -28,7 +28,7 @@ describe('PlanningSection', () => {
     })
 
     it('shows replay button', () => {
-      expect(wrapper.findComponent({ name: 'MainButton' }).exists()).toBeTruthy
+      expect(wrapper.findComponent({ name: 'MainButton' }).exists()).toBeTruthy()
     })
 
     describe.skip('click replay button', () => {

@@ -39,7 +39,7 @@ describe('HeaderMenu', () => {
     })
 
     it('has a sign in button', () => {
-      expect(wrapper.find('button.sign-in').exists()).toBeTruthy
+      expect(wrapper.find('button.sign-in').exists()).toBeTruthy()
     })
 
     describe('sign in button', () => {

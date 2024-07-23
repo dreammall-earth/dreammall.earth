@@ -143,7 +143,7 @@ describe('ContactForm', () => {
 
         describe('success message for user', () => {
           it('shows message', () => {
-            expect(wrapper.find('span.info-text.form-success').exists()).toBeTruthy
+            expect(wrapper.find('span.info-text.form-success').exists()).toBeTruthy()
             expect(wrapper.find('span.info-text.form-success').text()).toBe(
               "$t('menu.footer.contactForm.successMsg')",
             )
@@ -195,7 +195,7 @@ describe('ContactForm', () => {
 
         describe('error message for user', () => {
           it('shows error message', () => {
-            expect(wrapper.find('span.info-text.form-error').exists()).toBeTruthy
+            expect(wrapper.find('span.info-text.form-error').exists()).toBeTruthy()
             expect(wrapper.find('span.info-text.form-error').text()).toBe(
               "$t('menu.footer.contactForm.errorMsg')",
             )

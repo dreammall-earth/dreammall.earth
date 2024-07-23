@@ -22,7 +22,7 @@ describe('LogoImage', () => {
       it('has class logo-medium', () => {
         expect(wrapper.find('.v-img').classes('logo-large')).toBeFalsy()
         expect(wrapper.find('.v-img').classes('logo-small')).toBeFalsy()
-        expect(wrapper.find('.v-img').classes('logo-medium')).toBeTruthy
+        expect(wrapper.find('.v-img').classes('logo-medium')).toBeTruthy()
       })
     })
 
@@ -36,7 +36,7 @@ describe('LogoImage', () => {
       it('has class logo-large', () => {
         expect(wrapper.find('.v-img').classes('logo-medium')).toBeFalsy()
         expect(wrapper.find('.v-img').classes('logo-small')).toBeFalsy()
-        expect(wrapper.find('.v-img').classes('logo-large')).toBeTruthy
+        expect(wrapper.find('.v-img').classes('logo-large')).toBeTruthy()
       })
     })
 
@@ -50,7 +50,7 @@ describe('LogoImage', () => {
       it('has class logo-medium', () => {
         expect(wrapper.find('.v-img').classes('logo-large')).toBeFalsy()
         expect(wrapper.find('.v-img').classes('logo-small')).toBeFalsy()
-        expect(wrapper.find('.v-img').classes('logo-medium')).toBeTruthy
+        expect(wrapper.find('.v-img').classes('logo-medium')).toBeTruthy()
       })
     })
 
@@ -64,7 +64,7 @@ describe('LogoImage', () => {
       it('has class logo-small', () => {
         expect(wrapper.find('.v-img').classes('logo-large')).toBeFalsy()
         expect(wrapper.find('.v-img').classes('logo-medium')).toBeFalsy()
-        expect(wrapper.find('.v-img').classes('logo-small')).toBeTruthy
+        expect(wrapper.find('.v-img').classes('logo-small')).toBeTruthy()
       })
     })
   })

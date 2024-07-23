@@ -363,7 +363,7 @@ describe('Brevo', () => {
         it('does not throw on different email', async () => {
           await expect(
             subscribeToNewsletter(firstName, lastName, 'someother@email.de'),
-          ).resolves.toBeTruthy
+          ).resolves.toBeTruthy()
         })
       })
 
