@@ -214,12 +214,12 @@ describe('Brevo', () => {
         await sendContactEmails(contactFormData)
       })
 
-      it('does not call sendSmtpEmail', () => {
-        expect(mockSendTransacEmail).not.toHaveBeenCalled()
-      })
-
       afterAll(() => {
         CONFIG.BREVO_KEY = 'MY KEY'
+      })
+
+      it('does not call sendSmtpEmail', () => {
+        expect(mockSendTransacEmail).not.toHaveBeenCalled()
       })
     })
   })
@@ -422,16 +422,16 @@ describe('Brevo', () => {
         result = await subscribeToNewsletter(firstName, lastName, email)
       })
 
+      afterAll(() => {
+        CONFIG.BREVO_KEY = 'MY KEY'
+      })
+
       it('returns false', () => {
         expect(result).toBeFalsy()
       })
 
       it('does not call sendTransacEmail', () => {
         expect(mockSendTransacEmail).not.toHaveBeenCalled()
-      })
-
-      afterAll(() => {
-        CONFIG.BREVO_KEY = 'MY KEY'
       })
     })
   })
