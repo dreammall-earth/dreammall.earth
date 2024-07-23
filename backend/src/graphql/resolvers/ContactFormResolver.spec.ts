@@ -5,7 +5,9 @@ import { EventType } from '#src/event/EventType'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
 
-let testServer: ApolloServer
+import type { Context } from '#src/server/context'
+
+let testServer: ApolloServer<Context>
 
 jest.mock('#api/Brevo', () => {
   return {

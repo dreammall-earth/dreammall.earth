@@ -9,6 +9,7 @@ import { useServer } from 'graphql-ws/lib/use/ws'
 import { WebSocketServer } from 'ws'
 
 import { schema } from '#graphql/schema'
+import { prisma } from '#src/prisma'
 
 import { Context, getContextToken, GetContextToken } from './context'
 import logger from './logger'
@@ -17,7 +18,7 @@ export const createServer = async (
   withLogger: boolean = true,
   httpServer: Server | undefined = undefined,
   wsServer: ReturnType<typeof useServer> | undefined = undefined,
-): Promise<ApolloServer> => {
+): Promise<ApolloServer<Context>> => {
   const plugins: ApolloServerPlugin<Context>[] = []
   if (withLogger) plugins.push(logger)
   if (httpServer) plugins.push(ApolloServerPluginDrainHttpServer({ httpServer }))
@@ -65,8 +66,13 @@ export async function listen(port: number, getToken: GetContextToken = getContex
 
   app.use(
     expressMiddleware(apolloServer, {
-      // eslint-disable-next-line @typescript-eslint/require-await
-      context: async ({ req }) => ({ token: getToken(req.headers.authorization) }),
+      context: ({ req }) =>
+        Promise.resolve({
+          token: getToken(req.headers.authorization),
+          dataSources: {
+            prisma,
+          },
+        }),
     }),
   )
 
