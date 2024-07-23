@@ -298,23 +298,26 @@ describe('RoomResolver', () => {
       let meetingId: string | undefined
 
       describe('meeting does not exist', () => {
-        joinMeetingLinkMock.mockReturnValue('https://my-link')
-        createMeetingMock.mockResolvedValue({
-          returncode: 'SUCCESS',
-          meetingID: 'xxx',
-          internalMeetingID: 'b60d121b438a380c343d5ec3c2037564b82ffef3-1715231322715',
-          parentMeetingID: 'bbb-none',
-          attendeePW: 'w3VUvMcp',
-          moderatorPW: 'MyPp9Zfq',
-          createTime: 1718189921310,
-          voiceBridge: 255,
-          dialNumber: '613-555-1234',
-          createDate: new Date(),
-          hasUserJoined: false,
-          duration: 0,
-          hasBeenForciblyEnded: false,
-          messageKey: '',
-          message: '',
+        beforeEach(() => {
+          joinMeetingLinkMock.mockReturnValue('https://my-link')
+
+          createMeetingMock.mockResolvedValue({
+            returncode: 'SUCCESS',
+            meetingID: 'xxx',
+            internalMeetingID: 'b60d121b438a380c343d5ec3c2037564b82ffef3-1715231322715',
+            parentMeetingID: 'bbb-none',
+            attendeePW: 'w3VUvMcp',
+            moderatorPW: 'MyPp9Zfq',
+            createTime: 1718189921310,
+            voiceBridge: 255,
+            dialNumber: '613-555-1234',
+            createDate: new Date(),
+            hasUserJoined: false,
+            duration: 0,
+            hasBeenForciblyEnded: false,
+            messageKey: '',
+            message: '',
+          })
         })
 
         it('returns link to room', async () => {
@@ -383,23 +386,25 @@ describe('RoomResolver', () => {
           jest.clearAllMocks()
         })
 
-        joinMeetingLinkMock.mockReturnValue('https://my-link')
-        createMeetingMock.mockResolvedValue({
-          returncode: 'SUCCESS',
-          meetingID: 'xxx',
-          internalMeetingID: 'b60d121b438a380c343d5ec3c2037564b82ffef3-1715231322715',
-          parentMeetingID: 'bbb-none',
-          attendeePW: 'w3VUvMcp',
-          moderatorPW: 'MyPp9Zfq',
-          createTime: 1718189921310,
-          voiceBridge: 255,
-          dialNumber: '613-555-1234',
-          createDate: new Date(),
-          hasUserJoined: false,
-          duration: 0,
-          hasBeenForciblyEnded: false,
-          messageKey: '',
-          message: '',
+        beforeEach(() => {
+          joinMeetingLinkMock.mockReturnValue('https://my-link')
+          createMeetingMock.mockResolvedValue({
+            returncode: 'SUCCESS',
+            meetingID: 'xxx',
+            internalMeetingID: 'b60d121b438a380c343d5ec3c2037564b82ffef3-1715231322715',
+            parentMeetingID: 'bbb-none',
+            attendeePW: 'w3VUvMcp',
+            moderatorPW: 'MyPp9Zfq',
+            createTime: 1718189921310,
+            voiceBridge: 255,
+            dialNumber: '613-555-1234',
+            createDate: new Date(),
+            hasUserJoined: false,
+            duration: 0,
+            hasBeenForciblyEnded: false,
+            messageKey: '',
+            message: '',
+          })
         })
 
         it('returns link to room', async () => {

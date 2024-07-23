@@ -207,15 +207,6 @@ module.exports = {
         'jest/prefer-importing-jest-globals': 'off',
         'jest/prefer-lowercase-title': 'off',
         'jest/prefer-strict-equal': 'off',
-        'jest/require-hook': [
-          'error',
-          {
-            allowedFunctionCalls: [
-              'joinMeetingLinkMock.mockReturnValue',
-              'createMeetingMock.mockResolvedValue',
-            ],
-          },
-        ],
       },
     },
     {
