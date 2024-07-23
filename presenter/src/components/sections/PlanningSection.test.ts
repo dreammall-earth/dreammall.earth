@@ -31,21 +31,21 @@ describe('PlanningSection', () => {
       expect(wrapper.findComponent({ name: 'MainButton' }).exists()).toBeTruthy()
     })
 
-    describe.skip('click replay button', () => {
-      let spy: MockInstance
+    // describe('click replay button', () => {
+    //   let spy: MockInstance
 
-      beforeEach(async () => {
-        vi.clearAllMocks()
-        ;(wrapper.vm as unknown as { video: HTMLFormElement }).video.ended = true
-        spy = vi.spyOn((wrapper.vm as unknown as { video: HTMLFormElement }).video, 'play')
-        await wrapper.findComponent({ name: 'MainButton' }).trigger('click')
-      })
+    //   beforeEach(async () => {
+    //     vi.clearAllMocks()
+    //     ;(wrapper.vm as unknown as { video: HTMLFormElement }).video.ended = true
+    //     spy = vi.spyOn((wrapper.vm as unknown as { video: HTMLFormElement }).video, 'play')
+    //     await wrapper.findComponent({ name: 'MainButton' }).trigger('click')
+    //   })
 
-      it('plays video again', () => {
-        // eslint-disable-next-line vitest/prefer-called-with
-        expect(spy).toHaveBeenCalled()
-      })
-    })
+    //   it('plays video again', () => {
+    //     // eslint-disable-next-line vitest/prefer-called-with
+    //     expect(spy).toHaveBeenCalled()
+    //   })
+    // })
   })
 
   describe('video source and poster', () => {

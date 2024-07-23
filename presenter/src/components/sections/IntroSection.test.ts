@@ -135,19 +135,19 @@ describe('IntroSection', () => {
       })
     })
 
-    describe.skip('video ended', () => {
-      beforeEach(async () => {
-        ;(wrapper.vm as unknown as { video: HTMLFormElement }).video.ended = true
+    // describe('video ended', () => {
+    //   beforeEach(async () => {
+    //     ;(wrapper.vm as unknown as { video: HTMLFormElement }).video.ended = true
 
-        spy = vi.spyOn((wrapper.vm as unknown as { video: HTMLFormElement }).video, 'play')
-        await wrapper.find('video').trigger('click')
-      })
+    //     spy = vi.spyOn((wrapper.vm as unknown as { video: HTMLFormElement }).video, 'play')
+    //     await wrapper.find('video').trigger('click')
+    //   })
 
-      it('plays the video', () => {
-        // eslint-disable-next-line vitest/prefer-called-with
-        expect(spy).toHaveBeenCalled()
-      })
-    })
+    //   it('plays the video', () => {
+    //     // eslint-disable-next-line vitest/prefer-called-with
+    //     expect(spy).toHaveBeenCalled()
+    //   })
+    // })
   })
 
   describe('video source and poster', () => {

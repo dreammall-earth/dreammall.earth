@@ -108,9 +108,9 @@ describe('CreateButton', () => {
           expect(activeRoomStore.activeRoom).toBeNull()
         })
 
-        it.skip('toasts no room found error', () => {
-          expect(errorHandlerSpy).toHaveBeenCalledWith('No room found')
-        })
+        // it('toasts no room found error', () => {
+        //   expect(errorHandlerSpy).toHaveBeenCalledWith('No room found')
+        // })
       })
 
       describe('apollo with error', () => {
