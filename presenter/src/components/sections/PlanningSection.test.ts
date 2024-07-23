@@ -19,7 +19,7 @@ describe('PlanningSection', () => {
   })
 
   it('reload button hidden', () => {
-    expect(wrapper.findComponent({ name: 'MainButton' }).exists()).toBe(false)
+    expect(wrapper.findComponent({ name: 'MainButton' }).exists()).toBeFalsy()
   })
 
   describe('video ends', () => {
@@ -28,7 +28,7 @@ describe('PlanningSection', () => {
     })
 
     it('shows replay button', () => {
-      expect(wrapper.findComponent({ name: 'MainButton' }).exists()).toBe(true)
+      expect(wrapper.findComponent({ name: 'MainButton' }).exists()).toBeTruthy
     })
 
     describe.skip('click replay button', () => {

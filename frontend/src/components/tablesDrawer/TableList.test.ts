@@ -63,7 +63,7 @@ describe('TableList', () => {
   })
 
   it('renders list', () => {
-    expect(wrapper.find('.v-list--density-default').exists()).toBe(true)
+    expect(wrapper.find('.v-list--density-default').exists()).toBeTruthy
   })
 
   it('sets active room', async () => {

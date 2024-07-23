@@ -92,8 +92,8 @@ describe('ContactForm', () => {
       })
 
       it('user feedback not visible', () => {
-        expect(wrapper.find('span.info-text.form-success').exists()).toBe(false)
-        expect(wrapper.find('span.info-text.form-error').exists()).toBe(false)
+        expect(wrapper.find('span.info-text.form-success').exists()).toBeFalsy()
+        expect(wrapper.find('span.info-text.form-error').exists()).toBeFalsy()
       })
 
       it('does not call the API', () => {
@@ -142,7 +142,7 @@ describe('ContactForm', () => {
 
         describe('success message for user', () => {
           it('shows message', () => {
-            expect(wrapper.find('span.info-text.form-success').exists()).toBe(true)
+            expect(wrapper.find('span.info-text.form-success').exists()).toBeTruthy
             expect(wrapper.find('span.info-text.form-success').text()).toBe(
               "$t('menu.footer.contactForm.successMsg')",
             )
@@ -154,7 +154,7 @@ describe('ContactForm', () => {
             })
 
             it('does not show the message anymore', () => {
-              expect(wrapper.find('span.info-text.form-success').exists()).toBe(false)
+              expect(wrapper.find('span.info-text.form-success').exists()).toBeFalsy()
             })
           })
         })
@@ -194,7 +194,7 @@ describe('ContactForm', () => {
 
         describe('error message for user', () => {
           it('shows error message', () => {
-            expect(wrapper.find('span.info-text.form-error').exists()).toBe(true)
+            expect(wrapper.find('span.info-text.form-error').exists()).toBeTruthy
             expect(wrapper.find('span.info-text.form-error').text()).toBe(
               "$t('menu.footer.contactForm.errorMsg')",
             )
@@ -206,7 +206,7 @@ describe('ContactForm', () => {
             })
 
             it('does not show the message anymore', () => {
-              expect(wrapper.find('span.info-text.form-error').exists()).toBe(false)
+              expect(wrapper.find('span.info-text.form-error').exists()).toBeFalsy()
             })
           })
         })

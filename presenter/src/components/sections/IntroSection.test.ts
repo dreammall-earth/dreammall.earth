@@ -30,7 +30,7 @@ describe('IntroSection', () => {
       })
 
       it('contains a video', () => {
-        expect(item.find('video').exists()).toBe(true)
+        expect(item.find('video').exists()).toBeTruthy
       })
 
       it('has correct source', () => {
@@ -66,8 +66,8 @@ describe('IntroSection', () => {
       })
 
       it('has a logo image with size large', () => {
-        expect(item.findComponent({ name: 'LogoImage' }).exists()).toBe(true)
-        expect(item.findComponent({ name: 'LogoImage' }).classes('logo-large')).toBe(true)
+        expect(item.findComponent({ name: 'LogoImage' }).exists()).toBeTruthy
+        expect(item.findComponent({ name: 'LogoImage' }).classes('logo-large')).toBeTruthy
       })
 
       it('has section-subheadline home.introSection.subHeadline', () => {

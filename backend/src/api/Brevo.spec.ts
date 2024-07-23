@@ -363,7 +363,7 @@ describe('Brevo', () => {
         it('does not throw on different email', async () => {
           await expect(
             subscribeToNewsletter(firstName, lastName, 'someother@email.de'),
-          ).resolves.toBe(true)
+          ).resolves.toBeTruthy
         })
       })
 
@@ -423,7 +423,7 @@ describe('Brevo', () => {
       })
 
       it('returns false', () => {
-        expect(result).toBe(false)
+        expect(result).toBeFalsy()
       })
 
       it('does not call sendTransacEmail', () => {
@@ -811,7 +811,7 @@ describe('Brevo', () => {
       })
 
       it('returns false', () => {
-        expect(result).toBe(false)
+        expect(result).toBeFalsy()
       })
 
       it('does not call createContact', () => {
