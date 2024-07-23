@@ -70,11 +70,12 @@ describe('authChecker', () => {
       } as unknown as typeof prisma
 
       it('resolves to "INTERNAL_SERVER_ERROR" instead of "UNAUTHENTICATED"', async () => {
-        const [request, opts] = [
-          { query: 'mutation { joinMyRoom }' },
-          { contextValue: { token: 'token', dataSources: { prisma: failingPrisma } } },
-        ]
-        const expected = {
+        await expect(
+          testServer.executeOperation(
+            { query: 'mutation { joinMyRoom }' },
+            { contextValue: { token: 'token', dataSources: { prisma: failingPrisma } } },
+          ),
+        ).resolves.toEqual({
           http: expect.anything(), // eslint-disable-line @typescript-eslint/no-unsafe-assignment
           body: {
             kind: 'single',
@@ -90,8 +91,7 @@ describe('authChecker', () => {
               ],
             },
           },
-        }
-        await expect(testServer.executeOperation(request, opts)).resolves.toEqual(expected)
+        })
       })
     })
 

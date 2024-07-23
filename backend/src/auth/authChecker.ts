@@ -62,6 +62,6 @@ const contextUser =
         name,
       },
     })
-    void EVENT_CREATE_USER(user.id)
+    await EVENT_CREATE_USER(user.id)
     return user
   }
