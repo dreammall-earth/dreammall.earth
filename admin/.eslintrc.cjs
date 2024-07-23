@@ -175,6 +175,7 @@ module.exports = {
         'vitest/prefer-lowercase-title': 'off',
         'vitest/no-hooks': 'off',
         'vitest/consistent-test-filename': 'off',
+        'vitest/prefer-to-be-falsy': 'off',
         'vitest/prefer-to-be-truthy': 'off',
         'vitest/prefer-expect-assertions': [
           'off',
