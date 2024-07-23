@@ -69,7 +69,7 @@ describe('MainButton', () => {
 
   describe('label', () => {
     it('renders My Button', () => {
-      expect(wrapper.find('.v-btn').text()).toEqual('My Button')
+      expect(wrapper.find('.v-btn').text()).toBe('My Button')
     })
   })
 
