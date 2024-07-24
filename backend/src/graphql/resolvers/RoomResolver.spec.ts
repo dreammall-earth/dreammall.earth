@@ -32,6 +32,20 @@ const createMyRoomMutation = `mutation($name: String!, $isPublic: Boolean!, $use
   }
 }`
 
+const updateMyRoomMutation = `mutation($name: String!, $isPublic: Boolean!, $userIds: [Int]) {
+  updateMyRoom(name: $name, isPublic: $isPublic, userIds: $userIds) {
+    id
+    name
+    public
+    users {
+      id
+      role
+      name
+      username
+    }
+  }
+}`
+
 describe('RoomResolver', () => {
   beforeAll(async () => {
     testServer = await createTestServer()
@@ -44,6 +58,37 @@ describe('RoomResolver', () => {
           testServer.executeOperation(
             {
               query: createMyRoomMutation,
+              variables: {
+                name: 'My Room',
+                isPublic: true,
+                userIds: [],
+              },
+            },
+            { contextValue: { dataSources: { prisma } } },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('updateMyRoom', () => {
+      it('throws access denied', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: updateMyRoomMutation,
               variables: {
                 name: 'My Room',
                 isPublic: true,
@@ -340,7 +385,7 @@ describe('RoomResolver', () => {
                 query: createMyRoomMutation,
                 variables: {
                   name: 'My Room',
-                  isPublic: true,
+                  isPublic: false,
                   userIds: [bibi?.id, peter?.id],
                 },
               },
@@ -361,7 +406,179 @@ describe('RoomResolver', () => {
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     id: expect.any(Number),
                     name: 'My Room',
+                    public: false,
+                    users: [
+                      {
+                        name: 'Bibi Bloxberg',
+                        username: 'bibi',
+                        role: 'VIEWER',
+                      },
+                      {
+                        name: 'Peter Lustig',
+                        username: 'peter',
+                        role: 'VIEWER',
+                      },
+                    ],
+                  },
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+      })
+    })
+
+    describe('updateMyRoom', () => {
+      beforeAll(async () => {
+        await prisma.usersInMeetings.deleteMany()
+        await prisma.meeting.deleteMany()
+        await prisma.user.deleteMany()
+      })
+
+      let bibi: User | undefined
+      let peter: User | undefined
+
+      describe('meeting does not exist', () => {
+        it('throws meeting does not exist error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query: updateMyRoomMutation,
+                variables: {
+                  name: 'My Room',
+                  isPublic: true,
+                  userIds: [],
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'User has no meeting!',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('private meeting exists', () => {
+        beforeAll(async () => {
+          bibi = await prisma.user.create({
+            data: {
+              username: 'bibi',
+              name: 'Bibi Bloxberg',
+            },
+          })
+
+          peter = await prisma.user.create({
+            data: {
+              username: 'peter',
+              name: 'Peter Lustig',
+            },
+          })
+
+          await testServer.executeOperation(
+            {
+              query: createMyRoomMutation,
+              variables: {
+                name: 'My Room',
+                isPublic: true,
+                userIds: [bibi?.id, peter?.id],
+              },
+            },
+            {
+              contextValue: {
+                token: 'token',
+                dataSources: { prisma },
+              },
+            },
+          )
+        })
+
+        it('returns the updated room', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query: updateMyRoomMutation,
+                variables: {
+                  name: 'My Updated Room',
+                  isPublic: true,
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  updateMyRoom: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    name: 'My Updated Room',
                     public: true,
+                    users: [],
+                  },
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it('has no meeting user mapping left in database', async () => {
+          await expect(prisma.usersInMeetings.findMany()).resolves.toHaveLength(0)
+        })
+      })
+
+      describe('privat meeting exists', () => {
+        it('returns the updated room', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query: updateMyRoomMutation,
+                variables: {
+                  name: 'My Newly Updated Room',
+                  isPublic: false,
+                  userIds: [bibi?.id, peter?.id],
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  updateMyRoom: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    name: 'My Newly Updated Room',
+                    public: false,
                     users: [
                       {
                         name: 'Bibi Bloxberg',
