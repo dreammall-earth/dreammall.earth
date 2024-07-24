@@ -97,6 +97,67 @@ export class RoomResolver {
   }
 
   @Authorized()
+  @Mutation(() => Room)
+  async updateMyRoom(
+    @Arg('name') name: string,
+    @Arg('isPublic') isPublic: boolean,
+    @Ctx() context: Context,
+    // eslint-disable-next-line type-graphql/wrong-decorator-signature
+    @Arg('userIds', () => [Int], { nullable: 'itemsAndList' }) // eslint-disable-next-line type-graphql/invalid-nullable-input-type
+    userIds?: number[] | null | undefined,
+  ): Promise<Room> {
+    const { user } = context
+    if (!user) throw new Error('User not found!')
+
+    if (!user.meetingId) {
+      throw new Error('User has no meeting!')
+    }
+
+    const meeting = await prisma.meeting.update({
+      where: {
+        id: user.meetingId,
+      },
+      data: {
+        name,
+        public: isPublic,
+      },
+    })
+
+    if (!meeting) {
+      throw new Error('Error updating the meeting!')
+    }
+
+    await prisma.usersInMeetings.deleteMany({
+      where: {
+        meetingId: meeting.id,
+      },
+    })
+
+    let usersInMeetings: UsersWithMeetings[] = []
+
+    if (userIds && userIds.length) {
+      await prisma.usersInMeetings.createMany({
+        data: userIds.map((id) => ({
+          role: AttendeeRole.VIEWER,
+          meetingId: meeting.id,
+          userId: id,
+        })),
+      })
+
+      usersInMeetings = (await prisma.usersInMeetings.findMany({
+        where: {
+          meetingId: meeting.id,
+        },
+        include: {
+          user: true,
+        },
+      })) as UsersWithMeetings[]
+    }
+
+    return new Room(meeting, usersInMeetings)
+  }
+
+  @Authorized()
   @Mutation(() => String)
   async joinMyRoom(@Ctx() context: Context): Promise<string> {
     const { user } = context
