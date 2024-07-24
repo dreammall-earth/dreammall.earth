@@ -13,28 +13,30 @@ import {
 // eslint-disable-next-line import/named
 import { v4 as uuidv4 } from 'uuid'
 
-import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo } from '#api/BBB'
+import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo, AttendeeRole } from '#api/BBB'
 import { CONFIG } from '#config/config'
-import { Room, OpenRoom } from '#models/RoomModel'
+import { OpenRoom, Room } from '#models/RoomModel'
 import logger from '#src/logger'
-import { prisma } from '#src/prisma'
+import { prisma, UserWithMeeting, UsersWithMeetings } from '#src/prisma'
 import { Context } from '#src/server/context'
 
 @Resolver()
 export class RoomResolver {
   @Authorized()
-  @Mutation(() => Room, { nullable: true })
-  async createMyRoom(@Arg('name') name: string, @Ctx() context: Context): Promise<Room | null> {
+  @Mutation(() => Room)
+  async createMyRoom(
+    @Arg('name') name: string,
+    @Arg('isPublic') isPublic: boolean,
+    @Ctx() context: Context,
+    // eslint-disable-next-line type-graphql/wrong-decorator-signature
+    @Arg('userIds', () => [Int], { nullable: 'itemsAndList' }) // eslint-disable-next-line type-graphql/invalid-nullable-input-type
+    userIds?: number[] | null | undefined,
+  ): Promise<Room> {
     const { user } = context
-    if (!user) return null
+    if (!user) throw new Error('User not found!')
+
     if (user.meetingId) {
-      const meeting = await prisma.meeting.findUnique({
-        where: {
-          id: user.meetingId,
-        },
-      })
-      if (meeting) return new Room(meeting)
-      else return null
+      throw new Error('Meeting already exists!')
     }
 
     let meetingID: string = uuidv4()
@@ -48,18 +50,50 @@ export class RoomResolver {
       meetingID = uuidv4()
     }
 
-    const meeting = await prisma.meeting.create({
-      data: {
-        name,
-        meetingID,
+    const { meeting } = (await prisma.user.update({
+      where: {
+        id: user.id,
       },
-    })
+      data: {
+        meeting: {
+          create: {
+            name,
+            meetingID,
+            public: isPublic,
+          },
+        },
+      },
+      include: {
+        meeting: true,
+      },
+    })) as UserWithMeeting
 
-    await prisma.user.update({
-      where: { id: user.id },
-      data: { meetingId: meeting.id },
-    })
-    return meeting
+    if (!meeting) {
+      throw new Error('Error creating the meeting!')
+    }
+
+    let usersInMeetings: UsersWithMeetings[] = []
+
+    if (userIds && userIds.length) {
+      await prisma.usersInMeetings.createMany({
+        data: userIds.map((id) => ({
+          role: AttendeeRole.VIEWER,
+          meetingId: meeting.id,
+          userId: id,
+        })),
+      })
+
+      usersInMeetings = (await prisma.usersInMeetings.findMany({
+        where: {
+          meetingId: meeting.id,
+        },
+        include: {
+          user: true,
+        },
+      })) as UsersWithMeetings[]
+    }
+
+    return new Room(meeting, usersInMeetings)
   }
 
   @Authorized()
@@ -141,7 +175,7 @@ export class RoomResolver {
       fullName: user.name,
       meetingID: meeting.meetingID,
       password: meeting.moderatorPW,
-      role: 'MODERATOR',
+      role: AttendeeRole.MODERATOR,
       createTime: meeting.createTime.toString(),
       userID: user.id.toString(),
     })

@@ -25,7 +25,7 @@ describe('Rooms Store', () => {
 
   describe('api', () => {
     it('queries the API', () => {
-      expect(openRoomsQueryMock).toBeCalledTimes(1)
+      expect(openRoomsQueryMock).toHaveBeenCalledTimes(1)
     })
 
     describe('subscription', () => {

@@ -7,6 +7,6 @@ let pageContext: PageContextServer
 
 describe('signin page guard', () => {
   it('returns void', async () => {
-    expect(await guard(pageContext)).toBe(undefined)
+    await expect(guard(pageContext)).resolves.toBeUndefined()
   })
 })

@@ -55,6 +55,7 @@ model User {
   createdAt         DateTime @default(now())
   meeting           Meeting? @relation(fields: [meetingId], references: [id])
   meetingId         Int?     @unique
+  meetings          UsersInMeetings[]
 }
 
 model Meeting {
@@ -69,4 +70,17 @@ model Meeting {
   createTime        BigInt?
   createDate        DateTime?
   user              User?
+  public            Boolean  @default(true)
+  users             UsersInMeetings[]
+}
+
+model UsersInMeetings {
+  meeting           Meeting  @relation(fields: [meetingId], references: [id])
+  meetingId         Int
+  user              User     @relation(fields: [userId], references: [id])
+  userId            Int
+  assignedAt        DateTime @default(now())
+  role              String   @db.VarChar(12) @default("MODERATOR")
+  
+  @@id([meetingId, userId])
 }
