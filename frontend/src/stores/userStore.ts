@@ -22,6 +22,7 @@ export type CurrentUser = {
   id: number
   name: string
   username: string
+  avatar?: string
   room?: MyRoom
 }
 
@@ -49,7 +50,7 @@ export const useUserStore = defineStore(
 
     const getUsersInMyRoom = computed(() => currentUser.value?.room?.users)
 
-    const getCurrentUserAvatar = computed(() => null)
+    const getCurrentUserAvatar = computed(() => currentUser.value?.avatar)
 
     const getCurrentUserInitials = computed(() => {
       const name = currentUser.value?.name

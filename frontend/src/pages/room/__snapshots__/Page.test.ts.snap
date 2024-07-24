@@ -691,7 +691,9 @@ exports[`Room Page > renders 1`] = `
                       
                       <span
                         data-v-607bdd70=""
-                      />
+                      >
+                        CU
+                      </span>
                       
                       
                       
@@ -1725,7 +1727,9 @@ exports[`Room Page > renders 1`] = `
             
             <span
               data-v-607bdd70=""
-            />
+            >
+              CU
+            </span>
             
             
             

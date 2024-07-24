@@ -27,18 +27,14 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import { useAuthStore } from '#stores/authStore'
+import { useUserStore } from '#stores/userStore'
 
 import UserDropdown from './UserDropdown.vue'
 
-const authStore = useAuthStore()
+const userStore = useUserStore()
 
-const name = authStore.user?.profile.name
-const initals = name
-  ?.split(' ')
-  .map((n) => n.charAt(0))
-  .join('')
-const userImage = authStore.user?.profile.picture
+const initals = userStore.getCurrentUserInitials
+const userImage = userStore.getCurrentUserAvatar
 
 const isOpen = ref(false)
 </script>

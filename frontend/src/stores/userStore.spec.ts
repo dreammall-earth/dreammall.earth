@@ -26,8 +26,11 @@ describe('User Store', () => {
         room: null,
         username: 'currentUser',
       })
+    })
+
+    it('has computed getters set correctly', () => {
       expect(userStore.getCurrentUserInitials).toBe('CU')
-      expect(userStore.getCurrentUserAvatar).toEqual(null)
+      expect(userStore.getCurrentUserAvatar).toBeUndefined()
       expect(userStore.getMyRoom).toBeNull()
       expect(userStore.getUsersInMyRoom).toBeUndefined()
     })
