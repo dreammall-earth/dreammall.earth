@@ -1,5 +1,11 @@
 <template>
-  <v-btn :color="setColor" :class="classes" :size="size" @click="onClick">
+  <v-btn
+    :color="setColor"
+    :class="classes"
+    :size="size"
+    :disabled="$props.isLoading"
+    @click="onClick"
+  >
     <v-icon v-if="props.variant === 'reload'" start class="reload-icon" icon="mdi-reload"></v-icon>
     <v-icon v-if="props.icon !== ''" start class="icon pb-1" :icon="'mdi-' + props.icon"></v-icon>
 
