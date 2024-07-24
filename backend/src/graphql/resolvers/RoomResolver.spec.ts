@@ -1,6 +1,5 @@
 import { ApolloServer } from '@apollo/server'
-// eslint-disable-next-line n/no-unpublished-import
-import { gql } from 'graphql-tag'
+import { User } from '@prisma/client'
 
 import { createMeeting, joinMeetingLink, getMeetings } from '#api/BBB'
 import { CONFIG } from '#config/config'
@@ -19,6 +18,20 @@ let testServer: ApolloServer<Context>
 
 CONFIG.FRONTEND_INVITE_LINK_URL = '/'
 
+const createMyRoomMutation = `mutation($name: String!, $isPublic: Boolean!, $userIds: [Int]) {
+  createMyRoom(name: $name, isPublic: $isPublic, userIds: $userIds) {
+    id
+    name
+    public
+    users {
+      id
+      role
+      name
+      username
+    }
+  }
+}`
+
 describe('RoomResolver', () => {
   beforeAll(async () => {
     testServer = await createTestServer()
@@ -30,8 +43,12 @@ describe('RoomResolver', () => {
         await expect(
           testServer.executeOperation(
             {
-              query: 'mutation($name: String!) { createMyRoom(name: $name) { id } }',
-              variables: { name: 'My Room' },
+              query: createMyRoomMutation,
+              variables: {
+                name: 'My Room',
+                isPublic: true,
+                userIds: [],
+              },
             },
             { contextValue: { dataSources: { prisma } } },
           ),
@@ -39,7 +56,7 @@ describe('RoomResolver', () => {
           body: {
             kind: 'single',
             singleResult: {
-              data: { createMyRoom: null },
+              data: null,
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               errors: expect.arrayContaining([
                 expect.objectContaining({
@@ -105,7 +122,7 @@ describe('RoomResolver', () => {
     })
 
     describe('joinRoom', () => {
-      const query = gql`
+      const query = `
         query ($roomId: Int!, $userName: String!) {
           joinRoom(roomId: $roomId, userName: $userName)
         }
@@ -199,46 +216,21 @@ describe('RoomResolver', () => {
 
   describe('authorized', () => {
     describe('createMyRoom', () => {
-      describe.skip('no user in context', () => {
-        it('returns null', async () => {
-          await expect(
-            testServer.executeOperation(
-              {
-                query: 'mutation($name: String!) { createMyRoom(name: $name) { id } }',
-                variables: { name: 'My Room' },
-              },
-              {
-                contextValue: {
-                  token: 'token',
-                  user: undefined,
-                  dataSources: { prisma },
-                },
-              },
-            ),
-          ).resolves.toMatchObject({
-            body: {
-              kind: 'single',
-              singleResult: {
-                data: { createMyRoom: null },
-                errors: undefined,
-              },
-            },
-          })
-        })
-      })
-
       describe('meeting does not exist', () => {
         it('returns Room', async () => {
           await expect(
             testServer.executeOperation(
               {
-                query: 'mutation($name: String!) { createMyRoom(name: $name) { id name } }',
-                variables: { name: 'My Room' },
+                query: createMyRoomMutation,
+                variables: {
+                  name: 'My Room',
+                  isPublic: true,
+                  userIds: [],
+                },
               },
               {
                 contextValue: {
                   token: 'token',
-                  user: undefined,
                   dataSources: { prisma },
                 },
               },
@@ -252,6 +244,8 @@ describe('RoomResolver', () => {
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     id: expect.any(Number),
                     name: 'My Room',
+                    public: true,
+                    users: [],
                   },
                 },
                 errors: undefined,
@@ -271,19 +265,84 @@ describe('RoomResolver', () => {
             meeting: {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              meetingID: expect.any(String),
               name: 'My Room',
+              public: true,
             },
           })
         })
       })
 
       describe('meeting exists', () => {
-        it('returns existing Room', async () => {
+        it('throws meeting exists error', async () => {
           await expect(
             testServer.executeOperation(
               {
-                query: 'mutation($name: String!) { createMyRoom(name: $name) { id name } }',
-                variables: { name: 'New Room' },
+                query: createMyRoomMutation,
+                variables: {
+                  name: 'My Room',
+                  isPublic: true,
+                  userIds: [],
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  user: undefined,
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Meeting already exists!',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('private meeting', () => {
+        let bibi: User | undefined
+        let peter: User | undefined
+
+        beforeAll(async () => {
+          await prisma.meeting.deleteMany()
+
+          bibi = await prisma.user.create({
+            data: {
+              username: 'bibi',
+              name: 'Bibi Bloxberg',
+            },
+          })
+
+          peter = await prisma.user.create({
+            data: {
+              username: 'peter',
+              name: 'Peter Lustig',
+            },
+          })
+        })
+
+        it('returns room with users', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query: createMyRoomMutation,
+                variables: {
+                  name: 'My Room',
+                  isPublic: true,
+                  userIds: [bibi?.id, peter?.id],
+                },
               },
               {
                 contextValue: {
@@ -302,6 +361,19 @@ describe('RoomResolver', () => {
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     id: expect.any(Number),
                     name: 'My Room',
+                    public: true,
+                    users: [
+                      {
+                        name: 'Bibi Bloxberg',
+                        username: 'bibi',
+                        role: 'VIEWER',
+                      },
+                      {
+                        name: 'Peter Lustig',
+                        username: 'peter',
+                        role: 'VIEWER',
+                      },
+                    ],
                   },
                 },
                 errors: undefined,
@@ -314,6 +386,7 @@ describe('RoomResolver', () => {
 
     describe('joinMyRoom', () => {
       beforeAll(async () => {
+        await prisma.usersInMeetings.deleteMany()
         await prisma.meeting.deleteMany()
         await prisma.user.deleteMany()
       })
