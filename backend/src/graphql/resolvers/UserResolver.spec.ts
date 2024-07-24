@@ -124,37 +124,48 @@ describe('UserResolver', () => {
           })
         })
 
-        it('returns the username', async () => {
-          const response = await testServer.executeOperation(
-            {
-              query: `query ($searchString: String) {users(searchString: $searchString) {id name username}}`,
-              variables: { searchString: 'Tomas Schmid' },
-            },
-            {
-              contextValue: {
-                token: 'token',
+        const testCases = [
+          { searchString: 'Thomas Schmitt', expectedUsername: 'tom' },
+          { searchString: 'John Doe', expectedUsername: 'john' },
+          { searchString: 'Tomas Schmid', expectedUsername: 'Schmid' },
+          { searchString: 'Tomás Schmit', expectedUsername: 'Schmit' },
+        ]
+
+        it.each(testCases)(
+          'returns the correct username for %s',
+          async ({ searchString, expectedUsername }) => {
+            const response = await testServer.executeOperation(
+              {
+                query: `query ($searchString: String) {users(searchString: $searchString) {id name username}}`,
+                variables: { searchString },
               },
-            },
-          )
-          expect(response).toMatchObject({
-            body: {
-              kind: 'single',
-              singleResult: {
-                data: {
-                  users: [
-                    {
-                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                      id: expect.any(Number),
-                      name: 'Tomas Schmid',
-                      username: 'Schmid',
-                    },
-                  ],
+              {
+                contextValue: {
+                  token: 'token',
                 },
-                errors: undefined,
               },
-            },
-          })
-        })
+            )
+
+            expect(response).toMatchObject({
+              body: {
+                kind: 'single',
+                singleResult: {
+                  data: {
+                    users: [
+                      {
+                        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                        id: expect.any(Number),
+                        name: searchString,
+                        username: expectedUsername,
+                      },
+                    ],
+                  },
+                  errors: undefined,
+                },
+              },
+            })
+          },
+        )
       })
     })
   })

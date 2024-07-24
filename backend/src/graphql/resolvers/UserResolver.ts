@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client'
-import { Resolver, Query, Authorized, Ctx, Arg, Args } from 'type-graphql'
+import { Resolver, Query, Authorized, Ctx, Arg } from 'type-graphql'
 
 import { User } from '#graphql/models/UserModel'
 import { prisma } from '#src/prisma'
