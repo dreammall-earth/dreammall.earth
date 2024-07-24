@@ -18,10 +18,6 @@ let testServer: ApolloServer<Context>
 
 CONFIG.FRONTEND_INVITE_LINK_URL = '/'
 
-beforeAll(async () => {
-  testServer = await createTestServer()
-})
-
 const createMyRoomMutation = `mutation($name: String!, $isPublic: Boolean!, $userIds: [Int]) {
   createMyRoom(name: $name, isPublic: $isPublic, userIds: $userIds) {
     id
@@ -554,7 +550,7 @@ describe('RoomResolver', () => {
         })
       })
 
-      describe('public meeting exists', () => {
+      describe('privat meeting exists', () => {
         it('returns the updated room', async () => {
           await expect(
             testServer.executeOperation(
