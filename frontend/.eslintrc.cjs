@@ -172,9 +172,34 @@ module.exports = {
       extends: ['plugin:vuetify/recommended'],
     },
     {
-      files: ['*.[test,spec].[tj]s'],
+      files: ['*.{test,spec}.[tj]s'],
       plugins: ['vitest'],
       extends: ['plugin:vitest/all'],
+      rules: {
+        'vitest/prefer-lowercase-title': 'off',
+        'vitest/no-hooks': 'off',
+        'vitest/consistent-test-filename': 'off',
+        'vitest/prefer-expect-assertions': [
+          'off',
+          {
+            onlyFunctionsWithExpectInLoop: true,
+            onlyFunctionsWithExpectInCallback: true,
+          },
+        ],
+        'vitest/prefer-strict-equal': 'off',
+        'vitest/prefer-to-be-falsy': 'off',
+        'vitest/prefer-to-be-truthy': 'off',
+        'vitest/require-hook': [
+          'error',
+          {
+            allowedFunctionCalls: [
+              'mockClient.setRequestHandler',
+              'setActivePinia',
+              'provideApolloClient',
+            ],
+          },
+        ],
+      },
     },
     {
       files: ['*.yaml', '*.yml'],
