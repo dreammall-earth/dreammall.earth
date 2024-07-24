@@ -6,9 +6,10 @@ import { createHttpLink } from '@apollo/client/link/http'
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { createClient } from 'graphql-ws'
+import { navigate } from 'vike/client/router'
 import { WebSocket } from 'ws'
 
-import { ENDPOINTS, AUTH } from '#src/env'
+import { ENDPOINTS } from '#src/env'
 
 const createAuthLink = (getToken: () => string) => {
   return setContext((_, { headers }) => {
@@ -50,7 +51,7 @@ const errorLink = onError(({ graphQLErrors }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ extensions }) => {
       if (extensions.code === 'UNAUTHENTICATED') {
-        window.location.href = AUTH.UNAUTHORIZED_REDIRECT_URI
+        void navigate('/signin')
       }
     })
   }

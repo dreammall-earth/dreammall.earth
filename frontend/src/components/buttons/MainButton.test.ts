@@ -31,6 +31,12 @@ describe('MainButton', () => {
     expect(wrapper.find('.v-icon').exists()).toBe(false)
   })
 
+  it('is disabled when isLoading is true', async () => {
+    await wrapper.setProps({ isLoading: true })
+    // console.log(wrapper.find('.v-btn').attributes('disabled'))
+    expect(wrapper.find('.v-btn').attributes('disabled')).toBeDefined()
+  })
+
   describe('click on button', () => {
     it('emits click event', async () => {
       await wrapper.find('button').trigger('click')
@@ -63,7 +69,7 @@ describe('MainButton', () => {
 
   describe('label', () => {
     it('renders My Button', () => {
-      expect(wrapper.find('.v-btn').text()).toEqual('My Button')
+      expect(wrapper.find('.v-btn').text()).toBe('My Button')
     })
   })
 

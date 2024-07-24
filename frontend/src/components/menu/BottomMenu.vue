@@ -1,22 +1,26 @@
 <template>
-  <div class="navigation-drawer-box d-md-none position-fixed mb-5 pb-5">
-    <TablesDrawer v-model="isTablesDrawerVisible" location="bottom" />
-  </div>
-  <div
-    class="bottom-menu d-flex w-100 position-fixed bottom-0 justify-space-around align-center py-2 bg-surface d-md-none"
-  >
-    <button class="camera-button" @click="toggleDrawer">
+  <MobileCreateButtonActions :is-visible="isButtonListVisible" />
+  <TablesDrawer v-model="isTablesDrawerVisible" location="bottom" />
+  <div class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none">
+    <button class="camera-button mx-auto" @click="toggleDrawer">
       <Circle>
         <v-icon icon="$camera"></v-icon>
       </Circle>
     </button>
-    <CreateButtonMobile />
-    <UserInfo />
+    <MobileCreateButton
+      class="mx-auto"
+      :is-active="isButtonListVisible"
+      @button-click="toggleButtonList"
+    />
+    <UserInfo class="mx-auto" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import CreateButtonMobile from '#components/buttons/CreateButtonMobile.vue'
+import { ref } from 'vue'
+
+import MobileCreateButton from '#components/buttons/mobile-create-button/MobileCreateButton.vue'
+import MobileCreateButtonActions from '#components/buttons/mobile-create-button/MobileCreateButtonActions.vue'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
 
 import Circle from './CircleElement.vue'
@@ -27,14 +31,27 @@ const isTablesDrawerVisible = defineModel<boolean>()
 const toggleDrawer = () => {
   isTablesDrawerVisible.value = !isTablesDrawerVisible.value
 }
+
+const isButtonListVisible = ref(false)
+
+const toggleButtonList = () => {
+  try {
+    isButtonListVisible.value = !isButtonListVisible.value
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error while MobileCreateButton click', error)
+  }
+}
 </script>
 
 <style scoped lang="scss">
 .bottom-menu {
   bottom: 0;
   left: 0;
-  z-index: 1;
-  background: var(--v-bottom-menu-background) !important;
+  z-index: 3000;
+  display: grid;
+  grid-template-columns: repeat(3, 33.3333%);
+  background: var(--v-bottom-menu-background);
   backdrop-filter: blur(20px);
   border-radius: 30px 30px 0 0;
 
@@ -46,9 +63,5 @@ const toggleDrawer = () => {
 .create-button-mobile {
   z-index: 1;
   transform: translate(20px, 30px);
-}
-
-.navigation-drawer-box {
-  bottom: 65px;
 }
 </style>

@@ -2,12 +2,9 @@ import { redirect } from 'vike/abort'
 import { PageContextServer } from 'vike/types'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
-import { AUTH } from '#src/env'
 import { useAuthStore } from '#stores/authStore.js'
 
 import { guard } from './+guard'
-
-AUTH.UNAUTHORIZED_REDIRECT_URI = 'https://some.uri'
 
 vi.mock('vike/abort')
 vi.mocked(redirect).mockResolvedValue(new Error(''))
@@ -20,9 +17,11 @@ describe('global route guard', () => {
   describe('unauthenticated', () => {
     it('throws and redirects', () => {
       try {
+        // eslint-disable-next-line vitest/require-to-throw-message
         expect(guard({ hasToken: false } as PageContextServer)).toThrow()
       } catch (error) {
-        expect(redirect).toBeCalledWith('https://some.uri')
+        // eslint-disable-next-line vitest/no-conditional-expect
+        expect(redirect).toHaveBeenCalledWith('/signin')
       }
     })
   })
@@ -53,7 +52,7 @@ describe('global route guard', () => {
 
     it('does not redirect', () => {
       guard({ hasToken: true } as PageContextServer)
-      expect(redirect).not.toBeCalled()
+      expect(redirect).not.toHaveBeenCalled()
     })
   })
 })
