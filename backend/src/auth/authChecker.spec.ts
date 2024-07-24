@@ -5,6 +5,7 @@ import { createTestServer } from '#src/server/server'
 
 import type { Context } from '#src/server/context'
 
+// eslint-disable-next-line jest/no-untyped-mock-factory
 jest.mock('axios', () => {
   return {
     create: jest.fn().mockImplementation(() => {
@@ -27,12 +28,12 @@ jest.mock('axios', () => {
 
 let testServer: ApolloServer<Context>
 
-beforeAll(async () => {
-  testServer = await createTestServer()
-})
-
 // uses joinMyRoom query
 describe('authChecker', () => {
+  beforeAll(async () => {
+    testServer = await createTestServer()
+  })
+
   describe('no token in context', () => {
     it('returns access denied error', async () => {
       await expect(
@@ -61,7 +62,7 @@ describe('authChecker', () => {
 
   describe('valid token in context', () => {
     it('has no user in database', async () => {
-      expect(await prisma.user.findMany()).toHaveLength(0)
+      await expect(prisma.user.findMany()).resolves.toHaveLength(0)
     })
 
     describe('if prisma client throws an error, e.g. because of pending migrations', () => {
@@ -144,7 +145,7 @@ describe('authChecker', () => {
 
     describe('second call', () => {
       it('has the user in database', async () => {
-        expect(await prisma.user.findMany()).toHaveLength(1)
+        await expect(prisma.user.findMany()).resolves.toHaveLength(1)
       })
 
       it('has the same user in database', async () => {
@@ -159,7 +160,7 @@ describe('authChecker', () => {
             },
           },
         )
-        expect(await prisma.user.findMany()).toHaveLength(1)
+        await expect(prisma.user.findMany()).resolves.toHaveLength(1)
       })
     })
   })

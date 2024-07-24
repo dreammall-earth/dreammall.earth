@@ -10,17 +10,13 @@ import type { Context } from '#src/server/context'
 
 jest.mock('#api/BBB')
 
-const createMeetingMock = createMeeting as jest.MockedFunction<typeof createMeeting>
-const joinMeetingLinkMock = joinMeetingLink as jest.MockedFunction<typeof joinMeetingLink>
-const getMeetingsMock = getMeetings as jest.MockedFunction<typeof getMeetings>
+const createMeetingMock = jest.mocked(createMeeting)
+const joinMeetingLinkMock = jest.mocked(joinMeetingLink)
+const getMeetingsMock = jest.mocked(getMeetings)
 
 let testServer: ApolloServer<Context>
 
 CONFIG.FRONTEND_INVITE_LINK_URL = '/'
-
-beforeAll(async () => {
-  testServer = await createTestServer()
-})
 
 const createMyRoomMutation = `mutation($name: String!, $isPublic: Boolean!, $userIds: [Int]) {
   createMyRoom(name: $name, isPublic: $isPublic, userIds: $userIds) {
@@ -51,6 +47,10 @@ const updateMyRoomMutation = `mutation($name: String!, $isPublic: Boolean!, $use
 }`
 
 describe('RoomResolver', () => {
+  beforeAll(async () => {
+    testServer = await createTestServer()
+  })
+
   describe('unauthorized', () => {
     describe('createMyRoom', () => {
       it('throws access denied', async () => {
@@ -550,7 +550,7 @@ describe('RoomResolver', () => {
         })
       })
 
-      describe('public meeting exists', () => {
+      describe('privat meeting exists', () => {
         it('returns the updated room', async () => {
           await expect(
             testServer.executeOperation(
@@ -961,7 +961,7 @@ describe('RoomResolver', () => {
         })
 
         it('calls joinMeetingLink with correct PW', () => {
-          expect(joinMeetingLinkMock).toBeCalledWith({
+          expect(joinMeetingLinkMock).toHaveBeenCalledWith({
             fullName: 'User',
             meetingID: 'Dreammall-Entwicklung',
             password: '1234',

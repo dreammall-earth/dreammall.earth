@@ -131,22 +131,23 @@ describe('IntroSection', () => {
       })
 
       it('does not play the video', () => {
-        expect(spy).not.toBeCalled()
+        expect(spy).not.toHaveBeenCalled()
       })
     })
 
-    describe.skip('video ended', () => {
-      beforeEach(async () => {
-        ;(wrapper.vm as unknown as { video: HTMLFormElement }).video.ended = true
+    // describe('video ended', () => {
+    //   beforeEach(async () => {
+    //     ;(wrapper.vm as unknown as { video: HTMLFormElement }).video.ended = true
 
-        spy = vi.spyOn((wrapper.vm as unknown as { video: HTMLFormElement }).video, 'play')
-        await wrapper.find('video').trigger('click')
-      })
+    //     spy = vi.spyOn((wrapper.vm as unknown as { video: HTMLFormElement }).video, 'play')
+    //     await wrapper.find('video').trigger('click')
+    //   })
 
-      it('plays the video', () => {
-        expect(spy).toBeCalled()
-      })
-    })
+    //   it('plays the video', () => {
+    //     // eslint-disable-next-line vitest/prefer-called-with
+    //     expect(spy).toHaveBeenCalled()
+    //   })
+    // })
   })
 
   describe('video source and poster', () => {
@@ -190,7 +191,7 @@ describe('IntroSection', () => {
 
     beforeEach(() => {
       // eslint-disable-next-line promise/prefer-await-to-callbacks
-      global.window.addEventListener = vi.fn((event, callback) => {
+      vi.spyOn(global.window, 'addEventListener').mockImplementation((event, callback) => {
         // eslint-disable-next-line security/detect-object-injection
         events[event] = callback
       })
@@ -205,7 +206,8 @@ describe('IntroSection', () => {
     it('calls etVideoSrc', () => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       events.resize()
-      expect(spy).toBeCalled()
+      // eslint-disable-next-line vitest/prefer-called-with
+      expect(spy).toHaveBeenCalled()
     })
   })
 })
