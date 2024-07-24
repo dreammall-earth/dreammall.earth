@@ -1,6 +1,7 @@
 import { ApolloServer } from '@apollo/server'
 
 import { createTestServer } from '#src/server/server'
+import { prisma } from '#src/prisma'
 
 let testServer: ApolloServer
 
@@ -85,6 +86,67 @@ describe('UserResolver', () => {
                       id: expect.any(Number),
                       name: 'User',
                       username: 'mockedUser',
+                    },
+                  ],
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+      })
+
+      describe('include search string ', () => {
+        beforeAll(async () => {
+          await prisma.user.createMany({
+            data: [
+              {
+                name: 'Thomas Schmitt',
+                username: 'tom',
+              },
+              {
+                name: 'Thomas Schmidt',
+                username: 'Thomas',
+              },
+              {
+                name: 'John Doe',
+                username: 'john',
+              },
+              {
+                name: 'Tomas Schmid',
+                username: 'Schmid',
+              },
+              {
+                name: 'Tomás Schmit',
+                username: 'Schmit',
+              },
+            ],
+          })
+        })
+
+        it('returns the username', async () => {
+          const response = await testServer.executeOperation(
+            {
+              query: `query ($searchString: String) {users(searchString: $searchString) {id name username}}`,
+              variables: { searchString: 'Tomas Schmid' },
+            },
+            {
+              contextValue: {
+                token: 'token',
+              },
+            },
+          )
+          expect(response).toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  users: [
+                    {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'Tomas Schmid',
+                      username: 'Schmid',
                     },
                   ],
                 },
