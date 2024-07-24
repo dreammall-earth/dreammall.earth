@@ -1,6 +1,6 @@
 {
   "$vuetify": {
-    "input:": {
+    "input": {
       "clear": "Clear"
     }
   },
@@ -53,6 +53,8 @@
   },
   "tablesDrawer": {
     "header": "Open Tables",
+    "noResults": "No results found",
+    "noTables": "No tables available",
     "searchPlaceholder": "Open tables, attendees"
   }
 }
