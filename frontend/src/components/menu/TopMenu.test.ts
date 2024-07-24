@@ -66,11 +66,11 @@ describe('TopMenu', () => {
       })
 
       it('calls auth service sign out', () => {
-        expect(authServiceSpy).toBeCalled()
+        expect(authServiceSpy).toHaveBeenCalledWith()
       })
 
       it('clears the store', () => {
-        expect(storeSpy).toBeCalled()
+        expect(storeSpy).toHaveBeenCalledWith()
       })
     })
 
@@ -83,7 +83,7 @@ describe('TopMenu', () => {
       })
 
       it('logs the error', () => {
-        expect(errorHandlerSpy).toBeCalledWith('auth error', 'Error!')
+        expect(errorHandlerSpy).toHaveBeenCalledWith('auth error', 'Error!')
       })
     })
   })
