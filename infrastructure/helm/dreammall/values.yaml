@@ -43,7 +43,8 @@ authentik:
 
   worker:
     env:
-      - DREAMMALL_FRONTEND_URL=http://app.dreammall.roschaefer.de
+      - name: DREAMMALL_FRONTEND_URL
+        value: https://app.dreammall.roschaefer.de
 
   server:
     ingress:
