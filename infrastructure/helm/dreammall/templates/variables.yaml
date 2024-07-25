@@ -1,0 +1,4 @@
+{{- $postgresPassword := .Values.authentik.postgresql.auth.password | required ".Values.authentik.postgresql.auth.password is required" -}}
+{{- $mariadbPassword := .Values.mariadb.auth.password | required ".Values.mariadb.auth.password is required" -}}
+{{- $authentikSecretKey:= .Values.authentik.authentik.secret_key | required ".Values.authentik.authentik.secret_key is required" -}}
+{{- $authentikPostgresPassword:= .Values.authentik.authentik.postgresql.password | required ".Values.authentik.authentik.postgresql.password is required" -}}

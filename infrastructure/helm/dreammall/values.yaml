@@ -1,0 +1,73 @@
+image:
+  pullPolicy: Always
+
+dreammall:
+  domain: dreammall.roschaefer.de
+
+  presenter:
+    environment:
+      PUBLIC_ENV__META__DEFAULT_AUTHOR: "DreamMall Verlag GbR"
+
+  admin:
+    envirnonment:
+      PUBLIC_ENV__META__BASE_URL: "https://localhost:3000"
+      PUBLIC_ENV__META__DEFAULT_AUTHOR: "IT Team 4 Change"
+      PUBLIC_ENV__META__DEFAULT_DESCRIPTION: "IT4C Frontend Boilerplate"
+      PUBLIC_ENV__META__DEFAULT_TITLE: "IT4C"
+
+  frontend:
+    environment:
+      PUBLIC_ENV__AUTH__CLIENT_ID: "G3g0sjCjph1NAyGeeu5Te5ltx1I7WZ0DGB8i6vOI"
+      PUBLIC_ENV__AUTH__RESPONSE_TYPE: "code"
+      PUBLIC_ENV__AUTH__SCOPE: "openid profile posts"
+      PUBLIC_ENV__AUTH__ADMIN_GROUP: "authentik Admins"
+      PUBLIC_ENV__META__DEFAULT_AUTHOR: "DreamMall Verlag GbR"
+
+  backend:
+    environment:
+      BREVO_KEY: ""
+      BREVO_ADMIN_NAME: ""
+      BREVO_ADMIN_EMAIL: ""
+      BREVO_CONTACT_TEMPLATE_ADMIN: "1"
+      BREVO_CONTACT_TEMPLATE_USER: "2"
+      BREVO_NEWSLETTER_TEMPLATE_OPTIN: "3"
+      BREVO_NEWSLETTER_LIST: "3"
+      BBB_SHARED_SECRET:
+      BBB_URL:
+
+authentik:
+  enabled: true
+
+  server:
+    ingress:
+      enabled: true
+      annotations:
+        # edit this manually to letsencrypt-prod as soon as you're ready
+        cert-manager.io/issuer: letsencrypt-staging
+      hosts:
+        - "auth.dreammall.roschaefer.de"
+      tls:
+        - hosts:
+          - "auth.dreammall.roschaefer.de"
+          secretName: dreammall-authentik-letsencrypt-tls
+
+  authentik:
+    secret_key:
+    postgresql:
+      password:
+
+  postgresql:
+    enabled: true
+    auth:
+      password:
+
+  redis:
+    enabled: true
+
+mariadb:
+  enabled: true
+
+  auth:
+    username: "dreammall"
+    database: "dreammall.earth"
+    password:

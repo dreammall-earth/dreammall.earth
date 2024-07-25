@@ -14,33 +14,43 @@ services:
       - db_vol:/var/lib/mysql
 
   presenter:
+    image: roschaefer/dreammall-presenter
     build:
       context: ./presenter
-      target: production
+      target: build
     ports:
       - 3001:3000
+    env_file:
+      presenter/.env
     environment:
       - NODE_ENV=production
 
   frontend:
+    image: roschaefer/dreammall-frontend
     build:
       context: ./frontend
-      target: production
+      target: build
     ports:
       - 3000:3000
+    env_file:
+      frontend/.env
     environment:
       - NODE_ENV=production
 
   admin:
+    image: roschaefer/dreammall-admin
     build:
       context: ./admin
-      target: production
+      target: build
     ports:
       - 3002:3000
+    env_file:
+      admin/.env
     environment:
       - NODE_ENV=production
 
   backend:
+    image: roschaefer/dreammall-backend
     build:
       context: ./backend
       target: production

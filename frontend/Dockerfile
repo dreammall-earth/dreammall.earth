@@ -70,42 +70,6 @@ CMD /bin/sh -c "npm install && npm run storybook"
 ##################################################################################
 FROM base as build
 
-# Copy everything
 COPY . .
-# npm install
 RUN npm install --include=dev --frozen-lockfile --non-interactive
-# npm build
-RUN npm run build
-
-##################################################################################
-# TEST ###########################################################################
-##################################################################################
-FROM base as test
-
-# Copy everything
-COPY . .
-# npm install
-RUN npm install --include=dev --frozen-lockfile --non-interactive
-RUN npm run build
-
-# Run command
-CMD /bin/sh -c "npm run server:prod"
-
-##################################################################################
-# PRODUCTION (Does contain only "binary"- and static-files to reduce image size) #
-##################################################################################
-FROM base as production
-
-# Copy "binary"-files from build image
-COPY --from=build ${DOCKER_WORKDIR}/build ./build
-# Copy server
-COPY --from=build ${DOCKER_WORKDIR}/server ./server
-# Copy package.json & tsconfig.json
-COPY --from=build ${DOCKER_WORKDIR}/package.json ./package.json
-COPY --from=build ${DOCKER_WORKDIR}/package-lock.json ./package-lock.json
-COPY --from=build ${DOCKER_WORKDIR}/tsconfig.json ./tsconfig.json
-# Install production packages
-RUN npm install --omit=dev --frozen-lockfile --non-interactive
-
-# Run command
-CMD /bin/sh -c "npm run server:prod"
+CMD /bin/sh -c "npm run build && npm run server:prod"

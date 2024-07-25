@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f ../../docker-compose.yml -o dreammall/templates/
+    kompose.version: 1.32.0 (HEAD)
+  labels:
+    io.kompose.service: frontend
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: frontend
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f ../../docker-compose.yml -o dreammall/templates/
+        kompose.version: 1.32.0 (HEAD)
+      labels:
+        io.kompose.network/dreammallearth-default: "true"
+        io.kompose.service: frontend
+    spec:
+      containers:
+        - env:
+            - name: NODE_ENV
+              value: production
+            - name: PUBLIC_ENV__AUTH__AUTHORITY
+              value: "https://auth.{{ .Values.dreammall.domain }}/application/o/dreammallearth/"
+            - name: PUBLIC_ENV__AUTH__AUTHORITY_SIGNUP_URI
+              value: "https://auth.{{ .Values.dreammall.domain }}/if/flow/dreammallearth-enrollment/"
+            - name: PUBLIC_ENV__AUTH__AUTHORITY_SIGNOUT_URI
+              value: "https://auth.{{ .Values.dreammall.domain }}/if/flow/dreammallearth-invalidation-flow/"
+            - name: PUBLIC_ENV__AUTH__REDIRECT_URI
+              value: "https://app.{{ .Values.dreammall.domain }}/auth"
+            - name: PUBLIC_ENV__AUTH__SILENT_REDIRECT_URI
+              value: "https://app.{{ .Values.dreammall.domain }}/silent-refresh"
+            - name: PUBLIC_ENV__AUTH__ADMIN_REDIRECT_URI
+              value: "https://admin.{{ .Values.dreammall.domain }}/signin"
+            - name: PUBLIC_ENV__ENDPOINTS__GRAPHQL_URI
+              value: "https://{{ .Values.dreammall.domain }}/api/"
+            - name: PUBLIC_ENV__ENDPOINTS__WEBSOCKET_URI
+              value: "ws://{{ .Values.dreammall.domain }}/api/subscriptions"
+            - name: PUBLIC_ENV__META__BASE_URL
+              value: "app.{{ .Values.dreammall.domain }}"
+              {{- range $key, $val := .Values.dreammall.frontend.environment }}
+            - name: {{ $key }}
+              value: {{ $val | quote }}
+              {{- end }}
+          image: roschaefer/dreammall-frontend
+          imagePullPolicy: Always
+          name: frontend
+          ports:
+            - containerPort: 3000
+              hostPort: 3000
+              protocol: TCP
+      restartPolicy: Always

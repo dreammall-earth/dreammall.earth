@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f ../../docker-compose.yml -o dreammall/templates/
+    kompose.version: 1.32.0 (HEAD)
+  labels:
+    io.kompose.service: presenter
+  name: presenter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: presenter
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f ../../docker-compose.yml -o dreammall/templates/
+        kompose.version: 1.32.0 (HEAD)
+      labels:
+        io.kompose.network/dreammallearth-default: "true"
+        io.kompose.service: presenter
+    spec:
+      containers:
+        - env:
+            - name: NODE_ENV
+              value: production
+            - name: PUBLIC_ENV__SIGNIN_URI
+              value: "https://app.{{ .Values.dreammall.domain }}/signin/"
+            - name: PUBLIC_ENV__SIGNUP_URI
+              value: "https://auth.{{ .Values.dreammall.domain }}/if/flow/dreammallearth-enrollment/"
+            - name: PUBLIC_ENV__ENDPOINTS__GRAPHQL_URI
+              value: "https://{{ .Values.dreammall.domain }}/api/"
+            - name: PUBLIC_ENV__META__BASE_URL
+              value: "https://{{ .Values.dreammall.domain  }}"
+              {{- range $key, $val := .Values.dreammall.backend.environment }}
+            - name: {{ $key }}
+              value: {{ $val | quote }}
+              {{- end }}
+          image: roschaefer/dreammall-presenter
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          name: presenter
+          ports:
+            - containerPort: 3000
+              hostPort: 3001
+              protocol: TCP
+      restartPolicy: Always

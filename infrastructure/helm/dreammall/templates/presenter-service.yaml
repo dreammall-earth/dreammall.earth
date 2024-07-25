@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f ../../docker-compose.yml -o dreammall/templates/
+    kompose.version: 1.32.0 (HEAD)
+  labels:
+    io.kompose.service: presenter
+  name: presenter
+spec:
+  ports:
+    - name: "3001"
+      port: 3001
+      targetPort: 3000
+  selector:
+    io.kompose.service: presenter
