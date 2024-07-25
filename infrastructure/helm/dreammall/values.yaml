@@ -41,6 +41,10 @@ authentik:
     configMaps:
       - authentik-blueprints-configmap
 
+  worker:
+    env:
+      - DREAMMALL_FRONTEND_URL=http://app.dreammall.roschaefer.de
+
   server:
     ingress:
       enabled: true
