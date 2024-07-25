@@ -50,7 +50,7 @@ const cache = new InMemoryCache()
 const errorLink = onError(({ graphQLErrors }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ extensions }) => {
-      if (extensions.code === 'UNAUTHENTICATED') {
+      if (extensions !== null && extensions?.code === 'UNAUTHENTICATED') {
         void navigate('/signin')
       }
     })
