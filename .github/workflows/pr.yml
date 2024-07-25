@@ -32,12 +32,15 @@ jobs:
             admin
             authentik
             backend
+            deps
+            dev-deps
             docu
             docker
             frontend
             other
             presenter
             release
+            test
             workflow
           # Configure that a scope must always be provided.
           requireScope: true
