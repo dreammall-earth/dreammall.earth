@@ -42,9 +42,7 @@ authentik:
       - authentik-blueprints-configmap
 
   worker:
-    env:
-      - name: DREAMMALL_FRONTEND_URL
-        value: https://app.dreammall.roschaefer.de
+    env: []
 
   server:
     ingress:
