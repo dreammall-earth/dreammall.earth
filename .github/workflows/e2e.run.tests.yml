@@ -19,7 +19,6 @@ jobs:
           docker compose exec -T postgresql psql authentik --username authentik < authentik/dump.sql
           cd backend
           cp .env.dist .env
-          ln -s src/auth/public.pem public.pem
           npm install
           npm run db:reset
           npm run build

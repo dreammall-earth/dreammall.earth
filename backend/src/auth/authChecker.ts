@@ -1,28 +1,25 @@
-import fs from 'node:fs'
-
 import { User } from '@prisma/client'
-import { verify, JwtPayload } from 'jsonwebtoken'
+import { createRemoteJWKSet } from 'jose'
 import { AuthChecker } from 'type-graphql'
 
 import { EVENT_CREATE_USER } from '#src/event/Events'
 import { Context } from '#src/server/context'
 
+import { jwtVerify } from './jwtVerify'
+
 import type { prisma as Prisma } from '#src/prisma'
 
-interface CustomJwtPayload extends JwtPayload {
+export interface CustomJwtPayload {
   nickname: string
   name: string
 }
 
-let cert: Buffer
-
-export const getCert = (): Buffer => {
-  if (!cert) {
-    // eslint-disable-next-line n/no-sync
-    cert = fs.readFileSync('public.pem')
-  }
-  return cert
+// eslint-disable-next-line n/no-process-env
+const { JWKS_URI } = process.env
+if (!JWKS_URI) {
+  throw new Error('missing environment variable: JWKS_URI')
 }
+const JWKS = createRemoteJWKSet(new URL(JWKS_URI))
 
 export const authChecker: AuthChecker<Context> = async ({ context }) => {
   const { token, dataSources } = context
@@ -30,15 +27,16 @@ export const authChecker: AuthChecker<Context> = async ({ context }) => {
 
   if (!token) return false
 
-  let decoded
+  let payload: CustomJwtPayload
   try {
-    decoded = verify(token, getCert()) as CustomJwtPayload
+    const decoded = await jwtVerify<CustomJwtPayload>(token, JWKS)
+    payload = decoded.payload
   } catch (err) {
     return false
   }
 
-  if (decoded) {
-    const { nickname, name } = decoded
+  if (payload) {
+    const { nickname, name } = payload
     const user = await contextUser(prisma)(nickname, name)
     context.user = user
     return true
