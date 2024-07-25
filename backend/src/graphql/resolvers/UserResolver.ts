@@ -1,9 +1,8 @@
 import { Prisma } from '@prisma/client'
 import { Resolver, Query, Authorized, Ctx, Arg } from 'type-graphql'
 
-import { User } from '#graphql/models/UserModel'
-import { prisma } from '#src/prisma'
-
+import { User, CurrentUser } from '#graphql/models/UserModel'
+import { prisma, UsersWithMeetings } from '#src/prisma'
 import { Context } from '#src/server/context'
 
 @Resolver()

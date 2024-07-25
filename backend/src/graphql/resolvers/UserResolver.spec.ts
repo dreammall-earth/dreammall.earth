@@ -2,7 +2,6 @@ import { ApolloServer } from '@apollo/server'
 
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
-import { prisma } from '#src/prisma'
 
 import type { Context } from '#src/server/context'
 
@@ -49,7 +48,7 @@ describe('UserResolver', () => {
             {
               contextValue: {
                 token: 'token',
-                user: undefined,
+                dataSources: { prisma },
               },
             },
           )
@@ -77,7 +76,7 @@ describe('UserResolver', () => {
             {
               contextValue: {
                 token: 'token',
-                user: undefined,
+                dataSources: { prisma },
               },
             },
           )
@@ -102,7 +101,7 @@ describe('UserResolver', () => {
         })
       })
 
-      describe('include search string ', () => {
+      describe('include search string', () => {
         beforeAll(async () => {
           await prisma.user.createMany({
             data: [
@@ -112,11 +111,7 @@ describe('UserResolver', () => {
               },
               {
                 name: 'Thomas Schmidt',
-                username: 'Thomas',
-              },
-              {
-                name: 'John Doe',
-                username: 'john',
+                username: 'Toms',
               },
               {
                 name: 'Tomas Schmid',
@@ -130,48 +125,201 @@ describe('UserResolver', () => {
           })
         })
 
-        const testCases = [
-          { searchString: 'Thomas Schmitt', expectedUsername: 'tom' },
-          { searchString: 'John Doe', expectedUsername: 'john' },
-          { searchString: 'Tomas Schmid', expectedUsername: 'Schmid' },
-          { searchString: 'Tomás Schmit', expectedUsername: 'Schmit' },
-        ]
+        it('returns the correct users for "tom"', async () => {
+          const response = await testServer.executeOperation(
+            {
+              query: `query ($searchString: String) {users(searchString: $searchString) {id name username}}`,
+              variables: { searchString: 'tom' },
+            },
+            {
+              contextValue: {
+                token: 'token',
+                dataSources: { prisma },
+              },
+            },
+          )
 
-        it.each(testCases)(
-          'returns the correct username for %s',
-          async ({ searchString, expectedUsername }) => {
-            const response = await testServer.executeOperation(
-              {
-                query: `query ($searchString: String) {users(searchString: $searchString) {id name username}}`,
-                variables: { searchString },
-              },
-              {
-                contextValue: {
-                  token: 'token',
+          expect(response).toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  users: [
+                    {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'Thomas Schmitt',
+                      username: 'tom',
+                    },
+                    {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'Thomas Schmidt',
+                      username: 'Toms',
+                    },
+                    {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'Tomas Schmid',
+                      username: 'Schmid',
+                    },
+                    {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'Tomás Schmit',
+                      username: 'Schmit',
+                    },
+                  ],
                 },
+                errors: undefined,
               },
-            )
+            },
+          })
+        })
 
-            expect(response).toMatchObject({
-              body: {
-                kind: 'single',
-                singleResult: {
-                  data: {
-                    users: [
-                      {
-                        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                        id: expect.any(Number),
-                        name: searchString,
-                        username: expectedUsername,
-                      },
-                    ],
-                  },
-                  errors: undefined,
-                },
+        it('returns the correct users for "TOM"', async () => {
+          const response = await testServer.executeOperation(
+            {
+              query: `query ($searchString: String) {users(searchString: $searchString) {id name username}}`,
+              variables: { searchString: 'TOM' },
+            },
+            {
+              contextValue: {
+                token: 'token',
+                dataSources: { prisma },
               },
-            })
-          },
-        )
+            },
+          )
+
+          expect(response).toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  users: [
+                    {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'Thomas Schmitt',
+                      username: 'tom',
+                    },
+                    {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'Thomas Schmidt',
+                      username: 'Toms',
+                    },
+                    {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'Tomas Schmid',
+                      username: 'Schmid',
+                    },
+                    {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'Tomás Schmit',
+                      username: 'Schmit',
+                    },
+                  ],
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it('returns the correct users for "sch"', async () => {
+          const response = await testServer.executeOperation(
+            {
+              query: `query ($searchString: String) {users(searchString: $searchString) {id name username}}`,
+              variables: { searchString: 'sch' },
+            },
+            {
+              contextValue: {
+                token: 'token',
+                dataSources: { prisma },
+              },
+            },
+          )
+
+          expect(response).toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  users: [
+                    {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'Thomas Schmitt',
+                      username: 'tom',
+                    },
+                    {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'Thomas Schmidt',
+                      username: 'Toms',
+                    },
+                    {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'Tomas Schmid',
+                      username: 'Schmid',
+                    },
+                    {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'Tomás Schmit',
+                      username: 'Schmit',
+                    },
+                  ],
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it('returns the correct users for "tomas"', async () => {
+          const response = await testServer.executeOperation(
+            {
+              query: `query ($searchString: String) {users(searchString: $searchString) {id name username}}`,
+              variables: { searchString: 'tomas' },
+            },
+            {
+              contextValue: {
+                token: 'token',
+                dataSources: { prisma },
+              },
+            },
+          )
+
+          expect(response).toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  users: [
+                    {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'Tomas Schmid',
+                      username: 'Schmid',
+                    },
+                    {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'Tomás Schmit',
+                      username: 'Schmit',
+                    },
+                  ],
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
       })
     })
   })
