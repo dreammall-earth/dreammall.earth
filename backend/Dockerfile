@@ -69,12 +69,15 @@ RUN npm run build
 ##################################################################################
 FROM base as production
 
+# Copy "binary"-files from build image
 COPY --from=build ${DOCKER_WORKDIR}/build ./build
-COPY --from=build ${DOCKER_WORKDIR}/prisma ./prisma
+# We also copy the node_modules express and serve-static for the run script
+COPY --from=build ${DOCKER_WORKDIR}/node_modules ./node_modules
+# Copy package.json & tsconfig.json
 COPY --from=build ${DOCKER_WORKDIR}/package.json ./package.json
 COPY --from=build ${DOCKER_WORKDIR}/package-lock.json ./package-lock.json
 COPY --from=build ${DOCKER_WORKDIR}/tsconfig.json ./tsconfig.json
-
+# Install production packages
 RUN npm install --omit=dev --frozen-lockfile --non-interactive
 
 # Run command

@@ -17,7 +17,7 @@ services:
     image: roschaefer/dreammall-presenter
     build:
       context: ./presenter
-      target: build
+      target: production
     ports:
       - 3001:3000
     env_file:
@@ -29,7 +29,7 @@ services:
     image: roschaefer/dreammall-frontend
     build:
       context: ./frontend
-      target: build
+      target: production
     ports:
       - 3000:3000
     env_file:
@@ -41,7 +41,7 @@ services:
     image: roschaefer/dreammall-admin
     build:
       context: ./admin
-      target: build
+      target: production
     ports:
       - 3002:3000
     env_file:
