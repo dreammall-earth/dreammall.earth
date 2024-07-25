@@ -52,7 +52,7 @@
     "update": "npx npm-check-updates"
   },
   "dependencies": {
-    "@apollo/client": "^3.10.5",
+    "@apollo/client": "^3.11.1",
     "@intlify/unplugin-vue-i18n": "^4.0.0",
     "@mdi/font": "^7.4.47",
     "@types/compression": "^1.7.5",
