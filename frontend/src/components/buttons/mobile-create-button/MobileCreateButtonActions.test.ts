@@ -1,7 +1,7 @@
 import { ApolloError } from '@apollo/client/errors'
 import { flushPromises, mount } from '@vue/test-utils'
 import { navigate } from 'vike/client/router'
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest'
 import { h } from 'vue'
 import { VApp } from 'vuetify/components'
 
@@ -10,7 +10,7 @@ import { useActiveRoomStore } from '#stores/activeRoomStore'
 import { mockClient } from '#tests/mock.apolloClient'
 import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
-import CreateButtonMobile from './CreateButtonMobile.vue'
+import MobileCreateButtonActions from './MobileCreateButtonActions.vue'
 
 vi.mock('vike/client/router')
 vi.mocked(navigate).mockResolvedValue()
@@ -21,54 +21,33 @@ mockClient.setRequestHandler(joinMyRoomMutation, joinMyRoomMutationMock)
 
 const activeRoomStore = useActiveRoomStore()
 
-describe('CreateButtonMobile', () => {
-  const Wrapper = () => {
+describe('MobileCreateButtonActions', () => {
+  const Wrapper = (props = { isVisible: true }) => {
     return mount(VApp, {
       slots: {
-        default: h(CreateButtonMobile),
-      },
-      global: {
-        stubs: {
-          teleport: true,
-        },
+        default: h(MobileCreateButtonActions, props),
       },
     })
   }
   let wrapper: ReturnType<typeof Wrapper>
 
-  beforeEach(() => {
+  afterEach(() => {
+    wrapper.unmount()
+  })
+
+  it('renders open', () => {
     wrapper = Wrapper()
+    expect(wrapper.findComponent(MobileCreateButtonActions).element).toMatchSnapshot()
   })
 
-  it('renders', () => {
-    expect(wrapper.findComponent(CreateButtonMobile).element).toMatchSnapshot()
-  })
-
-  it('button list content is hidden', () => {
-    expect(wrapper.find('.button-list-mobile').classes('button-list-mobile--active')).toBe(false)
-    expect(wrapper.find('svg g.outer-rings').classes('outer-rings--active')).toBe(false)
-    expect(wrapper.find('svg g.most-outer-rings').classes('most-outer-rings--active')).toBe(false)
-  })
-
-  describe('click on create button', () => {
-    it('emits click event', async () => {
-      await wrapper.find('#create-button-mobile').trigger('click')
-      const component = wrapper.findComponent(CreateButtonMobile)
-      expect(component.emitted()).toHaveProperty('click', [[1]])
-    })
-
-    it('button list visible', async () => {
-      await wrapper.find('#create-button-mobile').trigger('click')
-      expect(wrapper.find('.button-list-mobile').classes('button-list-mobile--active')).toBe(true)
-      expect(wrapper.find('svg g.outer-rings').classes('outer-rings--active')).toBe(true)
-      expect(wrapper.find('svg g.most-outer-rings').classes('most-outer-rings--active')).toBe(true)
-    })
+  it('renders closed', () => {
+    wrapper = Wrapper({ isVisible: false })
+    expect(wrapper.findComponent(MobileCreateButtonActions).element).toMatchSnapshot()
   })
 
   describe('new table button', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
       wrapper = Wrapper()
-      await wrapper.find('#create-button-mobile').trigger('click')
     })
 
     describe('enter room', () => {
@@ -80,7 +59,6 @@ describe('CreateButtonMobile', () => {
               joinMyRoom: 'http://link-to-my.room',
             },
           })
-          await wrapper.find('#create-button-mobile').trigger('click')
           await wrapper.find('button.new-table-button').trigger('click')
         })
 
@@ -106,7 +84,6 @@ describe('CreateButtonMobile', () => {
           joinMyRoomMutationMock.mockResolvedValue({
             data: null,
           })
-          await wrapper.find('#create-button-mobile').trigger('click')
           await wrapper.find('.button-list-mobile button.new-table-button').trigger('click')
         })
 
@@ -132,7 +109,6 @@ describe('CreateButtonMobile', () => {
           joinMyRoomMutationMock.mockRejectedValue({
             message: 'OUCH',
           })
-          await wrapper.find('#create-button-mobile').trigger('click')
           await wrapper.find('.button-list-mobile button.new-table-button').trigger('click')
         })
 

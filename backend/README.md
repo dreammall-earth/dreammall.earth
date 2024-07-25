@@ -102,16 +102,6 @@ Run `npm run db:migrate` to generate the database.
 
 It might be required to delete the migration folder beforehand.
 
-## Token validation
-
-If you use the authentik database from the zip file, link the `src/auth/public.pem` to the main folder:
-
-```bash
-ln -s src/auth/public.pem public.pem
-```
-
-Otherwise place the according certificate in the main folder with the name `public.pem`
-
 ## License
 
 [Apache 2.0](./LICENSE)
