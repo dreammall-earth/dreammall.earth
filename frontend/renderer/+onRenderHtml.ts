@@ -5,7 +5,6 @@ import { PageContext, PageContextServer } from 'vike/types'
 
 import image from '#assets/dreammall-logo.svg'
 import logoUrl from '#assets/favicon.ico'
-import pinia from '#plugins/pinia'
 import { META } from '#src/env'
 
 import { createApp } from './app'
@@ -14,7 +13,7 @@ import { getDescription, getTitle } from './utils'
 import type { App } from 'vue'
 
 async function render(pageContext: PageContextServer & PageContext) {
-  const { app, i18n } = createApp(pageContext, false)
+  const { app, i18n, pinia } = createApp(pageContext, false)
 
   const locale = i18n.global.locale.value
 

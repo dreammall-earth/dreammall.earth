@@ -1,27 +1,18 @@
-import Cookies from 'js-cookie'
 import { User } from 'oidc-client-ts'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
+import { usePageContext } from '#context/usePageContext.js'
 import { AUTH } from '#src/env'
 
-export const cookieStorage = {
-  setItem(key: string, state: string) {
-    Cookies.set('auth', state, {
-      expires: 3,
-      Secure: true,
-      SameSite: 'None',
-    })
-  },
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getItem(key: string) {
-    return Cookies.get('auth') || null
-  },
-} as Storage
+import { cookieStorage } from './cookieStorage'
 
 export const useAuthStore = defineStore(
   'auth',
   () => {
+    // const pageContext = usePageContext()
+    // const serverSideCookie = pageContext.headers && pageContext.headers.cookie
+
     const user = ref<User | null>(null)
 
     const accessToken = computed(() => user.value?.access_token ?? '')
@@ -50,7 +41,14 @@ export const useAuthStore = defineStore(
       clear,
     }
   },
-  { persist: { storage: cookieStorage } },
+  {
+    persist: {
+      storage: cookieStorage,
+      afterRestore: (ctx) => {
+        console.log(`just restored '${ctx.store.$id}' with ${JSON.stringify(ctx.store.$state)}`)
+      },
+    },
+  },
 )
 
 if (import.meta.hot) {

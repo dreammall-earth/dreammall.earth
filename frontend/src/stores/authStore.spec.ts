@@ -2,7 +2,8 @@ import Cookies from 'js-cookie'
 import { setActivePinia, createPinia } from 'pinia'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
-import { cookieStorage, useAuthStore } from './authStore'
+import { useAuthStore } from './authStore'
+import { cookieStorage } from './cookieStorage'
 
 const setCookieSpy = vi.spyOn(Cookies, 'set')
 const getCookieSpy = vi.spyOn(Cookies, 'get')
@@ -73,6 +74,7 @@ describe('Auth Store', () => {
     })
   })
 
+  /* TODO move to cookieStorage.spec.ts */
   describe('cookieStorage', () => {
     beforeEach(() => {
       vi.clearAllMocks()

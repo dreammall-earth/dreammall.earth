@@ -50,11 +50,13 @@ function createApp(pageContext: PageContext, isClient = true) {
     },
   })
 
-  if (isClient) {
-    pinia.use(piniaPluginPersistedstate)
-  }
+  // if (isClient) {
+  pinia.use(piniaPluginPersistedstate)
+  // }
 
   const app = createSSRApp(PageWithWrapper)
+  // eslint-disable-next-line no-console
+  console.log('initialStoreState', pinia.state.value)
   app.use(pinia)
   app.use(i18n)
   app.use(vuetify)
@@ -80,6 +82,8 @@ function createApp(pageContext: PageContext, isClient = true) {
       rootComponent.pageProps = markRaw(pageContext.pageProps || {})
     },
   })
+
+  Object.assign(pageContext, { pinia })
 
   const pageContextReactive = reactive(pageContext)
 
