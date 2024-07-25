@@ -32,26 +32,6 @@ jobs:
         run: npm install && npm run build
         working-directory: ./frontend
 
-  docker-production:
-    if: needs.files-changed.outputs.frontend == 'true'
-    name: Build Docker Production - Frontend
-    needs: files-changed
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Frontend | Build Docker Production
-        run: docker compose -f docker-compose.yml build frontend
-
-  docker-development:
-    if: needs.files-changed.outputs.frontend == 'true'
-    name: Build Docker Development - Frontend
-    needs: files-changed
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Frontend | Build Docker Development
-        run: docker compose build frontend frontend-storybook
-
   storybook:
     if: needs.files-changed.outputs.frontend == 'true'
     name: Build Storybook - Frontend

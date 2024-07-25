@@ -1,0 +1,14 @@
+name: docker
+
+on: pull_request
+
+jobs:
+  docker-build:
+    name: Build Docker Images
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Root | Build Docker Images for Development
+        run: docker compose build
+      - name: Root | Build Docker Images for Production
+        run: docker compose -f docker-compose.yml build
