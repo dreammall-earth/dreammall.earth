@@ -32,8 +32,6 @@ spec:
               value: "https://app.{{ .Values.dreammall.domain }}/"
             - name: FRONTEND_INVITE_LINK_URL
               value: "https://app.{{ .Values.dreammall.domain }}/join-room"
-            - name: JWKS_URI
-              value: http://{{ .Release.Name }}-authentik-server/application/o/dreammallearth/jwks/
               {{- range $key, $val := .Values.dreammall.backend.environment }}
             - name: {{ $key }}
               value: {{ $val | quote }}
@@ -52,6 +50,8 @@ spec:
               value: "https://app.{{ .Values.dreammall.domain }}/"
             - name: FRONTEND_INVITE_LINK_URL
               value: "https://app.{{ .Values.dreammall.domain }}/join-room"
+            - name: JWKS_URI
+              value: http://{{ .Release.Name }}-authentik-server/application/o/dreammallearth/jwks/
               {{- range $key, $val := .Values.dreammall.backend.environment }}
             - name: {{ $key }}
               value: {{ $val | quote }}
