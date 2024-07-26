@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: authentik-blueprints-configmap
 data:
-{{ (.Files.Glob "blueprints/dreammall/*.yaml").AsConfig | indent 2 }}
+{{ (.Files.Glob "authentik-blueprints/dreammall/*.yaml").AsConfig | indent 2 }}
