@@ -43,39 +43,26 @@ WORKDIR ${DOCKER_WORKDIR}
 # DEVELOPMENT (Connected to the local environment, to reload on demand) ##########
 ##################################################################################
 FROM base as development
-
-# We don't need to copy or build anything since we gonna bind to the
-# local filesystem which will need a rebuild anyway
-
-# Run command
-# (for development we need to execute npm install since the
-#  node_modules are on another volume and need updating)
 CMD /bin/sh -c "npm install && npm run dev"
 
 ##################################################################################
 # BUILD (Does contain all files and is therefore bloated) ########################
 ##################################################################################
 FROM base as build
-
-# Copy everything
-COPY . .
-# npm install including dev dependencies to be able to compile
+COPY package.json package-lock.json prisma ./
 RUN npm install --include=dev --frozen-lockfile --non-interactive
-# npm build
+COPY . .
 RUN npm run build
 
 ##################################################################################
 # PRODUCTION (Does contain only "binary"- and static-files to reduce image size) #
 ##################################################################################
 FROM base as production
-
+COPY --from=build ${DOCKER_WORKDIR}/package.json ${DOCKER_WORKDIR}/package-lock.json ./
+RUN npm install --omit=dev --frozen-lockfile --non-interactive
 COPY --from=build ${DOCKER_WORKDIR}/build ./build
 COPY --from=build ${DOCKER_WORKDIR}/prisma ./prisma
-COPY --from=build ${DOCKER_WORKDIR}/package.json ./package.json
-COPY --from=build ${DOCKER_WORKDIR}/package-lock.json ./package-lock.json
 COPY --from=build ${DOCKER_WORKDIR}/tsconfig.json ./tsconfig.json
 
-RUN npm install --omit=dev --frozen-lockfile --non-interactive
 
-# Run command
 CMD /bin/sh -c "npm run start"
