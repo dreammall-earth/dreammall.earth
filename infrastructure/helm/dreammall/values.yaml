@@ -38,6 +38,7 @@ authentik:
   global:
     image:
       repository: roschaefer/dreammall-authentik
+      pullPolicy: Always
   enabled: true
 
   blueprints:
