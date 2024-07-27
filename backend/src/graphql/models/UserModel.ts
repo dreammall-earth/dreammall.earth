@@ -3,7 +3,7 @@ import { ObjectType, Field, Int } from 'type-graphql'
 
 import { UsersWithMeetings } from '#src/prisma'
 
-import { Room } from './RoomModel'
+import { Table } from './TableModel'
 
 @ObjectType()
 export class User {
@@ -29,7 +29,7 @@ export class CurrentUser {
     this.id = user.id
     this.username = user.username
     this.name = user.name
-    this.room = meeting ? new Room(meeting, users) : null
+    this.table = meeting ? new Table(meeting, users) : null
   }
 
   @Field(() => Int)
@@ -41,6 +41,6 @@ export class CurrentUser {
   @Field()
   name: string
 
-  @Field(() => Room, { nullable: true })
-  room: Room | null
+  @Field(() => Table, { nullable: true })
+  table: Table | null
 }
