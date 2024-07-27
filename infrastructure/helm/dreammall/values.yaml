@@ -35,6 +35,9 @@ dreammall:
       BBB_URL:
 
 authentik:
+  global:
+    image:
+      repository: roschaefer/dreammall-authentik
   enabled: true
 
   blueprints:
