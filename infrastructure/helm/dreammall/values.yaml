@@ -7,8 +7,8 @@ acme:
 dreammall:
   ingress:
     annotations:
-      # edit this manually to letsencrypt-prod as soon as you're ready
-      cert-manager.io/issuer: letsencrypt-staging
+      # change letsencrypt-staging => letsencrypt-prod when you're ready
+      cert-manager.io/issuer: letsencrypt-prod
 
   domain: dreammall.roschaefer.de
 
