@@ -11,7 +11,7 @@ exports[`Table Page > renders 1`] = `
     <main
       class="v-main bg-background main-layout"
       data-v-75d0be1e=""
-      data-v-d68296eb=""
+      data-v-dca85f6b=""
       style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: 70px; --v-layout-bottom: 0px; transition: none !important;"
     >
       
@@ -967,7 +967,7 @@ exports[`Table Page > renders 1`] = `
             
             <div
               class="container"
-              data-v-d68296eb=""
+              data-v-dca85f6b=""
             >
               <!--v-if-->
             </div>
