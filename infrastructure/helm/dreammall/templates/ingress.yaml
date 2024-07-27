@@ -13,6 +13,7 @@ spec:
       - "admin.{{ .Values.dreammall.domain }}"
       - "{{ .Values.dreammall.domain }}"
     secretName: dreammall-letsencrypt-tls
+
   rules:
   - host: "auth.{{ .Values.dreammall.domain }}"
     http:
