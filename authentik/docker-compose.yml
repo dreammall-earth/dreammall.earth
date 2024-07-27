@@ -48,7 +48,6 @@ services:
       <<: *x-shared-environments
     volumes:
       - ./templates:/templates
-      - ./data:/data
     env_file:
       - .env
     ports:
@@ -75,7 +74,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./certs:/certs
-      - ./data:/data
       - ./templates:/templates
     env_file:
       - .env
