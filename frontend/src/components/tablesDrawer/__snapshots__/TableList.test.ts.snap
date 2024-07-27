@@ -31,7 +31,7 @@ exports[`TableList > renders correctly 1`] = `
             class="subtitle"
             data-v-de37061b=""
           >
-            $t('rooms.participantCount')
+            $t('tables.participantCount')
           </span>
         </div>
         <button
@@ -76,7 +76,7 @@ exports[`TableList > renders correctly 1`] = `
             class="subtitle"
             data-v-de37061b=""
           >
-            $t('rooms.participantCount')
+            $t('tables.participantCount')
           </span>
         </div>
         <button

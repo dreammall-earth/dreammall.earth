@@ -4,10 +4,10 @@
       <div class="table-info bg-dropdown-background">
         <span class="name">{{ item.meetingName }}</span>
         <span class="subtitle">
-          {{ $t('rooms.participantCount', { count: item.participantCount }) }}
+          {{ $t('tables.participantCount', { count: item.participantCount }) }}
         </span>
       </div>
-      <button class="action" @click="openRoom(item.joinLink)">
+      <button class="action" @click="openTable(item.joinLink)">
         <v-icon class="icon" icon="$camera" />
       </button>
     </li>
@@ -17,21 +17,21 @@
 <script lang="ts" setup>
 import { navigate } from 'vike/client/router'
 
-import { useActiveRoomStore } from '#stores/activeRoomStore'
-import { Room } from '#stores/roomsStore'
+import { useActiveTableStore } from '#stores/activeTableStore'
+import { Table } from '#stores/tablesStore'
 
-const activeRoomStore = useActiveRoomStore()
+const activeTableStore = useActiveTableStore()
 
 defineProps<{
-  items: Room[]
+  items: Table[]
 }>()
 
-const emit = defineEmits(['openRoom'])
+const emit = defineEmits(['openTable'])
 
-const openRoom = (link: string) => {
-  emit('openRoom')
-  activeRoomStore.setActiveRoom(link)
-  navigate('/room/')
+const openTable = (link: string) => {
+  emit('openTable')
+  activeTableStore.setActiveTable(link)
+  navigate('/table/')
 }
 </script>
 
