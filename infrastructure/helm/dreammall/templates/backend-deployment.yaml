@@ -25,7 +25,7 @@ spec:
       initContainers:
         - env:
             - name: DATABASE_URL
-              value: mysql://{{ .Values.mariadb.auth.username }}:{{ .Values.mariadb.auth.password }}@{{ .Release.Name }}-mariadb:3306/{{ .Values.mariadb.auth.database }}
+              value: {{ printf "mysql://%s:%s@%s:%d/%s"  .Values.mariadb.auth.username  .Values.mariadb.auth.password (include "mariadb.primary.fullname" .Subcharts.mariadb) 3306  .Values.mariadb.auth.database }}
             - name: NODE_ENV
               value: production
             - name: FRONTEND_URL
