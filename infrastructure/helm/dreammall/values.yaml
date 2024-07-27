@@ -2,6 +2,11 @@ image:
   pullPolicy: Always
 
 dreammall:
+  ingress:
+    annotations:
+      # edit this manually to letsencrypt-prod as soon as you're ready
+      cert-manager.io/issuer: letsencrypt-staging
+
   domain: dreammall.roschaefer.de
 
   presenter:
@@ -47,19 +52,6 @@ authentik:
 
   worker:
     env: []
-
-  server:
-    ingress:
-      enabled: true
-      annotations:
-        # edit this manually to letsencrypt-prod as soon as you're ready
-        cert-manager.io/issuer: letsencrypt-staging
-      hosts:
-        - "auth.dreammall.roschaefer.de"
-      tls:
-        - hosts:
-          - "auth.dreammall.roschaefer.de"
-          secretName: dreammall-authentik-letsencrypt-tls
 
   authentik:
     secret_key:

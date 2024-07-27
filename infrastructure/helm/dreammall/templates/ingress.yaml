@@ -1,29 +1,30 @@
 ---
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: stripprefix
-spec:
-  stripPrefix:
-    prefixes:
-      - /api
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: dreammall-ingress
   annotations:
-    # edit this manually wtith `kubectl edit ingress dreammall-ingress` to letsencrypt-prod as soon as you're ready
-    cert-manager.io/issuer: letsencrypt-staging
-    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Release.Namespace }}-stripprefix@kubernetescrd"
+    cert-manager.io/issuer: {{ index .Values.dreammall.ingress.annotations "cert-manager.io/issuer" | quote }}
 spec:
   tls:
   - hosts:
+      - "auth.{{ .Values.dreammall.domain }}"
       - "app.{{ .Values.dreammall.domain }}"
       - "admin.{{ .Values.dreammall.domain }}"
       - "{{ .Values.dreammall.domain }}"
     secretName: dreammall-letsencrypt-tls
   rules:
+  - host: "auth.{{ .Values.dreammall.domain }}"
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ template "authentik.server.fullname" .Subcharts.authentik }}
+              port:
+                number: 80
+
   - host: "app.{{ .Values.dreammall.domain }}"
     http:
       paths:
@@ -56,6 +57,29 @@ spec:
             name: presenter
             port:
               number: 3001
+
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: stripprefix
+spec:
+  stripPrefix:
+    prefixes:
+      - /api
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dreammall-ingress-paths
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Release.Namespace }}-stripprefix@kubernetescrd"
+spec:
+  rules:
+  - host: {{ .Values.dreammall.domain | quote }}
+    http:
+      paths:
       - path: /api
         pathType: Prefix
         backend:
