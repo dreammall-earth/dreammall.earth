@@ -31,7 +31,6 @@
   outline: none;
   border: 1px solid transparent;
   border-radius: 80px;
-  background: linear-gradient(white, white) padding-box, linear-gradient(90deg, rgba(240, 150, 48, 1) 0%, rgba(44, 165, 177, 1) 100%) border-box;
 }
 
 /* sign in button */
