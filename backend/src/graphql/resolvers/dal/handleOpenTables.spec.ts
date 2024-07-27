@@ -1,13 +1,13 @@
 import { getMeetings } from '#api/BBB'
 import { prisma } from '#src/prisma'
 
-import { handleOpenRooms } from './handleOpenRooms'
+import { handleOpenTables } from './handleOpenTables'
 
 jest.mock('#api/BBB')
 
 const getMeetingsMock = jest.mocked(getMeetings)
 
-describe('handleOpenRooms', () => {
+describe('handleOpenTables', () => {
   describe('two meetings in db', () => {
     beforeAll(async () => {
       await prisma.meeting.create({
@@ -85,7 +85,7 @@ describe('handleOpenRooms', () => {
           },
         ])
 
-        await handleOpenRooms()
+        await handleOpenTables()
       })
 
       it('does not alter the DB', async () => {
@@ -138,7 +138,7 @@ describe('handleOpenRooms', () => {
           },
         ])
 
-        await handleOpenRooms()
+        await handleOpenTables()
       })
 
       it('resets the missing meeting in DB', async () => {
@@ -165,7 +165,7 @@ describe('handleOpenRooms', () => {
       beforeEach(async () => {
         getMeetingsMock.mockResolvedValue([])
 
-        await handleOpenRooms()
+        await handleOpenTables()
       })
 
       it('resets the meetings in DB', async () => {

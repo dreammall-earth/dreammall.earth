@@ -4,35 +4,35 @@ import { describe, it, expect, beforeEach } from 'vitest'
 
 import {
   mockClient,
-  openRoomsQueryMock,
-  updateOpenRoomsSubscriptionMock,
+  openTablesQueryMock,
+  updateOpenTablesSubscriptionMock,
 } from '#tests/mock.apolloClient'
 
-import { useRoomsStore } from './roomsStore'
+import { useTablesStore } from './tablesStore'
 
 provideApolloClient(mockClient)
 
-describe('Rooms Store', () => {
+describe('Tables Store', () => {
   setActivePinia(createPinia())
-  const roomsStore = useRoomsStore()
+  const tablesStore = useTablesStore()
 
   describe('defaults', () => {
     it('has defaults set correctly', () => {
-      expect(roomsStore.rooms).toEqual([])
-      expect(roomsStore.getRooms).toEqual([])
+      expect(tablesStore.tables).toEqual([])
+      expect(tablesStore.getTables).toEqual([])
     })
   })
 
   describe('api', () => {
     it('queries the API', () => {
-      expect(openRoomsQueryMock).toHaveBeenCalledTimes(1)
+      expect(openTablesQueryMock).toHaveBeenCalledTimes(1)
     })
 
     describe('subscription', () => {
       beforeEach(() => {
-        updateOpenRoomsSubscriptionMock.next({
+        updateOpenTablesSubscriptionMock.next({
           data: {
-            updateOpenRooms: [
+            updateOpenTables: [
               {
                 meetingID: 'my-meeting',
                 meetingName: 'My meeting',
@@ -51,7 +51,7 @@ describe('Rooms Store', () => {
       })
 
       it('updates the store', () => {
-        expect(roomsStore.getRooms).toEqual([
+        expect(tablesStore.getTables).toEqual([
           {
             meetingID: 'my-meeting',
             meetingName: 'My meeting',
@@ -69,9 +69,9 @@ describe('Rooms Store', () => {
     })
   })
 
-  describe('set rooms action', () => {
+  describe('set tables action', () => {
     it('updates the store', () => {
-      roomsStore.setRooms([
+      tablesStore.setTables([
         {
           meetingID: 'my-meeting',
           meetingName: 'my meeting',
@@ -85,7 +85,7 @@ describe('Rooms Store', () => {
           joinLink: 'https://my.link',
         },
       ])
-      expect(roomsStore.rooms).toEqual([
+      expect(tablesStore.tables).toEqual([
         {
           meetingID: 'my-meeting',
           meetingName: 'my meeting',

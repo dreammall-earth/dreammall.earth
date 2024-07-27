@@ -1,1 +1,1 @@
-export default '/join-room/@id'
+export default '/join-table/@id'

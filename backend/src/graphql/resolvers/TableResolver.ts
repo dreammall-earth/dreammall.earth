@@ -15,23 +15,23 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo, AttendeeRole } from '#api/BBB'
 import { CONFIG } from '#config/config'
-import { OpenRoom, Room } from '#models/RoomModel'
+import { OpenTable, Table } from '#models/TableModel'
 import logger from '#src/logger'
 import { prisma, UserWithMeeting, UsersWithMeetings } from '#src/prisma'
 import { Context } from '#src/server/context'
 
 @Resolver()
-export class RoomResolver {
+export class TableResolver {
   @Authorized()
-  @Mutation(() => Room)
-  async createMyRoom(
+  @Mutation(() => Table)
+  async createMyTable(
     @Arg('name') name: string,
     @Arg('isPublic') isPublic: boolean,
     @Ctx() context: Context,
     // eslint-disable-next-line type-graphql/wrong-decorator-signature
     @Arg('userIds', () => [Int], { nullable: 'itemsAndList' }) // eslint-disable-next-line type-graphql/invalid-nullable-input-type
     userIds?: number[] | null | undefined,
-  ): Promise<Room> {
+  ): Promise<Table> {
     const { user } = context
     if (!user) throw new Error('User not found!')
 
@@ -93,19 +93,19 @@ export class RoomResolver {
       })) as UsersWithMeetings[]
     }
 
-    return new Room(meeting, usersInMeetings)
+    return new Table(meeting, usersInMeetings)
   }
 
   @Authorized()
-  @Mutation(() => Room)
-  async updateMyRoom(
+  @Mutation(() => Table)
+  async updateMyTable(
     @Arg('name') name: string,
     @Arg('isPublic') isPublic: boolean,
     @Ctx() context: Context,
     // eslint-disable-next-line type-graphql/wrong-decorator-signature
     @Arg('userIds', () => [Int], { nullable: 'itemsAndList' }) // eslint-disable-next-line type-graphql/invalid-nullable-input-type
     userIds?: number[] | null | undefined,
-  ): Promise<Room> {
+  ): Promise<Table> {
     const { user } = context
     if (!user) throw new Error('User not found!')
 
@@ -154,12 +154,12 @@ export class RoomResolver {
       })) as UsersWithMeetings[]
     }
 
-    return new Room(meeting, usersInMeetings)
+    return new Table(meeting, usersInMeetings)
   }
 
   @Authorized()
   @Mutation(() => String)
-  async joinMyRoom(@Ctx() context: Context): Promise<string> {
+  async joinMyTable(@Ctx() context: Context): Promise<string> {
     const { user } = context
     if (!user) throw new Error('User not found!')
 
@@ -243,26 +243,26 @@ export class RoomResolver {
   }
 
   @Authorized()
-  @Query(() => [OpenRoom])
-  async openRooms(@Ctx() context: Context): Promise<OpenRoom[]> {
+  @Query(() => [OpenTable])
+  async openTables(@Ctx() context: Context): Promise<OpenTable[]> {
     const { user } = context
     if (!user) return []
     const meetings = await getMeetings()
 
-    return openRoomsFromOpenMeetings(meetings, user.name)
+    return openTablesFromOpenMeetings(meetings, user.name)
   }
 
   @Query(() => String)
-  async joinRoom(
+  async joinTable(
     @Arg('userName') userName: string,
-    @Arg('roomId', () => Int) roomId: number,
+    @Arg('tableId', () => Int) tableId: number,
   ): Promise<string> {
     const meeting = await prisma.meeting.findUnique({
       where: {
-        id: roomId,
+        id: tableId,
       },
     })
-    if (!meeting) throw new Error('Room does not exist')
+    if (!meeting) throw new Error('Table does not exist')
     return joinMeetingLink({
       fullName: userName,
       meetingID: meeting.meetingID,
@@ -270,14 +270,14 @@ export class RoomResolver {
     })
   }
 
-  @Subscription(() => [OpenRoom], {
+  @Subscription(() => [OpenTable], {
     topics: 'OPEN_ROOM_SUBSCRIPTION',
   })
-  async updateOpenRooms(
+  async updateOpenTables(
     @Root() meetings: MeetingInfo[],
     @Arg('username') username: string,
-  ): Promise<OpenRoom[]> {
-    return openRoomsFromOpenMeetings(meetings, username)
+  ): Promise<OpenTable[]> {
+    return openTablesFromOpenMeetings(meetings, username)
   }
 
   /*
@@ -293,10 +293,10 @@ export class RoomResolver {
   */
 }
 
-const openRoomsFromOpenMeetings = async (
+const openTablesFromOpenMeetings = async (
   meetings: MeetingInfo[],
   username: string,
-): Promise<OpenRoom[]> => {
+): Promise<OpenTable[]> => {
   if (meetings.length) {
     const dbMeetingsPwMap = await prisma.meeting.findMany({
       where: {
@@ -309,7 +309,7 @@ const openRoomsFromOpenMeetings = async (
     })
     return meetings.map((m: MeetingInfo) => {
       const pw = dbMeetingsPwMap.find((pw) => pw.meetingID === m.meetingID)
-      return new OpenRoom(
+      return new OpenTable(
         m,
         joinMeetingLink({
           fullName: username,

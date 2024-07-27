@@ -23,7 +23,7 @@
       label="New Table"
       size="auto"
       icon="plus"
-      @click="enterRoom"
+      @click="enterTable"
       >{{ $t('buttons.newTable') }}
     </MainButton>
     <MainButton
@@ -44,35 +44,35 @@ import { navigate } from 'vike/client/router'
 import Divider from '#assets/img/divider.svg'
 import Triangle from '#assets/img/triangle.svg'
 import MainButton from '#components/buttons/MainButton.vue'
-import { JoinMyRoomMutationResult, joinMyRoomMutation } from '#mutations/joinMyRoomMutation'
+import { JoinMyTableMutationResult, joinMyTableMutation } from '#mutations/joinMyTableMutation'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
-import { useActiveRoomStore } from '#stores/activeRoomStore'
+import { useActiveTableStore } from '#stores/activeTableStore'
 
 defineProps<{
   isVisible: boolean
 }>()
 
-const activeRoomStore = useActiveRoomStore()
+const activeTableStore = useActiveTableStore()
 
-const { mutate: joinMyRoomMutationResult } = useMutation<JoinMyRoomMutationResult>(
-  joinMyRoomMutation,
+const { mutate: joinMyTableMutationResult } = useMutation<JoinMyTableMutationResult>(
+  joinMyTableMutation,
   {
     fetchPolicy: 'no-cache',
   },
 )
 
-const enterRoom = async () => {
+const enterTable = async () => {
   try {
-    const result = await joinMyRoomMutationResult()
+    const result = await joinMyTableMutationResult()
 
-    if (result?.data?.joinMyRoom) {
-      activeRoomStore.setActiveRoom(result.data.joinMyRoom)
-      navigate('/room/')
+    if (result?.data?.joinMyTable) {
+      activeTableStore.setActiveTable(result.data.joinMyTable)
+      navigate('/table/')
     } else {
-      GlobalErrorHandler.error('No room found')
+      GlobalErrorHandler.error('No table found')
     }
   } catch (error) {
-    GlobalErrorHandler.error('Error opening room', error)
+    GlobalErrorHandler.error('Error opening table', error)
   }
 }
 </script>

@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`JoinRoomPage > renders 1`] = `
+exports[`JoinTablePage > renders 1`] = `
 <div
   class="v-application v-theme--light v-layout v-layout--full-height v-locale--is-ltr"
 >
@@ -20,7 +20,7 @@ exports[`JoinRoomPage > renders 1`] = `
           <h2
             class="section-headline"
           >
-            $t('joinRoomPage.header')
+            $t('joinTablePage.header')
           </h2>
           <div
             class="mt-8 d-flex justify-center"

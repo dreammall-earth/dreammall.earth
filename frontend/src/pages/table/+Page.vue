@@ -1,7 +1,7 @@
 <template>
   <DefaultLayout>
     <div class="container">
-      <EmbeddedRoom :url="roomUrl" />
+      <EmbeddedTable :url="tableUrl" />
     </div>
   </DefaultLayout>
 </template>
@@ -9,13 +9,13 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 
-import EmbeddedRoom from '#components/embedded-room/EmbeddedRoom.vue'
+import EmbeddedTable from '#components/embedded-table/EmbeddedTable.vue'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
-import { useActiveRoomStore } from '#stores/activeRoomStore'
+import { useActiveTableStore } from '#stores/activeTableStore'
 
-const activeRoomStore = useActiveRoomStore()
+const activeTableStore = useActiveTableStore()
 
-const { activeRoom: roomUrl } = storeToRefs(activeRoomStore)
+const { activeTable: tableUrl } = storeToRefs(activeTableStore)
 </script>
 
 <style scoped lang="scss">

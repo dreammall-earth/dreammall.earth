@@ -6,7 +6,7 @@ import Page from './+Page.vue'
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 const meta = {
-  title: 'Pages/Room',
+  title: 'Pages/Table',
   component: Page as SBComp,
   tags: ['autodocs'],
   argTypes: {},

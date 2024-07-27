@@ -11,7 +11,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   /**
-   * The url of the BigBlueButton meeting room (CSP should allow only specific hosts)
+   * The url of the BigBlueButton meeting table (CSP should allow only specific hosts)
    */
   url: string | null
 }>()

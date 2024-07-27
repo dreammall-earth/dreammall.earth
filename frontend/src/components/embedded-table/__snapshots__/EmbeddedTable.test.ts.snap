@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`EmbeddedRoom > renders 1`] = `
+exports[`EmbeddedTable > renders 1`] = `
 <iframe
   allow="camera;microphone;fullscreen;display-capture *;"
   height="100%"

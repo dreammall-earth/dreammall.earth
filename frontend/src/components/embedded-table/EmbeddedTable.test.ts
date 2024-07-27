@@ -2,16 +2,16 @@ import { mount } from '@vue/test-utils'
 import { navigate } from 'vike/client/router'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 
-import EmbeddedRoom from './EmbeddedRoom.vue'
+import EmbeddedTable from './EmbeddedTable.vue'
 
 vi.mock('vike/client/router')
 vi.mocked(navigate).mockResolvedValue()
 
-describe('EmbeddedRoom', () => {
+describe('EmbeddedTable', () => {
   const testUrl = 'https://dreammall.earth'
 
   const Wrapper = () => {
-    return mount(EmbeddedRoom, { props: { url: testUrl } })
+    return mount(EmbeddedTable, { props: { url: testUrl } })
   }
   let wrapper: ReturnType<typeof Wrapper>
 

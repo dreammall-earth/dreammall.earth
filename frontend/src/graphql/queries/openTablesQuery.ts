@@ -1,8 +1,8 @@
 import { gql } from 'graphql-tag'
 
-export const openRoomsQuery = gql`
+export const openTablesQuery = gql`
   query {
-    openRooms {
+    openTables {
       meetingID
       meetingName
       startTime

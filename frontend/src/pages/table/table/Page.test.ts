@@ -3,18 +3,18 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { useActiveRoomStore } from '#stores/activeRoomStore'
+import { useActiveTableStore } from '#stores/activeTableStore'
 
-import RoomPage from './+Page.vue'
+import TablePage from './+Page.vue'
 import { title } from './+title'
 
-const activeRoomStore = useActiveRoomStore()
+const activeTableStore = useActiveTableStore()
 
-describe('Room Page', () => {
+describe('Table Page', () => {
   const Wrapper = () => {
     return mount(VApp, {
       slots: {
-        default: h(RoomPage as Component),
+        default: h(TablePage as Component),
       },
     })
   }
@@ -33,15 +33,15 @@ describe('Room Page', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 
-  describe('active room store updates', () => {
+  describe('active table store updates', () => {
     beforeEach(() => {
-      activeRoomStore.setActiveRoom('https://my-room.link')
+      activeTableStore.setActiveTable('https://my-table.link')
     })
 
     it('shows iframe with correct url', async () => {
       await flushPromises()
       expect(wrapper.find('iframe').exists()).toBe(true)
-      expect(wrapper.find('iframe').attributes('src')).toBe('https://my-room.link')
+      expect(wrapper.find('iframe').attributes('src')).toBe('https://my-table.link')
     })
   })
 })

@@ -1,7 +1,7 @@
 import { gql } from 'graphql-tag'
 
-export const joinRoomQuery = gql`
-  query ($roomId: Int!, $userName: String!) {
-    joinRoom(roomId: $roomId, userName: $userName)
+export const joinTableQuery = gql`
+  query ($tableId: Int!, $userName: String!) {
+    joinTable(tableId: $tableId, userName: $userName)
   }
 `

@@ -8,7 +8,7 @@ import { Attendee } from './AttendeeModel'
 import { UserInMeeting } from './UserInMeetingModel'
 
 @ObjectType()
-export class Room {
+export class Table {
   constructor(meeting: Meeting, users: UsersWithMeetings[]) {
     this.id = meeting.id
     this.name = meeting.name
@@ -30,7 +30,7 @@ export class Room {
 }
 
 @ObjectType()
-export class OpenRoom {
+export class OpenTable {
   constructor(meeting: MeetingInfo, link: string) {
     this.meetingID = meeting.meetingID
     this.meetingName = meeting.meetingName

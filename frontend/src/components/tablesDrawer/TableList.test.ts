@@ -5,7 +5,7 @@ import { vi, describe, it, expect, beforeEach } from 'vitest'
 import { h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { useActiveRoomStore } from '#stores/activeRoomStore'
+import { useActiveTableStore } from '#stores/activeTableStore'
 
 import TableList from './TableList.vue'
 
@@ -62,11 +62,11 @@ describe('TableList', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 
-  it('sets active room', async () => {
-    const setActiveRoomSpy = vi.spyOn(useActiveRoomStore(), 'setActiveRoom')
+  it('sets active table', async () => {
+    const setActiveTableSpy = vi.spyOn(useActiveTableStore(), 'setActiveTable')
     await wrapper.find('.table .action').trigger('click')
 
-    expect(setActiveRoomSpy).toHaveBeenCalledWith(testTables[0].joinLink)
+    expect(setActiveTableSpy).toHaveBeenCalledWith(testTables[0].joinLink)
   })
 
   describe('when a table is clicked', () => {
@@ -76,13 +76,13 @@ describe('TableList', () => {
       await flushPromises()
     })
 
-    it('emit event "openRoom"', () => {
+    it('emit event "openTable"', () => {
       const tableList = wrapper.findComponent(TableList)
-      expect(tableList.emitted('openRoom')).toBeTruthy()
+      expect(tableList.emitted('openTable')).toBeTruthy()
     })
 
-    it('navigates to opened Room', () => {
-      expect(navigate).toHaveBeenCalledWith('/room/')
+    it('navigates to opened Table', () => {
+      expect(navigate).toHaveBeenCalledWith('/table/')
     })
   })
 })

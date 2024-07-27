@@ -2,9 +2,9 @@
   <div class="d-flex bg-white text-center pa-6 v-container">
     <v-row class="section-header newsletter-section">
       <v-col>
-        <h2 class="section-headline">{{ $t('joinRoomPage.header') }}</h2>
+        <h2 class="section-headline">{{ $t('joinTablePage.header') }}</h2>
         <div class="mt-8 d-flex justify-center">
-          <v-form ref="form" class="w-25" @submit.prevent="getRoomLink">
+          <v-form ref="form" class="w-25" @submit.prevent="getTableLink">
             <v-text-field
               id="userName"
               v-model="userName"
@@ -36,22 +36,22 @@ import { ref } from 'vue'
 import MainButton from '#components/buttons/MainButton.vue'
 import { usePageContext } from '#context/usePageContext'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
-import { joinRoomQuery } from '#queries/joinRoomQuery'
+import { joinTableQuery } from '#queries/joinTableQuery'
 
 const pageContext = usePageContext()
-const roomId = Number(pageContext.routeParams?.id)
+const tableId = Number(pageContext.routeParams?.id)
 const userName = ref('')
 
 const form = ref<HTMLFormElement>()
 const {
-  result: joinRoomQueryResult,
-  refetch: joinRoomQueryRefetch,
+  result: joinTableQueryResult,
+  refetch: joinTableQueryRefetch,
   loading,
 } = useQuery(
-  joinRoomQuery,
+  joinTableQuery,
   {
     userName: userName.value,
-    roomId,
+    tableId,
   },
   {
     prefetch: false,
@@ -59,17 +59,17 @@ const {
   },
 )
 
-const getRoomLink = async () => {
+const getTableLink = async () => {
   try {
-    await joinRoomQueryRefetch({
+    await joinTableQueryRefetch({
       userName: userName.value,
-      roomId,
+      tableId,
     })
-    if (joinRoomQueryResult.value) {
-      window.location.href = joinRoomQueryResult.value.joinRoom
+    if (joinTableQueryResult.value) {
+      window.location.href = joinTableQueryResult.value.joinTable
     }
   } catch (error) {
-    GlobalErrorHandler.error('room link not found', error)
+    GlobalErrorHandler.error('table link not found', error)
   }
 }
 </script>

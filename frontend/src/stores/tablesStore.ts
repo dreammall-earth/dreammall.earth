@@ -2,15 +2,15 @@ import { useQuery, useSubscription } from '@vue/apollo-composable'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { computed, ref, watch } from 'vue'
 
-import { openRoomsQuery } from '#src/graphql/queries/openRoomsQuery'
+import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
 import { useAuthStore } from '#stores/authStore'
-import { updateOpenRoomsSubscription } from '#subscriptions/updateOpenRoomsSubscription'
+import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 type Attendee = {
   fullName: string
 }
 
-export type Room = {
+export type Table = {
   meetingID: string
   meetingName: string
   startTime: string
@@ -19,15 +19,15 @@ export type Room = {
   joinLink: string
 }
 
-export const useRoomsStore = defineStore(
-  'rooms',
+export const useTablesStore = defineStore(
+  'tables',
   () => {
     const authStore = useAuthStore()
 
     const name = authStore.user?.profile.name
 
-    const { result: openRoomsQueryResult, loading } = useQuery(
-      openRoomsQuery,
+    const { result: openTablesQueryResult, loading } = useQuery(
+      openTablesQuery,
       {},
       {
         prefetch: false,
@@ -35,34 +35,34 @@ export const useRoomsStore = defineStore(
       },
     )
 
-    watch(openRoomsQueryResult, (data: { openRooms: Room[] }) => {
-      setRooms(data.openRooms)
+    watch(openTablesQueryResult, (data: { openTables: Table[] }) => {
+      setTables(data.openTables)
     })
 
-    const { result: updateOpenRoomsSubscriptionResult } = useSubscription(
-      updateOpenRoomsSubscription,
+    const { result: updateOpenTablesSubscriptionResult } = useSubscription(
+      updateOpenTablesSubscription,
       { username: name || 'Unknown User' },
       { fetchPolicy: 'no-cache' },
     )
 
-    watch(updateOpenRoomsSubscriptionResult, (data: { updateOpenRooms: Room[] }) => {
-      setRooms(data.updateOpenRooms)
+    watch(updateOpenTablesSubscriptionResult, (data: { updateOpenTables: Table[] }) => {
+      setTables(data.updateOpenTables)
     })
 
-    const rooms = ref<Room[]>([])
+    const tables = ref<Table[]>([])
 
-    const getRooms = computed(() => rooms.value)
+    const getTables = computed(() => tables.value)
 
     const isLoading = computed(() => loading)
 
-    const setRooms = (newRooms: Room[]) => {
-      rooms.value = newRooms
+    const setTables = (newTables: Table[]) => {
+      tables.value = newTables
     }
 
     return {
-      rooms,
-      setRooms,
-      getRooms,
+      tables,
+      setTables,
+      getTables,
       isLoading,
     }
   },
@@ -72,5 +72,5 @@ export const useRoomsStore = defineStore(
 )
 
 if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useRoomsStore, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(useTablesStore, import.meta.hot))
 }

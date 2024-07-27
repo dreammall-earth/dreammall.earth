@@ -109,7 +109,7 @@ describe('UserResolver', () => {
     id
     name
     username
-    room {
+    table {
       id
       name
       public
@@ -149,8 +149,8 @@ describe('UserResolver', () => {
     describe('authenticated', () => {
       let userId: number | undefined
 
-      describe('no room', () => {
-        it('returns the user without room', async () => {
+      describe('no table', () => {
+        it('returns the user without table', async () => {
           const user = await prisma.user.findFirst()
           userId = user?.id
           const response = await testServer.executeOperation(
@@ -174,7 +174,7 @@ describe('UserResolver', () => {
                     id: expect.any(Number),
                     name: 'User',
                     username: 'mockedUser',
-                    room: null,
+                    table: null,
                   },
                 },
                 errors: undefined,
@@ -184,7 +184,7 @@ describe('UserResolver', () => {
         })
       })
 
-      describe('with public room', () => {
+      describe('with public table', () => {
         beforeAll(async () => {
           await prisma.user.update({
             where: { id: userId },
@@ -200,7 +200,7 @@ describe('UserResolver', () => {
           })
         })
 
-        it('returns the user with room', async () => {
+        it('returns the user with table', async () => {
           const response = await testServer.executeOperation(
             {
               query,
@@ -222,7 +222,7 @@ describe('UserResolver', () => {
                     id: expect.any(Number),
                     name: 'User',
                     username: 'mockedUser',
-                    room: {
+                    table: {
                       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                       id: expect.any(Number),
                       name: 'My Meeting',
@@ -238,7 +238,7 @@ describe('UserResolver', () => {
         })
       })
 
-      describe('with private room', () => {
+      describe('with private table', () => {
         let meetingId: number | undefined
 
         beforeAll(async () => {
@@ -303,7 +303,7 @@ describe('UserResolver', () => {
           })
         })
 
-        it('returns the user with room and users', async () => {
+        it('returns the user with table and users', async () => {
           const response = await testServer.executeOperation(
             {
               query,
@@ -325,7 +325,7 @@ describe('UserResolver', () => {
                     id: expect.any(Number),
                     name: 'User',
                     username: 'mockedUser',
-                    room: {
+                    table: {
                       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                       id: expect.any(Number),
                       name: 'My Meeting',

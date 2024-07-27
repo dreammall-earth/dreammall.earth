@@ -4,26 +4,26 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { joinRoomQuery } from '#queries/joinRoomQuery'
+import { joinTableQuery } from '#queries/joinTableQuery'
 import { mockClient } from '#tests/mock.apolloClient'
 import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
-import JoinRoomPage from './+Page.vue'
+import JoinTablePage from './+Page.vue'
 import Route from './+route'
 import { title } from './+title'
 
-const joinRoomQueryMock = vi.fn()
+const joinTableQueryMock = vi.fn()
 
 mockClient.setRequestHandler(
-  joinRoomQuery,
-  joinRoomQueryMock.mockResolvedValue({ data: { joinRoom: 'http://some.url' } }),
+  joinTableQuery,
+  joinTableQueryMock.mockResolvedValue({ data: { joinTable: 'http://some.url' } }),
 )
 
-describe('JoinRoomPage', () => {
+describe('JoinTablePage', () => {
   const Wrapper = () => {
     return mount(VApp, {
       slots: {
-        default: h(JoinRoomPage as Component),
+        default: h(JoinTablePage as Component),
       },
     })
   }
@@ -34,7 +34,7 @@ describe('JoinRoomPage', () => {
     wrapper = Wrapper()
   })
 
-  it('returns join Room title', () => {
+  it('returns join Table title', () => {
     expect(title()).toBe('Raum beitreten')
   })
 
@@ -42,8 +42,8 @@ describe('JoinRoomPage', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 
-  it('has roomID as param', () => {
-    expect(Route).toBe('/join-room/@id')
+  it('has tableID as param', () => {
+    expect(Route).toBe('/join-table/@id')
   })
 
   describe('Api', () => {
@@ -53,34 +53,34 @@ describe('JoinRoomPage', () => {
       await wrapper.find('form').trigger('submit')
     })
 
-    it('calls JoinRoom query', () => {
+    it('calls JoinTable query', () => {
       // eslint-disable-next-line vitest/prefer-called-with
-      expect(joinRoomQueryMock).toHaveBeenCalled()
+      expect(joinTableQueryMock).toHaveBeenCalled()
     })
 
-    describe('Room Link returned', () => {
+    describe('Table Link returned', () => {
       beforeEach(async () => {
-        joinRoomQueryMock.mockResolvedValue({ data: { joinRoom: 'http://meinlink.de' } })
+        joinTableQueryMock.mockResolvedValue({ data: { joinTable: 'http://meinlink.de' } })
         vi.clearAllMocks()
         await wrapper.find('form').trigger('submit')
       })
 
-      it('Redirects to room Link', () => {
+      it('Redirects to table Link', () => {
         expect(global.window.location.href).toBe('http://meinlink.de/')
       })
     })
 
     describe('Error returned', () => {
       beforeEach(async () => {
-        joinRoomQueryMock.mockRejectedValue({ message: 'autsch' })
+        joinTableQueryMock.mockRejectedValue({ message: 'autsch' })
         await flushPromises()
         vi.clearAllMocks()
         await wrapper.find('form').trigger('submit')
       })
 
-      it('logs Room not found', () => {
+      it('logs Table not found', () => {
         expect(errorHandlerSpy).toHaveBeenCalledWith(
-          'room link not found',
+          'table link not found',
           new ApolloError({ errorMessage: 'autsch' }),
         )
       })

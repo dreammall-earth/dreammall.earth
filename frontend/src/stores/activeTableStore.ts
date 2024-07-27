@@ -1,21 +1,21 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
-export const useActiveRoomStore = defineStore(
-  'activeRoom',
+export const useActiveTableStore = defineStore(
+  'activeTable',
   () => {
-    const activeRoom = ref<string | null>(null)
+    const activeTable = ref<string | null>(null)
 
-    const getActiveRoom = computed(() => activeRoom.value)
+    const getActiveTable = computed(() => activeTable.value)
 
-    const setActiveRoom = (room: string | null) => {
-      activeRoom.value = room
+    const setActiveTable = (table: string | null) => {
+      activeTable.value = table
     }
 
     return {
-      activeRoom,
-      setActiveRoom,
-      getActiveRoom,
+      activeTable,
+      setActiveTable,
+      getActiveTable,
     }
   },
   {
@@ -24,5 +24,5 @@ export const useActiveRoomStore = defineStore(
 )
 
 if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useActiveRoomStore, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(useActiveTableStore, import.meta.hot))
 }

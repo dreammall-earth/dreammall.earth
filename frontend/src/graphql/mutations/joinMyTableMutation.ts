@@ -1,11 +1,11 @@
 import { gql } from 'graphql-tag'
 
-export const joinMyRoomMutation = gql`
+export const joinMyTableMutation = gql`
   mutation {
-    joinMyRoom
+    joinMyTable
   }
 `
 
-export type JoinMyRoomMutationResult = {
-  joinMyRoom: string
+export type JoinMyTableMutationResult = {
+  joinMyTable: string
 }

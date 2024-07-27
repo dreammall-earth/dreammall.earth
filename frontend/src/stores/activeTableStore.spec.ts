@@ -1,23 +1,23 @@
 import { setActivePinia, createPinia } from 'pinia'
 import { describe, it, expect } from 'vitest'
 
-import { useActiveRoomStore } from './activeRoomStore'
+import { useActiveTableStore } from './activeTableStore'
 
-describe('Active Room Store', () => {
+describe('Active Table Store', () => {
   setActivePinia(createPinia())
-  const activeRoomStore = useActiveRoomStore()
+  const activeTableStore = useActiveTableStore()
 
   describe('defaults', () => {
     it('has defaults set correctly', () => {
-      expect(activeRoomStore.activeRoom).toBeNull()
-      expect(activeRoomStore.getActiveRoom).toBeNull()
+      expect(activeTableStore.activeTable).toBeNull()
+      expect(activeTableStore.getActiveTable).toBeNull()
     })
   })
 
-  describe('set active room action', () => {
+  describe('set active table action', () => {
     it('updates the store', () => {
-      activeRoomStore.setActiveRoom('https://link-to-my.room')
-      expect(activeRoomStore.activeRoom).toBe('https://link-to-my.room')
+      activeTableStore.setActiveTable('https://link-to-my.table')
+      expect(activeTableStore.activeTable).toBe('https://link-to-my.table')
     })
   })
 })

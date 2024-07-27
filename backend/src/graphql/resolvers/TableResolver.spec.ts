@@ -18,8 +18,8 @@ let testServer: ApolloServer<Context>
 
 CONFIG.FRONTEND_INVITE_LINK_URL = '/'
 
-const createMyRoomMutation = `mutation($name: String!, $isPublic: Boolean!, $userIds: [Int]) {
-  createMyRoom(name: $name, isPublic: $isPublic, userIds: $userIds) {
+const createMyTableMutation = `mutation($name: String!, $isPublic: Boolean!, $userIds: [Int]) {
+  createMyTable(name: $name, isPublic: $isPublic, userIds: $userIds) {
     id
     name
     public
@@ -32,8 +32,8 @@ const createMyRoomMutation = `mutation($name: String!, $isPublic: Boolean!, $use
   }
 }`
 
-const updateMyRoomMutation = `mutation($name: String!, $isPublic: Boolean!, $userIds: [Int]) {
-  updateMyRoom(name: $name, isPublic: $isPublic, userIds: $userIds) {
+const updateMyTableMutation = `mutation($name: String!, $isPublic: Boolean!, $userIds: [Int]) {
+  updateMyTable(name: $name, isPublic: $isPublic, userIds: $userIds) {
     id
     name
     public
@@ -46,20 +46,20 @@ const updateMyRoomMutation = `mutation($name: String!, $isPublic: Boolean!, $use
   }
 }`
 
-describe('RoomResolver', () => {
+describe('TableResolver', () => {
   beforeAll(async () => {
     testServer = await createTestServer()
   })
 
   describe('unauthorized', () => {
-    describe('createMyRoom', () => {
+    describe('createMyTable', () => {
       it('throws access denied', async () => {
         await expect(
           testServer.executeOperation(
             {
-              query: createMyRoomMutation,
+              query: createMyTableMutation,
               variables: {
-                name: 'My Room',
+                name: 'My Table',
                 isPublic: true,
                 userIds: [],
               },
@@ -83,14 +83,14 @@ describe('RoomResolver', () => {
       })
     })
 
-    describe('updateMyRoom', () => {
+    describe('updateMyTable', () => {
       it('throws access denied', async () => {
         await expect(
           testServer.executeOperation(
             {
-              query: updateMyRoomMutation,
+              query: updateMyTableMutation,
               variables: {
-                name: 'My Room',
+                name: 'My Table',
                 isPublic: true,
                 userIds: [],
               },
@@ -114,12 +114,12 @@ describe('RoomResolver', () => {
       })
     })
 
-    describe('joinMyRoom', () => {
+    describe('joinMyTable', () => {
       it('throws access denied', async () => {
         await expect(
           testServer.executeOperation(
             {
-              query: 'mutation { joinMyRoom }',
+              query: 'mutation { joinMyTable }',
             },
             { contextValue: { dataSources: { prisma } } },
           ),
@@ -140,12 +140,12 @@ describe('RoomResolver', () => {
       })
     })
 
-    describe('openRooms', () => {
+    describe('openTables', () => {
       it('throws access denied', async () => {
         await expect(
           testServer.executeOperation(
             {
-              query: 'query { openRooms { meetingName } }',
+              query: 'query { openTables { meetingName } }',
             },
             { contextValue: { dataSources: { prisma } } },
           ),
@@ -166,13 +166,13 @@ describe('RoomResolver', () => {
       })
     })
 
-    describe('joinRoom', () => {
+    describe('joinTable', () => {
       const query = `
-        query ($roomId: Int!, $userName: String!) {
-          joinRoom(roomId: $roomId, userName: $userName)
+        query ($tableId: Int!, $userName: String!) {
+          joinTable(tableId: $tableId, userName: $userName)
         }
       `
-      describe('No room in DB', () => {
+      describe('No table in DB', () => {
         it('throws an Error', async () => {
           await expect(
             testServer.executeOperation(
@@ -180,7 +180,7 @@ describe('RoomResolver', () => {
                 query,
                 variables: {
                   userName: 'Pinky Pie',
-                  roomId: 25,
+                  tableId: 25,
                 },
               },
               { contextValue: { dataSources: { prisma } } },
@@ -190,15 +190,15 @@ describe('RoomResolver', () => {
               kind: 'single',
               singleResult: {
                 data: null,
-                errors: [expect.objectContaining({ message: 'Room does not exist' })],
+                errors: [expect.objectContaining({ message: 'Table does not exist' })],
               },
             },
           })
         })
       })
 
-      describe('room in DB', () => {
-        let roomId: number
+      describe('table in DB', () => {
+        let tableId: number
         beforeEach(async () => {
           joinMeetingLinkMock.mockReturnValue('https://my-link')
           const meeting = await prisma.meeting.create({
@@ -207,21 +207,21 @@ describe('RoomResolver', () => {
               meetingID: 'Pony Ville',
             },
           })
-          roomId = meeting.id
+          tableId = meeting.id
         })
 
         afterEach(async () => {
           await prisma.meeting.deleteMany()
         })
 
-        it('returns link to room', async () => {
+        it('returns link to table', async () => {
           await expect(
             testServer.executeOperation(
               {
                 query,
                 variables: {
                   userName: 'Pinky Pie',
-                  roomId,
+                  tableId,
                 },
               },
               { contextValue: { dataSources: { prisma } } },
@@ -230,7 +230,7 @@ describe('RoomResolver', () => {
             body: {
               kind: 'single',
               singleResult: {
-                data: { joinRoom: 'https://my-link' },
+                data: { joinTable: 'https://my-link' },
 
                 errors: undefined,
               },
@@ -244,7 +244,7 @@ describe('RoomResolver', () => {
               query,
               variables: {
                 userName: 'Pinky Pie',
-                roomId,
+                tableId,
               },
             },
             { contextValue: { dataSources: { prisma } } },
@@ -260,15 +260,15 @@ describe('RoomResolver', () => {
   })
 
   describe('authorized', () => {
-    describe('createMyRoom', () => {
+    describe('createMyTable', () => {
       describe('meeting does not exist', () => {
-        it('returns Room', async () => {
+        it('returns Table', async () => {
           await expect(
             testServer.executeOperation(
               {
-                query: createMyRoomMutation,
+                query: createMyTableMutation,
                 variables: {
-                  name: 'My Room',
+                  name: 'My Table',
                   isPublic: true,
                   userIds: [],
                 },
@@ -285,10 +285,10 @@ describe('RoomResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  createMyRoom: {
+                  createMyTable: {
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     id: expect.any(Number),
-                    name: 'My Room',
+                    name: 'My Table',
                     public: true,
                     users: [],
                   },
@@ -312,7 +312,7 @@ describe('RoomResolver', () => {
               id: expect.any(Number),
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               meetingID: expect.any(String),
-              name: 'My Room',
+              name: 'My Table',
               public: true,
             },
           })
@@ -324,9 +324,9 @@ describe('RoomResolver', () => {
           await expect(
             testServer.executeOperation(
               {
-                query: createMyRoomMutation,
+                query: createMyTableMutation,
                 variables: {
-                  name: 'My Room',
+                  name: 'My Table',
                   isPublic: true,
                   userIds: [],
                 },
@@ -378,13 +378,13 @@ describe('RoomResolver', () => {
           })
         })
 
-        it('returns room with users', async () => {
+        it('returns table with users', async () => {
           await expect(
             testServer.executeOperation(
               {
-                query: createMyRoomMutation,
+                query: createMyTableMutation,
                 variables: {
-                  name: 'My Room',
+                  name: 'My Table',
                   isPublic: false,
                   userIds: [bibi?.id, peter?.id],
                 },
@@ -402,10 +402,10 @@ describe('RoomResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  createMyRoom: {
+                  createMyTable: {
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     id: expect.any(Number),
-                    name: 'My Room',
+                    name: 'My Table',
                     public: false,
                     users: [
                       {
@@ -429,7 +429,7 @@ describe('RoomResolver', () => {
       })
     })
 
-    describe('updateMyRoom', () => {
+    describe('updateMyTable', () => {
       beforeAll(async () => {
         await prisma.usersInMeetings.deleteMany()
         await prisma.meeting.deleteMany()
@@ -444,9 +444,9 @@ describe('RoomResolver', () => {
           await expect(
             testServer.executeOperation(
               {
-                query: updateMyRoomMutation,
+                query: updateMyTableMutation,
                 variables: {
-                  name: 'My Room',
+                  name: 'My Table',
                   isPublic: true,
                   userIds: [],
                 },
@@ -493,9 +493,9 @@ describe('RoomResolver', () => {
 
           await testServer.executeOperation(
             {
-              query: createMyRoomMutation,
+              query: createMyTableMutation,
               variables: {
-                name: 'My Room',
+                name: 'My Table',
                 isPublic: true,
                 userIds: [bibi?.id, peter?.id],
               },
@@ -509,13 +509,13 @@ describe('RoomResolver', () => {
           )
         })
 
-        it('returns the updated room', async () => {
+        it('returns the updated table', async () => {
           await expect(
             testServer.executeOperation(
               {
-                query: updateMyRoomMutation,
+                query: updateMyTableMutation,
                 variables: {
-                  name: 'My Updated Room',
+                  name: 'My Updated Table',
                   isPublic: true,
                 },
               },
@@ -531,10 +531,10 @@ describe('RoomResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  updateMyRoom: {
+                  updateMyTable: {
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     id: expect.any(Number),
-                    name: 'My Updated Room',
+                    name: 'My Updated Table',
                     public: true,
                     users: [],
                   },
@@ -551,13 +551,13 @@ describe('RoomResolver', () => {
       })
 
       describe('privat meeting exists', () => {
-        it('returns the updated room', async () => {
+        it('returns the updated table', async () => {
           await expect(
             testServer.executeOperation(
               {
-                query: updateMyRoomMutation,
+                query: updateMyTableMutation,
                 variables: {
-                  name: 'My Newly Updated Room',
+                  name: 'My Newly Updated Table',
                   isPublic: false,
                   userIds: [bibi?.id, peter?.id],
                 },
@@ -574,10 +574,10 @@ describe('RoomResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  updateMyRoom: {
+                  updateMyTable: {
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     id: expect.any(Number),
-                    name: 'My Newly Updated Room',
+                    name: 'My Newly Updated Table',
                     public: false,
                     users: [
                       {
@@ -601,7 +601,7 @@ describe('RoomResolver', () => {
       })
     })
 
-    describe('joinMyRoom', () => {
+    describe('joinMyTable', () => {
       beforeAll(async () => {
         await prisma.usersInMeetings.deleteMany()
         await prisma.meeting.deleteMany()
@@ -633,11 +633,11 @@ describe('RoomResolver', () => {
           })
         })
 
-        it('returns link to room', async () => {
+        it('returns link to table', async () => {
           await expect(
             testServer.executeOperation(
               {
-                query: 'mutation { joinMyRoom }',
+                query: 'mutation { joinMyTable }',
               },
               {
                 contextValue: {
@@ -652,7 +652,7 @@ describe('RoomResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  joinMyRoom: 'https://my-link',
+                  joinMyTable: 'https://my-link',
                 },
                 errors: undefined,
               },
@@ -721,11 +721,11 @@ describe('RoomResolver', () => {
           })
         })
 
-        it('returns link to room', async () => {
+        it('returns link to table', async () => {
           await expect(
             testServer.executeOperation(
               {
-                query: 'mutation { joinMyRoom }',
+                query: 'mutation { joinMyTable }',
               },
               {
                 contextValue: {
@@ -740,7 +740,7 @@ describe('RoomResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  joinMyRoom: 'https://my-link',
+                  joinMyTable: 'https://my-link',
                 },
                 errors: undefined,
               },
@@ -779,7 +779,7 @@ describe('RoomResolver', () => {
           await expect(
             testServer.executeOperation(
               {
-                query: 'mutation { joinMyRoom }',
+                query: 'mutation { joinMyTable }',
               },
               {
                 contextValue: {
@@ -806,7 +806,7 @@ describe('RoomResolver', () => {
       })
     })
 
-    describe('openRooms', () => {
+    describe('openTables', () => {
       describe('no meetings', () => {
         beforeEach(() => {
           getMeetingsMock.mockResolvedValue([])
@@ -816,7 +816,7 @@ describe('RoomResolver', () => {
           await expect(
             testServer.executeOperation(
               {
-                query: 'query { openRooms { meetingName } }',
+                query: 'query { openTables { meetingName } }',
               },
               {
                 contextValue: {
@@ -829,7 +829,7 @@ describe('RoomResolver', () => {
             body: {
               kind: 'single',
               singleResult: {
-                data: { openRooms: [] },
+                data: { openTables: [] },
                 errors: undefined,
               },
             },
@@ -875,7 +875,7 @@ describe('RoomResolver', () => {
             testServer.executeOperation(
               {
                 query:
-                  'query { openRooms { meetingName meetingID participantCount startTime joinLink attendees { fullName } } }',
+                  'query { openTables { meetingName meetingID participantCount startTime joinLink attendees { fullName } } }',
               },
               {
                 contextValue: {
@@ -889,7 +889,7 @@ describe('RoomResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  openRooms: [
+                  openTables: [
                     {
                       meetingName: 'Dreammall Entwicklung',
                       meetingID: 'Dreammall-Entwicklung',
@@ -961,13 +961,13 @@ describe('RoomResolver', () => {
           ])
         })
 
-        it('returns room with attendee', async () => {
+        it('returns table with attendee', async () => {
           jest.clearAllMocks()
           await expect(
             testServer.executeOperation(
               {
                 query:
-                  'query { openRooms { meetingName meetingID participantCount startTime joinLink attendees { fullName } } }',
+                  'query { openTables { meetingName meetingID participantCount startTime joinLink attendees { fullName } } }',
               },
               {
                 contextValue: {
@@ -981,7 +981,7 @@ describe('RoomResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  openRooms: [
+                  openTables: [
                     {
                       meetingName: 'Dreammall Entwicklung',
                       meetingID: 'Dreammall-Entwicklung',
@@ -1072,7 +1072,7 @@ describe('RoomResolver', () => {
             testServer.executeOperation(
               {
                 query:
-                  'query { openRooms { meetingName meetingID participantCount startTime joinLink attendees { fullName } } }',
+                  'query { openTables { meetingName meetingID participantCount startTime joinLink attendees { fullName } } }',
               },
               {
                 contextValue: {
@@ -1086,7 +1086,7 @@ describe('RoomResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  openRooms: [
+                  openTables: [
                     {
                       meetingName: 'Dreammall Entwicklung',
                       meetingID: 'Dreammall-Entwicklung',
