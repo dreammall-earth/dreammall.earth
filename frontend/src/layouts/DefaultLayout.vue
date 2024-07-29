@@ -27,10 +27,13 @@
         </v-col>
       </v-row>
     </v-app-bar>
-    <TablesDrawer v-model="isTablesDrawerVisible" class="hide-on-mobile" location="right" />
     <div class="page-container px-8">
       <slot />
     </div>
+    <TablesDrawer
+      v-model="isTablesDrawerVisible"
+      :location="$vuetify.display.mobile ? 'bottom' : 'right'"
+    />
     <MobileCreateButtonActions :is-visible="isButtonListVisible" />
     <TablesDrawer v-model="isTablesDrawerVisible" location="bottom" />
     <div class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none">
