@@ -1,3 +1,4 @@
+import { withApollo } from '#root/.storybook/withApollo.decorator.js'
 import { SBComp } from '#types/SBComp'
 
 import Page from './+Page.vue'
@@ -10,6 +11,7 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {},
   args: {},
+  decorators: [withApollo],
 } satisfies Meta<typeof Page>
 
 export default meta
