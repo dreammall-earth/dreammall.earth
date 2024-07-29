@@ -1,20 +1,20 @@
 import { SBComp } from '#types/SBComp'
 
-import CreateButton from './CreateButton.vue'
+import LargeDreamMallButton from './LargeDreamMallButton.vue'
 
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 // More on how to set up stories at: https://storybook.js.org/docs/vue/writing-stories/introduction
 const meta = {
-  title: 'Inputs/CreateButton',
-  component: CreateButton as SBComp,
+  title: 'Inputs/LargeDreamMallButton',
+  component: LargeDreamMallButton as SBComp,
   // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/vue/writing-docs/autodocs
   tags: ['autodocs'],
   argTypes: {
     onClick: { action: 'clicked' },
   },
   args: {}, // default value
-} satisfies Meta<typeof CreateButton>
+} satisfies Meta<typeof LargeDreamMallButton>
 
 export default meta
 type Story = StoryObj<typeof meta>
