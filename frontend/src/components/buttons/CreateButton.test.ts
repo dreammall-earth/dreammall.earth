@@ -7,8 +7,6 @@ import { joinMyTableMutation } from '#mutations/joinMyTableMutation'
 import { mockClient } from '#tests/mock.apolloClient'
 import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
-import CreateButton from './CreateButton.vue'
-
 vi.mock('vike/client/router')
 vi.mocked(navigate).mockResolvedValue()
 
@@ -18,7 +16,7 @@ mockClient.setRequestHandler(joinMyTableMutation, joinMyTableMutationMock)
 
 describe('CreateButton', () => {
   const Wrapper = () => {
-    return mount(CreateButton, {
+    return mount(null, { /// todo: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       props: {},
     })
   }
