@@ -54,21 +54,16 @@ type User = {
   }
 }
 
-// Dummy user. TODO replace by real data
-const user: User = {
-  name: 'John Doe',
-  text: 'Pushing pixels and experiences in digital products',
-  place: 'Berlin, Germany',
-  work: 'Frontend Developer at Company XY',
-  social: {
-    linkedin: 'https://www.linkedin.com/in/johndoe',
-    xing: 'https://www.xing.com/profile/John_Doe',
-    x: 'https://www.x.com/johndoe',
-  },
-}
+defineProps<{
+  user: User
+}>()
 </script>
 
 <style scoped lang="scss">
+.about-me-text {
+  overflow-wrap: break-word;
+}
+
 .details,
 .social {
   padding: 0;
