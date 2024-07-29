@@ -3,7 +3,7 @@ import { describe, it, expect, afterEach } from 'vitest'
 import { h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import MobileCreateButton from './MobileCreateButton.vue'
+import MobileCreateButton from './SmallDreamMallButton.vue'
 
 describe('MobileCreateButton', () => {
   const Wrapper = (props = { isActive: false }) => {

@@ -19,7 +19,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import MobileCreateButton from '#components/buttons/mobile-create-button/MobileCreateButton.vue'
+import MobileCreateButton from '#components/buttons/mobile-create-button/SmallDreamMallButton.vue'
 import MobileCreateButtonActions from '#components/buttons/mobile-create-button/MobileCreateButtonActions.vue'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
 

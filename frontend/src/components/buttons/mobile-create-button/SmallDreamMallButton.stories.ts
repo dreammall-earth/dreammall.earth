@@ -1,6 +1,6 @@
 import { SBComp } from '#types/SBComp'
 
-import MobileCreateButton from './MobileCreateButton.vue'
+import MobileCreateButton from './SmallDreamMallButton.vue'
 
 import type { Meta, StoryObj } from '@storybook/vue3'
 
