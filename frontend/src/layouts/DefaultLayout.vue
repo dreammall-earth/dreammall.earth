@@ -37,7 +37,7 @@
           <v-container fluid class="pa-0">
             <div class="button-wrapper">
               <LargeDreamMallButton @click="toggleButtonList" />
-              <transition-group name="fade" tag="div" class="button-list">
+              <transition-group name="fade" tag="div" class="button-list-desktop">
                 <MainButton
                   v-if="isButtonListVisible"
                   key="1"
@@ -85,11 +85,42 @@
           <v-icon icon="$camera"></v-icon>
         </Circle>
       </button>
-      <MobileCreateButton
-        class="mx-auto"
-        :is-active="isButtonListVisible"
-        @button-click="toggleButtonList"
-      />
+      <div
+        class="button-list-mobile d-md-none"
+        :class="[isButtonListVisible ? 'button-list-mobile--active' : '']"
+      >
+        <v-img class="w-100 menu-divider" :src="Divider" />
+        <v-img
+          class="w-100 menu-triangle"
+          :class="[isButtonListVisible ? 'menu-triangle--turned' : '']"
+          :src="Triangle"
+        />
+        <MainButton
+          class="assistant-button"
+          variant="border-gradient"
+          label="Assistant"
+          size="auto"
+          icon="ear-hearing"
+          >{{ $t('buttons.toAssistant') }}
+        </MainButton>
+        <MainButton
+          class="new-table-button"
+          variant="border-yellow"
+          label="New Table"
+          size="auto"
+          icon="plus"
+          @click="enterTable"
+          >{{ $t('buttons.newTable') }}
+        </MainButton>
+        <MainButton
+          class="new-project-button"
+          variant="border-blue"
+          label="New Project"
+          size="auto"
+          icon="plus"
+          >{{ $t('buttons.newProject') }}
+        </MainButton>
+      </div>
       <UserInfo class="mx-auto" />
     </div>
   </v-main>
@@ -100,10 +131,10 @@ import { useMutation } from '@vue/apollo-composable'
 import { navigate } from 'vike/client/router'
 import { ref } from 'vue'
 
+import Divider from '#assets/img/divider.svg'
+import Triangle from '#assets/img/triangle.svg'
 import LargeDreamMallButton from '#components/buttons/LargeDreamMallButton.vue'
 import MainButton from '#components/buttons/MainButton.vue'
-import MobileCreateButtonActions from '#components/buttons/mobile-create-button/MobileCreateButtonActions.vue'
-import MobileCreateButton from '#components/buttons/mobile-create-button/SmallDreamMallButton.vue'
 import Circle from '#components/menu/CircleElement.vue'
 import LightDarkSwitch from '#components/menu/LightDarkSwitch.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
@@ -209,7 +240,7 @@ const enterTable = async () => {
   justify-content: center;
 }
 
-.button-list {
+.button-list-desktop {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -242,6 +273,75 @@ const enterTable = async () => {
 
   .new-project-button {
     transition-delay: 0s;
+  }
+}
+
+.button-list-mobile {
+  --height: 220px;
+  --width: 180px;
+
+  position: fixed;
+  bottom: calc(var(--height) * -1);
+  left: calc(50% - var(--width) / 2);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  justify-content: start;
+  width: var(--width);
+  height: var(--height);
+  padding-top: 30px;
+  background: var(--v-bottom-menu-background) !important;
+  backdrop-filter: blur(20px);
+  border-radius: 30px 30px 0 0;
+  transition: bottom 0.75s;
+
+  &--active {
+    bottom: 60px;
+  }
+
+  .menu-triangle {
+    position: absolute;
+    top: -95px;
+    max-width: 10px;
+    transition:
+      0.75s transform,
+      0.75s 0.25s top;
+    transform-origin: center;
+
+    &--turned {
+      top: 10px;
+      transition:
+        0.75s rotate,
+        0.5s top;
+      transform: rotate(180deg);
+    }
+  }
+
+  .menu-divider {
+    position: absolute;
+    top: 0;
+    max-width: 60px;
+  }
+
+  .assistant-button {
+    margin: 0 40px;
+    transition-delay: 0.2s;
+
+    :deep(i) {
+      margin-right: 16px;
+    }
+  }
+
+  .new-project-button {
+    margin: 0 20px;
+    transition-delay: 0s;
+  }
+
+  .new-table-button {
+    margin: 0 20px;
+    transition-delay: 0.1s;
   }
 }
 
