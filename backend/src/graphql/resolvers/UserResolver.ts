@@ -1,4 +1,5 @@
-import { Resolver, Query, Ctx, Authorized } from 'type-graphql'
+import { Prisma } from '@prisma/client'
+import { Resolver, Query, Authorized, Ctx, Arg } from 'type-graphql'
 
 import { User, CurrentUser } from '#graphql/models/UserModel'
 import { prisma, UsersWithMeetings } from '#src/prisma'
@@ -8,8 +9,19 @@ import { Context } from '#src/server/context'
 export class UserResolver {
   @Authorized()
   @Query(() => [User])
-  async users(): Promise<User[]> {
-    return prisma.user.findMany()
+  async users(
+    @Arg('includeSelf', { nullable: true }) includeSelf: boolean = false,
+    @Ctx() context: Context,
+  ): Promise<User[]> {
+    const { user } = context
+    if (!user) return []
+    const where: Prisma.UserWhereInput = {}
+    if (!includeSelf) {
+      where.NOT = { id: user.id }
+    }
+    return prisma.user.findMany({
+      where,
+    })
   }
 
   @Authorized()

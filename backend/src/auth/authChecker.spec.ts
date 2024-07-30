@@ -28,7 +28,7 @@ jest.mock('axios', () => {
 
 let testServer: ApolloServer<Context>
 
-// uses joinMyRoom query
+// uses joinMyTable query
 describe('authChecker', () => {
   beforeAll(async () => {
     testServer = await createTestServer()
@@ -39,7 +39,7 @@ describe('authChecker', () => {
       await expect(
         testServer.executeOperation(
           {
-            query: 'mutation { joinMyRoom }',
+            query: 'mutation { joinMyTable }',
           },
           { contextValue: { dataSources: { prisma } } },
         ),
@@ -73,7 +73,7 @@ describe('authChecker', () => {
       it('resolves to "INTERNAL_SERVER_ERROR" instead of "UNAUTHENTICATED"', async () => {
         await expect(
           testServer.executeOperation(
-            { query: 'mutation { joinMyRoom }' },
+            { query: 'mutation { joinMyTable }' },
             { contextValue: { token: 'token', dataSources: { prisma: failingPrisma } } },
           ),
         ).resolves.toEqual({
@@ -87,7 +87,7 @@ describe('authChecker', () => {
                   extensions: { code: 'INTERNAL_SERVER_ERROR' },
                   locations: expect.anything(), // eslint-disable-line @typescript-eslint/no-unsafe-assignment
                   message: 'Unexpected error value: "Ouch!"',
-                  path: ['joinMyRoom'],
+                  path: ['joinMyTable'],
                 },
               ],
             },
@@ -102,7 +102,7 @@ describe('authChecker', () => {
       it('creates user in database', async () => {
         await testServer.executeOperation(
           {
-            query: 'mutation { joinMyRoom }',
+            query: 'mutation { joinMyTable }',
           },
           {
             contextValue: {
@@ -122,7 +122,8 @@ describe('authChecker', () => {
             createdAt: expect.any(Date),
             name: 'User',
             username: 'mockedUser',
-            meetingId: null,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            meetingId: expect.any(Number),
           },
         ])
       })
@@ -151,7 +152,7 @@ describe('authChecker', () => {
       it('has the same user in database', async () => {
         await testServer.executeOperation(
           {
-            query: 'mutation { joinMyRoom }',
+            query: 'mutation { joinMyTable }',
           },
           {
             contextValue: {
