@@ -31,7 +31,8 @@ export class Table {
 
 @ObjectType()
 export class OpenTable {
-  constructor(meeting: MeetingInfo, link: string) {
+  constructor(meeting: MeetingInfo, link: string, id: number) {
+    this.id = id
     this.meetingID = meeting.meetingID
     this.meetingName = meeting.meetingName
     this.startTime = meeting.startTime.toString()
@@ -45,6 +46,9 @@ export class OpenTable {
     this.joinLink = link
   }
 
+  @Field(() => Int)
+  id: number
+  
   @Field()
   meetingID: string
 

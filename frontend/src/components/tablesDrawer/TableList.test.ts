@@ -13,6 +13,7 @@ vi.mock('vike/client/router')
 
 const testTables = [
   {
+    id: 69,
     meetingID: 'my-meeting',
     meetingName: 'my meeting',
     startTime: '1234',
@@ -25,6 +26,7 @@ const testTables = [
     joinLink: 'https://my.link',
   },
   {
+    id: 77,
     meetingID: 'my-meeting-2',
     meetingName: 'my meeting',
     startTime: '1234',
@@ -62,13 +64,6 @@ describe('TableList', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 
-  it('sets active table', async () => {
-    const setActiveTableSpy = vi.spyOn(useActiveTableStore(), 'setActiveTable')
-    await wrapper.find('.table .action').trigger('click')
-
-    expect(setActiveTableSpy).toHaveBeenCalledWith(testTables[0].joinLink)
-  })
-
   describe('when a table is clicked', () => {
     beforeEach(async () => {
       wrapper = Wrapper()
@@ -82,7 +77,7 @@ describe('TableList', () => {
     })
 
     it('navigates to opened Table', () => {
-      expect(navigate).toHaveBeenCalledWith('/table/')
+      expect(navigate).toHaveBeenCalledWith('/table/69')
     })
   })
 })

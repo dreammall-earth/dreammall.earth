@@ -11,6 +11,7 @@ type Attendee = {
 }
 
 export type Table = {
+  id: number
   meetingID: string
   meetingName: string
   startTime: string
@@ -46,6 +47,7 @@ export const useTablesStore = defineStore(
     )
 
     watch(updateOpenTablesSubscriptionResult, (data: { updateOpenTables: Table[] }) => {
+      console.log(data)
       setTables(data.updateOpenTables)
     })
 

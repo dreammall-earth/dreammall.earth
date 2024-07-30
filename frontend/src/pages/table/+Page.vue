@@ -7,30 +7,55 @@
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
+ import { useQuery } from '@vue/apollo-composable'
+ import { storeToRefs } from 'pinia'
 
-import EmbeddedTable from '#components/embedded-table/EmbeddedTable.vue'
-import DefaultLayout from '#layouts/DefaultLayout.vue'
-import { useActiveTableStore } from '#stores/activeTableStore'
+ import EmbeddedTable from '#components/embedded-table/EmbeddedTable.vue'
+ import DefaultLayout from '#layouts/DefaultLayout.vue'
+ import { usePageContext } from '#context/usePageContext'
+ import { joinTableQuery } from '#queries/joinTableQuery'
 
-const activeTableStore = useActiveTableStore()
+ import {  }
 
-const { activeTable: tableUrl } = storeToRefs(activeTableStore)
+ const {
+   result: joinTableQueryResult,
+   refetch: joinTableQueryRefetch,
+   loading,
+ } = useQuery(
+   joinTableQuery,
+   {
+     userName: userName.value,
+     tableId,
+   },
+   {
+     prefetch: false,
+     fetchPolicy: 'no-cache',
+   },
+ )
+
+ 
+ const pageContext = usePageContext()
+
+ const tableId = Number(pageContext.routeParams?.id)
+
+
+ 
+ const { activeTable: tableUrl } = storeToRefs(activeTableStore)
 </script>
 
 <style scoped lang="scss">
-@import 'vuetify/lib/styles/settings/_variables';
+ @import 'vuetify/lib/styles/settings/_variables';
 
-.container {
-  --bottom-height: 16px;
+ .container {
+   --bottom-height: 16px;
 
-  width: 100%;
-  height: calc(100vh - var(--v-layout-top) - var(--bottom-height));
-}
+   width: 100%;
+   height: calc(100vh - var(--v-layout-top) - var(--bottom-height));
+ }
 
-@media #{map-get($display-breakpoints, 'sm-and-down')} {
-  .container {
-    --bottom-height: 85px;
-  }
-}
+ @media #{map-get($display-breakpoints, 'sm-and-down')} {
+   .container {
+     --bottom-height: 85px;
+   }
+ }
 </style>

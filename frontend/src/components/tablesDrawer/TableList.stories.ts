@@ -12,6 +12,7 @@ const meta = {
   args: {
     items: [
       {
+        id: 69,
         meetingName: 'Beispiel Titel 1',
         meetingID: 'xxx',
         startTime: '1234',
@@ -25,6 +26,7 @@ const meta = {
         joinLink: 'https://my.link',
       },
       {
+        id: 77,
         meetingName: 'Beispiel Titel 2',
         meetingID: 'xxx',
         startTime: '1234',
@@ -46,6 +48,7 @@ export const Basic: Story = {
   args: {
     items: [
       {
+        id: 69,
         meetingName: 'Beispiel Titel 1',
         meetingID: 'xxx',
         startTime: '1234',
@@ -54,6 +57,7 @@ export const Basic: Story = {
         joinLink: 'https://my.link',
       },
       {
+        id: 77,
         meetingName: 'Beispiel Titel 2',
         meetingID: 'xxx',
         startTime: '1234',

@@ -303,6 +303,7 @@ const openTablesFromOpenMeetings = async (
         meetingID: { in: meetings.map((m: MeetingInfo) => m.meetingID) },
       },
       select: {
+        id: true,
         meetingID: true,
         attendeePW: true,
       },
@@ -313,10 +314,10 @@ const openTablesFromOpenMeetings = async (
         m,
         joinMeetingLink({
           fullName: username,
-
           meetingID: m.meetingID,
           password: pw?.attendeePW ? pw.attendeePW : '',
         }),
+        pw?.id ? pw?.id : 0,
       )
     })
   }
