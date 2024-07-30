@@ -39,65 +39,36 @@ describe('UserResolver', () => {
     })
 
     describe('authenticated', () => {
-      describe('include self is false', () => {
-        it('returns an empty list of users', async () => {
-          const response = await testServer.executeOperation(
-            {
-              query: `{users {id name username}}`,
+      it('returns a list of users', async () => {
+        const response = await testServer.executeOperation(
+          {
+            query: `{users {id name username}}`,
+          },
+          {
+            contextValue: {
+              token: 'token',
+              user: undefined,
+              dataSources: { prisma },
             },
-            {
-              contextValue: {
-                token: 'token',
-                dataSources: { prisma },
+          },
+        )
+        expect(response).toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: {
+                users: [
+                  {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    name: 'User',
+                    username: 'mockedUser',
+                  },
+                ],
               },
+              errors: undefined,
             },
-          )
-          expect(response).toMatchObject({
-            body: {
-              kind: 'single',
-              singleResult: {
-                data: {
-                  users: [],
-                },
-                errors: undefined,
-              },
-            },
-          })
-        })
-      })
-
-      describe('include self is true', () => {
-        it('returns a list of users', async () => {
-          const response = await testServer.executeOperation(
-            {
-              query: `query ($includeSelf: Boolean) {users(includeSelf: $includeSelf) {id name username}}`,
-              variables: { includeSelf: true },
-            },
-            {
-              contextValue: {
-                token: 'token',
-                dataSources: { prisma },
-              },
-            },
-          )
-          expect(response).toMatchObject({
-            body: {
-              kind: 'single',
-              singleResult: {
-                data: {
-                  users: [
-                    {
-                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                      id: expect.any(Number),
-                      name: 'User',
-                      username: 'mockedUser',
-                    },
-                  ],
-                },
-                errors: undefined,
-              },
-            },
-          })
+          },
         })
       })
     })
@@ -109,7 +80,7 @@ describe('UserResolver', () => {
     id
     name
     username
-    table {
+    room {
       id
       name
       public
@@ -149,8 +120,8 @@ describe('UserResolver', () => {
     describe('authenticated', () => {
       let userId: number | undefined
 
-      describe('no table', () => {
-        it('returns the user without table', async () => {
+      describe('no room', () => {
+        it('returns the user without room', async () => {
           const user = await prisma.user.findFirst()
           userId = user?.id
           const response = await testServer.executeOperation(
@@ -174,7 +145,7 @@ describe('UserResolver', () => {
                     id: expect.any(Number),
                     name: 'User',
                     username: 'mockedUser',
-                    table: null,
+                    room: null,
                   },
                 },
                 errors: undefined,
@@ -184,7 +155,7 @@ describe('UserResolver', () => {
         })
       })
 
-      describe('with public table', () => {
+      describe('with public room', () => {
         beforeAll(async () => {
           await prisma.user.update({
             where: { id: userId },
@@ -200,7 +171,7 @@ describe('UserResolver', () => {
           })
         })
 
-        it('returns the user with table', async () => {
+        it('returns the user with room', async () => {
           const response = await testServer.executeOperation(
             {
               query,
@@ -222,7 +193,7 @@ describe('UserResolver', () => {
                     id: expect.any(Number),
                     name: 'User',
                     username: 'mockedUser',
-                    table: {
+                    room: {
                       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                       id: expect.any(Number),
                       name: 'My Meeting',
@@ -238,7 +209,7 @@ describe('UserResolver', () => {
         })
       })
 
-      describe('with private table', () => {
+      describe('with private room', () => {
         let meetingId: number | undefined
 
         beforeAll(async () => {
@@ -303,7 +274,7 @@ describe('UserResolver', () => {
           })
         })
 
-        it('returns the user with table and users', async () => {
+        it('returns the user with room and users', async () => {
           const response = await testServer.executeOperation(
             {
               query,
@@ -325,7 +296,7 @@ describe('UserResolver', () => {
                     id: expect.any(Number),
                     name: 'User',
                     username: 'mockedUser',
-                    table: {
+                    room: {
                       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                       id: expect.any(Number),
                       name: 'My Meeting',

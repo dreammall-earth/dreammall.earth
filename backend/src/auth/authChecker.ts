@@ -1,21 +1,28 @@
+import fs from 'node:fs'
+
 import { User } from '@prisma/client'
-import { createRemoteJWKSet } from 'jose'
+import { verify, JwtPayload } from 'jsonwebtoken'
 import { AuthChecker } from 'type-graphql'
 
-import { CONFIG } from '#config/config'
 import { EVENT_CREATE_USER } from '#src/event/Events'
 import { Context } from '#src/server/context'
 
-import { jwtVerify } from './jwtVerify'
-
 import type { prisma as Prisma } from '#src/prisma'
 
-export interface CustomJwtPayload {
+interface CustomJwtPayload extends JwtPayload {
   nickname: string
   name: string
 }
 
-const JWKS = createRemoteJWKSet(new URL(CONFIG.JWKS_URI))
+let cert: Buffer
+
+export const getCert = (): Buffer => {
+  if (!cert) {
+    // eslint-disable-next-line n/no-sync
+    cert = fs.readFileSync('public.pem')
+  }
+  return cert
+}
 
 export const authChecker: AuthChecker<Context> = async ({ context }) => {
   const { token, dataSources } = context
@@ -23,16 +30,15 @@ export const authChecker: AuthChecker<Context> = async ({ context }) => {
 
   if (!token) return false
 
-  let payload: CustomJwtPayload
+  let decoded
   try {
-    const decoded = await jwtVerify<CustomJwtPayload>(token, JWKS)
-    payload = decoded.payload
+    decoded = verify(token, getCert()) as CustomJwtPayload
   } catch (err) {
     return false
   }
 
-  if (payload) {
-    const { nickname, name } = payload
+  if (decoded) {
+    const { nickname, name } = decoded
     const user = await contextUser(prisma)(nickname, name)
     context.user = user
     return true

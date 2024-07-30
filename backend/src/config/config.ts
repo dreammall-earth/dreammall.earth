@@ -38,19 +38,13 @@ const BBB = {
 const FRONTEND = {
   FRONTEND_URL: process.env.FRONTEND_URL ?? 'http://localhost:3000/',
   FRONTEND_INVITE_LINK_URL:
-    process.env.FRONTEND_INVITE_LINK_URL ?? 'http://localhost:3000/join-table/',
-}
-
-const { JWKS_URI } = process.env
-if (!JWKS_URI) {
-  throw new Error('missing environment variable: JWKS_URI')
+    process.env.FRONTEND_INVITE_LINK_URL ?? 'http://localhost:3000/join-room/',
 }
 
 export const CONFIG = {
   ...BREVO,
   ...BBB,
   ...FRONTEND,
-  JWKS_URI,
 }
 
 // Config Checks
