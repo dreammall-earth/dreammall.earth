@@ -30,6 +30,7 @@
     </v-app-bar>
     <TablesDrawer v-model="isTablesDrawerVisible" class="hide-on-mobile" location="right" />
 
+    <!-- Large DreamMall Button -->
     <v-container fluid class="page-container px-8">
       <div class="create-button-container">
         <div>
@@ -74,7 +75,23 @@
         </div>
       </div>
     </v-container>
-    <BottomMenu />
+
+    <!-- Small DreamMall Button -->
+    <MobileCreateButtonActions :is-visible="isButtonListVisible" />
+    <TablesDrawer v-model="isTablesDrawerVisible" class="hide-on-desktop" location="bottom" />
+    <div class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none">
+      <button class="camera-button mx-auto" @click="toggleDrawer">
+        <Circle>
+          <v-icon icon="$camera"></v-icon>
+        </Circle>
+      </button>
+      <MobileCreateButton
+        class="mx-auto"
+        :is-active="isButtonListVisible"
+        @button-click="toggleButtonList"
+      />
+      <UserInfo class="mx-auto" />
+    </div>
   </v-main>
 </template>
 
@@ -85,7 +102,8 @@ import { ref } from 'vue'
 
 import LargeDreamMallButton from '#components/buttons/LargeDreamMallButton.vue'
 import MainButton from '#components/buttons/MainButton.vue'
-import BottomMenu from '#components/menu/BottomMenu.vue'
+import MobileCreateButtonActions from '#components/buttons/mobile-create-button/MobileCreateButtonActions.vue'
+import MobileCreateButton from '#components/buttons/mobile-create-button/SmallDreamMallButton.vue'
 import Circle from '#components/menu/CircleElement.vue'
 import LightDarkSwitch from '#components/menu/LightDarkSwitch.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
@@ -237,5 +255,25 @@ const enterTable = async () => {
   pointer-events: none;
   opacity: 0;
   transform: translateY(-100px) scale(0.8);
+}
+
+.bottom-menu {
+  bottom: 0;
+  left: 0;
+  z-index: 3000;
+  display: grid;
+  grid-template-columns: repeat(3, 33.3333%);
+  background: var(--v-bottom-menu-background);
+  backdrop-filter: blur(20px);
+  border-radius: 30px 30px 0 0;
+
+  .camera-button {
+    transform: translateX(20px);
+  }
+}
+
+.create-button-mobile {
+  z-index: 1;
+  transform: translate(20px, 30px);
 }
 </style>
