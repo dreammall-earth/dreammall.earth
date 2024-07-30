@@ -317,6 +317,34 @@ describe('TableResolver', () => {
             },
           })
         })
+
+        it('creates create my table event in the database', async () => {
+          const user = await prisma.user.findFirst()
+          const result = await prisma.event.findMany()
+          expect(result).toHaveLength(2)
+          expect(result).toEqual(
+            expect.arrayContaining([
+              {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                id: expect.any(Number),
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                createdAt: expect.any(Date),
+                involvedEmail: null,
+                type: 'CREATE_MY_TABLE',
+                involvedUserId: user?.id,
+              },
+              {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                id: expect.any(Number),
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                createdAt: expect.any(Date),
+                involvedEmail: null,
+                type: 'CREATE_USER',
+                involvedUserId: user?.id,
+              },
+            ]),
+          )
+        })
       })
 
       describe('meeting exists', () => {
