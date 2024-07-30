@@ -15,7 +15,7 @@ const mockSubscription: IMockSubscription = createMockSubscription()
 mockClient.setRequestHandler(
   gql`
     subscription {
-      updateOpenRooms
+      updateOpenTables
     }
   `,
   () => mockSubscription,

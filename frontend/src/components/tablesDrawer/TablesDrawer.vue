@@ -22,7 +22,7 @@
       <div v-else-if="!filteredItems.length">
         {{ $t('tablesDrawer.noResults') }}
       </div>
-      <TableList v-else :items="filteredItems" @open-room="closeDrawer" />
+      <TableList v-else :items="filteredItems" @open-table="closeDrawer" />
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -31,13 +31,13 @@
 import { storeToRefs } from 'pinia'
 import { ref, computed } from 'vue'
 
-import { useRoomsStore } from '#stores/roomsStore'
+import { useTablesStore } from '#stores/tablesStore'
 
 import TableList from './TableList.vue'
 
-const roomsStore = useRoomsStore()
+const tablesStore = useTablesStore()
 
-const { rooms: items } = storeToRefs(roomsStore)
+const { tables: items } = storeToRefs(tablesStore)
 
 withDefaults(
   defineProps<{

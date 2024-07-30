@@ -15,7 +15,7 @@
     "signout": "Sign Out",
     "toAdmin": "To the admin",
     "toAssistant": "Assistant",
-    "toRoom": "To the meeting"
+    "toTable": "To the meeting"
   },
   "cafe": {
     "welcome": "World Cafe"
@@ -30,8 +30,8 @@
       "text": "Something went wrong."
     }
   },
-  "joinRoomPage": {
-    "header": "Join Room as:"
+  "joinTablePage": {
+    "header": "Join Table as:"
   },
   "menu": {
     "cockpit": "Cockpit",
@@ -46,9 +46,9 @@
   "meta": {
     "defaultDescription": "Expanding your reach making the most of opportunities enhance quality of life together",
     "defaultTitle": "DreamMall",
-    "joinRoomTitle": "Enter Room"
+    "joinTableTitle": "Enter Table"
   },
-  "rooms": {
+  "tables": {
     "participantCount": "{count} participants"
   },
   "tablesDrawer": {
