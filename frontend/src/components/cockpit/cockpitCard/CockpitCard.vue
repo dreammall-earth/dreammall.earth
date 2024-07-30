@@ -1,12 +1,22 @@
 <template>
-  <section class="cockpit-card">
-    <div class="header">
+  <section class="cockpit-card" :class="{ narrow: props.narrow }">
+    <div v-if="slots.header" class="header">
       <slot name="header"></slot>
     </div>
-    <hr />
+    <hr v-if="slots.header" class="hr" />
     <slot></slot>
   </section>
 </template>
+
+<script setup lang="ts">
+import { useSlots } from 'vue'
+
+const slots = useSlots()
+
+const props = defineProps<{
+  narrow: boolean
+}>()
+</script>
 
 <style scoped lang="scss">
 .cockpit-card {
@@ -17,11 +27,15 @@
   border-radius: 20px;
 }
 
-hr {
+.hr {
   margin-block: 15px;
   margin-inline: calc(-1 * var(--padding));
   border-color: rgb(var(--v-theme-background));
   border-style: solid;
   border-width: 0.5px;
+}
+
+.narrow {
+  max-width: 335px;
 }
 </style>

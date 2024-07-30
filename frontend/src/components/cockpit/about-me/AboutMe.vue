@@ -1,35 +1,62 @@
 <template>
-  <CockpitCard>
-    <template #header>
-      <h2>{{ $t('cockpit.about-me.header') }}</h2>
-    </template>
+  <CockpitCard narrow>
     <template #default>
-      <!-- eslint-disable-next-line @intlify/vue-i18n/no-raw-text -->
-      <div class="introduction">"{{ props.introduction }}"</div>
-      <hr />
+      <div class="header">
+        <v-avatar class="avatar d-flex align-center text-font bg-primary" size="75">
+          <v-img v-if="userImage" :src="userImage" />
+          <span v-else>{{ initials }}</span>
+        </v-avatar>
+        <v-select
+          v-model="availability"
+          :items="[
+            {
+              title: 'Available to work',
+              value: 'available',
+              props: { 'append-icon': '$green-circle' },
+              circle: 'red',
+            },
+            {
+              title: 'Busy but have time',
+              value: 'partly_available',
+              props: { circle: 'red', 'append-icon': '$green-circle' },
+              circle: 'red',
+            },
+            {
+              title: 'Busy',
+              value: 'busy',
+              props: { 'append-icon': '$red-circle' },
+            },
+          ]"
+          class="availability"
+        >
+          <template #item="{ item }"> {{ item.circle }} {{ item.value }} </template>
+        </v-select>
+        <div class="name">{{ props.name }}</div>
+        <div class="introduction">{{ props.introduction }}</div>
+      </div>
       <ul class="details">
-        <v-for :detail="props.details">
-          <li><v-icon :icon="getIcon(detail.category)"></v-icon> {{ detail.text }}</li>
-        </v-for>
+        <li v-for="(detail, index) in props.details" :key="index">
+          <v-chip :prepend-icon="getIcon(detail.category)" class="detail">{{ detail.text }}</v-chip>
+        </li>
       </ul>
       <ul class="social">
         <li v-if="props.social.facebook">
-          <a :href="user.social.facebook" target="_blank" rel="noopener noreferrer">
+          <a :href="props.social.facebook" target="_blank" rel="noopener noreferrer">
             <v-icon icon="$facebook"></v-icon>
           </a>
         </li>
         <li v-if="props.social.linkedin">
-          <a :href="user.social.linkedin" target="_blank" rel="noopener noreferrer">
+          <a :href="props.social.linkedin" target="_blank" rel="noopener noreferrer">
             <v-icon icon="$linkedIn"></v-icon>
           </a>
         </li>
         <li v-if="props.social.xing">
-          <a :href="user.social.xing" target="_blank" rel="noopener noreferrer">
+          <a :href="props.social.xing" target="_blank" rel="noopener noreferrer">
             <v-icon icon="$xing"></v-icon>
           </a>
         </li>
         <li v-if="props.social.x">
-          <a :href="user.social.x" target="_blank" rel="noopener noreferrer">
+          <a :href="props.social.x" target="_blank" rel="noopener noreferrer">
             <v-icon icon="$x"></v-icon>
           </a>
         </li>
@@ -39,7 +66,10 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
+
 import CockpitCard from '#components/cockpit/cockpitCard/CockpitCard.vue'
+import { useAvatar } from '#src/hooks/useAvatar'
 
 type DetailCategory = 'place' | 'work' | 'language' | 'education' | 'feeling'
 
@@ -71,14 +101,16 @@ const props = defineProps<{
   }
 }>()
 
+const availability = ref(props.availability)
+
 function getIcon(category: DetailCategory) {
   switch (category) {
     case 'place':
-      return '$location'
+      return '$place'
     case 'work':
-      return '$work'
+      return '$working'
     case 'language':
-      return '$language'
+      return '$world'
     case 'education':
       return '$education'
     case 'feeling':
@@ -87,17 +119,75 @@ function getIcon(category: DetailCategory) {
       throw new Error(`Unknown category: ${category}`)
   }
 }
+
+const { initials, userImage } = useAvatar()
 </script>
 
-<style scoped lang="scss">
+<style scoped>
+.header {
+  display: grid;
+  grid-template-columns: 75px 1fr;
+  grid-template-rows: 1 fr 1fr 1fr;
+  gap: 10px;
+}
+
+.avatar {
+  grid-row: 1 / 3;
+  border-radius: 15px;
+}
+
+.availability {
+  grid-column: 2;
+  grid-row: 1;
+
+  &:deep(.v-input__control) {
+    font-size: 10px !important;
+    color: white;
+    display: flex;
+    height: 24px;
+    padding: 0px 12px 0px 4px;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    border-radius: 9999px;
+    border: 1px solid rgba(214, 223, 233, 0.4);
+    background: #5d6670;
+  }
+
+  &:deep(.v-field__outline) {
+    display: none;
+  }
+}
+
+.name {
+  grid-column: 2;
+  grid-row: 2;
+}
+
 .introduction {
-  overflow-wrap: break-word;
+  grid-column: 2;
+  grid-row: 3;
+  font-size: 12px;
 }
 
 .details,
 .social {
   padding: 0;
   list-style: none;
+}
+
+.details {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 10px;
+  width: 300px;
+  padding: 10px;
+  border-radius: 15px;
+  background: #f3f3f3;
+}
+
+.detail {
+  font-size: 10px !important;
 }
 
 .social {

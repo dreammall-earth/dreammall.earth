@@ -10,16 +10,21 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {},
   args: {
-    user: {
-      name: 'John Doe',
-      text: 'Pushing pixels and experiences in digital products',
-      place: 'Berlin, Germany',
-      work: 'Frontend Developer at Company XY',
-      social: {
-        linkedin: 'https://www.linkedin.com/in/johndoe',
-        xing: 'https://www.xing.com/profile/John_Doe',
-        x: 'https://www.x.com/johndoe',
-      },
+    name: 'John Doe',
+    introduction: 'Pushing pixels and experiences',
+    availability: 'available',
+    details: [
+      { category: 'place', text: 'Berlin, Germany' },
+      { category: 'place', text: 'Madrid, Spain' },
+      { category: 'work', text: 'Frontend Developer at Company XY' },
+      { category: 'language', text: 'English, German, Spanish' },
+      { category: 'education', text: 'B.Sc. Computer Science' },
+      { category: 'feeling', text: 'Happy like a really happy honey cake horse' },
+    ],
+    social: {
+      linkedin: 'https://www.linkedin.com/in/johndoe',
+      xing: 'https://www.xing.com/profile/John_Doe',
+      x: 'https://www.x.com/johndoe',
     },
   },
 } satisfies Meta<typeof AboutMe>
