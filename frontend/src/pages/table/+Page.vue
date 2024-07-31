@@ -15,6 +15,7 @@
  import { usePageContext } from '#context/usePageContext'
  import { joinTableQuery } from '#queries/joinTableQuery'
 
+/*
  import {  }
 
  const {
@@ -32,7 +33,7 @@
      fetchPolicy: 'no-cache',
    },
  )
-
+ */
  
  const pageContext = usePageContext()
 
@@ -40,7 +41,7 @@
 
 
  
- const { activeTable: tableUrl } = storeToRefs(activeTableStore)
+ const tableUrl = ''
 </script>
 
 <style scoped lang="scss">
