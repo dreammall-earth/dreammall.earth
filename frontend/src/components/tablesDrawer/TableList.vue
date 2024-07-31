@@ -17,10 +17,7 @@
 <script lang="ts" setup>
 import { navigate } from 'vike/client/router'
 
-import { useActiveTableStore } from '#stores/activeTableStore'
 import { Table } from '#stores/tablesStore'
-
-const activeTableStore = useActiveTableStore()
 
 defineProps<{
   items: Table[]

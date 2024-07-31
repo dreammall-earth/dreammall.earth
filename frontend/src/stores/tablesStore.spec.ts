@@ -75,7 +75,7 @@ describe('Tables Store', () => {
     it('updates the store', () => {
       tablesStore.setTables([
         {
-          id:77,
+          id: 77,
           meetingID: 'my-meeting',
           meetingName: 'my meeting',
           startTime: '1234',

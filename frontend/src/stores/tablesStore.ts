@@ -47,7 +47,6 @@ export const useTablesStore = defineStore(
     )
 
     watch(updateOpenTablesSubscriptionResult, (data: { updateOpenTables: Table[] }) => {
-      console.log(data)
       setTables(data.updateOpenTables)
     })
 

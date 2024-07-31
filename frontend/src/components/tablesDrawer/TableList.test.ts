@@ -5,8 +5,6 @@ import { vi, describe, it, expect, beforeEach } from 'vitest'
 import { h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { useActiveTableStore } from '#stores/activeTableStore'
-
 import TableList from './TableList.vue'
 
 vi.mock('vike/client/router')
