@@ -17,7 +17,6 @@ export type Table = {
   startTime: string
   participantCount: number
   attendees: Attendee[]
-  joinLink: string
 }
 
 export const useTablesStore = defineStore(

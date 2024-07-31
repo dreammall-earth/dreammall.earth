@@ -23,7 +23,6 @@ const meta = {
           { fullName: 'Jane Doe' },
           { fullName: 'Elfriede Müller' },
         ],
-        joinLink: 'https://my.link',
       },
       {
         id: 77,
@@ -32,7 +31,6 @@ const meta = {
         startTime: '1234',
         participantCount: 0,
         attendees: [],
-        joinLink: 'https://my.link',
       },
     ],
   },

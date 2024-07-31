@@ -44,7 +44,6 @@ describe('Tables Store', () => {
                     fullName: 'Peter Lustig',
                   },
                 ],
-                joinLink: 'https://my.link',
               },
             ],
           },
@@ -64,7 +63,6 @@ describe('Tables Store', () => {
                 fullName: 'Peter Lustig',
               },
             ],
-            joinLink: 'https://my.link',
           },
         ])
       })
@@ -85,7 +83,6 @@ describe('Tables Store', () => {
               fullName: 'Peter Lustig',
             },
           ],
-          joinLink: 'https://my.link',
         },
       ])
       expect(tablesStore.tables).toEqual([
@@ -100,7 +97,6 @@ describe('Tables Store', () => {
               fullName: 'Peter Lustig',
             },
           ],
-          joinLink: 'https://my.link',
         },
       ])
     })
