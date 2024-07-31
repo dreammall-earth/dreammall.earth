@@ -633,7 +633,7 @@ describe('TableResolver', () => {
           })
         })
 
-        it('returns link to table', async () => {
+        it('returns id of the table', async () => {
           await expect(
             testServer.executeOperation(
               {
@@ -652,7 +652,8 @@ describe('TableResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  joinMyTable: 'https://my-link',
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                  joinMyTable: expect.any(Number),
                 },
                 errors: undefined,
               },
@@ -721,7 +722,7 @@ describe('TableResolver', () => {
           })
         })
 
-        it('returns link to table', async () => {
+        it('returns id of the table', async () => {
           await expect(
             testServer.executeOperation(
               {
@@ -740,7 +741,8 @@ describe('TableResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  joinMyTable: 'https://my-link',
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                  joinMyTable: expect.any(Number),
                 },
                 errors: undefined,
               },

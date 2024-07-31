@@ -158,8 +158,8 @@ export class TableResolver {
   }
 
   @Authorized()
-  @Mutation(() => String)
-  async joinMyTable(@Ctx() context: Context): Promise<string> {
+  @Mutation(() => Int)
+  async joinMyTable(@Ctx() context: Context): Promise<number> {
     const { user } = context
     if (!user) throw new Error('User not found!')
 
@@ -232,14 +232,7 @@ export class TableResolver {
       throw new Error('Could not update Meeting in DB!')
     }
 
-    return joinMeetingLink({
-      fullName: user.name,
-      meetingID: meeting.meetingID,
-      password: meeting.moderatorPW,
-      role: AttendeeRole.MODERATOR,
-      createTime: meeting.createTime.toString(),
-      userID: user.id.toString(),
-    })
+    return dbMeeting.id
   }
 
   @Authorized()

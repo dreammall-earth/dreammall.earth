@@ -48,7 +48,7 @@ export class OpenTable {
 
   @Field(() => Int)
   id: number
-  
+
   @Field()
   meetingID: string
 
