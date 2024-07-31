@@ -681,6 +681,7 @@ exports[`IndexPage > without apollo error > renders 1`] = `
                     data-v-607bdd70=""
                     targetref="[object Object]"
                   >
+                    
                     <div
                       class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm bg-primary"
                       data-v-607bdd70=""
@@ -726,6 +727,7 @@ exports[`IndexPage > without apollo error > renders 1`] = `
                         </svg>
                       </i>
                     </div>
+                    
                   </button>
                   
                   <!---->
@@ -2526,6 +2528,7 @@ exports[`IndexPage > without apollo error > renders 1`] = `
           data-v-607bdd70=""
           targetref="[object Object]"
         >
+          
           <div
             class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm bg-primary"
             data-v-607bdd70=""
@@ -2571,6 +2574,7 @@ exports[`IndexPage > without apollo error > renders 1`] = `
               </svg>
             </i>
           </div>
+          
         </button>
         
         <!---->
