@@ -32,48 +32,50 @@
 
     <!-- Large DreamMall Button -->
     <v-container fluid class="page-container px-8">
-      <div class="create-button-container">
-        <div>
-          <v-container fluid class="pa-0">
-            <div class="button-wrapper">
-              <LargeDreamMallButton @click="toggleButtonList" />
-              <transition-group name="fade" tag="div" class="button-list-desktop">
-                <MainButton
-                  v-if="isButtonListVisible"
-                  key="1"
-                  class="new-project-button"
-                  variant="fourth"
-                  label="New Project"
-                  size="auto"
-                  icon="plus"
-                  >{{ $t('buttons.newProject') }}
-                </MainButton>
-                <MainButton
-                  v-if="isButtonListVisible"
-                  key="2"
-                  class="new-table-button"
-                  variant="primary"
-                  label="New Table"
-                  size="auto"
-                  icon="plus"
-                  @click="enterTable"
-                  >{{ $t('buttons.newTable') }}
-                </MainButton>
-                <MainButton
-                  v-if="isButtonListVisible"
-                  key="3"
-                  class="assistant-button"
-                  variant="gradient"
-                  label="Assistant"
-                  size="auto"
-                  icon="ear-hearing"
-                  >{{ $t('buttons.toAssistant') }}
-                </MainButton>
-              </transition-group>
-            </div>
-          </v-container>
+      <slot>
+        <div class="create-button-container">
+          <div>
+            <v-container fluid class="pa-0">
+              <div class="button-wrapper">
+                <LargeDreamMallButton @click="toggleButtonList" />
+                <transition-group name="fade" tag="div" class="button-list-desktop">
+                  <MainButton
+                    v-if="isButtonListVisible"
+                    key="1"
+                    class="new-project-button"
+                    variant="fourth"
+                    label="New Project"
+                    size="auto"
+                    icon="plus"
+                    >{{ $t('buttons.newProject') }}
+                  </MainButton>
+                  <MainButton
+                    v-if="isButtonListVisible"
+                    key="2"
+                    class="new-table-button"
+                    variant="primary"
+                    label="New Table"
+                    size="auto"
+                    icon="plus"
+                    @click="enterTable"
+                    >{{ $t('buttons.newTable') }}
+                  </MainButton>
+                  <MainButton
+                    v-if="isButtonListVisible"
+                    key="3"
+                    class="assistant-button"
+                    variant="gradient"
+                    label="Assistant"
+                    size="auto"
+                    icon="ear-hearing"
+                    >{{ $t('buttons.toAssistant') }}
+                  </MainButton>
+                </transition-group>
+              </div>
+            </v-container>
+          </div>
         </div>
-      </div>
+      </slot>
     </v-container>
 
     <!-- Small DreamMall Button -->
