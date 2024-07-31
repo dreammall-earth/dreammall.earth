@@ -36,8 +36,8 @@ spec:
             - name: {{ $key }}
               value: {{ $val | quote }}
               {{- end }}
-          image: roschaefer/dreammall-backend
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.dreammall.backend.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.global.image.pullPolicy }}
           name: backend-migrations
           command: [ 'npm', 'run', 'db:migrate:deploy' ]
       containers:
@@ -56,8 +56,8 @@ spec:
             - name: {{ $key }}
               value: {{ $val | quote }}
               {{- end }}
-          image: roschaefer/dreammall-backend
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.dreammall.backend.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.global.image.pullPolicy }}
           name: backend
           ports:
             - containerPort: 4000

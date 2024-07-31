@@ -31,8 +31,8 @@ spec:
             - name: {{ $key }}
               value: {{ $val | quote }}
               {{- end }}
-          image: roschaefer/dreammall-admin
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.dreammall.admin.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.global.image.pullPolicy }}
           name: admin
           ports:
             - containerPort: 3000

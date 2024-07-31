@@ -1,8 +1,10 @@
 ingress:
   enabled: true
 
-image:
-  pullPolicy: Always
+global:
+  image:
+    tag: master
+    pullPolicy: Always
 
 acme:
   email:
@@ -16,16 +18,22 @@ dreammall:
   domain: dreammall.roschaefer.de
 
   presenter:
+    image:
+      repository: ghcr.io/dreammall-earth/presenter
     environment:
       PUBLIC_ENV__META__DEFAULT_AUTHOR: "DreamMall Verlag GbR"
 
   admin:
+    image:
+      repository: ghcr.io/dreammall-earth/admin
     envirnonment:
       PUBLIC_ENV__META__DEFAULT_AUTHOR: "IT Team 4 Change"
       PUBLIC_ENV__META__DEFAULT_DESCRIPTION: "IT4C Frontend Boilerplate"
       PUBLIC_ENV__META__DEFAULT_TITLE: "IT4C"
 
   frontend:
+    image:
+      repository: ghcr.io/dreammall-earth/frontend
     environment:
       PUBLIC_ENV__AUTH__CLIENT_ID: "G3g0sjCjph1NAyGeeu5Te5ltx1I7WZ0DGB8i6vOI"
       PUBLIC_ENV__AUTH__RESPONSE_TYPE: "code"
@@ -34,6 +42,8 @@ dreammall:
       PUBLIC_ENV__META__DEFAULT_AUTHOR: "DreamMall Verlag GbR"
 
   backend:
+    image:
+      repository: ghcr.io/dreammall-earth/backend
     environment:
       BREVO_KEY: ""
       BREVO_ADMIN_NAME: ""
@@ -48,7 +58,7 @@ dreammall:
 authentik:
   global:
     image:
-      repository: roschaefer/dreammall-authentik
+      repository: ghcr.io/dreammall-earth/authentik
       pullPolicy: Always
   enabled: true
 

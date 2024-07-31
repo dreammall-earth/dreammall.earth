@@ -37,8 +37,8 @@ spec:
             - name: {{ $key }}
               value: {{ $val | quote }}
               {{- end }}
-          image: roschaefer/dreammall-presenter
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.dreammall.presenter.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.global.image.pullPolicy }}
           name: presenter
           ports:
             - containerPort: 3000
