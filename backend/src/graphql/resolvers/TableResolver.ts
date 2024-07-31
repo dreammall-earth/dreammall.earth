@@ -246,17 +246,33 @@ export class TableResolver {
   async joinTable(
     @Arg('userName') userName: string,
     @Arg('tableId', () => Int) tableId: number,
+    @Arg('userId', () => Int, { nullable: true }) userId?: number | null | undefined,
   ): Promise<string> {
     const meeting = await prisma.meeting.findUnique({
       where: {
         id: tableId,
       },
+      include: {
+        user: true,
+      },
     })
     if (!meeting) throw new Error('Table does not exist')
+
+    let password: string
+
+    // we need the current user in the frontend to get this working
+    // to provide the userId
+    // like this, no user will ever be moderator
+    if (userId && meeting.user && meeting.user.id === userId) {
+      password = meeting.moderatorPW ? meeting.moderatorPW : ''
+    } else {
+      password = meeting.attendeePW ? meeting.attendeePW : ''
+    }
+
     return joinMeetingLink({
       fullName: userName,
       meetingID: meeting.meetingID,
-      password: meeting.attendeePW ? meeting.attendeePW : '',
+      password,
     })
   }
 
