@@ -11,6 +11,7 @@ import { mockPageContext } from '#tests/mock.vikePageContext'
 import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
 import TablePage from './+Page.vue'
+import Route from './+route'
 import { title } from './+title'
 
 const authStore = useAuthStore()
@@ -65,6 +66,10 @@ describe('Table Page', () => {
 
   it('renders', () => {
     expect(wrapper.element).toMatchSnapshot()
+  })
+
+  it('has tableID as param', () => {
+    expect(Route).toBe('/table/@id')
   })
 
   describe('route params in page context is undefined and API throws error', () => {
