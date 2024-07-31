@@ -6,29 +6,29 @@
  import { defineComponent, provide } from 'vue'
  import { DefaultApolloClient } from '@vue/apollo-composable'
 
- import { joinMyRoomMutation } from '#mutations/joinMyRoomMutation'
- import { openRoomsQuery } from '#src/graphql/queries/openRoomsQuery'
+ import { joinMyTableMutation } from '#mutations/joinMyTableMutation'
+ import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
  import { MockedProvider } from '@apollo/client/testing'
 
  const apolloClient = new MockedProvider({
    mocks: [
      {
        request: {
-         query: joinMyRoomMutation,
+         query: joinMyTableMutation,
        },
        result: {
          data: {
-           joinMyRoom: 'https://meet.jit.si/room',
+           joinMyTable: 'https://meet.jit.si/table',
          },
        },
      },
      {
        request: {
-         query: openRoomsQuery,
+         query: openTablesQuery,
        },
        result: {
          data: {
-           openRooms: [
+           openTables: [
              {
                meetingID: 'my-meeting',
                meetingName: 'my meeting',

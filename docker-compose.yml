@@ -46,11 +46,13 @@ services:
       target: production
     depends_on:
       - database
+      - authentik
     ports:
       - 4000:4000
     environment:
-      - DATABASE_URL=mysql://root:@database:3306/dreammall.earth
-      - NODE_ENV=production
+      DATABASE_URL: mysql://root:@database:3306/dreammall.earth
+      JWKS_URI: http://authentik:9000/application/o/dreammallearth/jwks/
+      NODE_ENV: production
 
 volumes:
   db_vol:

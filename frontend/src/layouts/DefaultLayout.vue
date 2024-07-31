@@ -15,7 +15,6 @@
       </v-row>
     </v-container>
     <BottomMenu />
-    <div id="teleported"></div>
   </v-main>
 </template>
 
@@ -39,12 +38,6 @@ const slots = useSlots()
 
   .page-container {
     margin-top: 70px;
-  }
-
-  #teleported {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
   }
 
   @media #{map-get($display-breakpoints, 'sm-and-down')} {

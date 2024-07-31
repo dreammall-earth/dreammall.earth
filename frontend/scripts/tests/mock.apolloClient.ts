@@ -4,20 +4,20 @@ import { createMockClient, createMockSubscription, IMockSubscription } from 'moc
 import { vi } from 'vitest'
 
 import { currentUserQuery } from '#queries/currentUserQuery'
-import { openRoomsQuery } from '#src/graphql/queries/openRoomsQuery'
-import { updateOpenRoomsSubscription } from '#subscriptions/updateOpenRoomsSubscription'
+import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
+import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 export const mockClient = createMockClient()
 
-export const openRoomsQueryMock = vi.fn()
+export const openTablesQueryMock = vi.fn()
 
 export const currentUserQueryMock = vi.fn()
 
-export const updateOpenRoomsSubscriptionMock: IMockSubscription = createMockSubscription()
+export const updateOpenTablesSubscriptionMock: IMockSubscription = createMockSubscription()
 
 mockClient.setRequestHandler(
-  openRoomsQuery,
-  openRoomsQueryMock.mockResolvedValue({ data: { openRooms: [] } }),
+  openTablesQuery,
+  openTablesQueryMock.mockResolvedValue({ data: { openTables: [] } }),
 )
 
 mockClient.setRequestHandler(
@@ -34,7 +34,7 @@ mockClient.setRequestHandler(
   }),
 )
 
-mockClient.setRequestHandler(updateOpenRoomsSubscription, () => updateOpenRoomsSubscriptionMock)
+mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateOpenTablesSubscriptionMock)
 
 config.global.provide = {
   ...config.global.provide,

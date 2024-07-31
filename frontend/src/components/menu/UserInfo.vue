@@ -6,18 +6,19 @@
         :class="$attrs.class"
         class="user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
       >
-        <v-avatar class="avatar d-flex align-center text-font border-sm bg-primary" size="44">
-          <v-img v-if="userImage" :src="userImage" />
-          <span v-else>{{ initals?.toUpperCase() }}</span>
-        </v-avatar>
-        <div class="d-flex flex-column justify-center text-right pa-1 pl-3 w-100">
-          <v-icon
-            icon="$ellipsis"
-            data-test="user-dropdown"
-            class="ellipsis-icon"
-            :class="isOpen && 'rotated'"
-          ></v-icon>
-        </div>
+        <ClientOnly
+          ><v-avatar class="avatar d-flex align-center text-font border-sm bg-primary" size="44">
+            <v-img v-if="userImage" :src="userImage" />
+            <span v-else>{{ initals?.toUpperCase() }}</span>
+          </v-avatar>
+          <div class="d-flex flex-column justify-center text-right pa-1 pl-3 w-100">
+            <v-icon
+              icon="$ellipsis"
+              data-test="user-dropdown"
+              class="ellipsis-icon"
+              :class="isOpen && 'rotated'"
+            ></v-icon></div
+        ></ClientOnly>
       </button>
     </template>
     <UserDropdown />
@@ -27,6 +28,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
+import ClientOnly from '#components/ClientOnly.vue'
 import { useUserStore } from '#stores/userStore'
 
 import UserDropdown from './UserDropdown.vue'
