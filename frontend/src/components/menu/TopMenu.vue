@@ -57,7 +57,7 @@ const toggleDrawer = () => {
 }
 
 .hide-on-mobile {
-  @media #{map-get($display-breakpoints, 'md-and-down')} {
+  @media #{map-get($display-breakpoints, 'sm-and-down')} {
     display: none;
   }
 }
