@@ -11,7 +11,6 @@ export const openTablesQuery = gql`
       attendees {
         fullName
       }
-      joinLink
     }
   }
 `
