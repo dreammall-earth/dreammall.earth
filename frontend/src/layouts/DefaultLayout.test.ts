@@ -362,14 +362,9 @@ describe('DefaultLayout', () => {
             )
           })
 
-          describe('click', () => {
-            beforeEach(async () => {
-              await wrapper.findComponent(UserDropdown).find('button.admin-button').trigger('click')
-            })
-
-            it('redirects to admin url', () => {
-              expect(global.window.location.href).toBe('https://url-to-admin.com/')
-            })
+          it('redirects to admin url by click', async () => {
+            await wrapper.findComponent(UserDropdown).find('button.admin-button').trigger('click')
+            expect(global.window.location.href).toBe('https://url-to-admin.com/')
           })
         })
       })
