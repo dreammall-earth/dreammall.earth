@@ -122,7 +122,8 @@ describe('authChecker', () => {
             createdAt: expect.any(Date),
             name: 'User',
             username: 'mockedUser',
-            meetingId: null,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            meetingId: expect.any(Number),
           },
         ])
       })
