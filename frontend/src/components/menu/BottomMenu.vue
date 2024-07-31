@@ -1,6 +1,6 @@
 <template>
   <MobileCreateButtonActions :is-visible="isButtonListVisible" />
-  <TablesDrawer v-model="isTablesDrawerVisible" location="bottom" />
+  <TablesDrawer v-model="isTablesDrawerVisible" location="bottom" class="d-md-none" />
   <div class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none">
     <button class="camera-button mx-auto" @click="toggleDrawer">
       <Circle>
