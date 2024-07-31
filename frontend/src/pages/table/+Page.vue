@@ -7,41 +7,46 @@
 </template>
 
 <script setup lang="ts">
- /*
 import { useQuery } from '@vue/apollo-composable'
-import { storeToRefs } from 'pinia'
-*/
+import { ref, watch } from 'vue'
 
 import EmbeddedTable from '#components/embedded-table/EmbeddedTable.vue'
 import { usePageContext } from '#context/usePageContext'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
-// import { joinTableQuery } from '#queries/joinTableQuery'
+import GlobalErrorHandler from '#plugins/globalErrorHandler'
+import { joinTableQuery } from '#queries/joinTableQuery'
+import { useAuthStore } from '#stores/authStore'
 
-/*
- import {  }
+const authStore = useAuthStore()
 
- const {
-   result: joinTableQueryResult,
-   refetch: joinTableQueryRefetch,
-   loading,
- } = useQuery(
-   joinTableQuery,
-   {
-     userName: userName.value,
-     tableId,
-   },
-   {
-     prefetch: false,
-     fetchPolicy: 'no-cache',
-   },
- )
- */
+const userName = authStore.user?.profile.name
+
+const tableUrl = ref<string | null>(null)
 
 const pageContext = usePageContext()
 
-// const tableId = Number(pageContext.routeParams?.id)
+const tableId = Number(pageContext.routeParams?.id)
 
-const tableUrl = ''
+const { result: joinTableQueryResult, error: joinTableQueryError } = useQuery(
+  joinTableQuery,
+  () => ({
+    userName,
+    tableId,
+  }),
+  {
+    prefetch: false,
+    fetchPolicy: 'no-cache',
+  },
+)
+
+watch(joinTableQueryResult, (data: { joinTable: string }) => {
+  tableUrl.value = data.joinTable
+})
+
+// eslint-disable-next-line promise/prefer-await-to-callbacks
+watch(joinTableQueryError, (error) => {
+  GlobalErrorHandler.error('Error opening table', error)
+})
 </script>
 
 <style scoped lang="scss">

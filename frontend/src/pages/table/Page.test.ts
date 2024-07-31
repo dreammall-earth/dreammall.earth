@@ -1,16 +1,50 @@
+import { ApolloError } from '@apollo/client/errors'
 import { flushPromises, mount } from '@vue/test-utils'
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach, vi, beforeAll } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { useActiveTableStore } from '#stores/activeTableStore'
+import { joinTableQuery } from '#queries/joinTableQuery'
+import { useAuthStore } from '#stores/authStore'
+import { mockClient } from '#tests/mock.apolloClient'
+import { mockPageContext } from '#tests/mock.vikePageContext'
+import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
 import TablePage from './+Page.vue'
 import { title } from './+title'
 
-const activeTableStore = useActiveTableStore()
+const authStore = useAuthStore()
+
+const joinTableQueryMock = vi.fn()
+
+mockClient.setRequestHandler(
+  joinTableQuery,
+  joinTableQueryMock.mockResolvedValue({ data: { joinTable: 'https://some-link-to-meeting.com' } }),
+)
 
 describe('Table Page', () => {
+  beforeAll(() => {
+    authStore.save({
+      access_token: 'access_token',
+      profile: {
+        aud: 'aud',
+        sub: 'sub',
+        exp: 1,
+        iat: 1,
+        iss: 'iss',
+        name: 'Peter Lustig',
+      },
+      token_type: 'token_type',
+      session_state: null,
+      state: null,
+      expires_at: new Date().valueOf() + 100,
+      expires_in: 0,
+      expired: false,
+      scopes: ['email'],
+      toStorageString: () => 'toStorageString',
+    })
+  })
+
   const Wrapper = () => {
     return mount(VApp, {
       slots: {
@@ -33,15 +67,57 @@ describe('Table Page', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 
-  describe('active table store updates', () => {
-    beforeEach(() => {
-      activeTableStore.setActiveTable('https://my-table.link')
+  describe('route params in page context is undefined and API throws error', () => {
+    beforeEach(async () => {
+      vi.clearAllMocks()
+      wrapper.unmount()
+      joinTableQueryMock.mockRejectedValue({ message: 'table does not exist' })
+      wrapper = Wrapper()
+      await flushPromises()
     })
 
-    it('shows iframe with correct url', async () => {
+    it('calls the API accordingly', () => {
+      expect(joinTableQueryMock).toHaveBeenCalledWith({
+        userName: 'Peter Lustig',
+        tableId: NaN,
+      })
+    })
+
+    it('does not show an iframe', () => {
+      expect(wrapper.find('iframe').exists()).toBe(false)
+    })
+
+    it('toasts an error', () => {
+      expect(errorHandlerSpy).toHaveBeenCalledWith(
+        'Error opening table',
+        new ApolloError({ errorMessage: 'table does not exist' }),
+      )
+    })
+  })
+
+  describe('route params in page context contains an id and API returns link', () => {
+    beforeEach(async () => {
+      vi.clearAllMocks()
+      wrapper.unmount()
+      mockPageContext.routeParams = {
+        id: 69,
+      }
+      joinTableQueryMock.mockResolvedValue({
+        data: { joinTable: 'https://some-link-to-meeting.com' },
+      })
+      wrapper = Wrapper()
       await flushPromises()
+    })
+
+    it('calls the API accordingly', () => {
+      expect(joinTableQueryMock).toHaveBeenCalledWith({
+        userName: 'Peter Lustig',
+        tableId: 69,
+      })
+    })
+
+    it('shows an iframe', () => {
       expect(wrapper.find('iframe').exists()).toBe(true)
-      expect(wrapper.find('iframe').attributes('src')).toBe('https://my-table.link')
     })
   })
 })
