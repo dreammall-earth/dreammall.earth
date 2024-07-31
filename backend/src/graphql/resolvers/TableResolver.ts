@@ -237,12 +237,9 @@ export class TableResolver {
 
   @Authorized()
   @Query(() => [OpenTable])
-  async openTables(@Ctx() context: Context): Promise<OpenTable[]> {
-    const { user } = context
-    if (!user) return []
+  async openTables(): Promise<OpenTable[]> {
     const meetings = await getMeetings()
-
-    return openTablesFromOpenMeetings(meetings, user.name)
+    return openTablesFromOpenMeetings(meetings)
   }
 
   @Query(() => String)
@@ -266,11 +263,8 @@ export class TableResolver {
   @Subscription(() => [OpenTable], {
     topics: 'OPEN_ROOM_SUBSCRIPTION',
   })
-  async updateOpenTables(
-    @Root() meetings: MeetingInfo[],
-    @Arg('username') username: string,
-  ): Promise<OpenTable[]> {
-    return openTablesFromOpenMeetings(meetings, username)
+  async updateOpenTables(@Root() meetings: MeetingInfo[]): Promise<OpenTable[]> {
+    return openTablesFromOpenMeetings(meetings)
   }
 
   /*
@@ -286,12 +280,9 @@ export class TableResolver {
   */
 }
 
-const openTablesFromOpenMeetings = async (
-  meetings: MeetingInfo[],
-  username: string,
-): Promise<OpenTable[]> => {
+const openTablesFromOpenMeetings = async (meetings: MeetingInfo[]): Promise<OpenTable[]> => {
   if (meetings.length) {
-    const dbMeetingsPwMap = await prisma.meeting.findMany({
+    const dbMeetingsIdMap = await prisma.meeting.findMany({
       where: {
         meetingID: { in: meetings.map((m: MeetingInfo) => m.meetingID) },
       },
@@ -302,16 +293,8 @@ const openTablesFromOpenMeetings = async (
       },
     })
     return meetings.map((m: MeetingInfo) => {
-      const pw = dbMeetingsPwMap.find((pw) => pw.meetingID === m.meetingID)
-      return new OpenTable(
-        m,
-        joinMeetingLink({
-          fullName: username,
-          meetingID: m.meetingID,
-          password: pw?.attendeePW ? pw.attendeePW : '',
-        }),
-        pw?.id ? pw?.id : 0,
-      )
+      const pw = dbMeetingsIdMap.find((pw) => pw.meetingID === m.meetingID)
+      return new OpenTable(m, pw?.id ? pw?.id : 0)
     })
   }
 

@@ -877,7 +877,7 @@ describe('TableResolver', () => {
             testServer.executeOperation(
               {
                 query:
-                  'query { openTables { meetingName meetingID participantCount startTime joinLink attendees { fullName } } }',
+                  'query { openTables { id meetingName meetingID participantCount startTime attendees { fullName } } }',
               },
               {
                 contextValue: {
@@ -893,12 +893,13 @@ describe('TableResolver', () => {
                 data: {
                   openTables: [
                     {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
                       meetingName: 'Dreammall Entwicklung',
                       meetingID: 'Dreammall-Entwicklung',
                       participantCount: 0,
                       startTime: '1718189',
                       attendees: [],
-                      joinLink: 'https://my-link',
                     },
                   ],
                 },
@@ -969,7 +970,7 @@ describe('TableResolver', () => {
             testServer.executeOperation(
               {
                 query:
-                  'query { openTables { meetingName meetingID participantCount startTime joinLink attendees { fullName } } }',
+                  'query { openTables { id meetingName meetingID participantCount startTime attendees { fullName } } }',
               },
               {
                 contextValue: {
@@ -985,11 +986,12 @@ describe('TableResolver', () => {
                 data: {
                   openTables: [
                     {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
                       meetingName: 'Dreammall Entwicklung',
                       meetingID: 'Dreammall-Entwicklung',
                       participantCount: 0,
                       startTime: '1718189',
-                      joinLink: 'https://my-link',
                       attendees: [
                         {
                           fullName: 'Peter Lustig',
@@ -1001,14 +1003,6 @@ describe('TableResolver', () => {
                 errors: undefined,
               },
             },
-          })
-        })
-
-        it('calls joinMeetingLink with correct PW', () => {
-          expect(joinMeetingLinkMock).toHaveBeenCalledWith({
-            fullName: 'User',
-            meetingID: 'Dreammall-Entwicklung',
-            password: '1234',
           })
         })
       })
@@ -1074,7 +1068,7 @@ describe('TableResolver', () => {
             testServer.executeOperation(
               {
                 query:
-                  'query { openTables { meetingName meetingID participantCount startTime joinLink attendees { fullName } } }',
+                  'query { openTables { id meetingName meetingID participantCount startTime attendees { fullName } } }',
               },
               {
                 contextValue: {
@@ -1090,11 +1084,12 @@ describe('TableResolver', () => {
                 data: {
                   openTables: [
                     {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
                       meetingName: 'Dreammall Entwicklung',
                       meetingID: 'Dreammall-Entwicklung',
                       participantCount: 0,
                       startTime: '1718189',
-                      joinLink: 'https://my-link',
                       attendees: [
                         {
                           fullName: 'Peter Lustig',
