@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useQuery } from '@vue/apollo-composable'
+import { useLazyQuery, useQuery } from '@vue/apollo-composable'
 import { ref } from 'vue'
 
 import MainButton from '#components/buttons/MainButton.vue'
@@ -43,11 +43,7 @@ const tableId = Number(pageContext.routeParams?.id)
 const userName = ref('')
 
 const form = ref<HTMLFormElement>()
-const {
-  result: joinTableQueryResult,
-  refetch: joinTableQueryRefetch,
-  loading,
-} = useQuery(
+const { load, loading } = useLazyQuery(
   joinTableQuery,
   {
     userName: userName.value,
@@ -61,13 +57,8 @@ const {
 
 const getTableLink = async () => {
   try {
-    await joinTableQueryRefetch({
-      userName: userName.value,
-      tableId,
-    })
-    if (joinTableQueryResult.value) {
-      window.location.href = joinTableQueryResult.value.joinTable
-    }
+    const result = await load()
+    window.location.href = result.joinTable
   } catch (error) {
     GlobalErrorHandler.error('table link not found', error)
   }
