@@ -29,16 +29,19 @@ jobs:
           # Configure which scopes are allowed (newline delimited).
           # Append a scope for each service here
           scopes: |
-            backend
-            presenter
-            frontend
             admin
             authentik
+            backend
+            deps
+            dev-deps
             docu
             docker
-            release
-            workflow
+            frontend
             other
+            presenter
+            release
+            test
+            workflow
           # Configure that a scope must always be provided.
           requireScope: true
           # Configure which scopes (newline delimited) are disallowed in PR

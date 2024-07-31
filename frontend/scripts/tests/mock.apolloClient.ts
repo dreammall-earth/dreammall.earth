@@ -3,21 +3,21 @@ import { config } from '@vue/test-utils'
 import { createMockClient, createMockSubscription, IMockSubscription } from 'mock-apollo-client'
 import { vi } from 'vitest'
 
-import { openRoomsQuery } from '#src/graphql/queries/openRoomsQuery'
-import { updateOpenRoomsSubscription } from '#subscriptions/updateOpenRoomsSubscription'
+import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
+import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 export const mockClient = createMockClient()
 
-export const openRoomsQueryMock = vi.fn()
+export const openTablesQueryMock = vi.fn()
 
-export const updateOpenRoomsSubscriptionMock: IMockSubscription = createMockSubscription()
+export const updateOpenTablesSubscriptionMock: IMockSubscription = createMockSubscription()
 
 mockClient.setRequestHandler(
-  openRoomsQuery,
-  openRoomsQueryMock.mockResolvedValue({ data: { openRooms: [] } }),
+  openTablesQuery,
+  openTablesQueryMock.mockResolvedValue({ data: { openTables: [] } }),
 )
 
-mockClient.setRequestHandler(updateOpenRoomsSubscription, () => updateOpenRoomsSubscriptionMock)
+mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateOpenTablesSubscriptionMock)
 
 config.global.provide = {
   ...config.global.provide,
