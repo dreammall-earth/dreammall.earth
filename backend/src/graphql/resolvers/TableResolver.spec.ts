@@ -3,6 +3,7 @@ import { User } from '@prisma/client'
 
 import { createMeeting, joinMeetingLink, getMeetings } from '#api/BBB'
 import { CONFIG } from '#config/config'
+import { fakePayload } from '#src/auth/jwtVerify'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
 
@@ -319,7 +320,11 @@ describe('TableResolver', () => {
         })
 
         it('creates create my table event in the database', async () => {
-          const user = await prisma.user.findFirst()
+          const user = await prisma.user.findUnique({
+            where: {
+              username: fakePayload.nickname,
+            },
+          })
           const result = await prisma.event.findMany({
             orderBy: {
               createdAt: 'asc',
@@ -580,9 +585,9 @@ describe('TableResolver', () => {
         })
 
         it('creates update my room event', async () => {
-          const user = await prisma.user.findFirst({
+          const user = await prisma.user.findUnique({
             where: {
-              username: 'mockedUser',
+              username: fakePayload.nickname,
             },
           })
           const result = await prisma.event.findMany({
