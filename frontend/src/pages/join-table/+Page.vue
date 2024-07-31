@@ -36,7 +36,7 @@ import { ref } from 'vue'
 import MainButton from '#components/buttons/MainButton.vue'
 import { usePageContext } from '#context/usePageContext'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
-import { joinTableQuery } from '#queries/joinTableQuery'
+import { joinTableAsGuestQuery } from '#queries/joinTableAsGuestQuery'
 
 const pageContext = usePageContext()
 const tableId = Number(pageContext.routeParams?.id)
@@ -44,11 +44,11 @@ const userName = ref('')
 
 const form = ref<HTMLFormElement>()
 const {
-  result: joinTableQueryResult,
-  refetch: joinTableQueryRefetch,
+  result: joinTableAsGuestQueryResult,
+  refetch: joinTableAsGuestQueryRefetch,
   loading,
 } = useQuery(
-  joinTableQuery,
+  joinTableAsGuestQuery,
   {
     userName: userName.value,
     tableId,
@@ -61,12 +61,12 @@ const {
 
 const getTableLink = async () => {
   try {
-    await joinTableQueryRefetch({
+    await joinTableAsGuestQueryRefetch({
       userName: userName.value,
       tableId,
     })
-    if (joinTableQueryResult.value) {
-      window.location.href = joinTableQueryResult.value.joinTable
+    if (joinTableAsGuestQueryResult.value) {
+      window.location.href = joinTableAsGuestQueryResult.value.joinTable
     }
   } catch (error) {
     GlobalErrorHandler.error('table link not found', error)

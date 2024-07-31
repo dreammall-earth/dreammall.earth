@@ -15,11 +15,6 @@ import { usePageContext } from '#context/usePageContext'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { joinTableQuery } from '#queries/joinTableQuery'
-import { useAuthStore } from '#stores/authStore'
-
-const authStore = useAuthStore()
-
-const userName = authStore.user?.profile.name
 
 const tableUrl = ref<string | null>(null)
 
@@ -30,7 +25,6 @@ const tableId = Number(pageContext.routeParams?.id)
 const { result: joinTableQueryResult, error: joinTableQueryError } = useQuery(
   joinTableQuery,
   () => ({
-    userName,
     tableId,
   }),
   {

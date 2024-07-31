@@ -692,9 +692,7 @@ exports[`Table Page > renders 1`] = `
                       
                       <span
                         data-v-607bdd70=""
-                      >
-                        PL
-                      </span>
+                      />
                       
                       
                       
@@ -1916,9 +1914,7 @@ exports[`Table Page > renders 1`] = `
             
             <span
               data-v-607bdd70=""
-            >
-              PL
-            </span>
+            />
             
             
             

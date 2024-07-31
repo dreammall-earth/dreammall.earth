@@ -1,11 +1,10 @@
 import { ApolloError } from '@apollo/client/errors'
 import { flushPromises, mount } from '@vue/test-utils'
-import { describe, it, expect, beforeEach, vi, beforeAll } from 'vitest'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 import { joinTableQuery } from '#queries/joinTableQuery'
-import { useAuthStore } from '#stores/authStore'
 import { mockClient } from '#tests/mock.apolloClient'
 import { mockPageContext } from '#tests/mock.vikePageContext'
 import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
@@ -13,8 +12,6 @@ import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 import TablePage from './+Page.vue'
 import Route from './+route'
 import { title } from './+title'
-
-const authStore = useAuthStore()
 
 const joinTableQueryMock = vi.fn()
 
@@ -24,28 +21,6 @@ mockClient.setRequestHandler(
 )
 
 describe('Table Page', () => {
-  beforeAll(() => {
-    authStore.save({
-      access_token: 'access_token',
-      profile: {
-        aud: 'aud',
-        sub: 'sub',
-        exp: 1,
-        iat: 1,
-        iss: 'iss',
-        name: 'Peter Lustig',
-      },
-      token_type: 'token_type',
-      session_state: null,
-      state: null,
-      expires_at: new Date().valueOf() + 100,
-      expires_in: 0,
-      expired: false,
-      scopes: ['email'],
-      toStorageString: () => 'toStorageString',
-    })
-  })
-
   const Wrapper = () => {
     return mount(VApp, {
       slots: {
@@ -83,7 +58,6 @@ describe('Table Page', () => {
 
     it('calls the API accordingly', () => {
       expect(joinTableQueryMock).toHaveBeenCalledWith({
-        userName: 'Peter Lustig',
         tableId: NaN,
       })
     })
@@ -116,7 +90,6 @@ describe('Table Page', () => {
 
     it('calls the API accordingly', () => {
       expect(joinTableQueryMock).toHaveBeenCalledWith({
-        userName: 'Peter Lustig',
         tableId: 69,
       })
     })
