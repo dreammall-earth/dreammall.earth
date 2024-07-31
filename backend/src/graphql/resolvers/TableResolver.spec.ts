@@ -643,7 +643,7 @@ describe('TableResolver', () => {
         beforeAll(async () => {
           await testServer.executeOperation(
             {
-              query: createMyRoomMutation,
+              query: createMyTableMutation,
               variables: {
                 name: 'My Room',
                 isPublic: true,
