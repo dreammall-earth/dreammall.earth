@@ -682,6 +682,7 @@ exports[`Table Page > renders 1`] = `
                     data-v-607bdd70=""
                     targetref="[object Object]"
                   >
+                    
                     <div
                       class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm bg-primary"
                       data-v-607bdd70=""
@@ -727,6 +728,7 @@ exports[`Table Page > renders 1`] = `
                         </svg>
                       </i>
                     </div>
+                    
                   </button>
                   
                   <!---->
@@ -1179,7 +1181,7 @@ exports[`Table Page > renders 1`] = `
       </div>
       
       <nav
-        class="v-navigation-drawer v-navigation-drawer--bottom v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer px-4"
+        class="v-navigation-drawer v-navigation-drawer--bottom v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer px-4 d-md-none"
         data-v-cf2c9067=""
         style="bottom: 0px; z-index: 1004; transform: translateY(110%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
       >
@@ -1902,6 +1904,7 @@ exports[`Table Page > renders 1`] = `
           data-v-607bdd70=""
           targetref="[object Object]"
         >
+          
           <div
             class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm bg-primary"
             data-v-607bdd70=""
@@ -1947,6 +1950,7 @@ exports[`Table Page > renders 1`] = `
               </svg>
             </i>
           </div>
+          
         </button>
         
         <!---->
