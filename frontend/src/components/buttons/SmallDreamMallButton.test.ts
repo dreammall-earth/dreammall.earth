@@ -35,7 +35,7 @@ describe('MobileCreateButton', () => {
       wrapper = Wrapper()
       await wrapper.find('#create-button-mobile').trigger('click')
       const component = wrapper.findComponent(MobileCreateButton)
-      expect(component.emitted('button-click')).toBeTruthy()
+      expect(component.emitted('onClick')).toBeTruthy()
     })
   })
 })

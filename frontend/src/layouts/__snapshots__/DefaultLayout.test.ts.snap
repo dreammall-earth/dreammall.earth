@@ -18,7 +18,7 @@ exports[`DefaultLayout > BottomMenu > renders BottomMenu 1`] = `
       <header
         class="v-toolbar v-toolbar--flat v-toolbar--density-default v-theme--light v-locale--is-ltr v-app-bar app-bar"
         data-v-75d0be1e=""
-        style="top: 0px; z-index: 1008; transform: translateY(0%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
+        style="top: 0px; z-index: 1006; transform: translateY(0%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
       >
         <!---->
         
@@ -681,6 +681,7 @@ exports[`DefaultLayout > BottomMenu > renders BottomMenu 1`] = `
                     data-v-607bdd70=""
                     targetref="[object Object]"
                   >
+                    
                     <div
                       class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm bg-primary"
                       data-v-607bdd70=""
@@ -726,6 +727,7 @@ exports[`DefaultLayout > BottomMenu > renders BottomMenu 1`] = `
                         </svg>
                       </i>
                     </div>
+                    
                   </button>
                   
                   <!---->
@@ -751,9 +753,9 @@ exports[`DefaultLayout > BottomMenu > renders BottomMenu 1`] = `
       </header>
       
       <nav
-        class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer px-4 hide-on-mobile"
+        class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer px-4"
         data-v-cf2c9067=""
-        style="right: 0px; z-index: 1006; transform: translateX(110%); position: fixed; transition: none !important; height: calc(100% - 70px - 0px); top: 70px; bottom: 0px;"
+        style="right: 0px; z-index: 1004; transform: translateX(110%); position: fixed; height: calc(100% - 70px - 0px); top: 70px; bottom: 0px;"
       >
         <!---->
         <!---->
@@ -1589,211 +1591,207 @@ exports[`DefaultLayout > BottomMenu > renders BottomMenu 1`] = `
         </div>
         
       </div>
-      <!-- Small DreamMall Button -->
-      <mobilecreatebuttonactions
+      <!-- MobileButtonList -->
+      <div
+        class="button-list-mobile d-md-none"
         data-v-75d0be1e=""
-        is-visible="false"
-      />
-      
-      <nav
-        class="v-navigation-drawer v-navigation-drawer--bottom v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer px-4 hide-on-desktop"
-        data-v-cf2c9067=""
-        style="bottom: 0px; z-index: 1004; transform: translateY(110%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
       >
-        <!---->
-        <!---->
         <div
-          class="v-navigation-drawer__content"
+          class="v-responsive v-img v-img--booting w-100 menu-divider"
+          data-v-75d0be1e=""
+        >
+          <div
+            class="v-responsive__sizer"
+          />
+          
+          
+          <transition-stub
+            appear="true"
+            css="true"
+            name="fade-transition"
+            persisted="false"
+          >
+            <img
+              class="v-img__img v-img__img--contain"
+              src="/src/assets/img/divider.svg"
+              style="display: none;"
+            />
+          </transition-stub>
+          <transition-stub
+            appear="false"
+            css="true"
+            name="fade-transition"
+            persisted="false"
+          >
+            <!---->
+          </transition-stub>
+          <!---->
+          <!---->
+          <!---->
+          
+          
+          <!---->
+        </div>
+        <div
+          class="v-responsive v-img v-img--booting w-100 menu-triangle"
+          data-v-75d0be1e=""
+        >
+          <div
+            class="v-responsive__sizer"
+          />
+          
+          
+          <transition-stub
+            appear="true"
+            css="true"
+            name="fade-transition"
+            persisted="false"
+          >
+            <img
+              class="v-img__img v-img__img--contain"
+              src="/src/assets/img/triangle.svg"
+              style="display: none;"
+            />
+          </transition-stub>
+          <transition-stub
+            appear="false"
+            css="true"
+            name="fade-transition"
+            persisted="false"
+          >
+            <!---->
+          </transition-stub>
+          <!---->
+          <!---->
+          <!---->
+          
+          
+          <!---->
+        </div>
+        <button
+          class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--border-gradient main-button-auto assistant-button"
+          data-v-2b63c1fe=""
+          data-v-75d0be1e=""
+          style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
+          type="button"
         >
           
-          <div
-            class="v-input v-input--horizontal v-input--center-affix v-input--density-compact v-theme--light v-locale--is-ltr v-text-field search"
-            data-v-cf2c9067=""
-          >
-            <!---->
-            <div
-              class="v-input__control"
-            >
-              
-              <div
-                class="v-field v-field--appended v-field--center-affix v-field--flat v-field--prepended v-field--variant-solo v-theme--light v-field--rounded v-locale--is-ltr"
-              >
-                <div
-                  class="v-field__overlay"
-                />
-                <div
-                  class="v-field__loader"
-                >
-                  <div
-                    aria-hidden="true"
-                    aria-valuemax="100"
-                    aria-valuemin="0"
-                    class="v-progress-linear v-theme--light v-locale--is-ltr"
-                    role="progressbar"
-                    style="top: 0px; height: 0px; --v-progress-linear-height: 2px;"
-                  >
-                    <!---->
-                    <div
-                      class="v-progress-linear__background"
-                      style="width: 100%;"
-                    />
-                    <transition-stub
-                      appear="false"
-                      css="true"
-                      name="fade-transition"
-                      persisted="false"
-                    >
-                      <div
-                        class="v-progress-linear__indeterminate"
-                      >
-                        
-                        <div
-                          class="v-progress-linear__indeterminate long"
-                        />
-                        <div
-                          class="v-progress-linear__indeterminate short"
-                        />
-                        
-                      </div>
-                    </transition-stub>
-                    <!---->
-                  </div>
-                </div>
-                <div
-                  class="v-field__prepend-inner"
-                >
-                  <i
-                    aria-hidden="true"
-                    class="mdi-tune mdi v-icon notranslate v-theme--light v-icon--size-default"
-                  />
-                  <!---->
-                </div>
-                <div
-                  class="v-field__field"
-                  data-no-activator=""
-                >
-                  <label
-                    aria-hidden="true"
-                    class="v-label v-field-label v-field-label--floating"
-                    for="input-6"
-                  >
-                    <!---->
-                    
-                    $t('tablesDrawer.searchPlaceholder')
-                    
-                  </label>
-                  <label
-                    class="v-label v-field-label"
-                    for="input-6"
-                  >
-                    <!---->
-                    
-                    $t('tablesDrawer.searchPlaceholder')
-                    
-                  </label>
-                  
-                  
-                  <!---->
-                  <input
-                    aria-describedby="input-6-messages"
-                    class="v-field__input"
-                    id="input-6"
-                    size="1"
-                    type="text"
-                  />
-                  <!---->
-                  
-                  
-                </div>
-                <transition-stub
-                  appear="false"
-                  css="true"
-                  name="expand-x-transition"
-                  persisted="false"
-                >
-                  <div
-                    class="v-field__clearable"
-                    style="display: none;"
-                  >
-                    
-                    <i
-                      aria-hidden="false"
-                      aria-label="Löschen"
-                      class="mdi-close-circle mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--clickable"
-                      role="button"
-                      tabindex="0"
-                    />
-                    
-                  </div>
-                </transition-stub>
-                <div
-                  class="v-field__append-inner"
-                >
-                  <!---->
-                  <!---->
-                </div>
-                <div
-                  class="v-field__outline"
-                >
-                  <!---->
-                  <!---->
-                </div>
-              </div>
-              
-            </div>
-            <!---->
-            <div
-              class="v-input__details"
-            >
-              <transition-group-stub
-                appear="false"
-                aria-live="polite"
-                class="v-messages"
-                css="true"
-                id="input-6-messages"
-                name="slide-y-transition"
-                persisted="false"
-                role="alert"
-                tag="div"
-              >
-                <!---->
-              </transition-group-stub>
-              <!---->
-            </div>
-          </div>
-          <div
-            class="v-list v-theme--light bg-transparent v-list--density-default v-list--one-line"
-            data-v-cf2c9067=""
-            role="listbox"
-            tabindex="0"
-          >
-            
-            <h2
-              class="header mb-4"
-              data-v-cf2c9067=""
-            >
-              $t('tablesDrawer.header')
-            </h2>
-            <div
-              data-v-cf2c9067=""
-            >
-              $t('tablesDrawer.noTables')
-            </div>
-            
-          </div>
+          <span
+            class="v-btn__overlay"
+          />
+          <span
+            class="v-btn__underlay"
+          />
           
-        </div>
-        <!---->
-      </nav>
-      <transition-stub
-        appear="false"
-        css="true"
-        name="fade-transition"
-        persisted="false"
-      >
-        <!---->
-      </transition-stub>
-      
+          <!---->
+          <span
+            class="v-btn__content"
+            data-no-activator=""
+          >
+            
+            
+            <!--v-if-->
+            <i
+              aria-hidden="true"
+              class="mdi-ear-hearing mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--start icon pb-1"
+              data-v-2b63c1fe=""
+            />
+            <span
+              class="main-button-content"
+              data-v-2b63c1fe=""
+            >
+              Assistant 
+              <!--v-if-->
+            </span>
+            
+            
+          </span>
+          <!---->
+          <!---->
+        </button>
+        <button
+          class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--border-yellow main-button-auto new-table-button"
+          data-v-2b63c1fe=""
+          data-v-75d0be1e=""
+          style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
+          type="button"
+        >
+          
+          <span
+            class="v-btn__overlay"
+          />
+          <span
+            class="v-btn__underlay"
+          />
+          
+          <!---->
+          <span
+            class="v-btn__content"
+            data-no-activator=""
+          >
+            
+            
+            <!--v-if-->
+            <i
+              aria-hidden="true"
+              class="mdi-plus mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--start icon pb-1"
+              data-v-2b63c1fe=""
+            />
+            <span
+              class="main-button-content"
+              data-v-2b63c1fe=""
+            >
+              New Table 
+              <!--v-if-->
+            </span>
+            
+            
+          </span>
+          <!---->
+          <!---->
+        </button>
+        <button
+          class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--border-blue main-button-auto new-project-button"
+          data-v-2b63c1fe=""
+          data-v-75d0be1e=""
+          style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
+          type="button"
+        >
+          
+          <span
+            class="v-btn__overlay"
+          />
+          <span
+            class="v-btn__underlay"
+          />
+          
+          <!---->
+          <span
+            class="v-btn__content"
+            data-no-activator=""
+          >
+            
+            
+            <!--v-if-->
+            <i
+              aria-hidden="true"
+              class="mdi-plus mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--start icon pb-1"
+              data-v-2b63c1fe=""
+            />
+            <span
+              class="main-button-content"
+              data-v-2b63c1fe=""
+            >
+              New Project 
+              <!--v-if-->
+            </span>
+            
+            
+          </span>
+          <!---->
+          <!---->
+        </button>
+      </div>
       <div
         class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none"
         data-v-75d0be1e=""
@@ -1829,216 +1827,497 @@ exports[`DefaultLayout > BottomMenu > renders BottomMenu 1`] = `
             
           </div>
         </button>
-        <div
-          class="button-list-mobile d-md-none"
+        <svg
+          class="create-button-svg mx-auto"
           data-v-75d0be1e=""
+          data-v-785ab064=""
+          fill="none"
+          height="182"
+          viewBox="0 0 182 182"
+          width="182"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <div
-            class="v-responsive v-img v-img--booting w-100 menu-divider"
-            data-v-75d0be1e=""
+          <g
+            class="most-outer-rings"
+            data-v-785ab064=""
+            filter="url(#filter0_i_1513_6638)"
+            opacity="0.25"
           >
-            <div
-              class="v-responsive__sizer"
+            <path
+              d="M91 170.364C46.7808 170.364 11 134.653 11 90.6818C11 46.7111 46.7808 11 91 11C135.219 11 171 46.7111 171 90.6818C171 134.653 135.219 170.364 91 170.364Z"
+              data-v-785ab064=""
+              stroke="url(#paint0_linear_1513_6638)"
+              stroke-width="22"
             />
-            
-            
-            <transition-stub
-              appear="true"
-              css="true"
-              name="fade-transition"
-              persisted="false"
-            >
-              <img
-                class="v-img__img v-img__img--contain"
-                src="/src/assets/img/divider.svg"
-                style="display: none;"
-              />
-            </transition-stub>
-            <transition-stub
-              appear="false"
-              css="true"
-              name="fade-transition"
-              persisted="false"
-            >
-              <!---->
-            </transition-stub>
-            <!---->
-            <!---->
-            <!---->
-            
-            
-            <!---->
-          </div>
-          <div
-            class="v-responsive v-img v-img--booting w-100 menu-triangle"
-            data-v-75d0be1e=""
+          </g>
+          <g
+            class="outer-rings"
+            data-v-785ab064=""
+            filter="url(#filter1_i_1513_6638)"
           >
-            <div
-              class="v-responsive__sizer"
+            <circle
+              cx="91.3183"
+              cy="90.6817"
+              data-v-785ab064=""
+              r="61.5"
+              stroke="url(#paint1_linear_1513_6638)"
+              stroke-opacity="0.5"
+              stroke-width="24"
+              transform="rotate(90 91.3183 90.6817)"
             />
-            
-            
-            <transition-stub
-              appear="true"
-              css="true"
-              name="fade-transition"
-              persisted="false"
-            >
-              <img
-                class="v-img__img v-img__img--contain"
-                src="/src/assets/img/triangle.svg"
-                style="display: none;"
-              />
-            </transition-stub>
-            <transition-stub
-              appear="false"
-              css="true"
-              name="fade-transition"
-              persisted="false"
-            >
-              <!---->
-            </transition-stub>
-            <!---->
-            <!---->
-            <!---->
-            
-            
-            <!---->
-          </div>
-          <button
-            class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--border-gradient main-button-auto assistant-button"
-            data-v-2b63c1fe=""
-            data-v-75d0be1e=""
-            style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
-            type="button"
+          </g>
+          <g
+            data-v-785ab064=""
+            filter="url(#filter2_i_1513_6638)"
           >
-            
-            <span
-              class="v-btn__overlay"
+            <circle
+              cx="91.1363"
+              cy="90.7914"
+              data-v-785ab064=""
+              fill="#EEEFF0"
+              fill-opacity="0.0405"
+              r="59.9955"
+              transform="rotate(90 91.1363 90.7914)"
             />
-            <span
-              class="v-btn__underlay"
-            />
-            
-            <!---->
-            <span
-              class="v-btn__content"
-              data-no-activator=""
-            >
-              
-              
-              <!--v-if-->
-              <i
-                aria-hidden="true"
-                class="mdi-ear-hearing mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--start icon pb-1"
-                data-v-2b63c1fe=""
-              />
-              <span
-                class="main-button-content"
-                data-v-2b63c1fe=""
-              >
-                Assistant 
-                <!--v-if-->
-              </span>
-              
-              
-            </span>
-            <!---->
-            <!---->
-          </button>
-          <button
-            class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--border-yellow main-button-auto new-table-button"
-            data-v-2b63c1fe=""
-            data-v-75d0be1e=""
-            style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
-            type="button"
+          </g>
+          <circle
+            cx="91.1363"
+            cy="90.7914"
+            data-v-785ab064=""
+            fill="white"
+            r="49.9955"
+            stroke="url(#paint2_linear_1513_6638)"
+            stroke-width="20"
+            transform="rotate(90 91.1363 90.7914)"
+          />
+          <g
+            clip-path="url(#clip0_1513_6638)"
+            data-v-785ab064=""
+            id="create-button-mobile"
           >
-            
-            <span
-              class="v-btn__overlay"
+            <rect
+              data-v-785ab064=""
+              fill="transparent"
+              height="100%"
+              width="100%"
             />
-            <span
-              class="v-btn__underlay"
+            <path
+              d="M90.7724 80.0176H95C100.877 80.0176 105.727 84.7568 105.727 90.5C105.727 96.2441 100.877 100.982 95 100.982H90.7714H84.2733H80.5162H76.7581H73V112H95C107.101 112 117 102.325 117 90.5C117 78.6747 107.101 69 95 69H73V85.1057V87.3626H76.7581H80.5162H84.2743H88.0324H91.7905H95C96.7284 87.3626 98.2105 88.8109 98.2105 90.5C98.2105 92.1891 96.7284 93.6374 95 93.6374H91.7895H73V97.3099H88.0324H95C98.8027 97.3099 101.969 94.217 101.969 90.5C101.969 86.7839 98.8027 83.6901 95 83.6901H88.0314H84.2733H80.5162H76.7581V72.6725H80.5162H95C105.026 72.6725 113.243 80.7027 113.243 90.5C113.243 100.298 105.027 108.327 95 108.327H76.7581V104.655H80.5162H90.7724H95C102.951 104.655 109.485 98.2712 109.485 90.5C109.485 82.7297 102.951 76.346 95 76.346H90.7714H81.617V80.0176H90.7724Z"
+              data-v-785ab064=""
+              fill="url(#paint3_linear_1513_6638)"
             />
-            
-            <!---->
-            <span
-              class="v-btn__content"
-              data-no-activator=""
-            >
-              
-              
-              <!--v-if-->
-              <i
-                aria-hidden="true"
-                class="mdi-plus mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--start icon pb-1"
-                data-v-2b63c1fe=""
-              />
-              <span
-                class="main-button-content"
-                data-v-2b63c1fe=""
-              >
-                New Table 
-                <!--v-if-->
-              </span>
-              
-              
-            </span>
-            <!---->
-            <!---->
-          </button>
-          <button
-            class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--border-blue main-button-auto new-project-button"
-            data-v-2b63c1fe=""
-            data-v-75d0be1e=""
-            style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
-            type="button"
+            <path
+              d="M81.537 87H93.9213H95V84.0007H93.9213L86.0749 84H81.537H77V87H81.537Z"
+              data-v-785ab064=""
+              fill="url(#paint4_linear_1513_6638)"
+              opacity="0.75"
+            />
+            <path
+              d="M81.6397 104.88H94.304H95.407V101.001H94.304L86.2803 101H81.6397H77V104.88H81.6397Z"
+              data-v-785ab064=""
+              fill="url(#paint5_linear_1513_6638)"
+              opacity="0.75"
+            />
+          </g>
+          <defs
+            data-v-785ab064=""
           >
-            
-            <span
-              class="v-btn__overlay"
-            />
-            <span
-              class="v-btn__underlay"
-            />
-            
-            <!---->
-            <span
-              class="v-btn__content"
-              data-no-activator=""
+            <filter
+              color-interpolation-filters="sRGB"
+              data-v-785ab064=""
+              filterUnits="userSpaceOnUse"
+              height="183.364"
+              id="filter0_i_1513_6638"
+              width="182"
+              x="0"
+              y="0"
             >
-              
-              
-              <!--v-if-->
-              <i
-                aria-hidden="true"
-                class="mdi-plus mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--start icon pb-1"
-                data-v-2b63c1fe=""
+              <feflood
+                data-v-785ab064=""
+                flood-opacity="0"
+                result="BackgroundImageFix"
               />
-              <span
-                class="main-button-content"
-                data-v-2b63c1fe=""
-              >
-                New Project 
-                <!--v-if-->
-              </span>
-              
-              
-            </span>
-            <!---->
-            <!---->
-          </button>
-        </div>
+              <feblend
+                data-v-785ab064=""
+                in="SourceGraphic"
+                in2="BackgroundImageFix"
+                mode="normal"
+                result="shape"
+              />
+              <fecolormatrix
+                data-v-785ab064=""
+                in="SourceAlpha"
+                result="hardAlpha"
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+              />
+              <feoffset
+                data-v-785ab064=""
+                dy="2"
+              />
+              <fegaussianblur
+                data-v-785ab064=""
+                stdDeviation="2.5"
+              />
+              <fecomposite
+                data-v-785ab064=""
+                in2="hardAlpha"
+                k2="-1"
+                k3="1"
+                operator="arithmetic"
+              />
+              <fecolormatrix
+                data-v-785ab064=""
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+              />
+              <feblend
+                data-v-785ab064=""
+                in2="shape"
+                mode="normal"
+                result="effect1_innerShadow_1513_6638"
+              />
+            </filter>
+            <filter
+              color-interpolation-filters="sRGB"
+              data-v-785ab064=""
+              filterUnits="userSpaceOnUse"
+              height="149"
+              id="filter1_i_1513_6638"
+              width="147"
+              x="17.8184"
+              y="17.1816"
+            >
+              <feflood
+                data-v-785ab064=""
+                flood-opacity="0"
+                result="BackgroundImageFix"
+              />
+              <feblend
+                data-v-785ab064=""
+                in="SourceGraphic"
+                in2="BackgroundImageFix"
+                mode="normal"
+                result="shape"
+              />
+              <fecolormatrix
+                data-v-785ab064=""
+                in="SourceAlpha"
+                result="hardAlpha"
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+              />
+              <feoffset
+                data-v-785ab064=""
+                dy="2"
+              />
+              <fegaussianblur
+                data-v-785ab064=""
+                stdDeviation="2.5"
+              />
+              <fecomposite
+                data-v-785ab064=""
+                in2="hardAlpha"
+                k2="-1"
+                k3="1"
+                operator="arithmetic"
+              />
+              <fecolormatrix
+                data-v-785ab064=""
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+              />
+              <feblend
+                data-v-785ab064=""
+                in2="shape"
+                mode="normal"
+                result="effect1_innerShadow_1513_6638"
+              />
+            </filter>
+            <filter
+              color-interpolation-filters="sRGB"
+              data-v-785ab064=""
+              filterUnits="userSpaceOnUse"
+              height="121.991"
+              id="filter2_i_1513_6638"
+              width="119.991"
+              x="31.1406"
+              y="30.7959"
+            >
+              <feflood
+                data-v-785ab064=""
+                flood-opacity="0"
+                result="BackgroundImageFix"
+              />
+              <feblend
+                data-v-785ab064=""
+                in="SourceGraphic"
+                in2="BackgroundImageFix"
+                mode="normal"
+                result="shape"
+              />
+              <fecolormatrix
+                data-v-785ab064=""
+                in="SourceAlpha"
+                result="hardAlpha"
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+              />
+              <feoffset
+                data-v-785ab064=""
+                dy="2"
+              />
+              <fegaussianblur
+                data-v-785ab064=""
+                stdDeviation="2.5"
+              />
+              <fecomposite
+                data-v-785ab064=""
+                in2="hardAlpha"
+                k2="-1"
+                k3="1"
+                operator="arithmetic"
+              />
+              <fecolormatrix
+                data-v-785ab064=""
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+              />
+              <feblend
+                data-v-785ab064=""
+                in2="shape"
+                mode="normal"
+                result="effect1_innerShadow_1513_6638"
+              />
+            </filter>
+            <lineargradient
+              data-v-785ab064=""
+              gradientUnits="userSpaceOnUse"
+              id="paint0_linear_1513_6638"
+              x1="198.763"
+              x2="-7.6048"
+              y1="23.5654"
+              y2="168.62"
+            >
+              <stop
+                data-v-785ab064=""
+                offset="0.0149795"
+                stop-color="#2CA5B1"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="1"
+                stop-color="#999999"
+              />
+            </lineargradient>
+            <lineargradient
+              data-v-785ab064=""
+              gradientUnits="userSpaceOnUse"
+              id="paint1_linear_1513_6638"
+              x1="36.9187"
+              x2="153.938"
+              y1="3.64216"
+              y2="170.71"
+            >
+              <stop
+                data-v-785ab064=""
+                offset="0.0149795"
+                stop-color="#2CA5B1"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="1"
+                stop-color="#999999"
+              />
+            </lineargradient>
+            <lineargradient
+              data-v-785ab064=""
+              gradientUnits="userSpaceOnUse"
+              id="paint2_linear_1513_6638"
+              x1="46.7317"
+              x2="142.251"
+              y1="19.7441"
+              y2="156.116"
+            >
+              <stop
+                data-v-785ab064=""
+                offset="0.0149795"
+                stop-color="#2CA5B1"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="1"
+                stop-color="#999999"
+              />
+            </lineargradient>
+            <lineargradient
+              data-v-785ab064=""
+              gradientUnits="userSpaceOnUse"
+              id="paint3_linear_1513_6638"
+              x1="105.448"
+              x2="75.1548"
+              y1="116.071"
+              y2="62.3785"
+            >
+              <stop
+                data-v-785ab064=""
+                offset="0.1721"
+                stop-color="#2CA5B1"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.804"
+                stop-color="#F09630"
+              />
+            </lineargradient>
+            <lineargradient
+              data-v-785ab064=""
+              gradientUnits="userSpaceOnUse"
+              id="paint4_linear_1513_6638"
+              x1="94.9997"
+              x2="76.9996"
+              y1="85.5001"
+              y2="85.5001"
+            >
+              <stop
+                data-v-785ab064=""
+                stop-color="white"
+                stop-opacity="0"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.0405"
+                stop-color="#EEEFF0"
+                stop-opacity="0.0405"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.1632"
+                stop-color="#BFC3C7"
+                stop-opacity="0.1632"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.29"
+                stop-color="#979DA3"
+                stop-opacity="0.29"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.4195"
+                stop-color="#777E86"
+                stop-opacity="0.4195"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.5522"
+                stop-color="#5D6670"
+                stop-opacity="0.5522"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.6896"
+                stop-color="#4B5460"
+                stop-opacity="0.6896"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.8346"
+                stop-color="#404A56"
+                stop-opacity="0.8346"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="1"
+                stop-color="#3D4753"
+              />
+            </lineargradient>
+            <lineargradient
+              data-v-785ab064=""
+              gradientUnits="userSpaceOnUse"
+              id="paint5_linear_1513_6638"
+              x1="95.4068"
+              x2="76.9995"
+              y1="102.94"
+              y2="102.94"
+            >
+              <stop
+                data-v-785ab064=""
+                stop-color="white"
+                stop-opacity="0"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.0405"
+                stop-color="#EEEFF0"
+                stop-opacity="0.0405"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.1632"
+                stop-color="#BFC3C7"
+                stop-opacity="0.1632"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.29"
+                stop-color="#979DA3"
+                stop-opacity="0.29"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.4195"
+                stop-color="#777E86"
+                stop-opacity="0.4195"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.5522"
+                stop-color="#5D6670"
+                stop-opacity="0.5522"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.6896"
+                stop-color="#4B5460"
+                stop-opacity="0.6896"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.8346"
+                stop-color="#404A56"
+                stop-opacity="0.8346"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="1"
+                stop-color="#3D4753"
+              />
+            </lineargradient>
+            <clippath
+              data-v-785ab064=""
+              id="clip0_1513_6638"
+            >
+              <circle
+                cx="91"
+                cy="91"
+                data-v-785ab064=""
+                r="60"
+              />
+            </clippath>
+          </defs>
+        </svg>
         
         
         <button
           aria-expanded="false"
           aria-haspopup="menu"
-          aria-owns="v-menu-11"
+          aria-owns="v-menu-8"
           class="mx-auto user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
           data-v-607bdd70=""
           targetref="[object Object]"
         >
+          
           <div
             class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm bg-primary"
             data-v-607bdd70=""
@@ -2084,6 +2363,7 @@ exports[`DefaultLayout > BottomMenu > renders BottomMenu 1`] = `
               </svg>
             </i>
           </div>
+          
         </button>
         
         <!---->
@@ -2114,7 +2394,7 @@ exports[`DefaultLayout > TopMenu > renders 1`] = `
       <header
         class="v-toolbar v-toolbar--flat v-toolbar--density-default v-theme--light v-locale--is-ltr v-app-bar app-bar"
         data-v-75d0be1e=""
-        style="top: 0px; z-index: 1008; transform: translateY(0%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
+        style="top: 0px; z-index: 1006; transform: translateY(0%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
       >
         <!---->
         
@@ -2777,6 +3057,7 @@ exports[`DefaultLayout > TopMenu > renders 1`] = `
                     data-v-607bdd70=""
                     targetref="[object Object]"
                   >
+                    
                     <div
                       class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm bg-primary"
                       data-v-607bdd70=""
@@ -2822,6 +3103,7 @@ exports[`DefaultLayout > TopMenu > renders 1`] = `
                         </svg>
                       </i>
                     </div>
+                    
                   </button>
                   
                   <!---->
@@ -2847,9 +3129,9 @@ exports[`DefaultLayout > TopMenu > renders 1`] = `
       </header>
       
       <nav
-        class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer px-4 hide-on-mobile"
+        class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer px-4"
         data-v-cf2c9067=""
-        style="right: 0px; z-index: 1006; transform: translateX(110%); position: fixed; transition: none !important; height: calc(100% - 70px - 0px); top: 70px; bottom: 0px;"
+        style="right: 0px; z-index: 1004; transform: translateX(110%); position: fixed; height: calc(100% - 70px - 0px); top: 70px; bottom: 0px;"
       >
         <!---->
         <!---->
@@ -3685,211 +3967,207 @@ exports[`DefaultLayout > TopMenu > renders 1`] = `
         </div>
         
       </div>
-      <!-- Small DreamMall Button -->
-      <mobilecreatebuttonactions
+      <!-- MobileButtonList -->
+      <div
+        class="button-list-mobile d-md-none"
         data-v-75d0be1e=""
-        is-visible="false"
-      />
-      
-      <nav
-        class="v-navigation-drawer v-navigation-drawer--bottom v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer px-4 hide-on-desktop"
-        data-v-cf2c9067=""
-        style="bottom: 0px; z-index: 1004; transform: translateY(110%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
       >
-        <!---->
-        <!---->
         <div
-          class="v-navigation-drawer__content"
+          class="v-responsive v-img v-img--booting w-100 menu-divider"
+          data-v-75d0be1e=""
+        >
+          <div
+            class="v-responsive__sizer"
+          />
+          
+          
+          <transition-stub
+            appear="true"
+            css="true"
+            name="fade-transition"
+            persisted="false"
+          >
+            <img
+              class="v-img__img v-img__img--contain"
+              src="/src/assets/img/divider.svg"
+              style="display: none;"
+            />
+          </transition-stub>
+          <transition-stub
+            appear="false"
+            css="true"
+            name="fade-transition"
+            persisted="false"
+          >
+            <!---->
+          </transition-stub>
+          <!---->
+          <!---->
+          <!---->
+          
+          
+          <!---->
+        </div>
+        <div
+          class="v-responsive v-img v-img--booting w-100 menu-triangle"
+          data-v-75d0be1e=""
+        >
+          <div
+            class="v-responsive__sizer"
+          />
+          
+          
+          <transition-stub
+            appear="true"
+            css="true"
+            name="fade-transition"
+            persisted="false"
+          >
+            <img
+              class="v-img__img v-img__img--contain"
+              src="/src/assets/img/triangle.svg"
+              style="display: none;"
+            />
+          </transition-stub>
+          <transition-stub
+            appear="false"
+            css="true"
+            name="fade-transition"
+            persisted="false"
+          >
+            <!---->
+          </transition-stub>
+          <!---->
+          <!---->
+          <!---->
+          
+          
+          <!---->
+        </div>
+        <button
+          class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--border-gradient main-button-auto assistant-button"
+          data-v-2b63c1fe=""
+          data-v-75d0be1e=""
+          style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
+          type="button"
         >
           
-          <div
-            class="v-input v-input--horizontal v-input--center-affix v-input--density-compact v-theme--light v-locale--is-ltr v-text-field search"
-            data-v-cf2c9067=""
-          >
-            <!---->
-            <div
-              class="v-input__control"
-            >
-              
-              <div
-                class="v-field v-field--appended v-field--center-affix v-field--flat v-field--prepended v-field--variant-solo v-theme--light v-field--rounded v-locale--is-ltr"
-              >
-                <div
-                  class="v-field__overlay"
-                />
-                <div
-                  class="v-field__loader"
-                >
-                  <div
-                    aria-hidden="true"
-                    aria-valuemax="100"
-                    aria-valuemin="0"
-                    class="v-progress-linear v-theme--light v-locale--is-ltr"
-                    role="progressbar"
-                    style="top: 0px; height: 0px; --v-progress-linear-height: 2px;"
-                  >
-                    <!---->
-                    <div
-                      class="v-progress-linear__background"
-                      style="width: 100%;"
-                    />
-                    <transition-stub
-                      appear="false"
-                      css="true"
-                      name="fade-transition"
-                      persisted="false"
-                    >
-                      <div
-                        class="v-progress-linear__indeterminate"
-                      >
-                        
-                        <div
-                          class="v-progress-linear__indeterminate long"
-                        />
-                        <div
-                          class="v-progress-linear__indeterminate short"
-                        />
-                        
-                      </div>
-                    </transition-stub>
-                    <!---->
-                  </div>
-                </div>
-                <div
-                  class="v-field__prepend-inner"
-                >
-                  <i
-                    aria-hidden="true"
-                    class="mdi-tune mdi v-icon notranslate v-theme--light v-icon--size-default"
-                  />
-                  <!---->
-                </div>
-                <div
-                  class="v-field__field"
-                  data-no-activator=""
-                >
-                  <label
-                    aria-hidden="true"
-                    class="v-label v-field-label v-field-label--floating"
-                    for="input-6"
-                  >
-                    <!---->
-                    
-                    $t('tablesDrawer.searchPlaceholder')
-                    
-                  </label>
-                  <label
-                    class="v-label v-field-label"
-                    for="input-6"
-                  >
-                    <!---->
-                    
-                    $t('tablesDrawer.searchPlaceholder')
-                    
-                  </label>
-                  
-                  
-                  <!---->
-                  <input
-                    aria-describedby="input-6-messages"
-                    class="v-field__input"
-                    id="input-6"
-                    size="1"
-                    type="text"
-                  />
-                  <!---->
-                  
-                  
-                </div>
-                <transition-stub
-                  appear="false"
-                  css="true"
-                  name="expand-x-transition"
-                  persisted="false"
-                >
-                  <div
-                    class="v-field__clearable"
-                    style="display: none;"
-                  >
-                    
-                    <i
-                      aria-hidden="false"
-                      aria-label="Löschen"
-                      class="mdi-close-circle mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--clickable"
-                      role="button"
-                      tabindex="0"
-                    />
-                    
-                  </div>
-                </transition-stub>
-                <div
-                  class="v-field__append-inner"
-                >
-                  <!---->
-                  <!---->
-                </div>
-                <div
-                  class="v-field__outline"
-                >
-                  <!---->
-                  <!---->
-                </div>
-              </div>
-              
-            </div>
-            <!---->
-            <div
-              class="v-input__details"
-            >
-              <transition-group-stub
-                appear="false"
-                aria-live="polite"
-                class="v-messages"
-                css="true"
-                id="input-6-messages"
-                name="slide-y-transition"
-                persisted="false"
-                role="alert"
-                tag="div"
-              >
-                <!---->
-              </transition-group-stub>
-              <!---->
-            </div>
-          </div>
-          <div
-            class="v-list v-theme--light bg-transparent v-list--density-default v-list--one-line"
-            data-v-cf2c9067=""
-            role="listbox"
-            tabindex="0"
-          >
-            
-            <h2
-              class="header mb-4"
-              data-v-cf2c9067=""
-            >
-              $t('tablesDrawer.header')
-            </h2>
-            <div
-              data-v-cf2c9067=""
-            >
-              $t('tablesDrawer.noTables')
-            </div>
-            
-          </div>
+          <span
+            class="v-btn__overlay"
+          />
+          <span
+            class="v-btn__underlay"
+          />
           
-        </div>
-        <!---->
-      </nav>
-      <transition-stub
-        appear="false"
-        css="true"
-        name="fade-transition"
-        persisted="false"
-      >
-        <!---->
-      </transition-stub>
-      
+          <!---->
+          <span
+            class="v-btn__content"
+            data-no-activator=""
+          >
+            
+            
+            <!--v-if-->
+            <i
+              aria-hidden="true"
+              class="mdi-ear-hearing mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--start icon pb-1"
+              data-v-2b63c1fe=""
+            />
+            <span
+              class="main-button-content"
+              data-v-2b63c1fe=""
+            >
+              Assistant 
+              <!--v-if-->
+            </span>
+            
+            
+          </span>
+          <!---->
+          <!---->
+        </button>
+        <button
+          class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--border-yellow main-button-auto new-table-button"
+          data-v-2b63c1fe=""
+          data-v-75d0be1e=""
+          style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
+          type="button"
+        >
+          
+          <span
+            class="v-btn__overlay"
+          />
+          <span
+            class="v-btn__underlay"
+          />
+          
+          <!---->
+          <span
+            class="v-btn__content"
+            data-no-activator=""
+          >
+            
+            
+            <!--v-if-->
+            <i
+              aria-hidden="true"
+              class="mdi-plus mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--start icon pb-1"
+              data-v-2b63c1fe=""
+            />
+            <span
+              class="main-button-content"
+              data-v-2b63c1fe=""
+            >
+              New Table 
+              <!--v-if-->
+            </span>
+            
+            
+          </span>
+          <!---->
+          <!---->
+        </button>
+        <button
+          class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--border-blue main-button-auto new-project-button"
+          data-v-2b63c1fe=""
+          data-v-75d0be1e=""
+          style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
+          type="button"
+        >
+          
+          <span
+            class="v-btn__overlay"
+          />
+          <span
+            class="v-btn__underlay"
+          />
+          
+          <!---->
+          <span
+            class="v-btn__content"
+            data-no-activator=""
+          >
+            
+            
+            <!--v-if-->
+            <i
+              aria-hidden="true"
+              class="mdi-plus mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--start icon pb-1"
+              data-v-2b63c1fe=""
+            />
+            <span
+              class="main-button-content"
+              data-v-2b63c1fe=""
+            >
+              New Project 
+              <!--v-if-->
+            </span>
+            
+            
+          </span>
+          <!---->
+          <!---->
+        </button>
+      </div>
       <div
         class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none"
         data-v-75d0be1e=""
@@ -3925,216 +4203,497 @@ exports[`DefaultLayout > TopMenu > renders 1`] = `
             
           </div>
         </button>
-        <div
-          class="button-list-mobile d-md-none"
+        <svg
+          class="create-button-svg mx-auto"
           data-v-75d0be1e=""
+          data-v-785ab064=""
+          fill="none"
+          height="182"
+          viewBox="0 0 182 182"
+          width="182"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <div
-            class="v-responsive v-img v-img--booting w-100 menu-divider"
-            data-v-75d0be1e=""
+          <g
+            class="most-outer-rings"
+            data-v-785ab064=""
+            filter="url(#filter0_i_1513_6638)"
+            opacity="0.25"
           >
-            <div
-              class="v-responsive__sizer"
+            <path
+              d="M91 170.364C46.7808 170.364 11 134.653 11 90.6818C11 46.7111 46.7808 11 91 11C135.219 11 171 46.7111 171 90.6818C171 134.653 135.219 170.364 91 170.364Z"
+              data-v-785ab064=""
+              stroke="url(#paint0_linear_1513_6638)"
+              stroke-width="22"
             />
-            
-            
-            <transition-stub
-              appear="true"
-              css="true"
-              name="fade-transition"
-              persisted="false"
-            >
-              <img
-                class="v-img__img v-img__img--contain"
-                src="/src/assets/img/divider.svg"
-                style="display: none;"
-              />
-            </transition-stub>
-            <transition-stub
-              appear="false"
-              css="true"
-              name="fade-transition"
-              persisted="false"
-            >
-              <!---->
-            </transition-stub>
-            <!---->
-            <!---->
-            <!---->
-            
-            
-            <!---->
-          </div>
-          <div
-            class="v-responsive v-img v-img--booting w-100 menu-triangle"
-            data-v-75d0be1e=""
+          </g>
+          <g
+            class="outer-rings"
+            data-v-785ab064=""
+            filter="url(#filter1_i_1513_6638)"
           >
-            <div
-              class="v-responsive__sizer"
+            <circle
+              cx="91.3183"
+              cy="90.6817"
+              data-v-785ab064=""
+              r="61.5"
+              stroke="url(#paint1_linear_1513_6638)"
+              stroke-opacity="0.5"
+              stroke-width="24"
+              transform="rotate(90 91.3183 90.6817)"
             />
-            
-            
-            <transition-stub
-              appear="true"
-              css="true"
-              name="fade-transition"
-              persisted="false"
-            >
-              <img
-                class="v-img__img v-img__img--contain"
-                src="/src/assets/img/triangle.svg"
-                style="display: none;"
-              />
-            </transition-stub>
-            <transition-stub
-              appear="false"
-              css="true"
-              name="fade-transition"
-              persisted="false"
-            >
-              <!---->
-            </transition-stub>
-            <!---->
-            <!---->
-            <!---->
-            
-            
-            <!---->
-          </div>
-          <button
-            class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--border-gradient main-button-auto assistant-button"
-            data-v-2b63c1fe=""
-            data-v-75d0be1e=""
-            style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
-            type="button"
+          </g>
+          <g
+            data-v-785ab064=""
+            filter="url(#filter2_i_1513_6638)"
           >
-            
-            <span
-              class="v-btn__overlay"
+            <circle
+              cx="91.1363"
+              cy="90.7914"
+              data-v-785ab064=""
+              fill="#EEEFF0"
+              fill-opacity="0.0405"
+              r="59.9955"
+              transform="rotate(90 91.1363 90.7914)"
             />
-            <span
-              class="v-btn__underlay"
-            />
-            
-            <!---->
-            <span
-              class="v-btn__content"
-              data-no-activator=""
-            >
-              
-              
-              <!--v-if-->
-              <i
-                aria-hidden="true"
-                class="mdi-ear-hearing mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--start icon pb-1"
-                data-v-2b63c1fe=""
-              />
-              <span
-                class="main-button-content"
-                data-v-2b63c1fe=""
-              >
-                Assistant 
-                <!--v-if-->
-              </span>
-              
-              
-            </span>
-            <!---->
-            <!---->
-          </button>
-          <button
-            class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--border-yellow main-button-auto new-table-button"
-            data-v-2b63c1fe=""
-            data-v-75d0be1e=""
-            style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
-            type="button"
+          </g>
+          <circle
+            cx="91.1363"
+            cy="90.7914"
+            data-v-785ab064=""
+            fill="white"
+            r="49.9955"
+            stroke="url(#paint2_linear_1513_6638)"
+            stroke-width="20"
+            transform="rotate(90 91.1363 90.7914)"
+          />
+          <g
+            clip-path="url(#clip0_1513_6638)"
+            data-v-785ab064=""
+            id="create-button-mobile"
           >
-            
-            <span
-              class="v-btn__overlay"
+            <rect
+              data-v-785ab064=""
+              fill="transparent"
+              height="100%"
+              width="100%"
             />
-            <span
-              class="v-btn__underlay"
+            <path
+              d="M90.7724 80.0176H95C100.877 80.0176 105.727 84.7568 105.727 90.5C105.727 96.2441 100.877 100.982 95 100.982H90.7714H84.2733H80.5162H76.7581H73V112H95C107.101 112 117 102.325 117 90.5C117 78.6747 107.101 69 95 69H73V85.1057V87.3626H76.7581H80.5162H84.2743H88.0324H91.7905H95C96.7284 87.3626 98.2105 88.8109 98.2105 90.5C98.2105 92.1891 96.7284 93.6374 95 93.6374H91.7895H73V97.3099H88.0324H95C98.8027 97.3099 101.969 94.217 101.969 90.5C101.969 86.7839 98.8027 83.6901 95 83.6901H88.0314H84.2733H80.5162H76.7581V72.6725H80.5162H95C105.026 72.6725 113.243 80.7027 113.243 90.5C113.243 100.298 105.027 108.327 95 108.327H76.7581V104.655H80.5162H90.7724H95C102.951 104.655 109.485 98.2712 109.485 90.5C109.485 82.7297 102.951 76.346 95 76.346H90.7714H81.617V80.0176H90.7724Z"
+              data-v-785ab064=""
+              fill="url(#paint3_linear_1513_6638)"
             />
-            
-            <!---->
-            <span
-              class="v-btn__content"
-              data-no-activator=""
-            >
-              
-              
-              <!--v-if-->
-              <i
-                aria-hidden="true"
-                class="mdi-plus mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--start icon pb-1"
-                data-v-2b63c1fe=""
-              />
-              <span
-                class="main-button-content"
-                data-v-2b63c1fe=""
-              >
-                New Table 
-                <!--v-if-->
-              </span>
-              
-              
-            </span>
-            <!---->
-            <!---->
-          </button>
-          <button
-            class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--border-blue main-button-auto new-project-button"
-            data-v-2b63c1fe=""
-            data-v-75d0be1e=""
-            style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
-            type="button"
+            <path
+              d="M81.537 87H93.9213H95V84.0007H93.9213L86.0749 84H81.537H77V87H81.537Z"
+              data-v-785ab064=""
+              fill="url(#paint4_linear_1513_6638)"
+              opacity="0.75"
+            />
+            <path
+              d="M81.6397 104.88H94.304H95.407V101.001H94.304L86.2803 101H81.6397H77V104.88H81.6397Z"
+              data-v-785ab064=""
+              fill="url(#paint5_linear_1513_6638)"
+              opacity="0.75"
+            />
+          </g>
+          <defs
+            data-v-785ab064=""
           >
-            
-            <span
-              class="v-btn__overlay"
-            />
-            <span
-              class="v-btn__underlay"
-            />
-            
-            <!---->
-            <span
-              class="v-btn__content"
-              data-no-activator=""
+            <filter
+              color-interpolation-filters="sRGB"
+              data-v-785ab064=""
+              filterUnits="userSpaceOnUse"
+              height="183.364"
+              id="filter0_i_1513_6638"
+              width="182"
+              x="0"
+              y="0"
             >
-              
-              
-              <!--v-if-->
-              <i
-                aria-hidden="true"
-                class="mdi-plus mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--start icon pb-1"
-                data-v-2b63c1fe=""
+              <feflood
+                data-v-785ab064=""
+                flood-opacity="0"
+                result="BackgroundImageFix"
               />
-              <span
-                class="main-button-content"
-                data-v-2b63c1fe=""
-              >
-                New Project 
-                <!--v-if-->
-              </span>
-              
-              
-            </span>
-            <!---->
-            <!---->
-          </button>
-        </div>
+              <feblend
+                data-v-785ab064=""
+                in="SourceGraphic"
+                in2="BackgroundImageFix"
+                mode="normal"
+                result="shape"
+              />
+              <fecolormatrix
+                data-v-785ab064=""
+                in="SourceAlpha"
+                result="hardAlpha"
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+              />
+              <feoffset
+                data-v-785ab064=""
+                dy="2"
+              />
+              <fegaussianblur
+                data-v-785ab064=""
+                stdDeviation="2.5"
+              />
+              <fecomposite
+                data-v-785ab064=""
+                in2="hardAlpha"
+                k2="-1"
+                k3="1"
+                operator="arithmetic"
+              />
+              <fecolormatrix
+                data-v-785ab064=""
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+              />
+              <feblend
+                data-v-785ab064=""
+                in2="shape"
+                mode="normal"
+                result="effect1_innerShadow_1513_6638"
+              />
+            </filter>
+            <filter
+              color-interpolation-filters="sRGB"
+              data-v-785ab064=""
+              filterUnits="userSpaceOnUse"
+              height="149"
+              id="filter1_i_1513_6638"
+              width="147"
+              x="17.8184"
+              y="17.1816"
+            >
+              <feflood
+                data-v-785ab064=""
+                flood-opacity="0"
+                result="BackgroundImageFix"
+              />
+              <feblend
+                data-v-785ab064=""
+                in="SourceGraphic"
+                in2="BackgroundImageFix"
+                mode="normal"
+                result="shape"
+              />
+              <fecolormatrix
+                data-v-785ab064=""
+                in="SourceAlpha"
+                result="hardAlpha"
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+              />
+              <feoffset
+                data-v-785ab064=""
+                dy="2"
+              />
+              <fegaussianblur
+                data-v-785ab064=""
+                stdDeviation="2.5"
+              />
+              <fecomposite
+                data-v-785ab064=""
+                in2="hardAlpha"
+                k2="-1"
+                k3="1"
+                operator="arithmetic"
+              />
+              <fecolormatrix
+                data-v-785ab064=""
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+              />
+              <feblend
+                data-v-785ab064=""
+                in2="shape"
+                mode="normal"
+                result="effect1_innerShadow_1513_6638"
+              />
+            </filter>
+            <filter
+              color-interpolation-filters="sRGB"
+              data-v-785ab064=""
+              filterUnits="userSpaceOnUse"
+              height="121.991"
+              id="filter2_i_1513_6638"
+              width="119.991"
+              x="31.1406"
+              y="30.7959"
+            >
+              <feflood
+                data-v-785ab064=""
+                flood-opacity="0"
+                result="BackgroundImageFix"
+              />
+              <feblend
+                data-v-785ab064=""
+                in="SourceGraphic"
+                in2="BackgroundImageFix"
+                mode="normal"
+                result="shape"
+              />
+              <fecolormatrix
+                data-v-785ab064=""
+                in="SourceAlpha"
+                result="hardAlpha"
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+              />
+              <feoffset
+                data-v-785ab064=""
+                dy="2"
+              />
+              <fegaussianblur
+                data-v-785ab064=""
+                stdDeviation="2.5"
+              />
+              <fecomposite
+                data-v-785ab064=""
+                in2="hardAlpha"
+                k2="-1"
+                k3="1"
+                operator="arithmetic"
+              />
+              <fecolormatrix
+                data-v-785ab064=""
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+              />
+              <feblend
+                data-v-785ab064=""
+                in2="shape"
+                mode="normal"
+                result="effect1_innerShadow_1513_6638"
+              />
+            </filter>
+            <lineargradient
+              data-v-785ab064=""
+              gradientUnits="userSpaceOnUse"
+              id="paint0_linear_1513_6638"
+              x1="198.763"
+              x2="-7.6048"
+              y1="23.5654"
+              y2="168.62"
+            >
+              <stop
+                data-v-785ab064=""
+                offset="0.0149795"
+                stop-color="#2CA5B1"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="1"
+                stop-color="#999999"
+              />
+            </lineargradient>
+            <lineargradient
+              data-v-785ab064=""
+              gradientUnits="userSpaceOnUse"
+              id="paint1_linear_1513_6638"
+              x1="36.9187"
+              x2="153.938"
+              y1="3.64216"
+              y2="170.71"
+            >
+              <stop
+                data-v-785ab064=""
+                offset="0.0149795"
+                stop-color="#2CA5B1"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="1"
+                stop-color="#999999"
+              />
+            </lineargradient>
+            <lineargradient
+              data-v-785ab064=""
+              gradientUnits="userSpaceOnUse"
+              id="paint2_linear_1513_6638"
+              x1="46.7317"
+              x2="142.251"
+              y1="19.7441"
+              y2="156.116"
+            >
+              <stop
+                data-v-785ab064=""
+                offset="0.0149795"
+                stop-color="#2CA5B1"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="1"
+                stop-color="#999999"
+              />
+            </lineargradient>
+            <lineargradient
+              data-v-785ab064=""
+              gradientUnits="userSpaceOnUse"
+              id="paint3_linear_1513_6638"
+              x1="105.448"
+              x2="75.1548"
+              y1="116.071"
+              y2="62.3785"
+            >
+              <stop
+                data-v-785ab064=""
+                offset="0.1721"
+                stop-color="#2CA5B1"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.804"
+                stop-color="#F09630"
+              />
+            </lineargradient>
+            <lineargradient
+              data-v-785ab064=""
+              gradientUnits="userSpaceOnUse"
+              id="paint4_linear_1513_6638"
+              x1="94.9997"
+              x2="76.9996"
+              y1="85.5001"
+              y2="85.5001"
+            >
+              <stop
+                data-v-785ab064=""
+                stop-color="white"
+                stop-opacity="0"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.0405"
+                stop-color="#EEEFF0"
+                stop-opacity="0.0405"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.1632"
+                stop-color="#BFC3C7"
+                stop-opacity="0.1632"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.29"
+                stop-color="#979DA3"
+                stop-opacity="0.29"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.4195"
+                stop-color="#777E86"
+                stop-opacity="0.4195"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.5522"
+                stop-color="#5D6670"
+                stop-opacity="0.5522"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.6896"
+                stop-color="#4B5460"
+                stop-opacity="0.6896"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.8346"
+                stop-color="#404A56"
+                stop-opacity="0.8346"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="1"
+                stop-color="#3D4753"
+              />
+            </lineargradient>
+            <lineargradient
+              data-v-785ab064=""
+              gradientUnits="userSpaceOnUse"
+              id="paint5_linear_1513_6638"
+              x1="95.4068"
+              x2="76.9995"
+              y1="102.94"
+              y2="102.94"
+            >
+              <stop
+                data-v-785ab064=""
+                stop-color="white"
+                stop-opacity="0"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.0405"
+                stop-color="#EEEFF0"
+                stop-opacity="0.0405"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.1632"
+                stop-color="#BFC3C7"
+                stop-opacity="0.1632"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.29"
+                stop-color="#979DA3"
+                stop-opacity="0.29"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.4195"
+                stop-color="#777E86"
+                stop-opacity="0.4195"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.5522"
+                stop-color="#5D6670"
+                stop-opacity="0.5522"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.6896"
+                stop-color="#4B5460"
+                stop-opacity="0.6896"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="0.8346"
+                stop-color="#404A56"
+                stop-opacity="0.8346"
+              />
+              <stop
+                data-v-785ab064=""
+                offset="1"
+                stop-color="#3D4753"
+              />
+            </lineargradient>
+            <clippath
+              data-v-785ab064=""
+              id="clip0_1513_6638"
+            >
+              <circle
+                cx="91"
+                cy="91"
+                data-v-785ab064=""
+                r="60"
+              />
+            </clippath>
+          </defs>
+        </svg>
         
         
         <button
           aria-expanded="false"
           aria-haspopup="menu"
-          aria-owns="v-menu-11"
+          aria-owns="v-menu-8"
           class="mx-auto user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
           data-v-607bdd70=""
           targetref="[object Object]"
         >
+          
           <div
             class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm bg-primary"
             data-v-607bdd70=""
@@ -4180,6 +4739,7 @@ exports[`DefaultLayout > TopMenu > renders 1`] = `
               </svg>
             </i>
           </div>
+          
         </button>
         
         <!---->
