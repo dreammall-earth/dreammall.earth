@@ -122,7 +122,7 @@
     "ts-node": "^10.9.2",
     "tsx": "^4.15.7",
     "typescript": "^5.4.5",
-    "vite-plugin-checker": "^0.6.4",
+    "vite-plugin-checker": "^0.7.2",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-vuetify": "^2.0.3",
     "vitest": "^2.0.4",
