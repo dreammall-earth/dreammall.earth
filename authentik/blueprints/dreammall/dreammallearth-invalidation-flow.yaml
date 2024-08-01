@@ -1,4 +1,8 @@
-context: {}
+version: 1
+metadata:
+  name: Invalidation flow
+context:
+  redirect_url: !Env [DREAMMALL_PRESENTER_URL, "http://localhost:3001"]
 entries:
 - attrs:
     authentication: none
@@ -9,29 +13,25 @@ entries:
     policy_engine_mode: any
     title: Logout
   conditions: []
-  id: null
+  id: dreammallearth-invalidation-flow
   identifiers:
-    pk: 0f65d54a-0ddf-40f9-acdc-6fb1dbd1565e
     slug: dreammallearth-invalidation-flow
   model: authentik_flows.flow
   state: present
 - attrs:
-    expression: 'context[''flow_plan''].context[''redirect''] = ''http://localhost:3001''
-
-      return True'
+    expression: !Format ["context['flow_plan'].context['redirect'] = '%s'\nreturn True", !Context redirect_url]
     name: dreammall.earth-redirect-presenter
   conditions: []
-  id: null
+  id: dreammall.earth-redirect-presenter
   identifiers:
-    pk: 984f6c0f-905b-41ae-8136-977d575f5539
+    name: dreammall.earth-redirect-presenter
   model: authentik_policies_expression.expressionpolicy
   state: present
 - attrs: {}
   conditions: []
-  id: null
+  id: default-invalidation-logout
   identifiers:
     name: default-invalidation-logout
-    pk: 52333b11-0f35-4727-bb3e-a36e462dc664
   model: authentik_stages_user_logout.userlogoutstage
   state: present
 - attrs:
@@ -39,12 +39,11 @@ entries:
     policy_engine_mode: any
     re_evaluate_policies: true
   conditions: []
-  id: null
+  id: ddc7d781-194d-49c4-bc65-a480810f287f
   identifiers:
     order: 0
-    pk: ddc7d781-194d-49c4-bc65-a480810f287f
-    stage: 52333b11-0f35-4727-bb3e-a36e462dc664
-    target: 0f65d54a-0ddf-40f9-acdc-6fb1dbd1565e
+    stage: !KeyOf default-invalidation-logout
+    target: !KeyOf dreammallearth-invalidation-flow
   model: authentik_flows.flowstagebinding
   state: present
 - attrs:
@@ -54,13 +53,7 @@ entries:
   id: null
   identifiers:
     order: 100
-    pk: e9389204-f1be-4fd1-8f10-cbd409a43120
-    policy: 984f6c0f-905b-41ae-8136-977d575f5539
-    target: ddc7d781-194d-49c4-bc65-a480810f287f
+    policy: !KeyOf dreammall.earth-redirect-presenter
+    target: !KeyOf ddc7d781-194d-49c4-bc65-a480810f287f
   model: authentik_policies.policybinding
   state: present
-metadata:
-  labels:
-    blueprints.goauthentik.io/generated: 'true'
-  name: authentik Export - 2024-03-28 11:34:04.390115+00:00
-version: 1

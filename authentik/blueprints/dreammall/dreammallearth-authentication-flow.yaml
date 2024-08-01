@@ -1,3 +1,6 @@
+version: 1
+metadata:
+  name: Authenticatin flow
 context: {}
 entries:
 - attrs:
@@ -19,10 +22,11 @@ entries:
       \    return True\n# If the user does not have a backend attached to it, they\
       \ haven't\n# been authenticated yet and we need the password stage\nreturn not\
       \ hasattr(flow_plan.context.get(\"pending_user\"), \"backend\")"
-    name: default-authentication-flow-password-stage
+    name: dreammall-authentication-flow-password-stage
   conditions: []
+  id: dreammall-authentication-flow-password-stage
   identifiers:
-    pk: 81da6459-118e-4ce7-a553-77a3aa722ebd
+    name: dreammall-authentication-flow-password-stage
   model: authentik_policies_expression.expressionpolicy
   state: present
 - attrs:
@@ -30,7 +34,7 @@ entries:
     - authentik.core.auth.InbuiltBackend
     - authentik.sources.ldap.auth.LDAPBackend
     - authentik.core.auth.TokenBackend
-    configure_flow: 1f9e2e1d-ae2e-4687-98ac-efcc65fb3adf
+    configure_flow: !Find [authentik_flows.flow, [slug, default-password-change]]
     failed_attempts_before_cancel: 5
   conditions: []
   identifiers:
@@ -134,12 +138,7 @@ entries:
   identifiers:
     order: 0
     pk: e29488e9-5bfc-415a-b836-6383de620b37
-    policy: 81da6459-118e-4ce7-a553-77a3aa722ebd
+    policy: !KeyOf dreammall-authentication-flow-password-stage
     target: 892fe3d5-b49d-4c44-9b53-ec4c0b1da8f5
   model: authentik_policies.policybinding
   state: present
-metadata:
-  labels:
-    blueprints.goauthentik.io/generated: 'true'
-  name: authentik Export - 2024-05-09 00:50:52.689788+00:00
-version: 1
