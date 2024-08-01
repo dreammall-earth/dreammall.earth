@@ -915,4 +915,318 @@ describe('UserResolver', () => {
       })
     })
   })
+
+  describe('addUserDetail mutation', () => {
+    const query = `mutation addUserDetail($data: AddUserDetailInput!) {
+  addUserDetail(data: $data) {
+    id
+    text
+    category
+  }
+}`
+
+    describe('unauthenticated', () => {
+      it('returns an unauthenticated error', async () => {
+        const response = await testServer.executeOperation(
+          {
+            query,
+            variables: {
+              data: {
+                category: 'work',
+                text: 'Schwer am Schuften',
+              },
+            },
+          },
+          { contextValue: { dataSources: { prisma } } },
+        )
+        expect(response).toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('authenticated', () => {
+      describe('with valid data', () => {
+        it('returns user detail', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    category: 'work',
+                    text: 'Schwer am Schuften',
+                  },
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  addUserDetail: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    category: 'work',
+                    text: 'Schwer am Schuften',
+                  },
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it('creates userDetail in database', async () => {
+          await expect(prisma.userDetail.findMany()).resolves.toEqual([
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              userId: expect.any(Number),
+              category: 'work',
+              text: 'Schwer am Schuften',
+            },
+          ])
+        })
+      })
+
+      describe('text is too long', () => {
+        it('throws validation error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    category: 'work',
+                    text: 'Ich arbeite sehr hart in den Diamanten-Minen der Republik Kongo',
+                  },
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Argument Validation Error',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+    })
+  })
+
+  describe('removeUserDetail mutation', () => {
+    const query = `mutation removeUserDetail($id: Int!) {
+  removeUserDetail(id: $id)
+}`
+
+    describe('unauthenticated', () => {
+      it('returns an unauthenticated error', async () => {
+        const response = await testServer.executeOperation(
+          {
+            query,
+            variables: {
+              id: -1,
+            },
+          },
+          { contextValue: { dataSources: { prisma } } },
+        )
+        expect(response).toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('authenticated', () => {
+      describe('detail id does not exist', () => {
+        it('throws detail not found error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  id: -1,
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Detail not found!',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('detail belongs to another user', () => {
+        let detailId: number | undefined
+
+        beforeAll(async () => {
+          const bibi = await prisma.user.findUnique({
+            where: {
+              username: 'bibi',
+            },
+          })
+
+          if (bibi) {
+            const detail = await prisma.userDetail.create({
+              data: {
+                userId: bibi.id,
+                category: 'work',
+                text: 'Ich arbeite im Hexenhaus',
+              },
+            })
+
+            detailId = detail?.id
+          }
+        })
+
+        afterAll(async () => {
+          await prisma.userDetail.delete({
+            where: {
+              id: detailId,
+            },
+          })
+        })
+
+        it('throws detail not found error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  id: detailId,
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Detail not found!',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('detail belongs to user', () => {
+        let detailId: number | undefined
+
+        beforeAll(async () => {
+          const detail = await prisma.userDetail.findFirst()
+          detailId = detail?.id
+        })
+
+        it('returns true', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  id: detailId,
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  removeUserDetail: true,
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it('deletes the detail in the database', async () => {
+          await expect(
+            prisma.userDetail.findFirst({
+              where: {
+                id: detailId,
+              },
+            }),
+          ).resolves.toBeNull()
+        })
+      })
+    })
+  })
 })

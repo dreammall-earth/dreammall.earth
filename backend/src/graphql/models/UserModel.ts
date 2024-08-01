@@ -76,9 +76,13 @@ export class User {
 @ObjectType()
 export class UserDetail {
   constructor(userDetail: DbUserDetail) {
+    this.id = userDetail.id
     this.category = userDetail.category as UserDetailCategory
     this.text = userDetail.text
   }
+
+  @Field(() => Int)
+  id: number
 
   @Field(() => UserDetailCategory)
   category: UserDetailCategory

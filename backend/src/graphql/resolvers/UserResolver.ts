@@ -1,7 +1,8 @@
 import { Prisma } from '@prisma/client'
-import { Resolver, Query, Authorized, Ctx, Arg, Mutation } from 'type-graphql'
+import { Resolver, Query, Authorized, Ctx, Arg, Mutation, Int } from 'type-graphql'
 
-import { User, CurrentUser } from '#graphql/models/UserModel'
+import { User, CurrentUser, UserDetail } from '#graphql/models/UserModel'
+import { AddUserDetailInput } from '#inputs/AddUserDetailInput'
 import { UpdateUserInput } from '#inputs/UpdateUserInput'
 import { prisma, UsersWithMeetings, UserWithProfile } from '#src/prisma'
 import { Context } from '#src/server/context'
@@ -60,6 +61,47 @@ export class UserResolver {
     if (data.availability === undefined) delete data.availability
 
     return createCurrentUser({ ...user, ...data })
+  }
+
+  @Authorized()
+  @Mutation(() => UserDetail)
+  async addUserDetail(
+    @Arg('data') data: AddUserDetailInput,
+    @Ctx() context: Context,
+  ): Promise<UserDetail> {
+    const { user } = context
+    if (!user) throw new Error('User not found!')
+
+    const detail = await prisma.userDetail.create({
+      data: {
+        userId: user.id,
+        ...data,
+      },
+    })
+
+    return new UserDetail(detail)
+  }
+
+  @Authorized()
+  @Mutation(() => Boolean)
+  async removeUserDetail(
+    @Arg('id', () => Int) id: number,
+    @Ctx() context: Context,
+  ): Promise<boolean> {
+    const { user } = context
+    if (!user) throw new Error('User not found!')
+
+    const detail = user.userDetail.find((d) => d.id === id)
+
+    if (!detail) throw new Error('Detail not found!')
+
+    await prisma.userDetail.delete({
+      where: {
+        id,
+      },
+    })
+
+    return true
   }
 }
 
