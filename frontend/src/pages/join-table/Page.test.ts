@@ -60,7 +60,9 @@ describe('JoinTablePage', () => {
 
     describe('Table Link returned', () => {
       beforeEach(async () => {
-        joinTableAsGuestQueryMock.mockResolvedValue({ data: { joinTable: 'http://meinlink.de' } })
+        joinTableAsGuestQueryMock.mockResolvedValue({
+          data: { joinTableAsGuest: 'http://meinlink.de' },
+        })
         vi.clearAllMocks()
         await wrapper.find('form').trigger('submit')
       })

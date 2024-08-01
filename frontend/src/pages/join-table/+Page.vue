@@ -66,7 +66,7 @@ const getTableLink = async () => {
       tableId,
     })
     if (joinTableAsGuestQueryResult.value) {
-      window.location.href = joinTableAsGuestQueryResult.value.joinTable
+      window.location.href = joinTableAsGuestQueryResult.value.joinTableAsGuest
     }
   } catch (error) {
     GlobalErrorHandler.error('table link not found', error)
