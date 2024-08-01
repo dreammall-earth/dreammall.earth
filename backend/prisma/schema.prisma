@@ -52,10 +52,14 @@ model User {
   id                Int      @id @default(autoincrement())
   username          String   @db.VarChar(100) @unique
   name              String   @db.VarChar(254)
+  introduction      String?  @db.VarChar(25)
+  availability      String?  @db.VarChar(20)
   createdAt         DateTime @default(now())
   meeting           Meeting? @relation(fields: [meetingId], references: [id])
   meetingId         Int?     @unique
   meetings          UsersInMeetings[]
+  userDetail        UserDetail[]
+  socialMedia       SocialMedia[]
 }
 
 model Meeting {
@@ -83,4 +87,20 @@ model UsersInMeetings {
   role              String   @db.VarChar(12) @default("MODERATOR")
   
   @@id([meetingId, userId])
+}
+
+model UserDetail {
+  id                Int      @id @default(autoincrement())
+  category          String   @db.VarChar(12)
+  text              String   @db.VarChar(40)
+  user              User     @relation(fields: [userId], references: [id])
+  userId            Int
+}
+
+model SocialMedia {
+  id                Int      @id @default(autoincrement())
+  type              String   @db.VarChar(16)
+  link              String   @db.VarChar(60)
+  user              User     @relation(fields: [userId], references: [id])
+  userId            Int
 }
