@@ -28,7 +28,10 @@
         </v-col>
       </v-row>
     </v-app-bar>
-    <TablesDrawer v-model="isTablesDrawerVisible" class="hide-on-mobile" location="right" />
+    <TablesDrawer
+      v-model="isTablesDrawerVisible"
+      :location="$vuetify.display.smAndDown ? 'bottom' : 'right'"
+    />
 
     <!-- Large DreamMall Button -->
     <v-container fluid class="page-container px-8">
@@ -80,7 +83,6 @@
 
     <!-- Small DreamMall Button -->
     <MobileCreateButtonActions :is-visible="isButtonListVisible" />
-    <TablesDrawer v-model="isTablesDrawerVisible" class="hide-on-desktop" location="bottom" />
     <div class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none">
       <button class="camera-button mx-auto" @click="toggleDrawer">
         <Circle>
@@ -215,12 +217,6 @@ const enterTable = async () => {
 
 .logo {
   width: 140px;
-}
-
-.hide-on-mobile {
-  @media #{map-get($display-breakpoints, 'md-and-down')} {
-    display: none;
-  }
 }
 
 .create-button-container {
