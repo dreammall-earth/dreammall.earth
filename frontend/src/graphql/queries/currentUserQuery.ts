@@ -6,7 +6,7 @@ export const currentUserQuery = gql`
       id
       name
       username
-      room {
+      table {
         id
         name
         public

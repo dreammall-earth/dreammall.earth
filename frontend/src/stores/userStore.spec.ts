@@ -17,13 +17,13 @@ describe('User Store', () => {
       expect(userStore.currentUser).toEqual({
         id: 666,
         name: 'Current User',
-        room: null,
+        table: null,
         username: 'currentUser',
       })
       expect(userStore.getCurrentUser).toEqual({
         id: 666,
         name: 'Current User',
-        room: null,
+        table: null,
         username: 'currentUser',
       })
     })
@@ -31,8 +31,8 @@ describe('User Store', () => {
     it('has computed getters set correctly', () => {
       expect(userStore.getCurrentUserInitials).toBe('CU')
       expect(userStore.getCurrentUserAvatar).toBeUndefined()
-      expect(userStore.getMyRoom).toBeNull()
-      expect(userStore.getUsersInMyRoom).toBeUndefined()
+      expect(userStore.getMyTable).toBeNull()
+      expect(userStore.getUsersInMyTable).toBeUndefined()
     })
   })
 
@@ -48,9 +48,9 @@ describe('User Store', () => {
         id: 666,
         name: 'Current User',
         username: 'currentUser',
-        room: {
+        table: {
           id: 1234,
-          name: 'My Room',
+          name: 'My Table',
           public: false,
           users: [
             {
@@ -75,9 +75,9 @@ describe('User Store', () => {
         id: 666,
         name: 'Current User',
         username: 'currentUser',
-        room: {
+        table: {
           id: 1234,
-          name: 'My Room',
+          name: 'My Table',
           public: false,
           users: [
             {
@@ -98,9 +98,9 @@ describe('User Store', () => {
     })
 
     it('updates my room', () => {
-      expect(userStore.getMyRoom).toEqual({
+      expect(userStore.getMyTable).toEqual({
         id: 1234,
-        name: 'My Room',
+        name: 'My Table',
         public: false,
         users: [
           {
@@ -120,7 +120,7 @@ describe('User Store', () => {
     })
 
     it('updates users in my room', () => {
-      expect(userStore.getUsersInMyRoom).toEqual([
+      expect(userStore.getUsersInMyTable).toEqual([
         {
           id: 333,
           role: 'VIEWER',

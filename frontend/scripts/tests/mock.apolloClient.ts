@@ -28,7 +28,7 @@ mockClient.setRequestHandler(
         id: 666,
         name: 'Current User',
         username: 'currentUser',
-        room: null,
+        table: null,
       },
     },
   }),

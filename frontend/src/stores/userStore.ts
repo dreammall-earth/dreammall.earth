@@ -4,18 +4,18 @@ import { computed, ref, watch } from 'vue'
 
 import { currentUserQuery } from '#queries/currentUserQuery'
 
-export type UserInRoom = {
+export type UserInTable = {
   id: number
   role: 'VIEWER' | 'MODERATOR'
   name: string
   username: string
 }
 
-export type MyRoom = {
+export type MyTable = {
   id: number
   name: string
   public: boolean
-  users: UserInRoom[]
+  users: UserInTable[]
 }
 
 export type CurrentUser = {
@@ -23,7 +23,7 @@ export type CurrentUser = {
   name: string
   username: string
   avatar?: string
-  room?: MyRoom
+  table?: MyTable
 }
 
 export const useUserStore = defineStore(
@@ -46,9 +46,9 @@ export const useUserStore = defineStore(
 
     const getCurrentUser = computed(() => currentUser.value)
 
-    const getMyRoom = computed(() => currentUser.value?.room)
+    const getMyTable = computed(() => currentUser.value?.table)
 
-    const getUsersInMyRoom = computed(() => currentUser.value?.room?.users)
+    const getUsersInMyTable = computed(() => currentUser.value?.table?.users)
 
     const getCurrentUserAvatar = computed(() => currentUser.value?.avatar)
 
@@ -72,8 +72,8 @@ export const useUserStore = defineStore(
       setCurrentUser,
       getCurrentUserInitials,
       getCurrentUserAvatar,
-      getMyRoom,
-      getUsersInMyRoom,
+      getMyTable,
+      getUsersInMyTable,
     }
   },
   {
