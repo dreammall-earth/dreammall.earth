@@ -81,50 +81,55 @@
       </slot>
     </v-container>
 
-    <!-- Small DreamMall Button -->
-    <MobileCreateButtonActions :is-visible="isButtonListVisible" />
+    <!-- MobileButtonList -->
+    <div
+      class="button-list-mobile d-md-none"
+      :class="[isButtonListVisible ? 'button-list-mobile--active' : '']"
+    >
+      <v-img class="w-100 menu-divider" :src="Divider" />
+      <v-img
+        class="w-100 menu-triangle"
+        :class="[isButtonListVisible ? 'menu-triangle--turned' : '']"
+        :src="Triangle"
+      />
+      <MainButton
+        class="assistant-button"
+        variant="border-gradient"
+        label="Assistant"
+        size="auto"
+        icon="ear-hearing"
+        >{{ $t('buttons.toAssistant') }}
+      </MainButton>
+      <MainButton
+        class="new-table-button"
+        variant="border-yellow"
+        label="New Table"
+        size="auto"
+        icon="plus"
+        @click="enterTable"
+        >{{ $t('buttons.newTable') }}
+      </MainButton>
+      <MainButton
+        class="new-project-button"
+        variant="border-blue"
+        label="New Project"
+        size="auto"
+        icon="plus"
+        >{{ $t('buttons.newProject') }}
+      </MainButton>
+    </div>
+
     <div class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none">
       <button class="camera-button mx-auto" @click="toggleDrawer">
         <Circle>
           <v-icon icon="$camera"></v-icon>
         </Circle>
       </button>
-      <div
-        class="button-list-mobile d-md-none"
-        :class="[isButtonListVisible ? 'button-list-mobile--active' : '']"
-      >
-        <v-img class="w-100 menu-divider" :src="Divider" />
-        <v-img
-          class="w-100 menu-triangle"
-          :class="[isButtonListVisible ? 'menu-triangle--turned' : '']"
-          :src="Triangle"
-        />
-        <MainButton
-          class="assistant-button"
-          variant="border-gradient"
-          label="Assistant"
-          size="auto"
-          icon="ear-hearing"
-          >{{ $t('buttons.toAssistant') }}
-        </MainButton>
-        <MainButton
-          class="new-table-button"
-          variant="border-yellow"
-          label="New Table"
-          size="auto"
-          icon="plus"
-          @click="enterTable"
-          >{{ $t('buttons.newTable') }}
-        </MainButton>
-        <MainButton
-          class="new-project-button"
-          variant="border-blue"
-          label="New Project"
-          size="auto"
-          icon="plus"
-          >{{ $t('buttons.newProject') }}
-        </MainButton>
-      </div>
+      <SmallDreamMallButton
+        class="mx-auto"
+        :is-active="isButtonListVisible"
+        @click="toggleButtonList"
+      />
       <UserInfo class="mx-auto" />
     </div>
   </v-main>
@@ -139,6 +144,7 @@ import Divider from '#assets/img/divider.svg'
 import Triangle from '#assets/img/triangle.svg'
 import LargeDreamMallButton from '#components/buttons/LargeDreamMallButton.vue'
 import MainButton from '#components/buttons/MainButton.vue'
+import SmallDreamMallButton from '#components/buttons/SmallDreamMallButton.vue'
 import Circle from '#components/menu/CircleElement.vue'
 import LightDarkSwitch from '#components/menu/LightDarkSwitch.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
