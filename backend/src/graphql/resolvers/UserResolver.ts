@@ -42,6 +42,8 @@ export class UserResolver {
       },
       include: {
         meeting: true,
+        socialMedia: true,
+        userDetail: true,
       },
     })
 

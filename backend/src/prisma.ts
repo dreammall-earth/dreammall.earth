@@ -65,4 +65,13 @@ const userWithMeeting = Prisma.validator<Prisma.UserDefaultArgs>()({
 
 type UserWithMeeting = Prisma.UserGetPayload<typeof userWithMeeting>
 
-export { prisma, UsersWithMeetings, UserWithMeeting }
+const userWithProfile = Prisma.validator<Prisma.UserDefaultArgs>()({
+  include: {
+    userDetail: true,
+    socialMedia: true,
+  },
+})
+
+type UserWithProfile = Prisma.UserGetPayload<typeof userWithProfile>
+
+export { prisma, UsersWithMeetings, UserWithMeeting, UserWithProfile }

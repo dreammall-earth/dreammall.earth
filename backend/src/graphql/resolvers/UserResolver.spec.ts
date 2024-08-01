@@ -330,6 +330,14 @@ describe('UserResolver', () => {
     id
     name
     username
+    details {
+      category
+      text
+    }
+    social {
+      type
+      link
+    }
     table {
       id
       name
