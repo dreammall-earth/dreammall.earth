@@ -23,7 +23,7 @@ build {
   provisioner "shell-local" {
     inline = [
       "rm -rf archive",
-      "git clone ../ archive",
+      "git clone ../../ archive",
       "cd archive",
       "git remote set-url origin https://github.com/dreammall-earth/dreammall.earth.git", # only necessary because of the `git pull -ff` in `deploy.sh`
       "git checkout master",

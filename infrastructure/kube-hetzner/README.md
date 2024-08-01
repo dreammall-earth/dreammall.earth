@@ -24,6 +24,11 @@ tofu output --raw kubeconfig > ~/.kube/config
 Or stream the output into another file and configure your `kubectl` to read from that file.
 Check the kubernetes docs how to organize [kubeconfig files](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/).
 
+Because we keep the kube config file in our repository, you can encrypt it and check it into source:
+```sh
+tofu output --raw kubeconfig | sops encrypt /dev/stdin > ../helmfile/secrets/kubeconfig
+```
+
 Now your cluster is up and running!
 ```sh
 $ kubectl get nodes
