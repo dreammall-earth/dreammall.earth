@@ -586,4 +586,333 @@ describe('UserResolver', () => {
       })
     })
   })
+
+  describe('updateUser mutation', () => {
+    const query = `mutation updateUser($data: UpdateUserInput!) {
+  updateUser(data: $data) {
+    id
+    name
+    username
+    introduction
+    availability
+    details {
+      category
+      text
+    }
+    social {
+      type
+      link
+    }
+    table {
+      id
+      name
+      public
+      users {
+        id
+        role
+        name
+        username
+      }
+    }
+  }
+}`
+
+    describe('unauthenticated', () => {
+      it('returns an unauthenticated error', async () => {
+        const response = await testServer.executeOperation(
+          {
+            query,
+            variables: {
+              data: {
+                name: 'User',
+              },
+            },
+          },
+          { contextValue: { dataSources: { prisma } } },
+        )
+        expect(response).toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('authenticated', () => {
+      beforeAll(async () => {
+        await prisma.user.update({
+          where: {
+            username: 'mockedUser',
+          },
+          data: {
+            meetingId: null,
+          },
+        })
+      })
+
+      it('has the default user in the database', async () => {
+        await expect(
+          prisma.user.findUnique({
+            where: {
+              username: 'mockedUser',
+            },
+          }),
+        ).resolves.toEqual({
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          id: expect.any(Number),
+          username: 'mockedUser',
+          name: 'User',
+          introduction: null,
+          availability: null,
+          meetingId: null,
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          createdAt: expect.any(Date),
+        })
+      })
+
+      describe('send values for all fields', () => {
+        it('returns updated current user', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    name: 'Peter Lustig',
+                    introduction: 'Latzhose und Nickelbrille',
+                    availability: 'busy',
+                  },
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  updateUser: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    name: 'Peter Lustig',
+                    username: 'mockedUser',
+                    introduction: 'Latzhose und Nickelbrille',
+                    availability: 'busy',
+                    details: [],
+                    social: [],
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    table: expect.any(Object),
+                  },
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it('updates the database', async () => {
+          await expect(
+            prisma.user.findUnique({
+              where: {
+                username: 'mockedUser',
+              },
+            }),
+          ).resolves.toEqual({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            username: 'mockedUser',
+            name: 'Peter Lustig',
+            introduction: 'Latzhose und Nickelbrille',
+            availability: 'busy',
+            meetingId: null,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            createdAt: expect.any(Date),
+          })
+        })
+      })
+
+      describe('introduction is too long', () => {
+        it('throws validation error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    name: 'Peter Lustig',
+                    introduction:
+                      'Trägt immer Latzhose und Nickelbrille, lebt in einem blauen Bauwagen und macht jede Menge kuriose Sachen. Am Ende sagt er immer "Abschalten"',
+                    availability: 'busy',
+                  },
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Argument Validation Error',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('introduction and availability is not passed', () => {
+        it('does not change introduction and availability', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    name: 'Bibi Bloxberg',
+                  },
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  updateUser: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    name: 'Bibi Bloxberg',
+                    username: 'mockedUser',
+                    introduction: 'Latzhose und Nickelbrille',
+                    availability: 'busy',
+                    details: [],
+                    social: [],
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    table: expect.any(Object),
+                  },
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it('updates only the name in the database', async () => {
+          await expect(
+            prisma.user.findUnique({
+              where: {
+                username: 'mockedUser',
+              },
+            }),
+          ).resolves.toEqual({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            name: 'Bibi Bloxberg',
+            username: 'mockedUser',
+            introduction: 'Latzhose und Nickelbrille',
+            availability: 'busy',
+            meetingId: null,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            createdAt: expect.any(Date),
+          })
+        })
+      })
+
+      describe('introduction and availability is null', () => {
+        it('deletes introduction and availability', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    name: 'Bibi Bloxberg',
+                    introduction: null,
+                    availability: null,
+                  },
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  updateUser: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    name: 'Bibi Bloxberg',
+                    username: 'mockedUser',
+                    introduction: null,
+                    availability: null,
+                    details: [],
+                    social: [],
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    table: expect.any(Object),
+                  },
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it('updates the database', async () => {
+          await expect(
+            prisma.user.findUnique({
+              where: {
+                username: 'mockedUser',
+              },
+            }),
+          ).resolves.toEqual({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            name: 'Bibi Bloxberg',
+            username: 'mockedUser',
+            introduction: null,
+            availability: null,
+            meetingId: null,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            createdAt: expect.any(Date),
+          })
+        })
+      })
+    })
+  })
 })

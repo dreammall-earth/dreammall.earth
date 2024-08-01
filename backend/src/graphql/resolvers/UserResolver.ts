@@ -43,7 +43,7 @@ export class UserResolver {
   @Authorized()
   @Mutation(() => CurrentUser)
   async updateUser(
-    @Arg('updateUserInput') updateUserInput: UpdateUserInput,
+    @Arg('data') data: UpdateUserInput,
     @Ctx() context: Context,
   ): Promise<CurrentUser> {
     const { user } = context
@@ -53,12 +53,13 @@ export class UserResolver {
       where: {
         id: user.id,
       },
-      data: {
-        ...updateUserInput,
-      },
+      data,
     })
 
-    return createCurrentUser({ ...user, ...updateUserInput })
+    if (data.introduction === undefined) delete data.introduction
+    if (data.availability === undefined) delete data.availability
+
+    return createCurrentUser({ ...user, ...data })
   }
 }
 
