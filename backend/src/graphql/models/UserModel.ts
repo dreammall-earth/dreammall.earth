@@ -1,6 +1,5 @@
 import {
   User as DbUser,
-  Meeting,
   UserDetail as DbUserDetail,
   SocialMedia as DbScoialMedia,
 } from '@prisma/client'
@@ -104,7 +103,7 @@ export class SocialMedia {
 
 @ObjectType()
 export class CurrentUser {
-  constructor(user: UserWithProfile, meeting: Meeting | null, users: UsersWithMeetings[]) {
+  constructor(user: UserWithProfile, users: UsersWithMeetings[]) {
     this.id = user.id
     this.username = user.username
     this.name = user.name
@@ -113,7 +112,7 @@ export class CurrentUser {
 
     this.details = user.userDetail.map((d) => new UserDetail(d))
     this.social = user.socialMedia.map((s) => new SocialMedia(s))
-    this.table = meeting ? new Table(meeting, users) : null
+    this.table = user.meeting ? new Table(user.meeting, users) : null
   }
 
   @Field(() => Int)

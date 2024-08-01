@@ -67,6 +67,7 @@ type UserWithMeeting = Prisma.UserGetPayload<typeof userWithMeeting>
 
 const userWithProfile = Prisma.validator<Prisma.UserDefaultArgs>()({
   include: {
+    meeting: true,
     userDetail: true,
     socialMedia: true,
   },

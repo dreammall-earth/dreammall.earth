@@ -1,8 +1,9 @@
 import { Prisma } from '@prisma/client'
-import { Resolver, Query, Authorized, Ctx, Arg } from 'type-graphql'
+import { Resolver, Query, Authorized, Ctx, Arg, Mutation } from 'type-graphql'
 
 import { User, CurrentUser } from '#graphql/models/UserModel'
-import { prisma, UsersWithMeetings } from '#src/prisma'
+import { UpdateUserInput } from '#inputs/UpdateUserInput'
+import { prisma, UsersWithMeetings, UserWithProfile } from '#src/prisma'
 import { Context } from '#src/server/context'
 
 @Resolver()
@@ -11,7 +12,7 @@ export class UserResolver {
   @Query(() => [User])
   async users(
     @Arg('includeSelf', { nullable: true }) includeSelf: boolean = false,
-    @Arg('searchString', { nullable: true }) searchString: string = '',
+    @Arg('searchString', () => String, { nullable: true }) searchString: string | null | undefined,
     @Ctx() context: Context,
   ): Promise<User[]> {
     const { user } = context
@@ -36,28 +37,40 @@ export class UserResolver {
     const { user } = context
     if (!user) throw new Error('User not found!')
 
-    const myself = await prisma.user.findUnique({
+    return createCurrentUser(user)
+  }
+
+  @Authorized()
+  @Mutation(() => CurrentUser)
+  async updateUser(
+    @Arg('updateUserInput') updateUserInput: UpdateUserInput,
+    @Ctx() context: Context,
+  ): Promise<CurrentUser> {
+    const { user } = context
+    if (!user) throw new Error('User not found!')
+
+    await prisma.user.update({
       where: {
         id: user.id,
       },
-      include: {
-        meeting: true,
-        socialMedia: true,
-        userDetail: true,
+      data: {
+        ...updateUserInput,
       },
     })
 
-    if (!myself) throw new Error('User not found in DB!')
-
-    let usersInMeetings: UsersWithMeetings[] = []
-
-    if (myself.meetingId && !myself.meeting?.public) {
-      usersInMeetings = await prisma.usersInMeetings.findMany({
-        where: { meetingId: myself.meetingId },
-        include: { user: true },
-      })
-    }
-
-    return new CurrentUser(myself, myself.meeting, usersInMeetings)
+    return createCurrentUser({ ...user, ...updateUserInput })
   }
+}
+
+const createCurrentUser = async (user: UserWithProfile): Promise<CurrentUser> => {
+  let usersInMeetings: UsersWithMeetings[] = []
+
+  if (user.meetingId && !user.meeting?.public) {
+    usersInMeetings = await prisma.usersInMeetings.findMany({
+      where: { meetingId: user.meetingId },
+      include: { user: true },
+    })
+  }
+
+  return new CurrentUser(user, usersInMeetings)
 }
