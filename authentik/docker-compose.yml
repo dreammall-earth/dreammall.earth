@@ -40,16 +40,15 @@ services:
       - redis:/data
 
   authentik:
-    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-latest}
+    build:
+      context: .
+      target: production
     restart: unless-stopped
     command: server
     environment:
       <<: *x-shared-environments
     volumes:
-      - ./media:/media
-      - ./custom-templates:/templates
-      - ./data:/data
-      - ./web/dist/custom.css:/web/dist/custom.css
+      - ./templates:/templates
     env_file:
       - .env
     ports:
@@ -60,7 +59,9 @@ services:
       - redis
 
   authentik-worker:
-    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-latest}
+    build:
+      context: .
+      target: production
     restart: unless-stopped
     command: worker
     environment:
@@ -74,10 +75,8 @@ services:
     user: root
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./media:/media
       - ./certs:/certs
-      - ./data:/data
-      - ./custom-templates:/templates
+      - ./templates:/templates
     env_file:
       - .env
     depends_on:
