@@ -1229,4 +1229,318 @@ describe('UserResolver', () => {
       })
     })
   })
+
+  describe('addSocialMedia mutation', () => {
+    const query = `mutation addSocialMedia($data: AddSocialMediaInput!) {
+  addSocialMedia(data: $data) {
+    id
+    link
+    type
+  }
+}`
+
+    describe('unauthenticated', () => {
+      it('returns an unauthenticated error', async () => {
+        const response = await testServer.executeOperation(
+          {
+            query,
+            variables: {
+              data: {
+                link: 'https://yunite.me/user/ork',
+                type: 'discord',
+              },
+            },
+          },
+          { contextValue: { dataSources: { prisma } } },
+        )
+        expect(response).toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('authenticated', () => {
+      describe('with valid data', () => {
+        it('returns social media', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    link: 'https://yunite.me/user/ork',
+                    type: 'discord',
+                  },
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  addSocialMedia: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    link: 'https://yunite.me/user/ork',
+                    type: 'discord',
+                  },
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it('creates socialMedia in database', async () => {
+          await expect(prisma.socialMedia.findMany()).resolves.toEqual([
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              userId: expect.any(Number),
+              link: 'https://yunite.me/user/ork',
+              type: 'discord',
+            },
+          ])
+        })
+      })
+
+      describe('link is too long', () => {
+        it('throws validation error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    link: 'https://yunite.me/user/ork/478924y8919246192946192yqworyqwqwhkshfksdfhalsfksafhasafskñakfañsfkañsjfqw9ruasñfjslakjañsfjñalsfjñ',
+                    type: 'discord',
+                  },
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Argument Validation Error',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+    })
+  })
+
+  describe('removeSocialMedia mutation', () => {
+    const query = `mutation removeSocialMedia($id: Int!) {
+  removeSocialMedia(id: $id)
+}`
+
+    describe('unauthenticated', () => {
+      it('returns an unauthenticated error', async () => {
+        const response = await testServer.executeOperation(
+          {
+            query,
+            variables: {
+              id: -1,
+            },
+          },
+          { contextValue: { dataSources: { prisma } } },
+        )
+        expect(response).toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('authenticated', () => {
+      describe('social media id does not exist', () => {
+        it('throws social media not found error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  id: -1,
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Social media not found!',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('social media belongs to another user', () => {
+        let socialMediaId: number | undefined
+
+        beforeAll(async () => {
+          const bibi = await prisma.user.findUnique({
+            where: {
+              username: 'bibi',
+            },
+          })
+
+          if (bibi) {
+            const sM = await prisma.socialMedia.create({
+              data: {
+                userId: bibi.id,
+                type: 'telegram',
+                link: 't.me/bibiBloxberg',
+              },
+            })
+
+            socialMediaId = sM?.id
+          }
+        })
+
+        afterAll(async () => {
+          await prisma.socialMedia.delete({
+            where: {
+              id: socialMediaId,
+            },
+          })
+        })
+
+        it('throws social media not found error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  id: socialMediaId,
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Social media not found!',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('social media belongs to user', () => {
+        let socialMediaId: number | undefined
+
+        beforeAll(async () => {
+          const sM = await prisma.socialMedia.findFirst()
+          socialMediaId = sM?.id
+        })
+
+        it('returns true', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  id: socialMediaId,
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  removeSocialMedia: true,
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it('deletes the detail in the database', async () => {
+          await expect(
+            prisma.userDetail.findFirst({
+              where: {
+                id: socialMediaId,
+              },
+            }),
+          ).resolves.toBeNull()
+        })
+      })
+    })
+  })
 })

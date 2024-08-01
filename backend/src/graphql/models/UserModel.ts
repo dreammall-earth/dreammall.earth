@@ -94,9 +94,13 @@ export class UserDetail {
 @ObjectType()
 export class SocialMedia {
   constructor(socialMedia: DbScoialMedia) {
+    this.id = socialMedia.id
     this.type = socialMedia.type as SocialMediaType
     this.link = socialMedia.link
   }
+
+  @Field(() => Int)
+  id: number
 
   @Field(() => SocialMediaType)
   type: SocialMediaType

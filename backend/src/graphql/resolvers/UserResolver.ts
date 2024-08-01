@@ -1,7 +1,8 @@
 import { Prisma } from '@prisma/client'
 import { Resolver, Query, Authorized, Ctx, Arg, Mutation, Int } from 'type-graphql'
 
-import { User, CurrentUser, UserDetail } from '#graphql/models/UserModel'
+import { User, CurrentUser, UserDetail, SocialMedia } from '#graphql/models/UserModel'
+import { AddSocialMediaInput } from '#inputs/AddSocialMediaInput'
 import { AddUserDetailInput } from '#inputs/AddUserDetailInput'
 import { UpdateUserInput } from '#inputs/UpdateUserInput'
 import { prisma, UsersWithMeetings, UserWithProfile } from '#src/prisma'
@@ -96,6 +97,47 @@ export class UserResolver {
     if (!detail) throw new Error('Detail not found!')
 
     await prisma.userDetail.delete({
+      where: {
+        id,
+      },
+    })
+
+    return true
+  }
+
+  @Authorized()
+  @Mutation(() => SocialMedia)
+  async addSocialMedia(
+    @Arg('data') data: AddSocialMediaInput,
+    @Ctx() context: Context,
+  ): Promise<SocialMedia> {
+    const { user } = context
+    if (!user) throw new Error('User not found!')
+
+    const detail = await prisma.socialMedia.create({
+      data: {
+        userId: user.id,
+        ...data,
+      },
+    })
+
+    return new SocialMedia(detail)
+  }
+
+  @Authorized()
+  @Mutation(() => Boolean)
+  async removeSocialMedia(
+    @Arg('id', () => Int) id: number,
+    @Ctx() context: Context,
+  ): Promise<boolean> {
+    const { user } = context
+    if (!user) throw new Error('User not found!')
+
+    const socialMedia = user.socialMedia.find((s) => s.id === id)
+
+    if (!socialMedia) throw new Error('Social media not found!')
+
+    await prisma.socialMedia.delete({
       where: {
         id,
       },
