@@ -3,6 +3,7 @@ import { User } from '@prisma/client'
 
 import { createMeeting, joinMeetingLink, getMeetings } from '#api/BBB'
 import { CONFIG } from '#config/config'
+import { fakePayload } from '#src/auth/jwtVerify'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
 
@@ -352,6 +353,39 @@ describe('TableResolver', () => {
             },
           })
         })
+
+        it('creates create my table event in the database', async () => {
+          const user = await prisma.user.findUnique({
+            where: {
+              username: fakePayload.nickname,
+            },
+          })
+          const result = await prisma.event.findMany({
+            orderBy: {
+              createdAt: 'asc',
+            },
+          })
+          expect(result).toEqual([
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_USER',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_MY_TABLE',
+              involvedUserId: user?.id,
+            },
+          ])
+        })
       })
 
       describe('meeting exists', () => {
@@ -469,6 +503,7 @@ describe('TableResolver', () => {
         await prisma.usersInMeetings.deleteMany()
         await prisma.meeting.deleteMany()
         await prisma.user.deleteMany()
+        await prisma.event.deleteMany()
       })
 
       let bibi: User | undefined
@@ -582,6 +617,48 @@ describe('TableResolver', () => {
 
         it('has no meeting user mapping left in database', async () => {
           await expect(prisma.usersInMeetings.findMany()).resolves.toHaveLength(0)
+        })
+
+        it('creates update my room event', async () => {
+          const user = await prisma.user.findUnique({
+            where: {
+              username: fakePayload.nickname,
+            },
+          })
+          const result = await prisma.event.findMany({
+            orderBy: {
+              createdAt: 'asc',
+            },
+          })
+          expect(result).toEqual([
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_USER',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_MY_TABLE',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'UPDATE_MY_TABLE',
+              involvedUserId: user?.id,
+            },
+          ])
         })
       })
 

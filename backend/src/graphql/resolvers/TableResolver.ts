@@ -16,6 +16,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo, AttendeeRole } from '#api/BBB'
 import { CONFIG } from '#config/config'
 import { OpenTable, Table } from '#models/TableModel'
+import { EVENT_CREATE_MY_TABLE, EVENT_UPDATE_MY_TABLE } from '#src/event/Events'
 import logger from '#src/logger'
 import { prisma, UserWithMeeting, UsersWithMeetings } from '#src/prisma'
 import { Context } from '#src/server/context'
@@ -93,6 +94,8 @@ export class TableResolver {
       })) as UsersWithMeetings[]
     }
 
+    await EVENT_CREATE_MY_TABLE(user.id)
+
     return new Table(meeting, usersInMeetings)
   }
 
@@ -153,6 +156,8 @@ export class TableResolver {
         },
       })) as UsersWithMeetings[]
     }
+
+    await EVENT_UPDATE_MY_TABLE(user.id)
 
     return new Table(meeting, usersInMeetings)
   }
