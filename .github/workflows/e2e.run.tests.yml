@@ -15,9 +15,9 @@ jobs:
 
       - name: E2E | Boot up test system
         run: |
+          cp backend/.env.dist backend/.env
           docker compose up -d --wait database authentik authentik-worker
           cd backend
-          cp .env.dist .env
           npm install
           npm run db:reset
           npm run build
