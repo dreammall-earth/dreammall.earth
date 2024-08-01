@@ -691,7 +691,9 @@ exports[`IndexPage > without apollo error > renders 1`] = `
                       
                       <span
                         data-v-607bdd70=""
-                      />
+                      >
+                        CU
+                      </span>
                       
                       
                       
@@ -2538,7 +2540,9 @@ exports[`IndexPage > without apollo error > renders 1`] = `
             
             <span
               data-v-607bdd70=""
-            />
+            >
+              CU
+            </span>
             
             
             
