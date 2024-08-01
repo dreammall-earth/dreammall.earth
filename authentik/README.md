@@ -8,7 +8,7 @@ docker compose up
 
 ## User Credentials
 
-Wait for some minutes and and open [http://localhost:9000](http://localhost:9000).
+Wait for some minutes and open [http://localhost:9000](http://localhost:9000).
 
 For login you can use the superadmin credentials:
 
