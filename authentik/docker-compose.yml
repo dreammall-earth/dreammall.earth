@@ -1,3 +1,12 @@
+x-shared-environments: &x-shared-environments
+  AUTHENTIK_REDIS__HOST: redis
+  AUTHENTIK_POSTGRESQL__HOST: postgresql
+  AUTHENTIK_POSTGRESQL__USER: ${PG_USER:-authentik}
+  AUTHENTIK_POSTGRESQL__NAME: ${PG_DB:-authentik}
+  AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS}
+  DREAMMALL_FRONTEND_URL: http://localhost:3000
+  DREAMMALL_PRESENTER_URL: http://localhost:3001
+
 services:
   postgresql:
     image: docker.io/library/postgres:16-alpine
@@ -35,11 +44,7 @@ services:
     restart: unless-stopped
     command: server
     environment:
-      AUTHENTIK_REDIS__HOST: redis
-      AUTHENTIK_POSTGRESQL__HOST: postgresql
-      AUTHENTIK_POSTGRESQL__USER: ${PG_USER:-authentik}
-      AUTHENTIK_POSTGRESQL__NAME: ${PG_DB:-authentik}
-      AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS}
+      <<: *x-shared-environments
     volumes:
       - ./media:/media
       - ./custom-templates:/templates
@@ -59,11 +64,7 @@ services:
     restart: unless-stopped
     command: worker
     environment:
-      AUTHENTIK_REDIS__HOST: redis
-      AUTHENTIK_POSTGRESQL__HOST: postgresql
-      AUTHENTIK_POSTGRESQL__USER: ${PG_USER:-authentik}
-      AUTHENTIK_POSTGRESQL__NAME: ${PG_DB:-authentik}
-      AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS}
+      <<: *x-shared-environments
     # `user: root` and the docker socket volume are optional.
     # See more for the docker socket integration here:
     # https://goauthentik.io/docs/outposts/integrations/docker

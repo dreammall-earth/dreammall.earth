@@ -1,0 +1,116 @@
+# yaml-language-server: $schema=https://goauthentik.io/blueprints/schema.json
+version: 1
+metadata:
+  name: Application
+context:
+  dreammall_frontend_url: !Env [DREAMMALL_FRONTEND_URL, "http://localhost:3000"]
+entries:
+- model: authentik_blueprints.metaapplyblueprint
+  attrs:
+    identifiers:
+      path: dreammall/dreammallearth-authentication-flow.yaml
+    required: false
+
+- model: authentik_blueprints.metaapplyblueprint
+  attrs:
+    identifiers:
+      path: dreammall/dreammallearth-authorization-implicit-consent.yaml
+    required: false
+
+- model: authentik_providers_oauth2.scopemapping
+  id: dreammall-oauth2-openid
+  identifiers:
+    managed: goauthentik.io/providers/oauth2/scope-openid
+  attrs:
+    name: "dreammall OAuth Mapping: OpenID 'openid'"
+    scope_name: openid
+    expression: |
+      # This scope is required by the OpenID-spec, and must as such exist in authentik.
+      # The scope by itself does not grant any information
+      return {}
+
+- model: authentik_providers_oauth2.scopemapping
+  id: dreammall-oauth2-email
+  identifiers:
+    managed: goauthentik.io/providers/oauth2/scope-email
+  attrs:
+    name: "dreammall OAuth Mapping: OpenID 'email'"
+    scope_name: email
+    description: "Email address"
+    expression: |
+      return {
+          "email": request.user.email,
+          "email_verified": True
+      }
+
+- model: authentik_providers_oauth2.scopemapping
+  id: dreammall-oauth2-profile
+  identifiers:
+    managed: goauthentik.io/providers/oauth2/scope-profile
+  attrs:
+    name: "dreammall OAuth Mapping: OpenID 'profile'"
+    scope_name: profile
+    description: "General Profile Information"
+    expression: |
+      return {
+          # Because authentik only saves the user's full name, and has no concept of first and last names,
+          # the full name is used as given name.
+          # You can override this behaviour in custom mappings, i.e. `request.user.name.split(" ")`
+          "name": request.user.name,
+          "given_name": request.user.name,
+          "preferred_username": request.user.username,
+          "nickname": request.user.username,
+          # groups is not part of the official userinfo schema, but is a quasi-standard
+          "groups": [group.name for group in request.user.ak_groups.all()],
+      }
+
+- model: authentik_providers_oauth2.scopemapping
+  id: dreammall-oauth2-offline_access
+  identifiers:
+    managed: goauthentik.io/providers/oauth2/scope-offline_access
+  attrs:
+    name: "dreammall OAuth Mapping: OpenID 'offline_access'"
+    scope_name: offline_access
+    description: "Access to request new tokens without interaction"
+    expression: |
+      # This scope grants the application a refresh token that can be used to refresh user data
+      # and let the application access authentik without the users interaction
+      return {}
+
+- model: authentik_providers_oauth2.oauth2provider
+  id: dreammallearth-provider
+  identifiers:
+    name: dreammallearth-provider
+  state: present
+  attrs:
+    name: Dreammall provider
+    authentication_flow: !Find [authentik_flows.flow, [slug, dreammallearth-authentication-flow]]
+    authorization_flow: !Find [authentik_flows.flow, [slug, dreammallearth-authorization-implicit-consent]]
+    client_type: public
+    redirect_uris: !Format ['%s/.*', !Context dreammall_frontend_url]
+    sub_mode: hashed_user_id
+    issuer_mode: per_provider
+    include_claims_in_id_token: true
+    access_code_validity: minutes=1
+    access_token_validity: minutes=5
+    client_id: G3g0sjCjph1NAyGeeu5Te5ltx1I7WZ0DGB8i6vOI
+    client_secret: S47fZaan6rb7al3ycKfEtXj1JaUbvkIQhVMcZYKP53znck0aSsYiDyDtMKOmxzRiT21XHVXZpPUkHE5bPz9hBrltjA2Dc0emH7Yk6AEqmuqjgx96ncbfFlwejubPZhgB
+    signing_key: !Find [authentik_crypto.certificatekeypair, [name, 'authentik Self-signed Certificate']]
+    refresh_token_validity: days=30
+    property_mappings:
+    - !KeyOf dreammall-oauth2-openid
+    - !KeyOf dreammall-oauth2-email
+    - !KeyOf dreammall-oauth2-profile
+    - !KeyOf dreammall-oauth2-offline_access
+
+- model: authentik_core.application
+  identifiers:
+    name: dreammallearth
+  attrs:
+    group: dreammall
+    name: Dreammall frontend
+    slug: dreammallearth
+    policy_engine_mode: any
+    icon: application-icons/dreammall-logo-plain.svg
+    provider: !KeyOf dreammallearth-provider
+  state: present
