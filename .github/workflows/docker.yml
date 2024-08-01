@@ -14,7 +14,7 @@ jobs:
         folder: [admin, backend, frontend, presenter]
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: ${{ github.repository_owner }}/${{ matrix.folder }}
+      IMAGE_NAME: ${{ github.repository }}/${{ matrix.folder }}
     permissions:
       contents: read
       packages: write
