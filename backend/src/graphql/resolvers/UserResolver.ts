@@ -114,14 +114,14 @@ export class UserResolver {
     const { user } = context
     if (!user) throw new Error('User not found!')
 
-    const detail = await prisma.socialMedia.create({
+    const socialMedia = await prisma.socialMedia.create({
       data: {
         userId: user.id,
         ...data,
       },
     })
 
-    return new SocialMedia(detail)
+    return new SocialMedia(socialMedia)
   }
 
   @Authorized()

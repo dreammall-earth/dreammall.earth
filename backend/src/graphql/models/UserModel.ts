@@ -1,7 +1,7 @@
 import {
   User as DbUser,
   UserDetail as DbUserDetail,
-  SocialMedia as DbScoialMedia,
+  SocialMedia as DbSocialMedia,
 } from '@prisma/client'
 import { ObjectType, Field, Int, registerEnumType } from 'type-graphql'
 
@@ -93,7 +93,7 @@ export class UserDetail {
 
 @ObjectType()
 export class SocialMedia {
-  constructor(socialMedia: DbScoialMedia) {
+  constructor(socialMedia: DbSocialMedia) {
     this.id = socialMedia.id
     this.type = socialMedia.type as SocialMediaType
     this.link = socialMedia.link
