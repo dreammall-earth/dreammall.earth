@@ -1,10 +1,8 @@
-import { User } from '@prisma/client'
-
-import type { prisma } from '#src/prisma'
+import type { prisma, UserWithProfile } from '#src/prisma'
 
 export type Context = {
   token?: string
-  user?: User | undefined
+  user?: UserWithProfile | undefined
   dataSources: { prisma: typeof prisma }
 }
 
