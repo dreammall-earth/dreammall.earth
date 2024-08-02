@@ -92,7 +92,7 @@ model UsersInMeetings {
 model UserDetail {
   id                Int      @id @default(autoincrement())
   category          String   @db.VarChar(12)
-  text              String   @db.VarChar(40)
+  text              String   @db.VarChar(60)
   user              User     @relation(fields: [userId], references: [id])
   userId            Int
 }

@@ -6,7 +6,7 @@ ALTER TABLE `User` ADD COLUMN `availability` VARCHAR(20) NULL,
 CREATE TABLE `UserDetail` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `category` VARCHAR(12) NOT NULL,
-    `text` VARCHAR(40) NOT NULL,
+    `text` VARCHAR(60) NOT NULL,
     `userId` INTEGER NOT NULL,
 
     PRIMARY KEY (`id`)
