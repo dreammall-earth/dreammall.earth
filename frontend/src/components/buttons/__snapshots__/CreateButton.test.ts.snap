@@ -2,7 +2,7 @@
 
 exports[`CreateButton > renders 1`] = `
 <div
-  class="create-button-container"
+  class="dream-mall-button-container"
   data-v-dc035224=""
 >
   <div
@@ -114,7 +114,7 @@ exports[`CreateButton > renders 1`] = `
           <g
             clip-path="url(#clip0_1513_6640)"
             data-v-dc035224=""
-            id="create-button"
+            id="dream-mall-button"
           >
             <rect
               data-v-dc035224=""

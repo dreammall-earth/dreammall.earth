@@ -960,7 +960,7 @@ exports[`IndexPage > without apollo error > renders 1`] = `
       >
         
         <div
-          class="create-button-container"
+          class="dream-mall-button-container"
           data-v-75d0be1e=""
         >
           <div
@@ -1073,7 +1073,7 @@ exports[`IndexPage > without apollo error > renders 1`] = `
                   <g
                     clip-path="url(#clip0_1513_6640)"
                     data-v-17c018e2=""
-                    id="create-button"
+                    id="dream-mall-button"
                   >
                     <rect
                       data-v-17c018e2=""
@@ -1830,7 +1830,7 @@ exports[`IndexPage > without apollo error > renders 1`] = `
           </div>
         </button>
         <svg
-          class="create-button-svg mx-auto"
+          class="dream-mall-button-svg mx-auto"
           data-v-75d0be1e=""
           data-v-785ab064=""
           fill="none"
@@ -1895,7 +1895,7 @@ exports[`IndexPage > without apollo error > renders 1`] = `
           <g
             clip-path="url(#clip0_1513_6638)"
             data-v-785ab064=""
-            id="create-button-mobile"
+            id="small-dream-mall-button"
           >
             <rect
               data-v-785ab064=""

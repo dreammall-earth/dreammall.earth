@@ -36,7 +36,7 @@
     <!-- Large DreamMall Button -->
     <v-container fluid class="page-container px-8">
       <slot>
-        <div class="create-button-container">
+        <div class="dream-mall-button-container">
           <div>
             <v-container fluid class="pa-0">
               <div class="button-wrapper">
@@ -225,7 +225,7 @@ const enterTable = async () => {
   width: 140px;
 }
 
-.create-button-container {
+.dream-mall-button-container {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -376,7 +376,7 @@ const enterTable = async () => {
   }
 }
 
-.create-button-mobile {
+.small-dream-mall-button {
   z-index: 1;
   transform: translate(20px, 30px);
 }

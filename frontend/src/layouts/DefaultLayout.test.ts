@@ -139,7 +139,7 @@ describe('DefaultLayout', () => {
 
     describe('click on create button', () => {
       it('button list visible', async () => {
-        await wrapper.find('#create-button').trigger('click')
+        await wrapper.find('#dream-mall-button').trigger('click')
         expect(wrapper.find('.button-list-desktop .new-project-button').exists()).toBe(true)
         expect(wrapper.find('.button-list-desktop .new-table-button').exists()).toBe(true)
         expect(wrapper.find('.button-list-desktop .assistant-button').exists()).toBe(true)
@@ -160,7 +160,7 @@ describe('DefaultLayout', () => {
                 joinMyTable: 'http://link-to-my.table',
               },
             })
-            await wrapper.find('#create-button').trigger('click')
+            await wrapper.find('#dream-mall-button').trigger('click')
             await wrapper.find('.button-list-desktop button.new-table-button').trigger('click')
           })
 
@@ -186,7 +186,7 @@ describe('DefaultLayout', () => {
             joinMyTableMutationMock.mockResolvedValue({
               data: null,
             })
-            await wrapper.find('#create-button').trigger('click')
+            await wrapper.find('#dream-mall-button').trigger('click')
             await wrapper.find('.button-list-desktop button.new-table-button').trigger('click')
           })
 
@@ -211,7 +211,7 @@ describe('DefaultLayout', () => {
             joinMyTableMutationMock.mockRejectedValue({
               message: 'OUCH',
             })
-            await wrapper.find('#create-button').trigger('click')
+            await wrapper.find('#dream-mall-button').trigger('click')
             await wrapper.find('.button-list-desktop button.new-table-button').trigger('click')
           })
 

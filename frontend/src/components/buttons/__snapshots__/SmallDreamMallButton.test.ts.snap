@@ -2,7 +2,7 @@
 
 exports[`MobileCreateButton > renders active 1`] = `
 <svg
-  class="create-button-svg create-button-svg--active"
+  class="dream-mall-button-svg dream-mall-button-svg--active"
   data-v-785ab064=""
   fill="none"
   height="182"
@@ -66,7 +66,7 @@ exports[`MobileCreateButton > renders active 1`] = `
   <g
     clip-path="url(#clip0_1513_6638)"
     data-v-785ab064=""
-    id="create-button-mobile"
+    id="small-dream-mall-button"
   >
     <rect
       data-v-785ab064=""
@@ -484,7 +484,7 @@ exports[`MobileCreateButton > renders active 1`] = `
 
 exports[`MobileCreateButton > renders inactive 1`] = `
 <svg
-  class="create-button-svg"
+  class="dream-mall-button-svg"
   data-v-785ab064=""
   fill="none"
   height="182"
@@ -548,7 +548,7 @@ exports[`MobileCreateButton > renders inactive 1`] = `
   <g
     clip-path="url(#clip0_1513_6638)"
     data-v-785ab064=""
-    id="create-button-mobile"
+    id="small-dream-mall-button"
   >
     <rect
       data-v-785ab064=""
