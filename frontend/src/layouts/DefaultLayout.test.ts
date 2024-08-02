@@ -39,9 +39,12 @@ describe('DefaultLayout', () => {
     wrapper = Wrapper()
   })
 
+  it('renders', () => {
+    expect(wrapper.element).toMatchSnapshot()
+  })
+
   describe('new table button - mobile', () => {
     beforeEach(() => {
-      // setViewport(375, 667) // Set to mobile viewport
       wrapper = Wrapper()
     })
 
@@ -239,10 +242,6 @@ describe('DefaultLayout', () => {
       wrapper = Wrapper()
     })
 
-    it('renders BottomMenu', () => {
-      expect(wrapper.element).toMatchSnapshot()
-    })
-
     describe('signout button', () => {
       const authStore = useAuthStore()
 
@@ -305,10 +304,6 @@ describe('DefaultLayout', () => {
   describe('TopMenu', () => {
     beforeEach(() => {
       wrapper = Wrapper()
-    })
-
-    it('renders', () => {
-      expect(wrapper.element).toMatchSnapshot()
     })
 
     describe('admin button', () => {

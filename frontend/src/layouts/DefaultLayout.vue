@@ -164,12 +164,7 @@ const toggleDrawer = () => {
 const isButtonListVisible = ref(false)
 
 const toggleButtonList = () => {
-  try {
     isButtonListVisible.value = !isButtonListVisible.value
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error('Error while MobileCreateButton click', error)
-  }
 }
 
 const activeTableStore = useActiveTableStore()

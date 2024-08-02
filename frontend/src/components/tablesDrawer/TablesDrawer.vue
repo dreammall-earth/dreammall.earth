@@ -3,7 +3,8 @@
     v-model="isVisible"
     :location="location"
     width="auto"
-    :class="['menu-drawer px-4', { 'changing-orientation': isChangingOrientation }]"
+    class="menu-drawer px-4"
+    :class="[{ 'changing-orientation': isChangingOrientation }]"
     :style="drawerStyle"
   >
     <v-text-field
@@ -72,7 +73,6 @@ const filteredItems = computed(() => {
   )
 })
 
-// New reactive properties for handling orientation changes
 const currentLocation = ref(props.location)
 const isChangingOrientation = ref(false)
 
