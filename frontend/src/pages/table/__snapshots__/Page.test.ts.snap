@@ -973,7 +973,13 @@ exports[`Table Page > renders 1`] = `
               class="container"
               data-v-dca85f6b=""
             >
-              <!--v-if-->
+              <iframe
+                allow="camera;microphone;fullscreen;display-capture *;"
+                data-v-dca85f6b=""
+                height="100%"
+                src="https://some-link-to-meeting.com"
+                width="100%"
+              />
             </div>
             
           </div>
