@@ -11,6 +11,7 @@ const meta = {
   argTypes: {},
   args: {
     name: 'John Doe',
+    initials: 'JD',
     introduction: 'Pushing pixels and experiences',
     availability: 'available',
     details: [

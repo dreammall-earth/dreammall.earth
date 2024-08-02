@@ -3,34 +3,14 @@
     <template #default>
       <div class="header">
         <v-avatar class="avatar d-flex align-center text-font bg-primary" size="75">
-          <v-img v-if="userImage" :src="userImage" />
-          <span v-else>{{ initials }}</span>
+          <v-img v-if="props.userImage" :src="props.userImage" />
+          <span v-else>{{ props.initials }}</span>
         </v-avatar>
-        <v-select
-          v-model="availability"
-          :items="[
-            {
-              title: 'Available to work',
-              value: 'available',
-              props: { 'append-icon': '$green-circle' },
-              circle: 'red',
-            },
-            {
-              title: 'Busy but have time',
-              value: 'partly_available',
-              props: { circle: 'red', 'append-icon': '$green-circle' },
-              circle: 'red',
-            },
-            {
-              title: 'Busy',
-              value: 'busy',
-              props: { 'append-icon': '$red-circle' },
-            },
-          ]"
-          class="availability"
-        >
-          <template #item="{ item }"> {{ item.circle }} {{ item.value }} </template>
-        </v-select>
+        <select v-model="availability" class="availability">
+          <option v-for="item in availabilityOptions" :key="item.value" :value="item.value">
+            {{ item.circle }} {{ item.text }} <v-icon icon="$chevronDown"></v-icon>
+          </option>
+        </select>
         <div class="name">{{ props.name }}</div>
         <div class="introduction">{{ props.introduction }}</div>
       </div>
@@ -69,7 +49,6 @@
 import { ref } from 'vue'
 
 import CockpitCard from '#components/cockpit/cockpitCard/CockpitCard.vue'
-import { useAvatar } from '#src/hooks/useAvatar'
 
 type DetailCategory = 'place' | 'work' | 'language' | 'education' | 'feeling'
 
@@ -79,7 +58,10 @@ type Detail = {
 }
 
 const props = defineProps<{
+  userName: string
   name: string
+  userImage?: string
+  initials?: string
   introduction?: string
   availability?: 'available' | 'partly_available' | 'busy'
   details: Detail[]
@@ -103,6 +85,12 @@ const props = defineProps<{
 
 const availability = ref(props.availability)
 
+const availabilityOptions = [
+  { circle: '🟢', value: 'available', text: 'Available to work' },
+  { circle: '🟡', value: 'partly_available', text: 'Busy but have time' },
+  { circle: '🔴', value: 'busy', text: 'Busy' },
+]
+
 function getIcon(category: DetailCategory) {
   switch (category) {
     case 'place':
@@ -119,8 +107,6 @@ function getIcon(category: DetailCategory) {
       throw new Error(`Unknown category: ${category}`)
   }
 }
-
-const { initials, userImage } = useAvatar()
 </script>
 
 <style scoped>
@@ -136,27 +122,27 @@ const { initials, userImage } = useAvatar()
   border-radius: 15px;
 }
 
-.availability {
+.availability select {
+  display: none;
+}
+
+.availability::after {
   grid-column: 2;
   grid-row: 1;
 
-  &:deep(.v-input__control) {
-    font-size: 10px !important;
-    color: white;
-    display: flex;
-    height: 24px;
-    padding: 0px 12px 0px 4px;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    border-radius: 9999px;
-    border: 1px solid rgba(214, 223, 233, 0.4);
-    background: #5d6670;
-  }
+  content: '';
 
-  &:deep(.v-field__outline) {
-    display: none;
-  }
+  font-size: 10px;
+  color: white;
+  display: flex;
+  height: 24px;
+  padding: 0px 12px 0px 4px;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  border-radius: 9999px;
+  border: 1px solid rgba(214, 223, 233, 0.4);
+  background: #5d6670;
 }
 
 .name {
