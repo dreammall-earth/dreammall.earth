@@ -330,6 +330,14 @@ describe('UserResolver', () => {
     id
     name
     username
+    details {
+      category
+      text
+    }
+    social {
+      type
+      link
+    }
     table {
       id
       name
@@ -574,6 +582,963 @@ describe('UserResolver', () => {
               },
             },
           })
+        })
+      })
+    })
+  })
+
+  describe('updateUser mutation', () => {
+    const query = `mutation updateUser($data: UpdateUserInput!) {
+  updateUser(data: $data) {
+    id
+    name
+    username
+    introduction
+    availability
+    details {
+      category
+      text
+    }
+    social {
+      type
+      link
+    }
+    table {
+      id
+      name
+      public
+      users {
+        id
+        role
+        name
+        username
+      }
+    }
+  }
+}`
+
+    describe('unauthenticated', () => {
+      it('returns an unauthenticated error', async () => {
+        const response = await testServer.executeOperation(
+          {
+            query,
+            variables: {
+              data: {
+                name: 'User',
+              },
+            },
+          },
+          { contextValue: { dataSources: { prisma } } },
+        )
+        expect(response).toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('authenticated', () => {
+      beforeAll(async () => {
+        await prisma.user.update({
+          where: {
+            username: 'mockedUser',
+          },
+          data: {
+            meetingId: null,
+          },
+        })
+      })
+
+      it('has the default user in the database', async () => {
+        await expect(
+          prisma.user.findUnique({
+            where: {
+              username: 'mockedUser',
+            },
+          }),
+        ).resolves.toEqual({
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          id: expect.any(Number),
+          username: 'mockedUser',
+          name: 'User',
+          introduction: null,
+          availability: null,
+          meetingId: null,
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          createdAt: expect.any(Date),
+        })
+      })
+
+      describe('send values for all fields', () => {
+        it('returns updated current user', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    name: 'Peter Lustig',
+                    introduction: 'Latzhose und Nickelbrille',
+                    availability: 'busy',
+                  },
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  updateUser: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    name: 'Peter Lustig',
+                    username: 'mockedUser',
+                    introduction: 'Latzhose und Nickelbrille',
+                    availability: 'busy',
+                    details: [],
+                    social: [],
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    table: expect.any(Object),
+                  },
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it('updates the database', async () => {
+          await expect(
+            prisma.user.findUnique({
+              where: {
+                username: 'mockedUser',
+              },
+            }),
+          ).resolves.toEqual({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            username: 'mockedUser',
+            name: 'Peter Lustig',
+            introduction: 'Latzhose und Nickelbrille',
+            availability: 'busy',
+            meetingId: null,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            createdAt: expect.any(Date),
+          })
+        })
+      })
+
+      describe('introduction is too long', () => {
+        it('throws validation error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    name: 'Peter Lustig',
+                    introduction:
+                      'Trägt immer Latzhose und Nickelbrille, lebt in einem blauen Bauwagen und macht jede Menge kuriose Sachen. Am Ende sagt er immer "Abschalten"',
+                    availability: 'busy',
+                  },
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Argument Validation Error',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('introduction and availability is not passed', () => {
+        it('does not change introduction and availability', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    name: 'Bibi Bloxberg',
+                  },
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  updateUser: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    name: 'Bibi Bloxberg',
+                    username: 'mockedUser',
+                    introduction: 'Latzhose und Nickelbrille',
+                    availability: 'busy',
+                    details: [],
+                    social: [],
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    table: expect.any(Object),
+                  },
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it('updates only the name in the database', async () => {
+          await expect(
+            prisma.user.findUnique({
+              where: {
+                username: 'mockedUser',
+              },
+            }),
+          ).resolves.toEqual({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            name: 'Bibi Bloxberg',
+            username: 'mockedUser',
+            introduction: 'Latzhose und Nickelbrille',
+            availability: 'busy',
+            meetingId: null,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            createdAt: expect.any(Date),
+          })
+        })
+      })
+
+      describe('introduction and availability is null', () => {
+        it('deletes introduction and availability', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    name: 'Bibi Bloxberg',
+                    introduction: null,
+                    availability: null,
+                  },
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  updateUser: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    name: 'Bibi Bloxberg',
+                    username: 'mockedUser',
+                    introduction: null,
+                    availability: null,
+                    details: [],
+                    social: [],
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    table: expect.any(Object),
+                  },
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it('updates the database', async () => {
+          await expect(
+            prisma.user.findUnique({
+              where: {
+                username: 'mockedUser',
+              },
+            }),
+          ).resolves.toEqual({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            name: 'Bibi Bloxberg',
+            username: 'mockedUser',
+            introduction: null,
+            availability: null,
+            meetingId: null,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            createdAt: expect.any(Date),
+          })
+        })
+      })
+    })
+  })
+
+  describe('addUserDetail mutation', () => {
+    const query = `mutation addUserDetail($data: AddUserDetailInput!) {
+  addUserDetail(data: $data) {
+    id
+    text
+    category
+  }
+}`
+
+    describe('unauthenticated', () => {
+      it('returns an unauthenticated error', async () => {
+        const response = await testServer.executeOperation(
+          {
+            query,
+            variables: {
+              data: {
+                category: 'work',
+                text: 'Schwer am Schuften',
+              },
+            },
+          },
+          { contextValue: { dataSources: { prisma } } },
+        )
+        expect(response).toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('authenticated', () => {
+      describe('with valid data', () => {
+        it('returns user detail', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    category: 'work',
+                    text: 'Schwer am Schuften',
+                  },
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  addUserDetail: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    category: 'work',
+                    text: 'Schwer am Schuften',
+                  },
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it('creates userDetail in database', async () => {
+          await expect(prisma.userDetail.findMany()).resolves.toEqual([
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              userId: expect.any(Number),
+              category: 'work',
+              text: 'Schwer am Schuften',
+            },
+          ])
+        })
+      })
+
+      describe('text is too long', () => {
+        it('throws validation error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    category: 'work',
+                    text: 'Ich arbeite sehr hart in den Diamanten-Minen der Republik Kongo',
+                  },
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Argument Validation Error',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+    })
+  })
+
+  describe('removeUserDetail mutation', () => {
+    const query = `mutation removeUserDetail($id: Int!) {
+  removeUserDetail(id: $id)
+}`
+
+    describe('unauthenticated', () => {
+      it('returns an unauthenticated error', async () => {
+        const response = await testServer.executeOperation(
+          {
+            query,
+            variables: {
+              id: -1,
+            },
+          },
+          { contextValue: { dataSources: { prisma } } },
+        )
+        expect(response).toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('authenticated', () => {
+      describe('detail id does not exist', () => {
+        it('throws detail not found error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  id: -1,
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Detail not found!',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('detail belongs to another user', () => {
+        let detailId: number | undefined
+
+        beforeAll(async () => {
+          const bibi = await prisma.user.findUnique({
+            where: {
+              username: 'bibi',
+            },
+          })
+
+          if (bibi) {
+            const detail = await prisma.userDetail.create({
+              data: {
+                userId: bibi.id,
+                category: 'work',
+                text: 'Ich arbeite im Hexenhaus',
+              },
+            })
+
+            detailId = detail?.id
+          }
+        })
+
+        afterAll(async () => {
+          await prisma.userDetail.delete({
+            where: {
+              id: detailId,
+            },
+          })
+        })
+
+        it('throws detail not found error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  id: detailId,
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Detail not found!',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('detail belongs to user', () => {
+        let detailId: number | undefined
+
+        beforeAll(async () => {
+          const detail = await prisma.userDetail.findFirst()
+          detailId = detail?.id
+        })
+
+        it('returns true', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  id: detailId,
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  removeUserDetail: true,
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it('deletes the detail in the database', async () => {
+          await expect(
+            prisma.userDetail.findFirst({
+              where: {
+                id: detailId,
+              },
+            }),
+          ).resolves.toBeNull()
+        })
+      })
+    })
+  })
+
+  describe('addSocialMedia mutation', () => {
+    const query = `mutation addSocialMedia($data: AddSocialMediaInput!) {
+  addSocialMedia(data: $data) {
+    id
+    link
+    type
+  }
+}`
+
+    describe('unauthenticated', () => {
+      it('returns an unauthenticated error', async () => {
+        const response = await testServer.executeOperation(
+          {
+            query,
+            variables: {
+              data: {
+                link: 'https://yunite.me/user/ork',
+                type: 'discord',
+              },
+            },
+          },
+          { contextValue: { dataSources: { prisma } } },
+        )
+        expect(response).toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('authenticated', () => {
+      describe('with valid data', () => {
+        it('returns social media', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    link: 'https://yunite.me/user/ork',
+                    type: 'discord',
+                  },
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  addSocialMedia: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    link: 'https://yunite.me/user/ork',
+                    type: 'discord',
+                  },
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it('creates socialMedia in database', async () => {
+          await expect(prisma.socialMedia.findMany()).resolves.toEqual([
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              userId: expect.any(Number),
+              link: 'https://yunite.me/user/ork',
+              type: 'discord',
+            },
+          ])
+        })
+      })
+
+      describe('link is too long', () => {
+        it('throws validation error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    link: 'https://yunite.me/user/ork/478924y8919246192946192yqworyqwqwhkshfksdfhalsfksafhasafskñakfañsfkañsjfqw9ruasñfjslakjañsfjñalsfjñ',
+                    type: 'discord',
+                  },
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Argument Validation Error',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+    })
+  })
+
+  describe('removeSocialMedia mutation', () => {
+    const query = `mutation removeSocialMedia($id: Int!) {
+  removeSocialMedia(id: $id)
+}`
+
+    describe('unauthenticated', () => {
+      it('returns an unauthenticated error', async () => {
+        const response = await testServer.executeOperation(
+          {
+            query,
+            variables: {
+              id: -1,
+            },
+          },
+          { contextValue: { dataSources: { prisma } } },
+        )
+        expect(response).toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('authenticated', () => {
+      describe('social media id does not exist', () => {
+        it('throws social media not found error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  id: -1,
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Social media not found!',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('social media belongs to another user', () => {
+        let socialMediaId: number | undefined
+
+        beforeAll(async () => {
+          const bibi = await prisma.user.findUnique({
+            where: {
+              username: 'bibi',
+            },
+          })
+
+          if (bibi) {
+            const sM = await prisma.socialMedia.create({
+              data: {
+                userId: bibi.id,
+                type: 'telegram',
+                link: 't.me/bibiBloxberg',
+              },
+            })
+
+            socialMediaId = sM?.id
+          }
+        })
+
+        afterAll(async () => {
+          await prisma.socialMedia.delete({
+            where: {
+              id: socialMediaId,
+            },
+          })
+        })
+
+        it('throws social media not found error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  id: socialMediaId,
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Social media not found!',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('social media belongs to user', () => {
+        let socialMediaId: number | undefined
+
+        beforeAll(async () => {
+          const sM = await prisma.socialMedia.findFirst()
+          socialMediaId = sM?.id
+        })
+
+        it('returns true', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  id: socialMediaId,
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  removeSocialMedia: true,
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it('deletes the detail in the database', async () => {
+          await expect(
+            prisma.userDetail.findFirst({
+              where: {
+                id: socialMediaId,
+              },
+            }),
+          ).resolves.toBeNull()
         })
       })
     })
