@@ -18,7 +18,7 @@
        },
        result: {
          data: {
-           joinMyTable: 'https://meet.jit.si/table',
+           joinMyTable: 69,
          },
        },
      },

@@ -4,7 +4,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { joinTableQuery } from '#queries/joinTableQuery'
+import { joinTableAsGuestQuery } from '#queries/joinTableAsGuestQuery'
 import { mockClient } from '#tests/mock.apolloClient'
 import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
@@ -12,11 +12,11 @@ import JoinTablePage from './+Page.vue'
 import Route from './+route'
 import { title } from './+title'
 
-const joinTableQueryMock = vi.fn()
+const joinTableAsGuestQueryMock = vi.fn()
 
 mockClient.setRequestHandler(
-  joinTableQuery,
-  joinTableQueryMock.mockResolvedValue({ data: { joinTable: 'http://some.url' } }),
+  joinTableAsGuestQuery,
+  joinTableAsGuestQueryMock.mockResolvedValue({ data: { joinTable: 'http://some.url' } }),
 )
 
 describe('JoinTablePage', () => {
@@ -55,12 +55,14 @@ describe('JoinTablePage', () => {
 
     it('calls JoinTable query', () => {
       // eslint-disable-next-line vitest/prefer-called-with
-      expect(joinTableQueryMock).toHaveBeenCalled()
+      expect(joinTableAsGuestQueryMock).toHaveBeenCalled()
     })
 
     describe('Table Link returned', () => {
       beforeEach(async () => {
-        joinTableQueryMock.mockResolvedValue({ data: { joinTable: 'http://meinlink.de' } })
+        joinTableAsGuestQueryMock.mockResolvedValue({
+          data: { joinTableAsGuest: 'http://meinlink.de' },
+        })
         vi.clearAllMocks()
         await wrapper.find('form').trigger('submit')
       })
@@ -72,7 +74,7 @@ describe('JoinTablePage', () => {
 
     describe('Error returned', () => {
       beforeEach(async () => {
-        joinTableQueryMock.mockRejectedValue({ message: 'autsch' })
+        joinTableAsGuestQueryMock.mockRejectedValue({ message: 'autsch' })
         await flushPromises()
         vi.clearAllMocks()
         await wrapper.find('form').trigger('submit')

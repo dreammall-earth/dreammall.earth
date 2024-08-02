@@ -7,5 +7,5 @@ export const joinMyTableMutation = gql`
 `
 
 export type JoinMyTableMutationResult = {
-  joinMyTable: string
+  joinMyTable: number
 }

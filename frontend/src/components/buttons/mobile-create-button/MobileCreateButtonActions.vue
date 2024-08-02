@@ -46,13 +46,10 @@ import Triangle from '#assets/img/triangle.svg'
 import MainButton from '#components/buttons/MainButton.vue'
 import { JoinMyTableMutationResult, joinMyTableMutation } from '#mutations/joinMyTableMutation'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
-import { useActiveTableStore } from '#stores/activeTableStore'
 
 defineProps<{
   isVisible: boolean
 }>()
-
-const activeTableStore = useActiveTableStore()
 
 const { mutate: joinMyTableMutationResult } = useMutation<JoinMyTableMutationResult>(
   joinMyTableMutation,
@@ -66,8 +63,7 @@ const enterTable = async () => {
     const result = await joinMyTableMutationResult()
 
     if (result?.data?.joinMyTable) {
-      activeTableStore.setActiveTable(result.data.joinMyTable)
-      navigate('/table/')
+      navigate(`/table/${result.data.joinMyTable}`)
     } else {
       GlobalErrorHandler.error('No table found')
     }

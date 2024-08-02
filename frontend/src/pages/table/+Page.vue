@@ -7,15 +7,40 @@
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
+import { useQuery } from '@vue/apollo-composable'
+import { ref, watch } from 'vue'
 
 import EmbeddedTable from '#components/embedded-table/EmbeddedTable.vue'
+import { usePageContext } from '#context/usePageContext'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
-import { useActiveTableStore } from '#stores/activeTableStore'
+import GlobalErrorHandler from '#plugins/globalErrorHandler'
+import { joinTableQuery } from '#queries/joinTableQuery'
 
-const activeTableStore = useActiveTableStore()
+const tableUrl = ref<string | null>(null)
 
-const { activeTable: tableUrl } = storeToRefs(activeTableStore)
+const pageContext = usePageContext()
+
+const tableId = Number(pageContext.routeParams?.id)
+
+const { result: joinTableQueryResult, error: joinTableQueryError } = useQuery(
+  joinTableQuery,
+  () => ({
+    tableId,
+  }),
+  {
+    prefetch: false,
+    fetchPolicy: 'no-cache',
+  },
+)
+
+watch(joinTableQueryResult, (data: { joinTable: string }) => {
+  tableUrl.value = data.joinTable
+})
+
+// eslint-disable-next-line promise/prefer-await-to-callbacks
+watch(joinTableQueryError, (error) => {
+  GlobalErrorHandler.error('Error opening table', error)
+})
 </script>
 
 <style scoped lang="scss">
