@@ -88,6 +88,7 @@ updates:
       exclude-patterns:
         - "@vuepress/bundler-vite"
         - "eslint-plugin-vitest"
+        - "vite-plugin-checker"
     vue:
       applies-to: version-updates
       patterns:
@@ -161,6 +162,7 @@ updates:
       exclude-patterns:
         - "@vuepress/bundler-vite"
         - "eslint-plugin-vitest"
+        - "vite-plugin-checker"
     vue:
       applies-to: version-updates
       patterns:
@@ -234,6 +236,7 @@ updates:
       exclude-patterns:
         - "@vuepress/bundler-vite"
         - "eslint-plugin-vitest"
+        - "vite-plugin-checker"
     vue:
       applies-to: version-updates
       patterns:
