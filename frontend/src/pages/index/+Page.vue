@@ -1,8 +1,10 @@
 <template>
+  
   <DefaultLayout>
     <StarryMap />
     <create-button />
   </DefaultLayout>
+ 
 </template>
 
 <script lang="ts" setup>
