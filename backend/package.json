@@ -28,7 +28,7 @@
     "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
-    "@apollo/server": "^4.10.4",
+    "@apollo/server": "^4.10.5",
     "@getbrevo/brevo": "^2.2.0",
     "@graphql-tools/schema": "^10.0.4",
     "@graphql-yoga/subscription": "^5.0.1",
