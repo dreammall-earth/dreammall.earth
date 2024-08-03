@@ -30,6 +30,7 @@
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 
 import ClientOnly from '#components/ClientOnly.vue'
@@ -50,12 +51,12 @@ const {
   getCurrentUser: user,
   getCurrentUserAvatar: avatar,
   getCurrentUserInitials: initials,
-} = userStore
+} = storeToRefs(userStore)
 
 const updateAvailability = async (newAvailability: UserAvailability) => {
   try {
     await userStore.updateUser({
-      name: user!.name,
+      name: user.value!.name,
       availability: newAvailability,
     })
   } catch (error) {
@@ -65,7 +66,7 @@ const updateAvailability = async (newAvailability: UserAvailability) => {
 
 const updateIntroduction = async (newIntroduction: string) => {
   await userStore.updateUser({
-    name: user!.name,
+    name: user.value!.name,
     introduction: newIntroduction,
   })
 }
