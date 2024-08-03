@@ -14,7 +14,7 @@ import { useSlots } from 'vue'
 const slots = useSlots()
 
 const props = defineProps<{
-  narrow: boolean
+  narrow?: boolean
 }>()
 </script>
 
@@ -25,6 +25,10 @@ const props = defineProps<{
   padding: var(--padding);
   background-color: var(--v-sidebar-background);
   border-radius: 20px;
+}
+
+.header {
+  font-size: 16px;
 }
 
 .hr {

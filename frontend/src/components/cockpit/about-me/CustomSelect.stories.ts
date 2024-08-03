@@ -1,16 +1,16 @@
 import { SBComp } from '#types/SBComp'
 
-import AboutMe from './AboutMe.vue'
+import CustomSelect from './CustomSelect.vue'
 
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 const meta = {
-  title: 'Cockpit/AboutMe',
-  component: AboutMe as SBComp,
+  title: 'Cockpit/AboutMe/CustomSelect',
+  component: CustomSelect as SBComp,
   tags: ['autodocs'],
   argTypes: {},
   args: {},
-} satisfies Meta<typeof AboutMe>
+} satisfies Meta<typeof CustomSelect>
 
 export default meta
 type Story = StoryObj<typeof meta>

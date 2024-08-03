@@ -22,7 +22,10 @@
   },
   "cockpit": {
     "about-me": {
-      "header": "About me"
+      "edit": {
+        "title": "About me",
+        "add": "Add",
+      }
     }
   },
   "error": {

@@ -1,3 +1,4 @@
+import Back from './back.svg?component'
 import Bell from './bell.svg?component'
 import Camera from './camera.svg?component'
 import Cockpit from './cockpit.svg?component'
@@ -13,6 +14,7 @@ import Message from './message.svg?component'
 import Pinterest from './pinterest.svg?component'
 import Place from './place.svg?component'
 import Share from './share.svg?component'
+import Triangle from './triangle.svg?component'
 import Website from './website.svg?component'
 import Working from './working.svg?component'
 import WorldCafe from './worldCafe.svg?component'
@@ -23,6 +25,7 @@ import Youtube from './youtube.svg?component'
 import type { IconAliases } from 'vuetify'
 
 const aliases: Partial<IconAliases> = {
+  back: Back,
   bell: Bell,
   camera: Camera,
   cockpit: Cockpit,
@@ -38,6 +41,7 @@ const aliases: Partial<IconAliases> = {
   pinterest: Pinterest,
   place: Place,
   share: Share,
+  triange: Triangle,
   website: Website,
   working: Working,
   'world-cafe': WorldCafe,
