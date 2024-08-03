@@ -12,6 +12,7 @@
       :initials="initials"
       @edit="() => setMode('edit')"
       @update-availability="updateAvailability"
+      @update-introduction="updateIntroduction"
     ></AboutMeView>
     <AboutMeEdit
       v-if="user && mode === 'edit'"
@@ -22,6 +23,8 @@
       :details="user.details"
       :social="user.social"
       @back="() => setMode('view')"
+      @add-detail="addDetail"
+      @remove-detail="removeDetail"
     ></AboutMeEdit>
   </ClientOnly>
 </template>
@@ -31,7 +34,7 @@ import { ref } from 'vue'
 
 import ClientOnly from '#components/ClientOnly.vue'
 import globalErrorHandler from '#plugins/globalErrorHandler'
-import { useUserStore, UserAvailability, UserDetail } from '#stores/userStore'
+import { useUserStore, UserAvailability, AddUserDetailInput } from '#stores/userStore'
 
 import AboutMeEdit from './AboutMeEdit.vue'
 import AboutMeView from './AboutMeView.vue'
@@ -67,7 +70,11 @@ const updateIntroduction = async (newIntroduction: string) => {
   })
 }
 
-const addDetail = async (detail: UserDetail) => {
+const addDetail = async (detail: AddUserDetailInput) => {
   await userStore.addUserDetail(detail)
+}
+
+const removeDetail = async (detailId: number) => {
+  await userStore.removeUserDetail(detailId)
 }
 </script>

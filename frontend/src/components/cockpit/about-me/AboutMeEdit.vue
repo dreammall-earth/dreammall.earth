@@ -7,16 +7,14 @@
       </div>
     </template>
     <template #default>
-      <v-form class="new-detail" @submit.prevent="addDetail">
-        <v-select
-          v-model="newDetail.category"
-          :items="detailTypes"
-          label="Type"
-          name="type"
-        ></v-select>
-        <v-text-field v-model="newDetail.text" name="text"></v-text-field>
-        <v-button type="submit">{{ $t('cockpit.about-me.edit.add') }}</v-button>
-      </v-form>
+      <v-select
+        v-model="newDetail.category"
+        :items="detailTypes"
+        label="Type"
+        name="type"
+      ></v-select>
+      <v-text-field v-model="newDetail.text" name="text"></v-text-field>
+      <v-btn @click="addDetail">{{ $t('cockpit.about-me.edit.add') }}</v-btn>
       <ul class="details">
         <li v-for="item in props.details" :key="item.id">
           <v-icon icon="$close" @click="() => removeDetail(item.id)"></v-icon>
@@ -32,7 +30,12 @@ import { reactive } from 'vue'
 
 import CockpitCard from '#components/cockpit/cockpitCard/CockpitCard.vue'
 
-import type { UserDetail, SocialMedia, UserDetailCategory } from '#stores/userStore'
+import type {
+  UserDetail,
+  SocialMedia,
+  UserDetailCategory,
+  AddUserDetailInput,
+} from '#stores/userStore'
 
 const props = defineProps<{
   username: string
@@ -46,12 +49,11 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'back'): void
-  (e: 'add-detail', detail: UserDetail): void
+  (e: 'add-detail', detail: AddUserDetailInput): void
   (e: 'remove-detail', id: number): void
 }>()
 
-const newDetail = reactive<UserDetail>({
-  id: 1,
+const newDetail = reactive<AddUserDetailInput>({
   category: 'place',
   text: '',
 })
