@@ -44,114 +44,157 @@
     </div>
   </template>
   
-  <script>
-  export default {
+  <script lang="ts">
+  import { defineComponent, ref, computed, onMounted, onBeforeUnmount } from 'vue';
+  
+  interface Star {
+    id: number;
+    left: string;
+    top: string;
+    pulsing: boolean;
+    text: string;
+    name: string;
+    type: string;
+    users: string[];
+    description: string;
+  }
+  
+  interface Layer {
+    src: string;
+  }
+  
+  interface ZoomLevel {
+    label: string;
+    value: number;
+  }
+  
+  export default defineComponent({
     name: 'StarryMap',
-    data() {
-      return {
-        layers: [
-          { src: 'src/assets/img/star_bg3.png' },
-          { src: 'src/assets/img/star_bg2.png' },
-          { src: 'src/assets/img/star_bg1.png' },
-        ],
-        stars: [],
-        viewportX: 0,
-        viewportY: 0,
-        scale: 1,
-        isDragging: false,
-        startX: 0,
-        startY: 0,
-        selectedStar: null,
-        zoomLevels: [
-          { label: '--', value: 0.5 },
-          { label: '-', value: 0.8 },
-          { label: 'o', value: 1 },
-          { label: '+', value: 1.3 },
-          { label: '++', value: 1.6 },
-        ],
-      };
-    },
-    computed: {
-      positionInfo() {
-        return `Position: (${Math.round(this.viewportX)}, ${Math.round(this.viewportY)}) Zoom: ${this.scale.toFixed(2)}`;
-      },
-    },
-    mounted() {
-      this.generateStars();
-    },
-    methods: {
-      generateStars() {
+    setup() {
+      const layers = ref<Layer[]>([
+        { src: 'src/assets/img/star_bg3.png' },
+        { src: 'src/assets/img/star_bg2.png' },
+        { src: 'src/assets/img/star_bg1.png' },
+      ]);
+      const stars = ref<Star[]>([]);
+      const viewportX = ref(0);
+      const viewportY = ref(0);
+      const scale = ref(1);
+      const isDragging = ref(false);
+      const startX = ref(0);
+      const startY = ref(0);
+      const selectedStar = ref<Star | null>(null);
+      const zoomLevels: ZoomLevel[] = [
+        { label: '--', value: 0.5 },
+        { label: '-', value: 0.8 },
+        { label: 'o', value: 1 },
+        { label: '+', value: 1.3 },
+        { label: '++', value: 1.6 },
+      ];
+  
+      const positionInfo = computed(() => {
+        return `Position: (${Math.round(viewportX.value)}, ${Math.round(viewportY.value)}) Zoom: ${scale.value.toFixed(2)}`;
+      });
+  
+      const generateStars = () => {
         const starTypes = ['User', 'Chat Room', 'Forum', 'Game Room', 'Workshop'];
-        this.stars = Array.from({ length: 200 }, (_, i) => {
-          return {
-            id: i + 1,
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            pulsing: Math.random() < 0.1,
-            text: starTypes[Math.floor(Math.random() * starTypes.length)].charAt(0),
-            name: `${starTypes[Math.floor(Math.random() * starTypes.length)]} ${i + 1}`,
-            type: starTypes[Math.floor(Math.random() * starTypes.length)],
-            users: Array.from({ length: Math.floor(Math.random() * 5) + 1 }, () => `User${Math.floor(Math.random() * 1000)}`),
-            description: `This is a virtual space. More information can be added here.`
-          };
-        });
-      },
-      getLayerStyle(index) {
+        stars.value = Array.from({ length: 200 }, (_, i) => ({
+          id: i + 1,
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+          pulsing: Math.random() < 0.1,
+          text: starTypes[Math.floor(Math.random() * starTypes.length)].charAt(0),
+          name: `${starTypes[Math.floor(Math.random() * starTypes.length)]} ${i + 1}`,
+          type: starTypes[Math.floor(Math.random() * starTypes.length)],
+          users: Array.from({ length: Math.floor(Math.random() * 5) + 1 }, () => `User${Math.floor(Math.random() * 1000)}`),
+          description: `This is a virtual space. More information can be added here.`
+        }));
+      };
+  
+      const getLayerStyle = (index: number) => {
         const factor = 0.1 * (index + 1);
         return {
-          transform: `translate(${-this.viewportX * factor}px, ${-this.viewportY * factor}px)`
+          transform: `translate(${-viewportX.value * factor}px, ${-viewportY.value * factor}px)`
         };
-      },
-      getInteractiveLayerStyle() {
+      };
+  
+      const getInteractiveLayerStyle = () => {
         return {
-          transform: `translate(${-this.viewportX}px, ${-this.viewportY}px) scale(${this.scale})`
+          transform: `translate(${-viewportX.value}px, ${-viewportY.value}px) scale(${scale.value})`
         };
-      },
-      handleWheel(e) {
+      };
+  
+      const handleWheel = (e: WheelEvent) => {
         e.preventDefault();
         const delta = e.deltaY * -0.001;
-        const newScale = Math.max(0.5, Math.min(2, this.scale + delta));
-        const scaleFactor = newScale / this.scale;
+        const newScale = Math.max(0.5, Math.min(2, scale.value + delta));
+        const scaleFactor = newScale / scale.value;
         
-        // Adjust viewport position to zoom towards mouse position
-        const rect = e.target.getBoundingClientRect();
+        const rect = (e.target as HTMLElement).getBoundingClientRect();
         const mouseX = e.clientX - rect.left;
         const mouseY = e.clientY - rect.top;
         
-        this.viewportX = mouseX - (mouseX - this.viewportX) * scaleFactor;
-        this.viewportY = mouseY - (mouseY - this.viewportY) * scaleFactor;
+        viewportX.value = mouseX - (mouseX - viewportX.value) * scaleFactor;
+        viewportY.value = mouseY - (mouseY - viewportY.value) * scaleFactor;
         
-        this.scale = newScale;
-      },
-      setZoom(level) {
-        this.scale = level;
-      },
-      showInfo(star) {
-        this.selectedStar = star;
-      },
-      startDrag(event) {
-        this.isDragging = true;
-        this.startX = event.clientX || event.touches[0].clientX;
-        this.startY = event.clientY || event.touches[0].clientY;
-      },
-      drag(event) {
-        if (!this.isDragging) return;
-        const currentX = event.clientX || event.touches[0].clientX;
-        const currentY = event.clientY || event.touches[0].clientY;
-        const dx = currentX - this.startX;
-        const dy = currentY - this.startY;
-        this.viewportX -= dx / this.scale;
-        this.viewportY -= dy / this.scale;
-        this.startX = currentX;
-        this.startY = currentY;
-      },
-      stopDrag() {
-        this.isDragging = false;
-      },
-    },
-  };
-  </script>
+        scale.value = newScale;
+      };
   
+      const setZoom = (level: number) => {
+        scale.value = level;
+      };
+  
+      const showInfo = (star: Star) => {
+        selectedStar.value = star;
+      };
+  
+      const startDrag = (event: MouseEvent | TouchEvent) => {
+        isDragging.value = true;
+        startX.value = 'touches' in event ? event.touches[0].clientX : event.clientX;
+        startY.value = 'touches' in event ? event.touches[0].clientY : event.clientY;
+      };
+  
+      const drag = (event: MouseEvent | TouchEvent) => {
+        if (!isDragging.value) return;
+        const currentX = 'touches' in event ? event.touches[0].clientX : event.clientX;
+        const currentY = 'touches' in event ? event.touches[0].clientY : event.clientY;
+        const dx = currentX - startX.value;
+        const dy = currentY - startY.value;
+        viewportX.value -= dx / scale.value;
+        viewportY.value -= dy / scale.value;
+        startX.value = currentX;
+        startY.value = currentY;
+      };
+  
+      const stopDrag = () => {
+        isDragging.value = false;
+      };
+  
+      onMounted(() => {
+        generateStars();
+      });
+  
+      return {
+        layers,
+        stars,
+        viewportX,
+        viewportY,
+        scale,
+        selectedStar,
+        zoomLevels,
+        positionInfo,
+        getLayerStyle,
+        getInteractiveLayerStyle,
+        handleWheel,
+        setZoom,
+        showInfo,
+        startDrag,
+        drag,
+        stopDrag
+      };
+    }
+  });
+  </script>
   <style scoped>
   .universe-viewport {
     position: relative;
