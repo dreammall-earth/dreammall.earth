@@ -1,20 +1,6 @@
 <template>
   <v-main class="bg-grey-lighten-3">
-    <v-container>
-      <v-row>
-        <v-col v-if="slots.sidemenu" cols="2">
-          <v-sheet rounded>
-            <slot name="sidemenu"></slot>
-          </v-sheet>
-        </v-col>
-
-        <v-col>
-          <v-sheet rounded class="pa-3">
-            <slot />
-          </v-sheet>
-        </v-col>
-      </v-row>
-    </v-container>
+    <slot />
   </v-main>
 </template>
 

@@ -18,7 +18,7 @@
 
 The DreamMall admin interface
 
-![](src/assets/it4c-logo2-clean-bg_alpha-128x128.png)
+![](src/assets/img/dreammall-logo.svg)
 
 ## Requirements & Technology
 

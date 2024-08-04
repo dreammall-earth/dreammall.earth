@@ -3,7 +3,7 @@ import { escapeInject, dangerouslySkipEscape } from 'vike/server'
 import { PageContext, PageContextServer } from 'vike/types'
 
 import logoUrl from '#assets/favicon.ico'
-import image from '#assets/it4c-logo2-clean-bg_alpha-128x128.png'
+import image from '#assets/img/dreammall-logo.svg'
 import { META } from '#src/env'
 
 import { createApp } from './app'

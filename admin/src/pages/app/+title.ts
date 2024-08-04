@@ -1,1 +1,1 @@
-export const title = 'IT4C | App'
+export const title = 'DM | App'
