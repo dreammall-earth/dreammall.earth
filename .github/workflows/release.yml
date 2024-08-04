@@ -19,7 +19,7 @@ jobs:
       ##########################################################################
       # CHECKOUT CODE ##########################################################
       ##########################################################################
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@9a9194f87191a7e9055e3e9b95b8cfb13023bb08 # v4.1.7
         with:
           fetch-depth: 0 # Fetch full History for changelog
       ##########################################################################
@@ -38,7 +38,7 @@ jobs:
       ##########################################################################
       # TODO: this will error on duplicate
       #- name: package-version-to-git-tag
-      #  uses: pkgdeps/git-tag-action@v3
+      #  uses: pkgdeps/git-tag-action@81b45ff87eb7f7bd49e76e2bed448990d4dd72b3 # v3.0.0
       #  with:
       #    github_token: ${{ secrets.GITHUB_TOKEN }}
       #    github_repo: ${{ github.repository }}
@@ -49,7 +49,7 @@ jobs:
       # Push build tag to GitHub ###############################################
       ##########################################################################
       - name: package-version-to-git-tag + build number
-        uses: pkgdeps/git-tag-action@v3
+        uses: pkgdeps/git-tag-action@81b45ff87eb7f7bd49e76e2bed448990d4dd72b3 # v3.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           github_repo: ${{ github.repository }}
@@ -65,7 +65,7 @@ jobs:
       - name: package-version-to-git-release
         continue-on-error: true # Will fail if tag exists
         id: create_release
-        uses: actions/create-release@v1
+        uses: actions/create-release@4c11c9fe1dcd9636620a16455165783b20fc7ea0 # v1.1.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:

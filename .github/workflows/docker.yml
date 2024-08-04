@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@9a9194f87191a7e9055e3e9b95b8cfb13023bb08 # v4.1.7
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
         with:
@@ -57,7 +57,7 @@ jobs:
       # https://docs.github.com/en/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds
       #
       # - name: Generate artifact attestation
-      #   uses: actions/attest-build-provenance@v1
+      #   uses: actions/attest-build-provenance@210c1913531870065f03ce1f9440dd87bc0938cd # v1.4.0
       #   with:
       #     subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
       #     subject-digest: ${{ steps.push.outputs.digest }}
