@@ -34,10 +34,10 @@ module "kube-hetzner" {
   # ssh_port = 2222
 
   # * Your ssh public key
-  ssh_public_key = file("~/.ssh/kube-hetzner.pub")
+  ssh_public_key = file("~/.ssh/id_ed25519.pub")
   # * Your private key must be "ssh_private_key = null" when you want to use ssh-agent for a Yubikey-like device authentication or an SSH key-pair with a passphrase.
   # For more details on SSH see https://github.com/kube-hetzner/kube-hetzner/blob/master/docs/ssh.md
-  ssh_private_key = file("~/.ssh/kube-hetzner")
+  ssh_private_key = file("~/.ssh/id_ed25519")
   # You can add additional SSH public Keys to grant other team members root access to your cluster nodes.
   # ssh_additional_public_keys = []
 
@@ -136,6 +136,34 @@ module "kube-hetzner" {
       # Enable automatic backups via Hetzner (default: false)
       # backups = true
     },
+    # {
+    #   name        = "control-plane-nbg1",
+    #   server_type = "cx22",
+    #   location    = "nbg1",
+    #   labels      = [],
+    #   taints      = [],
+    #   count       = 1
+
+    #   # Fine-grained control over placement groups (nodes in the same group are spread over different physical servers, 10 nodes per placement group max):
+    #   # placement_group = "default"
+
+    #   # Enable automatic backups via Hetzner (default: false)
+    #   # backups = true
+    # },
+    # {
+    #   name        = "control-plane-hel1",
+    #   server_type = "cx22",
+    #   location    = "hel1",
+    #   labels      = [],
+    #   taints      = [],
+    #   count       = 1
+
+    #   # Fine-grained control over placement groups (nodes in the same group are spread over different physical servers, 10 nodes per placement group max):
+    #   # placement_group = "default"
+
+    #   # Enable automatic backups via Hetzner (default: false)
+    #   # backups = true
+    # }
   ]
 
   agent_nodepools = [
@@ -156,6 +184,88 @@ module "kube-hetzner" {
       # Enable automatic backups via Hetzner (default: false)
       # backups = true
     },
+    # {
+    #   name        = "agent-large",
+    #   server_type = "cx32",
+    #   location    = "nbg1",
+    #   labels      = [],
+    #   taints      = [],
+    #   count       = 1
+
+    #   # Fine-grained control over placement groups (nodes in the same group are spread over different physical servers, 10 nodes per placement group max):
+    #   # placement_group = "default"
+
+    #   # Enable automatic backups via Hetzner (default: false)
+    #   # backups = true
+    # },
+    # {
+    #   name        = "storage",
+    #   server_type = "cx32",
+    #   location    = "fsn1",
+    #   # Fully optional, just a demo.
+    #   labels      = [
+    #     "node.kubernetes.io/server-usage=storage"
+    #   ],
+    #   taints      = [],
+    #   count       = 1
+
+    #   # In the case of using Longhorn, you can use Hetzner volumes instead of using the node's own storage by specifying a value from 10 to 10000 (in GB)
+    #   # It will create one volume per node in the nodepool, and configure Longhorn to use them.
+    #   # Something worth noting is that Volume storage is slower than node storage, which is achieved by not mentioning longhorn_volume_size or setting it to 0.
+    #   # So for something like DBs, you definitely want node storage, for other things like backups, volume storage is fine, and cheaper.
+    #   # longhorn_volume_size = 20
+
+    #   # Enable automatic backups via Hetzner (default: false)
+    #   # backups = true
+    # },
+    # # Egress nodepool useful to route egress traffic using Hetzner Floating IPs (https://docs.hetzner.com/cloud/floating-ips)
+    # # used with Cilium's Egress Gateway feature https://docs.cilium.io/en/stable/gettingstarted/egress-gateway/
+    # # See the https://github.com/kube-hetzner/terraform-hcloud-kube-hetzner#examples for an example use case.
+    # {
+    #   name        = "egress",
+    #   server_type = "cx22",
+    #   location    = "fsn1",
+    #   labels = [
+    #     "node.kubernetes.io/role=egress"
+    #   ],
+    #   taints = [
+    #     "node.kubernetes.io/role=egress:NoSchedule"
+    #   ],
+    #   floating_ip = true
+    #   count = 1
+    # },
+    # # Arm based nodes
+    # {
+    #   name        = "agent-arm-small",
+    #   server_type = "cax11",
+    #   location    = "fsn1",
+    #   labels      = [],
+    #   taints      = [],
+    #   count       = 1
+    # },
+    # # For fine-grained control over the nodes in a node pool, replace the count variable with a nodes map.
+    # # In this case, the node-pool variables are defaults which can be overridden on a per-node basis.
+    # # Each key in the nodes map refers to a single node and must be an integer string ("1", "123", ...).
+    # {
+    #   name        = "agent-arm-small",
+    #   server_type = "cax11",
+    #   location    = "fsn1",
+    #   labels      = [],
+    #   taints      = [],
+    #   nodes = {
+    #     "1" : {
+    #       location                  = "nbg1"
+    #       labels = [
+    #         "testing-labels=a1",
+    #       ]
+    #     },
+    #     "20" : {
+    #       labels = [
+    #         "testing-labels=b1",
+    #       ]
+    #     }
+    #   }
+    # },
   ]
   # Add custom control plane configuration options here.
   # E.g to enable monitoring for etcd, proxy etc:
@@ -301,6 +411,7 @@ module "kube-hetzner" {
   # be enabled (with the default settings for etcd snapshots).
   # Cloudflare's R2 offers 10GB, 10 million reads and 1 million writes per month for free.
   # For proper context, have a look at https://docs.k3s.io/datastore/backup-restore.
+  # You also can use additional parameters from https://docs.k3s.io/cli/etcd-snapshot, such as `etc-s3-folder`
   # etcd_s3_backup = {
   #   etcd-s3-endpoint        = "xxxx.r2.cloudflarestorage.com"
   #   etcd-s3-access-key      = "<access-key>"
@@ -674,9 +785,9 @@ module "kube-hetzner" {
   # lb_hostname = "mycluster.domain.com"
 
   # You can enable Rancher (installed by Helm behind the scenes) with the following flag, the default is "false".
-  # ⚠️ Rancher currently only supports Kubernetes v1.25 and earlier, you will need to set initial_k3s_channel to a supported version: https://github.com/rancher/rancher/issues/41113
+  # ⚠️ Rancher currently only supports Kubernetes v1.28 and earlier, you will need to set initial_k3s_channel to a supported version: https://github.com/rancher/rancher/issues/43110
   # When Rancher is enabled, it automatically installs cert-manager too, and it uses rancher's own self-signed certificates.
-  # See for options https://rancher.com/docs/rancher/v2.0-v2.4/en/installation/resources/advanced/helm2/helm-rancher/#choose-your-ssl-configuration
+  # See for options https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/install-upgrade-on-a-kubernetes-cluster#3-choose-your-ssl-configuration
   # The easiest thing is to leave everything as is (using the default rancher self-signed certificate) and put Cloudflare in front of it.
   # As for the number of replicas, by default it is set to the number of control plane nodes.
   # You can customized all of the above by adding a rancher_values variable see at the end of this file in the advanced section.
@@ -945,6 +1056,27 @@ terraform {
     hcloud = {
       source  = "hetznercloud/hcloud"
       version = ">= 1.43.0"
+    }
+  }
+
+  encryption {
+    key_provider "pbkdf2" "hcloud_token" {
+      # Specify a long / complex passphrase (min. 16 characters)
+      passphrase= var.hcloud_token != "" ? var.hcloud_token : local.hcloud_token
+    }
+
+    method "aes_gcm" "new_method" {
+      keys = key_provider.pbkdf2.hcloud_token
+    }
+
+    state {
+      ## Step 3: Link the desired encryption method:
+      method = method.aes_gcm.new_method
+
+      ## Step 4: Run "tofu apply".
+
+      ## Step 5: Consider adding the "enforced" option:
+      enforced = true
     }
   }
 }

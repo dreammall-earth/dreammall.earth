@@ -2,10 +2,8 @@
 *.tfstate
 *.tfstate.*terraform
 *.tfstate.lock.info
-
 *.tfstate.backup
 
-# not sure about that one
-k3s_kustomization_backup.yaml
-
 kube_override.tf
+
+!terraform.tfstate
