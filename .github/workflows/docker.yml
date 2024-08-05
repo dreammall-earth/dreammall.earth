@@ -11,7 +11,7 @@ jobs:
   build-and-push-image:
     strategy:
       matrix:
-        folder: [admin, backend, frontend, presenter]
+        folder: [authentik, admin, backend, frontend, presenter]
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: ${{ github.repository }}/${{ matrix.folder }}
