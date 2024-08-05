@@ -24,10 +24,12 @@ jobs:
           npm run start &
           cd ../frontend
           cp .env.dist .env
+          rm .env.production
           npm install
           npm run prod &
           cd  ../presenter
           cp .env.dist .env
+          rm .env.production
           export PORT=3001
           npm install
           npm run prod &
