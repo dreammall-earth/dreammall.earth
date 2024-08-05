@@ -164,7 +164,7 @@ const toggleDrawer = () => {
 const isButtonListVisible = ref(false)
 
 const toggleButtonList = () => {
-    isButtonListVisible.value = !isButtonListVisible.value
+  isButtonListVisible.value = !isButtonListVisible.value
 }
 
 const activeTableStore = useActiveTableStore()
