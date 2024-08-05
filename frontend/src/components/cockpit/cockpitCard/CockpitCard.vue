@@ -27,7 +27,7 @@ const props = defineProps<{
   border-radius: 20px;
 }
 
-.header {
+.header:deep(h2) {
   font-size: 16px;
 }
 

@@ -7,20 +7,40 @@
       </div>
     </template>
     <template #default>
-      <v-select
-        v-model="newDetail.category"
-        :items="detailTypes"
-        label="Type"
-        name="type"
-      ></v-select>
-      <v-text-field v-model="newDetail.text" name="text"></v-text-field>
-      <v-btn @click="addDetail">{{ $t('cockpit.about-me.edit.add') }}</v-btn>
-      <ul class="details">
-        <li v-for="item in props.details" :key="item.id">
-          <v-icon icon="$close" @click="() => removeDetail(item.id)"></v-icon>
-          <span>{{ item.text }}</span>
-        </li>
-      </ul>
+      <v-form class="add-detail" @submit.prevent="addDetail">
+        <v-select
+          v-model="newDetail.category"
+          flat
+          rounded
+          :items="detailCategories"
+          class="select-category"
+        >
+          <template #selection="{ item }">
+            <v-icon :icon="detailCategoryToIcon(item.value)"></v-icon>
+          </template>
+          <template #item="{ item, props: listProps }">
+            <v-list-item v-bind="listProps" title="">
+              <v-icon :icon="detailCategoryToIcon(item.value)"></v-icon>
+            </v-list-item>
+          </template>
+        </v-select>
+        <v-text-field
+          v-model="newDetail.text"
+          name="text"
+          clearable
+          rounded
+          flat
+          density="compact"
+          variant="solo"
+          class="add-detail-text"
+          maxlength="60"
+        ></v-text-field>
+        <v-btn type="submit" :disabled="newDetail.text?.length === 0" variant="flat" rounded>
+          <v-icon icon="mdi mdi-plus"></v-icon>
+        </v-btn>
+      </v-form>
+      <!-- </div> -->
+      <Details :details="props.details" editable @remove-detail="removeDetail" />
     </template>
   </CockpitCard>
 </template>
@@ -29,6 +49,9 @@
 import { reactive } from 'vue'
 
 import CockpitCard from '#components/cockpit/cockpitCard/CockpitCard.vue'
+
+import { detailCategoryToIcon } from './detailCategoryToIcon'
+import Details from './UserDetails.vue'
 
 import type {
   UserDetail,
@@ -54,11 +77,11 @@ const emit = defineEmits<{
 }>()
 
 const newDetail = reactive<AddUserDetailInput>({
-  category: 'place',
+  category: 'work',
   text: '',
 })
 
-const detailTypes: UserDetailCategory[] = ['place', 'work', 'education', 'feeling', 'language']
+const detailCategories: UserDetailCategory[] = ['place', 'work', 'education', 'feeling', 'language']
 
 const addDetail = () => {
   emit('add-detail', newDetail)
@@ -78,7 +101,28 @@ const removeDetail = (id: number) => {
   gap: 20px;
 }
 
-.details {
-  min-height: 50px;
+.add-detail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  &:deep(.v-input__details) {
+    display: none;
+  }
+}
+
+.select-category {
+  max-width: 80px;
+
+  &:deep(.v-field__outline) {
+    display: none;
+  }
+}
+
+.add-detail-text {
+  &:deep(.v-field) {
+    background: grey; /* TODO set correct color */
+  }
 }
 </style>

@@ -1,8 +1,10 @@
 {
   "$vuetify": {
+    "close": "Schließen",
+    "open": "Öffnen",
     "input": {
       "clear": "Löschen"
-    }
+    },
   },
   "auth": {
     "content": "Logge ein...",

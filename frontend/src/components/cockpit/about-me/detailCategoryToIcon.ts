@@ -3,15 +3,15 @@ import type { UserDetailCategory } from '#stores/userStore.js'
 export function detailCategoryToIcon(category: UserDetailCategory) {
   switch (category) {
     case 'place':
-      return '$place'
+      return 'mdi mdi-map-marker-outline'
     case 'work':
-      return '$working'
+      return 'mdi mdi-briefcase-outline'
     case 'language':
-      return '$world'
+      return 'mdi mdi-web'
     case 'education':
-      return '$education'
+      return 'mdi mdi-school-outline'
     case 'feeling':
-      return '$feeling'
+      return 'mdi mdi-emoticon-outline'
     default:
       throw new Error(`Unknown category`)
   }

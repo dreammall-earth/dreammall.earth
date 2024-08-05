@@ -73,6 +73,7 @@ const updateIntroduction = async (newIntroduction: string) => {
 
 const addDetail = async (detail: AddUserDetailInput) => {
   await userStore.addUserDetail(detail)
+  detail.text = ''
 }
 
 const removeDetail = async (detailId: number) => {

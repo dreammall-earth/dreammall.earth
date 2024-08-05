@@ -16,7 +16,6 @@ import Place from './place.svg?component'
 import Share from './share.svg?component'
 import Triangle from './triangle.svg?component'
 import Website from './website.svg?component'
-import Working from './working.svg?component'
 import WorldCafe from './worldCafe.svg?component'
 import X from './x.svg?component'
 import Xing from './xing.svg?component'
@@ -43,7 +42,6 @@ const aliases: Partial<IconAliases> = {
   share: Share,
   triange: Triangle,
   website: Website,
-  working: Working,
   'world-cafe': WorldCafe,
   x: X,
   xing: Xing,

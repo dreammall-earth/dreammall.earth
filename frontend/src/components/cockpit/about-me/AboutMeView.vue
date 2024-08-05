@@ -6,26 +6,29 @@
           <v-img v-if="props.userImage" :src="props.userImage" />
           <span v-else>{{ props.initials }}</span>
         </v-avatar>
-        <div class="availability-container">
-          <select v-model="availability" class="availability" @change="updateAvailability">
-            <option v-for="item in availabilityOptions" :key="item.value || 0" :value="item.value">
-              {{ item.circle }} {{ item.text }}
-            </option>
-          </select>
-        </div>
+        <v-select
+          v-model="availability"
+          round
+          flat
+          :items="availabilityOptions"
+          class="availability"
+          @update:model-value="updateAvailability"
+        >
+          <template #selection="{ item }"> {{ item.props.circle }} {{ item.title }} </template>
+          <template #item="{ item, props: listProps }">
+            <v-list-item v-bind="listProps">
+              <template #prepend> {{ item.props.circle }}</template>
+            </v-list-item>
+          </template>
+        </v-select>
+
         <div class="name">
           {{ props.name }}
           <button @click="$emit('edit')"><v-icon icon="$edit"></v-icon></button>
         </div>
         <div class="introduction">{{ props.introduction }}</div>
       </div>
-      <ul class="details">
-        <li v-for="(detail, index) in props.details" :key="index">
-          <v-chip :prepend-icon="detailCategoryToIcon(detail.category)" class="detail">{{
-            detail.text
-          }}</v-chip>
-        </li>
-      </ul>
+      <Details :details="props.details" />
       <ul class="social">
         <li v-for="item in props.social" :key="item.type">
           <a :href="item.link" target="_blank" rel="noopener noreferrer">
@@ -42,7 +45,7 @@ import { ref } from 'vue'
 
 import CockpitCard from '#components/cockpit/cockpitCard/CockpitCard.vue'
 
-import { detailCategoryToIcon } from './detailCategoryToIcon'
+import Details from './UserDetails.vue'
 
 import type { UserDetail, UserAvailability, SocialMedia } from '#stores/userStore'
 
@@ -65,10 +68,10 @@ const emit = defineEmits<{
 const availability = ref(props.availability)
 
 const availabilityOptions = [
-  { circle: '⚪️', value: null, text: 'Please choose' },
-  { circle: '🟢', value: 'available', text: 'Available to work' },
-  { circle: '🟡', value: 'partly_available', text: 'Busy but have time' },
-  { circle: '🔴', value: 'busy', text: 'Busy' },
+  { value: null, title: 'Please choose', props: { circle: '⚪️' } },
+  { value: 'available', title: 'Available to work', props: { circle: '🟢' } },
+  { value: 'partly_available', title: 'Busy but have time', props: { circle: '🟡' } },
+  { value: 'busy', title: 'Busy', props: { circle: '🔴' } },
 ]
 
 const updateAvailability = (event: Event) => {
@@ -89,28 +92,42 @@ const updateAvailability = (event: Event) => {
   border-radius: 15px;
 }
 
-.availability::after,
-.availability-container {
+.availability {
   grid-column: 2;
   grid-row: 1;
 
-  content: '';
-
-  font-size: 10px;
-  color: white;
-  display: flex;
-  height: 24px;
-  padding: 0px 12px 0px 4px;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-  border-radius: 9999px;
-  border: 1px solid rgba(214, 223, 233, 0.4);
-  background: #5d6670;
-  color: white;
-
-  select {
+  &:deep(.v-input__control) {
     color: white;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    border-radius: 9999px;
+    border: 1px solid rgba(214, 223, 233, 0.4);
+    background: #5d6670;
+    padding-left: 8px;
+    padding-top: 2px;
+  }
+
+  &:deep(.v-field__outline) {
+    display: none;
+  }
+
+  &:deep(.v-field__overlay) {
+    display: none;
+  }
+
+  &:deep(.v-field__input) {
+    padding-inline: 0;
+  }
+
+  &:deep(.v-field__append-inner) {
+    margin-right: -8px;
+  }
+
+  &:deep(.v-select__selection) {
+    font-size: 10px;
   }
 }
 
@@ -125,28 +142,9 @@ const updateAvailability = (event: Event) => {
   font-size: 12px;
 }
 
-.details,
 .social {
   padding: 0;
   list-style: none;
-}
-
-.details {
-  display: flex;
-  flex-flow: row wrap;
-  gap: 10px;
-  width: 300px;
-  padding: 10px;
-  border-radius: 15px;
-  background: #f3f3f3;
-  min-height: 60px;
-}
-
-.detail {
-  font-size: 10px !important;
-}
-
-.social {
   display: flex;
   min-height: 30px;
 }
