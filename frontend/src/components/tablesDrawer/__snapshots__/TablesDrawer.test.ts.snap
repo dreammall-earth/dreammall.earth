@@ -115,6 +115,7 @@ exports[`TablesDrawer > renders correctly 1`] = `
                   id="input-1"
                   size="1"
                   type="text"
+                  value=""
                 />
                 <!---->
                 
