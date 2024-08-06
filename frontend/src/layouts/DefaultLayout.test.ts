@@ -8,7 +8,6 @@ import { VApp } from 'vuetify/components'
 import UserDropdown from '#components/menu/UserDropdown.vue'
 import { joinMyTableMutation } from '#mutations/joinMyTableMutation'
 import { AUTH } from '#src/env'
-import { useActiveTableStore } from '#stores/activeTableStore'
 import { useAuthStore } from '#stores/authStore'
 import { mockClient } from '#tests/mock.apolloClient'
 import { authService } from '#tests/mock.authService'
@@ -22,8 +21,6 @@ vi.mocked(navigate).mockResolvedValue()
 const joinMyTableMutationMock = vi.fn()
 
 mockClient.setRequestHandler(joinMyTableMutation, joinMyTableMutationMock)
-
-const activeTableStore = useActiveTableStore()
 
 describe('DefaultLayout', () => {
   const Wrapper = () => {
@@ -54,7 +51,7 @@ describe('DefaultLayout', () => {
           vi.clearAllMocks()
           joinMyTableMutationMock.mockResolvedValue({
             data: {
-              joinMyTable: 'http://link-to-my.table',
+              joinMyTable: 69,
             },
           })
           await wrapper.find('button.new-table-button').trigger('click')
@@ -65,19 +62,14 @@ describe('DefaultLayout', () => {
           expect(joinMyTableMutationMock).toHaveBeenCalled()
         })
 
-        it('updates the store', () => {
-          expect(activeTableStore.activeTable).toBe('http://link-to-my.table')
-        })
-
         it('navigates to table page', async () => {
           await flushPromises()
-          expect(navigate).toHaveBeenCalledWith('/table/')
+          expect(navigate).toHaveBeenCalledWith('/table/69')
         })
       })
 
       describe('apollo with no data', () => {
         beforeEach(async () => {
-          activeTableStore.setActiveTable(null)
           vi.clearAllMocks()
           joinMyTableMutationMock.mockResolvedValue({
             data: null,
@@ -90,8 +82,8 @@ describe('DefaultLayout', () => {
           expect(joinMyTableMutationMock).toHaveBeenCalled()
         })
 
-        it('does not update the store', () => {
-          expect(activeTableStore.activeTable).toBeNull()
+        it('does not call navigate', () => {
+          expect(navigate).not.toHaveBeenCalled()
         })
 
         it('toasts no table found error', async () => {
@@ -102,7 +94,6 @@ describe('DefaultLayout', () => {
 
       describe('apollo with error', () => {
         beforeEach(async () => {
-          activeTableStore.setActiveTable(null)
           vi.clearAllMocks()
           joinMyTableMutationMock.mockRejectedValue({
             message: 'OUCH',
@@ -115,8 +106,8 @@ describe('DefaultLayout', () => {
           expect(joinMyTableMutationMock).toHaveBeenCalled()
         })
 
-        it('does not update the store', () => {
-          expect(activeTableStore.activeTable).toBeNull()
+        it('does not call navigate', () => {
+          expect(navigate).not.toHaveBeenCalled()
         })
 
         it('toasts no table found error', () => {
@@ -149,89 +140,77 @@ describe('DefaultLayout', () => {
       })
     })
 
-    describe('new table button', () => {
-      beforeEach(() => {
-        wrapper = Wrapper()
+    describe('enter table', () => {
+      describe('apollo with success', () => {
+        beforeEach(async () => {
+          vi.clearAllMocks()
+          joinMyTableMutationMock.mockResolvedValue({
+            data: {
+              joinMyTable: 69,
+            },
+          })
+          await wrapper.find('#dream-mall-button').trigger('click')
+          await wrapper.find('.button-list-desktop button.new-table-button').trigger('click')
+        })
+
+        it('calls the api', () => {
+          // eslint-disable-next-line vitest/prefer-called-with
+          expect(joinMyTableMutationMock).toHaveBeenCalled()
+        })
+
+        it('navigates to table page', async () => {
+          await flushPromises()
+          expect(navigate).toHaveBeenCalledWith('/table/69')
+        })
       })
 
-      describe('enter table', () => {
-        describe('apollo with success', () => {
-          beforeEach(async () => {
-            vi.clearAllMocks()
-            joinMyTableMutationMock.mockResolvedValue({
-              data: {
-                joinMyTable: 'http://link-to-my.table',
-              },
-            })
-            await wrapper.find('#dream-mall-button').trigger('click')
-            await wrapper.find('.button-list-desktop button.new-table-button').trigger('click')
+      describe('apollo with no data', () => {
+        beforeEach(async () => {
+          vi.clearAllMocks()
+          joinMyTableMutationMock.mockResolvedValue({
+            data: null,
           })
-
-          it('calls the api', () => {
-            // eslint-disable-next-line vitest/prefer-called-with
-            expect(joinMyTableMutationMock).toHaveBeenCalled()
-          })
-
-          it('updates the store', () => {
-            expect(activeTableStore.activeTable).toBe('http://link-to-my.table')
-          })
-
-          it('navigates to table page', async () => {
-            await flushPromises()
-            expect(navigate).toHaveBeenCalledWith('/table/')
-          })
+          await wrapper.find('#dream-mall-button').trigger('click')
+          await wrapper.find('.button-list-desktop button.new-table-button').trigger('click')
         })
 
-        describe('apollo with no data', () => {
-          beforeEach(async () => {
-            activeTableStore.setActiveTable(null)
-            vi.clearAllMocks()
-            joinMyTableMutationMock.mockResolvedValue({
-              data: null,
-            })
-            await wrapper.find('#dream-mall-button').trigger('click')
-            await wrapper.find('.button-list-desktop button.new-table-button').trigger('click')
-          })
-
-          it('calls the api', () => {
-            // eslint-disable-next-line vitest/prefer-called-with
-            expect(joinMyTableMutationMock).toHaveBeenCalled()
-          })
-
-          it('does not update the store', () => {
-            expect(activeTableStore.activeTable).toBeNull()
-          })
-
-          // it('toasts no table found error', () => {
-          //   expect(errorHandlerSpy).toHaveBeenCalledWith('No table found')
-          // })
+        it('calls the api', () => {
+          // eslint-disable-next-line vitest/prefer-called-with
+          expect(joinMyTableMutationMock).toHaveBeenCalled()
         })
 
-        describe('apollo with error', () => {
-          beforeEach(async () => {
-            activeTableStore.setActiveTable(null)
-            vi.clearAllMocks()
-            joinMyTableMutationMock.mockRejectedValue({
-              message: 'OUCH',
-            })
-            await wrapper.find('#dream-mall-button').trigger('click')
-            await wrapper.find('.button-list-desktop button.new-table-button').trigger('click')
-          })
+        it('does not call navigate', () => {
+          expect(navigate).not.toHaveBeenCalled()
+        })
 
-          it('calls the api', () => {
-            expect(joinMyTableMutationMock).toHaveBeenCalledWith({})
-          })
+        // it('toasts no table found error', () => {
+        //   expect(errorHandlerSpy).toHaveBeenCalledWith('No table found')
+        // })
+      })
 
-          it('does not update the store', () => {
-            expect(activeTableStore.activeTable).toBeNull()
+      describe('apollo with error', () => {
+        beforeEach(async () => {
+          vi.clearAllMocks()
+          joinMyTableMutationMock.mockRejectedValue({
+            message: 'OUCH',
           })
+          await wrapper.find('#dream-mall-button').trigger('click')
+          await wrapper.find('.button-list-desktop button.new-table-button').trigger('click')
+        })
 
-          it('toasts no table found error', () => {
-            expect(errorHandlerSpy).toHaveBeenCalledWith(
-              'Error opening table',
-              new ApolloError({ errorMessage: 'OUCH' }),
-            )
-          })
+        it('calls the api', () => {
+          expect(joinMyTableMutationMock).toHaveBeenCalledWith({})
+        })
+
+        it('does not call navigate', () => {
+          expect(navigate).not.toHaveBeenCalled()
+        })
+
+        it('toasts no table found error', () => {
+          expect(errorHandlerSpy).toHaveBeenCalledWith(
+            'Error opening table',
+            new ApolloError({ errorMessage: 'OUCH' }),
+          )
         })
       })
     })
