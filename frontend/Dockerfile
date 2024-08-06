@@ -1,4 +1,4 @@
-FROM node:21-alpine3.17 as base
+FROM node:21-alpine3.17 AS base
 
 # ENVs (available in production aswell, can be overwritten by commandline or env file)
 ## DOCKER_WORKDIR would be a classical ARG, but that is not multi layer persistent - shame
@@ -42,70 +42,35 @@ WORKDIR ${DOCKER_WORKDIR}
 ##################################################################################
 # DEVELOPMENT (Connected to the local environment, to reload on demand) ##########
 ##################################################################################
-FROM base as development
-
-# We don't need to copy or build anything since we gonna bind to the
-# local filesystem which will need a rebuild anyway
-
-# Run command
-# (for development we need to execute npm install since the
-#  node_modules are on another volume and need updating)
+FROM base AS development
 CMD /bin/sh -c "npm install && npm run dev"
 
 ##################################################################################
 # STORYBOOK ######################################################################
 ##################################################################################
-FROM base as storybook
-
-# We don't need to copy or build anything since we gonna bind to the
-# local filesystem which will need a rebuild anyway
-
-# Run command
-# (for development we need to execute npm install since the
-#  node_modules are on another volume and need updating)
+FROM base AS storybook
 CMD /bin/sh -c "npm install && npm run storybook"
 
 ##################################################################################
 # BUILD (Does contain all files and is therefore bloated) ########################
 ##################################################################################
-FROM base as build
+FROM base AS build
 
-# Copy everything
-COPY . .
-# npm install
+COPY package.json package-lock.json ./
 RUN npm install --include=dev --frozen-lockfile --non-interactive
-# npm build
-RUN npm run build
-
-##################################################################################
-# TEST ###########################################################################
-##################################################################################
-FROM base as test
-
-# Copy everything
 COPY . .
-# npm install
-RUN npm install --include=dev --frozen-lockfile --non-interactive
 RUN npm run build
-
-# Run command
-CMD /bin/sh -c "npm run server:prod"
 
 ##################################################################################
 # PRODUCTION (Does contain only "binary"- and static-files to reduce image size) #
 ##################################################################################
-FROM base as production
+FROM base AS production
 
-# Copy "binary"-files from build image
-COPY --from=build ${DOCKER_WORKDIR}/build ./build
-# Copy server
-COPY --from=build ${DOCKER_WORKDIR}/server ./server
-# Copy package.json & tsconfig.json
-COPY --from=build ${DOCKER_WORKDIR}/package.json ./package.json
-COPY --from=build ${DOCKER_WORKDIR}/package-lock.json ./package-lock.json
-COPY --from=build ${DOCKER_WORKDIR}/tsconfig.json ./tsconfig.json
-# Install production packages
+COPY --from=build ${DOCKER_WORKDIR}/package.json ${DOCKER_WORKDIR}/package-lock.json ./
 RUN npm install --omit=dev --frozen-lockfile --non-interactive
+COPY --from=build ${DOCKER_WORKDIR}/build ./build
+COPY --from=build ${DOCKER_WORKDIR}/server ./server
+COPY --from=build ${DOCKER_WORKDIR}/tsconfig.json ./tsconfig.json
 
 # Run command
 CMD /bin/sh -c "npm run server:prod"
