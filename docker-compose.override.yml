@@ -1,7 +1,7 @@
 include:
   - path:
     - ./authentik/docker-compose.yml
-    - ./authentik/docker-compose.test.yml
+    - ./authentik/docker-compose.override.yml
 
 services:
   presenter:

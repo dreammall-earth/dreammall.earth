@@ -107,7 +107,8 @@ describe('TabControl', () => {
     })
 
     it('clears timeouts', () => {
-      expect(timeOutSpy).toBeCalled()
+      // eslint-disable-next-line vitest/prefer-called-with
+      expect(timeOutSpy).toHaveBeenCalled()
     })
   })
 })

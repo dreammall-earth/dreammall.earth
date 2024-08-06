@@ -1,0 +1,18 @@
+version: 1
+metadata:
+  name: Authorization implicit consent
+context: {}
+entries:
+- attrs:
+    authentication: require_authenticated
+    denied_action: message_continue
+    designation: authorization
+    layout: sidebar_right
+    name: Authorize DreamMall
+    policy_engine_mode: any
+    title: Redirecting to DreamMall
+  conditions: []
+  identifiers:
+    slug: dreammallearth-authorization-implicit-consent
+  model: authentik_flows.flow
+  state: present

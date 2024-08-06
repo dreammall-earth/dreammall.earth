@@ -606,12 +606,11 @@ exports[`CreateButton > renders 1`] = `
               data-v-dc035224=""
               id="clip0_1513_6640"
             >
-              <rect
+              <circle
+                cx="866"
+                cy="859"
                 data-v-dc035224=""
-                fill="white"
-                height="48"
-                transform="translate(844 834.364)"
-                width="48"
+                r="60"
               />
             </clippath>
           </defs>

@@ -190,9 +190,25 @@ module.exports = {
       extends: ['plugin:json/recommended-with-comments'],
     },
     {
-      files: ['*.[test,spec].[tj]s'],
+      files: ['*.{test,spec}.[tj]s'],
       plugins: ['jest'],
       extends: ['plugin:jest/all'],
+      rules: {
+        'jest/max-expects': 'off',
+        'jest/no-disabled-tests': 'off',
+        'jest/no-hooks': 'off',
+        'jest/prefer-expect-assertions': [
+          'off',
+          {
+            onlyFunctionsWithExpectInLoop: true,
+            onlyFunctionsWithExpectInCallback: true,
+          },
+        ],
+        'jest/prefer-importing-jest-globals': 'off',
+        'jest/prefer-lowercase-title': 'off',
+        'jest/prefer-strict-equal': 'off',
+        'jest/prefer-to-be-truthy': 'off',
+      },
     },
     {
       files: ['*.yaml', '*.yml'],

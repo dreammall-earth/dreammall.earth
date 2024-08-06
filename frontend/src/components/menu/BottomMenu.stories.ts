@@ -1,3 +1,4 @@
+import { withApollo } from '#root/.storybook/withApollo.decorator.js'
 import { SBComp } from '#types/SBComp'
 
 import BottomMenu from './BottomMenu.vue'
@@ -10,12 +11,7 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {},
   args: {},
-  decorators: [
-    (story) => ({
-      components: { story },
-      template: '<div id="teleported"></div><story />',
-    }),
-  ],
+  decorators: [withApollo],
 } satisfies Meta<typeof BottomMenu>
 
 export default meta

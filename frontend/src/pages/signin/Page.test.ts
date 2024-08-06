@@ -38,11 +38,11 @@ describe('SigninPage', () => {
       })
 
       it('calls authservie signin', () => {
-        expect(authServiceSpy).toBeCalled()
+        expect(authServiceSpy).toHaveBeenCalledWith()
       })
 
       it('navigates to /', () => {
-        expect(navigate).toBeCalledWith('/')
+        expect(navigate).toHaveBeenCalledWith('/')
       })
     })
 
@@ -54,7 +54,7 @@ describe('SigninPage', () => {
       })
 
       it('logs the error on console', () => {
-        expect(errorHandlerSpy).toBeCalledWith('auth error', 'Ouch!')
+        expect(errorHandlerSpy).toHaveBeenCalledWith('auth error', 'Ouch!')
       })
     })
   })
@@ -85,11 +85,11 @@ describe('SigninPage', () => {
     })
 
     it('navigates to /', () => {
-      expect(navigate).toBeCalledWith('/')
+      expect(navigate).toHaveBeenCalledWith('/')
     })
 
     it('does not call auth service', () => {
-      expect(authServiceSpy).not.toBeCalled()
+      expect(authServiceSpy).not.toHaveBeenCalled()
     })
   })
 })

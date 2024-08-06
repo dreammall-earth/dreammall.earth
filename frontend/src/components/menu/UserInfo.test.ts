@@ -1,14 +1,18 @@
+import { provideApolloClient } from '@vue/apollo-composable'
 import { mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { useAuthStore } from '#stores/authStore'
+import { useUserStore } from '#stores/userStore'
+import { mockClient } from '#tests/mock.apolloClient'
 
 import UserInfo from './UserInfo.vue'
 
+provideApolloClient(mockClient)
+
 describe('UserInfo', () => {
-  const authStore = useAuthStore()
+  const userStore = useUserStore()
 
   const Wrapper = () => {
     return mount(VApp, {
@@ -29,6 +33,15 @@ describe('UserInfo', () => {
   })
 
   describe('no user name in store', () => {
+    beforeEach(() => {
+      userStore.setCurrentUser({
+        name: '',
+        username: '',
+        id: 22,
+      })
+      wrapper = Wrapper()
+    })
+
     it('has no image and no text in avatar', () => {
       expect(wrapper.findComponent({ name: 'VAvatar' }).text()).toBe('')
       expect(
@@ -39,24 +52,10 @@ describe('UserInfo', () => {
 
   describe('username in store, but no image', () => {
     beforeEach(() => {
-      authStore.save({
-        access_token: 'access_token',
-        profile: {
-          aud: 'aud',
-          sub: 'sub',
-          exp: 1,
-          iat: 1,
-          iss: 'iss',
-          name: 'Peter Lustig',
-        },
-        token_type: 'token_type',
-        session_state: null,
-        state: null,
-        expires_at: new Date().valueOf() + 100,
-        expires_in: 0,
-        expired: false,
-        scopes: ['email'],
-        toStorageString: () => 'toStorageString',
+      userStore.setCurrentUser({
+        name: 'Peter Lustig',
+        username: 'peter',
+        id: 22,
       })
       wrapper = Wrapper()
     })
@@ -71,25 +70,11 @@ describe('UserInfo', () => {
 
   describe('username and image in store', () => {
     beforeEach(() => {
-      authStore.save({
-        access_token: 'access_token',
-        profile: {
-          aud: 'aud',
-          sub: 'sub',
-          exp: 1,
-          iat: 1,
-          iss: 'iss',
-          name: 'Peter Lustig',
-          picture: 'http://url-to.me',
-        },
-        token_type: 'token_type',
-        session_state: null,
-        state: null,
-        expires_at: new Date().valueOf() + 100,
-        expires_in: 0,
-        expired: false,
-        scopes: ['email'],
-        toStorageString: () => 'toStorageString',
+      userStore.setCurrentUser({
+        name: 'Peter Lustig',
+        username: 'peter',
+        id: 22,
+        avatar: 'http://url-to.me',
       })
       wrapper = Wrapper()
     })

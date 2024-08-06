@@ -55,7 +55,7 @@ describe('OptinPage', () => {
 
   describe('API call with success', () => {
     it('calls the API', () => {
-      expect(confirmNewsletterMock).toBeCalledWith({ code: 'my-code' })
+      expect(confirmNewsletterMock).toHaveBeenCalledWith({ code: 'my-code' })
     })
 
     it('renders success', () => {
@@ -69,7 +69,7 @@ describe('OptinPage', () => {
       })
 
       it('redirects to /', () => {
-        expect(navigate).toBeCalledWith('/')
+        expect(navigate).toHaveBeenCalledWith('/')
       })
     })
   })

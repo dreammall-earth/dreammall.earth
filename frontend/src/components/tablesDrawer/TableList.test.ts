@@ -1,5 +1,3 @@
-import { wrap } from 'module'
-
 import { flushPromises, mount } from '@vue/test-utils'
 import { setActivePinia, createPinia } from 'pinia'
 import { navigate } from 'vike/client/router'
@@ -7,14 +5,13 @@ import { vi, describe, it, expect, beforeEach } from 'vitest'
 import { h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { useActiveRoomStore } from '#stores/activeRoomStore'
-
 import TableList from './TableList.vue'
 
 vi.mock('vike/client/router')
 
 const testTables = [
   {
+    id: 69,
     meetingID: 'my-meeting',
     meetingName: 'my meeting',
     startTime: '1234',
@@ -27,6 +24,7 @@ const testTables = [
     joinLink: 'https://my.link',
   },
   {
+    id: 77,
     meetingID: 'my-meeting-2',
     meetingName: 'my meeting',
     startTime: '1234',
@@ -64,31 +62,20 @@ describe('TableList', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 
-  it('renders list', () => {
-    expect(wrapper.find('.v-list--density-default').exists()).toBe(true)
-  })
-
-  it('sets active room', async () => {
-    const setActiveRoomSpy = vi.spyOn(useActiveRoomStore(), 'setActiveRoom')
-    await wrapper.find('.table').trigger('click')
-
-    expect(setActiveRoomSpy).toHaveBeenCalledWith(testTables[0].joinLink)
-  })
-
   describe('when a table is clicked', () => {
     beforeEach(async () => {
       wrapper = Wrapper()
-      await wrapper.find('.table').trigger('click')
+      await wrapper.find('.table .action').trigger('click')
       await flushPromises()
     })
 
-    it('emit event "openRoom"', () => {
+    it('emit event "openTable"', () => {
       const tableList = wrapper.findComponent(TableList)
-      expect(tableList.emitted('openRoom')).toBeTruthy()
+      expect(tableList.emitted('openTable')).toBeTruthy()
     })
 
-    it('navigates to opened Room', () => {
-      expect(navigate).toHaveBeenCalledWith('/room/')
+    it('navigates to opened Table', () => {
+      expect(navigate).toHaveBeenCalledWith('/table/69')
     })
   })
 })

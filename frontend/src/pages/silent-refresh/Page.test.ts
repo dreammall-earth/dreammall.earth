@@ -41,11 +41,11 @@ describe('SilentRefreshPage', () => {
     })
 
     it('calls renew token of auth service', () => {
-      expect(authServiceSpy).toBeCalled()
+      expect(authServiceSpy).toHaveBeenCalledWith()
     })
 
     it('navigatesto /', () => {
-      expect(navigate).toBeCalledWith('/')
+      expect(navigate).toHaveBeenCalledWith('/')
     })
   })
 
@@ -56,7 +56,7 @@ describe('SilentRefreshPage', () => {
     })
 
     it('logs error to console', () => {
-      expect(errorHandlerSpy).toBeCalledWith('auth error', 'Ouch!')
+      expect(errorHandlerSpy).toHaveBeenCalledWith('auth error', 'Ouch!')
     })
   })
 })

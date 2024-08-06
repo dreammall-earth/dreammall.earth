@@ -1,0 +1,28 @@
+x-shared-environments: &x-shared-environments
+  AUTHENTIK_EMAIL__HOST: mailpit
+  AUTHENTIK_EMAIL__PORT: 1025
+  AUTHENTIK_EMAIL__USE_TLS: false
+  AUTHENTIK_EMAIL__USE_SSL: false
+  AUTHENTIK_EMAIL__TIMEOUT: 10
+  AUTHENTIK_EMAIL__FROM: authentik@example.com
+  AUTHENTIK_BOOTSTRAP_PASSWORD: dreammall
+  AUTHENTIK_BOOTSTRAP_EMAIL: admin@dreammall.earth
+
+services:
+  mailpit:
+    image: axllent/mailpit
+    ports:
+      - 8025:8025
+      - 1025:1025
+
+  authentik:
+    environment:
+      <<: *x-shared-environments
+    depends_on:
+      - mailpit
+
+  authentik-worker:
+    environment:
+      <<: *x-shared-environments
+    volumes:
+      - ./blueprints:/blueprints

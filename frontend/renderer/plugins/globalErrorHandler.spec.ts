@@ -19,7 +19,7 @@ describe('GlobalErrorHandler', () => {
     it('toasts error message', () => {
       globalErrorHandler.error('someError')
 
-      expect(errorSpy).toBeCalledWith('someError')
+      expect(errorSpy).toHaveBeenCalledWith('someError')
     })
   })
 
@@ -29,7 +29,7 @@ describe('GlobalErrorHandler', () => {
     it('toasts warning message', () => {
       globalErrorHandler.warning('someWarning')
 
-      expect(warningSpy).toBeCalledWith('someWarning')
+      expect(warningSpy).toHaveBeenCalledWith('someWarning')
     })
   })
 })

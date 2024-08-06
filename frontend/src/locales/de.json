@@ -1,8 +1,8 @@
 {
   "$vuetify": {
-    "input:": {
-      "clear": "Löschen",
-    },
+    "input": {
+      "clear": "Löschen"
+    }
   },
   "auth": {
     "content": "Logge ein...",
@@ -15,7 +15,7 @@
     "signout": "Logout",
     "toAdmin": "Zum Admin",
     "toAssistant": "Assistent",
-    "toRoom": "Zum Treffen"
+    "toTable": "Zum Treffen"
   },
   "cafe": {
     "welcome": "Weltencafé"
@@ -30,7 +30,7 @@
       "text": "Irgendetwas ist schief gegangen."
     }
   },
-  "joinRoomPage": {
+  "joinTablePage": {
     "header": "Raum betreten als:"
   },
   "menu": {
@@ -46,13 +46,15 @@
   "meta": {
     "defaultDescription": "Deine Reichweite Erweitern Alle Möglichkeiten Miteinander Ausschöpfen Lebensqualität Leben",
     "defaultTitle": "DreamMall",
-    "joinRoomTitle": "Raum beitreten"
+    "joinTableTitle": "Raum beitreten"
   },
-  "rooms": {
+  "tables": {
     "participantCount": "{count} Teilnehmer"
   },
   "tablesDrawer": {
     "header": "Offene Tische",
+    "noResults": "Keine Ergebnisse gefunden",
+    "noTables": "Keine Tische verfügbar",
     "searchPlaceholder": "Offene Tische, Teilnehmer"
   }
 }

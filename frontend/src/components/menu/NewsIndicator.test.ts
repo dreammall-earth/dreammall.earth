@@ -1,24 +1,26 @@
 import { mount } from '@vue/test-utils'
-import { describe, it, expect, beforeEach, afterEach } from 'vitest'
+import { describe, it, expect, afterEach } from 'vitest'
 
 import NewsIndicator from './NewsIndicator.vue'
 
-describe('LogoImage', () => {
-  const Wrapper = () => {
-    return mount(NewsIndicator)
+describe('NewsIndicator', () => {
+  const Wrapper = (options = { props: { hasNews: true } }) => {
+    return mount(NewsIndicator, options)
   }
 
   let wrapper: ReturnType<typeof Wrapper>
-
-  beforeEach(() => {
-    wrapper = Wrapper()
-  })
 
   afterEach(() => {
     wrapper.unmount()
   })
 
-  it('renders', () => {
+  it('renders with news', () => {
+    wrapper = Wrapper()
+    expect(wrapper.element).toMatchSnapshot()
+  })
+
+  it('renders without news', () => {
+    wrapper = Wrapper({ props: { hasNews: false } })
     expect(wrapper.element).toMatchSnapshot()
   })
 })

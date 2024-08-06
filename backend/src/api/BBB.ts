@@ -5,6 +5,7 @@ import logger from '#src/logger'
 
 import { axiosInstance, createChecksum } from './BBB/axios'
 import {
+  AttendeeRole, // eslint-disable-line @typescript-eslint/no-unused-vars
   CreateMeetingResponse,
   MeetingInfo,
   GetMeetingsResponse,
@@ -14,7 +15,7 @@ import {
   MeetingLayouts,
 } from './BBB/types'
 
-export { MeetingInfo, AttendeeInfo } from './BBB/types'
+export { MeetingInfo, AttendeeInfo, AttendeeRole } from './BBB/types'
 
 const alwaysArray = ['response.meetings.meeting']
 
@@ -24,7 +25,7 @@ const parser = new XMLParser({
 
 const defaultCreateMeetingBodyOptions = {
   welcome: '<div></div>',
-  meetingLayout: MeetingLayouts.VIDEO_FOCUS,
+  meetingLayout: MeetingLayouts.SMART_LAYOUT,
 }
 
 export const getMeetings = async (): Promise<MeetingInfo[]> => {

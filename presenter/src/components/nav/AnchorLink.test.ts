@@ -33,7 +33,7 @@ describe('AnchorLink', () => {
     })
 
     it('calls navigate', () => {
-      expect(navigate).toBeCalledWith('someAnchorOrUrl')
+      expect(navigate).toHaveBeenCalledWith('someAnchorOrUrl')
     })
   })
 })

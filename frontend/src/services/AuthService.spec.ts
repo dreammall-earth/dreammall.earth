@@ -18,7 +18,7 @@ const authStore = useAuthStore()
 describe('AuthService', () => {
   describe('constructor', () => {
     it('creates user manager', () => {
-      expect(UserManager).toBeCalledWith({
+      expect(UserManager).toHaveBeenCalledWith({
         authority: 'authority',
         client_id: 'client_id',
         redirect_uri: 'redirect_uri',
@@ -40,21 +40,21 @@ describe('AuthService', () => {
   describe('signIn', () => {
     it('calls signin redirect', async () => {
       await authService.signIn()
-      expect(signinRedirectMock).toBeCalled()
+      expect(signinRedirectMock).toHaveBeenCalledWith()
     })
   })
 
   describe('signInCallback', () => {
     it('calls signin callback', async () => {
       await authService.signInCallback()
-      expect(signinCallbackMock).toBeCalled()
+      expect(signinCallbackMock).toHaveBeenCalledWith()
     })
   })
 
   describe('renewToken', () => {
     it('calls renew token', async () => {
       await authService.renewToken()
-      expect(signinSilentCallbackMock).toBeCalled()
+      expect(signinSilentCallbackMock).toHaveBeenCalledWith()
     })
   })
 
@@ -71,14 +71,14 @@ describe('AuthService', () => {
     })
 
     it('calls auth store clear', () => {
-      expect(authSpy).toBeCalled()
+      expect(authSpy).toHaveBeenCalledWith()
     })
   })
 
   describe('getUser', () => {
     it('calls get user', async () => {
       await authService.getUser()
-      expect(getUserMock).toBeCalled()
+      expect(getUserMock).toHaveBeenCalledWith()
     })
   })
 })

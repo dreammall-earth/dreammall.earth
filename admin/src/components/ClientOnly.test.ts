@@ -7,6 +7,6 @@ describe('ClientOnly', () => {
   const wrapper = mount(ClientOnly)
 
   it('renders content if mounted', () => {
-    expect(wrapper.isVisible()).toBeTruthy()
+    expect(wrapper.isVisible()).toBe(true)
   })
 })

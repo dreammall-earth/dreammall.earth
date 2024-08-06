@@ -38,7 +38,7 @@ exports[`ListWithNavigationDrawer > renders correctly 1`] = `
             class="mx-4"
             data-v-3308ee86=""
           >
-            $t('menu.roomList')
+            $t('menu.tableList')
           </div>
           <div
             class="v-card v-theme--light v-card--density-default v-card--variant-elevated mx-auto"

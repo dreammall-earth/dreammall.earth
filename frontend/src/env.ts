@@ -13,8 +13,6 @@ const AUTH = {
     'http://localhost:3001/silent-refresh') as string,
   RESPONSE_TYPE: (import.meta.env.PUBLIC_ENV__AUTH__RESPONSE_TYPE ?? 'code') as string,
   SCOPE: (import.meta.env.PUBLIC_ENV__AUTH__SCOPE ?? 'openid profile posts') as string,
-  UNAUTHORIZED_REDIRECT_URI: (import.meta.env.PUBLIC_ENV__AUTH__UNAUTHORIZED_REDIRECT_URI ??
-    'http://localhost:3001/') as string,
   ADMIN_GROUP: (import.meta.env.PUBLIC_ENV__AUTH__ADMIN_GROUP ?? 'authentik Admins') as string,
   ADMIN_REDIRECT_URI: (import.meta.env.PUBLIC_ENV__AUTH__ADMIN_REDIRECT_URI ??
     'http://localhost:3002/signin') as string,

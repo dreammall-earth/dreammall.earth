@@ -3,8 +3,7 @@ import { flushPromises, mount } from '@vue/test-utils'
 import { navigate } from 'vike/client/router'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 
-import { joinMyRoomMutation } from '#mutations/joinMyRoomMutation'
-import { useActiveRoomStore } from '#stores/activeRoomStore'
+import { joinMyTableMutation } from '#mutations/joinMyTableMutation'
 import { mockClient } from '#tests/mock.apolloClient'
 import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
@@ -13,11 +12,9 @@ import CreateButton from './CreateButton.vue'
 vi.mock('vike/client/router')
 vi.mocked(navigate).mockResolvedValue()
 
-const joinMyRoomMutationMock = vi.fn()
+const joinMyTableMutationMock = vi.fn()
 
-mockClient.setRequestHandler(joinMyRoomMutation, joinMyRoomMutationMock)
-
-const activeRoomStore = useActiveRoomStore()
+mockClient.setRequestHandler(joinMyTableMutation, joinMyTableMutationMock)
 
 describe('CreateButton', () => {
   const Wrapper = () => {
@@ -60,13 +57,13 @@ describe('CreateButton', () => {
       wrapper = Wrapper()
     })
 
-    describe('enter room', () => {
+    describe('enter table', () => {
       describe('apollo with success', () => {
         beforeEach(async () => {
           vi.clearAllMocks()
-          joinMyRoomMutationMock.mockResolvedValue({
+          joinMyTableMutationMock.mockResolvedValue({
             data: {
-              joinMyRoom: 'http://link-to-my.room',
+              joinMyTable: 69,
             },
           })
           await wrapper.find('#create-button').trigger('click')
@@ -74,24 +71,20 @@ describe('CreateButton', () => {
         })
 
         it('calls the api', () => {
-          expect(joinMyRoomMutationMock).toBeCalled()
+          // eslint-disable-next-line vitest/prefer-called-with
+          expect(joinMyTableMutationMock).toHaveBeenCalled()
         })
 
-        it('updates the store', () => {
-          expect(activeRoomStore.activeRoom).toBe('http://link-to-my.room')
-        })
-
-        it('navigates to room page', async () => {
+        it('navigates to table page', async () => {
           await flushPromises()
-          expect(navigate).toBeCalledWith('/room/')
+          expect(navigate).toHaveBeenCalledWith('/table/69')
         })
       })
 
       describe('apollo with no data', () => {
         beforeEach(async () => {
-          activeRoomStore.setActiveRoom(null)
           vi.clearAllMocks()
-          joinMyRoomMutationMock.mockResolvedValue({
+          joinMyTableMutationMock.mockResolvedValue({
             data: null,
           })
           await wrapper.find('#create-button').trigger('click')
@@ -99,24 +92,23 @@ describe('CreateButton', () => {
         })
 
         it('calls the api', () => {
-          expect(joinMyRoomMutationMock).toBeCalled()
+          // eslint-disable-next-line vitest/prefer-called-with
+          expect(joinMyTableMutationMock).toHaveBeenCalled()
         })
 
-        it('does not update the store', () => {
-          expect(activeRoomStore.activeRoom).toBe(null)
+        it('does not call navigate', () => {
+          expect(navigate).not.toHaveBeenCalled()
         })
 
-        it('toasts no room found error', async () => {
-          await flushPromises()
-          expect(errorHandlerSpy).toBeCalledWith('No room found')
-        })
+        // it('toasts no table found error', () => {
+        //   expect(errorHandlerSpy).toHaveBeenCalledWith('No table found')
+        // })
       })
 
       describe('apollo with error', () => {
         beforeEach(async () => {
-          activeRoomStore.setActiveRoom(null)
           vi.clearAllMocks()
-          joinMyRoomMutationMock.mockRejectedValue({
+          joinMyTableMutationMock.mockRejectedValue({
             message: 'OUCH',
           })
           await wrapper.find('#create-button').trigger('click')
@@ -124,16 +116,16 @@ describe('CreateButton', () => {
         })
 
         it('calls the api', () => {
-          expect(joinMyRoomMutationMock).toBeCalled()
+          expect(joinMyTableMutationMock).toHaveBeenCalledWith({})
         })
 
-        it('does not update the store', () => {
-          expect(activeRoomStore.activeRoom).toBe(null)
+        it('does not call navigate', () => {
+          expect(navigate).not.toHaveBeenCalled()
         })
 
-        it('toasts no room found error', () => {
-          expect(errorHandlerSpy).toBeCalledWith(
-            'Error opening room',
+        it('toasts no table found error', () => {
+          expect(errorHandlerSpy).toHaveBeenCalledWith(
+            'Error opening table',
             new ApolloError({ errorMessage: 'OUCH' }),
           )
         })

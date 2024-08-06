@@ -13,12 +13,12 @@ class WorldcafePage {
     cy.get(this.signOutBtn).click()
   }
 
-  enterMyRoom() {
+  enterMyTable() {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     cy.intercept('POST', Cypress.env('backendURL'), (req) => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call, no-prototype-builtins, @typescript-eslint/no-unsafe-member-access
-      if (req.body.hasOwnProperty('query') && req.body.query.includes('joinMyRoom')) {
-        req.alias = 'postJoinMyRoomQuery'
+      if (req.body.hasOwnProperty('query') && req.body.query.includes('joinMyTable')) {
+        req.alias = 'postJoinMyTableQuery'
       }
     })
 

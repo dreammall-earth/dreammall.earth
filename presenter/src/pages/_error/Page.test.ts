@@ -1,3 +1,4 @@
+/* eslint-disable vitest/prefer-to-be */
 import { mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach } from 'vitest'
 import { Component, h } from 'vue'

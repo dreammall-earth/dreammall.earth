@@ -10,7 +10,7 @@ describe('context', () => {
 
     describe('without authorization', () => {
       it('returns undefined', () => {
-        expect(getContextToken(undefined)).toBe(undefined)
+        expect(getContextToken(undefined)).toBeUndefined()
       })
     })
   })

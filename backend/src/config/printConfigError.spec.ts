@@ -3,6 +3,7 @@ import logger from '#src/logger'
 
 import { printConfigError } from './printConfigError'
 
+// eslint-disable-next-line jest/no-untyped-mock-factory
 jest.mock('#src/logger', () => {
   return {
     warn: jest.fn(),
@@ -16,6 +17,7 @@ describe('printConfigError', () => {
     })
 
     it('return undefined', () => {
+      // eslint-disable-next-line jest/prefer-to-be
       expect(printConfigError('test messsage')).toEqual(undefined)
     })
   })

@@ -296,7 +296,7 @@
                 <stop offset="1" stop-color="#3D4753" />
               </linearGradient>
               <clipPath id="clip0_1513_6640">
-                <rect width="48" height="48" fill="white" transform="translate(844 834.364)" />
+                <circle cx="866" cy="859" r="60" />
               </clipPath>
             </defs>
           </svg>
@@ -320,7 +320,7 @@
               label="New Table"
               size="auto"
               icon="plus"
-              @click="enterRoom"
+              @click="enterTable"
               >{{ $t('buttons.newTable') }}
             </MainButton>
             <MainButton
@@ -346,9 +346,8 @@ import { navigate } from 'vike/client/router'
 import { onMounted, ref } from 'vue'
 
 import MainButton from '#components/buttons/MainButton.vue'
-import { JoinMyRoomMutationResult, joinMyRoomMutation } from '#mutations/joinMyRoomMutation'
+import { JoinMyTableMutationResult, joinMyTableMutation } from '#mutations/joinMyTableMutation'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
-import { useActiveRoomStore } from '#stores/activeRoomStore'
 
 const buttonIsTurned = ref(false)
 const warp = ref<HTMLInputElement | null>(null)
@@ -391,32 +390,28 @@ const onClick = (event: MouseEvent) => {
 
     emit('click', 1)
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error('Error on CreateButton Click', error)
+    GlobalErrorHandler.error('Error on CreateButton Click', error)
   }
 }
 
-const activeRoomStore = useActiveRoomStore()
-
-const { mutate: joinMyRoomMutationResult } = useMutation<JoinMyRoomMutationResult>(
-  joinMyRoomMutation,
+const { mutate: joinMyTableMutationResult } = useMutation<JoinMyTableMutationResult>(
+  joinMyTableMutation,
   {
     fetchPolicy: 'no-cache',
   },
 )
 
-const enterRoom = async () => {
+const enterTable = async () => {
   try {
-    const result = await joinMyRoomMutationResult()
+    const result = await joinMyTableMutationResult()
 
-    if (result?.data?.joinMyRoom) {
-      activeRoomStore.setActiveRoom(result.data.joinMyRoom)
-      navigate('/room/')
+    if (result?.data?.joinMyTable) {
+      navigate(`/table/${result.data.joinMyTable}`)
     } else {
-      GlobalErrorHandler.error('No room found')
+      GlobalErrorHandler.error('No table found')
     }
   } catch (error) {
-    GlobalErrorHandler.error('Error opening room', error)
+    GlobalErrorHandler.error('Error opening table', error)
   }
 }
 </script>
@@ -438,19 +433,21 @@ const enterRoom = async () => {
 }
 
 svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 100vw;
   height: calc(100vh - 10px);
+  transform: translate(-50%, -50%);
 
   @media screen and (min-width: $mobile) and (max-width: $tablet) {
     transition: scale 1s;
-    transform: scale(3);
-    transform-origin: center;
+    transform: translate(-50%, -50%) scale(3);
   }
 
   @media screen and (min-width: $tablet) {
     transition: scale 1s;
-    transform: scale(1);
-    transform-origin: center;
+    transform: translate(-50%, -50%) scale(1);
   }
 
   #create-button {
@@ -478,15 +475,14 @@ svg {
     transition: transform 1s;
     transform: scale(0);
     transform-origin: center;
+    transform-box: fill-box;
   }
 
   .button-warp-on {
-    transform-origin: center;
     animation: 12s warp cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
   }
 
   .button-warp-off {
-    transform-origin: center;
     animation: 1s warp-off linear;
   }
 
@@ -498,32 +494,43 @@ svg {
 
 .button-wrapper {
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .button-list {
   position: absolute;
-  top: calc(50% + 40px);
-  left: calc(50% - 165px);
   display: flex;
   flex-direction: column;
   gap: 15px;
+  align-items: center;
   justify-content: center;
+  margin-top: 25px;
   pointer-events: all;
   transform: scale(0.5);
 
+  .assistant-button,
+  .new-project-button,
+  .new-table-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    transition-delay: 0.1s;
+
+    :deep(i) {
+      display: flex;
+      align-items: center;
+      margin-right: 8px;
+    }
+  }
+
   .assistant-button {
-    margin: 0 40px;
     transition-delay: 0.2s;
   }
 
   .new-project-button {
-    margin: 0 20px;
     transition-delay: 0s;
-  }
-
-  .new-table-button {
-    margin: 0 20px;
-    transition-delay: 0.1s;
   }
 }
 
@@ -545,7 +552,7 @@ svg {
   }
 
   50% {
-    transform: scale(2.25);
+    transform: scale(0.3);
   }
 
   100% {
@@ -556,28 +563,6 @@ svg {
 @keyframes warp-off {
   100% {
     transform: scale(0);
-  }
-}
-</style>
-
-<style lang="scss">
-.button-list {
-  .assistant-button {
-    i {
-      margin-right: 16px;
-    }
-  }
-
-  .project-button {
-    i {
-      margin-right: 16px;
-    }
-  }
-
-  .table-button {
-    i {
-      margin-right: 16px;
-    }
   }
 }
 </style>

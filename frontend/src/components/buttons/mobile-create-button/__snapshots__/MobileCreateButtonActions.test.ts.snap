@@ -1,0 +1,407 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MobileCreateButtonActions > renders closed 1`] = `
+<div
+  class="button-list-mobile d-md-none"
+  data-v-1479d999=""
+>
+  <div
+    class="v-responsive v-img v-img--booting w-100 menu-divider"
+    data-v-1479d999=""
+  >
+    <div
+      class="v-responsive__sizer"
+    />
+    
+    
+    <transition-stub
+      appear="true"
+      css="true"
+      name="fade-transition"
+      persisted="false"
+    >
+      <img
+        class="v-img__img v-img__img--contain"
+        src="/src/assets/img/divider.svg"
+        style="display: none;"
+      />
+    </transition-stub>
+    <transition-stub
+      appear="false"
+      css="true"
+      name="fade-transition"
+      persisted="false"
+    >
+      <!---->
+    </transition-stub>
+    <!---->
+    <!---->
+    <!---->
+    
+    
+    <!---->
+  </div>
+  <div
+    class="v-responsive v-img v-img--booting w-100 menu-triangle"
+    data-v-1479d999=""
+  >
+    <div
+      class="v-responsive__sizer"
+    />
+    
+    
+    <transition-stub
+      appear="true"
+      css="true"
+      name="fade-transition"
+      persisted="false"
+    >
+      <img
+        class="v-img__img v-img__img--contain"
+        src="/src/assets/img/triangle.svg"
+        style="display: none;"
+      />
+    </transition-stub>
+    <transition-stub
+      appear="false"
+      css="true"
+      name="fade-transition"
+      persisted="false"
+    >
+      <!---->
+    </transition-stub>
+    <!---->
+    <!---->
+    <!---->
+    
+    
+    <!---->
+  </div>
+  <button
+    class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--border-gradient main-button-auto assistant-button"
+    data-v-1479d999=""
+    data-v-2b63c1fe=""
+    style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
+    type="button"
+  >
+    
+    <span
+      class="v-btn__overlay"
+    />
+    <span
+      class="v-btn__underlay"
+    />
+    
+    <!---->
+    <span
+      class="v-btn__content"
+      data-no-activator=""
+    >
+      
+      
+      <!--v-if-->
+      <i
+        aria-hidden="true"
+        class="mdi-ear-hearing mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--start icon pb-1"
+        data-v-2b63c1fe=""
+      />
+      <span
+        class="main-button-content"
+        data-v-2b63c1fe=""
+      >
+        Assistant 
+        <!--v-if-->
+      </span>
+      
+      
+    </span>
+    <!---->
+    <!---->
+  </button>
+  <button
+    class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--border-yellow main-button-auto new-table-button"
+    data-v-1479d999=""
+    data-v-2b63c1fe=""
+    style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
+    type="button"
+  >
+    
+    <span
+      class="v-btn__overlay"
+    />
+    <span
+      class="v-btn__underlay"
+    />
+    
+    <!---->
+    <span
+      class="v-btn__content"
+      data-no-activator=""
+    >
+      
+      
+      <!--v-if-->
+      <i
+        aria-hidden="true"
+        class="mdi-plus mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--start icon pb-1"
+        data-v-2b63c1fe=""
+      />
+      <span
+        class="main-button-content"
+        data-v-2b63c1fe=""
+      >
+        New Table 
+        <!--v-if-->
+      </span>
+      
+      
+    </span>
+    <!---->
+    <!---->
+  </button>
+  <button
+    class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--border-blue main-button-auto new-project-button"
+    data-v-1479d999=""
+    data-v-2b63c1fe=""
+    style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
+    type="button"
+  >
+    
+    <span
+      class="v-btn__overlay"
+    />
+    <span
+      class="v-btn__underlay"
+    />
+    
+    <!---->
+    <span
+      class="v-btn__content"
+      data-no-activator=""
+    >
+      
+      
+      <!--v-if-->
+      <i
+        aria-hidden="true"
+        class="mdi-plus mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--start icon pb-1"
+        data-v-2b63c1fe=""
+      />
+      <span
+        class="main-button-content"
+        data-v-2b63c1fe=""
+      >
+        New Project 
+        <!--v-if-->
+      </span>
+      
+      
+    </span>
+    <!---->
+    <!---->
+  </button>
+</div>
+`;
+
+exports[`MobileCreateButtonActions > renders open 1`] = `
+<div
+  class="button-list-mobile d-md-none button-list-mobile--active"
+  data-v-1479d999=""
+>
+  <div
+    class="v-responsive v-img v-img--booting w-100 menu-divider"
+    data-v-1479d999=""
+  >
+    <div
+      class="v-responsive__sizer"
+    />
+    
+    
+    <transition-stub
+      appear="true"
+      css="true"
+      name="fade-transition"
+      persisted="false"
+    >
+      <img
+        class="v-img__img v-img__img--contain"
+        src="/src/assets/img/divider.svg"
+        style="display: none;"
+      />
+    </transition-stub>
+    <transition-stub
+      appear="false"
+      css="true"
+      name="fade-transition"
+      persisted="false"
+    >
+      <!---->
+    </transition-stub>
+    <!---->
+    <!---->
+    <!---->
+    
+    
+    <!---->
+  </div>
+  <div
+    class="v-responsive v-img v-img--booting w-100 menu-triangle menu-triangle--turned"
+    data-v-1479d999=""
+  >
+    <div
+      class="v-responsive__sizer"
+    />
+    
+    
+    <transition-stub
+      appear="true"
+      css="true"
+      name="fade-transition"
+      persisted="false"
+    >
+      <img
+        class="v-img__img v-img__img--contain"
+        src="/src/assets/img/triangle.svg"
+        style="display: none;"
+      />
+    </transition-stub>
+    <transition-stub
+      appear="false"
+      css="true"
+      name="fade-transition"
+      persisted="false"
+    >
+      <!---->
+    </transition-stub>
+    <!---->
+    <!---->
+    <!---->
+    
+    
+    <!---->
+  </div>
+  <button
+    class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--border-gradient main-button-auto assistant-button"
+    data-v-1479d999=""
+    data-v-2b63c1fe=""
+    style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
+    type="button"
+  >
+    
+    <span
+      class="v-btn__overlay"
+    />
+    <span
+      class="v-btn__underlay"
+    />
+    
+    <!---->
+    <span
+      class="v-btn__content"
+      data-no-activator=""
+    >
+      
+      
+      <!--v-if-->
+      <i
+        aria-hidden="true"
+        class="mdi-ear-hearing mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--start icon pb-1"
+        data-v-2b63c1fe=""
+      />
+      <span
+        class="main-button-content"
+        data-v-2b63c1fe=""
+      >
+        Assistant 
+        <!--v-if-->
+      </span>
+      
+      
+    </span>
+    <!---->
+    <!---->
+  </button>
+  <button
+    class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--border-yellow main-button-auto new-table-button"
+    data-v-1479d999=""
+    data-v-2b63c1fe=""
+    style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
+    type="button"
+  >
+    
+    <span
+      class="v-btn__overlay"
+    />
+    <span
+      class="v-btn__underlay"
+    />
+    
+    <!---->
+    <span
+      class="v-btn__content"
+      data-no-activator=""
+    >
+      
+      
+      <!--v-if-->
+      <i
+        aria-hidden="true"
+        class="mdi-plus mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--start icon pb-1"
+        data-v-2b63c1fe=""
+      />
+      <span
+        class="main-button-content"
+        data-v-2b63c1fe=""
+      >
+        New Table 
+        <!--v-if-->
+      </span>
+      
+      
+    </span>
+    <!---->
+    <!---->
+  </button>
+  <button
+    class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--border-blue main-button-auto new-project-button"
+    data-v-1479d999=""
+    data-v-2b63c1fe=""
+    style="background-color: #f09630; color: #000; caret-color: #000; height: auto; width: auto;"
+    type="button"
+  >
+    
+    <span
+      class="v-btn__overlay"
+    />
+    <span
+      class="v-btn__underlay"
+    />
+    
+    <!---->
+    <span
+      class="v-btn__content"
+      data-no-activator=""
+    >
+      
+      
+      <!--v-if-->
+      <i
+        aria-hidden="true"
+        class="mdi-plus mdi v-icon notranslate v-theme--light v-icon--size-default v-icon--start icon pb-1"
+        data-v-2b63c1fe=""
+      />
+      <span
+        class="main-button-content"
+        data-v-2b63c1fe=""
+      >
+        New Project 
+        <!--v-if-->
+      </span>
+      
+      
+    </span>
+    <!---->
+    <!---->
+  </button>
+</div>
+`;
