@@ -38,7 +38,7 @@ jobs:
       ##########################################################################
       # TODO: this will error on duplicate
       #- name: package-version-to-git-tag
-      #  uses: pkgdeps/git-tag-action@81b45ff87eb7f7bd49e76e2bed448990d4dd72b3 # v3.0.0
+      #  uses: pkgdeps/git-tag-action@ef111413f44ebe5cc05994e7f5b5b9edaaada08d # v3.0.0
       #  with:
       #    github_token: ${{ secrets.GITHUB_TOKEN }}
       #    github_repo: ${{ github.repository }}
@@ -49,7 +49,7 @@ jobs:
       # Push build tag to GitHub ###############################################
       ##########################################################################
       - name: package-version-to-git-tag + build number
-        uses: pkgdeps/git-tag-action@81b45ff87eb7f7bd49e76e2bed448990d4dd72b3 # v3.0.0
+        uses: pkgdeps/git-tag-action@ef111413f44ebe5cc05994e7f5b5b9edaaada08d # v3.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           github_repo: ${{ github.repository }}
