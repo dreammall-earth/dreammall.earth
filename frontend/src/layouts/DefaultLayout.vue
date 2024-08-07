@@ -33,59 +33,20 @@
       :location="$vuetify.display.smAndDown ? 'bottom' : 'right'"
     />
 
-    <!-- Large DreamMall Button -->
+    <!-- Page Content Container -->
     <v-container fluid class="page-container px-8">
-      <slot>
-        <div class="dream-mall-button-container">
-          <div>
-            <v-container fluid class="pa-0">
-              <div class="button-wrapper">
-                <LargeDreamMallButton @click="toggleButtonList" />
-                <transition-group name="fade" tag="div" class="button-list-desktop">
-                  <MainButton
-                    v-if="isButtonListVisible"
-                    key="1"
-                    class="new-project-button"
-                    variant="fourth"
-                    label="New Project"
-                    size="auto"
-                    icon="plus"
-                    >{{ $t('buttons.newProject') }}
-                  </MainButton>
-                  <MainButton
-                    v-if="isButtonListVisible"
-                    key="2"
-                    class="new-table-button"
-                    variant="primary"
-                    label="New Table"
-                    size="auto"
-                    icon="plus"
-                    @click="enterTable"
-                    >{{ $t('buttons.newTable') }}
-                  </MainButton>
-                  <MainButton
-                    v-if="isButtonListVisible"
-                    key="3"
-                    class="assistant-button"
-                    variant="gradient"
-                    label="Assistant"
-                    size="auto"
-                    icon="ear-hearing"
-                    >{{ $t('buttons.toAssistant') }}
-                  </MainButton>
-                </transition-group>
-              </div>
-            </v-container>
-          </div>
-        </div>
-      </slot>
+      <slot></slot>
     </v-container>
 
-    <!-- MobileButtonList -->
-    <div
-      class="button-list-mobile d-md-none"
-      :class="[isButtonListVisible ? 'button-list-mobile--active' : '']"
-    >
+    <!-- Desktop Bottom Bar -->
+    <div class="desktop-bottom-bar d-none d-md-flex">
+      <div class="dream-mall-button-container">
+        <LargeDreamMallButton @click="toggleButtonList" />
+      </div>
+    </div>
+
+    <!-- Universal Button List -->
+    <div class="button-list" :class="[isButtonListVisible ? 'button-list--active' : '']">
       <v-img class="w-100 menu-divider" :src="Divider" />
       <v-img
         class="w-100 menu-triangle"
@@ -199,6 +160,7 @@ const enterTable = async () => {
 
   .page-container {
     margin-top: 70px;
+    padding-bottom: 120px;
   }
 
   @media #{map-get($display-breakpoints, 'sm-and-down')} {
@@ -216,69 +178,34 @@ const enterTable = async () => {
   width: 140px;
 }
 
-.dream-mall-button-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-
-  @media screen and (max-width: $tablet) {
-    display: none;
-  }
-}
-
-.button-wrapper {
-  position: relative;
+.desktop-bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: var(--v-bottom-menu-background);
+  backdrop-filter: blur(20px);
   display: flex;
   justify-content: center;
-}
-
-.button-list-desktop {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
   align-items: center;
-  justify-content: center;
-  margin-top: 25px;
-  pointer-events: all;
-  transform: scale(0.5);
-
-  .assistant-button,
-  .new-project-button,
-  .new-table-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    transition-delay: 0.1s;
-
-    :deep(i) {
-      display: flex;
-      align-items: center;
-      margin-right: 8px;
-    }
-  }
-
-  .assistant-button {
-    transition-delay: 0.2s;
-  }
-
-  .new-project-button {
-    transition-delay: 0s;
-  }
+  z-index: 3000;
 }
 
-.button-list-mobile {
+.dream-mall-button-container {
+  position: relative;
+  width: auto;
+  pointer-events: all;
+}
+
+.button-list {
   --height: 220px;
   --width: 180px;
 
   position: fixed;
   bottom: calc(var(--height) * -1);
   left: calc(50% - var(--width) / 2);
-  z-index: 1;
+  z-index: 1001;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -293,7 +220,12 @@ const enterTable = async () => {
   transition: bottom 0.75s;
 
   &--active {
-    bottom: 60px;
+    @media #{map-get($display-breakpoints, 'sm-and-down')} {
+      bottom: 60px;
+    }
+    @media #{map-get($display-breakpoints, 'md-and-up')} {
+      bottom: 120px;
+    }
   }
 
   .menu-triangle {
@@ -340,18 +272,6 @@ const enterTable = async () => {
   }
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.4s ease-in-out;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(-100px) scale(0.8);
-}
-
 .bottom-menu {
   bottom: 0;
   left: 0;
@@ -365,10 +285,5 @@ const enterTable = async () => {
   .camera-button {
     transform: translateX(20px);
   }
-}
-
-.small-dream-mall-button {
-  z-index: 1;
-  transform: translate(20px, 30px);
 }
 </style>

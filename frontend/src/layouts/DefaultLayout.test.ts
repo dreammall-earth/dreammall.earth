@@ -1,7 +1,7 @@
 import { ApolloError } from '@apollo/client/errors'
 import { flushPromises, mount } from '@vue/test-utils'
 import { navigate } from 'vike/client/router'
-import { beforeEach, expect, describe, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
@@ -40,7 +40,7 @@ describe('DefaultLayout', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 
-  describe('new table button - mobile', () => {
+  describe('new table button', () => {
     beforeEach(() => {
       wrapper = Wrapper()
     })
@@ -74,7 +74,7 @@ describe('DefaultLayout', () => {
           joinMyTableMutationMock.mockResolvedValue({
             data: null,
           })
-          await wrapper.find('.button-list-mobile button.new-table-button').trigger('click')
+          await wrapper.find('.button-list button.new-table-button').trigger('click')
         })
 
         it('calls the api', () => {
@@ -98,7 +98,7 @@ describe('DefaultLayout', () => {
           joinMyTableMutationMock.mockRejectedValue({
             message: 'OUCH',
           })
-          await wrapper.find('.button-list-mobile button.new-table-button').trigger('click')
+          await wrapper.find('.button-list button.new-table-button').trigger('click')
         })
 
         it('calls the api', () => {
@@ -126,92 +126,15 @@ describe('DefaultLayout', () => {
     })
 
     it('button list content is hidden', () => {
-      expect(wrapper.find('.button-list-desktop .new-project-button').exists()).toBe(false)
-      expect(wrapper.find('.button-list-desktop .new-table-button').exists()).toBe(false)
-      expect(wrapper.find('.button-list-desktop .assistent-button').exists()).toBe(false)
+      expect(wrapper.find('.button-list').exists()).toBe(true)
+      expect(wrapper.find('.button-list').classes()).not.toContain('button-list--active')
     })
 
     describe('click on create button', () => {
       it('button list visible', async () => {
         await wrapper.find('#dream-mall-button').trigger('click')
-        expect(wrapper.find('.button-list-desktop .new-project-button').exists()).toBe(true)
-        expect(wrapper.find('.button-list-desktop .new-table-button').exists()).toBe(true)
-        expect(wrapper.find('.button-list-desktop .assistant-button').exists()).toBe(true)
-      })
-    })
-
-    describe('enter table', () => {
-      describe('apollo with success', () => {
-        beforeEach(async () => {
-          vi.clearAllMocks()
-          joinMyTableMutationMock.mockResolvedValue({
-            data: {
-              joinMyTable: 69,
-            },
-          })
-          await wrapper.find('#dream-mall-button').trigger('click')
-          await wrapper.find('.button-list-desktop button.new-table-button').trigger('click')
-        })
-
-        it('calls the api', () => {
-          // eslint-disable-next-line vitest/prefer-called-with
-          expect(joinMyTableMutationMock).toHaveBeenCalled()
-        })
-
-        it('navigates to table page', async () => {
-          await flushPromises()
-          expect(navigate).toHaveBeenCalledWith('/table/69')
-        })
-      })
-
-      describe('apollo with no data', () => {
-        beforeEach(async () => {
-          vi.clearAllMocks()
-          joinMyTableMutationMock.mockResolvedValue({
-            data: null,
-          })
-          await wrapper.find('#dream-mall-button').trigger('click')
-          await wrapper.find('.button-list-desktop button.new-table-button').trigger('click')
-        })
-
-        it('calls the api', () => {
-          // eslint-disable-next-line vitest/prefer-called-with
-          expect(joinMyTableMutationMock).toHaveBeenCalled()
-        })
-
-        it('does not call navigate', () => {
-          expect(navigate).not.toHaveBeenCalled()
-        })
-
-        // it('toasts no table found error', () => {
-        //   expect(errorHandlerSpy).toHaveBeenCalledWith('No table found')
-        // })
-      })
-
-      describe('apollo with error', () => {
-        beforeEach(async () => {
-          vi.clearAllMocks()
-          joinMyTableMutationMock.mockRejectedValue({
-            message: 'OUCH',
-          })
-          await wrapper.find('#dream-mall-button').trigger('click')
-          await wrapper.find('.button-list-desktop button.new-table-button').trigger('click')
-        })
-
-        it('calls the api', () => {
-          expect(joinMyTableMutationMock).toHaveBeenCalledWith({})
-        })
-
-        it('does not call navigate', () => {
-          expect(navigate).not.toHaveBeenCalled()
-        })
-
-        it('toasts no table found error', () => {
-          expect(errorHandlerSpy).toHaveBeenCalledWith(
-            'Error opening table',
-            new ApolloError({ errorMessage: 'OUCH' }),
-          )
-        })
+        expect(wrapper.find('.button-list').exists()).toBe(true)
+        expect(wrapper.find('.button-list').classes()).toContain('button-list--active')
       })
     })
   })
