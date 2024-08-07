@@ -190,6 +190,7 @@ const enterTable = async () => {
   justify-content: center;
   align-items: center;
   z-index: 3000;
+  overflow: hidden; // hotfix until the concept of DreamMallButton is clarified!
 }
 
 .dream-mall-button-container {
