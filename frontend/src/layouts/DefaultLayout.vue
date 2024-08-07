@@ -159,8 +159,8 @@ const enterTable = async () => {
   background: $background-color-primary;
 
   .page-container {
-    margin-top: 70px;
     padding-bottom: 120px;
+    margin-top: 70px;
   }
 
   @media #{map-get($display-breakpoints, 'sm-and-down')} {
@@ -180,17 +180,17 @@ const enterTable = async () => {
 
 .desktop-bottom-bar {
   position: fixed;
+  right: 0;
   bottom: 0;
   left: 0;
-  right: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 120px;
+  overflow: hidden; // hotfix until the concept of DreamMallButton is clarified!
   background: var(--v-bottom-menu-background);
   backdrop-filter: blur(20px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 3000;
-  overflow: hidden; // hotfix until the concept of DreamMallButton is clarified!
 }
 
 .dream-mall-button-container {
@@ -224,6 +224,7 @@ const enterTable = async () => {
     @media #{map-get($display-breakpoints, 'sm-and-down')} {
       bottom: 60px;
     }
+
     @media #{map-get($display-breakpoints, 'md-and-up')} {
       bottom: 120px;
     }

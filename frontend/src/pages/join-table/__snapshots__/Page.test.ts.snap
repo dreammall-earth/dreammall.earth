@@ -116,6 +116,7 @@ exports[`JoinTablePage > renders 1`] = `
                         required=""
                         size="1"
                         type="text"
+                        value=""
                       />
                       <!---->
                       

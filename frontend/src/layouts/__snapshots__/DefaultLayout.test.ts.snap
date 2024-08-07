@@ -857,6 +857,7 @@ exports[`DefaultLayout > renders 1`] = `
                     id="input-3"
                     size="1"
                     type="text"
+                    value=""
                   />
                   <!---->
                   

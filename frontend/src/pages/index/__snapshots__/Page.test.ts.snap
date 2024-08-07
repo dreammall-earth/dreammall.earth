@@ -859,6 +859,7 @@ exports[`IndexPage > without apollo error > renders 1`] = `
                     id="input-3"
                     size="1"
                     type="text"
+                    value=""
                   />
                   <!---->
                   
