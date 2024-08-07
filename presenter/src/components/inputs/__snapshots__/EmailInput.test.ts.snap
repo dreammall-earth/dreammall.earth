@@ -80,6 +80,7 @@ exports[`EmailInput > renders 1`] = `
           id="input-0"
           size="1"
           type="email"
+          value=""
         />
         <!---->
         

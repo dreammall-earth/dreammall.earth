@@ -377,6 +377,7 @@ exports[`FooterMenu > renders 1`] = `
                                 required=""
                                 size="1"
                                 type="text"
+                                value=""
                               />
                               <!---->
                               
@@ -492,6 +493,7 @@ exports[`FooterMenu > renders 1`] = `
                                 required=""
                                 size="1"
                                 type="text"
+                                value=""
                               />
                               <!---->
                               
@@ -612,6 +614,7 @@ exports[`FooterMenu > renders 1`] = `
                                 required=""
                                 size="1"
                                 type="email"
+                                value=""
                               />
                               <!---->
                               
@@ -752,6 +755,7 @@ exports[`FooterMenu > renders 1`] = `
                                 name="message"
                                 required=""
                                 rows="5"
+                                value=""
                               />
                               <!---->
                               <!---->
