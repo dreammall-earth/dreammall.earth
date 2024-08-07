@@ -5,8 +5,8 @@
     viewBox="0 0 182 182"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    class="create-button-svg"
-    :class="[isActive ? 'create-button-svg--active' : '']"
+    class="dream-mall-button-svg"
+    :class="[isActive ? 'dream-mall-button-svg--active' : '']"
   >
     <g
       class="most-outer-rings"
@@ -54,7 +54,7 @@
       stroke-width="20"
       fill="white"
     />
-    <g id="create-button-mobile" clip-path="url(#clip0_1513_6638)" @click="$emit('button-click')">
+    <g id="small-dream-mall-button" clip-path="url(#clip0_1513_6638)" @click="$emit('click')">
       <rect width="100%" height="100%" fill="transparent"></rect>
       <path
         d="M90.7724 80.0176H95C100.877 80.0176 105.727 84.7568 105.727 90.5C105.727 96.2441 100.877 100.982 95 100.982H90.7714H84.2733H80.5162H76.7581H73V112H95C107.101 112 117 102.325 117 90.5C117 78.6747 107.101 69 95 69H73V85.1057V87.3626H76.7581H80.5162H84.2743H88.0324H91.7905H95C96.7284 87.3626 98.2105 88.8109 98.2105 90.5C98.2105 92.1891 96.7284 93.6374 95 93.6374H91.7895H73V97.3099H88.0324H95C98.8027 97.3099 101.969 94.217 101.969 90.5C101.969 86.7839 98.8027 83.6901 95 83.6901H88.0314H84.2733H80.5162H76.7581V72.6725H80.5162H95C105.026 72.6725 113.243 80.7027 113.243 90.5C113.243 100.298 105.027 108.327 95 108.327H76.7581V104.655H80.5162H90.7724H95C102.951 104.655 109.485 98.2712 109.485 90.5C109.485 82.7297 102.951 76.346 95 76.346H90.7714H81.617V80.0176H90.7724Z"
@@ -233,11 +233,11 @@ defineProps<{
   isActive: boolean
 }>()
 
-defineEmits(['button-click'])
+defineEmits(['click'])
 </script>
 
 <style scoped lang="scss">
-.create-button-svg {
+.dream-mall-button-svg {
   width: 100%;
   max-width: 80px;
   height: 100%;
@@ -252,7 +252,7 @@ defineEmits(['button-click'])
     margin-top: -58px;
   }
 
-  #create-button-mobile {
+  #small-dream-mall-button {
     pointer-events: all;
     cursor: pointer;
     transition: transform 0.4s ease-in-out;

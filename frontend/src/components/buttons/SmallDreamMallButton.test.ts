@@ -3,7 +3,7 @@ import { describe, it, expect, afterEach } from 'vitest'
 import { h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import MobileCreateButton from './MobileCreateButton.vue'
+import MobileCreateButton from './SmallDreamMallButton.vue'
 
 describe('MobileCreateButton', () => {
   const Wrapper = (props = { isActive: false }) => {
@@ -33,9 +33,9 @@ describe('MobileCreateButton', () => {
   describe('click on create button', () => {
     it('emits click event', async () => {
       wrapper = Wrapper()
-      await wrapper.find('#create-button-mobile').trigger('click')
+      await wrapper.find('#small-dream-mall-button').trigger('click')
       const component = wrapper.findComponent(MobileCreateButton)
-      expect(component.emitted('button-click')).toBeTruthy()
+      expect(component.emitted('click')).toBeTruthy()
     })
   })
 })

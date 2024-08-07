@@ -4,6 +4,8 @@
     :location="location"
     width="auto"
     class="menu-drawer px-4"
+    :class="[{ 'changing-orientation': isChangingOrientation }]"
+    :style="drawerStyle"
   >
     <v-text-field
       v-model="searchValue"
@@ -29,7 +31,7 @@
 
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 
 import { useTablesStore } from '#stores/tablesStore'
 
@@ -39,7 +41,7 @@ const tablesStore = useTablesStore()
 
 const { tables: items } = storeToRefs(tablesStore)
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     modelValue: boolean
     location?: 'right' | 'bottom' | 'left' | 'end' | 'top' | 'start'
@@ -70,6 +72,28 @@ const filteredItems = computed(() => {
       ),
   )
 })
+
+const currentLocation = ref(props.location)
+const isChangingOrientation = ref(false)
+
+const drawerStyle = computed(() => ({
+  transition: isChangingOrientation.value ? 'none' : undefined,
+}))
+
+watch(
+  () => props.location,
+  (newLocation) => {
+    if (newLocation !== currentLocation.value && !isVisible.value) {
+      isChangingOrientation.value = true
+      setTimeout(() => {
+        currentLocation.value = newLocation
+        isChangingOrientation.value = false
+      }, 50) // Adjust this delay as needed
+    } else {
+      currentLocation.value = newLocation
+    }
+  },
+)
 </script>
 
 <style scoped lang="scss">
@@ -77,11 +101,19 @@ const filteredItems = computed(() => {
 
 .menu-drawer {
   top: 0 !important;
-  z-index: 1006 !important;
   width: 308px;
   height: 100% !important;
   padding-top: 70px;
   background: var(--v-sidebar-background) !important;
+  transition:
+    transform 0.3s ease,
+    width 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.changing-orientation {
+  opacity: 0 !important;
+  transition: none !important;
 }
 
 @media #{map-get($display-breakpoints, 'sm-and-down')} {

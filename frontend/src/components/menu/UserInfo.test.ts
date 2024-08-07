@@ -1,6 +1,6 @@
 import { provideApolloClient } from '@vue/apollo-composable'
 import { mount } from '@vue/test-utils'
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
@@ -26,6 +26,10 @@ describe('UserInfo', () => {
 
   beforeEach(() => {
     wrapper = Wrapper()
+  })
+
+  afterEach(() => {
+    wrapper.unmount()
   })
 
   it('renders', () => {
