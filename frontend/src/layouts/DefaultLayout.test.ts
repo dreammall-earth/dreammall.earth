@@ -1,7 +1,7 @@
 import { ApolloError } from '@apollo/client/errors'
 import { flushPromises, mount } from '@vue/test-utils'
 import { navigate } from 'vike/client/router'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
@@ -36,6 +36,10 @@ describe('DefaultLayout', () => {
     wrapper = Wrapper()
   })
 
+  afterEach(() => {
+    wrapper.unmount()
+  })
+
   it('renders', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
@@ -43,6 +47,10 @@ describe('DefaultLayout', () => {
   describe('new table button', () => {
     beforeEach(() => {
       wrapper = Wrapper()
+    })
+
+    afterEach(() => {
+      wrapper.unmount()
     })
 
     describe('enter table', () => {
@@ -125,6 +133,10 @@ describe('DefaultLayout', () => {
       wrapper = Wrapper()
     })
 
+    afterEach(() => {
+      wrapper.unmount()
+    })
+
     it('button list content is hidden', () => {
       expect(wrapper.find('.button-list').exists()).toBe(true)
       expect(wrapper.find('.button-list').classes()).not.toContain('button-list--active')
@@ -142,6 +154,10 @@ describe('DefaultLayout', () => {
   describe('BottomMenu', () => {
     beforeEach(() => {
       wrapper = Wrapper()
+    })
+
+    afterEach(() => {
+      wrapper.unmount()
     })
 
     describe('signout button', () => {
@@ -206,6 +222,10 @@ describe('DefaultLayout', () => {
   describe('TopMenu', () => {
     beforeEach(() => {
       wrapper = Wrapper()
+    })
+
+    afterEach(() => {
+      wrapper.unmount()
     })
 
     describe('admin button', () => {
