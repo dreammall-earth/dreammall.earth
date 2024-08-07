@@ -1,10 +1,15 @@
 # Helmfile
 
 You need the following tools installed on your machine:
-- [kubectl](https://kubernetes.io/docs/tasks/tools/)
-- [helmfile](https://helmfile.readthedocs.io/en/latest/) 
 - [sops](https://github.com/getsops/sops)
+
 - [age](https://github.com/FiloSottile/age)
+
+- [kubectl](https://kubernetes.io/docs/tasks/tools/)
+
+- [helmfile](https://helmfile.readthedocs.io/en/latest/) 
+  - [helm secrets](https://github.com/jkroepke/helm-secrets/wiki/Installation)
+  - [helm diff](https://github.com/databus23/helm-diff)
 
 Not required, but highly recommended:
 - [k9s](https://k9scli.io/)
@@ -24,8 +29,8 @@ sops decrypt ./secrets/kubeconfig > ~/.kube/config
 ## Deployment
 
 Relevant files that you might need to change:
-- [environments](./environments/)
 - [helmfile](./helmfile.yaml.gotmpl)
+- [environments](./environments/)
 - [secret files](./secrets)
 - [value files](./values/)
 
@@ -47,7 +52,7 @@ helmfile apply
 helmfile --environment master apply
 ```
 
-Tip: If you are sure there weren't any dependency updates, you can do:
+Tip: To speed things up you can add the `--skip-deps` command line argument:
 ```sh
 helmfile --skip-deps diff
 helmfile --skip-deps apply
