@@ -1,9 +1,14 @@
 import { ApolloServer } from '@apollo/server'
 
+import { findOrCreateUser } from '#src/context/findOrCreateUser'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
 
-import type { Context } from '#src/server/context'
+import type { Context } from '#src/context'
+import type { UserWithProfile } from '#src/prisma'
+
+const nickname = 'mockedUser'
+const name = 'User'
 
 let testServer: ApolloServer<Context>
 
@@ -19,7 +24,7 @@ describe('UserResolver', () => {
           {
             query: `{users {id name username}}`,
           },
-          { contextValue: { dataSources: { prisma } } },
+          { contextValue: { user: null, dataSources: { prisma } } },
         )
         expect(response).toMatchObject({
           body: {
@@ -39,6 +44,11 @@ describe('UserResolver', () => {
     })
 
     describe('authenticated', () => {
+      let user: UserWithProfile
+      beforeEach(async () => {
+        user = await findOrCreateUser({ nickname, name })
+      })
+
       describe('include self is false', () => {
         it('returns an empty list of users', async () => {
           const response = await testServer.executeOperation(
@@ -47,7 +57,7 @@ describe('UserResolver', () => {
             },
             {
               contextValue: {
-                token: 'token',
+                user,
                 dataSources: { prisma },
               },
             },
@@ -75,7 +85,7 @@ describe('UserResolver', () => {
             },
             {
               contextValue: {
-                token: 'token',
+                user,
                 dataSources: { prisma },
               },
             },
@@ -133,7 +143,7 @@ describe('UserResolver', () => {
             },
             {
               contextValue: {
-                token: 'token',
+                user,
                 dataSources: { prisma },
               },
             },
@@ -185,7 +195,7 @@ describe('UserResolver', () => {
             },
             {
               contextValue: {
-                token: 'token',
+                user,
                 dataSources: { prisma },
               },
             },
@@ -237,7 +247,7 @@ describe('UserResolver', () => {
             },
             {
               contextValue: {
-                token: 'token',
+                user,
                 dataSources: { prisma },
               },
             },
@@ -289,7 +299,7 @@ describe('UserResolver', () => {
             },
             {
               contextValue: {
-                token: 'token',
+                user,
                 dataSources: { prisma },
               },
             },
@@ -356,7 +366,7 @@ describe('UserResolver', () => {
       it('returns an unauthenticated error', async () => {
         const response = await testServer.executeOperation(
           { query },
-          { contextValue: { dataSources: { prisma } } },
+          { contextValue: { user: null, dataSources: { prisma } } },
         )
         expect(response).toMatchObject({
           body: {
@@ -376,11 +386,14 @@ describe('UserResolver', () => {
     })
 
     describe('authenticated', () => {
+      let user: UserWithProfile
+      beforeEach(async () => {
+        user = await findOrCreateUser({ nickname, name })
+      })
       let userId: number | undefined
 
       describe('no table', () => {
         it('returns the user without table', async () => {
-          const user = await prisma.user.findFirst()
           userId = user?.id
           const response = await testServer.executeOperation(
             {
@@ -388,7 +401,7 @@ describe('UserResolver', () => {
             },
             {
               contextValue: {
-                token: 'token',
+                user,
                 dataSources: { prisma },
               },
             },
@@ -436,7 +449,7 @@ describe('UserResolver', () => {
             },
             {
               contextValue: {
-                token: 'token',
+                user,
                 dataSources: { prisma },
               },
             },
@@ -539,7 +552,7 @@ describe('UserResolver', () => {
             },
             {
               contextValue: {
-                token: 'token',
+                user,
                 dataSources: { prisma },
               },
             },
@@ -628,7 +641,7 @@ describe('UserResolver', () => {
               },
             },
           },
-          { contextValue: { dataSources: { prisma } } },
+          { contextValue: { user: null, dataSources: { prisma } } },
         )
         expect(response).toMatchObject({
           body: {
@@ -648,13 +661,22 @@ describe('UserResolver', () => {
     })
 
     describe('authenticated', () => {
-      beforeAll(async () => {
+      let user: UserWithProfile
+      beforeEach(async () => {
+        user = await findOrCreateUser({ nickname, name })
         await prisma.user.update({
           where: {
             username: 'mockedUser',
           },
           data: {
             meetingId: null,
+          },
+        })
+      })
+      afterEach(async () => {
+        await prisma.user.delete({
+          where: {
+            username: 'mockedUser',
           },
         })
       })
@@ -680,27 +702,29 @@ describe('UserResolver', () => {
       })
 
       describe('send values for all fields', () => {
+        const action = () => {
+          return testServer.executeOperation(
+            {
+              query,
+              variables: {
+                data: {
+                  name: 'Peter Lustig',
+                  introduction: 'Latzhose und Nickelbrille',
+                  availability: 'busy',
+                },
+              },
+            },
+            {
+              contextValue: {
+                user,
+                dataSources: { prisma },
+              },
+            },
+          )
+        }
+
         it('returns updated current user', async () => {
-          await expect(
-            testServer.executeOperation(
-              {
-                query,
-                variables: {
-                  data: {
-                    name: 'Peter Lustig',
-                    introduction: 'Latzhose und Nickelbrille',
-                    availability: 'busy',
-                  },
-                },
-              },
-              {
-                contextValue: {
-                  token: 'token',
-                  dataSources: { prisma },
-                },
-              },
-            ),
-          ).resolves.toMatchObject({
+          await expect(action()).resolves.toMatchObject({
             body: {
               kind: 'single',
               singleResult: {
@@ -725,6 +749,7 @@ describe('UserResolver', () => {
         })
 
         it('updates the database', async () => {
+          await action()
           await expect(
             prisma.user.findUnique({
               where: {
@@ -762,7 +787,7 @@ describe('UserResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -785,25 +810,37 @@ describe('UserResolver', () => {
       })
 
       describe('introduction and availability is not passed', () => {
+        const action = async () => {
+          await prisma.user.update({
+            where: {
+              username: 'mockedUser',
+            },
+            data: {
+              availability: 'busy',
+              introduction: 'Latzhose und Nickelbrille',
+              name: 'Peter Lustig',
+            },
+          })
+          return testServer.executeOperation(
+            {
+              query,
+              variables: {
+                data: {
+                  name: 'Bibi Bloxberg',
+                },
+              },
+            },
+            {
+              contextValue: {
+                user,
+                dataSources: { prisma },
+              },
+            },
+          )
+        }
+
         it('does not change introduction and availability', async () => {
-          await expect(
-            testServer.executeOperation(
-              {
-                query,
-                variables: {
-                  data: {
-                    name: 'Bibi Bloxberg',
-                  },
-                },
-              },
-              {
-                contextValue: {
-                  token: 'token',
-                  dataSources: { prisma },
-                },
-              },
-            ),
-          ).resolves.toMatchObject({
+          await expect(action()).resolves.toMatchObject({
             body: {
               kind: 'single',
               singleResult: {
@@ -828,6 +865,7 @@ describe('UserResolver', () => {
         })
 
         it('updates only the name in the database', async () => {
+          await action()
           await expect(
             prisma.user.findUnique({
               where: {
@@ -849,27 +887,29 @@ describe('UserResolver', () => {
       })
 
       describe('introduction and availability is null', () => {
+        const action = () => {
+          return testServer.executeOperation(
+            {
+              query,
+              variables: {
+                data: {
+                  name: 'Bibi Bloxberg',
+                  introduction: null,
+                  availability: null,
+                },
+              },
+            },
+            {
+              contextValue: {
+                user,
+                dataSources: { prisma },
+              },
+            },
+          )
+        }
+
         it('deletes introduction and availability', async () => {
-          await expect(
-            testServer.executeOperation(
-              {
-                query,
-                variables: {
-                  data: {
-                    name: 'Bibi Bloxberg',
-                    introduction: null,
-                    availability: null,
-                  },
-                },
-              },
-              {
-                contextValue: {
-                  token: 'token',
-                  dataSources: { prisma },
-                },
-              },
-            ),
-          ).resolves.toMatchObject({
+          await expect(action()).resolves.toMatchObject({
             body: {
               kind: 'single',
               singleResult: {
@@ -894,6 +934,7 @@ describe('UserResolver', () => {
         })
 
         it('updates the database', async () => {
+          await action()
           await expect(
             prisma.user.findUnique({
               where: {
@@ -937,7 +978,7 @@ describe('UserResolver', () => {
               },
             },
           },
-          { contextValue: { dataSources: { prisma } } },
+          { contextValue: { user: null, dataSources: { prisma } } },
         )
         expect(response).toMatchObject({
           body: {
@@ -957,6 +998,11 @@ describe('UserResolver', () => {
     })
 
     describe('authenticated', () => {
+      let user: UserWithProfile
+      beforeEach(async () => {
+        user = await findOrCreateUser({ nickname, name })
+      })
+
       describe('with valid data', () => {
         it('returns user detail', async () => {
           await expect(
@@ -972,7 +1018,7 @@ describe('UserResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -1024,7 +1070,7 @@ describe('UserResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -1062,7 +1108,7 @@ describe('UserResolver', () => {
               id: -1,
             },
           },
-          { contextValue: { dataSources: { prisma } } },
+          { contextValue: { user: null, dataSources: { prisma } } },
         )
         expect(response).toMatchObject({
           body: {
@@ -1082,6 +1128,10 @@ describe('UserResolver', () => {
     })
 
     describe('authenticated', () => {
+      let user: UserWithProfile
+      beforeEach(async () => {
+        user = await findOrCreateUser({ nickname, name })
+      })
       describe('detail id does not exist', () => {
         it('throws detail not found error', async () => {
           await expect(
@@ -1094,7 +1144,7 @@ describe('UserResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -1158,7 +1208,7 @@ describe('UserResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -1199,7 +1249,7 @@ describe('UserResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -1251,7 +1301,7 @@ describe('UserResolver', () => {
               },
             },
           },
-          { contextValue: { dataSources: { prisma } } },
+          { contextValue: { user: null, dataSources: { prisma } } },
         )
         expect(response).toMatchObject({
           body: {
@@ -1271,6 +1321,11 @@ describe('UserResolver', () => {
     })
 
     describe('authenticated', () => {
+      let user: UserWithProfile
+      beforeEach(async () => {
+        user = await findOrCreateUser({ nickname, name })
+      })
+
       describe('with valid data', () => {
         it('returns social media', async () => {
           await expect(
@@ -1286,7 +1341,7 @@ describe('UserResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -1338,7 +1393,7 @@ describe('UserResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -1376,7 +1431,7 @@ describe('UserResolver', () => {
               id: -1,
             },
           },
-          { contextValue: { dataSources: { prisma } } },
+          { contextValue: { user: null, dataSources: { prisma } } },
         )
         expect(response).toMatchObject({
           body: {
@@ -1396,6 +1451,11 @@ describe('UserResolver', () => {
     })
 
     describe('authenticated', () => {
+      let user: UserWithProfile
+      beforeEach(async () => {
+        user = await findOrCreateUser({ nickname, name })
+      })
+
       describe('social media id does not exist', () => {
         it('throws social media not found error', async () => {
           await expect(
@@ -1408,7 +1468,7 @@ describe('UserResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -1472,7 +1532,7 @@ describe('UserResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -1513,7 +1573,7 @@ describe('UserResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
