@@ -282,6 +282,7 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                               size="1"
                               title="Öffnen"
                               type="text"
+                              value="de"
                             />
                           </div>
                           <!---->
@@ -921,6 +922,7 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                                   required=""
                                   size="1"
                                   type="text"
+                                  value=""
                                 />
                                 <!---->
                                 
@@ -1036,6 +1038,7 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                                   required=""
                                   size="1"
                                   type="text"
+                                  value=""
                                 />
                                 <!---->
                                 
@@ -1156,6 +1159,7 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                                   required=""
                                   size="1"
                                   type="email"
+                                  value=""
                                 />
                                 <!---->
                                 
@@ -1296,6 +1300,7 @@ exports[`OptinPage > API call with error > renders error message 1`] = `
                                   name="message"
                                   required=""
                                   rows="5"
+                                  value=""
                                 />
                                 <!---->
                                 <!---->
@@ -1783,6 +1788,7 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                               size="1"
                               title="Öffnen"
                               type="text"
+                              value="de"
                             />
                           </div>
                           <!---->
@@ -2422,6 +2428,7 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                                   required=""
                                   size="1"
                                   type="text"
+                                  value=""
                                 />
                                 <!---->
                                 
@@ -2537,6 +2544,7 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                                   required=""
                                   size="1"
                                   type="text"
+                                  value=""
                                 />
                                 <!---->
                                 
@@ -2657,6 +2665,7 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                                   required=""
                                   size="1"
                                   type="email"
+                                  value=""
                                 />
                                 <!---->
                                 
@@ -2797,6 +2806,7 @@ exports[`OptinPage > API call with failure > renders error message 1`] = `
                                   name="message"
                                   required=""
                                   rows="5"
+                                  value=""
                                 />
                                 <!---->
                                 <!---->
@@ -3284,6 +3294,7 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                               size="1"
                               title="Öffnen"
                               type="text"
+                              value="de"
                             />
                           </div>
                           <!---->
@@ -3887,6 +3898,7 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                                   required=""
                                   size="1"
                                   type="text"
+                                  value=""
                                 />
                                 <!---->
                                 
@@ -4002,6 +4014,7 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                                   required=""
                                   size="1"
                                   type="text"
+                                  value=""
                                 />
                                 <!---->
                                 
@@ -4122,6 +4135,7 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                                   required=""
                                   size="1"
                                   type="email"
+                                  value=""
                                 />
                                 <!---->
                                 
@@ -4262,6 +4276,7 @@ exports[`OptinPage > API call with success > renders success 1`] = `
                                   name="message"
                                   required=""
                                   rows="5"
+                                  value=""
                                 />
                                 <!---->
                                 <!---->
