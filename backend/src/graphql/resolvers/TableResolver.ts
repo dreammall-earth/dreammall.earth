@@ -163,8 +163,8 @@ export class TableResolver {
   }
 
   @Authorized()
-  @Mutation(() => String)
-  async joinMyTable(@Ctx() context: Context): Promise<string> {
+  @Mutation(() => Int)
+  async joinMyTable(@Ctx() context: Context): Promise<number> {
     const { user } = context
     if (!user) throw new Error('User not found!')
 
@@ -237,28 +237,53 @@ export class TableResolver {
       throw new Error('Could not update Meeting in DB!')
     }
 
-    return joinMeetingLink({
-      fullName: user.name,
-      meetingID: meeting.meetingID,
-      password: meeting.moderatorPW,
-      role: AttendeeRole.MODERATOR,
-      createTime: meeting.createTime.toString(),
-      userID: user.id.toString(),
-    })
+    return dbMeeting.id
   }
 
   @Authorized()
   @Query(() => [OpenTable])
-  async openTables(@Ctx() context: Context): Promise<OpenTable[]> {
-    const { user } = context
-    if (!user) return []
+  async openTables(): Promise<OpenTable[]> {
     const meetings = await getMeetings()
+    return openTablesFromOpenMeetings(meetings)
+  }
 
-    return openTablesFromOpenMeetings(meetings, user.name)
+  @Authorized()
+  @Query(() => String)
+  async joinTable(
+    @Arg('tableId', () => Int) tableId: number,
+    @Ctx() context: Context,
+  ): Promise<string> {
+    const { user } = context
+
+    if (!user) throw new Error('User not found!')
+    const meeting = await prisma.meeting.findUnique({
+      where: {
+        id: tableId,
+      },
+      include: {
+        user: true,
+      },
+    })
+
+    if (!meeting) throw new Error('Table does not exist')
+
+    let password: string
+
+    if (meeting.user && meeting.user.id === user.id) {
+      password = meeting.moderatorPW ? meeting.moderatorPW : ''
+    } else {
+      password = meeting.attendeePW ? meeting.attendeePW : ''
+    }
+
+    return joinMeetingLink({
+      fullName: user.name,
+      meetingID: meeting.meetingID,
+      password,
+    })
   }
 
   @Query(() => String)
-  async joinTable(
+  async joinTableAsGuest(
     @Arg('userName') userName: string,
     @Arg('tableId', () => Int) tableId: number,
   ): Promise<string> {
@@ -266,8 +291,12 @@ export class TableResolver {
       where: {
         id: tableId,
       },
+      include: {
+        user: true,
+      },
     })
     if (!meeting) throw new Error('Table does not exist')
+
     return joinMeetingLink({
       fullName: userName,
       meetingID: meeting.meetingID,
@@ -278,11 +307,8 @@ export class TableResolver {
   @Subscription(() => [OpenTable], {
     topics: 'OPEN_ROOM_SUBSCRIPTION',
   })
-  async updateOpenTables(
-    @Root() meetings: MeetingInfo[],
-    @Arg('username') username: string,
-  ): Promise<OpenTable[]> {
-    return openTablesFromOpenMeetings(meetings, username)
+  async updateOpenTables(@Root() meetings: MeetingInfo[]): Promise<OpenTable[]> {
+    return openTablesFromOpenMeetings(meetings)
   }
 
   /*
@@ -298,31 +324,21 @@ export class TableResolver {
   */
 }
 
-const openTablesFromOpenMeetings = async (
-  meetings: MeetingInfo[],
-  username: string,
-): Promise<OpenTable[]> => {
+const openTablesFromOpenMeetings = async (meetings: MeetingInfo[]): Promise<OpenTable[]> => {
   if (meetings.length) {
-    const dbMeetingsPwMap = await prisma.meeting.findMany({
+    const dbMeetingsIdMap = await prisma.meeting.findMany({
       where: {
         meetingID: { in: meetings.map((m: MeetingInfo) => m.meetingID) },
       },
       select: {
+        id: true,
         meetingID: true,
         attendeePW: true,
       },
     })
     return meetings.map((m: MeetingInfo) => {
-      const pw = dbMeetingsPwMap.find((pw) => pw.meetingID === m.meetingID)
-      return new OpenTable(
-        m,
-        joinMeetingLink({
-          fullName: username,
-
-          meetingID: m.meetingID,
-          password: pw?.attendeePW ? pw.attendeePW : '',
-        }),
-      )
+      const pw = dbMeetingsIdMap.find((pw) => pw.meetingID === m.meetingID)
+      return new OpenTable(m, pw?.id ? pw?.id : 0)
     })
   }
 

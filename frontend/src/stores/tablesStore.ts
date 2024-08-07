@@ -11,12 +11,12 @@ type Attendee = {
 }
 
 export type Table = {
+  id: number
   meetingID: string
   meetingName: string
   startTime: string
   participantCount: number
   attendees: Attendee[]
-  joinLink: string
 }
 
 export const useTablesStore = defineStore(

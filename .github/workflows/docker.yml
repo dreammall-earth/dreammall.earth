@@ -11,7 +11,7 @@ jobs:
   build-and-push-image:
     strategy:
       matrix:
-        folder: [admin, backend, frontend, presenter]
+        folder: [authentik, admin, backend, frontend, presenter]
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: ${{ github.repository }}/${{ matrix.folder }}
@@ -23,16 +23,16 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@9a9194f87191a7e9055e3e9b95b8cfb13023bb08 # v4.1.7
       - name: Log in to the Container registry
-        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+        uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        uses: docker/metadata-action@60a0d343a0d8a18aedee9d34e62251f752153bdb
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
@@ -45,7 +45,7 @@ jobs:
             type=sha
       - name: Build and push Docker image
         id: push
-        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+        uses: docker/build-push-action@a8d35412fb758de9162fd63e3fa3f0942bdedb4d
         with:
           context: ${{ matrix.folder }}
           target: production
@@ -57,7 +57,7 @@ jobs:
       # https://docs.github.com/en/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds
       #
       # - name: Generate artifact attestation
-      #   uses: actions/attest-build-provenance@v1
+      #   uses: actions/attest-build-provenance@210c1913531870065f03ce1f9440dd87bc0938cd # v1.4.0
       #   with:
       #     subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
       #     subject-digest: ${{ steps.push.outputs.digest }}

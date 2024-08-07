@@ -6,7 +6,6 @@ import { h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 import { joinMyTableMutation } from '#mutations/joinMyTableMutation'
-import { useActiveTableStore } from '#stores/activeTableStore'
 import { mockClient } from '#tests/mock.apolloClient'
 import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
@@ -18,8 +17,6 @@ vi.mocked(navigate).mockResolvedValue()
 const joinMyTableMutationMock = vi.fn()
 
 mockClient.setRequestHandler(joinMyTableMutation, joinMyTableMutationMock)
-
-const activeTableStore = useActiveTableStore()
 
 describe('MobileCreateButtonActions', () => {
   const Wrapper = (props = { isVisible: true }) => {
@@ -56,7 +53,7 @@ describe('MobileCreateButtonActions', () => {
           vi.clearAllMocks()
           joinMyTableMutationMock.mockResolvedValue({
             data: {
-              joinMyTable: 'http://link-to-my.table',
+              joinMyTable: 69,
             },
           })
           await wrapper.find('button.new-table-button').trigger('click')
@@ -67,19 +64,14 @@ describe('MobileCreateButtonActions', () => {
           expect(joinMyTableMutationMock).toHaveBeenCalled()
         })
 
-        it('updates the store', () => {
-          expect(activeTableStore.activeTable).toBe('http://link-to-my.table')
-        })
-
         it('navigates to table page', async () => {
           await flushPromises()
-          expect(navigate).toHaveBeenCalledWith('/table/')
+          expect(navigate).toHaveBeenCalledWith('/table/69')
         })
       })
 
       describe('apollo with no data', () => {
         beforeEach(async () => {
-          activeTableStore.setActiveTable(null)
           vi.clearAllMocks()
           joinMyTableMutationMock.mockResolvedValue({
             data: null,
@@ -92,8 +84,8 @@ describe('MobileCreateButtonActions', () => {
           expect(joinMyTableMutationMock).toHaveBeenCalled()
         })
 
-        it('does not update the store', () => {
-          expect(activeTableStore.activeTable).toBeNull()
+        it('does not call navigate', () => {
+          expect(navigate).not.toHaveBeenCalled()
         })
 
         it('toasts no table found error', async () => {
@@ -104,7 +96,6 @@ describe('MobileCreateButtonActions', () => {
 
       describe('apollo with error', () => {
         beforeEach(async () => {
-          activeTableStore.setActiveTable(null)
           vi.clearAllMocks()
           joinMyTableMutationMock.mockRejectedValue({
             message: 'OUCH',
@@ -117,8 +108,8 @@ describe('MobileCreateButtonActions', () => {
           expect(joinMyTableMutationMock).toHaveBeenCalled()
         })
 
-        it('does not update the store', () => {
-          expect(activeTableStore.activeTable).toBeNull()
+        it('does not call navigate', () => {
+          expect(navigate).not.toHaveBeenCalled()
         })
 
         it('toasts no table found error', () => {

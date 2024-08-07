@@ -34,6 +34,7 @@ describe('Tables Store', () => {
           data: {
             updateOpenTables: [
               {
+                id: 69,
                 meetingID: 'my-meeting',
                 meetingName: 'My meeting',
                 startTime: '1234',
@@ -43,7 +44,6 @@ describe('Tables Store', () => {
                     fullName: 'Peter Lustig',
                   },
                 ],
-                joinLink: 'https://my.link',
               },
             ],
           },
@@ -53,6 +53,7 @@ describe('Tables Store', () => {
       it('updates the store', () => {
         expect(tablesStore.getTables).toEqual([
           {
+            id: 69,
             meetingID: 'my-meeting',
             meetingName: 'My meeting',
             startTime: '1234',
@@ -62,7 +63,6 @@ describe('Tables Store', () => {
                 fullName: 'Peter Lustig',
               },
             ],
-            joinLink: 'https://my.link',
           },
         ])
       })
@@ -73,6 +73,7 @@ describe('Tables Store', () => {
     it('updates the store', () => {
       tablesStore.setTables([
         {
+          id: 77,
           meetingID: 'my-meeting',
           meetingName: 'my meeting',
           startTime: '1234',
@@ -82,11 +83,11 @@ describe('Tables Store', () => {
               fullName: 'Peter Lustig',
             },
           ],
-          joinLink: 'https://my.link',
         },
       ])
       expect(tablesStore.tables).toEqual([
         {
+          id: 77,
           meetingID: 'my-meeting',
           meetingName: 'my meeting',
           startTime: '1234',
@@ -96,7 +97,6 @@ describe('Tables Store', () => {
               fullName: 'Peter Lustig',
             },
           ],
-          joinLink: 'https://my.link',
         },
       ])
     })
