@@ -6,7 +6,7 @@ Follow the [prerequisites](https://github.com/kube-hetzner/terraform-hcloud-kube
 
 Create a passphrase-less SSH key:
 ```sh
-ssh-keygen -f ~/.ssh/kube-hetzner
+ssh-keygen -f ~/.ssh/id_ed25519
 ```
 
 Setup the kubernetes cluster:
