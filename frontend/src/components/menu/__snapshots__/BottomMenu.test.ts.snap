@@ -316,6 +316,7 @@ exports[`BottomMenu > renders BottomMenu 1`] = `
                   id="input-4"
                   size="1"
                   type="text"
+                  value=""
                 />
                 <!---->
                 
