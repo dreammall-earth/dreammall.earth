@@ -14,7 +14,7 @@
       @update-availability="updateAvailability"
       @update-introduction="updateIntroduction"
     ></AboutMeView>
-    <AboutMeEdit
+    <EditUserDetails
       v-if="user && mode === 'edit'"
       :username="user.username"
       :name="user.name"
@@ -25,7 +25,7 @@
       @back="() => setMode('view')"
       @add-detail="addDetail"
       @remove-detail="removeDetail"
-    ></AboutMeEdit>
+    ></EditUserDetails>
   </ClientOnly>
 </template>
 
@@ -37,8 +37,8 @@ import ClientOnly from '#components/ClientOnly.vue'
 import globalErrorHandler from '#plugins/globalErrorHandler'
 import { useUserStore, UserAvailability, AddUserDetailInput } from '#stores/userStore'
 
-import AboutMeEdit from './AboutMeEdit.vue'
 import AboutMeView from './AboutMeView.vue'
+import EditUserDetails from './EditUserDetails.vue'
 
 type Mode = 'view' | 'edit'
 const mode = ref<Mode>('view')

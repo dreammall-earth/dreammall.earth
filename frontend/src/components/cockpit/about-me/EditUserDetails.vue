@@ -50,15 +50,11 @@ import { reactive } from 'vue'
 
 import CockpitCard from '#components/cockpit/cockpitCard/CockpitCard.vue'
 
+import { detailCategories } from './detailCategories'
 import { detailCategoryToIcon } from './detailCategoryToIcon'
 import Details from './UserDetails.vue'
 
-import type {
-  UserDetail,
-  SocialMedia,
-  UserDetailCategory,
-  AddUserDetailInput,
-} from '#stores/userStore'
+import type { UserDetail, SocialMedia, AddUserDetailInput } from '#stores/userStore'
 
 const props = defineProps<{
   username: string
@@ -80,8 +76,6 @@ const newDetail = reactive<AddUserDetailInput>({
   category: 'work',
   text: '',
 })
-
-const detailCategories: UserDetailCategory[] = ['place', 'work', 'education', 'feeling', 'language']
 
 const addDetail = () => {
   emit('add-detail', newDetail)
