@@ -326,20 +326,23 @@ export class TableResolver {
 
 const openTablesFromOpenMeetings = async (meetings: MeetingInfo[]): Promise<OpenTable[]> => {
   if (meetings.length) {
-    const dbMeetingsIdMap = await prisma.meeting.findMany({
+    const dbMeetings = await prisma.meeting.findMany({
       where: {
         meetingID: { in: meetings.map((m: MeetingInfo) => m.meetingID) },
       },
       select: {
         id: true,
         meetingID: true,
-        attendeePW: true,
       },
     })
-    return meetings.map((m: MeetingInfo) => {
-      const pw = dbMeetingsIdMap.find((pw) => pw.meetingID === m.meetingID)
-      return new OpenTable(m, pw?.id ? pw?.id : 0)
+
+    const openTables: OpenTable[] = []
+
+    dbMeetings.forEach((ids) => {
+      const meeting = meetings.find((m) => ids.meetingID === m.meetingID)
+      if (meeting) openTables.push(new OpenTable(meeting, ids.id ? ids.id : 0))
     })
+    return openTables
   }
 
   return []
