@@ -27,7 +27,13 @@
       "edit": {
         "title": "About me",
         "add": "Add"
-      }
+      },
+      "introduction-placeholder": "My introduction line",
+      "work-placeholder": "My work",
+      "place-placeholder": "My location",
+      "education-placeholder": "My education",
+      "feeling-placeholder": "How I feel today",
+      "language-placeholder": "Languages I speak",
     }
   },
   "error": {

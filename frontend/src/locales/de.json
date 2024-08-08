@@ -27,7 +27,13 @@
       "edit": {
         "title": "Über mich",
         "add": "Hinzufügen"
-      }
+      },
+      "introduction-placeholder": "Meine Kurzvorstellung",
+      "work-placeholder": "Meine Arbeit",
+      "place-placeholder": "Mein Standort",
+      "education-placeholder": "Meine Ausbildung",
+      "feeling-placeholder": "Wie ich mich heute fühle",
+      "language-placeholder": "Sprachen, die ich spreche"
     }
   },
   "error": {
