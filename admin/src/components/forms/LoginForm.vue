@@ -1,10 +1,6 @@
 <template>
   <v-sheet class="mx-auto" width="300">
-    <v-img
-      class="bg-grey-lighten-2"
-      height="125"
-      src="src/assets/img/dreammall-logo.svg"
-    ></v-img>
+    <LogoAvatar />
     <h2 class="text-center my-4">Adminbereich</h2>
     <hr>
     <v-form @submit.prevent="login">
@@ -27,6 +23,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { useAuthStore } from '#stores/auth';
+import LogoAvatar from '#src/components/menu/LogoAvatar.vue'
 
 const authStore = useAuthStore();
 

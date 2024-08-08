@@ -1,12 +1,12 @@
 <template>
   <v-img
-  :width="300"
-  aspect-ratio="16/9"
+  :src="logo"
   cover
-  :src=Logo
+  class="bg-grey-lighten-2"
+  aspect-ratio="16/9"
 ></v-img>
 </template>
 
 <script lang="ts" setup>
-import Logo from '#assets/img/dreammall-logo.svg'
+import logo from '#assets/img/dreammall-logo.svg'
 </script>
