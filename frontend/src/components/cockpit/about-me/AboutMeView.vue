@@ -74,8 +74,8 @@ const availabilityOptions = [
   { value: 'busy', title: 'Busy', props: { circle: '🔴' } },
 ]
 
-const updateAvailability = (event: Event) => {
-  emit('update-availability', (event.target as HTMLSelectElement).value as UserAvailability)
+const updateAvailability = (newAvailability: string) => {
+  emit('update-availability', newAvailability as UserAvailability)
 }
 </script>
 
