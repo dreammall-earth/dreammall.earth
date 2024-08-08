@@ -4,7 +4,9 @@ import { prisma } from '#src/prisma'
 import type { UserWithProfile } from '#src/prisma'
 import type { CustomJwtPayload } from './context'
 
-export const findOrCreateUser = async (payload: CustomJwtPayload): Promise<UserWithProfile> => {
+export const findOrCreateUser = async (
+  payload: Pick<CustomJwtPayload, 'nickname' | 'name'>,
+): Promise<UserWithProfile> => {
   const { nickname: username, name } = payload
   let user: UserWithProfile | null = await prisma.user.findUnique({
     where: {

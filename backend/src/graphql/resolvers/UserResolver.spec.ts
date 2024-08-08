@@ -1,11 +1,10 @@
 import { ApolloServer } from '@apollo/server'
 
-import { findOrCreateUser } from '#src/context/findOrCreateUser'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
+import { authenticatedUser } from '#test/helpers'
 
 import type { Context } from '#src/context'
-import type { UserWithProfile } from '#src/prisma'
 
 const nickname = 'mockedUser'
 const name = 'User'
@@ -44,9 +43,9 @@ describe('UserResolver', () => {
     })
 
     describe('authenticated', () => {
-      let user: UserWithProfile
+      let user: Awaited<ReturnType<typeof authenticatedUser>>
       beforeEach(async () => {
-        user = await findOrCreateUser({ nickname, name })
+        user = await authenticatedUser({ nickname, name })
       })
 
       describe('include self is false', () => {
@@ -386,9 +385,9 @@ describe('UserResolver', () => {
     })
 
     describe('authenticated', () => {
-      let user: UserWithProfile
+      let user: Awaited<ReturnType<typeof authenticatedUser>>
       beforeEach(async () => {
-        user = await findOrCreateUser({ nickname, name })
+        user = await authenticatedUser({ nickname, name })
       })
       let userId: number | undefined
 
@@ -661,9 +660,9 @@ describe('UserResolver', () => {
     })
 
     describe('authenticated', () => {
-      let user: UserWithProfile
+      let user: Awaited<ReturnType<typeof authenticatedUser>>
       beforeEach(async () => {
-        user = await findOrCreateUser({ nickname, name })
+        user = await authenticatedUser({ nickname, name })
         await prisma.user.update({
           where: {
             username: 'mockedUser',
@@ -998,9 +997,9 @@ describe('UserResolver', () => {
     })
 
     describe('authenticated', () => {
-      let user: UserWithProfile
+      let user: Awaited<ReturnType<typeof authenticatedUser>>
       beforeEach(async () => {
-        user = await findOrCreateUser({ nickname, name })
+        user = await authenticatedUser({ nickname, name })
       })
 
       describe('with valid data', () => {
@@ -1128,9 +1127,9 @@ describe('UserResolver', () => {
     })
 
     describe('authenticated', () => {
-      let user: UserWithProfile
+      let user: Awaited<ReturnType<typeof authenticatedUser>>
       beforeEach(async () => {
-        user = await findOrCreateUser({ nickname, name })
+        user = await authenticatedUser({ nickname, name })
       })
       describe('detail id does not exist', () => {
         it('throws detail not found error', async () => {
@@ -1321,9 +1320,9 @@ describe('UserResolver', () => {
     })
 
     describe('authenticated', () => {
-      let user: UserWithProfile
+      let user: Awaited<ReturnType<typeof authenticatedUser>>
       beforeEach(async () => {
-        user = await findOrCreateUser({ nickname, name })
+        user = await authenticatedUser({ nickname, name })
       })
 
       describe('with valid data', () => {
@@ -1451,9 +1450,9 @@ describe('UserResolver', () => {
     })
 
     describe('authenticated', () => {
-      let user: UserWithProfile
+      let user: Awaited<ReturnType<typeof authenticatedUser>>
       beforeEach(async () => {
-        user = await findOrCreateUser({ nickname, name })
+        user = await authenticatedUser({ nickname, name })
       })
 
       describe('social media id does not exist', () => {

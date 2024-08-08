@@ -4,7 +4,6 @@ import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
 
 import type { Context } from '#src/context'
-import type { UserWithProfile } from '#src/prisma'
 
 let testServer: ApolloServer<Context>
 
@@ -57,7 +56,7 @@ describe('authChecker', () => {
   })
 
   describe('authenticated', () => {
-    const user: UserWithProfile = {
+    const user: NonNullable<Context['user']> = {
       id: 81,
       username: 'mockedUser',
       name: 'Bibi Bloxberg',
@@ -68,6 +67,7 @@ describe('authChecker', () => {
       meeting: null,
       userDetail: [{ id: 5, category: 'work', text: 'Schwer am Schuften', userId: 81 }],
       socialMedia: [],
+      roles: [],
     }
 
     it('checks if a user is authenticated', async () => {

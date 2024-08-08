@@ -12,14 +12,20 @@ import type { ExpressContextFunctionArgument } from '@apollo/server/express4'
 
 const JWKS = createRemoteJWKSet(new URL(CONFIG.JWKS_URI))
 
+type Role = 'admin'
+type UserWithProfileAndRoles = UserWithProfile & { roles: Role[] }
+
 export type Context = {
-  user: UserWithProfile | null
+  user: UserWithProfileAndRoles | null
   dataSources: { prisma: typeof Prisma }
 }
 
 export interface CustomJwtPayload {
   nickname: string
   name: string
+  group_attributes: {
+    roles?: Role[]
+  }
 }
 
 const decodePayload = async (
@@ -38,12 +44,14 @@ const decodePayload = async (
 
 const getCurrentUser = async (
   authorization: string | undefined,
-): Promise<UserWithProfile | null> => {
+): Promise<UserWithProfileAndRoles | null> => {
   const payload = await decodePayload(authorization)
   if (!payload) {
     return null
   }
-  return findOrCreateUser(payload)
+  const roles = payload.group_attributes.roles ?? []
+  const dbUser = await findOrCreateUser(payload)
+  return { ...dbUser, roles }
 }
 
 export const context: ContextFunction<[ExpressContextFunctionArgument], Context> = async ({

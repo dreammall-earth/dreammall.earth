@@ -15,7 +15,9 @@ describe('context', () => {
   describe('if prisma client throws an error, e.g. because of pending migrations', () => {
     beforeEach(() => {
       mockedFindOrCreateUser.mockRejectedValue('Ouch!')
-      const jwtVerifyPayload = { payload: { nickname: 'nickname', name: 'name' } }
+      const jwtVerifyPayload = {
+        payload: { nickname: 'nickname', name: 'name', group_attributes: {} },
+      }
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-explicit-any
       mockedJwtVerify.mockResolvedValue(jwtVerifyPayload as any)
     })
