@@ -1,7 +1,7 @@
 class WorldcafePage {
   userMenuBtn: string = '.user-info'
   signOutBtn: string = '.sign-out'
-  centerBtn: string = '#create-button'
+  centerBtn: string = '#dream-mall-button'
   newTableBtnBtn: string = 'div.button-list > button.new-table-button'
 
   signoutButtonIsVisible() {

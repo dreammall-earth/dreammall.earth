@@ -282,6 +282,7 @@ exports[`IndexPage > renders 1`] = `
                               size="1"
                               title="Öffnen"
                               type="text"
+                              value="de"
                             />
                           </div>
                           <!---->
@@ -1430,6 +1431,7 @@ exports[`IndexPage > renders 1`] = `
                                         required=""
                                         size="1"
                                         type="text"
+                                        value=""
                                       />
                                       <!---->
                                       
@@ -1545,6 +1547,7 @@ exports[`IndexPage > renders 1`] = `
                                         required=""
                                         size="1"
                                         type="text"
+                                        value=""
                                       />
                                       <!---->
                                       
@@ -1665,6 +1668,7 @@ exports[`IndexPage > renders 1`] = `
                                         required=""
                                         size="1"
                                         type="email"
+                                        value=""
                                       />
                                       <!---->
                                       
@@ -2804,6 +2808,7 @@ exports[`IndexPage > renders 1`] = `
                                   required=""
                                   size="1"
                                   type="text"
+                                  value=""
                                 />
                                 <!---->
                                 
@@ -2919,6 +2924,7 @@ exports[`IndexPage > renders 1`] = `
                                   required=""
                                   size="1"
                                   type="text"
+                                  value=""
                                 />
                                 <!---->
                                 
@@ -3039,6 +3045,7 @@ exports[`IndexPage > renders 1`] = `
                                   required=""
                                   size="1"
                                   type="email"
+                                  value=""
                                 />
                                 <!---->
                                 
@@ -3179,6 +3186,7 @@ exports[`IndexPage > renders 1`] = `
                                   name="message"
                                   required=""
                                   rows="5"
+                                  value=""
                                 />
                                 <!---->
                                 <!---->

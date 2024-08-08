@@ -1,0 +1,13 @@
+creation_rules:
+  - age:  >-
+      age1al36hkk8can83zpxq8qyy07gpv83hdw9vchfly5f264kanz405as283a00,
+      age1llp6k66265q3rzqemxpnq0x3562u20989vcjf65fl9s3hjhgcscq6mhnjw,
+      age1zycwtk6dkxj6vuqhj9jw7932ythky9p3att6df4z9qasyw8v5dxquejcmp,
+      age1t0ufylv5xfwhmcamu4gpwtay4wcuyqgzlkht4t04s9qjl8xjks9skxrt02,
+      age15g5mhkcrseuxq923j7vdnmrzq4eh08ujha864k8hc6ncrj5sqfcsqkkyr2
+
+# age1al36hkk8can83zpxq8qyy07gpv83hdw9vchfly5f264kanz405as283a00 SOPS_KEY github secret
+# age1llp6k66265q3rzqemxpnq0x3562u20989vcjf65fl9s3hjhgcscq6mhnjw @roschaefer
+# age1zycwtk6dkxj6vuqhj9jw7932ythky9p3att6df4z9qasyw8v5dxquejcmp @mahula
+# age1t0ufylv5xfwhmcamu4gpwtay4wcuyqgzlkht4t04s9qjl8xjks9skxrt02 @Bettelstab
+# age15g5mhkcrseuxq923j7vdnmrzq4eh08ujha864k8hc6ncrj5sqfcsqkkyr2 @trinity2701

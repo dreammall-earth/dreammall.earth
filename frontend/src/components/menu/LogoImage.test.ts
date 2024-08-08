@@ -1,11 +1,17 @@
 import { mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
+import { Component, h } from 'vue'
+import { VApp } from 'vuetify/components'
 
 import LogoImage from './LogoImage.vue'
 
 describe('LogoImage', () => {
-  const Wrapper = () => {
-    return mount(LogoImage)
+  const Wrapper = (props = {}) => {
+    return mount(VApp, {
+      slots: {
+        default: h(LogoImage as Component, props),
+      },
+    })
   }
 
   let wrapper: ReturnType<typeof Wrapper>
@@ -19,7 +25,7 @@ describe('LogoImage', () => {
   })
 
   it('renders Logo', () => {
-    expect(wrapper.element).toMatchSnapshot()
+    expect(wrapper.findComponent(LogoImage).element).toMatchSnapshot()
   })
 
   describe('classes', () => {
@@ -32,10 +38,8 @@ describe('LogoImage', () => {
     })
 
     describe('size large', () => {
-      beforeEach(async () => {
-        await wrapper.setProps({
-          size: 'large',
-        })
+      beforeEach(() => {
+        wrapper = Wrapper({ size: 'large' })
       })
 
       it('has class logo-large', () => {
@@ -46,10 +50,8 @@ describe('LogoImage', () => {
     })
 
     describe('size medium', () => {
-      beforeEach(async () => {
-        await wrapper.setProps({
-          size: 'medium',
-        })
+      beforeEach(() => {
+        wrapper = Wrapper({ size: 'medium' })
       })
 
       it('has class logo-medium', () => {
@@ -60,10 +62,8 @@ describe('LogoImage', () => {
     })
 
     describe('size small', () => {
-      beforeEach(async () => {
-        await wrapper.setProps({
-          size: 'small',
-        })
+      beforeEach(() => {
+        wrapper = Wrapper({ size: 'small' })
       })
 
       it('has class logo-small', () => {
