@@ -12,6 +12,7 @@
       :initials="initials"
       @edit="() => setMode('edit')"
       @update-availability="updateAvailability"
+      @update-name="updateName"
       @update-introduction="updateIntroduction"
     ></AboutMeView>
     <EditUserDetails
@@ -62,6 +63,12 @@ const updateAvailability = async (newAvailability: UserAvailability) => {
   } catch (error) {
     globalErrorHandler.error(`Could not update user: ${(error as Error).message}`, error)
   }
+}
+
+const updateName = async (newName: string) => {
+  await userStore.updateUser({
+    name: newName,
+  })
 }
 
 const updateIntroduction = async (newIntroduction: string) => {

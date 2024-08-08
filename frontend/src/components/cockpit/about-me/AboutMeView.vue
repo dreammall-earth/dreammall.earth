@@ -22,13 +22,37 @@
           </template>
         </v-select>
 
-        <div class="name">
-          {{ props.name }}
-          <button @click="$emit('edit')"><v-icon icon="$edit"></v-icon></button>
-        </div>
-        <div class="introduction">{{ props.introduction }}</div>
+        <template v-if="mode === 'view'">
+          <button class="name" @click="editName">
+            {{ props.name }}
+            <v-icon icon="$edit"></v-icon>
+          </button>
+          <button class="introduction" @click="editIntroduction">
+            {{ introduction }}
+          </button>
+        </template>
+        <template v-else>
+          <input
+            ref="nameInput"
+            :value="props.name"
+            name="name"
+            maxlength="100"
+            @change="updateName"
+          />
+          <input
+            ref="introductionInput"
+            :value="props.introduction"
+            :placeholder="introduction"
+            class="introduction"
+            name="introduction"
+            maxlength="25"
+            @change="updateIntroduction"
+          />
+        </template>
       </div>
-      <Details :details="props.details" />
+      <button @click="$emit('edit')">
+        <Details :details="props.details" />
+      </button>
       <ul class="social">
         <li v-for="item in props.social" :key="item.type">
           <a :href="item.link" target="_blank" rel="noopener noreferrer">
@@ -42,12 +66,15 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import CockpitCard from '#components/cockpit/cockpitCard/CockpitCard.vue'
 
 import Details from './UserDetails.vue'
 
 import type { UserDetail, UserAvailability, SocialMedia } from '#stores/userStore'
+
+const { t } = useI18n()
 
 const props = defineProps<{
   username: string
@@ -63,8 +90,11 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'edit'): void
   (e: 'update-availability', status: UserAvailability): void
+  (e: 'update-name', name: string): void
+  (e: 'update-introduction', introduction: string): void
 }>()
 
+// Availability
 const availability = ref(props.availability)
 
 const availabilityOptions = [
@@ -76,6 +106,32 @@ const availabilityOptions = [
 
 const updateAvailability = (newAvailability: string) => {
   emit('update-availability', newAvailability as UserAvailability)
+}
+
+// Name and introduction
+const mode = ref<'view' | 'edit-name' | 'edit-introduction'>('view')
+
+const introduction = props.introduction || t('cockpit.about-me.introduction-placeholder')
+
+const nameInput = ref<HTMLInputElement>()
+const introductionInput = ref<HTMLInputElement>()
+
+const editName = () => {
+  mode.value = 'edit-name'
+  window.requestAnimationFrame(() => nameInput.value?.focus())
+}
+
+const editIntroduction = () => {
+  mode.value = 'edit-introduction'
+  window.requestAnimationFrame(() => introductionInput.value?.focus())
+}
+
+const updateName = (event: Event) => {
+  emit('update-name', (event.target as HTMLInputElement).value)
+}
+
+const updateIntroduction = (event: Event) => {
+  emit('update-introduction', (event.target as HTMLInputElement).value)
 }
 </script>
 
@@ -118,6 +174,10 @@ const updateAvailability = (newAvailability: string) => {
     display: none;
   }
 
+  &:deep(.v-input__details) {
+    display: none;
+  }
+
   &:deep(.v-field__input) {
     padding-inline: 0;
   }
@@ -134,12 +194,14 @@ const updateAvailability = (newAvailability: string) => {
 .name {
   grid-column: 2;
   grid-row: 2;
+  text-align: left;
 }
 
 .introduction {
   grid-column: 2;
   grid-row: 3;
   font-size: 12px;
+  text-align: left;
 }
 
 .social {
