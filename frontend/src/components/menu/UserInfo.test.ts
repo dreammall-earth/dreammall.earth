@@ -61,6 +61,9 @@ describe('UserInfo', () => {
         name: '',
         username: '',
         id: 22,
+        availability: null,
+        details: [],
+        social: [],
       })
       wrapper = Wrapper()
     })
@@ -79,6 +82,9 @@ describe('UserInfo', () => {
         name: 'Peter Lustig',
         username: 'peter',
         id: 22,
+        availability: null,
+        details: [],
+        social: [],
       })
       wrapper = Wrapper()
     })
@@ -98,6 +104,9 @@ describe('UserInfo', () => {
         username: 'peter',
         id: 22,
         avatar: 'http://url-to.me',
+        availability: null,
+        details: [],
+        social: [],
       })
       wrapper = Wrapper()
     })
