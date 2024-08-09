@@ -1,5 +1,7 @@
 {
   "$vuetify": {
+    "close": "Close",
+    "open": "Open",
     "input": {
       "clear": "Clear"
     }
@@ -19,6 +21,20 @@
   },
   "cafe": {
     "welcome": "World Cafe"
+  },
+  "cockpit": {
+    "about-me": {
+      "edit": {
+        "title": "About me",
+        "add": "Add"
+      },
+      "introduction-placeholder": "My introduction line",
+      "work-placeholder": "My work",
+      "place-placeholder": "My location",
+      "education-placeholder": "My education",
+      "feeling-placeholder": "How I feel today",
+      "language-placeholder": "Languages I speak",
+    }
   },
   "error": {
     "404": {

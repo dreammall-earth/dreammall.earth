@@ -9,7 +9,7 @@
         <ClientOnly
           ><v-avatar class="avatar d-flex align-center text-font border-sm bg-primary" size="44">
             <v-img v-if="userImage" :src="userImage" />
-            <span v-else>{{ initals?.toUpperCase() }}</span>
+            <span v-else>{{ initials?.toUpperCase() }}</span>
           </v-avatar>
           <div class="d-flex flex-column justify-center text-right pa-1 pl-3 w-100">
             <v-icon
@@ -35,7 +35,7 @@ import UserDropdown from './UserDropdown.vue'
 
 const userStore = useUserStore()
 
-const initals = userStore.getCurrentUserInitials
+const initials = userStore.getCurrentUserInitials
 const userImage = userStore.getCurrentUserAvatar
 
 const isOpen = ref(false)
