@@ -61,7 +61,8 @@ entries:
           "preferred_username": request.user.username,
           "nickname": request.user.username,
           # groups is not part of the official userinfo schema, but is a quasi-standard
-          "groups": [group.name for group in request.user.ak_groups.all()],
+          # "groups": [group.name for group in request.user.ak_groups.all()],
+          "group_attributes": request.user.group_attributes(),
       }
 
 - model: authentik_providers_oauth2.scopemapping

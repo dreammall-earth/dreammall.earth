@@ -5,7 +5,7 @@ import { EventType } from '#src/event/EventType'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
 
-import type { Context } from '#src/server/context'
+import type { Context } from '#src/context'
 
 let testServer: ApolloServer<Context>
 

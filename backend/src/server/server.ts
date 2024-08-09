@@ -9,10 +9,11 @@ import { useServer } from 'graphql-ws/lib/use/ws'
 import { WebSocketServer } from 'ws'
 
 import { schema } from '#graphql/schema'
-import { prisma } from '#src/prisma'
+import { context } from '#src/context'
 
-import { Context, getContextToken, GetContextToken } from './context'
 import logger from './logger'
+
+import type { Context } from '#src/context'
 
 export const createServer = async (
   withLogger: boolean = true,
@@ -43,7 +44,7 @@ export const createTestServer = async () => {
   return await createServer(false)
 }
 
-export async function listen(port: number, getToken: GetContextToken = getContextToken) {
+export async function listen(port: number) {
   const app = express()
 
   const httpServer = createHttpServer(app)
@@ -64,17 +65,7 @@ export async function listen(port: number, getToken: GetContextToken = getContex
 
   app.use(cors<cors.CorsRequest>())
 
-  app.use(
-    expressMiddleware(apolloServer, {
-      context: ({ req }) =>
-        Promise.resolve({
-          token: getToken(req.headers.authorization),
-          dataSources: {
-            prisma,
-          },
-        }),
-    }),
-  )
+  app.use(expressMiddleware(apolloServer, { context }))
 
   httpServer.listen({ port })
 }

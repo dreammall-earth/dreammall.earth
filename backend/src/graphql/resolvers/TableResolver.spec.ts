@@ -3,11 +3,11 @@ import { User } from '@prisma/client'
 
 import { createMeeting, joinMeetingLink, getMeetings } from '#api/BBB'
 import { CONFIG } from '#config/config'
-import { fakePayload } from '#src/auth/jwtVerify'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
+import { authenticatedUser } from '#test/helpers'
 
-import type { Context } from '#src/server/context'
+import type { Context } from '#src/context'
 
 jest.mock('#api/BBB')
 
@@ -18,6 +18,9 @@ const getMeetingsMock = jest.mocked(getMeetings)
 let testServer: ApolloServer<Context>
 
 CONFIG.FRONTEND_INVITE_LINK_URL = '/'
+
+const nickname = 'mockedUser'
+const name = 'User'
 
 const createMyTableMutation = `mutation($name: String!, $isPublic: Boolean!, $userIds: [Int]) {
   createMyTable(name: $name, isPublic: $isPublic, userIds: $userIds) {
@@ -65,7 +68,7 @@ describe('TableResolver', () => {
                 userIds: [],
               },
             },
-            { contextValue: { dataSources: { prisma } } },
+            { contextValue: { user: null, dataSources: { prisma } } },
           ),
         ).resolves.toMatchObject({
           body: {
@@ -96,7 +99,7 @@ describe('TableResolver', () => {
                 userIds: [],
               },
             },
-            { contextValue: { dataSources: { prisma } } },
+            { contextValue: { user: null, dataSources: { prisma } } },
           ),
         ).resolves.toMatchObject({
           body: {
@@ -122,7 +125,7 @@ describe('TableResolver', () => {
             {
               query: 'mutation { joinMyTable }',
             },
-            { contextValue: { dataSources: { prisma } } },
+            { contextValue: { user: null, dataSources: { prisma } } },
           ),
         ).resolves.toMatchObject({
           body: {
@@ -157,7 +160,7 @@ describe('TableResolver', () => {
                 tableId: 69,
               },
             },
-            { contextValue: { dataSources: { prisma } } },
+            { contextValue: { user: null, dataSources: { prisma } } },
           ),
         ).resolves.toMatchObject({
           body: {
@@ -183,7 +186,7 @@ describe('TableResolver', () => {
             {
               query: 'query { openTables { meetingName } }',
             },
-            { contextValue: { dataSources: { prisma } } },
+            { contextValue: { user: null, dataSources: { prisma } } },
           ),
         ).resolves.toMatchObject({
           body: {
@@ -219,7 +222,7 @@ describe('TableResolver', () => {
                   tableId: 25,
                 },
               },
-              { contextValue: { dataSources: { prisma } } },
+              { contextValue: { user: null, dataSources: { prisma } } },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -260,7 +263,7 @@ describe('TableResolver', () => {
                   tableId,
                 },
               },
-              { contextValue: { dataSources: { prisma } } },
+              { contextValue: { user: null, dataSources: { prisma } } },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -283,7 +286,7 @@ describe('TableResolver', () => {
                 tableId,
               },
             },
-            { contextValue: { dataSources: { prisma } } },
+            { contextValue: { user: null, dataSources: { prisma } } },
           )
           expect(joinMeetingLinkMock).toHaveBeenCalledWith({
             fullName: 'Pinky Pie',
@@ -296,6 +299,11 @@ describe('TableResolver', () => {
   })
 
   describe('authorized', () => {
+    let user: Awaited<ReturnType<typeof authenticatedUser>>
+    beforeEach(async () => {
+      user = await authenticatedUser({ nickname, name })
+    })
+
     describe('createMyTable', () => {
       describe('meeting does not exist', () => {
         it('returns Table', async () => {
@@ -311,7 +319,7 @@ describe('TableResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -357,7 +365,7 @@ describe('TableResolver', () => {
         it('creates create my table event in the database', async () => {
           const user = await prisma.user.findUnique({
             where: {
-              username: fakePayload.nickname,
+              username: nickname,
             },
           })
           const result = await prisma.event.findMany({
@@ -402,8 +410,7 @@ describe('TableResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
-                  user: undefined,
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -460,8 +467,7 @@ describe('TableResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
-                  user: undefined,
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -523,7 +529,7 @@ describe('TableResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -572,7 +578,7 @@ describe('TableResolver', () => {
             },
             {
               contextValue: {
-                token: 'token',
+                user,
                 dataSources: { prisma },
               },
             },
@@ -591,7 +597,7 @@ describe('TableResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -622,7 +628,7 @@ describe('TableResolver', () => {
         it('creates update my room event', async () => {
           const user = await prisma.user.findUnique({
             where: {
-              username: fakePayload.nickname,
+              username: nickname,
             },
           })
           const result = await prisma.event.findMany({
@@ -676,7 +682,7 @@ describe('TableResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -753,8 +759,7 @@ describe('TableResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
-                  user: undefined,
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -842,8 +847,7 @@ describe('TableResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
-                  user: undefined,
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -897,7 +901,7 @@ describe('TableResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -939,7 +943,7 @@ describe('TableResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -987,7 +991,7 @@ describe('TableResolver', () => {
                 },
                 {
                   contextValue: {
-                    token: 'token',
+                    user,
                     dataSources: { prisma },
                   },
                 },
@@ -1013,7 +1017,7 @@ describe('TableResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -1059,7 +1063,7 @@ describe('TableResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -1089,7 +1093,7 @@ describe('TableResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -1148,7 +1152,7 @@ describe('TableResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -1241,7 +1245,7 @@ describe('TableResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },
@@ -1339,7 +1343,7 @@ describe('TableResolver', () => {
               },
               {
                 contextValue: {
-                  token: 'token',
+                  user,
                   dataSources: { prisma },
                 },
               },

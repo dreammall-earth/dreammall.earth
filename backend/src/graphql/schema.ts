@@ -5,6 +5,7 @@ import { CONFIG } from '#config/config'
 import { authChecker } from '#src/auth/authChecker'
 
 import { pubSub } from './pubSub'
+import { AdminDashboardResolver } from './resolvers/AdminDashboardResolver'
 import { ContactFormResolver } from './resolvers/ContactFormResolver'
 import { checkForOpenTables } from './resolvers/dal/handleOpenTables'
 import { NewsletterSubscriptionResolver } from './resolvers/NewsletterSubscriptionResolver'
@@ -15,7 +16,13 @@ if (CONFIG.BBB_PULL_MEETINGS) void checkForOpenTables()
 
 export const schema = async (): Promise<GraphQLSchema> => {
   return buildSchema({
-    resolvers: [ContactFormResolver, NewsletterSubscriptionResolver, TableResolver, UserResolver],
+    resolvers: [
+      ContactFormResolver,
+      NewsletterSubscriptionResolver,
+      TableResolver,
+      UserResolver,
+      AdminDashboardResolver,
+    ],
     pubSub,
     validate: {
       validationError: { target: false },

@@ -1,4 +1,7 @@
+import { findOrCreateUser } from '#src/context/findOrCreateUser'
 import { prisma } from '#src/prisma'
+
+import type { Context } from '#src/context/context'
 
 export const deleteAll = async () => {
   await prisma.contactForm.deleteMany()
@@ -14,4 +17,11 @@ export const deleteAll = async () => {
 
 export const disconnect = async () => {
   await prisma.$disconnect()
+}
+
+export const authenticatedUser = async (
+  payload: Parameters<typeof findOrCreateUser>[0],
+): Promise<NonNullable<Context['user']>> => {
+  const dbUser = await findOrCreateUser(payload)
+  return { ...dbUser, roles: [] }
 }
