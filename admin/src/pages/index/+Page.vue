@@ -1,16 +1,13 @@
 <template>
   <DefaultLayout>
-    <h1>{{ $t('home.h1') }}</h1>
-    <p>{{ $t('home.text1') }}</p>
-    <br />
-    <p>{{ $t('home.text2') }}</p>
-    <br />
-    <p>{{ $t('home.text3') }}</p>
-    <br />
-    <p>{{ $t('home.text4') }} <v-icon icon="mdi-heart" color="red" /></p>
-    <br />
-    <p>{{ $t('home.greet1') }}</p>
-    <p>{{ $t('home.greet2') }}</p>
+    <div class="mt-5 text-center">
+      <h1>{{ $t('index.header') }}</h1>
+      <v-link>
+        <v-card class="mt-5" href="/app">
+          <v-card-title> {{ $t('users.header') }} </v-card-title>
+        </v-card>
+      </v-link>
+    </div>
   </DefaultLayout>
 </template>
 

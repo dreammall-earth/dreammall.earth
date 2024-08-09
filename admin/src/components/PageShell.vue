@@ -1,10 +1,10 @@
 <template>
   <v-app>
-    <TopMenu />
+    <NavbarTop />
     <slot />
   </v-app>
 </template>
 
 <script lang="ts" setup>
-import TopMenu from '#components/menu/TopMenu.vue'
+import NavbarTop from '#components/menu/NavBarTop.vue'
 </script>

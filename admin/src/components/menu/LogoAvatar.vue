@@ -1,7 +1,7 @@
 <template>
-  <v-avatar color="#333" class="ma-2 pa-1" :image="Logo" size="48" />
+  <v-img :src="logo" cover class="bg-grey-lighten-2" aspect-ratio="16/9"></v-img>
 </template>
 
 <script lang="ts" setup>
-import Logo from '#assets/it4c-logo2-clean-bg_alpha-128x128.png'
+import logo from '#assets/img/dreammall-logo.svg'
 </script>
