@@ -17,6 +17,7 @@ jobs:
             admin:
               - '.github/workflows/**/*'
               - 'admin/**/*'
+
   build:
     if: needs.files-changed.outputs.admin == 'true'
     name: Build - Admin
@@ -30,26 +31,6 @@ jobs:
       - name: Admin | Build
         run: npm install && npm run build
         working-directory: ./admin
-
-  docker-production:
-    if: needs.files-changed.outputs.admin == 'true'
-    name: Build Docker Production - Admin
-    needs: files-changed
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@9a9194f87191a7e9055e3e9b95b8cfb13023bb08 # v4.1.7
-      - name: Admin | Build Docker Production
-        run: docker compose -f docker-compose.yml build admin
-
-  docker-development:
-    if: needs.files-changed.outputs.admin == 'true'
-    name: Build Docker Development - Admin
-    needs: files-changed
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@9a9194f87191a7e9055e3e9b95b8cfb13023bb08 # v4.1.7
-      - name: Admin | Build Docker Development
-        run: docker compose build admin admin-storybook
 
   storybook:
     if: needs.files-changed.outputs.admin == 'true'
