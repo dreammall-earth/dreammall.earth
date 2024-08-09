@@ -2,9 +2,8 @@ import { randomBytes } from 'crypto'
 
 import { GraphQLRequestContext, GraphQLRequestContextWillSendResponse } from '@apollo/server'
 
+import { Context } from '#src/context'
 import logger from '#src/logger'
-
-import { Context } from './context'
 
 export default {
   // Fires whenever a GraphQL request is received from a client.
