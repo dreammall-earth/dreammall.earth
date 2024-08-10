@@ -42,7 +42,7 @@ jobs:
 
       - name: E2E | Run all tests
         id: e2e-run
-        uses: cypress-io/github-action@689551a1df6a10c75be61ae30b642cb84fb8164c # v6.7.2
+        uses: cypress-io/github-action@d075fa1b8186f1bd3c43a2a85060373b9087cd9a # v6.7.2
         with:
           working-directory: tests
 
