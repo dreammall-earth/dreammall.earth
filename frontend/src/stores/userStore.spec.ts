@@ -1,7 +1,7 @@
 import { provideApolloClient } from '@vue/apollo-composable'
 import { createMockClient } from 'mock-apollo-client'
 import { setActivePinia, createPinia } from 'pinia'
-import { vi, describe, it, expect, beforeAll } from 'vitest'
+import { vi, describe, it, expect, beforeAll, beforeEach } from 'vitest'
 
 import { addSocialMediaMutation } from '#mutations/addSocialMediaMutation'
 import { addUserDetailMutation } from '#mutations/addUserDetailMutation'
@@ -32,8 +32,8 @@ mockClient.setRequestHandler(
         table: null,
         availability: null,
         introduction: '',
-        details: [],
-        social: [],
+        details: [{ id: 1, category: 'education', text: 'I am a student' }],
+        social: [{ id: 1, type: 'instagram', link: 'https://instagram.com' }],
       },
     },
   }),
@@ -52,10 +52,12 @@ mockClient.setRequestHandler(removeSocialMediaMutation, removeSocialMediaMock.mo
 provideApolloClient(mockClient)
 
 describe('User Store', () => {
-  setActivePinia(createPinia())
-  const userStore = useUserStore()
+  beforeEach(() => {
+    setActivePinia(createPinia())
+  })
 
   describe('defaults', () => {
+    const userStore = useUserStore()
     it('has defaults set correctly', () => {
       expect(userStore.currentUser).toEqual({
         id: 666,
@@ -64,8 +66,8 @@ describe('User Store', () => {
         username: 'currentUser',
         availability: null,
         introduction: '',
-        details: [],
-        social: [],
+        details: [{ id: 1, category: 'education', text: 'I am a student' }],
+        social: [{ id: 1, type: 'instagram', link: 'https://instagram.com' }],
       })
       expect(userStore.getCurrentUser).toEqual({
         id: 666,
@@ -74,8 +76,8 @@ describe('User Store', () => {
         username: 'currentUser',
         availability: null,
         introduction: '',
-        details: [],
-        social: [],
+        details: [{ id: 1, category: 'education', text: 'I am a student' }],
+        social: [{ id: 1, type: 'instagram', link: 'https://instagram.com' }],
       })
     })
 
@@ -88,12 +90,16 @@ describe('User Store', () => {
   })
 
   describe('api', () => {
+    const userStore = useUserStore()
     it('queries the API', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const user = userStore.currentUser
       expect(currentUserQueryMock).toHaveBeenCalledTimes(1)
     })
   })
 
   describe('set current user action', () => {
+    const userStore = useUserStore()
     beforeAll(() => {
       userStore.setCurrentUser({
         id: 666,
@@ -197,6 +203,7 @@ describe('User Store', () => {
   })
 
   describe('update user', () => {
+    const userStore = useUserStore()
     beforeAll(async () => {
       updateUserMutationMock.mockResolvedValue({
         data: {
@@ -207,8 +214,8 @@ describe('User Store', () => {
             table: null,
             availability: 'available',
             introduction: 'My introduction',
-            details: [],
-            social: [],
+            details: [{ id: 1, category: 'education', text: 'I am a student' }],
+            social: [{ id: 1, type: 'instagram', link: 'https://instagram.com' }],
           },
         },
       })
@@ -226,79 +233,85 @@ describe('User Store', () => {
         username: 'currentUser',
         introduction: 'My introduction',
         availability: 'available',
-        details: [],
-        social: [],
+        details: [{ id: 1, category: 'education', text: 'I am a student' }],
+        social: [{ id: 1, type: 'instagram', link: 'https://instagram.com' }],
         table: null,
       })
     })
+  })
 
-    describe('add user detail', () => {
-      beforeAll(async () => {
-        addUserDetailMock.mockResolvedValue({
-          data: {
-            addUserDetail: {
-              id: 2,
-              category: 'work',
-              text: 'I am a developer',
-            },
+  describe('add user detail', () => {
+    const userStore = useUserStore()
+    beforeAll(async () => {
+      addUserDetailMock.mockResolvedValue({
+        data: {
+          addUserDetail: {
+            id: 2,
+            category: 'work',
+            text: 'I am a developer',
           },
-        })
-        await userStore.addUserDetail({
-          text: 'I am a developer',
-          category: 'work',
-        })
+        },
       })
-
-      it('adds a user detail', () => {
-        expect(userStore.getCurrentUser?.details).toEqual([
-          { id: 2, category: 'work', text: 'I am a developer' },
-        ])
+      await userStore.addUserDetail({
+        text: 'I am a developer',
+        category: 'work',
       })
     })
 
-    describe('remove user detail', () => {
-      beforeAll(async () => {
-        await userStore.removeUserDetail(2)
-      })
+    it('adds a user detail', () => {
+      expect(userStore.getCurrentUser?.details).toEqual([
+        { id: 1, category: 'education', text: 'I am a student' },
+        { id: 2, category: 'work', text: 'I am a developer' },
+      ])
+    })
+  })
 
-      it('removes a user detail', () => {
-        expect(userStore.getCurrentUser?.details).toEqual([])
-      })
+  describe('remove user detail', () => {
+    const userStore = useUserStore()
+    beforeAll(async () => {
+      await userStore.removeUserDetail(1)
     })
 
-    describe('add social media account', () => {
-      beforeAll(async () => {
-        addSocialMediaMock.mockResolvedValue({
-          data: {
-            addSocialMedia: {
-              id: 4,
-              type: 'twitter',
-              link: 'https://twitter.com',
-            },
+    it('removes a user detail', () => {
+      expect(userStore.getCurrentUser?.details).toEqual([])
+    })
+  })
+
+  describe('add social media account', () => {
+    const userStore = useUserStore()
+    beforeAll(async () => {
+      addSocialMediaMock.mockResolvedValue({
+        data: {
+          addSocialMedia: {
+            id: 4,
+            type: 'twitter',
+            link: 'https://twitter.com',
           },
-        })
-
-        await userStore.addSocialMedia({
-          type: 'twitter',
-          link: 'https://twitter.com',
-        })
+        },
       })
 
-      it('adds a social media account', () => {
-        expect(userStore.getCurrentUser?.social).toEqual([
-          { id: 4, type: 'twitter', link: 'https://twitter.com' },
-        ])
+      await userStore.addSocialMedia({
+        type: 'twitter',
+        link: 'https://twitter.com',
       })
     })
 
-    describe('remove social media account', () => {
-      beforeAll(async () => {
-        await userStore.removeSocialMedia(4)
-      })
+    it('adds a social media account', () => {
+      expect(userStore.getCurrentUser?.social).toEqual([
+        { id: 1, type: 'instagram', link: 'https://instagram.com' },
+        { id: 4, type: 'twitter', link: 'https://twitter.com' },
+      ])
+    })
+  })
 
-      it('removes a social media account', () => {
-        expect(userStore.getCurrentUser?.social).toEqual([])
-      })
+  describe('remove social media account', () => {
+    const userStore = useUserStore()
+    beforeAll(async () => {
+      await userStore.removeSocialMedia(1)
+    })
+
+    it('removes a social media account', () => {
+      expect(userStore.getCurrentUser?.social).toEqual([])
     })
   })
 })
