@@ -60,7 +60,7 @@
     "@vue/apollo-composable": "^4.0.2",
     "@vue/apollo-option": "^4.0.0",
     "@vue/apollo-ssr": "^4.0.0",
-    "@vue/compiler-sfc": "^3.4.35",
+    "@vue/compiler-sfc": "^3.4.37",
     "@vue/server-renderer": "3.4.35",
     "compression": "^1.7.4",
     "cookie": "^0.6.0",
