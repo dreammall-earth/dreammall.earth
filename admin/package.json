@@ -63,7 +63,7 @@
     "pinia": "^2.2.0",
     "pinia-plugin-persistedstate": "^3.2.1",
     "sirv": "^2.0.4",
-    "vike": "^0.4.181",
+    "vike": "^0.4.183",
     "vite": "^5.3.5",
     "vue": "3.4.35",
     "vue-i18n": "^9.13.1",
