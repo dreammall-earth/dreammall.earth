@@ -1,7 +1,7 @@
 import { provideApolloClient } from '@vue/apollo-composable'
 import { createMockClient } from 'mock-apollo-client'
 import { setActivePinia, createPinia } from 'pinia'
-import { vi, describe, it, expect, beforeAll, beforeEach } from 'vitest'
+import { vi, describe, it, expect, beforeEach } from 'vitest'
 
 import { addSocialMediaMutation } from '#mutations/addSocialMediaMutation'
 import { addUserDetailMutation } from '#mutations/addUserDetailMutation'
@@ -51,13 +51,15 @@ mockClient.setRequestHandler(removeSocialMediaMutation, removeSocialMediaMock.mo
 
 provideApolloClient(mockClient)
 
-describe('User Store', () => {
-  beforeEach(() => {
-    setActivePinia(createPinia())
-  })
+const setup = () => {
+  setActivePinia(createPinia())
+  const userStore = useUserStore()
+  return userStore
+}
 
+describe('User Store', () => {
   describe('defaults', () => {
-    const userStore = useUserStore()
+    const userStore = setup()
     it('has defaults set correctly', () => {
       expect(userStore.currentUser).toEqual({
         id: 666,
@@ -90,8 +92,9 @@ describe('User Store', () => {
   })
 
   describe('api', () => {
-    const userStore = useUserStore()
+    const userStore = setup()
     it('queries the API', () => {
+      const currentUserQueryMock = vi.fn()
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const user = userStore.currentUser
       expect(currentUserQueryMock).toHaveBeenCalledTimes(1)
@@ -99,8 +102,8 @@ describe('User Store', () => {
   })
 
   describe('set current user action', () => {
-    const userStore = useUserStore()
-    beforeAll(() => {
+    const userStore = setup()
+    beforeEach(() => {
       userStore.setCurrentUser({
         id: 666,
         name: 'Current User',
@@ -203,8 +206,7 @@ describe('User Store', () => {
   })
 
   describe('update user', () => {
-    const userStore = useUserStore()
-    beforeAll(async () => {
+    const updateUser = async (userStore: ReturnType<typeof setup>) => {
       updateUserMutationMock.mockResolvedValue({
         data: {
           updateUser: {
@@ -224,9 +226,11 @@ describe('User Store', () => {
         introduction: 'My introduction',
         availability: 'available',
       })
-    })
+    }
 
-    it('updates the current user', () => {
+    it('updates the current user', async () => {
+      const userStore = setup()
+      await updateUser(userStore)
       expect(userStore.getCurrentUser).toEqual({
         id: 666,
         name: 'Updated Name',
@@ -241,8 +245,8 @@ describe('User Store', () => {
   })
 
   describe('add user detail', () => {
-    const userStore = useUserStore()
-    beforeAll(async () => {
+    const userStore = setup()
+    beforeEach(async () => {
       addUserDetailMock.mockResolvedValue({
         data: {
           addUserDetail: {
@@ -267,8 +271,8 @@ describe('User Store', () => {
   })
 
   describe('remove user detail', () => {
-    const userStore = useUserStore()
-    beforeAll(async () => {
+    const userStore = setup()
+    beforeEach(async () => {
       await userStore.removeUserDetail(1)
     })
 
@@ -278,8 +282,8 @@ describe('User Store', () => {
   })
 
   describe('add social media account', () => {
-    const userStore = useUserStore()
-    beforeAll(async () => {
+    const userStore = setup()
+    beforeEach(async () => {
       addSocialMediaMock.mockResolvedValue({
         data: {
           addSocialMedia: {
@@ -305,8 +309,8 @@ describe('User Store', () => {
   })
 
   describe('remove social media account', () => {
-    const userStore = useUserStore()
-    beforeAll(async () => {
+    const userStore = setup()
+    beforeEach(async () => {
       await userStore.removeSocialMedia(1)
     })
 
