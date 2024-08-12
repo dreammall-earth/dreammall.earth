@@ -1,23 +1,40 @@
-import { provideApolloClient } from '@vue/apollo-composable'
+import { createMockSubscription, IMockSubscription } from 'mock-apollo-client'
 import { setActivePinia, createPinia } from 'pinia'
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 
-import {
-  mockClient,
-  openTablesQueryMock,
-  updateOpenTablesSubscriptionMock,
-} from '#tests/mock.apolloClient'
+import { openTablesQuery } from '#queries/openTablesQuery'
+import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
+import { setupMockClient } from '#tests/mock.apolloClient'
 
 import { useTablesStore } from './tablesStore'
 
-provideApolloClient(mockClient)
+const setup = () => {
+  const mockClient = setupMockClient()
+  const openTablesQueryMock = vi.fn()
+  const updateOpenTablesSubscriptionMock: IMockSubscription = createMockSubscription()
+  mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateOpenTablesSubscriptionMock)
+  mockClient.setRequestHandler(openTablesQuery, openTablesQueryMock)
 
-describe('Tables Store', () => {
   setActivePinia(createPinia())
   const tablesStore = useTablesStore()
 
+  return { tablesStore, openTablesQueryMock, updateOpenTablesSubscriptionMock }
+}
+
+const mockOpenTablesQuery = (
+  openTablesQueryMock: ReturnType<typeof vi.fn> = vi.fn(),
+  value = { data: { openTables: [] } },
+) => {
+  openTablesQueryMock.mockResolvedValue(value)
+
+  return { openTablesQueryMock }
+}
+
+describe('Tables Store', () => {
   describe('defaults', () => {
     it('has defaults set correctly', () => {
+      const { tablesStore, openTablesQueryMock } = setup()
+      mockOpenTablesQuery(openTablesQueryMock)
       expect(tablesStore.tables).toEqual([])
       expect(tablesStore.getTables).toEqual([])
     })
@@ -25,10 +42,15 @@ describe('Tables Store', () => {
 
   describe('api', () => {
     it('queries the API', () => {
+      const { tablesStore, openTablesQueryMock } = setup()
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const unused = tablesStore.tables
       expect(openTablesQueryMock).toHaveBeenCalledTimes(1)
     })
 
     describe('subscription', () => {
+      const { tablesStore, updateOpenTablesSubscriptionMock } = setup()
+
       beforeEach(() => {
         updateOpenTablesSubscriptionMock.next({
           data: {
@@ -71,6 +93,7 @@ describe('Tables Store', () => {
 
   describe('set tables action', () => {
     it('updates the store', () => {
+      const { tablesStore } = setup()
       tablesStore.setTables([
         {
           id: 77,

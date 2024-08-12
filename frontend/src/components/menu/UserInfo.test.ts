@@ -5,9 +5,11 @@ import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 import { useUserStore } from '#stores/userStore'
-import { mockClient } from '#tests/mock.apolloClient'
+import { setupMockClient } from '#tests/mock.apolloClient'
 
 import UserInfo from './UserInfo.vue'
+
+const mockClient = setupMockClient()
 
 provideApolloClient(mockClient)
 

@@ -5,10 +5,12 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { mockClient } from '#tests/mock.apolloClient'
+import { setupMockClient } from '#tests/mock.apolloClient'
 
 import IndexPage from './+Page.vue'
 import { title } from './+title'
+
+const mockClient = setupMockClient()
 
 const mockSubscription: IMockSubscription = createMockSubscription()
 

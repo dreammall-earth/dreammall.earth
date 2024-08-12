@@ -5,7 +5,7 @@ import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 import { joinTableAsGuestQuery } from '#queries/joinTableAsGuestQuery'
-import { mockClient } from '#tests/mock.apolloClient'
+import { setupMockClient } from '#tests/mock.apolloClient'
 import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
 import JoinTablePage from './+Page.vue'
@@ -13,6 +13,8 @@ import Route from './+route'
 import { title } from './+title'
 
 const joinTableAsGuestQueryMock = vi.fn()
+
+const mockClient = setupMockClient()
 
 mockClient.setRequestHandler(
   joinTableAsGuestQuery,

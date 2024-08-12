@@ -5,7 +5,7 @@ import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 import { joinTableQuery } from '#queries/joinTableQuery'
-import { mockClient } from '#tests/mock.apolloClient'
+import { setupMockClient } from '#tests/mock.apolloClient'
 import { mockPageContext } from '#tests/mock.vikePageContext'
 import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
@@ -14,6 +14,8 @@ import Route from './+route'
 import { title } from './+title'
 
 const joinTableQueryMock = vi.fn()
+
+const mockClient = setupMockClient()
 
 mockClient.setRequestHandler(
   joinTableQuery,
