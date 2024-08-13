@@ -1,10 +1,29 @@
 import { provideApolloClient } from '@vue/apollo-composable'
+import { createMockClient } from 'mock-apollo-client'
 import { setActivePinia, createPinia } from 'pinia'
-import { describe, it, expect, beforeAll } from 'vitest'
+import { vi, describe, it, expect, beforeAll } from 'vitest'
 
-import { mockClient, currentUserQueryMock } from '#tests/mock.apolloClient'
+import { currentUserQuery } from '#queries/currentUserQuery'
 
 import { useUserStore } from './userStore'
+
+const mockClient = createMockClient()
+
+const currentUserQueryMock = vi.fn()
+
+mockClient.setRequestHandler(
+  currentUserQuery,
+  currentUserQueryMock.mockResolvedValue({
+    data: {
+      currentUser: {
+        id: 666,
+        name: 'Current User',
+        username: 'currentUser',
+        table: null,
+      },
+    },
+  }),
+)
 
 provideApolloClient(mockClient)
 
