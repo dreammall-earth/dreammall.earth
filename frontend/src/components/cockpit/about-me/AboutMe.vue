@@ -10,23 +10,26 @@
       :social="user.social"
       :user-image="avatar"
       :initials="initials"
-      @edit="() => setMode('edit')"
+      @edit-details="() => setMode('edit-details')"
+      @edit-social="() => setMode('edit-social')"
       @update-availability="updateAvailability"
       @update-name="updateName"
       @update-introduction="updateIntroduction"
-    ></AboutMeView>
+    />
     <EditUserDetails
-      v-if="user && mode === 'edit'"
-      :username="user.username"
-      :name="user.name"
-      :availability="user.availability"
-      :introduction="user.introduction"
+      v-if="user && mode === 'edit-details'"
       :details="user.details"
-      :social="user.social"
       @back="() => setMode('view')"
       @add-detail="addDetail"
       @remove-detail="removeDetail"
-    ></EditUserDetails>
+    />
+    <EditSocialMedia
+      v-if="user && mode === 'edit-social'"
+      :socials="user.social"
+      @back="() => setMode('view')"
+      @add-social="addSocial"
+      @remove-social="removeSocial"
+    />
   </ClientOnly>
 </template>
 
@@ -36,12 +39,18 @@ import { ref } from 'vue'
 
 import ClientOnly from '#components/ClientOnly.vue'
 import globalErrorHandler from '#plugins/globalErrorHandler'
-import { useUserStore, UserAvailability, AddUserDetailInput } from '#stores/userStore'
+import {
+  useUserStore,
+  UserAvailability,
+  AddUserDetailInput,
+  AddSocialMediaInput,
+} from '#stores/userStore'
 
 import AboutMeView from './AboutMeView.vue'
+import EditSocialMedia from './EditSocialMedia.vue'
 import EditUserDetails from './EditUserDetails.vue'
 
-type Mode = 'view' | 'edit'
+type Mode = 'view' | 'edit-details' | 'edit-social'
 const mode = ref<Mode>('view')
 
 const setMode = (newMode: Mode) => (mode.value = newMode)
@@ -85,5 +94,14 @@ const addDetail = async (detail: AddUserDetailInput) => {
 
 const removeDetail = async (detailId: number) => {
   await userStore.removeUserDetail(detailId)
+}
+
+const addSocial = async (social: AddSocialMediaInput) => {
+  await userStore.addSocialMedia(social)
+  social.link = ''
+}
+
+const removeSocial = async (socialId: number) => {
+  await userStore.removeSocialMedia(socialId)
 }
 </script>

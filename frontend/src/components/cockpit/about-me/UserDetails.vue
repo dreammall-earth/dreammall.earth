@@ -19,8 +19,7 @@
 import { computed, Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import { detailCategories } from './detailCategories'
-import { detailCategoryToIcon } from './detailCategoryToIcon'
+import { detailCategories, detailCategoryToIcon } from './detailCategories'
 
 import type { UserDetail } from '#stores/userStore'
 

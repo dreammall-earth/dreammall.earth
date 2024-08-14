@@ -6,6 +6,7 @@ import {
   addSocialMediaMutation,
   AddSocialMediaInput,
   AddSocialMediaMutationResult,
+  SocialMediaType,
 } from '#mutations/addSocialMediaMutation'
 import {
   addUserDetailMutation,
@@ -21,7 +22,7 @@ import {
 } from '#mutations/updateUserMutation'
 import { currentUserQuery } from '#queries/currentUserQuery'
 
-export type { AddSocialMediaInput } from '#mutations/addSocialMediaMutation'
+export type { AddSocialMediaInput, SocialMediaType } from '#mutations/addSocialMediaMutation'
 export type { AddUserDetailInput } from '#mutations/addUserDetailMutation'
 
 export type UserInTable = {
@@ -50,7 +51,7 @@ export type UserAvailability = null | 'available' | 'partly_available' | 'busy'
 
 export type SocialMedia = {
   id: number
-  type: string
+  type: SocialMediaType
   link: string
 }
 

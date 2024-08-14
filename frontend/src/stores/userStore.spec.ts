@@ -283,22 +283,22 @@ describe('User Store', () => {
         data: {
           addSocialMedia: {
             id: 4,
-            type: 'twitter',
-            link: 'https://twitter.com',
+            type: 'facebook',
+            link: 'https://facebook.com',
           },
         },
       })
 
       await userStore.addSocialMedia({
-        type: 'twitter',
-        link: 'https://twitter.com',
+        type: 'facebook',
+        link: 'https://facebook.com',
       })
     })
 
     it('adds a social media account', () => {
       expect(userStore.getCurrentUser?.social).toEqual([
         { id: 1, type: 'instagram', link: 'https://instagram.com' },
-        { id: 4, type: 'twitter', link: 'https://twitter.com' },
+        { id: 4, type: 'facebook', link: 'https://facebook.com' },
       ])
     })
   })
@@ -315,8 +315,8 @@ describe('User Store', () => {
       expect(userStore.getCurrentUser?.social).toEqual([
         {
           id: 4,
-          type: 'twitter',
-          link: 'https://twitter.com',
+          type: 'facebook',
+          link: 'https://facebook.com',
         },
       ])
     })

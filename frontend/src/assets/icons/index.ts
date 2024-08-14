@@ -4,6 +4,7 @@ import Camera from './camera.svg?component'
 import Cockpit from './cockpit.svg?component'
 import Data from './data.svg?component'
 import Date from './date.svg?component'
+import Discord from './discord.svg?component'
 import Ellipsis from './ellipsis.svg?component'
 import Facebook from './facebook.svg?component'
 import Instagram from './instagram.svg?component'
@@ -14,6 +15,8 @@ import Message from './message.svg?component'
 import Pinterest from './pinterest.svg?component'
 import Place from './place.svg?component'
 import Share from './share.svg?component'
+import Telegram from './telegram.svg?component'
+import Tiktok from './tiktok.svg?component'
 import Triangle from './triangle.svg?component'
 import Website from './website.svg?component'
 import WorldCafe from './worldCafe.svg?component'
@@ -30,6 +33,7 @@ const aliases: Partial<IconAliases> = {
   cockpit: Cockpit,
   data: Data,
   date: Date,
+  discord: Discord,
   ellipsis: Ellipsis,
   facebook: Facebook,
   instagram: Instagram,
@@ -40,6 +44,8 @@ const aliases: Partial<IconAliases> = {
   pinterest: Pinterest,
   place: Place,
   share: Share,
+  telegram: Telegram,
+  tiktok: Tiktok,
   triange: Triangle,
   website: Website,
   'world-cafe': WorldCafe,

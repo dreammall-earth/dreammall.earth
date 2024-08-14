@@ -7,40 +7,51 @@
       </div>
     </template>
     <template #default>
-      <v-form class="add-detail" @submit.prevent="addDetail">
+      <v-form class="add-social" @submit.prevent="addSocial">
         <v-select
-          v-model="newDetail.category"
+          v-model="newSocial.type"
           flat
           rounded
-          :items="detailCategories"
+          :items="socialMediaTypes"
           class="select-category"
         >
           <template #selection="{ item }">
-            <v-icon :icon="detailCategoryToIcon(item.value)"></v-icon>
+            <v-icon :icon="getSocialMediaIcon(item.value)"></v-icon>
           </template>
           <template #item="{ item, props: listProps }">
             <v-list-item v-bind="listProps" title="">
-              <v-icon :icon="detailCategoryToIcon(item.value)"></v-icon>
+              <v-icon :icon="getSocialMediaIcon(item.value)"></v-icon>
             </v-list-item>
           </template>
         </v-select>
         <v-text-field
-          v-model="newDetail.text"
+          v-model="newSocial.link"
           name="text"
           clearable
           rounded
           flat
           density="compact"
           variant="solo"
-          class="add-detail-text"
+          class="add-social-text"
           maxlength="60"
         ></v-text-field>
-        <v-btn type="submit" :disabled="newDetail.text?.length === 0" variant="flat" rounded>
+        <v-btn type="submit" :disabled="newSocial.link?.length === 0" variant="flat" rounded>
           <v-icon icon="mdi mdi-plus"></v-icon>
         </v-btn>
       </v-form>
-      <!-- </div> -->
-      <Details :details="props.details" editable @remove-detail="removeDetail" />
+      <ul class="social-media-list">
+        <li v-for="(social, index) in props.socials" :key="index">
+          <v-chip class="social">
+            <v-icon :icon="getSocialMediaIcon(social.type)" class="mr-2" />
+            {{ buildSocialMediaLink(social.type, social.link) }}
+            <v-icon
+              v-if="social.id >= 0"
+              icon="$close"
+              @click="$emit('remove-social', social.id)"
+            />
+          </v-chip>
+        </li>
+      </ul>
     </template>
   </CockpitCard>
 </template>
@@ -50,32 +61,27 @@ import { reactive } from 'vue'
 
 import CockpitCard from '#components/cockpit/cockpitCard/CockpitCard.vue'
 
-import { detailCategories, detailCategoryToIcon } from './detailCategories'
-import Details from './UserDetails.vue'
+import { getSocialMediaIcon, socialMediaTypes, buildSocialMediaLink } from './socialMediaPlatforms'
 
-import type { UserDetail, AddUserDetailInput } from '#stores/userStore'
+import type { SocialMedia, AddSocialMediaInput } from '#stores/userStore'
 
 const props = defineProps<{
-  details: UserDetail[]
+  socials: SocialMedia[]
 }>()
 
 const emit = defineEmits<{
   (e: 'back'): void
-  (e: 'add-detail', detail: AddUserDetailInput): void
-  (e: 'remove-detail', id: number): void
+  (e: 'add-social', social: AddSocialMediaInput): void
+  (e: 'remove-social', id: number): void
 }>()
 
-const newDetail = reactive<AddUserDetailInput>({
-  category: 'work',
-  text: '',
+const newSocial = reactive<AddSocialMediaInput>({
+  type: 'instagram',
+  link: '',
 })
 
-const addDetail = () => {
-  emit('add-detail', newDetail)
-}
-
-const removeDetail = (id: number) => {
-  emit('remove-detail', id)
+const addSocial = () => {
+  emit('add-social', newSocial)
 }
 </script>
 
@@ -89,13 +95,13 @@ const removeDetail = (id: number) => {
   gap: 20px;
 }
 
-.add-detail {
+.add-social {
   display: flex;
   gap: 8px;
   align-items: center;
   justify-content: center;
 
-  &:deep(.v-input__details) {
+  &:deep(.v-input__socials) {
     display: none;
   }
 }
@@ -108,7 +114,7 @@ const removeDetail = (id: number) => {
   }
 }
 
-.add-detail-text {
+.add-social-text {
   &:deep(.v-field) {
     background: grey; /* TODO set correct color */
   }

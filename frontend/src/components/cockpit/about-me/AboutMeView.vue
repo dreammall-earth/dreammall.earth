@@ -50,16 +50,22 @@
           />
         </template>
       </div>
-      <button @click="$emit('edit')">
+      <button @click="$emit('edit-details')">
         <Details :details="props.details" />
       </button>
-      <ul class="social">
-        <li v-for="item in props.social" :key="item.type">
-          <a :href="item.link" target="_blank" rel="noopener noreferrer">
-            <v-icon :icon="`mdi-${item.type}`"></v-icon>
-          </a>
-        </li>
-      </ul>
+      <button @click="$emit('edit-social')">
+        <ul v-if="props.social.length > 0" class="social">
+          <li v-for="item in props.social" :key="item.type">
+            <a :href="item.link" target="_blank" rel="noopener noreferrer">
+              <v-icon :icon="`mdi-${item.type}`"></v-icon>
+            </a>
+          </li>
+        </ul>
+        <div v-else class="social">
+          <v-icon icon="mdi mdi-share-variant-outline" />
+          {{ $t('cockpit.about-me.empty-social-media') }}
+        </div>
+      </button>
     </template>
   </CockpitCard>
 </template>
@@ -88,7 +94,8 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'edit'): void
+  (e: 'edit-details'): void
+  (e: 'edit-social'): void
   (e: 'update-availability', status: UserAvailability): void
   (e: 'update-name', name: string): void
   (e: 'update-introduction', introduction: string): void
@@ -205,10 +212,14 @@ const updateIntroduction = (event: Event) => {
 }
 
 .social {
+  margin-top: 10px;
   display: flex;
   min-height: 30px;
-  padding: 0;
+  width: 300px;
+  padding: 10px;
   list-style: none;
+  border-radius: 10px;
+  background: rgba(93, 102, 112, 0.55);
 }
 
 hr {
