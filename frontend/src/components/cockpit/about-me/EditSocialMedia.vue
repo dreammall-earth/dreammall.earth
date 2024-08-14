@@ -14,6 +14,7 @@
           rounded
           :items="socialMediaTypes"
           class="select-category"
+          density="compact"
         >
           <template #selection="{ item }">
             <v-icon :icon="getSocialMediaIcon(item.value)"></v-icon>
@@ -35,11 +36,15 @@
           class="add-social-text"
           maxlength="60"
         ></v-text-field>
-        <v-btn type="submit" :disabled="newSocial.link?.length === 0" variant="flat" rounded>
+        <button
+          type="submit"
+          :disabled="newSocial.link?.length === 0"
+          class="submit rounded-circle"
+        >
           <v-icon icon="mdi mdi-plus"></v-icon>
-        </v-btn>
+        </button>
       </v-form>
-      <ul class="social-media-list">
+      <ul class="social-media-list mt-4">
         <li v-for="(social, index) in props.socials" :key="index">
           <v-chip class="social">
             <v-icon :icon="getSocialMediaIcon(social.type)" class="mr-2" />
@@ -96,12 +101,13 @@ const addSocial = () => {
 }
 
 .add-social {
+  --height: 40px;
   display: flex;
   gap: 8px;
   align-items: center;
   justify-content: center;
 
-  &:deep(.v-input__socials) {
+  &:deep(.v-input__details) {
     display: none;
   }
 }
@@ -116,7 +122,31 @@ const addSocial = () => {
 
 .add-social-text {
   &:deep(.v-field) {
-    background: grey; /* TODO set correct color */
+    background: rgba(93, 102, 112, 0.55);
+  }
+}
+
+.submit {
+  height: var(--height);
+  width: var(--height);
+  background: #f3f3f3;
+  &:enabled {
+    background: #23ad5b;
+  }
+}
+
+.social-media-list {
+  list-style: none;
+}
+
+.social {
+  width: 100%;
+  height: 40px;
+
+  &:deep(.v-chip__content) {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
   }
 }
 </style>

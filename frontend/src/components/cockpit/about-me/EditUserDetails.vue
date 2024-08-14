@@ -7,13 +7,14 @@
       </div>
     </template>
     <template #default>
-      <v-form class="add-detail" @submit.prevent="addDetail">
+      <v-form class="add-detail mb-2" @submit.prevent="addDetail">
         <v-select
           v-model="newDetail.category"
           flat
           rounded
           :items="detailCategories"
           class="select-category"
+          density="compact"
         >
           <template #selection="{ item }">
             <v-icon :icon="detailCategoryToIcon(item.value)"></v-icon>
@@ -35,9 +36,13 @@
           class="add-detail-text"
           maxlength="60"
         ></v-text-field>
-        <v-btn type="submit" :disabled="newDetail.text?.length === 0" variant="flat" rounded>
+        <button
+          type="submit"
+          :disabled="newDetail.text?.length === 0"
+          class="submit rounded-circle"
+        >
           <v-icon icon="mdi mdi-plus"></v-icon>
-        </v-btn>
+        </button>
       </v-form>
       <!-- </div> -->
       <Details :details="props.details" editable @remove-detail="removeDetail" />
@@ -90,6 +95,7 @@ const removeDetail = (id: number) => {
 }
 
 .add-detail {
+  --height: 40px;
   display: flex;
   gap: 8px;
   align-items: center;
@@ -110,7 +116,16 @@ const removeDetail = (id: number) => {
 
 .add-detail-text {
   &:deep(.v-field) {
-    background: grey; /* TODO set correct color */
+    background: rgba(93, 102, 112, 0.55);
+  }
+}
+
+.submit {
+  height: var(--height);
+  width: var(--height);
+  background: #f3f3f3;
+  &:enabled {
+    background: #23ad5b;
   }
 }
 </style>
