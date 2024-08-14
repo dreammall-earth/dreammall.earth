@@ -1,13 +1,32 @@
 import { provideApolloClient } from '@vue/apollo-composable'
 import { mount } from '@vue/test-utils'
-import { describe, it, expect, beforeEach } from 'vitest'
+import { createMockClient } from 'mock-apollo-client'
+import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
+import { currentUserQuery } from '#queries/currentUserQuery'
 import { useUserStore } from '#stores/userStore'
-import { mockClient } from '#tests/mock.apolloClient'
 
 import UserInfo from './UserInfo.vue'
+
+const mockClient = createMockClient()
+
+const currentUserQueryMock = vi.fn()
+
+mockClient.setRequestHandler(
+  currentUserQuery,
+  currentUserQueryMock.mockResolvedValue({
+    data: {
+      currentUser: {
+        id: 666,
+        name: 'Current User',
+        username: 'currentUser',
+        table: null,
+      },
+    },
+  }),
+)
 
 provideApolloClient(mockClient)
 
@@ -28,6 +47,10 @@ describe('UserInfo', () => {
     wrapper = Wrapper()
   })
 
+  afterEach(() => {
+    wrapper.unmount()
+  })
+
   it('renders', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
@@ -38,6 +61,9 @@ describe('UserInfo', () => {
         name: '',
         username: '',
         id: 22,
+        availability: null,
+        details: [],
+        social: [],
       })
       wrapper = Wrapper()
     })
@@ -56,6 +82,9 @@ describe('UserInfo', () => {
         name: 'Peter Lustig',
         username: 'peter',
         id: 22,
+        availability: null,
+        details: [],
+        social: [],
       })
       wrapper = Wrapper()
     })
@@ -75,6 +104,9 @@ describe('UserInfo', () => {
         username: 'peter',
         id: 22,
         avatar: 'http://url-to.me',
+        availability: null,
+        details: [],
+        social: [],
       })
       wrapper = Wrapper()
     })

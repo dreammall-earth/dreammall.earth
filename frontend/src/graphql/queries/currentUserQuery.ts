@@ -6,6 +6,18 @@ export const currentUserQuery = gql`
       id
       name
       username
+      introduction
+      availability
+      details {
+        id
+        category
+        text
+      }
+      social {
+        id
+        type
+        link
+      }
       table {
         id
         name
