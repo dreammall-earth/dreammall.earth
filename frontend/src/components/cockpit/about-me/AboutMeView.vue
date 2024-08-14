@@ -53,18 +53,18 @@
       <button @click="$emit('edit-details')">
         <Details :details="props.details" />
       </button>
-      <button @click="$emit('edit-social')">
-        <ul v-if="props.social.length > 0" class="social">
+      <button class="social" @click="$emit('edit-social')">
+        <v-icon icon="mdi mdi-share-variant-outline" class="mr-2" />
+        <ul v-if="props.social.length > 0" class="social-list">
           <li v-for="item in props.social" :key="item.type">
             <a :href="item.link" target="_blank" rel="noopener noreferrer">
               <v-icon :icon="`mdi-${item.type}`"></v-icon>
             </a>
           </li>
         </ul>
-        <div v-else class="social">
-          <v-icon icon="mdi mdi-share-variant-outline" />
+        <span v-else>
           {{ $t('cockpit.about-me.empty-social-media') }}
-        </div>
+        </span>
       </button>
     </template>
   </CockpitCard>
@@ -214,12 +214,19 @@ const updateIntroduction = (event: Event) => {
 .social {
   margin-top: 10px;
   display: flex;
-  min-height: 30px;
+  align-items: center;
+  min-height: 60px;
   width: 300px;
   padding: 10px;
-  list-style: none;
   border-radius: 10px;
   background: rgba(93, 102, 112, 0.55);
+}
+
+.social-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 hr {

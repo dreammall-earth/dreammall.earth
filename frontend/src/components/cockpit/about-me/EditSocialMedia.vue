@@ -149,4 +149,10 @@ const addSocial = () => {
     justify-content: space-between;
   }
 }
+
+.social-media-list {
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+}
 </style>
