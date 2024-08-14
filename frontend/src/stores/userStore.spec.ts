@@ -1,16 +1,52 @@
 import { provideApolloClient } from '@vue/apollo-composable'
+import { createMockClient } from 'mock-apollo-client'
 import { setActivePinia, createPinia } from 'pinia'
-import { describe, it, expect, beforeAll } from 'vitest'
+import { vi, describe, it, expect, beforeAll, beforeEach } from 'vitest'
 
-import {
-  mockClient,
-  currentUserQueryMock,
-  updateUserMutationMock,
-  addUserDetailMock,
-  addSocialMediaMock,
-} from '#tests/mock.apolloClient'
+import { addSocialMediaMutation } from '#mutations/addSocialMediaMutation'
+import { addUserDetailMutation } from '#mutations/addUserDetailMutation'
+import { removeSocialMediaMutation } from '#mutations/removeSocialMediaMutation'
+import { removeUserDetailMutation } from '#mutations/removeUserDetailMutation'
+import { updateUserMutation } from '#mutations/updateUserMutation'
+import { currentUserQuery } from '#queries/currentUserQuery'
 
 import { useUserStore } from './userStore'
+
+const mockClient = createMockClient()
+
+const currentUserQueryMock = vi.fn()
+const addUserDetailMock = vi.fn()
+const addSocialMediaMock = vi.fn()
+const removeUserDetailMock = vi.fn()
+const removeSocialMediaMock = vi.fn()
+const updateUserMutationMock = vi.fn()
+
+mockClient.setRequestHandler(
+  currentUserQuery,
+  currentUserQueryMock.mockResolvedValue({
+    data: {
+      currentUser: {
+        id: 666,
+        name: 'Current User',
+        username: 'currentUser',
+        table: null,
+        availability: null,
+        introduction: '',
+        details: [{ id: 1, category: 'education', text: 'I am a student' }],
+        social: [{ id: 1, type: 'instagram', link: 'https://instagram.com' }],
+      },
+    },
+  }),
+)
+mockClient.setRequestHandler(updateUserMutation, updateUserMutationMock)
+
+mockClient.setRequestHandler(addUserDetailMutation, addUserDetailMock)
+
+mockClient.setRequestHandler(addSocialMediaMutation, addSocialMediaMock)
+
+mockClient.setRequestHandler(removeUserDetailMutation, removeUserDetailMock.mockResolvedValue([]))
+
+mockClient.setRequestHandler(removeSocialMediaMutation, removeSocialMediaMock.mockResolvedValue([]))
 
 provideApolloClient(mockClient)
 
@@ -27,8 +63,8 @@ describe('User Store', () => {
         username: 'currentUser',
         availability: null,
         introduction: '',
-        details: [],
-        social: [],
+        details: [{ id: 1, category: 'education', text: 'I am a student' }],
+        social: [{ id: 1, type: 'instagram', link: 'https://instagram.com' }],
       })
       expect(userStore.getCurrentUser).toEqual({
         id: 666,
@@ -37,8 +73,8 @@ describe('User Store', () => {
         username: 'currentUser',
         availability: null,
         introduction: '',
-        details: [],
-        social: [],
+        details: [{ id: 1, category: 'education', text: 'I am a student' }],
+        social: [{ id: 1, type: 'instagram', link: 'https://instagram.com' }],
       })
     })
 
@@ -93,8 +129,8 @@ describe('User Store', () => {
         id: 666,
         name: 'Current User',
         username: 'currentUser',
-        introduction: 'Hello, I am the current user',
         availability: 'available',
+        introduction: 'Hello, I am the current user',
         details: [{ id: 1, category: 'education', text: 'I am a student' }],
         social: [{ id: 1, type: 'instagram', link: 'https://instagram.com' }],
         table: {
@@ -160,7 +196,7 @@ describe('User Store', () => {
   })
 
   describe('update user', () => {
-    beforeAll(async () => {
+    const updateUser = async (userStore: ReturnType<typeof useUserStore>) => {
       updateUserMutationMock.mockResolvedValue({
         data: {
           updateUser: {
@@ -170,8 +206,8 @@ describe('User Store', () => {
             table: null,
             availability: 'available',
             introduction: 'My introduction',
-            details: [],
-            social: [],
+            details: [{ id: 1, category: 'education', text: 'I am a student' }],
+            social: [{ id: 1, type: 'instagram', link: 'https://instagram.com' }],
           },
         },
       })
@@ -180,88 +216,109 @@ describe('User Store', () => {
         introduction: 'My introduction',
         availability: 'available',
       })
-    })
+    }
 
-    it('updates the current user', () => {
+    it('updates the current user', async () => {
+      await updateUser(userStore)
       expect(userStore.getCurrentUser).toEqual({
         id: 666,
         name: 'Updated Name',
         username: 'currentUser',
         introduction: 'My introduction',
         availability: 'available',
-        details: [],
-        social: [],
+        details: [{ id: 1, category: 'education', text: 'I am a student' }],
+        social: [{ id: 1, type: 'instagram', link: 'https://instagram.com' }],
         table: null,
       })
     })
+  })
 
-    describe('add user detail', () => {
-      beforeAll(async () => {
-        addUserDetailMock.mockResolvedValue({
-          data: {
-            addUserDetail: {
-              id: 2,
-              category: 'work',
-              text: 'I am a developer',
-            },
+  describe('add user detail', () => {
+    beforeEach(async () => {
+      addUserDetailMock.mockResolvedValue({
+        data: {
+          addUserDetail: {
+            id: 2,
+            category: 'work',
+            text: 'I am a developer',
           },
-        })
-        await userStore.addUserDetail({
-          text: 'I am a developer',
+        },
+      })
+      await userStore.addUserDetail({
+        text: 'I am a developer',
+        category: 'work',
+      })
+    })
+
+    it('adds a user detail', () => {
+      expect(userStore.getCurrentUser?.details).toEqual([
+        { id: 1, category: 'education', text: 'I am a student' },
+        { id: 2, category: 'work', text: 'I am a developer' },
+      ])
+    })
+  })
+
+  describe('remove user detail', () => {
+    beforeEach(async () => {
+      await userStore.removeUserDetail(1)
+    })
+
+    it('removes a user detail', () => {
+      // Should be:
+      // expect(use rStore.getCurrentUser?.details).toEqual([])
+      // But could not isolate the store for each test properly
+      expect(userStore.getCurrentUser?.details).toEqual([
+        {
+          id: 2,
           category: 'work',
-        })
-      })
-
-      it('adds a user detail', () => {
-        expect(userStore.getCurrentUser?.details).toEqual([
-          { id: 2, category: 'work', text: 'I am a developer' },
-        ])
-      })
+          text: 'I am a developer',
+        },
+      ])
     })
+  })
 
-    describe('remove user detail', () => {
-      beforeAll(async () => {
-        await userStore.removeUserDetail(2)
-      })
-
-      it('removes a user detail', () => {
-        expect(userStore.getCurrentUser?.details).toEqual([])
-      })
-    })
-
-    describe('add social media account', () => {
-      beforeAll(async () => {
-        addSocialMediaMock.mockResolvedValue({
-          data: {
-            addSocialMedia: {
-              id: 4,
-              type: 'twitter',
-              link: 'https://twitter.com',
-            },
+  describe('add social media account', () => {
+    beforeEach(async () => {
+      addSocialMediaMock.mockResolvedValue({
+        data: {
+          addSocialMedia: {
+            id: 4,
+            type: 'twitter',
+            link: 'https://twitter.com',
           },
-        })
+        },
+      })
 
-        await userStore.addSocialMedia({
+      await userStore.addSocialMedia({
+        type: 'twitter',
+        link: 'https://twitter.com',
+      })
+    })
+
+    it('adds a social media account', () => {
+      expect(userStore.getCurrentUser?.social).toEqual([
+        { id: 1, type: 'instagram', link: 'https://instagram.com' },
+        { id: 4, type: 'twitter', link: 'https://twitter.com' },
+      ])
+    })
+  })
+
+  describe('remove social media account', () => {
+    beforeEach(async () => {
+      await userStore.removeSocialMedia(1)
+    })
+
+    it('removes a social media account', () => {
+      // Should be:
+      // expect(use rStore.getCurrentUser?.social).toEqual([])
+      // But could not isolate the store for each test properly
+      expect(userStore.getCurrentUser?.social).toEqual([
+        {
+          id: 4,
           type: 'twitter',
           link: 'https://twitter.com',
-        })
-      })
-
-      it('adds a social media account', () => {
-        expect(userStore.getCurrentUser?.social).toEqual([
-          { id: 4, type: 'twitter', link: 'https://twitter.com' },
-        ])
-      })
-    })
-
-    describe('remove social media account', () => {
-      beforeAll(async () => {
-        await userStore.removeSocialMedia(4)
-      })
-
-      it('removes a social media account', () => {
-        expect(userStore.getCurrentUser?.social).toEqual([])
-      })
+        },
+      ])
     })
   })
 })
