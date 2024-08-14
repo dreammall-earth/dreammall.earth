@@ -3,6 +3,8 @@ import { createEsbuildPlugin } from '@badeball/cypress-cucumber-preprocessor/esb
 import createBundler from '@bahmutov/cypress-esbuild-preprocessor'
 import { defineConfig } from 'cypress'
 
+let emailLink: string
+
 async function setupNodeEvents(
   on: Cypress.PluginEvents,
   config: Cypress.PluginConfigOptions,
@@ -15,6 +17,15 @@ async function setupNodeEvents(
       plugins: [createEsbuildPlugin(config)],
     }),
   )
+
+  on('task', {
+    setEmailLink: (link: string) => {
+      return (emailLink = link)
+    },
+    getEmailLink: () => {
+      return emailLink
+    },
+  })
 
   return config
 }
