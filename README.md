@@ -11,149 +11,162 @@ Dreammall.earth websites & services
 
 ## Modules
 
-### Frontends
-
-- [Presenter](presenter/README.md)
-- [Frontend](frontend/README.md)
 - [Admin](admin/README.md)
-
-### Backend
-
-- [Backend](backend/README.md)
-
-### Dev-Op
-
 - [Authentik](authentik/README.md)
-
-## Deployment
-
-Instructions how to deploy this software are available [here](deployment/README.md)
+- [Backend](backend/README.md)
+- [Deployment](deployment/README.md)
+- [Frontend](frontend/README.md)
+- [Presenter](presenter/README.md)
 
 ## Commands
 
-### The following commands are available
+The following commands are available:
 
 | Command                    | Description                                    |
 | -------------------------- | ---------------------------------------------- |
 | `npm install`              | Project setup                                  |
 | **Test**                   |                                                |
-| `npm run test:lint`        | Run all linters                                |
-| `npm run test:lint:remark` | Run linter remark                              |
-| `npm test`                 | Run all tests & linters                        |
+| `npm run remark`           | Run linter remark                              |
 | **Documentation**          |                                                |
 | `npm run docs:dev`         | Run Documentation in development mode          |
 | `npm run docs:build`       | Build static documentation                     |
 | **Release**                |                                                |
 | `npm run release`          | Propagate release version & generate changelog |
-| **Maintenance**            |                                                |
-| `npm run update`           | Check for updates                              |
 
-## Bare-metal
+## Shared Setup
+Make sure you have [docker](https://www.docker.com/) installed on your system.
+
+Start authentik and mariadb database:
+```bash
+docker compose up -d --wait authentik authentik-worker database
+```
+
+## A) Run applications with Docker
+
+Run database migrations:
+```bash
+docker compose run --rm backend npm run db:reset
+```
+
+Start your desired applications:
+```bash
+docker compose up admin backend frontend presenter
+```
+
+## B) Run applications locally
 
 Ensure you are using a `node --version` that matches the one specified in [.tool-versions](.tool-versions).
 E.g. you could install [asdf-vm](https://asdf-vm.com/guide/getting-started.html).
 
-### Install Authentik
-
+Set a temporary variable for the upcoming steps:
 ```bash
-# Go in authentik folder
-cd $rootFolder/authentik
-# Delete existing database
-rm -rf database
-# Unpack database in database folder
-./database.unpack.sh
-# Start authentik docker
-docker compose up
+export rootFolder=$(pwd)
 ```
 
-### Start Database
-
+Setup admin:
 ```bash
-# In new Terminal
-cd $rootFolder
-# Start database in docker
-docker compose up database
-```
-
-### Start Backend
-
-```bash
-# In new Terminal
-cd $rootFolder/backend
-# Copy .env.dist .env
-cp .env.dist .env
-# Symbolik for authentik key
-ln -s src/auth/public.pem public.pem
-npm install
-# Initialize Database
-npm run db:reset
-# Migration Database
-# npm run db:migrate
-npm run dev
-```
-
-### Start Presenter
-
-```bash
-# In new Terminal
-cd $rootFolder/presenter
-cp .env.dist .env
-npm install
-export PORT=3001
-# Run dev mode
-npm run dev
-# Run prod mode (faster)
-# npm run prod
-```
-
-### Start Frontend
-
-```bash
-# In new Terminal
-cd $rootFolder/frontend
-cp .env.dist .env
-npm install
-# export PORT=3000(default)
-# Run dev mode (for development)
-npm run dev
-# Run prod mode (faster)
-# npm run prod
-```
-
-### Start Admin
-
-```bash
-# In new Terminal
 cd $rootFolder/admin
 cp .env.dist .env
 npm install
-export PORT=3002
-# Run dev mode
-npm run dev
-# Run prod mode (faster)
-# npm run prod
 ```
 
-## Docker
+Setup backend:
+```bash
+cd $rootFolder/backend
+cp .env.dist .env
+npm install
+npm run db:reset
+```
 
-### The following endpoints are provided for `docker compose`
+Setup Frontend
+```bash
+cd $rootFolder/frontend
+cp .env.dist .env
+npm install
+```
 
-| Endpoint                                                             | Description                |
-| -------------------------------------------------------------------- | -------------------------- |
-| [http://localhost:3306](http://localhost:3306)                       | MySQL Database             |
-| [http://localhost:3000](http://localhost:3001)                       | Presenter                  |
-| [http://localhost:8081](http://localhost:8081)                       | Presenter Documentation    |
-| [http://localhost:6006](http://localhost:6006)                       | Presenter Storybook        |
-| [http://localhost:3001](http://localhost:3000)                       | Frontend                   |
-| [http://localhost:8082](http://localhost:8082)                       | Frontend Documentation     |
-| [http://localhost:6007](http://localhost:6007)                       | Frontend Storybook         |
-| [http://localhost:3002](http://localhost:3002)                       | Admin                      |
-| [http://localhost:8083](http://localhost:8083)                       | Admin Documentation        |
-| [http://localhost:6008](http://localhost:6008)                       | Admin Storybook            |
-| [http://localhost:4000/graphql](http://localhost:4000/graphql)       | Backend GraphQL API        |
-| [http://localhost:4000/playground](http://localhost:4000/playground) | Backend GraphQL Playground |
-| [http://localhost:8084](http://localhost:8084)                       | Backend Documentation      |
-| [http://localhost:8080](http://localhost:8080)                       | Documentation              |
+Setup presenter:
+```bash
+cd $rootFolder/presenter
+cp .env.dist .env
+npm install
+```
+
+### Start Services
+
+Now start all of these in separate terminals:
+```bash
+cd admin
+export PORT=3002
+npm run dev
+```
+
+```bash
+cd backend
+npm run dev
+```
+
+```bash
+cd frontend
+npm run dev
+```
+
+```bash
+cd presenter
+export PORT=3001
+npm run dev
+```
+
+## Endpoints
+
+The following endpoints are provided for `docker compose up`:
+
+| Endpoint                                        | Description                |
+| ----------------------------------------------- | -------------------------- |
+| [http://localhost:3306](http://localhost:3306)  | MySQL Database             |
+| [http://localhost:3000](http://localhost:3001)  | Presenter                  |
+| [http://localhost:6006](http://localhost:6006)  | Presenter Storybook        |
+| [http://localhost:3001](http://localhost:3000)  | Frontend                   |
+| [http://localhost:6007](http://localhost:6007)  | Frontend Storybook         |
+| [http://localhost:3002](http://localhost:3002)  | Admin                      |
+| [http://localhost:6008](http://localhost:6008)  | Admin Storybook            |
+| [http://localhost:4000](http://localhost:4000)  | Backend GraphQL Playground |
+| [http://localhost:8080](http://localhost:8080)  | Documentation              |
+| [http://localhost:8080](http://localhost:8025)  | Mailpit                    |
+| [http://localhost:8080](http://localhost:9000)  | Authentik                  |
+
+## Clean up docker
+
+If you run into issues with some docker left-overs, you can always stop+remove containers and volumes:
+```sh
+docker compose down -v
+```
+
+Check if you still have docker containers left:
+```sh
+docker container ls -a
+```
+
+If so, you can do:
+```sh
+docker container stop $(docker container ls -qa)
+docker container rm $(docker container ls -qa)
+```
+
+Prune docker caches:
+```sh
+docker system prune
+```
+
+Remove all your volumes:
+```sh
+docker volume remove $(docker volume list -q)
+```
+
+OK, this is ultima ratio, remove everything (even images) with:
+```sh
+docker system prune -a
+```
 
 ## How to release
 

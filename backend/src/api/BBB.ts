@@ -25,7 +25,7 @@ const parser = new XMLParser({
 
 const defaultCreateMeetingBodyOptions = {
   welcome: '<div></div>',
-  meetingLayout: MeetingLayouts.VIDEO_FOCUS,
+  meetingLayout: MeetingLayouts.SMART_LAYOUT,
 }
 
 export const getMeetings = async (): Promise<MeetingInfo[]> => {

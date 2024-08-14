@@ -1,0 +1,5 @@
+domain: master.git.dreammall.earth
+namespace: dreammall-git-master
+image_repository: ghcr.io/dreammall-earth/dreammall.earth
+image_tag: {{ requiredEnv "IMAGE_TAG" }}
+cert_manager_issuer: dreammall-letsencrypt-prod

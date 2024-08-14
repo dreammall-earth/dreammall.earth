@@ -6,6 +6,8 @@ export const deleteAll = async () => {
   await prisma.$executeRaw`DELETE FROM NewsletterSubscription`
   await prisma.event.deleteMany()
   await prisma.usersInMeetings.deleteMany()
+  await prisma.userDetail.deleteMany()
+  await prisma.socialMedia.deleteMany()
   await prisma.user.deleteMany()
   await prisma.meeting.deleteMany()
 }

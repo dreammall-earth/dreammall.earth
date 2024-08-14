@@ -1,14 +1,21 @@
 import { provideApolloClient } from '@vue/apollo-composable'
+import { createMockClient, createMockSubscription, IMockSubscription } from 'mock-apollo-client'
 import { setActivePinia, createPinia } from 'pinia'
-import { describe, it, expect, beforeEach } from 'vitest'
+import { vi, describe, it, expect, beforeEach } from 'vitest'
 
-import {
-  mockClient,
-  openTablesQueryMock,
-  updateOpenTablesSubscriptionMock,
-} from '#tests/mock.apolloClient'
+import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
+import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 import { useTablesStore } from './tablesStore'
+
+const updateOpenTablesSubscriptionMock: IMockSubscription = createMockSubscription()
+const mockClient = createMockClient()
+const openTablesQueryMock = vi.fn()
+mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateOpenTablesSubscriptionMock)
+mockClient.setRequestHandler(
+  openTablesQuery,
+  openTablesQueryMock.mockResolvedValue({ data: { openTables: [] } }),
+)
 
 provideApolloClient(mockClient)
 
@@ -34,6 +41,7 @@ describe('Tables Store', () => {
           data: {
             updateOpenTables: [
               {
+                id: 69,
                 meetingID: 'my-meeting',
                 meetingName: 'My meeting',
                 startTime: '1234',
@@ -43,7 +51,6 @@ describe('Tables Store', () => {
                     fullName: 'Peter Lustig',
                   },
                 ],
-                joinLink: 'https://my.link',
               },
             ],
           },
@@ -53,6 +60,7 @@ describe('Tables Store', () => {
       it('updates the store', () => {
         expect(tablesStore.getTables).toEqual([
           {
+            id: 69,
             meetingID: 'my-meeting',
             meetingName: 'My meeting',
             startTime: '1234',
@@ -62,7 +70,6 @@ describe('Tables Store', () => {
                 fullName: 'Peter Lustig',
               },
             ],
-            joinLink: 'https://my.link',
           },
         ])
       })
@@ -73,6 +80,7 @@ describe('Tables Store', () => {
     it('updates the store', () => {
       tablesStore.setTables([
         {
+          id: 77,
           meetingID: 'my-meeting',
           meetingName: 'my meeting',
           startTime: '1234',
@@ -82,11 +90,11 @@ describe('Tables Store', () => {
               fullName: 'Peter Lustig',
             },
           ],
-          joinLink: 'https://my.link',
         },
       ])
       expect(tablesStore.tables).toEqual([
         {
+          id: 77,
           meetingID: 'my-meeting',
           meetingName: 'my meeting',
           startTime: '1234',
@@ -96,7 +104,6 @@ describe('Tables Store', () => {
               fullName: 'Peter Lustig',
             },
           ],
-          joinLink: 'https://my.link',
         },
       ])
     })

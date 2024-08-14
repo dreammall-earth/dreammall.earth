@@ -1,0 +1,10 @@
+version: 0.0.0-dev
+dependencies:
+- name: authentik
+  repository: https://charts.goauthentik.io/
+  version: 2024.6.1
+- name: mariadb
+  repository: https://charts.bitnami.com/bitnami
+  version: 19.0.0
+digest: sha256:a133b2bfad477b3c4e90c03c8b3715401a2a478f3f1de485cb7d485583eb3148
+generated: "2024-08-02T02:29:45.065617828+02:00"

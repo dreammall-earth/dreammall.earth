@@ -7,16 +7,15 @@ jobs:
     name: Run all E2E tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@9a9194f87191a7e9055e3e9b95b8cfb13023bb08 # v4.1.7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@26961cf329f22f6837d5f54c3efd76b480300ace # v4.0.3
         with:
           node-version-file: './.tool-versions'
 
       - name: E2E | Boot up test system
         run: |
-          docker compose up -d --wait database authentik
-          docker compose exec -T postgresql psql authentik --username authentik < authentik/dump.sql
+          docker compose up -d --wait database authentik authentik-worker
           cd backend
           cp .env.dist .env
           npm install
@@ -25,10 +24,12 @@ jobs:
           npm run start &
           cd ../frontend
           cp .env.dist .env
+          rm .env.production
           npm install
           npm run prod &
           cd  ../presenter
           cp .env.dist .env
+          rm .env.production
           export PORT=3001
           npm install
           npm run prod &
@@ -41,7 +42,7 @@ jobs:
 
       - name: E2E | Run all tests
         id: e2e-run
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@689551a1df6a10c75be61ae30b642cb84fb8164c # v6.7.2
         with:
           working-directory: tests
 
@@ -54,12 +55,12 @@ jobs:
 
       - name: Get PR number
         if: ${{ failure() && steps.e2e-run.conclusion == 'failure' }}
-        uses: jwalton/gh-find-current-pr@master
+        uses: jwalton/gh-find-current-pr@89ee5799558265a1e0e31fab792ebb4ee91c016b # v1.3.3
         id: pr-number
 
       - name: E2E | if tests failed, upload report
         if: ${{ failure() && steps.e2e-run.conclusion == 'failure' }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@89ef406dd8d7e03cfd12d9e0a4a378f454709029 # v4.3.5
         with:
           name: dreammall-e2e-test-report-pr-${{ steps.pr-number.outputs.pr }}
           path: /home/runner/work/dreammall.earth/dreammall.earth/tests/cypress/reports/dreammall-e2e_html_report

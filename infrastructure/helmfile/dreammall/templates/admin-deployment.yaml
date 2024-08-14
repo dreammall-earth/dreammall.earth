@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: admin
+  template:
+    metadata:
+      labels:
+        io.kompose.service: admin
+    spec:
+      containers:
+        - env:
+          image: "{{ .Values.admin.image.repository }}:{{ default .Values.global.image.tag .Values.admin.image.tag "latest" }}"
+          imagePullPolicy: {{ quote .Values.global.image.pullPolicy }}
+          name: admin
+          ports:
+            - containerPort: 3000
+      restartPolicy: Always

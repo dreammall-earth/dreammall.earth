@@ -1,14 +1,37 @@
+import { provideApolloClient } from '@vue/apollo-composable'
 import { mount } from '@vue/test-utils'
-import { describe, it, expect, beforeEach } from 'vitest'
+import { createMockClient } from 'mock-apollo-client'
+import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { useAuthStore } from '#stores/authStore'
+import { currentUserQuery } from '#queries/currentUserQuery'
+import { useUserStore } from '#stores/userStore'
 
 import UserInfo from './UserInfo.vue'
 
+const mockClient = createMockClient()
+
+const currentUserQueryMock = vi.fn()
+
+mockClient.setRequestHandler(
+  currentUserQuery,
+  currentUserQueryMock.mockResolvedValue({
+    data: {
+      currentUser: {
+        id: 666,
+        name: 'Current User',
+        username: 'currentUser',
+        table: null,
+      },
+    },
+  }),
+)
+
+provideApolloClient(mockClient)
+
 describe('UserInfo', () => {
-  const authStore = useAuthStore()
+  const userStore = useUserStore()
 
   const Wrapper = () => {
     return mount(VApp, {
@@ -24,11 +47,27 @@ describe('UserInfo', () => {
     wrapper = Wrapper()
   })
 
+  afterEach(() => {
+    wrapper.unmount()
+  })
+
   it('renders', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 
   describe('no user name in store', () => {
+    beforeEach(() => {
+      userStore.setCurrentUser({
+        name: '',
+        username: '',
+        id: 22,
+        availability: null,
+        details: [],
+        social: [],
+      })
+      wrapper = Wrapper()
+    })
+
     it('has no image and no text in avatar', () => {
       expect(wrapper.findComponent({ name: 'VAvatar' }).text()).toBe('')
       expect(
@@ -39,24 +78,13 @@ describe('UserInfo', () => {
 
   describe('username in store, but no image', () => {
     beforeEach(() => {
-      authStore.save({
-        access_token: 'access_token',
-        profile: {
-          aud: 'aud',
-          sub: 'sub',
-          exp: 1,
-          iat: 1,
-          iss: 'iss',
-          name: 'Peter Lustig',
-        },
-        token_type: 'token_type',
-        session_state: null,
-        state: null,
-        expires_at: new Date().valueOf() + 100,
-        expires_in: 0,
-        expired: false,
-        scopes: ['email'],
-        toStorageString: () => 'toStorageString',
+      userStore.setCurrentUser({
+        name: 'Peter Lustig',
+        username: 'peter',
+        id: 22,
+        availability: null,
+        details: [],
+        social: [],
       })
       wrapper = Wrapper()
     })
@@ -71,25 +99,14 @@ describe('UserInfo', () => {
 
   describe('username and image in store', () => {
     beforeEach(() => {
-      authStore.save({
-        access_token: 'access_token',
-        profile: {
-          aud: 'aud',
-          sub: 'sub',
-          exp: 1,
-          iat: 1,
-          iss: 'iss',
-          name: 'Peter Lustig',
-          picture: 'http://url-to.me',
-        },
-        token_type: 'token_type',
-        session_state: null,
-        state: null,
-        expires_at: new Date().valueOf() + 100,
-        expires_in: 0,
-        expired: false,
-        scopes: ['email'],
-        toStorageString: () => 'toStorageString',
+      userStore.setCurrentUser({
+        name: 'Peter Lustig',
+        username: 'peter',
+        id: 22,
+        avatar: 'http://url-to.me',
+        availability: null,
+        details: [],
+        social: [],
       })
       wrapper = Wrapper()
     })

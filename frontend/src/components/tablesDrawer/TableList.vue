@@ -7,7 +7,7 @@
           {{ $t('tables.participantCount', { count: item.participantCount }) }}
         </span>
       </div>
-      <button class="action" @click="openTable(item.joinLink)">
+      <button class="action" @click="openTable(item.id)">
         <v-icon class="icon" icon="$camera" />
       </button>
     </li>
@@ -17,10 +17,7 @@
 <script lang="ts" setup>
 import { navigate } from 'vike/client/router'
 
-import { useActiveTableStore } from '#stores/activeTableStore'
 import { Table } from '#stores/tablesStore'
-
-const activeTableStore = useActiveTableStore()
 
 defineProps<{
   items: Table[]
@@ -28,10 +25,9 @@ defineProps<{
 
 const emit = defineEmits(['openTable'])
 
-const openTable = (link: string) => {
+const openTable = (id: number) => {
   emit('openTable')
-  activeTableStore.setActiveTable(link)
-  navigate('/table/')
+  navigate(`/table/${id}`)
 }
 </script>
 

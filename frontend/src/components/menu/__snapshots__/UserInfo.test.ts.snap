@@ -28,7 +28,9 @@ exports[`UserInfo > renders 1`] = `
         
         <span
           data-v-607bdd70=""
-        />
+        >
+          CU
+        </span>
         
         
         

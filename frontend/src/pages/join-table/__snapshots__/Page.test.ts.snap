@@ -116,6 +116,7 @@ exports[`JoinTablePage > renders 1`] = `
                         required=""
                         size="1"
                         type="text"
+                        value=""
                       />
                       <!---->
                       
@@ -136,9 +137,8 @@ exports[`JoinTablePage > renders 1`] = `
                 <!---->
               </div>
               <button
-                class="v-btn v-btn--disabled v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--form-submit main-button-auto"
+                class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--form-submit main-button-auto"
                 data-v-2b63c1fe=""
-                disabled=""
                 style="background-color: #23ad5b; color: #fff; caret-color: #fff; height: auto; width: auto;"
                 type="submit"
               >
@@ -164,42 +164,7 @@ exports[`JoinTablePage > renders 1`] = `
                     data-v-2b63c1fe=""
                   >
                     Bestätigen 
-                    <div
-                      aria-valuemax="100"
-                      aria-valuemin="0"
-                      class="v-progress-circular v-progress-circular--indeterminate v-progress-circular--disable-shrink v-theme--light btn-loading"
-                      data-v-2b63c1fe=""
-                      role="progressbar"
-                      style="width: 15px; height: 15px;"
-                    >
-                      <svg
-                        style="transform: rotate(calc(-90deg + 0deg));"
-                        viewBox="0 0 42.857142857142854 42.857142857142854"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <circle
-                          class="v-progress-circular__underlay"
-                          cx="50%"
-                          cy="50%"
-                          fill="transparent"
-                          r="20"
-                          stroke-dasharray="125.66370614359172"
-                          stroke-dashoffset="0"
-                          stroke-width="2.8571428571428568"
-                        />
-                        <circle
-                          class="v-progress-circular__overlay"
-                          cx="50%"
-                          cy="50%"
-                          fill="transparent"
-                          r="20"
-                          stroke-dasharray="125.66370614359172"
-                          stroke-dashoffset="125.66370614359172px"
-                          stroke-width="2.8571428571428568"
-                        />
-                      </svg>
-                      <!---->
-                    </div>
+                    <!--v-if-->
                   </span>
                   
                   

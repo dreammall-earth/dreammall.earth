@@ -1,0 +1,39 @@
+global:
+  image:
+    pullPolicy: Always
+    tag: master
+admin:
+  image:
+    repository: ghcr.io/dreammall-earth/dreammall.earth/admin
+frontend:
+  image:
+    repository:  ghcr.io/dreammall-earth/dreammall.earth/frontend
+presenter:
+  image:
+    repository: ghcr.io/dreammall-earth/dreammall.earth/presenter
+backend:
+  image:
+    repository:  ghcr.io/dreammall-earth/dreammall.earth/backend
+
+cert_manager:
+  issuer:
+
+hosts:
+  frontend: app.master.dreammall.earth
+  admin: admin.master.dreammall.earth
+  presenter: master.dreammall.earth
+
+configmap:
+  auth_admin_redirect_uri: https://admin.master.dreammall.earth/signin/
+  auth_authority_url: https://auth.master.dreammall.earth/application/o/dreammallearth/
+  auth_redirect_uri: https://app.master.dreammall.earth/auth/
+  auth_signout_uri: https://auth.master.dreammall.earth/if/flow/dreammallearth-invalidation-flow/
+  auth_signup_uri: https://auth.master.dreammall.earth/if/flow/dreammallearth-enrollment/
+  auth_silent_redirect_uri: https://app.master.dreammall.earth/silent-refresh/
+  bbb_url: https://cafe.dreammall.earth/bigbluebutton/api/
+  endpoints_graphql_uri: https://master.dreammall.earth/api/
+  endpoints_websocket_uri: ws://master.dreammall.earth/api/subscriptions
+  frontend_invite_link_url: https://app.master.dreammall.earth/join-room/
+  frontend_url:  https://app.master.dreammall.earth
+  jwks_uri: http://authentik-server/application/o/dreammallearth/jwks/
+  presenter_url: https://master.dreammall.earth

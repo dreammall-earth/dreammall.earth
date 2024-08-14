@@ -3,6 +3,7 @@ import { User } from '@prisma/client'
 
 import { createMeeting, joinMeetingLink, getMeetings } from '#api/BBB'
 import { CONFIG } from '#config/config'
+import { fakePayload } from '#src/auth/jwtVerify'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
 
@@ -140,6 +141,41 @@ describe('TableResolver', () => {
       })
     })
 
+    describe('joinTable', () => {
+      const query = `
+        query ($tableId: Int!) {
+          joinTable(tableId: $tableId)
+        }
+      `
+
+      it('throws access denied', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query,
+              variables: {
+                tableId: 69,
+              },
+            },
+            { contextValue: { dataSources: { prisma } } },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
     describe('openTables', () => {
       it('throws access denied', async () => {
         await expect(
@@ -166,10 +202,10 @@ describe('TableResolver', () => {
       })
     })
 
-    describe('joinTable', () => {
+    describe('joinTableAsGuest', () => {
       const query = `
         query ($tableId: Int!, $userName: String!) {
-          joinTable(tableId: $tableId, userName: $userName)
+          joinTableAsGuest(tableId: $tableId, userName: $userName)
         }
       `
       describe('No table in DB', () => {
@@ -230,7 +266,7 @@ describe('TableResolver', () => {
             body: {
               kind: 'single',
               singleResult: {
-                data: { joinTable: 'https://my-link' },
+                data: { joinTableAsGuest: 'https://my-link' },
 
                 errors: undefined,
               },
@@ -316,6 +352,39 @@ describe('TableResolver', () => {
               public: true,
             },
           })
+        })
+
+        it('creates create my table event in the database', async () => {
+          const user = await prisma.user.findUnique({
+            where: {
+              username: fakePayload.nickname,
+            },
+          })
+          const result = await prisma.event.findMany({
+            orderBy: {
+              createdAt: 'asc',
+            },
+          })
+          expect(result).toEqual([
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_USER',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_MY_TABLE',
+              involvedUserId: user?.id,
+            },
+          ])
         })
       })
 
@@ -434,6 +503,7 @@ describe('TableResolver', () => {
         await prisma.usersInMeetings.deleteMany()
         await prisma.meeting.deleteMany()
         await prisma.user.deleteMany()
+        await prisma.event.deleteMany()
       })
 
       let bibi: User | undefined
@@ -547,6 +617,48 @@ describe('TableResolver', () => {
 
         it('has no meeting user mapping left in database', async () => {
           await expect(prisma.usersInMeetings.findMany()).resolves.toHaveLength(0)
+        })
+
+        it('creates update my room event', async () => {
+          const user = await prisma.user.findUnique({
+            where: {
+              username: fakePayload.nickname,
+            },
+          })
+          const result = await prisma.event.findMany({
+            orderBy: {
+              createdAt: 'asc',
+            },
+          })
+          expect(result).toEqual([
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_USER',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_MY_TABLE',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'UPDATE_MY_TABLE',
+              involvedUserId: user?.id,
+            },
+          ])
         })
       })
 
@@ -678,7 +790,7 @@ describe('TableResolver', () => {
           })
         })
 
-        it('returns link to table', async () => {
+        it('returns id of the table', async () => {
           await expect(
             testServer.executeOperation(
               {
@@ -697,7 +809,8 @@ describe('TableResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  joinMyTable: 'https://my-link',
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                  joinMyTable: expect.any(Number),
                 },
                 errors: undefined,
               },
@@ -759,6 +872,161 @@ describe('TableResolver', () => {
                 ]),
               },
             },
+          })
+        })
+      })
+    })
+
+    describe('joinTable', () => {
+      const query = `
+        query ($tableId: Int!) {
+          joinTable(tableId: $tableId)
+        }
+      `
+
+      describe('no table in DB', () => {
+        it('throws an Error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  tableId: 25,
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                errors: [expect.objectContaining({ message: 'Table does not exist' })],
+              },
+            },
+          })
+        })
+      })
+
+      describe('table in DB', () => {
+        afterEach(async () => {
+          await prisma.meeting.deleteMany()
+        })
+
+        let tableId: number
+
+        describe('current user does not own the table', () => {
+          beforeEach(async () => {
+            joinMeetingLinkMock.mockReturnValue('https://my-link')
+            const meeting = await prisma.meeting.create({
+              data: {
+                name: 'Pony Ville',
+                meetingID: 'Pony Ville',
+                attendeePW: 'attendee',
+              },
+            })
+            tableId = meeting.id
+          })
+
+          it('returns link to table', async () => {
+            await expect(
+              testServer.executeOperation(
+                {
+                  query,
+                  variables: {
+                    tableId,
+                  },
+                },
+                {
+                  contextValue: {
+                    token: 'token',
+                    dataSources: { prisma },
+                  },
+                },
+              ),
+            ).resolves.toMatchObject({
+              body: {
+                kind: 'single',
+                singleResult: {
+                  data: { joinTable: 'https://my-link' },
+                  errors: undefined,
+                },
+              },
+            })
+          })
+
+          it('calls join meeting link with attendee pw', async () => {
+            await testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  tableId,
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            )
+
+            expect(joinMeetingLinkMock).toHaveBeenCalledWith({
+              fullName: 'User',
+              meetingID: 'Pony Ville',
+              password: 'attendee',
+            })
+          })
+        })
+
+        describe('current user is owner of the table', () => {
+          beforeEach(async () => {
+            joinMeetingLinkMock.mockReturnValue('https://my-link')
+            const meeting = await prisma.meeting.create({
+              data: {
+                name: 'Pony Ville',
+                meetingID: 'Pony Ville',
+                attendeePW: 'attendee',
+                moderatorPW: 'moderator',
+              },
+            })
+            tableId = meeting.id
+            await prisma.user.update({
+              where: {
+                username: 'mockedUser',
+              },
+              data: {
+                meetingId: tableId,
+              },
+            })
+          })
+
+          it('calls join meeting link with moderator pw', async () => {
+            await testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  tableId,
+                },
+              },
+              {
+                contextValue: {
+                  token: 'token',
+                  dataSources: { prisma },
+                },
+              },
+            )
+
+            expect(joinMeetingLinkMock).toHaveBeenCalledWith({
+              fullName: 'User',
+              meetingID: 'Pony Ville',
+              password: 'moderator',
+            })
           })
         })
       })
@@ -833,7 +1101,7 @@ describe('TableResolver', () => {
             testServer.executeOperation(
               {
                 query:
-                  'query { openTables { meetingName meetingID participantCount startTime joinLink attendees { fullName } } }',
+                  'query { openTables { id meetingName meetingID participantCount startTime attendees { fullName } } }',
               },
               {
                 contextValue: {
@@ -849,12 +1117,13 @@ describe('TableResolver', () => {
                 data: {
                   openTables: [
                     {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
                       meetingName: 'Dreammall Entwicklung',
                       meetingID: 'Dreammall-Entwicklung',
                       participantCount: 0,
                       startTime: '1718189',
                       attendees: [],
-                      joinLink: 'https://my-link',
                     },
                   ],
                 },
@@ -925,7 +1194,7 @@ describe('TableResolver', () => {
             testServer.executeOperation(
               {
                 query:
-                  'query { openTables { meetingName meetingID participantCount startTime joinLink attendees { fullName } } }',
+                  'query { openTables { id meetingName meetingID participantCount startTime attendees { fullName } } }',
               },
               {
                 contextValue: {
@@ -941,11 +1210,12 @@ describe('TableResolver', () => {
                 data: {
                   openTables: [
                     {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
                       meetingName: 'Dreammall Entwicklung',
                       meetingID: 'Dreammall-Entwicklung',
                       participantCount: 0,
                       startTime: '1718189',
-                      joinLink: 'https://my-link',
                       attendees: [
                         {
                           fullName: 'Peter Lustig',
@@ -957,14 +1227,6 @@ describe('TableResolver', () => {
                 errors: undefined,
               },
             },
-          })
-        })
-
-        it('calls joinMeetingLink with correct PW', () => {
-          expect(joinMeetingLinkMock).toHaveBeenCalledWith({
-            fullName: 'User',
-            meetingID: 'Dreammall-Entwicklung',
-            password: '1234',
           })
         })
       })
@@ -1030,7 +1292,7 @@ describe('TableResolver', () => {
             testServer.executeOperation(
               {
                 query:
-                  'query { openTables { meetingName meetingID participantCount startTime joinLink attendees { fullName } } }',
+                  'query { openTables { id meetingName meetingID participantCount startTime attendees { fullName } } }',
               },
               {
                 contextValue: {
@@ -1046,11 +1308,12 @@ describe('TableResolver', () => {
                 data: {
                   openTables: [
                     {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
                       meetingName: 'Dreammall Entwicklung',
                       meetingID: 'Dreammall-Entwicklung',
                       participantCount: 0,
                       startTime: '1718189',
-                      joinLink: 'https://my-link',
                       attendees: [
                         {
                           fullName: 'Peter Lustig',

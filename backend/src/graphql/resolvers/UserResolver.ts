@@ -1,8 +1,11 @@
 import { Prisma } from '@prisma/client'
-import { Resolver, Query, Authorized, Ctx, Arg } from 'type-graphql'
+import { Resolver, Query, Authorized, Ctx, Arg, Mutation, Int } from 'type-graphql'
 
-import { User, CurrentUser } from '#graphql/models/UserModel'
-import { prisma, UsersWithMeetings } from '#src/prisma'
+import { User, CurrentUser, UserDetail, SocialMedia } from '#graphql/models/UserModel'
+import { AddSocialMediaInput } from '#inputs/AddSocialMediaInput'
+import { AddUserDetailInput } from '#inputs/AddUserDetailInput'
+import { UpdateUserInput } from '#inputs/UpdateUserInput'
+import { prisma, UsersWithMeetings, UserWithProfile } from '#src/prisma'
 import { Context } from '#src/server/context'
 
 @Resolver()
@@ -11,6 +14,7 @@ export class UserResolver {
   @Query(() => [User])
   async users(
     @Arg('includeSelf', { nullable: true }) includeSelf: boolean = false,
+    @Arg('searchString', () => String, { nullable: true }) searchString: string | null | undefined,
     @Ctx() context: Context,
   ): Promise<User[]> {
     const { user } = context
@@ -19,6 +23,11 @@ export class UserResolver {
     if (!includeSelf) {
       where.NOT = { id: user.id }
     }
+
+    if (searchString) {
+      where.OR = [{ name: { contains: searchString } }, { username: { contains: searchString } }]
+    }
+
     return prisma.user.findMany({
       where,
     })
@@ -30,26 +39,123 @@ export class UserResolver {
     const { user } = context
     if (!user) throw new Error('User not found!')
 
-    const myself = await prisma.user.findUnique({
+    return createCurrentUser(user)
+  }
+
+  @Authorized()
+  @Mutation(() => CurrentUser)
+  async updateUser(
+    @Arg('data') data: UpdateUserInput,
+    @Ctx() context: Context,
+  ): Promise<CurrentUser> {
+    const { user } = context
+    if (!user) throw new Error('User not found!')
+
+    await prisma.user.update({
       where: {
         id: user.id,
       },
-      include: {
-        meeting: true,
+      data,
+    })
+
+    if (data.introduction === undefined) delete data.introduction
+    if (data.availability === undefined) delete data.availability
+
+    return createCurrentUser({ ...user, ...data })
+  }
+
+  @Authorized()
+  @Mutation(() => UserDetail)
+  async addUserDetail(
+    @Arg('data') data: AddUserDetailInput,
+    @Ctx() context: Context,
+  ): Promise<UserDetail> {
+    const { user } = context
+    if (!user) throw new Error('User not found!')
+
+    const detail = await prisma.userDetail.create({
+      data: {
+        userId: user.id,
+        ...data,
       },
     })
 
-    if (!myself) throw new Error('User not found in DB!')
-
-    let usersInMeetings: UsersWithMeetings[] = []
-
-    if (myself.meetingId && !myself.meeting?.public) {
-      usersInMeetings = await prisma.usersInMeetings.findMany({
-        where: { meetingId: myself.meetingId },
-        include: { user: true },
-      })
-    }
-
-    return new CurrentUser(myself, myself.meeting, usersInMeetings)
+    return new UserDetail(detail)
   }
+
+  @Authorized()
+  @Mutation(() => Boolean)
+  async removeUserDetail(
+    @Arg('id', () => Int) id: number,
+    @Ctx() context: Context,
+  ): Promise<boolean> {
+    const { user } = context
+    if (!user) throw new Error('User not found!')
+
+    const detail = user.userDetail.find((d) => d.id === id)
+
+    if (!detail) throw new Error('Detail not found!')
+
+    await prisma.userDetail.delete({
+      where: {
+        id,
+      },
+    })
+
+    return true
+  }
+
+  @Authorized()
+  @Mutation(() => SocialMedia)
+  async addSocialMedia(
+    @Arg('data') data: AddSocialMediaInput,
+    @Ctx() context: Context,
+  ): Promise<SocialMedia> {
+    const { user } = context
+    if (!user) throw new Error('User not found!')
+
+    const socialMedia = await prisma.socialMedia.create({
+      data: {
+        userId: user.id,
+        ...data,
+      },
+    })
+
+    return new SocialMedia(socialMedia)
+  }
+
+  @Authorized()
+  @Mutation(() => Boolean)
+  async removeSocialMedia(
+    @Arg('id', () => Int) id: number,
+    @Ctx() context: Context,
+  ): Promise<boolean> {
+    const { user } = context
+    if (!user) throw new Error('User not found!')
+
+    const socialMedia = user.socialMedia.find((s) => s.id === id)
+
+    if (!socialMedia) throw new Error('Social media not found!')
+
+    await prisma.socialMedia.delete({
+      where: {
+        id,
+      },
+    })
+
+    return true
+  }
+}
+
+const createCurrentUser = async (user: UserWithProfile): Promise<CurrentUser> => {
+  let usersInMeetings: UsersWithMeetings[] = []
+
+  if (user.meetingId && !user.meeting?.public) {
+    usersInMeetings = await prisma.usersInMeetings.findMany({
+      where: { meetingId: user.meetingId },
+      include: { user: true },
+    })
+  }
+
+  return new CurrentUser(user, usersInMeetings)
 }
