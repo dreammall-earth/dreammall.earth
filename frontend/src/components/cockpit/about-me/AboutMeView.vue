@@ -138,8 +138,8 @@ const updateIntroduction = (event: Event) => {
 <style scoped>
 .header {
   display: grid;
-  grid-template-columns: 75px 1fr;
   grid-template-rows: 1 fr 1fr 1fr;
+  grid-template-columns: 75px 1fr;
   gap: 10px;
 }
 
@@ -149,21 +149,21 @@ const updateIntroduction = (event: Event) => {
 }
 
 .availability {
-  grid-column: 2;
   grid-row: 1;
+  grid-column: 2;
 
   &:deep(.v-input__control) {
-    color: white;
-    height: 30px;
     display: flex;
-    justify-content: center;
-    align-items: center;
     gap: 6px;
-    border-radius: 9999px;
-    border: 1px solid rgba(214, 223, 233, 0.4);
-    background: #5d6670;
-    padding-left: 8px;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
     padding-top: 2px;
+    padding-left: 8px;
+    color: white;
+    background: #5d6670;
+    border: 1px solid rgb(214 223 233 / 40%);
+    border-radius: 9999px;
   }
 
   &:deep(.v-field__outline) {
@@ -192,23 +192,23 @@ const updateIntroduction = (event: Event) => {
 }
 
 .name {
-  grid-column: 2;
   grid-row: 2;
+  grid-column: 2;
   text-align: left;
 }
 
 .introduction {
-  grid-column: 2;
   grid-row: 3;
+  grid-column: 2;
   font-size: 12px;
   text-align: left;
 }
 
 .social {
-  padding: 0;
-  list-style: none;
   display: flex;
   min-height: 30px;
+  padding: 0;
+  list-style: none;
 }
 
 hr {

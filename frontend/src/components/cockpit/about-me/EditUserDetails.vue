@@ -90,6 +90,7 @@ const removeDetail = (id: number) => {
 .back {
   width: 40px;
 }
+
 .header {
   display: flex;
   gap: 20px;
@@ -97,9 +98,9 @@ const removeDetail = (id: number) => {
 
 .add-detail {
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 8px;
+  align-items: center;
+  justify-content: center;
 
   &:deep(.v-input__details) {
     display: none;

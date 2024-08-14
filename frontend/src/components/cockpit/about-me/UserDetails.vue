@@ -46,18 +46,15 @@ const details: Ref<UserDetail[]> = computed(() =>
 
 <style scoped>
 .details {
-  padding: 0;
-  list-style: none;
-}
-
-.details {
   display: flex;
   flex-flow: row wrap;
   gap: 10px;
   width: 300px;
-  padding: 10px;
-  border-radius: 15px;
-  background: #f3f3f3;
   min-height: 60px;
+  padding: 0;
+  padding: 10px;
+  list-style: none;
+  background: #f3f3f3;
+  border-radius: 15px;
 }
 </style>

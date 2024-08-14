@@ -1,10 +1,10 @@
 {
   "$vuetify": {
     "close": "Close",
-    "open": "Open",
     "input": {
       "clear": "Clear"
-    }
+    },
+    "open": "Open"
   },
   "auth": {
     "content": "Logging in...",
@@ -25,15 +25,15 @@
   "cockpit": {
     "about-me": {
       "edit": {
-        "title": "About me",
-        "add": "Add"
+        "add": "Add",
+        "title": "About me"
       },
-      "introduction-placeholder": "My introduction line",
-      "work-placeholder": "My work",
-      "place-placeholder": "My location",
       "education-placeholder": "My education",
       "feeling-placeholder": "How I feel today",
+      "introduction-placeholder": "My introduction line",
       "language-placeholder": "Languages I speak",
+      "place-placeholder": "My location",
+      "work-placeholder": "My work"
     }
   },
   "error": {
