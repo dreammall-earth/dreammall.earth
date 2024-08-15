@@ -1,4 +1,3 @@
-import { Meeting } from '@prisma/client'
 import {
   Resolver,
   Mutation,
@@ -168,43 +167,17 @@ export class TableResolver {
     const { user } = context
     if (!user) throw new Error('User not found!')
 
-    let dbMeeting: Meeting | null = null
-
-    try {
-      if (user.meetingId) {
-        dbMeeting = await prisma.meeting.findUnique({
-          where: {
-            id: user.meetingId,
-          },
-        })
-        if (!dbMeeting) throw new Error('Meeting not found!')
-      } else {
-        let meetingID: string = uuidv4()
-        while (
-          await prisma.meeting.count({
-            where: {
-              meetingID,
-            },
-          })
-        ) {
-          meetingID = uuidv4()
-        }
-
-        dbMeeting = await prisma.meeting.create({
-          data: {
-            name: user.username,
-            meetingID,
-          },
-        })
-        await prisma.user.update({
-          where: { id: user.id },
-          data: { meetingId: dbMeeting.id },
-        })
-      }
-    } catch (err) {
-      logger.error('Could not create Meeting in DB!', err)
-      throw new Error('Could not create Meeting in DB!')
+    if (!user.meetingId) {
+      throw new Error('No meeting for user!')
     }
+
+    const dbMeeting = await prisma.meeting.findUnique({
+      where: {
+        id: user.meetingId,
+      },
+    })
+
+    if (!dbMeeting) throw new Error('Meeting not found!')
 
     const inviteLink = CONFIG.FRONTEND_INVITE_LINK_URL + dbMeeting.id
 
