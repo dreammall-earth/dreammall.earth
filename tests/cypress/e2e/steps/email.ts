@@ -51,5 +51,5 @@ When('I open the account confirmation link in the browser', () => {
   cy.task('getEmailLink').then((emailLink) => {
     cy.visit(emailLink)
   })
-  cy.waitForNetworkIdle(5000)
+  cy.waitForNetworkIdle(40000)
 })

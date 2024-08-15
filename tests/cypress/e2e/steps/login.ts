@@ -25,6 +25,9 @@ Then('I am on page {string}', (page: string) => {
     case 'authentik welcome':
       authentikPage.userNameIsVisible('akadmin')
       break
+    case 'signin':
+      loginPage.usernameFieldIsVisible()
+      break
     case 'presenter':
       presenterPage.signinButtonIsVisible()
       break
