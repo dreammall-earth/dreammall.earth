@@ -36,7 +36,7 @@ export default defineConfig({
     experimentalOriginDependencies: true,
     baseUrl: 'http://localhost:3000/',
     specPattern: 'cypress/e2e/features/*.feature',
-    supportFile: false,
+    supportFile: 'cypress/support/e2e.ts',
     retries: 0,
     video: false,
     viewportHeight: 1080,
