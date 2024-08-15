@@ -6,7 +6,7 @@ jobs:
   build-and-push-images:
     strategy:
       matrix:
-        folder: [authentik, admin, backend, frontend, presenter]
+        folder: [authentik, backend, frontend, presenter]
     runs-on: ubuntu-latest
     env:
       REGISTRY: ghcr.io

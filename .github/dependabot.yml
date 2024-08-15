@@ -16,7 +16,6 @@ updates:
   open-pull-requests-limit: 99
   directories:
     - "/"
-    - "/admin"
     - "/backend"
     - "/frontend"
     - "/presenter"
@@ -105,7 +104,6 @@ updates:
   directories:
     - "/"
     - "/authentik"
-    - "/admin"
     - "/backend"
     - "/frontend"
     - "/presenter"

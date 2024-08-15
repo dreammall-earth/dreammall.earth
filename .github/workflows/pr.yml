@@ -29,7 +29,6 @@ jobs:
           # Configure which scopes are allowed (newline delimited).
           # Append a scope for each service here
           scopes: |
-            admin
             authentik
             backend
             deps
