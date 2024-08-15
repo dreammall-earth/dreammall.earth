@@ -1,16 +1,24 @@
+import { provideApolloClient } from '@vue/apollo-composable'
 import { mount } from '@vue/test-utils'
 import { gql } from 'graphql-tag'
-import { createMockSubscription, IMockSubscription } from 'mock-apollo-client'
-import { describe, it, expect, beforeEach } from 'vitest'
+import { createMockClient, createMockSubscription, IMockSubscription } from 'mock-apollo-client'
+import { vi, describe, it, expect, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { mockClient } from '#tests/mock.apolloClient'
+import { currentUserQuery } from '#queries/currentUserQuery'
+import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
+import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 import IndexPage from './+Page.vue'
 import { title } from './+title'
 
+const openTablesQueryMock = vi.fn()
 const mockSubscription: IMockSubscription = createMockSubscription()
+const currentUserQueryMock = vi.fn()
+const updateOpenTablesSubscriptionMock: IMockSubscription = createMockSubscription()
+
+const mockClient = createMockClient()
 
 mockClient.setRequestHandler(
   gql`
@@ -20,6 +28,27 @@ mockClient.setRequestHandler(
   `,
   () => mockSubscription,
 )
+
+mockClient.setRequestHandler(
+  openTablesQuery,
+  openTablesQueryMock.mockResolvedValue({ data: { openTables: [] } }),
+)
+mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateOpenTablesSubscriptionMock)
+mockClient.setRequestHandler(
+  currentUserQuery,
+  currentUserQueryMock.mockResolvedValue({
+    data: {
+      currentUser: {
+        id: 666,
+        name: 'Current User',
+        username: 'currentUser',
+        table: null,
+      },
+    },
+  }),
+)
+
+provideApolloClient(mockClient)
 
 describe('IndexPage', () => {
   const Wrapper = () => {
