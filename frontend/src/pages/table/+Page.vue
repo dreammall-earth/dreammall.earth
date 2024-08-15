@@ -1,13 +1,14 @@
 <template>
   <DefaultLayout>
     <div class="container">
-      <EmbeddedTable :url="tableUrl" />
+      <EmbeddedTable :url="tableUrl" @table-closed="onTableClosed" />
     </div>
   </DefaultLayout>
 </template>
 
 <script setup lang="ts">
 import { useQuery } from '@vue/apollo-composable'
+import { navigate } from 'vike/client/router'
 import { ref, watch } from 'vue'
 
 import EmbeddedTable from '#components/embedded-table/EmbeddedTable.vue'
@@ -41,6 +42,8 @@ watch(joinTableQueryResult, (data: { joinTable: string }) => {
 watch(joinTableQueryError, (error) => {
   GlobalErrorHandler.error('Error opening table', error)
 })
+
+const onTableClosed = () => navigate('/')
 </script>
 
 <style scoped lang="scss">

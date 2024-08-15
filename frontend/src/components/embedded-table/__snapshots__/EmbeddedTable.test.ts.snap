@@ -3,6 +3,8 @@
 exports[`EmbeddedTable > renders 1`] = `
 <iframe
   allow="camera;microphone;fullscreen;display-capture *;"
+  class="table-iframe"
+  data-v-51765335=""
   height="100%"
   src="https://dreammall.earth"
   width="100%"
