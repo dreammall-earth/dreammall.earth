@@ -23,6 +23,7 @@ const props = defineProps<{
   --padding: 20px;
   --cockpit-card-height: 323px;
 
+  height: var(--cockpit-card-height);
   max-height: var(--cockpit-card-height);
   padding: var(--padding);
   background-color: var(--v-sidebar-background);

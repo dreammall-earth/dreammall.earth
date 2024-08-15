@@ -38,16 +38,31 @@ defineEmits<{
   (e: 'remove-detail', id: number): void
 }>()
 
-const details: Ref<UserDetail[]> = computed(() =>
-  detailCategories.map((category) => {
+const details: Ref<UserDetail[]> = computed(() => {
+  const newDetails = [] as UserDetail[]
+  for (const category of detailCategories) {
     const detail = props.details.find((detail) => detail.category === category)
-    if (detail) return detail
-    return { id: -1, category, text: t(`cockpit.about-me.${category}-placeholder`) }
-  }),
-)
+    if (!detail) {
+      newDetails.push({
+        id: -1,
+        category,
+        text: t(`cockpit.about-me.${category}-placeholder`),
+      })
+    }
+  }
+  return [...props.details, ...newDetails]
+})
 </script>
 
 <style scoped>
+.detail {
+  background: var(--v-cockpit-chip-background);
+
+  &:deep(.v-chip__underlay) {
+    display: none;
+  }
+}
+
 .details {
   display: flex;
   flex-flow: row wrap;
@@ -55,7 +70,6 @@ const details: Ref<UserDetail[]> = computed(() =>
   width: 300px;
   min-height: 60px;
   max-height: 110px;
-  padding: 0;
   padding: 10px;
   overflow-y: auto;
   list-style: none;
@@ -63,15 +77,13 @@ const details: Ref<UserDetail[]> = computed(() =>
   border-radius: 15px;
 
   &.editable {
-    max-height: 150px;
-  }
-}
+    max-height: 178px;
+    padding: 0;
+    background: unset;
 
-.detail {
-  background: var(--v-cockpit-chip-background);
-
-  &:deep(.v-chip__underlay) {
-    display: none;
+    .detail {
+      background: var(--v-cockpit-chip-background-2);
+    }
   }
 }
 </style>

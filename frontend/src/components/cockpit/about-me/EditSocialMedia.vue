@@ -152,8 +152,8 @@ const addSocial = () => {
   display: flex;
   flex-flow: column;
   gap: 10px;
-  list-style: none;
   max-height: 200px;
   overflow-y: auto;
+  list-style: none;
 }
 </style>

@@ -200,10 +200,10 @@ const updateIntroduction = (event: Event) => {
 .name {
   grid-row: 2;
   grid-column: 2;
-  text-align: left;
-  text-wrap: nowrap;
-  text-overflow: ellipsis;
   overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
 }
 
 .introduction {

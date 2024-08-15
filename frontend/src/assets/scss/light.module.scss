@@ -18,6 +18,7 @@ $dropdown-background-color: #fff;
 $cockpit-input-background: rgb(243 243 243);
 $cockpit-element-background: rgb(243 243 243);
 $cockpit-chip-background: rgb(225 230 237);
+$cockpit-chip-background-2: white;
 
 :export {
     backgroundColor: $background-color;
@@ -40,5 +41,6 @@ $cockpit-chip-background: rgb(225 230 237);
     cockpitInputBackground: $cockpit-input-background;
     cockpitElementBackground: $cockpit-element-background;
     cockpitChipBackground: $cockpit-chip-background;
+    cockpitChipBackground2: $cockpit-chip-background-2;
 }
 
