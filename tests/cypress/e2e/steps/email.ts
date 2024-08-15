@@ -11,7 +11,8 @@ Then('an email transmission confirmation is displayed', () => {
 })
 
 Then('I receive an email containing the account confirmation link', () => {
-  cy.origin(`${Cypress.env('mailpitURL')}`, { args: {userEmailSite} }, ({ userEmailSite }) => {    
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  cy.origin(`${Cypress.env('mailpitURL')}`, { args: { userEmailSite } }, ({ userEmailSite }) => {
     Cypress.on('uncaught:exception', () => {
       return false
     })
@@ -37,10 +38,11 @@ Then('I receive an email containing the account confirmation link', () => {
       .then(cy.wrap)
 
     cy.wait(4000)
-    emailIframe.find('#confirm')
-    .should('have.attr', 'href')
-    .then((href) => {
-      cy.task('setEmailLink', href)
-    })
+    emailIframe
+      .find('#confirm')
+      .should('have.attr', 'href')
+      .then((href) => {
+        cy.task('setEmailLink', href)
+      })
   })
 })
