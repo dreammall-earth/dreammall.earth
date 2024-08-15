@@ -12,7 +12,7 @@ Feature: User registration
       | password | Aa12345_          |
     Then an email transmission confirmation is displayed
     And I receive an email containing the account confirmation link
-    # When I open the account confirmation link in the browser
+    When I open the account confirmation link in the browser
     # Then I am on page 'signin'
     # When I submit the credentials 'akadmin' 'dreammall'
     # Then I am on page 'worldcafe'

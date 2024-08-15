@@ -1,7 +1,7 @@
  /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 // eslint-disable-next-line import/no-unassigned-import
 import 'cypress-network-idle'
-import { Then } from '@badeball/cypress-cucumber-preprocessor'
+import { Then, When } from '@badeball/cypress-cucumber-preprocessor'
 
 import { userEmailSite } from '../pages/UserEmailSite'
 
@@ -45,4 +45,11 @@ Then('I receive an email containing the account confirmation link', () => {
         cy.task('setEmailLink', href)
       })
   })
+})
+
+When('I open the account confirmation link in the browser', () => {
+  cy.task('getEmailLink').then((emailLink) => {
+    cy.visit(emailLink)
+  })
+  cy.waitForNetworkIdle(5000)
 })
