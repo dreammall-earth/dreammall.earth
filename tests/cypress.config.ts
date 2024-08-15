@@ -33,6 +33,7 @@ async function setupNodeEvents(
 export default defineConfig({
   e2e: {
     chromeWebSecurity: false,
+    experimentalOriginDependencies: true,
     baseUrl: 'http://localhost:3000/',
     specPattern: 'cypress/e2e/features/*.feature',
     supportFile: false,
@@ -43,6 +44,7 @@ export default defineConfig({
     env: {
       authentikURL: 'http://localhost:9000/',
       backendURL: 'http://localhost:4000/',
+      mailpitURL: 'http://localhost:8025/',
     },
     setupNodeEvents,
   },
