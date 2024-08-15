@@ -2,7 +2,9 @@
   <CockpitCard narrow>
     <template #header>
       <div class="header">
-        <button class="back" @click="$emit('back')"><v-icon icon="$back"></v-icon></button>
+        <button class="back" @click="$emit('back')">
+          <v-icon icon="mdi mdi-chevron-left" color="icon" />
+        </button>
         <h2>{{ $t('cockpit.about-me.edit.title') }}</h2>
       </div>
     </template>

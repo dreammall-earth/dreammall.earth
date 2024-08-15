@@ -19,10 +19,14 @@ const props = defineProps<{
 </script>
 
 <style scoped lang="scss">
+@import 'vuetify/lib/styles/settings/_variables';
+
 .cockpit-card {
   --padding: 20px;
   --cockpit-card-height: 323px;
+  --card-width: 100%;
 
+  max-width: var(--card-width, 100%);
   height: var(--cockpit-card-height);
   max-height: var(--cockpit-card-height);
   padding: var(--padding);
@@ -42,7 +46,9 @@ const props = defineProps<{
   border-width: 0.5px;
 }
 
-.narrow {
-  max-width: 335px;
+@media #{map-get($display-breakpoints, 'md-and-up')} {
+  .narrow {
+    --card-width: 335px;
+  }
 }
 </style>

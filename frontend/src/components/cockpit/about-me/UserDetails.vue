@@ -67,7 +67,7 @@ const details: Ref<UserDetail[]> = computed(() => {
   display: flex;
   flex-flow: row wrap;
   gap: 10px;
-  width: 300px;
+  width: 100%;
   min-height: 60px;
   max-height: 110px;
   padding: 10px;

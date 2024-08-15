@@ -2,8 +2,10 @@
   <CockpitCard narrow>
     <template #header>
       <div class="header">
-        <button class="back" @click="$emit('back')"><v-icon icon="$back"></v-icon></button>
-        <h2>{{ $t('cockpit.about-me.edit.title') }}</h2>
+        <button class="back" @click="$emit('back')">
+          <v-icon icon="mdi mdi-chevron-left" color="icon" />
+        </button>
+        <h2>{{ $t('cockpit.about-me.edit.social-media') }}</h2>
       </div>
     </template>
     <template #default>
@@ -152,7 +154,7 @@ const addSocial = () => {
   display: flex;
   flex-flow: column;
   gap: 10px;
-  max-height: 200px;
+  max-height: 170px;
   overflow-y: auto;
   list-style: none;
 }

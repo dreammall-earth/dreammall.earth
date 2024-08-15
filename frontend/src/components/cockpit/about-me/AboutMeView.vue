@@ -214,10 +214,12 @@ const updateIntroduction = (event: Event) => {
 }
 
 .social {
+  --width: 100%;
+
   display: flex;
   align-items: center;
-  width: 300px;
-  max-width: 300px;
+  width: 100%;
+  max-width: 100%;
   min-height: 60px;
   padding: 10px;
   margin-top: 10px;

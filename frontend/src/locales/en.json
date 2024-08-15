@@ -26,7 +26,8 @@
     "about-me": {
       "edit": {
         "add": "Add",
-        "title": "About me"
+        "title": "About me",
+        "social-media": "Social Media"
       },
       "education-placeholder": "My education",
       "empty-social-media": "Add Social Media",
