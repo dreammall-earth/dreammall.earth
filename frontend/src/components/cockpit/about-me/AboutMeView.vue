@@ -147,8 +147,7 @@ const updateIntroduction = (event: Event) => {
   display: grid;
   grid-template-rows: 1 fr 1fr 1fr;
   grid-template-columns: 75px 1fr;
-  column-gap: 16px;
-  row-gap: 10px;
+  gap: 10px 16px;
 }
 
 .avatar {
@@ -169,8 +168,8 @@ const updateIntroduction = (event: Event) => {
     padding-top: 2px;
     padding-left: 8px;
     color: white;
-    background: var(--v-cockpit-input-background);
     color: var(--v-cockpit-input-color);
+    background: var(--v-cockpit-input-background);
     border: 1px solid rgb(214 223 233 / 40%);
     border-radius: 9999px;
   }
@@ -218,22 +217,22 @@ const updateIntroduction = (event: Event) => {
 }
 
 .social {
-  margin-top: 10px;
   display: flex;
   align-items: center;
-  min-height: 60px;
   max-width: 300px;
-  overflow: scroll;
+  min-height: 60px;
   padding: 10px;
-  border-radius: 10px;
+  margin-top: 10px;
+  overflow: scroll;
   background: var(--v-cockpit-element-background);
+  border-radius: 10px;
 }
 
 .social-list {
-  list-style: none;
   display: flex;
-  align-items: center;
   gap: 5px;
+  align-items: center;
+  list-style: none;
 }
 
 hr {

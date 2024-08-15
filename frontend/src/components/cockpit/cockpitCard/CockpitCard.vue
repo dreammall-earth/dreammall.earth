@@ -22,10 +22,11 @@ const props = defineProps<{
 .cockpit-card {
   --padding: 20px;
   --cockpit-card-height: 323px;
+
+  max-height: var(--cockpit-card-height);
   padding: var(--padding);
   background-color: var(--v-sidebar-background);
   border-radius: 20px;
-  max-height: var(--cockpit-card-height);
 }
 
 .header:deep(h2) {

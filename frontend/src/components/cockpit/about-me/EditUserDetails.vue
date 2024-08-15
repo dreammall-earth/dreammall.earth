@@ -96,6 +96,7 @@ const removeDetail = (id: number) => {
 
 .add-detail {
   --height: 40px;
+
   display: flex;
   gap: 8px;
   align-items: center;
@@ -121,9 +122,10 @@ const removeDetail = (id: number) => {
 }
 
 .submit {
-  height: var(--height);
   width: var(--height);
+  height: var(--height);
   background: var(--v-cockpit-input-background);
+
   &:enabled {
     background: #23ad5b;
   }

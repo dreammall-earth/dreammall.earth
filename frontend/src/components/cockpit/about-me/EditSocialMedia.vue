@@ -102,6 +102,7 @@ const addSocial = () => {
 
 .add-social {
   --height: 40px;
+
   display: flex;
   gap: 8px;
   align-items: center;
@@ -127,16 +128,13 @@ const addSocial = () => {
 }
 
 .submit {
-  height: var(--height);
   width: var(--height);
+  height: var(--height);
   background: var(--v-cockpit-input-background);
+
   &:enabled {
     background: #23ad5b;
   }
-}
-
-.social-media-list {
-  list-style: none;
 }
 
 .social {
@@ -144,9 +142,9 @@ const addSocial = () => {
   height: 40px;
 
   &:deep(.v-chip__content) {
-    width: 100%;
     display: flex;
     justify-content: space-between;
+    width: 100%;
   }
 }
 
@@ -154,5 +152,6 @@ const addSocial = () => {
   display: flex;
   flex-flow: column;
   gap: 10px;
+  list-style: none;
 }
 </style>

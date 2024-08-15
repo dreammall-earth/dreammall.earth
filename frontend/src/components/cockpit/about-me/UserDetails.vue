@@ -50,13 +50,14 @@ const details: Ref<UserDetail[]> = computed(() =>
   gap: 10px;
   width: 300px;
   min-height: 60px;
+  max-height: 110px;
   padding: 0;
   padding: 10px;
+  overflow-y: auto;
   list-style: none;
   background: var(--v-cockpit-element-background);
   border-radius: 15px;
-  max-height: 110px;
-  overflow-y: auto;
+
   &.editable {
     max-height: 150px;
   }
