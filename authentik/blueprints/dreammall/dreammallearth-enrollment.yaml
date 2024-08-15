@@ -12,6 +12,7 @@ entries:
   id: dreammall-user-group
 - attrs:
     authentication: none
+    compatibility_mode: true
     denied_action: message_continue
     designation: enrollment
     layout: sidebar_right
@@ -19,8 +20,9 @@ entries:
     policy_engine_mode: any
     title: Sign Up
   conditions: []
-  id: dreammallearth-enrollment
+  id: null
   identifiers:
+    pk: 20bd41d0-73cd-44a7-908f-691bc8d0363c
     slug: dreammallearth-enrollment
   model: authentik_flows.flow
   state: present
@@ -33,9 +35,9 @@ entries:
     required: true
     type: password
   conditions: []
-  id: dreammall-password-change-field-password-repeat
+  id: null
   identifiers:
-    name: dreammall-password-change-field-password-repeat
+    pk: 174e369e-e07b-480d-bea1-05c3148db2cd
   model: authentik_stages_prompt.prompt
   state: present
 - attrs:
@@ -49,9 +51,9 @@ entries:
     required: true
     type: text
   conditions: []
-  id: dreammall-user-settings-field-username
+  id: null
   identifiers:
-    name: dreammall-user-settings-field-username
+    pk: bde82da3-035d-41fd-8616-d7798edc652a
   model: authentik_stages_prompt.prompt
   state: present
 - attrs:
@@ -65,9 +67,9 @@ entries:
     required: true
     type: text
   conditions: []
-  id: dreammall-user-settings-field-name
+  id: null
   identifiers:
-    name: dreammall-user-settings-field-name
+    pk: d5b0116c-3a02-4f88-84a8-c5904feaed0d
   model: authentik_stages_prompt.prompt
   state: present
 - attrs:
@@ -81,9 +83,9 @@ entries:
     required: true
     type: email
   conditions: []
-  id: dreammall-user-settings-field-email
+  id: null
   identifiers:
-    name: dreammall-user-settings-field-email
+    pk: fa0a8692-9a39-4856-91ad-68b5e1c783d5
   model: authentik_stages_prompt.prompt
   state: present
 - attrs:
@@ -95,52 +97,60 @@ entries:
     required: true
     type: password
   conditions: []
-  id: dreammall-password-change-field-password
+  id: null
   identifiers:
-    name: dreammall-password-change-field-password
+    pk: 917cfcfc-48f4-4ec8-aa0b-22f8daeedfbf
   model: authentik_stages_prompt.prompt
   state: present
 - attrs:
     expression: !Format ["context['flow_plan'].context['redirect'] = '%s/signin'\nreturn True", !Context redirect_url]
-    name: dreammall.earth-redirect-localhost-frontend-signin
+    name: dreammall.earth-redirect-frontend-signin
   conditions: []
-  id: dreammall.earth-redirect-localhost-frontend-signin
   identifiers:
-    name: dreammall.earth-redirect-localhost-frontend-signin
+    name: dreammall.earth-redirect-frontend-signin
+  id: dreammall.earth-redirect-frontend-signin
   model: authentik_policies_expression.expressionpolicy
   state: present
 - attrs:
     fields:
-    - !KeyOf dreammall-password-change-field-password-repeat
-    - !KeyOf dreammall-user-settings-field-username
-    - !KeyOf dreammall-user-settings-field-name
-    - !KeyOf dreammall-user-settings-field-email
-    - !KeyOf dreammall-password-change-field-password
+    - 174e369e-e07b-480d-bea1-05c3148db2cd
+    - bde82da3-035d-41fd-8616-d7798edc652a
+    - d5b0116c-3a02-4f88-84a8-c5904feaed0d
+    - fa0a8692-9a39-4856-91ad-68b5e1c783d5
+    - 917cfcfc-48f4-4ec8-aa0b-22f8daeedfbf
   conditions: []
-  id: default-source-enrollment-prompt
+  id: null
   identifiers:
     name: default-source-enrollment-prompt
+    pk: 990b5d40-4236-444b-9e5b-30c016612f26
   model: authentik_stages_prompt.promptstage
   state: present
 - attrs:
-    geoip_binding: no_binding
-    network_binding: no_binding
-    remember_me_offset: seconds=0
-    session_duration: seconds=0
+    activate_user_on_success: true
+    from_address: system@authentik.local
+    host: localhost
+    port: 25
+    subject: Account Confirmation
+    template: email/account_confirmation.html
+    timeout: 10
+    token_expiry: 30
+    use_global_settings: true
   conditions: []
-  id: default-source-enrollment-login
+  id: null
   identifiers:
-    name: default-source-enrollment-login
-  model: authentik_stages_user_login.userloginstage
+    name: dreammallearth-account-confirmation
+    pk: b04d7644-1f3a-4e44-b27b-f78767aa3e1a
+  model: authentik_stages_email.emailstage
   state: present
 - attrs:
     create_users_group: !KeyOf dreammall-user-group
     user_creation_mode: always_create
     user_type: external
   conditions: []
-  id: default-source-enrollment-write
+  id: null
   identifiers:
     name: default-source-enrollment-write
+    pk: eeff0c69-6f97-4ab6-98fd-90a23ad4f493
   model: authentik_stages_user_write.userwritestage
   state: present
 - attrs:
@@ -151,8 +161,9 @@ entries:
   id: null
   identifiers:
     order: 10
-    stage: !KeyOf default-source-enrollment-prompt
-    target: !KeyOf dreammallearth-enrollment
+    pk: a178d267-87f8-4860-9507-de7fe94ddc8f
+    stage: 990b5d40-4236-444b-9e5b-30c016612f26
+    target: 20bd41d0-73cd-44a7-908f-691bc8d0363c
   model: authentik_flows.flowstagebinding
   state: present
 - attrs:
@@ -163,8 +174,9 @@ entries:
   id: null
   identifiers:
     order: 20
-    stage: !KeyOf default-source-enrollment-write
-    target: !KeyOf dreammallearth-enrollment
+    pk: 0425fe5e-7b3b-41b4-bb51-1864787975a3
+    stage: eeff0c69-6f97-4ab6-98fd-90a23ad4f493
+    target: 20bd41d0-73cd-44a7-908f-691bc8d0363c
   model: authentik_flows.flowstagebinding
   state: present
 - attrs:
@@ -172,20 +184,23 @@ entries:
     policy_engine_mode: any
     re_evaluate_policies: true
   conditions: []
-  id: 7af17c16-8209-44cd-84ba-122d8e37feb3
+  id: null
   identifiers:
-    order: 100
-    stage: !KeyOf default-source-enrollment-login
-    target: !KeyOf dreammallearth-enrollment
+    order: 30
+    pk: 71560401-adab-4888-bbef-7cc8597971e1
+    stage: b04d7644-1f3a-4e44-b27b-f78767aa3e1a
+    target: 20bd41d0-73cd-44a7-908f-691bc8d0363c
   model: authentik_flows.flowstagebinding
   state: present
 - attrs:
     enabled: true
     timeout: 30
   conditions: []
+  id: null
   identifiers:
-    order: 0
-    policy: !KeyOf dreammall.earth-redirect-localhost-frontend-signin
-    target: !KeyOf 7af17c16-8209-44cd-84ba-122d8e37feb3
+    order: 100
+    pk: 7ce6d02a-4c19-4895-bc43-899e15379a2b
+    policy: !KeyOf dreammall.earth-redirect-frontend-signin
+    target: 71560401-adab-4888-bbef-7cc8597971e1
   model: authentik_policies.policybinding
   state: present
