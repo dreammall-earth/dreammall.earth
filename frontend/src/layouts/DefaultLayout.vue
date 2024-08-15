@@ -35,6 +35,7 @@
 
     <!-- Page Content Container -->
     <v-container fluid class="page-container px-8">
+      <ClusterGalaxyVisualizer />
       <slot></slot>
     </v-container>
 
@@ -114,6 +115,7 @@ import UserInfo from '#components/menu/UserInfo.vue'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
 import { JoinMyTableMutationResult, joinMyTableMutation } from '#mutations/joinMyTableMutation'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
+import ClusterGalaxyVisualizer from '#components/ClusterGalaxy/ClusterGalaxyVisualizer.vue';
 
 const isTablesDrawerVisible = defineModel<boolean>()
 
