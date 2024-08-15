@@ -99,6 +99,7 @@ export const useUserStore = defineStore(
         return name
           .split(' ')
           .map((n) => n.charAt(0))
+          .slice(0, 2)
           .join('')
       return ''
     })
