@@ -58,12 +58,14 @@ export default defineComponent({
     const spaceWidth = ref(0);
     const spaceHeight = ref(0);
 
+    // Computed Property, das die Cluster anhand der Suchanfrage filtert
     const filteredClusters = computed(() => {
       return clusters.value.filter((cluster) =>
         cluster.name.toLowerCase().includes(searchQuery.value.toLowerCase())
       );
     });
-
+    
+    // Funktion, um das Canvas zu initialisieren und Event-Listener hinzuzufügen
     const initCanvas = () => {
       if (canvas.value) {
         ctx.value = canvas.value.getContext('2d');
@@ -74,6 +76,7 @@ export default defineComponent({
       }
     };
 
+    // Funktion, um das Canvas und den Raum für die Cluster-Größe anzupassen
     const resizeCanvas = () => {
       if (canvas.value) {
         const container = canvas.value.parentElement;
@@ -87,10 +90,14 @@ export default defineComponent({
       }
     };
 
+/**
+     * Funktion zur Generierung der Cluster.
+     * Die Cluster werden in einem Rastermuster angeordnet, wobei jeder Cluster eine Anzahl von Punkten enthält.
+     */
     const generateClusters = () => {
-      const clusterCount = 1;
+      const clusterCount = 100;
       const baseSizeScale = 30;
-      const clusterSpacing = 300;
+      const clusterSpacing = 500;
       const clusterNames = generateClusterNames(clusterCount);
 
       clusters.value = [];
@@ -122,6 +129,9 @@ export default defineComponent({
       }
     };
 
+    /**
+     * Generiert Namen für die Cluster basierend auf ihrer Anzahl.
+     */
     const generateClusterNames = (count: number) => {
       const names = [];
       for (let i = 1; i <= count; i++) {
@@ -130,6 +140,10 @@ export default defineComponent({
       return names;
     };
 
+    /**
+     * Zeichnet die Cluster und ihre Punkte auf das Canvas.
+     * Die Cluster werden entsprechend der aktuellen Skalierung und des Offsets gerendert.
+     */
     const drawClusters = () => {
       if (!ctx.value || !canvas.value) {
         console.log("Canvas oder Context nicht initialisiert");
@@ -171,6 +185,10 @@ export default defineComponent({
       console.log("Zeichnen abgeschlossen");
     };
 
+    /**
+     * Funktion, um die Zoom-Aktion auf dem Canvas zu handhaben.
+     * Die Skalierung des Canvas wird basierend auf dem Mausrad-Event angepasst.
+     */
     const onZoom = (event: WheelEvent) => {
       event.preventDefault();
       event.stopPropagation();
@@ -182,20 +200,33 @@ export default defineComponent({
       drawClusters();
     };
 
+    /**
+     * Handhabt das Panning (Verschieben) des Canvas, wenn die Maus gezogen wird.
+     */
     const onPan = (event: MouseEvent) => {
       offsetX.value += event.movementX;
       offsetY.value += event.movementY;
       drawClusters();
     };
 
+    /**
+     * Hinzufügen des Pan-Events beim Drücken der Maustaste.
+     */
     const onMouseDown = (event: MouseEvent) => {
       canvas.value?.addEventListener('mousemove', onPan);
     };
 
+    /**
+     * Entfernen des Pan-Events, wenn die Maustaste losgelassen wird.
+     */
     const onMouseUp = (event: MouseEvent) => {
       canvas.value?.removeEventListener('mousemove', onPan);
     };
 
+    /**
+     * Handhabt den Klick auf einen Punkt oder Cluster auf dem Canvas.
+     * Bestimmt, welcher Punkt oder Cluster angeklickt wurde und zeigt entsprechende Details an.
+     */
     const onClick = (event: MouseEvent) => {
       const rect = canvas.value?.getBoundingClientRect();
       if (!rect) return;
@@ -234,6 +265,10 @@ export default defineComponent({
       }
     };
 
+    /**
+     * Überprüft, ob der Mauszeiger innerhalb eines Clusters ist.
+     * Nützlich, um festzustellen, ob ein Cluster angeklickt wurde.
+     */
     const isInsideCluster = (x: number, y: number, cluster: any) => {
       for (const point of cluster.points) {
         const distance = Math.sqrt(Math.pow(point.x - x, 2) + Math.pow(point.y - y, 2));
@@ -244,6 +279,10 @@ export default defineComponent({
       return false;
     };
 
+    /**
+     * Zeigt die Details eines angeklickten Punktes an.
+     * Diese Details umfassen den Cluster-Namen und die Punktkoordinaten.
+     */
     const showPointDetails = (point: any, cluster: any) => {
       selectedInfo.value = [
         { text: `Cluster: ${cluster.name}` },
@@ -251,6 +290,10 @@ export default defineComponent({
       ];
     };
 
+    /**
+     * Zeigt die Details eines angeklickten Clusters an.
+     * Diese Details umfassen den Cluster-Namen und die Koordinaten aller aktiven Punkte im Cluster.
+     */
     const showClusterDetails = (cluster: any) => {
       selectedInfo.value = [{ text: `Cluster: ${cluster.name}` }];
       cluster.points.forEach((point: any, index: number) => {
@@ -262,8 +305,16 @@ export default defineComponent({
       });
     };
 
+    /**
+     * Placeholder-Funktion für das Such-Input-Feld.
+     * Aktuell wird die Filterung über das `filteredClusters` Computed Property gesteuert.
+     */
     const onSearchInput = () => {};
 
+    /**
+     * Zoomt auf den spezifischen Cluster, wenn dieser ausgewählt wird.
+     * Die Ansicht wird so zentriert, dass der ausgewählte Cluster im Fokus steht.
+     */
     const zoomToCluster = (cluster: any) => {
       scale.value = 2;
       offsetX.value = canvas.value!.width / 2 - cluster.centerX * scale.value;
@@ -272,6 +323,7 @@ export default defineComponent({
       searchQuery.value = '';
     };
 
+    // Mount Lifecycle-Hook: Initialisiert das Canvas, generiert Cluster und fügt Event-Listener hinzu
     onMounted(() => {
       initCanvas();
       resizeCanvas();
