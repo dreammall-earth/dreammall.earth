@@ -1111,7 +1111,7 @@ describe('TableResolver', () => {
         })
       })
 
-      describe('no attendees', () => {
+      describe('meeting is not in database', () => {
         beforeEach(() => {
           getMeetingsMock.mockResolvedValue([
             {
@@ -1163,17 +1163,7 @@ describe('TableResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  openTables: [
-                    {
-                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                      id: expect.any(Number),
-                      meetingName: 'Dreammall Entwicklung',
-                      meetingID: 'Dreammall-Entwicklung',
-                      participantCount: 0,
-                      startTime: '1718189',
-                      attendees: [],
-                    },
-                  ],
+                  openTables: [],
                 },
                 errors: undefined,
               },
@@ -1335,7 +1325,7 @@ describe('TableResolver', () => {
           ])
         })
 
-        it('returns empty array', async () => {
+        it('returns table with all attendees', async () => {
           await expect(
             testServer.executeOperation(
               {
