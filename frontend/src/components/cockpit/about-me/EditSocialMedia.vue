@@ -122,14 +122,14 @@ const addSocial = () => {
 
 .add-social-text {
   &:deep(.v-field) {
-    background: rgba(93, 102, 112, 0.55);
+    background: var(--v-cockpit-element-background);
   }
 }
 
 .submit {
   height: var(--height);
   width: var(--height);
-  background: #f3f3f3;
+  background: var(--v-cockpit-input-background);
   &:enabled {
     background: #23ad5b;
   }

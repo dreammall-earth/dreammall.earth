@@ -1,7 +1,7 @@
 <template>
   <CockpitCard narrow>
     <template #default>
-      <div class="header">
+      <div class="header mb-2">
         <v-avatar class="avatar d-flex align-center text-font bg-primary" size="75">
           <v-img v-if="props.userImage" :src="props.userImage" />
           <span v-else>{{ props.initials }}</span>
@@ -17,7 +17,7 @@
           <template #selection="{ item }"> {{ item.props.circle }} {{ item.title }} </template>
           <template #item="{ item, props: listProps }">
             <v-list-item v-bind="listProps">
-              <template #prepend> {{ item.props.circle }}</template>
+              <template #prepend> {{ item.props.circle }} </template>
             </v-list-item>
           </template>
         </v-select>
@@ -25,7 +25,7 @@
         <template v-if="mode === 'view'">
           <button class="name" @click="editName">
             {{ props.name }}
-            <v-icon icon="$edit"></v-icon>
+            <v-icon icon="mdi mdi-pencil-outline"></v-icon>
           </button>
           <button class="introduction" @click="editIntroduction">
             {{ introduction }}
@@ -51,7 +51,7 @@
         </template>
       </div>
       <button @click="$emit('edit-details')">
-        <Details :details="props.details" />
+        <UserDetails :details="props.details" />
       </button>
       <button class="social" @click="$emit('edit-social')">
         <v-icon icon="mdi mdi-share-variant-outline" class="mr-2" />
@@ -76,7 +76,7 @@ import { useI18n } from 'vue-i18n'
 
 import CockpitCard from '#components/cockpit/cockpitCard/CockpitCard.vue'
 
-import Details from './UserDetails.vue'
+import UserDetails from './UserDetails.vue'
 
 import type { UserDetail, UserAvailability, SocialMedia } from '#stores/userStore'
 
@@ -147,7 +147,8 @@ const updateIntroduction = (event: Event) => {
   display: grid;
   grid-template-rows: 1 fr 1fr 1fr;
   grid-template-columns: 75px 1fr;
-  gap: 10px;
+  column-gap: 16px;
+  row-gap: 10px;
 }
 
 .avatar {
@@ -168,7 +169,8 @@ const updateIntroduction = (event: Event) => {
     padding-top: 2px;
     padding-left: 8px;
     color: white;
-    background: #5d6670;
+    background: var(--v-cockpit-input-background);
+    color: var(--v-cockpit-input-color);
     border: 1px solid rgb(214 223 233 / 40%);
     border-radius: 9999px;
   }
@@ -196,6 +198,10 @@ const updateIntroduction = (event: Event) => {
   &:deep(.v-select__selection) {
     font-size: 10px;
   }
+
+  &:deep(.v-list-item__prepend) {
+    margin-right: 8px;
+  }
 }
 
 .name {
@@ -216,10 +222,11 @@ const updateIntroduction = (event: Event) => {
   display: flex;
   align-items: center;
   min-height: 60px;
-  width: 300px;
+  max-width: 300px;
+  overflow: scroll;
   padding: 10px;
   border-radius: 10px;
-  background: rgba(93, 102, 112, 0.55);
+  background: var(--v-cockpit-element-background);
 }
 
 .social-list {

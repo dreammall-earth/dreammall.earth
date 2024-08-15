@@ -1,5 +1,5 @@
 <template>
-  <ul class="details">
+  <ul class="details" :class="{ editable: props.editable }">
     <li v-for="(detail, index) in details" :key="index">
       <v-chip class="detail">
         <v-icon :icon="detailCategoryToIcon(detail.category)" class="mr-2"></v-icon>
@@ -53,7 +53,20 @@ const details: Ref<UserDetail[]> = computed(() =>
   padding: 0;
   padding: 10px;
   list-style: none;
-  background: #f3f3f3;
+  background: var(--v-cockpit-element-background);
   border-radius: 15px;
+  max-height: 110px;
+  overflow-y: auto;
+  &.editable {
+    max-height: 150px;
+  }
+}
+
+.detail {
+  background: var(--v-cockpit-chip-background);
+
+  &:deep(.v-chip__underlay) {
+    display: none;
+  }
 }
 </style>

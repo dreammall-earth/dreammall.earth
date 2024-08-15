@@ -1,7 +1,7 @@
 $background-color: #000;
-$surface-color: #4e5b6b;
+$surface-color: rgb(126, 166, 214);
 $primary-color: #f09630;
-$secondary-color: #3D4753;
+$secondary-color: #3d4753;
 $error-color: #f44336;
 $info-color: #2196f3;
 $success-color: #4caf50;
@@ -14,6 +14,9 @@ $icon-background: rgb(61 71 83 / 85%);
 $bottom-menu-background: rgb(78 91 107 / 60%);
 $sidebar-background: rgb(61 71 83 / 90%);
 $dropdown-background-color: #3D4753;
+$cockpit-input-background: rgb(93, 102, 112);
+$cockpit-element-background: rgba(93, 102, 112, 0.55);
+$cockpit-chip-background: rgb(61, 71, 83);
 
 :export {
     backgroundColor: $background-color;
@@ -32,4 +35,7 @@ $dropdown-background-color: #3D4753;
     bottomMenuBackground: $bottom-menu-background;
     sidebarBackground: $sidebar-background;
     dropdownBackgroundColor: $dropdown-background-color;
+    cockpitInputBackground: $cockpit-input-background;
+    cockpitElementBackground: $cockpit-element-background;
+    cockpitChipBackground: $cockpit-chip-background;
 }

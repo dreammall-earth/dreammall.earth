@@ -21,10 +21,11 @@ const props = defineProps<{
 <style scoped lang="scss">
 .cockpit-card {
   --padding: 20px;
-
+  --cockpit-card-height: 323px;
   padding: var(--padding);
   background-color: var(--v-sidebar-background);
   border-radius: 20px;
+  max-height: var(--cockpit-card-height);
 }
 
 .header:deep(h2) {
