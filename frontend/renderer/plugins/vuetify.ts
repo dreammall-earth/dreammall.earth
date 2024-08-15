@@ -26,6 +26,7 @@ function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): Theme
       font: theme.fontColor,
       icon: theme.iconColor,
       'dropdown-background': theme.dropdownBackgroundColor,
+      'cockpit-highlight': theme.cockpitHighlightColor,
     },
     variables: {
       'border-color': theme.borderColor,

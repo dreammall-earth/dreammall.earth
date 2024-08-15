@@ -2,7 +2,11 @@
   <ul class="details" :class="{ editable: props.editable }">
     <li v-for="(detail, index) in details" :key="index">
       <v-chip class="detail">
-        <v-icon :icon="detailCategoryToIcon(detail.category)" class="mr-2"></v-icon>
+        <v-icon
+          :icon="detailCategoryToIcon(detail.category)"
+          class="mr-2"
+          color="cockpit-highlight"
+        ></v-icon>
         {{ detail.text }}
         <v-icon
           v-if="props.editable && detail.id >= 0"

@@ -17,7 +17,7 @@
           <template #selection="{ item }"> {{ item.props.circle }} {{ item.title }} </template>
           <template #item="{ item, props: listProps }">
             <v-list-item v-bind="listProps">
-              <template #prepend> {{ item.props.circle }} </template>
+              <template #prepend> {{ item.props.circle }} <span class="ml-2"></span></template>
             </v-list-item>
           </template>
         </v-select>
@@ -57,9 +57,7 @@
         <v-icon icon="mdi mdi-share-variant-outline" class="mr-2" />
         <ul v-if="props.social.length > 0" class="social-list">
           <li v-for="item in props.social" :key="item.type">
-            <a :href="item.link" target="_blank" rel="noopener noreferrer">
-              <v-icon :icon="`mdi-${item.type}`"></v-icon>
-            </a>
+            <v-icon :icon="`mdi-${item.type}`"></v-icon>
           </li>
         </ul>
         <span v-else>
@@ -197,10 +195,6 @@ const updateIntroduction = (event: Event) => {
   &:deep(.v-select__selection) {
     font-size: 10px;
   }
-
-  &:deep(.v-list-item__prepend) {
-    margin-right: 8px;
-  }
 }
 
 .name {
@@ -219,6 +213,7 @@ const updateIntroduction = (event: Event) => {
 .social {
   display: flex;
   align-items: center;
+  width: 300px;
   max-width: 300px;
   min-height: 60px;
   padding: 10px;
