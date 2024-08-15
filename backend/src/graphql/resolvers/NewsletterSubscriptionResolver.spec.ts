@@ -6,7 +6,7 @@ import { EventType } from '#src/event/EventType'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
 
-import type { Context } from '#src/server/context'
+import type { Context } from '#src/context'
 
 CONFIG.BREVO_KEY = 'MY KEY'
 CONFIG.BREVO_ADMIN_NAME = 'Bibi Bloxberg'
