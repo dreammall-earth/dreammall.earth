@@ -50,7 +50,7 @@ const onTableClosed = () => navigate('/')
 @import 'vuetify/lib/styles/settings/_variables';
 
 .container {
-  --bottom-height: 16px;
+  --bottom-height: 136px;
 
   width: 100%;
   height: calc(100vh - var(--v-layout-top) - var(--bottom-height));
