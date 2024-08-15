@@ -26,6 +26,7 @@ const parser = new XMLParser({
 const defaultCreateMeetingBodyOptions = {
   welcome: '<div></div>',
   meetingLayout: MeetingLayouts.SMART_LAYOUT,
+  logoutURL: CONFIG.FRONTEND_BBB_LOGOUT_URL,
 }
 
 export const getMeetings = async (): Promise<MeetingInfo[]> => {
