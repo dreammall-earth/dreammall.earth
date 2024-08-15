@@ -2,7 +2,7 @@
   <CockpitCard narrow>
     <template #default>
       <div class="header mb-2">
-        <v-avatar class="avatar d-flex align-center text-font bg-primary" size="75">
+        <v-avatar class="avatar d-flex align-center text-font bg-primary" size="90">
           <v-img v-if="props.userImage" :src="props.userImage" />
           <span v-else>{{ props.initials }}</span>
         </v-avatar>
@@ -143,13 +143,13 @@ const updateIntroduction = (event: Event) => {
 <style scoped>
 .header {
   display: grid;
-  grid-template-rows: 1 fr 1fr 1fr;
-  grid-template-columns: 75px 1fr;
-  gap: 10px 16px;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 90px 1fr;
+  gap: 2px 16px;
 }
 
 .avatar {
-  grid-row: 1 / 3;
+  grid-row: 1 / 4;
   border-radius: 15px;
 }
 
