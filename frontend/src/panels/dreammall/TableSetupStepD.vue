@@ -12,14 +12,35 @@
 </template>
 
 <script lang="ts" setup>
+import { navigate } from 'vike/client/router'
+
 import SimpleButton from '#components/buttons/SimpleButton.vue'
+import GlobalErrorHandler from '#plugins/globalErrorHandler'
+import { useTablesStore } from '#stores/tablesStore'
+
+const tablesStore = useTablesStore()
 
 const emit = defineEmits<{
   (e: 'next'): void
 }>()
 
-const onNext = () => {
+const onNext = async () => {
+  await enterTable()
   emit('next')
+}
+
+const enterTable = async () => {
+  try {
+    const tableId = await tablesStore.joinMyTable()
+
+    if (tableId) {
+      await navigate(`/table/${tableId}`)
+    } else {
+      GlobalErrorHandler.error('No table found')
+    }
+  } catch (error) {
+    GlobalErrorHandler.error('Error opening table', error)
+  }
 }
 </script>
 

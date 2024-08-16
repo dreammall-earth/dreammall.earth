@@ -1,5 +1,5 @@
 <template>
-  <v-list-item class="user-invitation-item ma-2 pa-2 pr-3 rounded-pill" elevation="0" rounded>
+  <v-list-item class="user-invitation-item my-2 pa-2 pr-3 rounded-pill" elevation="0" rounded>
     <template #prepend>
       <v-avatar size="40">
         <v-img v-if="user.avatar" :src="user.avatar" :alt="user.name" cover></v-img>
@@ -24,7 +24,7 @@
         :color="user.invited ? 'success' : 'secondary'"
         class="invitation-button text-caption py-2 px-3 rounded-pill"
         size="small"
-        @click="invite"
+        @click="toggleInvitation"
       >
         {{ user.invited ? 'gesendet' : 'einladen' }}
       </v-btn>
@@ -35,23 +35,18 @@
 <script lang="ts" setup>
 import { defineProps, defineEmits } from 'vue'
 
-interface User {
-  id: number
-  name: string
-  avatar: string | null
-  invited: boolean
-}
+import UserInvitation from '#src/panels/dreammall/interfaces/UserInvitation'
 
 const props = defineProps<{
-  user: User
+  user: UserInvitation
 }>()
 
 const emit = defineEmits<{
   (e: 'update:invited', value: boolean): void
 }>()
 
-const invite = () => {
-  if (!props.user.invited) emit('update:invited', true)
+const toggleInvitation = () => {
+  emit('update:invited', !props.user.invited)
 }
 </script>
 
