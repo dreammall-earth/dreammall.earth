@@ -22,6 +22,7 @@
 import { ref } from 'vue'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
+import { useTablesStore } from '#stores/tablesStore'
 
 const emit = defineEmits<{
   (e: 'next'): void
@@ -29,7 +30,9 @@ const emit = defineEmits<{
 
 const onNext = () => emit('next')
 
-const tableName = ref('Hardi Hard 01')
+const tablesStore = useTablesStore()
+
+const tableName = ref(tablesStore.defaultMyTableName)
 const isPrivate = ref(false)
 </script>
 

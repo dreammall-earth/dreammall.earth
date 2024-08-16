@@ -20,6 +20,7 @@ import {
   UpdateUserMutationResult,
 } from '#mutations/updateUserMutation'
 import { currentUserQuery } from '#queries/currentUserQuery'
+import { searchUsersQuery } from '#queries/searchUsersQuery'
 
 export type { AddSocialMediaInput } from '#mutations/addSocialMediaMutation'
 export type { AddUserDetailInput } from '#mutations/addUserDetailMutation'
@@ -64,6 +65,16 @@ export type CurrentUser = {
   availability: UserAvailability
   details: UserDetail[]
   social: SocialMedia[]
+}
+
+export type SearchUser = {
+  id: number
+  name: string
+  username: string
+}
+
+export type SearchUsersResult = {
+  users: SearchUser[]
 }
 
 export const useUserStore = defineStore(
@@ -182,6 +193,17 @@ export const useUserStore = defineStore(
       }
     }
 
+    const searchUsers = (name: string) => {
+      const { result, loading, error } = useQuery(
+        searchUsersQuery,
+        { searchString: name },
+        {
+          fetchPolicy: 'no-cache',
+        },
+      )
+      return { result, loading, error }
+    }
+
     return {
       loading,
       currentUser,
@@ -191,6 +213,7 @@ export const useUserStore = defineStore(
       getCurrentUserAvatar,
       getMyTable,
       getUsersInMyTable,
+      searchUsers,
       updateUser,
       addUserDetail,
       addSocialMedia,
