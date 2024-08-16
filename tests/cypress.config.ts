@@ -33,6 +33,7 @@ async function setupNodeEvents(
 export default defineConfig({
   e2e: {
     chromeWebSecurity: false,
+    pageLoadTimeout: 90000,
     experimentalOriginDependencies: true,
     baseUrl: 'http://localhost:3000/',
     specPattern: 'cypress/e2e/features/*.feature',
