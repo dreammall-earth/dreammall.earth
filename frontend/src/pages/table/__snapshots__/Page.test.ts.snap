@@ -967,6 +967,8 @@ exports[`Table Page > renders 1`] = `
         >
           <iframe
             allow="camera;microphone;fullscreen;display-capture *;"
+            class="table-iframe"
+            data-v-51765335=""
             data-v-dca85f6b=""
             height="100%"
             src="https://some-link-to-meeting.com"
