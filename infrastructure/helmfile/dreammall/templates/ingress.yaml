@@ -9,7 +9,6 @@ spec:
   tls:
   - hosts:
       - {{ quote .Values.hosts.frontend }}
-      - {{ quote .Values.hosts.admin }}
       - {{ quote .Values.hosts.presenter }}
     secretName: {{ .Release.Name }}-letsencrypt-tls
 
@@ -24,17 +23,6 @@ spec:
               name: {{ .Release.Name }}-frontend
               port:
                 number: 3000
-
-  - host: {{ quote .Values.hosts.admin }}
-    http:
-      paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: {{ .Release.Name }}-admin
-              port:
-                number: 3002
 
   - host: {{ quote .Values.hosts.presenter }}
     http:
