@@ -11,7 +11,6 @@ export const updateOpenTablesSubscription = gql`
       attendees {
         fullName
       }
-      joinLink
     }
   }
 `

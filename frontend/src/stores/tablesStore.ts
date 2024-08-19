@@ -3,7 +3,7 @@ import { acceptHMRUpdate, defineStore } from 'pinia'
 import { computed, ref, watch } from 'vue'
 
 import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
-import { useAuthStore } from '#stores/authStore'
+import { useUserStore } from '#stores/userStore'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 type Attendee = {
@@ -22,9 +22,7 @@ export type Table = {
 export const useTablesStore = defineStore(
   'tables',
   () => {
-    const authStore = useAuthStore()
-
-    const name = authStore.user?.profile.name
+    const userStore = useUserStore()
 
     const { result: openTablesQueryResult, loading } = useQuery(
       openTablesQuery,
@@ -39,14 +37,19 @@ export const useTablesStore = defineStore(
       setTables(data.openTables)
     })
 
-    const { result: updateOpenTablesSubscriptionResult } = useSubscription(
+    const { result: updateOpenTablesSubscriptionResult, error: updateOpenTablesSubscriptionError } = useSubscription(
       updateOpenTablesSubscription,
-      { username: name || 'Unknown User' },
+      () => ({ username: userStore.getCurrentUser?.username || 'Unknown User' }),
       { fetchPolicy: 'no-cache' },
     )
 
     watch(updateOpenTablesSubscriptionResult, (data: { updateOpenTables: Table[] }) => {
+      console.log('updateOpenTablesSubscriptionResult', data)
       setTables(data.updateOpenTables)
+    })
+
+    watch(updateOpenTablesSubscriptionError, () => {
+      console.log(updateOpenTablesSubscriptionError)
     })
 
     const tables = ref<Table[]>([])
@@ -67,7 +70,7 @@ export const useTablesStore = defineStore(
     }
   },
   {
-    persist: true,
+    persist: false,
   },
 )
 
