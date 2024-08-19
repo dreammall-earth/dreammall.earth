@@ -11,7 +11,6 @@ Dreammall.earth websites & services
 
 ## Modules
 
-- [Admin](admin/README.md)
 - [Authentik](authentik/README.md)
 - [Backend](backend/README.md)
 - [Deployment](deployment/README.md)
@@ -50,7 +49,7 @@ docker compose run --rm backend npm run db:reset
 
 Start your desired applications:
 ```bash
-docker compose up admin backend frontend presenter
+docker compose up backend frontend presenter
 ```
 
 ## B) Run applications locally
@@ -61,13 +60,6 @@ E.g. you could install [asdf-vm](https://asdf-vm.com/guide/getting-started.html)
 Set a temporary variable for the upcoming steps:
 ```bash
 export rootFolder=$(pwd)
-```
-
-Setup admin:
-```bash
-cd $rootFolder/admin
-cp .env.dist .env
-npm install
 ```
 
 Setup backend:
@@ -93,13 +85,6 @@ npm install
 ```
 
 ### Start Services
-
-Now start all of these in separate terminals:
-```bash
-cd admin
-export PORT=3002
-npm run dev
-```
 
 ```bash
 cd backend
@@ -128,8 +113,6 @@ The following endpoints are provided for `docker compose up`:
 | [http://localhost:6006](http://localhost:6006)  | Presenter Storybook        |
 | [http://localhost:3001](http://localhost:3000)  | Frontend                   |
 | [http://localhost:6007](http://localhost:6007)  | Frontend Storybook         |
-| [http://localhost:3002](http://localhost:3002)  | Admin                      |
-| [http://localhost:6008](http://localhost:6008)  | Admin Storybook            |
 | [http://localhost:4000](http://localhost:4000)  | Backend GraphQL Playground |
 | [http://localhost:8080](http://localhost:8080)  | Documentation              |
 | [http://localhost:8080](http://localhost:8025)  | Mailpit                    |
