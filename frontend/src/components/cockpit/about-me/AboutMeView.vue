@@ -72,7 +72,7 @@
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import CockpitCard from '#components/cockpit/cockpitCard/CockpitCard.vue'
+import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
 
 import UserDetails from './UserDetails.vue'
 

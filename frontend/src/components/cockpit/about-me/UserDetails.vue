@@ -1,6 +1,6 @@
 <template>
   <ul class="details" :class="{ editable: props.editable }">
-    <li v-for="(detail, index) in details" :key="index">
+    <li v-for="detail in details" :key="detail.id">
       <v-chip class="detail">
         <v-icon
           :icon="detailCategoryToIcon(detail.category)"
@@ -8,13 +8,10 @@
           color="cockpit-highlight"
         ></v-icon>
         {{ detail.text }}
-        <v-icon
-          v-if="props.editable && detail.id >= 0"
-          icon="$close"
-          @click="$emit('remove-detail', detail.id)"
-        >
-        </v-icon
-      ></v-chip>
+        <button v-if="props.editable && detail.id > 0" @click="$emit('remove-detail', detail.id)">
+          <v-icon icon="$close" />
+        </button>
+      </v-chip>
     </li>
   </ul>
 </template>
@@ -40,11 +37,11 @@ defineEmits<{
 
 const details: Ref<UserDetail[]> = computed(() => {
   const newDetails = [] as UserDetail[]
-  for (const category of detailCategories) {
+  for (const [index, category] of detailCategories.entries()) {
     const detail = props.details.find((detail) => detail.category === category)
     if (!detail) {
       newDetails.push({
-        id: -1,
+        id: -index,
         category,
         text: t(`cockpit.about-me.${category}-placeholder`),
       })

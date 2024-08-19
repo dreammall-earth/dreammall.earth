@@ -55,7 +55,7 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
 
-import CockpitCard from '#components/cockpit/cockpitCard/CockpitCard.vue'
+import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
 
 import { detailCategories, detailCategoryToIcon } from './detailCategories'
 import Details from './UserDetails.vue'
