@@ -76,16 +76,19 @@ describe('AboutMeView', () => {
   it('renders', () => {
     const wrapper = Wrapper()
     expect(wrapper.findComponent(AboutMeView).element).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('renders without social media accounts', () => {
     const wrapper = Wrapper({ social: [] })
     expect(wrapper.findComponent(AboutMeView).element).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('renders initials', () => {
     const wrapper = Wrapper({ userImage: undefined })
     expect(wrapper.findComponent(AboutMeView).element).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('can edit name', async () => {
@@ -94,6 +97,7 @@ describe('AboutMeView', () => {
     const input = wrapper.find('input[name="name"]')
     await input.setValue('New Name')
     expect(wrapper.findComponent(AboutMeView).emitted('update-name')).toEqual([['New Name']])
+    wrapper.unmount()
   })
 
   it('can edit introduction', async () => {
@@ -104,5 +108,6 @@ describe('AboutMeView', () => {
     expect(wrapper.findComponent(AboutMeView).emitted('update-introduction')).toEqual([
       ['New Introduction'],
     ])
+    wrapper.unmount()
   })
 })
