@@ -14,7 +14,7 @@ import {
   AddUserDetailMutationResult,
 } from '#mutations/addUserDetailMutation'
 import { removeSocialMediaMutation } from '#mutations/removeSocialMediaMutation'
-import { removeUserDetailMutation } from '#mutations/removeUserDetailMutation.js'
+import { removeUserDetailMutation } from '#mutations/removeUserDetailMutation'
 import {
   updateUserMutation,
   UpdateUserInput,
