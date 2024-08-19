@@ -40,7 +40,7 @@
         ></v-text-field>
         <button
           type="submit"
-          :disabled="newDetail.text?.length === 0"
+          :disabled="newDetail.text?.length === 0 || props.loading"
           class="submit rounded-circle"
         >
           <v-icon icon="mdi mdi-plus"></v-icon>
@@ -64,6 +64,7 @@ import type { UserDetail, AddUserDetailInput } from '#stores/userStore'
 
 const props = defineProps<{
   details: UserDetail[]
+  loading?: boolean
 }>()
 
 const emit = defineEmits<{

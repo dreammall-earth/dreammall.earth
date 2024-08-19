@@ -40,7 +40,7 @@
         ></v-text-field>
         <button
           type="submit"
-          :disabled="newSocial.link?.length === 0"
+          :disabled="newSocial.link?.length === 0 || props.loading"
           class="submit rounded-circle"
         >
           <v-icon icon="mdi mdi-plus"></v-icon>
@@ -74,6 +74,7 @@ import type { SocialMedia, AddSocialMediaInput } from '#stores/userStore'
 
 const props = defineProps<{
   socials: SocialMedia[]
+  loading?: boolean
 }>()
 
 const emit = defineEmits<{

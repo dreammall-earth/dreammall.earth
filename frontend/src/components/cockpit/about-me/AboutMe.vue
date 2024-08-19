@@ -19,6 +19,7 @@
     <EditUserDetails
       v-if="user && mode === 'edit-details'"
       :details="user.details"
+      :loading="loading"
       @back="() => setMode('view')"
       @add-detail="addDetail"
       @remove-detail="removeDetail"
@@ -26,6 +27,7 @@
     <EditSocialMedia
       v-if="user && mode === 'edit-social'"
       :socials="user.social"
+      :loading="loading"
       @back="() => setMode('view')"
       @add-social="addSocial"
       @remove-social="removeSocial"
@@ -61,6 +63,7 @@ const {
   getCurrentUser: user,
   getCurrentUserAvatar: avatar,
   getCurrentUserInitials: initials,
+  loading,
 } = storeToRefs(userStore)
 
 const updateAvailability = async (newAvailability: UserAvailability) => {
