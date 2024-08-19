@@ -42,7 +42,7 @@ jobs:
 
       - name: E2E | Run all tests
         id: e2e-run
-        uses: cypress-io/github-action@689551a1df6a10c75be61ae30b642cb84fb8164c # v6.7.2
+        uses: cypress-io/github-action@3badb61c06ea80143340916056d3562aca71ae92 # v6.7.2
         with:
           working-directory: tests
 
@@ -60,7 +60,7 @@ jobs:
 
       - name: E2E | if tests failed, upload report
         if: ${{ failure() && steps.e2e-run.conclusion == 'failure' }}
-        uses: actions/upload-artifact@89ef406dd8d7e03cfd12d9e0a4a378f454709029 # v4.3.5
+        uses: actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a # v4.3.6
         with:
           name: dreammall-e2e-test-report-pr-${{ steps.pr-number.outputs.pr }}
           path: /home/runner/work/dreammall.earth/dreammall.earth/tests/cypress/reports/dreammall-e2e_html_report
