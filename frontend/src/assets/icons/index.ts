@@ -8,7 +8,6 @@ import Mall from './mall.svg?component'
 import Message from './message.svg?component'
 import Telegram from './telegram.svg?component'
 import Tiktok from './tiktok.svg?component'
-import Website from './website.svg?component'
 import WorldCafe from './worldCafe.svg?component'
 import X from './x.svg?component'
 import Xing from './xing.svg?component'
@@ -26,7 +25,6 @@ const aliases: Partial<IconAliases> = {
   message: Message,
   telegram: Telegram,
   tiktok: Tiktok,
-  website: Website,
   'world-cafe': WorldCafe,
   x: X,
   xing: Xing,
