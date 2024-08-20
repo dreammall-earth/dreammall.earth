@@ -1,7 +1,7 @@
 <template>
   <div class="flat-text-field d-flex flex-column align-center pa-4 w-100">
     <v-text-field
-      v-model="tableName"
+      v-model="tableNameModel"
       rounded
       class="elevation-0 w-100"
       content-class="elevation-0"
@@ -12,28 +12,39 @@
     />
     <!-- todo: manage values as maxlength globally? -->
 
-    <v-switch v-model="isPrivate" label="Privat" color="#4caf50" inset hide-details />
+    <v-switch v-model="isPrivateModel" label="Privat" color="#4caf50" inset hide-details />
 
     <SimpleButton class="mt-12" label="Weiter" @click="onNext" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed } from 'vue'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
-import { useTablesStore } from '#stores/tablesStore'
 
-const emit = defineEmits<{
-  (e: 'next'): void
-}>()
+import { TableSetupEmits, TableSetupProps } from './TableSetupProps'
 
-const onNext = () => emit('next')
+const props = defineProps<TableSetupProps>()
+const emit = defineEmits<TableSetupEmits>()
 
-const tablesStore = useTablesStore()
+const tableNameModel = computed({
+  get: () => props.myTableSettings.name,
+  set: (value) => {
+    emit('tableName:updated', value)
+  },
+})
 
-const tableName = ref(tablesStore.defaultMyTableName)
-const isPrivate = ref(false)
+const isPrivateModel = computed({
+  get: () => !props.myTableSettings.isPublic,
+  set: (value) => {
+    emit('isPublic:updated', !value)
+  },
+})
+
+const onNext = () => {
+  emit('next')
+}
 </script>
 
 <style lang="scss">

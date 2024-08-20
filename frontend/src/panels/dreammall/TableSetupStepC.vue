@@ -36,14 +36,17 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, defineProps } from 'vue'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 import UserInvitationItem from '#src/panels/dreammall/components/UserInvitationItem.vue'
 import UserInvitation from '#src/panels/dreammall/interfaces/UserInvitation'
 import { useSearchUsersStore } from '#stores/searchUsersStore'
 
-// const tablesStore = useTablesStore()
+import { TableSetupEmits, TableSetupProps } from './TableSetupProps'
+
+const props = defineProps<TableSetupProps>()
+const emit = defineEmits<TableSetupEmits>()
 
 const searchUsersStore = useSearchUsersStore()
 const userSearch = ref('')
@@ -57,23 +60,26 @@ const displayedUsers = computed<UserInvitation[]>(() => {
     id: user.id,
     name: user.name || user.username,
     avatar: null, // not supporting yet
-    invited: invitedUserIds.value.includes(user.id), // todo: user already included in myTable?
+    invited: invitedUserIdsModel.value.includes(user.id), // todo: user already included in myTable?
   }))
 })
 
-const invitedUserIds = ref<number[]>([])
+const invitedUserIdsModel = computed({
+  get: () => props.myTableSettings.users,
+  set: (value) => {
+    emit('users:updated', value)
+  },
+})
 
 const updateInvitationStatus = (userId: number, invited: boolean) => {
-  if (invited && !invitedUserIds.value.includes(userId)) {
-    invitedUserIds.value.push(userId)
-  } else if (!invited && invitedUserIds.value.includes(userId)) {
-    invitedUserIds.value = invitedUserIds.value.filter((id) => id !== userId)
+  let currentUsers: number[] = [...invitedUserIdsModel.value]
+  if (invited && !currentUsers.includes(userId)) {
+    currentUsers.push(userId)
+  } else if (!invited && currentUsers.includes(userId)) {
+    currentUsers = currentUsers.filter((id) => id !== userId)
   }
+  invitedUserIdsModel.value = currentUsers
 }
-
-const emit = defineEmits<{
-  (e: 'next'): void
-}>()
 
 const onNext = async () => {
   await createMyTable()

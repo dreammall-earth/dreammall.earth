@@ -155,11 +155,12 @@ const toggleButtonList = () => {
 }
 
 .button-list {
-  --height: 500px;
+  //--height: 500px;
   --width: 400px;
 
   position: fixed;
-  bottom: calc(var(--height) * -1);
+  //bottom: calc(var(--height) * -1);
+  bottom: -100%;
   left: calc(50% - var(--width) / 2);
   z-index: 1001;
   display: flex;
@@ -170,6 +171,7 @@ const toggleButtonList = () => {
   width: var(--width);
   height: var(--height);
   padding-top: 30px;
+  padding-bottom: 40px;
   background: var(--v-bottom-menu-background) !important;
   backdrop-filter: blur(20px);
   border-radius: 30px 30px 0 0;

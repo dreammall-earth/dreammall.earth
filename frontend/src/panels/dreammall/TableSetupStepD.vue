@@ -18,11 +18,12 @@ import SimpleButton from '#components/buttons/SimpleButton.vue'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { useTablesStore } from '#stores/tablesStore'
 
-const tablesStore = useTablesStore()
+import { TableSetupEmits, TableSetupProps } from './TableSetupProps'
 
-const emit = defineEmits<{
-  (e: 'next'): void
-}>()
+const props = defineProps<TableSetupProps>()
+const emit = defineEmits<TableSetupEmits>()
+
+const tablesStore = useTablesStore()
 
 const onNext = async () => {
   await enterTable()

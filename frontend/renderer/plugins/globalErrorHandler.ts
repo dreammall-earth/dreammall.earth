@@ -4,6 +4,7 @@ import { toast } from 'vue3-toastify'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const handleError = (message: string, data?: unknown) => {
   toast.error(message)
+  console.error(message, data)
 }
 const handleWarning = (message: string) => {
   toast.warning(message)

@@ -1,13 +1,13 @@
 <template>
-  <SimpleButton label="Tisch erstellen" icon="mdi-video" size="small" @click="onClick" />
+  <SimpleButton label="Tisch erstellen" icon="mdi-video" class="mb-5" @click="onClick" />
 </template>
 
 <script setup lang="ts">
 import SimpleButton from '#components/buttons/SimpleButton.vue'
+import { TableSetupEmits, TableSetupProps } from '#src/panels/dreammall/TableSetupProps'
 
-const emit = defineEmits<{
-  (e: 'next'): void
-}>()
+const props = defineProps<TableSetupProps>()
+const emit = defineEmits<TableSetupEmits>()
 
 const onClick = () => {
   emit('next')
