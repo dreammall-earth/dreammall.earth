@@ -35,12 +35,12 @@ const BBB = {
   BBB_PULL_MEETINGS: process.env.NODE_ENV !== 'test' && process.env.BBB_URL,
 }
 
+const FRONTEND_URL = process.env.FRONTEND_URL ?? 'http://localhost:3000/'
+
 const FRONTEND = {
-  FRONTEND_URL: process.env.FRONTEND_URL ?? 'http://localhost:3000/',
-  FRONTEND_INVITE_LINK_URL:
-    process.env.FRONTEND_INVITE_LINK_URL ?? 'http://localhost:3000/join-table/',
-  FRONTEND_BBB_LOGOUT_URL:
-    process.env.FRONTEND_BBB_LOGOUT_URL ?? 'http://localhost:3000/table-closed/',
+  FRONTEND_URL,
+  FRONTEND_INVITE_LINK_URL: FRONTEND_URL + 'join-table/',
+  FRONTEND_BBB_LOGOUT_URL: FRONTEND_URL + 'table-closed/',
 }
 
 const { JWKS_URI } = process.env
