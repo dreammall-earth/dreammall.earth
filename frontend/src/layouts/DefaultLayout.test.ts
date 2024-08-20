@@ -9,7 +9,6 @@ import { VApp } from 'vuetify/components'
 
 import UserDropdown from '#components/menu/UserDropdown.vue'
 import { joinMyTableMutation } from '#mutations/joinMyTableMutation'
-import { AUTH } from '#src/env'
 import { useAuthStore } from '#stores/authStore'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 import { authService } from '#tests/mock.authService'
@@ -222,75 +221,6 @@ describe('DefaultLayout', () => {
 
         it('logs the error', () => {
           expect(errorHandlerSpy).toHaveBeenCalledWith('auth error', 'Error!')
-        })
-      })
-    })
-  })
-
-  describe('TopMenu', () => {
-    beforeEach(() => {
-      wrapper = Wrapper()
-    })
-
-    afterEach(() => {
-      wrapper.unmount()
-    })
-
-    describe('admin button', () => {
-      beforeEach(() => {
-        wrapper = Wrapper()
-      })
-      describe('button visibility', () => {
-        const authStore = useAuthStore()
-
-        beforeEach(async () => {
-          await wrapper.find('button.user-info').trigger('click')
-          await flushPromises()
-        })
-
-        describe('as normal user', () => {
-          it('does not exist', () => {
-            expect(wrapper.findComponent(UserDropdown).find('button.admin-button').exists()).toBe(
-              false,
-            )
-          })
-        })
-
-        describe('as admin user', () => {
-          beforeEach(() => {
-            AUTH.ADMIN_GROUP = 'ADMIN_GROUP'
-            AUTH.ADMIN_REDIRECT_URI = 'https://url-to-admin.com'
-            authStore.save({
-              access_token: 'access_token',
-              profile: {
-                aud: 'aud',
-                sub: 'sub',
-                exp: 1,
-                iat: 1,
-                iss: 'iss',
-                groups: ['ADMIN_GROUP'],
-              },
-              token_type: 'token_type',
-              session_state: null,
-              state: null,
-              expires_at: new Date().valueOf() + 100,
-              expires_in: 0,
-              expired: false,
-              scopes: ['email'],
-              toStorageString: () => 'toStorageString',
-            })
-          })
-
-          it('exists', () => {
-            expect(wrapper.findComponent(UserDropdown).find('button.admin-button').exists()).toBe(
-              true,
-            )
-          })
-
-          it('redirects to admin url by click', async () => {
-            await wrapper.findComponent(UserDropdown).find('button.admin-button').trigger('click')
-            expect(global.window.location.href).toBe('https://url-to-admin.com/')
-          })
         })
       })
     })

@@ -33,16 +33,6 @@ services:
     environment:
       - NODE_ENV=production
 
-  admin:
-    image: ghcr.io/dreammall-earth/dreammall.earth/admin:latest
-    build:
-      context: ./admin
-      target: production
-    ports:
-      - 3002:3000
-    environment:
-      - NODE_ENV=production
-
   backend:
     image: ghcr.io/dreammall-earth/dreammall.earth/backend:latest
     build:
