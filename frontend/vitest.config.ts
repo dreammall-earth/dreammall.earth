@@ -12,7 +12,6 @@ export default mergeConfig(
       setupFiles: [
         'scripts/tests/mock.$t.ts',
         'scripts/tests/mock.vikePageContext.ts',
-        'scripts/tests/mock.apolloClient.ts',
         'scripts/tests/mock.authService.ts',
         'scripts/tests/plugin.pinia.ts',
         'scripts/tests/plugin.i18n-vuetify.ts',

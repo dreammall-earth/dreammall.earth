@@ -1,13 +1,32 @@
 import { provideApolloClient } from '@vue/apollo-composable'
 import { mount } from '@vue/test-utils'
-import { describe, it, expect, beforeEach, afterEach } from 'vitest'
+import { createMockClient } from 'mock-apollo-client'
+import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
+import { currentUserQuery } from '#queries/currentUserQuery'
 import { useUserStore } from '#stores/userStore'
-import { mockClient } from '#tests/mock.apolloClient'
 
 import UserInfo from './UserInfo.vue'
+
+const mockClient = createMockClient()
+
+const currentUserQueryMock = vi.fn()
+
+mockClient.setRequestHandler(
+  currentUserQuery,
+  currentUserQueryMock.mockResolvedValue({
+    data: {
+      currentUser: {
+        id: 666,
+        name: 'Current User',
+        username: 'currentUser',
+        table: null,
+      },
+    },
+  }),
+)
 
 provideApolloClient(mockClient)
 
@@ -46,7 +65,6 @@ describe('UserInfo', () => {
         details: [],
         social: [],
       })
-      wrapper = Wrapper()
     })
 
     it('has no image and no text in avatar', () => {
@@ -67,7 +85,6 @@ describe('UserInfo', () => {
         details: [],
         social: [],
       })
-      wrapper = Wrapper()
     })
 
     it('has no image but initials in avatar', () => {
@@ -89,7 +106,6 @@ describe('UserInfo', () => {
         details: [],
         social: [],
       })
-      wrapper = Wrapper()
     })
 
     it('has image and not text in avatar', () => {

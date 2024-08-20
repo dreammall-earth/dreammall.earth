@@ -5,11 +5,6 @@
         <v-icon icon="$logout"></v-icon>{{ $t('buttons.signout') }}
       </button>
     </li>
-    <li v-if="auth.isAdmin">
-      <button class="admin-button" @click="enterAdmin">
-        <v-icon icon="$logout"></v-icon>{{ $t('buttons.toAdmin') }}
-      </button>
-    </li>
   </ul>
 </template>
 
@@ -17,13 +12,9 @@
 import { inject } from 'vue'
 
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
-import { AUTH } from '#src/env'
 import AuthService from '#src/services/AuthService'
-import { useAuthStore } from '#stores/authStore'
 
 const authService = inject<AuthService>('authService')
-
-const auth = useAuthStore()
 
 async function signOut() {
   try {
@@ -31,10 +22,6 @@ async function signOut() {
   } catch (error) {
     GlobalErrorHandler.error('auth error', error)
   }
-}
-
-const enterAdmin = async () => {
-  window.location.href = AUTH.ADMIN_REDIRECT_URI
 }
 </script>
 

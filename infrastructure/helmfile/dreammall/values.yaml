@@ -2,9 +2,6 @@ global:
   image:
     pullPolicy: Always
     tag: master
-admin:
-  image:
-    repository: ghcr.io/dreammall-earth/dreammall.earth/admin
 frontend:
   image:
     repository:  ghcr.io/dreammall-earth/dreammall.earth/frontend
@@ -20,11 +17,9 @@ cert_manager:
 
 hosts:
   frontend: app.master.dreammall.earth
-  admin: admin.master.dreammall.earth
   presenter: master.dreammall.earth
 
 configmap:
-  auth_admin_redirect_uri: https://admin.master.dreammall.earth/signin/
   auth_authority_url: https://auth.master.dreammall.earth/application/o/dreammallearth/
   auth_redirect_uri: https://app.master.dreammall.earth/auth/
   auth_signout_uri: https://auth.master.dreammall.earth/if/flow/dreammallearth-invalidation-flow/

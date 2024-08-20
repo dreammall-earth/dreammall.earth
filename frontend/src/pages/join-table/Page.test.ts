@@ -1,11 +1,12 @@
 import { ApolloError } from '@apollo/client/errors'
+import { provideApolloClient } from '@vue/apollo-composable'
 import { flushPromises, mount } from '@vue/test-utils'
+import { createMockClient } from 'mock-apollo-client'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 import { joinTableAsGuestQuery } from '#queries/joinTableAsGuestQuery'
-import { mockClient } from '#tests/mock.apolloClient'
 import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
 import JoinTablePage from './+Page.vue'
@@ -14,10 +15,14 @@ import { title } from './+title'
 
 const joinTableAsGuestQueryMock = vi.fn()
 
+const mockClient = createMockClient()
+
 mockClient.setRequestHandler(
   joinTableAsGuestQuery,
   joinTableAsGuestQueryMock.mockResolvedValue({ data: { joinTable: 'http://some.url' } }),
 )
+
+provideApolloClient(mockClient)
 
 describe('JoinTablePage', () => {
   const Wrapper = () => {
