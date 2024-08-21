@@ -1,8 +1,10 @@
 {
   "$vuetify": {
+    "close": "Schließen",
     "input": {
       "clear": "Löschen"
-    }
+    },
+    "open": "Öffnen"
   },
   "auth": {
     "content": "Logge ein...",
@@ -18,6 +20,22 @@
   },
   "cafe": {
     "welcome": "Weltencafé"
+  },
+  "cockpit": {
+    "about-me": {
+      "edit": {
+        "add": "Hinzufügen",
+        "social-media": "Social Media",
+        "title": "Über mich"
+      },
+      "education-placeholder": "Meine Ausbildung",
+      "empty-social-media": "Social Media hinzufügen",
+      "feeling-placeholder": "Wie ich mich heute fühle",
+      "introduction-placeholder": "Meine Kurzvorstellung",
+      "language-placeholder": "Sprachen, die ich spreche",
+      "place-placeholder": "Mein Standort",
+      "work-placeholder": "Meine Arbeit"
+    }
   },
   "error": {
     "404": {
