@@ -28,6 +28,7 @@ const hasToken = (cookieString: string | undefined) => {
   try {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     return !!JSON.parse(parse(cookieString).auth).user
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     return false
   }
