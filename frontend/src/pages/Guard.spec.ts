@@ -18,7 +18,6 @@ describe('global route guard', () => {
     it('throws and redirects', () => {
       expect(() => guard({ hasToken: false } as PageContextServer)).toThrow(/* what exactly? */)
       expect(redirect).toHaveBeenCalledWith('/signin')
-      }
     })
   })
 
