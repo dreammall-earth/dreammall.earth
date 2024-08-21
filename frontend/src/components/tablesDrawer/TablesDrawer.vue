@@ -92,6 +92,7 @@ watch(
 </script>
 
 <style scoped lang="scss">
+@use 'sass:map';
 @import 'vuetify/lib/styles/settings/_variables';
 
 .menu-drawer {
@@ -111,7 +112,7 @@ watch(
   transition: none !important;
 }
 
-@media #{map-get($display-breakpoints, 'sm-and-down')} {
+@media #{map.get($display-breakpoints, 'sm-and-down')} {
   .menu-drawer {
     left: var(--sides) !important;
     z-index: 2000 !important;
@@ -123,7 +124,7 @@ watch(
   }
 }
 
-@media #{map-get($display-breakpoints, 'md-and-up')} {
+@media #{map.get($display-breakpoints, 'md-and-up')} {
   .menu-drawer {
     border-radius: 20px 0 0 20px;
   }

@@ -150,6 +150,7 @@ const enterTable = async () => {
 </script>
 
 <style scoped lang="scss">
+@use 'sass:map';
 @import '#root/src/assets/scss/style';
 @import 'vuetify/lib/styles/settings/_variables';
 
@@ -163,7 +164,7 @@ const enterTable = async () => {
     margin-top: 70px;
   }
 
-  @media #{map-get($display-breakpoints, 'sm-and-down')} {
+  @media #{map.get($display-breakpoints, 'sm-and-down')} {
     .page-container {
       margin-bottom: 50px;
     }
@@ -221,11 +222,11 @@ const enterTable = async () => {
   transition: bottom 0.75s;
 
   &--active {
-    @media #{map-get($display-breakpoints, 'sm-and-down')} {
+    @media #{map.get($display-breakpoints, 'sm-and-down')} {
       bottom: 60px;
     }
 
-    @media #{map-get($display-breakpoints, 'md-and-up')} {
+    @media #{map.get($display-breakpoints, 'md-and-up')} {
       bottom: 120px;
     }
   }
