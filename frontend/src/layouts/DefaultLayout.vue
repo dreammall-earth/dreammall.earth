@@ -115,7 +115,7 @@ import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
 import { JoinMyTableMutationResult, joinMyTableMutation } from '#mutations/joinMyTableMutation'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
 
-const isTablesDrawerVisible = defineModel<boolean>()
+const isTablesDrawerVisible = ref(false)
 
 const toggleDrawer = () => {
   isTablesDrawerVisible.value = !isTablesDrawerVisible.value
