@@ -1,0 +1,43 @@
+---
+environments:
+  default:
+    values:
+      - ./environments/default.yaml.gotmpl
+  master:
+    values:
+      - ./environments/master.yaml.gotmpl
+  roschaefer:
+    values:
+      - ./environments/roschaefer.yaml.gotmpl
+---
+repositories:
+- name: goauthentik
+# version: "2024.6.1"
+  url: "https://charts.goauthentik.io/"
+- name: bitnami
+  url: "https://charts.bitnami.com/bitnami"
+
+releases:
+  - name: authentik
+    namespace: {{ .StateValues.namespace }}
+    chart: goauthentik/authentik
+    version: "2024.6.1"
+    secrets:
+      - ./secrets/authentik.yaml
+    values:
+      - ./values/authentik.yaml.gotmpl
+
+  - name: mariadb
+    namespace: {{ .StateValues.namespace }}
+    chart: bitnami/mariadb
+    version: "19.0.0"
+    secrets:
+      - ./secrets/mariadb.yaml
+
+  - name: dreammall
+    namespace: {{ .StateValues.namespace }}
+    chart: ./dreammall
+    secrets:
+      - ./secrets/dreammall.yaml
+    values:
+      - ./values/dreammall.yaml.gotmpl

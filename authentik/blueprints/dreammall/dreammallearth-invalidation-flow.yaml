@@ -1,0 +1,59 @@
+version: 1
+metadata:
+  name: Invalidation flow
+context:
+  redirect_url: !Env [DREAMMALL_PRESENTER_URL, "http://localhost:3001"]
+entries:
+- attrs:
+    authentication: none
+    denied_action: message_continue
+    designation: invalidation
+    layout: sidebar_right
+    name: dreammall.earth-invalidation-flow
+    policy_engine_mode: any
+    title: Logout
+  conditions: []
+  id: dreammallearth-invalidation-flow
+  identifiers:
+    slug: dreammallearth-invalidation-flow
+  model: authentik_flows.flow
+  state: present
+- attrs:
+    expression: !Format ["context['flow_plan'].context['redirect'] = '%s'\nreturn True", !Context redirect_url]
+    name: dreammall.earth-redirect-presenter
+  conditions: []
+  id: dreammall.earth-redirect-presenter
+  identifiers:
+    name: dreammall.earth-redirect-presenter
+  model: authentik_policies_expression.expressionpolicy
+  state: present
+- attrs: {}
+  conditions: []
+  id: default-invalidation-logout
+  identifiers:
+    name: default-invalidation-logout
+  model: authentik_stages_user_logout.userlogoutstage
+  state: present
+- attrs:
+    invalid_response_action: retry
+    policy_engine_mode: any
+    re_evaluate_policies: true
+  conditions: []
+  id: ddc7d781-194d-49c4-bc65-a480810f287f
+  identifiers:
+    order: 0
+    stage: !KeyOf default-invalidation-logout
+    target: !KeyOf dreammallearth-invalidation-flow
+  model: authentik_flows.flowstagebinding
+  state: present
+- attrs:
+    enabled: true
+    timeout: 30
+  conditions: []
+  id: null
+  identifiers:
+    order: 100
+    policy: !KeyOf dreammall.earth-redirect-presenter
+    target: !KeyOf ddc7d781-194d-49c4-bc65-a480810f287f
+  model: authentik_policies.policybinding
+  state: present

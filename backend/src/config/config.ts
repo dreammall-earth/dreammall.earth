@@ -38,7 +38,9 @@ const BBB = {
 const FRONTEND = {
   FRONTEND_URL: process.env.FRONTEND_URL ?? 'http://localhost:3000/',
   FRONTEND_INVITE_LINK_URL:
-    process.env.FRONTEND_INVITE_LINK_URL ?? 'http://localhost:3000/join-room/',
+    process.env.FRONTEND_INVITE_LINK_URL ?? 'http://localhost:3000/join-table/',
+  FRONTEND_BBB_LOGOUT_URL:
+    process.env.FRONTEND_BBB_LOGOUT_URL ?? 'http://localhost:3000/table-closed/',
 }
 
 const { JWKS_URI } = process.env

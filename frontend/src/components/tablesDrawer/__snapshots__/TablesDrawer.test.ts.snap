@@ -13,7 +13,7 @@ exports[`TablesDrawer > renders correctly 1`] = `
       class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer px-4"
       data-v-cf2c9067=""
       drawer="true"
-      style="right: 0px; z-index: 1004; transform: translateX(110%); position: fixed; transition: none !important; height: calc(100% - 0px - 0px); top: 0px; bottom: 0px;"
+      style="right: 0px; z-index: 1004; transform: translateX(110%); position: fixed; height: calc(100% - 0px - 0px); top: 0px; bottom: 0px;"
     >
       <!---->
       <!---->
@@ -115,6 +115,7 @@ exports[`TablesDrawer > renders correctly 1`] = `
                   id="input-1"
                   size="1"
                   type="text"
+                  value=""
                 />
                 <!---->
                 

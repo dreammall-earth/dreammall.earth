@@ -3,8 +3,6 @@ import { User } from 'oidc-client-ts'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
-import { AUTH } from '#src/env'
-
 export const cookieStorage = {
   setItem(key: string, state: string) {
     Cookies.set('auth', state, {
@@ -27,12 +25,6 @@ export const useAuthStore = defineStore(
     const accessToken = computed(() => user.value?.access_token ?? '')
     const isLoggedIn = computed(() => !!user.value)
 
-    const isAdmin = computed(() =>
-      user.value?.profile.groups
-        ? (user.value?.profile.groups as string[]).includes(AUTH.ADMIN_GROUP)
-        : false,
-    )
-
     const save = (u: User | null) => {
       user.value = u
     }
@@ -45,7 +37,6 @@ export const useAuthStore = defineStore(
       user,
       accessToken,
       isLoggedIn,
-      isAdmin,
       save,
       clear,
     }

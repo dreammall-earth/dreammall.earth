@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: frontend
+  template:
+    metadata:
+      labels:
+        io.kompose.service: frontend
+    spec:
+      containers:
+        - env:
+          image: "{{ .Values.frontend.image.repository }}:{{ default .Values.global.image.tag .Values.frontend.image.tag "latest" }}"
+          imagePullPolicy: {{ quote .Values.global.image.pullPolicy }}
+          name: frontend
+          ports:
+            - containerPort: 3000
+      restartPolicy: Always

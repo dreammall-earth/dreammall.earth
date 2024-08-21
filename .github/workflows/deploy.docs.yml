@@ -12,12 +12,12 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@9a9194f87191a7e9055e3e9b95b8cfb13023bb08 # v4.1.7
+      - uses: actions/setup-node@26961cf329f22f6837d5f54c3efd76b480300ace # v4.0.3
         with:
           node-version-file: './.tool-versions'
       - name: vuepress-deploy
-        uses: IT4Change/vuepress-build-and-deploy@master
+        uses: IT4Change/vuepress-build-and-deploy@b7244880d4eecbdd2fc984e71b888f7eb5b2ba48 # v1.9.0
         env:
           ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           #TARGET_REPO: username/repo

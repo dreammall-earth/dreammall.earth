@@ -1,0 +1,39 @@
+global:
+  image:
+    repository: {{ .StateValues.image_repository }}/authentik
+    tag: {{ .StateValues.image_tag }}
+postgresql:
+  enabled: true
+redis:
+  enabled: true
+server:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/issuer: {{ .StateValues.cert_manager_issuer }}
+    hosts:
+      - auth.{{ .StateValues.domain }}
+    tls:
+      - hosts:
+        - auth.{{ .StateValues.domain }}
+        secretName: authentik-letsencrypt-tls
+blueprints:
+  configMaps:
+    - dreammall-authentik-blueprints
+worker:
+  env:
+    - name: DREAMMALL_FRONTEND_URL
+      valueFrom:
+        configMapKeyRef:
+          name: dreammall
+          key: frontend_url
+    - name: DREAMMALL_PRESENTER_URL
+      valueFrom:
+        configMapKeyRef:
+          name: dreammall
+          key: presenter_url
+    - name: AUTHENTIK_BOOTSTRAP_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: dreammall
+          key: authentik_bootstrap_password

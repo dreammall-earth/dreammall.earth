@@ -49,29 +49,6 @@ services:
     volumes:
       - ./frontend:/app
 
-  admin:
-    build:
-      target: development
-    ports:
-      # development server port
-      - 24680:24680
-    environment:
-      - NODE_ENV=development
-      - PORT_HMR=24680
-    volumes:
-      - ./admin:/app
-
-  admin-storybook:
-    build:
-      context: ./admin
-      target: storybook
-    ports:
-      - 6008:6006
-    environment:
-      - NODE_ENV=development
-    volumes:
-      - ./admin:/app
-
   backend:
     build:
       context: ./backend
