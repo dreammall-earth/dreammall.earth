@@ -2,7 +2,7 @@
   <v-navigation-drawer
     v-model="isVisible"
     :location="location"
-    width="auto"
+    mobile
     class="menu-drawer px-4"
     :class="[{ 'changing-orientation': isChangingOrientation }]"
   >
