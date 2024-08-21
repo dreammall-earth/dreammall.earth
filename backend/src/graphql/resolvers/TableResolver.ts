@@ -309,9 +309,10 @@ export class TableResolver {
   })
   async updateOpenTables(
     @Root() meetings: MeetingInfo[],
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     @Arg('username') username: string,
   ): Promise<OpenTable[]> {
-    console.log('--------------------', username)
+    // console.log('--------------------', username)
     return openTablesFromOpenMeetings(meetings)
   }
 

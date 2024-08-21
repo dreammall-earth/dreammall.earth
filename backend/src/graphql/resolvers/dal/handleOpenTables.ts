@@ -4,7 +4,7 @@ import { prisma } from '#src/prisma'
 
 export const handleOpenTables = async (): Promise<void> => {
   const meetings = await getMeetings()
-  console.log(meetings)
+  // console.log(meetings)
   pubSub.publish('OPEN_ROOM_SUBSCRIPTION', meetings)
   await prisma.meeting.updateMany({
     where: {

@@ -37,20 +37,24 @@ export const useTablesStore = defineStore(
       setTables(data.openTables)
     })
 
-    const { result: updateOpenTablesSubscriptionResult, error: updateOpenTablesSubscriptionError } = useSubscription(
+    const {
+      result: updateOpenTablesSubscriptionResult /* , error: updateOpenTablesSubscriptionError */,
+    } = useSubscription(
       updateOpenTablesSubscription,
       () => ({ username: userStore.getCurrentUser?.username || 'Unknown User' }),
       { fetchPolicy: 'no-cache' },
     )
 
     watch(updateOpenTablesSubscriptionResult, (data: { updateOpenTables: Table[] }) => {
-      console.log('updateOpenTablesSubscriptionResult', data)
+      // console.log('updateOpenTablesSubscriptionResult', data)
       setTables(data.updateOpenTables)
     })
 
+    /*
     watch(updateOpenTablesSubscriptionError, () => {
       console.log(updateOpenTablesSubscriptionError)
     })
+    */
 
     const tables = ref<Table[]>([])
 
