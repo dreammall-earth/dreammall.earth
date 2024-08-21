@@ -19,6 +19,7 @@ const props = defineProps<{
 </script>
 
 <style scoped lang="scss">
+@use 'sass:map';
 @import 'vuetify/lib/styles/settings/_variables';
 
 .cockpit-card {
@@ -46,7 +47,7 @@ const props = defineProps<{
   border-width: 0.5px;
 }
 
-@media #{map-get($display-breakpoints, 'md-and-up')} {
+@media #{map.get($display-breakpoints, 'md-and-up')} {
   .narrow {
     --card-width: 335px;
   }

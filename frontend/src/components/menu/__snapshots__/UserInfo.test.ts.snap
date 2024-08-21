@@ -16,7 +16,6 @@ exports[`UserInfo > renders 1`] = `
       aria-owns="v-menu-0"
       class="user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
       data-v-607bdd70=""
-      targetref="[object Object]"
     >
       
       <div

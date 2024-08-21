@@ -47,6 +47,7 @@ const onTableClosed = () => navigate('/')
 </script>
 
 <style scoped lang="scss">
+@use 'sass:map';
 @import 'vuetify/lib/styles/settings/_variables';
 
 .container {
@@ -56,7 +57,7 @@ const onTableClosed = () => navigate('/')
   height: calc(100vh - var(--v-layout-top) - var(--bottom-height));
 }
 
-@media #{map-get($display-breakpoints, 'sm-and-down')} {
+@media #{map.get($display-breakpoints, 'sm-and-down')} {
   .container {
     --bottom-height: 85px;
   }
