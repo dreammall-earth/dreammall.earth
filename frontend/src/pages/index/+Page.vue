@@ -12,6 +12,10 @@
    <p class="mb-5">frontend/src/components/ClusterGalaxy/ThreeScene3.vue</p>
     <p class="mb-5">360° hozizontal, 45° vertikal, zoombar, pulsierenden mittelstern, verbindungen, interaktive sterne</p>
    <ClusterGalaxyVisualizer3 />
+    <p class="mt-5">version 4</p>
+   <p class="mb-5">frontend/src/components/ClusterGalaxy/ThreeScene3.vue</p>
+    <p class="mb-5">360° hozizontal, 45° vertikal, zoombar, pulsierenden mittelstern, verbindungen, interaktive sterne</p>
+   <ClusterGalaxyVisualizer4 />
 </template>
 
 <script lang="ts" setup>
@@ -19,5 +23,6 @@ import DefaultLayout from '#layouts/DefaultLayout.vue'
 import ClusterGalaxyVisualizer from '#components/ClusterGalaxy/ThreeScene.vue';
 import ClusterGalaxyVisualizer2 from '#components/ClusterGalaxy/ThreeScene2.vue';
 import ClusterGalaxyVisualizer3 from '#components/ClusterGalaxy/ThreeScene3.vue';
+import ClusterGalaxyVisualizer4 from '#components/ClusterGalaxy/ThreeScene4.vue';
 
 </script>
