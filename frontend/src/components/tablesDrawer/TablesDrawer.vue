@@ -5,7 +5,6 @@
     width="auto"
     class="menu-drawer px-4"
     :class="[{ 'changing-orientation': isChangingOrientation }]"
-    :style="drawerStyle"
   >
     <v-text-field
       v-model="searchValue"
@@ -75,10 +74,6 @@ const filteredItems = computed(() => {
 
 const currentLocation = ref(props.location)
 const isChangingOrientation = ref(false)
-
-const drawerStyle = computed(() => ({
-  transition: isChangingOrientation.value ? 'none' : undefined,
-}))
 
 watch(
   () => props.location,
