@@ -35,6 +35,12 @@
       "language-placeholder": "Sprachen, die ich spreche",
       "place-placeholder": "Mein Standort",
       "work-placeholder": "Meine Arbeit"
+    },
+    "myTables": {
+      "header": "Meine Gruppentische",
+      "noTables": "Noch keine Gruppentische",
+      "addTable": "Tisch hinzufügen",
+      "memberCount": "{count} Mitglieder"
     }
   },
   "error": {
