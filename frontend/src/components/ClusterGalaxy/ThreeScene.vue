@@ -19,6 +19,7 @@ export default defineComponent({
     let raycaster: THREE.Raycaster;
     let mouse: THREE.Vector2;
     const starMeshes: THREE.Mesh[] = [];
+    const backgroundStars: THREE.Points[] = [];
 
     const initScene = () => {
       scene = new THREE.Scene();
@@ -70,10 +71,20 @@ export default defineComponent({
       // Sterne hinzufügen
       createStars();
 
+      // Hintergrundsterne für Parallax-Effekt hinzufügen
+      createBackgroundStars();
+
       // Animation
       const animate = () => {
         requestAnimationFrame(animate);
         controls.update();
+
+        // Parallax-Effekt durch Verschiebung der Hintergrundsterne
+        backgroundStars.forEach(starField => {
+          starField.position.x += 0.05 * (camera.position.x / 100);
+          starField.position.y += 0.05 * (camera.position.y / 100);
+        });
+
         renderer.render(scene, camera);
       };
       animate();
@@ -95,6 +106,24 @@ export default defineComponent({
         starMeshes.push(starMesh);
         scene.add(starMesh);
       }
+    };
+
+    const createBackgroundStars = () => {
+      const starMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 5 });
+      const starGeometry = new THREE.BufferGeometry();
+      const starPositions = [];
+
+      for (let i = 0; i < 1000; i++) {
+        const x = (Math.random() - 0.5) * 5000;
+        const y = (Math.random() - 0.5) * 5000;
+        const z = -Math.random() * 5000; // Hintergrundsterne haben eine negative Z-Position
+        starPositions.push(x, y, z);
+      }
+
+      starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starPositions, 3));
+      const starField = new THREE.Points(starGeometry, starMaterial);
+      backgroundStars.push(starField);
+      scene.add(starField);
     };
 
     const getRandomPositionOnSphere = (radius: number) => {
