@@ -28,7 +28,6 @@ configmap:
   bbb_url: https://cafe.dreammall.earth/bigbluebutton/api/
   endpoints_graphql_uri: https://master.dreammall.earth/api/
   endpoints_websocket_uri: ws://master.dreammall.earth/api/subscriptions
-  frontend_invite_link_url: https://app.master.dreammall.earth/join-room/
   frontend_url:  https://app.master.dreammall.earth
   jwks_uri: http://authentik-server/application/o/dreammallearth/jwks/
   presenter_url: https://master.dreammall.earth
