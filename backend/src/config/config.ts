@@ -39,8 +39,8 @@ const FRONTEND_URL = process.env.FRONTEND_URL ?? 'http://localhost:3000/'
 
 const FRONTEND = {
   FRONTEND_URL,
-  FRONTEND_INVITE_LINK_URL: FRONTEND_URL + 'join-table/',
-  FRONTEND_BBB_LOGOUT_URL: FRONTEND_URL + 'table-closed/',
+  FRONTEND_INVITE_LINK_URL: new URL('join-table/', FRONTEND_URL),
+  FRONTEND_BBB_LOGOUT_URL: new URL('table-closed/', FRONTEND_URL),
 }
 
 const { JWKS_URI } = process.env
