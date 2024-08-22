@@ -18,7 +18,7 @@ const getMeetingsMock = jest.mocked(getMeetings)
 
 let testServer: ApolloServer<Context>
 
-CONFIG.FRONTEND_INVITE_LINK_URL = '/'
+CONFIG.FRONTEND_URL = 'https://my.frontend.url'
 
 const nickname = 'mockedUser'
 const name = 'User'
@@ -808,7 +808,7 @@ describe('TableResolver', () => {
               meetingID: result?.meeting?.meetingID,
             },
             {
-              moderatorOnlyMessage: `Use this link to invite more people:<br/>/${result?.meeting?.id}`,
+              moderatorOnlyMessage: `Use this link to invite more people:<br/>https://my.frontend.url/join-table/${result?.meeting?.id}`,
             },
           )
         })
