@@ -5,7 +5,7 @@ context:
   redirect_url: !Env [DREAMMALL_FRONTEND_URL, "http://localhost:3000"]
 entries:
   - identifiers:
-      slug: dreammallearth-enrollment-email
+      slug: dreammallearth-enrollment
     id: flow
     model: authentik_flows.flow
     attrs:
