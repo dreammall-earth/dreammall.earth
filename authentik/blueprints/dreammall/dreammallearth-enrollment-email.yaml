@@ -3,6 +3,8 @@ metadata:
   labels:
     blueprints.goauthentik.io/instantiate: "false"
   name: Enrollment via E-Mail
+context:
+  redirect_url: !Env [DREAMMALL_FRONTEND_URL, "http://localhost:3000"]
 entries:
   - identifiers:
       slug: dreammallearth-enrollment-email
@@ -96,6 +98,15 @@ entries:
       name: default-enrollment-user-login
     id: default-enrollment-user-login
     model: authentik_stages_user_login.userloginstage
+  - attrs:
+      expression: !Format ["context['flow_plan'].context['redirect'] = '%s/signin'\nreturn True", !Context redirect_url]
+      name: dreammall.earth-redirect-localhost-frontend-signin
+    conditions: []
+    id: dreammall.earth-redirect-localhost-frontend-signin
+    identifiers:
+      name: dreammall.earth-redirect-localhost-frontend-signin
+    model: authentik_policies_expression.expressionpolicy
+    state: present
   - identifiers:
       name: default-enrollment-user-write
     id: default-enrollment-user-write
@@ -123,3 +134,25 @@ entries:
       stage: !KeyOf default-enrollment-user-login
       order: 100
     model: authentik_flows.flowstagebinding
+  - attrs:
+      invalid_response_action: retry
+      policy_engine_mode: any
+      re_evaluate_policies: true
+    conditions: []
+    id: redirect-to-frontend
+    identifiers:
+      order: 100
+      stage: !KeyOf default-enrollment-user-login
+      target: !KeyOf flow
+    model: authentik_flows.flowstagebinding
+    state: present
+  - attrs:
+      enabled: true
+      timeout: 30
+    conditions: []
+    identifiers:
+      order: 0
+      policy: !KeyOf dreammall.earth-redirect-localhost-frontend-signin
+      target: !KeyOf redirect-to-frontend
+    model: authentik_policies.policybinding
+    state: present
