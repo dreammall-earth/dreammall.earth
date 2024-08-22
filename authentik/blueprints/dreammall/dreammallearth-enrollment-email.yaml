@@ -1,7 +1,5 @@
 version: 1
 metadata:
-  labels:
-    blueprints.goauthentik.io/instantiate: "false"
   name: Enrollment via E-Mail
 context:
   redirect_url: !Env [DREAMMALL_FRONTEND_URL, "http://localhost:3000"]
