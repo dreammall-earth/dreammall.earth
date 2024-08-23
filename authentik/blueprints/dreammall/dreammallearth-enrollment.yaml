@@ -11,8 +11,12 @@ entries:
     attrs:
       name: E-Mail enrollment Flow
       title: Sign Up
+      compatibility_mode: true
+      layout: sidebar_right
       designation: enrollment
       authentication: require_unauthenticated
+
+  #  input fields in order ####################################################
   - identifiers:
       name: default-enrollment-field-username
     id: prompt-field-username
@@ -25,6 +29,7 @@ entries:
       placeholder: Username
       placeholder_expression: false
       order: 0
+
   - identifiers:
       name: default-enrollment-field-name
     id: prompt-field-name
@@ -37,6 +42,7 @@ entries:
       placeholder: Name
       placeholder_expression: false
       order: 1
+
   - identifiers:
       name: default-enrollment-field-email
     id: prompt-field-email
@@ -49,6 +55,7 @@ entries:
       placeholder: Email
       placeholder_expression: false
       order: 2
+
   - identifiers:
       name: default-enrollment-field-password
     id: prompt-field-password
@@ -61,6 +68,7 @@ entries:
       placeholder: Password
       placeholder_expression: false
       order: 3
+
   - identifiers:
       name: default-enrollment-field-password-repeat
     id: prompt-field-password-repeat
@@ -73,14 +81,8 @@ entries:
       placeholder: Password (repeat)
       placeholder_expression: false
       order: 4
-  - identifiers:
-      name: default-enrollment-email-verification
-    id: default-enrollment-email-verification
-    model: authentik_stages_email.emailstage
-    attrs:
-      use_global_settings: true
-      template: email/account_confirmation.html
-      activate_user_on_success: true
+
+  #  stages in order ##########################################################
   - identifiers:
       name: default-enrollment-prompt-first
     id: default-enrollment-prompt-first
@@ -92,10 +94,25 @@ entries:
         - !KeyOf prompt-field-email
         - !KeyOf prompt-field-password
         - !KeyOf prompt-field-password-repeat
+
   - identifiers:
-      name: default-enrollment-user-login
-    id: default-enrollment-user-login
-    model: authentik_stages_user_login.userloginstage
+      name: default-enrollment-user-write
+    id: default-enrollment-user-write
+    model: authentik_stages_user_write.userwritestage
+    attrs:
+      create_users_as_inactive: true
+      user_creation_mode: always_create
+
+  - identifiers:
+      name: default-enrollment-email-verification
+    id: default-enrollment-email-verification
+    model: authentik_stages_email.emailstage
+    attrs:
+      use_global_settings: true
+      template: email/account_confirmation.html
+      activate_user_on_success: true
+
+  # expression policiy (between email verification stage and user login stage)
   - attrs:
       expression: !Format ["context['flow_plan'].context['redirect'] = '%s/signin'\nreturn True", !Context redirect_url]
       name: dreammall.earth-redirect-localhost-frontend-signin
@@ -105,33 +122,38 @@ entries:
       name: dreammall.earth-redirect-localhost-frontend-signin
     model: authentik_policies_expression.expressionpolicy
     state: present
+
   - identifiers:
-      name: default-enrollment-user-write
-    id: default-enrollment-user-write
-    model: authentik_stages_user_write.userwritestage
-    attrs:
-      create_users_as_inactive: true
-      user_creation_mode: always_create
+      name: default-enrollment-user-login
+    id: default-enrollment-user-login
+    model: authentik_stages_user_login.userloginstage
+
+  # stage bindings ############################################################
   - identifiers:
       target: !KeyOf flow
       stage: !KeyOf default-enrollment-prompt-first
       order: 10
     model: authentik_flows.flowstagebinding
+
   - identifiers:
       target: !KeyOf flow
       stage: !KeyOf default-enrollment-user-write
       order: 20
     model: authentik_flows.flowstagebinding
+
   - identifiers:
       target: !KeyOf flow
       stage: !KeyOf default-enrollment-email-verification
       order: 30
     model: authentik_flows.flowstagebinding
+
   - identifiers:
       target: !KeyOf flow
       stage: !KeyOf default-enrollment-user-login
       order: 100
     model: authentik_flows.flowstagebinding
+
+  # policy attributes #########################################################
   - attrs:
       invalid_response_action: retry
       policy_engine_mode: any
@@ -144,6 +166,7 @@ entries:
       target: !KeyOf flow
     model: authentik_flows.flowstagebinding
     state: present
+
   - attrs:
       enabled: true
       timeout: 30
