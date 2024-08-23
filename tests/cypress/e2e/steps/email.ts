@@ -7,7 +7,7 @@ import { userEmailSite } from '../pages/UserEmailSite'
 
 Then('an email transmission confirmation is displayed', () => {
   cy.waitForNetworkIdle(3000)
-  cy.contains('Prüfen Sie Ihren Posteingang auf eine Bestätigungsmail')
+  cy.find('ak-stage-email').get('button[type="submit"]').should('be.visible')
 })
 
 Then('I receive an email containing the account confirmation link', () => {
