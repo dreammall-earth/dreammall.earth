@@ -1,191 +1,156 @@
 version: 1
 metadata:
-  name: Enrollment
+  name: Enrollment via E-Mail
 context:
-  group_name: Dreammall Users
   redirect_url: !Env [DREAMMALL_FRONTEND_URL, "http://localhost:3000"]
 entries:
-- model: authentik_core.group
-  state: present
-  identifiers:
-    name: !Context group_name
-  id: dreammall-user-group
-- attrs:
-    authentication: none
-    denied_action: message_continue
-    designation: enrollment
-    layout: sidebar_right
-    name: dreammallearth-enrollment
-    policy_engine_mode: any
-    title: Sign Up
-  conditions: []
-  id: dreammallearth-enrollment
-  identifiers:
-    slug: dreammallearth-enrollment
-  model: authentik_flows.flow
-  state: present
-- attrs:
-    field_key: password_repeat
-    label: Password (repeat)
-    name: dreammall-password-change-field-password-repeat
-    order: 301
-    placeholder: Password (repeat)
-    required: true
-    type: password
-  conditions: []
-  id: dreammall-password-change-field-password-repeat
-  identifiers:
-    name: dreammall-password-change-field-password-repeat
-  model: authentik_stages_prompt.prompt
-  state: present
-- attrs:
-    field_key: username
-    initial_value: "try:\n    return user.username\nexcept:\n    return ''"
-    initial_value_expression: true
-    label: Username
-    name: dreammall-user-settings-field-username
-    order: 200
-    placeholder: Username
-    required: true
-    type: text
-  conditions: []
-  id: dreammall-user-settings-field-username
-  identifiers:
-    name: dreammall-user-settings-field-username
-  model: authentik_stages_prompt.prompt
-  state: present
-- attrs:
-    field_key: name
-    initial_value: "try:\n    return user.name\nexcept:\n    return ''"
-    initial_value_expression: true
-    label: Name
-    name: dreammall-user-settings-field-name
-    order: 201
-    placeholder: Name
-    required: true
-    type: text
-  conditions: []
-  id: dreammall-user-settings-field-name
-  identifiers:
-    name: dreammall-user-settings-field-name
-  model: authentik_stages_prompt.prompt
-  state: present
-- attrs:
-    field_key: email
-    initial_value: "try:\n    return user.email\nexcept:\n    return ''"
-    initial_value_expression: true
-    label: Email
-    name: dreammall-user-settings-field-email
-    order: 202
-    placeholder: Email
-    required: true
-    type: email
-  conditions: []
-  id: dreammall-user-settings-field-email
-  identifiers:
-    name: dreammall-user-settings-field-email
-  model: authentik_stages_prompt.prompt
-  state: present
-- attrs:
-    field_key: password
-    label: Password
-    name: dreammall-password-change-field-password
-    order: 300
-    placeholder: Password
-    required: true
-    type: password
-  conditions: []
-  id: dreammall-password-change-field-password
-  identifiers:
-    name: dreammall-password-change-field-password
-  model: authentik_stages_prompt.prompt
-  state: present
-- attrs:
-    expression: !Format ["context['flow_plan'].context['redirect'] = '%s/signin'\nreturn True", !Context redirect_url]
-    name: dreammall.earth-redirect-localhost-frontend-signin
-  conditions: []
-  id: dreammall.earth-redirect-localhost-frontend-signin
-  identifiers:
-    name: dreammall.earth-redirect-localhost-frontend-signin
-  model: authentik_policies_expression.expressionpolicy
-  state: present
-- attrs:
-    fields:
-    - !KeyOf dreammall-password-change-field-password-repeat
-    - !KeyOf dreammall-user-settings-field-username
-    - !KeyOf dreammall-user-settings-field-name
-    - !KeyOf dreammall-user-settings-field-email
-    - !KeyOf dreammall-password-change-field-password
-  conditions: []
-  id: default-source-enrollment-prompt
-  identifiers:
-    name: default-source-enrollment-prompt
-  model: authentik_stages_prompt.promptstage
-  state: present
-- attrs:
-    geoip_binding: no_binding
-    network_binding: no_binding
-    remember_me_offset: seconds=0
-    session_duration: seconds=0
-  conditions: []
-  id: default-source-enrollment-login
-  identifiers:
-    name: default-source-enrollment-login
-  model: authentik_stages_user_login.userloginstage
-  state: present
-- attrs:
-    create_users_group: !KeyOf dreammall-user-group
-    user_creation_mode: always_create
-    user_type: external
-  conditions: []
-  id: default-source-enrollment-write
-  identifiers:
-    name: default-source-enrollment-write
-  model: authentik_stages_user_write.userwritestage
-  state: present
-- attrs:
-    invalid_response_action: retry
-    policy_engine_mode: any
-    re_evaluate_policies: true
-  conditions: []
-  id: null
-  identifiers:
-    order: 10
-    stage: !KeyOf default-source-enrollment-prompt
-    target: !KeyOf dreammallearth-enrollment
-  model: authentik_flows.flowstagebinding
-  state: present
-- attrs:
-    invalid_response_action: retry
-    policy_engine_mode: any
-    re_evaluate_policies: true
-  conditions: []
-  id: null
-  identifiers:
-    order: 20
-    stage: !KeyOf default-source-enrollment-write
-    target: !KeyOf dreammallearth-enrollment
-  model: authentik_flows.flowstagebinding
-  state: present
-- attrs:
-    invalid_response_action: retry
-    policy_engine_mode: any
-    re_evaluate_policies: true
-  conditions: []
-  id: 7af17c16-8209-44cd-84ba-122d8e37feb3
-  identifiers:
-    order: 100
-    stage: !KeyOf default-source-enrollment-login
-    target: !KeyOf dreammallearth-enrollment
-  model: authentik_flows.flowstagebinding
-  state: present
-- attrs:
-    enabled: true
-    timeout: 30
-  conditions: []
-  identifiers:
-    order: 0
-    policy: !KeyOf dreammall.earth-redirect-localhost-frontend-signin
-    target: !KeyOf 7af17c16-8209-44cd-84ba-122d8e37feb3
-  model: authentik_policies.policybinding
-  state: present
+  - identifiers:
+      slug: dreammallearth-enrollment
+    id: flow
+    model: authentik_flows.flow
+    attrs:
+      name: E-Mail enrollment Flow
+      title: Sign Up
+      designation: enrollment
+      authentication: require_unauthenticated
+  - identifiers:
+      name: default-enrollment-field-username
+    id: prompt-field-username
+    model: authentik_stages_prompt.prompt
+    attrs:
+      field_key: username
+      label: Username
+      type: username
+      required: true
+      placeholder: Username
+      placeholder_expression: false
+      order: 0
+  - identifiers:
+      name: default-enrollment-field-name
+    id: prompt-field-name
+    model: authentik_stages_prompt.prompt
+    attrs:
+      field_key: name
+      label: Name
+      type: text
+      required: true
+      placeholder: Name
+      placeholder_expression: false
+      order: 1
+  - identifiers:
+      name: default-enrollment-field-email
+    id: prompt-field-email
+    model: authentik_stages_prompt.prompt
+    attrs:
+      field_key: email
+      label: Email
+      type: email
+      required: true
+      placeholder: Email
+      placeholder_expression: false
+      order: 2
+  - identifiers:
+      name: default-enrollment-field-password
+    id: prompt-field-password
+    model: authentik_stages_prompt.prompt
+    attrs:
+      field_key: password
+      label: Password
+      type: password
+      required: true
+      placeholder: Password
+      placeholder_expression: false
+      order: 3
+  - identifiers:
+      name: default-enrollment-field-password-repeat
+    id: prompt-field-password-repeat
+    model: authentik_stages_prompt.prompt
+    attrs:
+      field_key: password_repeat
+      label: Password (repeat)
+      type: password
+      required: true
+      placeholder: Password (repeat)
+      placeholder_expression: false
+      order: 4
+  - identifiers:
+      name: default-enrollment-email-verification
+    id: default-enrollment-email-verification
+    model: authentik_stages_email.emailstage
+    attrs:
+      use_global_settings: true
+      template: email/account_confirmation.html
+      activate_user_on_success: true
+  - identifiers:
+      name: default-enrollment-prompt-first
+    id: default-enrollment-prompt-first
+    model: authentik_stages_prompt.promptstage
+    attrs:
+      fields:
+        - !KeyOf prompt-field-username
+        - !KeyOf prompt-field-name
+        - !KeyOf prompt-field-email
+        - !KeyOf prompt-field-password
+        - !KeyOf prompt-field-password-repeat
+  - identifiers:
+      name: default-enrollment-user-login
+    id: default-enrollment-user-login
+    model: authentik_stages_user_login.userloginstage
+  - attrs:
+      expression: !Format ["context['flow_plan'].context['redirect'] = '%s/signin'\nreturn True", !Context redirect_url]
+      name: dreammall.earth-redirect-localhost-frontend-signin
+    conditions: []
+    id: dreammall.earth-redirect-localhost-frontend-signin
+    identifiers:
+      name: dreammall.earth-redirect-localhost-frontend-signin
+    model: authentik_policies_expression.expressionpolicy
+    state: present
+  - identifiers:
+      name: default-enrollment-user-write
+    id: default-enrollment-user-write
+    model: authentik_stages_user_write.userwritestage
+    attrs:
+      create_users_as_inactive: true
+      user_creation_mode: always_create
+  - identifiers:
+      target: !KeyOf flow
+      stage: !KeyOf default-enrollment-prompt-first
+      order: 10
+    model: authentik_flows.flowstagebinding
+  - identifiers:
+      target: !KeyOf flow
+      stage: !KeyOf default-enrollment-user-write
+      order: 20
+    model: authentik_flows.flowstagebinding
+  - identifiers:
+      target: !KeyOf flow
+      stage: !KeyOf default-enrollment-email-verification
+      order: 30
+    model: authentik_flows.flowstagebinding
+  - identifiers:
+      target: !KeyOf flow
+      stage: !KeyOf default-enrollment-user-login
+      order: 100
+    model: authentik_flows.flowstagebinding
+  - attrs:
+      invalid_response_action: retry
+      policy_engine_mode: any
+      re_evaluate_policies: true
+    conditions: []
+    id: redirect-to-frontend
+    identifiers:
+      order: 100
+      stage: !KeyOf default-enrollment-user-login
+      target: !KeyOf flow
+    model: authentik_flows.flowstagebinding
+    state: present
+  - attrs:
+      enabled: true
+      timeout: 30
+    conditions: []
+    identifiers:
+      order: 0
+      policy: !KeyOf dreammall.earth-redirect-localhost-frontend-signin
+      target: !KeyOf redirect-to-frontend
+    model: authentik_policies.policybinding
+    state: present
