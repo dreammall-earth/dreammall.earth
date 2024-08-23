@@ -11,6 +11,7 @@ entries:
     attrs:
       name: E-Mail enrollment Flow
       title: Sign Up
+      layout: sidebar_right
       designation: enrollment
       authentication: require_unauthenticated
 
