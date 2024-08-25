@@ -40,7 +40,11 @@
       "header": "My Group Tables",
       "noTables": "No group tables so far",
       "addTable": "Add table",
-      "memberCount": "{count} members"
+      "memberCount": "{count} members",
+      "delete": "Delete",
+      "edit": "Edit",
+      "invite": "Invite",
+      "share": "Share"
     }
   },
   "error": {

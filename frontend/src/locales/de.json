@@ -40,7 +40,11 @@
       "header": "Meine Gruppentische",
       "noTables": "Noch keine Gruppentische",
       "addTable": "Tisch hinzufügen",
-      "memberCount": "{count} Mitglieder"
+      "memberCount": "{count} Mitglieder",
+      "delete": "Löschen",
+      "edit": "Bearbeiten",
+      "invite": "Einladen",
+      "share": "Teilen"
     }
   },
   "error": {
