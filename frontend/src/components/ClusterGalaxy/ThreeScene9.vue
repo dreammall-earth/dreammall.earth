@@ -1,6 +1,14 @@
 <template>
   <div class="canvas-container">
     <canvas ref="canvas"></canvas>
+    <div v-if="modalVisible" class="modal">
+      <div class="modal-content">
+        <span class="close" @click="closeModal">&times;</span>
+        <p>Längengrad: {{ selectedStar.longitude.toFixed(6) }}°</p>
+        <p>Breitengrad: {{ selectedStar.latitude.toFixed(6) }}°</p>
+        <p>Quadrant: {{ selectedStar.quadrant }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -10,14 +18,22 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
+import TWEEN from '@tweenjs/tween.js';
 
 export default defineComponent({
   setup() {
     const canvas = ref<HTMLCanvasElement | null>(null);
+    const modalVisible = ref(false);
+    const selectedStar = ref({ longitude: 0, latitude: 0, quadrant: '' });
     let scene: THREE.Scene;
     let camera: THREE.PerspectiveCamera;
     let renderer: THREE.WebGLRenderer;
     let controls: OrbitControls;
+    let stars: THREE.Mesh[] = [];
+    let redLongitudeLine: THREE.Line | null = null;
+    let redLatitudeLine: THREE.Line | null = null;
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
 
     const initScene = () => {
       scene = new THREE.Scene();
@@ -31,7 +47,7 @@ export default defineComponent({
       renderer.shadowMap.enabled = true;
 
       controls = new OrbitControls(camera, renderer.domElement);
-      controls.enableZoom = false;
+      controls.enableZoom = true;
       controls.enablePan = false;
       controls.enableDamping = true;
       controls.dampingFactor = 0.1;
@@ -43,15 +59,19 @@ export default defineComponent({
       drawEquator();
       drawHighlightedMeridiansAndParallels();
       createColoredFieldsWithNumbers();
+      createStars();
 
       const animate = () => {
         requestAnimationFrame(animate);
+        TWEEN.update();
         controls.update();
         renderer.render(scene, camera);
       };
       animate();
 
       window.addEventListener('resize', onWindowResize);
+      window.addEventListener('click', onMouseClick);
+      window.addEventListener('mousemove', onMouseMove);
     };
 
     const createFineGridWithIntersections = () => {
@@ -73,7 +93,6 @@ export default defineComponent({
       const primeMeridianLine = new THREE.Line(primeMeridianGeometry, primeMeridianMaterial);
       scene.add(primeMeridianLine);
 
-      // Füge Beschriftung hinzu
       const loader = new FontLoader();
       loader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
         const textGeometry = new TextGeometry('0°', {
@@ -101,7 +120,6 @@ export default defineComponent({
       const equatorLine = new THREE.Line(equatorGeometry, equatorMaterial);
       scene.add(equatorLine);
 
-      // Füge Beschriftung hinzu
       const loader = new FontLoader();
       loader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
         const textGeometry = new TextGeometry('Äquator', {
@@ -166,7 +184,6 @@ export default defineComponent({
           const phi = (j / 16) * Math.PI * 2;  // Winkel für den Längengrad
           const vertices = [];
 
-          // Vertices für das Feld generieren (Rechteck aus zwei Dreiecken)
           vertices.push(
             new THREE.Vector3(
               3000 * Math.sin(theta) * Math.cos(phi),
@@ -191,7 +208,7 @@ export default defineComponent({
           );
 
           const geometry = new THREE.BufferGeometry().setFromPoints(vertices);
-          geometry.setIndex([0, 1, 2, 0, 2, 3]); // Zwei Dreiecke für das Rechteck
+          geometry.setIndex([0, 1, 2, 0, 2, 3]);
 
           const material = new THREE.MeshBasicMaterial({
             color: colors[fieldCount % colors.length],
@@ -203,11 +220,9 @@ export default defineComponent({
           const mesh = new THREE.Mesh(geometry, material);
           scene.add(mesh);
 
-          const currentFieldCount = fieldCount; // Aktuellen Zählerwert speichern
-
           const loader = new FontLoader();
           loader.load('/src/assets/fonts/Helvetica/font.json', (font) => {
-            const label = `B${i}L${String.fromCharCode(65 + j)}`; // Label: B8A, B9B, usw.
+            const label = `B${i}L${String.fromCharCode(65 + j)}`;
             const textGeometry = new TextGeometry(label, {
               font: font,
               size: 50,
@@ -234,6 +249,131 @@ export default defineComponent({
       }
     };
 
+    const createStars = () => {
+      const starGeometry = new THREE.SphereGeometry(10, 16, 16);
+      const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+
+      for (let i = 0; i < 100; i++) {
+        const phi = Math.random() * Math.PI * 2; // Längengrad
+        const theta = Math.random() * Math.PI; // Breitengrad
+
+        const x = 3000 * Math.sin(theta) * Math.cos(phi);
+        const y = 3000 * Math.cos(theta);
+        const z = 3000 * Math.sin(theta) * Math.sin(phi);
+
+        const star = new THREE.Mesh(starGeometry, starMaterial);
+        star.position.set(x, y, z);
+        star.userData = { longitude: phi * (180 / Math.PI), latitude: theta * (180 / Math.PI) };
+
+        stars.push(star);
+        scene.add(star);
+      }
+    };
+
+    const onMouseClick = (event: MouseEvent) => {
+      event.preventDefault();
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(stars);
+
+      if (intersects.length > 0) {
+        const intersectedStar = intersects[0].object as THREE.Mesh;
+        handleStarClick(intersectedStar);
+      }
+    };
+
+    const onMouseMove = (event: MouseEvent) => {
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(stars);
+
+      if (intersects.length > 0) {
+        document.body.style.cursor = 'pointer';
+      } else {
+        document.body.style.cursor = 'default';
+      }
+    };
+
+    const calculateQuadrant = (longitude: number, latitude: number): string => {
+      const latIndex = Math.floor((latitude / 180) * 32);
+      const longIndex = Math.floor((longitude / 360) * 16);
+
+      const latitudeLabel = `B${latIndex}`;
+      const longitudeLabel = `L${String.fromCharCode(65 + longIndex)}`;
+
+      return `${latitudeLabel}${longitudeLabel}`;
+    };
+
+    const handleStarClick = (star: THREE.Mesh) => {
+      const userData = star.userData as { longitude: number; latitude: number };
+      const quadrant = calculateQuadrant(userData.longitude, userData.latitude);
+      selectedStar.value = { ...userData, quadrant };
+      modalVisible.value = true;
+
+      const { longitude, latitude } = userData;
+
+      if (redLongitudeLine) scene.remove(redLongitudeLine);
+      if (redLatitudeLine) scene.remove(redLatitudeLine);
+
+      const longitudeLineGeometry = new THREE.BufferGeometry();
+      const longitudePoints = [];
+      for (let i = 0; i <= 64; i++) {
+        const theta = (i / 64) * Math.PI;
+        longitudePoints.push(new THREE.Vector3(
+          3000 * Math.sin(theta) * Math.cos(longitude * (Math.PI / 180)),
+          3000 * Math.cos(theta),
+          3000 * Math.sin(theta) * Math.sin(longitude * (Math.PI / 180))
+        ));
+      }
+      longitudeLineGeometry.setFromPoints(longitudePoints);
+      redLongitudeLine = new THREE.Line(longitudeLineGeometry, new THREE.LineBasicMaterial({ color: 0xff0000 }));
+      scene.add(redLongitudeLine);
+
+      const latitudeLineGeometry = new THREE.BufferGeometry();
+      const latitudePoints = [];
+      for (let i = 0; i <= 64; i++) {
+        const phi = (i / 64) * Math.PI * 2;
+        latitudePoints.push(new THREE.Vector3(
+          3000 * Math.sin(latitude * (Math.PI / 180)) * Math.cos(phi),
+          3000 * Math.cos(latitude * (Math.PI / 180)),
+          3000 * Math.sin(latitude * (Math.PI / 180)) * Math.sin(phi)
+        ));
+      }
+      latitudeLineGeometry.setFromPoints(latitudePoints);
+      redLatitudeLine = new THREE.Line(latitudeLineGeometry, new THREE.LineBasicMaterial({ color: 0xff0000 }));
+      scene.add(redLatitudeLine);
+
+      const target = new THREE.Vector3(star.position.x, star.position.y, star.position.z);
+      new TWEEN.Tween(camera.position)
+        .to({
+          x: target.x * 0.9,
+          y: target.y * 0.9,
+          z: target.z * 0.9
+        }, 1000)
+        .easing(TWEEN.Easing.Quadratic.Out)
+        .start();
+
+      new TWEEN.Tween(controls.target)
+        .to({
+          x: target.x,
+          y: target.y,
+          z: target.z
+        }, 1000)
+        .easing(TWEEN.Easing.Quadratic.Out)
+        .onUpdate(() => controls.update())
+        .start();
+    };
+
+    const closeModal = () => {
+      modalVisible.value = false;
+      if (redLongitudeLine) scene.remove(redLongitudeLine);
+      if (redLatitudeLine) scene.remove(redLatitudeLine);
+    };
+
     const onWindowResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
@@ -246,6 +386,9 @@ export default defineComponent({
 
     return {
       canvas,
+      modalVisible,
+      selectedStar,
+      closeModal
     };
   },
 });
@@ -256,11 +399,40 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   overflow: hidden;
+  position: relative;
 }
 
 canvas {
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.modal {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.close {
+  align-self: flex-end;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal p {
+  margin: 5px 0;
 }
 </style>

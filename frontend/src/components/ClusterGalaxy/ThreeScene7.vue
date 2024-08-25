@@ -55,7 +55,7 @@ export default defineComponent({
 
     const createTexturedSphere = () => {
       const textureLoader = new THREE.TextureLoader();
-      const texture = textureLoader.load('/src/assets/img/galaxy_jpg.jpg');  // Verwende den korrekten Pfad zum Bild
+      const texture = textureLoader.load('/src/assets/img/space2.jpg');  // Verwende den korrekten Pfad zum Bild
       // const texture = textureLoader.load('/src/assets/img/galaxy2.jpg');  // Verwende den korrekten Pfad zum Bild
 
       texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
@@ -66,7 +66,7 @@ export default defineComponent({
         side: THREE.BackSide, // Wir schauen von innen nach außen
         transparent: true,
         opacity: 0.6,
-        color: new THREE.Color(0xfff)  // Macht das Bild dunkler
+        color: new THREE.Color(0xffff)  // Macht das Bild dunkler
       });
 
       const texturedSphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
