@@ -97,7 +97,7 @@ watch(
 
 .menu-drawer {
   top: 0 !important;
-  width: 308px;
+  width: 308px !important;
   height: 100% !important;
   padding-top: 70px;
   background: var(--v-sidebar-background) !important;
