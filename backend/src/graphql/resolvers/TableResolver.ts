@@ -10,8 +10,6 @@ import {
   Subscription,
   Root,
 } from 'type-graphql'
-// eslint-disable-next-line import/named
-import { v4 as uuidv4 } from 'uuid'
 
 import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo, AttendeeRole } from '#api/BBB'
 import { CONFIG } from '#config/config'
@@ -19,10 +17,50 @@ import { OpenTable, Table } from '#models/TableModel'
 import { Context } from '#src/context'
 import { EVENT_CREATE_MY_TABLE, EVENT_UPDATE_MY_TABLE } from '#src/event/Events'
 import logger from '#src/logger'
-import { prisma, UserWithMeeting, UsersWithMeetings } from '#src/prisma'
+import { prisma, UsersWithMeetings, UserWithMeeting } from '#src/prisma'
+import meetingRepository from '#src/Repositories/MeetingRepository'
+import userRepository from '#src/Repositories/UserRepository'
+
+export interface ApiRequestParams {
+  context: Context
+}
+
+export interface CreateGroupTableParams extends ApiRequestParams {
+  name: string
+  isPublic: boolean
+  userIds?: number[] | null | undefined
+}
 
 @Resolver()
 export class TableResolver {
+  // private userRepository = new UserRepository()
+
+  // @Authorized()
+  // @Mutation(() => Table)
+  // async createGroupTable(
+  //   // params: CreateGroupTableParams,
+  //   @Arg('name') name: string,
+  //   @Arg('isPublic') isPublic: boolean,
+  //   @Ctx() context: Context,
+  //   // eslint-disable-next-line type-graphql/wrong-decorator-signature
+  //   @Arg('userIds', () => [Int], { nullable: 'itemsAndList' }) // eslint-disable-next-line type-graphql/invalid-nullable-input-type
+  //   userIds?: number[] | null | undefined,
+  // ): Promise<Table> {
+  //   const { user } = context
+  //   if (!user) throw new Error('User not found!')
+
+  //   // Check if GroupMeeting already exist how to recognize the Meeting
+  //   // if (user.meetingId) {
+  //   //   throw new Error('Meeting already exists!')
+  //   // }
+
+  //   const meetingID: string = await meetingRepository.generateMeetingID()
+
+  //   await EVENT_CREATE_GROUP_TABLE(user.id)
+
+  //   return new Table(meeting, usersInMeetings)
+  // }
+
   @Authorized()
   @Mutation(() => Table)
   async createMyTable(
@@ -40,18 +78,9 @@ export class TableResolver {
       throw new Error('Meeting already exists!')
     }
 
-    let meetingID: string = uuidv4()
-    while (
-      await prisma.meeting.count({
-        where: {
-          meetingID,
-        },
-      })
-    ) {
-      meetingID = uuidv4()
-    }
+    const meetingID: string = await meetingRepository.generateMeetingID()
 
-    const { meeting } = (await prisma.user.update({
+    const { meeting } = (await userRepository.update({
       where: {
         id: user.id,
       },
@@ -116,7 +145,7 @@ export class TableResolver {
       throw new Error('User has no meeting!')
     }
 
-    const meeting = await prisma.meeting.update({
+    const meeting = await meetingRepository.update({
       where: {
         id: user.meetingId,
       },
@@ -172,34 +201,41 @@ export class TableResolver {
 
     try {
       if (user.meetingId) {
-        dbMeeting = await prisma.meeting.findUnique({
+        dbMeeting = await meetingRepository.findUnique({
           where: {
             id: user.meetingId,
           },
         })
+        // prisma.meeting.findUnique({
+        //   where: {
+        //     id: user.meetingId,
+        //   },
+        // })
         if (!dbMeeting) throw new Error('Meeting not found!')
       } else {
-        let meetingID: string = uuidv4()
-        while (
-          await prisma.meeting.count({
-            where: {
-              meetingID,
-            },
-          })
-        ) {
-          meetingID = uuidv4()
-        }
+        const meetingID: string = await meetingRepository.generateMeetingID()
 
-        dbMeeting = await prisma.meeting.create({
+        dbMeeting = await meetingRepository.create({
           data: {
             name: user.username,
             meetingID,
           },
         })
-        await prisma.user.update({
+        if (!dbMeeting) throw new Error()
+        // prisma.meeting.create({
+        //   data: {
+        //     name: user.username,
+        //     meetingID,
+        //   },
+        // })
+        await userRepository.update({
           where: { id: user.id },
           data: { meetingId: dbMeeting.id },
         })
+        // await prisma.user.update({
+        //   where: { id: user.id },
+        //   data: { meetingId: dbMeeting.id },
+        // })
       }
     } catch (err) {
       logger.error('Could not create Meeting in DB!', err)
@@ -221,7 +257,7 @@ export class TableResolver {
     if (!meeting) throw new Error('Could not create meeting!')
 
     try {
-      await prisma.meeting.update({
+      await meetingRepository.update({
         where: { id: dbMeeting.id },
         data: {
           attendeePW: meeting.attendeePW,
@@ -254,8 +290,8 @@ export class TableResolver {
     @Ctx() context: Context,
   ): Promise<string> {
     const { user } = context
-
     if (!user) throw new Error('User not found!')
+
     const meeting = await prisma.meeting.findUnique({
       where: {
         id: tableId,
@@ -264,7 +300,6 @@ export class TableResolver {
         user: true,
       },
     })
-
     if (!meeting) throw new Error('Table does not exist')
 
     let password: string
@@ -287,7 +322,7 @@ export class TableResolver {
     @Arg('userName') userName: string,
     @Arg('tableId', () => Int) tableId: number,
   ): Promise<string> {
-    const meeting = await prisma.meeting.findUnique({
+    const meeting = await meetingRepository.findUnique({
       where: {
         id: tableId,
       },
@@ -297,10 +332,11 @@ export class TableResolver {
     })
     if (!meeting) throw new Error('Table does not exist')
 
+    const password = meeting.attendeePW ? meeting.attendeePW : ''
     return joinMeetingLink({
       fullName: userName,
       meetingID: meeting.meetingID,
-      password: meeting.attendeePW ? meeting.attendeePW : '',
+      password,
     })
   }
 
