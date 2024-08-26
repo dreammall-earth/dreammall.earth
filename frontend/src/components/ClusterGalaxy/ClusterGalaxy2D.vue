@@ -16,8 +16,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue';
-import * as d3 from 'd3';
+import { geoStereographic, geoPath, select, geoGraticule, geoCircle, range } from 'd3'
+import { defineComponent, ref, onMounted } from 'vue'
 
 export default defineComponent({
   props: {
@@ -27,116 +27,120 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const northernHemisphere = ref<HTMLElement | null>(null);
-    const southernHemisphere = ref<HTMLElement | null>(null);
-    const showModal = ref(false);
-    const selectedStar = ref({ longitude: 0, latitude: 0, quadrant: '' });
+    const northernHemisphere = ref<HTMLElement | null>(null)
+    const southernHemisphere = ref<HTMLElement | null>(null)
+    const showModal = ref(false)
+    const selectedStar = ref({ longitude: 0, latitude: 0, quadrant: '' })
 
-    const width = 800;
-    const height = 800;
+    const width = 800
+    const height = 800
 
-    const projection = d3.geoStereographic()
+    const projection = geoStereographic()
       .reflectY(true)
       .scale((width - 120) * 0.5)
       .rotate([0, -90])
       .translate([width / 2, height / 2])
-      .precision(0.1);
+      .precision(0.1)
 
-    const path = d3.geoPath(projection);
+    const path = geoPath(projection)
 
     const calculateQuadrant = (longitude: number, latitude: number): string => {
-      const latIndex = Math.floor((latitude / 180) * 32);
-      const longIndex = Math.floor((longitude / 360) * 16);
+      const latIndex = Math.floor((latitude / 180) * 32)
+      const longIndex = Math.floor((longitude / 360) * 16)
 
-      const latitudeLabel = `B${latIndex}`;
-      const longitudeLabel = `L${String.fromCharCode(65 + longIndex)}`;
+      const latitudeLabel = `B${latIndex}`
+      const longitudeLabel = `L${String.fromCharCode(65 + longIndex)}`
 
-      return `${latitudeLabel}${longitudeLabel}`;
-    };
+      return `${latitudeLabel}${longitudeLabel}`
+    }
 
-    const drawHemisphere = (element: HTMLElement | null, data: any[], filterCondition: (d: any) => boolean) => {
-      if (!element) return;
+    const drawHemisphere = (
+      element: HTMLElement | null,
+      data: any[],
+      filterCondition: (d: any) => boolean,
+    ) => {
+      if (!element) return
 
-      const svg = d3.select(element)
+      const svg = select(element)
         .append('svg')
         .attr('width', width)
         .attr('height', height)
-        .style('background', '#081b3f');
+        .style('background', '#081b3f')
 
-      const graticule = d3.geoGraticule().step([15, 10])();
-      const outline = d3.geoCircle().radius(90).center([0, 90])();
+      const graticule = geoGraticule().step([15, 10])()
+      const outline = geoCircle().radius(90).center([0, 90])()
 
-      svg.append("path")
-        .attr("d", path(graticule))
-        .attr("fill", "none")
-        .attr("stroke", "#6c757d")
-        .attr("stroke-opacity", 0.2);
+      svg
+        .append('path')
+        .attr('d', path(graticule))
+        .attr('fill', 'none')
+        .attr('stroke', '#6c757d')
+        .attr('stroke-opacity', 0.2)
 
-      svg.append("path")
-        .attr("d", path(outline))
-        .attr("fill", "none")
-        .attr("stroke", "#6c757d");
+      svg.append('path').attr('d', path(outline)).attr('fill', 'none').attr('stroke', '#6c757d')
 
-      svg.append("g")
-        .selectAll("text")
-        .data(d3.range(0, 1440, 60)) // Jede Stunde
-        .join("text")
-        .attr("dy", "0.35em")
-        .text(d => `${d / 60}h`)
-        .attr("font-size", d => d % 360 ? 10 : 14)
-        .attr("font-weight", d => d % 360 ? null : "bold")
-        .attr("fill", "#e0e0e0")
-        .datum(d => projection([d / 4, -4]))
-        .attr("x", d => d ? d[0] : 0)
-        .attr("y", d => d ? d[1] : 0);
+      svg
+        .append('g')
+        .selectAll('text')
+        .data(range(0, 1440, 60)) // Jede Stunde
+        .join('text')
+        .attr('dy', '0.35em')
+        .text((d) => `${d / 60}h`)
+        .attr('font-size', (d) => (d % 360 ? 10 : 14))
+        .attr('font-weight', (d) => (d % 360 ? null : 'bold'))
+        .attr('fill', '#e0e0e0')
+        .datum((d) => projection([d / 4, -4]))
+        .attr('x', (d) => (d ? d[0] : 0))
+        .attr('y', (d) => (d ? d[1] : 0))
 
-      svg.selectAll('circle')
+      svg
+        .selectAll('circle')
         .data(data.filter(filterCondition))
         .enter()
         .append('circle')
-        .attr('cx', d => {
-          const point = projection([d.longitude, d.latitude]);
-          return point ? point[0] : 0;
+        .attr('cx', (d) => {
+          const point = projection([d.longitude, d.latitude])
+          return point ? point[0] : 0
         })
-        .attr('cy', d => {
-          const point = projection([d.longitude, d.latitude]);
-          return point ? point[1] : 0;
+        .attr('cy', (d) => {
+          const point = projection([d.longitude, d.latitude])
+          return point ? point[1] : 0
         })
-        .attr('r', d => d.magnitude ? (8 - d.magnitude) / 2 : 3)
+        .attr('r', (d) => (d.magnitude ? (8 - d.magnitude) / 2 : 3))
         .attr('fill', 'white')
         .attr('stroke', 'none')
         .attr('opacity', 0.8)
-        .on('mouseover', function() {
-          d3.select(this).attr('r', 6);
+        .on('mouseover', function () {
+          select(this).attr('r', 6)
         })
-        .on('mouseout', function(event, d) {
-          d3.select(this).attr('r', d.magnitude ? (8 - d.magnitude) / 2 : 3);
+        .on('mouseout', function (event, d) {
+          select(this).attr('r', d.magnitude ? (8 - d.magnitude) / 2 : 3)
         })
         .on('click', (event, d) => {
-          const quadrant = calculateQuadrant(d.longitude, d.latitude);
-          selectedStar.value = { ...d, quadrant };
-          showModal.value = true;
-        });
-    };
+          const quadrant = calculateQuadrant(d.longitude, d.latitude)
+          selectedStar.value = { ...d, quadrant }
+          showModal.value = true
+        })
+    }
 
     const closeModal = () => {
-      showModal.value = false;
-    };
+      showModal.value = false
+    }
 
     onMounted(() => {
-      drawHemisphere(northernHemisphere.value, props.starData, d => d.latitude > 0);
-      drawHemisphere(southernHemisphere.value, props.starData, d => d.latitude <= 0);
-    });
+      drawHemisphere(northernHemisphere.value, props.starData, (d) => d.latitude > 0)
+      drawHemisphere(southernHemisphere.value, props.starData, (d) => d.latitude <= 0)
+    })
 
     return {
       northernHemisphere,
       southernHemisphere,
       showModal,
       selectedStar,
-      closeModal
-    };
+      closeModal,
+    }
   },
-});
+})
 </script>
 
 <style scoped>
