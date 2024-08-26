@@ -756,7 +756,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
       <nav
         class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer px-4"
         data-v-cf2c9067=""
-        style="right: 0px; z-index: 1004; transform: translateX(256px); position: fixed; transition: none !important; height: calc(100% - 70px - 0px); top: 70px; bottom: 0px; width: 256px;"
+        style="right: 0px; z-index: 1004; transform: translateX(308px); position: fixed; transition: none !important; height: calc(100% - 70px - 0px); top: 70px; bottom: 0px; width: 308px;"
       >
         <!---->
         <!---->
