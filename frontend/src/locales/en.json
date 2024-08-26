@@ -1,8 +1,10 @@
 {
   "$vuetify": {
+    "close": "Close",
     "input": {
       "clear": "Clear"
-    }
+    },
+    "open": "Open"
   },
   "auth": {
     "content": "Logging in...",
@@ -13,12 +15,27 @@
     "newProject": "New Project",
     "newTable": "New Table",
     "signout": "Sign Out",
-    "toAdmin": "To the admin",
     "toAssistant": "Assistant",
     "toTable": "To the meeting"
   },
   "cafe": {
     "welcome": "World Cafe"
+  },
+  "cockpit": {
+    "about-me": {
+      "edit": {
+        "add": "Add",
+        "social-media": "Social Media",
+        "title": "About me"
+      },
+      "education-placeholder": "My education",
+      "empty-social-media": "Add Social Media",
+      "feeling-placeholder": "How I feel today",
+      "introduction-placeholder": "My introduction line",
+      "language-placeholder": "Languages I speak",
+      "place-placeholder": "My location",
+      "work-placeholder": "My work"
+    }
   },
   "error": {
     "404": {

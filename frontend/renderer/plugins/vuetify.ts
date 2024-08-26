@@ -26,6 +26,7 @@ function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): Theme
       font: theme.fontColor,
       icon: theme.iconColor,
       'dropdown-background': theme.dropdownBackgroundColor,
+      'cockpit-highlight': theme.cockpitHighlightColor,
     },
     variables: {
       'border-color': theme.borderColor,
@@ -35,6 +36,10 @@ function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): Theme
       'icon-background': theme.iconBackground,
       'bottom-menu-background': theme.bottomMenuBackground,
       'sidebar-background': theme.sidebarBackground,
+      'cockpit-input-background': theme.cockpitInputBackground,
+      'cockpit-element-background': theme.cockpitElementBackground,
+      'cockpit-chip-background': theme.cockpitChipBackground,
+      'cockpit-chip-background-2': theme.cockpitChipBackground2,
     },
   }
 }

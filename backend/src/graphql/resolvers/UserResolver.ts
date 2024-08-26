@@ -5,8 +5,8 @@ import { User, CurrentUser, UserDetail, SocialMedia } from '#graphql/models/User
 import { AddSocialMediaInput } from '#inputs/AddSocialMediaInput'
 import { AddUserDetailInput } from '#inputs/AddUserDetailInput'
 import { UpdateUserInput } from '#inputs/UpdateUserInput'
+import { Context } from '#src/context'
 import { prisma, UsersWithMeetings, UserWithProfile } from '#src/prisma'
-import { Context } from '#src/server/context'
 
 @Resolver()
 export class UserResolver {
@@ -51,17 +51,14 @@ export class UserResolver {
     const { user } = context
     if (!user) throw new Error('User not found!')
 
-    await prisma.user.update({
+    const updatedUser = await prisma.user.update({
       where: {
         id: user.id,
       },
       data,
     })
 
-    if (data.introduction === undefined) delete data.introduction
-    if (data.availability === undefined) delete data.availability
-
-    return createCurrentUser({ ...user, ...data })
+    return createCurrentUser({ ...user, ...updatedUser })
   }
 
   @Authorized()
