@@ -61,7 +61,7 @@ import DefaultLayout from '#layouts/DefaultLayout.vue'
 // import ClusterGalaxyVisualizer7 from '#components/ClusterGalaxy/ThreeScene7.vue';
 // import ClusterGalaxyVisualizer8 from '#components/ClusterGalaxy/ThreeScene8.vue';
 // import ClusterGalaxyVisualizer9 from '#components/ClusterGalaxy/ThreeScene9.vue';
-import ClusterGalaxy3D from '#components/ClusterGalaxy/ThreeScene10.vue';
+import ClusterGalaxy3D from '#components/ClusterGalaxy/ClusterGalaxy2D.vue';
 import ClusterGalaxy2D from '#components/ClusterGalaxy/ClusterGalaxy2D.vue';
 
 
