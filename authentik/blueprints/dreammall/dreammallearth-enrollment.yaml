@@ -84,8 +84,8 @@ entries:
 
   #  stages in order ##########################################################
   - identifiers:
-      name: default-enrollment-prompt-first
-    id: default-enrollment-prompt-first
+      name: default-source-enrollment-prompt
+    id: default-source-enrollment-prompt
     model: authentik_stages_prompt.promptstage
     attrs:
       fields:
@@ -104,35 +104,20 @@ entries:
       user_creation_mode: always_create
 
   - identifiers:
-      name: default-enrollment-email-verification
-    id: default-enrollment-email-verification
-    model: authentik_stages_email.emailstage
+      name: dreammallearth-account-confirmation
+    id: dreammallearth-account-confirmation
+    model: authentik_stages_email.emailstage 
     attrs:
-      use_global_settings: true
+      activate_user_on_success: true
       subject: DreamMall Account Confirmation
       template: email/account_confirmation.html
-      activate_user_on_success: true
-
-  # expression policiy (between email verification stage and user login stage)
-  - attrs:
-      expression: !Format ["context['flow_plan'].context['redirect'] = '%s/signin'\nreturn True", !Context redirect_url]
-      name: dreammall.earth-redirect-localhost-frontend-signin
-    conditions: []
-    id: dreammall.earth-redirect-localhost-frontend-signin
-    identifiers:
-      name: dreammall.earth-redirect-localhost-frontend-signin
-    model: authentik_policies_expression.expressionpolicy
-    state: present
-
-  - identifiers:
-      name: default-enrollment-user-login
-    id: default-enrollment-user-login
-    model: authentik_stages_user_login.userloginstage
+#      token_expiry: 30 - how long should the token in the link be valid?
+      use_global_settings: true
 
   # stage bindings ############################################################
   - identifiers:
       target: !KeyOf flow
-      stage: !KeyOf default-enrollment-prompt-first
+      stage: !KeyOf default-source-enrollment-prompt
       order: 10
     model: authentik_flows.flowstagebinding
 
@@ -144,14 +129,25 @@ entries:
 
   - identifiers:
       target: !KeyOf flow
-      stage: !KeyOf default-enrollment-email-verification
+      stage: !KeyOf dreammallearth-account-confirmation
       order: 30
     model: authentik_flows.flowstagebinding
 
+  # policiy (between user write stage and user login stage) ###################
+  - attrs:
+      expression: !Format ["context['flow_plan'].context['redirect'] = '%s/signin'\nreturn True", !Context redirect_url]
+      name: dreammall.earth-redirect-frontend-signin
+    conditions: []
+    id: dreammall.earth-redirect-frontend-signin
+    identifiers:
+      name: dreammall.earth-redirect-frontend-signin
+    model: authentik_policies_expression.expressionpolicy
+    state: present
+
   - identifiers:
       target: !KeyOf flow
-      stage: !KeyOf default-enrollment-user-login
-      order: 100
+      stage: !KeyOf dreammallearth-account-confirmation
+      order: 30
     model: authentik_flows.flowstagebinding
 
   # policy attributes #########################################################
@@ -163,7 +159,7 @@ entries:
     id: redirect-to-frontend
     identifiers:
       order: 100
-      stage: !KeyOf default-enrollment-user-login
+      stage: !KeyOf dreammallearth-account-confirmation
       target: !KeyOf flow
     model: authentik_flows.flowstagebinding
     state: present
@@ -174,7 +170,7 @@ entries:
     conditions: []
     identifiers:
       order: 0
-      policy: !KeyOf dreammall.earth-redirect-localhost-frontend-signin
+      policy: !KeyOf dreammall.earth-redirect-frontend-signin
       target: !KeyOf redirect-to-frontend
     model: authentik_policies.policybinding
     state: present
