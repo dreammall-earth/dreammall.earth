@@ -328,5 +328,59 @@
         "longitude": 315,
         "latitude": 0,
         "magnitude": 1
+      },
+      {
+        "id": 56,
+        "longitude": 0,
+        "latitude": 0,
+        "magnitude": 1
+      },
+      {
+        "id": 57,
+        "longitude": 45,
+        "latitude": 0,
+        "magnitude": 1
+      },
+      {
+        "id": 58,
+        "longitude": 90,
+        "latitude": 0,
+        "magnitude": 1
+      },
+      {
+        "id": 59,
+        "longitude": 135,
+        "latitude": 0,
+        "magnitude": 1
+      },
+      {
+        "id": 60,
+        "longitude": 180,
+        "latitude": 0,
+        "magnitude": 1
+      },
+      {
+        "id": 61,
+        "longitude": 225,
+        "latitude": 0,
+        "magnitude": 1
+      },
+      {
+        "id": 62,
+        "longitude": 270,
+        "latitude": 0,
+        "magnitude": 1
+      },
+      {
+        "id": 63,
+        "longitude": 315,
+        "latitude": 0,
+        "magnitude": 1
+      },
+      {
+        "id": 64,
+        "longitude": 360,
+        "latitude": 0,
+        "magnitude": 1
       }
 ]  

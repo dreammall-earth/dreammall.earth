@@ -19,10 +19,15 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import TWEEN from '@tweenjs/tween.js';
-import userData from '#src/assets/user_data.json'; 
 
 export default defineComponent({
-  setup() {
+  props: {
+    starData: {
+      type: Array,
+      required: true,
+    },
+  },
+  setup(props) {
     const canvas = ref<HTMLCanvasElement | null>(null);
     const modalVisible = ref(false);
     const selectedStar = ref({ longitude: 0, latitude: 0, quadrant: '' });
@@ -60,7 +65,7 @@ export default defineComponent({
       drawEquator();
       drawHighlightedMeridiansAndParallels();
       createColoredFieldsWithNumbers();
-      createStars(userData);
+      createStars(props.starData);
 
       const animate = () => {
         requestAnimationFrame(animate);
@@ -176,13 +181,13 @@ export default defineComponent({
 
       const startLatitudeIndex = 8;
       const endLatitudeIndex = 23;
-      const latStep = Math.PI / 32;  // Schrittweite für die Breitengrade (32 Schritte insgesamt)
+      const latStep = Math.PI / 32;
 
       for (let i = startLatitudeIndex; i <= endLatitudeIndex; i++) {
-        const theta = (i / 32) * Math.PI;  // Winkel für den Breitengrad
+        const theta = (i / 32) * Math.PI;
 
         for (let j = 0; j < 16; j++) {
-          const phi = (j / 16) * Math.PI * 2;  // Winkel für den Längengrad
+          const phi = (j / 16) * Math.PI * 2;
           const vertices = [];
 
           vertices.push(
@@ -266,8 +271,8 @@ export default defineComponent({
         star.position.set(x, y, z);
         star.userData = { longitude: starData.longitude, latitude: starData.latitude, id: starData.id };
 
-        stars.push(star);
         scene.add(star);
+        stars.push(star);
       });
     };
 
@@ -437,4 +442,3 @@ canvas {
   margin: 5px 0;
 }
 </style>
-
