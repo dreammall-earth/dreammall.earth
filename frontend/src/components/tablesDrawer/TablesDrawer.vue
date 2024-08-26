@@ -5,6 +5,7 @@
     mobile
     class="menu-drawer px-4"
     :class="[{ 'changing-orientation': isChangingOrientation }]"
+    :width="308"
   >
     <v-text-field
       v-model="searchValue"
@@ -97,7 +98,6 @@ watch(
 
 .menu-drawer {
   top: 0 !important;
-  width: 308px;
   height: 100% !important;
   padding-top: 70px;
   background: var(--v-sidebar-background) !important;
