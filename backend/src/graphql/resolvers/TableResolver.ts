@@ -206,7 +206,7 @@ export class TableResolver {
       throw new Error('Could not create Meeting in DB!')
     }
 
-    const inviteLink = CONFIG.FRONTEND_INVITE_LINK_URL + dbMeeting.id
+    const inviteLink = new URL(`join-table/${dbMeeting.id}`, CONFIG.FRONTEND_URL).toString()
 
     const meeting = await createMeeting(
       {
