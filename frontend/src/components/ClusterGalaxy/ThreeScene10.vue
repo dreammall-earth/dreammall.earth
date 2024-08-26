@@ -19,6 +19,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import TWEEN from '@tweenjs/tween.js';
+import userData from '#src/assets/user_data.json'; 
 
 export default defineComponent({
   setup() {
@@ -59,7 +60,7 @@ export default defineComponent({
       drawEquator();
       drawHighlightedMeridiansAndParallels();
       createColoredFieldsWithNumbers();
-      createStars();
+      createStars(userData);
 
       const animate = () => {
         requestAnimationFrame(animate);
@@ -249,13 +250,13 @@ export default defineComponent({
       }
     };
 
-    const createStars = () => {
+    const createStars = (data: any[]) => {
       const starGeometry = new THREE.SphereGeometry(10, 16, 16);
       const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
-      for (let i = 0; i < 100; i++) {
-        const phi = Math.random() * Math.PI * 2; // Längengrad
-        const theta = Math.random() * Math.PI; // Breitengrad
+      data.forEach(starData => {
+        const phi = starData.longitude * (Math.PI / 180);
+        const theta = starData.latitude * (Math.PI / 180);
 
         const x = 3000 * Math.sin(theta) * Math.cos(phi);
         const y = 3000 * Math.cos(theta);
@@ -263,11 +264,11 @@ export default defineComponent({
 
         const star = new THREE.Mesh(starGeometry, starMaterial);
         star.position.set(x, y, z);
-        star.userData = { longitude: phi * (180 / Math.PI), latitude: theta * (180 / Math.PI) };
+        star.userData = { longitude: starData.longitude, latitude: starData.latitude, id: starData.id };
 
         stars.push(star);
         scene.add(star);
-      }
+      });
     };
 
     const onMouseClick = (event: MouseEvent) => {
