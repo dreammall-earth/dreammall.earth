@@ -6,6 +6,7 @@ export type TableSetupProps = {
 
 export type TableSetupEmits = {
   (e: 'next'): void
+  (e: 'submit'): void
   (e: 'tableName:updated', value: string): void
   (e: 'isPublic:updated', value: boolean): void
   (e: 'users:updated', value: number[]): void

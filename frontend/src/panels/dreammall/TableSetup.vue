@@ -12,6 +12,7 @@
     v-if="steps && currentStep < steps.length"
     :my-table-settings="tableSettings"
     @next="onNext"
+    @submit="onSubmit"
     @table-name:updated="updateTableName"
     @is-public:updated="updateIsPublic"
     @users:updated="updateUsers"
@@ -19,8 +20,10 @@
 </template>
 
 <script setup lang="ts">
+import { navigate } from 'vike/client/router'
 import { onMounted, onUnmounted, ref } from 'vue'
 
+import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import MyTableSettings from '#src/panels/dreammall/interfaces/MyTableSettings'
 import TableSetupStepA from '#src/panels/dreammall/TableSetupStepA.vue'
 import TableSetupStepB from '#src/panels/dreammall/TableSetupStepB.vue'
@@ -132,6 +135,37 @@ const findStepById = (id: string): number => steps.findIndex((step) => step.id =
 const onNext = transitToNext
 const onBack = transitToPrevious
 
+const onSubmit = async () => {
+  try {
+    const name = tableSettings.value.name
+    const isPublic = tableSettings.value.isPublic
+    const users = tableSettings.value.users
+
+    const table = await tablesStore.createMyTable(
+      tableSettings.value.name,
+      tableSettings.value.isPublic,
+      tableSettings.value.users,
+    )
+    console.log(table)
+    if (!table) {
+      GlobalErrorHandler.error('Could not create MyTable')
+      return
+    }
+
+    emit('close')
+
+    const tableId = await tablesStore.joinMyTable()
+    if (!tableId) {
+      GlobalErrorHandler.error('Could not join myTable')
+      return
+    }
+
+    await navigate(`/table/${tableId}`)
+  } catch (error) {
+    GlobalErrorHandler.error('Error opening table', error)
+  }
+}
+
 const onClose = () => emit('close')
 
 const reset = () => {
@@ -139,7 +173,6 @@ const reset = () => {
   updateHistory(currentStep.value)
 }
 reset()
-
 defineExpose({ reset })
 
 const handlePopState = (event: PopStateEvent) => {

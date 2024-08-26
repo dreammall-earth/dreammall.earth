@@ -36,12 +36,12 @@ export type MyTable = {
   users: UserInTable[]
 }
 
-type CreateMyRoomResult = {
-  createMyRoom: MyTable
+type CreateMyTableResult = {
+  createMyTable: MyTable
 }
 
-type UpdateMyRoomResult = {
-  updateMyRoom: MyTable
+type UpdateMyTableResult = {
+  updateMyTable: MyTable
 }
 
 type JoinMyTableResult = {
@@ -89,24 +89,24 @@ export const useTablesStore = defineStore(
       tables.value = newTables
     }
 
-    const { mutate: createMyTableMutate } = useMutation<CreateMyRoomResult>(createMyTableMutation)
-    const { mutate: updateMyTableMutate } = useMutation<UpdateMyRoomResult>(updateMyTableMutation)
+    const { mutate: createMyTableMutate } = useMutation<CreateMyTableResult>(createMyTableMutation)
+    const { mutate: updateMyTableMutate } = useMutation<UpdateMyTableResult>(updateMyTableMutation)
     const { mutate: joinMyTableMutate } = useMutation<JoinMyTableResult>(joinMyTableMutation)
 
-    const createMyTable = async (name: string, isPublic: boolean) => {
-      const result = await createMyTableMutate({ name, isPublic })
-      if (result?.data?.createMyRoom) {
-        myTable.value = result.data.createMyRoom
+    const createMyTable = async (name: string, isPublic: boolean, userIds: number[]) => {
+      const result = await createMyTableMutate({ name, isPublic, users: userIds })
+      if (result?.data?.createMyTable) {
+        myTable.value = result.data.createMyTable
       }
-      return result?.data?.createMyRoom
+      return result?.data?.createMyTable
     }
 
     const updateMyTable = async (name: string, isPublic: boolean) => {
       const result = await updateMyTableMutate({ name, isPublic })
-      if (result?.data?.updateMyRoom) {
-        myTable.value = result.data.updateMyRoom
+      if (result?.data?.updateMyTable) {
+        myTable.value = result.data.updateMyTable
       }
-      return result?.data?.updateMyRoom
+      return result?.data?.updateMyTable
     }
 
     const updateMyTableUsers = async (userIds: number[]) => {
@@ -116,10 +116,10 @@ export const useTablesStore = defineStore(
         isPublic: myTable.value.public,
         userIds,
       })
-      if (result?.data?.updateMyRoom) {
-        myTable.value = result.data.updateMyRoom
+      if (result?.data?.updateMyTable) {
+        myTable.value = result.data.updateMyTable
       }
-      return result?.data?.updateMyRoom
+      return result?.data?.updateMyTable
     }
 
     const joinMyTable = async (): Promise<number | undefined> => {

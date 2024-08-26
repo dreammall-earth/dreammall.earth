@@ -7,41 +7,19 @@
       </p>
     </div>
 
-    <SimpleButton class="mt-12 mx-auto" label="Los geht's" @click="onNext" />
+    <SimpleButton class="mt-12 mx-auto" label="Los geht's" @click="onSubmit" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { navigate } from 'vike/client/router'
-
 import SimpleButton from '#components/buttons/SimpleButton.vue'
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
-import { useTablesStore } from '#stores/tablesStore'
 
-import { TableSetupEmits, TableSetupProps } from './TableSetupProps'
+import { TableSetupEmits } from './TableSetupProps'
 
-const props = defineProps<TableSetupProps>()
 const emit = defineEmits<TableSetupEmits>()
 
-const tablesStore = useTablesStore()
-
-const onNext = async () => {
-  await enterTable()
-  emit('next')
-}
-
-const enterTable = async () => {
-  try {
-    const tableId = await tablesStore.joinMyTable()
-
-    if (tableId) {
-      await navigate(`/table/${tableId}`)
-    } else {
-      GlobalErrorHandler.error('No table found')
-    }
-  } catch (error) {
-    GlobalErrorHandler.error('Error opening table', error)
-  }
+const onSubmit = async () => {
+  emit('submit')
 }
 </script>
 

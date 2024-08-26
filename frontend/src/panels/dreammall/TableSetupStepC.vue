@@ -11,7 +11,10 @@
     />
 
     <div class="user-list-container w-100">
-      <v-list class="bg-transparent w-100 user-list">
+      <v-list
+        class="bg-transparent w-100 user-list"
+        :class="{ loading: searchUsersStore.isLoading }"
+      >
         <UserInvitationItem
           v-for="user in displayedUsers"
           :key="user.id"
@@ -19,10 +22,6 @@
           @update:invited="updateInvitationStatus(user.id, $event)"
         />
       </v-list>
-    </div>
-
-    <div v-if="searchUsersStore.isLoading" class="text-center">
-      <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </div>
 
     <div v-if="searchUsersStore.error" class="text-center text-error">
@@ -81,17 +80,8 @@ const updateInvitationStatus = (userId: number, invited: boolean) => {
   invitedUserIdsModel.value = currentUsers
 }
 
-const onNext = async () => {
-  await createMyTable()
+const onNext = () => {
   emit('next')
-}
-
-const createMyTable = async () => {
-  // try {
-  //
-  // } catch (error) {
-  //   GlobalErrorHandler.error('Error opening table', error)
-  // }
 }
 </script>
 
@@ -106,5 +96,9 @@ const createMyTable = async () => {
 }
 .user-list {
   height: 100%;
+
+  &.loading {
+    opacity: 50%;
+  }
 }
 </style>
