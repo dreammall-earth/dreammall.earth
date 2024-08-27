@@ -91,4 +91,5 @@ export interface CreateMeetingBodyOptions {
   welcome?: string
   meetingLayout?: MeetingLayouts
   moderatorOnlyMessage?: string
+  logoutURL?: string
 }

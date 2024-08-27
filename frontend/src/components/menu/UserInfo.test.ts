@@ -65,7 +65,6 @@ describe('UserInfo', () => {
         details: [],
         social: [],
       })
-      wrapper = Wrapper()
     })
 
     it('has no image and no text in avatar', () => {
@@ -86,7 +85,6 @@ describe('UserInfo', () => {
         details: [],
         social: [],
       })
-      wrapper = Wrapper()
     })
 
     it('has no image but initials in avatar', () => {
@@ -108,7 +106,6 @@ describe('UserInfo', () => {
         details: [],
         social: [],
       })
-      wrapper = Wrapper()
     })
 
     it('has image and not text in avatar', () => {

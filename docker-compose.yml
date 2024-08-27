@@ -14,6 +14,7 @@ services:
       - db_vol:/var/lib/mysql
 
   presenter:
+    image: ghcr.io/dreammall-earth/dreammall.earth/presenter:latest
     build:
       context: ./presenter
       target: production
@@ -23,6 +24,7 @@ services:
       - NODE_ENV=production
 
   frontend:
+    image: ghcr.io/dreammall-earth/dreammall.earth/frontend:latest
     build:
       context: ./frontend
       target: production
@@ -31,16 +33,8 @@ services:
     environment:
       - NODE_ENV=production
 
-  admin:
-    build:
-      context: ./admin
-      target: production
-    ports:
-      - 3002:3000
-    environment:
-      - NODE_ENV=production
-
   backend:
+    image: ghcr.io/dreammall-earth/dreammall.earth/backend:latest
     build:
       context: ./backend
       target: production

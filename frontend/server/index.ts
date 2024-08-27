@@ -29,7 +29,8 @@ const hasToken = (cookieString: string | undefined) => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     return !!JSON.parse(parse(cookieString).auth).user
   } catch (error) {
-    return false
+    if (error instanceof SyntaxError) return false
+    throw error
   }
 }
 

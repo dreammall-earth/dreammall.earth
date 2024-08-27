@@ -35,10 +35,10 @@ const BBB = {
   BBB_PULL_MEETINGS: process.env.NODE_ENV !== 'test' && process.env.BBB_URL,
 }
 
+const FRONTEND_URL = process.env.FRONTEND_URL ?? 'http://localhost:3000/'
+
 const FRONTEND = {
-  FRONTEND_URL: process.env.FRONTEND_URL ?? 'http://localhost:3000/',
-  FRONTEND_INVITE_LINK_URL:
-    process.env.FRONTEND_INVITE_LINK_URL ?? 'http://localhost:3000/join-table/',
+  FRONTEND_URL,
 }
 
 const { JWKS_URI } = process.env
