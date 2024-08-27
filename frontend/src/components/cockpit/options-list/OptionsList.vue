@@ -1,6 +1,6 @@
 <template>
   <TransitionGroup name="options">
-    <ul v-if="props.showIf" class="options-list">
+    <ul v-if="props.isVisible" class="options-list">
       <slot />
     </ul>
   </TransitionGroup>
@@ -10,7 +10,7 @@
 import { defineProps } from 'vue'
 
 const props = defineProps<{
-  showIf: boolean
+  isVisible: boolean
 }>()
 </script>
 

@@ -23,7 +23,7 @@
         icon="mdi mdi-dots-horizontal"
       />
     </button>
-    <OptionsList :show-if="isShowingOptions">
+    <OptionsList :is-visible="isShowingOptions">
       <OptionButton class="trash" @click="deleteTable">
         <v-icon icon="mdi mdi-trash-can-outline" />
         {{ $t('cockpit.myTables.delete') }}
