@@ -45,6 +45,7 @@ jobs:
         uses: cypress-io/github-action@3badb61c06ea80143340916056d3562aca71ae92 # v6.7.2
         with:
           working-directory: tests
+          spec: cypress/e2e/features/User.Registration.feature
 
       - name: E2E | if tests failed, compile html report
         if: ${{ failure() && steps.e2e-run.conclusion == 'failure' }}
