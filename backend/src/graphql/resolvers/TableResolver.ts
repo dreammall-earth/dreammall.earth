@@ -24,77 +24,6 @@ import { prisma, UserWithMeeting, UsersWithMeetings } from '#src/prisma'
 export class TableResolver {
   @Authorized()
   @Mutation(() => Table)
-  async createTable(
-    // params: CreateGroupTableParams,
-    @Arg('name') name: string,
-    @Arg('isPublic') isPublic: boolean,
-    @Ctx() context: Context,
-    // eslint-disable-next-line type-graphql/wrong-decorator-signature
-    @Arg('userIds', () => [Int], { nullable: 'itemsAndList' }) // eslint-disable-next-line type-graphql/invalid-nullable-input-type
-    userIds?: number[] | null | undefined,
-  ): Promise<Table> {
-    const { user } = context
-    if (!user) throw new Error('User not found!')
-
-    // Get Meeting where user.id and userIds are Moderator
-    // Check if GroupMeeting already exist how to recognize the Meeting?
-    // if (user.meetingId) {
-    //   throw new Error('Meeting already exists!')
-    // }
-
-    let meetingID: string = uuidv4()
-    while (
-      await prisma.meeting.count({
-        where: {
-          meetingID,
-        },
-      })
-    ) {
-      meetingID = uuidv4()
-    }
-
-    const dbMeeting = await prisma.meeting.create({
-      data: { meetingID, name, public: isPublic },
-    })
-
-    const usersInMeetings: UsersWithMeetings[] = []
-
-    if (userIds) {
-      if (!userIds.some((userId) => userId === user.id)) {
-        userIds.push(user.id)
-      }
-      for (const userId of userIds) {
-        const userInMeeting = await prisma.usersInMeetings.create({
-          data: { meetingId: dbMeeting.id, userId },
-        })
-        usersInMeetings.push({
-          ...userInMeeting,
-          user,
-        })
-      }
-    }
-
-    const inviteLink = new URL(`join-table/${dbMeeting.id}`, CONFIG.FRONTEND_URL).toString()
-    const meeting = await createMeeting(
-      {
-        meetingID,
-        name,
-      },
-      {
-        moderatorOnlyMessage: `Use this link to invite more people:<br/>${inviteLink}`,
-      },
-    )
-    if (!meeting) {
-      throw new Error('Error creating the meeting!')
-    }
-
-    await EVENT_CREATE_TABLE(user.id)
-
-    return new Table(dbMeeting, usersInMeetings)
-  }
-
-  @Authorized()
-  @Mutation(() => Table)
   async createMyTable(
     @Arg('name') name: string,
     @Arg('isPublic') isPublic: boolean,
@@ -110,16 +39,7 @@ export class TableResolver {
       throw new Error('Meeting already exists!')
     }
 
-    let meetingID: string = uuidv4()
-    while (
-      await prisma.meeting.count({
-        where: {
-          meetingID,
-        },
-      })
-    ) {
-      meetingID = uuidv4()
-    }
+    const meetingID: string = await createMeetingID()
 
     const { meeting } = (await prisma.user.update({
       where: {
@@ -143,26 +63,10 @@ export class TableResolver {
       throw new Error('Error creating the meeting!')
     }
 
-    let usersInMeetings: UsersWithMeetings[] = []
-
     if (userIds && userIds.length) {
-      await prisma.usersInMeetings.createMany({
-        data: userIds.map((id) => ({
-          role: AttendeeRole.VIEWER,
-          meetingId: meeting.id,
-          userId: id,
-        })),
-      })
-
-      usersInMeetings = (await prisma.usersInMeetings.findMany({
-        where: {
-          meetingId: meeting.id,
-        },
-        include: {
-          user: true,
-        },
-      })) as UsersWithMeetings[]
+      await createUsersInMeetings({ userIds, meeting, role: AttendeeRole.VIEWER })
     }
+    const usersInMeetings = await findUsersInMeetings(meeting)
 
     await EVENT_CREATE_MY_TABLE(user.id)
 
@@ -206,8 +110,6 @@ export class TableResolver {
       },
     })
 
-    let usersInMeetings: UsersWithMeetings[] = []
-
     if (userIds && userIds.length) {
       await prisma.usersInMeetings.createMany({
         data: userIds.map((id) => ({
@@ -216,16 +118,8 @@ export class TableResolver {
           userId: id,
         })),
       })
-
-      usersInMeetings = (await prisma.usersInMeetings.findMany({
-        where: {
-          meetingId: meeting.id,
-        },
-        include: {
-          user: true,
-        },
-      })) as UsersWithMeetings[]
     }
+    const usersInMeetings = await findUsersInMeetings(meeting)
 
     await EVENT_UPDATE_MY_TABLE(user.id)
 
@@ -285,6 +179,59 @@ export class TableResolver {
   async openTables(): Promise<OpenTable[]> {
     const meetings = await getMeetings()
     return openTablesFromOpenMeetings(meetings)
+  }
+
+  @Authorized()
+  @Mutation(() => Table)
+  async createTable(
+    // params: CreateGroupTableParams,
+    @Arg('name') name: string,
+    @Arg('isPublic') isPublic: boolean,
+    @Ctx() context: Context,
+    // eslint-disable-next-line type-graphql/wrong-decorator-signature
+    @Arg('userIds', () => [Int], { nullable: 'itemsAndList' }) // eslint-disable-next-line type-graphql/invalid-nullable-input-type
+    userIds?: number[] | null | undefined,
+  ): Promise<Table> {
+    const { user } = context
+    if (!user) throw new Error('User not found!')
+
+    // Get Meeting where user.id and userIds are Moderator
+    // Check if GroupMeeting already exist how to recognize the Meeting?
+    // if (user.meetingId) {
+    //   throw new Error('Meeting already exists!')
+    // }
+
+    const meetingID: string = await createMeetingID()
+
+    const dbMeeting = await prisma.meeting.create({
+      data: { meetingID, name, public: isPublic },
+    })
+
+    if (userIds) {
+      if (!userIds.some((userId) => userId === user.id)) {
+        userIds.push(user.id)
+      }
+      await createUsersInMeetings({ userIds, meeting: dbMeeting })
+    }
+    const usersInMeetings = await findUsersInMeetings(dbMeeting)
+
+    const inviteLink = new URL(`join-table/${dbMeeting.id}`, CONFIG.FRONTEND_URL).toString()
+    const meeting = await createMeeting(
+      {
+        meetingID,
+        name,
+      },
+      {
+        moderatorOnlyMessage: `Use this link to invite more people:<br/>${inviteLink}`,
+      },
+    )
+    if (!meeting) {
+      throw new Error('Error creating the meeting!')
+    }
+
+    await EVENT_CREATE_TABLE(user.id)
+
+    return new Table(dbMeeting, usersInMeetings)
   }
 
   @Authorized()
@@ -394,4 +341,66 @@ const openTablesFromOpenMeetings = async (meetings: MeetingInfo[]): Promise<Open
   }
 
   return []
+}
+const createUsersInMeetings = async (data: {
+  userIds: number[]
+  meeting: {
+    name: string
+    id: number
+    createdAt: Date
+    meetingID: string
+    attendeePW: string | null
+    moderatorPW: string | null
+    voiceBridge: number | null
+    dialNumber: string | null
+    createTime: bigint | null
+    createDate: Date | null
+    public: boolean
+  }
+  role?: AttendeeRole
+}) => {
+  await prisma.usersInMeetings.createMany({
+    data: data.userIds.map((id) => ({
+      role: data.role,
+      meetingId: data.meeting.id,
+      userId: id,
+    })),
+  })
+}
+
+const findUsersInMeetings = async (meeting: {
+  name: string
+  id: number
+  createdAt: Date
+  meetingID: string
+  attendeePW: string | null
+  moderatorPW: string | null
+  voiceBridge: number | null
+  dialNumber: string | null
+  createTime: bigint | null
+  createDate: Date | null
+  public: boolean
+}): Promise<UsersWithMeetings[]> => {
+  return (await prisma.usersInMeetings.findMany({
+    where: {
+      meetingId: meeting.id,
+    },
+    include: {
+      user: true,
+    },
+  })) as UsersWithMeetings[]
+}
+
+const createMeetingID = async (): Promise<string> => {
+  let meetingID: string = uuidv4()
+  while (
+    await prisma.meeting.count({
+      where: {
+        meetingID,
+      },
+    })
+  ) {
+    meetingID = uuidv4()
+  }
+  return meetingID
 }
