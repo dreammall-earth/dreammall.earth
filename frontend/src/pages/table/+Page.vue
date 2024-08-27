@@ -21,12 +21,16 @@ const tableUrl = ref<string | null>(null)
 
 const pageContext = usePageContext()
 
-const tableId = Number(pageContext.routeParams?.id)
+const tableId = ref(Number(pageContext.routeParams?.id))
+
+watch(pageContext, (context) => {
+  tableId.value = Number(context.routeParams?.id)
+})
 
 const { result: joinTableQueryResult, error: joinTableQueryError } = useQuery(
   joinTableQuery,
   () => ({
-    tableId,
+    tableId: tableId.value,
   }),
   {
     prefetch: false,
