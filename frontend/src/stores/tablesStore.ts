@@ -146,7 +146,7 @@ export const useTablesStore = defineStore(
       updateMyTableUsers,
       joinMyTable,
       existsMyTable,
-      defaultMyTableName: name,
+      defaultMyTableName: userStore.getCurrentUser?.name,
     }
   },
   {
