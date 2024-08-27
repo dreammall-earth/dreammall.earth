@@ -96,12 +96,23 @@ entries:
         - !KeyOf prompt-field-password-repeat
 
   - identifiers:
-      name: default-enrollment-user-write
-    id: default-enrollment-user-write
+      name: default-source-enrollment-write
+    id: default-source-enrollment-write
     model: authentik_stages_user_write.userwritestage
     attrs:
       create_users_as_inactive: true
       user_creation_mode: always_create
+
+  # policiy (between user write stage and user login stage)
+  - attrs:
+      expression: !Format ["context['flow_plan'].context['redirect'] = '%s/signin'\nreturn True", !Context redirect_url]
+      name: dreammall.earth-redirect-frontend-signin
+    conditions: []
+    id: dreammall.earth-redirect-frontend-signin
+    identifiers:
+      name: dreammall.earth-redirect-frontend-signin
+    model: authentik_policies_expression.expressionpolicy
+    state: present
 
   - identifiers:
       name: dreammallearth-account-confirmation
@@ -115,62 +126,58 @@ entries:
       use_global_settings: true
 
   # stage bindings ############################################################
-  - identifiers:
+  - attrs:
+      invalid_response_action: retry
+      policy_engine_mode: any
+      re_evaluate_policies: true
+    identifiers:
       target: !KeyOf flow
       stage: !KeyOf default-source-enrollment-prompt
       order: 10
     model: authentik_flows.flowstagebinding
 
-  - identifiers:
-      target: !KeyOf flow
-      stage: !KeyOf default-enrollment-user-write
-      order: 20
-    model: authentik_flows.flowstagebinding
-
-  - identifiers:
-      target: !KeyOf flow
-      stage: !KeyOf dreammallearth-account-confirmation
-      order: 30
-    model: authentik_flows.flowstagebinding
-
-  # policiy (between user write stage and user login stage) ###################
-  - attrs:
-      expression: !Format ["context['flow_plan'].context['redirect'] = '%s/signin'\nreturn True", !Context redirect_url]
-      name: dreammall.earth-redirect-frontend-signin
-    conditions: []
-    id: dreammall.earth-redirect-frontend-signin
-    identifiers:
-      name: dreammall.earth-redirect-frontend-signin
-    model: authentik_policies_expression.expressionpolicy
-    state: present
-
-  - identifiers:
-      target: !KeyOf flow
-      stage: !KeyOf dreammallearth-account-confirmation
-      order: 30
-    model: authentik_flows.flowstagebinding
-
-  # policy attributes #########################################################
   - attrs:
       invalid_response_action: retry
       policy_engine_mode: any
       re_evaluate_policies: true
-    conditions: []
-    id: redirect-to-frontend
     identifiers:
-      order: 100
-      stage: !KeyOf dreammallearth-account-confirmation
       target: !KeyOf flow
+      stage: !KeyOf default-source-enrollment-write
+      order: 20
     model: authentik_flows.flowstagebinding
-    state: present
+
+  - attrs:
+      invalid_response_action: retry
+      policy_engine_mode: any
+      re_evaluate_policies: true
+    identifiers:
+      target: !KeyOf flow
+      stage: !KeyOf dreammallearth-account-confirmation
+      order: 30
+    id: email-stage-binding
+    model: authentik_flows.flowstagebinding
+
+  # policy attributes #########################################################
+# - attrs:
+#     invalid_response_action: retry
+#     policy_engine_mode: any
+#     re_evaluate_policies: true
+#   conditions: []
+#   id: redirect-to-frontend
+#   identifiers:
+#     order: 100
+#     stage: !KeyOf dreammallearth-account-confirmation
+#     target: !KeyOf flow
+#   model: authentik_flows.flowstagebinding
+#   state: present
 
   - attrs:
       enabled: true
       timeout: 30
     conditions: []
     identifiers:
-      order: 0
+      order: 100
       policy: !KeyOf dreammall.earth-redirect-frontend-signin
-      target: !KeyOf redirect-to-frontend
+      target: !KeyOf email-stage-binding
     model: authentik_policies.policybinding
     state: present
