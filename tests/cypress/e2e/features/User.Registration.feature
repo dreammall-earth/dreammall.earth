@@ -6,9 +6,9 @@ Feature: User registration
   Scenario: DreamMall Signup
     Given I navigate to page 'signup'
     When I submit the signup form with:
-      | username | xBibi              |
-      | name     | xBloxberg          |
-      | email    | xbibi@bloxberg.org |
+      | username | Bibi              |
+      | name     | Bloxberg          |
+      | email    | bibi@bloxberg.org |
       | password | Aa12345_          |
     Then an email transmission confirmation is displayed
     And I receive an email containing the account confirmation link
