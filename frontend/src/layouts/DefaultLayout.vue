@@ -87,7 +87,7 @@ import UserInfo from '#components/menu/UserInfo.vue'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
 import TableSetup from '#src/panels/dreammall/TableSetup.vue'
 
-const isTablesDrawerVisible = defineModel<boolean>()
+const isTablesDrawerVisible = ref(false)
 
 const toggleDrawer = () => {
   isTablesDrawerVisible.value = !isTablesDrawerVisible.value
@@ -105,6 +105,7 @@ const toggleButtonList = () => {
 </script>
 
 <style scoped lang="scss">
+@use 'sass:map';
 @import '#root/src/assets/scss/style';
 @import 'vuetify/lib/styles/settings/_variables';
 
@@ -118,7 +119,7 @@ const toggleButtonList = () => {
     margin-top: 70px;
   }
 
-  @media #{map-get($display-breakpoints, 'sm-and-down')} {
+  @media #{map.get($display-breakpoints, 'sm-and-down')} {
     .page-container {
       margin-bottom: 50px;
     }
@@ -178,11 +179,11 @@ const toggleButtonList = () => {
   transition: bottom 0.75s;
 
   &--active {
-    @media #{map-get($display-breakpoints, 'sm-and-down')} {
+    @media #{map.get($display-breakpoints, 'sm-and-down')} {
       bottom: 60px;
     }
 
-    @media #{map-get($display-breakpoints, 'md-and-up')} {
+    @media #{map.get($display-breakpoints, 'md-and-up')} {
       bottom: 120px;
     }
   }

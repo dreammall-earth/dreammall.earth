@@ -67,7 +67,10 @@ async function renderToString(app: App) {
     err = err_
   }
   const appHtml = await renderToString_(app)
-  if (err) throw err
+  if (err) {
+    if (err instanceof Error) throw err
+    else throw new Error(String(err))
+  }
   return appHtml
 }
 

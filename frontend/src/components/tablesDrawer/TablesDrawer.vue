@@ -2,10 +2,10 @@
   <v-navigation-drawer
     v-model="isVisible"
     :location="location"
-    width="auto"
+    mobile
     class="menu-drawer px-4"
     :class="[{ 'changing-orientation': isChangingOrientation }]"
-    :style="drawerStyle"
+    :width="308"
   >
     <v-text-field
       v-model="searchValue"
@@ -76,10 +76,6 @@ const filteredItems = computed(() => {
 const currentLocation = ref(props.location)
 const isChangingOrientation = ref(false)
 
-const drawerStyle = computed(() => ({
-  transition: isChangingOrientation.value ? 'none' : undefined,
-}))
-
 watch(
   () => props.location,
   (newLocation) => {
@@ -97,11 +93,11 @@ watch(
 </script>
 
 <style scoped lang="scss">
+@use 'sass:map';
 @import 'vuetify/lib/styles/settings/_variables';
 
 .menu-drawer {
   top: 0 !important;
-  width: 308px;
   height: 100% !important;
   padding-top: 70px;
   background: var(--v-sidebar-background) !important;
@@ -116,7 +112,7 @@ watch(
   transition: none !important;
 }
 
-@media #{map-get($display-breakpoints, 'sm-and-down')} {
+@media #{map.get($display-breakpoints, 'sm-and-down')} {
   .menu-drawer {
     left: var(--sides) !important;
     z-index: 2000 !important;
@@ -128,7 +124,7 @@ watch(
   }
 }
 
-@media #{map-get($display-breakpoints, 'md-and-up')} {
+@media #{map.get($display-breakpoints, 'md-and-up')} {
   .menu-drawer {
     border-radius: 20px 0 0 20px;
   }

@@ -25,11 +25,6 @@ spec:
                 configMapKeyRef:
                   name: {{ .Release.Name }}
                   key: frontend_url
-            - name: FRONTEND_INVITE_LINK_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}
-                  key: frontend_invite_link_url
             - name: NODE_ENV
               value: production
           image: "{{ .Values.backend.image.repository }}:{{ default .Values.global.image.tag .Values.backend.image.tag "latest" }}"
@@ -48,11 +43,6 @@ spec:
                 configMapKeyRef:
                   name: {{ .Release.Name }}
                   key: frontend_url
-            - name: FRONTEND_INVITE_LINK_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}
-                  key: frontend_invite_link_url
             - name: JWKS_URI
               valueFrom:
                 configMapKeyRef:

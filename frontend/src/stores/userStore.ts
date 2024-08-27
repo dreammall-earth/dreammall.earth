@@ -6,6 +6,7 @@ import {
   addSocialMediaMutation,
   AddSocialMediaInput,
   AddSocialMediaMutationResult,
+  SocialMediaType,
 } from '#mutations/addSocialMediaMutation'
 import {
   addUserDetailMutation,
@@ -22,7 +23,7 @@ import {
 import { currentUserQuery } from '#queries/currentUserQuery'
 import { searchUsersQuery } from '#queries/searchUsersQuery'
 
-export type { AddSocialMediaInput } from '#mutations/addSocialMediaMutation'
+export type { AddSocialMediaInput, SocialMediaType } from '#mutations/addSocialMediaMutation'
 export type { AddUserDetailInput } from '#mutations/addUserDetailMutation'
 
 export type UserInTable = {
@@ -51,7 +52,7 @@ export type UserAvailability = null | 'available' | 'partly_available' | 'busy'
 
 export type SocialMedia = {
   id: number
-  type: string
+  type: SocialMediaType
   link: string
 }
 
@@ -109,6 +110,7 @@ export const useUserStore = defineStore(
         return name
           .split(' ')
           .map((n) => n.charAt(0))
+          .slice(0, 2)
           .join('')
       return ''
     })
