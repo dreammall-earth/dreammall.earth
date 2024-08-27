@@ -14,16 +14,22 @@ defineEmits(['click'])
 
 <style scoped>
 .item {
-  width: 54px;
+  width: calc(54px + var(--padding-left, 0px) + var(--padding-right, 0px));
+  padding-right: var(--padding-right, initial);
+  padding-left: var(--padding-left, initial);
   font-size: 10px;
-  background: rgb(93 102 112 / 55%);
+  background: var(--v-cockpit-element-background);
 
   &:first-child {
     border-radius: 16px 0 0 16px;
+
+    --padding-left: 4px;
   }
 
   &:last-child {
     border-radius: 0 16px 16px 0;
+
+    --padding-right: 4px;
   }
 }
 
@@ -34,6 +40,5 @@ defineEmits(['click'])
   justify-content: center;
   width: 100%;
   height: 100%;
-  color: #f5f5f5;
 }
 </style>

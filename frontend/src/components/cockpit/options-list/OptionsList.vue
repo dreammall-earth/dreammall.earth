@@ -24,7 +24,6 @@ const props = defineProps<{
   height: 100%;
   padding: 0;
   list-style: none;
-  background-color: var(--v-sidebar-background);
 }
 
 .options-move, /* apply transition to moving elements */
