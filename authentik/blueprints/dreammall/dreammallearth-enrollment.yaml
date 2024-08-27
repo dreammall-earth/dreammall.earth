@@ -157,26 +157,12 @@ entries:
     id: email-stage-binding
     model: authentik_flows.flowstagebinding
 
-  # policy attributes #########################################################
-# - attrs:
-#     invalid_response_action: retry
-#     policy_engine_mode: any
-#     re_evaluate_policies: true
-#   conditions: []
-#   id: redirect-to-frontend
-#   identifiers:
-#     order: 100
-#     stage: !KeyOf dreammallearth-account-confirmation
-#     target: !KeyOf flow
-#   model: authentik_flows.flowstagebinding
-#   state: present
-
   - attrs:
       enabled: true
       timeout: 30
     conditions: []
     identifiers:
-      order: 100
+      order: 0
       policy: !KeyOf dreammall.earth-redirect-frontend-signin
       target: !KeyOf email-stage-binding
     model: authentik_policies.policybinding
