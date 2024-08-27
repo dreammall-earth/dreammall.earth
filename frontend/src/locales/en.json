@@ -37,13 +37,13 @@
       "work-placeholder": "My work"
     },
     "myTables": {
-      "header": "My Group Tables",
-      "noTables": "No group tables so far",
       "addTable": "Add table",
-      "memberCount": "{count} members",
       "delete": "Delete",
       "edit": "Edit",
+      "header": "My Group Tables",
       "invite": "Invite",
+      "memberCount": "{count} members",
+      "noTables": "No group tables so far",
       "share": "Share"
     }
   },

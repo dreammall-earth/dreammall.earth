@@ -11,6 +11,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
     <main
       class="v-main bg-background main-layout"
       data-v-75d0be1e=""
+      data-v-e027cbb0=""
       style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: 70px; --v-layout-bottom: 0px; transition: none !important;"
     >
       
@@ -963,433 +964,613 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
         data-v-75d0be1e=""
       >
         
-        
-        <section
-          class="cockpit-card narrow"
-          data-v-1451ba78=""
-          data-v-f444dc92=""
+        <div
+          class="cockpit"
+          data-v-e027cbb0=""
         >
-          <!--v-if-->
-          <!--v-if-->
           
-          <div
-            class="header mb-2"
+          <section
+            class="cockpit-card narrow"
+            data-v-1451ba78=""
             data-v-f444dc92=""
           >
+            <!--v-if-->
+            <!--v-if-->
+            
             <div
-              class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font bg-primary"
-              data-v-f444dc92=""
-              style="width: 90px; height: 90px;"
-            >
-              
-              
-              <span
-                data-v-f444dc92=""
-              >
-                CU
-              </span>
-              
-              
-              
-              <!---->
-              <span
-                class="v-avatar__underlay"
-              />
-              
-            </div>
-            <div
-              class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-input--dirty v-text-field v-select v-select--single v-select--selected v-select--selection-slot availability"
+              class="header mb-2"
               data-v-f444dc92=""
             >
-              <!---->
               <div
-                class="v-input__control"
+                class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font bg-primary"
+                data-v-f444dc92=""
+                style="width: 90px; height: 90px;"
               >
                 
-                <div
-                  aria-expanded="false"
-                  aria-haspopup="listbox"
-                  aria-owns="v-menu-11"
-                  class="v-field v-field--active v-field--appended v-field--center-affix v-field--dirty v-field--flat v-field--no-label v-field--variant-filled v-theme--light v-locale--is-ltr"
-                  role="combobox"
+                
+                <span
+                  data-v-f444dc92=""
                 >
+                  CU
+                </span>
+                
+                
+                
+                <!---->
+                <span
+                  class="v-avatar__underlay"
+                />
+                
+              </div>
+              <div
+                class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-input--dirty v-text-field v-select v-select--single v-select--selected v-select--selection-slot availability"
+                data-v-f444dc92=""
+              >
+                <!---->
+                <div
+                  class="v-input__control"
+                >
+                  
                   <div
-                    class="v-field__overlay"
-                  />
-                  <div
-                    class="v-field__loader"
+                    aria-expanded="false"
+                    aria-haspopup="listbox"
+                    aria-owns="v-menu-11"
+                    class="v-field v-field--active v-field--appended v-field--center-affix v-field--dirty v-field--flat v-field--no-label v-field--variant-filled v-theme--light v-locale--is-ltr"
+                    role="combobox"
                   >
                     <div
-                      aria-hidden="true"
-                      aria-valuemax="100"
-                      aria-valuemin="0"
-                      class="v-progress-linear v-theme--light v-locale--is-ltr"
-                      role="progressbar"
-                      style="top: 0px; height: 0px; --v-progress-linear-height: 2px;"
+                      class="v-field__overlay"
+                    />
+                    <div
+                      class="v-field__loader"
+                    >
+                      <div
+                        aria-hidden="true"
+                        aria-valuemax="100"
+                        aria-valuemin="0"
+                        class="v-progress-linear v-theme--light v-locale--is-ltr"
+                        role="progressbar"
+                        style="top: 0px; height: 0px; --v-progress-linear-height: 2px;"
+                      >
+                        <!---->
+                        <div
+                          class="v-progress-linear__background"
+                          style="opacity: NaN;"
+                        />
+                        <div
+                          class="v-progress-linear__buffer"
+                          style="opacity: NaN; width: 0%;"
+                        />
+                        <transition-stub
+                          appear="false"
+                          css="true"
+                          name="fade-transition"
+                          persisted="false"
+                        >
+                          <div
+                            class="v-progress-linear__indeterminate"
+                          >
+                            
+                            <div
+                              class="v-progress-linear__indeterminate long"
+                            />
+                            <div
+                              class="v-progress-linear__indeterminate short"
+                            />
+                            
+                          </div>
+                        </transition-stub>
+                        <!---->
+                      </div>
+                    </div>
+                    <!---->
+                    <div
+                      class="v-field__field"
+                      data-no-activator=""
                     >
                       <!---->
-                      <div
-                        class="v-progress-linear__background"
-                        style="opacity: NaN;"
-                      />
-                      <div
-                        class="v-progress-linear__buffer"
-                        style="opacity: NaN; width: 0%;"
-                      />
-                      <transition-stub
-                        appear="false"
-                        css="true"
-                        name="fade-transition"
-                        persisted="false"
+                      <label
+                        class="v-label v-field-label"
+                        for="input-9"
                       >
+                        <!---->
+                        
+                        <!---->
+                        
+                      </label>
+                      
+                      
+                      <!---->
+                      <div
+                        class="v-field__input"
+                        data-no-activator=""
+                      >
+                        
+                        
+                        
+                        <!---->
+                        <!---->
+                        
+                        
                         <div
-                          class="v-progress-linear__indeterminate"
+                          class="v-select__selection"
                         >
                           
-                          <div
-                            class="v-progress-linear__indeterminate long"
-                          />
-                          <div
-                            class="v-progress-linear__indeterminate short"
-                          />
+                          🟢 Available to work
                           
                         </div>
-                      </transition-stub>
+                        
+                        
+                        
+                        <input
+                          aria-describedby="input-9-messages"
+                          aria-label="Öffnen"
+                          id="input-9"
+                          inputmode="none"
+                          round=""
+                          size="1"
+                          title="Öffnen"
+                          type="text"
+                          value="available"
+                        />
+                      </div>
+                      <!---->
+                      
+                      
+                    </div>
+                    <!---->
+                    <div
+                      class="v-field__append-inner"
+                    >
+                      
+                      
+                      <!---->
+                      <i
+                        aria-hidden="true"
+                        class="mdi-menu-down mdi v-icon notranslate v-theme--light v-icon--size-default v-select__menu-icon"
+                      />
+                      
+                      
+                      <!---->
+                    </div>
+                    <div
+                      class="v-field__outline"
+                    >
+                      <!---->
                       <!---->
                     </div>
                   </div>
-                  <!---->
-                  <div
-                    class="v-field__field"
-                    data-no-activator=""
+                  
+                </div>
+                <!---->
+                <div
+                  class="v-input__details"
+                >
+                  <transition-group-stub
+                    appear="false"
+                    aria-live="polite"
+                    class="v-messages"
+                    css="true"
+                    id="input-9-messages"
+                    name="slide-y-transition"
+                    persisted="false"
+                    role="alert"
+                    tag="div"
                   >
                     <!---->
-                    <label
-                      class="v-label v-field-label"
-                      for="input-9"
-                    >
-                      <!---->
-                      
-                      <!---->
-                      
-                    </label>
-                    
+                  </transition-group-stub>
+                  <!---->
+                </div>
+              </div>
+              
+              <button
+                class="name"
+                data-v-f444dc92=""
+              >
+                Current User 
+                <i
+                  aria-hidden="true"
+                  class="mdi mdi-pencil-outline mdi v-icon notranslate v-theme--light v-icon--size-default"
+                  data-v-f444dc92=""
+                />
+              </button>
+              <button
+                class="introduction"
+                data-v-f444dc92=""
+              >
+                Hello, I am the current user
+              </button>
+              
+            </div>
+            <button
+              data-v-f444dc92=""
+            >
+              <ul
+                class="details"
+                data-v-589db232=""
+                data-v-f444dc92=""
+              >
+                
+                <li
+                  data-v-589db232=""
+                >
+                  <span
+                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+                    data-v-589db232=""
+                    draggable="false"
+                  >
                     
                     <!---->
+                    <span
+                      class="v-chip__underlay"
+                    />
+                    
+                    <!---->
+                    <!---->
                     <div
-                      class="v-field__input"
+                      class="v-chip__content"
                       data-no-activator=""
                     >
                       
-                      
-                      
-                      <!---->
-                      <!---->
-                      
-                      
-                      <div
-                        class="v-select__selection"
-                      >
-                        
-                        🟢 Available to work
-                        
-                      </div>
-                      
-                      
-                      
-                      <input
-                        aria-describedby="input-9-messages"
-                        aria-label="Öffnen"
-                        id="input-9"
-                        inputmode="none"
-                        round=""
-                        size="1"
-                        title="Öffnen"
-                        type="text"
-                        value="available"
+                      <i
+                        aria-hidden="true"
+                        class="mdi mdi-school-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+                        data-v-589db232=""
                       />
+                       I am a student 
+                      <!--v-if-->
+                      
                     </div>
                     <!---->
-                    
-                    
-                  </div>
-                  <!---->
-                  <div
-                    class="v-field__append-inner"
+                    <!---->
+                  </span>
+                </li>
+                <li
+                  data-v-589db232=""
+                >
+                  <span
+                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+                    data-v-589db232=""
+                    draggable="false"
                   >
                     
-                    
                     <!---->
-                    <i
-                      aria-hidden="true"
-                      class="mdi-menu-down mdi v-icon notranslate v-theme--light v-icon--size-default v-select__menu-icon"
+                    <span
+                      class="v-chip__underlay"
                     />
                     
+                    <!---->
+                    <!---->
+                    <div
+                      class="v-chip__content"
+                      data-no-activator=""
+                    >
+                      
+                      <i
+                        aria-hidden="true"
+                        class="mdi mdi-map-marker-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+                        data-v-589db232=""
+                      />
+                       Mein Standort 
+                      <!--v-if-->
+                      
+                    </div>
+                    <!---->
+                    <!---->
+                  </span>
+                </li>
+                <li
+                  data-v-589db232=""
+                >
+                  <span
+                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+                    data-v-589db232=""
+                    draggable="false"
+                  >
                     
                     <!---->
-                  </div>
-                  <div
-                    class="v-field__outline"
-                  >
+                    <span
+                      class="v-chip__underlay"
+                    />
+                    
                     <!---->
                     <!---->
-                  </div>
-                </div>
-                
-              </div>
-              <!---->
-              <div
-                class="v-input__details"
-              >
-                <transition-group-stub
-                  appear="false"
-                  aria-live="polite"
-                  class="v-messages"
-                  css="true"
-                  id="input-9-messages"
-                  name="slide-y-transition"
-                  persisted="false"
-                  role="alert"
-                  tag="div"
+                    <div
+                      class="v-chip__content"
+                      data-no-activator=""
+                    >
+                      
+                      <i
+                        aria-hidden="true"
+                        class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+                        data-v-589db232=""
+                      />
+                       Meine Arbeit 
+                      <!--v-if-->
+                      
+                    </div>
+                    <!---->
+                    <!---->
+                  </span>
+                </li>
+                <li
+                  data-v-589db232=""
                 >
-                  <!---->
-                </transition-group-stub>
-                <!---->
-              </div>
-            </div>
-            
+                  <span
+                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+                    data-v-589db232=""
+                    draggable="false"
+                  >
+                    
+                    <!---->
+                    <span
+                      class="v-chip__underlay"
+                    />
+                    
+                    <!---->
+                    <!---->
+                    <div
+                      class="v-chip__content"
+                      data-no-activator=""
+                    >
+                      
+                      <i
+                        aria-hidden="true"
+                        class="mdi mdi-emoticon-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+                        data-v-589db232=""
+                      />
+                       Wie ich mich heute fühle 
+                      <!--v-if-->
+                      
+                    </div>
+                    <!---->
+                    <!---->
+                  </span>
+                </li>
+                <li
+                  data-v-589db232=""
+                >
+                  <span
+                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+                    data-v-589db232=""
+                    draggable="false"
+                  >
+                    
+                    <!---->
+                    <span
+                      class="v-chip__underlay"
+                    />
+                    
+                    <!---->
+                    <!---->
+                    <div
+                      class="v-chip__content"
+                      data-no-activator=""
+                    >
+                      
+                      <i
+                        aria-hidden="true"
+                        class="mdi mdi-web mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+                        data-v-589db232=""
+                      />
+                       Sprachen, die ich spreche 
+                      <!--v-if-->
+                      
+                    </div>
+                    <!---->
+                    <!---->
+                  </span>
+                </li>
+                
+              </ul>
+            </button>
             <button
-              class="name"
+              class="social"
               data-v-f444dc92=""
             >
-              Current User 
               <i
                 aria-hidden="true"
-                class="mdi mdi-pencil-outline mdi v-icon notranslate v-theme--light v-icon--size-default"
+                class="mdi mdi-share-variant-outline mdi v-icon notranslate v-theme--light v-icon--size-default mr-2"
                 data-v-f444dc92=""
               />
-            </button>
-            <button
-              class="introduction"
-              data-v-f444dc92=""
-            >
-              Hello, I am the current user
-            </button>
-            
-          </div>
-          <button
-            data-v-f444dc92=""
-          >
-            <ul
-              class="details"
-              data-v-589db232=""
-              data-v-f444dc92=""
-            >
-              
-              <li
-                data-v-589db232=""
-              >
-                <span
-                  class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
-                  data-v-589db232=""
-                  draggable="false"
-                >
-                  
-                  <!---->
-                  <span
-                    class="v-chip__underlay"
-                  />
-                  
-                  <!---->
-                  <!---->
-                  <div
-                    class="v-chip__content"
-                    data-no-activator=""
-                  >
-                    
-                    <i
-                      aria-hidden="true"
-                      class="mdi mdi-school-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
-                      data-v-589db232=""
-                    />
-                     I am a student 
-                    <!--v-if-->
-                    
-                  </div>
-                  <!---->
-                  <!---->
-                </span>
-              </li>
-              <li
-                data-v-589db232=""
-              >
-                <span
-                  class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
-                  data-v-589db232=""
-                  draggable="false"
-                >
-                  
-                  <!---->
-                  <span
-                    class="v-chip__underlay"
-                  />
-                  
-                  <!---->
-                  <!---->
-                  <div
-                    class="v-chip__content"
-                    data-no-activator=""
-                  >
-                    
-                    <i
-                      aria-hidden="true"
-                      class="mdi mdi-map-marker-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
-                      data-v-589db232=""
-                    />
-                     Mein Standort 
-                    <!--v-if-->
-                    
-                  </div>
-                  <!---->
-                  <!---->
-                </span>
-              </li>
-              <li
-                data-v-589db232=""
-              >
-                <span
-                  class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
-                  data-v-589db232=""
-                  draggable="false"
-                >
-                  
-                  <!---->
-                  <span
-                    class="v-chip__underlay"
-                  />
-                  
-                  <!---->
-                  <!---->
-                  <div
-                    class="v-chip__content"
-                    data-no-activator=""
-                  >
-                    
-                    <i
-                      aria-hidden="true"
-                      class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
-                      data-v-589db232=""
-                    />
-                     Meine Arbeit 
-                    <!--v-if-->
-                    
-                  </div>
-                  <!---->
-                  <!---->
-                </span>
-              </li>
-              <li
-                data-v-589db232=""
-              >
-                <span
-                  class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
-                  data-v-589db232=""
-                  draggable="false"
-                >
-                  
-                  <!---->
-                  <span
-                    class="v-chip__underlay"
-                  />
-                  
-                  <!---->
-                  <!---->
-                  <div
-                    class="v-chip__content"
-                    data-no-activator=""
-                  >
-                    
-                    <i
-                      aria-hidden="true"
-                      class="mdi mdi-emoticon-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
-                      data-v-589db232=""
-                    />
-                     Wie ich mich heute fühle 
-                    <!--v-if-->
-                    
-                  </div>
-                  <!---->
-                  <!---->
-                </span>
-              </li>
-              <li
-                data-v-589db232=""
-              >
-                <span
-                  class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
-                  data-v-589db232=""
-                  draggable="false"
-                >
-                  
-                  <!---->
-                  <span
-                    class="v-chip__underlay"
-                  />
-                  
-                  <!---->
-                  <!---->
-                  <div
-                    class="v-chip__content"
-                    data-no-activator=""
-                  >
-                    
-                    <i
-                      aria-hidden="true"
-                      class="mdi mdi-web mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
-                      data-v-589db232=""
-                    />
-                     Sprachen, die ich spreche 
-                    <!--v-if-->
-                    
-                  </div>
-                  <!---->
-                  <!---->
-                </span>
-              </li>
-              
-            </ul>
-          </button>
-          <button
-            class="social"
-            data-v-f444dc92=""
-          >
-            <i
-              aria-hidden="true"
-              class="mdi mdi-share-variant-outline mdi v-icon notranslate v-theme--light v-icon--size-default mr-2"
-              data-v-f444dc92=""
-            />
-            <ul
-              class="social-list"
-              data-v-f444dc92=""
-            >
-              
-              <li
+              <ul
+                class="social-list"
                 data-v-f444dc92=""
               >
-                <i
-                  aria-hidden="true"
-                  class="mdi-instagram mdi v-icon notranslate v-theme--light v-icon--size-default"
+                
+                <li
                   data-v-f444dc92=""
-                />
+                >
+                  <i
+                    aria-hidden="true"
+                    class="mdi-instagram mdi v-icon notranslate v-theme--light v-icon--size-default"
+                    data-v-f444dc92=""
+                  />
+                </li>
+                
+              </ul>
+            </button>
+            
+          </section>
+          <!--v-if-->
+          <!--v-if-->
+          
+          <section
+            class="cockpit-card narrow"
+            data-v-1451ba78=""
+            data-v-c2e63817=""
+            data-v-e027cbb0=""
+          >
+            <div
+              class="header"
+              data-v-1451ba78=""
+            >
+              
+              <div
+                class="header"
+                data-v-c2e63817=""
+              >
+                <h2
+                  data-v-c2e63817=""
+                >
+                  $t('cockpit.myTables.header')
+                </h2>
+                <button
+                  data-v-c2e63817=""
+                >
+                  $t('cockpit.myTables.addTable')
+                </button>
+              </div>
+              
+            </div>
+            <hr
+              class="hr"
+              data-v-1451ba78=""
+            />
+            
+            <ul
+              class="list"
+              data-v-c2e63817=""
+            >
+              
+              <li
+                class="table"
+                data-v-c2e63817=""
+                data-v-dca20f6c=""
+              >
+                <div
+                  class="table-info bg-dropdown-background animate-fade-out"
+                  data-v-dca20f6c=""
+                >
+                  <span
+                    class="name"
+                    data-v-dca20f6c=""
+                  >
+                    Permakultur
+                  </span>
+                  <span
+                    class="subtitle"
+                    data-v-dca20f6c=""
+                  >
+                    $t('cockpit.myTables.memberCount')
+                  </span>
+                </div>
+                <button
+                  class="action animate-fade-out"
+                  data-v-dca20f6c=""
+                >
+                  <i
+                    aria-hidden="true"
+                    class="v-icon notranslate v-theme--light v-icon--size-default camera-icon"
+                    data-v-dca20f6c=""
+                  >
+                    <svg
+                      fill="none"
+                      height="17"
+                      viewBox="0 0 21 17"
+                      width="21"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7.68844 12.4824H9.66834V9.51172H12.6382V7.53125H9.66834V4.56055H7.68844V7.53125H4.71859V9.51172H7.68844V12.4824ZM2.73869 16.4434C2.19422 16.4434 1.72812 16.2494 1.34038 15.8616C0.952654 15.4738 0.758789 15.0075 0.758789 14.4629V2.58008C0.758789 2.03545 0.952654 1.56921 1.34038 1.18137C1.72812 0.79353 2.19422 0.599609 2.73869 0.599609H14.6181C15.1626 0.599609 15.6287 0.79353 16.0164 1.18137C16.4041 1.56921 16.598 2.03545 16.598 2.58008V7.03613L20.5578 3.0752V13.9678L16.598 10.0068V14.4629C16.598 15.0075 16.4041 15.4738 16.0164 15.8616C15.6287 16.2494 15.1626 16.4434 14.6181 16.4434H2.73869ZM2.73869 14.4629H14.6181V2.58008H2.73869V14.4629Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </i>
+                </button>
+                <button
+                  class="options"
+                  data-v-dca20f6c=""
+                >
+                  <i
+                    aria-hidden="true"
+                    class="mdi mdi-dots-horizontal mdi v-icon notranslate v-theme--light v-icon--size-default options-icon"
+                    data-v-dca20f6c=""
+                  />
+                </button>
+                <transition-group-stub
+                  appear="false"
+                  css="true"
+                  data-v-01c78171=""
+                  data-v-dca20f6c=""
+                  name="options"
+                  persisted="false"
+                >
+                  <!--v-if-->
+                </transition-group-stub>
+              </li>
+              <li
+                class="table"
+                data-v-c2e63817=""
+                data-v-dca20f6c=""
+              >
+                <div
+                  class="table-info bg-dropdown-background animate-fade-out"
+                  data-v-dca20f6c=""
+                >
+                  <span
+                    class="name"
+                    data-v-dca20f6c=""
+                  >
+                    Cryptowährungen
+                  </span>
+                  <span
+                    class="subtitle"
+                    data-v-dca20f6c=""
+                  >
+                    $t('cockpit.myTables.memberCount')
+                  </span>
+                </div>
+                <button
+                  class="action animate-fade-out"
+                  data-v-dca20f6c=""
+                >
+                  <i
+                    aria-hidden="true"
+                    class="v-icon notranslate v-theme--light v-icon--size-default camera-icon"
+                    data-v-dca20f6c=""
+                  >
+                    <svg
+                      fill="none"
+                      height="17"
+                      viewBox="0 0 21 17"
+                      width="21"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7.68844 12.4824H9.66834V9.51172H12.6382V7.53125H9.66834V4.56055H7.68844V7.53125H4.71859V9.51172H7.68844V12.4824ZM2.73869 16.4434C2.19422 16.4434 1.72812 16.2494 1.34038 15.8616C0.952654 15.4738 0.758789 15.0075 0.758789 14.4629V2.58008C0.758789 2.03545 0.952654 1.56921 1.34038 1.18137C1.72812 0.79353 2.19422 0.599609 2.73869 0.599609H14.6181C15.1626 0.599609 15.6287 0.79353 16.0164 1.18137C16.4041 1.56921 16.598 2.03545 16.598 2.58008V7.03613L20.5578 3.0752V13.9678L16.598 10.0068V14.4629C16.598 15.0075 16.4041 15.4738 16.0164 15.8616C15.6287 16.2494 15.1626 16.4434 14.6181 16.4434H2.73869ZM2.73869 14.4629H14.6181V2.58008H2.73869V14.4629Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </i>
+                </button>
+                <button
+                  class="options"
+                  data-v-dca20f6c=""
+                >
+                  <i
+                    aria-hidden="true"
+                    class="mdi mdi-dots-horizontal mdi v-icon notranslate v-theme--light v-icon--size-default options-icon"
+                    data-v-dca20f6c=""
+                  />
+                </button>
+                <transition-group-stub
+                  appear="false"
+                  css="true"
+                  data-v-01c78171=""
+                  data-v-dca20f6c=""
+                  name="options"
+                  persisted="false"
+                >
+                  <!--v-if-->
+                </transition-group-stub>
               </li>
               
             </ul>
-          </button>
-          
-        </section>
-        <!--v-if-->
-        <!--v-if-->
-        
+            <!--v-if-->
+            
+          </section>
+        </div>
         
       </div>
       <!-- Desktop Bottom Bar -->

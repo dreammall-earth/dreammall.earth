@@ -20,9 +20,9 @@ import DefaultLayout from '#layouts/DefaultLayout.vue'
 .cockpit {
   display: grid;
   grid-template-columns: 1fr;
+  gap: 20px;
   align-items: center;
   justify-content: center;
-  gap: 20px;
   margin: auto;
 }
 

@@ -86,11 +86,11 @@ const deleteTable = () => {
 
 <style scoped lang="scss">
 .table {
+  position: relative;
   display: flex;
   gap: 8px;
   align-items: center;
   justify-content: center;
-  position: relative;
 }
 
 .table-info {
@@ -130,8 +130,9 @@ const deleteTable = () => {
 }
 
 .options-icon {
-  transform: rotate(0);
   transition: transform 0.3s;
+  transform: rotate(0);
+
   &.turned {
     transform: rotate(90deg);
   }

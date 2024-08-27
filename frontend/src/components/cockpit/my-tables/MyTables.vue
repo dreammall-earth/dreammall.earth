@@ -8,7 +8,7 @@
     </template>
     <template #default>
       <ul class="list">
-        <Table v-for="item in items" :key="item.id" v-bind="item" />
+        <TableItem v-for="item in items" :key="item.id" v-bind="item" />
       </ul>
       <div v-if="items.length === 0">
         {{ $t('cockpit.myTables.noTables') }}
@@ -20,7 +20,7 @@
 <script lang="ts" setup>
 import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
 
-import Table from './Table.vue'
+import TableItem from './TableItem.vue'
 
 const items = [
   {

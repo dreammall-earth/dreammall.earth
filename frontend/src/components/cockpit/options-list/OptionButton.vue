@@ -15,25 +15,25 @@ defineEmits(['click'])
 <style scoped>
 .item {
   width: 54px;
-  background: rgba(93, 102, 112, 0.55);
   font-size: 10px;
+  background: rgb(93 102 112 / 55%);
 
   &:first-child {
-    border-radius: 16px 0px 0px 16px;
+    border-radius: 16px 0 0 16px;
   }
 
   &:last-child {
-    border-radius: 0px 16px 16px 0px;
+    border-radius: 0 16px 16px 0;
   }
 }
 
 .button {
   display: flex;
   flex-flow: column;
-  height: 100%;
-  justify-content: center;
   align-items: center;
-  color: #f5f5f5;
+  justify-content: center;
   width: 100%;
+  height: 100%;
+  color: #f5f5f5;
 }
 </style>

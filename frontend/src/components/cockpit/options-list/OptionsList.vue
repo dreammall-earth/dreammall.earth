@@ -19,12 +19,12 @@ const props = defineProps<{
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
-  width: calc(100% - 30px);
-  background-color: var(--v-sidebar-background);
   display: flex;
+  width: calc(100% - 30px);
+  height: 100%;
   padding: 0;
   list-style: none;
+  background-color: var(--v-sidebar-background);
 }
 
 .options-move, /* apply transition to moving elements */

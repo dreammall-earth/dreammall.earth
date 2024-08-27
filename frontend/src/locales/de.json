@@ -37,13 +37,13 @@
       "work-placeholder": "Meine Arbeit"
     },
     "myTables": {
-      "header": "Meine Gruppentische",
-      "noTables": "Noch keine Gruppentische",
       "addTable": "Tisch hinzufügen",
-      "memberCount": "{count} Mitglieder",
       "delete": "Löschen",
       "edit": "Bearbeiten",
+      "header": "Meine Gruppentische",
       "invite": "Einladen",
+      "memberCount": "{count} Mitglieder",
+      "noTables": "Noch keine Gruppentische",
       "share": "Teilen"
     }
   },
