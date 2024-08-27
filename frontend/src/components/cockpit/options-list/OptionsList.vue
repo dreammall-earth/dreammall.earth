@@ -10,7 +10,7 @@
 import { defineProps } from 'vue'
 
 const props = defineProps<{
-  isVisible: boolean
+  isVisible?: boolean
 }>()
 </script>
 
