@@ -21,9 +21,15 @@ exports[`MyTables > renders 1`] = `
         $t('cockpit.myTables.header')
       </h2>
       <button
+        class="add-table bg-primary px-3 py-1"
         data-v-c2e63817=""
       >
-        $t('cockpit.myTables.addTable')
+        <i
+          aria-hidden="true"
+          class="mdi mdi-plus mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-c2e63817=""
+        />
+         $t('cockpit.myTables.addTable')
       </button>
     </div>
     
