@@ -29,16 +29,35 @@
 </template>
 
 <script lang="ts" setup>
-import { storeToRefs } from 'pinia'
 import { ref, computed, watch } from 'vue'
-
-import { useTablesStore } from '#stores/tablesStore'
 
 import TableList from './TableList.vue'
 
-const tablesStore = useTablesStore()
+// const { tables: items } = storeToRefs(tablesStore)
 
-const { tables: items } = storeToRefs(tablesStore)
+const items = ref([
+  {
+    id: 69,
+    meetingName: 'Beispiel Titel 1',
+    meetingID: 'xxx',
+    startTime: '1234',
+    participantCount: 4,
+    attendees: [
+      { fullName: 'John Doe' },
+      { fullName: 'Max Mustermann' },
+      { fullName: 'Jane Doe' },
+      { fullName: 'Elfriede Müller' },
+    ],
+  },
+  {
+    id: 77,
+    meetingName: 'Beispiel Titel 2',
+    meetingID: 'xxx',
+    startTime: '1234',
+    participantCount: 0,
+    attendees: [],
+  },
+])
 
 const props = withDefaults(
   defineProps<{

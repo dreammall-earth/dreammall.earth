@@ -2,6 +2,7 @@ import { ApolloError } from '@apollo/client/errors'
 import { provideApolloClient } from '@vue/apollo-composable'
 import { flushPromises, mount } from '@vue/test-utils'
 import { createMockClient, createMockSubscription, IMockSubscription } from 'mock-apollo-client'
+import { navigate } from 'vike/client/router'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
@@ -9,7 +10,7 @@ import { VApp } from 'vuetify/components'
 import { currentUserQuery } from '#queries/currentUserQuery'
 import { joinTableQuery } from '#queries/joinTableQuery'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
-import { mockPageContext } from '#tests/mock.vikePageContext'
+import { setMockPageContext } from '#tests/mock.vikePageContext.js'
 import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
 import TablePage from './+Page.vue'
@@ -48,6 +49,16 @@ describe('Table Page', () => {
     return mount(VApp, {
       slots: {
         default: h(TablePage as Component),
+      },
+      global: {
+        provide: {
+          Symbol(pageContext): {
+            urlPathname: '/table/69',
+            routeParams: {
+              id: 69,
+            },
+          },
+        },
       },
     })
   }
@@ -101,9 +112,12 @@ describe('Table Page', () => {
     beforeEach(async () => {
       vi.clearAllMocks()
       wrapper.unmount()
-      mockPageContext.routeParams = {
-        id: 69,
-      }
+      setMockPageContext({
+        urlPathname: '/table/69',
+        routeParams: {
+          id: 69,
+        },
+      })
       joinTableQueryMock.mockResolvedValue({
         data: { joinTable: 'https://some-link-to-meeting.com' },
       })
@@ -119,6 +133,37 @@ describe('Table Page', () => {
 
     it('shows an iframe', () => {
       expect(wrapper.find('iframe').exists()).toBe(true)
+    })
+  })
+
+  describe('table is queried again after table id changes', () => {
+    beforeEach(async () => {
+      vi.clearAllMocks()
+      wrapper.unmount()
+      setMockPageContext({
+        urlPathname: '/table/69',
+        routeParams: {
+          id: 69,
+        },
+      })
+      joinTableQueryMock.mockResolvedValue({
+        data: { joinTable: 'https://some-link-to-meeting.com' },
+      })
+      wrapper = Wrapper()
+      await flushPromises()
+      await navigate('/table/96')
+      setMockPageContext({
+        urlPathname: '/table/96',
+        routeParams: {
+          id: 96,
+        },
+      })
+    })
+
+    it('calls the API accordingly', () => {
+      expect(joinTableQueryMock).toHaveBeenCalledWith({
+        tableId: 96,
+      })
     })
   })
 })
