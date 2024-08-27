@@ -7,7 +7,6 @@ import { AddUserDetailInput } from '#inputs/AddUserDetailInput'
 import { UpdateUserInput } from '#inputs/UpdateUserInput'
 import { Context } from '#src/context'
 import { prisma, UsersWithMeetings, UserWithProfile } from '#src/prisma'
-import userRepository from '#src/Repositories/UserRepository'
 
 @Resolver()
 export class UserResolver {
@@ -52,7 +51,7 @@ export class UserResolver {
     const { user } = context
     if (!user) throw new Error('User not found!')
 
-    const updatedUser = await userRepository.update({
+    const updatedUser = await prisma.user.update({
       where: {
         id: user.id,
       },
