@@ -15,7 +15,7 @@ import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo, AttendeeRole 
 import { CONFIG } from '#config/config'
 import { OpenTable, Table } from '#models/TableModel'
 import { Context } from '#src/context'
-import { EVENT_CREATE_MY_TABLE, EVENT_UPDATE_MY_TABLE } from '#src/event/Events'
+import { EVENT_CREATE_MY_TABLE, EVENT_UPDATE_MY_TABLE, EVENT_CREATE_TABLE } from '#src/event/Events'
 import logger from '#src/logger'
 import { prisma, UsersWithMeetings, UserWithMeeting } from '#src/prisma'
 import meetingRepository from '#src/Repositories/MeetingRepository'
@@ -35,31 +35,66 @@ export interface CreateGroupTableParams extends ApiRequestParams {
 export class TableResolver {
   // private userRepository = new UserRepository()
 
-  // @Authorized()
-  // @Mutation(() => Table)
-  // async createGroupTable(
-  //   // params: CreateGroupTableParams,
-  //   @Arg('name') name: string,
-  //   @Arg('isPublic') isPublic: boolean,
-  //   @Ctx() context: Context,
-  //   // eslint-disable-next-line type-graphql/wrong-decorator-signature
-  //   @Arg('userIds', () => [Int], { nullable: 'itemsAndList' }) // eslint-disable-next-line type-graphql/invalid-nullable-input-type
-  //   userIds?: number[] | null | undefined,
-  // ): Promise<Table> {
-  //   const { user } = context
-  //   if (!user) throw new Error('User not found!')
+  @Authorized()
+  @Mutation(() => Table)
+  async createTable(
+    // params: CreateGroupTableParams,
+    @Arg('name') name: string,
+    @Arg('isPublic') isPublic: boolean,
+    @Ctx() context: Context,
+    // eslint-disable-next-line type-graphql/wrong-decorator-signature
+    @Arg('userIds', () => [Int], { nullable: 'itemsAndList' }) // eslint-disable-next-line type-graphql/invalid-nullable-input-type
+    userIds?: number[] | null | undefined,
+  ): Promise<Table> {
+    const { user } = context
+    if (!user) throw new Error('User not found!')
 
-  //   // Check if GroupMeeting already exist how to recognize the Meeting
-  //   // if (user.meetingId) {
-  //   //   throw new Error('Meeting already exists!')
-  //   // }
+    // Get Meeting where user.id and userIds are Moderator
+    // Check if GroupMeeting already exist how to recognize the Meeting?
+    // if (user.meetingId) {
+    //   throw new Error('Meeting already exists!')
+    // }
 
-  //   const meetingID: string = await meetingRepository.generateMeetingID()
+    const meetingID: string = await meetingRepository.generateMeetingID()
+    const dbMeeting = await prisma.meeting.create({
+      data: { meetingID, name, public: isPublic },
+    })
 
-  //   await EVENT_CREATE_GROUP_TABLE(user.id)
+    const usersInMeetings: UsersWithMeetings[] = []
 
-  //   return new Table(meeting, usersInMeetings)
-  // }
+    if (userIds) {
+      if (!userIds.some((userId) => userId === user.id)) {
+        userIds.push(user.id)
+      }
+      for (const userId of userIds) {
+        const userInMeeting = await prisma.usersInMeetings.create({
+          data: { meetingId: dbMeeting.id, userId },
+        })
+        usersInMeetings.push({
+          ...userInMeeting,
+          user,
+        })
+      }
+    }
+
+    const inviteLink = new URL(`join-table/${dbMeeting.id}`, CONFIG.FRONTEND_URL).toString()
+    const meeting = await createMeeting(
+      {
+        meetingID,
+        name,
+      },
+      {
+        moderatorOnlyMessage: `Use this link to invite more people:<br/>${inviteLink}`,
+      },
+    )
+    if (!meeting) {
+      throw new Error('Error creating the meeting!')
+    }
+
+    await EVENT_CREATE_TABLE(user.id)
+
+    return new Table(dbMeeting, usersInMeetings)
+  }
 
   @Authorized()
   @Mutation(() => Table)
@@ -298,13 +333,16 @@ export class TableResolver {
       },
       include: {
         user: true,
+        users: true,
       },
     })
     if (!meeting) throw new Error('Table does not exist')
 
     let password: string
 
-    if (meeting.user && meeting.user.id === user.id) {
+    if (meeting.users.some((e) => e.userId === user.id && e.role === 'MODERATOR')) {
+      password = meeting.moderatorPW ? meeting.moderatorPW : ''
+    } else if (meeting.user && meeting.user.id === user.id) {
       password = meeting.moderatorPW ? meeting.moderatorPW : ''
     } else {
       password = meeting.attendeePW ? meeting.attendeePW : ''
