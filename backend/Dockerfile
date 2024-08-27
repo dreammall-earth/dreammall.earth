@@ -54,6 +54,7 @@ COPY prisma ./prisma
 RUN npm install --include=dev --frozen-lockfile --non-interactive
 COPY . .
 RUN npm run build
+RUN npm run db:migrate
 
 ##################################################################################
 # PRODUCTION (Does contain only "binary"- and static-files to reduce image size) #
