@@ -3,7 +3,10 @@
     <template #header>
       <div class="header">
         <h2>{{ $t('cockpit.myTables.header') }}</h2>
-        <button>{{ $t('cockpit.myTables.addTable') }}</button>
+        <button class="add-table bg-primary px-3 py-1">
+          <v-icon icon="mdi mdi-plus" />
+          {{ $t('cockpit.myTables.addTable') }}
+        </button>
       </div>
     </template>
     <template #default>
@@ -40,6 +43,8 @@ const items = [
 .header {
   display: flex;
   gap: 20px;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .list {
@@ -48,5 +53,11 @@ const items = [
   gap: 8px;
   padding: 0;
   list-style: none;
+}
+
+.add-table {
+  font-size: 14px;
+  color: white !important;
+  border-radius: 20px;
 }
 </style>
