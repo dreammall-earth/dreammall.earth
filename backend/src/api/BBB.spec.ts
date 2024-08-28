@@ -19,6 +19,7 @@ jest.mock('#src/logger', () => {
     error: jest.fn(),
     debug: jest.fn(),
     warn: jest.fn(),
+    info: jest.fn(),
   }
 })
 
@@ -514,13 +515,13 @@ describe('registerWebhook', () => {
   })
 
   describe('with success', () => {
-    it('returns true', async () => {
+    it('returns true and logs success info', async () => {
       axiosInstanceGetSpy.mockResolvedValue({ data: '<returncode>SUCCESS</returncode>' })
 
       await expect(registerWebhook()).resolves.toBe(true)
 
       // eslint-disable-next-line @typescript-eslint/unbound-method
-      expect(logger.error).toHaveBeenCalledTimes(0)
+      expect(logger.info).toHaveBeenCalledWith('Webhook registered successfully')
     })
   })
 

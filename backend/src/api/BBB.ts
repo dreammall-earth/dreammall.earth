@@ -123,7 +123,13 @@ export const registerWebhook = async (): Promise<boolean> => {
     logger.error('Webhook was not registered due to an error:', result.data)
     return false
   }
+  logger.info('Webhook registered successfully')
   return true
+}
+
+export const periodicallyRegisterWebhook = (): void => {
+  void registerWebhook()
+  setTimeout(periodicallyRegisterWebhook, 100 * 1000)
 }
 
 /*
