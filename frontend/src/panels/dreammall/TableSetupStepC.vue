@@ -3,6 +3,7 @@
     <v-text-field
       v-model="userSearch"
       rounded
+      clearable
       class="elevation-0 w-100"
       content-class="elevation-0"
       label="Suche"
@@ -11,9 +12,14 @@
     />
 
     <div class="user-list-container w-100">
+      <div v-if="error" class="text-center text-error">
+        Bei der Suche ist ein Fehler aufgetreten.
+      </div>
+
       <v-list
+        v-if="displayedUsers.length"
         class="bg-transparent w-100 user-list"
-        :class="{ loading: searchUsersStore.isLoading }"
+        :class="{ loading: isLoading }"
       >
         <UserInvitationItem
           v-for="user in displayedUsers"
@@ -22,10 +28,10 @@
           @update:invited="updateInvitationStatus(user.id, $event)"
         />
       </v-list>
-    </div>
 
-    <div v-if="searchUsersStore.error" class="text-center text-error">
-      An error occurred while searching for users.
+      <div v-if="!displayedUsers.length" class="text-center mt-4 text-grey-darken-2">
+        Keine Ergebnisse
+      </div>
     </div>
 
     <div class="align-content-center align-center">
@@ -39,23 +45,23 @@ import { ref, computed, watch, defineProps } from 'vue'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 import UserInvitationItem from '#src/panels/dreammall/components/UserInvitationItem.vue'
+import useSearchUsers from '#src/panels/dreammall/composable/useSearchUsers'
 import UserInvitation from '#src/panels/dreammall/interfaces/UserInvitation'
-import { useSearchUsersStore } from '#stores/searchUsersStore'
 
 import { TableSetupEmits, TableSetupProps } from './TableSetupProps'
 
 const props = defineProps<TableSetupProps>()
 const emit = defineEmits<TableSetupEmits>()
 
-const searchUsersStore = useSearchUsersStore()
+const { searchUsers, searchResults, isLoading, error } = useSearchUsers()
 const userSearch = ref('')
 
 watch(userSearch, (newSearch) => {
-  searchUsersStore.searchUsers(newSearch)
+  searchUsers(newSearch)
 })
 
 const displayedUsers = computed<UserInvitation[]>(() => {
-  return searchUsersStore.searchResults.map((user) => ({
+  return searchResults.value.map((user) => ({
     id: user.id,
     name: user.name || user.username,
     avatar: null, // not supporting yet
@@ -93,12 +99,23 @@ const onNext = () => {
 .user-list-container {
   height: 200px;
   overflow-y: auto;
-}
-.user-list {
-  height: 100%;
 
-  &.loading {
-    opacity: 50%;
+  .user-list {
+    height: 100%;
+
+    &.loading {
+      opacity: 50%;
+      transition: opacity 0.5s ease;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
   }
 }
 </style>
