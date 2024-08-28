@@ -13,12 +13,10 @@ import {
   Mesh,
   SphereGeometry,
   MeshBasicMaterial,
-  /*
   LineBasicMaterial,
   BufferGeometry,
   Line,
-   Vector3,
-   */
+  Vector3,
 } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { onMounted, ref } from 'vue'
@@ -32,34 +30,81 @@ type Star = {
   color: number // relative color
 }
 
+const starsData: Star[] = [
+  {
+    id: 's1',
+    azimuth: 0.0,
+    altitude: 0.0,
+    distance: 1,
+    magnitude: 1,
+    color: 1,
+  },
+  {
+    id: 's2',
+    azimuth: Math.PI / 4,
+    altitude: Math.PI / 4,
+    distance: 1,
+    magnitude: 1,
+    color: 1,
+  },
+  {
+    id: 's3',
+    azimuth: -Math.PI / 4,
+    altitude: Math.PI / 6,
+    distance: 1,
+    magnitude: 1,
+    color: 1,
+  },
+  {
+    id: 's4',
+    azimuth: -Math.PI / 6,
+    altitude: (2 * Math.PI) / 6,
+    distance: 1,
+    magnitude: 1,
+    color: 1,
+  },
+  {
+    id: 's5',
+    azimuth: (-2 * Math.PI) / 6,
+    altitude: -Math.PI / 6,
+    distance: 1,
+    magnitude: 1,
+    color: 1,
+  },
+]
+
 const canvas = ref<HTMLCanvasElement | null>(null)
 
 const stars: Mesh[] = []
 
-const SPHERE_RADIUS = 3000
+const SPHERE_RADIUS = 2000
 const STAR_RADIUS = 10
 
 const initScene = () => {
+  const width = window.innerWidth
+  const height = window.innerHeight - 136 // should by 85 in mobile
+
   const scene = new Scene()
-  const camera = new PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 5000)
+  const camera = new PerspectiveCamera(90, width / height, 0.1, 5000)
   const renderer = new WebGLRenderer({ canvas: canvas.value!, antialias: true })
 
-  camera.position.z = 1500
+  camera.position.set(0, 0, 500)
+  camera.lookAt(5000, 0, 0)
 
-  renderer.setSize(window.innerWidth, window.innerHeight)
+  renderer.setSize(width, height)
   renderer.setPixelRatio(window.devicePixelRatio)
   renderer.shadowMap.enabled = true
 
   const controls = new OrbitControls(camera, renderer.domElement)
 
-  controls.enableZoom = true
+  controls.enableZoom = false
   controls.enablePan = false
   controls.enableDamping = true
   controls.dampingFactor = 0.1
-  controls.minPolarAngle = -Math.PI / 2
-  controls.maxPolarAngle = Math.PI / 2
+  controls.minPolarAngle = 0
+  controls.maxPolarAngle = Math.PI
 
-  /*
+  /* this line helps to no get lost in space
    const equatorMaterial = new LineBasicMaterial({ color: 0xff0000, linewidth: 3 })
    const equatorGeometry = new BufferGeometry()
    const points = []
@@ -72,51 +117,9 @@ const initScene = () => {
    scene.add(equatorLine)
    */
 
-  addStars(
-    [
-      {
-        id: 's1',
-        azimuth: 0.0,
-        altitude: 0.0,
-        distance: 1,
-        magnitude: 1,
-        color: 1,
-      },
-      {
-        id: 's2',
-        azimuth: Math.PI / 4,
-        altitude: Math.PI / 4,
-        distance: 1,
-        magnitude: 1,
-        color: 1,
-      },
-      {
-        id: 's3',
-        azimuth: -Math.PI / 4,
-        altitude: Math.PI / 6,
-        distance: 1,
-        magnitude: 1,
-        color: 1,
-      },
-      {
-        id: 's4',
-        azimuth: -Math.PI / 6,
-        altitude: (2 * Math.PI) / 6,
-        distance: 1,
-        magnitude: 1,
-        color: 1,
-      },
-      {
-        id: 's5',
-        azimuth: (-2 * Math.PI) / 6,
-        altitude: -Math.PI / 6,
-        distance: 1,
-        magnitude: 1,
-        color: 1,
-      },
-    ],
-    scene,
-  )
+  addStars(starsData, scene)
+
+  addLine('s1', 's2', scene)
 
   const animate = () => {
     requestAnimationFrame(animate)
@@ -132,13 +135,7 @@ const addStars = (data: Star[], scene: Scene) => {
     const starGeometry = new SphereGeometry(STAR_RADIUS * starData.magnitude, 16, 16)
     const starMaterial = new MeshBasicMaterial({ color: 0xffffff })
 
-    const theta = Math.PI / 2 - starData.altitude
-    const phi = starData.azimuth - Math.PI / 2
-    const r = SPHERE_RADIUS * starData.distance
-
-    const x = r * Math.sin(theta) * Math.cos(phi)
-    const y = r * Math.cos(theta)
-    const z = r * Math.sin(theta) * Math.sin(phi)
+    const [x, y, z] = cartesianFromSphere(starData.azimuth, starData.altitude, starData.distance)
 
     const star = new Mesh(starGeometry, starMaterial)
     star.position.set(x, y, z)
@@ -154,21 +151,68 @@ const addStars = (data: Star[], scene: Scene) => {
   })
 }
 
+const addLine = (from: string, to: string, scene: Scene) => {
+  const star1 = starsData.find((s) => s.id === from)
+  const star2 = starsData.find((s) => s.id === to)
+
+  if (star1 && star2) {
+    const lineMaterial = new LineBasicMaterial({ color: 0xd3d3d3, linewidth: 1 })
+
+    const [x1, y1, z1] = cartesianFromSphere(star1.azimuth, star1.altitude, star1.distance)
+
+    const [x2, y2, z2] = cartesianFromSphere(star2.azimuth, star2.altitude, star2.distance)
+
+    const lineGeometry = new BufferGeometry().setFromPoints([
+      new Vector3(x1, y1, z1),
+      new Vector3(x2, y2, z2),
+    ])
+
+    const line = new Line(lineGeometry, lineMaterial)
+
+    scene.add(line)
+  }
+}
+
+const cartesianFromSphere = (azimuth: number, altitude: number, distance: number): number[] => {
+  const theta = Math.PI / 2 - altitude
+  const phi = azimuth - Math.PI / 2
+  const r = SPHERE_RADIUS * distance
+
+  return [
+    r * Math.sin(theta) * Math.cos(phi),
+    r * Math.cos(theta),
+    r * Math.sin(theta) * Math.sin(phi),
+  ]
+}
+
 onMounted(() => {
   initScene()
 })
 </script>
 
 <style scoped lang="scss">
+@use 'sass:map';
+@import 'vuetify/lib/styles/settings/_variables';
+
 .canvas-container {
-  background-color: #000;
+  --bottom-height: 136px;
+
   width: 100%;
-  height: 100%;
+  height: calc(100vh - var(--v-layout-top) - var(--bottom-height));
+  overflow: hidden;
+  position: relative;
+  border: none;
 }
 
 canvas {
   display: block;
   width: 100%;
   height: 100%;
+}
+
+@media #{map.get($display-breakpoints, 'sm-and-down')} {
+  .container {
+    --bottom-height: 85px;
+  }
 }
 </style>
