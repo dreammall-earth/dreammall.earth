@@ -3,7 +3,14 @@ import { Request } from 'express'
 import { CONFIG } from '#config/config'
 import logger from '#src/logger'
 
-import { joinMeetingLink, getMeetings, MeetingInfo, createMeeting, handleWebhook } from './BBB'
+import {
+  joinMeetingLink,
+  getMeetings,
+  MeetingInfo,
+  createMeeting,
+  handleWebhook,
+  registerWebhook,
+} from './BBB'
 import { axiosInstance } from './BBB/axios'
 
 // eslint-disable-next-line jest/no-untyped-mock-factory
@@ -11,6 +18,7 @@ jest.mock('#src/logger', () => {
   return {
     error: jest.fn(),
     debug: jest.fn(),
+    warn: jest.fn(),
   }
 })
 
@@ -493,6 +501,52 @@ describe('handleWebhook', () => {
       // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(logger.error).toHaveBeenCalledWith(
         'Webhook checksum received (ef21dc772f12e380e71e929756e05f2a320aa84a) does not match calculated checksum 6f355e209efcad2aad189a9fca32cb2dcfd6ac40',
+      )
+    })
+  })
+})
+
+describe('registerWebhook', () => {
+  const axiosInstanceGetSpy = jest.spyOn(axiosInstance, 'get')
+
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
+  describe('with success', () => {
+    it('returns true', async () => {
+      axiosInstanceGetSpy.mockResolvedValue({ data: '<returncode>SUCCESS</returncode>' })
+
+      await expect(registerWebhook()).resolves.toBe(true)
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.error).toHaveBeenCalledTimes(0)
+    })
+  })
+
+  describe('with error from the api', () => {
+    it('returns false and logs api error', async () => {
+      axiosInstanceGetSpy.mockResolvedValue({ data: '<returncode>FAILURE</returncode>' })
+
+      await expect(registerWebhook()).resolves.toBe(false)
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.error).toHaveBeenCalledWith(
+        'Webhook was not registered due to an error:',
+        '<returncode>FAILURE</returncode>',
+      )
+    })
+  })
+
+  describe('with no BBB_WEBHOOK_URL configured', () => {
+    it('returns false and logs warning', async () => {
+      CONFIG.BBB_WEBHOOK_URL = ''
+
+      await expect(registerWebhook()).resolves.toBe(false)
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.warn).toHaveBeenCalledWith(
+        'Webhook was not registered since BBB_WEBHOOK_URL is empty or undefined',
       )
     })
   })
