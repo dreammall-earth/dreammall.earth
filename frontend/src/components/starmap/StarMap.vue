@@ -80,13 +80,16 @@ const stars: Mesh[] = []
 const SPHERE_RADIUS = 2000
 const STAR_RADIUS = 10
 
-const initScene = () => {
-  const width = window.innerWidth
-  const height = window.innerHeight - 136 // should by 85 in mobile
+let renderer: WebGLRenderer
+let camera: PerspectiveCamera
+let scene: Scene
 
-  const scene = new Scene()
-  const camera = new PerspectiveCamera(90, width / height, 0.1, 5000)
-  const renderer = new WebGLRenderer({ canvas: canvas.value!, antialias: true })
+const initScene = () => {
+  const { width, height } = getDimensions()
+
+  scene = new Scene()
+  camera = new PerspectiveCamera(90, width / height, 0.1, 5000)
+  renderer = new WebGLRenderer({ canvas: canvas.value!, antialias: true })
 
   camera.position.set(0, 0, 500)
   camera.lookAt(5000, 0, 0)
@@ -105,21 +108,21 @@ const initScene = () => {
   controls.maxPolarAngle = Math.PI
 
   /* this line helps to no get lost in space
-   const equatorMaterial = new LineBasicMaterial({ color: 0xff0000, linewidth: 3 })
-   const equatorGeometry = new BufferGeometry()
-   const points = []
-   for (let i = 0; i <= 64; i++) {
-     const phi = (i / 64) * Math.PI * 2
-     points.push(new Vector3(3000 * Math.cos(phi), 0, 3000 * Math.sin(phi)))
-   }
-   equatorGeometry.setFromPoints(points)
-   const equatorLine = new Line(equatorGeometry, equatorMaterial)
-   scene.add(equatorLine)
-   */
+      const equatorMaterial = new LineBasicMaterial({ color: 0xff0000, linewidth: 3 })
+      const equatorGeometry = new BufferGeometry()
+      const points = []
+      for (let i = 0; i <= 64; i++) {
+      const phi = (i / 64) * Math.PI * 2
+      points.push(new Vector3(3000 * Math.cos(phi), 0, 3000 * Math.sin(phi)))
+      }
+      equatorGeometry.setFromPoints(points)
+      const equatorLine = new Line(equatorGeometry, equatorMaterial)
+      scene.add(equatorLine)
+    */
 
-  addStars(starsData, scene)
+  addStars(starsData)
 
-  addLine('s1', 's2', scene)
+  addLine('s1', 's2')
 
   const animate = () => {
     requestAnimationFrame(animate)
@@ -128,9 +131,11 @@ const initScene = () => {
     renderer.render(scene, camera)
   }
   animate()
+
+  window.addEventListener('resize', onWindowResize)
 }
 
-const addStars = (data: Star[], scene: Scene) => {
+const addStars = (data: Star[]) => {
   data.forEach((starData) => {
     const starGeometry = new SphereGeometry(STAR_RADIUS * starData.magnitude, 16, 16)
     const starMaterial = new MeshBasicMaterial({ color: 0xffffff })
@@ -151,7 +156,7 @@ const addStars = (data: Star[], scene: Scene) => {
   })
 }
 
-const addLine = (from: string, to: string, scene: Scene) => {
+const addLine = (from: string, to: string) => {
   const star1 = starsData.find((s) => s.id === from)
   const star2 = starsData.find((s) => s.id === to)
 
@@ -184,6 +189,18 @@ const cartesianFromSphere = (azimuth: number, altitude: number, distance: number
     r * Math.sin(theta) * Math.sin(phi),
   ]
 }
+
+const onWindowResize = () => {
+  const { width, height } = getDimensions()
+  camera.aspect = width / height
+  camera.updateProjectionMatrix()
+  renderer.setSize(width, height)
+}
+
+const getDimensions = (): { width: number; height: number } => ({
+  width: window.innerWidth,
+  height: window.innerHeight - 136, // should by 85 in mobile, 136 on desktop
+})
 
 onMounted(() => {
   initScene()
