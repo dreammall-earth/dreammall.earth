@@ -8,6 +8,7 @@ import { pubSub } from './pubSub'
 import { ContactFormResolver } from './resolvers/ContactFormResolver'
 import { checkForOpenTables } from './resolvers/dal/handleOpenTables'
 import { NewsletterSubscriptionResolver } from './resolvers/NewsletterSubscriptionResolver'
+import { StarmapResolver } from './resolvers/StarmapResolver'
 import { TableResolver } from './resolvers/TableResolver'
 import { UserResolver } from './resolvers/UserResolver'
 
@@ -15,7 +16,13 @@ if (CONFIG.BBB_PULL_MEETINGS) void checkForOpenTables()
 
 export const schema = async (): Promise<GraphQLSchema> => {
   return buildSchema({
-    resolvers: [ContactFormResolver, NewsletterSubscriptionResolver, TableResolver, UserResolver],
+    resolvers: [
+      ContactFormResolver,
+      NewsletterSubscriptionResolver,
+      StarmapResolver,
+      TableResolver,
+      UserResolver,
+    ],
     pubSub,
     validate: {
       validationError: { target: false },
