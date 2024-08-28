@@ -35,6 +35,16 @@
       "language-placeholder": "Languages I speak",
       "place-placeholder": "My location",
       "work-placeholder": "My work"
+    },
+    "myTables": {
+      "addTable": "Add table",
+      "delete": "Delete",
+      "edit": "Edit",
+      "header": "My Tables",
+      "invite": "Invite",
+      "memberCount": "{count} members",
+      "noTables": "No group tables so far",
+      "share": "Share"
     }
   },
   "error": {
