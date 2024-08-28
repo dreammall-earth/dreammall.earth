@@ -17,8 +17,7 @@
     "eslint",
     "stylelint",
     "vitest",
-    "storybook",
-    "chromatic"
+    "storybook"
   ],
   "author": {
     "name": "Ulf Gebhardt"
@@ -49,7 +48,6 @@
     "test:unit:update": "npm run test:unit:dev -- run --coverage -u",
     "test:unit:dev": "vitest",
     "test": "npm run test:lint && npm run test:unit",
-    "chromatic": "npx chromatic --build-script-name storybook:build",
     "update": "npx npm-check-updates"
   },
   "dependencies": {
@@ -105,7 +103,6 @@
     "@typescript-eslint/parser": "^8.2.0",
     "@vitest/coverage-v8": "^2.0.5",
     "@vue/test-utils": "^2.4.6",
-    "chromatic": "^11.7.0",
     "esbuild": "^0.23.1",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
