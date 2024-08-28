@@ -51,6 +51,19 @@ const updateMyTableMutation = `mutation($name: String!, $isPublic: Boolean!, $us
   }
 }`
 
+const createTableMutation = `mutation CreateTable($isPublic: Boolean!, $name: String!, $userIds: [Int]) {
+  createTable(isPublic: $isPublic, name: $name, userIds: $userIds) {
+    id
+    name
+    public
+    users {
+      id
+      name
+      role
+    }
+  }
+}`
+
 describe('TableResolver', () => {
   beforeAll(async () => {
     testServer = await createTestServer()
@@ -125,6 +138,37 @@ describe('TableResolver', () => {
           testServer.executeOperation(
             {
               query: 'mutation { joinMyTable }',
+            },
+            { contextValue: { user: null, dataSources: { prisma } } },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('createTable', () => {
+      it('throws access denied', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: createTableMutation,
+              variables: {
+                name: 'Group Table',
+                isPublic: true,
+                userIds: [],
+              },
             },
             { contextValue: { user: null, dataSources: { prisma } } },
           ),
@@ -876,6 +920,243 @@ describe('TableResolver', () => {
                     message: 'Could not create meeting!',
                   }),
                 ]),
+              },
+            },
+          })
+        })
+      })
+    })
+
+    describe('createTable', () => {
+      let bibi: User | undefined
+      let peter: User | undefined
+
+      beforeAll(async () => {
+        await prisma.meeting.deleteMany()
+
+        bibi = await prisma.user.create({
+          data: {
+            username: 'bibi',
+            name: 'Bibi Bloxberg',
+          },
+        })
+
+        peter = await prisma.user.create({
+          data: {
+            username: 'peter',
+            name: 'Peter Lustig',
+          },
+        })
+      })
+
+      describe('meeting does not exist', () => {
+        it('returns Table', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query: createTableMutation,
+                variables: {
+                  name: 'Table',
+                  isPublic: true,
+                  userIds: [bibi?.id],
+                },
+              },
+              {
+                contextValue: {
+                  user,
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  createTable: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    name: 'Table',
+                    public: true,
+                    users: [user.id, bibi?.id],
+                  },
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it.skip('creates meeting in database', async () => {
+          await expect(
+            prisma.meeting.findFirst({
+              where: {
+                user: null,
+                users: {
+                  some: {
+                    userId: {
+                      // in: [bibi?.id, user.id],
+                    },
+                  },
+                },
+              },
+              include: {
+                users: true,
+              },
+            }),
+          ).resolves.toMatchObject({
+            meeting: {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              meetingID: expect.any(String),
+              name: 'Table',
+              public: true,
+            },
+          })
+        })
+
+        it('creates create my table event in the database', async () => {
+          const user = await prisma.user.findUnique({
+            where: {
+              username: nickname,
+            },
+          })
+          const result = await prisma.event.findMany({
+            orderBy: {
+              createdAt: 'asc',
+            },
+          })
+          expect(result).toEqual([
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_USER',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_TABLE',
+              involvedUserId: user?.id,
+            },
+          ])
+        })
+      })
+
+      describe('meeting exists', () => {
+        // Need to define if we want to have a throw if meeting already exists
+        it.skip('throws meeting exists error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query: createTableMutation,
+                variables: {
+                  name: 'Table',
+                  isPublic: true,
+                  userIds: [bibi?.id],
+                },
+              },
+              {
+                contextValue: {
+                  user,
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Meeting already exists!',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('private meeting', () => {
+        // let bibi: User | undefined
+        // let peter: User | undefined
+
+        // beforeAll(async () => {
+        //   await prisma.meeting.deleteMany()
+
+        //   bibi = await prisma.user.create({
+        //     data: {
+        //       username: 'bibi',
+        //       name: 'Bibi Bloxberg',
+        //     },
+        //   })
+
+        //   peter = await prisma.user.create({
+        //     data: {
+        //       username: 'peter',
+        //       name: 'Peter Lustig',
+        //     },
+        //   })
+        // })
+
+        it('returns table with users', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query: createTableMutation,
+                variables: {
+                  name: 'Table',
+                  isPublic: false,
+                  userIds: [bibi?.id, peter?.id],
+                },
+              },
+              {
+                contextValue: {
+                  user,
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  createMyTable: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    name: 'My Table',
+                    public: false,
+                    users: [
+                      {
+                        name: user.name,
+                        username: user.username,
+                        role: 'MODERATOR',
+                      },
+                      {
+                        name: 'Bibi Bloxberg',
+                        username: 'bibi',
+                        role: 'MODERATOR',
+                      },
+                      {
+                        name: 'Peter Lustig',
+                        username: 'peter',
+                        role: 'MODERATOR',
+                      },
+                    ],
+                  },
+                },
+                errors: undefined,
               },
             },
           })
