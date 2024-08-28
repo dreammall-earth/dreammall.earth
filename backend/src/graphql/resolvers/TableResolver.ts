@@ -243,7 +243,8 @@ export class TableResolver {
     const { user } = context
 
     if (!user) throw new Error('User not found!')
-    const meeting = await prisma.meeting.findUnique({
+
+    const table = await prisma.meeting.findUnique({
       where: {
         id: tableId,
       },
@@ -253,21 +254,42 @@ export class TableResolver {
       },
     })
 
-    if (!meeting) throw new Error('Table does not exist')
+    if (!table) {
+      // if user === 'VIEWER'
+      //    throw new Error('Table does not exist')
+      // else if user === 'MODERATOR'
+      //    createMeeting()
+      throw new Error('Table does not exist')
+    }
+    // table.
 
     let password: string
 
-    if (meeting.users.some((e) => e.userId === user.id && e.role === 'MODERATOR')) {
-      password = meeting.moderatorPW ? meeting.moderatorPW : ''
-    } else if (meeting.user && meeting.user.id === user.id) {
-      password = meeting.moderatorPW ? meeting.moderatorPW : ''
+    let meeting
+    if (table.users.some((e) => e.userId === user.id && e.role === 'MODERATOR')) {
+      const inviteLink = new URL(`join-table/${table.id}`, CONFIG.FRONTEND_URL).toString()
+      meeting = await createMeeting(
+        {
+          meetingID: table.meetingID,
+          name: table.name,
+        },
+        {
+          moderatorOnlyMessage: `Use this link to invite more people:<br/>${inviteLink}`,
+        },
+      )
+      if (!meeting) {
+        throw new Error('Error creating the meeting!')
+      }
+      password = table.moderatorPW ? table.moderatorPW : ''
+    } else if (table.user && table.user.id === user.id) {
+      password = table.moderatorPW ? table.moderatorPW : ''
     } else {
-      password = meeting.attendeePW ? meeting.attendeePW : ''
+      password = table.attendeePW ? table.attendeePW : ''
     }
 
     return joinMeetingLink({
       fullName: user.name,
-      meetingID: meeting.meetingID,
+      meetingID: table.meetingID,
       password,
     })
   }
@@ -359,14 +381,6 @@ const createUsersInMeetings = async (data: {
   }
   role?: AttendeeRole
 }) => {
-  // const filteredUserIds: number[] = []
-  // for (const id of data.userIds) {
-  //   const user = await prisma.user.findUnique({ where: { id } })
-  //   logger.info('user.findUnique', user)
-  //   if (user) {
-  //     filteredUserIds.push(id)
-  //   }
-  // }
   await prisma.usersInMeetings.createMany({
     data: data.userIds.map((id) => ({
       role: data.role,
