@@ -1,3 +1,4 @@
+import { Request } from 'express'
 import { XMLParser } from 'fast-xml-parser'
 
 import { CONFIG } from '#config/config'
@@ -87,6 +88,27 @@ export const joinMeetingLink = (options: JoinMeetinLinkOptions): string => {
   }).toString()
   const checksum = createChecksum('join', params)
   return CONFIG.BBB_URL + 'join?' + params + '&checksum=' + checksum
+}
+
+export const handleWebhook = (req: Request): void => {
+  // Checksum validation
+  const checksum = createChecksum(
+    'http://localhost:4000/bbb-webhooks',
+    req.headers.rawBody as string,
+  )
+  if (req.query.checksum !== checksum) {
+    logger.error(
+      `Webhook checksum received (${req.query.checksum as string}) does not match calculated checksum ${checksum}`,
+    )
+    return
+  }
+
+  // Webhook Handling
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+  const event = JSON.parse(req.body.event as string)
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  const timestamp = new Date((req.body.timestamp as number) * 1000)
+  logger.debug('webhook received', timestamp, event)
 }
 
 /*
