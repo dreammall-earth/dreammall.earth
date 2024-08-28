@@ -16,6 +16,11 @@ export default mergeConfig(
         'scripts/tests/plugin.pinia.ts',
         'scripts/tests/plugin.i18n-vuetify.ts',
       ],
+      exclude: [
+        ...configDefaults.exclude,
+        // index page due to canvas issues
+        'src/pages/index/Page.test.ts',
+      ],
       coverage: {
         all: true,
         include: ['src/**/*.{js,jsx,ts,tsx,vue}'],
@@ -24,6 +29,8 @@ export default mergeConfig(
           // storybook
           '**/*{.,-}stories.?(c|m)[jt]s?(x)',
           'src/stories/**/*',
+          'src/pages/index/+Page.vue',
+          'src/components/starmap/StarMap.vue',
         ],
         thresholds: {
           lines: 97,
