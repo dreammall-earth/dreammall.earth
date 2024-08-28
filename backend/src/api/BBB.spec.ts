@@ -1,13 +1,16 @@
+import { Request } from 'express'
+
 import { CONFIG } from '#config/config'
 import logger from '#src/logger'
 
-import { joinMeetingLink, getMeetings, MeetingInfo, createMeeting } from './BBB'
+import { joinMeetingLink, getMeetings, MeetingInfo, createMeeting, handleWebhook } from './BBB'
 import { axiosInstance } from './BBB/axios'
 
 // eslint-disable-next-line jest/no-untyped-mock-factory
 jest.mock('#src/logger', () => {
   return {
     error: jest.fn(),
+    debug: jest.fn(),
   }
 })
 
@@ -451,6 +454,41 @@ describe('createMeeting', () => {
       })
       // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(logger.error).toHaveBeenCalledWith('createMeeting with error', 'Aua!')
+    })
+  })
+})
+
+describe('handleWebhook', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
+  describe('with success', () => {
+    it('logs webhook debug info', () => {
+      const req = {
+        headers: { rawBody: 'Body' },
+        query: { checksum: 'ef21dc772f12e380e71e929756e05f2a320aa84a' },
+        body: { event: '{}', timestamp: 1724836968 },
+      }
+      handleWebhook(req as unknown as Request)
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.debug).toHaveBeenCalledWith('webhook received', new Date('2024-08-28T09:22:48.000Z'), {})
+    })
+  })
+
+  describe('with checksum error', () => {
+    it('logs checksum error', () => {
+      const req = {
+        headers: { rawBody: 'MismatchingBody' },
+        query: { checksum: 'ef21dc772f12e380e71e929756e05f2a320aa84a' },
+        body: { event: '{}', timestamp: 1724836968 },
+      }
+      handleWebhook(req as unknown as Request)
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.error).toHaveBeenCalledWith(
+        'Webhook checksum received (ef21dc772f12e380e71e929756e05f2a320aa84a) does not match calculated checksum 6f355e209efcad2aad189a9fca32cb2dcfd6ac40',
+      )
     })
   })
 })
