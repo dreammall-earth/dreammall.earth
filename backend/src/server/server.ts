@@ -61,7 +61,7 @@ export async function listen(port: number) {
   app.use(cors<cors.CorsRequest>())
 
   // BBB Webhooks
-  app.post('/bbb-webhooks', function requestHandler(req, res) {
+  app.post('/bbb-webhook', function requestHandler(req, res) {
     res.status(200)
     res.end('Webhook received')
     handleWebhook(req)
