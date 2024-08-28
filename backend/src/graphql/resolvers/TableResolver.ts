@@ -359,6 +359,14 @@ const createUsersInMeetings = async (data: {
   }
   role?: AttendeeRole
 }) => {
+  // const filteredUserIds: number[] = []
+  // for (const id of data.userIds) {
+  //   const user = await prisma.user.findUnique({ where: { id } })
+  //   logger.info('user.findUnique', user)
+  //   if (user) {
+  //     filteredUserIds.push(id)
+  //   }
+  // }
   await prisma.usersInMeetings.createMany({
     data: data.userIds.map((id) => ({
       role: data.role,
