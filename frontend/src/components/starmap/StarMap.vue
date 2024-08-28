@@ -6,6 +6,7 @@
 
 <script lang="ts" setup>
 import { update as tweenUpdate } from '@tweenjs/tween.js'
+import { useQuery } from '@vue/apollo-composable'
 import {
   Scene,
   PerspectiveCamera,
@@ -19,61 +20,29 @@ import {
   Vector3,
 } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
-type Star = {
-  id: string
-  azimuth: number // longitude in radients 0 <= azimuth <= 2 * pi
-  altitude: number // latitude in radients - pi / 2 <= altitude <= pi / 2
-  distance: number // relative distance
-  magnitude: number // relative size
-  color: number // relative color
-}
+import { starmapQuery, StarmapQueryResult, StarLine, Star } from '#queries/starmapQuery'
 
-const starsData: Star[] = [
-  {
-    id: 's1',
-    azimuth: 0.0,
-    altitude: 0.0,
-    distance: 1,
-    magnitude: 1,
-    color: 1,
-  },
-  {
-    id: 's2',
-    azimuth: Math.PI / 4,
-    altitude: Math.PI / 4,
-    distance: 1,
-    magnitude: 1,
-    color: 1,
-  },
-  {
-    id: 's3',
-    azimuth: -Math.PI / 4,
-    altitude: Math.PI / 6,
-    distance: 1,
-    magnitude: 1,
-    color: 1,
-  },
-  {
-    id: 's4',
-    azimuth: -Math.PI / 6,
-    altitude: (2 * Math.PI) / 6,
-    distance: 1,
-    magnitude: 1,
-    color: 1,
-  },
-  {
-    id: 's5',
-    azimuth: (-2 * Math.PI) / 6,
-    altitude: -Math.PI / 6,
-    distance: 1,
-    magnitude: 1,
-    color: 1,
-  },
-]
+const starData = ref<Star[]>([])
 
 const canvas = ref<HTMLCanvasElement | null>(null)
+
+const { result: starmapQueryResult } = useQuery(
+  starmapQuery,
+  {},
+  {
+    prefetch: false,
+    fetchPolicy: 'no-cache',
+  },
+)
+
+watch(starmapQueryResult, (data: { starmap: StarmapQueryResult }) => {
+  addStars(data.starmap.stars)
+  starData.value = data.starmap.stars
+
+  data.starmap.starLines.forEach((l: StarLine) => addLine(l.from, l.to))
+})
 
 const stars: Mesh[] = []
 
@@ -120,10 +89,6 @@ const initScene = () => {
       scene.add(equatorLine)
     */
 
-  addStars(starsData)
-
-  addLine('s1', 's2')
-
   const animate = () => {
     requestAnimationFrame(animate)
     tweenUpdate()
@@ -136,11 +101,11 @@ const initScene = () => {
 }
 
 const addStars = (data: Star[]) => {
-  data.forEach((starData) => {
-    const starGeometry = new SphereGeometry(STAR_RADIUS * starData.magnitude, 16, 16)
+  data.forEach((data) => {
+    const starGeometry = new SphereGeometry(STAR_RADIUS * data.magnitude, 16, 16)
     const starMaterial = new MeshBasicMaterial({ color: 0xffffff })
 
-    const [x, y, z] = cartesianFromSphere(starData.azimuth, starData.altitude, starData.distance)
+    const [x, y, z] = cartesianFromSphere(data.azimuth, data.altitude, data.distance)
 
     const star = new Mesh(starGeometry, starMaterial)
     star.position.set(x, y, z)
@@ -157,8 +122,8 @@ const addStars = (data: Star[]) => {
 }
 
 const addLine = (from: string, to: string) => {
-  const star1 = starsData.find((s) => s.id === from)
-  const star2 = starsData.find((s) => s.id === to)
+  const star1 = starData.value.find((s) => s.id === from)
+  const star2 = starData.value.find((s) => s.id === to)
 
   if (star1 && star2) {
     const lineMaterial = new LineBasicMaterial({ color: 0xd3d3d3, linewidth: 1 })
