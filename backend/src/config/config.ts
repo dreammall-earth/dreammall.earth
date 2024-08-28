@@ -33,7 +33,7 @@ const BBB = {
   BBB_SHARED_SECRET: process.env.BBB_SHARED_SECRET ?? 'unknown',
   BBB_URL: process.env.BBB_URL ?? 'https://my.url',
   BBB_PULL_MEETINGS: process.env.NODE_ENV !== 'test' && process.env.BBB_URL,
-  BBB_WEBHOOK_URL: process.env.BBB_WEBHOOK_URL ?? 'http://localhost:4000/bbb-webhook',
+  BBB_WEBHOOK_URL: process.env.BBB_WEBHOOK_URL ?? '',
 }
 
 const FRONTEND_URL = process.env.FRONTEND_URL ?? 'http://localhost:3000/'

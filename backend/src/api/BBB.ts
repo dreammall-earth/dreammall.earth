@@ -108,6 +108,24 @@ export const handleWebhook = (req: Request): void => {
   logger.debug('webhook received', timestamp, event)
 }
 
+export const registerWebhook = async (): Promise<boolean> => {
+  if (CONFIG.BBB_WEBHOOK_URL === '') {
+    logger.warn('Webhook was not registered since BBB_WEBHOOK_URL is empty or undefined')
+    return false
+  }
+
+  const params = {
+    callbackURL: CONFIG.BBB_WEBHOOK_URL,
+  }
+
+  const result = await axiosInstance.get<string>('hooks/create', { params })
+  if (result.data.indexOf('<returncode>SUCCESS</returncode>') === -1) {
+    logger.error('Webhook was not registered due to an error:', result.data)
+    return false
+  }
+  return true
+}
+
 /*
 export const listHooks = async () => {
   try {

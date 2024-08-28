@@ -17,6 +17,7 @@ jest.mock('#src/logger', () => {
 // values taken form https://docs.bigbluebutton.org/development/api/#usage
 CONFIG.BBB_SHARED_SECRET = '639259d4-9dd8-4b25-bf01-95f9567eaf4b'
 CONFIG.BBB_URL = 'https://my.url/'
+CONFIG.BBB_WEBHOOK_URL = 'http://localhost:4000/bbb-webhook'
 
 describe('joinMeetingLink', () => {
   it('returns a link to join the meeting', () => {
