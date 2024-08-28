@@ -473,7 +473,11 @@ describe('handleWebhook', () => {
       handleWebhook(req as unknown as Request)
 
       // eslint-disable-next-line @typescript-eslint/unbound-method
-      expect(logger.debug).toHaveBeenCalledWith('webhook received', new Date('2024-08-28T09:22:48.000Z'), {})
+      expect(logger.debug).toHaveBeenCalledWith(
+        'webhook received',
+        new Date('2024-08-28T09:22:48.000Z'),
+        {},
+      )
     })
   })
 
