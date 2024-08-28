@@ -179,10 +179,10 @@ onMounted(() => {
 .canvas-container {
   --bottom-height: 136px;
 
+  position: relative;
   width: 100%;
   height: calc(100vh - var(--v-layout-top) - var(--bottom-height));
   overflow: hidden;
-  position: relative;
   border: none;
 }
 
