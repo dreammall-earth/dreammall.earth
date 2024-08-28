@@ -29,7 +29,7 @@ export default mergeConfig(
           // storybook
           '**/*{.,-}stories.?(c|m)[jt]s?(x)',
           'src/stories/**/*',
-          'src/pages/index/+Page.vue',
+          'src/pages/index/*',
           'src/components/starmap/StarMap.vue',
         ],
         thresholds: {
