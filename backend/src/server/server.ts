@@ -8,13 +8,13 @@ import express, { json, urlencoded } from 'express'
 import { useServer } from 'graphql-ws/lib/use/ws'
 import { WebSocketServer } from 'ws'
 
+import { handleWebhook } from '#api/BBB'
 import { schema } from '#graphql/schema'
 import { context } from '#src/context'
 
 import logger from './logger'
 
 import type { Context } from '#src/context'
-import { handleWebhook } from '#api/BBB'
 
 export const createServer = async (
   withLogger: boolean = true,
