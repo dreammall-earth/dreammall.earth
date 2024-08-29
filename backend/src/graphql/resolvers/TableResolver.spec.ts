@@ -295,7 +295,6 @@ describe('TableResolver', () => {
         })
 
         afterEach(async () => {
-          // await prisma.usersInMeetings.deleteMany()
           await prisma.meeting.deleteMany()
         })
 
@@ -1104,27 +1103,6 @@ describe('TableResolver', () => {
       })
 
       describe('private meeting', () => {
-        // let bibi: User | undefined
-        // let peter: User | undefined
-
-        // beforeAll(async () => {
-        //   await prisma.meeting.deleteMany()
-
-        //   bibi = await prisma.user.create({
-        //     data: {
-        //       username: 'bibi',
-        //       name: 'Bibi Bloxberg',
-        //     },
-        //   })
-
-        //   peter = await prisma.user.create({
-        //     data: {
-        //       username: 'peter',
-        //       name: 'Peter Lustig',
-        //     },
-        //   })
-        // })
-
         it('returns table with users', async () => {
           await expect(
             testServer.executeOperation(
