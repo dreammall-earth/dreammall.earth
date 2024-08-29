@@ -3,12 +3,19 @@
     <div class="motivation">
       <img :src="Logo" class="logo" />
       {{ $t('cockpit.myTables.createTableA.motivation') }}
+      <input v-model="table.name" placeholder="Name" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import Logo from '#assets/dreammall-logo-no-text.svg'
+
+import type { CreateTableInput } from './CreateTableFlow.vue'
+
+const table = defineModel<CreateTableInput>({
+  required: true,
+})
 </script>
 
 <style scoped>

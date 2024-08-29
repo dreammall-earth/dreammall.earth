@@ -26,13 +26,13 @@ import { h } from 'vue'
 import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
 import usePanel from '#src/panels/usePanel'
 
-import CreateTable from './CreateTable.vue'
+import CreateTableFlow from './CreateTableFlow.vue'
 import TableItem from './TableItem.vue'
 
 const { setComponent } = usePanel()
 
 const addTable = () => {
-  setComponent(h(CreateTable))
+  setComponent(h(CreateTableFlow))
 }
 
 const items = [
