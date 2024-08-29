@@ -30,7 +30,7 @@ export default mergeConfig(
           '**/*{.,-}stories.?(c|m)[jt]s?(x)',
           'src/stories/**/*',
           'src/pages/index/*',
-          'src/components/starmap/StarMap.vue',
+          'src/components/starmap/*',
         ],
         thresholds: {
           lines: 97,

@@ -124,8 +124,8 @@ const createDezentGrid = () => {
   })
 
   // Erstellt die Geometrie und Linien für die Meridiane (Längengrade)
-  for (let i = 0; i < 32; i++) {
-    const phi = (i / 32) * Math.PI * 2
+  for (let i = 0; i < 24; i++) {
+    const phi = (i / 24) * Math.PI * 2
     const meridianPoints = []
 
     for (let j = 0; j <= 64; j++) {
@@ -145,8 +145,8 @@ const createDezentGrid = () => {
   }
 
   // Erstellt die Geometrie und Linien für die Parallelen (Breitengrade)
-  for (let i = 1; i < 16; i++) {
-    const theta = (i / 16) * Math.PI
+  for (let i = 1; i < 12; i++) {
+    const theta = (i / 12) * Math.PI
     const parallelPoints = []
 
     for (let j = 0; j <= 64; j++) {
