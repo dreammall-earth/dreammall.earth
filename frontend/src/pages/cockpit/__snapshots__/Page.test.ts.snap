@@ -2267,7 +2267,6 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
           
           <!---->
         </div>
-        <!--v-if-->
         
         <div
           class="step-header"
@@ -2287,7 +2286,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
               class="text-h6"
               data-v-fe0c4e23=""
             >
-              Tisch betreten
+              Mall Talk
             </h2>
           </div>
           <div
@@ -2330,6 +2329,8 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
         <button
           class="v-btn v-btn--elevated v-theme--light v-btn--density-default elevation-0 v-btn--rounded v-btn--size-default v-btn--variant-elevated custom-green-btn mb-5"
           data-v-ea088446=""
+          my-table-settings="[object Object]"
+          submit-text="Weiter"
           type="button"
         >
           
@@ -2354,7 +2355,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
           >
             
             
-            Tisch betreten
+            $t('dream-mall-panel.setup.table-creation')
             
             
           </span>
@@ -2362,6 +2363,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
           <!---->
         </button>
         
+        <!--v-if-->
         <!--v-if-->
       </div>
       <div
