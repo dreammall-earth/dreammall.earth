@@ -232,31 +232,14 @@ export class TableResolver {
     })
 
     if (!table) {
-      // if user === 'VIEWER'
-      //    throw new Error('Table does not exist')
-      // else if user === 'MODERATOR'
-      //    createMeeting()
       throw new Error('Table does not exist')
     }
-    // table.
 
     let password: string
 
-    let meeting
     if (table.users.some((e) => e.userId === user.id && e.role === 'MODERATOR')) {
       const inviteLink = new URL(`join-table/${table.id}`, CONFIG.FRONTEND_URL).toString()
-      meeting = await createMeeting(
-        {
-          meetingID: table.meetingID,
-          name: table.name,
-        },
-        {
-          moderatorOnlyMessage: `Use this link to invite more people:<br/>${inviteLink}`,
-        },
-      )
-      if (!meeting) {
-        throw new Error('Error creating the meeting!')
-      }
+      await createBBBMeeting(table.meetingID, table.name, inviteLink)
       password = table.moderatorPW ? table.moderatorPW : ''
     } else if (table.user && table.user.id === user.id) {
       password = table.moderatorPW ? table.moderatorPW : ''
