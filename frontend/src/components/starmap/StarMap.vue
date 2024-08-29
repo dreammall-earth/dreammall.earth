@@ -49,7 +49,7 @@ watch(starmapQueryResult, (data: { starmap: StarmapQueryResult }) => {
 const stars: Mesh[] = []
 
 // Erhöht den Radius der Sphäre, um Verzerrungen zu reduzieren
-const SPHERE_RADIUS = 4000 // Angepasster Radius der Sphäre
+const SPHERE_RADIUS = 4500 // Angepasster Radius der Sphäre
 const STAR_RADIUS = 10
 
 let renderer: WebGLRenderer
@@ -63,10 +63,10 @@ const initScene = () => {
   // Erstellt eine neue Three.js-Szene
   scene = new Scene()
 
-  // Erstellt eine Kamera mit einem größeren Sichtfeld, um die Sphäre besser darzustellen
-  camera = new PerspectiveCamera(75, width / height, 0.1, 10000)
-  // Positioniert die Kamera leicht außerhalb der Sphäre
-  camera.position.set(0, 0, -SPHERE_RADIUS + 500)
+  // Erstellt eine Kamera mit einem Sichtfeld, um die Sphäre darzustellen
+  camera = new PerspectiveCamera(45, width / height, 0.1, 10000)
+  // Positioniert die Kamera leicht versetzt vom Mittelpunkt der Szene
+  camera.position.set(0, 0, 2250)
 
   // Erstellt einen Renderer und weist ihm das Canvas-Element zu
   renderer = new WebGLRenderer({ canvas: canvas.value!, antialias: true })
@@ -78,17 +78,13 @@ const initScene = () => {
   const textureLoader = new TextureLoader()
   const spaceTexture = textureLoader.load(
     'https://raw.githubusercontent.com/ogerly/playstuff/main/dskSu.jpg',
-    () => {
-      // Setzt die Textur als Hintergrund der Szene
-      scene.background = spaceTexture
-    },
   )
-
-  // Erstellt eine Sphäre mit der Weltraumtextur und fügt sie zur Szene hinzu
   const sphereGeometry = new SphereGeometry(SPHERE_RADIUS, 64, 64)
   const sphereMaterial = new MeshBasicMaterial({
     map: spaceTexture,
     side: BackSide, // Textur wird auf der Innenseite der Sphäre angezeigt
+    transparent: true, // Ermöglicht die Transparenz
+    opacity: 0.5, // Setzt die Transparenz für das Hintergrundbild
   })
   const sphere = new Mesh(sphereGeometry, sphereMaterial)
   scene.add(sphere)
@@ -99,8 +95,8 @@ const initScene = () => {
   controls.enablePan = false // Deaktiviert das Schwenken
   controls.enableDamping = true // Fügt eine Dämpfung für sanftere Bewegungen hinzu
   controls.dampingFactor = 0.1
-  controls.minPolarAngle = 0
-  controls.maxPolarAngle = Math.PI
+  controls.minPolarAngle = Math.PI / 2 - Math.PI / 9 // Begrenzung nach unten: 50° vom Äquator (90° - 40° = 50°)
+  controls.maxPolarAngle = Math.PI / 2 + Math.PI / 9 // Begrenzung nach oben: 130° vom Äquator (90° + 40° = 130°)
 
   // Fügt das dezente Raster zur Sphäre hinzu
   createDezentGrid()
