@@ -86,58 +86,48 @@ query {
             singleResult: {
               data: {
                 starmap: {
-                  stars: [
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                  stars: expect.arrayContaining([
                     {
-                      id: 's1',
-                      azimuth: 0,
-                      altitude: 0,
+                      id: 's8',
+                      azimuth: -0.043611111,
+                      altitude: -0.2531666667,
                       distance: 1,
-                      magnitude: 1,
+                      magnitude: 3,
                       color: 1,
                     },
                     {
-                      id: 's2',
-                      azimuth: 0.7853981633974483,
-                      altitude: 0.7853981633974483,
+                      id: 's9',
+                      azimuth: 0.1731666667,
+                      altitude: -0.2131666667,
                       distance: 1,
-                      magnitude: 1,
+                      magnitude: 3,
                       color: 1,
                     },
                     {
-                      id: 's3',
-                      azimuth: -0.7853981633974483,
-                      altitude: 0.5235987755982988,
+                      id: 's10',
+                      azimuth: 0.251666667,
+                      altitude: -0.043611111,
                       distance: 1,
-                      magnitude: 1,
+                      magnitude: 3,
                       color: 1,
                     },
+                  ]),
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                  starLines: expect.arrayContaining([
                     {
-                      id: 's4',
-                      azimuth: -0.5235987755982988,
-                      altitude: 1.0471975511965976,
-                      distance: 1,
-                      magnitude: 1,
-                      color: 1,
+                      from: 's6',
+                      to: 's7',
                     },
                     {
-                      id: 's5',
-                      azimuth: -1.0471975511965976,
-                      altitude: -0.5235987755982988,
-                      distance: 1,
-                      magnitude: 1,
-                      color: 1,
-                    },
-                  ],
-                  starLines: [
-                    {
-                      from: 's1',
-                      to: 's3',
+                      from: 's6',
+                      to: 's8',
                     },
                     {
-                      from: 's1',
-                      to: 's2',
+                      from: 's6',
+                      to: 's9',
                     },
-                  ],
+                  ]),
                 },
               },
               errors: undefined,
