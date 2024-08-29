@@ -293,7 +293,6 @@ export class TableResolver {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     @Arg('username') username: string,
   ): Promise<OpenTable[]> {
-    // console.log('--------------------', username)
     return openTablesFromOpenMeetings(meetings)
   }
 
