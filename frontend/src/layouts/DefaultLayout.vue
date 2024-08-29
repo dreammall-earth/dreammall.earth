@@ -55,6 +55,7 @@
       />
       <TableSetup v-if="getMode() === 'setup'" ref="tableSetupRef" @close="toggleButtonList" />
       <TableJoin v-if="getMode() === 'join'" @close="toggleButtonList" />
+      <TableSettings v-if="getMode() === 'table'" @close="toggleButtonList" />
     </div>
 
     <div class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none">
@@ -74,7 +75,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 
 import Divider from '#assets/img/divider.svg'
 import Triangle from '#assets/img/triangle.svg'
@@ -87,6 +88,7 @@ import TabControl from '#components/menu/TabControl.vue'
 import UserInfo from '#components/menu/UserInfo.vue'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
 import TableJoin from '#src/panels/dreammall/TableJoin.vue'
+import TableSettings from '#src/panels/dreammall/TableSettings.vue'
 import TableSetup from '#src/panels/dreammall/TableSetup.vue'
 import { useUserStore } from '#stores/userStore'
 
@@ -109,8 +111,14 @@ const toggleButtonList = () => {
 const userStore = useUserStore()
 
 const getMode = () => {
-  if (window.location.href.includes('/table/')) return 'table'
-  return userStore.getMyTable != null ? 'join' : 'setup'
+  if (
+    typeof window !== 'undefined' &&
+    window.location.pathname.includes('/table/') &&
+    userStore.getMyTable
+  ) {
+    return 'table'
+  }
+  return userStore.getMyTable ? 'join' : 'setup'
 }
 </script>
 

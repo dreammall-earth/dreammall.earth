@@ -14,7 +14,7 @@
 
     <v-switch v-model="isPrivateModel" label="Privat" color="#4caf50" inset hide-details />
 
-    <SimpleButton class="mt-12" label="Weiter" @click="onNext" />
+    <SimpleButton class="mt-12" :label="submitText" @click="onNext" />
   </div>
 </template>
 

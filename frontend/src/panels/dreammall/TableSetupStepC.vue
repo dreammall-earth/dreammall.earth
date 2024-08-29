@@ -35,7 +35,7 @@
     </div>
 
     <div class="align-content-center align-center">
-      <SimpleButton class="mt-12 mx-auto" label="Weiter" @click="onNext" />
+      <SimpleButton class="mt-12 mx-auto" :label="submitText" @click="onNext" />
     </div>
   </div>
 </template>

@@ -98,7 +98,15 @@ export const useUserStore = defineStore(
 
     const getCurrentUser = computed(() => currentUser.value)
 
-    const getMyTable = computed(() => currentUser.value?.table)
+    const getMyTable = computed(
+      () =>
+        currentUser.value?.table || {
+          id: 0,
+          name: '',
+          public: false,
+          users: [],
+        },
+    )
 
     const getUsersInMyTable = computed(() => currentUser.value?.table?.users)
 

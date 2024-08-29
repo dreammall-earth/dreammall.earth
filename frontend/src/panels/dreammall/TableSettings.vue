@@ -1,3 +1,4 @@
+<!-- Mainly Duplicated code from TableSetup Panel -->
 <template>
   <PanelHeader
     v-if="steps"
@@ -14,6 +15,7 @@
     :submit-text="steps[currentStep]?.submitText ?? 'Weiter'"
     @next="onNext"
     @submit="onSubmit"
+    @custom="onCustom"
     @table-name:updated="updateTableName"
     @is-public:updated="updateIsPublic"
     @users:updated="updateUsers"
@@ -21,27 +23,28 @@
 </template>
 
 <script setup lang="ts">
-import { navigate } from 'vike/client/router'
 import { onMounted, onUnmounted, ref } from 'vue'
 
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import MyTableSettings from '#src/panels/dreammall/interfaces/MyTableSettings'
-import TableSetupStepA from '#src/panels/dreammall/TableSetupStepA.vue'
+import TableSettingsRoot from '#src/panels/dreammall/TableSettingsRoot.vue'
 import TableSetupStepB from '#src/panels/dreammall/TableSetupStepB.vue'
 import TableSetupStepC from '#src/panels/dreammall/TableSetupStepC.vue'
-import TableSetupStepD from '#src/panels/dreammall/TableSetupStepD.vue'
 import PanelHeader from '#src/panels/PanelHeader.vue'
 import { useTablesStore } from '#stores/tablesStore'
+import { MyTable, useUserStore } from '#stores/userStore'
 
 const tablesStore = useTablesStore()
+const userStore = useUserStore()
+
+const myTable: MyTable = userStore.getMyTable
+const tableSettings = ref<MyTableSettings>({
+  name: myTable?.name || '',
+  isPublic: myTable.public || true,
+  users: myTable.users.map((u) => u.id) || [],
+})
 
 const currentStep = ref(0)
-
-const tableSettings = ref<MyTableSettings>({
-  name: tablesStore.defaultMyTableName || '',
-  isPublic: false,
-  users: [],
-})
 
 const updateTableName = (name: string) => {
   tableSettings.value.name = name
@@ -55,7 +58,32 @@ const updateUsers = (users: number[]) => {
   tableSettings.value.users = users
 }
 
-type StepId = string | (() => string)
+const onSubmitSettingsAsync = async (): Promise<string> => {
+  try {
+    await tablesStore.updateMyTable(tableSettings.value.name, tableSettings.value.isPublic)
+    return 'root'
+  } catch (error) {
+    GlobalErrorHandler.error('Error occurred by updating the settings', error)
+    return ''
+  }
+}
+
+const onSubmitUsersAsync = async (): Promise<string> => {
+  try {
+    await tablesStore.updateMyTableUsers(tableSettings.value.users)
+    return 'root'
+  } catch (error) {
+    GlobalErrorHandler.error('Error occurred by updating the users', error)
+    return ''
+  }
+}
+
+const onSubmitCloseCallAsync = async (): Promise<string> => {
+  emit('close')
+  return ''
+}
+
+type StepId = string | (() => string) | (() => Promise<string>)
 type Step = {
   component: unknown
   id: string
@@ -66,36 +94,28 @@ type Step = {
 }
 const steps: Step[] = [
   {
-    component: TableSetupStepA,
-    id: 'start',
-    title: 'Mall Talk',
-    submit: 'next',
-    submitText: 'Weiter',
+    component: TableSettingsRoot,
+    id: 'root',
+    title: 'Mein Tisch',
+    submit: onSubmitCloseCallAsync,
+    submitText: 'Beenden',
     back: 'previous',
   },
   {
     component: TableSetupStepB,
     id: 'settings',
-    title: 'Tisch erstellen',
-    submit: () => (tableSettings.value.isPublic ? 'end' : 'users'),
-    submitText: 'Weiter',
-    back: 'previous',
+    title: 'Einstellungen',
+    submit: onSubmitSettingsAsync,
+    submitText: 'Übernehmen',
+    back: 'root',
   },
   {
     component: TableSetupStepC,
     id: 'users',
-    title: 'Leute einladen',
-    submit: 'next',
-    submitText: 'Weiter',
-    back: 'previous',
-  },
-  {
-    component: TableSetupStepD,
-    id: 'end',
-    title: 'Kleine Erinnerung',
-    submit: 'next',
-    submitText: 'Weiter',
-    back: () => (tableSettings.value.isPublic ? 'settings' : 'users'),
+    title: 'Teilnehmer',
+    submit: onSubmitUsersAsync,
+    submitText: 'Übernehmen',
+    back: 'root',
   },
 ]
 
@@ -111,10 +131,10 @@ const updateHistory = (step: number) => {
   // window.history.pushState({ step }, '', url.toString())
 }
 
-const transitToNext = () => transitToId(steps[currentStep.value].submit)
-const transitToPrevious = () => transitToId(steps[currentStep.value].back)
+const transitToNextAsync = () => transitToIdAsync(steps[currentStep.value].submit)
+const transitToPreviousAsync = () => transitToIdAsync(steps[currentStep.value].back)
 
-const transitToId = (destinationId: StepId) => {
+const transitToIdAsync = async (destinationId: StepId) => {
   if (destinationId === 'next') {
     if (currentStep.value < steps.length - 1) {
       currentStep.value++
@@ -128,9 +148,9 @@ const transitToId = (destinationId: StepId) => {
       currentStep.value = -1
     }
   } else if (typeof destinationId === 'string') {
-    currentStep.value = findStepById(destinationId)
+    currentStep.value = await findStepByIdAsync(destinationId)
   } else if (typeof destinationId === 'function') {
-    currentStep.value = findStepById(destinationId())
+    currentStep.value = await findStepByIdAsync(await destinationId())
   } else {
     currentStep.value = -1
   }
@@ -142,39 +162,17 @@ const transitToId = (destinationId: StepId) => {
   }
 }
 
-const findStepById = (id: string): number => steps.findIndex((step) => step.id === id)
-
-const onNext = transitToNext
-const onBack = transitToPrevious
-
-const onSubmit = async () => {
-  try {
-    const table = await tablesStore.createMyTable(
-      tableSettings.value.name,
-      tableSettings.value.isPublic,
-      tableSettings.value.users,
-    )
-
-    if (!table) {
-      GlobalErrorHandler.error('Could not create MyTable')
-      return
-    }
-
-    emit('close')
-
-    const tableId = await tablesStore.joinMyTable()
-    if (!tableId) {
-      GlobalErrorHandler.error('Could not join myTable')
-      return
-    }
-
-    await navigate(`/table/${tableId}`)
-  } catch (error) {
-    GlobalErrorHandler.error('Error opening table', error)
-  }
+const findStepByIdAsync = async (id: string): Promise<number> => {
+  if (!id) return currentStep.value
+  return steps.findIndex((step) => step.id === id)
 }
 
+const onNext = transitToNextAsync
+const onBack = transitToPreviousAsync
+const onCustom = async (stepId: string) => transitToIdAsync(stepId)
+
 const onClose = () => emit('close')
+const onSubmit = onClose
 
 const reset = () => {
   currentStep.value = 0

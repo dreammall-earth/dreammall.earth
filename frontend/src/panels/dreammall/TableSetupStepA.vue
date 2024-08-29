@@ -4,9 +4,8 @@
 
 <script setup lang="ts">
 import SimpleButton from '#components/buttons/SimpleButton.vue'
-import { TableSetupEmits, TableSetupProps } from '#src/panels/dreammall/TableSetupProps'
+import { TableSetupEmits } from '#src/panels/dreammall/TableSetupProps'
 
-const props = defineProps<TableSetupProps>()
 const emit = defineEmits<TableSetupEmits>()
 
 const onClick = () => {
