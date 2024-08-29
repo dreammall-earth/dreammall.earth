@@ -113,12 +113,11 @@ const userStore = useUserStore()
 const getMode = () => {
   if (
     typeof window !== 'undefined' &&
-    window.location.pathname.includes('/table/') &&
-    userStore.getMyTable
+    window.location.pathname.includes('/table/')
   ) {
     return 'table'
   }
-  return userStore.getMyTable ? 'join' : 'setup'
+  return userStore.getMyTable?.id ? 'join' : 'setup'
 }
 </script>
 
