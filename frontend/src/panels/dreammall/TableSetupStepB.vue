@@ -47,7 +47,7 @@ const onNext = () => {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .flat-text-field .v-field--variant-solo-filled {
   box-shadow: none !important;
 }
