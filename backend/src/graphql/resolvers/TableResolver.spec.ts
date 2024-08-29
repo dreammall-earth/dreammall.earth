@@ -488,7 +488,6 @@ describe('TableResolver', () => {
         let peter: User | null
 
         beforeAll(async () => {
-          // await prisma.usersInMeetings.deleteMany()
           await prisma.meeting.deleteMany()
 
           bibi = await prisma.user.findUnique({
