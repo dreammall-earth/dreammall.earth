@@ -3,7 +3,7 @@
     <template #header>
       <div class="header">
         <h2>{{ $t('cockpit.myTables.header') }}</h2>
-        <button class="add-table bg-primary px-3 py-1">
+        <button class="add-table bg-primary px-3 py-1" @click="addTable">
           <v-icon icon="mdi mdi-plus" />
           {{ $t('cockpit.myTables.addTable') }}
         </button>
@@ -21,9 +21,19 @@
 </template>
 
 <script lang="ts" setup>
-import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
+import { h } from 'vue'
 
+import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
+import usePanel from '#src/panels/usePanel'
+
+import CreateTable from './CreateTable.vue'
 import TableItem from './TableItem.vue'
+
+const { setComponent } = usePanel()
+
+const addTable = () => {
+  setComponent(h(CreateTable))
+}
 
 const items = [
   {

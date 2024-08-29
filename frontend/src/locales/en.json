@@ -44,7 +44,10 @@
       "invite": "Invite",
       "memberCount": "{count} members",
       "noTables": "No group tables so far",
-      "share": "Share"
+      "share": "Share",
+      "createTableA": {
+        "motivation": "Your vision turns into reality. Let's take the first step together."
+      }
     }
   },
   "error": {

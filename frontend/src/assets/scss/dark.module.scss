@@ -19,6 +19,8 @@ $cockpit-input-background: rgb(93 102 112);
 $cockpit-element-background: rgb(93 102 112 / 55%);
 $cockpit-chip-background: rgb(61 71 83);
 $cockpit-chip-background-2: $cockpit-chip-background;
+$panel-background: rgba(61, 71, 83, 0.75);
+$panel-element-background: rgba(28, 42, 57, 0.15);
 
 :export {
     backgroundColor: $background-color;
@@ -42,4 +44,6 @@ $cockpit-chip-background-2: $cockpit-chip-background;
     cockpitElementBackground: $cockpit-element-background;
     cockpitChipBackground: $cockpit-chip-background;
     cockpitChipBackground2: $cockpit-chip-background-2;
+    panelBackground: $panel-background;
+    panelElementBackground: $panel-element-background;
 }

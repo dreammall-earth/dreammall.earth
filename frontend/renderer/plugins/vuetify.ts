@@ -40,6 +40,8 @@ function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): Theme
       'cockpit-element-background': theme.cockpitElementBackground,
       'cockpit-chip-background': theme.cockpitChipBackground,
       'cockpit-chip-background-2': theme.cockpitChipBackground2,
+      'panel-background': theme.panelBackground,
+      'panel-element-background': theme.panelElementBackground,
     },
   }
 }

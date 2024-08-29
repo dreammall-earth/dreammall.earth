@@ -33,6 +33,8 @@
       :location="$vuetify.display.smAndDown ? 'bottom' : 'right'"
     />
 
+    <Panel />
+
     <!-- Page Content Container -->
     <v-container fluid class="page-container px-8">
       <slot></slot>
@@ -114,6 +116,7 @@ import UserInfo from '#components/menu/UserInfo.vue'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
 import { JoinMyTableMutationResult, joinMyTableMutation } from '#mutations/joinMyTableMutation'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
+import Panel from '#src/panels/Panel.vue'
 
 const isTablesDrawerVisible = ref(false)
 

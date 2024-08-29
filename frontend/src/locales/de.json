@@ -44,7 +44,10 @@
       "invite": "Einladen",
       "memberCount": "{count} Mitglieder",
       "noTables": "Noch keine Gruppentische",
-      "share": "Teilen"
+      "share": "Teilen",
+      "createTableA": {
+        "motivation": "Deine Vision wird Realität, lass uns gemeinsam den ersten Schritt machen."
+      }
     }
   },
   "error": {
