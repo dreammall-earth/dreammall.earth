@@ -994,6 +994,7 @@ exports[`Table Page > renders 1`] = `
             data-v-75d0be1e=""
             fill="none"
             height="1719"
+            is-active="false"
             viewBox="0 0 1731 1719"
             width="1731"
             xmlns="http://www.w3.org/2000/svg"
