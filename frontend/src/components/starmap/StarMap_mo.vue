@@ -19,7 +19,6 @@ import {
   Line,
   Vector3,
   TextureLoader,
-  BackSide,
 } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { onMounted, ref, watch } from 'vue'
@@ -48,64 +47,58 @@ watch(starmapQueryResult, (data: { starmap: StarmapQueryResult }) => {
 
 const stars: Mesh[] = []
 
-// Erhöht den Radius der Sphäre, um Verzerrungen zu reduzieren
-const SPHERE_RADIUS = 4000 // Angepasster Radius der Sphäre
+const SPHERE_RADIUS = 2000
 const STAR_RADIUS = 10
 
 let renderer: WebGLRenderer
 let camera: PerspectiveCamera
 let scene: Scene
 
-// Initialisiert die 3D-Szene, Kamera, Renderer und Steuerungen
 const initScene = () => {
   const { width, height } = getDimensions()
 
-  // Erstellt eine neue Three.js-Szene
   scene = new Scene()
-
-  // Erstellt eine Kamera mit einem größeren Sichtfeld, um die Sphäre besser darzustellen
-  camera = new PerspectiveCamera(75, width / height, 0.1, 10000)
-  // Positioniert die Kamera leicht außerhalb der Sphäre
-  camera.position.set(0, 0, -SPHERE_RADIUS + 500)
-
-  // Erstellt einen Renderer und weist ihm das Canvas-Element zu
+  camera = new PerspectiveCamera(90, width / height, 0.1, 5000)
   renderer = new WebGLRenderer({ canvas: canvas.value!, antialias: true })
+
+  camera.position.set(0, 0, 500)
+  camera.lookAt(5000, 0, 0)
+
   renderer.setSize(width, height)
   renderer.setPixelRatio(window.devicePixelRatio)
   renderer.shadowMap.enabled = true
 
-  // Lädt die Textur für den Weltraumhintergrund
+  // Load the space background texture
   const textureLoader = new TextureLoader()
   const spaceTexture = textureLoader.load(
     'https://raw.githubusercontent.com/ogerly/playstuff/main/dskSu.jpg',
     () => {
-      // Setzt die Textur als Hintergrund der Szene
       scene.background = spaceTexture
     },
   )
 
-  // Erstellt eine Sphäre mit der Weltraumtextur und fügt sie zur Szene hinzu
-  const sphereGeometry = new SphereGeometry(SPHERE_RADIUS, 64, 64)
-  const sphereMaterial = new MeshBasicMaterial({
-    map: spaceTexture,
-    side: BackSide, // Textur wird auf der Innenseite der Sphäre angezeigt
-  })
-  const sphere = new Mesh(sphereGeometry, sphereMaterial)
-  scene.add(sphere)
-
-  // Fügt Steuerungen für die Kamera hinzu, ermöglicht das Schwenken, Drehen und Zoomen
   const controls = new OrbitControls(camera, renderer.domElement)
-  controls.enableZoom = false // Deaktiviert das Zoomen
-  controls.enablePan = false // Deaktiviert das Schwenken
-  controls.enableDamping = true // Fügt eine Dämpfung für sanftere Bewegungen hinzu
+
+  controls.enableZoom = false
+  controls.enablePan = false
+  controls.enableDamping = true
   controls.dampingFactor = 0.1
   controls.minPolarAngle = 0
   controls.maxPolarAngle = Math.PI
 
-  // Fügt das dezente Raster zur Sphäre hinzu
-  createDezentGrid()
+  /* this line helps to no get lost in space
+      const equatorMaterial = new LineBasicMaterial({ color: 0xff0000, linewidth: 3 })
+      const equatorGeometry = new BufferGeometry()
+      const points = []
+      for (let i = 0; i <= 64; i++) {
+      const phi = (i / 64) * Math.PI * 2
+      points.push(new Vector3(3000 * Math.cos(phi), 0, 3000 * Math.sin(phi)))
+      }
+      equatorGeometry.setFromPoints(points)
+      const equatorLine = new Line(equatorGeometry, equatorMaterial)
+      scene.add(equatorLine)
+    */
 
-  // Startet die Animationsschleife
   const animate = () => {
     requestAnimationFrame(animate)
     tweenUpdate()
@@ -114,80 +107,30 @@ const initScene = () => {
   }
   animate()
 
-  // Fügt Event-Listener für das Anpassen der Fenstergröße hinzu
   window.addEventListener('resize', onWindowResize)
 }
 
-// Erstellt ein dezentes Raster auf der Sphäre
-const createDezentGrid = () => {
-  const gridMaterial = new LineBasicMaterial({
-    color: 0x00ffff, // Leichte Farbe, z.B. ein helles Cyan
-    transparent: true,
-    opacity: 0.1, // Sehr transparent, um das Raster dezent erscheinen zu lassen
-    linewidth: 1, // Dünne Linien
-  })
-
-  // Erstellt die Geometrie und Linien für die Meridiane (Längengrade)
-  for (let i = 0; i < 32; i++) {
-    const phi = (i / 32) * Math.PI * 2
-    const meridianPoints = []
-
-    for (let j = 0; j <= 64; j++) {
-      const theta = (j / 64) * Math.PI
-      meridianPoints.push(
-        new Vector3(
-          SPHERE_RADIUS * Math.sin(theta) * Math.cos(phi),
-          SPHERE_RADIUS * Math.cos(theta),
-          SPHERE_RADIUS * Math.sin(theta) * Math.sin(phi),
-        ),
-      )
-    }
-
-    const geometry = new BufferGeometry().setFromPoints(meridianPoints)
-    const meridianLine = new Line(geometry, gridMaterial)
-    scene.add(meridianLine)
-  }
-
-  // Erstellt die Geometrie und Linien für die Parallelen (Breitengrade)
-  for (let i = 1; i < 16; i++) {
-    const theta = (i / 16) * Math.PI
-    const parallelPoints = []
-
-    for (let j = 0; j <= 64; j++) {
-      const phi = (j / 64) * Math.PI * 2
-      parallelPoints.push(
-        new Vector3(
-          SPHERE_RADIUS * Math.sin(theta) * Math.cos(phi),
-          SPHERE_RADIUS * Math.cos(theta),
-          SPHERE_RADIUS * Math.sin(theta) * Math.sin(phi),
-        ),
-      )
-    }
-
-    const geometry = new BufferGeometry().setFromPoints(parallelPoints)
-    const parallelLine = new Line(geometry, gridMaterial)
-    scene.add(parallelLine)
-  }
-}
-
-// Fügt Sterne zur Szene hinzu, basierend auf den Daten aus der Datenbankabfrage
 const addStars = (data: Star[]) => {
   data.forEach((data) => {
-    // Erstellt eine Sphäre für jeden Stern basierend auf seiner Magnitude
     const starGeometry = new SphereGeometry(STAR_RADIUS * data.magnitude, 16, 16)
     const starMaterial = new MeshBasicMaterial({ color: 0xffffff })
 
-    // Berechnet die Position des Sterns auf der Sphäre
     const [x, y, z] = cartesianFromSphere(data.azimuth, data.altitude, data.distance)
 
     const star = new Mesh(starGeometry, starMaterial)
     star.position.set(x, y, z)
+    /*
+        star.userData = {
+        longitude: starData.longitude,
+        latitude: starData.latitude,
+        id: starData.id,
+        }
+      */
     scene.add(star)
     stars.push(star)
   })
 }
 
-// Fügt Linien zwischen den Sternen hinzu, um Konstellationen oder Verbindungen darzustellen
 const addLine = (from: string, to: string) => {
   const star1 = starData.value.find((s) => s.id === from)
   const star2 = starData.value.find((s) => s.id === to)
@@ -196,6 +139,7 @@ const addLine = (from: string, to: string) => {
     const lineMaterial = new LineBasicMaterial({ color: 0xd3d3d3, linewidth: 1 })
 
     const [x1, y1, z1] = cartesianFromSphere(star1.azimuth, star1.altitude, star1.distance)
+
     const [x2, y2, z2] = cartesianFromSphere(star2.azimuth, star2.altitude, star2.distance)
 
     const lineGeometry = new BufferGeometry().setFromPoints([
@@ -204,11 +148,11 @@ const addLine = (from: string, to: string) => {
     ])
 
     const line = new Line(lineGeometry, lineMaterial)
+
     scene.add(line)
   }
 }
 
-// Konvertiert sphärische Koordinaten (Azimut, Höhe, Entfernung) in kartesische Koordinaten (x, y, z)
 const cartesianFromSphere = (azimuth: number, altitude: number, distance: number): number[] => {
   const theta = Math.PI / 2 - altitude
   const phi = azimuth - Math.PI / 2
@@ -221,7 +165,6 @@ const cartesianFromSphere = (azimuth: number, altitude: number, distance: number
   ]
 }
 
-// Passt die Szene und Kamera an die neue Fenstergröße an
 const onWindowResize = () => {
   const { width, height } = getDimensions()
   camera.aspect = width / height
@@ -229,13 +172,11 @@ const onWindowResize = () => {
   renderer.setSize(width, height)
 }
 
-// Berechnet die Abmessungen des Canvas-Containers basierend auf der Fenstergröße
 const getDimensions = (): { width: number; height: number } => ({
   width: window.innerWidth,
-  height: window.innerHeight - 136, // Sollte 85px in der mobilen Ansicht, 136px auf dem Desktop sein
+  height: window.innerHeight - 136, // should be 85 in mobile, 136 on desktop
 })
 
-// Startet die Initialisierung der Szene, sobald die Komponente gemountet ist
 onMounted(() => {
   initScene()
 })
