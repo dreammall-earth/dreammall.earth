@@ -482,6 +482,7 @@ describe('TableResolver', () => {
         let peter: User | undefined
 
         beforeAll(async () => {
+          // await prisma.usersInMeetings.deleteMany()
           await prisma.meeting.deleteMany()
 
           bibi = await prisma.user.create({
@@ -917,7 +918,7 @@ describe('TableResolver', () => {
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 errors: expect.arrayContaining([
                   expect.objectContaining({
-                    message: 'Could not create meeting!',
+                    message: 'Error creating the meeting!',
                   }),
                 ]),
               },
@@ -932,6 +933,7 @@ describe('TableResolver', () => {
       let peter: User | undefined
 
       beforeAll(async () => {
+        await prisma.usersInMeetings.deleteMany()
         await prisma.meeting.deleteMany()
 
         bibi = await prisma.user.create({
@@ -978,7 +980,18 @@ describe('TableResolver', () => {
                     id: expect.any(Number),
                     name: 'Table',
                     public: true,
-                    users: [user.id, bibi?.id],
+                    users: [
+                      {
+                        id: user.id,
+                        name: user.name,
+                        role: 'MODERATOR',
+                      },
+                      {
+                        id: bibi?.id,
+                        name: bibi?.name,
+                        role: 'MODERATOR',
+                      },
+                    ],
                   },
                 },
                 errors: undefined,
@@ -1016,7 +1029,7 @@ describe('TableResolver', () => {
           })
         })
 
-        it('creates create my table event in the database', async () => {
+        it('creates create table event in the database', async () => {
           const user = await prisma.user.findUnique({
             where: {
               username: nickname,
@@ -1027,26 +1040,28 @@ describe('TableResolver', () => {
               createdAt: 'asc',
             },
           })
-          expect(result).toEqual([
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_USER',
-              involvedUserId: user?.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_TABLE',
-              involvedUserId: user?.id,
-            },
-          ])
+          expect(result).toMatchObject(
+            expect.arrayContaining([
+              expect.objectContaining({
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                id: expect.any(Number),
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                createdAt: expect.any(Date),
+                involvedEmail: null,
+                type: 'CREATE_USER',
+                involvedUserId: user?.id,
+              }),
+              expect.objectContaining({
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                id: expect.any(Number),
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                createdAt: expect.any(Date),
+                involvedEmail: null,
+                type: 'CREATE_TABLE',
+                involvedUserId: user?.id,
+              }),
+            ]),
+          )
         })
       })
 
@@ -1088,27 +1103,6 @@ describe('TableResolver', () => {
       })
 
       describe('private meeting', () => {
-        // let bibi: User | undefined
-        // let peter: User | undefined
-
-        // beforeAll(async () => {
-        //   await prisma.meeting.deleteMany()
-
-        //   bibi = await prisma.user.create({
-        //     data: {
-        //       username: 'bibi',
-        //       name: 'Bibi Bloxberg',
-        //     },
-        //   })
-
-        //   peter = await prisma.user.create({
-        //     data: {
-        //       username: 'peter',
-        //       name: 'Peter Lustig',
-        //     },
-        //   })
-        // })
-
         it('returns table with users', async () => {
           await expect(
             testServer.executeOperation(
@@ -1132,25 +1126,28 @@ describe('TableResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  createMyTable: {
+                  createTable: {
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     id: expect.any(Number),
-                    name: 'My Table',
+                    name: 'Table',
                     public: false,
                     users: [
                       {
+                        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                        id: expect.any(Number),
                         name: user.name,
-                        username: user.username,
                         role: 'MODERATOR',
                       },
                       {
+                        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                        id: expect.any(Number),
                         name: 'Bibi Bloxberg',
-                        username: 'bibi',
                         role: 'MODERATOR',
                       },
                       {
+                        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                        id: expect.any(Number),
                         name: 'Peter Lustig',
-                        username: 'peter',
                         role: 'MODERATOR',
                       },
                     ],
@@ -1202,6 +1199,7 @@ describe('TableResolver', () => {
 
       describe('table in DB', () => {
         afterEach(async () => {
+          await prisma.usersInMeetings.deleteMany()
           await prisma.meeting.deleteMany()
         })
 

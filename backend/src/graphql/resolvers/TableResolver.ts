@@ -13,6 +13,7 @@ import {
 import { v4 as uuidv4 } from 'uuid'
 
 import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo, AttendeeRole } from '#api/BBB'
+import { CreateMeetingResponse } from '#api/BBB/types'
 import { CONFIG } from '#config/config'
 import { OpenTable, Table } from '#models/TableModel'
 import { Context } from '#src/context'
@@ -142,17 +143,7 @@ export class TableResolver {
 
     const inviteLink = new URL(`join-table/${dbMeeting.id}`, CONFIG.FRONTEND_URL).toString()
 
-    const meeting = await createMeeting(
-      {
-        name: dbMeeting.name,
-        meetingID: dbMeeting.meetingID,
-      },
-      {
-        moderatorOnlyMessage: `Use this link to invite more people:<br/>${inviteLink}`,
-      },
-    )
-
-    if (!meeting) throw new Error('Could not create meeting!')
+    const meeting = await createBBBMeeting(dbMeeting.meetingID, dbMeeting.name, inviteLink)
 
     try {
       await prisma.meeting.update({
@@ -214,20 +205,6 @@ export class TableResolver {
       await createUsersInMeetings({ userIds, meeting: dbMeeting })
     }
     const usersInMeetings = await findUsersInMeetings(dbMeeting)
-
-    const inviteLink = new URL(`join-table/${dbMeeting.id}`, CONFIG.FRONTEND_URL).toString()
-    const meeting = await createMeeting(
-      {
-        meetingID,
-        name,
-      },
-      {
-        moderatorOnlyMessage: `Use this link to invite more people:<br/>${inviteLink}`,
-      },
-    )
-    if (!meeting) {
-      throw new Error('Error creating the meeting!')
-    }
 
     await EVENT_CREATE_TABLE(user.id)
 
@@ -425,4 +402,24 @@ const createMeetingID = async (): Promise<string> => {
     meetingID = uuidv4()
   }
   return meetingID
+}
+
+async function createBBBMeeting(
+  meetingID: string,
+  name: string,
+  inviteLink: string,
+): Promise<CreateMeetingResponse> {
+  const meeting = await createMeeting(
+    {
+      meetingID,
+      name,
+    },
+    {
+      moderatorOnlyMessage: `Use this link to invite more people:<br/>${inviteLink}`,
+    },
+  )
+  if (!meeting) {
+    throw new Error('Error creating the meeting!')
+  }
+  return meeting
 }
