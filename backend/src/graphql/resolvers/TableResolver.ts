@@ -276,6 +276,40 @@ export class TableResolver {
     })
   }
 
+  @Authorized()
+  @Query(() => [Table])
+  async tables(@Ctx() context: Context): Promise<Table[]> {
+    const { user } = context
+    const dbMeetings = await prisma.meeting.findMany({
+      where: {
+        OR: [
+          {
+            user: {
+              id: user?.id,
+            },
+          },
+          {
+            users: {
+              some: {
+                userId: user?.id,
+                role: AttendeeRole.MODERATOR,
+              },
+            },
+          },
+        ],
+      },
+      include: {
+        users: true,
+      },
+    })
+    const tables: Table[] = []
+    for (const meeting of dbMeetings) {
+      const usersInMeetings = await findUsersInMeetings(meeting)
+      tables.push(new Table(meeting, usersInMeetings))
+    }
+    return tables
+  }
+
   @Subscription(() => [OpenTable], {
     topics: 'OPEN_ROOM_SUBSCRIPTION',
   })

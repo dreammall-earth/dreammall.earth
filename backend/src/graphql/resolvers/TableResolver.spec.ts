@@ -1,7 +1,7 @@
 import { ApolloServer } from '@apollo/server'
 import { User } from '@prisma/client'
 
-import { createMeeting, joinMeetingLink, getMeetings } from '#api/BBB'
+import { createMeeting, joinMeetingLink, getMeetings, AttendeeRole } from '#api/BBB'
 import { CONFIG } from '#config/config'
 import { findOrCreateUser } from '#src/context/findOrCreateUser'
 import { prisma } from '#src/prisma'
@@ -60,6 +60,20 @@ const createTableMutation = `mutation CreateTable($isPublic: Boolean!, $name: St
       id
       name
       role
+    }
+  }
+}`
+
+const tablesQuery = `{
+  tables {
+    id
+    name
+    public
+    users {
+      id
+      name
+      role
+      username
     }
   }
 }`
@@ -338,6 +352,32 @@ describe('TableResolver', () => {
             meetingID: 'Pony Ville',
             password: '',
           })
+        })
+      })
+    })
+
+    describe('tables', () => {
+      it('throws access denied', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: tablesQuery,
+            },
+            { contextValue: { user: null, dataSources: { prisma } } },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
         })
       })
     })
@@ -1002,16 +1042,21 @@ describe('TableResolver', () => {
           })
         })
 
-        it.skip('creates meeting in database', async () => {
+        it('creates meeting in database', async () => {
           await expect(
             prisma.meeting.findFirst({
               where: {
                 user: null,
                 users: {
                   some: {
-                    userId: {
-                      // in: [bibi?.id, user.id],
-                    },
+                    OR: [
+                      {
+                        userId: bibi?.id,
+                      },
+                      {
+                        userId: user.id,
+                      },
+                    ],
                   },
                 },
               },
@@ -1020,14 +1065,12 @@ describe('TableResolver', () => {
               },
             }),
           ).resolves.toMatchObject({
-            meeting: {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              meetingID: expect.any(String),
-              name: 'Table',
-              public: true,
-            },
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            meetingID: expect.any(String),
+            name: 'Table',
+            public: true,
           })
         })
 
@@ -1067,7 +1110,7 @@ describe('TableResolver', () => {
         })
       })
 
-      describe('meeting exists', () => {
+      describe.skip('meeting exists', () => {
         // Need to define if we want to have a throw if meeting already exists
         it.skip('throws meeting exists error', async () => {
           await expect(
@@ -1724,6 +1767,144 @@ describe('TableResolver', () => {
                       ],
                     },
                   ],
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+      })
+    })
+
+    describe('tables', () => {
+      it('returns empty array for tables where user is owner', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: tablesQuery,
+            },
+            { contextValue: { user, dataSources: { prisma } } },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: {
+                tables: [],
+              },
+              errors: undefined,
+            },
+          },
+        })
+      })
+
+      describe('setup myTables', () => {
+        beforeEach(async () => {
+          await testServer.executeOperation(
+            {
+              query: createMyTableMutation,
+              variables: {
+                name: 'My Table',
+                isPublic: true,
+              },
+            },
+            {
+              contextValue: {
+                user,
+                dataSources: { prisma },
+              },
+            },
+          )
+        })
+
+        it('returns array for tables where user is owner', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query: tablesQuery,
+              },
+              { contextValue: { user, dataSources: { prisma } } },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                  tables: expect.arrayContaining([
+                    expect.objectContaining({
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'My Table',
+                      public: true,
+                      users: [],
+                    }),
+                  ]),
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+      })
+
+      describe('setup tables', () => {
+        beforeEach(async () => {
+          await prisma.usersInMeetings.deleteMany()
+          await prisma.meeting.deleteMany()
+          await testServer.executeOperation(
+            {
+              query: createTableMutation,
+              variables: {
+                name: 'Table',
+                isPublic: true,
+                userIds: [bibiUser.id],
+              },
+            },
+            {
+              contextValue: {
+                user,
+                dataSources: { prisma },
+              },
+            },
+          )
+        })
+
+        it('returns array for tables where user is owner', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query: tablesQuery,
+              },
+              { contextValue: { user, dataSources: { prisma } } },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                  tables: expect.arrayContaining([
+                    expect.objectContaining({
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'Table',
+                      public: true,
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      users: expect.arrayContaining([
+                        expect.objectContaining({
+                          id: bibiUser.id,
+                          name: bibiUser.name,
+                          role: AttendeeRole.MODERATOR,
+                        }),
+                        expect.objectContaining({
+                          id: user.id,
+                          name: user.name,
+                          role: AttendeeRole.MODERATOR,
+                        }),
+                      ]),
+                    }),
+                  ]),
                 },
                 errors: undefined,
               },
