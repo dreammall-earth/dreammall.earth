@@ -96,11 +96,7 @@ exports[`AboutMeView > renders 1`] = `
               <!---->
               <div
                 class="v-progress-linear__background"
-                style="opacity: NaN;"
-              />
-              <div
-                class="v-progress-linear__buffer"
-                style="opacity: NaN; width: 0%;"
+                style="width: 100%;"
               />
               <transition-stub
                 appear="false"
@@ -684,11 +680,7 @@ exports[`AboutMeView > renders initials 1`] = `
               <!---->
               <div
                 class="v-progress-linear__background"
-                style="opacity: NaN;"
-              />
-              <div
-                class="v-progress-linear__buffer"
-                style="opacity: NaN; width: 0%;"
+                style="width: 100%;"
               />
               <transition-stub
                 appear="false"
@@ -1272,11 +1264,7 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
               <!---->
               <div
                 class="v-progress-linear__background"
-                style="opacity: NaN;"
-              />
-              <div
-                class="v-progress-linear__buffer"
-                style="opacity: NaN; width: 0%;"
+                style="width: 100%;"
               />
               <transition-stub
                 appear="false"
