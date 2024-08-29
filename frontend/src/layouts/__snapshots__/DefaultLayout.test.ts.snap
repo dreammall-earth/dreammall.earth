@@ -642,6 +642,7 @@ exports[`DefaultLayout > renders 1`] = `
                   data-v-75d0be1e=""
                 >
                   <button
+                    class="test-desktop-camera-button"
                     data-v-75d0be1e=""
                   >
                     <div
@@ -1781,7 +1782,7 @@ exports[`DefaultLayout > renders 1`] = `
         data-v-75d0be1e=""
       >
         <button
-          class="camera-button mx-auto"
+          class="test-mobile-camera-button camera-button mx-auto"
           data-v-75d0be1e=""
         >
           <div

@@ -17,7 +17,7 @@
               <LightDarkSwitch class="d-none d-lg-flex" />
             </v-col>
             <v-col class="d-flex align-center justify-end">
-              <button @click="toggleDrawer('tables')">
+              <button class="test-desktop-camera-button" @click="toggleDrawer('tables')">
                 <Circle>
                   <v-icon icon="$camera"></v-icon>
                 </Circle>
@@ -87,7 +87,10 @@
     </div>
 
     <div class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none">
-      <button class="camera-button mx-auto" @click="() => toggleDrawer('tables')">
+      <button
+        class="test-mobile-camera-button camera-button mx-auto"
+        @click="() => toggleDrawer('tables')"
+      >
         <Circle>
           <v-icon icon="$camera"></v-icon>
         </Circle>
