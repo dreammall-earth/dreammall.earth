@@ -13,7 +13,7 @@
 
     <div class="user-list-container w-100">
       <div v-if="error" class="text-center text-error">
-        Bei der Suche ist ein Fehler aufgetreten.
+        {{ $t('dream-mall-panel.setup.search-error') }}
       </div>
 
       <v-list
@@ -30,7 +30,7 @@
       </v-list>
 
       <div v-if="!displayedUsers.length" class="text-center mt-4 text-grey-darken-2">
-        Keine Ergebnisse
+        {{ $t('dream-mall-panel.setup.no-result') }}
       </div>
     </div>
 

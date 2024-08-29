@@ -2,7 +2,7 @@
   <div class="step-header">
     <div class="step-header__left">
       <v-btn v-if="isBackButtonVisible" icon variant="text" size="small" @click="emitBack">
-        <v-icon>mdi-arrow-left</v-icon>
+        <v-icon icon="mdi-arrow-left" />
       </v-btn>
     </div>
     <div class="step-header__middle">
@@ -10,7 +10,7 @@
     </div>
     <div class="step-header__right">
       <v-btn v-if="isCloseButtonVisible" icon variant="text" size="small" @click="emitClose">
-        <v-icon>mdi-close</v-icon>
+        <v-icon icon="mdi-close" />
       </v-btn>
     </div>
   </div>
@@ -19,7 +19,7 @@
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue'
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     title: string
     isBackButtonVisible: boolean

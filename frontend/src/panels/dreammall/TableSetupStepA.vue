@@ -1,5 +1,10 @@
 <template>
-  <SimpleButton label="Tisch erstellen" icon="mdi-video" class="mb-5" @click="onClick" />
+  <SimpleButton
+    :label="$t('dream-mall-panel.setup.table-creation')"
+    icon="mdi-video"
+    class="mb-5"
+    @click="onClick"
+  />
 </template>
 
 <script setup lang="ts">

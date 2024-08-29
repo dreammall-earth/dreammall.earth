@@ -123,13 +123,13 @@ const emit = defineEmits<{
   (e: 'close'): void
 }>()
 
-const updateHistory = (step: number) => {
-  // if (window?.location?.href == null) return
-  // const url = new URL(window.location.href)
-  // url.searchParams.set('step', step.toString())
-  // todo: find other solution. This causes conflicts with Vike
-  // window.history.pushState({ step }, '', url.toString())
-}
+// const updateHistory = () => {
+// if (window?.location?.href == null) return
+// const url = new URL(window.location.href)
+// url.searchParams.set('step', step.toString())
+// todo: find other solution. This causes conflicts with Vike
+// window.history.pushState({ step }, '', url.toString())
+// }
 
 const transitToNextAsync = () => transitToIdAsync(steps[currentStep.value].submit)
 const transitToPreviousAsync = () => transitToIdAsync(steps[currentStep.value].back)
@@ -156,7 +156,7 @@ const transitToIdAsync = async (destinationId: StepId) => {
   }
 
   if (currentStep.value >= 0) {
-    updateHistory(currentStep.value)
+    // updateHistory(currentStep.value)
   } else {
     emit('close')
   }
@@ -176,7 +176,7 @@ const onSubmit = onClose
 
 const reset = () => {
   currentStep.value = 0
-  updateHistory(currentStep.value)
+  // updateHistory(currentStep.value)
 }
 reset()
 defineExpose({ reset })
@@ -195,15 +195,12 @@ onMounted(() => {
   const initialStep = parseInt(urlParams.get('step') || '0', 10)
   currentStep.value =
     isNaN(initialStep) || initialStep < 0 || initialStep >= steps.length ? 0 : initialStep
-  updateHistory(currentStep.value)
+  // updateHistory(currentStep.value)
 })
 
 onUnmounted(() => {
   window.removeEventListener('popstate', handlePopState)
 })
-
-// todo: add createTable
-// todo: hasOwnTable -> getOwnTable
 </script>
 
 <style scoped lang="scss"></style>

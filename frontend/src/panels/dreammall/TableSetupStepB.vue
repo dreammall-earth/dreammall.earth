@@ -5,7 +5,7 @@
       rounded
       class="elevation-0 w-100"
       content-class="elevation-0"
-      label="Tischname"
+      :label="$t('dream-mall-panel.setup.table-name')"
       variant="solo-filled"
       append-inner-icon="mdi-pencil"
       maxlength="64"

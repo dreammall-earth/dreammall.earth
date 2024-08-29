@@ -21,6 +21,25 @@
   "cafe": {
     "welcome": "Weltencafé"
   },
+  "dream-mall-panel": {
+    "setup": {
+      "continue": "Weiter",
+      "table-creation": "Tisch erstellen",
+      "table-name": "Tischname",
+      "search-error": "Bei der Suche ist ein Fehler aufgetreten.",
+      "no-result": "Keine Ergebnisse",
+      "reminder": "Deine Vision wird Realität,\nlass uns gerne dazu den ersten Schritt machen.",
+      "create-table": "Los geht's",
+      "invitation-sent": "gesendet",
+      "invite": "einladen"
+    },
+    "call": {
+      "leave-table": "Tisch verlassen",
+      "link": "Link",
+      "edit": "Edit",
+      "add-user": "Add"
+    }
+  },
   "cockpit": {
     "about-me": {
       "edit": {

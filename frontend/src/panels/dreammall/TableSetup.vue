@@ -94,7 +94,7 @@ const steps: Step[] = [
     id: 'end',
     title: 'Kleine Erinnerung',
     submit: 'next',
-    submitText: 'Weiter',
+    submitText: "Los geht's",
     back: () => (tableSettings.value.isPublic ? 'settings' : 'users'),
   },
 ]
@@ -103,13 +103,13 @@ const emit = defineEmits<{
   (e: 'close'): void
 }>()
 
-const updateHistory = (step: number) => {
-  // if (window?.location?.href == null) return
-  // const url = new URL(window.location.href)
-  // url.searchParams.set('step', step.toString())
-  // todo: find other solution. This causes conflicts with Vike
-  // window.history.pushState({ step }, '', url.toString())
-}
+// const updateHistory = () => {
+// if (window?.location?.href == null) return
+// const url = new URL(window.location.href)
+// url.searchParams.set('step', step.toString())
+// todo: find other solution. This causes conflicts with Vike
+// window.history.pushState({ step }, '', url.toString())
+// }
 
 const transitToNext = () => transitToId(steps[currentStep.value].submit)
 const transitToPrevious = () => transitToId(steps[currentStep.value].back)
@@ -136,7 +136,7 @@ const transitToId = (destinationId: StepId) => {
   }
 
   if (currentStep.value >= 0) {
-    updateHistory(currentStep.value)
+    // updateHistory(currentStep.value)
   } else {
     emit('close')
   }
@@ -178,7 +178,7 @@ const onClose = () => emit('close')
 
 const reset = () => {
   currentStep.value = 0
-  updateHistory(currentStep.value)
+  // updateHistory(currentStep.value)
 }
 reset()
 defineExpose({ reset })
@@ -197,15 +197,12 @@ onMounted(() => {
   const initialStep = parseInt(urlParams.get('step') || '0', 10)
   currentStep.value =
     isNaN(initialStep) || initialStep < 0 || initialStep >= steps.length ? 0 : initialStep
-  updateHistory(currentStep.value)
+  // updateHistory(currentStep.value)
 })
 
 onUnmounted(() => {
   window.removeEventListener('popstate', handlePopState)
 })
-
-// todo: add createTable
-// todo: hasOwnTable -> getOwnTable
 </script>
 
 <style scoped lang="scss"></style>

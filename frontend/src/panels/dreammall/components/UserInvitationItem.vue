@@ -26,7 +26,11 @@
         size="small"
         @click="toggleInvitation"
       >
-        {{ user.invited ? 'gesendet' : 'einladen' }}
+        {{
+          user.invited
+            ? $t('dream-mall-panel.setup.invitation-sent')
+            : $t('dream-mall-panel.setup.invite')
+        }}
       </v-btn>
     </template>
   </v-list-item>

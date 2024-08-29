@@ -1,9 +1,9 @@
 import { App } from 'vue'
 import { toast } from 'vue3-toastify'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const handleError = (message: string, data?: unknown) => {
   toast.error(message)
+  // eslint-disable-next-line no-console
   console.error(message, data)
 }
 const handleWarning = (message: string) => {

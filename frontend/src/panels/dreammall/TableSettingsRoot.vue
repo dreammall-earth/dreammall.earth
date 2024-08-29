@@ -4,23 +4,23 @@
       <v-col cols="12">
         <v-btn-group variant="outlined" class="rounded-lg" divided>
           <v-btn class="px-6" @click="copyToClipboard">
-            <v-icon icon="mdi-link" class="mr-2"></v-icon>
-            Link
+            <v-icon icon="mdi-link" class="mr-2" />
+            {{ $t('dream-mall-panel.call.link') }}
           </v-btn>
           <v-btn class="px-6" @click="onClick('settings')">
-            <v-icon icon="mdi-pencil" class="mr-2"></v-icon>
-            Edit
+            <v-icon icon="mdi-pencil" class="mr-2" />
+            {{ $t('dream-mall-panel.call.edit') }}
           </v-btn>
           <v-btn class="px-6" @click="onClick('users')">
-            <v-icon icon="mdi-account-plus" class="mr-2"></v-icon>
-            Add
+            <v-icon icon="mdi-account-plus" class="mr-2" />
+            {{ $t('dream-mall-panel.call.add-user') }}
           </v-btn>
         </v-btn-group>
       </v-col>
     </v-row>
     <SimpleButton
       color="#F44336"
-      label="Tisch verlassen"
+      :label="$t('dream-mall-panel.call.leave-table')"
       class="mt-12 mb-5"
       disabled="disabled"
     />
@@ -32,7 +32,7 @@ import SimpleButton from '#components/buttons/SimpleButton.vue'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { TableSetupEmits, TableSetupProps } from '#src/panels/dreammall/TableSetupProps'
 
-const props = defineProps<TableSetupProps>()
+defineProps<TableSetupProps>()
 const emit = defineEmits<TableSetupEmits>()
 
 const onClick = (stepId: string) => {
@@ -48,5 +48,3 @@ const copyToClipboard = async () => {
   }
 }
 </script>
-
-<style scoped lang="scss"></style>

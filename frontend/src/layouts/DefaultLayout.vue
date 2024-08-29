@@ -111,6 +111,7 @@ const toggleButtonList = () => {
 const userStore = useUserStore()
 
 const getMode = () => {
+  return 'setup'
   if (
     typeof window !== 'undefined' &&
     window.location.pathname.includes('/table/') &&
