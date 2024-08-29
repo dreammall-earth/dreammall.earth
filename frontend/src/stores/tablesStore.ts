@@ -1,7 +1,10 @@
-import { useQuery, useSubscription } from '@vue/apollo-composable'
+import { useMutation, useQuery, useSubscription } from '@vue/apollo-composable'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { computed, ref, watch } from 'vue'
 
+import { createMyTableMutation } from '#mutations/createMyTableMutation'
+import { joinMyTableMutation } from '#mutations/joinMyTableMutation'
+import { updateMyTableMutation } from '#mutations/updateMyTableMutation'
 import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
 import { useUserStore } from '#stores/userStore'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
@@ -19,9 +22,36 @@ export type Table = {
   attendees: Attendee[]
 }
 
+export type UserInTable = {
+  id: number
+  role: 'VIEWER' | 'MODERATOR'
+  name: string
+  username: string
+}
+
+export type MyTable = {
+  id: number
+  name: string
+  public: boolean
+  users: UserInTable[]
+}
+
+type CreateMyTableResult = {
+  createMyTable: MyTable
+}
+
+type UpdateMyTableResult = {
+  updateMyTable: MyTable
+}
+
+type JoinMyTableResult = {
+  joinMyTable: number
+}
+
 export const useTablesStore = defineStore(
   'tables',
   () => {
+    const myTable = ref<MyTable | null>(null)
     const userStore = useUserStore()
 
     const { result: openTablesQueryResult, loading } = useQuery(
@@ -65,11 +95,57 @@ export const useTablesStore = defineStore(
       tables.value = newTables
     }
 
+    const { mutate: createMyTableMutate } = useMutation<CreateMyTableResult>(createMyTableMutation)
+    const { mutate: updateMyTableMutate } = useMutation<UpdateMyTableResult>(updateMyTableMutation)
+    const { mutate: joinMyTableMutate } = useMutation<JoinMyTableResult>(joinMyTableMutation)
+
+    const createMyTable = async (name: string, isPublic: boolean, userIds: number[]) => {
+      const result = await createMyTableMutate({ name, isPublic, users: userIds })
+      if (result?.data?.createMyTable) {
+        myTable.value = result.data.createMyTable
+      }
+      return result?.data?.createMyTable
+    }
+
+    const updateMyTable = async (name: string, isPublic: boolean) => {
+      const result = await updateMyTableMutate({ name, isPublic })
+      if (result?.data?.updateMyTable) {
+        myTable.value = result.data.updateMyTable
+      }
+      return result?.data?.updateMyTable
+    }
+
+    const updateMyTableUsers = async (userIds: number[]) => {
+      if (!myTable.value) return null
+      const result = await updateMyTableMutate({
+        name: myTable.value.name,
+        isPublic: myTable.value.public,
+        userIds,
+      })
+      if (result?.data?.updateMyTable) {
+        myTable.value = result.data.updateMyTable
+      }
+      return result?.data?.updateMyTable
+    }
+
+    const joinMyTable = async (): Promise<number | undefined> => {
+      const result = await joinMyTableMutate()
+      return result?.data?.joinMyTable
+    }
+
+    const existsMyTable = computed(() => myTable.value !== null)
+
     return {
       tables,
       setTables,
       getTables,
       isLoading,
+      createMyTable,
+      updateMyTable,
+      updateMyTableUsers,
+      joinMyTable,
+      existsMyTable,
+      defaultMyTableName: userStore.getCurrentUser?.name,
     }
   },
   {
