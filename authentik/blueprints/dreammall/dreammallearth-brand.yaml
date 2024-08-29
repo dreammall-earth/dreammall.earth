@@ -1,6 +1,6 @@
 version: 1
 metadata:
-  name: Dreammall - Brand
+  name: DreamMall - Brand
 entries:
   - model: authentik_blueprints.metaapplyblueprint
     attrs:

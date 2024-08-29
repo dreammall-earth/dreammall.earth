@@ -35,6 +35,16 @@
       "language-placeholder": "Sprachen, die ich spreche",
       "place-placeholder": "Mein Standort",
       "work-placeholder": "Meine Arbeit"
+    },
+    "myTables": {
+      "addTable": "Tisch hinzufügen",
+      "delete": "Löschen",
+      "edit": "Bearbeiten",
+      "header": "Meine Tische",
+      "invite": "Einladen",
+      "memberCount": "{count} Mitglieder",
+      "noTables": "Noch keine Gruppentische",
+      "share": "Teilen"
     }
   },
   "dream-mall-panel": {
