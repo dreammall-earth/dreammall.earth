@@ -13,7 +13,6 @@
 [![stylelint][badge-stylelint-img]][badge-stylelint-href]
 [![vitest][badge-vitest-img]][badge-vitest-href]
 [![storybook][badge-storybook-img]][badge-storybook-href]
-[![chromatic][badge-chromatic-img]][badge-chromatic-href]
 
 The Dreammall frontend.
 
@@ -26,8 +25,6 @@ To be able to build this project you need `nodejs`, `npm` and optional `docker` 
 The project uses `vite` as builder, `vike` to do the SSR. The design framework is `vuetify` which requires the frontend framework `vue3`. For localization `vue-i18n` is used; Session storage is handled with `pinia`.
 
 Testing is done with `vitest` and code style is enforced with `eslint`, `remark-cli` and `stylelint`.
-
-This projects utilizes `storybook` and `chromatic` to develop, document & test frontend components.
 
 ## Commands
 
@@ -57,24 +54,8 @@ The following commands are available:
 | `npm run storybook`         | Run Storybook                                    |
 | `npm run storybook:build`   | Build static storybook                           |
 | `npm run storybook:test`    | Run tests against all storybook stories          |
-| **Chromatic**               |                                                  |
-| `npm run chromatic`         | Run Chromatic. See Chromatic section for details |
 | **Maintenance**             |                                                  |
 | `npm run update`            | Check for updates                                |
-
-### Chromatic
-
-In order to use the chromatic workflow you need to provide a `CHROMATIC_PROJECT_TOKEN` in the repository secrets.
-
-If you want to run chromatic from the command line you either have to provide this variable as well
-```bash
-export CHROMATIC_PROJECT_TOKEN=...
-npm run chromatic
-```
-or you have to append it via parameter:
-```bash
-npm run chromatic -- --project-token=...
-```
 
 ### Update
 
@@ -173,6 +154,3 @@ This mechanic was taken from this [source](https://stackoverflow.com/questions/1
 
 [badge-storybook-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-frontend%2Fmaster%2Fpackage.json&query=devDependencies.storybook&label=storybook&color=orange
 [badge-storybook-href]: https://storybook.js.org/
-
-[badge-chromatic-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FIT4Change%2Fboilerplate-frontend%2Fmaster%2Fpackage.json&query=devDependencies.chromatic&label=chromatic&color=orange
-[badge-chromatic-href]: https://www.chromatic.com/
