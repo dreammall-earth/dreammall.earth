@@ -18,7 +18,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
       <header
         class="v-toolbar v-toolbar--flat v-toolbar--density-default v-theme--light v-locale--is-ltr v-app-bar app-bar"
         data-v-75d0be1e=""
-        style="top: 0px; z-index: 1006; transform: translateY(0%); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
+        style="top: 0px; z-index: 1006; transform: translateY(0px); position: fixed; transition: none !important; left: 0px; width: calc(100% - 0px - 0px);"
       >
         <!---->
         
@@ -679,7 +679,6 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                     aria-owns="v-menu-1"
                     class="ml-2 user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
                     data-v-607bdd70=""
-                    targetref="[object Object]"
                   >
                     
                     <div
@@ -757,8 +756,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
       <nav
         class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer px-4"
         data-v-cf2c9067=""
-        mobile=""
-        style="right: 0px; z-index: 1004; transform: translateX(110%); position: fixed; transition: none !important; height: calc(100% - 70px - 0px); top: 70px; bottom: 0px; width: 308px;"
+        style="right: 0px; z-index: 1004; transform: translateX(308px); position: fixed; transition: none !important; height: calc(100% - 70px - 0px); top: 70px; bottom: 0px; width: 308px;"
       >
         <!---->
         <!---->
@@ -795,7 +793,11 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                     <!---->
                     <div
                       class="v-progress-linear__background"
-                      style="width: 100%;"
+                      style="opacity: NaN;"
+                    />
+                    <div
+                      class="v-progress-linear__buffer"
+                      style="opacity: NaN; width: 0%;"
                     />
                     <transition-stub
                       appear="false"
@@ -1007,7 +1009,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                 <div
                   aria-expanded="false"
                   aria-haspopup="listbox"
-                  aria-owns="v-menu-9"
+                  aria-owns="v-menu-10"
                   class="v-field v-field--active v-field--appended v-field--center-affix v-field--dirty v-field--flat v-field--no-label v-field--variant-filled v-theme--light v-locale--is-ltr"
                   role="combobox"
                 >
@@ -1028,7 +1030,11 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                       <!---->
                       <div
                         class="v-progress-linear__background"
-                        style="width: 100%;"
+                        style="opacity: NaN;"
+                      />
+                      <div
+                        class="v-progress-linear__buffer"
+                        style="opacity: NaN; width: 0%;"
                       />
                       <transition-stub
                         appear="false"
@@ -1060,7 +1066,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                     <!---->
                     <label
                       class="v-label v-field-label"
-                      for="input-7"
+                      for="input-8"
                     >
                       <!---->
                       
@@ -1092,9 +1098,9 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                       
                       
                       <input
-                        aria-describedby="input-7-messages"
+                        aria-describedby="input-8-messages"
                         aria-label="Öffnen"
-                        id="input-7"
+                        id="input-8"
                         inputmode="none"
                         round=""
                         size="1"
@@ -1140,7 +1146,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   aria-live="polite"
                   class="v-messages"
                   css="true"
-                  id="input-7-messages"
+                  id="input-8-messages"
                   name="slide-y-transition"
                   persisted="false"
                   role="alert"
@@ -2074,7 +2080,6 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
           
           <!---->
         </div>
-        <!--v-if-->
         
         <div
           class="step-header"
@@ -2094,19 +2099,51 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
               class="text-h6"
               data-v-fe0c4e23=""
             >
-              Tisch betreten
+              Mall Talk
             </h2>
           </div>
           <div
             class="step-header__right"
             data-v-fe0c4e23=""
           >
-            <!--v-if-->
+            <button
+              class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-small v-btn--variant-text"
+              data-v-fe0c4e23=""
+              type="button"
+            >
+              
+              <span
+                class="v-btn__overlay"
+              />
+              <span
+                class="v-btn__underlay"
+              />
+              
+              <!---->
+              <span
+                class="v-btn__content"
+                data-no-activator=""
+              >
+                
+                
+                <i
+                  aria-hidden="true"
+                  class="mdi-close mdi v-icon notranslate v-theme--light v-icon--size-default"
+                  data-v-fe0c4e23=""
+                />
+                
+                
+              </span>
+              <!---->
+              <!---->
+            </button>
           </div>
         </div>
         <button
           class="v-btn v-btn--elevated v-theme--light v-btn--density-default elevation-0 v-btn--rounded v-btn--size-default v-btn--variant-elevated custom-green-btn mb-5"
           data-v-ea088446=""
+          my-table-settings="[object Object]"
+          submit-text="Weiter"
           type="button"
         >
           
@@ -2131,7 +2168,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
           >
             
             
-            Tisch betreten
+            $t('dream-mall-panel.setup.table-creation')
             
             
           </span>
@@ -2139,6 +2176,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
           <!---->
         </button>
         
+        <!--v-if-->
         <!--v-if-->
       </div>
       <div
@@ -2661,10 +2699,9 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
         <button
           aria-expanded="false"
           aria-haspopup="menu"
-          aria-owns="v-menu-6"
+          aria-owns="v-menu-7"
           class="mx-auto user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
           data-v-607bdd70=""
-          targetref="[object Object]"
         >
           
           <div
