@@ -53,7 +53,8 @@
         :class="[isButtonListVisible ? 'menu-triangle--turned' : '']"
         :src="Triangle"
       />
-      <TableSetup ref="tableSetupRef" @close="toggleButtonList" />
+      <TableSetup v-if="getMode() === 'setup'" ref="tableSetupRef" @close="toggleButtonList" />
+      <TableJoin v-if="getMode() === 'join'" @close="toggleButtonList" />
     </div>
 
     <div class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none">
@@ -73,7 +74,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 import Divider from '#assets/img/divider.svg'
 import Triangle from '#assets/img/triangle.svg'
@@ -85,7 +86,9 @@ import LogoImage from '#components/menu/LogoImage.vue'
 import TabControl from '#components/menu/TabControl.vue'
 import UserInfo from '#components/menu/UserInfo.vue'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
+import TableJoin from '#src/panels/dreammall/TableJoin.vue'
 import TableSetup from '#src/panels/dreammall/TableSetup.vue'
+import { useUserStore } from '#stores/userStore'
 
 const isTablesDrawerVisible = ref(false)
 
@@ -101,6 +104,13 @@ const toggleButtonList = () => {
     tableSetupRef.value?.reset()
   }
   isButtonListVisible.value = !isButtonListVisible.value
+}
+
+const userStore = useUserStore()
+
+const getMode = () => {
+  if (window.location.href.includes('/table/')) return 'table'
+  return userStore.getMyTable != null ? 'join' : 'setup'
 }
 </script>
 

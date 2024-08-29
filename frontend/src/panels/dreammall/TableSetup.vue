@@ -137,16 +137,12 @@ const onBack = transitToPrevious
 
 const onSubmit = async () => {
   try {
-    const name = tableSettings.value.name
-    const isPublic = tableSettings.value.isPublic
-    const users = tableSettings.value.users
-
     const table = await tablesStore.createMyTable(
       tableSettings.value.name,
       tableSettings.value.isPublic,
       tableSettings.value.users,
     )
-    console.log(table)
+
     if (!table) {
       GlobalErrorHandler.error('Could not create MyTable')
       return
