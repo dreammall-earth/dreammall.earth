@@ -91,13 +91,26 @@ export const joinMeetingLink = (options: JoinMeetinLinkOptions): string => {
 }
 
 export const handleWebhook = (req: Request): void => {
-  // Checksum validation
-  const checksum = createChecksum(CONFIG.BBB_WEBHOOK_URL, req.headers.rawBody as string)
-  if (req.query.checksum !== checksum) {
-    logger.error(
-      `Webhook checksum received (${req.query.checksum as string}) does not match calculated checksum ${checksum}`,
-    )
-    return
+  // Authorization
+  if (req.query.checksum) {
+    // Checksum validation
+    const checksum = createChecksum(CONFIG.BBB_WEBHOOK_URL, req.headers.rawBody as string)
+    if (req.query.checksum !== checksum) {
+      logger.error(
+        `Webhook checksum received (${req.query.checksum as string}) does not match calculated checksum ${checksum}`,
+      )
+      return
+    }
+  } else {
+    // Bearer Header validation
+    // In case auth2.0 is configured in bbb no checksum is transmitted but the shared secret is in the header.
+    // This case is not documented in the webhook documentation, but there is an issue for this case: https://github.com/bigbluebutton/bbb-webhooks/issues/8
+    if (req.headers.authorization !== `Bearer ${CONFIG.BBB_SHARED_SECRET}`) {
+      logger.error(
+        `Webhook bearer header received "(${req.headers.authorization as string})" does not match bbb shared secret configured`,
+      )
+      return
+    }
   }
 
   // Webhook Handling

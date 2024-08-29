@@ -473,11 +473,32 @@ describe('handleWebhook', () => {
     jest.clearAllMocks()
   })
 
-  describe('with success', () => {
+  describe('with checksum success', () => {
     it('logs webhook debug info', () => {
       const req = {
         headers: { rawBody: 'Body' },
         query: { checksum: 'ef21dc772f12e380e71e929756e05f2a320aa84a' },
+        body: { event: '{}', timestamp: 1724836968 },
+      }
+      handleWebhook(req as unknown as Request)
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.debug).toHaveBeenCalledWith(
+        'webhook received',
+        new Date('2024-08-28T09:22:48.000Z'),
+        {},
+      )
+    })
+  })
+
+  describe('with header success', () => {
+    it('logs webhook debug info', () => {
+      const req = {
+        headers: {
+          rawBody: 'Body',
+          authorization: `Bearer ${CONFIG.BBB_SHARED_SECRET}`,
+        },
+        query: {},
         body: { event: '{}', timestamp: 1724836968 },
       }
       handleWebhook(req as unknown as Request)
@@ -502,6 +523,24 @@ describe('handleWebhook', () => {
       // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(logger.error).toHaveBeenCalledWith(
         'Webhook checksum received (ef21dc772f12e380e71e929756e05f2a320aa84a) does not match calculated checksum 6f355e209efcad2aad189a9fca32cb2dcfd6ac40',
+      )
+    })
+  })
+
+  describe('with header error', () => {
+    it('logs shared secret error', () => {
+      const req = {
+        headers: {
+          rawBody: 'Body',
+          authorization: 'Bearer InvalidSecret',
+        },
+        query: {},
+        body: { event: '{}', timestamp: 1724836968 },
+      }
+      handleWebhook(req as unknown as Request)
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.error).toHaveBeenCalledWith(
+        'Webhook bearer header received "(Bearer InvalidSecret)" does not match bbb shared secret configured',
       )
     })
   })
