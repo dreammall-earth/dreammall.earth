@@ -324,6 +324,7 @@ const openTablesFromOpenMeetings = async (meetings: MeetingInfo[]): Promise<Open
 
   return []
 }
+
 const createUsersInMeetings = async (data: {
   userIds: number[]
   meeting: {

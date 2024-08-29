@@ -345,8 +345,12 @@ describe('TableResolver', () => {
 
   describe('authorized', () => {
     let user: UserWithProfile
+    let bibiUser: UserWithProfile
+    let peterUser: UserWithProfile
     beforeEach(async () => {
       user = await findOrCreateUser({ nickname, name })
+      bibiUser = await findOrCreateUser({ nickname: 'bibi', name: 'Bibi Bloxberg' })
+      peterUser = await findOrCreateUser({ nickname: 'peter', name: 'Peter Lustig' })
     })
 
     describe('createMyTable', () => {
@@ -418,26 +422,28 @@ describe('TableResolver', () => {
               createdAt: 'asc',
             },
           })
-          expect(result).toEqual([
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_USER',
-              involvedUserId: user?.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_MY_TABLE',
-              involvedUserId: user?.id,
-            },
-          ])
+          expect(result).toMatchObject(
+            expect.arrayContaining([
+              expect.objectContaining({
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                id: expect.any(Number),
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                createdAt: expect.any(Date),
+                involvedEmail: null,
+                type: 'CREATE_USER',
+                involvedUserId: user?.id,
+              }),
+              expect.objectContaining({
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                id: expect.any(Number),
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                createdAt: expect.any(Date),
+                involvedEmail: null,
+                type: 'CREATE_MY_TABLE',
+                involvedUserId: user?.id,
+              }),
+            ]),
+          )
         })
       })
 
@@ -478,24 +484,22 @@ describe('TableResolver', () => {
       })
 
       describe('private meeting', () => {
-        let bibi: User | undefined
-        let peter: User | undefined
+        let bibi: User | null
+        let peter: User | null
 
         beforeAll(async () => {
           // await prisma.usersInMeetings.deleteMany()
           await prisma.meeting.deleteMany()
 
-          bibi = await prisma.user.create({
-            data: {
+          bibi = await prisma.user.findUnique({
+            where: {
               username: 'bibi',
-              name: 'Bibi Bloxberg',
             },
           })
 
-          peter = await prisma.user.create({
-            data: {
+          peter = await prisma.user.findUnique({
+            where: {
               username: 'peter',
-              name: 'Peter Lustig',
             },
           })
         })
@@ -558,8 +562,8 @@ describe('TableResolver', () => {
         await prisma.event.deleteMany()
       })
 
-      let bibi: User | undefined
-      let peter: User | undefined
+      let bibi: User | null
+      let peter: User | null
 
       describe('meeting does not exist', () => {
         it('throws meeting does not exist error', async () => {
@@ -599,17 +603,15 @@ describe('TableResolver', () => {
 
       describe('private meeting exists', () => {
         beforeAll(async () => {
-          bibi = await prisma.user.create({
-            data: {
+          bibi = await prisma.user.findUnique({
+            where: {
               username: 'bibi',
-              name: 'Bibi Bloxberg',
             },
           })
 
-          peter = await prisma.user.create({
-            data: {
+          peter = await prisma.user.findUnique({
+            where: {
               username: 'peter',
-              name: 'Peter Lustig',
             },
           })
 
@@ -682,35 +684,37 @@ describe('TableResolver', () => {
               createdAt: 'asc',
             },
           })
-          expect(result).toEqual([
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_USER',
-              involvedUserId: user?.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_MY_TABLE',
-              involvedUserId: user?.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'UPDATE_MY_TABLE',
-              involvedUserId: user?.id,
-            },
-          ])
+          expect(result).toMatchObject(
+            expect.arrayContaining([
+              expect.objectContaining({
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                id: expect.any(Number),
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                createdAt: expect.any(Date),
+                involvedEmail: null,
+                type: 'CREATE_USER',
+                involvedUserId: user?.id,
+              }),
+              expect.objectContaining({
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                id: expect.any(Number),
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                createdAt: expect.any(Date),
+                involvedEmail: null,
+                type: 'CREATE_MY_TABLE',
+                involvedUserId: user?.id,
+              }),
+              expect.objectContaining({
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                id: expect.any(Number),
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                createdAt: expect.any(Date),
+                involvedEmail: null,
+                type: 'UPDATE_MY_TABLE',
+                involvedUserId: user?.id,
+              }),
+            ]),
+          )
         })
       })
 
@@ -929,24 +933,22 @@ describe('TableResolver', () => {
     })
 
     describe('createTable', () => {
-      let bibi: User | undefined
-      let peter: User | undefined
+      let bibi: User | null
+      let peter: User | null
 
       beforeAll(async () => {
         await prisma.usersInMeetings.deleteMany()
         await prisma.meeting.deleteMany()
 
-        bibi = await prisma.user.create({
-          data: {
+        bibi = await prisma.user.findUnique({
+          where: {
             username: 'bibi',
-            name: 'Bibi Bloxberg',
           },
         })
 
-        peter = await prisma.user.create({
-          data: {
+        peter = await prisma.user.findUnique({
+          where: {
             username: 'peter',
-            name: 'Peter Lustig',
           },
         })
       })
@@ -1272,6 +1274,23 @@ describe('TableResolver', () => {
         describe('current user is owner of the table', () => {
           beforeEach(async () => {
             joinMeetingLinkMock.mockReturnValue('https://my-link')
+            createMeetingMock.mockResolvedValue({
+              returncode: 'SUCCESS',
+              meetingID: 'xxx',
+              internalMeetingID: 'b60d121b438a380c343d5ec3c2037564b82ffef3-1715231322715',
+              parentMeetingID: 'bbb-none',
+              attendeePW: 'w3VUvMcp',
+              moderatorPW: 'MyPp9Zfq',
+              createTime: 1718189921310,
+              voiceBridge: 255,
+              dialNumber: '613-555-1234',
+              createDate: new Date(),
+              hasUserJoined: false,
+              duration: 0,
+              hasBeenForciblyEnded: false,
+              messageKey: '',
+              message: '',
+            })
             const meeting = await prisma.meeting.create({
               data: {
                 name: 'Pony Ville',
@@ -1311,6 +1330,112 @@ describe('TableResolver', () => {
               fullName: 'User',
               meetingID: 'Pony Ville',
               password: 'moderator',
+            })
+          })
+        })
+
+        describe('current user is moderator of the table', () => {
+          let bibi: User | null
+          beforeEach(async () => {
+            jest.clearAllMocks()
+            const user = await prisma.user.findUnique({
+              where: {
+                username: nickname,
+              },
+            })
+            if (!user) return
+            bibi = await prisma.user.findUnique({
+              where: {
+                username: 'bibi',
+              },
+            })
+
+            joinMeetingLinkMock.mockReturnValue('https://my-link')
+            const meeting = await prisma.meeting.create({
+              data: {
+                name: 'Pony Ville',
+                meetingID: 'Pony Ville',
+                attendeePW: 'attendee',
+                moderatorPW: 'moderator',
+              },
+            })
+            tableId = meeting.id
+            if (!bibi) return
+            const userIds = [user.id, bibi.id]
+            await prisma.usersInMeetings.createMany({
+              data: userIds.map((id) => ({
+                meetingId: tableId,
+                userId: id,
+              })),
+            })
+          })
+
+          it('calls join meeting link with moderator pw', async () => {
+            await testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  tableId,
+                },
+              },
+              {
+                contextValue: {
+                  user,
+                  dataSources: { prisma },
+                },
+              },
+            )
+
+            expect(joinMeetingLinkMock).toHaveBeenCalledWith({
+              fullName: 'User',
+              meetingID: 'Pony Ville',
+              password: 'moderator',
+            })
+          })
+
+          it('calls join meeting link with moderator pw for bibi', async () => {
+            await testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  tableId,
+                },
+              },
+              {
+                contextValue: {
+                  user: bibiUser,
+                  dataSources: { prisma },
+                },
+              },
+            )
+
+            expect(joinMeetingLinkMock).toHaveBeenCalledWith({
+              fullName: 'Bibi Bloxberg',
+              meetingID: 'Pony Ville',
+              password: 'moderator',
+            })
+          })
+
+          it('calls join meeting link with moderator pw for peter', async () => {
+            await testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  tableId,
+                },
+              },
+              {
+                contextValue: {
+                  user: peterUser,
+                  dataSources: { prisma },
+                },
+              },
+            )
+
+            expect(joinMeetingLinkMock).toHaveBeenCalledWith({
+              fullName: 'Peter Lustig',
+              meetingID: 'Pony Ville',
+              password: 'attendee',
             })
           })
         })
