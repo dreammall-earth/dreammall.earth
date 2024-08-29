@@ -174,11 +174,9 @@ const getMode = () => {
 }
 
 .button-list {
-  //--height: 500px;
   --width: 400px;
 
   position: fixed;
-  //bottom: calc(var(--height) * -1);
   bottom: -100%;
   left: calc(50% - var(--width) / 2);
   z-index: 1001;

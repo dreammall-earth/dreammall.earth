@@ -204,5 +204,3 @@ onUnmounted(() => {
   window.removeEventListener('popstate', handlePopState)
 })
 </script>
-
-<style scoped lang="scss"></style>

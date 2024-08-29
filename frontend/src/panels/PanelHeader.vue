@@ -51,9 +51,9 @@ const emitClose = () => emit('close')
 
   &__left,
   &__right {
-    width: 48px; // Ensures consistent spacing even when buttons are hidden
     display: flex;
     align-items: center;
+    width: 48px; // Ensures consistent spacing even when buttons are hidden
   }
 
   &__middle {

@@ -17,5 +17,3 @@ const onClick = () => {
   emit('next')
 }
 </script>
-
-<style scoped lang="scss"></style>

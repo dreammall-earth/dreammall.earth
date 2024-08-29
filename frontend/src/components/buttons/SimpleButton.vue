@@ -27,18 +27,17 @@ const onClick = () => {
 
 <style scoped lang="scss">
 .custom-green-btn {
-  background-color: #4caf50;
-  color: white;
-  text-transform: none;
-  font-weight: normal;
-  font-size: 16px;
-  height: auto !important;
-  padding: 0 20px;
-  min-height: 42px; // Adjust this value as needed
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  height: auto !important;
+  min-height: 42px; // Adjust this value as needed
+  padding: 0 20px;
+  font-size: 16px;
+  font-weight: normal;
+  color: white;
+  text-transform: none;
+  background-color: #4caf50;
 
   &::before {
     display: none;

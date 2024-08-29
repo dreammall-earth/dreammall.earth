@@ -21,25 +21,6 @@
   "cafe": {
     "welcome": "Weltencafé"
   },
-  "dream-mall-panel": {
-    "setup": {
-      "continue": "Weiter",
-      "table-creation": "Tisch erstellen",
-      "table-name": "Tischname",
-      "search-error": "Bei der Suche ist ein Fehler aufgetreten.",
-      "no-result": "Keine Ergebnisse",
-      "reminder": "Deine Vision wird Realität,\nlass uns gerne dazu den ersten Schritt machen.",
-      "create-table": "Los geht's",
-      "invitation-sent": "gesendet",
-      "invite": "einladen"
-    },
-    "call": {
-      "leave-table": "Tisch verlassen",
-      "link": "Link",
-      "edit": "Edit",
-      "add-user": "Add"
-    }
-  },
   "cockpit": {
     "about-me": {
       "edit": {
@@ -54,6 +35,25 @@
       "language-placeholder": "Sprachen, die ich spreche",
       "place-placeholder": "Mein Standort",
       "work-placeholder": "Meine Arbeit"
+    }
+  },
+  "dream-mall-panel": {
+    "call": {
+      "add-user": "Add",
+      "edit": "Edit",
+      "leave-table": "Tisch verlassen",
+      "link": "Link"
+    },
+    "setup": {
+      "continue": "Weiter",
+      "create-table": "Los geht's",
+      "invitation-sent": "gesendet",
+      "invite": "einladen",
+      "no-result": "Keine Ergebnisse",
+      "reminder": "Deine Vision wird Realität,\nlass uns gerne dazu den ersten Schritt machen.",
+      "search-error": "Bei der Suche ist ein Fehler aufgetreten.",
+      "table-creation": "Tisch erstellen",
+      "table-name": "Tischname"
     }
   },
   "error": {

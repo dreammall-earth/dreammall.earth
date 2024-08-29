@@ -104,18 +104,9 @@ const onNext = () => {
     height: 100%;
 
     &.loading {
-      opacity: 50%;
+      opacity: 0.5;
       transition: opacity 0.5s ease;
     }
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0.5;
-  }
-  to {
-    opacity: 1;
   }
 }
 </style>

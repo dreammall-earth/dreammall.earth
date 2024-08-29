@@ -21,25 +21,6 @@
   "cafe": {
     "welcome": "World Cafe"
   },
-  "dream-mall-panel": {
-    "setup": {
-      "continue": "Continue",
-      "table-creation": "Create Table",
-      "table-name": "Table Name",
-      "search-error": "An error occurred during the search.",
-      "no-result": "No results",
-      "reminder": "Your vision becomes reality,\nlet's take the first step together.",
-      "create-table": "Let's go",
-      "invitation-sent": "sent",
-      "invite": "invite"
-    },
-    "call": {
-      "leave-table": "Leave Table",
-      "link": "Link",
-      "edit": "Edit",
-      "add-user": "Add"
-    }
-  },
   "cockpit": {
     "about-me": {
       "edit": {
@@ -54,6 +35,25 @@
       "language-placeholder": "Languages I speak",
       "place-placeholder": "My location",
       "work-placeholder": "My work"
+    }
+  },
+  "dream-mall-panel": {
+    "call": {
+      "add-user": "Add",
+      "edit": "Edit",
+      "leave-table": "Leave Table",
+      "link": "Link"
+    },
+    "setup": {
+      "continue": "Continue",
+      "create-table": "Let's go",
+      "invitation-sent": "sent",
+      "invite": "invite",
+      "no-result": "No results",
+      "reminder": "Your vision becomes reality,\nlet's take the first step together.",
+      "search-error": "An error occurred during the search.",
+      "table-creation": "Create Table",
+      "table-name": "Table Name"
     }
   },
   "error": {
