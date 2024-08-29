@@ -1,7 +1,6 @@
 import { ApolloServer } from '@apollo/server'
-import { User } from '@prisma/client'
 
-import { createMeeting, joinMeetingLink, getMeetings } from '#api/BBB'
+import { createMeeting, joinMeetingLink, getMeetings, AttendeeRole } from '#api/BBB'
 import { CONFIG } from '#config/config'
 import { findOrCreateUser } from '#src/context/findOrCreateUser'
 import { prisma } from '#src/prisma'
@@ -347,7 +346,7 @@ describe('TableResolver', () => {
     let user: UserWithProfile
     let bibiUser: UserWithProfile
     let peterUser: UserWithProfile
-    beforeEach(async () => {
+    beforeAll(async () => {
       user = await findOrCreateUser({ nickname, name })
       bibiUser = await findOrCreateUser({ nickname: 'bibi', name: 'Bibi Bloxberg' })
       peterUser = await findOrCreateUser({ nickname: 'peter', name: 'Peter Lustig' })
@@ -395,6 +394,9 @@ describe('TableResolver', () => {
         it('creates meeting in database', async () => {
           await expect(
             prisma.user.findFirst({
+              where: {
+                id: user.id,
+              },
               include: {
                 meeting: true,
               },
@@ -422,33 +424,50 @@ describe('TableResolver', () => {
               createdAt: 'asc',
             },
           })
-          expect(result).toMatchObject(
-            expect.arrayContaining([
-              expect.objectContaining({
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                id: expect.any(Number),
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                createdAt: expect.any(Date),
-                involvedEmail: null,
-                type: 'CREATE_USER',
-                involvedUserId: user?.id,
-              }),
-              expect.objectContaining({
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                id: expect.any(Number),
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                createdAt: expect.any(Date),
-                involvedEmail: null,
-                type: 'CREATE_MY_TABLE',
-                involvedUserId: user?.id,
-              }),
-            ]),
-          )
+          expect(result).toEqual([
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_USER',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_USER',
+              involvedUserId: bibiUser.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_USER',
+              involvedUserId: peterUser.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_MY_TABLE',
+              involvedUserId: user?.id,
+            },
+          ])
         })
       })
 
       describe('meeting exists', () => {
         it('throws meeting exists error', async () => {
+          user = await findOrCreateUser({ nickname, name })
           await expect(
             testServer.executeOperation(
               {
@@ -484,24 +503,13 @@ describe('TableResolver', () => {
       })
 
       describe('private meeting', () => {
-        let bibi: User | null
-        let peter: User | null
-
         beforeAll(async () => {
-          // await prisma.usersInMeetings.deleteMany()
+          await prisma.usersInMeetings.deleteMany()
           await prisma.meeting.deleteMany()
-
-          bibi = await prisma.user.findUnique({
-            where: {
-              username: 'bibi',
-            },
-          })
-
-          peter = await prisma.user.findUnique({
-            where: {
-              username: 'peter',
-            },
-          })
+          user = {
+            ...user,
+            meetingId: null,
+          }
         })
 
         it('returns table with users', async () => {
@@ -512,7 +520,7 @@ describe('TableResolver', () => {
                 variables: {
                   name: 'My Table',
                   isPublic: false,
-                  userIds: [bibi?.id, peter?.id],
+                  userIds: [bibiUser.id, peterUser.id],
                 },
               },
               {
@@ -558,12 +566,10 @@ describe('TableResolver', () => {
       beforeAll(async () => {
         await prisma.usersInMeetings.deleteMany()
         await prisma.meeting.deleteMany()
-        await prisma.user.deleteMany()
-        await prisma.event.deleteMany()
+        // await prisma.user.deleteMany()
+        // await prisma.event.deleteMany()
+        // user = await findOrCreateUser({ name, nickname })
       })
-
-      let bibi: User | null
-      let peter: User | null
 
       describe('meeting does not exist', () => {
         it('throws meeting does not exist error', async () => {
@@ -603,25 +609,14 @@ describe('TableResolver', () => {
 
       describe('private meeting exists', () => {
         beforeAll(async () => {
-          bibi = await prisma.user.findUnique({
-            where: {
-              username: 'bibi',
-            },
-          })
-
-          peter = await prisma.user.findUnique({
-            where: {
-              username: 'peter',
-            },
-          })
-
+          user = await findOrCreateUser({ nickname, name })
           await testServer.executeOperation(
             {
               query: createMyTableMutation,
               variables: {
                 name: 'My Table',
                 isPublic: true,
-                userIds: [bibi?.id, peter?.id],
+                userIds: [bibiUser.id, peterUser.id],
               },
             },
             {
@@ -634,6 +629,7 @@ describe('TableResolver', () => {
         })
 
         it('returns the updated table', async () => {
+          user = await findOrCreateUser({ nickname, name })
           await expect(
             testServer.executeOperation(
               {
@@ -684,42 +680,77 @@ describe('TableResolver', () => {
               createdAt: 'asc',
             },
           })
-          expect(result).toMatchObject(
-            expect.arrayContaining([
-              expect.objectContaining({
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                id: expect.any(Number),
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                createdAt: expect.any(Date),
-                involvedEmail: null,
-                type: 'CREATE_USER',
-                involvedUserId: user?.id,
-              }),
-              expect.objectContaining({
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                id: expect.any(Number),
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                createdAt: expect.any(Date),
-                involvedEmail: null,
-                type: 'CREATE_MY_TABLE',
-                involvedUserId: user?.id,
-              }),
-              expect.objectContaining({
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                id: expect.any(Number),
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                createdAt: expect.any(Date),
-                involvedEmail: null,
-                type: 'UPDATE_MY_TABLE',
-                involvedUserId: user?.id,
-              }),
-            ]),
-          )
+          expect(result).toEqual([
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_USER',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_USER',
+              involvedUserId: bibiUser.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_USER',
+              involvedUserId: peterUser.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_MY_TABLE',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_MY_TABLE',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_MY_TABLE',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'UPDATE_MY_TABLE',
+              involvedUserId: user?.id,
+            },
+          ])
         })
       })
 
       describe('privat meeting exists', () => {
         it('returns the updated table', async () => {
+          user = await findOrCreateUser({ nickname, name })
           await expect(
             testServer.executeOperation(
               {
@@ -727,7 +758,7 @@ describe('TableResolver', () => {
                 variables: {
                   name: 'My Newly Updated Table',
                   isPublic: false,
-                  userIds: [bibi?.id, peter?.id],
+                  userIds: [bibiUser.id, peterUser.id],
                 },
               },
               {
@@ -773,11 +804,14 @@ describe('TableResolver', () => {
       beforeAll(async () => {
         await prisma.usersInMeetings.deleteMany()
         await prisma.meeting.deleteMany()
-        await prisma.user.deleteMany()
       })
 
       describe('meeting does not exist', () => {
         it('throws meeting does not exist error', async () => {
+          user = {
+            ...user,
+            meetingId: null,
+          }
           await expect(
             testServer.executeOperation(
               {
@@ -847,6 +881,7 @@ describe('TableResolver', () => {
         })
 
         it('returns id of the table', async () => {
+          user = await findOrCreateUser({ nickname, name })
           await expect(
             testServer.executeOperation(
               {
@@ -876,6 +911,9 @@ describe('TableResolver', () => {
         it('updates meeting in database', async () => {
           await expect(
             prisma.user.findFirst({
+              where: {
+                id: user.id,
+              },
               include: {
                 meeting: true,
               },
@@ -902,6 +940,7 @@ describe('TableResolver', () => {
       describe('createMeeting returns undefined', () => {
         it('throws meeting error', async () => {
           createMeetingMock.mockResolvedValue(null)
+          user = await findOrCreateUser({ nickname, name })
           await expect(
             testServer.executeOperation(
               {
@@ -933,28 +972,14 @@ describe('TableResolver', () => {
     })
 
     describe('createTable', () => {
-      let bibi: User | null
-      let peter: User | null
-
       beforeAll(async () => {
         await prisma.usersInMeetings.deleteMany()
         await prisma.meeting.deleteMany()
-
-        bibi = await prisma.user.findUnique({
-          where: {
-            username: 'bibi',
-          },
-        })
-
-        peter = await prisma.user.findUnique({
-          where: {
-            username: 'peter',
-          },
-        })
       })
 
       describe('meeting does not exist', () => {
         it('returns Table', async () => {
+          user = await findOrCreateUser({ nickname, name })
           await expect(
             testServer.executeOperation(
               {
@@ -962,7 +987,7 @@ describe('TableResolver', () => {
                 variables: {
                   name: 'Table',
                   isPublic: true,
-                  userIds: [bibi?.id],
+                  userIds: [bibiUser.id],
                 },
               },
               {
@@ -989,8 +1014,8 @@ describe('TableResolver', () => {
                         role: 'MODERATOR',
                       },
                       {
-                        id: bibi?.id,
-                        name: bibi?.name,
+                        id: bibiUser.id,
+                        name: bibiUser.name,
                         role: 'MODERATOR',
                       },
                     ],
@@ -1002,16 +1027,21 @@ describe('TableResolver', () => {
           })
         })
 
-        it.skip('creates meeting in database', async () => {
+        it('creates meeting in database', async () => {
           await expect(
             prisma.meeting.findFirst({
               where: {
                 user: null,
                 users: {
                   some: {
-                    userId: {
-                      // in: [bibi?.id, user.id],
-                    },
+                    OR: [
+                      {
+                        userId: user.id,
+                      },
+                      {
+                        userId: bibiUser.id,
+                      },
+                    ],
                   },
                 },
               },
@@ -1020,14 +1050,12 @@ describe('TableResolver', () => {
               },
             }),
           ).resolves.toMatchObject({
-            meeting: {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              meetingID: expect.any(String),
-              name: 'Table',
-              public: true,
-            },
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            meetingID: expect.any(String),
+            name: 'Table',
+            public: true,
           })
         })
 
@@ -1042,28 +1070,98 @@ describe('TableResolver', () => {
               createdAt: 'asc',
             },
           })
-          expect(result).toMatchObject(
-            expect.arrayContaining([
-              expect.objectContaining({
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                id: expect.any(Number),
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                createdAt: expect.any(Date),
-                involvedEmail: null,
-                type: 'CREATE_USER',
-                involvedUserId: user?.id,
-              }),
-              expect.objectContaining({
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                id: expect.any(Number),
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                createdAt: expect.any(Date),
-                involvedEmail: null,
-                type: 'CREATE_TABLE',
-                involvedUserId: user?.id,
-              }),
-            ]),
-          )
+          expect(result).toEqual([
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_USER',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_USER',
+              involvedUserId: bibiUser.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_USER',
+              involvedUserId: peterUser.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_MY_TABLE',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_MY_TABLE',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_MY_TABLE',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'UPDATE_MY_TABLE',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'UPDATE_MY_TABLE',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_MY_TABLE',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_TABLE',
+              involvedUserId: user?.id,
+            },
+          ])
         })
       })
 
@@ -1077,7 +1175,7 @@ describe('TableResolver', () => {
                 variables: {
                   name: 'Table',
                   isPublic: true,
-                  userIds: [bibi?.id],
+                  userIds: [bibiUser.id],
                 },
               },
               {
@@ -1113,7 +1211,7 @@ describe('TableResolver', () => {
                 variables: {
                   name: 'Table',
                   isPublic: false,
-                  userIds: [bibi?.id, peter?.id],
+                  userIds: [bibiUser.id, peterUser.id],
                 },
               },
               {
@@ -1335,39 +1433,29 @@ describe('TableResolver', () => {
         })
 
         describe('current user is moderator of the table', () => {
-          let bibi: User | null
           beforeEach(async () => {
             jest.clearAllMocks()
-            const user = await prisma.user.findUnique({
-              where: {
-                username: nickname,
-              },
-            })
-            if (!user) return
-            bibi = await prisma.user.findUnique({
-              where: {
-                username: 'bibi',
-              },
-            })
 
             joinMeetingLinkMock.mockReturnValue('https://my-link')
+            const userIds = [user.id, bibiUser.id]
             const meeting = await prisma.meeting.create({
               data: {
-                name: 'Pony Ville',
                 meetingID: 'Pony Ville',
+                name: '',
                 attendeePW: 'attendee',
                 moderatorPW: 'moderator',
               },
             })
+            for (const userId of userIds) {
+              await prisma.usersInMeetings.create({
+                data: {
+                  userId,
+                  meetingId: meeting.id,
+                  role: AttendeeRole.MODERATOR,
+                },
+              })
+            }
             tableId = meeting.id
-            if (!bibi) return
-            const userIds = [user.id, bibi.id]
-            await prisma.usersInMeetings.createMany({
-              data: userIds.map((id) => ({
-                meetingId: tableId,
-                userId: id,
-              })),
-            })
           })
 
           it('calls join meeting link with moderator pw', async () => {
@@ -1416,7 +1504,7 @@ describe('TableResolver', () => {
             })
           })
 
-          it('calls join meeting link with moderator pw for peter', async () => {
+          it('calls join meeting link with attendee pw for peter', async () => {
             await testServer.executeOperation(
               {
                 query,

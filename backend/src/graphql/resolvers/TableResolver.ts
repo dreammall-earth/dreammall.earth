@@ -1,3 +1,4 @@
+import { Meeting } from '@prisma/client'
 import {
   Resolver,
   Mutation,
@@ -141,7 +142,7 @@ export class TableResolver {
 
     if (!dbMeeting) throw new Error('Meeting not found!')
 
-    const inviteLink = new URL(`join-table/${dbMeeting.id}`, CONFIG.FRONTEND_URL).toString()
+    const inviteLink = createInviteLink(dbMeeting.id)
 
     const meeting = await createBBBMeeting(dbMeeting.meetingID, dbMeeting.name, inviteLink)
 
@@ -198,6 +199,13 @@ export class TableResolver {
       data: { meetingID, name, public: isPublic },
     })
 
+    if (!userIds) {
+      userIds = []
+      if (!userIds.some((userId) => userId === user.id)) {
+        userIds.push(user.id)
+      }
+    }
+
     if (userIds) {
       if (!userIds.some((userId) => userId === user.id)) {
         userIds.push(user.id)
@@ -237,11 +245,12 @@ export class TableResolver {
 
     let password: string
 
-    if (table.users.some((e) => e.userId === user.id && e.role === 'MODERATOR')) {
-      const inviteLink = new URL(`join-table/${table.id}`, CONFIG.FRONTEND_URL).toString()
+    if (
+      (table.user && table.user.id === user.id) ||
+      table.users.some((e) => e.userId === user.id && e.role === 'MODERATOR')
+    ) {
+      const inviteLink = createInviteLink(table.id)
       await createBBBMeeting(table.meetingID, table.name, inviteLink)
-      password = table.moderatorPW ? table.moderatorPW : ''
-    } else if (table.user && table.user.id === user.id) {
       password = table.moderatorPW ? table.moderatorPW : ''
     } else {
       password = table.attendeePW ? table.attendeePW : ''
@@ -327,19 +336,7 @@ const openTablesFromOpenMeetings = async (meetings: MeetingInfo[]): Promise<Open
 
 const createUsersInMeetings = async (data: {
   userIds: number[]
-  meeting: {
-    name: string
-    id: number
-    createdAt: Date
-    meetingID: string
-    attendeePW: string | null
-    moderatorPW: string | null
-    voiceBridge: number | null
-    dialNumber: string | null
-    createTime: bigint | null
-    createDate: Date | null
-    public: boolean
-  }
+  meeting: Meeting
   role?: AttendeeRole
 }) => {
   await prisma.usersInMeetings.createMany({
@@ -351,19 +348,7 @@ const createUsersInMeetings = async (data: {
   })
 }
 
-const findUsersInMeetings = async (meeting: {
-  name: string
-  id: number
-  createdAt: Date
-  meetingID: string
-  attendeePW: string | null
-  moderatorPW: string | null
-  voiceBridge: number | null
-  dialNumber: string | null
-  createTime: bigint | null
-  createDate: Date | null
-  public: boolean
-}): Promise<UsersWithMeetings[]> => {
+const findUsersInMeetings = async (meeting: Meeting): Promise<UsersWithMeetings[]> => {
   return (await prisma.usersInMeetings.findMany({
     where: {
       meetingId: meeting.id,
@@ -386,6 +371,10 @@ const createMeetingID = async (): Promise<string> => {
     meetingID = uuidv4()
   }
   return meetingID
+}
+
+function createInviteLink(tableId: number) {
+  return new URL(`join-table/${tableId}`, CONFIG.FRONTEND_URL).toString()
 }
 
 async function createBBBMeeting(
