@@ -14,7 +14,6 @@
 [![stylelint][badge-stylelint-img]][badge-stylelint-href]
 [![vitest][badge-vitest-img]][badge-vitest-href]
 [![storybook][badge-storybook-img]][badge-storybook-href]
-[![chromatic][badge-chromatic-img]][badge-chromatic-href]
 
 The Dreammall presenter.
 
@@ -28,7 +27,7 @@ The project uses `vite` as builder, `vike` to do the SSR. The design framework i
 
 Testing is done with `vitest` and code style is enforced with `eslint`, `remark-cli` and `stylelint`.
 
-This projects utilizes `storybook` and `chromatic` to develop, document & test frontend components.
+This projects utilizes `storybook` to develop, document & test frontend components.
 
 ## Commands
 
@@ -58,24 +57,8 @@ This projects utilizes `storybook` and `chromatic` to develop, document & test f
 | `npm run storybook`         | Run Storybook                                    |
 | `npm run storybook:build`   | Build static storybook                           |
 | `npm run storybook:test`    | Run tests against all storybook stories          |
-| **Chromatic**               |                                                  |
-| `npm run chromatic`         | Run Chromatic. See Chromatic section for details |
 | **Maintenance**             |                                                  |
 | `npm run update`            | Check for updates                                |
-
-### Chromatic
-
-In order to use the chromatic workflow you need to provide a `CHROMATIC_PROJECT_TOKEN` in the repository secrets.
-
-If you want to run chromatic from the command line you either have to provide this variable as well
-```bash
-export CHROMATIC_PROJECT_TOKEN=...
-npm run chromatic
-```
-or you have to append it via parameter:
-```bash
-npm run chromatic -- --project-token=...
-```
 
 ### Update
 
@@ -174,6 +157,3 @@ This mechanic was taken from this [source](https://stackoverflow.com/questions/1
 
 [badge-storybook-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fpresenter%2Fpackage.json&query=devDependencies.storybook&label=storybook&color=orange
 [badge-storybook-href]: https://storybook.js.org/
-
-[badge-chromatic-img]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdreammall-earth%2Fdreammall.earth%2Fmaster%2Fpresenter%2Fpackage.json&query=devDependencies.chromatic&label=chromatic&color=orange
-[badge-chromatic-href]: https://www.chromatic.com/
