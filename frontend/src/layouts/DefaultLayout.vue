@@ -111,10 +111,7 @@ const toggleButtonList = () => {
 const userStore = useUserStore()
 
 const getMode = () => {
-  if (
-    typeof window !== 'undefined' &&
-    window.location.pathname.includes('/table/')
-  ) {
+  if (typeof window !== 'undefined' && window.location.pathname.includes('/table/')) {
     return 'table'
   }
   return userStore.getMyTable?.id ? 'join' : 'setup'
