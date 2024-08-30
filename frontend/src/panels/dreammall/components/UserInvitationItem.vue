@@ -37,8 +37,6 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, defineEmits } from 'vue'
-
 import UserInvitation from '#src/panels/dreammall/interfaces/UserInvitation'
 
 const props = defineProps<{

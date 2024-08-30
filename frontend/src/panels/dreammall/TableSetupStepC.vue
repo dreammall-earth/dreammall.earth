@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, watch, defineProps } from 'vue'
+import { ref, computed, watch } from 'vue'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 import UserInvitationItem from '#src/panels/dreammall/components/UserInvitationItem.vue'
