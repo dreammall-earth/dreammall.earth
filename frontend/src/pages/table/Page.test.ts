@@ -120,5 +120,15 @@ describe('Table Page', () => {
     it('shows an iframe', () => {
       expect(wrapper.find('iframe').exists()).toBe(true)
     })
+
+    it('open table changes when url changes', async () => {
+      mockPageContext.routeParams = {
+        id: 420,
+      }
+      await flushPromises()
+      expect(joinTableQueryMock).toHaveBeenCalledWith({
+        tableId: 420,
+      })
+    })
   })
 })
