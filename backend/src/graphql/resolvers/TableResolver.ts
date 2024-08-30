@@ -138,11 +138,15 @@ export class TableResolver {
       throw new Error('No meeting for user!')
     }
 
-    const dbMeeting = user.meeting
+    const dbMeeting = await prisma.meeting.findUnique({
+      where: {
+        id: user.meetingId,
+      },
+    })
 
     if (!dbMeeting) throw new Error('Meeting not found!')
 
-    const inviteLink = createInviteLink(dbMeeting.id)
+    const inviteLink = new URL(`join-table/${dbMeeting.id}`, CONFIG.FRONTEND_URL).toString()
 
     const meeting = await createBBBMeeting(dbMeeting.meetingID, dbMeeting.name, inviteLink)
 
