@@ -59,10 +59,10 @@ spec:
                   name: {{ .Release.Name }}
                   key: bbb_shared_secret
             - name: BBB_WEBHOOK_URL
--             valueFrom:
--               configMapKeyRef:
--                 name: {{ .Release.Name }}
--                 key: bbb_webhook_url
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: bbb_webhook_url
             - name: NODE_ENV
               value: production
             - name: BREVO_KEY
