@@ -1,18 +1,13 @@
-import { ApolloError } from '@apollo/client/errors'
 import { provideApolloClient } from '@vue/apollo-composable'
-import { flushPromises, mount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { createMockClient, createMockSubscription, IMockSubscription } from 'mock-apollo-client'
 import { navigate } from 'vike/client/router'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import UserDropdown from '#components/menu/UserDropdown.vue'
 import { joinMyTableMutation } from '#mutations/joinMyTableMutation'
-import { useAuthStore } from '#stores/authStore'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
-import { authService } from '#tests/mock.authService'
-import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
 import DefaultLayout from './DefaultLayout.vue'
 
