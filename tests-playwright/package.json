@@ -1,0 +1,26 @@
+{
+  "name": "dreammall-e2e-playwright-testing",
+  "version": "1.0.0",
+  "description": "The DreamMall End-to-End Testing with Playwright",
+  "main": "index.js",
+  "scripts": {
+    "test": "todo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dreammall-earth/dreammall.earth.git"
+  },
+  "keywords": [
+    "bdd",
+    "playwright"
+  ],
+  "author": "mahula",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/dreammall-earth/dreammall.earth/issues"
+  },
+  "homepage": "https://github.com/dreammall-earth/dreammall.earth/blob/master/tests/README.md",
+  "devDependencies": {
+    "playwright-bdd": "^7.2.2"
+  }
+}
