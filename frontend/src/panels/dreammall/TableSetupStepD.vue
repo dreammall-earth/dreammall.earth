@@ -11,8 +11,6 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps } from 'vue'
-
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 
 import { TableSetupEmits, TableSetupProps } from './TableSetupProps'
