@@ -94,6 +94,9 @@
     "defaultTitle": "DreamMall",
     "joinTableTitle": "Enter Table"
   },
+  "table": {
+    "notFound": "Table not found."
+  },
   "tables": {
     "participantCount": "{count} participants"
   },
