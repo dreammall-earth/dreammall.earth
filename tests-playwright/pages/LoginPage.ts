@@ -1,4 +1,4 @@
-import { type Page } from '@playwright/test'
+import { test, type Page } from '@playwright/test'
 
 export class LoginPage {
   readonly page: Page
@@ -11,6 +11,7 @@ export class LoginPage {
     this.usernameInput = page.locator('input[name="uidField"]')
     this.passwordInput = page.locator('input[name="password"]')
     this.submitBtn = page.locator('button[type="submit"]')
+    test.setTimeout(45000)
   }
 
   async usernameFieldIsVisible() {

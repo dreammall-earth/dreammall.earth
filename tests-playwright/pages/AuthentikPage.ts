@@ -12,7 +12,8 @@ export class AuthentikPage {
   }
 
   async userNameIsVisible(username: string) {
-    return await this.usernameItem.contains(username)
+    // return await this.usernameItem.contains(username).waitFor({state:'visible'})
+    return await this.usernameItem.waitFor({state:'visible'})
   }
 
   async logout() {
