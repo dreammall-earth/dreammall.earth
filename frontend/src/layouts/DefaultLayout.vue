@@ -158,9 +158,7 @@ const getMode = () => {
   align-items: center;
   justify-content: center;
   height: 120px;
-  overflow: hidden; // hotfix until the concept of DreamMallButton is clarified!
-  background: var(--v-bottom-menu-background);
-  backdrop-filter: blur(20px);
+  background: transparent;
 }
 
 .dream-mall-button-container {
