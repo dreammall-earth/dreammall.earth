@@ -248,6 +248,8 @@ onMounted(() => {
   top: 0;
   left: 0;
   width: 100vw;
+
+  // Todo: Remove after we are sure we want to keep it full screen.
   // height: calc(100vh - var(--v-layout-top) - var(--bottom-height));
   height: 100vh;
   overflow: hidden;
