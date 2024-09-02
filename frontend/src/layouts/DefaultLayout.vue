@@ -59,9 +59,16 @@
         :class="[visibleDrawer === 'dream-mall-button' ? 'menu-triangle--turned' : '']"
         :src="Triangle"
       />
-      <TableSetup v-if="getMode() === 'setup'" ref="tableSetupRef" @close="toggleButtonList" />
-      <TableJoin v-if="getMode() === 'join'" @close="toggleButtonList" />
-      <TableSettings v-if="getMode() === 'table'" @close="toggleButtonList" />
+      <TableSetup
+        v-if="getMode() === 'setup'"
+        ref="tableSetupRef"
+        @close="() => toggleDrawer('dream-mall-button')"
+      />
+      <TableJoin v-if="getMode() === 'join'" @close="() => toggleDrawer('dream-mall-button')" />
+      <TableSettings
+        v-if="getMode() === 'table'"
+        @close="() => toggleDrawer('dream-mall-button')"
+      />
     </div>
 
     <div class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none">
@@ -84,8 +91,6 @@
 </template>
 
 <script lang="ts" setup>
-import { useMutation } from '@vue/apollo-composable'
-import { navigate } from 'vike/client/router'
 import { computed, ref } from 'vue'
 
 import Divider from '#assets/img/divider.svg'
