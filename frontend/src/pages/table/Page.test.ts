@@ -97,6 +97,29 @@ describe('Table Page', () => {
     })
   })
 
+  describe('route params in page context contains an id and API throws error', () => {
+    beforeEach(async () => {
+      vi.clearAllMocks()
+      wrapper.unmount()
+      mockPageContext.routeParams = {
+        id: 70,
+      }
+      joinTableQueryMock.mockResolvedValue({
+        errors: [{ message: 'Table does not exist' }],
+      })
+      wrapper = Wrapper()
+      await flushPromises()
+    })
+
+    it('does not show an iframe', () => {
+      expect(wrapper.find('iframe').exists()).toBeFalsy()
+    })
+
+    it('renders table not found message', () => {
+      expect(wrapper.find('.test-not-found').exists()).toBeTruthy()
+    })
+  })
+
   describe('route params in page context contains an id and API returns link', () => {
     beforeEach(async () => {
       vi.clearAllMocks()
@@ -105,7 +128,7 @@ describe('Table Page', () => {
         id: 69,
       }
       joinTableQueryMock.mockResolvedValue({
-        data: { joinTable: 'https://some-link-to-meeting.com' },
+        data: { joinTable: 'https://some-link-to-meeting.com', errors: [] },
       })
       wrapper = Wrapper()
       await flushPromises()
