@@ -94,6 +94,9 @@
     "defaultTitle": "DreamMall",
     "joinTableTitle": "Raum beitreten"
   },
+  "table": {
+    "notFound": "Tisch nicht gefunden."
+  },
   "tables": {
     "participantCount": "{count} Teilnehmer"
   },

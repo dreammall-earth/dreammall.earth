@@ -1,7 +1,10 @@
 <template>
   <DefaultLayout>
     <div class="container">
-      <EmbeddedTable :url="tableUrl" @table-closed="onTableClosed" />
+      <EmbeddedTable v-if="errorMessage === null" :url="tableUrl" @table-closed="onTableClosed" />
+      <div v-else class="test-not-found">
+        {{ $t('table.notFound') }}
+      </div>
     </div>
   </DefaultLayout>
 </template>
@@ -23,6 +26,8 @@ const pageContext = usePageContext()
 
 const tableId = ref(Number(pageContext.routeParams?.id))
 
+const errorMessage = ref<string | null>(null)
+
 watch(pageContext, (context) => {
   tableId.value = Number(context.routeParams?.id)
 })
@@ -39,12 +44,17 @@ const { result: joinTableQueryResult, error: joinTableQueryError } = useQuery(
 )
 
 watch(joinTableQueryResult, (data: { joinTable: string }) => {
+  if (!data.joinTable) return
   tableUrl.value = data.joinTable
+  errorMessage.value = null
 })
 
 // eslint-disable-next-line promise/prefer-await-to-callbacks
 watch(joinTableQueryError, (error) => {
+  if (!error) return
   GlobalErrorHandler.error('Error opening table', error)
+  errorMessage.value = error.message
+  tableUrl.value = null
 })
 
 const onTableClosed = () => navigate('/')
