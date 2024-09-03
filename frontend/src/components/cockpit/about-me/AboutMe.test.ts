@@ -1,4 +1,3 @@
-import { createTestingPinia } from '@pinia/testing'
 import { provideApolloClient } from '@vue/apollo-composable'
 import { mount } from '@vue/test-utils'
 import { createMockClient } from 'mock-apollo-client'
@@ -128,9 +127,6 @@ describe('AboutMe', () => {
   const Wrapper = (props = {}) =>
     mount(AboutMe, {
       props,
-      global: {
-        plugins: [createTestingPinia()],
-      },
     })
 
   it('renders', () => {

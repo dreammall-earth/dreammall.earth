@@ -7,8 +7,6 @@
 </template>
 
 <script lang="ts" setup>
-import { defineEmits } from 'vue'
-
 defineEmits(['click'])
 </script>
 
