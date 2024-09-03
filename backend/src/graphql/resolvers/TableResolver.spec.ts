@@ -444,6 +444,7 @@ describe('TableResolver', () => {
             data: {
               username: 'bibi',
               name: 'Bibi Bloxberg',
+              referenceId: 'BAN2ZWXV',
             },
           })
 
@@ -451,6 +452,7 @@ describe('TableResolver', () => {
             data: {
               username: 'peter',
               name: 'Peter Lustig',
+              referenceId: 'Q31R9L35',
             },
           })
         })
@@ -558,6 +560,7 @@ describe('TableResolver', () => {
             data: {
               username: 'bibi',
               name: 'Bibi Bloxberg',
+              referenceId: 'BAN2ZWXV',
             },
           })
 
@@ -565,6 +568,7 @@ describe('TableResolver', () => {
             data: {
               username: 'peter',
               name: 'Peter Lustig',
+              referenceId: 'Q31R9L35',
             },
           })
 

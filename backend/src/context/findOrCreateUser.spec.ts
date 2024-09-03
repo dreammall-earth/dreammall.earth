@@ -18,6 +18,8 @@ describe('findOrCreateUser', () => {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           id: expect.any(Number),
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          referenceId: expect.any(String),
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           createdAt: expect.any(Date),
           name: 'User',
           username: 'mockedUser',

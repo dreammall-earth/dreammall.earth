@@ -58,6 +58,7 @@ describe('authChecker', () => {
   describe('authenticated', () => {
     const user: UserWithProfile = {
       id: 81,
+      referenceId: '2G8P5DYG',
       username: 'mockedUser',
       name: 'Bibi Bloxberg',
       introduction: null,
