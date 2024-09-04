@@ -115,7 +115,7 @@ export const handleWebhook = (req: Request): void => {
 
   // Webhook Handling
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-  const event = JSON.parse(req.body.event as string).data
+  const event = JSON.parse(req.body.event as string)
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   const timestamp = new Date((req.body.timestamp as number) * 1000)
   logger.debug('webhook received', timestamp, event)
