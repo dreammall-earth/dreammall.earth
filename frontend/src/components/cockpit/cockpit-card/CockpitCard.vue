@@ -1,5 +1,5 @@
 <template>
-  <section class="cockpit-card" :class="{ narrow: props.narrow }">
+  <section class="cockpit-card">
     <div v-if="slots.header" class="header">
       <slot name="header"></slot>
     </div>
@@ -12,10 +12,6 @@
 import { useSlots } from 'vue'
 
 const slots = useSlots()
-
-const props = defineProps<{
-  narrow?: boolean
-}>()
 </script>
 
 <style scoped lang="scss">
@@ -45,11 +41,5 @@ const props = defineProps<{
   border-color: rgb(var(--v-theme-background));
   border-style: solid;
   border-width: 0.5px;
-}
-
-@media #{map.get($display-breakpoints, 'md-and-up')} {
-  .narrow {
-    --card-width: 335px;
-  }
 }
 </style>
