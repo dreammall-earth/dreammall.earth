@@ -35,7 +35,7 @@
     </div>
 
     <div class="align-content-center align-center">
-      <SimpleButton class="mt-12 mx-auto" :label="submitText" @click="onNext" />
+      <SimpleButton class="mt-12 mx-auto" :label="props.submitText" @click="onNext" />
     </div>
   </div>
 </template>
@@ -48,10 +48,12 @@ import UserInvitationItem from '#src/panels/dreammall/components/UserInvitationI
 import useSearchUsers from '#src/panels/dreammall/composable/useSearchUsers'
 import UserInvitation from '#src/panels/dreammall/interfaces/UserInvitation'
 
+import MyTableSettings from './interfaces/MyTableSettings'
 import { TableSetupEmits, TableSetupProps } from './TableSetupProps'
 
 const props = defineProps<TableSetupProps>()
 const emit = defineEmits<TableSetupEmits>()
+const tableSettings = defineModel<MyTableSettings>({ required: true })
 
 const { searchUsers, searchResults, isLoading, error } = useSearchUsers()
 const userSearch = ref('')
@@ -65,25 +67,18 @@ const displayedUsers = computed<UserInvitation[]>(() => {
     id: user.id,
     name: user.name || user.username,
     avatar: null, // not supporting yet
-    invited: invitedUserIdsModel.value.includes(user.id), // todo: user already included in myTable?
+    invited: tableSettings.value.users.includes(user.id), // todo: user already included in myTable?
   }))
 })
 
-const invitedUserIdsModel = computed({
-  get: () => props.myTableSettings.users,
-  set: (value) => {
-    emit('users:updated', value)
-  },
-})
-
 const updateInvitationStatus = (userId: number, invited: boolean) => {
-  let currentUsers: number[] = [...invitedUserIdsModel.value]
+  let currentUsers: number[] = [...tableSettings.value.users]
   if (invited && !currentUsers.includes(userId)) {
     currentUsers.push(userId)
   } else if (!invited && currentUsers.includes(userId)) {
     currentUsers = currentUsers.filter((id) => id !== userId)
   }
-  invitedUserIdsModel.value = currentUsers
+  tableSettings.value.users = currentUsers
 }
 
 const onNext = () => {

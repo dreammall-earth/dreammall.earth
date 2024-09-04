@@ -1,5 +1,5 @@
 export default interface MyTableSettings {
   name: string
-  isPublic: boolean
+  isPrivate: boolean
   users: number[]
 }

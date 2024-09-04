@@ -1,8 +1,5 @@
-import MyTableSettings from '#src/panels/dreammall/interfaces/MyTableSettings'
-
 export type TableSetupProps = {
   submitText: string
-  myTableSettings: MyTableSettings
 }
 
 export type TableSetupEmits = {

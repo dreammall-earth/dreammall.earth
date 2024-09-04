@@ -10,19 +10,17 @@
   <component
     :is="steps[currentStep].component"
     v-if="steps && currentStep < steps.length"
+    v-model="tableSettings"
     :my-table-settings="tableSettings"
     :submit-text="steps[currentStep]?.submitText ?? 'Weiter'"
     @next="onNext"
     @submit="onSubmit"
-    @table-name:updated="updateTableName"
-    @is-public:updated="updateIsPublic"
-    @users:updated="updateUsers"
   />
 </template>
 
 <script setup lang="ts">
 import { navigate } from 'vike/client/router'
-import { onMounted, onUnmounted, ref } from 'vue'
+import { reactive } from 'vue'
 
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import MyTableSettings from '#src/panels/dreammall/interfaces/MyTableSettings'
@@ -33,37 +31,16 @@ import TableSetupStepD from '#src/panels/dreammall/TableSetupStepD.vue'
 import PanelHeader from '#src/panels/PanelHeader.vue'
 import { useTablesStore } from '#stores/tablesStore'
 
+import { useSteps, Step } from './composable/useSteps'
+
 const tablesStore = useTablesStore()
 
-const currentStep = ref(0)
-
-const tableSettings = ref<MyTableSettings>({
+const tableSettings = reactive<MyTableSettings>({
   name: tablesStore.defaultMyTableName || '',
-  isPublic: false,
+  isPrivate: true,
   users: [],
 })
 
-const updateTableName = (name: string) => {
-  tableSettings.value.name = name
-}
-
-const updateIsPublic = (isPublic: boolean) => {
-  tableSettings.value.isPublic = isPublic
-}
-
-const updateUsers = (users: number[]) => {
-  tableSettings.value.users = users
-}
-
-type StepId = string | (() => string)
-type Step = {
-  component: unknown
-  id: string
-  title: string
-  submit: StepId
-  submitText: string
-  back: StepId
-}
 const steps: Step[] = [
   {
     component: TableSetupStepA,
@@ -77,7 +54,7 @@ const steps: Step[] = [
     component: TableSetupStepB,
     id: 'settings',
     title: 'Tisch erstellen',
-    submit: () => (tableSettings.value.isPublic ? 'end' : 'users'),
+    submit: () => (tableSettings.isPrivate ? 'users' : 'end'),
     submitText: 'Weiter',
     back: 'previous',
   },
@@ -95,7 +72,7 @@ const steps: Step[] = [
     title: 'Kleine Erinnerung',
     submit: 'next',
     submitText: "Los geht's",
-    back: () => (tableSettings.value.isPublic ? 'settings' : 'users'),
+    back: () => (tableSettings.isPrivate ? 'users' : 'settings'),
   },
 ]
 
@@ -103,56 +80,14 @@ const emit = defineEmits<{
   (e: 'close'): void
 }>()
 
-// const updateHistory = () => {
-// if (window?.location?.href == null) return
-// const url = new URL(window.location.href)
-// url.searchParams.set('step', step.toString())
-// todo: find other solution. This causes conflicts with Vike
-// window.history.pushState({ step }, '', url.toString())
-// }
-
-const transitToNext = () => transitToId(steps[currentStep.value].submit)
-const transitToPrevious = () => transitToId(steps[currentStep.value].back)
-
-const transitToId = (destinationId: StepId) => {
-  if (destinationId === 'next') {
-    if (currentStep.value < steps.length - 1) {
-      currentStep.value++
-    } else {
-      currentStep.value = -1
-    }
-  } else if (destinationId === 'previous') {
-    if (currentStep.value > 0) {
-      currentStep.value--
-    } else {
-      currentStep.value = -1
-    }
-  } else if (typeof destinationId === 'string') {
-    currentStep.value = findStepById(destinationId)
-  } else if (typeof destinationId === 'function') {
-    currentStep.value = findStepById(destinationId())
-  } else {
-    currentStep.value = -1
-  }
-
-  if (currentStep.value >= 0) {
-    // updateHistory(currentStep.value)
-  } else {
-    emit('close')
-  }
-}
-
-const findStepById = (id: string): number => steps.findIndex((step) => step.id === id)
-
-const onNext = transitToNext
-const onBack = transitToPrevious
+const { currentStep, onNext, onBack, reset } = useSteps(steps, emit)
 
 const onSubmit = async () => {
   try {
     const table = await tablesStore.createMyTable(
-      tableSettings.value.name,
-      tableSettings.value.isPublic,
-      tableSettings.value.users,
+      tableSettings.name,
+      !tableSettings.isPrivate,
+      tableSettings.users,
     )
 
     if (!table) {
@@ -176,31 +111,6 @@ const onSubmit = async () => {
 
 const onClose = () => emit('close')
 
-const reset = () => {
-  currentStep.value = 0
-  // updateHistory(currentStep.value)
-}
 reset()
 defineExpose({ reset })
-
-const handlePopState = (event: PopStateEvent) => {
-  if (event.state && typeof event.state.step === 'number') {
-    currentStep.value = event.state.step
-  }
-}
-
-onMounted(() => {
-  window.addEventListener('popstate', handlePopState)
-
-  // Initialize the history state
-  const urlParams = new URLSearchParams(window.location.search)
-  const initialStep = parseInt(urlParams.get('step') || '0', 10)
-  currentStep.value =
-    isNaN(initialStep) || initialStep < 0 || initialStep >= steps.length ? 0 : initialStep
-  // updateHistory(currentStep.value)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('popstate', handlePopState)
-})
 </script>

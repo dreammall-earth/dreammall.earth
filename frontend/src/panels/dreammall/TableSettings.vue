@@ -11,19 +11,17 @@
   <component
     :is="steps[currentStep].component"
     v-if="steps && currentStep < steps.length"
+    v-model="tableSettings"
     :my-table-settings="tableSettings"
     :submit-text="steps[currentStep]?.submitText ?? 'Weiter'"
     @next="onNext"
     @submit="onSubmit"
     @custom="onCustom"
-    @table-name:updated="updateTableName"
-    @is-public:updated="updateIsPublic"
-    @users:updated="updateUsers"
   />
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, reactive } from 'vue'
 
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import MyTableSettings from '#src/panels/dreammall/interfaces/MyTableSettings'
@@ -38,29 +36,17 @@ const tablesStore = useTablesStore()
 const userStore = useUserStore()
 
 const myTable: MyTable = userStore.getMyTable
-const tableSettings = ref<MyTableSettings>({
-  name: myTable?.name || '',
-  isPublic: myTable.public || true,
+const tableSettings = reactive<MyTableSettings>({
+  name: myTable.name || '',
+  isPrivate: !myTable.public,
   users: myTable.users.map((u) => u.id) || [],
 })
 
 const currentStep = ref(0)
 
-const updateTableName = (name: string) => {
-  tableSettings.value.name = name
-}
-
-const updateIsPublic = (isPublic: boolean) => {
-  tableSettings.value.isPublic = isPublic
-}
-
-const updateUsers = (users: number[]) => {
-  tableSettings.value.users = users
-}
-
 const onSubmitSettingsAsync = async (): Promise<string> => {
   try {
-    await tablesStore.updateMyTable(tableSettings.value.name, tableSettings.value.isPublic)
+    await tablesStore.updateMyTable(tableSettings.name, !tableSettings.isPrivate)
     return 'root'
   } catch (error) {
     GlobalErrorHandler.error('Error occurred by updating the settings', error)
@@ -70,7 +56,7 @@ const onSubmitSettingsAsync = async (): Promise<string> => {
 
 const onSubmitUsersAsync = async (): Promise<string> => {
   try {
-    await tablesStore.updateMyTableUsers(tableSettings.value.users)
+    await tablesStore.updateMyTableUsers(tableSettings.users)
     return 'root'
   } catch (error) {
     GlobalErrorHandler.error('Error occurred by updating the users', error)
