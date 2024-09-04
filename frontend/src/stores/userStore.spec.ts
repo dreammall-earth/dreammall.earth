@@ -81,7 +81,7 @@ describe('User Store', () => {
     it('has computed getters set correctly', () => {
       expect(userStore.getCurrentUserInitials).toBe('CU')
       expect(userStore.getCurrentUserAvatar).toBeUndefined()
-      expect(userStore.getMyTable).toBeNull()
+      expect(userStore.getMyTable.id).toBe(0)
       expect(userStore.getUsersInMyTable).toBeUndefined()
     })
   })
@@ -155,7 +155,7 @@ describe('User Store', () => {
       })
     })
 
-    it('updates my room', () => {
+    it('updates my table', () => {
       expect(userStore.getMyTable).toEqual({
         id: 1234,
         name: 'My Table',
@@ -177,7 +177,7 @@ describe('User Store', () => {
       })
     })
 
-    it('updates users in my room', () => {
+    it('updates users in my table', () => {
       expect(userStore.getUsersInMyTable).toEqual([
         {
           id: 333,

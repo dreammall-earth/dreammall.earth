@@ -35,6 +35,35 @@
       "language-placeholder": "Languages I speak",
       "place-placeholder": "My location",
       "work-placeholder": "My work"
+    },
+    "myTables": {
+      "addTable": "Add table",
+      "delete": "Delete",
+      "edit": "Edit",
+      "header": "My Tables",
+      "invite": "Invite",
+      "memberCount": "{count} members",
+      "noTables": "No group tables so far",
+      "share": "Share"
+    }
+  },
+  "dream-mall-panel": {
+    "call": {
+      "add-user": "Add",
+      "edit": "Edit",
+      "leave-table": "Leave Table",
+      "link": "Link"
+    },
+    "setup": {
+      "continue": "Continue",
+      "create-table": "Let's go",
+      "invitation-sent": "sent",
+      "invite": "invite",
+      "no-result": "No results",
+      "reminder": "Your vision becomes reality,\nlet's take the first step together.",
+      "search-error": "An error occurred during the search.",
+      "table-creation": "Create Table",
+      "table-name": "Table Name"
     }
   },
   "error": {
@@ -64,6 +93,9 @@
     "defaultDescription": "Expanding your reach making the most of opportunities enhance quality of life together",
     "defaultTitle": "DreamMall",
     "joinTableTitle": "Enter Table"
+  },
+  "table": {
+    "notFound": "Table not found."
   },
   "tables": {
     "participantCount": "{count} participants"
