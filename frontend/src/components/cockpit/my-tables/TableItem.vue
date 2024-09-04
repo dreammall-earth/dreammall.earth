@@ -24,7 +24,7 @@
       />
     </button>
     <OptionsList :is-visible="isShowingOptions">
-      <OptionButton class="trash" @click="deleteTable">
+      <OptionButton red @click="deleteTable">
         <v-icon icon="mdi mdi-trash-can-outline" />
         {{ $t('cockpit.myTables.delete') }}
       </OptionButton>
@@ -84,7 +84,7 @@ const deleteTable = () => {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="css">
 .table {
   position: relative;
   display: flex;
@@ -136,11 +136,6 @@ const deleteTable = () => {
   &.turned {
     transform: rotate(90deg);
   }
-}
-
-.trash {
-  color: #f5f5f5;
-  background-color: #d02f44;
 }
 
 .animate-fade-out {
