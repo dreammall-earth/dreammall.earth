@@ -10,6 +10,15 @@ export type Step = {
   back: StepId
 }
 
+export type StepProps = {
+  submitText: string
+}
+
+export type StepEmits = {
+  (e: 'next' | 'submit'): void
+  (e: 'goTo', value: string): void
+}
+
 // const updateHistory = () => {
 // if (window?.location?.href == null) return
 // const url = new URL(window.location.href)
@@ -37,6 +46,8 @@ export const useSteps = (steps: Step[], emit: (event: 'close') => void) => {
       } else {
         currentStep.value = -1
       }
+    } else if (destinationId === 'close') {
+      currentStep.value = -1
     } else if (typeof destinationId === 'string') {
       currentStep.value = findStepById(destinationId)
     } else if (typeof destinationId === 'function') {
@@ -56,6 +67,8 @@ export const useSteps = (steps: Step[], emit: (event: 'close') => void) => {
 
   const onNext = transitToNext
   const onBack = transitToPrevious
+
+  const goTo = (stepId: string) => transitToId(stepId)
 
   const reset = () => {
     currentStep.value = 0
@@ -89,6 +102,7 @@ export const useSteps = (steps: Step[], emit: (event: 'close') => void) => {
     currentStep,
     onNext,
     onBack,
+    goTo,
     reset,
   }
 }

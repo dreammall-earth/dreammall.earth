@@ -1,4 +1,3 @@
-<!-- Mainly Duplicated code from TableSetup Panel -->
 <template>
   <PanelHeader
     v-if="steps"
@@ -6,33 +5,28 @@
     :is-back-button-visible="currentStep > 0"
     :is-close-button-visible="true"
     @back="onBack"
-    @close="onClose"
+    @close="() => $emit('close')"
   />
   <component
     :is="steps[currentStep].component"
     v-if="steps && currentStep < steps.length"
     v-model="tableSettings"
-    :my-table-settings="tableSettings"
     :submit-text="steps[currentStep]?.submitText ?? 'Weiter'"
     @next="onNext"
-    @submit="onSubmit"
-    @custom="onCustom"
+    @go-to="goTo"
   />
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, reactive } from 'vue'
+import { reactive } from 'vue'
 
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
+import { Step, useSteps } from '#src/panels/composables/useSteps'
+import ChangeUsers from '#src/panels/dreammall/ChangeUsers.vue'
 import MyTableSettings from '#src/panels/dreammall/interfaces/MyTableSettings'
 import TableSettingsRoot from '#src/panels/dreammall/TableSettingsRoot.vue'
-import TableSetupStepB from '#src/panels/dreammall/TableSetupStepB.vue'
-import TableSetupStepC from '#src/panels/dreammall/TableSetupStepC.vue'
 import PanelHeader from '#src/panels/PanelHeader.vue'
-import { useTablesStore } from '#stores/tablesStore'
 import { MyTable, useUserStore } from '#stores/userStore'
 
-const tablesStore = useTablesStore()
 const userStore = useUserStore()
 
 const myTable: MyTable = userStore.getMyTable
@@ -42,64 +36,20 @@ const tableSettings = reactive<MyTableSettings>({
   users: myTable.users.map((u) => u.id) || [],
 })
 
-const currentStep = ref(0)
-
-const onSubmitSettingsAsync = async (): Promise<string> => {
-  try {
-    await tablesStore.updateMyTable(tableSettings.name, !tableSettings.isPrivate)
-    return 'root'
-  } catch (error) {
-    GlobalErrorHandler.error('Error occurred by updating the settings', error)
-    return ''
-  }
-}
-
-const onSubmitUsersAsync = async (): Promise<string> => {
-  try {
-    await tablesStore.updateMyTableUsers(tableSettings.users)
-    return 'root'
-  } catch (error) {
-    GlobalErrorHandler.error('Error occurred by updating the users', error)
-    return ''
-  }
-}
-
-const onSubmitCloseCallAsync = async (): Promise<string> => {
-  emit('close')
-  return ''
-}
-
-type StepId = string | (() => string) | (() => Promise<string>)
-type Step = {
-  component: unknown
-  id: string
-  title: string
-  submit: StepId
-  submitText: string
-  back: StepId
-}
 const steps: Step[] = [
   {
     component: TableSettingsRoot,
     id: 'root',
     title: 'Mein Tisch',
-    submit: onSubmitCloseCallAsync,
+    submit: 'close',
     submitText: 'Beenden',
     back: 'previous',
   },
   {
-    component: TableSetupStepB,
-    id: 'settings',
-    title: 'Einstellungen',
-    submit: onSubmitSettingsAsync,
-    submitText: 'Übernehmen',
-    back: 'root',
-  },
-  {
-    component: TableSetupStepC,
+    component: ChangeUsers,
     id: 'users',
     title: 'Teilnehmer',
-    submit: onSubmitUsersAsync,
+    submit: 'root',
     submitText: 'Übernehmen',
     back: 'root',
   },
@@ -109,82 +59,8 @@ const emit = defineEmits<{
   (e: 'close'): void
 }>()
 
-// const updateHistory = () => {
-// if (window?.location?.href == null) return
-// const url = new URL(window.location.href)
-// url.searchParams.set('step', step.toString())
-// todo: find other solution. This causes conflicts with Vike
-// window.history.pushState({ step }, '', url.toString())
-// }
+const { currentStep, onNext, onBack, goTo, reset } = useSteps(steps, emit)
 
-const transitToNextAsync = () => transitToIdAsync(steps[currentStep.value].submit)
-const transitToPreviousAsync = () => transitToIdAsync(steps[currentStep.value].back)
-
-const transitToIdAsync = async (destinationId: StepId) => {
-  if (destinationId === 'next') {
-    if (currentStep.value < steps.length - 1) {
-      currentStep.value++
-    } else {
-      currentStep.value = -1
-    }
-  } else if (destinationId === 'previous') {
-    if (currentStep.value > 0) {
-      currentStep.value--
-    } else {
-      currentStep.value = -1
-    }
-  } else if (typeof destinationId === 'string') {
-    currentStep.value = await findStepByIdAsync(destinationId)
-  } else if (typeof destinationId === 'function') {
-    currentStep.value = await findStepByIdAsync(await destinationId())
-  } else {
-    currentStep.value = -1
-  }
-
-  if (currentStep.value >= 0) {
-    // updateHistory(currentStep.value)
-  } else {
-    emit('close')
-  }
-}
-
-const findStepByIdAsync = async (id: string): Promise<number> => {
-  if (!id) return currentStep.value
-  return steps.findIndex((step) => step.id === id)
-}
-
-const onNext = transitToNextAsync
-const onBack = transitToPreviousAsync
-const onCustom = async (stepId: string) => transitToIdAsync(stepId)
-
-const onClose = () => emit('close')
-const onSubmit = onClose
-
-const reset = () => {
-  currentStep.value = 0
-  // updateHistory(currentStep.value)
-}
 reset()
 defineExpose({ reset })
-
-const handlePopState = (event: PopStateEvent) => {
-  if (event.state && typeof event.state.step === 'number') {
-    currentStep.value = event.state.step
-  }
-}
-
-onMounted(() => {
-  window.addEventListener('popstate', handlePopState)
-
-  // Initialize the history state
-  const urlParams = new URLSearchParams(window.location.search)
-  const initialStep = parseInt(urlParams.get('step') || '0', 10)
-  currentStep.value =
-    isNaN(initialStep) || initialStep < 0 || initialStep >= steps.length ? 0 : initialStep
-  // updateHistory(currentStep.value)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('popstate', handlePopState)
-})
 </script>

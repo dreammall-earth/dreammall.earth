@@ -21,11 +21,11 @@
 <script setup lang="ts">
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 
+import type { StepProps, StepEmits } from '#src/panels/composables/useSteps'
 import type MyTableSettings from '#src/panels/dreammall/interfaces/MyTableSettings'
-import type { TableSetupProps, TableSetupEmits } from './TableSetupProps'
 
-defineProps<TableSetupProps>()
-const emit = defineEmits<TableSetupEmits>()
+defineProps<StepProps>()
+const emit = defineEmits<StepEmits>()
 
 const tableSettings = defineModel<MyTableSettings>({ required: true })
 
@@ -39,3 +39,4 @@ const onNext = () => {
   box-shadow: none !important;
 }
 </style>
+./StepProps

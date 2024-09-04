@@ -11,7 +11,6 @@
     :is="steps[currentStep].component"
     v-if="steps && currentStep < steps.length"
     v-model="tableSettings"
-    :my-table-settings="tableSettings"
     :submit-text="steps[currentStep]?.submitText ?? 'Weiter'"
     @next="onNext"
     @submit="onSubmit"
@@ -23,6 +22,7 @@ import { navigate } from 'vike/client/router'
 import { reactive } from 'vue'
 
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
+import { Step, useSteps } from '#src/panels/composables/useSteps'
 import MyTableSettings from '#src/panels/dreammall/interfaces/MyTableSettings'
 import TableSetupStepA from '#src/panels/dreammall/TableSetupStepA.vue'
 import TableSetupStepB from '#src/panels/dreammall/TableSetupStepB.vue'
@@ -30,8 +30,6 @@ import TableSetupStepC from '#src/panels/dreammall/TableSetupStepC.vue'
 import TableSetupStepD from '#src/panels/dreammall/TableSetupStepD.vue'
 import PanelHeader from '#src/panels/PanelHeader.vue'
 import { useTablesStore } from '#stores/tablesStore'
-
-import { useSteps, Step } from './composable/useSteps'
 
 const tablesStore = useTablesStore()
 
@@ -114,3 +112,4 @@ const onClose = () => emit('close')
 reset()
 defineExpose({ reset })
 </script>
+./composables/useSteps ../composables/useSteps

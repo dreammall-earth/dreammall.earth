@@ -9,9 +9,10 @@
 
 <script setup lang="ts">
 import SimpleButton from '#components/buttons/SimpleButton.vue'
-import { TableSetupEmits } from '#src/panels/dreammall/TableSetupProps'
 
-const emit = defineEmits<TableSetupEmits>()
+import type { StepEmits } from '#src/panels/composables/useSteps'
+
+const emit = defineEmits<StepEmits>()
 
 const onClick = () => {
   emit('next')

@@ -13,10 +13,10 @@
 <script lang="ts" setup>
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 
-import { TableSetupEmits, TableSetupProps } from './TableSetupProps'
+import type { StepProps, StepEmits } from '#src/panels/composables/useSteps'
 
-defineProps<TableSetupProps>()
-const emit = defineEmits<TableSetupEmits>()
+defineProps<StepProps>()
+const emit = defineEmits<StepEmits>()
 
 const onSubmit = async () => {
   emit('submit')
@@ -28,3 +28,4 @@ const onSubmit = async () => {
   background-color: #8b949b; // todo: save globally
 }
 </style>
+./StepProps
