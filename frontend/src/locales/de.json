@@ -93,6 +93,21 @@
     "defaultTitle": "DreamMall",
     "joinTableTitle": "Raum beitreten"
   },
+  "payment-link": {
+    "call-to-action": "Upgrade auf PRO",
+    "subtitle": "Upgrade auf Premium, um weitere Funktionen freizuschalten",
+    "title": "Upgrade auf Premium"
+  },
+  "sepaIban": {
+    "accountHolder": "Konto Inhaber",
+    "amount": "Betrag",
+    "explanation": "Bitte richte einen Dauerauftrag in deinem Online-Banking ein.",
+    "introduction": "Danke, dass du dich für ein DreamMall-Abonnement entschieden hast!",
+    "qr-explanation": "Wenn deine Banking-App QR codes unterstützt, kannst du einfach diesen QR code scannen.",
+    "reference": "Referenz",
+    "table-header": "Kontodaten",
+    "title": "Dauerauftrag einrichten"
+  },
   "table": {
     "notFound": "Tisch nicht gefunden."
   },

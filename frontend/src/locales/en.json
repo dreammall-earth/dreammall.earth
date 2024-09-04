@@ -93,6 +93,21 @@
     "defaultTitle": "DreamMall",
     "joinTableTitle": "Enter Table"
   },
+  "payment-link": {
+    "call-to-action": "Upgrade to PRO",
+    "subtitle": "Upgrade to premium to unlock more features",
+    "title": "Upgrade to premium"
+  },
+  "sepaIban": {
+    "accountHolder": "Account holder",
+    "amount": "Amount",
+    "explanation": "Please set up a monthly standing order in your online banking.",
+    "introduction": "Thank you for choosing a DreamMall subscription!",
+    "qr-explanation": "If your banking app supports QR codes, you can easily scan this QR code.",
+    "reference": "Reference",
+    "table-header": "Account details",
+    "title": "Set up standing order"
+  },
   "table": {
     "notFound": "Table not found."
   },

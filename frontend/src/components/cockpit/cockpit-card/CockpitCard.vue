@@ -20,7 +20,7 @@ const slots = useSlots()
 
 .cockpit-card {
   --padding: 20px;
-  --cockpit-card-height: 323px;
+  --cockpit-card-height: 350px;
   --card-width: 100%;
 
   max-width: var(--card-width, 100%);

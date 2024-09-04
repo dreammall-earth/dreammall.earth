@@ -49,6 +49,7 @@ module.exports = {
     // Optional eslint-comments rule
     '@eslint-community/eslint-comments/no-unused-disable': 'error',
     '@eslint-community/eslint-comments/disable-enable-pair': ['error', { allowWholeFile: true }],
+    '@intlify/vue-i18n/no-raw-text': ['error', { ignoreText: ['IBAN', 'BIC'] }],
     // import
     'import/export': 'error',
     'import/no-deprecated': 'error',
