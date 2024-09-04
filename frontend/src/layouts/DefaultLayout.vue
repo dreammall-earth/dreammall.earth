@@ -102,7 +102,7 @@ const isButtonListVisible = ref(false)
 const tableSetupRef = ref<InstanceType<typeof TableSetup> | null>(null)
 
 const toggleButtonList = () => {
-  if (isButtonListVisible.value) {
+  if (!isButtonListVisible.value) {
     tableSetupRef.value?.reset()
   }
   isButtonListVisible.value = !isButtonListVisible.value
