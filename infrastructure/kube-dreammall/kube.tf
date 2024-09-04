@@ -136,40 +136,40 @@ module "kube-hetzner" {
       # Enable automatic backups via Hetzner (default: false)
       # backups = true
     },
-    # {
-    #   name        = "control-plane-nbg1",
-    #   server_type = "cx22",
-    #   location    = "nbg1",
-    #   labels      = [],
-    #   taints      = [],
-    #   count       = 1
+    {
+      name        = "control-plane-nbg1",
+      server_type = "cx22",
+      location    = "nbg1",
+      labels      = [],
+      taints      = [],
+      count       = 1
 
-    #   # Fine-grained control over placement groups (nodes in the same group are spread over different physical servers, 10 nodes per placement group max):
-    #   # placement_group = "default"
+      # Fine-grained control over placement groups (nodes in the same group are spread over different physical servers, 10 nodes per placement group max):
+      # placement_group = "default"
 
-    #   # Enable automatic backups via Hetzner (default: false)
-    #   # backups = true
-    # },
-    # {
-    #   name        = "control-plane-hel1",
-    #   server_type = "cx22",
-    #   location    = "hel1",
-    #   labels      = [],
-    #   taints      = [],
-    #   count       = 1
+      # Enable automatic backups via Hetzner (default: false)
+      # backups = true
+    },
+    {
+      name        = "control-plane-hel1",
+      server_type = "cx22",
+      location    = "hel1",
+      labels      = [],
+      taints      = [],
+      count       = 1
 
-    #   # Fine-grained control over placement groups (nodes in the same group are spread over different physical servers, 10 nodes per placement group max):
-    #   # placement_group = "default"
+      # Fine-grained control over placement groups (nodes in the same group are spread over different physical servers, 10 nodes per placement group max):
+      # placement_group = "default"
 
-    #   # Enable automatic backups via Hetzner (default: false)
-    #   # backups = true
-    # }
+      # Enable automatic backups via Hetzner (default: false)
+      # backups = true
+    }
   ]
 
   agent_nodepools = [
     {
-      name        = "agent-small",
-      server_type = "cx22",
+      name        = "agent-large",
+      server_type = "cx32",
       location    = "fsn1",
       labels      = [],
       taints      = [],

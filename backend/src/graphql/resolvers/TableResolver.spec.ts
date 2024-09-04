@@ -669,7 +669,7 @@ describe('TableResolver', () => {
           await expect(prisma.usersInMeetings.findMany()).resolves.toHaveLength(0)
         })
 
-        it('creates update my room event', async () => {
+        it('creates update my table event', async () => {
           const user = await prisma.user.findUnique({
             where: {
               username: nickname,
@@ -847,7 +847,7 @@ describe('TableResolver', () => {
             {
               query: createMyTableMutation,
               variables: {
-                name: 'My Room',
+                name: 'My Table',
                 isPublic: true,
               },
             },
@@ -922,7 +922,7 @@ describe('TableResolver', () => {
             meeting: {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(Number),
-              name: 'My Room',
+              name: 'My Table',
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               meetingID: expect.any(String),
               attendeePW: 'w3VUvMcp',

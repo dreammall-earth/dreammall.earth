@@ -290,7 +290,7 @@ export class TableResolver {
   }
 
   @Subscription(() => [OpenTable], {
-    topics: 'OPEN_ROOM_SUBSCRIPTION',
+    topics: 'OPEN_TABLE_SUBSCRIPTION',
   })
   async updateOpenTables(
     @Root() meetings: MeetingInfo[],
@@ -304,7 +304,7 @@ export class TableResolver {
   @Query(() => Boolean)
   test(): boolean {
     try {
-      pubSub.publish('OPEN_ROOM_SUBSCRIPTION', 'Hallo')
+      pubSub.publish('OPEN_TABLE_SUBSCRIPTION', 'Hallo')
     } catch (err) {
       console.log(err)
     }
