@@ -57,8 +57,8 @@ const isOpen = ref(false)
   width: calc(var(--menu-icon-height) - 6px) !important;
   height: calc(var(--menu-icon-height) - 6px) !important;
   margin: 3px !important;
-  border-color: rgb(var(--v-theme-border) 0.8);
   background-color: rgb(var(--v-theme-cockpit-highlight));
+  border-color: rgb(var(--v-theme-border) 0.8);
 }
 
 .ellipsis-icon {

@@ -150,8 +150,8 @@ const updateIntroduction = (event: Event) => {
 
 .avatar {
   grid-row: 1 / 4;
-  border-radius: 15px;
   background-color: rgb(var(--v-theme-cockpit-highlight));
+  border-radius: 15px;
 }
 
 .availability {
