@@ -2268,6 +2268,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
           <!---->
         </div>
         
+        
         <div
           class="step-header"
           data-v-fe0c4e23=""
@@ -2364,7 +2365,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
         </button>
         
         <!--v-if-->
-        <!--v-if-->
+        
       </div>
       <div
         class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none"
