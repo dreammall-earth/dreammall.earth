@@ -34,9 +34,6 @@ jobs:
           npm install
           npm run prod &
 
-      - name: Wait
-        run: sleep 10m
-
       - name: Install cucumber-json-formatter
         run: |
           wget --no-verbose -O /opt/cucumber-json-formatter "https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-linux-386"
