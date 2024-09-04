@@ -115,10 +115,19 @@ export const handleWebhook = (req: Request): void => {
 
   // Webhook Handling
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-  const event = JSON.parse(req.body.event as string)
+  const webhook = JSON.parse(req.body.event as string)
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   const timestamp = new Date((req.body.timestamp as number) * 1000)
-  logger.debug('webhook received', timestamp, event)
+  logger.debug('webhook received', timestamp, webhook)
+
+  // eslint-disable-next-line dot-notation, @typescript-eslint/no-unsafe-member-access
+  if (!Array.isArray(webhook) || !webhook[0]['data']) {
+    logger.debug('webhook cannot be parsed')
+    return
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+  const event = webhook[0].data
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   if (event.type === 'event' && event.id) {
@@ -152,7 +161,7 @@ export const handleWebhook = (req: Request): void => {
   │       }                                                                                                                                                                                                           │
   │     }
         */
-        logger.debug('webhook', 'meeting-created', event)
+        logger.debug('webhook', 'meeting-created')
         break
       case 'meeting-ended':
         /* This does not trigger user left!
@@ -170,7 +179,7 @@ export const handleWebhook = (req: Request): void => {
   │       }                                                                                                                                                                                                           │
   │     }
         */
-        logger.debug('webhook', 'meeting-ended', event)
+        logger.debug('webhook', 'meeting-ended')
         break
       case 'user-joined':
         /*
@@ -195,7 +204,7 @@ export const handleWebhook = (req: Request): void => {
   │       }                                                                                                                                                                                                           │
   │     }
         */
-        logger.debug('webhook', 'user-joined', event)
+        logger.debug('webhook', 'user-joined')
         break
       case 'user-left':
         /*
@@ -217,7 +226,7 @@ export const handleWebhook = (req: Request): void => {
   │       }                                                                                                                                                                                                           │
   │     }
         */
-        logger.debug('webhook', 'user-left', event)
+        logger.debug('webhook', 'user-left')
         break
       default:
         logger.debug('webhook', 'unhandled')
