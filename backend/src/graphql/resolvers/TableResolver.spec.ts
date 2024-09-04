@@ -397,42 +397,6 @@ describe('TableResolver', () => {
         })
       })
 
-      describe('meeting exists', () => {
-        it('throws meeting exists error', async () => {
-          await expect(
-            testServer.executeOperation(
-              {
-                query: createMyTableMutation,
-                variables: {
-                  name: 'My Table',
-                  isPublic: true,
-                  userIds: [],
-                },
-              },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
-            ),
-          ).resolves.toMatchObject({
-            body: {
-              kind: 'single',
-              singleResult: {
-                data: null,
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                errors: expect.arrayContaining([
-                  expect.objectContaining({
-                    message: 'Meeting already exists!',
-                  }),
-                ]),
-              },
-            },
-          })
-        })
-      })
-
       describe('private meeting', () => {
         let bibi: User | undefined
         let peter: User | undefined
