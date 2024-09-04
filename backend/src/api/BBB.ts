@@ -135,97 +135,97 @@ export const handleWebhook = (req: Request): void => {
     switch (event.id) {
       case 'meeting-created':
         /*
-        {                                                                                                                                                                                                       │
-  │       type: 'event',                                                                                                                                                                                              │
-  │       id: 'meeting-created',                                                                                                                                                                                      │
-  │       attributes: {                                                                                                                                                                                               │
-  │         meeting: {                                                                                                                                                                                                │
-  │           'internal-meeting-id': 'b070c2de30140b9f77b7fa2318de762112e592c5-1725451926427',                                                                                                                        │
-  │           'external-meeting-id': 'be587b9d-1846-491c-a59c-4a1bb1ecf5e8',                                                                                                                                          │
-  │           name: 'Test',                                                                                                                                                                                           │
-  │           'is-breakout': false,                                                                                                                                                                                   │
-  │           duration: 0,                                                                                                                                                                                            │
-  │           'create-time': 1725451926427,                                                                                                                                                                           │
-  │           'create-date': 'Wed Sep 04 12:12:06 UTC 2024',                                                                                                                                                          │
-  │           'moderator-pass': '8w0BAHHH',                                                                                                                                                                           │
-  │           'viewer-pass': 'HxsFc4Z9',                                                                                                                                                                              │
-  │           record: false,                                                                                                                                                                                          │
-  │           'voice-conf': '51484',                                                                                                                                                                                  │
-  │           'dial-number': '613-555-1234',                                                                                                                                                                          │
-  │           'max-users': 0,                                                                                                                                                                                         │
-  │           metadata: {}                                                                                                                                                                                            │
-  │         }                                                                                                                                                                                                         │
-  │       },                                                                                                                                                                                                          │
-  │       event: {                                                                                                                                                                                                    │
-  │         ts: 1725451926429                                                                                                                                                                                         │
-  │       }                                                                                                                                                                                                           │
-  │     }
+        {
+          type: 'event',
+          id: 'meeting-created',
+          attributes: {
+            meeting: {
+              'internal-meeting-id': 'b070c2de30140b9f77b7fa2318de762112e592c5-1725451926427',
+              'external-meeting-id': 'be587b9d-1846-491c-a59c-4a1bb1ecf5e8',
+              name: 'Test',
+              'is-breakout': false,
+              duration: 0,
+              'create-time': 1725451926427,
+              'create-date': 'Wed Sep 04 12:12:06 UTC 2024',
+              'moderator-pass': '8w0BAHHH',
+              'viewer-pass': 'HxsFc4Z9',
+              record: false,
+              'voice-conf': '51484',
+              'dial-number': '613-555-1234',
+              'max-users': 0,
+              metadata: {},
+            },
+          },
+          event: {
+            ts: 1725451926429,
+          },
+        }
         */
         logger.debug('webhook', 'meeting-created')
         break
       case 'meeting-ended':
         /* This does not trigger user left!
-        {                                                                                                                                                                                                       │
-  │       type: 'event',                                                                                                                                                                                              │
-  │       id: 'meeting-ended',                                                                                                                                                                                        │
-  │       attributes: {                                                                                                                                                                                               │
-  │         meeting: {                                                                                                                                                                                                │
-  │           'internal-meeting-id': 'b070c2de30140b9f77b7fa2318de762112e592c5-1725451345612',                                                                                                                        │
-  │           'external-meeting-id': 'be587b9d-1846-491c-a59c-4a1bb1ecf5e8'                                                                                                                                           │
-  │         }                                                                                                                                                                                                         │
-  │       },                                                                                                                                                                                                          │
-  │       event: {                                                                                                                                                                                                    │
-  │         ts: 1725451705451                                                                                                                                                                                         │
-  │       }                                                                                                                                                                                                           │
-  │     }
+        {
+          type: 'event',
+          id: 'meeting-ended',
+          attributes: {
+            meeting: {
+              'internal-meeting-id': 'b070c2de30140b9f77b7fa2318de762112e592c5-1725451345612',
+              'external-meeting-id': 'be587b9d-1846-491c-a59c-4a1bb1ecf5e8',
+            },
+          },
+          event: {
+            ts: 1725451705451,
+          },
+        }
         */
         logger.debug('webhook', 'meeting-ended')
         break
       case 'user-joined':
         /*
-        {                                                                                                                                                                                                       │
-  │       type: 'event',                                                                                                                                                                                              │
-  │       id: 'user-joined',                                                                                                                                                                                          │
-  │       attributes: {                                                                                                                                                                                               │
-  │         meeting: {                                                                                                                                                                                                │
-  │           'internal-meeting-id': 'b070c2de30140b9f77b7fa2318de762112e592c5-1725451345612',                                                                                                                        │
-  │           'external-meeting-id': 'be587b9d-1846-491c-a59c-4a1bb1ecf5e8'                                                                                                                                           │
-  │         },                                                                                                                                                                                                        │
-  │         user: {                                                                                                                                                                                                   │
-  │           'internal-user-id': 'w_82pliky3pdaf',                                                                                                                                                                   │
-  │           'external-user-id': 'w_82pliky3pdaf',                                                                                                                                                                   │
-  │           name: 'authentik Default Admin',                                                                                                                                                                        │
-  │           role: 'MODERATOR',                                                                                                                                                                                      │
-  │           presenter: false                                                                                                                                                                                        │
-  │         }                                                                                                                                                                                                         │
-  │       },                                                                                                                                                                                                          │
-  │       event: {                                                                                                                                                                                                    │
-  │         ts: 1725451622572                                                                                                                                                                                         │
-  │       }                                                                                                                                                                                                           │
-  │     }
+        {
+          type: 'event',
+          id: 'user-joined',
+          attributes: {
+            meeting: {
+              'internal-meeting-id': 'b070c2de30140b9f77b7fa2318de762112e592c5-1725451345612',
+              'external-meeting-id': 'be587b9d-1846-491c-a59c-4a1bb1ecf5e8',
+            },
+            user: {
+              'internal-user-id': 'w_82pliky3pdaf',
+              'external-user-id': 'w_82pliky3pdaf',
+              name: 'authentik Default Admin',
+              role: 'MODERATOR',
+              presenter: false,
+            },
+          },
+          event: {
+            ts: 1725451622572,
+          },
+        }
         */
         logger.debug('webhook', 'user-joined')
         break
       case 'user-left':
         /*
-        {                                                                                                                                                                                                       │
-  │       type: 'event',                                                                                                                                                                                              │
-  │       id: 'user-left',                                                                                                                                                                                            │
-  │       attributes: {                                                                                                                                                                                               │
-  │         meeting: {                                                                                                                                                                                                │
-  │           'internal-meeting-id': 'b070c2de30140b9f77b7fa2318de762112e592c5-1725451136950',                                                                                                                        │
-  │           'external-meeting-id': 'be587b9d-1846-491c-a59c-4a1bb1ecf5e8'                                                                                                                                           │
-  │         },                                                                                                                                                                                                        │
-  │         user: {                                                                                                                                                                                                   │
-  │           'internal-user-id': 'w_t8tu7qjwy5fg',                                                                                                                                                                   │
-  │           'external-user-id': 'w_t8tu7qjwy5fg'                                                                                                                                                                    │
-  │         }                                                                                                                                                                                                         │
-  │       },                                                                                                                                                                                                          │
-  │       event: {                                                                                                                                                                                                    │
-  │         ts: 1725451221971                                                                                                                                                                                         │
-  │       }                                                                                                                                                                                                           │
-  │     }
-        */
+        {
+          type: 'event',
+          id: 'user-left',
+          attributes: {
+            meeting: {
+              'internal-meeting-id': 'b070c2de30140b9f77b7fa2318de762112e592c5-1725451136950',
+              'external-meeting-id': 'be587b9d-1846-491c-a59c-4a1bb1ecf5e8',
+            },
+            user: {
+              'internal-user-id': 'w_t8tu7qjwy5fg',
+              'external-user-id': 'w_t8tu7qjwy5fg',
+            },
+          },
+          event: {
+            ts: 1725451221971,
+          },
+        }
+       */
         logger.debug('webhook', 'user-left')
         break
       default:

@@ -478,7 +478,7 @@ describe('handleWebhook', () => {
       const req = {
         headers: { rawBody: 'Body' },
         query: { checksum: 'ef21dc772f12e380e71e929756e05f2a320aa84a' },
-        body: { event: '{}', timestamp: 1724836968 },
+        body: { event: '[{"data": {}}]', timestamp: 1724836968 },
       }
       handleWebhook(req as unknown as Request)
 
@@ -486,7 +486,7 @@ describe('handleWebhook', () => {
       expect(logger.debug).toHaveBeenCalledWith(
         'webhook received',
         new Date('2024-08-28T09:22:48.000Z'),
-        {},
+        [{ data: {} }],
       )
     })
   })
@@ -542,6 +542,177 @@ describe('handleWebhook', () => {
       expect(logger.error).toHaveBeenCalledWith(
         'Webhook bearer header received "(Bearer InvalidSecret)" does not match bbb shared secret configured',
       )
+    })
+  })
+
+  describe('event meeting-created', () => {
+    it('logs webhook meeting-created', () => {
+      const event = {
+        type: 'event',
+        id: 'meeting-created',
+        attributes: {
+          meeting: {
+            'internal-meeting-id': 'b070c2de30140b9f77b7fa2318de762112e592c5-1725451926427',
+            'external-meeting-id': 'be587b9d-1846-491c-a59c-4a1bb1ecf5e8',
+            name: 'Test',
+            'is-breakout': false,
+            duration: 0,
+            'create-time': 1725451926427,
+            'create-date': 'Wed Sep 04 12:12:06 UTC 2024',
+            'moderator-pass': '8w0BAHHH',
+            'viewer-pass': 'HxsFc4Z9',
+            record: false,
+            'voice-conf': '51484',
+            'dial-number': '613-555-1234',
+            'max-users': 0,
+            metadata: {},
+          },
+        },
+        event: {
+          ts: 1725451926429,
+        },
+      }
+      const req = {
+        headers: { rawBody: 'Body' },
+        query: { checksum: 'ef21dc772f12e380e71e929756e05f2a320aa84a' },
+        body: {
+          event: `[{"data": ${JSON.stringify(event)}}]`,
+          timestamp: 1724836968,
+        },
+      }
+      handleWebhook(req as unknown as Request)
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.debug).toHaveBeenCalledWith(
+        'webhook received',
+        new Date('2024-08-28T09:22:48.000Z'),
+        [{ data: event }],
+      )
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.debug).toHaveBeenCalledWith('webhook', 'meeting-created')
+    })
+  })
+
+  describe('event meeting-ended', () => {
+    it('logs webhook meeting-ended', () => {
+      const event = {
+        type: 'event',
+        id: 'meeting-ended',
+        attributes: {
+          meeting: {
+            'internal-meeting-id': 'b070c2de30140b9f77b7fa2318de762112e592c5-1725451345612',
+            'external-meeting-id': 'be587b9d-1846-491c-a59c-4a1bb1ecf5e8',
+          },
+        },
+        event: {
+          ts: 1725451705451,
+        },
+      }
+      const req = {
+        headers: { rawBody: 'Body' },
+        query: { checksum: 'ef21dc772f12e380e71e929756e05f2a320aa84a' },
+        body: {
+          event: `[{"data": ${JSON.stringify(event)}}]`,
+          timestamp: 1724836968,
+        },
+      }
+      handleWebhook(req as unknown as Request)
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.debug).toHaveBeenCalledWith(
+        'webhook received',
+        new Date('2024-08-28T09:22:48.000Z'),
+        [{ data: event }],
+      )
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.debug).toHaveBeenCalledWith('webhook', 'meeting-ended')
+    })
+  })
+
+  describe('event user-joined', () => {
+    it('logs webhook user-joined', () => {
+      const event = {
+        type: 'event',
+        id: 'user-joined',
+        attributes: {
+          meeting: {
+            'internal-meeting-id': 'b070c2de30140b9f77b7fa2318de762112e592c5-1725451345612',
+            'external-meeting-id': 'be587b9d-1846-491c-a59c-4a1bb1ecf5e8',
+          },
+          user: {
+            'internal-user-id': 'w_82pliky3pdaf',
+            'external-user-id': 'w_82pliky3pdaf',
+            name: 'authentik Default Admin',
+            role: 'MODERATOR',
+            presenter: false,
+          },
+        },
+        event: {
+          ts: 1725451622572,
+        },
+      }
+      const req = {
+        headers: { rawBody: 'Body' },
+        query: { checksum: 'ef21dc772f12e380e71e929756e05f2a320aa84a' },
+        body: {
+          event: `[{"data": ${JSON.stringify(event)}}]`,
+          timestamp: 1724836968,
+        },
+      }
+      handleWebhook(req as unknown as Request)
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.debug).toHaveBeenCalledWith(
+        'webhook received',
+        new Date('2024-08-28T09:22:48.000Z'),
+        [{ data: event }],
+      )
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.debug).toHaveBeenCalledWith('webhook', 'user-joined')
+    })
+  })
+
+  describe('event user-left', () => {
+    it('logs webhook user-left', () => {
+      const event = {
+        type: 'event',
+        id: 'user-left',
+        attributes: {
+          meeting: {
+            'internal-meeting-id': 'b070c2de30140b9f77b7fa2318de762112e592c5-1725451136950',
+            'external-meeting-id': 'be587b9d-1846-491c-a59c-4a1bb1ecf5e8',
+          },
+          user: {
+            'internal-user-id': 'w_t8tu7qjwy5fg',
+            'external-user-id': 'w_t8tu7qjwy5fg',
+          },
+        },
+        event: {
+          ts: 1725451221971,
+        },
+      }
+      const req = {
+        headers: { rawBody: 'Body' },
+        query: { checksum: 'ef21dc772f12e380e71e929756e05f2a320aa84a' },
+        body: {
+          event: `[{"data": ${JSON.stringify(event)}}]`,
+          timestamp: 1724836968,
+        },
+      }
+      handleWebhook(req as unknown as Request)
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.debug).toHaveBeenCalledWith(
+        'webhook received',
+        new Date('2024-08-28T09:22:48.000Z'),
+        [{ data: event }],
+      )
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.debug).toHaveBeenCalledWith('webhook', 'user-left')
     })
   })
 })
