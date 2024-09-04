@@ -1,11 +1,16 @@
 <template>
   <DefaultLayout>
-    <div class="container">
-      <EmbeddedTable v-if="errorMessage === null" :url="tableUrl" @table-closed="onTableClosed" />
-      <div v-else class="test-not-found">
-        {{ $t('table.notFound') }}
+    <template #dream-mall-button="{ close }">
+      <TableSettings ref="tableSetupRef" @close="close" />
+    </template>
+    <template #default>
+      <div class="container">
+        <EmbeddedTable v-if="errorMessage === null" :url="tableUrl" @table-closed="onTableClosed" />
+        <div v-else class="test-not-found">
+          {{ $t('table.notFound') }}
+        </div>
       </div>
-    </div>
+    </template>
   </DefaultLayout>
 </template>
 
@@ -19,6 +24,7 @@ import { usePageContext } from '#context/usePageContext'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { joinTableQuery } from '#queries/joinTableQuery'
+import TableSettings from '#src/panels/dreammall/TableSettings.vue'
 
 const tableUrl = ref<string | null>(null)
 
