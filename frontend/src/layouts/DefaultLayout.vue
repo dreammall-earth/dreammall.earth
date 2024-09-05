@@ -59,9 +59,13 @@
         :class="[visibleDrawer === 'dream-mall-button' ? 'menu-triangle--turned' : '']"
         :src="Triangle"
       />
-      <slot name="dream-mall-button" :close="toggleButtonList">
-        <TableSetup v-if="mode === 'setup'" ref="tableSetupRef" @close="toggleButtonList" />
-        <TableJoin v-if="mode === 'join'" @close="toggleButtonList" />
+      <slot name="dream-mall-button" :close="() => toggleDrawer('dream-mall-button')">
+        <TableSetup
+          v-if="mode === 'setup'"
+          ref="tableSetupRef"
+          @close="() => toggleDrawer('dream-mall-button')"
+        />
+        <TableJoin v-if="mode === 'join'" @close="() => toggleDrawer('dream-mall-button')" />
       </slot>
     </div>
 
