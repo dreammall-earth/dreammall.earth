@@ -8,6 +8,7 @@ import express, { json, urlencoded } from 'express'
 import { useServer } from 'graphql-ws/lib/use/ws'
 import { WebSocketServer } from 'ws'
 
+import { handleWebhook } from '#api/BBB'
 import { schema } from '#graphql/schema'
 import { context } from '#src/context'
 
@@ -47,6 +48,26 @@ export const createTestServer = async () => {
 export async function listen(port: number) {
   const app = express()
 
+  // Setup
+  app.use(json())
+  app.use(
+    urlencoded({
+      extended: true,
+      verify: (req, res, buf) => {
+        req.headers.rawBody = buf.toString()
+      },
+    }),
+  )
+  app.use(cors<cors.CorsRequest>())
+
+  // BBB Webhooks
+  app.post('/bbb-webhook', function requestHandler(req, res) {
+    res.status(200)
+    res.end('Webhook received')
+    handleWebhook(req)
+  })
+
+  // Websocket + Apollo
   const httpServer = createHttpServer(app)
 
   const wsServer = new WebSocketServer({
@@ -59,11 +80,6 @@ export async function listen(port: number) {
   const apolloServer = await createServer(true, httpServer, serverCleanup)
 
   await apolloServer.start()
-
-  app.use(json())
-  app.use(urlencoded({ extended: true }))
-
-  app.use(cors<cors.CorsRequest>())
 
   app.use(expressMiddleware(apolloServer, { context }))
 

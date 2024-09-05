@@ -24,6 +24,7 @@ export const addChecksumParam = (
     const checksumParams = querystring
       .stringify(config.params as ParsedUrlQueryInput | undefined)
       .replace(/%20/g, '+')
+      .replace(/%3A/g, ':')
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     config.params = {
       ...config.params,
