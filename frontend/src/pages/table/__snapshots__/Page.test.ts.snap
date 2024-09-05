@@ -684,7 +684,7 @@ exports[`Table Page > renders 1`] = `
                   >
                     
                     <div
-                      class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm bg-primary"
+                      class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm"
                       data-v-607bdd70=""
                       style="width: 44px; height: 44px;"
                     >
@@ -1671,6 +1671,7 @@ exports[`Table Page > renders 1`] = `
           <!---->
         </div>
         
+        
         <div
           class="step-header"
           data-v-fe0c4e23=""
@@ -1689,7 +1690,7 @@ exports[`Table Page > renders 1`] = `
               class="text-h6"
               data-v-fe0c4e23=""
             >
-              Mall Talk
+              Mein Tisch
             </h2>
           </div>
           <div
@@ -1729,45 +1730,146 @@ exports[`Table Page > renders 1`] = `
             </button>
           </div>
         </div>
-        <button
-          class="v-btn v-btn--elevated v-theme--light v-btn--density-default elevation-0 v-btn--rounded v-btn--size-default v-btn--variant-elevated custom-green-btn mb-5"
-          data-v-ea088446=""
-          my-table-settings="[object Object]"
-          submit-text="Weiter"
-          type="button"
+        <div
+          class="flat-text-field d-flex flex-column align-center pa-4 w-100"
         >
-          
-          <span
-            class="v-btn__overlay"
-          />
-          <span
-            class="v-btn__underlay"
-          />
-          
-          <span
-            class="v-btn__prepend"
+          <div
+            class="v-row v-row--no-gutters"
           >
-            <i
-              aria-hidden="true"
-              class="mdi-video mdi v-icon notranslate v-theme--light v-icon--size-default"
+            <div
+              class="v-col v-col-12"
+            >
+              <div
+                class="v-btn-group v-btn-group--divided v-theme--light v-btn-group--density-default rounded-lg"
+              >
+                <button
+                  class="v-btn v-btn--flat v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-outlined px-6"
+                  style="height: auto;"
+                  type="button"
+                >
+                  
+                  <span
+                    class="v-btn__overlay"
+                  />
+                  <span
+                    class="v-btn__underlay"
+                  />
+                  
+                  <!---->
+                  <span
+                    class="v-btn__content"
+                    data-no-activator=""
+                  >
+                    
+                    
+                    <i
+                      aria-hidden="true"
+                      class="mdi-link mdi v-icon notranslate v-theme--light v-icon--size-default mr-2"
+                    />
+                     $t('dream-mall-panel.call.link')
+                    
+                    
+                  </span>
+                  <!---->
+                  <!---->
+                </button>
+                <button
+                  class="v-btn v-btn--flat v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-outlined px-6"
+                  style="height: auto;"
+                  type="button"
+                >
+                  
+                  <span
+                    class="v-btn__overlay"
+                  />
+                  <span
+                    class="v-btn__underlay"
+                  />
+                  
+                  <!---->
+                  <span
+                    class="v-btn__content"
+                    data-no-activator=""
+                  >
+                    
+                    
+                    <i
+                      aria-hidden="true"
+                      class="mdi-pencil mdi v-icon notranslate v-theme--light v-icon--size-default mr-2"
+                    />
+                     $t('dream-mall-panel.call.edit')
+                    
+                    
+                  </span>
+                  <!---->
+                  <!---->
+                </button>
+                <button
+                  class="v-btn v-btn--flat v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-outlined px-6"
+                  style="height: auto;"
+                  type="button"
+                >
+                  
+                  <span
+                    class="v-btn__overlay"
+                  />
+                  <span
+                    class="v-btn__underlay"
+                  />
+                  
+                  <!---->
+                  <span
+                    class="v-btn__content"
+                    data-no-activator=""
+                  >
+                    
+                    
+                    <i
+                      aria-hidden="true"
+                      class="mdi-account-plus mdi v-icon notranslate v-theme--light v-icon--size-default mr-2"
+                    />
+                     $t('dream-mall-panel.call.add-user')
+                    
+                    
+                  </span>
+                  <!---->
+                  <!---->
+                </button>
+              </div>
+            </div>
+          </div>
+          <button
+            class="v-btn v-btn--disabled v-theme--light v-btn--density-default elevation-0 v-btn--rounded v-btn--size-default v-btn--variant-elevated custom-green-btn mt-12 mb-5"
+            data-v-ea088446=""
+            disabled=""
+            style="background-color: #F44336; color: #fff; caret-color: #fff;"
+            type="button"
+          >
+            
+            <span
+              class="v-btn__overlay"
             />
-          </span>
-          <span
-            class="v-btn__content"
-            data-no-activator=""
-          >
+            <span
+              class="v-btn__underlay"
+            />
             
-            
-            $t('dream-mall-panel.setup.table-creation')
-            
-            
-          </span>
-          <!---->
-          <!---->
-        </button>
+            <!---->
+            <span
+              class="v-btn__content"
+              data-no-activator=""
+            >
+              
+              
+              $t('dream-mall-panel.call.leave-table')
+              
+              
+            </span>
+            <!---->
+            <!---->
+          </button>
+        </div>
         
-        <!--v-if-->
-        <!--v-if-->
+        
       </div>
       <div
         class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none"
@@ -2289,13 +2391,13 @@ exports[`Table Page > renders 1`] = `
         <button
           aria-expanded="false"
           aria-haspopup="menu"
-          aria-owns="v-menu-7"
+          aria-owns="v-menu-10"
           class="mx-auto user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
           data-v-607bdd70=""
         >
           
           <div
-            class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm bg-primary"
+            class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm"
             data-v-607bdd70=""
             style="width: 44px; height: 44px;"
           >

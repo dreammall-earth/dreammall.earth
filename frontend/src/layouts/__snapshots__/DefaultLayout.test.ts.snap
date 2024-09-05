@@ -683,7 +683,7 @@ exports[`DefaultLayout > renders 1`] = `
                   >
                     
                     <div
-                      class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm bg-primary"
+                      class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm"
                       data-v-607bdd70=""
                       style="width: 44px; height: 44px;"
                     >
@@ -1654,6 +1654,7 @@ exports[`DefaultLayout > renders 1`] = `
           <!---->
         </div>
         
+        
         <div
           class="step-header"
           data-v-fe0c4e23=""
@@ -1750,7 +1751,7 @@ exports[`DefaultLayout > renders 1`] = `
         </button>
         
         <!--v-if-->
-        <!--v-if-->
+        
       </div>
       <div
         class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none"
@@ -2278,7 +2279,7 @@ exports[`DefaultLayout > renders 1`] = `
         >
           
           <div
-            class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm bg-primary"
+            class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm"
             data-v-607bdd70=""
             style="width: 44px; height: 44px;"
           >

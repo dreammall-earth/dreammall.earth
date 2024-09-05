@@ -59,16 +59,10 @@
         :class="[visibleDrawer === 'dream-mall-button' ? 'menu-triangle--turned' : '']"
         :src="Triangle"
       />
-      <TableSetup
-        v-if="getMode() === 'setup'"
-        ref="tableSetupRef"
-        @close="() => toggleDrawer('dream-mall-button')"
-      />
-      <TableJoin v-if="getMode() === 'join'" @close="() => toggleDrawer('dream-mall-button')" />
-      <TableSettings
-        v-if="getMode() === 'table'"
-        @close="() => toggleDrawer('dream-mall-button')"
-      />
+      <slot name="dream-mall-button" :close="toggleButtonList">
+        <TableSetup v-if="mode === 'setup'" ref="tableSetupRef" @close="toggleButtonList" />
+        <TableJoin v-if="mode === 'join'" @close="toggleButtonList" />
+      </slot>
     </div>
 
     <div class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none">
@@ -91,7 +85,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { ref, watch } from 'vue'
 
 import Divider from '#assets/img/divider.svg'
 import Triangle from '#assets/img/triangle.svg'
@@ -104,7 +98,6 @@ import TabControl from '#components/menu/TabControl.vue'
 import UserInfo from '#components/menu/UserInfo.vue'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
 import TableJoin from '#src/panels/dreammall/TableJoin.vue'
-import TableSettings from '#src/panels/dreammall/TableSettings.vue'
 import TableSetup from '#src/panels/dreammall/TableSetup.vue'
 import { useUserStore } from '#stores/userStore'
 
@@ -131,12 +124,15 @@ const toggleDrawer = (drawer: DrawerType) => {
 
 const userStore = useUserStore()
 
-const getMode = () => {
-  if (typeof window !== 'undefined' && window.location.pathname.includes('/table/')) {
-    return 'table'
-  }
-  return userStore.getMyTable?.id ? 'join' : 'setup'
-}
+type Mode = 'setup' | 'join'
+const mode = ref<Mode>(userStore.getMyTable?.id ? 'join' : 'setup')
+
+watch(
+  () => userStore.getMyTable?.id,
+  (id: number) => {
+    mode.value = id ? 'join' : 'setup'
+  },
+)
 </script>
 
 <style scoped lang="scss">
@@ -179,9 +175,7 @@ const getMode = () => {
   align-items: center;
   justify-content: center;
   height: 120px;
-  overflow: hidden; // hotfix until the concept of DreamMallButton is clarified!
-  background: var(--v-bottom-menu-background);
-  backdrop-filter: blur(20px);
+  background: transparent;
 }
 
 .dream-mall-button-container {
