@@ -4,6 +4,12 @@ include:
 services:
   database:
     image: mariadb:10.5
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3
     environment:
       - MARIADB_ALLOW_EMPTY_PASSWORD=1
       - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=1
@@ -39,13 +45,31 @@ services:
       context: ./backend
       target: production
     depends_on:
-      - database
-      - authentik
+      authentik: # because JWKS_URI
+        condition: service_started
+      database:
+        condition: service_started
+      migrations:
+        condition: service_completed_successfully
+
     ports:
       - 4000:4000
     environment:
       DATABASE_URL: mysql://root:@database:3306/dreammall.earth
       JWKS_URI: http://authentik:9000/application/o/dreammallearth/jwks/
+      NODE_ENV: production
+
+  migrations:
+    image: ghcr.io/dreammall-earth/dreammall.earth/backend:latest
+    command: npm run db:migrate:deploy
+    build:
+      context: ./backend
+      target: production
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: mysql://root:@database:3306/dreammall.earth
       NODE_ENV: production
 
 volumes:
