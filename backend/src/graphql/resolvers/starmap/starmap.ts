@@ -151,7 +151,6 @@ export const getMaxDistance = (x: number[]) => {
 }
 
 export const randomStarsinSector = (sectorIdx: number, count: number): StarsInSector => {
-  const time = new Date().getTime()
   const starsInSector: StarsInSector = {
     sectorIdx,
     stars: [],
@@ -182,7 +181,5 @@ export const randomStarsinSector = (sectorIdx: number, count: number): StarsInSe
     azimuths.splice(azimuthMaxIdx, 0, azimuth)
     altitudes.splice(altitudeMaxIdx, 0, altitude)
   }
-  // eslint-disable-next-line no-console
-  console.log(new Date().getTime() - time)
   return starsInSector
 }
