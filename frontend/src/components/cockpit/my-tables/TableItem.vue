@@ -84,7 +84,7 @@ const deleteTable = () => {
 }
 </script>
 
-<style scoped lang="css">
+<style scoped>
 .table {
   position: relative;
   display: flex;
