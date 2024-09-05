@@ -228,7 +228,7 @@ const onWindowResize = () => {
 // Berechnet die Abmessungen des Canvas-Containers basierend auf der Fenstergröße
 const getDimensions = (): { width: number; height: number } => ({
   width: window.innerWidth,
-  height: window.innerHeight - 136, // Sollte 85px in der mobilen Ansicht, 136px auf dem Desktop sein
+  height: window.innerHeight, // Sollte 85px in der mobilen Ansicht, 136px auf dem Desktop sein
 })
 
 // Startet die Initialisierung der Szene, sobald die Komponente gemountet ist
@@ -244,9 +244,14 @@ onMounted(() => {
 .canvas-container {
   --bottom-height: 136px;
 
-  position: relative;
-  width: 100%;
-  height: calc(100vh - var(--v-layout-top) - var(--bottom-height));
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+
+  // Todo: Remove after we are sure we want to keep it full screen.
+  // height: calc(100vh - var(--v-layout-top) - var(--bottom-height));
+  height: 100vh;
   overflow: hidden;
   border: none;
 }
