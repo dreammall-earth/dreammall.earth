@@ -85,7 +85,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 import Divider from '#assets/img/divider.svg'
 import Triangle from '#assets/img/triangle.svg'
