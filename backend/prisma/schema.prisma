@@ -50,7 +50,7 @@ model Event {
 
 model User {
   id                Int      @id @default(autoincrement())
-  referenceId       String   @db.VarChar(140) @unique
+  referenceId       String   @db.VarChar(140) @unique @default(dbgenerated("UPPER(LEFT(UUID(), 8))"))
   username          String   @db.VarChar(100) @unique
   name              String   @db.VarChar(254)
   introduction      String?  @db.VarChar(25)
