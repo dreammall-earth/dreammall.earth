@@ -26,7 +26,7 @@ const tablesStore = useTablesStore()
 const onSubmitUsers = async (): Promise<string | void> => {
   try {
     await tablesStore.updateMyTableUsers(tableSettings.value.users)
-    emit('submit')
+    emit('goTo', 'root')
   } catch (error) {
     GlobalErrorHandler.error('Error occurred by updating the users', error)
   }

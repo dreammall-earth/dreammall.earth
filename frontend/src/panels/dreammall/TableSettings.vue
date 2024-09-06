@@ -18,22 +18,30 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { storeToRefs } from 'pinia'
+import { reactive, watch } from 'vue'
 
 import { Step, useSteps } from '#src/panels/composables/useSteps'
 import ChangeUsers from '#src/panels/dreammall/ChangeUsers.vue'
 import MyTableSettings from '#src/panels/dreammall/interfaces/MyTableSettings'
 import TableSettingsRoot from '#src/panels/dreammall/TableSettingsRoot.vue'
 import PanelHeader from '#src/panels/PanelHeader.vue'
-import { MyTable, useUserStore } from '#stores/userStore'
+import { useUserStore } from '#stores/userStore'
 
 const userStore = useUserStore()
 
-const myTable: MyTable = userStore.getMyTable
+const { getMyTable: myTable } = storeToRefs(userStore)
+
 const tableSettings = reactive<MyTableSettings>({
-  name: myTable.name || '',
-  isPrivate: !myTable.public,
-  users: myTable.users.map((u) => u.id) || [],
+  name: myTable.value?.name || '',
+  isPrivate: !myTable.value?.public || false,
+  users: myTable.value?.users.map((u) => u.id) || [],
+})
+
+watch(myTable, (value) => {
+  tableSettings.name = value?.name || ''
+  tableSettings.isPrivate = !value?.public || false
+  tableSettings.users = value?.users.map((u) => u.id) || []
 })
 
 const steps: Step[] = [
