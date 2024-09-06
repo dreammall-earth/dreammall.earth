@@ -113,6 +113,7 @@ export class SocialMedia {
 export class CurrentUser {
   constructor(user: UserWithProfile, users: UsersWithMeetings[]) {
     this.id = user.id
+    this.referenceId = user.referenceId
     this.username = user.username
     this.name = user.name
     this.introduction = user.introduction
@@ -125,6 +126,9 @@ export class CurrentUser {
 
   @Field(() => Int)
   id: number
+
+  @Field()
+  referenceId: string
 
   @Field()
   username: string
