@@ -101,7 +101,7 @@ export const useTablesStore = defineStore(
     const { mutate: joinMyTableMutate } = useMutation<JoinMyTableResult>(joinMyTableMutation)
 
     const createMyTable = async (name: string, isPublic: boolean, userIds: number[]) => {
-      const result = await createMyTableMutate({ name, isPublic, users: userIds })
+      const result = await createMyTableMutate({ name, isPublic, userIds })
       if (result?.data?.createMyTable) {
         userStore.setMyTable(result.data.createMyTable)
       }
