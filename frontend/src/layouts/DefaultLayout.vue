@@ -55,7 +55,6 @@
       />
       <slot name="dream-mall-button" :close="toggleButtonList">
         <TableSetup v-if="mode === 'setup'" ref="tableSetupRef" @close="toggleButtonList" />
-        <TableJoin v-if="mode === 'join'" @close="toggleButtonList" />
       </slot>
     </div>
 
@@ -82,14 +81,13 @@ import Divider from '#assets/img/divider.svg'
 import Triangle from '#assets/img/triangle.svg'
 import LargeDreamMallButton from '#components/buttons/LargeDreamMallButton.vue'
 import SmallDreamMallButton from '#components/buttons/SmallDreamMallButton.vue'
+import TableSetup from '#components/malltalk/setup/TableSetup.vue'
 import Circle from '#components/menu/CircleElement.vue'
 import LightDarkSwitch from '#components/menu/LightDarkSwitch.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 import TabControl from '#components/menu/TabControl.vue'
 import UserInfo from '#components/menu/UserInfo.vue'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
-import TableJoin from '#src/panels/dreammall/TableJoin.vue'
-import TableSetup from '#src/panels/dreammall/TableSetup.vue'
 import { useUserStore } from '#stores/userStore'
 
 const isTablesDrawerVisible = ref(false)
@@ -114,7 +112,7 @@ type Mode = 'setup' | 'join'
 const mode = ref<Mode>(userStore.getMyTable?.id ? 'join' : 'setup')
 
 watch(
-  () => userStore.getMyTable?.id,
+  () => userStore.getMyTable?.id || 0,
   (id: number) => {
     mode.value = id ? 'join' : 'setup'
   },

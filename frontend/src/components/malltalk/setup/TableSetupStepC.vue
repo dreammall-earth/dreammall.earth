@@ -10,10 +10,10 @@
 
 <script lang="ts" setup>
 import SimpleButton from '#components/buttons/SimpleButton.vue'
-import UserSelection from '#src/panels/components/UserSelection.vue'
-import { StepEmits, StepProps } from '#src/panels/composables/useSteps'
+import UserSelection from '#components/user-selection/UserSelection.vue'
 
-import MyTableSettings from './interfaces/MyTableSettings'
+import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
+import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
 
 const props = defineProps<StepProps>()
 const emit = defineEmits<StepEmits>()

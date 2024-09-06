@@ -37,9 +37,9 @@
 <script lang="ts" setup>
 import { ref, computed, watch } from 'vue'
 
-import UserInvitationItem from '#src/panels/components/UserInvitationItem.vue'
-import useSearchUsers from '#src/panels/composables/useSearchUsers'
-import UserInvitation from '#src/panels/dreammall/interfaces/UserInvitation'
+import UserInvitation from './UserInvitation'
+import UserInvitationItem from './UserInvitationItem.vue'
+import useSearchUsers from './useSearchUsers'
 
 const users = defineModel<number[]>({ required: true })
 

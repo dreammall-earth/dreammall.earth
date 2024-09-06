@@ -9,7 +9,7 @@
 <!--    @close="onClose"-->
 <!--  />-->
 <!--  <component-->
-<!--    :is="steps[currentStep].component"-->
+<!--    :is="steps[currentStep].component"--
 <!--    v-if="steps && currentStep < steps.length"-->
 <!--    v-bind="componentProps"-->
 <!--    v-on="componentEmits"-->

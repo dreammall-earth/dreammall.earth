@@ -13,7 +13,7 @@
 <script lang="ts" setup>
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 
-import type { StepProps, StepEmits } from '#src/panels/composables/useSteps'
+import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
 
 defineProps<StepProps>()
 const emit = defineEmits<StepEmits>()

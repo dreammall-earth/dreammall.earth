@@ -10,15 +10,6 @@ export type Step = {
   back: StepId
 }
 
-export type StepProps = {
-  submitText: string
-}
-
-export type StepEmits = {
-  (e: 'next' | 'submit'): void
-  (e: 'goTo', value: string): void
-}
-
 // const updateHistory = () => {
 // if (window?.location?.href == null) return
 // const url = new URL(window.location.href)

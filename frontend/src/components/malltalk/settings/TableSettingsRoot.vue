@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import SimpleButton from '#components/buttons/SimpleButton.vue'
-import { StepEmits, StepProps } from '#src/panels/composables/useSteps'
+import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
 import { copyToClipboard } from '#src/utils/copyToClipboard'
 
 defineProps<StepProps>()

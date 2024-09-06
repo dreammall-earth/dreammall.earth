@@ -20,11 +20,11 @@ import { navigate } from 'vike/client/router'
 import { ref, watch } from 'vue'
 
 import EmbeddedTable from '#components/embedded-table/EmbeddedTable.vue'
+import TableSettings from '#components/malltalk/settings/TableSettings.vue'
 import { usePageContext } from '#context/usePageContext'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { joinTableQuery } from '#queries/joinTableQuery'
-import TableSettings from '#src/panels/dreammall/TableSettings.vue'
 
 const tableUrl = ref<string | null>(null)
 

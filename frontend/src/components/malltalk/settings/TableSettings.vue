@@ -1,5 +1,5 @@
 <template>
-  <PanelHeader
+  <StepHeader
     v-if="steps"
     :title="steps[currentStep]?.title ?? 'unknown'"
     :is-back-button-visible="currentStep > 0"
@@ -21,12 +21,14 @@
 import { storeToRefs } from 'pinia'
 import { reactive, watch } from 'vue'
 
-import { Step, useSteps } from '#src/panels/composables/useSteps'
-import ChangeUsers from '#src/panels/dreammall/ChangeUsers.vue'
-import MyTableSettings from '#src/panels/dreammall/interfaces/MyTableSettings'
-import TableSettingsRoot from '#src/panels/dreammall/TableSettingsRoot.vue'
-import PanelHeader from '#src/panels/PanelHeader.vue'
+import StepHeader from '#components/steps/StepHeader.vue'
+import { Step, useSteps } from '#components/steps/useSteps'
 import { useUserStore } from '#stores/userStore'
+
+import ChangeUsers from './ChangeUsers.vue'
+import TableSettingsRoot from './TableSettingsRoot.vue'
+
+import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
 
 const userStore = useUserStore()
 
@@ -72,3 +74,4 @@ const { currentStep, onNext, onBack, goTo, reset } = useSteps(steps, emit)
 reset()
 defineExpose({ reset })
 </script>
+#src/panels/dreammall-button-drawer/interfaces/MyTableSettings.js
