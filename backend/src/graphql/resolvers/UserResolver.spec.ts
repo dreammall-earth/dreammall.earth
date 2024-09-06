@@ -118,18 +118,22 @@ describe('UserResolver', () => {
               {
                 name: 'Thomas Schmitt',
                 username: 'tom',
+                referenceId: 'UQV6KSVD',
               },
               {
                 name: 'Thomas Schmidt',
                 username: 'Toms',
+                referenceId: '1ZZIRJ2I',
               },
               {
                 name: 'Tomas Schmid',
                 username: 'Schmid',
+                referenceId: 'NV44R1LR',
               },
               {
                 name: 'Tomás Schmit',
                 username: 'Schmit',
+                referenceId: 'MC0CW1MV',
               },
             ],
           })
@@ -392,6 +396,47 @@ describe('UserResolver', () => {
       })
       let userId: number | undefined
 
+      describe('User.referenceId', () => {
+        const query = `{ currentUser { id referenceId name username } }`
+
+        it('provides a unique and unchangeable reference that can be used in the "purpose" field of a bank transfer to link it to the user\'s account', async () => {
+          const referenceId = 'RENC1MCC'
+          const user = await prisma.user.create({
+            data: {
+              username: 'Some username',
+              name: 'Some name',
+              referenceId,
+            },
+            include: {
+              meeting: true,
+              userDetail: true,
+              socialMedia: true,
+            },
+          })
+          const response = await testServer.executeOperation(
+            { query },
+            { contextValue: { user, dataSources: { prisma } } },
+          )
+          expect(response).toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  currentUser: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    referenceId: 'RENC1MCC',
+                    name: 'Some name',
+                    username: 'Some username',
+                  },
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+      })
+
       describe('no table', () => {
         it('returns the user without table', async () => {
           userId = user?.id
@@ -491,6 +536,7 @@ describe('UserResolver', () => {
             data: {
               username: 'bibi',
               name: 'Bibi Bloxberg',
+              referenceId: 'BAN2ZWXV',
             },
           })
 
@@ -498,6 +544,7 @@ describe('UserResolver', () => {
             data: {
               username: 'peter',
               name: 'Peter Lustig',
+              referenceId: 'Q31R9L35',
             },
           })
 
@@ -691,6 +738,8 @@ describe('UserResolver', () => {
         ).resolves.toEqual({
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           id: expect.any(Number),
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          referenceId: expect.any(String),
           username: 'mockedUser',
           name: 'User',
           introduction: null,
@@ -760,6 +809,8 @@ describe('UserResolver', () => {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
             username: 'mockedUser',
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            referenceId: expect.any(String),
             name: 'Peter Lustig',
             introduction: 'Latzhose und Nickelbrille',
             availability: 'busy',
@@ -875,6 +926,8 @@ describe('UserResolver', () => {
           ).resolves.toEqual({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            referenceId: expect.any(String),
             name: 'Bibi Bloxberg',
             username: 'mockedUser',
             introduction: 'Latzhose und Nickelbrille',
@@ -955,6 +1008,8 @@ describe('UserResolver', () => {
           ).resolves.toEqual({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            referenceId: expect.any(String),
             name: 'User',
             username: 'mockedUser',
             introduction: 'Make me null',
@@ -973,6 +1028,8 @@ describe('UserResolver', () => {
           ).resolves.toEqual({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            referenceId: expect.any(String),
             name: 'Bibi Bloxberg',
             username: 'mockedUser',
             introduction: null,
