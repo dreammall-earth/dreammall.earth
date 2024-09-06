@@ -346,10 +346,12 @@ describe('TableResolver', () => {
     let user: UserWithProfile
     let bibiUser: UserWithProfile
     let peterUser: UserWithProfile
+    let raeuberUser: UserWithProfile
     beforeAll(async () => {
       user = await findOrCreateUser({ nickname, name })
       bibiUser = await findOrCreateUser({ nickname: 'bibi', name: 'Bibi Bloxberg' })
       peterUser = await findOrCreateUser({ nickname: 'peter', name: 'Peter Lustig' })
+      raeuberUser = await findOrCreateUser({ nickname: 'raeuber', name: 'Räuber Hotzenplotz' })
     })
 
     describe('createMyTable', () => {
@@ -451,6 +453,15 @@ describe('TableResolver', () => {
               involvedEmail: null,
               type: 'CREATE_USER',
               involvedUserId: peterUser.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_USER',
+              involvedUserId: raeuberUser.id,
             },
             {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -707,6 +718,15 @@ describe('TableResolver', () => {
               involvedEmail: null,
               type: 'CREATE_USER',
               involvedUserId: peterUser.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_USER',
+              involvedUserId: raeuberUser.id,
             },
             {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -1104,6 +1124,15 @@ describe('TableResolver', () => {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               createdAt: expect.any(Date),
               involvedEmail: null,
+              type: 'CREATE_USER',
+              involvedUserId: raeuberUser.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
               type: 'CREATE_MY_TABLE',
               involvedUserId: user?.id,
             },
@@ -1196,6 +1225,51 @@ describe('TableResolver', () => {
                     message: 'Meeting already exists!',
                   }),
                 ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('own meeting as public', () => {
+        it('returns table with users', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query: createTableMutation,
+                variables: {
+                  name: 'Own Group Table',
+                  isPublic: false,
+                },
+              },
+              {
+                contextValue: {
+                  user,
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  createTable: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    name: 'Own Group Table',
+                    public: false,
+                    users: [
+                      {
+                        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                        id: expect.any(Number),
+                        name: user.name,
+                        role: 'MODERATOR',
+                      },
+                    ],
+                  },
+                },
+                errors: undefined,
               },
             },
           })
@@ -1298,24 +1372,25 @@ describe('TableResolver', () => {
       })
 
       describe('table in DB', () => {
-        afterEach(async () => {
-          await prisma.usersInMeetings.deleteMany()
-          await prisma.meeting.deleteMany()
-        })
-
         let tableId: number
 
-        describe('current user does not own the table', () => {
-          beforeEach(async () => {
+        beforeAll(async () => {
+          await prisma.usersInMeetings.deleteMany()
+          await prisma.meeting.deleteMany()
+          const meeting = await prisma.meeting.create({
+            data: {
+              name: 'Pony Ville',
+              meetingID: 'Pony Ville',
+              attendeePW: 'attendee',
+              moderatorPW: 'moderator',
+            },
+          })
+          tableId = meeting.id
+        })
+
+        describe('current user does not own the opened public table', () => {
+          beforeAll(() => {
             joinMeetingLinkMock.mockReturnValue('https://my-link')
-            const meeting = await prisma.meeting.create({
-              data: {
-                name: 'Pony Ville',
-                meetingID: 'Pony Ville',
-                attendeePW: 'attendee',
-              },
-            })
-            tableId = meeting.id
           })
 
           it('returns link to table', async () => {
@@ -1370,15 +1445,15 @@ describe('TableResolver', () => {
         })
 
         describe('current user is owner of the table', () => {
-          beforeEach(async () => {
+          beforeAll(async () => {
             joinMeetingLinkMock.mockReturnValue('https://my-link')
             createMeetingMock.mockResolvedValue({
               returncode: 'SUCCESS',
               meetingID: 'xxx',
               internalMeetingID: 'b60d121b438a380c343d5ec3c2037564b82ffef3-1715231322715',
               parentMeetingID: 'bbb-none',
-              attendeePW: 'w3VUvMcp',
-              moderatorPW: 'MyPp9Zfq',
+              attendeePW: 'attendee',
+              moderatorPW: 'moderator',
               createTime: 1718189921310,
               voiceBridge: 255,
               dialNumber: '613-555-1234',
@@ -1389,21 +1464,23 @@ describe('TableResolver', () => {
               messageKey: '',
               message: '',
             })
-            const meeting = await prisma.meeting.create({
-              data: {
-                name: 'Pony Ville',
-                meetingID: 'Pony Ville',
-                attendeePW: 'attendee',
-                moderatorPW: 'moderator',
-              },
-            })
-            tableId = meeting.id
             await prisma.user.update({
               where: {
-                username: 'mockedUser',
+                username: user.username,
               },
               data: {
                 meetingId: tableId,
+              },
+            })
+          })
+
+          afterAll(async () => {
+            await prisma.user.update({
+              where: {
+                username: user.username,
+              },
+              data: {
+                meetingId: null,
               },
             })
           })
@@ -1432,30 +1509,73 @@ describe('TableResolver', () => {
           })
         })
 
+        describe('current user is attendee of a closed public meeting', () => {
+          beforeAll(async () => {
+            await prisma.meeting.update({
+              where: {
+                id: tableId,
+              },
+              data: {
+                attendeePW: null,
+              },
+            })
+          })
+
+          afterAll(async () => {
+            await prisma.meeting.update({
+              where: {
+                id: tableId,
+              },
+              data: {
+                attendeePW: 'attendee',
+              },
+            })
+          })
+
+          it('throws an error that the meeting does not exists', async () => {
+            await expect(
+              testServer.executeOperation(
+                {
+                  query,
+                  variables: {
+                    tableId,
+                  },
+                },
+                {
+                  contextValue: {
+                    user: peterUser,
+                    dataSources: { prisma },
+                  },
+                },
+              ),
+            ).resolves.toMatchObject({
+              body: {
+                kind: 'single',
+                singleResult: {
+                  data: null,
+                  errors: [expect.objectContaining({ message: 'This meeting does not exists.' })],
+                },
+              },
+            })
+          })
+        })
+
         describe('current user is moderator of the table', () => {
-          beforeEach(async () => {
+          beforeAll(async () => {
             jest.clearAllMocks()
 
             joinMeetingLinkMock.mockReturnValue('https://my-link')
             const userIds = [user.id, bibiUser.id]
-            const meeting = await prisma.meeting.create({
-              data: {
-                meetingID: 'Pony Ville',
-                name: '',
-                attendeePW: 'attendee',
-                moderatorPW: 'moderator',
-              },
-            })
+
             for (const userId of userIds) {
               await prisma.usersInMeetings.create({
                 data: {
                   userId,
-                  meetingId: meeting.id,
+                  meetingId: tableId,
                   role: AttendeeRole.MODERATOR,
                 },
               })
             }
-            tableId = meeting.id
           })
 
           it('calls join meeting link with moderator pw', async () => {
@@ -1524,6 +1644,51 @@ describe('TableResolver', () => {
               fullName: 'Peter Lustig',
               meetingID: 'Pony Ville',
               password: 'attendee',
+            })
+          })
+        })
+
+        describe('meeting is private', () => {
+          beforeAll(async () => {
+            await prisma.meeting.update({
+              where: {
+                id: tableId,
+              },
+              data: {
+                public: false,
+              },
+            })
+          })
+
+          it('throws an exeption for an unknown user', async () => {
+            await expect(
+              testServer.executeOperation(
+                {
+                  query,
+                  variables: {
+                    tableId,
+                  },
+                },
+                {
+                  contextValue: {
+                    user: raeuberUser,
+                    dataSources: { prisma },
+                  },
+                },
+              ),
+            ).resolves.toMatchObject({
+              body: {
+                kind: 'single',
+                singleResult: {
+                  data: null,
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                  errors: expect.arrayContaining([
+                    expect.objectContaining({
+                      message: 'User has no access to meeting.',
+                    }),
+                  ]),
+                },
+              },
             })
           })
         })

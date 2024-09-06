@@ -193,15 +193,13 @@ export class TableResolver {
 
     if (!userIds) {
       userIds = []
-      if (!userIds.some((userId) => userId === user.id)) {
-        userIds.push(user.id)
-      }
+    }
+
+    if (!userIds.some((userId) => userId === user.id)) {
+      userIds.push(user.id)
     }
 
     if (userIds) {
-      if (!userIds.some((userId) => userId === user.id)) {
-        userIds.push(user.id)
-      }
       await createUsersInMeetings({ userIds, meeting: dbMeeting })
     }
     const usersInMeetings = await findUsersInMeetings(dbMeeting)
