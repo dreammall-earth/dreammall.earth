@@ -161,8 +161,8 @@ watch(
   align-items: center;
   justify-content: center;
   height: 120px;
-  background: transparent;
   overflow: hidden;
+  background: transparent;
 }
 
 .dream-mall-button-container {
