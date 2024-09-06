@@ -10,22 +10,27 @@ const seedUsers = async () => {
       {
         username: 'bibi',
         name: 'Bibi Bloxberg',
+        referenceId: faker.string.alphanumeric({ length: 8, casing: 'upper', exclude: 'O' }),
       },
       {
         username: 'peter',
         name: 'Peter Lustig',
+        referenceId: faker.string.alphanumeric({ length: 8, casing: 'upper', exclude: 'O' }),
       },
       {
         username: 'bob',
         name: 'Bob der Baumeister',
+        referenceId: faker.string.alphanumeric({ length: 8, casing: 'upper', exclude: 'O' }),
       },
       {
         username: 'raeuber',
         name: 'Räuber Hotzenplotz',
+        referenceId: faker.string.alphanumeric({ length: 8, casing: 'upper', exclude: 'O' }),
       },
       ...Array.from(new Array(100), () => ({
         name: faker.person.fullName(),
         username: faker.internet.userName(),
+        referenceId: faker.string.alphanumeric({ length: 8, casing: 'upper', exclude: 'O' }),
       })),
     ],
   })
