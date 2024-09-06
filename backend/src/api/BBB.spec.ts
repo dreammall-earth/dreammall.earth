@@ -1,19 +1,32 @@
+import { Request } from 'express'
+
 import { CONFIG } from '#config/config'
 import logger from '#src/logger'
 
-import { joinMeetingLink, getMeetings, MeetingInfo, createMeeting } from './BBB'
+import {
+  joinMeetingLink,
+  getMeetings,
+  MeetingInfo,
+  createMeeting,
+  handleWebhook,
+  registerWebhook,
+} from './BBB'
 import { axiosInstance } from './BBB/axios'
 
 // eslint-disable-next-line jest/no-untyped-mock-factory
 jest.mock('#src/logger', () => {
   return {
     error: jest.fn(),
+    debug: jest.fn(),
+    warn: jest.fn(),
+    info: jest.fn(),
   }
 })
 
 // values taken form https://docs.bigbluebutton.org/development/api/#usage
 CONFIG.BBB_SHARED_SECRET = '639259d4-9dd8-4b25-bf01-95f9567eaf4b'
 CONFIG.BBB_URL = 'https://my.url/'
+CONFIG.BBB_WEBHOOK_URL = 'http://localhost:4000/bbb-webhook'
 
 describe('joinMeetingLink', () => {
   it('returns a link to join the meeting', () => {
@@ -451,6 +464,301 @@ describe('createMeeting', () => {
       })
       // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(logger.error).toHaveBeenCalledWith('createMeeting with error', 'Aua!')
+    })
+  })
+})
+
+describe('handleWebhook', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
+  describe('with checksum success', () => {
+    it('logs webhook debug info', () => {
+      const req = {
+        headers: { rawBody: 'Body' },
+        query: { checksum: 'ef21dc772f12e380e71e929756e05f2a320aa84a' },
+        body: { event: '[{"data": {}}]', timestamp: 1724836968 },
+      }
+      handleWebhook(req as unknown as Request)
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.debug).toHaveBeenCalledWith(
+        'webhook received',
+        new Date('2024-08-28T09:22:48.000Z'),
+        [{ data: {} }],
+      )
+    })
+  })
+
+  describe('with header success', () => {
+    it('logs webhook debug info', () => {
+      const req = {
+        headers: {
+          rawBody: 'Body',
+          authorization: `Bearer ${CONFIG.BBB_SHARED_SECRET}`,
+        },
+        query: {},
+        body: { event: '{}', timestamp: 1724836968 },
+      }
+      handleWebhook(req as unknown as Request)
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.debug).toHaveBeenCalledWith(
+        'webhook received',
+        new Date('2024-08-28T09:22:48.000Z'),
+        {},
+      )
+    })
+  })
+
+  describe('with checksum error', () => {
+    it('logs checksum error', () => {
+      const req = {
+        headers: { rawBody: 'MismatchingBody' },
+        query: { checksum: 'ef21dc772f12e380e71e929756e05f2a320aa84a' },
+        body: { event: '{}', timestamp: 1724836968 },
+      }
+      handleWebhook(req as unknown as Request)
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.error).toHaveBeenCalledWith(
+        'Webhook checksum received (ef21dc772f12e380e71e929756e05f2a320aa84a) does not match calculated checksum 6f355e209efcad2aad189a9fca32cb2dcfd6ac40',
+      )
+    })
+  })
+
+  describe('with header error', () => {
+    it('logs shared secret error', () => {
+      const req = {
+        headers: {
+          rawBody: 'Body',
+          authorization: 'Bearer InvalidSecret',
+        },
+        query: {},
+        body: { event: '{}', timestamp: 1724836968 },
+      }
+      handleWebhook(req as unknown as Request)
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.error).toHaveBeenCalledWith(
+        'Webhook bearer header received "(Bearer InvalidSecret)" does not match bbb shared secret configured',
+      )
+    })
+  })
+
+  describe('event meeting-created', () => {
+    it('logs webhook meeting-created', () => {
+      const event = {
+        type: 'event',
+        id: 'meeting-created',
+        attributes: {
+          meeting: {
+            'internal-meeting-id': 'b070c2de30140b9f77b7fa2318de762112e592c5-1725451926427',
+            'external-meeting-id': 'be587b9d-1846-491c-a59c-4a1bb1ecf5e8',
+            name: 'Test',
+            'is-breakout': false,
+            duration: 0,
+            'create-time': 1725451926427,
+            'create-date': 'Wed Sep 04 12:12:06 UTC 2024',
+            'moderator-pass': '8w0BAHHH',
+            'viewer-pass': 'HxsFc4Z9',
+            record: false,
+            'voice-conf': '51484',
+            'dial-number': '613-555-1234',
+            'max-users': 0,
+            metadata: {},
+          },
+        },
+        event: {
+          ts: 1725451926429,
+        },
+      }
+      const req = {
+        headers: { rawBody: 'Body' },
+        query: { checksum: 'ef21dc772f12e380e71e929756e05f2a320aa84a' },
+        body: {
+          event: `[{"data": ${JSON.stringify(event)}}]`,
+          timestamp: 1724836968,
+        },
+      }
+      handleWebhook(req as unknown as Request)
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.debug).toHaveBeenCalledWith(
+        'webhook received',
+        new Date('2024-08-28T09:22:48.000Z'),
+        [{ data: event }],
+      )
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.debug).toHaveBeenCalledWith('webhook', 'meeting-created')
+    })
+  })
+
+  describe('event meeting-ended', () => {
+    it('logs webhook meeting-ended', () => {
+      const event = {
+        type: 'event',
+        id: 'meeting-ended',
+        attributes: {
+          meeting: {
+            'internal-meeting-id': 'b070c2de30140b9f77b7fa2318de762112e592c5-1725451345612',
+            'external-meeting-id': 'be587b9d-1846-491c-a59c-4a1bb1ecf5e8',
+          },
+        },
+        event: {
+          ts: 1725451705451,
+        },
+      }
+      const req = {
+        headers: { rawBody: 'Body' },
+        query: { checksum: 'ef21dc772f12e380e71e929756e05f2a320aa84a' },
+        body: {
+          event: `[{"data": ${JSON.stringify(event)}}]`,
+          timestamp: 1724836968,
+        },
+      }
+      handleWebhook(req as unknown as Request)
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.debug).toHaveBeenCalledWith(
+        'webhook received',
+        new Date('2024-08-28T09:22:48.000Z'),
+        [{ data: event }],
+      )
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.debug).toHaveBeenCalledWith('webhook', 'meeting-ended')
+    })
+  })
+
+  describe('event user-joined', () => {
+    it('logs webhook user-joined', () => {
+      const event = {
+        type: 'event',
+        id: 'user-joined',
+        attributes: {
+          meeting: {
+            'internal-meeting-id': 'b070c2de30140b9f77b7fa2318de762112e592c5-1725451345612',
+            'external-meeting-id': 'be587b9d-1846-491c-a59c-4a1bb1ecf5e8',
+          },
+          user: {
+            'internal-user-id': 'w_82pliky3pdaf',
+            'external-user-id': 'w_82pliky3pdaf',
+            name: 'authentik Default Admin',
+            role: 'MODERATOR',
+            presenter: false,
+          },
+        },
+        event: {
+          ts: 1725451622572,
+        },
+      }
+      const req = {
+        headers: { rawBody: 'Body' },
+        query: { checksum: 'ef21dc772f12e380e71e929756e05f2a320aa84a' },
+        body: {
+          event: `[{"data": ${JSON.stringify(event)}}]`,
+          timestamp: 1724836968,
+        },
+      }
+      handleWebhook(req as unknown as Request)
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.debug).toHaveBeenCalledWith(
+        'webhook received',
+        new Date('2024-08-28T09:22:48.000Z'),
+        [{ data: event }],
+      )
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.debug).toHaveBeenCalledWith('webhook', 'user-joined')
+    })
+  })
+
+  describe('event user-left', () => {
+    it('logs webhook user-left', () => {
+      const event = {
+        type: 'event',
+        id: 'user-left',
+        attributes: {
+          meeting: {
+            'internal-meeting-id': 'b070c2de30140b9f77b7fa2318de762112e592c5-1725451136950',
+            'external-meeting-id': 'be587b9d-1846-491c-a59c-4a1bb1ecf5e8',
+          },
+          user: {
+            'internal-user-id': 'w_t8tu7qjwy5fg',
+            'external-user-id': 'w_t8tu7qjwy5fg',
+          },
+        },
+        event: {
+          ts: 1725451221971,
+        },
+      }
+      const req = {
+        headers: { rawBody: 'Body' },
+        query: { checksum: 'ef21dc772f12e380e71e929756e05f2a320aa84a' },
+        body: {
+          event: `[{"data": ${JSON.stringify(event)}}]`,
+          timestamp: 1724836968,
+        },
+      }
+      handleWebhook(req as unknown as Request)
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.debug).toHaveBeenCalledWith(
+        'webhook received',
+        new Date('2024-08-28T09:22:48.000Z'),
+        [{ data: event }],
+      )
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.debug).toHaveBeenCalledWith('webhook', 'user-left')
+    })
+  })
+})
+
+describe('registerWebhook', () => {
+  const axiosInstanceGetSpy = jest.spyOn(axiosInstance, 'get')
+
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
+  describe('with success', () => {
+    it('returns true and logs success info', async () => {
+      axiosInstanceGetSpy.mockResolvedValue({ data: '<returncode>SUCCESS</returncode>' })
+
+      await expect(registerWebhook()).resolves.toBe(true)
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.info).toHaveBeenCalledWith('Webhook registered successfully')
+    })
+  })
+
+  describe('with error from the api', () => {
+    it('returns false and logs api error', async () => {
+      axiosInstanceGetSpy.mockResolvedValue({ data: '<returncode>FAILURE</returncode>' })
+
+      await expect(registerWebhook()).resolves.toBe(false)
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.error).toHaveBeenCalledWith(
+        'Webhook was not registered due to an error:',
+        '<returncode>FAILURE</returncode>',
+      )
+    })
+  })
+
+  describe('with no BBB_WEBHOOK_URL configured', () => {
+    it('returns false and logs warning', async () => {
+      CONFIG.BBB_WEBHOOK_URL = ''
+
+      await expect(registerWebhook()).resolves.toBe(false)
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.warn).toHaveBeenCalledWith(
+        'Webhook was not registered since BBB_WEBHOOK_URL is empty or undefined',
+      )
     })
   })
 })
