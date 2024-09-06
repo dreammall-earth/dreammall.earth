@@ -161,6 +161,7 @@ watch(
   align-items: center;
   justify-content: center;
   height: 120px;
+  overflow: hidden;
   background: transparent;
 }
 
