@@ -1655,32 +1655,32 @@ exports[`DefaultLayout > renders 1`] = `
         
         <div
           class="step-header"
-          data-v-fe0c4e23=""
+          data-v-c8879a4f=""
         >
           <div
             class="step-header__left"
-            data-v-fe0c4e23=""
+            data-v-c8879a4f=""
           >
             <!--v-if-->
           </div>
           <div
             class="step-header__middle"
-            data-v-fe0c4e23=""
+            data-v-c8879a4f=""
           >
             <h2
               class="text-h6"
-              data-v-fe0c4e23=""
+              data-v-c8879a4f=""
             >
               Mall Talk
             </h2>
           </div>
           <div
             class="step-header__right"
-            data-v-fe0c4e23=""
+            data-v-c8879a4f=""
           >
             <button
               class="v-btn v-btn--icon v-theme--light v-btn--density-default v-btn--size-small v-btn--variant-text"
-              data-v-fe0c4e23=""
+              data-v-c8879a4f=""
               type="button"
             >
               
@@ -1701,7 +1701,7 @@ exports[`DefaultLayout > renders 1`] = `
                 <i
                   aria-hidden="true"
                   class="mdi-close mdi v-icon notranslate v-theme--light v-icon--size-default"
-                  data-v-fe0c4e23=""
+                  data-v-c8879a4f=""
                 />
                 
                 
@@ -1714,7 +1714,7 @@ exports[`DefaultLayout > renders 1`] = `
         <button
           class="v-btn v-btn--elevated v-theme--light v-btn--density-default elevation-0 v-btn--rounded v-btn--size-default v-btn--variant-elevated custom-green-btn mb-5"
           data-v-ea088446=""
-          my-table-settings="[object Object]"
+          modelvalue="[object Object]"
           submit-text="Weiter"
           type="button"
         >
@@ -1748,7 +1748,6 @@ exports[`DefaultLayout > renders 1`] = `
           <!---->
         </button>
         
-        <!--v-if-->
         
       </div>
       <div
