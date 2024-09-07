@@ -397,6 +397,60 @@ describe('TableResolver', () => {
         })
       })
 
+      describe('meeting exists', () => {
+        it('creates new meeting and deletes old one', async () => {
+          const userWithMeeting = await prisma.user.findUnique({
+            where: {
+              username: nickname,
+            },
+          })
+
+          expect(userWithMeeting).not.toBeNull()
+
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          const oldMeetingID = userWithMeeting!.meetingId!
+
+          await expect(
+            testServer.executeOperation(
+              {
+                query: createMyTableMutation,
+                variables: {
+                  name: 'My Second Table',
+                  isPublic: true,
+                  userIds: [],
+                },
+              },
+              {
+                contextValue: {
+                  user,
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  createMyTable: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    name: 'My Second Table',
+                    public: true,
+                    users: [],
+                  },
+                },
+                errors: undefined,
+              },
+            },
+          })
+
+          await expect(
+            prisma.meeting.findUnique({ where: { id: oldMeetingID } }),
+          ).resolves.toBeNull()
+        })
+      })
+
       describe('private meeting', () => {
         let bibi: User | undefined
         let peter: User | undefined
@@ -467,6 +521,60 @@ describe('TableResolver', () => {
               },
             },
           })
+        })
+      })
+
+      describe('private meeting exists', () => {
+        it('creates new meeting and deletes old one', async () => {
+          const userWithMeeting = await prisma.user.findUnique({
+            where: {
+              username: nickname,
+            },
+          })
+
+          expect(userWithMeeting).not.toBeNull()
+
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          const oldMeetingID = userWithMeeting!.meetingId!
+
+          await expect(
+            testServer.executeOperation(
+              {
+                query: createMyTableMutation,
+                variables: {
+                  name: 'My Next Table',
+                  isPublic: true,
+                  userIds: [],
+                },
+              },
+              {
+                contextValue: {
+                  user,
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  createMyTable: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    name: 'My Next Table',
+                    public: true,
+                    users: [],
+                  },
+                },
+                errors: undefined,
+              },
+            },
+          })
+
+          await expect(
+            prisma.meeting.findUnique({ where: { id: oldMeetingID } }),
+          ).resolves.toBeNull()
         })
       })
     })

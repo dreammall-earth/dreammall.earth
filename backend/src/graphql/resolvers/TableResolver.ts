@@ -94,6 +94,12 @@ export class TableResolver {
     await EVENT_CREATE_MY_TABLE(user.id)
 
     if (oldMeetindID) {
+      await prisma.usersInMeetings.deleteMany({
+        where: {
+          meetingId: oldMeetindID,
+        },
+      })
+
       await prisma.meeting.delete({
         where: {
           id: oldMeetindID,
