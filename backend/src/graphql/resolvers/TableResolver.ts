@@ -199,7 +199,7 @@ export class TableResolver {
       userIds.push(user.id)
     }
 
-    if (userIds) {
+    if (userIds.length) {
       await createUsersInMeetings({ userIds, meeting: dbMeeting })
     }
     const usersInMeetings = await findUsersInMeetings(dbMeeting)
