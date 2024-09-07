@@ -1228,7 +1228,7 @@ describe('TableResolver', () => {
         })
       })
 
-      describe('own meeting as public', () => {
+      describe('public table without given users', () => {
         it('returns table with users', async () => {
           await expect(
             testServer.executeOperation(
