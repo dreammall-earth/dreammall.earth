@@ -1,34 +1,20 @@
 <template>
-  <StepHeader
-    v-if="steps"
-    :title="steps[currentStep]?.title ?? 'unknown'"
-    :is-back-button-visible="currentStep > 0"
-    :is-close-button-visible="true"
-    @back="onBack"
-    @close="() => $emit('close')"
-  />
-  <component
-    :is="steps[currentStep].component"
-    v-if="steps && currentStep < steps.length"
-    v-model="tableSettings"
-    :submit-text="steps[currentStep]?.submitText ?? 'Weiter'"
-    @next="onNext"
-    @go-to="goTo"
-  />
+  <StepControl ref="stepControl" v-model="tableSettings" :steps="steps" @close="$emit('close')" />
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { reactive, watch } from 'vue'
+import { reactive, watch, ref } from 'vue'
 
-import StepHeader from '#components/steps/StepHeader.vue'
-import { Step, useSteps } from '#components/steps/useSteps'
+import StepControl from '#components/steps/StepControl.vue'
+import { Step } from '#components/steps/useSteps'
 import { useUserStore } from '#stores/userStore'
 
 import ChangeUsers from './ChangeUsers.vue'
 import TableSettingsRoot from './TableSettingsRoot.vue'
 
 import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
+import type { ComponentExposed } from 'vue-component-type-helpers'
 
 const userStore = useUserStore()
 
@@ -65,13 +51,11 @@ const steps: Step[] = [
   },
 ]
 
-const emit = defineEmits<{
+defineEmits<{
   (e: 'close'): void
 }>()
 
-const { currentStep, onNext, onBack, goTo, reset } = useSteps(steps, emit)
+const stepControl = ref<ComponentExposed<typeof StepControl<MyTableSettings>> | null>(null)
 
-reset()
-defineExpose({ reset })
+defineExpose({ reset: () => stepControl.value?.reset() })
 </script>
-#src/panels/dreammall-button-drawer/interfaces/MyTableSettings.js

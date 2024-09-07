@@ -54,7 +54,7 @@
         :src="Triangle"
       />
       <slot name="dream-mall-button" :close="toggleButtonList">
-        <TableSetup v-if="mode === 'setup'" ref="tableSetupRef" @close="toggleButtonList" />
+        <TableSetup ref="tableSetupRef" @close="toggleButtonList" />
       </slot>
     </div>
 

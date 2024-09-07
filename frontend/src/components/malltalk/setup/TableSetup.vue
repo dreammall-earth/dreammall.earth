@@ -1,28 +1,19 @@
 <template>
-  <StepHeader
-    v-if="steps"
-    :title="steps[currentStep]?.title ?? 'unknown'"
-    :is-back-button-visible="currentStep > 0"
-    :is-close-button-visible="true"
-    @back="onBack"
-    @close="onClose"
-  />
-  <component
-    :is="steps[currentStep].component"
-    v-if="steps && currentStep < steps.length"
+  <StepControl
+    ref="stepControl"
     v-model="tableSettings"
-    :submit-text="steps[currentStep]?.submitText ?? 'Weiter'"
-    @next="onNext"
+    :steps="steps"
     @submit="onSubmit"
+    @close="() => $emit('close')"
   />
 </template>
 
 <script setup lang="ts">
 import { navigate } from 'vike/client/router'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 
-import StepHeader from '#components/steps/StepHeader.vue'
-import { Step, useSteps } from '#components/steps/useSteps'
+import StepControl from '#components/steps/StepControl.vue'
+import { Step } from '#components/steps/useSteps'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { useTablesStore } from '#stores/tablesStore'
 
@@ -32,6 +23,7 @@ import TableSetupStepC from './TableSetupStepC.vue'
 import TableSetupStepD from './TableSetupStepD.vue'
 
 import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
+import type { ComponentExposed } from 'vue-component-type-helpers'
 
 const tablesStore = useTablesStore()
 
@@ -80,8 +72,6 @@ const emit = defineEmits<{
   (e: 'close'): void
 }>()
 
-const { currentStep, onNext, onBack, reset } = useSteps(steps, emit)
-
 const onSubmit = async () => {
   try {
     const table = await tablesStore.createMyTable(
@@ -109,9 +99,7 @@ const onSubmit = async () => {
   }
 }
 
-const onClose = () => emit('close')
+const stepControl = ref<ComponentExposed<typeof StepControl<MyTableSettings>> | null>(null)
 
-reset()
-defineExpose({ reset })
+defineExpose({ reset: () => stepControl.value?.reset() })
 </script>
-#src/panels/dreammall-button-drawer/interfaces/MyTableSettings.js
