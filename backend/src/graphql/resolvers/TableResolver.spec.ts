@@ -1236,7 +1236,7 @@ describe('TableResolver', () => {
                 query: createTableMutation,
                 variables: {
                   name: 'Own Group Table',
-                  isPublic: false,
+                  isPublic: true,
                 },
               },
               {
