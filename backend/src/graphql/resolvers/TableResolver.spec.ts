@@ -1255,7 +1255,7 @@ describe('TableResolver', () => {
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     id: expect.any(Number),
                     name: 'Own Group Table',
-                    public: false,
+                    public: true,
                     users: [
                       {
                         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
