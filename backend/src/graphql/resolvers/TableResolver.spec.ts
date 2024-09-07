@@ -1229,7 +1229,7 @@ describe('TableResolver', () => {
       })
 
       describe('public table without given users', () => {
-        it('returns table with users', async () => {
+        it('returns table with creating user as moderator', async () => {
           await expect(
             testServer.executeOperation(
               {
