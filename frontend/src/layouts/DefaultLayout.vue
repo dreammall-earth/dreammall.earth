@@ -118,6 +118,16 @@ const toggleDrawer = (drawer: DrawerType) => {
     visibleDrawer.value = drawer
   }
 }
+
+const isButtonListVisible = ref(false)
+const tableSetupRef = ref<InstanceType<typeof TableSetup> | null>(null)
+
+const toggleButtonList = () => {
+  if (isButtonListVisible.value) {
+    tableSetupRef.value?.reset()
+  }
+  isButtonListVisible.value = !isButtonListVisible.value
+}
 </script>
 
 <style scoped lang="scss">
