@@ -1,5 +1,5 @@
 <template>
-  <li class="item">
+  <li class="item" :class="{ red }">
     <button class="button" @click="$emit('click')">
       <slot />
     </button>
@@ -7,6 +7,9 @@
 </template>
 
 <script lang="ts" setup>
+defineProps<{
+  red?: boolean
+}>()
 defineEmits(['click'])
 </script>
 
@@ -29,6 +32,11 @@ defineEmits(['click'])
 
     --padding-right: 4px;
   }
+}
+
+.item.red {
+  color: #f5f5f5;
+  background-color: #d02f44;
 }
 
 .button {
