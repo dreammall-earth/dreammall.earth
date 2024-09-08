@@ -51,7 +51,7 @@
     "update": "npx npm-check-updates"
   },
   "dependencies": {
-    "@apollo/client": "^3.11.5",
+    "@apollo/client": "^3.11.8",
     "@intlify/unplugin-vue-i18n": "^4.0.0",
     "@mdi/font": "^7.4.47",
     "@tweenjs/tween.js": "^25.0.0",
@@ -59,7 +59,7 @@
     "@vue/apollo-composable": "^4.2.1",
     "@vue/apollo-option": "^4.0.0",
     "@vue/apollo-ssr": "^4.0.0",
-    "@vue/compiler-sfc": "^3.4.35",
+    "@vue/compiler-sfc": "^3.5.3",
     "@vue/server-renderer": "3.4.35",
     "compression": "^1.7.4",
     "cookie": "^0.6.0",
@@ -78,7 +78,7 @@
     "vite-svg-loader": "^5.1.0",
     "vue": "3.4.35",
     "vue-i18n": "9.13.0",
-    "vue3-toastify": "^0.2.2",
+    "vue3-toastify": "^0.2.3",
     "vuetify": "^3.7.0",
     "ws": "^8.18.0"
   },
@@ -139,7 +139,7 @@
     "ts-node": "^10.9.2",
     "tsx": "^4.15.7",
     "typescript": "^5.5.4",
-    "vite-plugin-checker": "^0.7.2",
+    "vite-plugin-checker": "^0.8.0",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-vuetify": "^2.0.3",
     "vitest": "^2.0.4",
