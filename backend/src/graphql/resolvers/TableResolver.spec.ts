@@ -398,13 +398,24 @@ describe('TableResolver', () => {
       })
 
       describe('meeting exists', () => {
-        it('throws meeting exists error', async () => {
+        it('creates new meeting and deletes old one', async () => {
+          const userWithMeeting = await prisma.user.findUnique({
+            where: {
+              username: nickname,
+            },
+          })
+
+          expect(userWithMeeting).not.toBeNull()
+
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          const oldMeetingID = userWithMeeting!.meetingId!
+
           await expect(
             testServer.executeOperation(
               {
                 query: createMyTableMutation,
                 variables: {
-                  name: 'My Table',
+                  name: 'My Second Table',
                   isPublic: true,
                   userIds: [],
                 },
@@ -420,16 +431,23 @@ describe('TableResolver', () => {
             body: {
               kind: 'single',
               singleResult: {
-                data: null,
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                errors: expect.arrayContaining([
-                  expect.objectContaining({
-                    message: 'Meeting already exists!',
-                  }),
-                ]),
+                data: {
+                  createMyTable: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    name: 'My Second Table',
+                    public: true,
+                    users: [],
+                  },
+                },
+                errors: undefined,
               },
             },
           })
+
+          await expect(
+            prisma.meeting.findUnique({ where: { id: oldMeetingID } }),
+          ).resolves.toBeNull()
         })
       })
 
@@ -444,6 +462,7 @@ describe('TableResolver', () => {
             data: {
               username: 'bibi',
               name: 'Bibi Bloxberg',
+              referenceId: 'BAN2ZWXV',
             },
           })
 
@@ -451,6 +470,7 @@ describe('TableResolver', () => {
             data: {
               username: 'peter',
               name: 'Peter Lustig',
+              referenceId: 'Q31R9L35',
             },
           })
         })
@@ -501,6 +521,60 @@ describe('TableResolver', () => {
               },
             },
           })
+        })
+      })
+
+      describe('private meeting exists', () => {
+        it('creates new meeting and deletes old one', async () => {
+          const userWithMeeting = await prisma.user.findUnique({
+            where: {
+              username: nickname,
+            },
+          })
+
+          expect(userWithMeeting).not.toBeNull()
+
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          const oldMeetingID = userWithMeeting!.meetingId!
+
+          await expect(
+            testServer.executeOperation(
+              {
+                query: createMyTableMutation,
+                variables: {
+                  name: 'My Next Table',
+                  isPublic: true,
+                  userIds: [],
+                },
+              },
+              {
+                contextValue: {
+                  user,
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  createMyTable: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    name: 'My Next Table',
+                    public: true,
+                    users: [],
+                  },
+                },
+                errors: undefined,
+              },
+            },
+          })
+
+          await expect(
+            prisma.meeting.findUnique({ where: { id: oldMeetingID } }),
+          ).resolves.toBeNull()
         })
       })
     })
@@ -558,6 +632,7 @@ describe('TableResolver', () => {
             data: {
               username: 'bibi',
               name: 'Bibi Bloxberg',
+              referenceId: 'BAN2ZWXV',
             },
           })
 
@@ -565,6 +640,7 @@ describe('TableResolver', () => {
             data: {
               username: 'peter',
               name: 'Peter Lustig',
+              referenceId: 'Q31R9L35',
             },
           })
 
