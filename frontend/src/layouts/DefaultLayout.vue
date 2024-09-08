@@ -75,7 +75,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 
 import Divider from '#assets/img/divider.svg'
 import Triangle from '#assets/img/triangle.svg'
@@ -105,7 +105,6 @@ const toggleButtonList = () => {
   }
   isButtonListVisible.value = !isButtonListVisible.value
 }
-
 const userStore = useUserStore()
 
 type Mode = 'setup' | 'join'
