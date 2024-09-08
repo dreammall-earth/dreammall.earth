@@ -2366,7 +2366,6 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
           <!---->
         </button>
         
-        <!--v-if-->
         
       </div>
       <div

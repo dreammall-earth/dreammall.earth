@@ -59,13 +59,8 @@
         :class="[visibleDrawer === 'dream-mall-button' ? 'menu-triangle--turned' : '']"
         :src="Triangle"
       />
-      <slot name="dream-mall-button" :close="() => toggleDrawer('dream-mall-button')">
-        <TableSetup
-          v-if="mode === 'setup'"
-          ref="tableSetupRef"
-          @close="() => toggleDrawer('dream-mall-button')"
-        />
-        <TableJoin v-if="mode === 'join'" @close="() => toggleDrawer('dream-mall-button')" />
+      <slot name="dream-mall-button" :close="toggleButtonList">
+        <TableSetup ref="tableSetupRef" @close="toggleButtonList" />
       </slot>
     </div>
 
@@ -101,9 +96,7 @@ import LogoImage from '#components/menu/LogoImage.vue'
 import TabControl from '#components/menu/TabControl.vue'
 import UserInfo from '#components/menu/UserInfo.vue'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
-import TableJoin from '#src/panels/dreammall/TableJoin.vue'
 import TableSetup from '#src/panels/dreammall/TableSetup.vue'
-import { useUserStore } from '#stores/userStore'
 
 type DrawerType = 'tables' | 'dream-mall-button' | null
 
@@ -125,18 +118,6 @@ const toggleDrawer = (drawer: DrawerType) => {
     visibleDrawer.value = drawer
   }
 }
-
-const userStore = useUserStore()
-
-type Mode = 'setup' | 'join'
-const mode = ref<Mode>(userStore.getMyTable?.id ? 'join' : 'setup')
-
-watch(
-  () => userStore.getMyTable?.id,
-  (id: number) => {
-    mode.value = id ? 'join' : 'setup'
-  },
-)
 </script>
 
 <style scoped lang="scss">
@@ -179,6 +160,7 @@ watch(
   align-items: center;
   justify-content: center;
   height: 120px;
+  overflow: hidden;
   background: transparent;
 }
 

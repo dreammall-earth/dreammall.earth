@@ -1750,7 +1750,6 @@ exports[`DefaultLayout > renders 1`] = `
           <!---->
         </button>
         
-        <!--v-if-->
         
       </div>
       <div
