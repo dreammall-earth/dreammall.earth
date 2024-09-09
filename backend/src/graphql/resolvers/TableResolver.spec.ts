@@ -1726,7 +1726,7 @@ describe('TableResolver', () => {
               {
                 query,
                 variables: {
-                  tableId: 25,
+                  tableId: -1,
                 },
               },
               {
