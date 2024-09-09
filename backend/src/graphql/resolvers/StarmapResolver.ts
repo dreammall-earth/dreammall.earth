@@ -1,12 +1,92 @@
 import { Resolver, Query, Authorized } from 'type-graphql'
 
-import { StarMap, StarLine } from '#models/StarModel'
+import { StarMap } from '#models/StarModel'
+
+import { randomStarsinSector } from './starmap/starmap'
 
 @Resolver()
 export class StarmapResolver {
   @Authorized()
   @Query(() => StarMap)
   starmap(): StarMap {
+    return new StarMap(
+      [
+        ...randomStarsinSector(0, 512).stars.map((s, i) => ({
+          id: `s${i}`,
+          azimuth: s.azimuth,
+          altitude: s.altitude,
+          distance: 1,
+          magnitude: 1,
+          color: 1,
+        })),
+        ...randomStarsinSector(1, 256).stars.map((s, i) => ({
+          id: `s${i}`,
+          azimuth: s.azimuth,
+          altitude: s.altitude,
+          distance: 1,
+          magnitude: 1,
+          color: 1,
+        })),
+        ...randomStarsinSector(2, 256).stars.map((s, i) => ({
+          id: `s${i}`,
+          azimuth: s.azimuth,
+          altitude: s.altitude,
+          distance: 1,
+          magnitude: 1,
+          color: 1,
+        })),
+        ...randomStarsinSector(3, 256).stars.map((s, i) => ({
+          id: `s${i}`,
+          azimuth: s.azimuth,
+          altitude: s.altitude,
+          distance: 1,
+          magnitude: 1,
+          color: 1,
+        })),
+        ...randomStarsinSector(4, 256).stars.map((s, i) => ({
+          id: `s${i}`,
+          azimuth: s.azimuth,
+          altitude: s.altitude,
+          distance: 1,
+          magnitude: 1,
+          color: 1,
+        })),
+        ...randomStarsinSector(5, 128).stars.map((s, i) => ({
+          id: `s${i}`,
+          azimuth: s.azimuth,
+          altitude: s.altitude,
+          distance: 1,
+          magnitude: 1,
+          color: 1,
+        })),
+        ...randomStarsinSector(6, 128).stars.map((s, i) => ({
+          id: `s${i}`,
+          azimuth: s.azimuth,
+          altitude: s.altitude,
+          distance: 1,
+          magnitude: 1,
+          color: 1,
+        })),
+        ...randomStarsinSector(7, 128).stars.map((s, i) => ({
+          id: `s${i}`,
+          azimuth: s.azimuth,
+          altitude: s.altitude,
+          distance: 1,
+          magnitude: 1,
+          color: 1,
+        })),
+        ...randomStarsinSector(8, 128).stars.map((s, i) => ({
+          id: `s${i}`,
+          azimuth: s.azimuth,
+          altitude: s.altitude,
+          distance: 1,
+          magnitude: 1,
+          color: 1,
+        })),
+      ],
+      [],
+    )
+    /*
     return new StarMap(
       [
         {
@@ -125,5 +205,6 @@ export class StarmapResolver {
         new StarLine('s7', 's12'),
       ],
     )
+    */
   }
 }
