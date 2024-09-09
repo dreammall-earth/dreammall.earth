@@ -81,7 +81,7 @@ describe('User Store', () => {
     it('has computed getters set correctly', () => {
       expect(userStore.getCurrentUserInitials).toBe('CU')
       expect(userStore.getCurrentUserAvatar).toBeUndefined()
-      expect(userStore.getMyTable.id).toBe(0)
+      expect(userStore.getMyTable).toBeNull()
       expect(userStore.getUsersInMyTable).toBeUndefined()
     })
   })

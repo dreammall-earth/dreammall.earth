@@ -59,8 +59,8 @@
         :class="[visibleDrawer === 'dream-mall-button' ? 'menu-triangle--turned' : '']"
         :src="Triangle"
       />
-      <slot name="dream-mall-button" :close="toggleButtonList">
-        <TableSetup ref="tableSetupRef" @close="toggleButtonList" />
+      <slot name="dream-mall-button" :close="() => toggleDrawer('dream-mall-button')">
+        <TableSetup ref="tableSetupRef" @close="toggleDrawer('dream-mall-button')" />
       </slot>
     </div>
 
@@ -90,13 +90,13 @@ import Divider from '#assets/img/divider.svg'
 import Triangle from '#assets/img/triangle.svg'
 import LargeDreamMallButton from '#components/buttons/LargeDreamMallButton.vue'
 import SmallDreamMallButton from '#components/buttons/SmallDreamMallButton.vue'
+import TableSetup from '#components/malltalk/setup/TableSetup.vue'
 import Circle from '#components/menu/CircleElement.vue'
 import LightDarkSwitch from '#components/menu/LightDarkSwitch.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 import TabControl from '#components/menu/TabControl.vue'
 import UserInfo from '#components/menu/UserInfo.vue'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
-import TableSetup from '#src/panels/dreammall/TableSetup.vue'
 
 type DrawerType = 'tables' | 'dream-mall-button' | null
 
@@ -111,22 +111,17 @@ const isTablesDrawerVisible = computed({
   },
 })
 
+const tableSetupRef = ref<InstanceType<typeof TableSetup> | null>(null)
+
 const toggleDrawer = (drawer: DrawerType) => {
   if (visibleDrawer.value === drawer) {
     visibleDrawer.value = null
   } else {
     visibleDrawer.value = drawer
+    if (drawer === 'dream-mall-button') {
+      tableSetupRef.value?.reset()
+    }
   }
-}
-
-const isButtonListVisible = ref(false)
-const tableSetupRef = ref<InstanceType<typeof TableSetup> | null>(null)
-
-const toggleButtonList = () => {
-  if (isButtonListVisible.value) {
-    tableSetupRef.value?.reset()
-  }
-  isButtonListVisible.value = !isButtonListVisible.value
 }
 </script>
 

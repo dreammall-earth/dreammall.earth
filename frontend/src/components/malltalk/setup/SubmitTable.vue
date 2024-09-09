@@ -13,12 +13,12 @@
 <script lang="ts" setup>
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 
-import { TableSetupEmits, TableSetupProps } from './TableSetupProps'
+import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
 
-defineProps<TableSetupProps>()
-const emit = defineEmits<TableSetupEmits>()
+defineProps<StepProps>()
+const emit = defineEmits<StepEmits>()
 
-const onSubmit = async () => {
+const onSubmit = () => {
   emit('submit')
 }
 </script>

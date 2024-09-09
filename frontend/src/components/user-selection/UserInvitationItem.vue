@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts" setup>
-import UserInvitation from '#src/panels/dreammall/interfaces/UserInvitation'
+import type UserInvitation from './UserInvitation'
 
 const props = defineProps<{
   user: UserInvitation
@@ -66,3 +66,5 @@ const toggleInvitation = () => {
   }
 }
 </style>
+#src/panels/dreammall-button-drawer/interfaces/UserInvitation.js
+#components/malltalk/interfaces/UserInvitation.js

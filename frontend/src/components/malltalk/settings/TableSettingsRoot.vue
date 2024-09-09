@@ -7,10 +7,6 @@
             <v-icon icon="mdi-link" class="mr-2" />
             {{ $t('dream-mall-panel.call.link') }}
           </v-btn>
-          <v-btn class="px-6" @click="onClick('settings')">
-            <v-icon icon="mdi-pencil" class="mr-2" />
-            {{ $t('dream-mall-panel.call.edit') }}
-          </v-btn>
           <v-btn class="px-6" @click="onClick('users')">
             <v-icon icon="mdi-account-plus" class="mr-2" />
             {{ $t('dream-mall-panel.call.add-user') }}
@@ -29,22 +25,14 @@
 
 <script setup lang="ts">
 import SimpleButton from '#components/buttons/SimpleButton.vue'
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
-import { TableSetupEmits, TableSetupProps } from '#src/panels/dreammall/TableSetupProps'
+import { copyToClipboard } from '#src/utils/copyToClipboard'
 
-defineProps<TableSetupProps>()
-const emit = defineEmits<TableSetupEmits>()
+import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
+
+defineProps<StepProps>()
+const emit = defineEmits<StepEmits>()
 
 const onClick = (stepId: string) => {
-  emit('custom', stepId)
-}
-
-const copyToClipboard = async () => {
-  if (typeof window === 'undefined') return
-  try {
-    await navigator.clipboard.writeText(window.location.href)
-  } catch (err) {
-    GlobalErrorHandler.error('Failed to url: ', err)
-  }
+  emit('goTo', stepId)
 }
 </script>

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useSubscription } from '@vue/apollo-composable'
-import { acceptHMRUpdate, defineStore } from 'pinia'
+import { acceptHMRUpdate, defineStore, storeToRefs } from 'pinia'
 import { computed, ref, watch } from 'vue'
 
 import { createMyTableMutation } from '#mutations/createMyTableMutation'
@@ -51,8 +51,9 @@ type JoinMyTableResult = {
 export const useTablesStore = defineStore(
   'tables',
   () => {
-    const myTable = ref<MyTable | null>(null)
     const userStore = useUserStore()
+
+    const { getMyTable: myTable, currentUser } = storeToRefs(userStore)
 
     const { result: openTablesQueryResult, loading } = useQuery(
       openTablesQuery,
@@ -100,9 +101,9 @@ export const useTablesStore = defineStore(
     const { mutate: joinMyTableMutate } = useMutation<JoinMyTableResult>(joinMyTableMutation)
 
     const createMyTable = async (name: string, isPublic: boolean, userIds: number[]) => {
-      const result = await createMyTableMutate({ name, isPublic, users: userIds })
+      const result = await createMyTableMutate({ name, isPublic, userIds })
       if (result?.data?.createMyTable) {
-        myTable.value = result.data.createMyTable
+        userStore.setMyTable(result.data.createMyTable)
       }
       return result?.data?.createMyTable
     }
@@ -110,7 +111,7 @@ export const useTablesStore = defineStore(
     const updateMyTable = async (name: string, isPublic: boolean) => {
       const result = await updateMyTableMutate({ name, isPublic })
       if (result?.data?.updateMyTable) {
-        myTable.value = result.data.updateMyTable
+        userStore.setMyTable(result.data.updateMyTable)
       }
       return result?.data?.updateMyTable
     }
@@ -123,7 +124,7 @@ export const useTablesStore = defineStore(
         userIds,
       })
       if (result?.data?.updateMyTable) {
-        myTable.value = result.data.updateMyTable
+        userStore.setMyTable(result.data.updateMyTable)
       }
       return result?.data?.updateMyTable
     }
@@ -135,6 +136,8 @@ export const useTablesStore = defineStore(
 
     const existsMyTable = computed(() => myTable.value !== null)
 
+    const defaultMyTableName = computed(() => currentUser.value?.name ?? '')
+
     return {
       tables,
       setTables,
@@ -145,7 +148,7 @@ export const useTablesStore = defineStore(
       updateMyTableUsers,
       joinMyTable,
       existsMyTable,
-      defaultMyTableName: userStore.getCurrentUser?.name,
+      defaultMyTableName,
     }
   },
   {
