@@ -642,6 +642,7 @@ exports[`DefaultLayout > renders 1`] = `
                   data-v-75d0be1e=""
                 >
                   <button
+                    class="test-desktop-camera-button"
                     data-v-75d0be1e=""
                   >
                     <div
@@ -977,6 +978,7 @@ exports[`DefaultLayout > renders 1`] = `
             data-v-75d0be1e=""
             fill="none"
             height="1719"
+            is-active="false"
             viewBox="0 0 1731 1719"
             width="1731"
             xmlns="http://www.w3.org/2000/svg"
@@ -1748,7 +1750,6 @@ exports[`DefaultLayout > renders 1`] = `
           <!---->
         </button>
         
-        <!--v-if-->
         
       </div>
       <div
@@ -1756,7 +1757,7 @@ exports[`DefaultLayout > renders 1`] = `
         data-v-75d0be1e=""
       >
         <button
-          class="camera-button mx-auto"
+          class="test-mobile-camera-button camera-button mx-auto"
           data-v-75d0be1e=""
         >
           <div
