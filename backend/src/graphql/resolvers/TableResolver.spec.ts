@@ -63,6 +63,20 @@ const createTableMutation = `mutation CreateTable($isPublic: Boolean!, $name: St
   }
 }`
 
+const tablesQuery = `{
+  tables {
+    id
+    name
+    public
+    users {
+      id
+      name
+      role
+      username
+    }
+  }
+}`
+
 describe('TableResolver', () => {
   beforeAll(async () => {
     testServer = await createTestServer()
@@ -340,6 +354,32 @@ describe('TableResolver', () => {
         })
       })
     })
+
+    describe('tables', () => {
+      it('throws access denied', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: tablesQuery,
+            },
+            { contextValue: { user: null, dataSources: { prisma } } },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
   })
 
   describe('authorized', () => {
@@ -426,6 +466,7 @@ describe('TableResolver', () => {
               createdAt: 'asc',
             },
           })
+
           expect(result).toEqual([
             {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -754,6 +795,7 @@ describe('TableResolver', () => {
               createdAt: 'asc',
             },
           })
+
           expect(result).toEqual([
             {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -913,6 +955,7 @@ describe('TableResolver', () => {
             ...user,
             meetingId: null,
           }
+
           await expect(
             testServer.executeOperation(
               {
@@ -2072,6 +2115,146 @@ describe('TableResolver', () => {
                         },
                         {
                           fullName: 'Bibi Bloxberg',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+      })
+    })
+
+    describe('tables', () => {
+      it('returns empty array for tables where user is owner', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: tablesQuery,
+            },
+            { contextValue: { user: raeuberUser, dataSources: { prisma } } },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: {
+                tables: [],
+              },
+              errors: undefined,
+            },
+          },
+        })
+      })
+
+      describe('setup myTables', () => {
+        beforeEach(async () => {
+          await testServer.executeOperation(
+            {
+              query: createMyTableMutation,
+              variables: {
+                name: 'My Table',
+                isPublic: true,
+              },
+            },
+            {
+              contextValue: {
+                user: raeuberUser,
+                dataSources: { prisma },
+              },
+            },
+          )
+        })
+
+        it('returns array for tables where user is owner', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query: tablesQuery,
+              },
+              { contextValue: { user: raeuberUser, dataSources: { prisma } } },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  tables: [
+                    {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'My Table',
+                      public: true,
+                      users: [],
+                    },
+                  ],
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+      })
+
+      describe('setup tables', () => {
+        beforeEach(async () => {
+          await testServer.executeOperation(
+            {
+              query: createTableMutation,
+              variables: {
+                name: 'Table',
+                isPublic: true,
+                userIds: [bibiUser.id],
+              },
+            },
+            {
+              contextValue: {
+                user: raeuberUser,
+                dataSources: { prisma },
+              },
+            },
+          )
+        })
+
+        it('returns array for tables where user is owner', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query: tablesQuery,
+              },
+              { contextValue: { user: raeuberUser, dataSources: { prisma } } },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  tables: [
+                    {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'My Table',
+                      public: true,
+                      users: [],
+                    },
+                    {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'Table',
+                      public: true,
+                      users: [
+                        {
+                          id: bibiUser.id,
+                          name: bibiUser.name,
+                          role: AttendeeRole.MODERATOR,
+                        },
+                        {
+                          id: raeuberUser.id,
+                          name: raeuberUser.name,
+                          role: AttendeeRole.MODERATOR,
                         },
                       ],
                     },
