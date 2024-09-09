@@ -51,9 +51,8 @@ type JoinMyTableResult = {
 export const useTablesStore = defineStore(
   'tables',
   () => {
+    const myTable = ref<MyTable | null>(null)
     const userStore = useUserStore()
-
-    const { getMyTable: myTable, currentUser } = storeToRefs(userStore)
 
     const { result: openTablesQueryResult, loading } = useQuery(
       openTablesQuery,
@@ -135,8 +134,10 @@ export const useTablesStore = defineStore(
     }
 
     const existsMyTable = computed(() => myTable.value !== null)
-
     const defaultMyTableName = computed(() => currentUser.value?.name ?? '')
+    const isTableChangeable = (id: number): boolean => {
+      return existsMyTable.value && myTable.value?.id !== id
+    }
 
     return {
       tables,
@@ -149,6 +150,7 @@ export const useTablesStore = defineStore(
       joinMyTable,
       existsMyTable,
       defaultMyTableName,
+      isTableChangeable,
     }
   },
   {
