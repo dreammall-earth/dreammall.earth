@@ -17,10 +17,10 @@ import { Step } from '#components/steps/useSteps'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { useTablesStore } from '#stores/tablesStore'
 
-import TableSetupStepA from './TableSetupStepA.vue'
-import TableSetupStepB from './TableSetupStepB.vue'
-import TableSetupStepC from './TableSetupStepC.vue'
-import TableSetupStepD from './TableSetupStepD.vue'
+import EnterNameAndVisibility from './EnterNameAndVisibility.vue'
+import SelectUsers from './SelectUsers.vue'
+import StartSetup from './StartSetup.vue'
+import SubmitTable from './SubmitTable.vue'
 
 import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
 import type { ComponentExposed } from 'vue-component-type-helpers'
@@ -35,7 +35,7 @@ const tableSettings = reactive<MyTableSettings>({
 
 const steps: Step[] = [
   {
-    component: TableSetupStepA,
+    component: StartSetup,
     id: 'start',
     title: 'Mall Talk',
     submit: 'next',
@@ -43,7 +43,7 @@ const steps: Step[] = [
     back: 'previous',
   },
   {
-    component: TableSetupStepB,
+    component: EnterNameAndVisibility,
     id: 'settings',
     title: 'Tisch erstellen',
     submit: () => (tableSettings.isPrivate ? 'users' : 'end'),
@@ -51,7 +51,7 @@ const steps: Step[] = [
     back: 'previous',
   },
   {
-    component: TableSetupStepC,
+    component: SelectUsers,
     id: 'users',
     title: 'Leute einladen',
     submit: 'next',
@@ -59,7 +59,7 @@ const steps: Step[] = [
     back: 'previous',
   },
   {
-    component: TableSetupStepD,
+    component: SubmitTable,
     id: 'end',
     title: 'Kleine Erinnerung',
     submit: 'next',

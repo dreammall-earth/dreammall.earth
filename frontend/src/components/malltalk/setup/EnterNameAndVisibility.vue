@@ -39,4 +39,3 @@ const onNext = () => {
   box-shadow: none !important;
 }
 </style>
-./StepProps #src/panels/dreammall-button-drawer/interfaces/MyTableSettings.js

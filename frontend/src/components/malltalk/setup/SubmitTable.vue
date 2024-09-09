@@ -18,7 +18,7 @@ import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
 defineProps<StepProps>()
 const emit = defineEmits<StepEmits>()
 
-const onSubmit = async () => {
+const onSubmit = () => {
   emit('submit')
 }
 </script>
@@ -28,4 +28,3 @@ const onSubmit = async () => {
   background-color: #8b949b; // todo: save globally
 }
 </style>
-./StepProps
