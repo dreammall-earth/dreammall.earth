@@ -1,13 +1,28 @@
 /* eslint-disable vitest/prefer-to-be */
+
 import { mount } from '@vue/test-utils'
 import { describe, it, expect, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
+import { vikePageContext } from '#context/usePageContext'
 import i18n from '#plugins/i18n'
 
 import ErrorPage from './+Page.vue'
 import { title } from './+title'
+
+const global = {
+  provide: {
+    [vikePageContext as symbol]: {
+      publicEnv: {
+        AUTH: {
+          SIGNIN_URI: '',
+          SIGNUP_URI: '',
+        },
+      },
+    },
+  },
+}
 
 describe('ErrorPage', () => {
   it('title returns correct title', () => {
@@ -16,6 +31,7 @@ describe('ErrorPage', () => {
   describe('500 Error', () => {
     const WrapperUndefined = () => {
       return mount(VApp, {
+        global,
         slots: {
           default: h(ErrorPage as Component),
         },
@@ -23,6 +39,7 @@ describe('ErrorPage', () => {
     }
     const WrapperFalse = () => {
       return mount(VApp, {
+        global,
         slots: {
           default: h(ErrorPage as Component, {
             is404: false,
@@ -56,6 +73,7 @@ describe('ErrorPage', () => {
   describe('404 Error', () => {
     const Wrapper = () => {
       return mount(VApp, {
+        global,
         slots: {
           default: h(ErrorPage as Component, {
             is404: true,

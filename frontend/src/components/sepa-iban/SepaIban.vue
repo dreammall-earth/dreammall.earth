@@ -87,12 +87,12 @@ import CockpitLayout from '#components/cockpit/cockpit-layout/CockpitLayout.vue'
 
 import { generateQrCode } from './qrCode'
 
-import type { ACCOUNTING } from '#src/env'
+import type { PageContext } from 'vike/types'
 
 const amount = ref(30)
 
 const props = defineProps<{
-  accountData: typeof ACCOUNTING
+  accountData: PageContext['publicEnv']['ACCOUNTING']
   reference: string
 }>()
 

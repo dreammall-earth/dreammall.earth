@@ -14,6 +14,21 @@ spec:
     spec:
       containers:
         - env:
+            - name: PUBLIC_ENV__SIGNUP_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: auth_signup_uri
+            - name: PUBLIC_ENV__SIGNIN_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: frontend_signin_url
+            - name: PUBLIC_ENV__ENDPOINTS__GRAPHQL_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: endpoints_graphql_uri
           image: "{{ .Values.presenter.image.repository }}:{{ default .Values.global.image.tag .Values.presenter.image.tag "latest" }}"
           imagePullPolicy: {{ quote .Values.global.image.pullPolicy }}
           name: presenter

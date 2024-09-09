@@ -1,9 +1,25 @@
-import { mount } from '@vue/test-utils'
+import { mount, config } from '@vue/test-utils'
 import { beforeEach, expect, describe, it } from 'vitest'
-import { Component, h } from 'vue'
+import { Component, h, reactive } from 'vue'
 import { VApp } from 'vuetify/components'
 
+import { vikePageContext } from '#context/usePageContext'
+
 import DefaultLayout from './DefaultLayout.vue'
+
+const mockPageContext = reactive({
+  publicEnv: {
+    AUTH: {
+      SIGNIN_URI: '',
+      SIGNUP_URI: '',
+    },
+  },
+})
+
+config.global.provide = {
+  ...config.global.provide,
+  [vikePageContext as symbol]: mockPageContext,
+}
 
 describe('DefaultLayout', () => {
   const Wrapper = () => {
