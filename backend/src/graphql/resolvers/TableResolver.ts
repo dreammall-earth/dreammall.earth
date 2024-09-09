@@ -66,7 +66,6 @@ export class TableResolver {
     if (userIds && userIds.length) {
       await createUsersInMeetings({ userIds, meeting, role: AttendeeRole.VIEWER })
     }
-    const usersInMeetings = await findUsersInMeetings(meeting)
 
     await EVENT_CREATE_MY_TABLE(user.id)
 
@@ -83,6 +82,7 @@ export class TableResolver {
         },
       })
     }
+    const usersInMeetings = await findUsersInMeetings(meeting)
 
     return new Table(meeting, usersInMeetings)
   }
@@ -295,6 +295,38 @@ export class TableResolver {
       meetingID: meeting.meetingID,
       password: meeting.attendeePW ? meeting.attendeePW : '',
     })
+  }
+
+  @Authorized()
+  @Query(() => [Table])
+  async tables(@Ctx() context: Context): Promise<Table[]> {
+    const { user } = context
+    const dbMeetings = await prisma.meeting.findMany({
+      where: {
+        OR: [
+          {
+            user: {
+              id: user?.id,
+            },
+          },
+          {
+            users: {
+              some: {
+                userId: user?.id,
+                role: AttendeeRole.MODERATOR,
+              },
+            },
+          },
+        ],
+      },
+      include: {
+        users: true,
+      },
+    })
+    const tables: Table[] = await Promise.all(
+      dbMeetings.map(async (meeting) => new Table(meeting, await findUsersInMeetings(meeting))),
+    )
+    return tables
   }
 
   @Subscription(() => [OpenTable], {
