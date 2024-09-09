@@ -29,7 +29,7 @@ const tablesStore = useTablesStore()
 
 const tableSettings = reactive<MyTableSettings>({
   name: tablesStore.defaultMyTableName || '',
-  isPrivate: true,
+  isPrivate: false,
   users: [],
 })
 
