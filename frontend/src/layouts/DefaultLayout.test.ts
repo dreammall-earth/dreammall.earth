@@ -50,11 +50,11 @@ describe('DefaultLayout', () => {
   //   beforeEach(() => {
   //     wrapper = Wrapper()
   //   })
-  //
+
   //   afterEach(() => {
   //     wrapper.unmount()
   //   })
-  //
+
   //   describe('enter table', () => {
   //     describe('apollo with success', () => {
   //       beforeEach(async () => {
@@ -66,18 +66,18 @@ describe('DefaultLayout', () => {
   //         })
   //         await wrapper.find('button.new-table-button').trigger('click')
   //       })
-  //
+
   //       it('calls the api', () => {
   //         // eslint-disable-next-line vitest/prefer-called-with
   //         expect(joinMyTableMutationMock).toHaveBeenCalled()
   //       })
-  //
+
   //       it('navigates to table page', async () => {
   //         await flushPromises()
   //         expect(navigate).toHaveBeenCalledWith('/table/69')
   //       })
   //     })
-  //
+
   //     describe('apollo with no data', () => {
   //       beforeEach(async () => {
   //         vi.clearAllMocks()
@@ -86,22 +86,22 @@ describe('DefaultLayout', () => {
   //         })
   //         await wrapper.find('.button-list button.new-table-button').trigger('click')
   //       })
-  //
+
   //       it('calls the api', () => {
   //         // eslint-disable-next-line vitest/prefer-called-with
   //         expect(joinMyTableMutationMock).toHaveBeenCalled()
   //       })
-  //
+
   //       it('does not call navigate', () => {
   //         expect(navigate).not.toHaveBeenCalled()
   //       })
-  //
+
   //       it('toasts no table found error', async () => {
   //         await flushPromises()
   //         expect(errorHandlerSpy).toHaveBeenCalledWith('No table found')
   //       })
   //     })
-  //
+
   //     describe('apollo with error', () => {
   //       beforeEach(async () => {
   //         vi.clearAllMocks()
@@ -110,16 +110,16 @@ describe('DefaultLayout', () => {
   //         })
   //         await wrapper.find('.button-list button.new-table-button').trigger('click')
   //       })
-  //
+
   //       it('calls the api', () => {
   //         // eslint-disable-next-line vitest/prefer-called-with
   //         expect(joinMyTableMutationMock).toHaveBeenCalled()
   //       })
-  //
+
   //       it('does not call navigate', () => {
   //         expect(navigate).not.toHaveBeenCalled()
   //       })
-  //
+
   //       it('toasts no table found error', () => {
   //         expect(errorHandlerSpy).toHaveBeenCalledWith(
   //           'Error opening table',
@@ -134,16 +134,16 @@ describe('DefaultLayout', () => {
   //   beforeEach(() => {
   //     wrapper = Wrapper()
   //   })
-  //
+
   //   afterEach(() => {
   //     wrapper.unmount()
   //   })
-  //
+
   //   it('button list content is hidden', () => {
   //     expect(wrapper.find('.button-list').exists()).toBe(true)
   //     expect(wrapper.find('.button-list').classes()).not.toContain('button-list--active')
   //   })
-  //
+
   //   describe('click on create button', () => {
   //     it('button list visible', async () => {
   //       await wrapper.find('#dream-mall-button').trigger('click')
@@ -157,17 +157,17 @@ describe('DefaultLayout', () => {
   //   beforeEach(() => {
   //     wrapper = Wrapper()
   //   })
-  //
+
   //   afterEach(() => {
   //     wrapper.unmount()
   //   })
-  //
+
   //   describe('signout button', () => {
   //     const authStore = useAuthStore()
-  //
+
   //     const authServiceSpy = vi.spyOn(authService, 'signOut')
   //     const storeSpy = vi.spyOn(authStore, 'clear')
-  //
+
   //     beforeEach(() => {
   //       vi.clearAllMocks()
   //       authStore.save({
@@ -189,23 +189,23 @@ describe('DefaultLayout', () => {
   //         toStorageString: () => 'toStorageString',
   //       })
   //     })
-  //
+
   //     describe('without error', () => {
   //       beforeEach(async () => {
   //         await wrapper.find('button.user-info').trigger('click')
   //         await flushPromises()
   //         await wrapper.findComponent(UserDropdown).find('button.sign-out').trigger('click')
   //       })
-  //
+
   //       it('calls auth service sign out', () => {
   //         expect(authServiceSpy).toHaveBeenCalledWith()
   //       })
-  //
+
   //       it('clears the store', () => {
   //         expect(storeSpy).toHaveBeenCalledWith()
   //       })
   //     })
-  //
+
   //     describe('with error', () => {
   //       beforeEach(async () => {
   //         authServiceSpy.mockRejectedValue('Error!')
@@ -213,11 +213,43 @@ describe('DefaultLayout', () => {
   //         await flushPromises()
   //         await wrapper.findComponent(UserDropdown).find('button.sign-out').trigger('click')
   //       })
-  //
+
   //       it('logs the error', () => {
   //         expect(errorHandlerSpy).toHaveBeenCalledWith('auth error', 'Error!')
   //       })
   //     })
   //   })
   // })
+
+  describe('DreamMallButton Desktop', () => {
+    it('shows the Buttonlist and hides the drawer', async () => {
+      await wrapper.find('.test-desktop-camera-button').trigger('click')
+      await wrapper.find('#dream-mall-button').trigger('click')
+      expect(wrapper.find('.button-list').classes()).toContain('button-list--active')
+      expect(wrapper.find('.v-navigation-drawer').classes()).not.toContain(
+        '.v-navigation-drawer--active',
+      )
+    })
+    it('hide the buttonlist after two clicks', async () => {
+      await wrapper.find('#dream-mall-button').trigger('click')
+      await wrapper.find('#dream-mall-button').trigger('click')
+      expect(wrapper.find('.button-list').classes()).not.toContain('button-list--active')
+    })
+  })
+
+  describe('DreamMallButton Mobile', () => {
+    it('shows the Buttonlist and hides the drawer', async () => {
+      await wrapper.find('.test-mobile-camera-button').trigger('click')
+      await wrapper.find('#small-dream-mall-button').trigger('click')
+      expect(wrapper.find('.button-list').classes()).toContain('button-list--active')
+      expect(wrapper.find('.v-navigation-drawer').classes()).not.toContain(
+        '.v-navigation-drawer--active',
+      )
+    })
+    it('hide the buttonlist after two clicks', async () => {
+      await wrapper.find('#small-dream-mall-button').trigger('click')
+      await wrapper.find('#small-dream-mall-button').trigger('click')
+      expect(wrapper.find('.button-list').classes()).not.toContain('button-list--active')
+    })
+  })
 })
