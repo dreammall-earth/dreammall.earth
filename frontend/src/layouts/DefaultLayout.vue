@@ -17,7 +17,7 @@
               <LightDarkSwitch class="d-none d-lg-flex" />
             </v-col>
             <v-col class="d-flex align-center justify-end">
-              <button @click="toggleDrawer">
+              <button class="test-desktop-camera-button" @click="toggleDrawer('tables')">
                 <Circle>
                   <v-icon icon="$camera"></v-icon>
                 </Circle>
@@ -41,33 +41,42 @@
     <!-- Desktop Bottom Bar -->
     <div class="desktop-bottom-bar d-none d-md-flex">
       <div class="dream-mall-button-container">
-        <LargeDreamMallButton @click="toggleButtonList" />
+        <LargeDreamMallButton
+          :is-active="visibleDrawer === 'dream-mall-button'"
+          @click="() => toggleDrawer('dream-mall-button')"
+        />
       </div>
     </div>
 
     <!-- Universal Button List -->
-    <div class="button-list" :class="[isButtonListVisible ? 'button-list--active' : '']">
+    <div
+      class="button-list"
+      :class="[visibleDrawer === 'dream-mall-button' ? 'button-list--active' : '']"
+    >
       <v-img class="w-100 menu-divider" :src="Divider" />
       <v-img
         class="w-100 menu-triangle"
-        :class="[isButtonListVisible ? 'menu-triangle--turned' : '']"
+        :class="[visibleDrawer === 'dream-mall-button' ? 'menu-triangle--turned' : '']"
         :src="Triangle"
       />
-      <slot name="dream-mall-button" :close="toggleButtonList">
-        <TableSetup ref="tableSetupRef" @close="toggleButtonList" />
+      <slot name="dream-mall-button" :close="() => toggleDrawer('dream-mall-button')">
+        <TableSetup ref="tableSetupRef" @close="toggleDrawer('dream-mall-button')" />
       </slot>
     </div>
 
     <div class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none">
-      <button class="camera-button mx-auto" @click="toggleDrawer">
+      <button
+        class="test-mobile-camera-button camera-button mx-auto"
+        @click="() => toggleDrawer('tables')"
+      >
         <Circle>
           <v-icon icon="$camera"></v-icon>
         </Circle>
       </button>
       <SmallDreamMallButton
         class="mx-auto"
-        :is-active="isButtonListVisible"
-        @click="toggleButtonList"
+        :is-active="visibleDrawer === 'dream-mall-button'"
+        @click="() => toggleDrawer('dream-mall-button')"
       />
       <UserInfo class="mx-auto" />
     </div>
@@ -75,7 +84,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 
 import Divider from '#assets/img/divider.svg'
 import Triangle from '#assets/img/triangle.svg'
@@ -88,34 +97,32 @@ import LogoImage from '#components/menu/LogoImage.vue'
 import TabControl from '#components/menu/TabControl.vue'
 import UserInfo from '#components/menu/UserInfo.vue'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
-import { useUserStore } from '#stores/userStore'
 
-const isTablesDrawerVisible = ref(false)
+type DrawerType = 'tables' | 'dream-mall-button' | null
 
-const toggleDrawer = () => {
-  isTablesDrawerVisible.value = !isTablesDrawerVisible.value
-}
+const visibleDrawer = ref<DrawerType>(null)
 
-const isButtonListVisible = ref(false)
+const isTablesDrawerVisible = computed({
+  get() {
+    return visibleDrawer.value === 'tables'
+  },
+  set() {
+    toggleDrawer('tables')
+  },
+})
+
 const tableSetupRef = ref<InstanceType<typeof TableSetup> | null>(null)
 
-const toggleButtonList = () => {
-  if (isButtonListVisible.value) {
-    tableSetupRef.value?.reset()
+const toggleDrawer = (drawer: DrawerType) => {
+  if (visibleDrawer.value === drawer) {
+    visibleDrawer.value = null
+  } else {
+    visibleDrawer.value = drawer
+    if (drawer === 'dream-mall-button') {
+      tableSetupRef.value?.reset()
+    }
   }
-  isButtonListVisible.value = !isButtonListVisible.value
 }
-const userStore = useUserStore()
-
-type Mode = 'setup' | 'join'
-const mode = ref<Mode>(userStore.getMyTable?.id ? 'join' : 'setup')
-
-watch(
-  () => userStore.getMyTable?.id || 0,
-  (id: number) => {
-    mode.value = id ? 'join' : 'setup'
-  },
-)
 </script>
 
 <style scoped lang="scss">

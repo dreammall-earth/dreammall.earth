@@ -1,3 +1,5 @@
+import { fn } from '@storybook/test'
+
 import { SBComp } from '#types/SBComp'
 
 import MainButton from './MainButton.vue'
@@ -25,7 +27,7 @@ const meta = {
       ],
     },
     size: { control: 'select', options: ['small', 'medium', 'large', 'auto'] },
-    onClick: { action: 'clicked' },
+    onClick: fn(),
   },
   args: { variant: 'primary', size: 'large' }, // default value
 } satisfies Meta<typeof MainButton>
