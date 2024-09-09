@@ -9,8 +9,9 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
 import { navigate } from 'vike/client/router'
-import { reactive, ref } from 'vue'
+import { reactive, ref, watch } from 'vue'
 
 import StepControl from '#components/steps/StepControl.vue'
 import { Step } from '#components/steps/useSteps'
@@ -26,11 +27,18 @@ import type MyTableSettings from '#components/malltalk/interfaces/MyTableSetting
 import type { ComponentExposed } from 'vue-component-type-helpers'
 
 const tablesStore = useTablesStore()
+const { defaultMyTableName } = storeToRefs(tablesStore)
 
 const tableSettings = reactive<MyTableSettings>({
-  name: tablesStore.defaultMyTableName || '',
+  name: defaultMyTableName.value,
   isPrivate: false,
   users: [],
+})
+
+watch(defaultMyTableName, (value) => {
+  if (value && !tableSettings.name) {
+    tableSettings.name = value
+  }
 })
 
 const steps: Step[] = [
