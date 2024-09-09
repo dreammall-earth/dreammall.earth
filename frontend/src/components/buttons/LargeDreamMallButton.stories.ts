@@ -1,3 +1,5 @@
+import { fn } from '@storybook/test'
+
 import { SBComp } from '#types/SBComp'
 
 import LargeDreamMallButton from './LargeDreamMallButton.vue'
@@ -11,7 +13,7 @@ const meta = {
   // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/vue/writing-docs/autodocs
   tags: ['autodocs'],
   argTypes: {
-    onClick: { action: 'clicked' },
+    onClick: fn(),
   },
   args: {}, // default value
 } satisfies Meta<typeof LargeDreamMallButton>

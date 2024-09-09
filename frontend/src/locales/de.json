@@ -47,6 +47,25 @@
       "share": "Teilen"
     }
   },
+  "dream-mall-panel": {
+    "call": {
+      "add-user": "Add",
+      "edit": "Edit",
+      "leave-table": "Tisch verlassen",
+      "link": "Link"
+    },
+    "setup": {
+      "continue": "Weiter",
+      "create-table": "Los geht's",
+      "invitation-sent": "gesendet",
+      "invite": "einladen",
+      "no-result": "Keine Ergebnisse",
+      "reminder": "Deine Vision wird Realität,\nlass uns gerne dazu den ersten Schritt machen.",
+      "search-error": "Bei der Suche ist ein Fehler aufgetreten.",
+      "table-creation": "Tisch erstellen",
+      "table-name": "Tischname"
+    }
+  },
   "error": {
     "404": {
       "h1": "404 Seite nicht gefunden",
@@ -74,6 +93,9 @@
     "defaultDescription": "Deine Reichweite Erweitern Alle Möglichkeiten Miteinander Ausschöpfen Lebensqualität Leben",
     "defaultTitle": "DreamMall",
     "joinTableTitle": "Raum beitreten"
+  },
+  "table": {
+    "notFound": "Tisch nicht gefunden."
   },
   "tables": {
     "participantCount": "{count} Teilnehmer"

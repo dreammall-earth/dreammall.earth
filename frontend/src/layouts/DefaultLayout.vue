@@ -17,7 +17,7 @@
               <LightDarkSwitch class="d-none d-lg-flex" />
             </v-col>
             <v-col class="d-flex align-center justify-end">
-              <button @click="toggleDrawer">
+              <button class="test-desktop-camera-button" @click="toggleDrawer('tables')">
                 <Circle>
                   <v-icon icon="$camera"></v-icon>
                 </Circle>
@@ -41,55 +41,42 @@
     <!-- Desktop Bottom Bar -->
     <div class="desktop-bottom-bar d-none d-md-flex">
       <div class="dream-mall-button-container">
-        <LargeDreamMallButton @click="toggleButtonList" />
+        <LargeDreamMallButton
+          :is-active="visibleDrawer === 'dream-mall-button'"
+          @click="() => toggleDrawer('dream-mall-button')"
+        />
       </div>
     </div>
 
     <!-- Universal Button List -->
-    <div class="button-list" :class="[isButtonListVisible ? 'button-list--active' : '']">
+    <div
+      class="button-list"
+      :class="[visibleDrawer === 'dream-mall-button' ? 'button-list--active' : '']"
+    >
       <v-img class="w-100 menu-divider" :src="Divider" />
       <v-img
         class="w-100 menu-triangle"
-        :class="[isButtonListVisible ? 'menu-triangle--turned' : '']"
+        :class="[visibleDrawer === 'dream-mall-button' ? 'menu-triangle--turned' : '']"
         :src="Triangle"
       />
-      <MainButton
-        class="assistant-button"
-        variant="border-gradient"
-        label="Assistant"
-        size="auto"
-        icon="ear-hearing"
-        >{{ $t('buttons.toAssistant') }}
-      </MainButton>
-      <MainButton
-        class="new-table-button"
-        variant="border-yellow"
-        label="New Table"
-        size="auto"
-        icon="plus"
-        @click="enterTable"
-        >{{ $t('buttons.newTable') }}
-      </MainButton>
-      <MainButton
-        class="new-project-button"
-        variant="border-blue"
-        label="New Project"
-        size="auto"
-        icon="plus"
-        >{{ $t('buttons.newProject') }}
-      </MainButton>
+      <slot name="dream-mall-button" :close="toggleButtonList">
+        <TableSetup ref="tableSetupRef" @close="toggleButtonList" />
+      </slot>
     </div>
 
     <div class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none">
-      <button class="camera-button mx-auto" @click="toggleDrawer">
+      <button
+        class="test-mobile-camera-button camera-button mx-auto"
+        @click="() => toggleDrawer('tables')"
+      >
         <Circle>
           <v-icon icon="$camera"></v-icon>
         </Circle>
       </button>
       <SmallDreamMallButton
         class="mx-auto"
-        :is-active="isButtonListVisible"
-        @click="toggleButtonList"
+        :is-active="visibleDrawer === 'dream-mall-button'"
+        @click="() => toggleDrawer('dream-mall-button')"
       />
       <UserInfo class="mx-auto" />
     </div>
@@ -97,14 +84,11 @@
 </template>
 
 <script lang="ts" setup>
-import { useMutation } from '@vue/apollo-composable'
-import { navigate } from 'vike/client/router'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 import Divider from '#assets/img/divider.svg'
 import Triangle from '#assets/img/triangle.svg'
 import LargeDreamMallButton from '#components/buttons/LargeDreamMallButton.vue'
-import MainButton from '#components/buttons/MainButton.vue'
 import SmallDreamMallButton from '#components/buttons/SmallDreamMallButton.vue'
 import Circle from '#components/menu/CircleElement.vue'
 import LightDarkSwitch from '#components/menu/LightDarkSwitch.vue'
@@ -112,40 +96,37 @@ import LogoImage from '#components/menu/LogoImage.vue'
 import TabControl from '#components/menu/TabControl.vue'
 import UserInfo from '#components/menu/UserInfo.vue'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
-import { JoinMyTableMutationResult, joinMyTableMutation } from '#mutations/joinMyTableMutation'
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
+import TableSetup from '#src/panels/dreammall/TableSetup.vue'
 
-const isTablesDrawerVisible = ref(false)
+type DrawerType = 'tables' | 'dream-mall-button' | null
 
-const toggleDrawer = () => {
-  isTablesDrawerVisible.value = !isTablesDrawerVisible.value
+const visibleDrawer = ref<DrawerType>(null)
+
+const isTablesDrawerVisible = computed({
+  get() {
+    return visibleDrawer.value === 'tables'
+  },
+  set() {
+    toggleDrawer('tables')
+  },
+})
+
+const toggleDrawer = (drawer: DrawerType) => {
+  if (visibleDrawer.value === drawer) {
+    visibleDrawer.value = null
+  } else {
+    visibleDrawer.value = drawer
+  }
 }
 
 const isButtonListVisible = ref(false)
+const tableSetupRef = ref<InstanceType<typeof TableSetup> | null>(null)
 
 const toggleButtonList = () => {
-  isButtonListVisible.value = !isButtonListVisible.value
-}
-
-const { mutate: joinMyTableMutationResult } = useMutation<JoinMyTableMutationResult>(
-  joinMyTableMutation,
-  {
-    fetchPolicy: 'no-cache',
-  },
-)
-
-const enterTable = async () => {
-  try {
-    const result = await joinMyTableMutationResult()
-
-    if (result?.data?.joinMyTable) {
-      navigate(`/table/${result.data.joinMyTable}`)
-    } else {
-      GlobalErrorHandler.error('No table found')
-    }
-  } catch (error) {
-    GlobalErrorHandler.error('Error opening table', error)
+  if (isButtonListVisible.value) {
+    tableSetupRef.value?.reset()
   }
+  isButtonListVisible.value = !isButtonListVisible.value
 }
 </script>
 
@@ -189,9 +170,8 @@ const enterTable = async () => {
   align-items: center;
   justify-content: center;
   height: 120px;
-  overflow: hidden; // hotfix until the concept of DreamMallButton is clarified!
-  background: var(--v-bottom-menu-background);
-  backdrop-filter: blur(20px);
+  overflow: hidden;
+  background: transparent;
 }
 
 .dream-mall-button-container {
@@ -201,11 +181,10 @@ const enterTable = async () => {
 }
 
 .button-list {
-  --height: 220px;
-  --width: 180px;
+  --width: 400px;
 
   position: fixed;
-  bottom: calc(var(--height) * -1);
+  bottom: -100%;
   left: calc(50% - var(--width) / 2);
   z-index: 1001;
   display: flex;
@@ -216,6 +195,7 @@ const enterTable = async () => {
   width: var(--width);
   height: var(--height);
   padding-top: 30px;
+  padding-bottom: 40px;
   background: var(--v-bottom-menu-background) !important;
   backdrop-filter: blur(20px);
   border-radius: 30px 30px 0 0;

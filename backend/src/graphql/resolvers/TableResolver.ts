@@ -36,9 +36,7 @@ export class TableResolver {
     const { user } = context
     if (!user) throw new Error('User not found!')
 
-    if (user.meetingId) {
-      throw new Error('Meeting already exists!')
-    }
+    const oldMeetindID = user.meetingId
 
     const meetingID: string = await createMeetingID()
 
@@ -70,6 +68,21 @@ export class TableResolver {
     const usersInMeetings = await findUsersInMeetings(meeting)
 
     await EVENT_CREATE_MY_TABLE(user.id)
+
+    if (oldMeetindID) {
+      await prisma.usersInMeetings.deleteMany({
+        where: {
+          meetingId: oldMeetindID,
+        },
+      })
+
+      await prisma.meeting.delete({
+        where: {
+          id: oldMeetindID,
+        },
+      })
+    }
+    const usersInMeetings = await findUsersInMeetings(meeting)
 
     return new Table(meeting, usersInMeetings)
   }
@@ -137,30 +150,22 @@ export class TableResolver {
       throw new Error('No meeting for user!')
     }
 
-    const dbMeeting = user.meeting
+    const dbMeeting = await prisma.meeting.findUnique({
+      where: {
+        id: user.meetingId,
+      },
+    })
 
     if (!dbMeeting) throw new Error('Meeting not found!')
 
-    const inviteLink = new URL(`join-table/${dbMeeting.id}`, CONFIG.FRONTEND_URL).toString()
+    const inviteLink = createInviteLink(dbMeeting.id)
 
-    const meeting = await createBBBMeeting(dbMeeting.meetingID, dbMeeting.name, inviteLink)
-
-    try {
-      await prisma.meeting.update({
-        where: { id: dbMeeting.id },
-        data: {
-          attendeePW: meeting.attendeePW,
-          moderatorPW: meeting.moderatorPW,
-          voiceBridge: meeting.voiceBridge,
-          dialNumber: meeting.dialNumber,
-          createTime: meeting.createTime,
-          createDate: new Date(meeting.createDate).toISOString(),
-        },
-      })
-    } catch (err) {
-      logger.error('Could not update Meeting in DB!', err)
-      throw new Error('Could not update Meeting in DB!')
-    }
+    await createBBBMeeting({
+      meetingID: dbMeeting.meetingID,
+      name: dbMeeting.name,
+      inviteLink,
+      tableId: dbMeeting.id,
+    })
 
     return dbMeeting.id
   }
@@ -198,10 +203,15 @@ export class TableResolver {
       data: { meetingID, name, public: isPublic },
     })
 
-    if (userIds) {
-      if (!userIds.some((userId) => userId === user.id)) {
-        userIds.push(user.id)
-      }
+    if (!userIds) {
+      userIds = []
+    }
+
+    if (!userIds.some((userId) => userId === user.id)) {
+      userIds.push(user.id)
+    }
+
+    if (userIds.length) {
       await createUsersInMeetings({ userIds, meeting: dbMeeting })
     }
     const usersInMeetings = await findUsersInMeetings(dbMeeting)
@@ -237,14 +247,25 @@ export class TableResolver {
 
     let password: string
 
-    if (table.users.some((e) => e.userId === user.id && e.role === 'MODERATOR')) {
-      const inviteLink = new URL(`join-table/${table.id}`, CONFIG.FRONTEND_URL).toString()
-      await createBBBMeeting(table.meetingID, table.name, inviteLink)
-      password = table.moderatorPW ? table.moderatorPW : ''
-    } else if (table.user && table.user.id === user.id) {
-      password = table.moderatorPW ? table.moderatorPW : ''
+    if (
+      (table.user && table.user.id === user.id) ||
+      table.users.some((e) => e.userId === user.id && e.role === 'MODERATOR')
+    ) {
+      const inviteLink = createInviteLink(table.id)
+      const meeting = await createBBBMeeting({
+        meetingID: table.meetingID,
+        name: table.name,
+        inviteLink,
+        tableId: table.id,
+      })
+      password = meeting.moderatorPW
+    } else if (table.public || table.users.some((u) => u.userId === user.id)) {
+      if (!table.attendeePW) {
+        throw new Error('This meeting does not exists.')
+      }
+      password = table.attendeePW
     } else {
-      password = table.attendeePW ? table.attendeePW : ''
+      throw new Error('User has no access to meeting.')
     }
 
     return joinMeetingLink({
@@ -311,14 +332,13 @@ export class TableResolver {
   }
 
   @Subscription(() => [OpenTable], {
-    topics: 'OPEN_ROOM_SUBSCRIPTION',
+    topics: 'OPEN_TABLE_SUBSCRIPTION',
   })
   async updateOpenTables(
     @Root() meetings: MeetingInfo[],
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     @Arg('username') username: string,
   ): Promise<OpenTable[]> {
-    // console.log('--------------------', username)
     return openTablesFromOpenMeetings(meetings)
   }
 
@@ -326,7 +346,7 @@ export class TableResolver {
   @Query(() => Boolean)
   test(): boolean {
     try {
-      pubSub.publish('OPEN_ROOM_SUBSCRIPTION', 'Hallo')
+      pubSub.publish('OPEN_TABLE_SUBSCRIPTION', 'Hallo')
     } catch (err) {
       console.log(err)
     }
@@ -361,19 +381,7 @@ const openTablesFromOpenMeetings = async (meetings: MeetingInfo[]): Promise<Open
 
 const createUsersInMeetings = async (data: {
   userIds: number[]
-  meeting: {
-    name: string
-    id: number
-    createdAt: Date
-    meetingID: string
-    attendeePW: string | null
-    moderatorPW: string | null
-    voiceBridge: number | null
-    dialNumber: string | null
-    createTime: bigint | null
-    createDate: Date | null
-    public: boolean
-  }
+  meeting: Meeting
   role?: AttendeeRole
 }) => {
   await prisma.usersInMeetings.createMany({
@@ -385,19 +393,7 @@ const createUsersInMeetings = async (data: {
   })
 }
 
-const findUsersInMeetings = async (meeting: {
-  name: string
-  id: number
-  createdAt: Date
-  meetingID: string
-  attendeePW: string | null
-  moderatorPW: string | null
-  voiceBridge: number | null
-  dialNumber: string | null
-  createTime: bigint | null
-  createDate: Date | null
-  public: boolean
-}): Promise<UsersWithMeetings[]> => {
+const findUsersInMeetings = async (meeting: Meeting): Promise<UsersWithMeetings[]> => {
   return (await prisma.usersInMeetings.findMany({
     where: {
       meetingId: meeting.id,
@@ -422,22 +418,43 @@ const createMeetingID = async (): Promise<string> => {
   return meetingID
 }
 
-async function createBBBMeeting(
-  meetingID: string,
-  name: string,
-  inviteLink: string,
-): Promise<CreateMeetingResponse> {
+function createInviteLink(tableId: number) {
+  return new URL(`join-table/${tableId}`, CONFIG.FRONTEND_URL).toString()
+}
+
+async function createBBBMeeting(data: {
+  meetingID: string
+  name: string
+  inviteLink: string
+  tableId: number
+}): Promise<CreateMeetingResponse> {
   const meeting = await createMeeting(
     {
-      meetingID,
-      name,
+      meetingID: data.meetingID,
+      name: data.name,
     },
     {
-      moderatorOnlyMessage: `Use this link to invite more people:<br/>${inviteLink}`,
+      moderatorOnlyMessage: `Use this link to invite more people:<br/>${data.inviteLink}`,
     },
   )
   if (!meeting) {
     throw new Error('Error creating the meeting!')
+  }
+  try {
+    await prisma.meeting.update({
+      where: { id: data.tableId },
+      data: {
+        attendeePW: meeting.attendeePW,
+        moderatorPW: meeting.moderatorPW,
+        voiceBridge: meeting.voiceBridge,
+        dialNumber: meeting.dialNumber,
+        createTime: meeting.createTime,
+        createDate: new Date(meeting.createDate).toISOString(),
+      },
+    })
+  } catch (err) {
+    logger.error('Could not update Meeting in DB!', err)
+    throw new Error('Could not update Meeting in DB!')
   }
   return meeting
 }
