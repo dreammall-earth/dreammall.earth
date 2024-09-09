@@ -323,11 +323,9 @@ export class TableResolver {
         users: true,
       },
     })
-    const tables: Table[] = []
-    for (const meeting of dbMeetings) {
-      const usersInMeetings = await findUsersInMeetings(meeting)
-      tables.push(new Table(meeting, usersInMeetings))
-    }
+    const tables: Table[] = await Promise.all(
+      dbMeetings.map(async (meeting) => new Table(meeting, await findUsersInMeetings(meeting))),
+    )
     return tables
   }
 
