@@ -14,6 +14,7 @@
     :submit-text="steps[currentStep]?.submitText ?? 'Weiter'"
     @next="onNext"
     @go-to="goTo"
+    @submit="$emit('submit')"
   />
 </template>
 
