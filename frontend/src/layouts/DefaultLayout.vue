@@ -54,8 +54,7 @@
         :src="Triangle"
       />
       <slot name="dream-mall-button" :close="toggleButtonList">
-        <TableSetup v-if="mode === 'setup'" ref="tableSetupRef" @close="toggleButtonList" />
-        <TableJoin v-if="mode === 'join'" @close="toggleButtonList" />
+        <TableSetup ref="tableSetupRef" @close="toggleButtonList" />
       </slot>
     </div>
 
@@ -76,7 +75,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 
 import Divider from '#assets/img/divider.svg'
 import Triangle from '#assets/img/triangle.svg'
@@ -88,9 +87,7 @@ import LogoImage from '#components/menu/LogoImage.vue'
 import TabControl from '#components/menu/TabControl.vue'
 import UserInfo from '#components/menu/UserInfo.vue'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
-import TableJoin from '#src/panels/dreammall/TableJoin.vue'
 import TableSetup from '#src/panels/dreammall/TableSetup.vue'
-import { useUserStore } from '#stores/userStore'
 
 const isTablesDrawerVisible = ref(false)
 
@@ -107,18 +104,6 @@ const toggleButtonList = () => {
   }
   isButtonListVisible.value = !isButtonListVisible.value
 }
-
-const userStore = useUserStore()
-
-type Mode = 'setup' | 'join'
-const mode = ref<Mode>(userStore.getMyTable?.id ? 'join' : 'setup')
-
-watch(
-  () => userStore.getMyTable?.id,
-  (id: number) => {
-    mode.value = id ? 'join' : 'setup'
-  },
-)
 </script>
 
 <style scoped lang="scss">
@@ -161,6 +146,7 @@ watch(
   align-items: center;
   justify-content: center;
   height: 120px;
+  overflow: hidden;
   background: transparent;
 }
 

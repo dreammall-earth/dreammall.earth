@@ -37,9 +37,7 @@ export class TableResolver {
     const { user } = context
     if (!user) throw new Error('User not found!')
 
-    if (user.meetingId) {
-      throw new Error('Meeting already exists!')
-    }
+    const oldMeetindID = user.meetingId
 
     const meetingID: string = await createMeetingID()
 
@@ -71,6 +69,20 @@ export class TableResolver {
     const usersInMeetings = await findUsersInMeetings(meeting)
 
     await EVENT_CREATE_MY_TABLE(user.id)
+
+    if (oldMeetindID) {
+      await prisma.usersInMeetings.deleteMany({
+        where: {
+          meetingId: oldMeetindID,
+        },
+      })
+
+      await prisma.meeting.delete({
+        where: {
+          id: oldMeetindID,
+        },
+      })
+    }
 
     return new Table(meeting, usersInMeetings)
   }
