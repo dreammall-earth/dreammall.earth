@@ -51,8 +51,8 @@ type JoinMyTableResult = {
 export const useTablesStore = defineStore(
   'tables',
   () => {
-    const myTable = ref<MyTable | null>(null)
     const userStore = useUserStore()
+    const { getMyTable: myTable, currentUser } = storeToRefs(userStore)
 
     const { result: openTablesQueryResult, loading } = useQuery(
       openTablesQuery,

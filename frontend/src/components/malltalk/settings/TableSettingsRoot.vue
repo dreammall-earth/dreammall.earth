@@ -23,10 +23,8 @@ import { useI18n } from 'vue-i18n'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 import { usePageContext } from '#context/usePageContext'
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
-import { TableSetupEmits, TableSetupProps } from '#src/panels/dreammall/TableSetupProps'
-import { useTablesStore } from '#stores/tablesStore'
 import { copyToClipboard } from '#src/utils/copyToClipboard'
+import { useTablesStore } from '#stores/tablesStore'
 
 import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
 
