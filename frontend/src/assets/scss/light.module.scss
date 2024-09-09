@@ -19,6 +19,8 @@ $cockpit-input-background: rgb(243 243 243);
 $cockpit-element-background: rgb(243 243 243);
 $cockpit-chip-background: rgb(225 230 237);
 $cockpit-chip-background-2: white;
+$dm-panel-call-action-button-color: #3d4753;
+$dm-panel-call-action-button-background-color: #ffffff;
 
 :export {
     backgroundColor: $background-color;
@@ -42,5 +44,7 @@ $cockpit-chip-background-2: white;
     cockpitElementBackground: $cockpit-element-background;
     cockpitChipBackground: $cockpit-chip-background;
     cockpitChipBackground2: $cockpit-chip-background-2;
+    dmPanelCallActionButtonColor: $dm-panel-call-action-button-color;
+    dmPanelCallActionButtonBackgroundColor: $dm-panel-call-action-button-background-color;
 }
 

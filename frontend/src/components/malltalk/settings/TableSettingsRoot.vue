@@ -62,12 +62,8 @@ const leaveTable = () => {
 
 <style scoped lang="scss">
 .roundButton {
-  color: #3d4753;
-  background-color: #ffffff;
-}
-.roundButton-DarkTheme {
-  color: #f5f5f5;
-  background-color: #8b949b;
+  color: rgb(var(--v-theme-dm-panel-call-action-button-color));
+  background-color: rgb(var(--v-theme-dm-panel-call-action-button-background-color));
 }
 .leaveButton {
   background-color: #f44336;
