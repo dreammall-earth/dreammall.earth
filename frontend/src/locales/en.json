@@ -50,7 +50,6 @@
   "dream-mall-panel": {
     "call": {
       "add-user": "Add",
-      "edit": "Edit",
       "leave-table": "Leave Table",
       "link": "Link"
     },
