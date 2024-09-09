@@ -1,5 +1,5 @@
 <template>
-  <div class="flat-text-field d-flex flex-column align-center pa-4 w-100">
+  <form class="flat-text-field d-flex flex-column align-center pa-4 w-100" @submit.prevent="onNext">
     <v-text-field
       v-model="tableSettings.name"
       rounded
@@ -9,13 +9,14 @@
       variant="solo-filled"
       append-inner-icon="mdi-pencil"
       maxlength="64"
+      required
     />
     <!-- todo: manage values as maxlength globally? -->
 
     <v-switch v-model="tableSettings.isPrivate" label="Privat" color="#4caf50" inset hide-details />
 
-    <SimpleButton class="mt-12" :label="submitText" @click="onNext" />
-  </div>
+    <SimpleButton type="submit" class="mt-12" :label="submitText" />
+  </form>
 </template>
 
 <script setup lang="ts">
