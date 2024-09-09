@@ -136,7 +136,7 @@ export const useTablesStore = defineStore(
     const existsMyTable = computed(() => myTable.value !== null)
     const defaultMyTableName = computed(() => currentUser.value?.name ?? '')
     const isTableChangeable = (id: number): boolean => {
-      return existsMyTable.value && myTable.value?.id !== id
+      return existsMyTable.value && myTable.value?.id === id
     }
 
     return {
