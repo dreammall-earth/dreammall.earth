@@ -2162,7 +2162,7 @@ describe('TableResolver', () => {
             },
             {
               contextValue: {
-                user,
+                user: raeuberUser,
                 dataSources: { prisma },
               },
             },
@@ -2175,23 +2175,22 @@ describe('TableResolver', () => {
               {
                 query: tablesQuery,
               },
-              { contextValue: { user, dataSources: { prisma } } },
+              { contextValue: { user: raeuberUser, dataSources: { prisma } } },
             ),
           ).resolves.toMatchObject({
             body: {
               kind: 'single',
               singleResult: {
                 data: {
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                  tables: expect.arrayContaining([
-                    expect.objectContaining({
+                  tables: [
+                    {
                       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                       id: expect.any(Number),
                       name: 'My Table',
                       public: true,
                       users: [],
-                    }),
-                  ]),
+                    },
+                  ],
                 },
                 errors: undefined,
               },
@@ -2202,8 +2201,6 @@ describe('TableResolver', () => {
 
       describe('setup tables', () => {
         beforeEach(async () => {
-          await prisma.usersInMeetings.deleteMany()
-          await prisma.meeting.deleteMany()
           await testServer.executeOperation(
             {
               query: createTableMutation,
@@ -2215,7 +2212,7 @@ describe('TableResolver', () => {
             },
             {
               contextValue: {
-                user,
+                user: raeuberUser,
                 dataSources: { prisma },
               },
             },
@@ -2228,35 +2225,40 @@ describe('TableResolver', () => {
               {
                 query: tablesQuery,
               },
-              { contextValue: { user, dataSources: { prisma } } },
+              { contextValue: { user: raeuberUser, dataSources: { prisma } } },
             ),
           ).resolves.toMatchObject({
             body: {
               kind: 'single',
               singleResult: {
                 data: {
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                  tables: expect.arrayContaining([
-                    expect.objectContaining({
+                  tables: [
+                    {
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                      id: expect.any(Number),
+                      name: 'My Table',
+                      public: true,
+                      users: [],
+                    },
+                    {
                       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                       id: expect.any(Number),
                       name: 'Table',
                       public: true,
-                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                      users: expect.arrayContaining([
-                        expect.objectContaining({
+                      users: [
+                        {
                           id: bibiUser.id,
                           name: bibiUser.name,
                           role: AttendeeRole.MODERATOR,
-                        }),
-                        expect.objectContaining({
-                          id: user.id,
-                          name: user.name,
+                        },
+                        {
+                          id: raeuberUser.id,
+                          name: raeuberUser.name,
                           role: AttendeeRole.MODERATOR,
-                        }),
-                      ]),
-                    }),
-                  ]),
+                        },
+                      ],
+                    },
+                  ],
                 },
                 errors: undefined,
               },
