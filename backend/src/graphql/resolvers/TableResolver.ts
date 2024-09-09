@@ -1,3 +1,4 @@
+import { Meeting } from '@prisma/client'
 import {
   Resolver,
   Mutation,
@@ -65,7 +66,6 @@ export class TableResolver {
     if (userIds && userIds.length) {
       await createUsersInMeetings({ userIds, meeting, role: AttendeeRole.VIEWER })
     }
-    const usersInMeetings = await findUsersInMeetings(meeting)
 
     await EVENT_CREATE_MY_TABLE(user.id)
 
