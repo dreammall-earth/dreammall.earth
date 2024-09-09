@@ -478,16 +478,12 @@ describe('TableResolver', () => {
 
       describe('meeting exists', () => {
         it('creates new meeting and deletes old one', async () => {
-          const userWithMeeting = await prisma.user.findUnique({
-            where: {
-              username: nickname,
-            },
-          })
+          user = await findOrCreateUser({ name: user.name, nickname: user.username })
 
-          expect(userWithMeeting).not.toBeNull()
+          expect(user).not.toBeNull()
 
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          const oldMeetingID = userWithMeeting!.meetingId!
+          const oldMeetingID = user!.meetingId!
 
           await expect(
             testServer.executeOperation(
@@ -591,16 +587,15 @@ describe('TableResolver', () => {
 
       describe('private meeting exists', () => {
         it('creates new meeting and deletes old one', async () => {
-          const userWithMeeting = await prisma.user.findUnique({
-            where: {
-              username: nickname,
-            },
+          const userWithMeeting = await findOrCreateUser({
+            name: user.name,
+            nickname: user.username,
           })
 
           expect(userWithMeeting).not.toBeNull()
 
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          const oldMeetingID = userWithMeeting!.meetingId!
+          const oldMeetingID = userWithMeeting.meetingId!
 
           await expect(
             testServer.executeOperation(
@@ -614,7 +609,7 @@ describe('TableResolver', () => {
               },
               {
                 contextValue: {
-                  user,
+                  user: userWithMeeting,
                   dataSources: { prisma },
                 },
               },
@@ -795,6 +790,24 @@ describe('TableResolver', () => {
               involvedEmail: null,
               type: 'CREATE_USER',
               involvedUserId: raeuberUser.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_MY_TABLE',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_MY_TABLE',
+              involvedUserId: user?.id,
             },
             {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -1194,6 +1207,24 @@ describe('TableResolver', () => {
               involvedEmail: null,
               type: 'CREATE_USER',
               involvedUserId: raeuberUser.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_MY_TABLE',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_MY_TABLE',
+              involvedUserId: user?.id,
             },
             {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
