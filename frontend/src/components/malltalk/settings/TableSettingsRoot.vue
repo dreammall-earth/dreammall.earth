@@ -39,7 +39,7 @@ const onClick = (stepId: string) => {
 
 const pageContext = usePageContext()
 const tableId = computed(() => {
-  return pageContext.routeParams.id ? Number(pageContext.routeParams.id) : null
+  return pageContext.routeParams?.id ? Number(pageContext.routeParams.id) : null
 })
 
 const tablesStore = useTablesStore()
