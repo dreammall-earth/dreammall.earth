@@ -55,14 +55,17 @@
     },
     "setup": {
       "continue": "Continue",
-      "create-table": "Let's go",
+      "create-table": "Done",
       "invitation-sent": "sent",
+      "invitation-title": "Invite People",
       "invite": "invite",
       "no-result": "No results",
       "reminder": "Your vision becomes reality,\nlet's take the first step together.",
       "search-error": "An error occurred during the search.",
       "table-creation": "Create Table",
-      "table-name": "Table Name"
+      "table-creation-title": "Create Table",
+      "table-name": "Table Name",
+      "submit-title": "Hint"
     }
   },
   "error": {

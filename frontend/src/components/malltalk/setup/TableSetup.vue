@@ -12,6 +12,7 @@
 import { storeToRefs } from 'pinia'
 import { navigate } from 'vike/client/router'
 import { reactive, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import StepControl from '#components/steps/StepControl.vue'
 import { Step } from '#components/steps/useSteps'
@@ -35,6 +36,8 @@ const tableSettings = reactive<MyTableSettings>({
   users: [],
 })
 
+const { t } = useI18n()
+
 watch(defaultMyTableName, (value) => {
   if (value && !tableSettings.name) {
     tableSettings.name = value
@@ -47,31 +50,31 @@ const steps: Step[] = [
     id: 'start',
     title: 'Mall Talk',
     submit: 'next',
-    submitText: 'Weiter',
+    submitText: t('dream-mall-panel.setup.continue'),
     back: 'previous',
   },
   {
     component: EnterNameAndVisibility,
     id: 'settings',
-    title: 'Tisch erstellen',
+    title: t('dream-mall-panel.setup.table-creation-title'),
     submit: () => (tableSettings.isPrivate ? 'users' : 'end'),
-    submitText: 'Weiter',
+    submitText: t('dream-mall-panel.setup.continue'),
     back: 'previous',
   },
   {
     component: SelectUsers,
     id: 'users',
-    title: 'Leute einladen',
+    title: t('dream-mall-panel.setup.continue'),
     submit: 'next',
-    submitText: 'Weiter',
+    submitText: t('dream-mall-panel.setup.continue'),
     back: 'previous',
   },
   {
     component: SubmitTable,
     id: 'end',
-    title: 'Kleine Erinnerung',
+    title: t('dream-mall-panel.setup.submit-title'),
     submit: 'next',
-    submitText: "Los geht's",
+    submitText: t('dream-mall-panel.setup.create-table'),
     back: () => (tableSettings.isPrivate ? 'users' : 'settings'),
   },
 ]
