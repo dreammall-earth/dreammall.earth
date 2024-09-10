@@ -1,5 +1,5 @@
 <template>
-  <CockpitCard narrow>
+  <CockpitCard>
     <template #header>
       <div class="header">
         <button class="back" @click="$emit('back')">
