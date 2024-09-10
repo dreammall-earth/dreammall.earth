@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { navigate } from 'vike/client/router'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
@@ -48,11 +48,26 @@ const showAddAction = computed(() => {
   return tablesStore.isTableChangeable(tableId.value)
 })
 
+const copiedIndicator = ref(false)
+let timerIndicator: ReturnType<typeof setTimeout> | null = null
+
 const buttons = computed(() => [
   {
-    icon: 'mdi-content-copy',
+    icon: copiedIndicator.value ? 'mdi-check' : 'mdi-content-copy',
     text: t('dream-mall-panel.call.link'),
-    action: () => copyToClipboard(),
+    action: () => {
+      if (tableId.value) {
+        copyToClipboard(tablesStore.getTableUrl(tableId.value))
+        copiedIndicator.value = true
+
+        if (timerIndicator) clearTimeout(timerIndicator)
+
+        timerIndicator = setTimeout(() => {
+          copiedIndicator.value = false
+          timerIndicator = null
+        }, 3000)
+      }
+    },
   },
   ...(showAddAction.value
     ? [

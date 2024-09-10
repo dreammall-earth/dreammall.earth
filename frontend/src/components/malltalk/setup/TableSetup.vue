@@ -101,7 +101,7 @@ const onSubmit = async () => {
       return
     }
 
-    await navigate(`/table/${tableId}`)
+    await navigate(tablesStore.getTableUri(tableId))
   } catch (error) {
     GlobalErrorHandler.error('Error opening table', error)
   }
