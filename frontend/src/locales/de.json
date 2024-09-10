@@ -93,20 +93,29 @@
     "defaultTitle": "DreamMall",
     "joinTableTitle": "Raum beitreten"
   },
-  "payment-link": {
-    "call-to-action": "Upgrade auf PRO",
+  "paymentLink": {
+    "callToAction": "Upgrade auf PRO",
     "subtitle": "Upgrade auf Premium, um weitere Funktionen freizuschalten",
     "title": "Upgrade auf Premium"
   },
   "sepaIban": {
-    "accountHolder": "Konto Inhaber",
-    "amount": "Betrag",
-    "explanation": "Bitte richte einen Dauerauftrag in deinem Online-Banking ein.",
-    "introduction": "Danke, dass du dich für ein DreamMall-Abonnement entschieden hast!",
-    "qr-explanation": "Wenn deine Banking-App QR codes unterstützt, kannst du einfach diesen QR code scannen.",
-    "reference": "Referenz",
-    "table-header": "Kontodaten",
-    "title": "Dauerauftrag einrichten"
+    "explanation": {
+      "title": "Dauerauftrag einrichten",
+      "introduction": "Danke, dass du dich für ein DreamMall-Abonnement entschieden hast!",
+      "callToAction": "Um ein Dreammall-Abonnement abzuschließen, kannst du einfach in deinem Online-Banking einen Dauerauftrag einrichten. Die Kontodetails findest du auf dieser Seite."
+    },
+    "accountData": {
+      "title": "Kontodaten",
+      "accountHolder": "Konto Inhaber",
+      "amount": "Betrag in Euro",
+      "reference": "Referenz",
+      "IBAN": "IBAN",
+      "BIC": "BIC"
+    },
+    "qr": {
+      "title": "QR Code scannen",
+      "explanation": "Alternativ kannst du auch diesen QR Code mit deiner Banking-App QR scannen."
+    }
   },
   "table": {
     "notFound": "Tisch nicht gefunden."

@@ -1,10 +1,10 @@
 <template>
-  <v-card class="payment-link" :title="$t('payment-link.title')">
+  <v-card flat class="payment-link" :title="$t('paymentLink.title')">
     <v-card-text>
-      {{ $t('payment-link.subtitle') }}
+      {{ $t('paymentLink.subtitle') }}
     </v-card-text>
     <v-btn href="/payment" color="primary" block border>
-      {{ $t('payment-link.call-to-action') }}
+      {{ $t('paymentLink.callToAction') }}
     </v-btn>
   </v-card>
 </template>

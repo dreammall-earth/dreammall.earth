@@ -1577,7 +1577,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
             
           </section>
           <div
-            class="v-card v-theme--light v-card--density-default v-card--variant-elevated payment-link"
+            class="v-card v-card--flat v-theme--light v-card--density-default v-card--variant-elevated payment-link"
             data-v-f97d716a=""
           >
             <!---->
@@ -1633,7 +1633,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                 <div
                   class="v-card-title"
                 >
-                  $t('payment-link.title')
+                  $t('paymentLink.title')
                 </div>
                 <!---->
                 <!---->
@@ -1646,7 +1646,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
               class="v-card-text"
               data-v-f97d716a=""
             >
-              $t('payment-link.subtitle')
+              $t('paymentLink.subtitle')
             </div>
             <a
               class="v-btn v-btn--block v-theme--light v-btn--border bg-primary v-btn--density-default v-btn--size-default v-btn--variant-elevated"
@@ -1668,7 +1668,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
               >
                 
                 
-                $t('payment-link.call-to-action')
+                $t('paymentLink.callToAction')
                 
                 
               </span>
