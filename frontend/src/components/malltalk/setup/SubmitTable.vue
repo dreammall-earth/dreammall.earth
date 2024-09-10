@@ -1,7 +1,8 @@
 <template>
   <div class="flat-text-field d-flex flex-column text-center pa-4">
-    <div class="reminder pa-5 rounded-lg text-white font-weight-medium">
-      <p class="text-center">
+    <div class="reminder text-center pa-5 font-weight-medium">
+      <LogoImage class="mx-auto" size="tiny" :text-enabled="false" />
+      <p class="mt-5">
         {{ $t('dream-mall-panel.setup.reminder') }}
       </p>
     </div>
@@ -10,6 +11,7 @@
       <v-text-field
         v-model="tableUrl"
         rounded
+        flat
         class="elevation-0 w-100 flex-grow-1 mr-3 custom-text-field"
         content-class="elevation-0"
         variant="solo-filled"
@@ -17,7 +19,7 @@
         readonly
       />
       <v-btn icon class="custom-icon-btn" @click="copyUrl">
-        <v-icon icon="mdi-content-copy" />
+        <v-icon :icon="copiedIndicator ? 'mdi-check' : 'mdi-content-copy'" />
       </v-btn>
     </div>
 
@@ -29,6 +31,9 @@
 import { ref } from 'vue'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
+import LogoImage from '#components/menu/LogoImage.vue'
+import { copyToClipboard } from '#src/utils/copyToClipboard'
+import { useTablesStore } from '#stores/tablesStore'
 
 import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
 
@@ -39,18 +44,37 @@ const onSubmit = () => {
   emit('submit')
 }
 
-const tableUrl = ref('https.//asdfasdf.de')
+const tablesStore = useTablesStore()
 
-const copyUrl = () => {}
+const tableId = 0 // todo: the tableId is not known here yet!!
+const tableUrl = ref(tablesStore.getJoinTableUrl(tableId))
+
+const copiedIndicator = ref(false)
+let timerIndicator: ReturnType<typeof setTimeout> | null = null
+
+const copyUrl = () => {
+  copyToClipboard(tableUrl.value)
+  copiedIndicator.value = true
+
+  if (timerIndicator) clearTimeout(timerIndicator)
+
+  timerIndicator = setTimeout(() => {
+    copiedIndicator.value = false
+    timerIndicator = null
+  }, 3000)
+}
 </script>
 
 <style scoped lang="scss">
 .reminder {
-  background-color: #8b949b; // todo: save globally
+  border-radius: 16.25px;
+
+  color: rgb(var(--v-theme-dm-panel-reminder-text-color));
+  background-color: var(--v-dm-panel-reminder-text-background-color);
 }
 
 :root {
-  --custom-height: 56px;
+  --custom-height: 48px;
 }
 
 .custom-text-field {
@@ -60,10 +84,23 @@ const copyUrl = () => {}
     padding-top: 12px;
     padding-bottom: 12px;
   }
+
+  :deep(.v-field) {
+    color: rgb(var(--v-theme-dm-panel-reminder-link-color)) !important;
+    background-color: var(--v-dm-panel-reminder-link-background-color) !important;
+  }
+
+  :deep(input) {
+    color: var(--v-theme-dm-panel-reminder-link-color) !important;
+  }
 }
 
 .custom-icon-btn {
   height: 48px;
   width: 48px;
+  box-shadow: none !important;
+
+  color: rgb(var(--v-theme-dm-panel-reminder-link-color)) !important;
+  background-color: var(--v-dm-panel-reminder-link-background-color) !important;
 }
 </style>
