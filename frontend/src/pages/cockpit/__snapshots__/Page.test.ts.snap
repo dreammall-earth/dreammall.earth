@@ -11,7 +11,6 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
     <main
       class="v-main bg-background main-layout"
       data-v-75d0be1e=""
-      data-v-e027cbb0=""
       style="--v-layout-left: 0px; --v-layout-right: 0px; --v-layout-top: 70px; --v-layout-bottom: 0px; transition: none !important;"
     >
       
@@ -967,11 +966,12 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
         
         <div
           class="cockpit"
-          data-v-e027cbb0=""
+          data-v-b49ea567=""
         >
           
+          
           <section
-            class="cockpit-card narrow"
+            class="cockpit-card"
             data-v-1451ba78=""
             data-v-f444dc92=""
           >
@@ -1397,10 +1397,9 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
           <!--v-if-->
           
           <section
-            class="cockpit-card narrow"
+            class="cockpit-card"
             data-v-1451ba78=""
             data-v-c2e63817=""
-            data-v-e027cbb0=""
           >
             <div
               class="header"
@@ -1577,6 +1576,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
             <!--v-if-->
             
           </section>
+          
         </div>
         
       </div>
