@@ -39,8 +39,7 @@ const onClick = (stepId: string) => {
 
 const pageContext = usePageContext()
 const tableId = computed(() => {
-  const match = pageContext.urlPathname.match(/\/table\/(\d+)/)
-  return match ? parseInt(match[1], 10) : null
+  return pageContext.routeParams.id ? Number(pageContext.routeParams.id) : null
 })
 
 const tablesStore = useTablesStore()
