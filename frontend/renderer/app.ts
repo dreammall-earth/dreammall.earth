@@ -27,6 +27,7 @@ function createApp(pageContext: PageContext, isClient = true) {
     setup: () => {
       provide(DefaultApolloClient, createApolloClient(getToken, isClient))
       provide('authService', new AuthService())
+      provide('pageContext', pageContext)
     },
     data: () => ({
       Page: markRaw(pageContext.Page),
