@@ -1,5 +1,5 @@
 <template>
-  <CockpitCard narrow>
+  <CockpitCard>
     <template #default>
       <div class="header mb-2">
         <v-avatar class="avatar d-flex align-center text-font" size="90">
