@@ -73,10 +73,16 @@
     "500": {
       "h1": "500 Interner Fehler",
       "text": "Irgendetwas ist schief gegangen."
+    },
+    "globalerror": {
+    "text": "Fehler beim Öffnen der Tabelle",
+    "autherror": "Authentifizierungsfehler"
     }
   },
   "joinTablePage": {
-    "header": "Raum betreten als:"
+    "header": "Raum betreten als:",
+    "button": "Bestätigen", 
+    "name": "Name"
   },
   "menu": {
     "cockpit": "Cockpit",

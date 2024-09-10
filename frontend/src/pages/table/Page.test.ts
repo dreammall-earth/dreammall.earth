@@ -91,7 +91,7 @@ describe('Table Page', () => {
 
     it('toasts an error', () => {
       expect(errorHandlerSpy).toHaveBeenCalledWith(
-        'Error opening table',
+        'Fehler beim Öffnen der Tabelle',
         new ApolloError({ errorMessage: 'table does not exist' }),
       )
     })

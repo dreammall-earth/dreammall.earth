@@ -12,6 +12,8 @@
 import { storeToRefs } from 'pinia'
 import { navigate } from 'vike/client/router'
 import { reactive, ref, watch } from 'vue'
+import { ComponentExposed } from 'vue-component-type-helpers'
+import { useI18n } from 'vue-i18n'
 
 import StepControl from '#components/steps/StepControl.vue'
 import { Step } from '#components/steps/useSteps'
@@ -24,7 +26,8 @@ import StartSetup from './StartSetup.vue'
 import SubmitTable from './SubmitTable.vue'
 
 import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
-import type { ComponentExposed } from 'vue-component-type-helpers'
+
+const { t } = useI18n()
 
 const tablesStore = useTablesStore()
 const { defaultMyTableName } = storeToRefs(tablesStore)
@@ -103,7 +106,7 @@ const onSubmit = async () => {
 
     await navigate(`/table/${tableId}`)
   } catch (error) {
-    GlobalErrorHandler.error('Error opening table', error)
+    GlobalErrorHandler.error(t('error.globalerror.text'), error)
   }
 }
 

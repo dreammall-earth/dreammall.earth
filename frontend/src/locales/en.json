@@ -73,10 +73,16 @@
     "500": {
       "h1": "500 Internal Error",
       "text": "Something went wrong."
+    },
+    "globalerror": {
+    "text": "Error opening table",
+    "autherror": "auth error"
     }
   },
   "joinTablePage": {
-    "header": "Join Table as:"
+    "header": "Join Table as:", 
+    "button": "Submit",
+    "name": "Name"
   },
   "menu": {
     "cockpit": "Cockpit",

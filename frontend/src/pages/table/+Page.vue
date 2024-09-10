@@ -18,6 +18,7 @@
 import { useQuery } from '@vue/apollo-composable'
 import { navigate } from 'vike/client/router'
 import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import EmbeddedTable from '#components/embedded-table/EmbeddedTable.vue'
 import TableSettings from '#components/malltalk/settings/TableSettings.vue'
@@ -25,6 +26,8 @@ import { usePageContext } from '#context/usePageContext'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { joinTableQuery } from '#queries/joinTableQuery'
+
+const { t } = useI18n()
 
 const tableUrl = ref<string | null>(null)
 
@@ -58,7 +61,7 @@ watch(joinTableQueryResult, (data: { joinTable: string }) => {
 // eslint-disable-next-line promise/prefer-await-to-callbacks
 watch(joinTableQueryError, (error) => {
   if (!error) return
-  GlobalErrorHandler.error('Error opening table', error)
+  GlobalErrorHandler.error(t('error.globalerror.text'), error)
   errorMessage.value = error.message
   tableUrl.value = null
 })
