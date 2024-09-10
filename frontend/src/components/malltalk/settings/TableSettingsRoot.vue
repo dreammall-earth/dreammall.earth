@@ -57,7 +57,7 @@ const buttons = computed(() => [
     text: t('dream-mall-panel.call.link'),
     action: () => {
       if (tableId.value) {
-        copyToClipboard(tablesStore.getTableUrl(tableId.value))
+        copyToClipboard(tablesStore.getJoinTableUrl(tableId.value))
         copiedIndicator.value = true
 
         if (timerIndicator) clearTimeout(timerIndicator)

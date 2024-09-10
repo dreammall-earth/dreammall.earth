@@ -137,7 +137,9 @@ export const useTablesStore = defineStore(
     const defaultMyTableName = computed(() => currentUser.value?.name ?? '')
     const isTableChangeable = (id: number): boolean => myTable.value?.id === id
     const getTableUri = (id: number): string => `/table/${id}`
-    const getTableUrl = (id: number): string => new URL(window.location.href).host + getTableUri(id)
+    const getJoinTableUri = (id: number): string => `/join-table/${id}`
+    const getJoinTableUrl = (id: number): string =>
+      new URL(window.location.href).host + getJoinTableUri(id)
 
     return {
       tables,
@@ -152,7 +154,7 @@ export const useTablesStore = defineStore(
       defaultMyTableName,
       isTableChangeable,
       getTableUri,
-      getTableUrl,
+      getJoinTableUrl,
     }
   },
   {
