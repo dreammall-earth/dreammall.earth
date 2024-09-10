@@ -40,7 +40,7 @@ services:
       - redis:/data
 
   authentik:
-    image: ghcr.io/dreammall-earth/dreammall.earth/authentik:latest
+    image: ghcr.io/dreammall-earth/dreammall.earth/authentik:${IMAGE_TAG:-latest}
     build:
       context: .
       target: production
@@ -60,7 +60,7 @@ services:
       - redis
 
   authentik-worker:
-    image: ghcr.io/dreammall-earth/dreammall.earth/authentik:latest
+    image: ghcr.io/dreammall-earth/dreammall.earth/authentik:${IMAGE_TAG:-latest}
     build:
       context: .
       target: production
