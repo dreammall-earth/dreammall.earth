@@ -75,13 +75,13 @@
       "text": "Irgendetwas ist schief gegangen."
     },
     "globalerror": {
-    "text": "Fehler beim Öffnen der Tabelle",
-    "autherror": "Authentifizierungsfehler"
+      "text": "Fehler beim Öffnen der Tabelle",
+      "autherror": "Authentifizierungsfehler"
     }
   },
   "joinTablePage": {
     "header": "Raum betreten als:",
-    "button": "Bestätigen", 
+    "button": "Bestätigen",
     "name": "Name"
   },
   "menu": {
