@@ -64,7 +64,7 @@ const steps: Step[] = [
   {
     component: SelectUsers,
     id: 'users',
-    title: t('dream-mall-panel.setup.invitation-title"'),
+    title: t('dream-mall-panel.setup.invitation-title'),
     submit: 'next',
     submitText: t('dream-mall-panel.setup.continue'),
     back: 'previous',
