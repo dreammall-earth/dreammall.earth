@@ -2310,8 +2310,7 @@ describe('TableResolver', () => {
       })
     })
 
-    // describe('deleteTable', () => {
-
-    // })
+    describe('deleteTable', () => {
+    })
   })
 })

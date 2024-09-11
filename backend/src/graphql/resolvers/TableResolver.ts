@@ -359,20 +359,7 @@ export class TableResolver {
         },
       },
     })
-    // const updatedMeeting = await prisma.meeting.update({
-    //   where: {
-    //     id: tableId,
-    //   },
-    //   data: {
-    //     users: {
-    //       disconnect: [{ meetingId_userId: { userId: user?.id, meetingId: tableId } }],
-    //     },
-    //   },
-    //   include: {
-    //     users: true,
-    //   },
-    // })
-    // const userWithMeeting = await findUsersInMeetings(meeting)
+
     return true
   }
 
