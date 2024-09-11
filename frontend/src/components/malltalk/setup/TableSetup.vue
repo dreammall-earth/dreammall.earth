@@ -79,7 +79,7 @@ const steps: Step[] = [
   },
 ]
 
-const emit = defineEmits<{
+defineEmits<{
   (e: 'close'): void
 }>()
 
