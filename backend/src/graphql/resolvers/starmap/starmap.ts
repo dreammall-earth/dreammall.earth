@@ -27,11 +27,16 @@ type Star = {
   coordinates: Coordinates
 }
 
+type StarDistribution = {
+  starsPlacedInIteration: number
+  starsPlacedInSectorIteration: number[]
+}
+
 const fibonacci = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
 
 // these are static singletons, access by the getter functions
 const sectors: Sector[] = []
-const starsPlacedInIteration: number[] = []
+const starDistribution: StarDistribution[] = []
 const sectorsPerIteration: number[] = []
 
 /*
@@ -75,7 +80,8 @@ The sectors array is ordered like this:
 ]
 
 This is how the stars are distributed to the sectors
-(with max vertical sectors of 3)
+(with max vertical sectors of 3),
+formalized in singleton starDistribution (see spec)
 
 Iteration | distribution                                            | sum         | total
 ----------------------------------------------------------------------------------------
@@ -238,8 +244,8 @@ const getSectorsPerIteration = (): number[] => {
   return sectorsPerIteration
 }
 
-const getStarsPlacedInIteration = (): number[] => {
-  if (starsPlacedInIteration.length) return starsPlacedInIteration
+export const getStarDistribution = (): StarDistribution[] => {
+  if (starDistribution.length) return starDistribution
   const iterationLength = 4 + MAX_VERTICAL_SECTORS
   const sectorsPerIteration = getSectorsPerIteration()
 
@@ -247,45 +253,71 @@ const getStarsPlacedInIteration = (): number[] => {
 
   fibonacci.forEach((_, i) => {
     if (i === 0) {
-      starsPlacedInIteration.push(starsAdded)
+      starDistribution.push({
+        starsPlacedInSectorIteration: [starsAdded],
+        starsPlacedInIteration: starsAdded,
+      })
     } else {
+      const starsPlacedInSectorIteration = []
       const startIdx = i > iterationLength - 1 ? i - iterationLength + 1 : 0
       const length = Math.min(iterationLength, i + 1)
       for (let j = startIdx; j < length + startIdx; j++) {
-        starsAdded += fibonacci[j] * sectorsPerIteration[length - j - 1 + startIdx]
+        const starsAddedInSectorIteration =
+          fibonacci[j] * sectorsPerIteration[length - j - 1 + startIdx]
+        starsAdded += starsAddedInSectorIteration
+        starsPlacedInSectorIteration.push(starsAddedInSectorIteration)
       }
-      starsPlacedInIteration.push(starsAdded)
+      starDistribution.push({
+        starsPlacedInSectorIteration,
+        starsPlacedInIteration: starsAdded,
+      })
     }
   })
-  return starsPlacedInIteration
+  return starDistribution
 }
 
 const getNextSectorIdx = (starsPlaced: number): number => {
-  const iterationLength = 4 + MAX_VERTICAL_SECTORS
-  const starsPlacedInIteration = getStarsPlacedInIteration()
-  const sectorsPerIteration = getSectorsPerIteration()
-  const iteration = starsPlacedInIteration.findIndex((i) => i > starsPlaced)
-
-  
-  console.log('difference', difference)
-  
+  // const sectorIterationLength = 4 + MAX_VERTICAL_SECTORS
+  const starDistribution = getStarDistribution()
   const sectors = getSectors()
+  const iteration = starDistribution.findIndex((sD) => sD.starsPlacedInIteration > starsPlaced)
 
-  let starsAdded = 0
-  const startIdx = iteration > iterationLength - 1 ? iteration - iterationLength + 1 : 0
-  const length = Math.min(iterationLength, iteration + 1)
-  let j = startIdx
-  while (starsAdded < difference && j < length + startIdx) {
-    starsAdded += fibonacci[j] * sectorsPerIteration[length - j - 1 + startIdx]
-    j++
-    console.log(starsAdded, j)
+  const difference = starDistribution[iteration].starsPlacedInIteration - starsPlaced
+
+  // const length = Math.min(sectorIterationLength, iteration + 1)
+  /*
+  console.log({
+    starsPlaced,
+    iteration,
+    difference,
+  })
+  */
+
+  if (difference === 0) {
+    return sectors.findLastIndex((s: Sector) => s.iteration === iteration + 1)
   }
-  
-  return (
-    sectors.findIndex((s) => s.iteration === iteration + 1) +
-    sectors.filter((s) => s.iteration === iteration + 1).length -
-    difference
-  )
+
+  let sectorIdx = 0
+  let starsAdded = 0
+  while (difference > starsAdded) {
+    starsAdded += starDistribution[iteration].starsPlacedInSectorIteration[sectorIdx]
+    sectorIdx++
+    /*
+    console.log({
+      sectorIdx,
+      starsAdded,
+    })
+    */
+  }
+
+  /*
+  console.log('result', (
+    sectors.findIndex((s) => s.iteration === sectorIdx) +
+      starsAdded - difference
+  ))
+  */
+
+  return sectors.findIndex((s) => s.iteration === sectorIdx) + starsAdded - difference
 }
 
 export const distributeStarsToSectorsRecursive = (
