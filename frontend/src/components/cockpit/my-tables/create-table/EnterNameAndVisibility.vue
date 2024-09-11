@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="onNext">
     <MotivationBox>
-      {{ $t('cockpit.myTables.createTableA.motivation') }}
+      {{ $t('cockpit.myTables.createTable.visionIntoReality') }}
     </MotivationBox>
     <v-text-field
       v-model="createTableModel.name"

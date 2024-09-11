@@ -1,5 +1,8 @@
 <template>
   <div>
+    <MotivationBox>
+      {{ $t('cockpit.myTables.createTable.visionIntoReality') }}
+    </MotivationBox>
     <UserSelection v-model="createTableModel.userIds" />
 
     <div class="align-content-center align-center">
@@ -11,6 +14,8 @@
 <script lang="ts" setup>
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 import UserSelection from '#components/user-selection/UserSelection.vue'
+
+import MotivationBox from './MotivationBox.vue'
 
 import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
 import type { CreateTableModel } from './CreateTable.vue'

@@ -45,8 +45,9 @@
       "memberCount": "{count} members",
       "noTables": "No group tables so far",
       "share": "Share",
-      "createTableA": {
-        "motivation": "Your vision turns into reality. Let's take the first step together."
+      "createTable": {
+        "visionIntoReality": "Your vision turns into reality. Let's take the first step together.",
+        "tableCreated": "Your table was created.",
       }
     }
   },
