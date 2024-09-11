@@ -30,7 +30,7 @@ const { currentComponent, close } = useModal()
 .modal-move,
 .modal-enter-active,
 .modal-leave-active {
-  transition: all 0.3s ease;
+  transition: opacity 0.5s ease;
 }
 
 .modal-enter-from,

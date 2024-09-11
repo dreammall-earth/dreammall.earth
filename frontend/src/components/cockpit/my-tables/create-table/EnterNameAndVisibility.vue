@@ -14,6 +14,7 @@
       append-inner-icon="mdi-pencil"
       maxlength="64"
       required
+      autofocus
     />
     <!-- todo: manage values as maxlength globally? -->
 
