@@ -10,6 +10,8 @@
 <script lang="ts" setup>
 import { navigate } from 'vike/client/router'
 
+import SimpleButton from '#components/buttons/SimpleButton.vue'
+
 import MotivationBox from './MotivationBox.vue'
 
 import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
