@@ -16,7 +16,11 @@
 
     <v-switch
       v-model="tableSettings.isPrivate"
-      :label="tableSettings.isPrivate ? 'Privat' : 'Öffentlich'"
+      :label="
+        tableSettings.isPrivate
+          ? $t('dream-mall-panel.setup.private')
+          : $t('dream-mall-panel.setup.public')
+      "
       color="#4caf50"
       inset
       hide-details

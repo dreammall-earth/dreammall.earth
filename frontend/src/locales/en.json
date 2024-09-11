@@ -79,7 +79,9 @@
       "submit-title": "Hint",
       "table-creation": "Create Table",
       "table-creation-title": "Create Table",
-      "table-name": "Table Name"
+      "table-name": "Table Name",
+      "public": "Public",
+      "private": "Private"
     }
   },
   "error": {

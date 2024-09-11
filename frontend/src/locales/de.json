@@ -79,7 +79,9 @@
       "submit-title": "Hinweis",
       "table-creation": "Tisch erstellen",
       "table-creation-title": "Tisch erstellen",
-      "table-name": "Tischname"
+      "table-name": "Tischname",
+      "public": "Öffentlich",
+      "private": "Privat"
     }
   },
   "error": {
