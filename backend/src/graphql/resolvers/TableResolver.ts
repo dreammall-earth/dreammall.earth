@@ -361,6 +361,7 @@ export class TableResolver {
         },
       })
     } catch (e) {
+      logger.error('User could not be detached', e)
       throw new Error('User could not be detached.')
     }
 
