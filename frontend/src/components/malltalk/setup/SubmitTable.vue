@@ -43,6 +43,7 @@ import { useTablesStore } from '#stores/tablesStore'
 
 import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
 import {useI18n} from "vue-i18n";
+import {useUserStore} from "#stores/userStore";
 
 defineProps<StepProps>()
 const emit = defineEmits<StepEmits>()
@@ -53,9 +54,10 @@ const onSubmit = () => {
 
 const { t } = useI18n()
 
+const userStore = useUserStore()
 const tablesStore = useTablesStore()
 
-const tableId = 0 // todo: the tableId is not known here yet!!
+const tableId = userStore.getMyTable?.id ?? 0
 const tableUrl = ref(tablesStore.getJoinTableUrl(tableId))
 
 const copiedIndicator = ref(false)
