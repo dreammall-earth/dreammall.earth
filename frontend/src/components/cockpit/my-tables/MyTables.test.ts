@@ -37,6 +37,7 @@ mockClient.setRequestHandler(
     data: {
       tables: [
         {
+          id: 1,
           name: 'My Table',
           public: false,
           users: [
