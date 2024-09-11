@@ -1,7 +1,11 @@
 <template>
-  <form class="flat-text-field d-flex flex-column align-center pa-4 w-100" @submit.prevent="onNext">
+  <form @submit.prevent="onNext">
+    <MotivationBox>
+      {{ $t('cockpit.myTables.createTableA.motivation') }}
+    </MotivationBox>
     <v-text-field
       v-model="createTableModel.name"
+      flat
       rounded
       class="elevation-0 w-100"
       content-class="elevation-0"
@@ -28,6 +32,8 @@
 <script setup lang="ts">
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 
+import MotivationBox from './MotivationBox.vue'
+
 import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
 import type { CreateTableModel } from './CreateTable.vue'
 
@@ -44,9 +50,3 @@ const onNext = () => {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.flat-text-field .v-field--variant-solo-filled {
-  box-shadow: none !important;
-}
-</style>

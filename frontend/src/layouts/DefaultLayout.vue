@@ -98,7 +98,7 @@ import LightDarkSwitch from '#components/menu/LightDarkSwitch.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 import TabControl from '#components/menu/TabControl.vue'
 import UserInfo from '#components/menu/UserInfo.vue'
-import ModalPanel from '#components/modal/Modal.vue'
+import ModalPanel from '#components/modal/ModalPanel.vue'
 import useModal from '#components/modal/useModal'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
 

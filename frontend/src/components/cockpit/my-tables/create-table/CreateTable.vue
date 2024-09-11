@@ -3,6 +3,7 @@
     ref="stepControl"
     v-model="createTableModel"
     :steps="steps"
+    class="d-flex flex-column align-center pa-4 w-100"
     @submit="onSubmit"
     @close="() => $emit('close')"
   />
@@ -89,5 +90,3 @@ const stepControl = ref<ComponentExposed<typeof StepControl<CreateTableModel>> |
 
 defineExpose({ reset: () => stepControl.value?.reset() })
 </script>
-
-<script setup lang="ts"></script>

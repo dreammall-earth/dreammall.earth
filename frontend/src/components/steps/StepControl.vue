@@ -12,6 +12,7 @@
     v-if="steps && currentStep < steps.length"
     v-model="model"
     :submit-text="steps[currentStep]?.submitText ?? 'Weiter'"
+    :class="$attrs.class"
     @next="next"
     @go-to="goTo"
     @submit="$emit('submit')"

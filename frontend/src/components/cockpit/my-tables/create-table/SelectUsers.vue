@@ -1,5 +1,5 @@
 <template>
-  <div class="flat-text-field d-flex flex-column align-center pa-4 w-100">
+  <div>
     <UserSelection v-model="createTableModel.userIds" />
 
     <div class="align-content-center align-center">
