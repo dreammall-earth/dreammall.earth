@@ -96,6 +96,7 @@ describe('User Store', () => {
     beforeAll(() => {
       userStore.setCurrentUser({
         id: 666,
+        referenceId: 'UQV6KSVD',
         name: 'Current User',
         username: 'currentUser',
         introduction: 'Hello, I am the current user',
@@ -127,6 +128,7 @@ describe('User Store', () => {
     it('updates current user', () => {
       expect(userStore.getCurrentUser).toEqual({
         id: 666,
+        referenceId: 'UQV6KSVD',
         name: 'Current User',
         username: 'currentUser',
         availability: 'available',

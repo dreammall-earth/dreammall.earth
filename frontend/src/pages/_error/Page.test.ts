@@ -8,7 +8,7 @@ import { title } from './+title'
 
 describe('ErrorPage', () => {
   it('title returns correct title', () => {
-    expect(title).toBe('IT4C | Error')
+    expect(title).toBe('DreamMall | Error')
   })
   describe('500 Error', () => {
     const WrapperUndefined = () => {
