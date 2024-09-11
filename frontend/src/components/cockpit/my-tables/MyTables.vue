@@ -53,6 +53,8 @@ const { getTables: tables } = storeToRefs(useTablesStore())
   gap: 8px;
   padding: 0;
   list-style: none;
+  height: 78%;
+  overflow: auto;
 }
 
 .add-table {
