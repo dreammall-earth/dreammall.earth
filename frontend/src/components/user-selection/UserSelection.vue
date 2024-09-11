@@ -91,8 +91,8 @@ const updateInvitationStatus = (userId: number, invited: boolean) => {
     background-color: var(--v-dm-panel-text-input-background-color) !important;
 
     // todo: find workaround for a gradient and round corners
-    //border: 1px solid transparent !important;
-    //border-image: linear-gradient(to right, red, blue) 1;
+    // border: 1px solid transparent !important;
+    // border-image: linear-gradient(to right, red, blue) 1;
     border-radius: 28px !important;
   }
 
