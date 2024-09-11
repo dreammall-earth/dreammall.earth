@@ -58,6 +58,7 @@ export type SocialMedia = {
 
 export type CurrentUser = {
   id: number
+  referenceId: string
   name: string
   username: string
   avatar?: string

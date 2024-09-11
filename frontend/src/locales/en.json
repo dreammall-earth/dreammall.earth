@@ -93,6 +93,30 @@
     "defaultTitle": "DreamMall",
     "joinTableTitle": "Enter Table"
   },
+  "paymentLink": {
+    "callToAction": "Upgrade to PRO",
+    "subtitle": "Upgrade to premium to unlock more features",
+    "title": "Upgrade to premium"
+  },
+  "sepaIban": {
+    "accountData": {
+      "accountHolder": "Account holder",
+      "amount": "Amount in Euro",
+      "BIC": "BIC",
+      "IBAN": "IBAN",
+      "reference": "Reference",
+      "title": "Account details"
+    },
+    "explanation": {
+      "callToAction": "To order a Dreammall subscription, you can simply set up a standing order in your online banking. You can view the account details on this page.",
+      "introduction": "Thank you for choosing a DreamMall subscription!",
+      "title": "Set up standing order"
+    },
+    "qr": {
+      "explanation": "If your banking app supports QR codes, you can easily scan the QR code below on the page.",
+      "title": "Scan QR Code"
+    }
+  },
   "table": {
     "notFound": "Table not found."
   },
