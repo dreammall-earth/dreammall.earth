@@ -1,6 +1,7 @@
 <template>
   <v-text-field
     v-model="userSearch"
+    flat
     rounded
     clearable
     class="elevation-0 w-100"
@@ -70,11 +71,7 @@ const updateInvitationStatus = (userId: number, invited: boolean) => {
 }
 </script>
 
-<style lang="scss" scoped>
-.flat-text-field .v-field--variant-solo-filled {
-  box-shadow: none !important;
-}
-
+<style scoped>
 .user-list-container {
   height: 200px;
   overflow-y: auto;
