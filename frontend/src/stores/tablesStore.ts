@@ -7,6 +7,7 @@ import { createTableMutation } from '#mutations/createTableMutation'
 import { deleteTableMutation } from '#mutations/deleteTableMutation'
 import { joinMyTableMutation } from '#mutations/joinMyTableMutation'
 import { updateMyTableMutation } from '#mutations/updateMyTableMutation'
+import { META } from '#src/env'
 import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
 import { tablesQuery } from '#src/graphql/queries/tablesQuery'
 import { useUserStore } from '#stores/userStore'
@@ -197,6 +198,10 @@ export const useTablesStore = defineStore(
     const existsMyTable = computed(() => myTable.value !== null)
     const defaultMyTableName = computed(() => currentUser.value?.name ?? '')
     const isTableChangeable = (id: number): boolean => myTable.value?.id === id
+    const getTableUri = (id: number): string => `/table/${id}`
+    const getJoinTableUri = (id: number): string => `/join-table/${id}`
+    const getJoinTableUrl = (id: number): string =>
+      id ? new URL(getJoinTableUri(id), META.BASE_URL).href : ''
 
     return {
       openTables,
@@ -217,6 +222,8 @@ export const useTablesStore = defineStore(
       existsMyTable,
       defaultMyTableName,
       isTableChangeable,
+      getTableUri,
+      getJoinTableUrl,
     }
   },
   {
