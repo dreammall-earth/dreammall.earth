@@ -2329,7 +2329,7 @@ describe('TableResolver', () => {
         })
       })
 
-      describe('existing table with multiple', () => {
+      describe('existing table with multiple Moderator', () => {
         let tableId: number | undefined
         beforeAll(async () => {
           const meeting = await prisma.meeting.findFirst({
