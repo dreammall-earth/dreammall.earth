@@ -1,7 +1,7 @@
 import { Resolver, Query, Authorized } from 'type-graphql'
 
 import { StarMap } from '#models/StarModel'
-import { prisma } from '#src/prisma'
+import { prisma, UserWithProfile } from '#src/prisma'
 
 import { distributeStarsToSectorsRecursive } from './starmap/starmap'
 
@@ -10,10 +10,11 @@ export class StarmapResolver {
   @Authorized()
   @Query(() => StarMap)
   async starmap(): Promise<StarMap> {
-    const users = await prisma.user.findMany({
+    const users: UserWithProfile[] = await prisma.user.findMany({
       include: {
         userDetail: true,
         socialMedia: true,
+        meeting: true,
       },
     })
 
@@ -26,6 +27,11 @@ export class StarmapResolver {
         distance: 1,
         magnitude: 1,
         color: 1,
+        data: {
+          // eslint-disable-next-line security/detect-object-injection
+          ...users[i],
+          meeting: null,
+        },
       })),
       [],
     )
