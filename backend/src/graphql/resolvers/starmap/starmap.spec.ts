@@ -1,4 +1,12 @@
-import { getMaxDistance, randomStarsinSector } from './starmap'
+import { getMaxDistance, distributeStarsToSectorsRecursive, getSectors } from './starmap'
+
+describe('getSectors', () => {
+  const sectors = getSectors()
+
+  it('has the correct length', () => {
+    expect(sectors).toHaveLength(12 * 4 * 3)
+  })
+})
 
 describe('getMaxDistance', () => {
   describe('called with empty array', () => {
@@ -20,16 +28,49 @@ describe('getMaxDistance', () => {
   })
 })
 
-describe('randomStarsinSector', () => {
-  describe('24 stars in sector 0', () => {
-    it('returns an array with 24 stars', () => {
-      const starsInSector = randomStarsinSector(0, 24)
-      expect(starsInSector).toMatchObject({
-        sectorIdx: 0,
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        stars: expect.any(Array),
-      })
-      expect(starsInSector.stars).toHaveLength(24)
+describe('distributeStarsToSectorsRecursive', () => {
+  describe('distribute 3 stars', () => {
+    const stars = distributeStarsToSectorsRecursive(3)
+
+    it('has 3 stars', () => {
+      expect(stars).toHaveLength(3)
+    })
+
+    it('has 1 star in sector 0', () => {
+      expect(stars[0].sectorIdx).toBe(0)
+    })
+
+    it('has 1 star in sector 1', () => {
+      expect(stars[1].sectorIdx).toBe(1)
+    })
+
+    it('has 1 star in sector 2', () => {
+      expect(stars[2].sectorIdx).toBe(2)
+    })
+  })
+
+  describe('distribute 14 stars', () => {
+    const stars = distributeStarsToSectorsRecursive(14)
+
+    it('has 14 stars', () => {
+      expect(stars).toHaveLength(14)
+    })
+
+    it('has 1 star in sector 11', () => {
+      expect(stars[11].sectorIdx).toBe(11)
+    })
+
+    it('has 2 stars in sector 0', () => {
+      expect(stars[0].sectorIdx).toBe(1)
+      expect(stars[12].sectorIdx).toBe(1)
+    })
+
+    it('has 2 stars in sector 1', () => {
+      expect(stars[1].sectorIdx).toBe(2)
+    })
+
+    it('has 1 stars in sector 2', () => {
+      expect(stars[2].sectorIdx).toBe(1)
     })
   })
 })
