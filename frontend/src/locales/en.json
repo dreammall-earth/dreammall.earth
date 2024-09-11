@@ -11,6 +11,9 @@
     "signin": "Signing In",
     "title": "DreamMall {'|'} Authentication"
   },
+  "globalErrorHandler": {
+    "copiedToClipboard": "Copied to clipboard"
+  },
   "buttons": {
     "newProject": "New Project",
     "newTable": "New Table",

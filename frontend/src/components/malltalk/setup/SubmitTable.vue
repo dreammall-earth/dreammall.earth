@@ -42,6 +42,7 @@ import { copyToClipboard } from '#src/utils/copyToClipboard'
 import { useTablesStore } from '#stores/tablesStore'
 
 import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
+import {useI18n} from "vue-i18n";
 
 defineProps<StepProps>()
 const emit = defineEmits<StepEmits>()
@@ -49,6 +50,8 @@ const emit = defineEmits<StepEmits>()
 const onSubmit = () => {
   emit('submit')
 }
+
+const { t } = useI18n()
 
 const tablesStore = useTablesStore()
 
@@ -59,7 +62,7 @@ const copiedIndicator = ref(false)
 let timerIndicator: ReturnType<typeof setTimeout> | null = null
 
 const copyUrl = () => {
-  copyToClipboard(tableUrl.value)
+  copyToClipboard(tableUrl.value, t('globalErrorHandler.copiedToClipboard'))
   copiedIndicator.value = true
 
   if (timerIndicator) clearTimeout(timerIndicator)
@@ -73,7 +76,7 @@ const copyUrl = () => {
 
 <style scoped lang="scss">
 .reminder {
-  border-radius: 16.25px;
+  border-radius: 24px;
 
   color: rgb(var(--v-theme-dm-panel-reminder-text-color));
   background-color: var(--v-dm-panel-reminder-text-background-color);

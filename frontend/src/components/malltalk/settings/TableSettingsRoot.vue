@@ -65,7 +65,10 @@ const buttons = computed(() => [
     indicator: copiedIndicator.value,
     action: () => {
       if (tableId.value) {
-        copyToClipboard(tablesStore.getJoinTableUrl(tableId.value))
+        copyToClipboard(
+          tablesStore.getJoinTableUrl(tableId.value),
+          t('globalErrorHandler.copiedToClipboard'),
+        )
         copiedIndicator.value = true
 
         if (timerIndicator) clearTimeout(timerIndicator)
