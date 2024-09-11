@@ -26,7 +26,7 @@ describe('Tables Store', () => {
   describe('defaults', () => {
     it('has defaults set correctly', () => {
       expect(tablesStore.tables).toEqual([])
-      expect(tablesStore.getTables).toEqual([])
+      expect(tablesStore.getOpenTables).toEqual([])
     })
   })
 
@@ -58,7 +58,7 @@ describe('Tables Store', () => {
       })
 
       it('updates the store', () => {
-        expect(tablesStore.getTables).toEqual([
+        expect(tablesStore.getOpenTables).toEqual([
           {
             id: 69,
             meetingID: 'my-meeting',
@@ -78,7 +78,7 @@ describe('Tables Store', () => {
 
   describe('set tables action', () => {
     it('updates the store', () => {
-      tablesStore.setTables([
+      tablesStore.setOpenTables([
         {
           id: 77,
           meetingID: 'my-meeting',

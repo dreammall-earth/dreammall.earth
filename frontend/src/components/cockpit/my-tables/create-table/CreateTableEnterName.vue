@@ -11,9 +11,9 @@
 <script setup lang="ts">
 import Logo from '#assets/dreammall-logo-no-text.svg'
 
-import type { CreateTableInput } from './CreateTableFlow.vue'
+import type { CreateTableModel } from './CreateTable.vue'
 
-const table = defineModel<CreateTableInput>({
+const table = defineModel<CreateTableModel>({
   required: true,
 })
 </script>

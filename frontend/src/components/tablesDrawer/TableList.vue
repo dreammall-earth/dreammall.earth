@@ -17,10 +17,10 @@
 <script lang="ts" setup>
 import { navigate } from 'vike/client/router'
 
-import { Table } from '#stores/tablesStore'
+import type { OpenTable } from '#stores/tablesStore'
 
 defineProps<{
-  items: Table[]
+  items: OpenTable[]
 }>()
 
 const emit = defineEmits(['openTable'])

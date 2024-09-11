@@ -1,8 +1,8 @@
-import { onMounted, onUnmounted, ref } from 'vue'
+import { Component, onMounted, onUnmounted, ref } from 'vue'
 
 type StepId = string | (() => string)
 export type Step = {
-  component: unknown
+  component: Component
   id: string
   title: string
   submit: StepId
@@ -56,8 +56,8 @@ export const useSteps = (steps: Step[], emit: (event: 'close') => void) => {
 
   const findStepById = (id: string): number => steps.findIndex((step) => step.id === id)
 
-  const onNext = transitToNext
-  const onBack = transitToPrevious
+  const next = transitToNext
+  const back = transitToPrevious
 
   const goTo = (stepId: string) => transitToId(stepId)
 
@@ -91,8 +91,8 @@ export const useSteps = (steps: Step[], emit: (event: 'close') => void) => {
 
   return {
     currentStep,
-    onNext,
-    onBack,
+    next,
+    back,
     goTo,
     reset,
   }

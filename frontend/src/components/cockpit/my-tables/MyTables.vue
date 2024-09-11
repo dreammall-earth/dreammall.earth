@@ -21,18 +21,16 @@
 </template>
 
 <script lang="ts" setup>
-import { h } from 'vue'
-
 import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
-import usePanel from '#src/panels/usePanel'
+import useModal from '#components/modal/useModal'
 
-import CreateTableFlow from './CreateTableFlow.vue'
+import CreateTable from './create-table/CreateTable.vue'
 import TableItem from './TableItem.vue'
 
-const { setComponent } = usePanel()
+const { setComponent } = useModal()
 
 const addTable = () => {
-  setComponent(h(CreateTableFlow))
+  setComponent(CreateTable)
 }
 
 const items = [

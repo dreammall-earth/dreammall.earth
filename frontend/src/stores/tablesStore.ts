@@ -3,9 +3,11 @@ import { acceptHMRUpdate, defineStore, storeToRefs } from 'pinia'
 import { computed, ref, watch } from 'vue'
 
 import { createMyTableMutation } from '#mutations/createMyTableMutation'
+import { createTableMutation } from '#mutations/createTableMutation'
 import { joinMyTableMutation } from '#mutations/joinMyTableMutation'
 import { updateMyTableMutation } from '#mutations/updateMyTableMutation'
 import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
+import { tablesQuery } from '#src/graphql/queries/tablesQuery'
 import { useUserStore } from '#stores/userStore'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
@@ -13,7 +15,7 @@ type Attendee = {
   fullName: string
 }
 
-export type Table = {
+export type OpenTable = {
   id: number
   meetingID: string
   meetingName: string
@@ -29,7 +31,7 @@ export type UserInTable = {
   username: string
 }
 
-export type MyTable = {
+export type Table = {
   id: number
   name: string
   public: boolean
@@ -37,15 +39,19 @@ export type MyTable = {
 }
 
 type CreateMyTableResult = {
-  createMyTable: MyTable
+  createMyTable: Table
 }
 
 type UpdateMyTableResult = {
-  updateMyTable: MyTable
+  updateMyTable: Table
 }
 
 type JoinMyTableResult = {
   joinMyTable: number
+}
+
+type CreateTableResult = {
+  createTable: Table
 }
 
 export const useTablesStore = defineStore(
@@ -54,7 +60,7 @@ export const useTablesStore = defineStore(
     const userStore = useUserStore()
     const { getMyTable: myTable, currentUser } = storeToRefs(userStore)
 
-    const { result: openTablesQueryResult, loading } = useQuery(
+    const { result: openTablesQueryResult, loading: isLoadingOpenTables } = useQuery(
       openTablesQuery,
       {},
       {
@@ -63,8 +69,21 @@ export const useTablesStore = defineStore(
       },
     )
 
-    watch(openTablesQueryResult, (data: { openTables: Table[] }) => {
-      setTables(data.openTables)
+    watch(openTablesQueryResult, (data: { openTables: OpenTable[] }) => {
+      setOpenTables(data.openTables)
+    })
+
+    const { result: tablesQueryResult, loading: isLoadingTables } = useQuery(
+      tablesQuery,
+      {},
+      {
+        prefetch: false,
+        fetchPolicy: 'no-cache',
+      },
+    )
+
+    watch(tablesQueryResult, (data: { tables: Table[] }) => {
+      setTables(data.tables)
     })
 
     const {
@@ -75,8 +94,8 @@ export const useTablesStore = defineStore(
       { fetchPolicy: 'no-cache' },
     )
 
-    watch(updateOpenTablesSubscriptionResult, (data: { updateOpenTables: Table[] }) => {
-      setTables(data.updateOpenTables)
+    watch(updateOpenTablesSubscriptionResult, (data: { updateOpenTables: OpenTable[] }) => {
+      setOpenTables(data.updateOpenTables)
     })
 
     /*
@@ -85,11 +104,17 @@ export const useTablesStore = defineStore(
     })
     */
 
+    const mallTalks = ref<OpenTable[]>([])
+
+    const getOpenTables = computed(() => mallTalks.value)
+
+    const setOpenTables = (newTables: OpenTable[]) => {
+      mallTalks.value = newTables
+    }
+
     const tables = ref<Table[]>([])
 
     const getTables = computed(() => tables.value)
-
-    const isLoading = computed(() => loading)
 
     const setTables = (newTables: Table[]) => {
       tables.value = newTables
@@ -98,6 +123,16 @@ export const useTablesStore = defineStore(
     const { mutate: createMyTableMutate } = useMutation<CreateMyTableResult>(createMyTableMutation)
     const { mutate: updateMyTableMutate } = useMutation<UpdateMyTableResult>(updateMyTableMutation)
     const { mutate: joinMyTableMutate } = useMutation<JoinMyTableResult>(joinMyTableMutation)
+
+    const { mutate: createTableMutate } = useMutation<CreateTableResult>(createTableMutation)
+
+    const createTable = async (name: string, isPublic: boolean, userIds: number[]) => {
+      const result = await createTableMutate({ name, isPublic, userIds })
+      if (result?.data?.createTable) {
+        setTables([...tables.value, result.data.createTable])
+      }
+      return result?.data?.createTable
+    }
 
     const createMyTable = async (name: string, isPublic: boolean, userIds: number[]) => {
       const result = await createMyTableMutate({ name, isPublic, userIds })
@@ -138,13 +173,17 @@ export const useTablesStore = defineStore(
     const isTableChangeable = (id: number): boolean => myTable.value?.id === id
 
     return {
-      tables,
-      setTables,
+      tables: mallTalks,
+      setOpenTables,
+      getOpenTables,
+      isLoadingOpenTables,
       getTables,
-      isLoading,
+      setTables,
+      isLoadingTables,
       createMyTable,
       updateMyTable,
       updateMyTableUsers,
+      createTable,
       joinMyTable,
       existsMyTable,
       defaultMyTableName,
