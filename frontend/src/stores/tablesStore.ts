@@ -4,6 +4,7 @@ import { computed, ref, watch } from 'vue'
 
 import { createMyTableMutation } from '#mutations/createMyTableMutation'
 import { createTableMutation } from '#mutations/createTableMutation'
+import { deleteTableMutation } from '#mutations/deleteTableMutation'
 import { joinMyTableMutation } from '#mutations/joinMyTableMutation'
 import { updateMyTableMutation } from '#mutations/updateMyTableMutation'
 import { META } from '#src/env'
@@ -53,6 +54,10 @@ type JoinMyTableResult = {
 
 type CreateTableResult = {
   createTable: Table
+}
+
+type DeleteTableResult = {
+  deleteTable: boolean
 }
 
 export const useTablesStore = defineStore(
@@ -126,6 +131,7 @@ export const useTablesStore = defineStore(
     const { mutate: joinMyTableMutate } = useMutation<JoinMyTableResult>(joinMyTableMutation)
 
     const { mutate: createTableMutate } = useMutation<CreateTableResult>(createTableMutation)
+    const { mutate: deleteTableMutate } = useMutation<DeleteTableResult>(deleteTableMutation)
 
     const createTable = async (name: string, isPublic: boolean, userIds: number[]) => {
       const result = await createTableMutate({ name, isPublic, userIds })
@@ -133,6 +139,26 @@ export const useTablesStore = defineStore(
         setTables([...tables.value, result.data.createTable])
       }
       return result?.data?.createTable
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const updateTable = async (_tableId: number, _name: string, _isPublic: boolean) => {
+      // TODO: Implement
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const updateTableModerators = async (_tableId: number, _userIds: number[]) => {
+      // TODO: Implement
+    }
+
+    const deleteTable = async (tableId: number) => {
+      const result = await deleteTableMutate({ tableId })
+
+      if (result?.data?.deleteTable) {
+        setTables(tables.value.filter((table) => table.id !== tableId))
+      }
+
+      return result?.data?.deleteTable
     }
 
     const createMyTable = async (name: string, isPublic: boolean, userIds: number[]) => {
@@ -189,6 +215,9 @@ export const useTablesStore = defineStore(
       updateMyTable,
       updateMyTableUsers,
       createTable,
+      updateTable,
+      updateTableModerators,
+      deleteTable,
       joinMyTable,
       existsMyTable,
       defaultMyTableName,
