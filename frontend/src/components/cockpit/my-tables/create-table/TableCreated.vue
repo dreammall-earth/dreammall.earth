@@ -3,8 +3,7 @@
     <MotivationBox>
       {{ $t('cockpit.myTables.createTable.tableCreated') }}
     </MotivationBox>
-    [Copy link]
-    <button @click="openTable">Open new table</button>
+    <SimpleButton class="mt-12 mx-auto" :label="props.submitText" @click="openTable" />
   </div>
 </template>
 
@@ -13,11 +12,12 @@ import { navigate } from 'vike/client/router'
 
 import MotivationBox from './MotivationBox.vue'
 
-import type { StepEmits } from '#components/steps/StepComponentTypes'
+import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
 import type { CreateTableModel } from './CreateTable.vue'
 
 const createTableModel = defineModel<CreateTableModel>({ required: true })
 
+const props = defineProps<StepProps>()
 const emit = defineEmits<StepEmits>()
 
 const openTable = () => {

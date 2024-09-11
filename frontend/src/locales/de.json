@@ -38,17 +38,17 @@
     },
     "myTables": {
       "addTable": "Tisch hinzufügen",
+      "createTable": {
+        "tableCreated": "Dein Tisch wurde erstellt.",
+        "visionIntoReality": "Deine Vision wird Realität, lass uns gemeinsam den ersten Schritt machen."
+      },
       "delete": "Löschen",
       "edit": "Bearbeiten",
       "header": "Meine Tische",
       "invite": "Einladen",
       "memberCount": "{count} Mitglieder",
       "noTables": "Noch keine Gruppentische",
-      "share": "Teilen",
-      "createTable": {
-        "visionIntoReality": "Deine Vision wird Realität, lass uns gemeinsam den ersten Schritt machen.",
-        "tableCreated": "Dein Tisch wurde erstellt."
-      }
+      "share": "Teilen"
     }
   },
   "dream-mall-panel": {
