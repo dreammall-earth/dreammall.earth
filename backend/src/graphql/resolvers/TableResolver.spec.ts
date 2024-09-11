@@ -2414,8 +2414,8 @@ describe('TableResolver', () => {
         beforeAll(async () => {
           const meeting = await prisma.meeting.create({
             data: {
-              meetingID: '',
-              name: '',
+              meetingID: 'Räuber Group',
+              name: 'Räuber Group',
               users: {
                 create: {
                   userId: raeuberUser.id,
