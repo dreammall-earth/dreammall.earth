@@ -55,12 +55,6 @@
       class="button-list"
       :class="[visibleDrawer === 'dream-mall-button' ? 'button-list--active' : '']"
     >
-      <v-img class="w-100 menu-divider" :src="Divider" />
-      <v-img
-        class="w-100 menu-triangle"
-        :class="[visibleDrawer === 'dream-mall-button' ? 'menu-triangle--turned' : '']"
-        :src="Triangle"
-      />
       <slot name="dream-mall-button" :close="() => toggleDrawer('dream-mall-button')">
         <TableSetup ref="tableSetupRef" @close="toggleDrawer('dream-mall-button')" />
       </slot>
@@ -199,16 +193,17 @@ const { isModalActive } = useModal()
   justify-content: start;
   width: var(--width);
   height: var(--height);
-  padding-top: 30px;
-  padding-bottom: 40px;
-  background: var(--v-bottom-menu-background) !important;
-  backdrop-filter: blur(20px);
-  border-radius: 30px 30px 0 0;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  background-color: var(--v-dm-panel-background-color);
+  border: 1px solid var(--v-dm-panel-border-color);
+  backdrop-filter: blur(30px);
+  border-radius: 30px;
   transition: bottom 0.75s;
 
   &--active {
     @media #{map.get($display-breakpoints, 'sm-and-down')} {
-      bottom: 60px;
+      bottom: 90px;
     }
 
     @media #{map.get($display-breakpoints, 'md-and-up')} {

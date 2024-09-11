@@ -1,9 +1,10 @@
 <template>
-  <form class="flat-text-field d-flex flex-column align-center pa-4 w-100" @submit.prevent="onNext">
+  <form class="d-flex flex-column align-center pa-4 w-100" @submit.prevent="onNext">
     <v-text-field
       v-model="tableSettings.name"
       rounded
-      class="elevation-0 w-100"
+      flat
+      class="custom-text-field elevation-0 w-100"
       content-class="elevation-0"
       :label="$t('dream-mall-panel.setup.table-name')"
       variant="solo-filled"
@@ -13,7 +14,13 @@
     />
     <!-- todo: manage values as maxlength globally? -->
 
-    <v-switch v-model="tableSettings.isPrivate" label="Privat" color="#4caf50" inset hide-details />
+    <v-switch
+      v-model="tableSettings.isPrivate"
+      :label="tableSettings.isPrivate ? 'Privat' : 'Öffentlich'"
+      color="#4caf50"
+      inset
+      hide-details
+    />
 
     <SimpleButton type="submit" class="mt-12" :label="submitText" />
   </form>
@@ -40,7 +47,14 @@ const onNext = () => {
 </script>
 
 <style lang="scss" scoped>
-.flat-text-field .v-field--variant-solo-filled {
-  box-shadow: none !important;
+.custom-text-field {
+  :deep(.v-field) {
+    color: rgb(var(--v-theme-dm-panel-text-input-color)) !important;
+    background-color: var(--v-dm-panel-text-input-background-color) !important;
+  }
+
+  :deep(input) {
+    color: rgb(var(--v-theme-dm-panel-text-input-color)) !important;
+  }
 }
 </style>
