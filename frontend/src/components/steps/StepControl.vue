@@ -33,5 +33,5 @@ const emit = defineEmits<{
 
 const { currentStep, next, back, goTo, reset } = useSteps(props.steps, emit)
 
-defineExpose({ reset, goTo, next })
+defineExpose({ reset, goTo, next, back })
 </script>
