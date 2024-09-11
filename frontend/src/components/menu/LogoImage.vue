@@ -1,10 +1,11 @@
 <template>
-  <v-img class="w-100" :class="classes" :src="Logo" />
+  <v-img class="w-100" :class="classes" :src="textEnabled ? Logo : LogoSimple" />
 </template>
 
 <script lang="ts" setup>
 import { computed } from 'vue'
 
+import LogoSimple from '#assets/dreammall-logo-simple.svg'
 import Logo from '#assets/dreammall-logo.svg'
 
 const props = withDefaults(
@@ -12,15 +13,17 @@ const props = withDefaults(
     /**
      * size of the logo image
      */
-    size?: 'small' | 'medium' | 'large'
+    size?: 'small' | 'medium' | 'large' | 'tiny'
+    textEnabled: boolean
   }>(),
-  { size: 'medium' },
+  { size: 'medium', textEnabled: true },
 )
 
 const classes = computed(() => ({
   'logo-large': props.size === 'large',
   'logo-medium': props.size === 'medium',
   'logo-small': props.size === 'small',
+  'logo-tiny': props.size === 'tiny',
 }))
 </script>
 
@@ -35,5 +38,9 @@ const classes = computed(() => ({
 
 .logo-small {
   max-width: 8em;
+}
+
+.logo-tiny {
+  max-width: 2em;
 }
 </style>

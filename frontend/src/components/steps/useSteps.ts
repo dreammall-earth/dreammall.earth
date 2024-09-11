@@ -8,6 +8,7 @@ export type Step = {
   submit: StepId
   submitText: string
   back: StepId
+  canBack?: boolean
 }
 
 // const updateHistory = () => {

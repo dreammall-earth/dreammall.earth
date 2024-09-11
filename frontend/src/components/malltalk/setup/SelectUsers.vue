@@ -20,6 +20,6 @@ const emit = defineEmits<StepEmits>()
 const tableSettings = defineModel<MyTableSettings>({ required: true })
 
 const onNext = () => {
-  emit('next')
+  emit('submit')
 }
 </script>
