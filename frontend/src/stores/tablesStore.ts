@@ -104,12 +104,12 @@ export const useTablesStore = defineStore(
     })
     */
 
-    const mallTalks = ref<OpenTable[]>([])
+    const openTables = ref<OpenTable[]>([])
 
-    const getOpenTables = computed(() => mallTalks.value)
+    const getOpenTables = computed(() => openTables.value)
 
     const setOpenTables = (newTables: OpenTable[]) => {
-      mallTalks.value = newTables
+      openTables.value = newTables
     }
 
     const tables = ref<Table[]>([])
@@ -173,7 +173,7 @@ export const useTablesStore = defineStore(
     const isTableChangeable = (id: number): boolean => myTable.value?.id === id
 
     return {
-      tables: mallTalks,
+      openTables,
       setOpenTables,
       getOpenTables,
       isLoadingOpenTables,
