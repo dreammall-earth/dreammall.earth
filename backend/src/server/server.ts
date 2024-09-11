@@ -8,7 +8,8 @@ import express, { json, urlencoded } from 'express'
 import { useServer } from 'graphql-ws/lib/use/ws'
 import { WebSocketServer } from 'ws'
 
-import { handleWebhook } from '#api/BBB'
+import { periodicallyRegisterWebhook, handleWebhook } from '#api/BBB'
+import { CONFIG } from '#config/config'
 import { schema } from '#graphql/schema'
 import { context } from '#src/context'
 
@@ -46,6 +47,10 @@ export const createTestServer = async () => {
 }
 
 export async function listen(port: number) {
+  if (CONFIG.BBB_WEBHOOK_URL) {
+    periodicallyRegisterWebhook()
+  }
+
   const app = express()
 
   // Setup
