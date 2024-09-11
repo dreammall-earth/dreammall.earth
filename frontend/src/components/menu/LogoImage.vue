@@ -14,7 +14,7 @@ const props = withDefaults(
      * size of the logo image
      */
     size?: 'small' | 'medium' | 'large' | 'tiny'
-    textEnabled: boolean
+    textEnabled?: boolean
   }>(),
   { size: 'medium', textEnabled: true },
 )
