@@ -1732,87 +1732,62 @@ exports[`Table Page > renders 1`] = `
         </div>
         <div
           class="flat-text-field d-flex flex-column align-center pa-4 w-100"
+          data-v-b63bd396=""
           modelvalue="[object Object]"
         >
           <div
-            class="v-row v-row--no-gutters"
+            class="v-row v-row--no-gutters justify-space-around"
+            data-v-b63bd396=""
           >
+            
             <div
-              class="v-col v-col-12"
+              class="v-col v-col-auto text-center px-2"
+              data-v-b63bd396=""
             >
-              <div
-                class="v-btn-group v-btn-group--divided v-theme--light v-btn-group--density-default rounded-lg"
+              <button
+                class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default elevation-0 v-btn--size-x-large v-btn--variant-elevated round-button mb-2"
+                data-v-b63bd396=""
+                type="button"
               >
-                <button
-                  class="v-btn v-btn--flat v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-outlined px-6"
-                  style="height: auto;"
-                  type="button"
+                
+                <span
+                  class="v-btn__overlay"
+                />
+                <span
+                  class="v-btn__underlay"
+                />
+                
+                <!---->
+                <span
+                  class="v-btn__content"
+                  data-no-activator=""
                 >
                   
-                  <span
-                    class="v-btn__overlay"
-                  />
-                  <span
-                    class="v-btn__underlay"
+                  
+                  <i
+                    aria-hidden="true"
+                    class="mdi-content-copy mdi v-icon notranslate v-theme--light v-icon--size-default"
+                    data-v-b63bd396=""
                   />
                   
-                  <!---->
-                  <span
-                    class="v-btn__content"
-                    data-no-activator=""
-                  >
-                    
-                    
-                    <i
-                      aria-hidden="true"
-                      class="mdi-link mdi v-icon notranslate v-theme--light v-icon--size-default mr-2"
-                    />
-                     $t('dream-mall-panel.call.link')
-                    
-                    
-                  </span>
-                  <!---->
-                  <!---->
-                </button>
-                <button
-                  class="v-btn v-btn--flat v-theme--light v-btn--density-default v-btn--size-default v-btn--variant-outlined px-6"
-                  style="height: auto;"
-                  type="button"
-                >
                   
-                  <span
-                    class="v-btn__overlay"
-                  />
-                  <span
-                    class="v-btn__underlay"
-                  />
-                  
-                  <!---->
-                  <span
-                    class="v-btn__content"
-                    data-no-activator=""
-                  >
-                    
-                    
-                    <i
-                      aria-hidden="true"
-                      class="mdi-account-plus mdi v-icon notranslate v-theme--light v-icon--size-default mr-2"
-                    />
-                     $t('dream-mall-panel.call.add-user')
-                    
-                    
-                  </span>
-                  <!---->
-                  <!---->
-                </button>
+                </span>
+                <!---->
+                <!---->
+              </button>
+              <div
+                class="text-caption"
+                data-v-b63bd396=""
+              >
+                Link
               </div>
             </div>
+            
           </div>
           <button
-            class="v-btn v-btn--disabled v-theme--light v-btn--density-default elevation-0 v-btn--rounded v-btn--size-default v-btn--variant-elevated custom-green-btn mt-12 mb-5"
+            class="v-btn v-btn--elevated v-theme--light v-btn--density-default elevation-0 v-btn--rounded v-btn--size-default v-btn--variant-elevated custom-green-btn leave-button mt-12 mb-5"
+            data-v-b63bd396=""
             data-v-ea088446=""
-            disabled=""
-            style="background-color: #F44336; color: #fff; caret-color: #fff;"
             type="button"
           >
             
@@ -2361,7 +2336,7 @@ exports[`Table Page > renders 1`] = `
         <button
           aria-expanded="false"
           aria-haspopup="menu"
-          aria-owns="v-menu-9"
+          aria-owns="v-menu-8"
           class="mx-auto user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
           data-v-607bdd70=""
         >
