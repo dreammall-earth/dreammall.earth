@@ -4,7 +4,7 @@
     :title="steps[currentStep]?.title ?? 'unknown'"
     :is-back-button-visible="currentStep > 0"
     :is-close-button-visible="true"
-    @back="onBack"
+    @back="back"
     @close="$emit('close')"
   />
   <component
@@ -12,7 +12,7 @@
     v-if="steps && currentStep < steps.length"
     v-model="model"
     :submit-text="steps[currentStep]?.submitText ?? 'Weiter'"
-    @next="onNext"
+    @next="next"
     @go-to="goTo"
     @submit="$emit('submit')"
   />
@@ -30,7 +30,7 @@ const emit = defineEmits<{
   (e: 'submit'): void
 }>()
 
-const { currentStep, onNext, onBack, goTo, reset } = useSteps(props.steps, emit)
+const { currentStep, next, back, goTo, reset } = useSteps(props.steps, emit)
 
-defineExpose({ reset })
+defineExpose({ reset, goTo, next, back })
 </script>
