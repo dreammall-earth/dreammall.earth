@@ -8,7 +8,7 @@
     @close="$emit('close')"
   />
   <component
-    :is="steps[currentStep].component"
+    :is="steps[currentStep]?.component"
     v-if="steps && currentStep < steps.length"
     v-model="model"
     :submit-text="steps[currentStep]?.submitText ?? 'Weiter'"

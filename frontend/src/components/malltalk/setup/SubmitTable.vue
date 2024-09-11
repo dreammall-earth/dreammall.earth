@@ -34,30 +34,33 @@
 </template>
 
 <script lang="ts" setup>
+import { navigate } from 'vike/client/router'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
+import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { copyToClipboard } from '#src/utils/copyToClipboard'
 import { useTablesStore } from '#stores/tablesStore'
-import { useUserStore } from '#stores/userStore'
 
+import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
 import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
 
 defineProps<StepProps>()
 const emit = defineEmits<StepEmits>()
 
-const onSubmit = () => {
-  emit('submit')
+const onSubmit = async () => {
+  emit('next')
+  await navigateToTable()
 }
 
 const { t } = useI18n()
 
-const userStore = useUserStore()
 const tablesStore = useTablesStore()
 
-const tableId = userStore.getMyTable?.id ?? 0
+const tableSettings = defineModel<MyTableSettings>({ required: true })
+const tableId = tableSettings.value.tableId ?? 0
 const tableUrl = ref(tablesStore.getJoinTableUrl(tableId))
 
 const copiedIndicator = ref(false)
@@ -73,6 +76,15 @@ const copyUrl = () => {
     copiedIndicator.value = false
     timerIndicator = null
   }, 3000)
+}
+
+const navigateToTable = async () => {
+  if (!tableId) return
+  try {
+    await navigate(tablesStore.getTableUri(tableId))
+  } catch (error) {
+    GlobalErrorHandler.error('Error opening table', error)
+  }
 }
 </script>
 

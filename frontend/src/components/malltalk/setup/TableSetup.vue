@@ -10,7 +10,6 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { navigate } from 'vike/client/router'
 import { reactive, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -34,6 +33,7 @@ const tableSettings = reactive<MyTableSettings>({
   name: defaultMyTableName.value,
   isPrivate: false,
   users: [],
+  tableId: 0,
 })
 
 const { t } = useI18n()
@@ -96,18 +96,15 @@ const onSubmit = async () => {
       return
     }
 
-    emit('close')
-
-    const tableId = await tablesStore.joinMyTable()
-    if (!tableId) {
+    tableSettings.tableId = await tablesStore.joinMyTable()
+    if (!tableSettings.tableId) {
       GlobalErrorHandler.error('Could not join myTable')
-      return
     }
-
-    await navigate(tablesStore.getTableUri(tableId))
   } catch (error) {
     GlobalErrorHandler.error('Error opening table', error)
   }
+
+  stepControl.value?.next()
 }
 
 const stepControl = ref<ComponentExposed<typeof StepControl<MyTableSettings>> | null>(null)
