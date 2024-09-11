@@ -82,8 +82,6 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 
-import Divider from '#assets/img/divider.svg'
-import Triangle from '#assets/img/triangle.svg'
 import LargeDreamMallButton from '#components/buttons/LargeDreamMallButton.vue'
 import SmallDreamMallButton from '#components/buttons/SmallDreamMallButton.vue'
 import TableSetup from '#components/malltalk/setup/TableSetup.vue'
