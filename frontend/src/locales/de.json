@@ -39,6 +39,7 @@
     "myTables": {
       "addTable": "Tisch hinzufügen",
       "createTable": {
+        "chooseModerators": "Wähle deine Mitmoderatoren.",
         "tableCreated": "Dein Tisch wurde erstellt.",
         "visionIntoReality": "Deine Vision wird Realität, lass uns gemeinsam den ersten Schritt machen."
       },

@@ -39,8 +39,9 @@
     "myTables": {
       "addTable": "Add table",
       "createTable": {
+        "chooseModerators": "Choose your co-moderators.",
         "tableCreated": "Your table was created.",
-        "visionIntoReality": "Your vision turns into reality. Let's take the first step together."
+        "visionIntoReality": "Your vision turns into reality. Let's take the first step together.",
       },
       "delete": "Delete",
       "edit": "Edit",

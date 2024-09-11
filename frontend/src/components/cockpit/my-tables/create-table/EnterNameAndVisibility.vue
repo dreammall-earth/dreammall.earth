@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="onNext">
+  <form @submit.prevent="$emit('next')">
     <MotivationBox>
       {{ $t('cockpit.myTables.createTable.visionIntoReality') }}
     </MotivationBox>
@@ -39,15 +39,7 @@ import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
 import type { CreateTableModel } from './CreateTable.vue'
 
 defineProps<StepProps>()
-const emit = defineEmits<StepEmits>()
+defineEmits<StepEmits>()
 
 const createTableModel = defineModel<CreateTableModel>({ required: true })
-
-const onNext = () => {
-  if (createTableModel.value.isPrivate) {
-    emit('next')
-  } else {
-    emit('submit')
-  }
-}
 </script>

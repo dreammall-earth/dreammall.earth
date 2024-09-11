@@ -1,6 +1,6 @@
 <template>
   <div class="motivation">
-    <img :src="Logo" class="logo" />
+    <img :src="Logo" class="logo mb-2" />
     <slot />
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <MotivationBox>
-      {{ $t('cockpit.myTables.createTable.visionIntoReality') }}
+      {{ $t('cockpit.myTables.createTable.chooseModerators') }}
     </MotivationBox>
     <UserSelection v-model="createTableModel.userIds" />
 

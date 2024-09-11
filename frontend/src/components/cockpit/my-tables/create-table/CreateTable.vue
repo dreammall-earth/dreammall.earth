@@ -41,7 +41,7 @@ const steps: Step[] = [
     component: EnterNameAndVisibility,
     id: 'settings',
     title: 'Tisch erstellen',
-    submit: () => (createTableModel.isPrivate ? 'users' : 'end'),
+    submit: 'users',
     submitText: 'Weiter',
     back: 'previous',
   },
@@ -59,7 +59,7 @@ const steps: Step[] = [
     title: 'Kleine Erinnerung',
     submit: 'close',
     submitText: "Los geht's",
-    back: () => (createTableModel.isPrivate ? 'users' : 'settings'),
+    back: () => 'users',
   },
 ]
 
