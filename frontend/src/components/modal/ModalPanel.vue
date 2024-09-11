@@ -1,7 +1,7 @@
 <template>
   <TransitionGroup name="modal">
     <div v-if="!!currentComponent" class="modal">
-      <component :is="currentComponent" @close="close" />
+      <component :is="currentComponent" v-bind="currentProps" @close="close" />
     </div>
   </TransitionGroup>
 </template>
@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import useModal from './useModal'
 
-const { currentComponent, close } = useModal()
+const { currentComponent, currentProps, close } = useModal()
 </script>
 
 <style scoped>

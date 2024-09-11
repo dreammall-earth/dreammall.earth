@@ -4,7 +4,7 @@
     flat
     rounded
     clearable
-    class="elevation-0 w-100"
+    class="elevation-0 w-100 flex-grow-0"
     content-class="elevation-0"
     label="Suche"
     variant="solo-filled"
