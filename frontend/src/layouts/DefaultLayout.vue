@@ -1,5 +1,5 @@
 <template>
-  <v-main class="bg-background main-layout">
+  <v-main class="bg-background main-layout" :class="{ 'modal-active': isModalActive }">
     <!-- Top Menu -->
     <v-app-bar flat class="app-bar" height="70">
       <v-row class="ma-1">
@@ -32,6 +32,8 @@
       v-model="isTablesDrawerVisible"
       :location="$vuetify.display.smAndDown ? 'bottom' : 'right'"
     />
+
+    <ModalPanel />
 
     <!-- Page Content Container -->
     <v-container fluid class="page-container px-8">
@@ -96,6 +98,8 @@ import LightDarkSwitch from '#components/menu/LightDarkSwitch.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 import TabControl from '#components/menu/TabControl.vue'
 import UserInfo from '#components/menu/UserInfo.vue'
+import ModalPanel from '#components/modal/ModalPanel.vue'
+import useModal from '#components/modal/useModal'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
 
 type DrawerType = 'tables' | 'dream-mall-button' | null
@@ -123,6 +127,8 @@ const toggleDrawer = (drawer: DrawerType) => {
     }
   }
 }
+
+const { isModalActive } = useModal()
 </script>
 
 <style scoped lang="scss">
@@ -134,6 +140,10 @@ const toggleDrawer = (drawer: DrawerType) => {
   padding-top: 0;
   padding-right: 0;
   background: $background-color-primary;
+
+  &.modal-active {
+    pointer-events: none;
+  }
 
   .page-container {
     padding-bottom: 120px;

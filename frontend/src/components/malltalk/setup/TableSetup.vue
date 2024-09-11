@@ -10,8 +10,8 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { navigate } from 'vike/client/router'
 import { reactive, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import StepControl from '#components/steps/StepControl.vue'
 import { Step } from '#components/steps/useSteps'
@@ -33,7 +33,10 @@ const tableSettings = reactive<MyTableSettings>({
   name: defaultMyTableName.value,
   isPrivate: false,
   users: [],
+  tableId: 0,
 })
+
+const { t } = useI18n()
 
 watch(defaultMyTableName, (value) => {
   if (value && !tableSettings.name) {
@@ -47,36 +50,37 @@ const steps: Step[] = [
     id: 'start',
     title: 'Mall Talk',
     submit: 'next',
-    submitText: 'Weiter',
+    submitText: t('dream-mall-panel.setup.continue'),
     back: 'previous',
   },
   {
     component: EnterNameAndVisibility,
     id: 'settings',
-    title: 'Tisch erstellen',
+    title: t('dream-mall-panel.setup.table-creation-title'),
     submit: () => (tableSettings.isPrivate ? 'users' : 'end'),
-    submitText: 'Weiter',
+    submitText: t('dream-mall-panel.setup.continue'),
     back: 'previous',
   },
   {
     component: SelectUsers,
     id: 'users',
-    title: 'Leute einladen',
+    title: t('dream-mall-panel.setup.invitation-title'),
     submit: 'next',
-    submitText: 'Weiter',
+    submitText: t('dream-mall-panel.setup.continue'),
     back: 'previous',
   },
   {
     component: SubmitTable,
     id: 'end',
-    title: 'Kleine Erinnerung',
+    title: t('dream-mall-panel.setup.submit-title'),
     submit: 'next',
-    submitText: "Los geht's",
+    submitText: t('dream-mall-panel.setup.create-table'),
     back: () => (tableSettings.isPrivate ? 'users' : 'settings'),
+    canBack: false,
   },
 ]
 
-const emit = defineEmits<{
+defineEmits<{
   (e: 'close'): void
 }>()
 
@@ -93,18 +97,15 @@ const onSubmit = async () => {
       return
     }
 
-    emit('close')
-
-    const tableId = await tablesStore.joinMyTable()
-    if (!tableId) {
+    tableSettings.tableId = await tablesStore.joinMyTable()
+    if (!tableSettings.tableId) {
       GlobalErrorHandler.error('Could not join myTable')
-      return
     }
-
-    await navigate(`/table/${tableId}`)
   } catch (error) {
     GlobalErrorHandler.error('Error opening table', error)
   }
+
+  stepControl.value?.next()
 }
 
 const stepControl = ref<ComponentExposed<typeof StepControl<MyTableSettings>> | null>(null)

@@ -5,7 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-import { update as tweenUpdate } from '@tweenjs/tween.js'
 import { useQuery } from '@vue/apollo-composable'
 import {
   Scene,
@@ -104,7 +103,6 @@ const initScene = () => {
   // Startet die Animationsschleife
   const animate = () => {
     requestAnimationFrame(animate)
-    tweenUpdate()
     controls.update()
     renderer.render(scene, camera)
   }

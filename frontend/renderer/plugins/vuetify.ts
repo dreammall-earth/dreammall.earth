@@ -29,6 +29,11 @@ function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): Theme
       'cockpit-highlight': theme.cockpitHighlightColor,
       'dm-panel-call-action-button-color': theme.dmPanelCallActionButtonColor,
       'dm-panel-call-action-button-background-color': theme.dmPanelCallActionButtonBackgroundColor,
+      'dm-panel-call-action-button-indicator-color': theme.dmPanelCallActionButtonIndicatorColor,
+      'dm-panel-call-action-button-indicator-background-color':
+        theme.dmPanelCallActionButtonIndicatorBackgroundColor,
+      'dm-panel-reminder-text-color': theme.dmPanelReminderTextColor,
+      'dm-panel-reminder-link-color': theme.dmPanelReminderLinkColor,
     },
     variables: {
       'border-color': theme.borderColor,
@@ -42,6 +47,10 @@ function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): Theme
       'cockpit-element-background': theme.cockpitElementBackground,
       'cockpit-chip-background': theme.cockpitChipBackground,
       'cockpit-chip-background-2': theme.cockpitChipBackground2,
+      'panel-background': theme.panelBackground,
+      'panel-element-background': theme.panelElementBackground,
+      'dm-panel-reminder-text-background-color': theme.dmPanelReminderTextBackgroundColor,
+      'dm-panel-reminder-link-background-color': theme.dmPanelReminderLinkBackgroundColor,
     },
   }
 }

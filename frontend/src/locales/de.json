@@ -38,8 +38,22 @@
     },
     "myTables": {
       "addTable": "Tisch hinzufügen",
+      "changeModerators": {
+        "title": "Moderatoren ändern",
+        "update": "Speichern"
+      },
+      "createTable": {
+        "chooseModerators": "Wähle deine Mitmoderatoren.",
+        "tableCreated": "Dein Tisch wurde erstellt.",
+        "visionIntoReality": "Deine Vision wird Realität, lass uns gemeinsam den ersten Schritt machen."
+      },
       "delete": "Löschen",
+      "deleteConfirmation": "Möchtest du diesen Tisch wirklich löschen?",
       "edit": "Bearbeiten",
+      "editTable": {
+        "title": "Tisch anpassen",
+        "update": "Speichern"
+      },
       "header": "Meine Tische",
       "invite": "Einladen",
       "memberCount": "{count} Mitglieder",
@@ -55,13 +69,16 @@
     },
     "setup": {
       "continue": "Weiter",
-      "create-table": "Los geht's",
+      "create-table": "Fertig",
       "invitation-sent": "gesendet",
+      "invitation-title": "Leute einladen",
       "invite": "einladen",
       "no-result": "Keine Ergebnisse",
       "reminder": "Deine Vision wird Realität,\nlass uns gerne dazu den ersten Schritt machen.",
       "search-error": "Bei der Suche ist ein Fehler aufgetreten.",
+      "submit-title": "Hinweis",
       "table-creation": "Tisch erstellen",
+      "table-creation-title": "Tisch erstellen",
       "table-name": "Tischname"
     }
   },
@@ -74,6 +91,9 @@
       "h1": "500 Interner Fehler",
       "text": "Irgendetwas ist schief gegangen."
     }
+  },
+  "globalErrorHandler": {
+    "copiedToClipboard": "In die Zwischenablage kopiert"
   },
   "joinTablePage": {
     "header": "Raum betreten als:"
