@@ -11,9 +11,9 @@
     </template>
     <template #default>
       <ul class="list">
-        <TableItem v-for="item in items" :key="item.id" v-bind="item" />
+        <TableItem v-for="table in tables" :key="table.id" v-bind="table" />
       </ul>
-      <div v-if="items.length === 0">
+      <div v-if="tables.length === 0">
         {{ $t('cockpit.myTables.noTables') }}
       </div>
     </template>
@@ -21,8 +21,11 @@
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia'
+
 import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
 import useModal from '#components/modal/useModal'
+import { useTablesStore } from '#stores/tablesStore'
 
 import CreateTable from './create-table/CreateTable.vue'
 import TableItem from './TableItem.vue'
@@ -33,18 +36,7 @@ const addTable = () => {
   setComponent(CreateTable)
 }
 
-const items = [
-  {
-    id: 1,
-    name: 'Permakultur',
-    memberCount: 5,
-  },
-  {
-    id: 2,
-    name: 'Cryptowährungen',
-    memberCount: 23,
-  },
-]
+const { getTables: tables } = storeToRefs(useTablesStore())
 </script>
 
 <style scoped>

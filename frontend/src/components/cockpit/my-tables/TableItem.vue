@@ -6,7 +6,7 @@
     >
       <span class="name">{{ props.name }}</span>
       <span class="subtitle">
-        {{ $t('cockpit.myTables.memberCount', { count: props.memberCount }) }}
+        {{ $t('cockpit.myTables.memberCount', { count: props.users.length }) }}
       </span>
     </div>
     <button
@@ -51,11 +51,9 @@ import { ref } from 'vue'
 import OptionButton from '#components/cockpit/options-list/OptionButton.vue'
 import OptionsList from '#components/cockpit/options-list/OptionsList.vue'
 
-const props = defineProps<{
-  id: number
-  name: string
-  memberCount: number
-}>()
+import type { Table } from '#stores/tablesStore'
+
+const props = defineProps<Table>()
 
 const isShowingOptions = ref(false)
 
