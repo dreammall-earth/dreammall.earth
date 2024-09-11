@@ -77,6 +77,19 @@ const tablesQuery = `{
   }
 }`
 
+const deleteTableMutation = `mutation DeleteTable($tableId: Int!) {
+  deleteTable(tableId: $tableId) {
+    id
+    name
+    public
+    users {
+      id
+      name
+      role
+    }
+  }
+}`
+
 describe('TableResolver', () => {
   beforeAll(async () => {
     testServer = await createTestServer()
@@ -361,6 +374,35 @@ describe('TableResolver', () => {
           testServer.executeOperation(
             {
               query: tablesQuery,
+            },
+            { contextValue: { user: null, dataSources: { prisma } } },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('deleteTable', () => {
+      it('throws access denied', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: deleteTableMutation,
+              variables: {
+                tableId: -1,
+              },
             },
             { contextValue: { user: null, dataSources: { prisma } } },
           ),
@@ -2267,5 +2309,9 @@ describe('TableResolver', () => {
         })
       })
     })
+
+    // describe('deleteTable', () => {
+
+    // })
   })
 })

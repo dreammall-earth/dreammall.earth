@@ -330,11 +330,11 @@ export class TableResolver {
   }
 
   @Authorized()
-  @Mutation(() => Table)
+  @Mutation(() => Boolean)
   async deleteTable(
     @Ctx() context: Context,
     @Arg('tableId', () => Int) tableId: number,
-  ): Promise<Table> {
+  ): Promise<boolean> {
     const { user } = context
     if (!user) throw new Error('User not found!')
 
@@ -351,21 +351,29 @@ export class TableResolver {
     } else if (!meeting.users.some((u) => u.userId !== user?.id && u.role === 'MODERATOR')) {
       throw new Error('There is no other Moderator in this table.')
     }
-    const updatedMeeting = await prisma.meeting.update({
+    await prisma.usersInMeetings.delete({
       where: {
-        id: tableId,
-      },
-      data: {
-        users: {
-          disconnect: [{ meetingId_userId: { userId: user?.id, meetingId: tableId } }],
+        meetingId_userId: {
+          userId: user?.id,
+          meetingId: tableId,
         },
       },
-      include: {
-        users: true,
-      },
     })
-    const userWithMeeting = await findUsersInMeetings(meeting)
-    return new Table(updatedMeeting, userWithMeeting)
+    // const updatedMeeting = await prisma.meeting.update({
+    //   where: {
+    //     id: tableId,
+    //   },
+    //   data: {
+    //     users: {
+    //       disconnect: [{ meetingId_userId: { userId: user?.id, meetingId: tableId } }],
+    //     },
+    //   },
+    //   include: {
+    //     users: true,
+    //   },
+    // })
+    // const userWithMeeting = await findUsersInMeetings(meeting)
+    return true
   }
 
   @Subscription(() => [OpenTable], {
