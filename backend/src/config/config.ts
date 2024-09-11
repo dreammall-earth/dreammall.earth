@@ -7,7 +7,10 @@ import { printConfigError } from './printConfigError'
 
 // Load env file
 config({
-  path: path.resolve(__dirname, '../../.env'),
+  path: path.resolve(
+    __dirname,
+    process.env.NODE_ENV === 'production' ? '../../../.env' : '../../.env',
+  ),
 })
 
 // Config

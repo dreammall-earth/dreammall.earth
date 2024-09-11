@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "start": "TZ=UTC TS_NODE_BASEURL=./build node -r tsconfig-paths/register build/src/index.js",
+    "start": "cross-env NODE_ENV=production TZ=UTC TS_NODE_BASEURL=./build node -r tsconfig-paths/register build/src/index.js",
     "dev": "TZ=UTC nodemon -w src --ext ts,json --exec ts-node -r tsconfig-paths/register src/index.ts",
     "db:migrate": "TZ=UTC npx prisma migrate dev",
     "db:migrate:deploy": "TZ=UTC npx prisma migrate deploy",
@@ -37,6 +37,7 @@
     "axios": "^1.7.7",
     "class-validator": "^0.14.1",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "fast-xml-parser": "^4.5.0",
