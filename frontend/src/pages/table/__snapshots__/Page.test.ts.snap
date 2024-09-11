@@ -959,6 +959,16 @@ exports[`Table Page > renders 1`] = `
         <!---->
       </transition-stub>
       
+      <transition-group-stub
+        appear="false"
+        css="true"
+        data-v-48393cd1=""
+        data-v-75d0be1e=""
+        name="modal"
+        persisted="false"
+      >
+        <!--v-if-->
+      </transition-group-stub>
       <!-- Page Content Container -->
       <div
         class="v-container v-container--fluid v-locale--is-ltr page-container px-8"

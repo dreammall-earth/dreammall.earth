@@ -22,6 +22,7 @@
 
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
+import { computed } from 'vue'
 
 import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
 import useModal from '#components/modal/useModal'
@@ -30,13 +31,23 @@ import { useTablesStore } from '#stores/tablesStore'
 import CreateTable from './create-table/CreateTable.vue'
 import TableItem from './TableItem.vue'
 
+import type { Table } from '#stores/tablesStore'
+
 const { setComponent } = useModal()
 
 const addTable = () => {
   setComponent(CreateTable)
 }
 
-const { getTables: tables } = storeToRefs(useTablesStore())
+const { getTables } = storeToRefs(useTablesStore())
+
+const tables = computed(() =>
+  getTables.value.map((table: Table) => ({
+    id: table.id,
+    name: table.name,
+    memberCount: table.users.length,
+  })),
+)
 </script>
 
 <style scoped>
