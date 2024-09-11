@@ -89,6 +89,7 @@ const updateInvitationStatus = (userId: number, invited: boolean) => {
   :deep(.v-field) {
     color: rgb(var(--v-theme-dm-panel-text-input-color)) !important;
     background-color: var(--v-dm-panel-text-input-background-color) !important;
+
     // todo: find workaround for a gradient and round corners
     //border: 1px solid transparent !important;
     //border-image: linear-gradient(to right, red, blue) 1;

@@ -194,8 +194,8 @@ const { isModalActive } = useModal()
   padding-top: 10px;
   padding-bottom: 20px;
   background-color: var(--v-dm-panel-background-color);
-  border: 1px solid var(--v-dm-panel-border-color);
   backdrop-filter: blur(30px);
+  border: 1px solid var(--v-dm-panel-border-color);
   border-radius: 30px;
   transition: bottom 0.75s;
 
