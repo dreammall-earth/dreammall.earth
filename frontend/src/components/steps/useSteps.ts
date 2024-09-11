@@ -1,13 +1,14 @@
-import { onMounted, onUnmounted, ref } from 'vue'
+import { Component, onMounted, onUnmounted, ref } from 'vue'
 
 type StepId = string | (() => string)
 export type Step = {
-  component: unknown
+  component: Component
   id: string
   title: string
   submit: StepId
   submitText: string
   back: StepId
+  canBack?: boolean
 }
 
 // const updateHistory = () => {

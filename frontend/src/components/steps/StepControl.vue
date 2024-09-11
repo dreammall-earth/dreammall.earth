@@ -2,16 +2,17 @@
   <StepHeader
     v-if="steps"
     :title="steps[currentStep]?.title ?? 'unknown'"
-    :is-back-button-visible="currentStep > 0"
+    :is-back-button-visible="currentStep > 0 && steps[currentStep]?.canBack !== false"
     :is-close-button-visible="true"
     @back="back"
     @close="$emit('close')"
   />
   <component
-    :is="steps[currentStep].component"
+    :is="steps[currentStep]?.component"
     v-if="steps && currentStep < steps.length"
     v-model="model"
     :submit-text="steps[currentStep]?.submitText ?? 'Weiter'"
+    :class="$attrs.class"
     @next="next"
     @go-to="goTo"
     @submit="$emit('submit')"
