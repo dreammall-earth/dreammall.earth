@@ -64,7 +64,7 @@ const steps: Step[] = [
   {
     component: SelectUsers,
     id: 'users',
-    title: t('dream-mall-panel.setup.continue'),
+    title: t('dream-mall-panel.setup.invitation-title"'),
     submit: 'next',
     submitText: t('dream-mall-panel.setup.continue'),
     back: 'previous',
@@ -76,6 +76,7 @@ const steps: Step[] = [
     submit: 'next',
     submitText: t('dream-mall-panel.setup.create-table'),
     back: () => (tableSettings.isPrivate ? 'users' : 'settings'),
+    canBack: false,
   },
 ]
 

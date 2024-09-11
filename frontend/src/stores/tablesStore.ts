@@ -5,6 +5,7 @@ import { computed, ref, watch } from 'vue'
 import { createMyTableMutation } from '#mutations/createMyTableMutation'
 import { joinMyTableMutation } from '#mutations/joinMyTableMutation'
 import { updateMyTableMutation } from '#mutations/updateMyTableMutation'
+import { META } from '#src/env'
 import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
 import { useUserStore } from '#stores/userStore'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
@@ -139,7 +140,7 @@ export const useTablesStore = defineStore(
     const getTableUri = (id: number): string => `/table/${id}`
     const getJoinTableUri = (id: number): string => `/join-table/${id}`
     const getJoinTableUrl = (id: number): string =>
-      new URL(window.location.href).host + getJoinTableUri(id)
+      id ? new URL(getJoinTableUri(id), META.BASE_URL).href : ''
 
     return {
       tables,

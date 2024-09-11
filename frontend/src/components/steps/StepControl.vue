@@ -2,7 +2,7 @@
   <StepHeader
     v-if="steps"
     :title="steps[currentStep]?.title ?? 'unknown'"
-    :is-back-button-visible="currentStep > 0"
+    :is-back-button-visible="currentStep > 0 && steps[currentStep]?.canBack !== false"
     :is-close-button-visible="true"
     @back="back"
     @close="$emit('close')"

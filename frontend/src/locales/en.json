@@ -11,9 +11,6 @@
     "signin": "Signing In",
     "title": "DreamMall {'|'} Authentication"
   },
-  "globalErrorHandler": {
-    "copiedToClipboard": "Copied to clipboard"
-  },
   "buttons": {
     "newProject": "New Project",
     "newTable": "New Table",
@@ -65,10 +62,10 @@
       "no-result": "No results",
       "reminder": "Your vision becomes reality,\nlet's take the first step together.",
       "search-error": "An error occurred during the search.",
+      "submit-title": "Hint",
       "table-creation": "Create Table",
       "table-creation-title": "Create Table",
-      "table-name": "Table Name",
-      "submit-title": "Hint"
+      "table-name": "Table Name"
     }
   },
   "error": {
@@ -80,6 +77,9 @@
       "h1": "500 Internal Error",
       "text": "Something went wrong."
     }
+  },
+  "globalErrorHandler": {
+    "copiedToClipboard": "Copied to clipboard"
   },
   "joinTablePage": {
     "header": "Join Table as:"

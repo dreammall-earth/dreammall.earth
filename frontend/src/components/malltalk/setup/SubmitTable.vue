@@ -61,13 +61,13 @@ const tablesStore = useTablesStore()
 
 const tableSettings = defineModel<MyTableSettings>({ required: true })
 const tableId = tableSettings.value.tableId ?? 0
-const tableUrl = ref(tablesStore.getJoinTableUrl(tableId))
+const tableUrl = tablesStore.getJoinTableUrl(tableId)
 
 const copiedIndicator = ref(false)
 let timerIndicator: ReturnType<typeof setTimeout> | null = null
 
 const copyUrl = () => {
-  copyToClipboard(tableUrl.value, t('globalErrorHandler.copiedToClipboard'))
+  copyToClipboard(tableUrl, t('globalErrorHandler.copiedToClipboard'))
   copiedIndicator.value = true
 
   if (timerIndicator) clearTimeout(timerIndicator)
@@ -108,9 +108,9 @@ const navigateToTable = async () => {
   }
 
   :deep(.v-field) {
-    border: 1px solid transparent;
     color: rgb(var(--v-theme-dm-panel-reminder-link-color)) !important;
     background-color: var(--v-dm-panel-reminder-link-background-color) !important;
+    border: 1px solid transparent;
   }
 
   :deep(input) {
