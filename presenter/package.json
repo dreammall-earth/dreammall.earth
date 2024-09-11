@@ -67,7 +67,7 @@
     "pinia-plugin-persistedstate": "^3.2.3",
     "sirv": "^2.0.4",
     "validator": "^13.12.0",
-    "vike": "^0.4.176",
+    "vike": "^0.4.195",
     "vite": "^5.4.3",
     "vue": "3.4.38",
     "vue-i18n": "^9.13.1",
