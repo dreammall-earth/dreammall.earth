@@ -1,4 +1,5 @@
 import { config } from '@vue/test-utils'
+import { reactive } from 'vue'
 
 import { vikePageContext } from '#context/usePageContext'
 
@@ -9,9 +10,9 @@ type MockPageContext = {
   }
 }
 
-export const mockPageContext: MockPageContext = {
+export const mockPageContext: MockPageContext = reactive({
   urlPathname: '/some-url',
-}
+})
 
 config.global.provide = {
   ...config.global.provide,

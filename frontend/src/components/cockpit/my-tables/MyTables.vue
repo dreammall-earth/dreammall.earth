@@ -1,5 +1,5 @@
 <template>
-  <CockpitCard narrow>
+  <CockpitCard>
     <template #header>
       <div class="header">
         <h2>{{ $t('cockpit.myTables.header') }}</h2>

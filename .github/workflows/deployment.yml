@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@9a9194f87191a7e9055e3e9b95b8cfb13023bb08 # v4.1.7
+        uses: actions/checkout@6d193bf28034eafb982f37bd894289fe649468fc # v4.1.7
       - name: Log in to the Container registry
         uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567
         with:
@@ -65,7 +65,7 @@ jobs:
     needs: build-and-push-images
     steps:
       - uses: mdgreenwald/mozilla-sops-action@d9714e521cbaecdae64a89d2fdd576dd2aa97056 # v1.6.0
-      - uses: actions/checkout@9a9194f87191a7e9055e3e9b95b8cfb13023bb08 # v4.1.7
+      - uses: actions/checkout@6d193bf28034eafb982f37bd894289fe649468fc # v4.1.7
       - run: |
           mkdir -p ~/.config/sops/age
           echo $SOPS_KEY | base64 --decode > ~/.config/sops/age/keys.txt

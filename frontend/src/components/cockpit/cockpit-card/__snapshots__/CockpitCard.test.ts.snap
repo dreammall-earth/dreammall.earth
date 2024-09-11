@@ -4,6 +4,7 @@ exports[`CockpitCard > renders 1`] = `
 <section
   class="cockpit-card"
   data-v-1451ba78=""
+  narrow="false"
 >
   <div
     class="header"
@@ -29,8 +30,9 @@ exports[`CockpitCard > renders 1`] = `
 
 exports[`CockpitCard > renders narrow 1`] = `
 <section
-  class="cockpit-card narrow"
+  class="cockpit-card"
   data-v-1451ba78=""
+  narrow="true"
 >
   <div
     class="header"
@@ -58,6 +60,7 @@ exports[`CockpitCard > renders with empty header slot 1`] = `
 <section
   class="cockpit-card"
   data-v-1451ba78=""
+  narrow="false"
 >
   <div
     class="header"

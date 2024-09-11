@@ -50,6 +50,7 @@ model Event {
 
 model User {
   id                Int      @id @default(autoincrement())
+  referenceId       String   @db.VarChar(140) @unique
   username          String   @db.VarChar(100) @unique
   name              String   @db.VarChar(254)
   introduction      String?  @db.VarChar(25)
@@ -85,7 +86,7 @@ model UsersInMeetings {
   userId            Int
   assignedAt        DateTime @default(now())
   role              String   @db.VarChar(12) @default("MODERATOR")
-  
+
   @@id([meetingId, userId])
 }
 

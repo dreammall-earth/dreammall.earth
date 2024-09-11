@@ -14,10 +14,11 @@ import {
 import { v4 as uuidv4 } from 'uuid'
 
 import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo, AttendeeRole } from '#api/BBB'
+import { CreateMeetingResponse } from '#api/BBB/types'
 import { CONFIG } from '#config/config'
 import { OpenTable, Table } from '#models/TableModel'
 import { Context } from '#src/context'
-import { EVENT_CREATE_MY_TABLE, EVENT_UPDATE_MY_TABLE } from '#src/event/Events'
+import { EVENT_CREATE_MY_TABLE, EVENT_UPDATE_MY_TABLE, EVENT_CREATE_TABLE } from '#src/event/Events'
 import logger from '#src/logger'
 import { prisma, UserWithMeeting, UsersWithMeetings } from '#src/prisma'
 
@@ -36,20 +37,9 @@ export class TableResolver {
     const { user } = context
     if (!user) throw new Error('User not found!')
 
-    if (user.meetingId) {
-      throw new Error('Meeting already exists!')
-    }
+    const oldMeetindID = user.meetingId
 
-    let meetingID: string = uuidv4()
-    while (
-      await prisma.meeting.count({
-        where: {
-          meetingID,
-        },
-      })
-    ) {
-      meetingID = uuidv4()
-    }
+    const meetingID: string = await createMeetingID()
 
     const { meeting } = (await prisma.user.update({
       where: {
@@ -73,28 +63,26 @@ export class TableResolver {
       throw new Error('Error creating the meeting!')
     }
 
-    let usersInMeetings: UsersWithMeetings[] = []
-
     if (userIds && userIds.length) {
-      await prisma.usersInMeetings.createMany({
-        data: userIds.map((id) => ({
-          role: AttendeeRole.VIEWER,
-          meetingId: meeting.id,
-          userId: id,
-        })),
-      })
-
-      usersInMeetings = (await prisma.usersInMeetings.findMany({
-        where: {
-          meetingId: meeting.id,
-        },
-        include: {
-          user: true,
-        },
-      })) as UsersWithMeetings[]
+      await createUsersInMeetings({ userIds, meeting, role: AttendeeRole.VIEWER })
     }
 
     await EVENT_CREATE_MY_TABLE(user.id)
+
+    if (oldMeetindID) {
+      await prisma.usersInMeetings.deleteMany({
+        where: {
+          meetingId: oldMeetindID,
+        },
+      })
+
+      await prisma.meeting.delete({
+        where: {
+          id: oldMeetindID,
+        },
+      })
+    }
+    const usersInMeetings = await findUsersInMeetings(meeting)
 
     return new Table(meeting, usersInMeetings)
   }
@@ -136,8 +124,6 @@ export class TableResolver {
       },
     })
 
-    let usersInMeetings: UsersWithMeetings[] = []
-
     if (userIds && userIds.length) {
       await prisma.usersInMeetings.createMany({
         data: userIds.map((id) => ({
@@ -146,16 +132,8 @@ export class TableResolver {
           userId: id,
         })),
       })
-
-      usersInMeetings = (await prisma.usersInMeetings.findMany({
-        where: {
-          meetingId: meeting.id,
-        },
-        include: {
-          user: true,
-        },
-      })) as UsersWithMeetings[]
     }
+    const usersInMeetings = await findUsersInMeetings(meeting)
 
     await EVENT_UPDATE_MY_TABLE(user.id)
 
@@ -168,74 +146,26 @@ export class TableResolver {
     const { user } = context
     if (!user) throw new Error('User not found!')
 
-    let dbMeeting: Meeting | null = null
-
-    try {
-      if (user.meetingId) {
-        dbMeeting = await prisma.meeting.findUnique({
-          where: {
-            id: user.meetingId,
-          },
-        })
-        if (!dbMeeting) throw new Error('Meeting not found!')
-      } else {
-        let meetingID: string = uuidv4()
-        while (
-          await prisma.meeting.count({
-            where: {
-              meetingID,
-            },
-          })
-        ) {
-          meetingID = uuidv4()
-        }
-
-        dbMeeting = await prisma.meeting.create({
-          data: {
-            name: user.username,
-            meetingID,
-          },
-        })
-        await prisma.user.update({
-          where: { id: user.id },
-          data: { meetingId: dbMeeting.id },
-        })
-      }
-    } catch (err) {
-      logger.error('Could not create Meeting in DB!', err)
-      throw new Error('Could not create Meeting in DB!')
+    if (!user.meetingId) {
+      throw new Error('No meeting for user!')
     }
 
-    const inviteLink = new URL(`join-table/${dbMeeting.id}`, CONFIG.FRONTEND_URL).toString()
-
-    const meeting = await createMeeting(
-      {
-        name: dbMeeting.name,
-        meetingID: dbMeeting.meetingID,
+    const dbMeeting = await prisma.meeting.findUnique({
+      where: {
+        id: user.meetingId,
       },
-      {
-        moderatorOnlyMessage: `Use this link to invite more people:<br/>${inviteLink}`,
-      },
-    )
+    })
 
-    if (!meeting) throw new Error('Could not create meeting!')
+    if (!dbMeeting) throw new Error('Meeting not found!')
 
-    try {
-      await prisma.meeting.update({
-        where: { id: dbMeeting.id },
-        data: {
-          attendeePW: meeting.attendeePW,
-          moderatorPW: meeting.moderatorPW,
-          voiceBridge: meeting.voiceBridge,
-          dialNumber: meeting.dialNumber,
-          createTime: meeting.createTime,
-          createDate: new Date(meeting.createDate).toISOString(),
-        },
-      })
-    } catch (err) {
-      logger.error('Could not update Meeting in DB!', err)
-      throw new Error('Could not update Meeting in DB!')
-    }
+    const inviteLink = createInviteLink(dbMeeting.id)
+
+    await createBBBMeeting({
+      meetingID: dbMeeting.meetingID,
+      name: dbMeeting.name,
+      inviteLink,
+      tableId: dbMeeting.id,
+    })
 
     return dbMeeting.id
   }
@@ -248,6 +178,50 @@ export class TableResolver {
   }
 
   @Authorized()
+  @Mutation(() => Table)
+  async createTable(
+    // params: CreateGroupTableParams,
+    @Arg('name') name: string,
+    @Arg('isPublic') isPublic: boolean,
+    @Ctx() context: Context,
+    // eslint-disable-next-line type-graphql/wrong-decorator-signature
+    @Arg('userIds', () => [Int], { nullable: 'itemsAndList' }) // eslint-disable-next-line type-graphql/invalid-nullable-input-type
+    userIds?: number[] | null | undefined,
+  ): Promise<Table> {
+    const { user } = context
+    if (!user) throw new Error('User not found!')
+
+    // Get Meeting where user.id and userIds are Moderator
+    // Check if GroupMeeting already exist how to recognize the Meeting?
+    // if (user.meetingId) {
+    //   throw new Error('Meeting already exists!')
+    // }
+
+    const meetingID: string = await createMeetingID()
+
+    const dbMeeting = await prisma.meeting.create({
+      data: { meetingID, name, public: isPublic },
+    })
+
+    if (!userIds) {
+      userIds = []
+    }
+
+    if (!userIds.some((userId) => userId === user.id)) {
+      userIds.push(user.id)
+    }
+
+    if (userIds.length) {
+      await createUsersInMeetings({ userIds, meeting: dbMeeting })
+    }
+    const usersInMeetings = await findUsersInMeetings(dbMeeting)
+
+    await EVENT_CREATE_TABLE(user.id)
+
+    return new Table(dbMeeting, usersInMeetings)
+  }
+
+  @Authorized()
   @Query(() => String)
   async joinTable(
     @Arg('tableId', () => Int) tableId: number,
@@ -256,28 +230,47 @@ export class TableResolver {
     const { user } = context
 
     if (!user) throw new Error('User not found!')
-    const meeting = await prisma.meeting.findUnique({
+
+    const table = await prisma.meeting.findUnique({
       where: {
         id: tableId,
       },
       include: {
         user: true,
+        users: true,
       },
     })
 
-    if (!meeting) throw new Error('Table does not exist')
+    if (!table) {
+      throw new Error('Table does not exist')
+    }
 
     let password: string
 
-    if (meeting.user && meeting.user.id === user.id) {
-      password = meeting.moderatorPW ? meeting.moderatorPW : ''
+    if (
+      (table.user && table.user.id === user.id) ||
+      table.users.some((e) => e.userId === user.id && e.role === 'MODERATOR')
+    ) {
+      const inviteLink = createInviteLink(table.id)
+      const meeting = await createBBBMeeting({
+        meetingID: table.meetingID,
+        name: table.name,
+        inviteLink,
+        tableId: table.id,
+      })
+      password = meeting.moderatorPW
+    } else if (table.public || table.users.some((u) => u.userId === user.id)) {
+      if (!table.attendeePW) {
+        throw new Error('This meeting does not exists.')
+      }
+      password = table.attendeePW
     } else {
-      password = meeting.attendeePW ? meeting.attendeePW : ''
+      throw new Error('User has no access to meeting.')
     }
 
     return joinMeetingLink({
       fullName: user.name,
-      meetingID: meeting.meetingID,
+      meetingID: table.meetingID,
       password,
     })
   }
@@ -304,15 +297,46 @@ export class TableResolver {
     })
   }
 
+  @Authorized()
+  @Query(() => [Table])
+  async tables(@Ctx() context: Context): Promise<Table[]> {
+    const { user } = context
+    const dbMeetings = await prisma.meeting.findMany({
+      where: {
+        OR: [
+          {
+            user: {
+              id: user?.id,
+            },
+          },
+          {
+            users: {
+              some: {
+                userId: user?.id,
+                role: AttendeeRole.MODERATOR,
+              },
+            },
+          },
+        ],
+      },
+      include: {
+        users: true,
+      },
+    })
+    const tables: Table[] = await Promise.all(
+      dbMeetings.map(async (meeting) => new Table(meeting, await findUsersInMeetings(meeting))),
+    )
+    return tables
+  }
+
   @Subscription(() => [OpenTable], {
-    topics: 'OPEN_ROOM_SUBSCRIPTION',
+    topics: 'OPEN_TABLE_SUBSCRIPTION',
   })
   async updateOpenTables(
     @Root() meetings: MeetingInfo[],
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     @Arg('username') username: string,
   ): Promise<OpenTable[]> {
-    // console.log('--------------------', username)
     return openTablesFromOpenMeetings(meetings)
   }
 
@@ -320,7 +344,7 @@ export class TableResolver {
   @Query(() => Boolean)
   test(): boolean {
     try {
-      pubSub.publish('OPEN_ROOM_SUBSCRIPTION', 'Hallo')
+      pubSub.publish('OPEN_TABLE_SUBSCRIPTION', 'Hallo')
     } catch (err) {
       console.log(err)
     }
@@ -351,4 +375,84 @@ const openTablesFromOpenMeetings = async (meetings: MeetingInfo[]): Promise<Open
   }
 
   return []
+}
+
+const createUsersInMeetings = async (data: {
+  userIds: number[]
+  meeting: Meeting
+  role?: AttendeeRole
+}) => {
+  await prisma.usersInMeetings.createMany({
+    data: data.userIds.map((id) => ({
+      role: data.role,
+      meetingId: data.meeting.id,
+      userId: id,
+    })),
+  })
+}
+
+const findUsersInMeetings = async (meeting: Meeting): Promise<UsersWithMeetings[]> => {
+  return (await prisma.usersInMeetings.findMany({
+    where: {
+      meetingId: meeting.id,
+    },
+    include: {
+      user: true,
+    },
+  })) as UsersWithMeetings[]
+}
+
+const createMeetingID = async (): Promise<string> => {
+  let meetingID: string = uuidv4()
+  while (
+    await prisma.meeting.count({
+      where: {
+        meetingID,
+      },
+    })
+  ) {
+    meetingID = uuidv4()
+  }
+  return meetingID
+}
+
+function createInviteLink(tableId: number) {
+  return new URL(`join-table/${tableId}`, CONFIG.FRONTEND_URL).toString()
+}
+
+async function createBBBMeeting(data: {
+  meetingID: string
+  name: string
+  inviteLink: string
+  tableId: number
+}): Promise<CreateMeetingResponse> {
+  const meeting = await createMeeting(
+    {
+      meetingID: data.meetingID,
+      name: data.name,
+    },
+    {
+      moderatorOnlyMessage: `Use this link to invite more people:<br/>${data.inviteLink}`,
+    },
+  )
+  if (!meeting) {
+    throw new Error('Error creating the meeting!')
+  }
+  try {
+    await prisma.meeting.update({
+      where: { id: data.tableId },
+      data: {
+        attendeePW: meeting.attendeePW,
+        moderatorPW: meeting.moderatorPW,
+        voiceBridge: meeting.voiceBridge,
+        dialNumber: meeting.dialNumber,
+        createTime: meeting.createTime,
+        createDate: new Date(meeting.createDate).toISOString(),
+      },
+    })
+  } catch (err) {
+    logger.error('Could not update Meeting in DB!', err)
+    throw new Error('Could not update Meeting in DB!')
+  }
+  return meeting
 }

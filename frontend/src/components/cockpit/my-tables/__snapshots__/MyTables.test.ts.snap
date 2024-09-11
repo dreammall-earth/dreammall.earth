@@ -2,7 +2,7 @@
 
 exports[`MyTables > renders 1`] = `
 <section
-  class="cockpit-card narrow"
+  class="cockpit-card"
   data-v-1451ba78=""
   data-v-c2e63817=""
 >

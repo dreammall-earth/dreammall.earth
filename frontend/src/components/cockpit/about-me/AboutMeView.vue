@@ -1,8 +1,8 @@
 <template>
-  <CockpitCard narrow>
+  <CockpitCard>
     <template #default>
       <div class="header mb-2">
-        <v-avatar class="avatar d-flex align-center text-font bg-primary" size="90">
+        <v-avatar class="avatar d-flex align-center text-font" size="90">
           <v-img v-if="props.userImage" :src="props.userImage" />
           <span v-else>{{ props.initials }}</span>
         </v-avatar>
@@ -150,6 +150,7 @@ const updateIntroduction = (event: Event) => {
 
 .avatar {
   grid-row: 1 / 4;
+  background-color: rgb(var(--v-theme-cockpit-highlight));
   border-radius: 15px;
 }
 

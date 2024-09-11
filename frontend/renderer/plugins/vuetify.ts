@@ -27,6 +27,8 @@ function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): Theme
       icon: theme.iconColor,
       'dropdown-background': theme.dropdownBackgroundColor,
       'cockpit-highlight': theme.cockpitHighlightColor,
+      'dm-panel-call-action-button-color': theme.dmPanelCallActionButtonColor,
+      'dm-panel-call-action-button-background-color': theme.dmPanelCallActionButtonBackgroundColor,
     },
     variables: {
       'border-color': theme.borderColor,

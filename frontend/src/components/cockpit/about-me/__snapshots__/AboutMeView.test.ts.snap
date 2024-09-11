@@ -2,7 +2,7 @@
 
 exports[`AboutMeView > renders 1`] = `
 <section
-  class="cockpit-card narrow"
+  class="cockpit-card"
   data-v-1451ba78=""
   data-v-f444dc92=""
   editable="false"
@@ -15,7 +15,7 @@ exports[`AboutMeView > renders 1`] = `
     data-v-f444dc92=""
   >
     <div
-      class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font bg-primary"
+      class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font"
       data-v-f444dc92=""
       style="width: 90px; height: 90px;"
     >
@@ -590,7 +590,7 @@ exports[`AboutMeView > renders 1`] = `
 
 exports[`AboutMeView > renders initials 1`] = `
 <section
-  class="cockpit-card narrow"
+  class="cockpit-card"
   data-v-1451ba78=""
   data-v-f444dc92=""
   editable="false"
@@ -603,7 +603,7 @@ exports[`AboutMeView > renders initials 1`] = `
     data-v-f444dc92=""
   >
     <div
-      class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font bg-primary"
+      class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font"
       data-v-f444dc92=""
       style="width: 90px; height: 90px;"
     >
@@ -1178,7 +1178,7 @@ exports[`AboutMeView > renders initials 1`] = `
 
 exports[`AboutMeView > renders without social media accounts 1`] = `
 <section
-  class="cockpit-card narrow"
+  class="cockpit-card"
   data-v-1451ba78=""
   data-v-f444dc92=""
   editable="false"
@@ -1191,7 +1191,7 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
     data-v-f444dc92=""
   >
     <div
-      class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font bg-primary"
+      class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font"
       data-v-f444dc92=""
       style="width: 90px; height: 90px;"
     >

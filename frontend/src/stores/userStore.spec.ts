@@ -155,7 +155,7 @@ describe('User Store', () => {
       })
     })
 
-    it('updates my room', () => {
+    it('updates my table', () => {
       expect(userStore.getMyTable).toEqual({
         id: 1234,
         name: 'My Table',
@@ -177,7 +177,7 @@ describe('User Store', () => {
       })
     })
 
-    it('updates users in my room', () => {
+    it('updates users in my table', () => {
       expect(userStore.getUsersInMyTable).toEqual([
         {
           id: 333,

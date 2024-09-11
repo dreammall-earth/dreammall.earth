@@ -94,7 +94,6 @@ entries:
     access_code_validity: minutes=1
     access_token_validity: minutes=5
     client_id: G3g0sjCjph1NAyGeeu5Te5ltx1I7WZ0DGB8i6vOI
-    client_secret: S47fZaan6rb7al3ycKfEtXj1JaUbvkIQhVMcZYKP53znck0aSsYiDyDtMKOmxzRiT21XHVXZpPUkHE5bPz9hBrltjA2Dc0emH7Yk6AEqmuqjgx96ncbfFlwejubPZhgB
     signing_key: !Find [authentik_crypto.certificatekeypair, [name, 'authentik Self-signed Certificate']]
     refresh_token_validity: days=30
     property_mappings:
