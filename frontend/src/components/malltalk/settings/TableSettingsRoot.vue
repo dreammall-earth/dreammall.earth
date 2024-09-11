@@ -2,7 +2,14 @@
   <div class="flat-text-field d-flex flex-column align-center pa-4 w-100">
     <v-row no-gutters justify="space-around">
       <v-col v-for="(button, index) in buttons" :key="index" cols="auto" class="text-center px-2">
-        <v-btn icon size="x-large" elevation="0" class="round-button mb-2" @click="button.action">
+        <v-btn
+          icon
+          size="x-large"
+          elevation="0"
+          class="round-button mb-2"
+          :class="{ 'copied-indicator': button.indicator }"
+          @click="button.action"
+        >
           <v-icon>{{ button.icon }}</v-icon>
         </v-btn>
         <div class="text-caption">{{ button.text }}</div>
@@ -53,8 +60,9 @@ let timerIndicator: ReturnType<typeof setTimeout> | null = null
 
 const buttons = computed(() => [
   {
-    icon: copiedIndicator.value ? 'mdi-check' : 'mdi-content-copy',
+    icon: 'mdi-content-copy',
     text: t('dream-mall-panel.call.link'),
+    indicator: copiedIndicator.value,
     action: () => {
       if (tableId.value) {
         copyToClipboard(tablesStore.getJoinTableUrl(tableId.value))
@@ -74,6 +82,7 @@ const buttons = computed(() => [
         {
           icon: 'mdi-account-multiple-plus-outline',
           text: t('dream-mall-panel.call.add-user'),
+          indicator: false,
           action: () => onClick('users'),
         },
       ]
@@ -89,6 +98,11 @@ const leaveTable = () => {
 .round-button {
   color: rgb(var(--v-theme-dm-panel-call-action-button-color));
   background-color: rgb(var(--v-theme-dm-panel-call-action-button-background-color));
+
+  &.copied-indicator {
+    color: rgb(var(--v-theme-dm-panel-call-action-button-indicator-color));
+    background-color: rgb(var(--v-theme-dm-panel-call-action-button-indicator-background-color));
+  }
 }
 
 .leave-button {

@@ -29,6 +29,9 @@ function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): Theme
       'cockpit-highlight': theme.cockpitHighlightColor,
       'dm-panel-call-action-button-color': theme.dmPanelCallActionButtonColor,
       'dm-panel-call-action-button-background-color': theme.dmPanelCallActionButtonBackgroundColor,
+      'dm-panel-call-action-button-indicator-color': theme.dmPanelCallActionButtonIndicatorColor,
+      'dm-panel-call-action-button-indicator-background-color':
+        theme.dmPanelCallActionButtonIndicatorBackgroundColor,
       'dm-panel-reminder-text-color': theme.dmPanelReminderTextColor,
       'dm-panel-reminder-link-color': theme.dmPanelReminderLinkColor,
     },

@@ -13,13 +13,19 @@
         rounded
         flat
         class="elevation-0 w-100 flex-grow-1 mr-3 custom-text-field"
+        :class="{ 'copied-indicator': copiedIndicator }"
         content-class="elevation-0"
         variant="solo-filled"
         hide-details
         readonly
       />
-      <v-btn icon class="custom-icon-btn" @click="copyUrl">
-        <v-icon :icon="copiedIndicator ? 'mdi-check' : 'mdi-content-copy'" />
+      <v-btn
+        icon
+        class="custom-icon-btn"
+        :class="{ 'copied-indicator': copiedIndicator }"
+        @click="copyUrl"
+      >
+        <v-icon icon="mdi-content-copy" />
       </v-btn>
     </div>
 
@@ -93,6 +99,16 @@ const copyUrl = () => {
   :deep(input) {
     color: var(--v-theme-dm-panel-reminder-link-color) !important;
   }
+
+  :deep(.v-field) {
+    border: 1px solid transparent;
+  }
+
+  &.copied-indicator {
+    :deep(.v-field) {
+      border: 1px solid rgb(var(--v-theme-dm-panel-call-action-button-indicator-background-color));
+    }
+  }
 }
 
 .custom-icon-btn {
@@ -102,5 +118,10 @@ const copyUrl = () => {
 
   color: rgb(var(--v-theme-dm-panel-reminder-link-color)) !important;
   background-color: var(--v-dm-panel-reminder-link-background-color) !important;
+
+  &.copied-indicator {
+    color: rgb(var(--v-theme-dm-panel-call-action-button-indicator-color)) !important;
+    background-color: rgb(var(--v-theme-dm-panel-call-action-button-indicator-background-color)) !important;
+  }
 }
 </style>
