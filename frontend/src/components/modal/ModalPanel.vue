@@ -21,10 +21,10 @@ const { currentComponent, close } = useModal()
   transform: translate(calc(50vw - 50%), calc(50vh - 50%));
   border-radius: 20px;
   width: min(636px, 100vw);
-  height: clamp(200px, 70vh, 550px);
+  height: min(550px, 100vh);
   background: var(--v-panel-background);
   backdrop-filter: blur(15px);
-  z-index: 100;
+  z-index: 4000;
 }
 
 .modal-move,
