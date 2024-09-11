@@ -55,13 +55,16 @@
     },
     "setup": {
       "continue": "Weiter",
-      "create-table": "Los geht's",
+      "create-table": "Fertig",
       "invitation-sent": "gesendet",
+      "invitation-title": "Leute einladen",
       "invite": "einladen",
       "no-result": "Keine Ergebnisse",
       "reminder": "Deine Vision wird Realität,\nlass uns gerne dazu den ersten Schritt machen.",
       "search-error": "Bei der Suche ist ein Fehler aufgetreten.",
+      "submit-title": "Hinweis",
       "table-creation": "Tisch erstellen",
+      "table-creation-title": "Tisch erstellen",
       "table-name": "Tischname"
     }
   },
@@ -74,6 +77,9 @@
       "h1": "500 Interner Fehler",
       "text": "Irgendetwas ist schief gegangen."
     }
+  },
+  "globalErrorHandler": {
+    "copiedToClipboard": "In die Zwischenablage kopiert"
   },
   "joinTablePage": {
     "header": "Raum betreten als:"
