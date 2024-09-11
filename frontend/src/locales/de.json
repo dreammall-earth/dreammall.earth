@@ -99,22 +99,22 @@
     "title": "Upgrade auf Premium"
   },
   "sepaIban": {
-    "explanation": {
-      "title": "Dauerauftrag einrichten",
-      "introduction": "Danke, dass du dich für ein DreamMall-Abonnement entschieden hast!",
-      "callToAction": "Um ein Dreammall-Abonnement abzuschließen, kannst du einfach in deinem Online-Banking einen Dauerauftrag einrichten. Die Kontodetails findest du auf dieser Seite."
-    },
     "accountData": {
-      "title": "Kontodaten",
       "accountHolder": "Konto Inhaber",
       "amount": "Betrag in Euro",
-      "reference": "Referenz",
+      "BIC": "BIC",
       "IBAN": "IBAN",
-      "BIC": "BIC"
+      "reference": "Referenz",
+      "title": "Kontodaten"
+    },
+    "explanation": {
+      "callToAction": "Um ein Dreammall-Abonnement abzuschließen, kannst du einfach in deinem Online-Banking einen Dauerauftrag einrichten. Die Kontodetails findest du auf dieser Seite.",
+      "introduction": "Danke, dass du dich für ein DreamMall-Abonnement entschieden hast!",
+      "title": "Dauerauftrag einrichten"
     },
     "qr": {
-      "title": "QR Code scannen",
-      "explanation": "Alternativ kannst du auch diesen QR Code mit deiner Banking-App QR scannen."
+      "explanation": "Alternativ kannst du auch diesen QR Code mit deiner Banking-App QR scannen.",
+      "title": "QR Code scannen"
     }
   },
   "table": {

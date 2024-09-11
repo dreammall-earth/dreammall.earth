@@ -99,21 +99,22 @@
     "title": "Upgrade to premium"
   },
   "sepaIban": {
-    "explanation": {
-      "title": "Set up standing order",
-      "introduction": "Thank you for choosing a DreamMall subscription!",
-      "callToAction": "To order a Dreammall subscription, you can simply set up a standing order in your online banking. You can view the account details on this page."
-    },
     "accountData": {
-      "title": "Account details",
+      "accountHolder": "Account holder",
       "amount": "Amount in Euro",
-      "reference": "Reference",
+      "BIC": "BIC",
       "IBAN": "IBAN",
-      "BIC": "BIC"
+      "reference": "Reference",
+      "title": "Account details"
+    },
+    "explanation": {
+      "callToAction": "To order a Dreammall subscription, you can simply set up a standing order in your online banking. You can view the account details on this page.",
+      "introduction": "Thank you for choosing a DreamMall subscription!",
+      "title": "Set up standing order"
     },
     "qr": {
-      "title": "Scan QR Code",
-      "explanation": "If your banking app supports QR codes, you can easily scan the QR code below on the page."
+      "explanation": "If your banking app supports QR codes, you can easily scan the QR code below on the page.",
+      "title": "Scan QR Code"
     }
   },
   "table": {
