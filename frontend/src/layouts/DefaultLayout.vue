@@ -33,7 +33,7 @@
       :location="$vuetify.display.smAndDown ? 'bottom' : 'right'"
     />
 
-    <Modal />
+    <ModalPanel />
 
     <!-- Page Content Container -->
     <v-container fluid class="page-container px-8">
@@ -98,7 +98,7 @@ import LightDarkSwitch from '#components/menu/LightDarkSwitch.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 import TabControl from '#components/menu/TabControl.vue'
 import UserInfo from '#components/menu/UserInfo.vue'
-import Modal from '#components/modal/Modal.vue'
+import ModalPanel from '#components/modal/Modal.vue'
 import useModal from '#components/modal/useModal'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
 
