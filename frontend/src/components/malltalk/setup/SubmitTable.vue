@@ -35,15 +35,15 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 import { copyToClipboard } from '#src/utils/copyToClipboard'
 import { useTablesStore } from '#stores/tablesStore'
+import { useUserStore } from '#stores/userStore'
 
 import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
-import {useI18n} from "vue-i18n";
-import {useUserStore} from "#stores/userStore";
 
 defineProps<StepProps>()
 const emit = defineEmits<StepEmits>()
@@ -78,10 +78,9 @@ const copyUrl = () => {
 
 <style scoped lang="scss">
 .reminder {
-  border-radius: 24px;
-
   color: rgb(var(--v-theme-dm-panel-reminder-text-color));
   background-color: var(--v-dm-panel-reminder-text-background-color);
+  border-radius: 24px;
 }
 
 :root {
@@ -90,23 +89,20 @@ const copyUrl = () => {
 
 .custom-text-field {
   :deep(.v-field__input) {
-    min-height: var(--custom-height) !important;
     height: var(--custom-height) !important;
+    min-height: var(--custom-height) !important;
     padding-top: 12px;
     padding-bottom: 12px;
   }
 
   :deep(.v-field) {
+    border: 1px solid transparent;
     color: rgb(var(--v-theme-dm-panel-reminder-link-color)) !important;
     background-color: var(--v-dm-panel-reminder-link-background-color) !important;
   }
 
   :deep(input) {
     color: var(--v-theme-dm-panel-reminder-link-color) !important;
-  }
-
-  :deep(.v-field) {
-    border: 1px solid transparent;
   }
 
   &.copied-indicator {
@@ -117,16 +113,17 @@ const copyUrl = () => {
 }
 
 .custom-icon-btn {
-  height: 48px;
   width: 48px;
-  box-shadow: none !important;
-
+  height: 48px;
   color: rgb(var(--v-theme-dm-panel-reminder-link-color)) !important;
   background-color: var(--v-dm-panel-reminder-link-background-color) !important;
+  box-shadow: none !important;
 
   &.copied-indicator {
     color: rgb(var(--v-theme-dm-panel-call-action-button-indicator-color)) !important;
-    background-color: rgb(var(--v-theme-dm-panel-call-action-button-indicator-background-color)) !important;
+    background-color: rgb(
+      var(--v-theme-dm-panel-call-action-button-indicator-background-color)
+    ) !important;
   }
 }
 </style>
