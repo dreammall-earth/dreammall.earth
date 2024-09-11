@@ -74,6 +74,7 @@ provideApolloClient(mockClient)
 const setCurrentUser = (store: ReturnType<typeof useUserStore>) => {
   store.currentUser = {
     id: 666,
+    referenceId: 'UQV6KSVD',
     name: 'Current User',
     username: 'currentUser',
     availability: 'available',
