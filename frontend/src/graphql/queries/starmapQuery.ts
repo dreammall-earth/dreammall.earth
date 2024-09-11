@@ -10,6 +10,21 @@ export const starmapQuery = gql`
         distance
         magnitude
         color
+        data {
+          id
+          username
+          name
+          introduction
+          availability
+          details {
+            category
+            text
+          }
+          social {
+            type
+            link
+          }
+        }
       }
       starLines {
         from
