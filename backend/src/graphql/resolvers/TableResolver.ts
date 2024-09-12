@@ -303,21 +303,12 @@ export class TableResolver {
     const { user } = context
     const dbMeetings = await prisma.meeting.findMany({
       where: {
-        OR: [
-          {
-            user: {
-              id: user?.id,
-            },
+        users: {
+          some: {
+            userId: user?.id,
+            role: AttendeeRole.MODERATOR,
           },
-          {
-            users: {
-              some: {
-                userId: user?.id,
-                role: AttendeeRole.MODERATOR,
-              },
-            },
-          },
-        ],
+        },
       },
       include: {
         users: true,
@@ -327,6 +318,45 @@ export class TableResolver {
       dbMeetings.map(async (meeting) => new Table(meeting, await findUsersInMeetings(meeting))),
     )
     return tables
+  }
+
+  @Authorized()
+  @Mutation(() => Boolean)
+  async deleteTable(
+    @Ctx() context: Context,
+    @Arg('tableId', () => Int) tableId: number,
+  ): Promise<boolean> {
+    const { user } = context
+    if (!user) throw new Error('User not found!')
+
+    const meeting = await prisma.meeting.findFirst({
+      where: {
+        id: tableId,
+      },
+      include: {
+        users: true,
+      },
+    })
+    if (!meeting) {
+      throw new Error('Meeting not found!')
+    } else if (!meeting.users.some((u) => u.userId !== user?.id && u.role === 'MODERATOR')) {
+      throw new Error('There is no other Moderator in this table.')
+    }
+    try {
+      await prisma.usersInMeetings.delete({
+        where: {
+          meetingId_userId: {
+            userId: user?.id,
+            meetingId: tableId,
+          },
+        },
+      })
+    } catch (e) {
+      logger.error('User could not be detached', e)
+      throw new Error('User could not be detached.')
+    }
+
+    return true
   }
 
   @Subscription(() => [OpenTable], {

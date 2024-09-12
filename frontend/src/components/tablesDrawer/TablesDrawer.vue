@@ -39,7 +39,7 @@ import TableList from './TableList.vue'
 
 const tablesStore = useTablesStore()
 
-const { tables: items } = storeToRefs(tablesStore)
+const { getOpenTables: items } = storeToRefs(tablesStore)
 
 const props = withDefaults(
   defineProps<{

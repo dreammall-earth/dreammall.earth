@@ -38,8 +38,22 @@
     },
     "myTables": {
       "addTable": "Tisch hinzufügen",
+      "changeModerators": {
+        "title": "Moderatoren ändern",
+        "update": "Speichern"
+      },
+      "createTable": {
+        "chooseModerators": "Wähle deine Mitmoderatoren.",
+        "tableCreated": "Dein Tisch wurde erstellt.",
+        "visionIntoReality": "Deine Vision wird Realität, lass uns gemeinsam den ersten Schritt machen."
+      },
       "delete": "Löschen",
+      "deleteConfirmation": "Möchtest du diesen Tisch wirklich löschen?",
       "edit": "Bearbeiten",
+      "editTable": {
+        "title": "Tisch anpassen",
+        "update": "Speichern"
+      },
       "header": "Meine Tische",
       "invite": "Einladen",
       "memberCount": "{count} Mitglieder",
