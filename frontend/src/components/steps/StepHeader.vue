@@ -6,7 +6,7 @@
       </v-btn>
     </div>
     <div class="step-header__middle">
-      <h2 class="text-h6">{{ title }}</h2>
+      <h2 class="text-h6 font-weight-bold">{{ title }}</h2>
     </div>
     <div class="step-header__right">
       <v-btn v-if="isCloseButtonVisible" icon variant="text" size="small" @click="emitClose">
