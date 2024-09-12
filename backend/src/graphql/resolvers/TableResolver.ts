@@ -378,16 +378,21 @@ export class TableResolver {
     const { user } = context
     if (!user) throw new Error('User not found!')
 
-    const meeting = await prisma.meeting.findFirst({
+    let meeting = await prisma.meeting.findFirst({
       where: {
         id: tableId,
       },
+      include: {
+        users: true,
+      },
     })
     if (!meeting) throw new Error('Meeting not found!')
+    else if (!meeting.users.some((u) => u.userId === user.id && u.role === 'MODERATOR')) {
+      throw new Error('User has no right to edit meeting.')
+    }
 
-    let updatedMeeting = meeting
     if (name) {
-      updatedMeeting = await prisma.meeting.update({
+      meeting = await prisma.meeting.update({
         where: {
           id: tableId,
         },
@@ -395,9 +400,12 @@ export class TableResolver {
           name,
           public: isPublic,
         },
+        include: {
+          users: true,
+        },
       })
 
-      if (!updatedMeeting) {
+      if (!meeting) {
         throw new Error('Error updating the meeting!')
       }
     }
@@ -405,20 +413,20 @@ export class TableResolver {
     if (userIds && userIds.length) {
       await prisma.usersInMeetings.deleteMany({
         where: {
-          meetingId: updatedMeeting.id,
+          meetingId: tableId,
         },
       })
       await prisma.usersInMeetings.createMany({
         data: userIds.map((id) => ({
-          meetingId: updatedMeeting.id,
+          meetingId: tableId,
           userId: id,
         })),
       })
     }
 
-    const userInMeeting = await findUsersInMeetings(updatedMeeting)
+    const userInMeeting = await findUsersInMeetings(meeting)
     await EVENT_UPDATE_TABLE(user.id)
-    return new Table(updatedMeeting, userInMeeting)
+    return new Table(meeting, userInMeeting)
   }
 
   @Subscription(() => [OpenTable], {

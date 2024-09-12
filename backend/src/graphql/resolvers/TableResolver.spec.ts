@@ -2773,6 +2773,34 @@ describe('TableResolver', () => {
           },
         })
       })
+
+      it('throws error since raeuber has no right on this meeting', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: updateTableMutation,
+              variables: {
+                tableId: meetingId,
+                userIds: [user.id, bibiUser.id],
+              },
+            },
+            { contextValue: { user: raeuberUser, dataSources: { prisma } } },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'User has no right to edit meeting.',
+                }),
+              ]),
+            },
+          },
+        })
+      })
     })
   })
 })
