@@ -6,7 +6,14 @@
     >
       <span class="name">{{ props.name }}</span>
       <span class="subtitle">
-        {{ $t('cockpit.myTables.memberCount', { count: props.memberCount }) }}
+        {{
+          $t(
+            props.moderatorCount
+              ? 'cockpit.myTables.moderatorCount'
+              : 'cockpit.myTables.memberCount',
+            { count: props.moderatorCount ? props.moderatorCount : props.memberCount },
+          )
+        }}
       </span>
     </div>
     <button
@@ -67,7 +74,8 @@ const { t } = useI18n()
 const props = defineProps<{
   id: number
   name: string
-  memberCount: number
+  memberCount?: number
+  moderatorCount?: number
 }>()
 
 const isShowingOptions = ref(false)
