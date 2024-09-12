@@ -57,6 +57,7 @@
       "header": "Meine Tische",
       "invite": "Einladen",
       "memberCount": "{count} Mitglieder",
+      "moderatorCount": "{count} Moderatoren",
       "noTables": "Noch keine Gruppentische",
       "share": "Teilen"
     }

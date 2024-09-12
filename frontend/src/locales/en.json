@@ -57,6 +57,7 @@
       "header": "My Tables",
       "invite": "Invite",
       "memberCount": "{count} members",
+      "moderatorCount": "{count} moderators",
       "noTables": "No group tables so far",
       "share": "Share"
     }
