@@ -81,6 +81,20 @@ const deleteTableMutation = `mutation DeleteTable($tableId: Int!) {
   deleteTable(tableId: $tableId)
 }`
 
+const editTableMutation = `mutation EditTable($tableId: Int!) {
+  editTable(tableId: $tableId) {
+    id
+    name
+    public
+    users {
+      id
+      name
+      role
+      username
+    }
+  }
+}`
+
 describe('TableResolver', () => {
   beforeAll(async () => {
     testServer = await createTestServer()
@@ -263,6 +277,35 @@ describe('TableResolver', () => {
               ]),
             },
           },
+        })
+      })
+
+      describe('editTable', () => {
+        it('throws access denied', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query: editTableMutation,
+                variables: {
+                  tableId: -1,
+                },
+              },
+              { contextValue: { user: null, dataSources: { prisma } } },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Access denied! You need to be authenticated to perform this action!',
+                  }),
+                ]),
+              },
+            },
+          })
         })
       })
     })
