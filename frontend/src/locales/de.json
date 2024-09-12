@@ -96,7 +96,7 @@
     }
   },
   "globalErrorHandler": {
-    "copiedToClipboard": "In die Zwischenablage kopiert"
+    "copiedToClipboard": "Link in Zwischenablage kopiert"
   },
   "joinTablePage": {
     "header": "Raum betreten als:"
