@@ -26,78 +26,78 @@ updates:
     day: "saturday"
     timezone: "Europe/Berlin"
     time: "03:00"
-  groups:
-    cypress:
-      applies-to: version-updates
-      patterns:
-        - "*cypress*"
-        - "*cucumber*"
-    remark:
-      applies-to: version-updates
-      patterns:
-        - "remark*"
-    vuepress:
-      applies-to: version-updates
-      patterns:
-        - "*vuepress*"
-    eslint:
-      applies-to: version-updates
-      patterns:
-        - "*eslint*"
-    linting:
-      applies-to: version-updates
-      patterns:
-        - "@eslint-community/eslint-plugin-eslint-comments"
-        - "@typescript-eslint/*"
-        - "eslint-*"
-        - "prettier"
-      exclude-patterns:
-        - "eslint"
-    prisma:
-      applies-to: version-updates
-      patterns:
-        - "*prisma*"
-    pinia:
-      applies-to: version-updates
-      patterns:
-        - "*pinia*"
-    react:
-      applies-to: version-updates
-      patterns:
-        - "react*"
-    sass:
-      applies-to: version-updates
-      patterns:
-        - "sass*"
-    storybook:
-      applies-to: version-updates
-      patterns:
-        - "*storybook*"
-    stylelint:
-      applies-to: version-updates
-      patterns:
-        - "*stylelint*"
-    typescript:
-      applies-to: version-updates
-      patterns:
-        - "ts*"
-        - "*types*"
-    vite:
-      applies-to: version-updates
-      patterns:
-        - "*vite*"
-      exclude-patterns:
-        - "@vuepress/bundler-vite"
-        - "eslint-plugin-vitest"
-        - "vite-plugin-checker"
-    vue:
-      applies-to: version-updates
-      patterns:
-        - "*vue?(/)*"
-      exclude-patterns:
-        - "vuetify"
-        - "*vuepress*"
-        - "vue-tsc"
+  #groups:
+  #  cypress:
+  #    applies-to: version-updates
+  #    patterns:
+  #      - "*cypress*"
+  #      - "*cucumber*"
+  #  remark:
+  #    applies-to: version-updates
+  #    patterns:
+  #      - "remark*"
+  #  vuepress:
+  #    applies-to: version-updates
+  #    patterns:
+  #      - "*vuepress*"
+  #  eslint:
+  #    applies-to: version-updates
+  #    patterns:
+  #      - "*eslint*"
+  #  linting:
+  #    applies-to: version-updates
+  #    patterns:
+  #      - "@eslint-community/eslint-plugin-eslint-comments"
+  #      - "@typescript-eslint/*"
+  #      - "eslint-*"
+  #      - "prettier"
+  #    exclude-patterns:
+  #      - "eslint"
+  #  prisma:
+  #    applies-to: version-updates
+  #    patterns:
+  #      - "*prisma*"
+  #  pinia:
+  #    applies-to: version-updates
+  #    patterns:
+  #      - "*pinia*"
+  #  react:
+  #    applies-to: version-updates
+  #    patterns:
+  #      - "react*"
+  #  sass:
+  #    applies-to: version-updates
+  #    patterns:
+  #      - "sass*"
+  #  storybook:
+  #    applies-to: version-updates
+  #    patterns:
+  #      - "*storybook*"
+  #  stylelint:
+  #    applies-to: version-updates
+  #    patterns:
+  #      - "*stylelint*"
+  #  typescript:
+  #    applies-to: version-updates
+  #    patterns:
+  #      - "ts*"
+  #      - "*types*"
+  #  vite:
+  #    applies-to: version-updates
+  #    patterns:
+  #      - "*vite*"
+  #    exclude-patterns:
+  #      - "@vuepress/bundler-vite"
+  #      - "eslint-plugin-vitest"
+  #      - "vite-plugin-checker"
+  #  vue:
+  #    applies-to: version-updates
+  #    patterns:
+  #      - "*vue?(/)*"
+  #    exclude-patterns:
+  #      - "vuetify"
+  #      - "*vuepress*"
+  #      - "vue-tsc"
 
 - package-ecosystem: docker
   open-pull-requests-limit: 99
