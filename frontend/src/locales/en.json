@@ -79,7 +79,7 @@
     }
   },
   "globalErrorHandler": {
-    "copiedToClipboard": "Copied to clipboard"
+    "copiedToClipboard": "Link copied to clipboard"
   },
   "joinTablePage": {
     "header": "Join Table as:"
