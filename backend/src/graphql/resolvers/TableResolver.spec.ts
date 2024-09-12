@@ -8,7 +8,6 @@ import { createTestServer } from '#src/server/server'
 
 import type { Context } from '#src/context'
 import type { UserWithProfile } from '#src/prisma'
-import { Meeting } from '@prisma/client'
 
 jest.mock('#api/BBB')
 
