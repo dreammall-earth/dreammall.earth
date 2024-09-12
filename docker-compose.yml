@@ -20,7 +20,7 @@ services:
       - db_vol:/var/lib/mysql
 
   presenter:
-    image: ghcr.io/dreammall-earth/dreammall.earth/presenter:latest
+    image: ghcr.io/dreammall-earth/dreammall.earth/presenter:${IMAGE_TAG:-latest}
     build:
       context: ./presenter
       target: production
@@ -30,7 +30,7 @@ services:
       - NODE_ENV=production
 
   frontend:
-    image: ghcr.io/dreammall-earth/dreammall.earth/frontend:latest
+    image: ghcr.io/dreammall-earth/dreammall.earth/frontend:${IMAGE_TAG:-latest}
     build:
       context: ./frontend
       target: production
@@ -40,7 +40,7 @@ services:
       - NODE_ENV=production
 
   backend:
-    image: ghcr.io/dreammall-earth/dreammall.earth/backend:latest
+    image: ghcr.io/dreammall-earth/dreammall.earth/backend:${IMAGE_TAG:-latest}
     build:
       context: ./backend
       target: production
@@ -51,16 +51,22 @@ services:
         condition: service_started
       migrations:
         condition: service_completed_successfully
-
     ports:
       - 4000:4000
     environment:
       DATABASE_URL: mysql://root:@database:3306/dreammall.earth
       JWKS_URI: http://authentik:9000/application/o/dreammallearth/jwks/
       NODE_ENV: production
+      BREVO_KEY: ""
+      BREVO_ADMIN_NAME: ""
+      BREVO_ADMIN_EMAIL: ""
+      BREVO_CONTACT_TEMPLATE_ADMIN: "1"
+      BREVO_CONTACT_TEMPLATE_USER: "2"
+      BREVO_NEWSLETTER_TEMPLATE_OPTIN: "3"
+      BREVO_NEWSLETTER_LIST: "3"
 
   migrations:
-    image: ghcr.io/dreammall-earth/dreammall.earth/backend:latest
+    image: ghcr.io/dreammall-earth/dreammall.earth/backend:${IMAGE_TAG:-latest}
     command: npm run db:migrate:deploy
     build:
       context: ./backend
