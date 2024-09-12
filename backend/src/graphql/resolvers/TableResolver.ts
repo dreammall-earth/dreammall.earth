@@ -303,21 +303,12 @@ export class TableResolver {
     const { user } = context
     const dbMeetings = await prisma.meeting.findMany({
       where: {
-        OR: [
-          {
-            user: {
-              id: user?.id,
-            },
+        users: {
+          some: {
+            userId: user?.id,
+            role: AttendeeRole.MODERATOR,
           },
-          {
-            users: {
-              some: {
-                userId: user?.id,
-                role: AttendeeRole.MODERATOR,
-              },
-            },
-          },
-        ],
+        },
       },
       include: {
         users: true,
