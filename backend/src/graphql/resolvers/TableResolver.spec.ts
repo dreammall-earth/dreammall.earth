@@ -81,8 +81,8 @@ const deleteTableMutation = `mutation DeleteTable($tableId: Int!) {
   deleteTable(tableId: $tableId)
 }`
 
-const updateTableMutation = `mutation UpdateTable($tableId: Int!) {
-  updateTable(tableId: $tableId) {
+const updateTableMutation = `mutation UpdateTable($tableId: Int!, $name: String, $isPublic: Boolean, $userIds: [Int]) {
+  updateTable(tableId: $tableId, name: $name, isPublic: $isPublic, userIds: $userIds) {
     id
     name
     public
@@ -288,6 +288,8 @@ describe('TableResolver', () => {
                 query: updateTableMutation,
                 variables: {
                   tableId: -1,
+                  name: '',
+                  isPublic: false,
                 },
               },
               { contextValue: { user: null, dataSources: { prisma } } },
@@ -2658,6 +2660,8 @@ describe('TableResolver', () => {
               query: updateTableMutation,
               variables: {
                 tableId: -1,
+                name: '',
+                isPublic: false,
               },
             },
             { contextValue: { user, dataSources: { prisma } } },
@@ -2673,6 +2677,98 @@ describe('TableResolver', () => {
                   message: 'Meeting not found!',
                 }),
               ]),
+            },
+          },
+        })
+      })
+
+      it('updates the table name and visibility', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: updateTableMutation,
+              variables: {
+                tableId: meetingId,
+                name: 'DreamMall Entwicklung Edit Step 2',
+                isPublic: true,
+                // userIds: [user.id, bibiUser.id],
+              },
+            },
+            { contextValue: { user, dataSources: { prisma } } },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: {
+                updateTable: {
+                  id: meetingId,
+                  name: 'DreamMall Entwicklung Edit Step 2',
+                  public: true,
+                  users: [
+                    {
+                      id: user.id,
+                      name: user.name,
+                      role: 'MODERATOR',
+                      username: user.username,
+                    },
+                    {
+                      id: bibiUser.id,
+                      name: bibiUser.name,
+                      role: 'MODERATOR',
+                      username: bibiUser.username,
+                    },
+                    {
+                      id: peterUser.id,
+                      name: peterUser.name,
+                      role: 'MODERATOR',
+                      username: peterUser.username,
+                    },
+                  ],
+                },
+              },
+            },
+          },
+        })
+      })
+
+      it('updates the table users', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: updateTableMutation,
+              variables: {
+                tableId: meetingId,
+                userIds: [user.id, bibiUser.id],
+              },
+            },
+            { contextValue: { user, dataSources: { prisma } } },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: {
+                updateTable: {
+                  id: meetingId,
+                  name: 'DreamMall Entwicklung Edit Step 2',
+                  public: true,
+                  users: [
+                    {
+                      id: user.id,
+                      name: user.name,
+                      role: 'MODERATOR',
+                      username: user.username,
+                    },
+                    {
+                      id: bibiUser.id,
+                      name: bibiUser.name,
+                      role: 'MODERATOR',
+                      username: bibiUser.username,
+                    },
+                  ],
+                },
+              },
             },
           },
         })

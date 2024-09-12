@@ -368,9 +368,9 @@ export class TableResolver {
   @Mutation(() => Table)
   async updateTable(
     @Arg('tableId', () => Int) tableId: number,
-    @Arg('name') name: string,
-    @Arg('isPublic') isPublic: boolean,
     @Ctx() context: Context,
+    @Arg('name', () => String, { nullable: true }) name: string | null | undefined,
+    @Arg('isPublic', { nullable: true }) isPublic: boolean = false,
     // eslint-disable-next-line type-graphql/wrong-decorator-signature
     @Arg('userIds', () => [Int], { nullable: 'itemsAndList' }) // eslint-disable-next-line type-graphql/invalid-nullable-input-type
     userIds?: number[] | null | undefined,
@@ -385,27 +385,29 @@ export class TableResolver {
     })
     if (!meeting) throw new Error('Meeting not found!')
 
-    const updatedMeeting = await prisma.meeting.update({
-      where: {
-        id: tableId,
-      },
-      data: {
-        name,
-        public: isPublic,
-      },
-    })
+    let updatedMeeting = meeting
+    if (name) {
+      updatedMeeting = await prisma.meeting.update({
+        where: {
+          id: tableId,
+        },
+        data: {
+          name,
+          public: isPublic,
+        },
+      })
 
-    if (!updatedMeeting) {
-      throw new Error('Error updating the meeting!')
+      if (!updatedMeeting) {
+        throw new Error('Error updating the meeting!')
+      }
     }
 
-    await prisma.usersInMeetings.deleteMany({
-      where: {
-        meetingId: updatedMeeting.id,
-      },
-    })
-
     if (userIds && userIds.length) {
+      await prisma.usersInMeetings.deleteMany({
+        where: {
+          meetingId: updatedMeeting.id,
+        },
+      })
       await prisma.usersInMeetings.createMany({
         data: userIds.map((id) => ({
           meetingId: updatedMeeting.id,
