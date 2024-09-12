@@ -2,9 +2,8 @@
   <v-text-field
     v-model="userSearch"
     flat
-    rounded
     clearable
-    class="elevation-0 w-100 flex-grow-0"
+    class="user-search-field elevation-0 w-100 flex-grow-0"
     content-class="elevation-0"
     label="Suche"
     variant="solo-filled"
@@ -71,7 +70,7 @@ const updateInvitationStatus = (userId: number, invited: boolean) => {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .user-list-container {
   height: 200px;
   overflow-y: auto;
@@ -83,6 +82,22 @@ const updateInvitationStatus = (userId: number, invited: boolean) => {
       opacity: 0.5;
       transition: opacity 0.5s ease;
     }
+  }
+}
+
+.user-search-field {
+  :deep(.v-field) {
+    color: rgb(var(--v-theme-dm-panel-text-input-color)) !important;
+    background-color: var(--v-dm-panel-text-input-background-color) !important;
+
+    // todo: find workaround for a gradient and round corners
+    // border: 1px solid transparent !important;
+    // border-image: linear-gradient(to right, red, blue) 1;
+    border-radius: 28px !important;
+  }
+
+  :deep(input) {
+    color: rgb(var(--v-theme-dm-panel-text-input-color)) !important;
   }
 }
 </style>

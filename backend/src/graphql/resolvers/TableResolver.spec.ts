@@ -2202,7 +2202,7 @@ describe('TableResolver', () => {
           )
         })
 
-        it('returns array for tables where user is owner', async () => {
+        it('returns empty array for tables where user is moderator', async () => {
           await expect(
             testServer.executeOperation(
               {
@@ -2215,15 +2215,7 @@ describe('TableResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  tables: [
-                    {
-                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                      id: expect.any(Number),
-                      name: 'My Table',
-                      public: true,
-                      users: [],
-                    },
-                  ],
+                  tables: [],
                 },
                 errors: undefined,
               },
@@ -2266,13 +2258,6 @@ describe('TableResolver', () => {
               singleResult: {
                 data: {
                   tables: [
-                    {
-                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                      id: expect.any(Number),
-                      name: 'My Table',
-                      public: true,
-                      users: [],
-                    },
                     {
                       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                       id: expect.any(Number),

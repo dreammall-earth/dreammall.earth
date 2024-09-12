@@ -45,7 +45,7 @@ const tables = computed(() =>
   getTables.value.map((table: Table) => ({
     id: table.id,
     name: table.name,
-    memberCount: table.users.length,
+    moderatorCount: table.users.filter((user) => user.role === 'MODERATOR').length,
   })),
 )
 </script>
