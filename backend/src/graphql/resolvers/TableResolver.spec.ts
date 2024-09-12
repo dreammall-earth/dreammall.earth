@@ -2589,5 +2589,94 @@ describe('TableResolver', () => {
         })
       })
     })
+
+    describe('editTable', () => {
+      let meetingId: number | undefined
+      beforeAll(async () => {
+        const meeting = await prisma.meeting.create({
+          data: {
+            meetingID: 'DreamMall-Entwicklung-Edit',
+            name: 'DreamMall Entwicklung Edit',
+            attendeePW: 'attendee',
+            moderatorPW: 'moderator',
+            public: false,
+          },
+        })
+        await prisma.usersInMeetings.createMany({
+          data: [
+            {
+              meetingId: meeting.id,
+              userId: user.id,
+            },
+            {
+              meetingId: meeting.id,
+              userId: bibiUser.id,
+            },
+            {
+              meetingId: meeting.id,
+              userId: peterUser.id,
+            },
+          ],
+        })
+        meetingId = meeting.id
+      })
+
+      afterAll(async () => {
+        await prisma.usersInMeetings.deleteMany({
+          where: {
+            AND: [
+              {
+                meetingId,
+              },
+              {
+                OR: [
+                  {
+                    userId: user.id,
+                  },
+                  {
+                    userId: bibiUser.id,
+                  },
+                  {
+                    userId: peterUser.id,
+                  },
+                ],
+              },
+            ],
+          },
+        })
+        await prisma.meeting.delete({
+          where: {
+            id: meetingId,
+          },
+        })
+      })
+
+      it('throws error for wrong meeting id', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: editTableMutation,
+              variables: {
+                tableId: -1,
+              },
+            },
+            { contextValue: { user, dataSources: { prisma } } },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Meeting not found!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
   })
 })
