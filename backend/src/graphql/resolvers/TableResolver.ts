@@ -18,7 +18,12 @@ import { CreateMeetingResponse } from '#api/BBB/types'
 import { CONFIG } from '#config/config'
 import { OpenTable, Table } from '#models/TableModel'
 import { Context } from '#src/context'
-import { EVENT_CREATE_MY_TABLE, EVENT_UPDATE_MY_TABLE, EVENT_CREATE_TABLE } from '#src/event/Events'
+import {
+  EVENT_CREATE_MY_TABLE,
+  EVENT_UPDATE_MY_TABLE,
+  EVENT_CREATE_TABLE,
+  EVENT_UPDATE_TABLE,
+} from '#src/event/Events'
 import logger from '#src/logger'
 import { prisma, UserWithMeeting, UsersWithMeetings } from '#src/prisma'
 
@@ -357,6 +362,61 @@ export class TableResolver {
     }
 
     return true
+  }
+
+  @Authorized()
+  @Mutation(() => Table)
+  async updateTable(
+    @Arg('tableId', () => Int) tableId: number,
+    @Arg('name') name: string,
+    @Arg('isPublic') isPublic: boolean,
+    @Ctx() context: Context,
+    // eslint-disable-next-line type-graphql/wrong-decorator-signature
+    @Arg('userIds', () => [Int], { nullable: 'itemsAndList' }) // eslint-disable-next-line type-graphql/invalid-nullable-input-type
+    userIds?: number[] | null | undefined,
+  ): Promise<Table> {
+    const { user } = context
+    if (!user) throw new Error('User not found!')
+
+    const meeting = await prisma.meeting.findFirst({
+      where: {
+        id: tableId,
+      },
+    })
+    if (!meeting) throw new Error('Meeting not found!')
+
+    const updatedMeeting = await prisma.meeting.update({
+      where: {
+        id: tableId,
+      },
+      data: {
+        name,
+        public: isPublic,
+      },
+    })
+
+    if (!updatedMeeting) {
+      throw new Error('Error updating the meeting!')
+    }
+
+    await prisma.usersInMeetings.deleteMany({
+      where: {
+        meetingId: updatedMeeting.id,
+      },
+    })
+
+    if (userIds && userIds.length) {
+      await prisma.usersInMeetings.createMany({
+        data: userIds.map((id) => ({
+          meetingId: updatedMeeting.id,
+          userId: id,
+        })),
+      })
+    }
+
+    const userInMeeting = await findUsersInMeetings(updatedMeeting)
+    await EVENT_UPDATE_TABLE(user.id)
+    return new Table(updatedMeeting, userInMeeting)
   }
 
   @Subscription(() => [OpenTable], {

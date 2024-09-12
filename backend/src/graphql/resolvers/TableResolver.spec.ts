@@ -81,8 +81,8 @@ const deleteTableMutation = `mutation DeleteTable($tableId: Int!) {
   deleteTable(tableId: $tableId)
 }`
 
-const editTableMutation = `mutation EditTable($tableId: Int!) {
-  editTable(tableId: $tableId) {
+const updateTableMutation = `mutation UpdateTable($tableId: Int!) {
+  updateTable(tableId: $tableId) {
     id
     name
     public
@@ -280,12 +280,12 @@ describe('TableResolver', () => {
         })
       })
 
-      describe('editTable', () => {
+      describe('updateTable', () => {
         it('throws access denied', async () => {
           await expect(
             testServer.executeOperation(
               {
-                query: editTableMutation,
+                query: updateTableMutation,
                 variables: {
                   tableId: -1,
                 },
@@ -2590,7 +2590,7 @@ describe('TableResolver', () => {
       })
     })
 
-    describe('editTable', () => {
+    describe('updateTable', () => {
       let meetingId: number | undefined
       beforeAll(async () => {
         const meeting = await prisma.meeting.create({
@@ -2655,7 +2655,7 @@ describe('TableResolver', () => {
         await expect(
           testServer.executeOperation(
             {
-              query: editTableMutation,
+              query: updateTableMutation,
               variables: {
                 tableId: -1,
               },
