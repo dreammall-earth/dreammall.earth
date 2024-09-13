@@ -24,8 +24,7 @@ import StartSetup from './StartSetup.vue'
 import SubmitTable from './SubmitTable.vue'
 
 import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
-
-const { t } = useI18n()
+import type { ComponentExposed } from 'vue-component-type-helpers'
 
 const tablesStore = useTablesStore()
 const { defaultMyTableName } = storeToRefs(tablesStore)
@@ -103,7 +102,7 @@ const onSubmit = async () => {
       GlobalErrorHandler.error('Could not join myTable')
     }
   } catch (error) {
-    GlobalErrorHandler.error(t('error.globalerror.text'), error)
+    GlobalErrorHandler.error('Error opening table', error)
   }
 
   stepControl.value?.next()
