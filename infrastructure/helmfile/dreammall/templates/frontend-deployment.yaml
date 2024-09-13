@@ -14,6 +14,61 @@ spec:
     spec:
       containers:
         - env:
+            - name: PUBLIC_ENV__AUTH__AUTHORITY
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: auth_authority_url
+            - name: PUBLIC_ENV__AUTH__AUTHORITY_SIGNUP_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: auth_signup_uri
+            - name: PUBLIC_ENV__AUTH__AUTHORITY_SIGNOUT_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: auth_signout_uri
+            - name: PUBLIC_ENV__AUTH__REDIRECT_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: auth_redirect_uri
+            - name: PUBLIC_ENV__AUTH__SILENT_REDIRECT_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: auth_silent_redirect_uri
+            - name: PUBLIC_ENV__ENDPOINTS__GRAPHQL_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: endpoints_graphql_uri
+            - name: PUBLIC_ENV__ENDPOINTS__WEBSOCKET_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: endpoints_websocket_uri
+            - name: PUBLIC_ENV__META__BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: frontend_url
+            - name: PUBLIC_ENV__ACCOUNT_HOLDER
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: account_holder
+            - name: PUBLIC_ENV__IBAN
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: iban
+            - name: PUBLIC_ENV__BIC
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: bic
           image: "{{ .Values.frontend.image.repository }}:{{ default .Values.global.image.tag .Values.frontend.image.tag "latest" }}"
           imagePullPolicy: {{ quote .Values.global.image.pullPolicy }}
           name: frontend

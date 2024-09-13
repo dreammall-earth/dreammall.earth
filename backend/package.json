@@ -38,7 +38,7 @@
     "class-validator": "^0.14.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "fast-xml-parser": "^4.5.0",
     "graphql": "^16.9.0",
     "graphql-scalars": "^1.23.0",
