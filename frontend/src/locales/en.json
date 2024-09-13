@@ -136,7 +136,7 @@
       "title": "Set up standing order"
     },
     "qr": {
-      "explanation": "If your banking app supports QR codes, you can easily scan the QR code below on the page.",
+      "explanation": "Alternatively, you can also scan this QR code with your banking app.",
       "title": "Scan QR Code"
     }
   },
