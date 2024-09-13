@@ -12,9 +12,12 @@
 import { storeToRefs } from 'pinia'
 
 import SepaIban from '#components/sepa-iban/SepaIban.vue'
+import { usePageContext } from '#context/usePageContext'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
-import { ACCOUNTING } from '#src/env'
 import { useUserStore } from '#stores/userStore'
+
+const pageContext = usePageContext()
+const { ACCOUNTING } = pageContext.publicEnv
 
 const userStore = useUserStore()
 const { getCurrentUser } = storeToRefs(userStore)

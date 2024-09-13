@@ -28,7 +28,7 @@
           <div v-if="showAuthentication" class="d-none d-md-flex align-center mr-0 mr-md-8">
             <div class="d-flex">
               <MainButton
-                v-if="!!AUTH.SIGNIN_URI"
+                v-if="!!auth.SIGNIN_URI"
                 variant="third-inverse"
                 class="mr-4 sign-in"
                 label="Sign in"
@@ -36,7 +36,7 @@
                 @click="signIn"
               />
               <MainButton
-                v-if="!!AUTH.SIGNUP_URI"
+                v-if="!!auth.SIGNUP_URI"
                 class="sign-up"
                 :class="[buttonsInBackground ? 'video-helper' : '']"
                 variant="third"
@@ -84,7 +84,7 @@
         <v-divider class="ma-4"></v-divider>
         <div class="d-flex flex-column justify-center align-center">
           <MainButton
-            v-if="!!AUTH.SIGNIN_URI"
+            v-if="!!auth.SIGNIN_URI"
             variant="third-inverse"
             class="sign-in ma-4"
             label="Sign in"
@@ -92,7 +92,7 @@
             @click="signIn"
           />
           <MainButton
-            v-if="!!AUTH.SIGNUP_URI"
+            v-if="!!auth.SIGNUP_URI"
             class="sign-up ma-4"
             variant="third"
             label="Sign up"
@@ -106,23 +106,28 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, onBeforeMount } from 'vue'
+import { ref, onMounted, onBeforeMount, defineProps } from 'vue'
 
 import MobileMenuIcon from '#assets/img/hamburger_mobile.svg'
 import MainButton from '#components/buttons/MainButton.vue'
 import LanguageSelector from '#components/language/LanguageSelector.vue'
 import LogoImage from '#components/LogoImage.vue'
 import AnchorLink from '#components/nav/AnchorLink.vue'
-import { AUTH } from '#src/env'
 
-const showAuthentication = !!AUTH.SIGNUP_URI || !!AUTH.SIGNIN_URI
+import type { PageContext } from 'vike/types'
+
+const props = defineProps<{
+  auth: PageContext['publicEnv']['AUTH']
+}>()
+
+const showAuthentication = !!props.auth.SIGNUP_URI || !!props.auth.SIGNIN_URI
 
 async function signIn() {
-  window.location.href = AUTH.SIGNIN_URI
+  window.location.href = props.auth.SIGNIN_URI
 }
 
 async function signUp() {
-  window.location.href = AUTH.SIGNUP_URI
+  window.location.href = props.auth.SIGNUP_URI
 }
 
 const appBackground = ref('transparent')

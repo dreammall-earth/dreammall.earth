@@ -3,24 +3,37 @@ import { provideApolloClient } from '@vue/apollo-composable'
 import { flushPromises, mount } from '@vue/test-utils'
 import { createMockClient, createMockSubscription, IMockSubscription } from 'mock-apollo-client'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { Component, h } from 'vue'
+import { Component, h, reactive } from 'vue'
 import { VApp } from 'vuetify/components'
 
+import { vikePageContext } from '#context/usePageContext'
 import { currentUserQuery } from '#queries/currentUserQuery'
 import { joinTableQuery } from '#queries/joinTableQuery'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
-import { mockPageContext } from '#tests/mock.vikePageContext'
+import { mockPageContext as globalMockPageContext } from '#tests/mock.vikePageContext'
 import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 
 import TablePage from './+Page.vue'
 import Route from './+route'
 import { title } from './+title'
 
+import type { PageContext } from 'vike/types'
+
 const joinTableQueryMock = vi.fn()
 const currentUserQueryMock = vi.fn()
 const updateOpenTablesSubscriptionMock: IMockSubscription = createMockSubscription()
 
 const mockClient = createMockClient()
+
+const META: PageContext['publicEnv']['META'] = {
+  BASE_URL: 'http://localhost:3000',
+  DEFAULT_AUTHOR: 'Whatever',
+}
+
+const mockPageContext = reactive({
+  ...globalMockPageContext,
+  publicEnv: { META },
+})
 
 mockClient.setRequestHandler(
   currentUserQuery,
@@ -46,6 +59,11 @@ provideApolloClient(mockClient)
 describe('Table Page', () => {
   const Wrapper = () => {
     return mount(VApp, {
+      global: {
+        provide: {
+          [vikePageContext as symbol]: mockPageContext,
+        },
+      },
       slots: {
         default: h(TablePage as Component),
       },

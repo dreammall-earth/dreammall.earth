@@ -25,8 +25,12 @@ function createApp(pageContext: PageContext, isClient = true) {
   let rootComponent: InstanceType<typeof PageWithWrapper>
   const PageWithWrapper = defineComponent({
     setup: () => {
-      provide(DefaultApolloClient, createApolloClient(getToken, isClient))
-      provide('authService', new AuthService())
+      provide(
+        DefaultApolloClient,
+        createApolloClient(pageContext.publicEnv.ENDPOINTS)(getToken, isClient),
+      )
+      provide('authService', new AuthService(pageContext.publicEnv.AUTH))
+      provide('pageContext', pageContext)
     },
     data: () => ({
       Page: markRaw(pageContext.Page),

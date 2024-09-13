@@ -30,5 +30,9 @@ configmap:
   endpoints_graphql_uri: https://master.dreammall.earth/api/
   endpoints_websocket_uri: ws://master.dreammall.earth/api/subscriptions
   frontend_url:  https://app.master.dreammall.earth
+  frontend_signin_url:  https://app.master.dreammall.earth/signin
   jwks_uri: http://authentik-server/application/o/dreammallearth/jwks/
   presenter_url: https://master.dreammall.earth
+  account_holder: 'DreamMall GBR'
+  iban: 'DE75512108001245126199'
+  bic: 'SOGEDEFFXXX'

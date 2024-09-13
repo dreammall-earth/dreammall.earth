@@ -45,6 +45,9 @@ const onClick = (stepId: string) => {
 }
 
 const pageContext = usePageContext()
+
+const { META } = pageContext.publicEnv
+
 const tableId = computed(() => {
   return pageContext.routeParams?.id ? Number(pageContext.routeParams.id) : null
 })
@@ -66,7 +69,7 @@ const buttons = computed(() => [
     action: () => {
       if (tableId.value) {
         copyToClipboard(
-          tablesStore.getJoinTableUrl(tableId.value),
+          tablesStore.getJoinTableUrl(tableId.value, META.BASE_URL),
           t('globalErrorHandler.copiedToClipboard'),
         )
         copiedIndicator.value = true
