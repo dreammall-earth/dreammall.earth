@@ -19,7 +19,7 @@ const config: UserConfig = {
       defaultImport: 'url', // Preserve default behavior to not break anything
       svgo: false, // SVGO is disabled because it breaks the SVGs. It seems to be unmaintained.
     }),
-    !isStorybook() && vike({ prerender: true }), // SSR only when storybook is not running
+    !isStorybook() && vike({ prerender: false }),
     vueI18n({
       ssr: true,
       include: path.resolve(__dirname, './src/locales/**'),

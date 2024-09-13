@@ -3,8 +3,9 @@ import { config } from '@vue/test-utils'
 import { UserManager } from 'oidc-client-ts'
 import { vi } from 'vitest'
 
-import { AUTH } from '#src/env'
 import AuthService from '#src/services/AuthService'
+
+import type { PageContext } from 'vike/types'
 
 export const signinSilentCallbackMock = vi.fn()
 export const signinRedirectMock = vi.fn()
@@ -34,14 +35,18 @@ vi.mock('oidc-client-ts', async (importOriginal) => {
   }
 })
 
-AUTH.AUTHORITY = 'authority'
-AUTH.CLIENT_ID = 'client_id'
-AUTH.REDIRECT_URI = 'redirect_uri'
-AUTH.SILENT_REDIRECT_URI = 'silent_redirect_uri'
-AUTH.RESPONSE_TYPE = 'response_type'
-AUTH.SCOPE = 'scope'
+const AUTH = {
+  AUTHORITY: 'authority',
+  AUTHORITY_SIGNUP_URI: 'authority_signup_uri',
+  AUTHORITY_SIGNOUT_URI: 'authority_signout_uri',
+  CLIENT_ID: 'client_id',
+  REDIRECT_URI: 'redirect_uri',
+  SILENT_REDIRECT_URI: 'silent_redirect_uri',
+  RESPONSE_TYPE: 'response_type',
+  SCOPE: 'scope',
+} satisfies PageContext['publicEnv']['AUTH']
 
-export const authService = new AuthService()
+export const authService = new AuthService(AUTH)
 
 config.global.provide = {
   ...config.global.provide,

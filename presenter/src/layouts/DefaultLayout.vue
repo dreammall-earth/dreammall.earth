@@ -1,6 +1,6 @@
 <template>
   <v-main class="main-layout">
-    <HeaderMenu />
+    <HeaderMenu :auth="publicEnv.AUTH" />
     <v-container fluid class="page-container pa-0">
       <v-row>
         <v-col v-if="slots.sidemenu" cols="2">
@@ -23,7 +23,9 @@ import { useSlots } from 'vue'
 
 import FooterMenu from '#components/menu/FooterMenu.vue'
 import HeaderMenu from '#components/menu/HeaderMenu.vue'
+import { usePageContext } from '#context/usePageContext'
 
+const { publicEnv } = usePageContext()
 const slots = useSlots()
 </script>
 

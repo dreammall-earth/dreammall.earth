@@ -1,17 +1,16 @@
 import { renderToString as renderToString_ } from '@vue/server-renderer'
 import { escapeInject, dangerouslySkipEscape } from 'vike/server'
-import { PageContext, PageContextServer } from 'vike/types'
 
 import image from '#assets/dreammall-logo.svg'
 import logoUrl from '#assets/favicon.ico'
-import { META } from '#src/env'
 
 import { createApp } from './app'
 import { getDescription, getTitle } from './utils'
 
+import type { OnRenderHtmlAsync } from 'vike/types'
 import type { App } from 'vue'
 
-async function render(pageContext: PageContextServer & PageContext) {
+const onRenderHtml: OnRenderHtmlAsync = async (pageContext) => {
   const { app, i18n } = createApp(pageContext, false)
 
   const locale = i18n.global.locale.value
@@ -21,6 +20,8 @@ async function render(pageContext: PageContextServer & PageContext) {
   // See https://vike.dev/head
   const title = getTitle(pageContext)
   const description = getDescription(pageContext)
+
+  const { META } = pageContext.publicEnv
 
   const documentHtml = escapeInject`<!DOCTYPE html>
     <html lang="${locale}">
@@ -74,4 +75,4 @@ async function renderToString(app: App) {
   return appHtml
 }
 
-export default render
+export { onRenderHtml }

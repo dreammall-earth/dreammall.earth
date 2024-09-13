@@ -40,6 +40,7 @@ import { useI18n } from 'vue-i18n'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
+import { usePageContext } from '#context/usePageContext'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { copyToClipboard } from '#src/utils/copyToClipboard'
 import { useTablesStore } from '#stores/tablesStore'
@@ -59,9 +60,12 @@ const { t } = useI18n()
 
 const tablesStore = useTablesStore()
 
+const pageContext = usePageContext()
+const { META } = pageContext.publicEnv
+
 const tableSettings = defineModel<MyTableSettings>({ required: true })
 const tableId = tableSettings.value.tableId ?? 0
-const tableUrl = tablesStore.getJoinTableUrl(tableId)
+const tableUrl = tablesStore.getJoinTableUrl(tableId, META.BASE_URL)
 
 const copiedIndicator = ref(false)
 let timerIndicator: ReturnType<typeof setTimeout> | null = null

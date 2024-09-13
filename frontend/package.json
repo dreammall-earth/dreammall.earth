@@ -64,6 +64,7 @@
     "compression": "^1.7.4",
     "cookie": "^0.6.0",
     "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "graphql-tag": "^2.12.6",
     "graphql-ws": "^5.16.0",
