@@ -73,7 +73,6 @@
     "pinia": "^2.2.2",
     "pinia-plugin-persistedstate": "^3.2.3",
     "qrcode": "^1.5.4",
-    "sepa-payment-qr-code": "^2.0.2",
     "sirv": "^2.0.4",
     "three": "^0.168.0",
     "vike": "^0.4.194",
