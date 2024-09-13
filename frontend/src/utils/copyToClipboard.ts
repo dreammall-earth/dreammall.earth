@@ -1,4 +1,4 @@
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
+import GlobalErrorHandler from '#renderer/plugins/globalErrorHandler'
 
 export const copyToClipboard = async (data: string, successMessage: string | null = null) => {
   if (typeof window === 'undefined') return

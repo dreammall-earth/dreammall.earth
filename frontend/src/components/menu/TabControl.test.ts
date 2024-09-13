@@ -3,11 +3,11 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { usePageContext } from '#root/renderer/context/usePageContext'
+import { usePageContext } from '#renderer/context/usePageContext'
 
 import TabControl from './TabControl.vue'
 
-vi.mock('#root/renderer/context/usePageContext')
+vi.mock('#renderer/context/usePageContext')
 const mockedUsePageContext = vi.mocked(usePageContext)
 
 describe('TabControl', () => {

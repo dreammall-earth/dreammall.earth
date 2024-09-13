@@ -9,12 +9,12 @@ export default mergeConfig(
       globals: true,
       environment: 'happy-dom',
       setupFiles: [
-        'scripts/tests/mock.$t.ts',
-        'scripts/tests/mock.vikePageContext.ts',
-        'scripts/tests/mock.apolloClient.ts',
-        'scripts/tests/mock.IntersectionObserver.ts',
-        'scripts/tests/plugin.pinia.ts',
-        'scripts/tests/plugin.i18n-vuetify.ts',
+        'src/tests/mock.$t.ts',
+        'src/tests/mock.vikePageContext.ts',
+        'src/tests/mock.apolloClient.ts',
+        'src/tests/mock.IntersectionObserver.ts',
+        'src/tests/plugin.pinia.ts',
+        'src/tests/plugin.i18n-vuetify.ts',
       ],
       coverage: {
         all: true,

@@ -2,15 +2,15 @@ import { useMutation, useQuery, useSubscription } from '@vue/apollo-composable'
 import { acceptHMRUpdate, defineStore, storeToRefs } from 'pinia'
 import { computed, ref, watch } from 'vue'
 
-import { createMyTableMutation } from '#mutations/createMyTableMutation'
-import { createTableMutation } from '#mutations/createTableMutation'
-import { deleteTableMutation } from '#mutations/deleteTableMutation'
-import { joinMyTableMutation } from '#mutations/joinMyTableMutation'
-import { updateMyTableMutation } from '#mutations/updateMyTableMutation'
+import { createMyTableMutation } from '#src/graphql/mutations/createMyTableMutation'
+import { createTableMutation } from '#src/graphql/mutations/createTableMutation'
+import { deleteTableMutation } from '#src/graphql/mutations/deleteTableMutation'
+import { joinMyTableMutation } from '#src/graphql/mutations/joinMyTableMutation'
+import { updateMyTableMutation } from '#src/graphql/mutations/updateMyTableMutation'
 import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
 import { tablesQuery } from '#src/graphql/queries/tablesQuery'
-import { useUserStore } from '#stores/userStore'
-import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
+import { updateOpenTablesSubscription } from '#src/graphql/subscriptions/updateOpenTablesSubscription'
+import { useUserStore } from '#src/stores/userStore'
 
 type Attendee = {
   fullName: string

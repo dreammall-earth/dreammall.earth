@@ -13,17 +13,17 @@ import { storeToRefs } from 'pinia'
 import { reactive, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import StepControl from '#components/steps/StepControl.vue'
-import { Step } from '#components/steps/useSteps'
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
-import { useTablesStore } from '#stores/tablesStore'
+import GlobalErrorHandler from '#renderer/plugins/globalErrorHandler'
+import StepControl from '#src/components/steps/StepControl.vue'
+import { Step } from '#src/components/steps/useSteps'
+import { useTablesStore } from '#src/stores/tablesStore'
 
 import EnterNameAndVisibility from './EnterNameAndVisibility.vue'
 import SelectUsers from './SelectUsers.vue'
 import StartSetup from './StartSetup.vue'
 import SubmitTable from './SubmitTable.vue'
 
-import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
+import type MyTableSettings from '#src/components/malltalk/interfaces/MyTableSettings'
 import type { ComponentExposed } from 'vue-component-type-helpers'
 
 const tablesStore = useTablesStore()

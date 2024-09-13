@@ -1,7 +1,7 @@
 import { redirect } from 'vike/abort'
 
-import pinia from '#plugins/pinia'
-import { useAuthStore } from '#stores/authStore'
+import pinia from '#renderer/plugins/pinia'
+import { useAuthStore } from '#src/stores/authStore'
 
 import type { GuardSync } from 'vike/types'
 

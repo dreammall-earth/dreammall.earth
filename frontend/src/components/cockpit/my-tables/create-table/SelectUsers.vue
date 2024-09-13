@@ -12,12 +12,12 @@
 </template>
 
 <script lang="ts" setup>
-import SimpleButton from '#components/buttons/SimpleButton.vue'
-import UserSelection from '#components/user-selection/UserSelection.vue'
+import SimpleButton from '#src/components/buttons/SimpleButton.vue'
+import UserSelection from '#src/components/user-selection/UserSelection.vue'
 
 import MotivationBox from './MotivationBox.vue'
 
-import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
+import type { StepEmits, StepProps } from '#src/components/steps/StepComponentTypes'
 import type { CreateTableModel } from './CreateTable.vue'
 
 const props = defineProps<StepProps>()

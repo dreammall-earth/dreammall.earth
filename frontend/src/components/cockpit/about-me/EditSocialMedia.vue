@@ -66,11 +66,11 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
 
-import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
+import CockpitCard from '#src/components/cockpit/cockpit-card/CockpitCard.vue'
 
 import { getSocialMediaIcon, socialMediaTypes, buildSocialMediaLink } from './socialMediaPlatforms'
 
-import type { SocialMedia, AddSocialMediaInput } from '#stores/userStore'
+import type { SocialMedia, AddSocialMediaInput } from '#src/stores/userStore'
 
 const props = defineProps<{
   socials: SocialMedia[]

@@ -4,7 +4,7 @@ import { setActivePinia, createPinia } from 'pinia'
 import { vi, describe, it, expect, beforeEach } from 'vitest'
 
 import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
-import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
+import { updateOpenTablesSubscription } from '#src/graphql/subscriptions/updateOpenTablesSubscription'
 
 import { useTablesStore } from './tablesStore'
 

@@ -38,15 +38,15 @@ import { navigate } from 'vike/client/router'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import SimpleButton from '#components/buttons/SimpleButton.vue'
-import LogoImage from '#components/menu/LogoImage.vue'
-import { usePageContext } from '#context/usePageContext'
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
+import { usePageContext } from '#renderer/context/usePageContext'
+import GlobalErrorHandler from '#renderer/plugins/globalErrorHandler'
+import SimpleButton from '#src/components/buttons/SimpleButton.vue'
+import LogoImage from '#src/components/menu/LogoImage.vue'
+import { useTablesStore } from '#src/stores/tablesStore'
 import { copyToClipboard } from '#src/utils/copyToClipboard'
-import { useTablesStore } from '#stores/tablesStore'
 
-import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
-import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
+import type MyTableSettings from '#src/components/malltalk/interfaces/MyTableSettings'
+import type { StepEmits, StepProps } from '#src/components/steps/StepComponentTypes'
 
 defineProps<StepProps>()
 const emit = defineEmits<StepEmits>()

@@ -67,4 +67,4 @@ const toggleInvitation = () => {
 }
 </style>
 #src/panels/dreammall-button-drawer/interfaces/UserInvitation.js
-#components/malltalk/interfaces/UserInvitation.js
+#src/components/malltalk/interfaces/UserInvitation.js

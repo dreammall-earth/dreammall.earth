@@ -1,7 +1,7 @@
 import { config } from '@vue/test-utils'
 import { reactive } from 'vue'
 
-import { vikePageContext } from '#context/usePageContext'
+import { vikePageContext } from '#renderer/context/usePageContext'
 
 type MockPageContext = {
   urlPathname: string

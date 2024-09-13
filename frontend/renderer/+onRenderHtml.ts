@@ -1,8 +1,8 @@
 import { renderToString as renderToString_ } from '@vue/server-renderer'
 import { escapeInject, dangerouslySkipEscape } from 'vike/server'
 
-import image from '#assets/dreammall-logo.svg'
-import logoUrl from '#assets/favicon.ico'
+import image from '#src/assets/dreammall-logo.svg'
+import logoUrl from '#src/assets/favicon.ico'
 
 import { createApp } from './app'
 import { getDescription, getTitle } from './utils'

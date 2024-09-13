@@ -82,8 +82,8 @@
 import VueQrcode from '@chenfengyuan/vue-qrcode'
 import { ref, computed, defineProps } from 'vue'
 
-import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
-import CockpitLayout from '#components/cockpit/cockpit-layout/CockpitLayout.vue'
+import CockpitCard from '#src/components/cockpit/cockpit-card/CockpitCard.vue'
+import CockpitLayout from '#src/components/cockpit/cockpit-layout/CockpitLayout.vue'
 
 import { generateQrCode } from './qrCode'
 

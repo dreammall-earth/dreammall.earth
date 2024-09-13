@@ -12,10 +12,10 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 
-import StepControl from '#components/steps/StepControl.vue'
-import { Step } from '#components/steps/useSteps'
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
-import { useTablesStore } from '#stores/tablesStore'
+import GlobalErrorHandler from '#renderer/plugins/globalErrorHandler'
+import StepControl from '#src/components/steps/StepControl.vue'
+import { Step } from '#src/components/steps/useSteps'
+import { useTablesStore } from '#src/stores/tablesStore'
 
 import EnterNameAndVisibility from './EnterNameAndVisibility.vue'
 import SelectUsers from './SelectUsers.vue'

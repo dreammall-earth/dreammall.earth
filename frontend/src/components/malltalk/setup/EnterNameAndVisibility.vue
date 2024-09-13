@@ -31,10 +31,10 @@
 </template>
 
 <script setup lang="ts">
-import SimpleButton from '#components/buttons/SimpleButton.vue'
+import SimpleButton from '#src/components/buttons/SimpleButton.vue'
 
-import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
-import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
+import type MyTableSettings from '#src/components/malltalk/interfaces/MyTableSettings'
+import type { StepEmits, StepProps } from '#src/components/steps/StepComponentTypes'
 
 defineProps<StepProps>()
 const emit = defineEmits<StepEmits>()

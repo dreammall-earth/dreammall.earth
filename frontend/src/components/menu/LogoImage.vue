@@ -5,8 +5,8 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 
-import LogoSimple from '#assets/dreammall-logo-simple.svg'
-import Logo from '#assets/dreammall-logo.svg'
+import LogoSimple from '#src/assets/dreammall-logo-simple.svg'
+import Logo from '#src/assets/dreammall-logo.svg'
 
 const props = withDefaults(
   defineProps<{

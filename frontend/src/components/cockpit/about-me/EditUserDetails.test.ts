@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { UserDetail } from '#stores/userStore'
+import { UserDetail } from '#src/stores/userStore'
 
 import EditUserDetails from './EditUserDetails.vue'
 

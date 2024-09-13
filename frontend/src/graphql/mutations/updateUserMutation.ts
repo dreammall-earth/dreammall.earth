@@ -1,6 +1,6 @@
 import { gql } from 'graphql-tag'
 
-import type { CurrentUser } from '#stores/userStore'
+import type { CurrentUser } from '#src/stores/userStore'
 
 export type UpdateUserInput = {
   name: string

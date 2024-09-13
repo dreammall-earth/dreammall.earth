@@ -7,6 +7,6 @@
 </template>
 
 <script lang="ts" setup>
-import DefaultLayout from '#layouts/DefaultLayout.vue'
-import DataProtectionSection from '#root/src/components/sections/DataProtectionSection.vue'
+import DataProtectionSection from '#src/components/sections/DataProtectionSection.vue'
+import DefaultLayout from '#src/layouts/DefaultLayout.vue'
 </script>

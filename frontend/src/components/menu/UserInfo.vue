@@ -28,8 +28,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import ClientOnly from '#components/ClientOnly.vue'
-import { useUserStore } from '#stores/userStore'
+import ClientOnly from '#src/components/ClientOnly.vue'
+import { useUserStore } from '#src/stores/userStore'
 
 import UserDropdown from './UserDropdown.vue'
 

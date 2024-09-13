@@ -7,24 +7,27 @@ import {
   AddSocialMediaInput,
   AddSocialMediaMutationResult,
   SocialMediaType,
-} from '#mutations/addSocialMediaMutation'
+} from '#src/graphql/mutations/addSocialMediaMutation'
 import {
   addUserDetailMutation,
   AddUserDetailInput,
   AddUserDetailMutationResult,
-} from '#mutations/addUserDetailMutation'
-import { removeSocialMediaMutation } from '#mutations/removeSocialMediaMutation'
-import { removeUserDetailMutation } from '#mutations/removeUserDetailMutation'
+} from '#src/graphql/mutations/addUserDetailMutation'
+import { removeSocialMediaMutation } from '#src/graphql/mutations/removeSocialMediaMutation'
+import { removeUserDetailMutation } from '#src/graphql/mutations/removeUserDetailMutation'
 import {
   updateUserMutation,
   UpdateUserInput,
   UpdateUserMutationResult,
-} from '#mutations/updateUserMutation'
-import { currentUserQuery } from '#queries/currentUserQuery'
-import { searchUsersQuery } from '#queries/searchUsersQuery'
+} from '#src/graphql/mutations/updateUserMutation'
+import { currentUserQuery } from '#src/graphql/queries/currentUserQuery'
+import { searchUsersQuery } from '#src/graphql/queries/searchUsersQuery'
 
-export type { AddSocialMediaInput, SocialMediaType } from '#mutations/addSocialMediaMutation'
-export type { AddUserDetailInput } from '#mutations/addUserDetailMutation'
+export type {
+  AddSocialMediaInput,
+  SocialMediaType,
+} from '#src/graphql/mutations/addSocialMediaMutation'
+export type { AddUserDetailInput } from '#src/graphql/mutations/addUserDetailMutation'
 
 export type UserInTable = {
   id: number

@@ -35,16 +35,16 @@
 </template>
 
 <script lang="ts" setup>
-import CoffeeLogo from '#assets/img/coffee_icon.svg'
-import MallIcon from '#assets/img/logo_mall.svg'
-import MenschenProjekteIcon from '#assets/img/menschen_projekte.svg'
-import SectionColumnCard from '#components/layout/SectionColumnCard.vue'
+import CoffeeLogo from '#src/assets/img/coffee_icon.svg'
+import MallIcon from '#src/assets/img/logo_mall.svg'
+import MenschenProjekteIcon from '#src/assets/img/menschen_projekte.svg'
+import SectionColumnCard from '#src/components/layout/SectionColumnCard.vue'
 </script>
 
 <script lang="ts" setup></script>
 
 <style scoped lang="scss">
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 
 .products-section {
   max-width: $section-max-width-x-big;

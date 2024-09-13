@@ -19,12 +19,12 @@ import { useQuery } from '@vue/apollo-composable'
 import { navigate } from 'vike/client/router'
 import { ref, watch } from 'vue'
 
-import EmbeddedTable from '#components/embedded-table/EmbeddedTable.vue'
-import TableSettings from '#components/malltalk/settings/TableSettings.vue'
-import { usePageContext } from '#context/usePageContext'
-import DefaultLayout from '#layouts/DefaultLayout.vue'
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
-import { joinTableQuery } from '#queries/joinTableQuery'
+import { usePageContext } from '#renderer/context/usePageContext'
+import GlobalErrorHandler from '#renderer/plugins/globalErrorHandler'
+import EmbeddedTable from '#src/components/embedded-table/EmbeddedTable.vue'
+import TableSettings from '#src/components/malltalk/settings/TableSettings.vue'
+import { joinTableQuery } from '#src/graphql/queries/joinTableQuery'
+import DefaultLayout from '#src/layouts/DefaultLayout.vue'
 
 const tableUrl = ref<string | null>(null)
 

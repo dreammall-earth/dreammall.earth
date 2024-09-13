@@ -1,8 +1,8 @@
 import { mount, flushPromises } from '@vue/test-utils'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 
-import { subscribeToNewsletter } from '#mutations/subscribeToNewsletter'
-import { mockClient } from '#tests/mock.apolloClient'
+import { subscribeToNewsletter } from '#src/graphql/mutations/subscribeToNewsletter'
+import { mockClient } from '#src/tests/mock.apolloClient'
 
 import NewsletterForm from './NewsletterForm.vue'
 

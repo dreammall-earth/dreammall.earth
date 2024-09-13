@@ -78,12 +78,12 @@
 import { useMutation } from '@vue/apollo-composable'
 import { ref } from 'vue'
 
-import MainButton from '#components/buttons/MainButton.vue'
-import DataPrivacyCheckbox from '#components/inputs/DataPrivacyCheckbox.vue'
-import EmailInput from '#components/inputs/EmailInput.vue'
-import NameInput from '#components/inputs/NameInput.vue'
-import AnchorLink from '#components/nav/AnchorLink.vue'
-import { subscribeToNewsletter } from '#mutations/subscribeToNewsletter'
+import MainButton from '#src/components/buttons/MainButton.vue'
+import DataPrivacyCheckbox from '#src/components/inputs/DataPrivacyCheckbox.vue'
+import EmailInput from '#src/components/inputs/EmailInput.vue'
+import NameInput from '#src/components/inputs/NameInput.vue'
+import AnchorLink from '#src/components/nav/AnchorLink.vue'
+import { subscribeToNewsletter } from '#src/graphql/mutations/subscribeToNewsletter'
 
 const firstname = ref('')
 const lastname = ref('')
@@ -132,7 +132,7 @@ async function submitForm() {
 </script>
 
 <style scoped lang="scss">
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 
 .newsletter-form {
   .newsletter-text {

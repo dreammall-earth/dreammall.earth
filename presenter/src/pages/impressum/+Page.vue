@@ -7,6 +7,6 @@
 </template>
 
 <script lang="ts" setup>
-import DefaultLayout from '#layouts/DefaultLayout.vue'
-import ImpressSection from '#root/src/components/sections/ImpressSection.vue'
+import ImpressSection from '#src/components/sections/ImpressSection.vue'
+import DefaultLayout from '#src/layouts/DefaultLayout.vue'
 </script>

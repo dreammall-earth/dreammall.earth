@@ -5,8 +5,8 @@ import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { currentUserQuery } from '#queries/currentUserQuery'
-import { useUserStore } from '#stores/userStore'
+import { currentUserQuery } from '#src/graphql/queries/currentUserQuery'
+import { useUserStore } from '#src/stores/userStore'
 
 import UserInfo from './UserInfo.vue'
 

@@ -6,7 +6,7 @@ import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
-import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
+import { updateOpenTablesSubscription } from '#src/graphql/subscriptions/updateOpenTablesSubscription'
 
 import TablesDrawer from './TablesDrawer.vue'
 

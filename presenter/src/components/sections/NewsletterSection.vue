@@ -39,15 +39,15 @@
 </template>
 
 <script lang="ts" setup>
-// import MainButton from '#components/buttons/MainButton.vue'
-import NewsletterForm from '#components/forms/NewsletterForm.vue'
+// import MainButton from '#src/components/buttons/MainButton.vue'
+import NewsletterForm from '#src/components/forms/NewsletterForm.vue'
 
 // TODO insert link to newest newsletter
 // const newsletterDownloadPath = '#'
 </script>
 
 <style scoped lang="scss">
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 
 .newsletter-section {
   max-width: $section-max-width-x-small;

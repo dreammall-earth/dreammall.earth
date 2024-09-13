@@ -47,13 +47,13 @@
 </template>
 
 <script lang="ts" setup>
-import ContactForm from '#components/forms/ContactForm.vue'
-import LogoImage from '#components/LogoImage.vue'
-import AnchorLink from '#components/nav/AnchorLink.vue'
+import ContactForm from '#src/components/forms/ContactForm.vue'
+import LogoImage from '#src/components/LogoImage.vue'
+import AnchorLink from '#src/components/nav/AnchorLink.vue'
 </script>
 
 <style scoped lang="scss">
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 
 .gradient-bg {
   width: 100%;

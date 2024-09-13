@@ -9,7 +9,7 @@
 <script lang="ts" setup>
 import { navigate } from 'vike/client/router'
 
-import { usePageContext } from '#context/usePageContext'
+import { usePageContext } from '#renderer/context/usePageContext'
 
 const pageContext = usePageContext()
 

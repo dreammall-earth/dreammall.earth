@@ -35,8 +35,8 @@
 <script lang="ts" setup>
 import { onBeforeMount, onMounted, ref } from 'vue'
 
-import LogoPlain from '#assets/dreammall-logo-plain.svg'
-import MainButton from '#components/buttons/MainButton.vue'
+import LogoPlain from '#src/assets/dreammall-logo-plain.svg'
+import MainButton from '#src/components/buttons/MainButton.vue'
 
 const target = ref()
 const animate = ref(false)
@@ -63,7 +63,7 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 
 .about-section {
   max-width: $section-max-width-big;

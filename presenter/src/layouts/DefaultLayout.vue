@@ -21,16 +21,16 @@
 <script lang="ts" setup>
 import { useSlots } from 'vue'
 
-import FooterMenu from '#components/menu/FooterMenu.vue'
-import HeaderMenu from '#components/menu/HeaderMenu.vue'
-import { usePageContext } from '#context/usePageContext'
+import { usePageContext } from '#renderer/context/usePageContext'
+import FooterMenu from '#src/components/menu/FooterMenu.vue'
+import HeaderMenu from '#src/components/menu/HeaderMenu.vue'
 
 const { publicEnv } = usePageContext()
 const slots = useSlots()
 </script>
 
 <style scoped lang="scss">
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 
 .main-layout {
   padding-top: 0;
@@ -44,7 +44,7 @@ const slots = useSlots()
 </style>
 
 <style lang="scss">
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 
 html {
   scroll-behavior: smooth;

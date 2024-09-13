@@ -1,6 +1,6 @@
 import { UserManager } from 'oidc-client-ts'
 
-import { useAuthStore } from '#stores/authStore.js'
+import { useAuthStore } from '#src/stores/authStore.js'
 
 import type { PageContext } from 'vike/types'
 

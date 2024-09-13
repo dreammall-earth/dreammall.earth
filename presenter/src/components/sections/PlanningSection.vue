@@ -45,13 +45,13 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 
-import VideoPosterMobile from '#assets/img/timeline_thumbnail_hoch.jpg'
-import VideoPoster from '#assets/img/timeline_thumbnail_quer.jpg'
-import VideoMobileMp4 from '#assets/video/timeline_hoch.mp4'
-import VideoMobileWebm from '#assets/video/timeline_hoch.webm'
-import VideoMp4 from '#assets/video/timeline_quer.mp4'
-import VideoWebm from '#assets/video/timeline_quer.webm'
-import MainButton from '#components/buttons/MainButton.vue'
+import VideoPosterMobile from '#src/assets/img/timeline_thumbnail_hoch.jpg'
+import VideoPoster from '#src/assets/img/timeline_thumbnail_quer.jpg'
+import VideoMobileMp4 from '#src/assets/video/timeline_hoch.mp4'
+import VideoMobileWebm from '#src/assets/video/timeline_hoch.webm'
+import VideoMp4 from '#src/assets/video/timeline_quer.mp4'
+import VideoWebm from '#src/assets/video/timeline_quer.webm'
+import MainButton from '#src/components/buttons/MainButton.vue'
 
 const showButton = ref(false)
 const video = ref<HTMLFormElement>()
@@ -98,7 +98,7 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 
 .planning-section {
   max-width: $section-max-width;

@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import Logo from '#assets/dreammall-logo-no-text.svg'
+import Logo from '#src/assets/dreammall-logo-no-text.svg'
 </script>
 
 <style scoped>

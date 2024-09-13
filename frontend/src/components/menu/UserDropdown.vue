@@ -11,7 +11,7 @@
 <script lang="ts" setup>
 import { inject } from 'vue'
 
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
+import GlobalErrorHandler from '#renderer/plugins/globalErrorHandler'
 import AuthService from '#src/services/AuthService'
 
 const authService = inject<AuthService>('authService')

@@ -28,12 +28,12 @@ import { navigate } from 'vike/client/router'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import SimpleButton from '#components/buttons/SimpleButton.vue'
-import { usePageContext } from '#context/usePageContext'
+import { usePageContext } from '#renderer/context/usePageContext'
+import SimpleButton from '#src/components/buttons/SimpleButton.vue'
+import { useTablesStore } from '#src/stores/tablesStore'
 import { copyToClipboard } from '#src/utils/copyToClipboard'
-import { useTablesStore } from '#stores/tablesStore'
 
-import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
+import type { StepEmits, StepProps } from '#src/components/steps/StepComponentTypes'
 
 const { t } = useI18n()
 

@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 
-import Logo from '#assets/dreammall-logo.svg'
+import Logo from '#src/assets/dreammall-logo.svg'
 
 const props = withDefaults(
   defineProps<{

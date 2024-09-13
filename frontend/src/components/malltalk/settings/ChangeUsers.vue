@@ -9,13 +9,13 @@
 </template>
 
 <script lang="ts" setup>
-import SimpleButton from '#components/buttons/SimpleButton.vue'
-import UserSelection from '#components/user-selection/UserSelection.vue'
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
-import { useTablesStore } from '#stores/tablesStore'
+import GlobalErrorHandler from '#renderer/plugins/globalErrorHandler'
+import SimpleButton from '#src/components/buttons/SimpleButton.vue'
+import UserSelection from '#src/components/user-selection/UserSelection.vue'
+import { useTablesStore } from '#src/stores/tablesStore'
 
-import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
-import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
+import type MyTableSettings from '#src/components/malltalk/interfaces/MyTableSettings'
+import type { StepEmits, StepProps } from '#src/components/steps/StepComponentTypes'
 
 const props = defineProps<StepProps>()
 const emit = defineEmits<StepEmits>()
