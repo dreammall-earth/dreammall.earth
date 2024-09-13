@@ -75,13 +75,13 @@
       "text": "Something went wrong."
     },
     "globalerror": {
-      "text": "Error opening table",
-      "autherror": "auth error"
+      "autherror": "auth error",
+      "text": "Error opening table"
     }
   },
   "joinTablePage": {
-    "header": "Join Table as:",
     "button": "Submit",
+    "header": "Join Table as:",
     "name": "Name"
   },
   "menu": {
