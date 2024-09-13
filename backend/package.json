@@ -87,7 +87,7 @@
     "ts-jest": "^29.2.4",
     "ts-node": "^10.9.2",
     "tsc-watch": "^6.2.0",
-    "typescript": "^5.5.4"
+    "typescript": "^5.6.2"
   },
   "imports": {
     "#api/*": "./src/api/*",
