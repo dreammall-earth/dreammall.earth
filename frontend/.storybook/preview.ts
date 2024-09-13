@@ -1,9 +1,9 @@
 import { setup } from '@storybook/vue3'
 import { createPinia } from 'pinia'
 
-import { setPageContext } from '#context/usePageContext'
-import i18n from '#plugins/i18n'
-import CreateVuetify from '#plugins/vuetify'
+import { setPageContext } from '#renderer/context/usePageContext'
+import i18n from '#renderer/plugins/i18n'
+import CreateVuetify from '#renderer/plugins/vuetify'
 
 import { withVuetifyTheme } from './withVuetifyTheme.decorator'
 

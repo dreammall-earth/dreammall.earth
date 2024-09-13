@@ -2,13 +2,13 @@ import { UserManager } from 'oidc-client-ts'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
 import AuthService from '#src/services/AuthService'
-import { useAuthStore } from '#stores/authStore'
+import { useAuthStore } from '#src/stores/authStore'
 import {
   signinSilentCallbackMock,
   signinRedirectMock,
   signinCallbackMock,
   getUserMock,
-} from '#tests/mock.authService'
+} from '#src/tests/mock.authService'
 
 import type { PageContext } from 'vike/types'
 

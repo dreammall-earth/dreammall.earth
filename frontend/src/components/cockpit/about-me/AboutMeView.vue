@@ -72,11 +72,11 @@
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
+import CockpitCard from '#src/components/cockpit/cockpit-card/CockpitCard.vue'
 
 import UserDetails from './UserDetails.vue'
 
-import type { UserDetail, UserAvailability, SocialMedia } from '#stores/userStore'
+import type { UserDetail, UserAvailability, SocialMedia } from '#src/stores/userStore'
 
 const { t } = useI18n()
 

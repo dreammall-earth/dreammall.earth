@@ -6,15 +6,15 @@ import Vue3Toasity from 'vue3-toastify'
 // eslint-disable-next-line import/no-unassigned-import
 import 'vue3-toastify/dist/index.css'
 
-import PageShell from '#components/PageShell.vue'
-import { setPageContext } from '#context/usePageContext'
-import { createApolloClient } from '#plugins/apollo'
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
-import i18n from '#plugins/i18n'
-import pinia from '#plugins/pinia'
-import CreateVuetify from '#plugins/vuetify'
+import { setPageContext } from '#renderer/context/usePageContext'
+import { createApolloClient } from '#renderer/plugins/apollo'
+import GlobalErrorHandler from '#renderer/plugins/globalErrorHandler'
+import i18n from '#renderer/plugins/i18n'
+import pinia from '#renderer/plugins/pinia'
+import CreateVuetify from '#renderer/plugins/vuetify'
+import PageShell from '#src/components/PageShell.vue'
 import AuthService from '#src/services/AuthService'
-import { useAuthStore } from '#stores/authStore'
+import { useAuthStore } from '#src/stores/authStore'
 
 import type { ToastContainerOptions } from 'vue3-toastify'
 

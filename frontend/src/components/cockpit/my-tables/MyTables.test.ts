@@ -3,9 +3,9 @@ import { mount } from '@vue/test-utils'
 import { createMockClient, createMockSubscription, IMockSubscription } from 'mock-apollo-client'
 import { describe, expect, it, vi } from 'vitest'
 
-import { currentUserQuery } from '#queries/currentUserQuery'
-import { tablesQuery } from '#queries/tablesQuery'
-import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
+import { currentUserQuery } from '#src/graphql/queries/currentUserQuery'
+import { tablesQuery } from '#src/graphql/queries/tablesQuery'
+import { updateOpenTablesSubscription } from '#src/graphql/subscriptions/updateOpenTablesSubscription'
 
 import MyTables from './MyTables.vue'
 

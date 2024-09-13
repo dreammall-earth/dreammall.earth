@@ -32,11 +32,11 @@
 </template>
 
 <script lang="ts" setup>
-import MainButton from '#components/buttons/MainButton.vue'
+import MainButton from '#src/components/buttons/MainButton.vue'
 </script>
 
 <style scoped lang="scss">
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 
 .cta-section {
   max-width: $section-max-width-small;

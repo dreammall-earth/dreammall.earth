@@ -22,10 +22,10 @@
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 
-import SimpleButton from '#components/buttons/SimpleButton.vue'
-import StepHeader from '#components/steps/StepHeader.vue'
-import UserSelection from '#components/user-selection/UserSelection.vue'
-import { useTablesStore, Table } from '#stores/tablesStore'
+import SimpleButton from '#src/components/buttons/SimpleButton.vue'
+import StepHeader from '#src/components/steps/StepHeader.vue'
+import UserSelection from '#src/components/user-selection/UserSelection.vue'
+import { useTablesStore, Table } from '#src/stores/tablesStore'
 
 const props = defineProps<{
   tableId: number

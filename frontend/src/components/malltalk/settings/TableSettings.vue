@@ -6,14 +6,14 @@
 import { storeToRefs } from 'pinia'
 import { reactive, watch, ref } from 'vue'
 
-import StepControl from '#components/steps/StepControl.vue'
-import { Step } from '#components/steps/useSteps'
-import { useUserStore } from '#stores/userStore'
+import StepControl from '#src/components/steps/StepControl.vue'
+import { Step } from '#src/components/steps/useSteps'
+import { useUserStore } from '#src/stores/userStore'
 
 import ChangeUsers from './ChangeUsers.vue'
 import TableSettingsRoot from './TableSettingsRoot.vue'
 
-import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
+import type MyTableSettings from '#src/components/malltalk/interfaces/MyTableSettings'
 import type { ComponentExposed } from 'vue-component-type-helpers'
 
 const userStore = useUserStore()

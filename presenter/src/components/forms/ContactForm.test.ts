@@ -1,8 +1,8 @@
 import { mount, flushPromises } from '@vue/test-utils'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 
-import { createContactForm } from '#mutations/createContactForm'
-import { mockClient } from '#tests/mock.apolloClient'
+import { createContactForm } from '#src/graphql/mutations/createContactForm'
+import { mockClient } from '#src/tests/mock.apolloClient'
 
 import ContactForm from './ContactForm.vue'
 

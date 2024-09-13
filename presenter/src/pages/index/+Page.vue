@@ -25,18 +25,18 @@
 </template>
 
 <script lang="ts" setup>
-import DefaultLayout from '#layouts/DefaultLayout.vue'
-import AboutSection from '#root/src/components/sections/AboutSection.vue'
-import CallToActionSection from '#root/src/components/sections/CallToActionSection.vue'
-import CoffeeSection from '#root/src/components/sections/CoffeeSection.vue'
-import IntroSection from '#root/src/components/sections/IntroSection.vue'
-import NewsletterSection from '#root/src/components/sections/NewsletterSection.vue'
-import PlanningSection from '#root/src/components/sections/PlanningSection.vue'
-import ProductsSection from '#root/src/components/sections/ProductsSection.vue'
+import AboutSection from '#src/components/sections/AboutSection.vue'
+import CallToActionSection from '#src/components/sections/CallToActionSection.vue'
+import CoffeeSection from '#src/components/sections/CoffeeSection.vue'
+import IntroSection from '#src/components/sections/IntroSection.vue'
+import NewsletterSection from '#src/components/sections/NewsletterSection.vue'
+import PlanningSection from '#src/components/sections/PlanningSection.vue'
+import ProductsSection from '#src/components/sections/ProductsSection.vue'
+import DefaultLayout from '#src/layouts/DefaultLayout.vue'
 </script>
 
 <style scoped lang="scss">
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 
 .index-page {
   overflow: hidden;

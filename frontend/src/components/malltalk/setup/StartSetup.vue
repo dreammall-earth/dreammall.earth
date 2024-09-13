@@ -8,9 +8,9 @@
 </template>
 
 <script setup lang="ts">
-import SimpleButton from '#components/buttons/SimpleButton.vue'
+import SimpleButton from '#src/components/buttons/SimpleButton.vue'
 
-import type { StepEmits } from '#components/steps/StepComponentTypes'
+import type { StepEmits } from '#src/components/steps/StepComponentTypes'
 
 const emit = defineEmits<StepEmits>()
 

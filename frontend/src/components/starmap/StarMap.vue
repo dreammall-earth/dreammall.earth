@@ -23,7 +23,7 @@ import {
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { onMounted, ref, watch } from 'vue'
 
-import { starmapQuery, StarmapQueryResult, StarLine, Star } from '#queries/starmapQuery'
+import { starmapQuery, StarmapQueryResult, StarLine, Star } from '#src/graphql/queries/starmapQuery'
 
 const starData = ref<Star[]>([])
 

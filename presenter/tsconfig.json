@@ -11,19 +11,10 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "paths": {
-      "#components/*": ["./src/components/*"],
-      "#pages/*": ["./src/pages/*"],
-      "#assets/*": ["./src/assets/*"],
-      "#layouts/*": ["./src/layouts/*"],
-      "#stores/*": ["./src/stores/*"],
-      "#mutations/*": ["./src/graphql/mutations/*"],
-      "#queries/*": ["./src/graphql/queries/*"],
       "#src/*": ["./src/*"],
-      "#plugins/*": ["./renderer/plugins/*"],
-      "#context/*": ["./renderer/context/*"],
-      "#tests/*": ["./scripts/tests/*"],
-      "#types/*": ["./types/*"],
-      "#root/*": ["./*"]
+      "#renderer/*": ["./renderer/*"],
+      "#server/*": ["./server/*"],
+      "#types/*": ["./types/*"]
     }
   },
   "ts-node": {

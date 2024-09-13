@@ -108,11 +108,11 @@
 <script lang="ts" setup>
 import { ref, onMounted, onBeforeMount, defineProps } from 'vue'
 
-import MobileMenuIcon from '#assets/img/hamburger_mobile.svg'
-import MainButton from '#components/buttons/MainButton.vue'
-import LanguageSelector from '#components/language/LanguageSelector.vue'
-import LogoImage from '#components/LogoImage.vue'
-import AnchorLink from '#components/nav/AnchorLink.vue'
+import MobileMenuIcon from '#src/assets/img/hamburger_mobile.svg'
+import MainButton from '#src/components/buttons/MainButton.vue'
+import LanguageSelector from '#src/components/language/LanguageSelector.vue'
+import LogoImage from '#src/components/LogoImage.vue'
+import AnchorLink from '#src/components/nav/AnchorLink.vue'
 
 import type { PageContext } from 'vike/types'
 
@@ -191,7 +191,7 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 
 .topmenu {
   background: linear-gradient(
@@ -209,7 +209,7 @@ onMounted(() => {
 </style>
 
 <style lang="scss">
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 
 .topmenu {
   .v-toolbar {

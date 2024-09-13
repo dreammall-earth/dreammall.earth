@@ -4,9 +4,9 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import i18n from '#plugins/i18n'
-import { authService } from '#tests/mock.authService'
-import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
+import i18n from '#renderer/plugins/i18n'
+import { authService } from '#src/tests/mock.authService'
+import { errorHandlerSpy } from '#src/tests/plugin.globalErrorHandler'
 
 import SilentRefreshPage from './+Page.vue'
 import { title } from './+title'

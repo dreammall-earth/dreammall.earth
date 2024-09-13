@@ -1,6 +1,6 @@
 import { config } from '@vue/test-utils'
 
-import { vikePageContext } from '#context/usePageContext'
+import { vikePageContext } from '#renderer/context/usePageContext'
 
 config.global.provide = {
   ...config.global.provide,

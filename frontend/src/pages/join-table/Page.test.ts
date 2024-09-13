@@ -6,8 +6,8 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { joinTableAsGuestQuery } from '#queries/joinTableAsGuestQuery'
-import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
+import { joinTableAsGuestQuery } from '#src/graphql/queries/joinTableAsGuestQuery'
+import { errorHandlerSpy } from '#src/tests/plugin.globalErrorHandler'
 
 import JoinTablePage from './+Page.vue'
 import Route from './+route'

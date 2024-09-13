@@ -95,7 +95,7 @@ const onClick = () => {
 </script>
 
 <style scoped lang="scss">
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 
 .main-button {
   padding: 12px 39px;

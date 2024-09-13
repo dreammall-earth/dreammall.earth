@@ -59,14 +59,14 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 
-import VideoPosterMobile from '#assets/img/intro_thumbnail_hoch.jpg'
-import VideoPoster from '#assets/img/intro_thumbnail_quer.jpg'
-import VideoMobileMp4 from '#assets/video/intro_hoch.mp4'
-import VideoMobileWebm from '#assets/video/intro_hoch.webm'
-import VideoMp4 from '#assets/video/intro_quer.mp4'
-import VideoWebm from '#assets/video/intro_quer.webm'
-import MainButton from '#components/buttons/MainButton.vue'
-import LogoImage from '#components/LogoImage.vue'
+import VideoPosterMobile from '#src/assets/img/intro_thumbnail_hoch.jpg'
+import VideoPoster from '#src/assets/img/intro_thumbnail_quer.jpg'
+import VideoMobileMp4 from '#src/assets/video/intro_hoch.mp4'
+import VideoMobileWebm from '#src/assets/video/intro_hoch.webm'
+import VideoMp4 from '#src/assets/video/intro_quer.mp4'
+import VideoWebm from '#src/assets/video/intro_quer.webm'
+import MainButton from '#src/components/buttons/MainButton.vue'
+import LogoImage from '#src/components/LogoImage.vue'
 
 const slide = ref(0)
 const video = ref<HTMLFormElement>()
@@ -115,7 +115,7 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 
 .intro-section {
   background: linear-gradient(

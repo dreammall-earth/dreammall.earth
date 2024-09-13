@@ -1,6 +1,6 @@
 import { PageContext } from 'vike/types'
 
-import i18n from '#plugins/i18n'
+import i18n from '#renderer/plugins/i18n'
 
 function getTitle(pageContext: PageContext) {
   // The value exported by /pages/**/+title.js is available at pageContext.config.title

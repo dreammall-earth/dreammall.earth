@@ -11,10 +11,10 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 
-import SepaIban from '#components/sepa-iban/SepaIban.vue'
-import { usePageContext } from '#context/usePageContext'
-import DefaultLayout from '#layouts/DefaultLayout.vue'
-import { useUserStore } from '#stores/userStore'
+import { usePageContext } from '#renderer/context/usePageContext'
+import SepaIban from '#src/components/sepa-iban/SepaIban.vue'
+import DefaultLayout from '#src/layouts/DefaultLayout.vue'
+import { useUserStore } from '#src/stores/userStore'
 
 const pageContext = usePageContext()
 const { ACCOUNTING } = pageContext.publicEnv

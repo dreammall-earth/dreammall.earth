@@ -3,7 +3,7 @@ import { beforeEach, expect, describe, it } from 'vitest'
 import { Component, h, reactive } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { vikePageContext } from '#context/usePageContext'
+import { vikePageContext } from '#renderer/context/usePageContext'
 
 import DefaultLayout from './DefaultLayout.vue'
 

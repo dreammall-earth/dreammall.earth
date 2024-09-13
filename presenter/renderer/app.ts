@@ -3,12 +3,12 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { PageContext } from 'vike/types'
 import { createSSRApp, defineComponent, h, markRaw, reactive, Component, provide } from 'vue'
 
-import PageShell from '#components/PageShell.vue'
-import { setPageContext } from '#context/usePageContext'
-import { createApolloClient } from '#plugins/apollo'
-import i18n from '#plugins/i18n'
-import pinia from '#plugins/pinia'
-import CreateVuetify from '#plugins/vuetify'
+import { setPageContext } from '#renderer/context/usePageContext'
+import { createApolloClient } from '#renderer/plugins/apollo'
+import i18n from '#renderer/plugins/i18n'
+import pinia from '#renderer/plugins/pinia'
+import CreateVuetify from '#renderer/plugins/vuetify'
+import PageShell from '#src/components/PageShell.vue'
 import { locales } from '#src/locales'
 
 const vuetify = CreateVuetify(i18n)

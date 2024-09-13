@@ -82,17 +82,17 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 
-import LargeDreamMallButton from '#components/buttons/LargeDreamMallButton.vue'
-import SmallDreamMallButton from '#components/buttons/SmallDreamMallButton.vue'
-import TableSetup from '#components/malltalk/setup/TableSetup.vue'
-import Circle from '#components/menu/CircleElement.vue'
-import LightDarkSwitch from '#components/menu/LightDarkSwitch.vue'
-import LogoImage from '#components/menu/LogoImage.vue'
-import TabControl from '#components/menu/TabControl.vue'
-import UserInfo from '#components/menu/UserInfo.vue'
-import ModalPanel from '#components/modal/ModalPanel.vue'
-import useModal from '#components/modal/useModal'
-import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
+import LargeDreamMallButton from '#src/components/buttons/LargeDreamMallButton.vue'
+import SmallDreamMallButton from '#src/components/buttons/SmallDreamMallButton.vue'
+import TableSetup from '#src/components/malltalk/setup/TableSetup.vue'
+import Circle from '#src/components/menu/CircleElement.vue'
+import LightDarkSwitch from '#src/components/menu/LightDarkSwitch.vue'
+import LogoImage from '#src/components/menu/LogoImage.vue'
+import TabControl from '#src/components/menu/TabControl.vue'
+import UserInfo from '#src/components/menu/UserInfo.vue'
+import ModalPanel from '#src/components/modal/ModalPanel.vue'
+import useModal from '#src/components/modal/useModal'
+import TablesDrawer from '#src/components/tablesDrawer/TablesDrawer.vue'
 
 type DrawerType = 'tables' | 'dream-mall-button' | null
 
@@ -125,7 +125,7 @@ const { isModalActive } = useModal()
 
 <style scoped lang="scss">
 @use 'sass:map';
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 @import 'vuetify/lib/styles/settings/_variables';
 
 .main-layout {

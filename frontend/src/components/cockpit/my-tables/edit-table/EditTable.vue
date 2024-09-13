@@ -33,8 +33,8 @@
 import { storeToRefs } from 'pinia'
 import { computed, reactive } from 'vue'
 
-import SimpleButton from '#components/buttons/SimpleButton.vue'
-import StepHeader from '#components/steps/StepHeader.vue'
+import SimpleButton from '#src/components/buttons/SimpleButton.vue'
+import StepHeader from '#src/components/steps/StepHeader.vue'
 import { useTablesStore } from '#src/stores/tablesStore'
 
 const props = defineProps<{

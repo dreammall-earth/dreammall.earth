@@ -297,7 +297,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
+import GlobalErrorHandler from '#renderer/plugins/globalErrorHandler'
 
 const buttonIsTurned = ref(false)
 const warp = ref<HTMLInputElement | null>(null)
@@ -339,7 +339,7 @@ onMounted(() => {})
 </script>
 
 <style scoped lang="scss">
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 
 svg {
   position: absolute;

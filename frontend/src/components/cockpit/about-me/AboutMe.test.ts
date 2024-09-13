@@ -3,8 +3,8 @@ import { mount } from '@vue/test-utils'
 import { createMockClient } from 'mock-apollo-client'
 import { describe, expect, it, vi } from 'vitest'
 
-import { currentUserQuery } from '#queries/currentUserQuery'
-import { SocialMedia, UserDetail, useUserStore } from '#stores/userStore'
+import { currentUserQuery } from '#src/graphql/queries/currentUserQuery'
+import { SocialMedia, UserDetail, useUserStore } from '#src/stores/userStore'
 
 import AboutMe from './AboutMe.vue'
 

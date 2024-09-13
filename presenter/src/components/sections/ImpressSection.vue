@@ -107,7 +107,7 @@
 <script lang="ts" setup></script>
 
 <style scoped lang="scss">
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 
 .impress-section {
   max-width: $page-max-width;

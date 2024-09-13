@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 
-import { UserDetail } from '#stores/userStore'
+import { UserDetail } from '#src/stores/userStore'
 
 import UserDetails from './UserDetails.vue'
 

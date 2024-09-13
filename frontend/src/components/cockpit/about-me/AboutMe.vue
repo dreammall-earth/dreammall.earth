@@ -39,14 +39,14 @@
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 
-import ClientOnly from '#components/ClientOnly.vue'
-import globalErrorHandler from '#plugins/globalErrorHandler'
+import globalErrorHandler from '#renderer/plugins/globalErrorHandler'
+import ClientOnly from '#src/components/ClientOnly.vue'
 import {
   useUserStore,
   UserAvailability,
   AddUserDetailInput,
   AddSocialMediaInput,
-} from '#stores/userStore'
+} from '#src/stores/userStore'
 
 import AboutMeView from './AboutMeView.vue'
 import EditSocialMedia from './EditSocialMedia.vue'

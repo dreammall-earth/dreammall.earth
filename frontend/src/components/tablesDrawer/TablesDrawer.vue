@@ -33,7 +33,7 @@
 import { storeToRefs } from 'pinia'
 import { ref, computed, watch } from 'vue'
 
-import { useTablesStore } from '#stores/tablesStore'
+import { useTablesStore } from '#src/stores/tablesStore'
 
 import TableList from './TableList.vue'
 

@@ -5,6 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-import StarMap from '#components/starmap/StarMap.vue'
-import DefaultLayout from '#layouts/DefaultLayout.vue'
+import StarMap from '#src/components/starmap/StarMap.vue'
+import DefaultLayout from '#src/layouts/DefaultLayout.vue'
 </script>
