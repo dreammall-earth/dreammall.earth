@@ -1,5 +1,5 @@
 <template>
-  <v-main class="bg-background main-layout">
+  <v-main class="bg-background main-layout" :class="{ 'modal-active': isModalActive }">
     <!-- Top Menu -->
     <v-app-bar flat class="app-bar" height="70">
       <v-row class="ma-1">
@@ -33,6 +33,8 @@
       :location="$vuetify.display.smAndDown ? 'bottom' : 'right'"
     />
 
+    <ModalPanel />
+
     <!-- Page Content Container -->
     <v-container fluid class="page-container px-8">
       <slot></slot>
@@ -53,12 +55,6 @@
       class="button-list"
       :class="[visibleDrawer === 'dream-mall-button' ? 'button-list--active' : '']"
     >
-      <v-img class="w-100 menu-divider" :src="Divider" />
-      <v-img
-        class="w-100 menu-triangle"
-        :class="[visibleDrawer === 'dream-mall-button' ? 'menu-triangle--turned' : '']"
-        :src="Triangle"
-      />
       <slot name="dream-mall-button" :close="() => toggleDrawer('dream-mall-button')">
         <TableSetup ref="tableSetupRef" @close="toggleDrawer('dream-mall-button')" />
       </slot>
@@ -86,8 +82,6 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 
-import Divider from '#assets/img/divider.svg'
-import Triangle from '#assets/img/triangle.svg'
 import LargeDreamMallButton from '#components/buttons/LargeDreamMallButton.vue'
 import SmallDreamMallButton from '#components/buttons/SmallDreamMallButton.vue'
 import TableSetup from '#components/malltalk/setup/TableSetup.vue'
@@ -96,6 +90,8 @@ import LightDarkSwitch from '#components/menu/LightDarkSwitch.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 import TabControl from '#components/menu/TabControl.vue'
 import UserInfo from '#components/menu/UserInfo.vue'
+import ModalPanel from '#components/modal/ModalPanel.vue'
+import useModal from '#components/modal/useModal'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
 
 type DrawerType = 'tables' | 'dream-mall-button' | null
@@ -123,6 +119,8 @@ const toggleDrawer = (drawer: DrawerType) => {
     }
   }
 }
+
+const { isModalActive } = useModal()
 </script>
 
 <style scoped lang="scss">
@@ -134,6 +132,10 @@ const toggleDrawer = (drawer: DrawerType) => {
   padding-top: 0;
   padding-right: 0;
   background: $background-color-primary;
+
+  &.modal-active {
+    pointer-events: none;
+  }
 
   .page-container {
     padding-bottom: 120px;
@@ -189,16 +191,17 @@ const toggleDrawer = (drawer: DrawerType) => {
   justify-content: start;
   width: var(--width);
   height: var(--height);
-  padding-top: 30px;
-  padding-bottom: 40px;
-  background: var(--v-bottom-menu-background) !important;
-  backdrop-filter: blur(20px);
-  border-radius: 30px 30px 0 0;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  background-color: var(--v-dm-panel-background-color);
+  backdrop-filter: blur(30px);
+  border: 1px solid var(--v-dm-panel-border-color);
+  border-radius: 30px;
   transition: bottom 0.75s;
 
   &--active {
     @media #{map.get($display-breakpoints, 'sm-and-down')} {
-      bottom: 60px;
+      bottom: 90px;
     }
 
     @media #{map.get($display-breakpoints, 'md-and-up')} {

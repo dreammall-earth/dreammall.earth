@@ -6,7 +6,14 @@
     >
       <span class="name">{{ props.name }}</span>
       <span class="subtitle">
-        {{ $t('cockpit.myTables.memberCount', { count: props.memberCount }) }}
+        {{
+          $t(
+            props.moderatorCount
+              ? 'cockpit.myTables.moderatorCount'
+              : 'cockpit.myTables.memberCount',
+            { count: props.moderatorCount ? props.moderatorCount : props.memberCount },
+          )
+        }}
       </span>
     </div>
     <button
@@ -46,15 +53,29 @@
 
 <script lang="ts" setup>
 import { navigate } from 'vike/client/router'
-import { ref } from 'vue'
+import { ref, h } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import OptionButton from '#components/cockpit/options-list/OptionButton.vue'
 import OptionsList from '#components/cockpit/options-list/OptionsList.vue'
+import useModal from '#components/modal/useModal'
+import GlobalErrorHandler from '#plugins/globalErrorHandler'
+import { useTablesStore } from '#stores/tablesStore'
+
+import ChangeModerators from './change-moderators/ChangeModerators.vue'
+import EditTable from './edit-table/EditTable.vue'
+
+const { setComponent } = useModal()
+
+const tablesStore = useTablesStore()
+
+const { t } = useI18n()
 
 const props = defineProps<{
   id: number
   name: string
-  memberCount: number
+  memberCount?: number
+  moderatorCount?: number
 }>()
 
 const isShowingOptions = ref(false)
@@ -68,19 +89,25 @@ const toggleOptions = () => {
 }
 
 const editTable = () => {
-  // TODO implement
+  setComponent(h(EditTable, { tableId: props.id }))
 }
 
 const invite = () => {
-  // TODO implement
+  setComponent(h(ChangeModerators, { tableId: props.id }))
 }
 
 const shareTable = () => {
   // TODO implement
 }
 
-const deleteTable = () => {
-  // TODO implement
+const deleteTable = async () => {
+  if (confirm(t('cockpit.myTables.deleteConfirmation'))) {
+    try {
+      await tablesStore.deleteTable(props.id)
+    } catch (error) {
+      GlobalErrorHandler.error('Could not delete table', error)
+    }
+  }
 }
 </script>
 

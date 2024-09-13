@@ -77,6 +77,10 @@ const tablesQuery = `{
   }
 }`
 
+const deleteTableMutation = `mutation DeleteTable($tableId: Int!) {
+  deleteTable(tableId: $tableId)
+}`
+
 describe('TableResolver', () => {
   beforeAll(async () => {
     testServer = await createTestServer()
@@ -361,6 +365,35 @@ describe('TableResolver', () => {
           testServer.executeOperation(
             {
               query: tablesQuery,
+            },
+            { contextValue: { user: null, dataSources: { prisma } } },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('deleteTable', () => {
+      it('throws access denied', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: deleteTableMutation,
+              variables: {
+                tableId: -1,
+              },
             },
             { contextValue: { user: null, dataSources: { prisma } } },
           ),
@@ -2126,6 +2159,109 @@ describe('TableResolver', () => {
           })
         })
       })
+
+      describe('private meeting in DB', () => {
+        beforeAll(async () => {
+          const meeting = await prisma.meeting.create({
+            data: {
+              name: 'Dreammall Entwicklung',
+              meetingID: 'Dreammall-Entwicklung-2',
+              attendeePW: '1234',
+              public: false,
+            },
+          })
+          await prisma.usersInMeetings.create({
+            data: {
+              meetingId: meeting.id,
+              userId: user.id,
+            },
+          })
+        })
+
+        beforeEach(() => {
+          getMeetingsMock.mockResolvedValue([
+            {
+              meetingName: 'Dreammall Entwicklung',
+              meetingID: 'Dreammall-Entwicklung-2',
+              internalMeetingID: '258ea7269760758304b6b8494f17e9bf69dc1efe-1718189921310',
+              createTime: 1718189921310,
+              createDate: new Date('Wed Jun 12 10:58:41 UTC 2024'),
+              voiceBridge: 96378,
+              dialNumber: '613-555-1234',
+              attendeePW: 'MqgUFwdD',
+              moderatorPW: 'mTtxYGo2',
+              running: true,
+              duration: 0,
+              hasUserJoined: true,
+              recording: false,
+              hasBeenForciblyEnded: false,
+              startTime: 1718189,
+              endTime: 0,
+              participantCount: 0,
+              listenerCount: 1,
+              voiceParticipantCount: 0,
+              videoCount: 0,
+              maxUsers: 0,
+              moderatorCount: 1,
+              attendees: {
+                attendee: {
+                  userID: '1234',
+                  fullName: 'Peter Lustig',
+                  role: 'moderator',
+                  isPresenter: false,
+                  isListeningOnly: false,
+                  hasJoinedVoice: true,
+                  hasVideo: true,
+                  clientType: 'html5',
+                },
+              },
+              metadata: '',
+              isBreakout: false,
+            },
+          ])
+        })
+
+        afterAll(async () => {
+          await prisma.usersInMeetings.deleteMany({
+            where: {
+              userId: user.id,
+            },
+          })
+          await prisma.meeting.deleteMany({
+            where: {
+              meetingID: 'Dreammall-Entwicklung-2',
+            },
+          })
+        })
+
+        it('returns empty array of meeting', async () => {
+          jest.clearAllMocks()
+          await expect(
+            testServer.executeOperation(
+              {
+                query:
+                  'query { openTables { id meetingName meetingID participantCount startTime attendees { fullName } } }',
+              },
+              {
+                contextValue: {
+                  user: bibiUser,
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  openTables: [],
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+      })
     })
 
     describe('tables', () => {
@@ -2169,7 +2305,7 @@ describe('TableResolver', () => {
           )
         })
 
-        it('returns array for tables where user is owner', async () => {
+        it('returns empty array for tables where user is moderator', async () => {
           await expect(
             testServer.executeOperation(
               {
@@ -2182,15 +2318,7 @@ describe('TableResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  tables: [
-                    {
-                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                      id: expect.any(Number),
-                      name: 'My Table',
-                      public: true,
-                      users: [],
-                    },
-                  ],
+                  tables: [],
                 },
                 errors: undefined,
               },
@@ -2236,13 +2364,6 @@ describe('TableResolver', () => {
                     {
                       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                       id: expect.any(Number),
-                      name: 'My Table',
-                      public: true,
-                      users: [],
-                    },
-                    {
-                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                      id: expect.any(Number),
                       name: 'Table',
                       public: true,
                       users: [
@@ -2261,6 +2382,164 @@ describe('TableResolver', () => {
                   ],
                 },
                 errors: undefined,
+              },
+            },
+          })
+        })
+      })
+    })
+
+    describe('deleteTable', () => {
+      it('throws an error for non existing tableId', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: deleteTableMutation,
+              variables: {
+                tableId: -1,
+              },
+            },
+            {
+              contextValue: {
+                user: raeuberUser,
+                dataSources: { prisma },
+              },
+            },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              errors: [expect.objectContaining({ message: 'Meeting not found!' })],
+            },
+          },
+        })
+      })
+
+      describe('existing table with multiple Moderator', () => {
+        let tableId: number | undefined
+        beforeAll(async () => {
+          const meeting = await prisma.meeting.findFirst({
+            where: {
+              users: {
+                some: {
+                  userId: raeuberUser.id,
+                  role: AttendeeRole.MODERATOR,
+                },
+              },
+            },
+          })
+          tableId = meeting?.id
+        })
+
+        it('delete the connection of table to user', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query: deleteTableMutation,
+                variables: {
+                  tableId,
+                },
+              },
+              {
+                contextValue: {
+                  user: raeuberUser,
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  deleteTable: true,
+                },
+              },
+            },
+          })
+          await expect(
+            prisma.usersInMeetings.findFirst({
+              where: {
+                meetingId: tableId,
+                userId: raeuberUser.id,
+              },
+            }),
+          ).resolves.toBeNull()
+        })
+
+        it('throws error for already deleted connection', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query: deleteTableMutation,
+                variables: {
+                  tableId,
+                },
+              },
+              {
+                contextValue: {
+                  user: raeuberUser,
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                errors: [expect.objectContaining({ message: 'User could not be detached.' })],
+              },
+            },
+          })
+        })
+      })
+
+      describe('existing table with one MODERATOR', () => {
+        let tableId: number | undefined
+        beforeAll(async () => {
+          const meeting = await prisma.meeting.create({
+            data: {
+              meetingID: 'Räuber Group',
+              name: 'Räuber Group',
+              users: {
+                create: {
+                  userId: raeuberUser.id,
+                },
+              },
+            },
+          })
+          tableId = meeting.id
+        })
+
+        it('throws error no other Moderator in table', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query: deleteTableMutation,
+                variables: {
+                  tableId,
+                },
+              },
+              {
+                contextValue: {
+                  user: raeuberUser,
+                  dataSources: { prisma },
+                },
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                errors: [
+                  expect.objectContaining({
+                    message: 'There is no other Moderator in this table.',
+                  }),
+                ],
               },
             },
           })

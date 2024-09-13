@@ -27,8 +27,16 @@ function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): Theme
       icon: theme.iconColor,
       'dropdown-background': theme.dropdownBackgroundColor,
       'cockpit-highlight': theme.cockpitHighlightColor,
+      'dm-panel-submit-color': theme.dmPanelSubmitColor,
+      'dm-panel-submit-background-color': theme.dmPanelSubmitBackgroundColor,
+      'dm-panel-text-input-color': theme.dmPanelTextInputColor,
       'dm-panel-call-action-button-color': theme.dmPanelCallActionButtonColor,
       'dm-panel-call-action-button-background-color': theme.dmPanelCallActionButtonBackgroundColor,
+      'dm-panel-call-action-button-indicator-color': theme.dmPanelCallActionButtonIndicatorColor,
+      'dm-panel-call-action-button-indicator-background-color':
+        theme.dmPanelCallActionButtonIndicatorBackgroundColor,
+      'dm-panel-reminder-text-color': theme.dmPanelReminderTextColor,
+      'dm-panel-reminder-link-color': theme.dmPanelReminderLinkColor,
     },
     variables: {
       'border-color': theme.borderColor,
@@ -42,6 +50,13 @@ function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): Theme
       'cockpit-element-background': theme.cockpitElementBackground,
       'cockpit-chip-background': theme.cockpitChipBackground,
       'cockpit-chip-background-2': theme.cockpitChipBackground2,
+      'panel-background': theme.panelBackground,
+      'panel-element-background': theme.panelElementBackground,
+      'dm-panel-text-input-background-color': theme.dmPanelTextInputBackgroundColor,
+      'dm-panel-background-color': theme.dmPanelBackgroundColor,
+      'dm-panel-border-color': theme.dmPanelBorderColor,
+      'dm-panel-reminder-text-background-color': theme.dmPanelReminderTextBackgroundColor,
+      'dm-panel-reminder-link-background-color': theme.dmPanelReminderLinkBackgroundColor,
     },
   }
 }

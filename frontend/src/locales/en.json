@@ -38,11 +38,26 @@
     },
     "myTables": {
       "addTable": "Add table",
+      "changeModerators": {
+        "title": "Change Moderators",
+        "update": "Save"
+      },
+      "createTable": {
+        "chooseModerators": "Choose your co-moderators.",
+        "tableCreated": "Your table was created.",
+        "visionIntoReality": "Your vision turns into reality. Let's take the first step together."
+      },
       "delete": "Delete",
+      "deleteConfirmation": "Are you sure you want to delete this table?",
       "edit": "Edit",
+      "editTable": {
+        "title": "Edit Table",
+        "update": "Save"
+      },
       "header": "My Tables",
       "invite": "Invite",
       "memberCount": "{count} members",
+      "moderatorCount": "{count} moderators",
       "noTables": "No group tables so far",
       "share": "Share"
     }
@@ -55,13 +70,18 @@
     },
     "setup": {
       "continue": "Continue",
-      "create-table": "Let's go",
+      "create-table": "Done",
       "invitation-sent": "sent",
+      "invitation-title": "Invite People",
       "invite": "invite",
       "no-result": "No results",
+      "private": "Private",
+      "public": "Public",
       "reminder": "Your vision becomes reality,\nlet's take the first step together.",
       "search-error": "An error occurred during the search.",
+      "submit-title": "Hint",
       "table-creation": "Create Table",
+      "table-creation-title": "Create Table",
       "table-name": "Table Name"
     }
   },
@@ -78,6 +98,9 @@
       "autherror": "auth error",
       "text": "Error opening table"
     }
+  },
+  "globalErrorHandler": {
+    "copiedToClipboard": "Link copied to clipboard"
   },
   "joinTablePage": {
     "button": "Submit",
@@ -98,6 +121,30 @@
     "defaultDescription": "Expanding your reach making the most of opportunities enhance quality of life together",
     "defaultTitle": "DreamMall",
     "joinTableTitle": "Enter Table"
+  },
+  "paymentLink": {
+    "callToAction": "Upgrade to PRO",
+    "subtitle": "Upgrade to premium to unlock more features",
+    "title": "Upgrade to premium"
+  },
+  "sepaIban": {
+    "accountData": {
+      "accountHolder": "Account holder",
+      "amount": "Amount in Euro",
+      "BIC": "BIC",
+      "IBAN": "IBAN",
+      "reference": "Reference",
+      "title": "Account details"
+    },
+    "explanation": {
+      "callToAction": "To order a Dreammall subscription, you can simply set up a standing order in your online banking. You can view the account details on this page.",
+      "introduction": "Thank you for choosing a DreamMall subscription!",
+      "title": "Set up standing order"
+    },
+    "qr": {
+      "explanation": "Alternatively, you can also scan this QR code with your banking app.",
+      "title": "Scan QR Code"
+    }
   },
   "table": {
     "notFound": "Table not found."

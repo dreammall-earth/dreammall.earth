@@ -29,13 +29,13 @@ const onClick = () => {
   align-items: center;
   justify-content: center;
   height: auto !important;
-  min-height: 42px; // Adjust this value as needed
+  min-height: 42px;
   padding: 0 20px;
   font-size: 16px;
   font-weight: normal;
-  color: white;
+  color: rgb(var(--v-theme-dm-panel-submit-color));
   text-transform: none;
-  background-color: #4caf50;
+  background-color: rgb(var(--v-theme-dm-panel-submit-background-color));
 
   &::before {
     display: none;

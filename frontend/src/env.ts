@@ -8,7 +8,7 @@ const AUTH = {
   CLIENT_ID: (import.meta.env.PUBLIC_ENV__AUTH__CLIENT_ID ??
     'G3g0sjCjph1NAyGeeu5Te5ltx1I7WZ0DGB8i6vOI') as string,
   REDIRECT_URI: (import.meta.env.PUBLIC_ENV__AUTH__REDIRECT_URI ??
-    'http://localhost:3001/auth') as string,
+    'http://localhost:3000/auth') as string,
   SILENT_REDIRECT_URI: (import.meta.env.PUBLIC_ENV__AUTH__SILENT_REDIRECT_URI ??
     'http://localhost:3001/silent-refresh') as string,
   RESPONSE_TYPE: (import.meta.env.PUBLIC_ENV__AUTH__RESPONSE_TYPE ?? 'code') as string,
@@ -28,4 +28,15 @@ const META = {
     'DreamMall Verlag GbR') as string,
 }
 
-export { AUTH, ENDPOINTS, META }
+const ACCOUNT_HOLDER = (import.meta.env.PUBLIC_ENV__ACCOUNT_HOLDER ?? 'DreamMall GBR') as string
+// source: https://www.iban.com/structure
+const IBAN = (import.meta.env.PUBLIC_ENV__IBAN ?? 'DE75512108001245126199') as string
+const BIC = (import.meta.env.PUBLIC_ENV__BIC ?? 'SOGEDEFFXXX') as string
+
+const ACCOUNTING = {
+  ACCOUNT_HOLDER,
+  IBAN,
+  BIC,
+}
+
+export { AUTH, ENDPOINTS, META, ACCOUNTING }

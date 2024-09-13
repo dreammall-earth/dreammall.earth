@@ -2,17 +2,18 @@
   <StepHeader
     v-if="steps"
     :title="steps[currentStep]?.title ?? 'unknown'"
-    :is-back-button-visible="currentStep > 0"
+    :is-back-button-visible="currentStep > 0 && steps[currentStep]?.canBack !== false"
     :is-close-button-visible="true"
-    @back="onBack"
+    @back="back"
     @close="$emit('close')"
   />
   <component
-    :is="steps[currentStep].component"
+    :is="steps[currentStep]?.component"
     v-if="steps && currentStep < steps.length"
     v-model="model"
     :submit-text="steps[currentStep]?.submitText ?? 'Weiter'"
-    @next="onNext"
+    :class="$attrs.class"
+    @next="next"
     @go-to="goTo"
     @submit="$emit('submit')"
   />
@@ -30,7 +31,7 @@ const emit = defineEmits<{
   (e: 'submit'): void
 }>()
 
-const { currentStep, onNext, onBack, goTo, reset } = useSteps(props.steps, emit)
+const { currentStep, next, back, goTo, reset } = useSteps(props.steps, emit)
 
-defineExpose({ reset })
+defineExpose({ reset, goTo, next, back })
 </script>

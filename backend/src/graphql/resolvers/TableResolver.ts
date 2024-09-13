@@ -172,9 +172,9 @@ export class TableResolver {
 
   @Authorized()
   @Query(() => [OpenTable])
-  async openTables(): Promise<OpenTable[]> {
+  async openTables(@Ctx() context: Context): Promise<OpenTable[]> {
     const meetings = await getMeetings()
-    return openTablesFromOpenMeetings(meetings)
+    return openTablesFromOpenMeetings(meetings, context)
   }
 
   @Authorized()
@@ -303,21 +303,12 @@ export class TableResolver {
     const { user } = context
     const dbMeetings = await prisma.meeting.findMany({
       where: {
-        OR: [
-          {
-            user: {
-              id: user?.id,
-            },
+        users: {
+          some: {
+            userId: user?.id,
+            role: AttendeeRole.MODERATOR,
           },
-          {
-            users: {
-              some: {
-                userId: user?.id,
-                role: AttendeeRole.MODERATOR,
-              },
-            },
-          },
-        ],
+        },
       },
       include: {
         users: true,
@@ -329,15 +320,55 @@ export class TableResolver {
     return tables
   }
 
+  @Authorized()
+  @Mutation(() => Boolean)
+  async deleteTable(
+    @Ctx() context: Context,
+    @Arg('tableId', () => Int) tableId: number,
+  ): Promise<boolean> {
+    const { user } = context
+    if (!user) throw new Error('User not found!')
+
+    const meeting = await prisma.meeting.findFirst({
+      where: {
+        id: tableId,
+      },
+      include: {
+        users: true,
+      },
+    })
+    if (!meeting) {
+      throw new Error('Meeting not found!')
+    } else if (!meeting.users.some((u) => u.userId !== user?.id && u.role === 'MODERATOR')) {
+      throw new Error('There is no other Moderator in this table.')
+    }
+    try {
+      await prisma.usersInMeetings.delete({
+        where: {
+          meetingId_userId: {
+            userId: user?.id,
+            meetingId: tableId,
+          },
+        },
+      })
+    } catch (e) {
+      logger.error('User could not be detached', e)
+      throw new Error('User could not be detached.')
+    }
+
+    return true
+  }
+
   @Subscription(() => [OpenTable], {
     topics: 'OPEN_TABLE_SUBSCRIPTION',
   })
   async updateOpenTables(
     @Root() meetings: MeetingInfo[],
+    @Ctx() context: Context,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     @Arg('username') username: string,
   ): Promise<OpenTable[]> {
-    return openTablesFromOpenMeetings(meetings)
+    return openTablesFromOpenMeetings(meetings, context)
   }
 
   /*
@@ -353,7 +384,10 @@ export class TableResolver {
   */
 }
 
-const openTablesFromOpenMeetings = async (meetings: MeetingInfo[]): Promise<OpenTable[]> => {
+const openTablesFromOpenMeetings = async (
+  meetings: MeetingInfo[],
+  context: Context,
+): Promise<OpenTable[]> => {
   if (meetings.length) {
     const dbMeetings = await prisma.meeting.findMany({
       where: {
@@ -362,15 +396,24 @@ const openTablesFromOpenMeetings = async (meetings: MeetingInfo[]): Promise<Open
       select: {
         id: true,
         meetingID: true,
+        public: true,
+        users: true,
       },
     })
 
     const openTables: OpenTable[] = []
 
-    dbMeetings.forEach((ids) => {
-      const meeting = meetings.find((m) => ids.meetingID === m.meetingID)
-      if (meeting) openTables.push(new OpenTable(meeting, ids.id ? ids.id : 0))
-    })
+    const { user } = context
+    dbMeetings
+      .filter(
+        (meeting) =>
+          meeting.public ||
+          meeting.users.some((userInMeeting) => user?.id === userInMeeting.userId),
+      )
+      .forEach((ids) => {
+        const meeting = meetings.find((m) => ids.meetingID === m.meetingID)
+        if (meeting) openTables.push(new OpenTable(meeting, ids.id ? ids.id : 0))
+      })
     return openTables
   }
 

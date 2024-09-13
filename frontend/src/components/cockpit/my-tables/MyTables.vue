@@ -1,9 +1,9 @@
 <template>
-  <CockpitCard narrow>
+  <CockpitCard>
     <template #header>
       <div class="header">
         <h2>{{ $t('cockpit.myTables.header') }}</h2>
-        <button class="add-table bg-primary px-3 py-1">
+        <button class="add-table bg-primary px-3 py-1" @click="addTable">
           <v-icon icon="mdi mdi-plus" />
           {{ $t('cockpit.myTables.addTable') }}
         </button>
@@ -11,9 +11,9 @@
     </template>
     <template #default>
       <ul class="list">
-        <TableItem v-for="item in items" :key="item.id" v-bind="item" />
+        <TableItem v-for="table in tables" :key="table.id" v-bind="table" />
       </ul>
-      <div v-if="items.length === 0">
+      <div v-if="tables.length === 0">
         {{ $t('cockpit.myTables.noTables') }}
       </div>
     </template>
@@ -21,22 +21,33 @@
 </template>
 
 <script lang="ts" setup>
-import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
+import { storeToRefs } from 'pinia'
+import { computed } from 'vue'
 
+import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
+import useModal from '#components/modal/useModal'
+import { useTablesStore } from '#stores/tablesStore'
+
+import CreateTable from './create-table/CreateTable.vue'
 import TableItem from './TableItem.vue'
 
-const items = [
-  {
-    id: 1,
-    name: 'Permakultur',
-    memberCount: 5,
-  },
-  {
-    id: 2,
-    name: 'Cryptowährungen',
-    memberCount: 23,
-  },
-]
+import type { Table } from '#stores/tablesStore'
+
+const { setComponent } = useModal()
+
+const addTable = () => {
+  setComponent(CreateTable)
+}
+
+const { getTables } = storeToRefs(useTablesStore())
+
+const tables = computed(() =>
+  getTables.value.map((table: Table) => ({
+    id: table.id,
+    name: table.name,
+    moderatorCount: table.users.filter((user) => user.role === 'MODERATOR').length,
+  })),
+)
 </script>
 
 <style scoped>
@@ -51,7 +62,9 @@ const items = [
   display: flex;
   flex-flow: column;
   gap: 8px;
+  height: 78%;
   padding: 0;
+  overflow: auto;
   list-style: none;
 }
 

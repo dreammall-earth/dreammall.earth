@@ -19,8 +19,22 @@ $cockpit-input-background: rgb(243 243 243);
 $cockpit-element-background: rgb(243 243 243);
 $cockpit-chip-background: rgb(225 230 237);
 $cockpit-chip-background-2: white;
+$panel-background: rgb(242 242 242 / 75%);
+$panel-element-background: rgb(255 255 255 / 50%);
+$dm-panel-background-color: rgb(242 242 242 / 75%);
+$dm-panel-border-color: rgb(151 151 151 / 30%);
+$dm-panel-submit-color: #F5F5F5;
+$dm-panel-submit-background-color: #23ad5b;
+$dm-panel-text-input-color: #3D4753;
+$dm-panel-text-input-background-color: rgb(255 255 255 / 55%);
 $dm-panel-call-action-button-color: #3d4753;
 $dm-panel-call-action-button-background-color: #fff;
+$dm-panel-call-action-button-indicator-color: #f5f5f5;
+$dm-panel-call-action-button-indicator-background-color: #23ad5b;
+$dm-panel-reminder-text-color: #3d4753;
+$dm-panel-reminder-text-background-color: rgb(255 255 255 / 50%);
+$dm-panel-reminder-link-color: #3d4753;
+$dm-panel-reminder-link-background-color: rgb(255 255 255 / 50%);
 
 :export {
     backgroundColor: $background-color;
@@ -44,7 +58,21 @@ $dm-panel-call-action-button-background-color: #fff;
     cockpitElementBackground: $cockpit-element-background;
     cockpitChipBackground: $cockpit-chip-background;
     cockpitChipBackground2: $cockpit-chip-background-2;
+    panelBackground: $panel-background;
+    panelElementBackground: $panel-element-background;
+    dmPanelBackgroundColor: $dm-panel-background-color;
+    dmPanelBorderColor: $dm-panel-border-color;
+    dmPanelSubmitColor: $dm-panel-submit-color;
+    dmPanelSubmitBackgroundColor: $dm-panel-submit-background-color;
+    dmPanelTextInputColor: $dm-panel-text-input-color;
+    dmPanelTextInputBackgroundColor: $dm-panel-text-input-background-color;
     dmPanelCallActionButtonColor: $dm-panel-call-action-button-color;
     dmPanelCallActionButtonBackgroundColor: $dm-panel-call-action-button-background-color;
+    dmPanelCallActionButtonIndicatorColor: $dm-panel-call-action-button-indicator-color;
+    dmPanelCallActionButtonIndicatorBackgroundColor: $dm-panel-call-action-button-indicator-background-color;
+    dmPanelReminderTextColor: $dm-panel-reminder-text-color;
+    dmPanelReminderTextBackgroundColor: $dm-panel-reminder-text-background-color;
+    dmPanelReminderLinkColor: $dm-panel-reminder-link-color;
+    dmPanelReminderLinkBackgroundColor: $dm-panel-reminder-link-background-color;
 }
 
