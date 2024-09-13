@@ -172,9 +172,9 @@ export class TableResolver {
 
   @Authorized()
   @Query(() => [OpenTable])
-  async openTables(@Ctx() context: Context): Promise<OpenTable[]> {
+  async openTables(): Promise<OpenTable[]> {
     const meetings = await getMeetings()
-    return openTablesFromOpenMeetings(meetings, context)
+    return openTablesFromOpenMeetings(meetings)
   }
 
   @Authorized()
@@ -364,11 +364,10 @@ export class TableResolver {
   })
   async updateOpenTables(
     @Root() meetings: MeetingInfo[],
-    @Ctx() context: Context,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     @Arg('username') username: string,
   ): Promise<OpenTable[]> {
-    return openTablesFromOpenMeetings(meetings, context)
+    return openTablesFromOpenMeetings(meetings)
   }
 
   /*
@@ -384,10 +383,7 @@ export class TableResolver {
   */
 }
 
-const openTablesFromOpenMeetings = async (
-  meetings: MeetingInfo[],
-  context: Context,
-): Promise<OpenTable[]> => {
+const openTablesFromOpenMeetings = async (meetings: MeetingInfo[]): Promise<OpenTable[]> => {
   if (meetings.length) {
     const dbMeetings = await prisma.meeting.findMany({
       where: {
@@ -396,24 +392,15 @@ const openTablesFromOpenMeetings = async (
       select: {
         id: true,
         meetingID: true,
-        public: true,
-        users: true,
       },
     })
 
     const openTables: OpenTable[] = []
 
-    const { user } = context
-    dbMeetings
-      .filter(
-        (meeting) =>
-          meeting.public ||
-          meeting.users.some((userInMeeting) => user?.id === userInMeeting.userId),
-      )
-      .forEach((ids) => {
-        const meeting = meetings.find((m) => ids.meetingID === m.meetingID)
-        if (meeting) openTables.push(new OpenTable(meeting, ids.id ? ids.id : 0))
-      })
+    dbMeetings.forEach((ids) => {
+      const meeting = meetings.find((m) => ids.meetingID === m.meetingID)
+      if (meeting) openTables.push(new OpenTable(meeting, ids.id ? ids.id : 0))
+    })
     return openTables
   }
 
