@@ -16,6 +16,7 @@ import { parse } from 'cookie'
 import express from 'express'
 import { renderPage } from 'vike/server'
 
+import { publicEnv } from './config.js'
 import { root } from './root.js'
 
 const isProduction = process.env.NODE_ENV === 'production'
@@ -89,6 +90,7 @@ async function startServer() {
       const pageContextInit = {
         urlOriginal: req.originalUrl,
         hasToken: hasToken(req.headers.cookie),
+        publicEnv,
       }
       const pageContext = await renderPage(pageContextInit)
       const { httpResponse } = pageContext

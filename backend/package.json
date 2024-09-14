@@ -38,7 +38,7 @@
     "class-validator": "^0.14.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "fast-xml-parser": "^4.5.0",
     "graphql": "^16.9.0",
     "graphql-scalars": "^1.23.0",
@@ -56,11 +56,11 @@
     "ws": "^8.18.0"
   },
   "devDependencies": {
-    "@eslint-community/eslint-plugin-eslint-comments": "^4.3.0",
+    "@eslint-community/eslint-plugin-eslint-comments": "^4.4.0",
     "@faker-js/faker": "^9.0.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
-    "@types/jest": "^29.5.12",
+    "@types/jest": "^29.5.13",
     "@types/nanoid": "^3.0.0",
     "@types/node": "^22.5.4",
     "@types/uuid": "^10.0.0",
@@ -71,7 +71,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-import-resolver-typescript": "^3.6.3",
-    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-import": "^2.30.0",
     "eslint-plugin-jest": "^28.6.0",
     "eslint-plugin-json": "^3.1.0",
     "eslint-plugin-n": "^16.6.2",
@@ -87,7 +87,7 @@
     "ts-jest": "^29.2.4",
     "ts-node": "^10.9.2",
     "tsc-watch": "^6.2.0",
-    "typescript": "^5.5.4"
+    "typescript": "^5.6.2"
   },
   "imports": {
     "#api/*": "./src/api/*",

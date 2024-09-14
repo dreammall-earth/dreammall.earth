@@ -69,6 +69,7 @@ FROM base AS production
 COPY --from=build ${DOCKER_WORKDIR}/package.json ${DOCKER_WORKDIR}/package-lock.json ./
 RUN npm install --omit=dev --frozen-lockfile --non-interactive
 COPY --from=build ${DOCKER_WORKDIR}/build ./build
+COPY --from=build ${DOCKER_WORKDIR}/node_modules/@brillout/vite-plugin-server-entry/dist/runtime/autoImporter.js ./node_modules/@brillout/vite-plugin-server-entry/dist/runtime/autoImporter.js
 COPY --from=build ${DOCKER_WORKDIR}/server ./server
 COPY --from=build ${DOCKER_WORKDIR}/tsconfig.json ./tsconfig.json
 
