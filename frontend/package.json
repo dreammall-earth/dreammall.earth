@@ -91,7 +91,7 @@
     "@pinia/testing": "^0.1.5",
     "@storybook/addon-essentials": "^8.3.0",
     "@storybook/addon-interactions": "^8.3.0",
-    "@storybook/addon-links": "^8.2.9",
+    "@storybook/addon-links": "^8.3.0",
     "@storybook/blocks": "^8.3.0",
     "@storybook/test": "^8.2.9",
     "@storybook/test-runner": "^0.19.1",
