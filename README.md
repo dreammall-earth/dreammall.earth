@@ -7,7 +7,7 @@
 
 Dreammall.earth websites & services
 
-![](presenter/src/assets/dreammall-logo.svg)
+![](frontend/assets/dreammall-logo.svg)
 
 ## Modules
 
@@ -15,7 +15,6 @@ Dreammall.earth websites & services
 - [Backend](backend/README.md)
 - [Deployment](deployment/README.md)
 - [Frontend](frontend/README.md)
-- [Presenter](presenter/README.md)
 
 ## Commands
 
@@ -49,7 +48,7 @@ docker compose run --rm backend npm run db:reset
 
 Start your desired applications:
 ```bash
-docker compose up backend frontend presenter
+docker compose up backend frontend
 ```
 
 ## B) Run applications locally
@@ -77,13 +76,6 @@ cp .env.dist .env
 npm install
 ```
 
-Setup presenter:
-```bash
-cd $rootFolder/presenter
-cp .env.dist .env
-npm install
-```
-
 ### Start Services
 
 ```bash
@@ -96,22 +88,14 @@ cd frontend
 npm run dev
 ```
 
-```bash
-cd presenter
-export PORT=3001
-npm run dev
-```
-
 ## Endpoints
 
 The following endpoints are provided for `docker compose up`:
 
 | Endpoint                                        | Description                |
 | ----------------------------------------------- | -------------------------- |
-| [http://localhost:3306](http://localhost:3306)  | MySQL Database             |
-| [http://localhost:3000](http://localhost:3001)  | Presenter                  |
-| [http://localhost:6006](http://localhost:6006)  | Presenter Storybook        |
 | [http://localhost:3001](http://localhost:3000)  | Frontend                   |
+| [http://localhost:3306](http://localhost:3306)  | MySQL Database             |
 | [http://localhost:6007](http://localhost:6007)  | Frontend Storybook         |
 | [http://localhost:4000](http://localhost:4000)  | Backend GraphQL Playground |
 | [http://localhost:8080](http://localhost:8080)  | Documentation              |

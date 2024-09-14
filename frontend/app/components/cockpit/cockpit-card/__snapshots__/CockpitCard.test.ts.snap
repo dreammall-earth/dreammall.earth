@@ -1,0 +1,85 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CockpitCard > renders 1`] = `
+<section
+  class="cockpit-card"
+  data-v-7779afd2=""
+  narrow="false"
+>
+  <div
+    class="header"
+    data-v-7779afd2=""
+  >
+    
+    <h2>
+      Header
+    </h2>
+    
+  </div>
+  <hr
+    class="hr"
+    data-v-7779afd2=""
+  />
+  
+  <div>
+    Content
+  </div>
+  
+</section>
+`;
+
+exports[`CockpitCard > renders narrow 1`] = `
+<section
+  class="cockpit-card"
+  data-v-7779afd2=""
+  narrow="true"
+>
+  <div
+    class="header"
+    data-v-7779afd2=""
+  >
+    
+    <h2>
+      Header
+    </h2>
+    
+  </div>
+  <hr
+    class="hr"
+    data-v-7779afd2=""
+  />
+  
+  <div>
+    Content
+  </div>
+  
+</section>
+`;
+
+exports[`CockpitCard > renders with empty header slot 1`] = `
+<section
+  class="cockpit-card"
+  data-v-7779afd2=""
+  narrow="false"
+>
+  <div
+    class="header"
+    data-v-7779afd2=""
+  >
+    
+    <h2>
+      Header
+    </h2>
+    
+  </div>
+  <hr
+    class="hr"
+    data-v-7779afd2=""
+  />
+  
+  <div>
+    Content
+  </div>
+  
+</section>
+`;

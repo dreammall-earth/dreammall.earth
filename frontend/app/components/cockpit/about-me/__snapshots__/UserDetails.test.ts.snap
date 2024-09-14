@@ -1,0 +1,837 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UserDetails > renders in editable mode 1`] = `
+<ul
+  class="details editable"
+  data-v-f9dbb6f1=""
+>
+  
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-school-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         I am a student 
+        <button
+          data-v-f9dbb6f1=""
+        >
+          <i
+            aria-hidden="true"
+            class="mdi-close mdi v-icon notranslate v-theme--light v-icon--size-default"
+            data-v-f9dbb6f1=""
+          />
+        </button>
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         I am a worker 
+        <button
+          data-v-f9dbb6f1=""
+        >
+          <i
+            aria-hidden="true"
+            class="mdi-close mdi v-icon notranslate v-theme--light v-icon--size-default"
+            data-v-f9dbb6f1=""
+          />
+        </button>
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         I really like my job 
+        <button
+          data-v-f9dbb6f1=""
+        >
+          <i
+            aria-hidden="true"
+            class="mdi-close mdi v-icon notranslate v-theme--light v-icon--size-default"
+            data-v-f9dbb6f1=""
+          />
+        </button>
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-web mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         English 
+        <button
+          data-v-f9dbb6f1=""
+        >
+          <i
+            aria-hidden="true"
+            class="mdi-close mdi v-icon notranslate v-theme--light v-icon--size-default"
+            data-v-f9dbb6f1=""
+          />
+        </button>
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-map-marker-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         Berlin 
+        <button
+          data-v-f9dbb6f1=""
+        >
+          <i
+            aria-hidden="true"
+            class="mdi-close mdi v-icon notranslate v-theme--light v-icon--size-default"
+            data-v-f9dbb6f1=""
+          />
+        </button>
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-emoticon-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         Yeah! 
+        <button
+          data-v-f9dbb6f1=""
+        >
+          <i
+            aria-hidden="true"
+            class="mdi-close mdi v-icon notranslate v-theme--light v-icon--size-default"
+            data-v-f9dbb6f1=""
+          />
+        </button>
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  
+</ul>
+`;
+
+exports[`UserDetails > renders in non-editable mode 1`] = `
+<ul
+  class="details"
+  data-v-f9dbb6f1=""
+>
+  
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-school-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         I am a student 
+        <!--v-if-->
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         I am a worker 
+        <!--v-if-->
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         I really like my job 
+        <!--v-if-->
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-web mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         English 
+        <!--v-if-->
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-map-marker-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         Berlin 
+        <!--v-if-->
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-emoticon-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         Yeah! 
+        <!--v-if-->
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  
+</ul>
+`;
+
+exports[`UserDetails > renders placeholders 1`] = `
+<ul
+  class="details"
+  data-v-f9dbb6f1=""
+>
+  
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-map-marker-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         Mein Standort 
+        <!--v-if-->
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         Meine Arbeit 
+        <!--v-if-->
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-school-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         Meine Ausbildung 
+        <!--v-if-->
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-emoticon-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         Wie ich mich heute fühle 
+        <!--v-if-->
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-web mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         Sprachen, die ich spreche 
+        <!--v-if-->
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  
+</ul>
+`;
+
+exports[`UserDetails > renders placeholders in editable mode 1`] = `
+<ul
+  class="details editable"
+  data-v-f9dbb6f1=""
+>
+  
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-map-marker-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         Mein Standort 
+        <!--v-if-->
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         Meine Arbeit 
+        <!--v-if-->
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-school-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         Meine Ausbildung 
+        <!--v-if-->
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-emoticon-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         Wie ich mich heute fühle 
+        <!--v-if-->
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  <li
+    data-v-f9dbb6f1=""
+  >
+    <span
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+      data-v-f9dbb6f1=""
+      draggable="false"
+    >
+      
+      <!---->
+      <span
+        class="v-chip__underlay"
+      />
+      
+      <!---->
+      <!---->
+      <div
+        class="v-chip__content"
+        data-no-activator=""
+      >
+        
+        <i
+          aria-hidden="true"
+          class="mdi mdi-web mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+          data-v-f9dbb6f1=""
+        />
+         Sprachen, die ich spreche 
+        <!--v-if-->
+        
+      </div>
+      <!---->
+      <!---->
+    </span>
+  </li>
+  
+</ul>
+`;

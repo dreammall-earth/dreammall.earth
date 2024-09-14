@@ -5,9 +5,6 @@ global:
 frontend:
   image:
     repository:  {{ .StateValues.image_repository }}/frontend
-presenter:
-  image:
-    repository: {{ .StateValues.image_repository }}/presenter
 backend:
   image:
     repository:  {{ .StateValues.image_repository }}/backend
@@ -16,20 +13,18 @@ cert_manager:
   issuer: {{ .StateValues.cert_manager_issuer }}
 
 hosts:
-  frontend: app.{{ .StateValues.domain }}
-  presenter: {{ .StateValues.domain }}
+  frontend: {{ .StateValues.domain }}
 
 configmap:
   auth_authority_url: https://auth.{{ .StateValues.domain }}/application/o/dreammallearth/
-  auth_redirect_uri: https://app.{{ .StateValues.domain }}/auth/
+  auth_redirect_uri: https://{{ .StateValues.domain }}/app/auth/
   auth_signout_uri: https://auth.{{ .StateValues.domain }}/if/flow/dreammallearth-invalidation-flow/
   auth_signup_uri: https://auth.{{ .StateValues.domain }}/if/flow/dreammallearth-enrollment/
-  auth_silent_redirect_uri: https://app.{{ .StateValues.domain }}/silent-refresh/
+  auth_silent_redirect_uri: https://{{ .StateValues.domain }}/app/silent-refresh/
   bbb_url: https://cafe.dreammall.earth/bigbluebutton/api/
   bbb_webhook_url: https://{{ .StateValues.domain }}/api/bbb-webhook
   endpoints_graphql_uri: https://{{ .StateValues.domain }}/api/
   endpoints_websocket_uri: ws://{{ .StateValues.domain }}/api/subscriptions
-  frontend_url:  https://app.{{ .StateValues.domain }}
-  frontend_signin_url:  https://app.{{ .StateValues.domain }}/signin
+  frontend_url:  https://{{ .StateValues.domain }}/app
+  frontend_signin_url:  https://{{ .StateValues.domain }}/app/signin
   jwks_uri: http://authentik-server/application/o/dreammallearth/jwks/
-  presenter_url: https://{{ .StateValues.domain }}

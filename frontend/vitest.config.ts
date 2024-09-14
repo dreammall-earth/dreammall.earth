@@ -10,27 +10,26 @@ export default mergeConfig(
       globals: true,
       environment: 'happy-dom',
       setupFiles: [
-        'src/tests/mock.$t.ts',
-        'src/tests/mock.vikePageContext.ts',
-        'src/tests/mock.authService.ts',
-        'src/tests/plugin.pinia.ts',
-        'src/tests/plugin.i18n-vuetify.ts',
+        'tests/mock.$t.ts',
+        'tests/mock.authService.ts',
+        'tests/mock.IntersectionObserver.ts',
+        'tests/mock.vikePageContext.ts',
+        'tests/plugin.i18n-vuetify.ts',
+        'tests/plugin.pinia.ts',
       ],
       exclude: [
         ...configDefaults.exclude,
         // index page due to canvas issues
-        'src/pages/index/Page.test.ts',
+        'app/pages/index/Page.test.ts',
       ],
       coverage: {
         all: true,
-        include: ['src/**/*.{js,jsx,ts,tsx,vue}'],
+        include: ['{(presenter),app,renderer,server}/**/*.{js,jsx,ts,tsx,vue}'],
         exclude: [
           ...configDefaults.exclude,
           // storybook
           '**/*{.,-}stories.?(c|m)[jt]s?(x)',
-          'src/stories/**/*',
-          'src/pages/index/*',
-          'src/components/starmap/*',
+          'app/components/starmap/*',
         ],
         thresholds: {
           lines: 90,

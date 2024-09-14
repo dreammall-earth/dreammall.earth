@@ -29,7 +29,7 @@ module.exports = {
       node: true,
     },
     'vue-i18n': {
-      localeDir: './src/locales/*.json',
+      localeDir: './locales/*.json',
     },
   },
   rules: {
@@ -197,6 +197,12 @@ module.exports = {
               'setActivePinia',
               'provideApolloClient',
             ],
+          },
+        ],
+        'vitest/max-nested-describe': [
+          'error',
+          {
+            max: 6,
           },
         ],
       },

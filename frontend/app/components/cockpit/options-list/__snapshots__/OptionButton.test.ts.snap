@@ -1,0 +1,16 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Option Button > renders 1`] = `
+<li
+  class="item"
+  data-v-2a3b4920=""
+>
+  <button
+    class="button"
+    data-v-2a3b4920=""
+  >
+    
+    
+  </button>
+</li>
+`;

@@ -22,14 +22,14 @@ const config: UserConfig = {
     !isStorybook() && vike({ prerender: false }),
     vueI18n({
       ssr: true,
-      include: path.resolve(__dirname, './src/locales/**'),
+      include: path.resolve(__dirname, './locales/**'),
       jitCompilation: false,
     }),
     checker({
       typescript: true,
       vueTsc: true,
     }),
-    vuetify({ styles: { configFile: './src/assets/scss/style.scss' } }),
+    vuetify({ styles: { configFile: './assets/scss/style.scss' } }),
     viteCompression({ filter: /\.*$/i }),
   ],
   build: {
@@ -38,8 +38,12 @@ const config: UserConfig = {
   ssr: { noExternal: ['vuetify'] },
   resolve: {
     alias: {
-      '#src': path.join(__dirname, '/src'),
+      '#app': path.join(__dirname, '/app'),
+      '#presenter': path.join(__dirname, '/(presenter)'),
+      '#tests': path.join(__dirname, '/tests'),
       '#renderer': path.join(__dirname, '/renderer'),
+      '#locales': path.join(__dirname, '/locales'),
+      '#assets': path.join(__dirname, '/assets'),
       '#storybook': path.join(__dirname, '/.storybook'),
       '#types': path.join(__dirname, '/types'),
     },

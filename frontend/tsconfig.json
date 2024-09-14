@@ -11,8 +11,12 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "paths": {
-      "#src/*": ["./src/*"],
+      "#app/*": ["./app/*"],
+      "#presenter/*": ["./(presenter)/*"],
+      "#tests/*": ["./tests/*"],
       "#renderer/*": ["./renderer/*"],
+      "#assets/*": ["./assets/*"],
+      "#locales/*": ["./locales/*"],
       "#storybook/*": ["./.storybook/*"],
       "#server/*": ["./server/*"],
       "#types/*": ["./types/*"]

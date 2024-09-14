@@ -5,9 +5,6 @@ global:
 frontend:
   image:
     repository:  ghcr.io/dreammall-earth/dreammall.earth/frontend
-presenter:
-  image:
-    repository: ghcr.io/dreammall-earth/dreammall.earth/presenter
 backend:
   image:
     repository:  ghcr.io/dreammall-earth/dreammall.earth/backend
@@ -16,23 +13,21 @@ cert_manager:
   issuer:
 
 hosts:
-  frontend: app.master.dreammall.earth
-  presenter: master.dreammall.earth
+  frontend: master.dreammall.earth
 
 configmap:
   auth_authority_url: https://auth.master.dreammall.earth/application/o/dreammallearth/
-  auth_redirect_uri: https://app.master.dreammall.earth/auth/
+  auth_redirect_uri: https://master.dreammall.earth/app/auth/
   auth_signout_uri: https://auth.master.dreammall.earth/if/flow/dreammallearth-invalidation-flow/
   auth_signup_uri: https://auth.master.dreammall.earth/if/flow/dreammallearth-enrollment/
-  auth_silent_redirect_uri: https://app.master.dreammall.earth/silent-refresh/
+  auth_silent_redirect_uri: https://master.dreammall.earth/app/silent-refresh/
   bbb_url: https://cafe.dreammall.earth/bigbluebutton/api/
   bbb_webhook_url: https://master.dreammall.earth/api/bbb-webhook
   endpoints_graphql_uri: https://master.dreammall.earth/api/
   endpoints_websocket_uri: ws://master.dreammall.earth/api/subscriptions
-  frontend_url:  https://app.master.dreammall.earth
-  frontend_signin_url:  https://app.master.dreammall.earth/signin
+  frontend_url:  https://master.dreammall.earth/app
+  frontend_signin_url:  https://master.dreammall.earth/app/signin
   jwks_uri: http://authentik-server/application/o/dreammallearth/jwks/
-  presenter_url: https://master.dreammall.earth
   account_holder: 'DreamMall GBR'
   iban: 'DE75512108001245126199'
   bic: 'SOGEDEFFXXX'

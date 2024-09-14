@@ -460,7 +460,7 @@ const createMeetingID = async (): Promise<string> => {
 }
 
 function createInviteLink(tableId: number) {
-  return new URL(`join-table/${tableId}`, CONFIG.FRONTEND_URL).toString()
+  return new URL(`app/join-table/${tableId}`, CONFIG.FRONTEND_URL).toString()
 }
 
 async function createBBBMeeting(data: {

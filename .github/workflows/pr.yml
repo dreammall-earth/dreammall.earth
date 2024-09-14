@@ -37,7 +37,6 @@ jobs:
             docker
             frontend
             other
-            presenter
             release
             test
             workflow

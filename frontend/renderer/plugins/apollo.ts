@@ -52,7 +52,7 @@ export const createApolloClient = (ENDPOINTS: PageContext['publicEnv']['ENDPOINT
     if (graphQLErrors) {
       graphQLErrors.forEach(({ extensions }) => {
         if (extensions !== null && extensions?.code === 'UNAUTHENTICATED') {
-          void navigate('/signin')
+          void navigate('/app/signin')
         }
       })
     }

@@ -105,7 +105,7 @@ entries:
 
   # policiy (between user write stage and user login stage)
   - attrs:
-      expression: !Format ["context['flow_plan'].context['redirect'] = '%s/signin'\nreturn True", !Context redirect_url]
+      expression: !Format ["context['flow_plan'].context['redirect'] = '%s/app/signin'\nreturn True", !Context redirect_url]
       name: dreammall.earth-redirect-frontend-signin
     conditions: []
     id: dreammall.earth-redirect-frontend-signin

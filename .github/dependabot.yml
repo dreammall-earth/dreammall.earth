@@ -16,7 +16,6 @@ updates:
     - "/"
     - "/backend"
     - "/frontend"
-    - "/presenter"
     - "/tests"
   schedule:
     interval: daily
@@ -102,7 +101,6 @@ updates:
     - "/authentik"
     - "/backend"
     - "/frontend"
-    - "/presenter"
   schedule:
     interval: daily
     timezone: "Europe/Berlin"

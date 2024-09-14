@@ -105,15 +105,6 @@ vi backend/.env
 
 ### Configure backend connections
 
-#### Presenter
-
-```bash
-cp presenter/.env.dist presenter/.env
-# adjust the .env config as needed
-vi presenter/.env
-# PUBLIC_ENV__ENDPOINTS__GRAPHQL_URI=http://localhost/api
-```
-
 #### Frontend
 
 ```bash
@@ -136,7 +127,6 @@ This will build all projects parts and start a pm2 instance to serve the corresp
 
 | Service             | URL                                        |
 | ------------------- | ------------------------------------------ |
-| presenter           | [https://host/](https://host/)             |
 | backend             | [https://host/api](https://host/api)       |
 | docs                | [https://host/docs](https://host/docs)     |
 | webhooks (optional) | [https://host/hooks/](https://host/hooks/) |

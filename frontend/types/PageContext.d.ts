@@ -15,6 +15,7 @@ declare global {
       Page: Page
       pageProps?: PageProps
       hasToken: boolean
+      locale?: LocaleCode
     }
   }
 }

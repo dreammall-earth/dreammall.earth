@@ -4,7 +4,7 @@
 [![npm][badge-npm-img]][badge-npm-href]
 [![eslint][badge-eslint-img]][badge-eslint-href]
 
-![](../presenter/src/assets/dreammall-logo.svg)
+![](../frontend/assets/dreammall-logo.svg)
 
 End-to-End Testing the DreamMall Software with Cypress utilizing
 - [cypress-io/github-action](https://github.com/marketplace/actions/cypress-io) caching the Cypress installation and dependencies for fast Cypress CI initialization

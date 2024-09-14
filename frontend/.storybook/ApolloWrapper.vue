@@ -6,8 +6,8 @@
  import { defineComponent, provide } from 'vue'
  import { DefaultApolloClient } from '@vue/apollo-composable'
 
- import { joinMyTableMutation } from '#src/graphql/mutations/joinMyTableMutation'
- import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
+ import { joinMyTableMutation } from '#app/graphql/mutations/joinMyTableMutation'
+ import { openTablesQuery } from '#app/graphql/queries/openTablesQuery'
  import { MockedProvider } from '@apollo/client/testing'
 
  const apolloClient = new MockedProvider({

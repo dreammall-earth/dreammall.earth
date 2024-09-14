@@ -2,14 +2,16 @@
 import '@mdi/font/css/materialdesignicons.css'
 // eslint-disable-next-line import/no-unassigned-import
 import 'vuetify/styles'
-import { I18n, useI18n } from 'vue-i18n'
+import { useI18n } from 'vue-i18n'
 import { ThemeDefinition, createVuetify } from 'vuetify'
 import { aliases as mdiAliases } from 'vuetify/iconsets/mdi'
 import { createVueI18nAdapter } from 'vuetify/locale/adapters/vue-i18n'
 
-import { aliases as customAliases } from '#src/assets/icons'
-import dark from '#src/assets/scss/dark.module.scss'
-import light from '#src/assets/scss/light.module.scss'
+import { aliases as customAliases } from '#assets/icons'
+import dark from '#assets/scss/dark.module.scss'
+import light from '#assets/scss/light.module.scss'
+
+import type I18n from '#renderer/plugins/i18n'
 
 function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): ThemeDefinition {
   return {
@@ -66,8 +68,7 @@ const themes = {
   dark: makeThemeFromCssModule(dark, true),
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default (i18n: I18n<any, NonNullable<unknown>, NonNullable<unknown>, string, false>) =>
+export default (i18n: typeof I18n) =>
   createVuetify({
     locale: {
       adapter: createVueI18nAdapter({ i18n, useI18n }),

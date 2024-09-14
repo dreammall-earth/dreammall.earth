@@ -4,28 +4,6 @@ include:
     - ./authentik/docker-compose.override.yml
 
 services:
-  presenter:
-    build:
-      target: development
-    ports:
-      # development server port
-      - 24678:24678
-    environment:
-      - NODE_ENV=development
-    volumes:
-      - ./presenter:/app
-
-  presenter-storybook:
-    build:
-      context: ./presenter
-      target: storybook
-    ports:
-      - 6006:6006
-    environment:
-      - NODE_ENV=development
-    volumes:
-      - ./presenter:/app
-
   frontend:
     build:
       target: development
