@@ -102,7 +102,7 @@ const onSubmit = async () => {
       GlobalErrorHandler.error('Could not join myTable')
     }
   } catch (error) {
-    GlobalErrorHandler.error('Error opening table', error)
+    GlobalErrorHandler.error(t('error.globalerror.text'), error)
   }
 
   stepControl.value?.next()
