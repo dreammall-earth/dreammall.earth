@@ -79,7 +79,7 @@
     "@intlify/eslint-plugin-vue-i18n": "^2.0.0",
     "@pinia/testing": "^0.1.5",
     "@storybook/addon-essentials": "^8.2.6",
-    "@storybook/addon-interactions": "^8.2.6",
+    "@storybook/addon-interactions": "^8.3.0",
     "@storybook/addon-links": "^8.2.6",
     "@storybook/blocks": "^8.3.0",
     "@storybook/test-runner": "^0.19.1",
