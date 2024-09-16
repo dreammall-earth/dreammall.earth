@@ -113,12 +113,12 @@
 import { useMutation } from '@vue/apollo-composable'
 import { ref } from 'vue'
 
-import MainButton from '#components/buttons/MainButton.vue'
-import DataPrivacyCheckbox from '#components/inputs/DataPrivacyCheckbox.vue'
-import EmailInput from '#components/inputs/EmailInput.vue'
-import NameInput from '#components/inputs/NameInput.vue'
-import AnchorLink from '#components/nav/AnchorLink.vue'
-import { createContactForm } from '#mutations/createContactForm'
+import MainButton from '#src/components/buttons/MainButton.vue'
+import DataPrivacyCheckbox from '#src/components/inputs/DataPrivacyCheckbox.vue'
+import EmailInput from '#src/components/inputs/EmailInput.vue'
+import NameInput from '#src/components/inputs/NameInput.vue'
+import AnchorLink from '#src/components/nav/AnchorLink.vue'
+import { createContactForm } from '#src/graphql/mutations/createContactForm'
 import { messageRules } from '#src/validation/validation'
 
 const firstname = ref('')
@@ -169,7 +169,7 @@ async function submitForm() {
 </script>
 
 <style scoped lang="scss">
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 
 .contact-form {
   .contact-text {

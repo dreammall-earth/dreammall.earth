@@ -28,7 +28,7 @@
 import { navigate } from 'vike/client/router'
 import { onMounted, onUnmounted, ref } from 'vue'
 
-import { usePageContext } from '#root/renderer/context/usePageContext'
+import { usePageContext } from '#renderer/context/usePageContext'
 
 import type { Ref } from 'vue'
 

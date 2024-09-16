@@ -4,10 +4,10 @@ import { describe, it, expect, beforeEach, vi, beforeAll, afterAll } from 'vites
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { vikePageContext } from '#context/usePageContext'
-import { confirmNewsletter } from '#mutations/confirmNewsletter'
-import i18n from '#plugins/i18n'
-import { mockClient } from '#tests/mock.apolloClient'
+import { vikePageContext } from '#renderer/context/usePageContext'
+import i18n from '#renderer/plugins/i18n'
+import { confirmNewsletter } from '#src/graphql/mutations/confirmNewsletter'
+import { mockClient } from '#src/tests/mock.apolloClient'
 
 import OptinPage from './+Page.vue'
 import route from './+route'

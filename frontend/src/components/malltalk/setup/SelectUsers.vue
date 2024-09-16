@@ -9,11 +9,11 @@
 </template>
 
 <script lang="ts" setup>
-import SimpleButton from '#components/buttons/SimpleButton.vue'
-import UserSelection from '#components/user-selection/UserSelection.vue'
+import SimpleButton from '#src/components/buttons/SimpleButton.vue'
+import UserSelection from '#src/components/user-selection/UserSelection.vue'
 
-import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
-import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
+import type MyTableSettings from '#src/components/malltalk/interfaces/MyTableSettings'
+import type { StepEmits, StepProps } from '#src/components/steps/StepComponentTypes'
 
 const props = defineProps<StepProps>()
 const emit = defineEmits<StepEmits>()

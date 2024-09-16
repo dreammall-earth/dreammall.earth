@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts" setup>
-import DefaultLayout from '#layouts/DefaultLayout.vue'
+import DefaultLayout from '#src/layouts/DefaultLayout.vue'
 
 defineProps({ is404: Boolean })
 </script>

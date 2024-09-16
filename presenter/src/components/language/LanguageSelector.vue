@@ -31,8 +31,8 @@
 import { navigate } from 'vike/client/router'
 import { ref } from 'vue'
 
-import { usePageContext } from '#context/usePageContext'
-import i18n from '#plugins/i18n'
+import { usePageContext } from '#renderer/context/usePageContext'
+import i18n from '#renderer/plugins/i18n'
 import { localizedLocale } from '#src/locales'
 
 const pageContext = usePageContext()
@@ -51,7 +51,7 @@ const updateLanguage = () => {
 </script>
 
 <style lang="scss">
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 
 .language-select {
   min-width: 70px;

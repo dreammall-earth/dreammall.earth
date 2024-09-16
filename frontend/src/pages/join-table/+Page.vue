@@ -33,10 +33,10 @@
 import { useQuery } from '@vue/apollo-composable'
 import { ref } from 'vue'
 
-import MainButton from '#components/buttons/MainButton.vue'
-import { usePageContext } from '#context/usePageContext'
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
-import { joinTableAsGuestQuery } from '#queries/joinTableAsGuestQuery'
+import { usePageContext } from '#renderer/context/usePageContext'
+import GlobalErrorHandler from '#renderer/plugins/globalErrorHandler'
+import MainButton from '#src/components/buttons/MainButton.vue'
+import { joinTableAsGuestQuery } from '#src/graphql/queries/joinTableAsGuestQuery'
 
 const pageContext = usePageContext()
 const tableId = Number(pageContext.routeParams?.id)

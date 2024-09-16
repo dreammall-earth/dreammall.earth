@@ -6,9 +6,9 @@ import { vi, describe, it, expect, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { currentUserQuery } from '#queries/currentUserQuery'
+import { currentUserQuery } from '#src/graphql/queries/currentUserQuery'
 import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
-import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
+import { updateOpenTablesSubscription } from '#src/graphql/subscriptions/updateOpenTablesSubscription'
 
 import IndexPage from './+Page.vue'
 import { title } from './+title'

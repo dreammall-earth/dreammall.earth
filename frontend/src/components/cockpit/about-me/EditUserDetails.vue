@@ -55,12 +55,12 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
 
-import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
+import CockpitCard from '#src/components/cockpit/cockpit-card/CockpitCard.vue'
 
 import { detailCategories, detailCategoryToIcon } from './detailCategories'
 import Details from './UserDetails.vue'
 
-import type { UserDetail, AddUserDetailInput } from '#stores/userStore'
+import type { UserDetail, AddUserDetailInput } from '#src/stores/userStore'
 
 const props = defineProps<{
   details: UserDetail[]

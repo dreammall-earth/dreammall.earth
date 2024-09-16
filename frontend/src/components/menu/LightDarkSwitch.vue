@@ -10,7 +10,7 @@
 <script lang="ts" setup>
 import { useTheme } from 'vuetify'
 
-import Switch, { State } from '#components/switch/SwitchComponent.vue'
+import Switch, { State } from '#src/components/switch/SwitchComponent.vue'
 
 const theme = useTheme()
 

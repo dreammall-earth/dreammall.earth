@@ -46,7 +46,7 @@ const onClick = () => {
 </script>
 
 <style lang="scss">
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 
 .custom-font .v-field__field {
   @include text-font-base;

@@ -31,11 +31,11 @@
 </template>
 
 <script setup lang="ts">
-import SimpleButton from '#components/buttons/SimpleButton.vue'
+import SimpleButton from '#src/components/buttons/SimpleButton.vue'
 
 import MotivationBox from './MotivationBox.vue'
 
-import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
+import type { StepEmits, StepProps } from '#src/components/steps/StepComponentTypes'
 import type { CreateTableModel } from './CreateTable.vue'
 
 defineProps<StepProps>()

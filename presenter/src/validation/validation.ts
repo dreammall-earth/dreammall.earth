@@ -1,6 +1,6 @@
 import isEmail from 'validator/lib/isEmail'
 
-import i18n from '#plugins/i18n'
+import i18n from '#renderer/plugins/i18n'
 
 const MAX_NAME_LENGTH = 50
 const MAX_MESSAGE_LENGTH = 255

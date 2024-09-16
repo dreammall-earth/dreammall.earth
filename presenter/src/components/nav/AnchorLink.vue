@@ -37,7 +37,7 @@ function onClick() {
 </script>
 
 <style scoped lang="scss">
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 
 .anchor-link {
   @include anchor-font;

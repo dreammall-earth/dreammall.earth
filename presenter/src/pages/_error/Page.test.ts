@@ -5,8 +5,8 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { vikePageContext } from '#context/usePageContext'
-import i18n from '#plugins/i18n'
+import { vikePageContext } from '#renderer/context/usePageContext'
+import i18n from '#renderer/plugins/i18n'
 
 import ErrorPage from './+Page.vue'
 import { title } from './+title'

@@ -6,9 +6,9 @@
 import { navigate } from 'vike/client/router'
 import { inject, onBeforeMount } from 'vue'
 
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
+import GlobalErrorHandler from '#renderer/plugins/globalErrorHandler'
 import AuthService from '#src/services/AuthService'
-import { useAuthStore } from '#stores/authStore'
+import { useAuthStore } from '#src/stores/authStore'
 
 const authService = inject<AuthService>('authService')
 

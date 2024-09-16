@@ -7,9 +7,9 @@ import { ThemeDefinition, createVuetify } from 'vuetify'
 import { aliases as mdiAliases } from 'vuetify/iconsets/mdi'
 import { createVueI18nAdapter } from 'vuetify/locale/adapters/vue-i18n'
 
-import { aliases as customAliases } from '#assets/icons'
-import dark from '#assets/scss/dark.module.scss'
-import light from '#assets/scss/light.module.scss'
+import { aliases as customAliases } from '#src/assets/icons'
+import dark from '#src/assets/scss/dark.module.scss'
+import light from '#src/assets/scss/light.module.scss'
 
 function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): ThemeDefinition {
   return {

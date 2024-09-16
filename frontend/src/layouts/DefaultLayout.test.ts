@@ -6,8 +6,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { joinMyTableMutation } from '#mutations/joinMyTableMutation'
-import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
+import { joinMyTableMutation } from '#src/graphql/mutations/joinMyTableMutation'
+import { updateOpenTablesSubscription } from '#src/graphql/subscriptions/updateOpenTablesSubscription'
 
 import DefaultLayout from './DefaultLayout.vue'
 

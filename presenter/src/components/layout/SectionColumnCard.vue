@@ -31,7 +31,7 @@ const props = withDefaults(
 </script>
 
 <style scoped lang="scss">
-@import '#root/src/assets/scss/style';
+@import '#src/assets/scss/style';
 
 .v-card {
   @include text-font-base($font-color-card);

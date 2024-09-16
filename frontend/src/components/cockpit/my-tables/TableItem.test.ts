@@ -4,9 +4,9 @@ import { createMockClient, createMockSubscription, IMockSubscription } from 'moc
 import { navigate } from 'vike/client/router'
 import { describe, expect, it, vi } from 'vitest'
 
-import { currentUserQuery } from '#queries/currentUserQuery'
-import { tablesQuery } from '#queries/tablesQuery'
-import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
+import { currentUserQuery } from '#src/graphql/queries/currentUserQuery'
+import { tablesQuery } from '#src/graphql/queries/tablesQuery'
+import { updateOpenTablesSubscription } from '#src/graphql/subscriptions/updateOpenTablesSubscription'
 
 import TableItem from './TableItem.vue'
 

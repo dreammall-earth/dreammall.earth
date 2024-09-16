@@ -1,4 +1,4 @@
-import { withApollo } from '#root/.storybook/withApollo.decorator'
+import { withApollo } from '#storybook/withApollo.decorator'
 import { SBComp } from '#types/SBComp'
 
 import Page from './+Page.vue'

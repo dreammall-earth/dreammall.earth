@@ -24,10 +24,10 @@ import { useMutation } from '@vue/apollo-composable'
 import { navigate } from 'vike/client/router'
 import { onBeforeMount, ref } from 'vue'
 
-import MainButton from '#components/buttons/MainButton.vue'
-import { usePageContext } from '#context/usePageContext'
-import DefaultLayout from '#layouts/DefaultLayout.vue'
-import { confirmNewsletter } from '#mutations/confirmNewsletter'
+import { usePageContext } from '#renderer/context/usePageContext'
+import MainButton from '#src/components/buttons/MainButton.vue'
+import { confirmNewsletter } from '#src/graphql/mutations/confirmNewsletter'
+import DefaultLayout from '#src/layouts/DefaultLayout.vue'
 
 const pageContext = usePageContext()
 

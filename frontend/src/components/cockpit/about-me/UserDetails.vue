@@ -22,7 +22,7 @@ import { useI18n } from 'vue-i18n'
 
 import { detailCategories, detailCategoryToIcon } from './detailCategories'
 
-import type { UserDetail } from '#stores/userStore'
+import type { UserDetail } from '#src/stores/userStore'
 
 const { t } = useI18n()
 

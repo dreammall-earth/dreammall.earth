@@ -1,6 +1,6 @@
-import CoffeeIcon from '#assets/img/coffee_icon.svg'
-import MallIcon from '#assets/img/logo_mall.svg'
-import ProjectsIcon from '#assets/img/menschen_projekte.svg'
+import CoffeeIcon from '#src/assets/img/coffee_icon.svg'
+import MallIcon from '#src/assets/img/logo_mall.svg'
+import ProjectsIcon from '#src/assets/img/menschen_projekte.svg'
 import { SBComp } from '#types/SBComp'
 
 import SectionColumnCard from './SectionColumnCard.vue'

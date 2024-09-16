@@ -1,4 +1,4 @@
-import { UserDetailCategory } from '#stores/userStore'
+import { UserDetailCategory } from '#src/stores/userStore'
 
 export const detailCategories: UserDetailCategory[] = [
   'place',

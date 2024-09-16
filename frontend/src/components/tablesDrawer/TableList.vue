@@ -17,7 +17,7 @@
 <script lang="ts" setup>
 import { navigate } from 'vike/client/router'
 
-import type { OpenTable } from '#stores/tablesStore'
+import type { OpenTable } from '#src/stores/tablesStore'
 
 defineProps<{
   items: OpenTable[]

@@ -24,14 +24,14 @@
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 
-import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
-import useModal from '#components/modal/useModal'
-import { useTablesStore } from '#stores/tablesStore'
+import CockpitCard from '#src/components/cockpit/cockpit-card/CockpitCard.vue'
+import useModal from '#src/components/modal/useModal'
+import { useTablesStore } from '#src/stores/tablesStore'
 
 import CreateTable from './create-table/CreateTable.vue'
 import TableItem from './TableItem.vue'
 
-import type { Table } from '#stores/tablesStore'
+import type { Table } from '#src/stores/tablesStore'
 
 const { setComponent } = useModal()
 

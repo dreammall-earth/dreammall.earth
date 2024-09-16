@@ -3,12 +3,12 @@ import { createMockClient } from 'mock-apollo-client'
 import { setActivePinia, createPinia } from 'pinia'
 import { vi, describe, it, expect, beforeAll, beforeEach } from 'vitest'
 
-import { addSocialMediaMutation } from '#mutations/addSocialMediaMutation'
-import { addUserDetailMutation } from '#mutations/addUserDetailMutation'
-import { removeSocialMediaMutation } from '#mutations/removeSocialMediaMutation'
-import { removeUserDetailMutation } from '#mutations/removeUserDetailMutation'
-import { updateUserMutation } from '#mutations/updateUserMutation'
-import { currentUserQuery } from '#queries/currentUserQuery'
+import { addSocialMediaMutation } from '#src/graphql/mutations/addSocialMediaMutation'
+import { addUserDetailMutation } from '#src/graphql/mutations/addUserDetailMutation'
+import { removeSocialMediaMutation } from '#src/graphql/mutations/removeSocialMediaMutation'
+import { removeUserDetailMutation } from '#src/graphql/mutations/removeUserDetailMutation'
+import { updateUserMutation } from '#src/graphql/mutations/updateUserMutation'
+import { currentUserQuery } from '#src/graphql/queries/currentUserQuery'
 
 import { useUserStore } from './userStore'
 

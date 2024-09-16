@@ -1,8 +1,8 @@
 import { useQuery } from '@vue/apollo-composable'
 import { computed, ref } from 'vue'
 
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
-import { searchUsersQuery } from '#queries/searchUsersQuery'
+import GlobalErrorHandler from '#renderer/plugins/globalErrorHandler'
+import { searchUsersQuery } from '#src/graphql/queries/searchUsersQuery'
 
 export type SearchUser = {
   id: number

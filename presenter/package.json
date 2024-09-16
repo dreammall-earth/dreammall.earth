@@ -134,20 +134,5 @@
     "vite-plugin-vuetify": "^2.0.4",
     "vitest": "^2.0.4",
     "vue-tsc": "^1.8.27"
-  },
-  "imports": {
-    "#components/*": "./src/components/*",
-    "#pages/*": "./src/pages/*",
-    "#assets/*": "./src/assets/*",
-    "#layouts/*": "./src/layouts/*",
-    "#stores/*": "./src/stores/*",
-    "#mutations/*": "./src/graphql/mutations/*",
-    "#queries/*": "./src/graphql/queries/*",
-    "#src/*": "./src/*",
-    "#plugins/*": "./renderer/plugins/*",
-    "#context/*": "./renderer/context/*",
-    "#tests/*": "./scripts/tests/*",
-    "#types/*": "./types/*",
-    "#root/*": "./*"
   }
 }
