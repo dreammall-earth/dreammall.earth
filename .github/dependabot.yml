@@ -9,8 +9,8 @@ updates:
   schedule:
     interval: daily
     #day: "saturday"
-    #timezone: "Europe/Berlin"
-    #time: "03:00"
+    timezone: "Europe/Berlin"
+    time: "03:00"
 
 - package-ecosystem: npm
   open-pull-requests-limit: 99
@@ -24,8 +24,8 @@ updates:
   schedule:
     interval: daily
     #day: "saturday"
-    #timezone: "Europe/Berlin"
-    #time: "03:00"
+    timezone: "Europe/Berlin"
+    time: "03:00"
   #groups:
   #  cypress:
   #    applies-to: version-updates
@@ -111,6 +111,6 @@ updates:
   schedule:
     interval: daily
     #day: "saturday"
-    #timezone: "Europe/Berlin"
-    #time: "03:00"
+    timezone: "Europe/Berlin"
+    time: "03:00"
 
