@@ -173,8 +173,14 @@ export class TableResolver {
   @Authorized()
   @Query(() => [OpenTable])
   async openTables(@Ctx() context: Context): Promise<OpenTable[]> {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: context.user?.id,
+      },
+    })
+    if (!user) throw new Error('User not found!')
     const meetings = await getMeetings()
-    return openTablesFromOpenMeetings(meetings, context)
+    return openTablesFromOpenMeetings({ meetings, userId: user.id })
   }
 
   @Authorized()
@@ -364,11 +370,15 @@ export class TableResolver {
   })
   async updateOpenTables(
     @Root() meetings: MeetingInfo[],
-    @Ctx() context: Context,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     @Arg('username') username: string,
   ): Promise<OpenTable[]> {
-    return openTablesFromOpenMeetings(meetings, context)
+    const user = await prisma.user.findUnique({
+      where: {
+        username,
+      },
+    })
+    if (!user) throw new Error('User not found!')
+    return openTablesFromOpenMeetings({ meetings, userId: user.id })
   }
 
   /*
@@ -384,40 +394,44 @@ export class TableResolver {
   */
 }
 
-const openTablesFromOpenMeetings = async (
-  meetings: MeetingInfo[],
-  context: Context,
-): Promise<OpenTable[]> => {
-  if (meetings.length) {
-    const dbMeetings = await prisma.meeting.findMany({
-      where: {
-        meetingID: { in: meetings.map((m: MeetingInfo) => m.meetingID) },
-      },
-      select: {
-        id: true,
-        meetingID: true,
-        public: true,
-        users: true,
-      },
-    })
+type MeetingInfoUnionUser = {
+  meetings: MeetingInfo[]
+  userId: number
+}
 
-    const openTables: OpenTable[] = []
+const openTablesFromOpenMeetings = async (arg: MeetingInfoUnionUser): Promise<OpenTable[]> => {
+  if (!arg.meetings.length) return []
+  const dbMeetings = await prisma.meeting.findMany({
+    where: {
+      meetingID: { in: arg.meetings.map((m: MeetingInfo) => m.meetingID) },
+      OR: [
+        {
+          public: true,
+        },
+        {
+          users: {
+            some: {
+              userId: arg.userId,
+            },
+          },
+        },
+      ],
+    },
+    select: {
+      id: true,
+      meetingID: true,
+      public: true,
+      users: true,
+    },
+  })
 
-    const { user } = context
-    dbMeetings
-      .filter(
-        (meeting) =>
-          meeting.public ||
-          meeting.users.some((userInMeeting) => user?.id === userInMeeting.userId),
-      )
-      .forEach((ids) => {
-        const meeting = meetings.find((m) => ids.meetingID === m.meetingID)
-        if (meeting) openTables.push(new OpenTable(meeting, ids.id ? ids.id : 0))
-      })
-    return openTables
-  }
+  const openTables: OpenTable[] = []
 
-  return []
+  dbMeetings.forEach((ids) => {
+    const meeting = arg.meetings.find((m) => ids.meetingID === m.meetingID)
+    if (meeting) openTables.push(new OpenTable(meeting, ids.id ? ids.id : 0))
+  })
+  return openTables
 }
 
 const createUsersInMeetings = async (data: {
