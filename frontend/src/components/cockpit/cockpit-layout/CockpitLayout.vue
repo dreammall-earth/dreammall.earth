@@ -19,7 +19,7 @@
 
 @media #{map.get($display-breakpoints, 'md-and-up')} {
   .cockpit {
-    grid-template-columns: 380px 380px;
+    grid-template-columns: 400px 400px;
     max-width: 1200px;
   }
 }

@@ -3,7 +3,7 @@
     <v-card-text>
       {{ $t('paymentLink.subtitle') }}
     </v-card-text>
-    <v-btn href="/payment" color="primary" block border>
+    <v-btn href="/cockpit/payment" color="primary" block border>
       {{ $t('paymentLink.callToAction') }}
     </v-btn>
   </v-card>
