@@ -5,10 +5,8 @@ updates:
 - package-ecosystem: "github-actions"
   open-pull-requests-limit: 99
   directory: "/"
-  #rebase-strategy: "disabled"
   schedule:
-    interval: weekly
-    day: "saturday"
+    interval: daily
     timezone: "Europe/Berlin"
     time: "03:00"
 
@@ -20,10 +18,8 @@ updates:
     - "/frontend"
     - "/presenter"
     - "/tests"
-  #rebase-strategy: "disabled"
   schedule:
-    interval: weekly
-    day: "saturday"
+    interval: daily
     timezone: "Europe/Berlin"
     time: "03:00"
   #groups:
@@ -107,10 +103,8 @@ updates:
     - "/backend"
     - "/frontend"
     - "/presenter"
-  #rebase-strategy: "disabled"
   schedule:
-    interval: weekly
-    day: "saturday"
+    interval: daily
     timezone: "Europe/Berlin"
     time: "03:00"
 
