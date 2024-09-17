@@ -1533,7 +1533,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
             <a
               class="v-btn v-btn--block v-theme--light v-btn--border bg-primary v-btn--density-default v-btn--size-default v-btn--variant-elevated"
               data-v-f97d716a=""
-              href="/payment"
+              href="/cockpit/payment"
             >
               
               <span
