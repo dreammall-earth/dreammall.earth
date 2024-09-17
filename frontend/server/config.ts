@@ -12,7 +12,7 @@ const {
   PUBLIC_ENV__AUTH__SCOPE = 'openid profile posts',
 
   PUBLIC_ENV__ENDPOINTS__GRAPHQL_URI = 'http://localhost:4000/',
-  PUBLIC_ENV__ENDPOINTS__WEBSOCKET_URI = 'http://localhost:4000/subscriptions',
+  PUBLIC_ENV__ENDPOINTS__WEBSOCKET_URI = 'ws://localhost:4000/subscriptions',
 
   PUBLIC_ENV__META__BASE_URL = 'http://localhost:3000',
   PUBLIC_ENV__META__DEFAULT_AUTHOR = 'DreamMall Verlag GbR',
