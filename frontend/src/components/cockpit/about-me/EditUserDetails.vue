@@ -43,7 +43,9 @@
           :disabled="newDetail.text?.length === 0 || props.loading"
           class="submit rounded-circle"
         >
-          <v-icon icon="mdi mdi-plus"></v-icon>
+          <v-icon
+            :icon="newDetail.text?.length === 0 || props.loading ? 'mdi mdi-plus' : 'mdi mdi-check'"
+          ></v-icon>
         </button>
       </v-form>
       <!-- </div> -->
@@ -131,6 +133,7 @@ const removeDetail = (id: number) => {
 
   &:enabled {
     background: #23ad5b;
+    color: white;
   }
 }
 </style>
