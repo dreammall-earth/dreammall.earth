@@ -12,7 +12,7 @@ $font-color: #F5F5F5;
 $cockpit-highlight-color: #2ca5b1;
 $icon-background: rgb(61 71 83 / 85%);
 $bottom-menu-background: rgb(78 91 107 / 60%);
-$sidebar-background: rgb(61 71 83 / 90%);
+$sidebar-background: rgba(61, 71, 83, 0.6); // rgb(61 71 83 / 90%) for sidebar and the value of 0.6 for cockpit cards?
 $dropdown-background-color: #3D4753;
 $cockpit-input-background: rgb(93 102 112);
 $cockpit-element-background: rgb(93 102 112 / 55%);
