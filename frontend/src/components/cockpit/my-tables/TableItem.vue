@@ -39,7 +39,7 @@
         <v-icon icon="mdi mdi-account-plus-outline" />
         {{ $t('cockpit.myTables.invite') }}
       </OptionButton>
-      <OptionButton @click="shareTable">
+      <OptionButton disabled @click="shareTable">
         <v-icon icon="mdi mdi-share-variant-outline" />
         {{ $t('cockpit.myTables.share') }}
       </OptionButton>
