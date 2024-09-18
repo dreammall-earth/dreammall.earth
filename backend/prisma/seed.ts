@@ -27,7 +27,7 @@ const seedUsers = async () => {
         name: 'Räuber Hotzenplotz',
         referenceId: faker.string.alphanumeric({ length: 8, casing: 'upper', exclude: 'O' }),
       },
-      ...Array.from(new Array(100), () => ({
+      ...Array.from(new Array(891), () => ({
         name: faker.person.fullName(),
         username: faker.internet.userName(),
         referenceId: faker.string.alphanumeric({ length: 8, casing: 'upper', exclude: 'O' }),

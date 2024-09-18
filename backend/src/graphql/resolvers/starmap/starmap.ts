@@ -38,6 +38,7 @@ const fibonacci = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
 const sectors: Sector[] = []
 const starDistribution: StarDistribution[] = []
 const sectorsPerIteration: number[] = []
+const starInSector: number[] = []
 
 /*
 
@@ -277,47 +278,75 @@ export const getStarDistribution = (): StarDistribution[] => {
 }
 
 const getNextSectorIdx = (starsPlaced: number): number => {
-  // const sectorIterationLength = 4 + MAX_VERTICAL_SECTORS
+  if (starInSector[starsPlaced] || starInSector[starsPlaced] === 0) {
+    return starInSector[starsPlaced]
+  }
+
+  const pushAndReturn = (n: number): number => {
+    starInSector.push(n)
+    return n
+  }
+
+  if (starsPlaced === 0) {
+    return pushAndReturn(0)
+  }
+
   const starDistribution = getStarDistribution()
   const sectors = getSectors()
-  const iteration = starDistribution.findIndex((sD) => sD.starsPlacedInIteration > starsPlaced)
 
-  const difference = starDistribution[iteration].starsPlacedInIteration - starsPlaced
+  let iteration: number = 0
 
-  // const length = Math.min(sectorIterationLength, iteration + 1)
-  /*
-  console.log({
-    starsPlaced,
-    iteration,
-    difference,
-  })
-  */
-
-  if (difference === 0) {
-    return sectors.findLastIndex((s: Sector) => s.iteration === iteration + 1)
+  if (
+    (iteration = starDistribution.findIndex((sD) => sD.starsPlacedInIteration === starsPlaced)) > -1
+  ) {
+    return pushAndReturn(
+      sectors.findIndex(
+        (s: Sector) =>
+          s.iteration === starDistribution[iteration + 1].starsPlacedInSectorIteration.length,
+      ),
+    )
   }
 
-  let sectorIdx = 0
-  let starsAdded = 0
-  while (difference > starsAdded) {
-    starsAdded += starDistribution[iteration].starsPlacedInSectorIteration[sectorIdx]
-    sectorIdx++
-    /*
-    console.log({
-      sectorIdx,
-      starsAdded,
-    })
-    */
+  iteration = starDistribution.findIndex((sD) => sD.starsPlacedInIteration > starsPlaced)
+  const starsAddedInPreviousIterations =
+    iteration === 0 ? 0 : starDistribution[iteration - 1].starsPlacedInIteration
+
+  const starsToPlace = starsPlaced - starsAddedInPreviousIterations
+
+  let sectorIterationIdx = 0
+  let starsAddedInSectorIterations = 0
+  const { starsPlacedInSectorIteration } = starDistribution[iteration]
+  while (starsToPlace > starsAddedInSectorIterations) {
+    starsAddedInSectorIterations += starsPlacedInSectorIteration[sectorIterationIdx]
+    sectorIterationIdx++
   }
 
-  /*
-  console.log('result', (
-    sectors.findIndex((s) => s.iteration === sectorIdx) +
-      starsAdded - difference
-  ))
-  */
+  if (starsToPlace === starsAddedInSectorIterations) {
+    return pushAndReturn(
+      sectors.findIndex(
+        (s: Sector) => s.iteration === starsPlacedInSectorIteration.length - sectorIterationIdx,
+      ),
+    )
+  }
 
-  return sectors.findIndex((s) => s.iteration === sectorIdx) + starsAdded - difference
+  const f = fibonacci[sectorIterationIdx - 1]
+
+  if (f > 1) {
+    const starsPlacedInThisSectorIteration = starsPlacedInSectorIteration
+      .slice(0, sectorIterationIdx - 1)
+      .reduce((acc, curr) => acc + curr, 0)
+    const starsToPlcaeInThisSectorIteration = starsToPlace - starsPlacedInThisSectorIteration
+
+    const sectorsPerIteration =
+      getSectorsPerIteration()[starsPlacedInSectorIteration.length - sectorIterationIdx]
+
+    if (starsToPlcaeInThisSectorIteration % sectorsPerIteration === 0) {
+      return pushAndReturn(starInSector[starsPlaced - 1] - sectorsPerIteration + 1)
+    }
+    return pushAndReturn(starInSector[starsPlaced - 1] + 1)
+  }
+
+  return pushAndReturn(starInSector[starsPlaced - 1] + 1)
 }
 
 export const distributeStarsToSectorsRecursive = (
@@ -343,8 +372,12 @@ const addRandomStarToSector = (sectorIdx: number, stars: Star[]): Star => {
       altitudes.push(s.coordinates.altitude)
     })
 
-  const azimuthMaxIdx = getMaxDistance(azimuths)
-  const altitudeMaxIdx = getMaxDistance(altitudes)
+  const sortFn = (a: number, b: number): number => {
+    return a - b
+  }
+
+  const azimuthMaxIdx = getMaxDistance(azimuths.sort(sortFn))
+  const altitudeMaxIdx = getMaxDistance(altitudes.sort(sortFn))
 
   const azimuth = randomBetween(
     azimuths[azimuthMaxIdx] + DELTA_MIN,
@@ -363,46 +396,3 @@ const addRandomStarToSector = (sectorIdx: number, stars: Star[]): Star => {
     },
   }
 }
-
-/*
-
-type StarsInSector = {
-  sectorIdx: number
-  coordinates: Coordinates
-}
-
-export const randomStarsinSector = (sectorIdx: number, count: number): StarsInSector => {
-  const starsInSector: StarsInSector = {
-    sectorIdx,
-    stars: [],
-  }
-  const azimuths: number[] = [
-    sectors[sectorIdx].bottomLeft.azimuth,
-    sectors[sectorIdx].topRight.azimuth,
-  ]
-  const altitudes: number[] = [
-    sectors[sectorIdx].bottomLeft.altitude,
-    sectors[sectorIdx].topRight.altitude,
-  ]
-  for (let n = 0; n < count; n++) {
-    const azimuthMaxIdx = getMaxDistance(azimuths)
-    const altitudeMaxIdx = getMaxDistance(altitudes)
-    const azimuth = randomBetween(
-      azimuths[azimuthMaxIdx] + DELTA_MIN,
-      azimuths[azimuthMaxIdx + 1] - DELTA_MIN,
-    )
-    const altitude = randomBetween(
-      altitudes[altitudeMaxIdx] + DELTA_MIN,
-      altitudes[altitudeMaxIdx + 1] - DELTA_MIN,
-    )
-    starsInSector.stars.push({
-      azimuth,
-      altitude,
-    })
-    azimuths.splice(azimuthMaxIdx, 0, azimuth)
-    altitudes.splice(altitudeMaxIdx, 0, altitude)
-  }
-  return starsInSector
-}
-
-*/
