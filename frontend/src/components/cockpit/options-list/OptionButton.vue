@@ -1,6 +1,6 @@
 <template>
   <li class="item" :class="{ red }">
-    <button class="button" @click="$emit('click')">
+    <button class="button" :disabled="$props.disabled" @click="$emit('click')">
       <slot />
     </button>
   </li>
@@ -9,6 +9,7 @@
 <script lang="ts" setup>
 defineProps<{
   red?: boolean
+  disabled?: boolean
 }>()
 defineEmits(['click'])
 </script>
@@ -46,5 +47,10 @@ defineEmits(['click'])
   justify-content: center;
   width: 100%;
   height: 100%;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
 }
 </style>
