@@ -1,15 +1,15 @@
 import { mount } from '@vue/test-utils'
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import LightDarkSwitch from './LightDarkSwitch.vue'
+import UserDropdown from './UserDropdown.vue'
 
-describe('LightDarkSwitch', () => {
+describe('UserDropdown', () => {
   const Wrapper = () => {
     return mount(VApp, {
       slots: {
-        default: h(LightDarkSwitch as Component),
+        default: h(UserDropdown as Component),
       },
     })
   }
@@ -20,25 +20,24 @@ describe('LightDarkSwitch', () => {
     wrapper = Wrapper()
   })
 
+  afterEach(() => {
+    wrapper.unmount()
+  })
+
   it('renders', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 
-  it('has light theme as default', () => {
-    expect(wrapper.vm.theme.global.name.value).toBe('light')
-  })
-
-  // theme seems to be global and does not reset
-  describe('click button', () => {
+  describe('click dark button', () => {
     beforeEach(async () => {
-      await wrapper.find('button').trigger('click')
+      await wrapper.find('button[data-test-theme-switch').trigger('click')
     })
 
     it('changes to dark theme', () => {
       expect(wrapper.vm.theme.global.name.value).toBe('dark')
     })
 
-    describe('click buttom again', () => {
+    describe('click botton again', () => {
       it('changes to light theme', () => {
         expect(wrapper.vm.theme.global.name.value).toBe('light')
       })
