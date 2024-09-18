@@ -36,7 +36,7 @@
     <ModalPanel />
 
     <!-- Page Content Container -->
-    <v-container fluid class="page-container px-8">
+    <v-container fluid class="page-container px-8 text-font">
       <slot></slot>
     </v-container>
 
