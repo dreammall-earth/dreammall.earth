@@ -1,14 +1,18 @@
 <template>
   <ul class="details" :class="{ editable: props.editable }">
     <li v-for="detail in details" :key="detail.id">
-      <v-chip class="detail">
+      <v-chip class="detail border-thin">
         <v-icon
           :icon="detailCategoryToIcon(detail.category)"
           class="mr-2"
           color="cockpit-highlight"
         ></v-icon>
         {{ detail.text }}
-        <button v-if="props.editable && detail.id > 0" @click="$emit('remove-detail', detail.id)">
+        <button
+          v-if="props.editable && detail.id > 0"
+          class="pl-1"
+          @click="$emit('remove-detail', detail.id)"
+        >
           <v-icon icon="$close" />
         </button>
       </v-chip>
