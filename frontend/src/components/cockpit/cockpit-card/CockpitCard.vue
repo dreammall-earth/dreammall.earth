@@ -32,10 +32,10 @@ const slots = useSlots()
 }
 
 .header {
-  height: 28px;
   display: flex;
   flex-flow: column;
   justify-content: center;
+  height: 28px;
   text-wrap: nowrap;
 }
 

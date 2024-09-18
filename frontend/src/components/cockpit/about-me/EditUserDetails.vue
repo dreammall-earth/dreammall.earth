@@ -140,8 +140,8 @@ const removeDetail = (id: number) => {
   background: var(--v-cockpit-input-background);
 
   &:enabled {
-    background: #23ad5b;
     color: white;
+    background: #23ad5b;
   }
 }
 </style>
