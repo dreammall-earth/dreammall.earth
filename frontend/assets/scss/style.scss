@@ -1,0 +1,27 @@
+$font-family-default: 'Helvetica', sans-serif;
+
+@forward 'vuetify/settings' with (
+  $body-font-family: $font-family-default,
+  $borders: (
+    0: 0,
+    null: thin,
+    thin: thin,
+    sm: .953px,
+    md: 2px,
+    lg: 4px,
+    xl: 8px
+  ),
+);
+@import './imports/_config';
+@import './imports/_fonts';
+@import './imports/_typo';
+@import './imports/_mixins';
+
+:root {
+  --menu-icon-height: 44px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

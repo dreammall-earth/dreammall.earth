@@ -1,0 +1,1622 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`AboutMeView > renders 1`] = `
+<section
+  class="cockpit-card"
+  data-v-3bd38464=""
+  data-v-7779afd2=""
+  editable="false"
+>
+  <!--v-if-->
+  <!--v-if-->
+  
+  <div
+    class="header mb-2"
+    data-v-3bd38464=""
+  >
+    <div
+      class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font"
+      data-v-3bd38464=""
+      style="width: 90px; height: 90px;"
+    >
+      
+      
+      <div
+        class="v-responsive v-img v-img--booting"
+        data-v-3bd38464=""
+      >
+        <div
+          class="v-responsive__sizer"
+        />
+        
+        
+        <!---->
+        <transition-stub
+          appear="false"
+          css="true"
+          name="fade-transition"
+          persisted="false"
+        >
+          <!---->
+        </transition-stub>
+        <!---->
+        <!---->
+        <!---->
+        
+        
+        <!---->
+      </div>
+      
+      
+      
+      <!---->
+      <span
+        class="v-avatar__underlay"
+      />
+      
+    </div>
+    <div
+      class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-input--dirty v-text-field v-select v-select--single v-select--selected v-select--selection-slot availability"
+      data-v-3bd38464=""
+    >
+      <!---->
+      <div
+        class="v-input__control"
+      >
+        
+        <div
+          class="v-field v-field--active v-field--appended v-field--center-affix v-field--dirty v-field--flat v-field--no-label v-field--variant-filled v-theme--light v-locale--is-ltr"
+          role="combobox"
+        >
+          <div
+            class="v-field__overlay"
+          />
+          <div
+            class="v-field__loader"
+          >
+            <div
+              aria-hidden="true"
+              aria-valuemax="100"
+              aria-valuemin="0"
+              class="v-progress-linear v-theme--light v-locale--is-ltr"
+              role="progressbar"
+              style="top: 0px; height: 0px; --v-progress-linear-height: 2px;"
+            >
+              <!---->
+              <div
+                class="v-progress-linear__background"
+                style="opacity: NaN;"
+              />
+              <div
+                class="v-progress-linear__buffer"
+                style="opacity: NaN; width: 0%;"
+              />
+              <transition-stub
+                appear="false"
+                css="true"
+                name="fade-transition"
+                persisted="false"
+              >
+                <div
+                  class="v-progress-linear__indeterminate"
+                >
+                  
+                  <div
+                    class="v-progress-linear__indeterminate long"
+                  />
+                  <div
+                    class="v-progress-linear__indeterminate short"
+                  />
+                  
+                </div>
+              </transition-stub>
+              <!---->
+            </div>
+          </div>
+          <!---->
+          <div
+            class="v-field__field"
+            data-no-activator=""
+          >
+            <!---->
+            <label
+              class="v-label v-field-label"
+              for="input-0"
+            >
+              <!---->
+              
+              <!---->
+              
+            </label>
+            
+            
+            <!---->
+            <div
+              class="v-field__input"
+              data-no-activator=""
+            >
+              
+              
+              
+              <!---->
+              <!---->
+              
+              
+              <div
+                class="v-select__selection"
+              >
+                
+                🟢 Available to work
+                
+              </div>
+              
+              
+              
+              <input
+                aria-describedby="input-0-messages"
+                aria-label="Öffnen"
+                id="input-0"
+                inputmode="none"
+                round=""
+                size="1"
+                title="Öffnen"
+                type="text"
+                value="available"
+              />
+            </div>
+            <!---->
+            
+            
+          </div>
+          <!---->
+          <div
+            class="v-field__append-inner"
+          >
+            
+            
+            <!---->
+            <i
+              aria-hidden="true"
+              class="mdi-menu-down mdi v-icon notranslate v-theme--light v-icon--size-default v-select__menu-icon"
+            />
+            
+            
+            <!---->
+          </div>
+          <div
+            class="v-field__outline"
+          >
+            <!---->
+            <!---->
+          </div>
+        </div>
+        
+      </div>
+      <!---->
+      <div
+        class="v-input__details"
+      >
+        <transition-group-stub
+          appear="false"
+          aria-live="polite"
+          class="v-messages"
+          css="true"
+          id="input-0-messages"
+          name="slide-y-transition"
+          persisted="false"
+          role="alert"
+          tag="div"
+        >
+          <!---->
+        </transition-group-stub>
+        <!---->
+      </div>
+    </div>
+    
+    <button
+      class="name"
+      data-v-3bd38464=""
+    >
+      name 
+      <i
+        aria-hidden="true"
+        class="mdi mdi-pencil-outline mdi v-icon notranslate v-theme--light v-icon--size-default"
+        data-v-3bd38464=""
+      />
+    </button>
+    <button
+      class="introduction"
+      data-v-3bd38464=""
+    >
+      Meine Kurzvorstellung
+    </button>
+    
+  </div>
+  <button
+    data-v-3bd38464=""
+  >
+    <ul
+      class="details"
+      data-v-3bd38464=""
+      data-v-f9dbb6f1=""
+    >
+      
+      <li
+        data-v-f9dbb6f1=""
+      >
+        <span
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          data-v-f9dbb6f1=""
+          draggable="false"
+        >
+          
+          <!---->
+          <span
+            class="v-chip__underlay"
+          />
+          
+          <!---->
+          <!---->
+          <div
+            class="v-chip__content"
+            data-no-activator=""
+          >
+            
+            <i
+              aria-hidden="true"
+              class="mdi mdi-school-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+              data-v-f9dbb6f1=""
+            />
+             I am a student 
+            <!--v-if-->
+            
+          </div>
+          <!---->
+          <!---->
+        </span>
+      </li>
+      <li
+        data-v-f9dbb6f1=""
+      >
+        <span
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          data-v-f9dbb6f1=""
+          draggable="false"
+        >
+          
+          <!---->
+          <span
+            class="v-chip__underlay"
+          />
+          
+          <!---->
+          <!---->
+          <div
+            class="v-chip__content"
+            data-no-activator=""
+          >
+            
+            <i
+              aria-hidden="true"
+              class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+              data-v-f9dbb6f1=""
+            />
+             I am a worker 
+            <!--v-if-->
+            
+          </div>
+          <!---->
+          <!---->
+        </span>
+      </li>
+      <li
+        data-v-f9dbb6f1=""
+      >
+        <span
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          data-v-f9dbb6f1=""
+          draggable="false"
+        >
+          
+          <!---->
+          <span
+            class="v-chip__underlay"
+          />
+          
+          <!---->
+          <!---->
+          <div
+            class="v-chip__content"
+            data-no-activator=""
+          >
+            
+            <i
+              aria-hidden="true"
+              class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+              data-v-f9dbb6f1=""
+            />
+             I really like my job 
+            <!--v-if-->
+            
+          </div>
+          <!---->
+          <!---->
+        </span>
+      </li>
+      <li
+        data-v-f9dbb6f1=""
+      >
+        <span
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          data-v-f9dbb6f1=""
+          draggable="false"
+        >
+          
+          <!---->
+          <span
+            class="v-chip__underlay"
+          />
+          
+          <!---->
+          <!---->
+          <div
+            class="v-chip__content"
+            data-no-activator=""
+          >
+            
+            <i
+              aria-hidden="true"
+              class="mdi mdi-web mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+              data-v-f9dbb6f1=""
+            />
+             English 
+            <!--v-if-->
+            
+          </div>
+          <!---->
+          <!---->
+        </span>
+      </li>
+      <li
+        data-v-f9dbb6f1=""
+      >
+        <span
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          data-v-f9dbb6f1=""
+          draggable="false"
+        >
+          
+          <!---->
+          <span
+            class="v-chip__underlay"
+          />
+          
+          <!---->
+          <!---->
+          <div
+            class="v-chip__content"
+            data-no-activator=""
+          >
+            
+            <i
+              aria-hidden="true"
+              class="mdi mdi-map-marker-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+              data-v-f9dbb6f1=""
+            />
+             Berlin 
+            <!--v-if-->
+            
+          </div>
+          <!---->
+          <!---->
+        </span>
+      </li>
+      <li
+        data-v-f9dbb6f1=""
+      >
+        <span
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          data-v-f9dbb6f1=""
+          draggable="false"
+        >
+          
+          <!---->
+          <span
+            class="v-chip__underlay"
+          />
+          
+          <!---->
+          <!---->
+          <div
+            class="v-chip__content"
+            data-no-activator=""
+          >
+            
+            <i
+              aria-hidden="true"
+              class="mdi mdi-emoticon-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+              data-v-f9dbb6f1=""
+            />
+             Yeah! 
+            <!--v-if-->
+            
+          </div>
+          <!---->
+          <!---->
+        </span>
+      </li>
+      
+    </ul>
+  </button>
+  <button
+    class="social"
+    data-v-3bd38464=""
+  >
+    <i
+      aria-hidden="true"
+      class="mdi mdi-share-variant-outline mdi v-icon notranslate v-theme--light v-icon--size-default mr-2"
+      data-v-3bd38464=""
+    />
+    <ul
+      class="social-list"
+      data-v-3bd38464=""
+    >
+      
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-instagram mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-facebook mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-linkedin mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-x mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-xing mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-discord mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-telegram mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-snapchat mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-reddit mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-whatsapp mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-pintarest mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-linkedin mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      
+    </ul>
+  </button>
+  
+</section>
+`;
+
+exports[`AboutMeView > renders initials 1`] = `
+<section
+  class="cockpit-card"
+  data-v-3bd38464=""
+  data-v-7779afd2=""
+  editable="false"
+>
+  <!--v-if-->
+  <!--v-if-->
+  
+  <div
+    class="header mb-2"
+    data-v-3bd38464=""
+  >
+    <div
+      class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font"
+      data-v-3bd38464=""
+      style="width: 90px; height: 90px;"
+    >
+      
+      
+      <div
+        class="v-responsive v-img v-img--booting"
+        data-v-3bd38464=""
+      >
+        <div
+          class="v-responsive__sizer"
+        />
+        
+        
+        <!---->
+        <transition-stub
+          appear="false"
+          css="true"
+          name="fade-transition"
+          persisted="false"
+        >
+          <!---->
+        </transition-stub>
+        <!---->
+        <!---->
+        <!---->
+        
+        
+        <!---->
+      </div>
+      
+      
+      
+      <!---->
+      <span
+        class="v-avatar__underlay"
+      />
+      
+    </div>
+    <div
+      class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-input--dirty v-text-field v-select v-select--single v-select--selected v-select--selection-slot availability"
+      data-v-3bd38464=""
+    >
+      <!---->
+      <div
+        class="v-input__control"
+      >
+        
+        <div
+          class="v-field v-field--active v-field--appended v-field--center-affix v-field--dirty v-field--flat v-field--no-label v-field--variant-filled v-theme--light v-locale--is-ltr"
+          role="combobox"
+        >
+          <div
+            class="v-field__overlay"
+          />
+          <div
+            class="v-field__loader"
+          >
+            <div
+              aria-hidden="true"
+              aria-valuemax="100"
+              aria-valuemin="0"
+              class="v-progress-linear v-theme--light v-locale--is-ltr"
+              role="progressbar"
+              style="top: 0px; height: 0px; --v-progress-linear-height: 2px;"
+            >
+              <!---->
+              <div
+                class="v-progress-linear__background"
+                style="opacity: NaN;"
+              />
+              <div
+                class="v-progress-linear__buffer"
+                style="opacity: NaN; width: 0%;"
+              />
+              <transition-stub
+                appear="false"
+                css="true"
+                name="fade-transition"
+                persisted="false"
+              >
+                <div
+                  class="v-progress-linear__indeterminate"
+                >
+                  
+                  <div
+                    class="v-progress-linear__indeterminate long"
+                  />
+                  <div
+                    class="v-progress-linear__indeterminate short"
+                  />
+                  
+                </div>
+              </transition-stub>
+              <!---->
+            </div>
+          </div>
+          <!---->
+          <div
+            class="v-field__field"
+            data-no-activator=""
+          >
+            <!---->
+            <label
+              class="v-label v-field-label"
+              for="input-0"
+            >
+              <!---->
+              
+              <!---->
+              
+            </label>
+            
+            
+            <!---->
+            <div
+              class="v-field__input"
+              data-no-activator=""
+            >
+              
+              
+              
+              <!---->
+              <!---->
+              
+              
+              <div
+                class="v-select__selection"
+              >
+                
+                🟢 Available to work
+                
+              </div>
+              
+              
+              
+              <input
+                aria-describedby="input-0-messages"
+                aria-label="Öffnen"
+                id="input-0"
+                inputmode="none"
+                round=""
+                size="1"
+                title="Öffnen"
+                type="text"
+                value="available"
+              />
+            </div>
+            <!---->
+            
+            
+          </div>
+          <!---->
+          <div
+            class="v-field__append-inner"
+          >
+            
+            
+            <!---->
+            <i
+              aria-hidden="true"
+              class="mdi-menu-down mdi v-icon notranslate v-theme--light v-icon--size-default v-select__menu-icon"
+            />
+            
+            
+            <!---->
+          </div>
+          <div
+            class="v-field__outline"
+          >
+            <!---->
+            <!---->
+          </div>
+        </div>
+        
+      </div>
+      <!---->
+      <div
+        class="v-input__details"
+      >
+        <transition-group-stub
+          appear="false"
+          aria-live="polite"
+          class="v-messages"
+          css="true"
+          id="input-0-messages"
+          name="slide-y-transition"
+          persisted="false"
+          role="alert"
+          tag="div"
+        >
+          <!---->
+        </transition-group-stub>
+        <!---->
+      </div>
+    </div>
+    
+    <button
+      class="name"
+      data-v-3bd38464=""
+    >
+      name 
+      <i
+        aria-hidden="true"
+        class="mdi mdi-pencil-outline mdi v-icon notranslate v-theme--light v-icon--size-default"
+        data-v-3bd38464=""
+      />
+    </button>
+    <button
+      class="introduction"
+      data-v-3bd38464=""
+    >
+      Meine Kurzvorstellung
+    </button>
+    
+  </div>
+  <button
+    data-v-3bd38464=""
+  >
+    <ul
+      class="details"
+      data-v-3bd38464=""
+      data-v-f9dbb6f1=""
+    >
+      
+      <li
+        data-v-f9dbb6f1=""
+      >
+        <span
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          data-v-f9dbb6f1=""
+          draggable="false"
+        >
+          
+          <!---->
+          <span
+            class="v-chip__underlay"
+          />
+          
+          <!---->
+          <!---->
+          <div
+            class="v-chip__content"
+            data-no-activator=""
+          >
+            
+            <i
+              aria-hidden="true"
+              class="mdi mdi-school-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+              data-v-f9dbb6f1=""
+            />
+             I am a student 
+            <!--v-if-->
+            
+          </div>
+          <!---->
+          <!---->
+        </span>
+      </li>
+      <li
+        data-v-f9dbb6f1=""
+      >
+        <span
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          data-v-f9dbb6f1=""
+          draggable="false"
+        >
+          
+          <!---->
+          <span
+            class="v-chip__underlay"
+          />
+          
+          <!---->
+          <!---->
+          <div
+            class="v-chip__content"
+            data-no-activator=""
+          >
+            
+            <i
+              aria-hidden="true"
+              class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+              data-v-f9dbb6f1=""
+            />
+             I am a worker 
+            <!--v-if-->
+            
+          </div>
+          <!---->
+          <!---->
+        </span>
+      </li>
+      <li
+        data-v-f9dbb6f1=""
+      >
+        <span
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          data-v-f9dbb6f1=""
+          draggable="false"
+        >
+          
+          <!---->
+          <span
+            class="v-chip__underlay"
+          />
+          
+          <!---->
+          <!---->
+          <div
+            class="v-chip__content"
+            data-no-activator=""
+          >
+            
+            <i
+              aria-hidden="true"
+              class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+              data-v-f9dbb6f1=""
+            />
+             I really like my job 
+            <!--v-if-->
+            
+          </div>
+          <!---->
+          <!---->
+        </span>
+      </li>
+      <li
+        data-v-f9dbb6f1=""
+      >
+        <span
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          data-v-f9dbb6f1=""
+          draggable="false"
+        >
+          
+          <!---->
+          <span
+            class="v-chip__underlay"
+          />
+          
+          <!---->
+          <!---->
+          <div
+            class="v-chip__content"
+            data-no-activator=""
+          >
+            
+            <i
+              aria-hidden="true"
+              class="mdi mdi-web mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+              data-v-f9dbb6f1=""
+            />
+             English 
+            <!--v-if-->
+            
+          </div>
+          <!---->
+          <!---->
+        </span>
+      </li>
+      <li
+        data-v-f9dbb6f1=""
+      >
+        <span
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          data-v-f9dbb6f1=""
+          draggable="false"
+        >
+          
+          <!---->
+          <span
+            class="v-chip__underlay"
+          />
+          
+          <!---->
+          <!---->
+          <div
+            class="v-chip__content"
+            data-no-activator=""
+          >
+            
+            <i
+              aria-hidden="true"
+              class="mdi mdi-map-marker-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+              data-v-f9dbb6f1=""
+            />
+             Berlin 
+            <!--v-if-->
+            
+          </div>
+          <!---->
+          <!---->
+        </span>
+      </li>
+      <li
+        data-v-f9dbb6f1=""
+      >
+        <span
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          data-v-f9dbb6f1=""
+          draggable="false"
+        >
+          
+          <!---->
+          <span
+            class="v-chip__underlay"
+          />
+          
+          <!---->
+          <!---->
+          <div
+            class="v-chip__content"
+            data-no-activator=""
+          >
+            
+            <i
+              aria-hidden="true"
+              class="mdi mdi-emoticon-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+              data-v-f9dbb6f1=""
+            />
+             Yeah! 
+            <!--v-if-->
+            
+          </div>
+          <!---->
+          <!---->
+        </span>
+      </li>
+      
+    </ul>
+  </button>
+  <button
+    class="social"
+    data-v-3bd38464=""
+  >
+    <i
+      aria-hidden="true"
+      class="mdi mdi-share-variant-outline mdi v-icon notranslate v-theme--light v-icon--size-default mr-2"
+      data-v-3bd38464=""
+    />
+    <ul
+      class="social-list"
+      data-v-3bd38464=""
+    >
+      
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-instagram mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-facebook mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-linkedin mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-x mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-xing mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-discord mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-telegram mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-snapchat mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-reddit mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-whatsapp mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-pintarest mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      <li
+        data-v-3bd38464=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi-linkedin mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-3bd38464=""
+        />
+      </li>
+      
+    </ul>
+  </button>
+  
+</section>
+`;
+
+exports[`AboutMeView > renders without social media accounts 1`] = `
+<section
+  class="cockpit-card"
+  data-v-3bd38464=""
+  data-v-7779afd2=""
+  editable="false"
+>
+  <!--v-if-->
+  <!--v-if-->
+  
+  <div
+    class="header mb-2"
+    data-v-3bd38464=""
+  >
+    <div
+      class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font"
+      data-v-3bd38464=""
+      style="width: 90px; height: 90px;"
+    >
+      
+      
+      <div
+        class="v-responsive v-img v-img--booting"
+        data-v-3bd38464=""
+      >
+        <div
+          class="v-responsive__sizer"
+        />
+        
+        
+        <!---->
+        <transition-stub
+          appear="false"
+          css="true"
+          name="fade-transition"
+          persisted="false"
+        >
+          <!---->
+        </transition-stub>
+        <!---->
+        <!---->
+        <!---->
+        
+        
+        <!---->
+      </div>
+      
+      
+      
+      <!---->
+      <span
+        class="v-avatar__underlay"
+      />
+      
+    </div>
+    <div
+      class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-input--dirty v-text-field v-select v-select--single v-select--selected v-select--selection-slot availability"
+      data-v-3bd38464=""
+    >
+      <!---->
+      <div
+        class="v-input__control"
+      >
+        
+        <div
+          class="v-field v-field--active v-field--appended v-field--center-affix v-field--dirty v-field--flat v-field--no-label v-field--variant-filled v-theme--light v-locale--is-ltr"
+          role="combobox"
+        >
+          <div
+            class="v-field__overlay"
+          />
+          <div
+            class="v-field__loader"
+          >
+            <div
+              aria-hidden="true"
+              aria-valuemax="100"
+              aria-valuemin="0"
+              class="v-progress-linear v-theme--light v-locale--is-ltr"
+              role="progressbar"
+              style="top: 0px; height: 0px; --v-progress-linear-height: 2px;"
+            >
+              <!---->
+              <div
+                class="v-progress-linear__background"
+                style="opacity: NaN;"
+              />
+              <div
+                class="v-progress-linear__buffer"
+                style="opacity: NaN; width: 0%;"
+              />
+              <transition-stub
+                appear="false"
+                css="true"
+                name="fade-transition"
+                persisted="false"
+              >
+                <div
+                  class="v-progress-linear__indeterminate"
+                >
+                  
+                  <div
+                    class="v-progress-linear__indeterminate long"
+                  />
+                  <div
+                    class="v-progress-linear__indeterminate short"
+                  />
+                  
+                </div>
+              </transition-stub>
+              <!---->
+            </div>
+          </div>
+          <!---->
+          <div
+            class="v-field__field"
+            data-no-activator=""
+          >
+            <!---->
+            <label
+              class="v-label v-field-label"
+              for="input-0"
+            >
+              <!---->
+              
+              <!---->
+              
+            </label>
+            
+            
+            <!---->
+            <div
+              class="v-field__input"
+              data-no-activator=""
+            >
+              
+              
+              
+              <!---->
+              <!---->
+              
+              
+              <div
+                class="v-select__selection"
+              >
+                
+                🟢 Available to work
+                
+              </div>
+              
+              
+              
+              <input
+                aria-describedby="input-0-messages"
+                aria-label="Öffnen"
+                id="input-0"
+                inputmode="none"
+                round=""
+                size="1"
+                title="Öffnen"
+                type="text"
+                value="available"
+              />
+            </div>
+            <!---->
+            
+            
+          </div>
+          <!---->
+          <div
+            class="v-field__append-inner"
+          >
+            
+            
+            <!---->
+            <i
+              aria-hidden="true"
+              class="mdi-menu-down mdi v-icon notranslate v-theme--light v-icon--size-default v-select__menu-icon"
+            />
+            
+            
+            <!---->
+          </div>
+          <div
+            class="v-field__outline"
+          >
+            <!---->
+            <!---->
+          </div>
+        </div>
+        
+      </div>
+      <!---->
+      <div
+        class="v-input__details"
+      >
+        <transition-group-stub
+          appear="false"
+          aria-live="polite"
+          class="v-messages"
+          css="true"
+          id="input-0-messages"
+          name="slide-y-transition"
+          persisted="false"
+          role="alert"
+          tag="div"
+        >
+          <!---->
+        </transition-group-stub>
+        <!---->
+      </div>
+    </div>
+    
+    <button
+      class="name"
+      data-v-3bd38464=""
+    >
+      name 
+      <i
+        aria-hidden="true"
+        class="mdi mdi-pencil-outline mdi v-icon notranslate v-theme--light v-icon--size-default"
+        data-v-3bd38464=""
+      />
+    </button>
+    <button
+      class="introduction"
+      data-v-3bd38464=""
+    >
+      Meine Kurzvorstellung
+    </button>
+    
+  </div>
+  <button
+    data-v-3bd38464=""
+  >
+    <ul
+      class="details"
+      data-v-3bd38464=""
+      data-v-f9dbb6f1=""
+    >
+      
+      <li
+        data-v-f9dbb6f1=""
+      >
+        <span
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          data-v-f9dbb6f1=""
+          draggable="false"
+        >
+          
+          <!---->
+          <span
+            class="v-chip__underlay"
+          />
+          
+          <!---->
+          <!---->
+          <div
+            class="v-chip__content"
+            data-no-activator=""
+          >
+            
+            <i
+              aria-hidden="true"
+              class="mdi mdi-school-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+              data-v-f9dbb6f1=""
+            />
+             I am a student 
+            <!--v-if-->
+            
+          </div>
+          <!---->
+          <!---->
+        </span>
+      </li>
+      <li
+        data-v-f9dbb6f1=""
+      >
+        <span
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          data-v-f9dbb6f1=""
+          draggable="false"
+        >
+          
+          <!---->
+          <span
+            class="v-chip__underlay"
+          />
+          
+          <!---->
+          <!---->
+          <div
+            class="v-chip__content"
+            data-no-activator=""
+          >
+            
+            <i
+              aria-hidden="true"
+              class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+              data-v-f9dbb6f1=""
+            />
+             I am a worker 
+            <!--v-if-->
+            
+          </div>
+          <!---->
+          <!---->
+        </span>
+      </li>
+      <li
+        data-v-f9dbb6f1=""
+      >
+        <span
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          data-v-f9dbb6f1=""
+          draggable="false"
+        >
+          
+          <!---->
+          <span
+            class="v-chip__underlay"
+          />
+          
+          <!---->
+          <!---->
+          <div
+            class="v-chip__content"
+            data-no-activator=""
+          >
+            
+            <i
+              aria-hidden="true"
+              class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+              data-v-f9dbb6f1=""
+            />
+             I really like my job 
+            <!--v-if-->
+            
+          </div>
+          <!---->
+          <!---->
+        </span>
+      </li>
+      <li
+        data-v-f9dbb6f1=""
+      >
+        <span
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          data-v-f9dbb6f1=""
+          draggable="false"
+        >
+          
+          <!---->
+          <span
+            class="v-chip__underlay"
+          />
+          
+          <!---->
+          <!---->
+          <div
+            class="v-chip__content"
+            data-no-activator=""
+          >
+            
+            <i
+              aria-hidden="true"
+              class="mdi mdi-web mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+              data-v-f9dbb6f1=""
+            />
+             English 
+            <!--v-if-->
+            
+          </div>
+          <!---->
+          <!---->
+        </span>
+      </li>
+      <li
+        data-v-f9dbb6f1=""
+      >
+        <span
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          data-v-f9dbb6f1=""
+          draggable="false"
+        >
+          
+          <!---->
+          <span
+            class="v-chip__underlay"
+          />
+          
+          <!---->
+          <!---->
+          <div
+            class="v-chip__content"
+            data-no-activator=""
+          >
+            
+            <i
+              aria-hidden="true"
+              class="mdi mdi-map-marker-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+              data-v-f9dbb6f1=""
+            />
+             Berlin 
+            <!--v-if-->
+            
+          </div>
+          <!---->
+          <!---->
+        </span>
+      </li>
+      <li
+        data-v-f9dbb6f1=""
+      >
+        <span
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          data-v-f9dbb6f1=""
+          draggable="false"
+        >
+          
+          <!---->
+          <span
+            class="v-chip__underlay"
+          />
+          
+          <!---->
+          <!---->
+          <div
+            class="v-chip__content"
+            data-no-activator=""
+          >
+            
+            <i
+              aria-hidden="true"
+              class="mdi mdi-emoticon-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
+              data-v-f9dbb6f1=""
+            />
+             Yeah! 
+            <!--v-if-->
+            
+          </div>
+          <!---->
+          <!---->
+        </span>
+      </li>
+      
+    </ul>
+  </button>
+  <button
+    class="social"
+    data-v-3bd38464=""
+  >
+    <i
+      aria-hidden="true"
+      class="mdi mdi-share-variant-outline mdi v-icon notranslate v-theme--light v-icon--size-default mr-2"
+      data-v-3bd38464=""
+    />
+    <span
+      data-v-3bd38464=""
+    >
+      $t('cockpit.about-me.empty-social-media')
+    </span>
+  </button>
+  
+</section>
+`;

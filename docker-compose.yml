@@ -19,18 +19,6 @@ services:
     volumes:
       - db_vol:/var/lib/mysql
 
-  presenter:
-    image: ghcr.io/dreammall-earth/dreammall.earth/presenter:${IMAGE_TAG:-latest}
-    build:
-      context: ./presenter
-      target: production
-    ports:
-      - 3001:3000
-    environment:
-      - NODE_ENV=production
-      - PUBLIC_ENV__SIGNUP_URI=http://localhost:9000/if/flow/dreammallearth-enrollment/
-      - PUBLIC_ENV__SIGNIN_URI="http://localhost:3000/signin"
-
   frontend:
     image: ghcr.io/dreammall-earth/dreammall.earth/frontend:${IMAGE_TAG:-latest}
     build:

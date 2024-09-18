@@ -2,7 +2,7 @@
 export default {
   clientRouting: true,
   prefetchStaticAssets: 'viewport',
-  passToClient: ['pageProps', 'publicEnv', /* 'urlPathname', */ 'routeParams'],
+  passToClient: ['pageProps', 'publicEnv', /* 'urlPathname', */ 'routeParams', 'locale'],
   meta: {
     title: {
       // Make the value of `title` available on both the server- and client-side

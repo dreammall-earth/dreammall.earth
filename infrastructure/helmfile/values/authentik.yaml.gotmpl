@@ -27,11 +27,6 @@ worker:
         configMapKeyRef:
           name: dreammall
           key: frontend_url
-    - name: DREAMMALL_PRESENTER_URL
-      valueFrom:
-        configMapKeyRef:
-          name: dreammall
-          key: presenter_url
     - name: AUTHENTIK_BOOTSTRAP_PASSWORD
       valueFrom:
         secretKeyRef:

@@ -2,7 +2,7 @@ version: 1
 metadata:
   name: Invalidation flow
 context:
-  redirect_url: !Env [DREAMMALL_PRESENTER_URL, "http://localhost:3001"]
+  redirect_url: !Env [DREAMMALL_FRONTEND_URL, "http://localhost:3000"]
 entries:
 - attrs:
     authentication: none

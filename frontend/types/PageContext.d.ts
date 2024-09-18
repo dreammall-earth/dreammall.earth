@@ -1,7 +1,7 @@
 import { Page } from '#types/Page'
 import { PageProps } from '#types/PageProps'
 
-import type { publicEnv } from '#root/server/config'
+import type { publicEnv } from '#server/config'
 
 declare global {
   namespace Vike {
@@ -15,6 +15,7 @@ declare global {
       Page: Page
       pageProps?: PageProps
       hasToken: boolean
+      locale?: LocaleCode
     }
   }
 }

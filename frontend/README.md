@@ -16,7 +16,7 @@
 
 The Dreammall frontend.
 
-![](src/assets/dreammall-logo.svg)
+![](assets/dreammall-logo.svg)
 
 ## Requirements & Technology
 

@@ -1,0 +1,355 @@
+{
+  "about": {},
+  "auth": {
+    "content": "Logging in...",
+    "signin": "Signing In",
+    "title": "DreamMall {'|'} Authentication"
+  },
+  "buttons": {
+    "newProject": "New Project",
+    "newTable": "New Table",
+    "signout": "Sign Out",
+    "toAssistant": "Assistant",
+    "toTable": "To the meeting"
+  },
+  "cafe": {
+    "welcome": "World Cafe"
+  },
+  "cockpit": {
+    "about-me": {
+      "edit": {
+        "add": "Add",
+        "social-media": "Social Media",
+        "title": "About me"
+      },
+      "education-placeholder": "My education",
+      "empty-social-media": "Add Social Media",
+      "feeling-placeholder": "How I feel today",
+      "introduction-placeholder": "My introduction line",
+      "language-placeholder": "Languages I speak",
+      "place-placeholder": "My location",
+      "work-placeholder": "My work"
+    },
+    "myTables": {
+      "addTable": "Add table",
+      "changeModerators": {
+        "title": "Change Moderators",
+        "update": "Save"
+      },
+      "createTable": {
+        "chooseModerators": "Choose your co-moderators.",
+        "tableCreated": "Your table was created.",
+        "visionIntoReality": "Your vision turns into reality. Let's take the first step together."
+      },
+      "delete": "Delete",
+      "deleteConfirmation": "Are you sure you want to delete this table?",
+      "edit": "Edit",
+      "editTable": {
+        "title": "Edit Table",
+        "update": "Save"
+      },
+      "header": "My Tables",
+      "invite": "Invite",
+      "memberCount": "{count} members",
+      "moderatorCount": "{count} moderators",
+      "noTables": "No group tables so far",
+      "share": "Share"
+    }
+  },
+  "dataProtection": {
+    "euDispute": {
+      "content": "The European Commission provides a platform for online dispute resolution (OS): https://ec.europa.eu/consumers/odr/. You can find our e-mail address in the legal notice.",
+      "headline": "EU dispute settlement"
+    },
+    "general": {
+      "city": "Kempten",
+      "company": "DreamMall Verlag GbR",
+      "headline": "General notice and mandatory information",
+      "infoEnd": "The controller decides alone or jointly with others on the purposes and means of processing personal data (e.g. names, contact details, etc.).",
+      "infoStart": "The controller responsible for data processing on this website is:",
+      "person": "Sabine Laudien & Claudia Siebert",
+      "street": "Rosenau 15",
+      "zip": "DE-87437"
+    },
+    "headline": "Privacy policy",
+    "processing": {
+      "content": "The use of our website is generally possible without providing personal data. If personal data (e.g. name, address or e-mail addresses) is collected on our website, this is always done on a voluntary basis as far as possible. This data may be passed on to third parties as part of the fulfillment of the service offered. We would like to point out that data transmission over the Internet (e.g. when communicating by e-mail) may be subject to security vulnerabilities. Complete protection of data against access by third parties is not possible.",
+      "headline": "Consent to the processing of data"
+    },
+    "revocation": {
+      "content": "Some data processing operations are only possible with your express consent. You can withdraw your consent at any time. An informal notification by e-mail is sufficient for the revocation. The legality of the data processing carried out until the revocation remains unaffected by the revocation.",
+      "headline": "Withdrawal of your consent to data processing"
+    },
+    "title": "DreamMall {'|'} Privacy Policy"
+  },
+  "dream-mall-panel": {
+    "call": {
+      "add-user": "Add",
+      "leave-table": "Leave Table",
+      "link": "Link"
+    },
+    "setup": {
+      "continue": "Continue",
+      "create-table": "Done",
+      "invitation-sent": "sent",
+      "invitation-title": "Invite People",
+      "invite": "invite",
+      "no-result": "No results",
+      "private": "Private",
+      "public": "Public",
+      "reminder": "Your vision becomes reality,\nlet's take the first step together.",
+      "search-error": "An error occurred during the search.",
+      "submit-title": "Hint",
+      "table-creation": "Create Table",
+      "table-creation-title": "Create Table",
+      "table-name": "Table Name"
+    }
+  },
+  "error": {
+    "404": {
+      "h1": "404 Page not found",
+      "text": "This page could not be found."
+    },
+    "500": {
+      "h1": "500 Internal error",
+      "text": "Something went wrong."
+    },
+    "title": "DreamMall {'|'} Error"
+  },
+  "globalErrorHandler": {
+    "copiedToClipboard": "Link copied to clipboard"
+  },
+  "home": {
+    "aboutSection": {
+      "buttonTxt": "Personal contact",
+      "contentFirstParagraph": "The DreamMall platform offers you as entrepreneurs, groups of entrepreneurs and young entrepreneurs/start-ups a trustworthy space for creative networking for your ideas and projects.",
+      "contentSecondParagraph": "We are all realizing ourselves now. The DreamMall is developing with each and every one of us for a shared economy and a good quality of life. Our positive energy is multiplying and together we are only looking forward. Worldwide!",
+      "headline": "Respectful cooperation makes EVERYTHING possible."
+    },
+    "coffeeSection": {
+      "headline": "The ingredients",
+      "headlineAppend": "for your coffee",
+      "slide1": {
+        "headline": "All the features you need.",
+        "subheadline": "World Cafe"
+      },
+      "slide2": {
+        "headline": "Digital diversity",
+        "subheadline": "Mall"
+      },
+      "slide3": {
+        "headline": "Successful projects are looking for talent, resources and work.",
+        "subheadline": "Humans and projects"
+      }
+    },
+    "ctaSection": {
+      "buttonText": "more",
+      "content": "Be part of the beginning of an exciting change! Simply leave us your name and email address to receive exclusive offers and full details before the official release. Don't miss the opportunity to become part of our unique community and benefit from our special starter offers!",
+      "headline": "Change",
+      "headlineAppend": "Create"
+    },
+    "introSection": {
+      "headline": "DreamMall created by people for people",
+      "preOrderBtn": "More information",
+      "subHeadline": "7 days free trial"
+    },
+    "newsletterSection": {
+      "currentNewsletter": "Current newsletter",
+      "headline": "Newsletter",
+      "newsletterDownloadBtn": "Download",
+      "newsletterForm": {
+        "email": "E-mail address",
+        "errorMsg": "Unfortunately this did not work! Please try again",
+        "firstname": "First name",
+        "lastname": "Last Name",
+        "privacy": "I consent to the storage of data for processing in accordance with the GDPR. You can find further information in our",
+        "privacyLinkLabel": "Privacy policy",
+        "submitBtn": "Send",
+        "successMsg": "Email sent"
+      },
+      "subHeadline": "Always stay up to date"
+    },
+    "planningSection": {
+      "headline": "DreamMall Planning",
+      "timelineBtn": "Reload"
+    },
+    "productsSection": {
+      "firstColumn": {
+        "headline": "Mall",
+        "text": "We are creating a world, a place of shared life and economy."
+      },
+      "headline": "DreamMall.",
+      "headlineAppend": "Earth",
+      "secondColumn": {
+        "headline": "World Cafe",
+        "text": "We find each other, connect with each other, trust each other and support each other."
+      },
+      "thirdColumn": {
+        "headline": "Humans and projects",
+        "text": "Your talent is important for the world. Turn your creativity into reality."
+      }
+    }
+  },
+  "impress": {
+    "consumerDispute": {
+      "content": "We are not willing or obliged to participate in dispute resolution proceedings before a consumer arbitration board.",
+      "headline": "Consumer dispute resolution / universal arbitration board"
+    },
+    "contact": {
+      "additionalLaw": "Responsible according to § 18 MStV is Sabine Laudien, Rosenau 15, 87437 Kempten.",
+      "email": "kontakt (at) dreammall.earth",
+      "emailLabel": "E-Mail:",
+      "headline": "Contact",
+      "lawHeadline": "Information according to § 18 MStV",
+      "telefax": "+49 (0) 123 44 55 99",
+      "telefaxLabel": "Fax:",
+      "telephone": "+49 (0) 123 44 55 66",
+      "telephoneLabel": "Phone:"
+    },
+    "copyright": {
+      "content": "Insofar as the content on this site was not created by the operator, the copyrights of third parties are respected. In particular, third-party content is identified as such. Should you nevertheless become aware of a copyright infringement, please inform us accordingly. If we become aware of any infringements, we will remove such content immediately.",
+      "headline": "Copyright"
+    },
+    "data": {
+      "additional": "Building 44",
+      "city": "Kempten",
+      "court": "District Court of Musterstadt",
+      "courtLabel": "Register court:",
+      "headline": "Information according to § 5 TMG",
+      "name": "DreamMall Verlag GbR",
+      "person1": "Sabine Laudien",
+      "person2": "Claudia Siebert",
+      "personHeadline": "represented by the shareholders",
+      "register": "HRB 999999",
+      "registerLabel": "Commercial register:",
+      "street": "Rosenau 15",
+      "zip": "DE-87437"
+    },
+    "headline": "Commercial register",
+    "legalDisclaimer": {
+      "content": "This disclaimer is to be regarded as part of the internet publication which you were referred from. If sections or individual terms of this statement are not legal or correct, the content or validity of the other parts remain uninfluenced by this fact.",
+      "headline": "Legal validity of this disclaimer"
+    },
+    "liabilityContent": {
+      "content": "The contents of our pages have been created with the greatest care. However, we cannot assume any liability for the accuracy, completeness and topicality of the content. As a service provider, we are responsible for our own content on these pages in accordance with § 7 para. 1 TMG (German Telemedia Act) and general laws. According to §§ 8 to 10 TMG, however, we as a service provider are not obliged to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity. Obligations to remove or block the use of information in accordance with general legislation remain unaffected by this. However, liability in this respect is only possible from the time of knowledge of a specific infringement. As soon as we become aware of such infringements, we will remove this content immediately.",
+      "headline": "Liability for contents"
+    },
+    "liabilityLinks": {
+      "content": "Our website contains links to external third-party websites over whose content we have no influence. Therefore, we cannot accept any liability for this third-party content. The respective provider or operator of the pages is always responsible for the content of the linked pages. The linked pages were checked for possible legal violations at the time of linking. Illegal content was not recognizable at the time of linking. However, permanent monitoring of the content of the linked pages is not reasonable without concrete evidence of an infringement. If we become aware of any legal infringements, we will remove such links immediately.",
+      "headline": "Liability for links"
+    },
+    "tax": {
+      "content": "Sales tax identification number according to § 27 a sales tax law:",
+      "headline": "Sales tax ID",
+      "id": "DE356946303"
+    },
+    "title": "DreamMall {'|'} Imprint"
+  },
+  "joinTablePage": {
+    "header": "Join Table as:"
+  },
+  "menu": {
+    "cockpit": "Cockpit",
+    "eMail": "E-Mail",
+    "footer": {
+      "contact": "Get in touch with us",
+      "contactForm": {
+        "errorMsg": "Unfortunately this did not work! Please try again",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "mail": "E-mail address",
+        "message": "Simply ask us ...",
+        "privacy": "I consent to the storage of data for processing in accordance with the GDPR. You can find further information in our",
+        "privacyLinkLabel": "Privacy policy",
+        "submitBtn": "Send",
+        "successMsg": "Email sent",
+        "topic": "Topic"
+      },
+      "cookies": "Cookie options",
+      "home": "Home",
+      "humansAndProjects": "Human and Projects",
+      "impress": "Impressum",
+      "instagram": "Instagram",
+      "mall": "Mall",
+      "newsletter": "Newsletter",
+      "planing": "DreamMall Planning",
+      "privacy": "Privacy policy",
+      "privacyHeadline": "Data protection",
+      "sitemap": "Sitemap",
+      "socialHeadline": "Social Media",
+      "telegram": "Telegram",
+      "worldCoffeeHouse": "World Coffee House"
+    },
+    "header": {
+      "about": "about",
+      "contact": "contact",
+      "newsletter": "Subscribe to our newsletter",
+      "products": "products",
+      "sitemap": "Sitemap"
+    },
+    "mall": "Mall",
+    "theme": {
+      "dark": "Dark",
+      "light": "Light"
+    },
+    "userPhrase": "Talk to your friends",
+    "worldCafe": "World Cafe"
+  },
+  "meta": {
+    "defaultDescription": "Expanding your reach making the most of opportunities enhance quality of life together",
+    "defaultTitle": "DreamMall",
+    "joinTableTitle": "Enter Table"
+  },
+  "optin": {
+    "error": {
+      "link": "Register again",
+      "text": "An error occurred during confirmation. Please subscribe to the newsletter again."
+    },
+    "success": {
+      "text": "You have successfully confirmed your newsletter subscription. You will be redirected to the start page shortly."
+    },
+    "title": "DreamMall {'|'} Newsletter"
+  },
+  "paymentLink": {
+    "callToAction": "Upgrade to PRO",
+    "subtitle": "Upgrade to premium to unlock more features",
+    "title": "Upgrade to premium"
+  },
+  "sepaIban": {
+    "accountData": {
+      "accountHolder": "Account holder",
+      "amount": "Amount in Euro",
+      "BIC": "BIC",
+      "IBAN": "IBAN",
+      "reference": "Purpose",
+      "title": "Account details"
+    },
+    "explanation": {
+      "callToAction": "To order a Dreammall subscription, you can simply set up a standing order in your online banking. You can view the account details on this page.",
+      "introduction": "Thank you for choosing a DreamMall subscription!",
+      "title": "Set up standing order"
+    },
+    "qr": {
+      "explanation": "Alternatively, you can also scan this QR code with your banking app.",
+      "invalid": "Please enter a valid amount to display a QR code.",
+      "title": "Scan QR Code"
+    }
+  },
+  "table": {
+    "notFound": "Table not found."
+  },
+  "tables": {
+    "participantCount": "{count} participants"
+  },
+  "tablesDrawer": {
+    "header": "Open Tables",
+    "noResults": "No results found",
+    "noTables": "No tables available",
+    "searchPlaceholder": "Open tables, attendees"
+  },
+  "validation": {
+    "fieldNoEmail": "This field must be an email address",
+    "fieldRequired": "This field is required",
+    "fieldTooLong": "This field is too long"
+  }
+}

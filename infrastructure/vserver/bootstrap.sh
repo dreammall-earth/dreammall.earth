@@ -28,11 +28,9 @@ cp $PROJECT_ROOT/deployment/nginx/frontend.conf /etc/nginx/http.d/frontend.conf
 mysql -e "CREATE USER 'dreammall'@'localhost' IDENTIFIED BY 'SECRET'; GRANT ALL PRIVILEGES ON * . * TO 'dreammall'@'localhost'; FLUSH PRIVILEGES;"
 
 cp $PROJECT_ROOT/backend/.env.dist $PROJECT_ROOT/backend/.env
-cp $PROJECT_ROOT/presenter/.env.dist $PROJECT_ROOT/presenter/.env
 cp $PROJECT_ROOT/frontend/.env.dist $PROJECT_ROOT/frontend/.env
 
 # The target ports here must match the port mappings of the Vagrant file
-sed -e 's/localhost:3001/localhost:8000/g' -i $PROJECT_ROOT/*/.env
 sed -e 's/localhost:4000/localhost:8000\/api/g' -i $PROJECT_ROOT/*/.env
 sed -e 's/localhost:3000/localhost:8080/g' -i $PROJECT_ROOT/*/.env
 
