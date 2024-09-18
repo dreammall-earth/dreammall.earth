@@ -37,7 +37,7 @@ exports[`UserDropdown > renders 1`] = `
               />
             </svg>
           </i>
-           $t('menu.userDropdown.dark')
+           $t('menu.theme.dark')
         </button>
       </li>
       <li
