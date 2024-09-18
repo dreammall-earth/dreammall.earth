@@ -256,7 +256,7 @@ exports[`AboutMeView > renders 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -290,7 +290,7 @@ exports[`AboutMeView > renders 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -324,7 +324,7 @@ exports[`AboutMeView > renders 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -358,7 +358,7 @@ exports[`AboutMeView > renders 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -392,7 +392,7 @@ exports[`AboutMeView > renders 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -426,7 +426,7 @@ exports[`AboutMeView > renders 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -844,7 +844,7 @@ exports[`AboutMeView > renders initials 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -878,7 +878,7 @@ exports[`AboutMeView > renders initials 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -912,7 +912,7 @@ exports[`AboutMeView > renders initials 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -946,7 +946,7 @@ exports[`AboutMeView > renders initials 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -980,7 +980,7 @@ exports[`AboutMeView > renders initials 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -1014,7 +1014,7 @@ exports[`AboutMeView > renders initials 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -1432,7 +1432,7 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -1466,7 +1466,7 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -1500,7 +1500,7 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -1534,7 +1534,7 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -1568,7 +1568,7 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -1602,7 +1602,7 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >

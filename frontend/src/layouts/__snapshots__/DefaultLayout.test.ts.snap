@@ -86,7 +86,7 @@ exports[`DefaultLayout > renders 1`] = `
               data-v-75d0be1e=""
             >
               <button
-                class="tab-control ma-auto border-sm text-font open"
+                class="tab-control ma-auto border-sm open"
                 data-v-75d0be1e=""
                 data-v-d58c92bb=""
               >
@@ -646,7 +646,7 @@ exports[`DefaultLayout > renders 1`] = `
                     data-v-75d0be1e=""
                   >
                     <div
-                      class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
+                      class="circle rounded-circle border-sm text-font pa-2 d-flex justify-center align-center"
                       data-v-39e8094e=""
                       data-v-75d0be1e=""
                     >
@@ -678,7 +678,7 @@ exports[`DefaultLayout > renders 1`] = `
                     aria-expanded="false"
                     aria-haspopup="menu"
                     aria-owns="v-menu-1"
-                    class="ml-2 user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
+                    class="ml-2 user-info rounded-pill d-flex flex-row text-font border-sm align-center justify-center"
                     data-v-607bdd70=""
                   >
                     
@@ -968,7 +968,7 @@ exports[`DefaultLayout > renders 1`] = `
       </transition-group-stub>
       <!-- Page Content Container -->
       <div
-        class="v-container v-container--fluid v-locale--is-ltr page-container px-8"
+        class="v-container v-container--fluid v-locale--is-ltr page-container px-8 text-font"
         data-v-75d0be1e=""
       >
         
@@ -1699,7 +1699,7 @@ exports[`DefaultLayout > renders 1`] = `
           data-v-75d0be1e=""
         >
           <div
-            class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
+            class="circle rounded-circle border-sm text-font pa-2 d-flex justify-center align-center"
             data-v-39e8094e=""
             data-v-75d0be1e=""
           >
@@ -2211,7 +2211,7 @@ exports[`DefaultLayout > renders 1`] = `
           aria-expanded="false"
           aria-haspopup="menu"
           aria-owns="v-menu-7"
-          class="mx-auto user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
+          class="mx-auto user-info rounded-pill d-flex flex-row text-font border-sm align-center justify-center"
           data-v-607bdd70=""
         >
           
