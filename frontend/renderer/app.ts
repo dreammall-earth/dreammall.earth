@@ -6,6 +6,7 @@ import Vue3Toasity from 'vue3-toastify'
 // eslint-disable-next-line import/no-unassigned-import
 import 'vue3-toastify/dist/index.css'
 
+import AppWrapper from '#components/embedded-table/AppWrapper.vue'
 import PageShell from '#components/PageShell.vue'
 import { setPageContext } from '#context/usePageContext'
 import { createApolloClient } from '#plugins/apollo'
@@ -47,7 +48,9 @@ function createApp(pageContext: PageContext, isClient = true) {
         {},
         {
           default: () => {
-            return h(this.Page, this.pageProps)
+            return h(AppWrapper, null, {
+              default: () => h(this.Page, this.pageProps),
+            })
           },
         },
       )
