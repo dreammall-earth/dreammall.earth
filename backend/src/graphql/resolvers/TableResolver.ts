@@ -377,7 +377,7 @@ export class TableResolver {
         username,
       },
     })
-    if (!user) throw new Error('User not found!')
+    if (!user) return []
     return openTablesFromOpenMeetings({ meetings, userId: user.id })
   }
 
