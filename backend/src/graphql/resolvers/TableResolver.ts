@@ -430,13 +430,12 @@ const openTablesFromOpenMeetings = async (arg: MeetingInfoUnionUser): Promise<Op
     },
   })
 
-  return dbMeetings
-    .filter((meeting) => arg.meetings.find((m) => meeting.meetingID === m.meetingID))
-    .map((meeting) => {
-      const meetingInfo = arg.meetings.find((m) => meeting.meetingID === m.meetingID)
-      if (!meetingInfo) throw new Error('No meeting info for this meeting')
-      return new OpenTable(meetingInfo, meeting.id ? meeting.id : 0)
-    })
+  const openTables: OpenTable[] = []
+  dbMeetings.forEach((meeting) => {
+    const meetingInfo = arg.meetings.find((m) => meeting.meetingID === m.meetingID)
+    if (meetingInfo) openTables.push(new OpenTable(meetingInfo, meeting.id ? meeting.id : 0))
+  })
+  return openTables
 }
 
 const createUsersInMeetings = async (data: {
