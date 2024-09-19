@@ -1,5 +1,8 @@
-domain: {{ env "DOMAIN" | default (printf "%s.git.dreammall.earth" (requiredEnv "BRANCH")) }}
-namespace: {{ env "NAMESPACE" | default (printf "dreammall-git-%s" (requiredEnv "BRANCH")) }}
+{{ $branch := env "BRANCH" | default (exec "../scripts/branch.sh" (list) | trim) }}
+{{ $image_tag:= env "IMAGE_TAG" | default (exec "../scripts/image_tag.sh" (list) | trim) }}
+
+domain: {{ env "DOMAIN" | default (printf "%s.git.dreammall.earth" $branch ) }}
+namespace: {{ env "NAMESPACE" | default (printf "dreammall-git-%s" $branch ) }}
 image_repository: ghcr.io/dreammall-earth/dreammall.earth
-image_tag: {{ requiredEnv "IMAGE_TAG" }}
+image_tag: {{ $image_tag }}
 cert_manager_issuer: dreammall-letsencrypt-prod
