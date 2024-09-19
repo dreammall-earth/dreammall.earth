@@ -105,7 +105,6 @@ export const useTablesStore = defineStore(
 
     /*
     watch(updateOpenTablesSubscriptionError, () => {
-      // eslint-disable-next-line no-console
       console.log(updateOpenTablesSubscriptionError)
     })
     */
