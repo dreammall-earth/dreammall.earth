@@ -1,5 +1,5 @@
 <template>
-  <div class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center">
+  <div class="circle rounded-circle border-sm text-font pa-2 d-flex justify-center align-center">
     <slot />
   </div>
 </template>

@@ -24,7 +24,6 @@ function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): Theme
       warning: theme.warningColor,
       error: theme.errorColor,
       font: theme.fontColor,
-      icon: theme.iconColor,
       'dropdown-background': theme.dropdownBackgroundColor,
       'cockpit-highlight': theme.cockpitHighlightColor,
       'dm-panel-submit-color': theme.dmPanelSubmitColor,

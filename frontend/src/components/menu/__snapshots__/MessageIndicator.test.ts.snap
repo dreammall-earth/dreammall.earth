@@ -6,7 +6,7 @@ exports[`MessageIndicator > renders with 0 messages 1`] = `
   data-v-6b63f7d9=""
 >
   <div
-    class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
+    class="circle rounded-circle border-sm text-font pa-2 d-flex justify-center align-center"
     data-v-39e8094e=""
     data-v-6b63f7d9=""
   >
@@ -47,7 +47,7 @@ exports[`MessageIndicator > renders with 1 message 1`] = `
   data-v-6b63f7d9=""
 >
   <div
-    class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
+    class="circle rounded-circle border-sm text-font pa-2 d-flex justify-center align-center"
     data-v-39e8094e=""
     data-v-6b63f7d9=""
   >
@@ -88,7 +88,7 @@ exports[`MessageIndicator > renders with 2 messages 1`] = `
   data-v-6b63f7d9=""
 >
   <div
-    class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
+    class="circle rounded-circle border-sm text-font pa-2 d-flex justify-center align-center"
     data-v-39e8094e=""
     data-v-6b63f7d9=""
   >

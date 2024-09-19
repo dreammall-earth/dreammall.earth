@@ -1,7 +1,7 @@
 <template>
   <button
     ref="tabControl"
-    class="tab-control ma-auto border-sm text-font"
+    class="tab-control ma-auto border-sm"
     :class="{ open: isOpen, sliding: isSliding }"
     @click="() => !isOpen && open()"
   >
@@ -235,6 +235,7 @@ onUnmounted(() => {
   font-style: normal;
   font-weight: 600;
   line-height: 150%;
+  color: #222;
   background-color: var(--background-color);
   border-radius: 27.067px;
   transition: padding var(--animation-time);
