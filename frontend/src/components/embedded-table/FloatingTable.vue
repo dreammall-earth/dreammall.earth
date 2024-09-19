@@ -24,9 +24,12 @@ const onTableClosed = () => {
 @import 'vuetify/lib/styles/settings/_variables';
 
 .container {
-  width: 400px;
-  height: 400px;
-  display: flex;
+  position: fixed;
+  right: 8px;
+  bottom: 8px;
   z-index: 1000;
+  display: flex;
+  width: 500px;
+  height: 400px;
 }
 </style>
