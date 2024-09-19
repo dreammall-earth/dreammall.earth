@@ -345,8 +345,6 @@ export class TableResolver {
     })
     if (!meeting) {
       throw new Error('Meeting not found!')
-    } else if (!meeting.users.some((u) => u.userId !== user?.id && u.role === 'MODERATOR')) {
-      throw new Error('There is no other Moderator in this table.')
     }
     try {
       await prisma.usersInMeetings.delete({
@@ -357,6 +355,13 @@ export class TableResolver {
           },
         },
       })
+      if (!meeting.users.some((u) => u.userId !== user?.id && u.role === 'MODERATOR')) {
+        await prisma.meeting.delete({
+          where: {
+            id: tableId,
+          },
+        })
+      }
     } catch (e) {
       logger.error('User could not be detached', e)
       throw new Error('User could not be detached.')
