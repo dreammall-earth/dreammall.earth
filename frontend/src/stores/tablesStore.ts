@@ -91,23 +91,21 @@ export const useTablesStore = defineStore(
       setTables(data.tables)
     })
 
-    const {
-      result: updateOpenTablesSubscriptionResult /* , error: updateOpenTablesSubscriptionError */,
-    } = useSubscription(
-      updateOpenTablesSubscription,
-      () => ({ username: userStore.getCurrentUser?.username || 'Unknown User' }),
-      { fetchPolicy: 'no-cache' },
-    )
+    const { result: updateOpenTablesSubscriptionResult, error: updateOpenTablesSubscriptionError } =
+      useSubscription(
+        updateOpenTablesSubscription,
+        () => ({ username: userStore.getCurrentUser?.username || 'Unknown User' }),
+        { fetchPolicy: 'no-cache' },
+      )
 
     watch(updateOpenTablesSubscriptionResult, (data: { updateOpenTables: OpenTable[] }) => {
       setOpenTables(data.updateOpenTables)
     })
 
-    /*
     watch(updateOpenTablesSubscriptionError, () => {
+      // eslint-disable-next-line no-console
       console.log(updateOpenTablesSubscriptionError)
     })
-    */
 
     const openTables = ref<OpenTable[]>([])
 
