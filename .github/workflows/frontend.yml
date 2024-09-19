@@ -57,7 +57,8 @@ jobs:
         with:
           node-version-file: './.tool-versions'
       - name: Frontend | Lint
-        run: npm install && npm run test:lint
+        # we also run lintfix since there was a dependency update of typescript which caused lintfix to fail
+        run: npm install && npm run test:lint && npm run test:lintfix
         working-directory: ./frontend
 
   unit:
