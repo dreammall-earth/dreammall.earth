@@ -1,4 +1,4 @@
-import { Meeting } from '@prisma/client'
+import { Meeting, User } from '@prisma/client'
 import {
   Resolver,
   Mutation,
@@ -180,7 +180,7 @@ export class TableResolver {
     })
     if (!user) throw new Error('User not found!')
     const meetings = await getMeetings()
-    return openTablesFromOpenMeetings({ meetings, userId: user.id })
+    return openTablesFromOpenMeetings({ meetings, user })
   }
 
   @Authorized()
@@ -378,7 +378,7 @@ export class TableResolver {
       },
     })
     if (!user) return []
-    return openTablesFromOpenMeetings({ meetings, userId: user.id })
+    return openTablesFromOpenMeetings({ meetings, user })
   }
 
   /*
@@ -396,7 +396,7 @@ export class TableResolver {
 
 type MeetingInfoUnionUser = {
   meetings: MeetingInfo[]
-  userId: number
+  user: User
 }
 
 const openTablesFromOpenMeetings = async (arg: MeetingInfoUnionUser): Promise<OpenTable[]> => {
@@ -411,10 +411,15 @@ const openTablesFromOpenMeetings = async (arg: MeetingInfoUnionUser): Promise<Op
         {
           users: {
             some: {
-              userId: arg.userId,
+              userId: arg.user.id,
             },
           },
         },
+        arg.user.meetingId
+          ? {
+              id: arg.user.meetingId,
+            }
+          : {},
       ],
     },
     select: {
