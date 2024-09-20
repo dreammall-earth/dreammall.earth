@@ -2,6 +2,8 @@
 import path from 'path'
 
 import { config } from 'dotenv'
+// eslint-disable-next-line import/named
+import { v4 as uuidv4 } from 'uuid'
 
 import { printConfigError } from './printConfigError'
 
@@ -47,10 +49,15 @@ if (!JWKS_URI) {
   throw new Error('missing environment variable: JWKS_URI')
 }
 
+const WELCOME_TABLE_MEETING_ID = process.env.WELCOME_TABLE_MEETING_ID ?? uuidv4()
+const WELCOME_TABLE_NAME = process.env.WELCOME_TABLE_NAME ?? 'DreamMall Coffeetime'
+
 export const CONFIG = {
   ...BREVO,
   ...BBB,
   ...FRONTEND,
+  WELCOME_TABLE_MEETING_ID,
+  WELCOME_TABLE_NAME,
   JWKS_URI,
 }
 
