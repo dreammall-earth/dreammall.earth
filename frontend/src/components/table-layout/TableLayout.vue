@@ -15,41 +15,28 @@
 </template>
 
 <script setup lang="ts">
-import { useQuery } from '@vue/apollo-composable'
 import { navigate } from 'vike/client/router'
 import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import EmbeddedTable from '#components/embedded-table/EmbeddedTable.vue'
 import TableSettings from '#components/malltalk/settings/TableSettings.vue'
-import { usePageContext } from '#context/usePageContext'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
-import { joinTableQuery } from '#queries/joinTableQuery'
+
+import type { UseQueryReturn } from '@vue/apollo-composable'
+
+const errorMessage = ref<string | null>(null)
+const tableUrl = ref<string | null>(null)
 
 const { t } = useI18n()
 
-const tableUrl = ref<string | null>(null)
+const props = defineProps<{
+  useQueryResult:
+    | UseQueryReturn<any, { tableId: number }> // eslint-disable-line @typescript-eslint/no-explicit-any
+    | UseQueryReturn<any, Record<string, never>> // eslint-disable-line @typescript-eslint/no-explicit-any
+}>()
 
-const pageContext = usePageContext()
-
-const tableId = ref(Number(pageContext.routeParams?.id))
-
-const errorMessage = ref<string | null>(null)
-
-watch(pageContext, (context) => {
-  tableId.value = Number(context.routeParams?.id)
-})
-
-const { result: joinTableQueryResult, error: joinTableQueryError } = useQuery(
-  joinTableQuery,
-  () => ({
-    tableId: tableId.value,
-  }),
-  {
-    prefetch: false,
-    fetchPolicy: 'no-cache',
-  },
-)
+const { result: joinTableQueryResult, error: joinTableQueryError } = props.useQueryResult
 
 watch(joinTableQueryResult, (data: { joinTable: string }) => {
   if (!data.joinTable) return
