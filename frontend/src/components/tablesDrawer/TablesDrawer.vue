@@ -18,6 +18,10 @@
       variant="solo"
       class="search"
     ></v-text-field>
+
+    <!-- Coffee time -->
+
+    <!-- Mall Talk -->
     <v-list>
       <h2 class="header mb-4">{{ $t('tablesDrawer.header') }}</h2>
       <div v-if="!items.length">{{ $t('tablesDrawer.noTables') }}</div>
@@ -26,6 +30,8 @@
       </div>
       <TableList v-else :items="filteredItems" @open-table="closeDrawer" />
     </v-list>
+
+    <!-- Projects -->
   </v-navigation-drawer>
 </template>
 
