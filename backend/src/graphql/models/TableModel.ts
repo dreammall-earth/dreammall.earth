@@ -9,11 +9,14 @@ import { UserInMeeting } from './UserInMeetingModel'
 
 @ObjectType()
 export class Table {
-  constructor(meeting: Meeting, users: UsersWithMeetings[]) {
-    this.id = meeting.id
-    this.name = meeting.name
-    this.public = meeting.public
-    this.users = users.map((u) => new UserInMeeting(u))
+  constructor(data: Pick<Table, 'id' | 'name' | 'public' | 'users'>) {
+    Object.assign(this, data)
+  }
+
+  static fromMeeting(meeting: Meeting, usersWithMeetings: UsersWithMeetings[]) {
+    const { id, name } = meeting
+    const users = usersWithMeetings.map((u) => new UserInMeeting(u))
+    return new Table({ id, name, public: meeting.public, users })
   }
 
   @Field(() => Int)
@@ -31,18 +34,32 @@ export class Table {
 
 @ObjectType()
 export class OpenTable {
-  constructor(meeting: MeetingInfo, id: number) {
-    this.id = id
-    this.meetingID = meeting.meetingID
-    this.meetingName = meeting.meetingName
-    this.startTime = meeting.startTime.toString()
-    this.participantCount = meeting.participantCount
-    this.attendees =
+  constructor(
+    data: Pick<
+      OpenTable,
+      'id' | 'meetingID' | 'meetingName' | 'participantCount' | 'startTime' | 'attendees'
+    >,
+  ) {
+    Object.assign(this, data)
+  }
+
+  static fromMeetingInfo(meeting: MeetingInfo, id: number) {
+    const { meetingID, meetingName, participantCount } = meeting
+    const startTime = meeting.startTime.toString()
+    const attendees =
       typeof meeting.attendees !== 'string'
         ? Array.isArray(meeting.attendees.attendee)
           ? meeting.attendees.attendee.map((a: AttendeeInfo) => new Attendee(a))
           : [meeting.attendees.attendee]
         : []
+    return new OpenTable({
+      id,
+      meetingID,
+      meetingName,
+      participantCount,
+      startTime,
+      attendees,
+    })
   }
 
   @Field(() => Int)

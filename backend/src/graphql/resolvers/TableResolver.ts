@@ -93,7 +93,7 @@ export class TableResolver {
     }
     const usersInMeetings = await findUsersInMeetings(prisma)(meeting)
 
-    return new Table(meeting, usersInMeetings)
+    return Table.fromMeeting(meeting, usersInMeetings)
   }
 
   @Authorized()
@@ -149,7 +149,7 @@ export class TableResolver {
 
     await EVENT_UPDATE_MY_TABLE(user.id)
 
-    return new Table(meeting, usersInMeetings)
+    return Table.fromMeeting(meeting, usersInMeetings)
   }
 
   @Authorized()
@@ -245,7 +245,7 @@ export class TableResolver {
 
     await EVENT_CREATE_TABLE(user.id)
 
-    return new Table(dbMeeting, usersInMeetings)
+    return Table.fromMeeting(dbMeeting, usersInMeetings)
   }
 
   @Authorized()
@@ -370,8 +370,8 @@ export class TableResolver {
       },
     })
     const tables: Table[] = await Promise.all(
-      dbMeetings.map(
-        async (meeting) => new Table(meeting, await findUsersInMeetings(prisma)(meeting)),
+      dbMeetings.map(async (meeting) =>
+        Table.fromMeeting(meeting, await findUsersInMeetings(prisma)(meeting)),
       ),
     )
     return tables
@@ -494,7 +494,7 @@ export class TableResolver {
 
     const userInMeeting = await findUsersInMeetings(prisma)(meeting)
     await EVENT_UPDATE_TABLE(user.id)
-    return new Table(meeting, userInMeeting)
+    return Table.fromMeeting(meeting, userInMeeting)
   }
 
   @Subscription(() => [OpenTable], {
@@ -571,7 +571,9 @@ const openTablesFromOpenMeetings =
     const openTables: OpenTable[] = []
     dbMeetings.forEach((meeting) => {
       const meetingInfo = arg.meetings.find((m) => meeting.meetingID === m.meetingID)
-      if (meetingInfo) openTables.push(new OpenTable(meetingInfo, meeting.id ? meeting.id : 0))
+      if (meetingInfo) {
+        openTables.push(OpenTable.fromMeetingInfo(meetingInfo, meeting.id ? meeting.id : 0))
+      }
     })
     return openTables
   }

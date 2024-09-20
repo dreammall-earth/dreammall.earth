@@ -121,7 +121,7 @@ export class CurrentUser {
 
     this.details = user.userDetail.map((d) => new UserDetail(d))
     this.social = user.socialMedia.map((s) => new SocialMedia(s))
-    this.table = user.meeting ? new Table(user.meeting, users) : null
+    this.table = user.meeting ? Table.fromMeeting(user.meeting, users) : null
   }
 
   @Field(() => Int)
