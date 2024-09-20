@@ -78,7 +78,7 @@
     "@eslint-community/eslint-plugin-eslint-comments": "^4.4.0",
     "@intlify/eslint-plugin-vue-i18n": "^3.0.0",
     "@pinia/testing": "^0.1.5",
-    "@storybook/addon-essentials": "^8.3.1",
+    "@storybook/addon-essentials": "^8.3.2",
     "@storybook/addon-interactions": "^8.3.2",
     "@storybook/addon-links": "^8.3.1",
     "@storybook/blocks": "^8.3.1",
