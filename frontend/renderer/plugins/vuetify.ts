@@ -36,6 +36,8 @@ function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): Theme
         theme.dmPanelCallActionButtonIndicatorBackgroundColor,
       'dm-panel-reminder-text-color': theme.dmPanelReminderTextColor,
       'dm-panel-reminder-link-color': theme.dmPanelReminderLinkColor,
+      'dm-switch-inactive-color': theme.dmSwitchInactiveColor,
+      'dm-switch-active-color': theme.dmSwitchActiveColor,
     },
     variables: {
       'border-color': theme.borderColor,
