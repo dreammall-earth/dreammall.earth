@@ -293,4 +293,28 @@ describe('distributeStarsToSectorsRecursive', () => {
       expect(stars).toHaveLength(896)
     })
   })
+
+  describe('distribute 1536 stars', () => {
+    const stars = distributeStarsToSectorsRecursive(1536)
+
+    it('has 1536 stars', () => {
+      expect(stars).toHaveLength(1536)
+    })
+  })
+
+  describe('distribute 2576 stars', () => {
+    const stars = distributeStarsToSectorsRecursive(2576)
+
+    it('has 2576 stars', () => {
+      expect(stars).toHaveLength(2576)
+    })
+  })
+
+  describe('distribute 4256 stars', () => {
+    const stars = distributeStarsToSectorsRecursive(4256)
+
+    it('has 4256 stars', () => {
+      expect(stars).toHaveLength(4256)
+    })
+  })
 })
