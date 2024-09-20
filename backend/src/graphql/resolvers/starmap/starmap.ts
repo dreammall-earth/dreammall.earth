@@ -302,7 +302,9 @@ const getNextSectorIdx = (starsPlaced: number): number => {
     return pushAndReturn(
       sectors.findIndex(
         (s: Sector) =>
-          s.iteration === starDistribution[iteration + 1].starsPlacedInSectorIteration.length,
+          s.iteration ===
+          starDistribution[Math.min(iteration + 1, 3 + MAX_VERTICAL_SECTORS)]
+            .starsPlacedInSectorIteration.length,
       ),
     )
   }
@@ -329,7 +331,7 @@ const getNextSectorIdx = (starsPlaced: number): number => {
     )
   }
 
-  const f = fibonacci[sectorIterationIdx - 1]
+  const f = fibonacci[sectorIterationIdx - 1 + Math.max(iteration - 3 - MAX_VERTICAL_SECTORS, 0)]
 
   if (f > 1) {
     const starsPlacedInThisSectorIteration = starsPlacedInSectorIteration
