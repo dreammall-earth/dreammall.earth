@@ -168,14 +168,153 @@ describe('distributeStarsToSectorsRecursive', () => {
       expect(stars[0].sectorIdx).toBe(0)
     })
 
-    // ToDo: fix
-    it('has 13th star in sector 1', () => {
-      expect(stars[12].sectorIdx).not.toBe(0)
+    it('has 12th star in sector 11', () => {
+      expect(stars[11].sectorIdx).toBe(11)
     })
 
-    // ToDo: fix
+    it('has 13th star in sector 0', () => {
+      expect(stars[12].sectorIdx).toBe(0)
+    })
+
     it('has 14th star in sector 1', () => {
-      expect(stars[13].sectorIdx).not.toBe(1)
+      expect(stars[13].sectorIdx).toBe(1)
+    })
+  })
+
+  describe('distribute 16 stars', () => {
+    const stars = distributeStarsToSectorsRecursive(16)
+
+    it('has 16 stars', () => {
+      expect(stars).toHaveLength(16)
+    })
+
+    it('has last star in sector 3', () => {
+      expect(stars[15].sectorIdx).toBe(3)
+    })
+  })
+
+  describe('distribute 17 stars', () => {
+    const stars = distributeStarsToSectorsRecursive(17)
+
+    it('has 17 stars', () => {
+      expect(stars).toHaveLength(17)
+    })
+
+    it('has last star in sector 12', () => {
+      expect(stars[16].sectorIdx).toBe(12)
+    })
+  })
+
+  describe('distribute 48 stars', () => {
+    const stars = distributeStarsToSectorsRecursive(48)
+
+    it('has 48 stars', () => {
+      expect(stars).toHaveLength(48)
+    })
+
+    it('has star at index 39 in sector 11', () => {
+      expect(stars[39].sectorIdx).toBe(11)
+    })
+
+    it('has star at index 40 in sector 0', () => {
+      expect(stars[40].sectorIdx).toBe(0)
+    })
+
+    it('has the last 4 stars in sector 0, 1, 2, 3', () => {
+      expect(stars[44].sectorIdx).toBe(0)
+      expect(stars[45].sectorIdx).toBe(1)
+      expect(stars[46].sectorIdx).toBe(2)
+      expect(stars[47].sectorIdx).toBe(3)
+    })
+  })
+
+  describe('distribute 116 stars', () => {
+    const stars = distributeStarsToSectorsRecursive(116)
+
+    it('has 116 stars', () => {
+      expect(stars).toHaveLength(116)
+    })
+
+    it('has star at index 48 in sector 28', () => {
+      expect(stars[48].sectorIdx).toBe(28)
+    })
+
+    it('has star at index 71 in sector 51', () => {
+      expect(stars[71].sectorIdx).toBe(51)
+    })
+
+    it('has star at index 72 in sector 12', () => {
+      expect(stars[72].sectorIdx).toBe(12)
+    })
+
+    it('has star at index 88 in sector 4', () => {
+      expect(stars[88].sectorIdx).toBe(4)
+    })
+
+    it('has star at index 96 in sector 4', () => {
+      expect(stars[96].sectorIdx).toBe(4)
+    })
+
+    it('has the last 4 stars in sector 0, 1, 2, 3', () => {
+      expect(stars[112].sectorIdx).toBe(0)
+      expect(stars[113].sectorIdx).toBe(1)
+      expect(stars[114].sectorIdx).toBe(2)
+      expect(stars[115].sectorIdx).toBe(3)
+    })
+  })
+
+  describe('distribute 256 stars', () => {
+    const stars = distributeStarsToSectorsRecursive(256)
+
+    it('has 256 stars', () => {
+      expect(stars).toHaveLength(256)
+    })
+
+    it('has the last 4 stars in sector 0, 1, 2, 3', () => {
+      expect(stars[252].sectorIdx).toBe(0)
+      expect(stars[253].sectorIdx).toBe(1)
+      expect(stars[254].sectorIdx).toBe(2)
+      expect(stars[255].sectorIdx).toBe(3)
+    })
+  })
+
+  describe('distribute 496 stars', () => {
+    const stars = distributeStarsToSectorsRecursive(496)
+
+    it('has 496 stars', () => {
+      expect(stars).toHaveLength(496)
+    })
+  })
+
+  describe('distribute 896 stars', () => {
+    const stars = distributeStarsToSectorsRecursive(896)
+
+    it('has 896 stars', () => {
+      expect(stars).toHaveLength(896)
+    })
+  })
+
+  describe('distribute 1536 stars', () => {
+    const stars = distributeStarsToSectorsRecursive(1536)
+
+    it('has 1536 stars', () => {
+      expect(stars).toHaveLength(1536)
+    })
+  })
+
+  describe('distribute 2576 stars', () => {
+    const stars = distributeStarsToSectorsRecursive(2576)
+
+    it('has 2576 stars', () => {
+      expect(stars).toHaveLength(2576)
+    })
+  })
+
+  describe('distribute 4256 stars', () => {
+    const stars = distributeStarsToSectorsRecursive(4256)
+
+    it('has 4256 stars', () => {
+      expect(stars).toHaveLength(4256)
     })
   })
 })
