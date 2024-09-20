@@ -31,6 +31,14 @@ const slots = useSlots()
   border-radius: 20px;
 }
 
+.header {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  height: 28px;
+  text-wrap: nowrap;
+}
+
 .header:deep(h2) {
   font-size: 16px;
 }
