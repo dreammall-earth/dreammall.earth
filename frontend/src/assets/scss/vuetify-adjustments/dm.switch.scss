@@ -1,0 +1,60 @@
+.v-switch {
+  --inactive-color: var(--v-theme-dm-switch-inactive-color);
+  --active-color: var(--v-theme-dm-switch-active-color);
+
+  // Overriding of track style and size
+  :deep(.v-switch__track) {
+    border: 3px solid rgb(var(--inactive-color));
+    background-color: transparent !important;
+    height: 22px !important;
+    width: 54px !important;
+    opacity: 1 !important;
+  }
+  :deep(.v-switch__thumb-container) {
+    &::before {
+      background-color: transparent !important;
+    }
+  }
+
+  // Overriding of thumb's general style
+  :deep(.v-switch__thumb) {
+    background-color: rgb(var(--inactive-color)) !important;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1); // todo: ist das wirklich notwenidg?
+    width: 12px !important;
+    height: 12px !important;
+
+    box-shadow: none !important;
+  }
+
+  // Overriding of thumb's hover colors and opacity
+  :deep(.v-selection-control__input:hover::before) {
+    background-color: rgb(var(--inactive-color)) !important;
+    color: rgb(var(--inactive-color)) !important;
+    caret-color: rgb(var(--inactive-color)) !important;
+    opacity: 0.1;
+  }
+  :deep(.v-ripple__container) {
+    opacity: 0 !important;
+  }
+  :deep(.v-selection-control--dirty) {
+    .v-switch__track {
+      border-color: rgb(var(--active-color));
+    }
+    .v-switch__thumb {
+      background-color: rgb(var(--active-color)) !important;
+    }
+    .v-selection-control__input:hover::before {
+      background-color: rgb(var(--active-color)) !important;
+      color: rgb(var(--active-color)) !important;
+      caret-color: rgb(var(--active-color)) !important;
+    }
+  }
+
+  // Correction of the thumb's positions
+  :deep(.v-selection-control__input) {
+    transform: translateX(-8px) !important;
+  }
+  &:deep(.v-selection-control--dirty .v-selection-control__input) {
+    transform: translateX(8px) !important;
+  }
+}
