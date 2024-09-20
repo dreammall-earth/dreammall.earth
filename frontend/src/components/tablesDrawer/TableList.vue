@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts" setup>
-import { navigate } from 'vike/client/router'
+import { useTable } from '#components/embedded-table/useTable'
 
 import type { OpenTable } from '#stores/tablesStore'
 
@@ -25,9 +25,11 @@ defineProps<{
 
 const emit = defineEmits(['openTable'])
 
-const openTable = (id: number) => {
+const { setTableId } = useTable()
+
+const openTable = async (id: number) => {
   emit('openTable')
-  navigate(`/table/${id}`)
+  await setTableId(id)
 }
 </script>
 
