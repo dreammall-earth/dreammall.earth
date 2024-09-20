@@ -13,10 +13,10 @@
       </div>
     </template>
     <template #default>
-      <ul class="list">
+      <ul v-if="tables.length > 0" class="list">
         <TableItem v-for="table in tables" :key="table.id" v-bind="table" />
       </ul>
-      <div v-if="tables.length === 0">
+      <div v-else>
         {{ $t('cockpit.myTables.noTables') }}
       </div>
     </template>
