@@ -93,13 +93,11 @@
     "500": {
       "h1": "500 Interner Fehler",
       "text": "Irgendetwas ist schief gegangen."
-    },
-    "globalerror": {
-      "tableerror": "Fehler beim Öffnen der Tabelle"
     }
   },
   "globalErrorHandler": {
-    "copiedToClipboard": "Link in Zwischenablage kopiert"
+    "copiedToClipboard": "Link in Zwischenablage kopiert",
+    "tableerror": "Fehler beim Öffnen der Tabelle"
   },
   "joinTablePage": {
     "button": "Bestätigen",

@@ -87,7 +87,7 @@ const navigateToTable = async () => {
   try {
     await navigate(tablesStore.getTableUri(tableId))
   } catch (error) {
-    GlobalErrorHandler.error(t('error.globalerror.tableerror'), error)
+    GlobalErrorHandler.error(t('error.globalErrorHandler.tableerror'), error)
   }
 }
 </script>

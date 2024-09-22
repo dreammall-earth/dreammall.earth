@@ -93,13 +93,11 @@
     "500": {
       "h1": "500 Internal Error",
       "text": "Something went wrong."
-    },
-    "globalerror": {
-      "tableerror": "Error opening table"
     }
   },
   "globalErrorHandler": {
-    "copiedToClipboard": "Link copied to clipboard"
+    "copiedToClipboard": "Link copied to clipboard",
+    "tableerror": "Error opening table"
   },
   "joinTablePage": {
     "button": "Submit",
