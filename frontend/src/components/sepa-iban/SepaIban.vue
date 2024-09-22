@@ -15,19 +15,24 @@
         </p>
       </template>
     </CockpitCard>
-    <CockpitCard v-if="qr">
+    <CockpitCard>
       <template #header>
         <h2>
           {{ $t('sepaIban.qr.title') }}
         </h2>
       </template>
-      <template #default>
+      <template v-if="qr" #default>
         <p class="pb-4">
           {{ $t('sepaIban.qr.explanation') }}
         </p>
         <div class="d-flex justify-center">
           <VueQrcode :value="qr" :options="{ width: 140 }"></VueQrcode>
         </div>
+      </template>
+      <template v-else #default>
+        <p>
+          {{ $t('sepaIban.qr.invalid') }}
+        </p>
       </template>
     </CockpitCard>
     <CockpitCard>

@@ -13,9 +13,6 @@
         </v-col>
         <v-col class="d-none d-md-flex align-center">
           <v-row>
-            <v-col class="d-flex align-center">
-              <LightDarkSwitch class="d-none d-lg-flex" />
-            </v-col>
             <v-col class="d-flex align-center justify-end">
               <button class="test-desktop-camera-button" @click="toggleDrawer('tables')">
                 <Circle>
@@ -36,7 +33,7 @@
     <ModalPanel />
 
     <!-- Page Content Container -->
-    <v-container fluid class="page-container px-8">
+    <v-container fluid class="page-container px-8 text-font">
       <slot></slot>
     </v-container>
 
@@ -86,7 +83,6 @@ import LargeDreamMallButton from '#components/buttons/LargeDreamMallButton.vue'
 import SmallDreamMallButton from '#components/buttons/SmallDreamMallButton.vue'
 import TableSetup from '#components/malltalk/setup/TableSetup.vue'
 import Circle from '#components/menu/CircleElement.vue'
-import LightDarkSwitch from '#components/menu/LightDarkSwitch.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 import TabControl from '#components/menu/TabControl.vue'
 import UserInfo from '#components/menu/UserInfo.vue'

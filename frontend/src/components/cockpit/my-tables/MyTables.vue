@@ -3,17 +3,20 @@
     <template #header>
       <div class="header">
         <h2>{{ $t('cockpit.myTables.header') }}</h2>
-        <button class="add-table bg-primary px-3 py-1" @click="addTable">
+        <button
+          class="add-table bg-primary px-3 py-1 d-flex align-center justify-center"
+          @click="addTable"
+        >
           <v-icon icon="mdi mdi-plus" />
           {{ $t('cockpit.myTables.addTable') }}
         </button>
       </div>
     </template>
     <template #default>
-      <ul class="list">
+      <ul v-if="tables.length > 0" class="list">
         <TableItem v-for="table in tables" :key="table.id" v-bind="table" />
       </ul>
-      <div v-if="tables.length === 0">
+      <div v-else>
         {{ $t('cockpit.myTables.noTables') }}
       </div>
     </template>

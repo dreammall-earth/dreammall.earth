@@ -4,7 +4,7 @@
       <button
         v-bind="props"
         :class="$attrs.class"
-        class="user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
+        class="user-info rounded-pill d-flex flex-row text-font border-sm align-center justify-center"
       >
         <ClientOnly
           ><v-avatar class="avatar d-flex align-center text-font border-sm" size="44">

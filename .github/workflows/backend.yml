@@ -9,7 +9,7 @@ jobs:
     outputs:
       backend: ${{ steps.filter.outputs.backend }}
     steps:
-      - uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v4.1.7
+      - uses: actions/checkout@6d193bf28034eafb982f37bd894289fe649468fc # v4.1.7
       - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
         id: filter
         with:
@@ -24,7 +24,7 @@ jobs:
     needs: files-changed
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v4.1.7
+      - uses: actions/checkout@6d193bf28034eafb982f37bd894289fe649468fc # v4.1.7
       - uses: actions/setup-node@97ca147735c170fb35096b39ef17a0fc5d9270ac # v4.0.3
         with:
           node-version-file: './.tool-versions'
@@ -38,7 +38,7 @@ jobs:
     needs: files-changed
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v4.1.7
+      - uses: actions/checkout@6d193bf28034eafb982f37bd894289fe649468fc # v4.1.7
       - uses: actions/setup-node@97ca147735c170fb35096b39ef17a0fc5d9270ac # v4.0.3
         with:
           node-version-file: './.tool-versions'
@@ -54,7 +54,7 @@ jobs:
     env:
       DATABASE_URL: mysql://root:@localhost:3306/dreammall.earth
     steps:
-      - uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v4.1.7
+      - uses: actions/checkout@6d193bf28034eafb982f37bd894289fe649468fc # v4.1.7
       - uses: actions/setup-node@97ca147735c170fb35096b39ef17a0fc5d9270ac # v4.0.3
         with:
           node-version-file: './.tool-versions'
