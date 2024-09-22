@@ -2579,12 +2579,9 @@ describe('TableResolver', () => {
             body: {
               kind: 'single',
               singleResult: {
-                data: null,
-                errors: [
-                  expect.objectContaining({
-                    message: 'There is no other Moderator in this table.',
-                  }),
-                ],
+                data: {
+                  deleteTable: true,
+                },
               },
             },
           })

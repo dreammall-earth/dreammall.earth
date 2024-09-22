@@ -1,3 +1,9 @@
+authentik:
+  email:
+    port: 587
+    timeout: 10
+    use_ssl: false
+    use_tls: true
 global:
   image:
     repository: {{ .StateValues.image_repository }}/authentik

@@ -127,7 +127,7 @@
       "amount": "Amount in Euro",
       "BIC": "BIC",
       "IBAN": "IBAN",
-      "reference": "Reference",
+      "reference": "Purpose",
       "title": "Account details"
     },
     "explanation": {
@@ -137,6 +137,7 @@
     },
     "qr": {
       "explanation": "Alternatively, you can also scan this QR code with your banking app.",
+      "invalid": "Please enter a valid amount to display a QR code.",
       "title": "Scan QR Code"
     }
   },

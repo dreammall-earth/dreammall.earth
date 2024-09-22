@@ -6,7 +6,7 @@ exports[`NewsIndicator > renders with news 1`] = `
   data-v-5cc937bd=""
 >
   <div
-    class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
+    class="circle rounded-circle border-sm text-font pa-2 d-flex justify-center align-center"
     data-v-39e8094e=""
     data-v-5cc937bd=""
   >
@@ -45,7 +45,7 @@ exports[`NewsIndicator > renders without news 1`] = `
   data-v-5cc937bd=""
 >
   <div
-    class="circle rounded-circle border-sm text-icon pa-2 d-flex justify-center align-center"
+    class="circle rounded-circle border-sm text-font pa-2 d-flex justify-center align-center"
     data-v-39e8094e=""
     data-v-5cc937bd=""
   >
