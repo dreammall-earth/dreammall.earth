@@ -61,7 +61,7 @@ watch(joinTableQueryResult, (data: { joinTable: string }) => {
 // eslint-disable-next-line promise/prefer-await-to-callbacks
 watch(joinTableQueryError, (error) => {
   if (!error) return
-  GlobalErrorHandler.error(t('error.globalerror.text'), error)
+  GlobalErrorHandler.error(t('error.globalerror.tableerror'), error)
   errorMessage.value = error.message
   tableUrl.value = null
 })

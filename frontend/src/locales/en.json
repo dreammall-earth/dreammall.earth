@@ -95,8 +95,7 @@
       "text": "Something went wrong."
     },
     "globalerror": {
-      "autherror": "auth error",
-      "text": "Error opening table"
+      "tableerror": "Error opening table"
     }
   },
   "globalErrorHandler": {

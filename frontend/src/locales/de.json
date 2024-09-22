@@ -95,8 +95,7 @@
       "text": "Irgendetwas ist schief gegangen."
     },
     "globalerror": {
-      "autherror": "Authentifizierungsfehler",
-      "text": "Fehler beim Öffnen der Tabelle"
+      "tableerror": "Fehler beim Öffnen der Tabelle"
     }
   },
   "globalErrorHandler": {
