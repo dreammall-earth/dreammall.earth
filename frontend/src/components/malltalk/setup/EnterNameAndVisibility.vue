@@ -21,8 +21,6 @@
           ? $t('dream-mall-panel.setup.private')
           : $t('dream-mall-panel.setup.public')
       "
-      color="#4caf50"
-      inset
       hide-details
     />
 
