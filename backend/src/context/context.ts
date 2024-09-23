@@ -13,6 +13,7 @@ import type { ExpressContextFunctionArgument } from '@apollo/server/express4'
 const JWKS = createRemoteJWKSet(new URL(CONFIG.JWKS_URI))
 
 export type Context = {
+  config: typeof CONFIG
   user: UserWithProfile | null
   dataSources: { prisma: PrismaClient }
 }
@@ -52,6 +53,7 @@ export const context: ContextFunction<[ExpressContextFunctionArgument], Context>
   const user = await getCurrentUser(req.headers.authorization)
   return {
     user,
+    config: CONFIG,
     dataSources: {
       prisma,
     },

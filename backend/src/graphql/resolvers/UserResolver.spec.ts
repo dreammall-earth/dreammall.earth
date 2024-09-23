@@ -3,6 +3,7 @@ import { ApolloServer } from '@apollo/server'
 import { findOrCreateUser } from '#src/context/findOrCreateUser'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
+import { mockContextValue } from '#test/mockContextValue'
 
 import type { Context } from '#src/context'
 import type { UserWithProfile } from '#src/prisma'
@@ -24,7 +25,7 @@ describe('UserResolver', () => {
           {
             query: `{users {id name username}}`,
           },
-          { contextValue: { user: null, dataSources: { prisma } } },
+          { contextValue: mockContextValue() },
         )
         expect(response).toMatchObject({
           body: {
@@ -55,12 +56,7 @@ describe('UserResolver', () => {
             {
               query: `{users {id name username}}`,
             },
-            {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
-            },
+            { contextValue: mockContextValue({ user }) },
           )
           expect(response).toMatchObject({
             body: {
@@ -83,12 +79,7 @@ describe('UserResolver', () => {
               query: `query ($includeSelf: Boolean) {users(includeSelf: $includeSelf) {id name username}}`,
               variables: { includeSelf: true },
             },
-            {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
-            },
+            { contextValue: mockContextValue({ user }) },
           )
           expect(response).toMatchObject({
             body: {
@@ -146,10 +137,7 @@ describe('UserResolver', () => {
               variables: { searchString: 'tom' },
             },
             {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
+              contextValue: mockContextValue({ user }),
             },
           )
 
@@ -198,10 +186,7 @@ describe('UserResolver', () => {
               variables: { searchString: 'TOM' },
             },
             {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
+              contextValue: mockContextValue({ user }),
             },
           )
 
@@ -250,10 +235,7 @@ describe('UserResolver', () => {
               variables: { searchString: 'sch' },
             },
             {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
+              contextValue: mockContextValue({ user }),
             },
           )
 
@@ -302,10 +284,7 @@ describe('UserResolver', () => {
               variables: { searchString: 'tomas' },
             },
             {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
+              contextValue: mockContextValue({ user }),
             },
           )
 
@@ -370,7 +349,7 @@ describe('UserResolver', () => {
       it('returns an unauthenticated error', async () => {
         const response = await testServer.executeOperation(
           { query },
-          { contextValue: { user: null, dataSources: { prisma } } },
+          { contextValue: mockContextValue() },
         )
         expect(response).toMatchObject({
           body: {
@@ -415,7 +394,7 @@ describe('UserResolver', () => {
           })
           const response = await testServer.executeOperation(
             { query },
-            { contextValue: { user, dataSources: { prisma } } },
+            { contextValue: mockContextValue({ user }) },
           )
           expect(response).toMatchObject({
             body: {
@@ -445,10 +424,7 @@ describe('UserResolver', () => {
               query,
             },
             {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
+              contextValue: mockContextValue({ user }),
             },
           )
           expect(response).toMatchObject({
@@ -493,10 +469,7 @@ describe('UserResolver', () => {
               query,
             },
             {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
+              contextValue: mockContextValue({ user }),
             },
           )
           expect(response).toMatchObject({
@@ -598,10 +571,7 @@ describe('UserResolver', () => {
               query,
             },
             {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
+              contextValue: mockContextValue({ user }),
             },
           )
           expect(response).toMatchObject({
@@ -688,7 +658,7 @@ describe('UserResolver', () => {
               },
             },
           },
-          { contextValue: { user: null, dataSources: { prisma } } },
+          { contextValue: mockContextValue() },
         )
         expect(response).toMatchObject({
           body: {
@@ -764,10 +734,7 @@ describe('UserResolver', () => {
               },
             },
             {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
+              contextValue: mockContextValue({ user }),
             },
           )
         }
@@ -837,10 +804,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({
@@ -882,10 +846,7 @@ describe('UserResolver', () => {
               },
             },
             {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
+              contextValue: mockContextValue({ user }),
             },
           )
         }
@@ -965,10 +926,7 @@ describe('UserResolver', () => {
               },
             },
             {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
+              contextValue: mockContextValue({ user }),
             },
           )
         }
@@ -1064,7 +1022,7 @@ describe('UserResolver', () => {
               },
             },
           },
-          { contextValue: { user: null, dataSources: { prisma } } },
+          { contextValue: mockContextValue() },
         )
         expect(response).toMatchObject({
           body: {
@@ -1103,10 +1061,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({
@@ -1155,10 +1110,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({
@@ -1194,7 +1146,7 @@ describe('UserResolver', () => {
               id: -1,
             },
           },
-          { contextValue: { user: null, dataSources: { prisma } } },
+          { contextValue: mockContextValue() },
         )
         expect(response).toMatchObject({
           body: {
@@ -1229,10 +1181,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({
@@ -1293,10 +1242,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({
@@ -1334,10 +1280,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({
@@ -1387,7 +1330,7 @@ describe('UserResolver', () => {
               },
             },
           },
-          { contextValue: { user: null, dataSources: { prisma } } },
+          { contextValue: mockContextValue() },
         )
         expect(response).toMatchObject({
           body: {
@@ -1426,10 +1369,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({
@@ -1478,10 +1418,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({
@@ -1517,7 +1454,7 @@ describe('UserResolver', () => {
               id: -1,
             },
           },
-          { contextValue: { user: null, dataSources: { prisma } } },
+          { contextValue: mockContextValue() },
         )
         expect(response).toMatchObject({
           body: {
@@ -1553,10 +1490,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({
@@ -1617,10 +1551,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({
@@ -1658,10 +1589,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({
