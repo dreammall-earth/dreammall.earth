@@ -18,6 +18,8 @@ export const mockContextValue: (overrides?: Partial<Context>) => Context = (over
       BBB_PULL_MEETINGS: '',
       BBB_WEBHOOK_URL: '',
       FRONTEND_URL: '',
+      WELCOME_TABLE_MEETING_ID: '',
+      WELCOME_TABLE_NAME: '',
       JWKS_URI: '',
     },
     dataSources: { prisma },

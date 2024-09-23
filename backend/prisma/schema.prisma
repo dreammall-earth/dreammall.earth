@@ -74,15 +74,22 @@ model User {
   socialMedia       SocialMedia[]
 }
 
+enum MeetingType {
+  PERMANENT
+  PROJECT
+  MALL_TALK
+}
+
 model Meeting {
-  id                Int      @id @default(autoincrement())
-  name              String   @db.VarChar(254)
-  meetingID         String   @db.VarChar(36) @unique
-  attendeePW        String?  @db.VarChar(64)
-  moderatorPW       String?  @db.VarChar(64)
-  createdAt         DateTime @default(now())
+  id                Int         @id @default(autoincrement())
+  type              MeetingType @default(PROJECT)
+  name              String      @db.VarChar(254)
+  meetingID         String      @db.VarChar(36) @unique
+  attendeePW        String?     @db.VarChar(64)
+  moderatorPW       String?     @db.VarChar(64)
+  createdAt         DateTime    @default(now())
   voiceBridge       Int?
-  dialNumber        String?  @db.VarChar(64)
+  dialNumber        String?     @db.VarChar(64)
   createTime        BigInt?
   createDate        DateTime?
   user              User?

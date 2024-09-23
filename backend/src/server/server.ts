@@ -12,8 +12,10 @@ import { periodicallyRegisterWebhook, handleWebhook } from '#api/BBB'
 import { CONFIG } from '#config/config'
 import { schema } from '#graphql/schema'
 import { context } from '#src/context'
+import { prisma } from '#src/prisma'
 
 import logger from './logger'
+import { onStartup } from './onStartup'
 
 import type { Context } from '#src/context'
 
@@ -52,6 +54,8 @@ export async function listen(port: number) {
   }
 
   const app = express()
+
+  await onStartup({ prisma, config: CONFIG })
 
   // Setup
   app.use(json())

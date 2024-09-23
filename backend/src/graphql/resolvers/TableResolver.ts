@@ -14,8 +14,9 @@ import {
 import { v4 as uuidv4 } from 'uuid'
 
 import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo, AttendeeRole } from '#api/BBB'
-import { CreateMeetingResponse } from '#api/BBB/types'
+import { CreateMeetingResponse, AttendeeInfo } from '#api/BBB/types'
 import { CONFIG } from '#config/config'
+import { Attendee } from '#models/AttendeeModel'
 import { OpenTable, Table } from '#models/TableModel'
 import { Context } from '#src/context'
 import {
@@ -198,7 +199,9 @@ export class TableResolver {
     })
     if (!user) throw new Error('User not found!')
     const meetings = await getMeetings()
-    return openTablesFromOpenMeetings(prisma)({ meetings, user })
+    const openWelcomeTable = await getOpenWelcomeTable(context)(meetings)
+    const openTables = await openTablesFromOpenMeetings(prisma)({ meetings, user })
+    return [openWelcomeTable, ...openTables]
   }
 
   @Authorized()
@@ -278,6 +281,7 @@ export class TableResolver {
     let password: string
 
     if (
+      table.type === 'PERMANENT' ||
       (table.user && table.user.id === user.id) ||
       table.users.some((e) => e.userId === user.id && e.role === 'MODERATOR')
     ) {
@@ -514,7 +518,9 @@ export class TableResolver {
       },
     })
     if (!user) return []
-    return openTablesFromOpenMeetings(prisma)({ meetings, user })
+    const openWelcomeTable = await getOpenWelcomeTable(context)(meetings)
+    const openTables = await openTablesFromOpenMeetings(prisma)({ meetings, user })
+    return [openWelcomeTable, ...openTables]
   }
 
   /*
@@ -659,3 +665,31 @@ const createBBBMeeting =
     }
     return meeting
   }
+
+const getOpenWelcomeTable = (context: Context) => async (meetings: MeetingInfo[]) => {
+  const {
+    config,
+    dataSources: { prisma },
+  } = context
+  const welcomeTable = await prisma.meeting.findFirstOrThrow({
+    where: {
+      meetingID: config.WELCOME_TABLE_MEETING_ID,
+    },
+  })
+  const welcomeMeeting = meetings.find((m) => m.meetingID === config.WELCOME_TABLE_MEETING_ID)
+  const attendees = welcomeMeeting
+    ? typeof welcomeMeeting.attendees !== 'string'
+      ? Array.isArray(welcomeMeeting.attendees.attendee)
+        ? welcomeMeeting.attendees.attendee.map((a: AttendeeInfo) => new Attendee(a))
+        : [welcomeMeeting.attendees.attendee]
+      : []
+    : []
+  return new OpenTable({
+    id: welcomeTable.id,
+    meetingID: config.WELCOME_TABLE_MEETING_ID,
+    meetingName: config.WELCOME_TABLE_NAME,
+    participantCount: welcomeMeeting?.participantCount ?? 0,
+    startTime: new Date(welcomeMeeting?.startTime ?? 0).toISOString(),
+    attendees,
+  })
+}

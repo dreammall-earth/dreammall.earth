@@ -1,5 +1,5 @@
 import { Meeting } from '@prisma/client'
-import { ObjectType, Field, Int } from 'type-graphql'
+import { ObjectType, Field, Int, registerEnumType } from 'type-graphql'
 
 import { MeetingInfo, AttendeeInfo } from '#src/api/BBB'
 import { UsersWithMeetings } from '#src/prisma'
@@ -7,16 +7,26 @@ import { UsersWithMeetings } from '#src/prisma'
 import { Attendee } from './AttendeeModel'
 import { UserInMeeting } from './UserInMeetingModel'
 
+enum MeetingType {
+  'PERMANENT' = 'PERMANENT',
+  'PROJECT' = 'PROJECT',
+  'MALL_TALK' = 'MALL_TALK',
+}
+
+registerEnumType(MeetingType, {
+  name: 'MeetingType',
+})
+
 @ObjectType()
 export class Table {
-  constructor(data: Pick<Table, 'id' | 'name' | 'public' | 'users'>) {
+  constructor(data: Pick<Table, 'id' | 'name' | 'public' | 'users' | 'type'>) {
     Object.assign(this, data)
   }
 
   static fromMeeting(meeting: Meeting, usersWithMeetings: UsersWithMeetings[]) {
-    const { id, name } = meeting
+    const { id, name, type } = meeting
     const users = usersWithMeetings.map((u) => new UserInMeeting(u))
-    return new Table({ id, name, public: meeting.public, users })
+    return new Table({ id, name, public: meeting.public, users, type: type as MeetingType })
   }
 
   @Field(() => Int)
@@ -27,6 +37,9 @@ export class Table {
 
   @Field()
   public: boolean
+
+  @Field(() => MeetingType)
+  type: MeetingType
 
   @Field(() => [UserInMeeting])
   users: UserInMeeting[]

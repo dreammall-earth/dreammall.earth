@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient, EventType } from '@prisma/client'
+import { Prisma, PrismaClient, EventType, MeetingType } from '@prisma/client'
 import { createSoftDeleteExtension } from 'prisma-extension-soft-delete'
 
 import logger from './logger'
@@ -81,6 +81,7 @@ export {
   prisma,
   DeamMallPrismaClient as PrismaClient,
   EventType,
+  MeetingType,
   UserWithMeeting,
   UserWithProfile,
   UsersWithMeetings,
