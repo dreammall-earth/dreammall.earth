@@ -13,10 +13,16 @@
       </div>
     </template>
     <template #default>
-      <ul class="list">
-        <TableItem v-for="table in tables" :key="table.id" v-bind="table" />
+      <ul v-if="tables.length > 0" class="list">
+        <TableItem
+          v-for="table in tables"
+          :key="table.id"
+          v-bind="table"
+          ref="tableItemRefs"
+          @option-opened="closeOptions"
+        />
       </ul>
-      <div v-if="tables.length === 0">
+      <div v-else>
         {{ $t('cockpit.myTables.noTables') }}
       </div>
     </template>
@@ -25,7 +31,7 @@
 
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
 import useModal from '#components/modal/useModal'
@@ -51,6 +57,14 @@ const tables = computed(() =>
     moderatorCount: table.users.filter((user) => user.role === 'MODERATOR').length,
   })),
 )
+
+const tableItemRefs = ref<(typeof TableItem)[]>([])
+
+const closeOptions = () => {
+  tableItemRefs.value.forEach((tableItem) => {
+    tableItem.closeOptions()
+  })
+}
 </script>
 
 <style scoped>

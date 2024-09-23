@@ -78,6 +78,10 @@ const props = defineProps<{
   moderatorCount?: number
 }>()
 
+const emit = defineEmits<{
+  (e: 'option-opened'): void
+}>()
+
 const isShowingOptions = ref(false)
 
 const openTable = () => {
@@ -85,6 +89,9 @@ const openTable = () => {
 }
 
 const toggleOptions = () => {
+  if (!isShowingOptions.value) {
+    emit('option-opened')
+  }
   isShowingOptions.value = !isShowingOptions.value
 }
 
@@ -109,6 +116,12 @@ const deleteTable = async () => {
     }
   }
 }
+
+defineExpose({
+  closeOptions: () => {
+    isShowingOptions.value = false
+  },
+})
 </script>
 
 <style scoped>
