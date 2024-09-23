@@ -4,12 +4,13 @@
 
   // Overriding of track style and size
   .v-switch__track {
-    border: 3px solid rgb(var(--inactive-color));
-    background-color: transparent !important;
-    height: 22px !important;
     width: 54px !important;
+    height: 22px !important;
+    background-color: transparent !important;
+    border: 3px solid rgb(var(--inactive-color));
     opacity: 1 !important;
   }
+
   .v-switch__thumb-container {
     &::before {
       background-color: transparent !important;
@@ -18,35 +19,38 @@
 
   // Overriding of thumb's general style
   .v-switch__thumb {
-    background-color: rgb(var(--inactive-color)) !important;
-    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1); // todo: ist das wirklich notwenidg?
     width: 12px !important;
     height: 12px !important;
-
+    background-color: rgb(var(--inactive-color)) !important;
     box-shadow: none !important;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1); // todo: ist das wirklich notwenidg?
   }
 
   // Overriding of thumb's hover colors and opacity
   .v-selection-control__input:hover::before {
-    background-color: rgb(var(--inactive-color)) !important;
     color: rgb(var(--inactive-color)) !important;
     caret-color: rgb(var(--inactive-color)) !important;
+    background-color: rgb(var(--inactive-color)) !important;
     opacity: 0.1;
   }
+
   .v-ripple__container {
     opacity: 0 !important;
   }
+
   .v-selection-control--dirty {
     .v-switch__track {
       border-color: rgb(var(--active-color));
     }
+
     .v-switch__thumb {
       background-color: rgb(var(--active-color)) !important;
     }
+
     .v-selection-control__input:hover::before {
-      background-color: rgb(var(--active-color)) !important;
       color: rgb(var(--active-color)) !important;
       caret-color: rgb(var(--active-color)) !important;
+      background-color: rgb(var(--active-color)) !important;
     }
   }
 
@@ -54,6 +58,7 @@
   .v-selection-control__input {
     transform: translateX(-8px) !important;
   }
+
   .v-selection-control--dirty .v-selection-control__input {
     transform: translateX(8px) !important;
   }
