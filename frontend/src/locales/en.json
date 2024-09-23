@@ -99,7 +99,9 @@
     "copiedToClipboard": "Link copied to clipboard"
   },
   "joinTablePage": {
-    "header": "Join Table as:"
+    "reminder": "Welcome to the meeting! Type in your name, join the meeting - and then register to be on more than just the guest list!",
+    "submit": "Enter table",
+    "guest-name": "Guest name"
   },
   "menu": {
     "cockpit": "Cockpit",

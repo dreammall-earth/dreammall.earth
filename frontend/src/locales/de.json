@@ -99,7 +99,9 @@
     "copiedToClipboard": "Link in Zwischenablage kopiert"
   },
   "joinTablePage": {
-    "header": "Raum betreten als:"
+    "reminder": "Willkommen! Namen eintippen, Meeting beitreten – und danach registrieren, um nicht nur auf der Gästeliste zu stehen!",
+    "submit": "Tisch betreten",
+    "guest-name": "Gastname"
   },
   "menu": {
     "cockpit": "Cockpit",

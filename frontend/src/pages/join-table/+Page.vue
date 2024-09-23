@@ -1,53 +1,60 @@
 <template>
-  <div class="d-flex bg-white text-center pa-6 v-container">
-    <v-row class="section-header newsletter-section">
-      <v-col>
-        <h2 class="section-headline">{{ $t('joinTablePage.header') }}</h2>
-        <div class="mt-8 d-flex justify-center">
-          <v-form ref="form" class="w-25" @submit.prevent="getTableLink">
-            <v-text-field
-              id="userName"
-              v-model="userName"
-              class="pb-3"
-              :counter="10"
-              label="Name"
-              hide-details
-              required
-            ></v-text-field>
-            <MainButton
-              variant="submit"
-              size="auto"
-              label="Bestätigen"
-              type="submit"
-              :is-loading="loading"
-            >
-            </MainButton>
-          </v-form>
+  <div class="background">
+    <div class="panel">
+      <div class="d-flex flex-column align-center justify-space-around pa-4">
+        <h2 class="section-headline">{{ tableName }}</h2>
+
+        <div class="reminder text-center mt-4 pa-5 font-weight-medium">
+          <LogoImage class="mx-auto" size="tiny" :text-enabled="false" />
+          <p class="mt-5">
+            {{ $t('joinTablePage.reminder') }}
+          </p>
         </div>
-      </v-col>
-    </v-row>
+
+        <v-text-field
+          v-model="userName"
+          flat
+          rounded
+          class="elevation-0 w-75 flex-grow-0 mt-12"
+          content-class="elevation-0"
+          :label="t('joinTablePage.guest-name')"
+          variant="solo-filled"
+          append-inner-icon="mdi-pencil"
+          maxlength="64"
+          required
+          autofocus
+        />
+        <!-- todo: manage values as maxlength globally? -->
+
+        <SimpleButton class="mt-12 mx-auto" :label="t('joinTablePage.submit')" @click="submit" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useQuery } from '@vue/apollo-composable'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-import MainButton from '#components/buttons/MainButton.vue'
+import SimpleButton from '#components/buttons/SimpleButton.vue'
+import LogoImage from '#components/menu/LogoImage.vue'
 import { usePageContext } from '#context/usePageContext'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { joinTableAsGuestQuery } from '#queries/joinTableAsGuestQuery'
+import { useTablesStore } from '#stores/tablesStore'
+
+const { t } = useI18n()
 
 const pageContext = usePageContext()
 const tableId = Number(pageContext.routeParams?.id)
+
 const userName = ref('')
 
-const form = ref<HTMLFormElement>()
-const {
-  result: joinTableAsGuestQueryResult,
-  refetch: joinTableAsGuestQueryRefetch,
-  loading,
-} = useQuery(
+const tablesStore = useTablesStore()
+const tableName = tablesStore.getTable(tableId)?.name ?? 'Unbekannter Tisch'
+
+const { result: joinTableAsGuestQueryResult, refetch: joinTableAsGuestQueryRefetch } = useQuery(
   joinTableAsGuestQuery,
   {
     userName: userName.value,
@@ -59,7 +66,7 @@ const {
   },
 )
 
-const getTableLink = async () => {
+const submit = async () => {
   try {
     await joinTableAsGuestQueryRefetch({
       userName: userName.value,
@@ -68,8 +75,26 @@ const getTableLink = async () => {
     if (joinTableAsGuestQueryResult.value) {
       window.location.href = joinTableAsGuestQueryResult.value.joinTableAsGuest
     }
+
   } catch (error) {
     GlobalErrorHandler.error('table link not found', error)
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.panel {
+  width: min(636px, 100vw);
+  padding: 20px 20px 40px 20px;
+  background-color: var(--v-dm-panel-background-color);
+  backdrop-filter: blur(30px);
+  border: 1px solid var(--v-dm-panel-border-color);
+  border-radius: 30px;
+  transform: translate(calc(50vw - 50%), calc(50vh - 50%));
+}
+.reminder {
+  color: rgb(var(--v-theme-dm-panel-reminder-text-color));
+  background-color: var(--v-dm-panel-reminder-text-background-color);
+  border-radius: 24px;
+}
+</style>

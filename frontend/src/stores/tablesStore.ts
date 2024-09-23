@@ -121,6 +121,9 @@ export const useTablesStore = defineStore(
 
     const getTables = computed(() => tables.value)
 
+    // todo: just a test implementation - This is not fulfilling the requirements!!!
+    const getTable = (id: number) => tables.value.find((t) => t.id === id)
+
     const setTables = (newTables: Table[]) => {
       tables.value = newTables
     }
@@ -209,6 +212,7 @@ export const useTablesStore = defineStore(
       isLoadingOpenTables,
       getTables,
       setTables,
+      getTable,
       isLoadingTables,
       createMyTable,
       updateMyTable,

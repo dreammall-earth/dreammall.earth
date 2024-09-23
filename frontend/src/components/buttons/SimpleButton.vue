@@ -32,7 +32,7 @@ const onClick = () => {
   min-height: 42px;
   padding: 0 20px;
   font-size: 16px;
-  font-weight: normal;
+  font-weight: 600;
   color: rgb(var(--v-theme-dm-panel-submit-color));
   text-transform: none;
   background-color: rgb(var(--v-theme-dm-panel-submit-background-color));
