@@ -96,10 +96,13 @@
     }
   },
   "globalErrorHandler": {
-    "copiedToClipboard": "Link copied to clipboard"
+    "copiedToClipboard": "Link copied to clipboard",
+    "tableerror": "Error opening table"
   },
   "joinTablePage": {
-    "header": "Join Table as:"
+    "button": "Submit",
+    "header": "Join Table as:",
+    "name": "Name"
   },
   "menu": {
     "cockpit": "Cockpit",

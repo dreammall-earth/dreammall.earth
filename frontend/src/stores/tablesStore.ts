@@ -7,6 +7,7 @@ import { createTableMutation } from '#mutations/createTableMutation'
 import { deleteTableMutation } from '#mutations/deleteTableMutation'
 import { joinMyTableMutation } from '#mutations/joinMyTableMutation'
 import { updateMyTableMutation } from '#mutations/updateMyTableMutation'
+import { updateTableMutation } from '#mutations/updateTableMutation'
 import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
 import { tablesQuery } from '#src/graphql/queries/tablesQuery'
 import { useUserStore } from '#stores/userStore'
@@ -45,6 +46,10 @@ type CreateMyTableResult = {
 
 type UpdateMyTableResult = {
   updateMyTable: Table
+}
+
+type UpdateTableResult = {
+  updateTable: Table
 }
 
 type JoinMyTableResult = {
@@ -127,6 +132,7 @@ export const useTablesStore = defineStore(
 
     const { mutate: createMyTableMutate } = useMutation<CreateMyTableResult>(createMyTableMutation)
     const { mutate: updateMyTableMutate } = useMutation<UpdateMyTableResult>(updateMyTableMutation)
+    const { mutate: updateTableMutate } = useMutation<UpdateTableResult>(updateTableMutation)
     const { mutate: joinMyTableMutate } = useMutation<JoinMyTableResult>(joinMyTableMutation)
 
     const { mutate: createTableMutate } = useMutation<CreateTableResult>(createTableMutation)
@@ -140,14 +146,26 @@ export const useTablesStore = defineStore(
       return result?.data?.createTable
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const updateTable = async (_tableId: number, _name: string, _isPublic: boolean) => {
-      // TODO: Implement
+    const updateTable = async (tableId: number, name: string, isPublic: boolean) => {
+      const result = await updateTableMutate({ name, tableId, isPublic })
+      if (result?.data?.updateTable) {
+        setTables([
+          ...tables.value.filter((table) => table.id !== tableId),
+          result.data.updateTable,
+        ])
+      }
+      return result?.data?.updateTable
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const updateTableModerators = async (_tableId: number, _userIds: number[]) => {
-      // TODO: Implement
+    const updateTableModerators = async (tableId: number, userIds: number[]) => {
+      const result = await updateTableMutate({ tableId, userIds })
+      if (result?.data?.updateTable) {
+        setTables([
+          ...tables.value.filter((table) => table.id !== tableId),
+          result.data.updateTable,
+        ])
+      }
+      return result?.data?.updateTable
     }
 
     const deleteTable = async (tableId: number) => {

@@ -81,6 +81,20 @@ const deleteTableMutation = `mutation DeleteTable($tableId: Int!) {
   deleteTable(tableId: $tableId)
 }`
 
+const updateTableMutation = `mutation UpdateTable($tableId: Int!, $name: String, $isPublic: Boolean, $userIds: [Int]) {
+  updateTable(tableId: $tableId, name: $name, isPublic: $isPublic, userIds: $userIds) {
+    id
+    name
+    public
+    users {
+      id
+      name
+      role
+      username
+    }
+  }
+}`
+
 describe('TableResolver', () => {
   beforeAll(async () => {
     testServer = await createTestServer()
@@ -263,6 +277,37 @@ describe('TableResolver', () => {
               ]),
             },
           },
+        })
+      })
+
+      describe('updateTable', () => {
+        it('throws access denied', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query: updateTableMutation,
+                variables: {
+                  tableId: -1,
+                  name: '',
+                  isPublic: false,
+                },
+              },
+              { contextValue: { user: null, dataSources: { prisma } } },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Access denied! You need to be authenticated to perform this action!',
+                  }),
+                ]),
+              },
+            },
+          })
         })
       })
     })
@@ -2540,6 +2585,217 @@ describe('TableResolver', () => {
               },
             },
           })
+        })
+      })
+    })
+
+    describe('updateTable', () => {
+      let meetingId: number | undefined
+      beforeAll(async () => {
+        const meeting = await prisma.meeting.create({
+          data: {
+            meetingID: 'DreamMall-Entwicklung-Edit',
+            name: 'DreamMall Entwicklung Edit',
+            attendeePW: 'attendee',
+            moderatorPW: 'moderator',
+            public: false,
+          },
+        })
+        await prisma.usersInMeetings.createMany({
+          data: [
+            {
+              meetingId: meeting.id,
+              userId: user.id,
+            },
+            {
+              meetingId: meeting.id,
+              userId: bibiUser.id,
+            },
+            {
+              meetingId: meeting.id,
+              userId: peterUser.id,
+            },
+          ],
+        })
+        meetingId = meeting.id
+      })
+
+      afterAll(async () => {
+        await prisma.usersInMeetings.deleteMany({
+          where: {
+            AND: [
+              {
+                meetingId,
+              },
+              {
+                OR: [
+                  {
+                    userId: user.id,
+                  },
+                  {
+                    userId: bibiUser.id,
+                  },
+                  {
+                    userId: peterUser.id,
+                  },
+                ],
+              },
+            ],
+          },
+        })
+        await prisma.meeting.delete({
+          where: {
+            id: meetingId,
+          },
+        })
+      })
+
+      it('throws error for wrong meeting id', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: updateTableMutation,
+              variables: {
+                tableId: -1,
+                name: '',
+                isPublic: false,
+              },
+            },
+            { contextValue: { user, dataSources: { prisma } } },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Meeting not found!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+
+      it('updates the table name and visibility', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: updateTableMutation,
+              variables: {
+                tableId: meetingId,
+                name: 'DreamMall Entwicklung Edit Step 2',
+                isPublic: true,
+                // userIds: [user.id, bibiUser.id],
+              },
+            },
+            { contextValue: { user, dataSources: { prisma } } },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: {
+                updateTable: {
+                  id: meetingId,
+                  name: 'DreamMall Entwicklung Edit Step 2',
+                  public: true,
+                  users: [
+                    {
+                      id: user.id,
+                      name: user.name,
+                      role: 'MODERATOR',
+                      username: user.username,
+                    },
+                    {
+                      id: bibiUser.id,
+                      name: bibiUser.name,
+                      role: 'MODERATOR',
+                      username: bibiUser.username,
+                    },
+                    {
+                      id: peterUser.id,
+                      name: peterUser.name,
+                      role: 'MODERATOR',
+                      username: peterUser.username,
+                    },
+                  ],
+                },
+              },
+            },
+          },
+        })
+      })
+
+      it('updates the table users', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: updateTableMutation,
+              variables: {
+                tableId: meetingId,
+                userIds: [user.id, bibiUser.id],
+              },
+            },
+            { contextValue: { user, dataSources: { prisma } } },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: {
+                updateTable: {
+                  id: meetingId,
+                  name: 'DreamMall Entwicklung Edit Step 2',
+                  public: true,
+                  users: [
+                    {
+                      id: user.id,
+                      name: user.name,
+                      role: 'MODERATOR',
+                      username: user.username,
+                    },
+                    {
+                      id: bibiUser.id,
+                      name: bibiUser.name,
+                      role: 'MODERATOR',
+                      username: bibiUser.username,
+                    },
+                  ],
+                },
+              },
+            },
+          },
+        })
+      })
+
+      it('throws error since raeuber has no right on this meeting', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: updateTableMutation,
+              variables: {
+                tableId: meetingId,
+                userIds: [user.id, bibiUser.id],
+              },
+            },
+            { contextValue: { user: raeuberUser, dataSources: { prisma } } },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'User has no right to edit meeting.',
+                }),
+              ]),
+            },
+          },
         })
       })
     })
