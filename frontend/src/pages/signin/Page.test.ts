@@ -40,8 +40,8 @@ describe('SigninPage', () => {
         Wrapper()
       })
 
-      it('calls authservie signin', () => {
-        expect(authServiceSpy).toHaveBeenCalledWith('')
+      it('calls authservice signin', () => {
+        expect(authServiceSpy).toHaveBeenCalledWith(undefined)
       })
 
       it('navigates to /', () => {

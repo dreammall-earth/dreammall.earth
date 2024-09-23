@@ -10,7 +10,7 @@ const guard: GuardSync = (pageContext): ReturnType<GuardSync> => {
   // there might be a better solution to combine both into pageContext
   const authStore = useAuthStore(pinia)
   if (!pageContext.hasToken && !authStore.isLoggedIn) {
-    throw redirect(`/signin${pageContext.urlPathname}`)
+    throw redirect(`/signin?previousUrl=${pageContext.urlPathname}`)
   }
 }
 

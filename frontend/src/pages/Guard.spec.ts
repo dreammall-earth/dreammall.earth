@@ -20,7 +20,7 @@ describe('global route guard', () => {
          which is not an acceptable argument for toThrow(). */
       /* eslint-disable-next-line vitest/require-to-throw-message */
       expect(() => guard({ hasToken: false, urlPathname: '/' } as PageContextServer)).toThrow()
-      expect(redirect).toHaveBeenCalledWith('/signin/')
+      expect(redirect).toHaveBeenCalledWith('/signin?previousUrl=/')
     })
 
     it('throws and redirects passing the path', () => {
@@ -28,7 +28,7 @@ describe('global route guard', () => {
          which is not an acceptable argument for toThrow(). */
       /* eslint-disable-next-line vitest/require-to-throw-message */
       expect(() => guard({ hasToken: false, urlPathname: '/x/23' } as PageContextServer)).toThrow()
-      expect(redirect).toHaveBeenCalledWith('/signin/x/23')
+      expect(redirect).toHaveBeenCalledWith('/signin?previousUrl=/x/23')
     })
   })
 
