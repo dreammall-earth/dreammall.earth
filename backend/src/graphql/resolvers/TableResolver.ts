@@ -18,7 +18,12 @@ import { CreateMeetingResponse } from '#api/BBB/types'
 import { CONFIG } from '#config/config'
 import { OpenTable, Table } from '#models/TableModel'
 import { Context } from '#src/context'
-import { EVENT_CREATE_MY_TABLE, EVENT_UPDATE_MY_TABLE, EVENT_CREATE_TABLE } from '#src/event/Events'
+import {
+  EVENT_CREATE_MY_TABLE,
+  EVENT_UPDATE_MY_TABLE,
+  EVENT_CREATE_TABLE,
+  EVENT_UPDATE_TABLE,
+} from '#src/event/Events'
 import logger from '#src/logger'
 import { prisma, UserWithMeeting, UsersWithMeetings } from '#src/prisma'
 
@@ -368,6 +373,71 @@ export class TableResolver {
     }
 
     return true
+  }
+
+  @Authorized()
+  @Mutation(() => Table)
+  async updateTable(
+    @Arg('tableId', () => Int) tableId: number,
+    @Ctx() context: Context,
+    @Arg('name', () => String, { nullable: true }) name: string | null | undefined,
+    @Arg('isPublic', { nullable: true }) isPublic: boolean = false,
+    // eslint-disable-next-line type-graphql/wrong-decorator-signature
+    @Arg('userIds', () => [Int], { nullable: 'itemsAndList' }) // eslint-disable-next-line type-graphql/invalid-nullable-input-type
+    userIds?: number[] | null | undefined,
+  ): Promise<Table> {
+    const { user } = context
+    if (!user) throw new Error('User not found!')
+
+    let meeting = await prisma.meeting.findFirst({
+      where: {
+        id: tableId,
+      },
+      include: {
+        users: true,
+      },
+    })
+    if (!meeting) throw new Error('Meeting not found!')
+    else if (!meeting.users.some((u) => u.userId === user.id && u.role === 'MODERATOR')) {
+      throw new Error('User has no right to edit meeting.')
+    }
+
+    if (name) {
+      meeting = await prisma.meeting.update({
+        where: {
+          id: tableId,
+        },
+        data: {
+          name,
+          public: isPublic,
+        },
+        include: {
+          users: true,
+        },
+      })
+
+      if (!meeting) {
+        throw new Error('Error updating the meeting!')
+      }
+    }
+
+    if (userIds && userIds.length) {
+      await prisma.usersInMeetings.deleteMany({
+        where: {
+          meetingId: tableId,
+        },
+      })
+      await prisma.usersInMeetings.createMany({
+        data: userIds.map((id) => ({
+          meetingId: tableId,
+          userId: id,
+        })),
+      })
+    }
+
+    const userInMeeting = await findUsersInMeetings(meeting)
+    await EVENT_UPDATE_TABLE(user.id)
+    return new Table(meeting, userInMeeting)
   }
 
   @Subscription(() => [OpenTable], {
