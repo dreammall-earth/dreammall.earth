@@ -16,8 +16,8 @@ import { parse } from 'cookie'
 import express from 'express'
 import { renderPage } from 'vike/server'
 
-import { publicEnv } from './config.js'
-import { root } from './root.js'
+import { publicEnv } from './config'
+import { root } from './root'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
