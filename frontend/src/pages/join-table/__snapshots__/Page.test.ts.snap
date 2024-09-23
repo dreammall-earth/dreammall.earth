@@ -98,7 +98,7 @@ exports[`JoinTablePage > renders 1`] = `
                       >
                         <!---->
                         
-                        Name
+                        $t('joinTablePage.name')
                         
                       </label>
                       <label
@@ -107,7 +107,7 @@ exports[`JoinTablePage > renders 1`] = `
                       >
                         <!---->
                         
-                        Name
+                        $t('joinTablePage.name')
                         
                       </label>
                       
@@ -167,7 +167,7 @@ exports[`JoinTablePage > renders 1`] = `
                     class="main-button-content"
                     data-v-2b63c1fe=""
                   >
-                    Bestätigen 
+                    $t('joinTablePage.button') 
                     <!--v-if-->
                   </span>
                   
