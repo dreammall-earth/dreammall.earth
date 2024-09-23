@@ -21,7 +21,12 @@ onBeforeMount(async () => {
   if (!user) {
     throw new Error('Could not sign in')
   }
-  navigate('/')
+
+  if (typeof user.state === 'string' && user.state.length > 0) {
+    navigate(user.state)
+  } else {
+    navigate('/')
+  }
 })
 </script>
 
