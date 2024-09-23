@@ -1,1 +1,1 @@
-export default '/signin/*'
+export default '/signin*'

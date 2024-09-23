@@ -26,7 +26,9 @@ onBeforeMount(async () => {
     return
   }
   try {
-    await authService?.signIn(pageContext.urlPathname.slice(1).split('/').slice(1).join('/'))
+    // Extract path from URL, ignoring the leading /signin
+    const redirectTo = pageContext.urlPathname.slice(1).split('/').slice(1).join('/')
+    await authService?.signIn(redirectTo)
     navigate('/')
   } catch (cause) {
     throw new Error('auth error', { cause })
