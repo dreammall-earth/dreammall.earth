@@ -96,10 +96,13 @@
     }
   },
   "globalErrorHandler": {
-    "copiedToClipboard": "Link in Zwischenablage kopiert"
+    "copiedToClipboard": "Link in Zwischenablage kopiert",
+    "tableerror": "Fehler beim Öffnen der Tabelle"
   },
   "joinTablePage": {
-    "header": "Raum betreten als:"
+    "button": "Bestätigen",
+    "header": "Raum betreten als:",
+    "name": "Name"
   },
   "menu": {
     "cockpit": "Cockpit",

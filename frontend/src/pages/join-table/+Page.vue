@@ -10,14 +10,14 @@
               v-model="userName"
               class="pb-3"
               :counter="10"
-              label="Name"
+              :label="$t('joinTablePage.name')"
               hide-details
               required
             ></v-text-field>
             <MainButton
               variant="submit"
               size="auto"
-              label="Bestätigen"
+              :label="$t('joinTablePage.button')"
               type="submit"
               :is-loading="loading"
             >
