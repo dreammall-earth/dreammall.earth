@@ -41,7 +41,7 @@ describe('SigninPage', () => {
       })
 
       it('calls authservie signin', () => {
-        expect(authServiceSpy).toHaveBeenCalledWith()
+        expect(authServiceSpy).toHaveBeenCalledWith('')
       })
 
       it('navigates to /', () => {

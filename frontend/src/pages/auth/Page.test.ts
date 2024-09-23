@@ -61,12 +61,40 @@ describe('AuthPage', () => {
       expect(wrapper.element).toMatchSnapshot()
     })
 
-    it('calls authservie signin callback', () => {
+    it('calls authservice signin callback', () => {
       expect(authServiceSpy).toHaveBeenCalledWith()
     })
 
     it('navigates to /', () => {
       expect(navigate).toHaveBeenCalledWith('/')
+    })
+  })
+
+  describe('signin callback with redirect path in state, without error', () => {
+    beforeEach(() => {
+      vi.clearAllMocks()
+      authServiceSpy.mockResolvedValue({
+        access_token: 'access_token',
+        profile: {
+          aud: 'aud',
+          sub: 'sub',
+          exp: 1,
+          iat: 1,
+          iss: 'iss',
+        },
+        token_type: 'token_type',
+        session_state: null,
+        state: '/my-path',
+        expires_in: 0,
+        expired: false,
+        scopes: ['email'],
+        toStorageString: () => 'toStorageString',
+      })
+      wrapper = Wrapper()
+    })
+
+    it('navigates to /my-path', () => {
+      expect(navigate).toHaveBeenCalledWith('/my-path')
     })
   })
 
