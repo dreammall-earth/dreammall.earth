@@ -22,7 +22,6 @@
       v-model="createTableModel.isPrivate"
       label="Privat"
       color="#4caf50"
-      inset
       hide-details
     />
 
