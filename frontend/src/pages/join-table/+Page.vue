@@ -96,10 +96,11 @@ const submit = async () => {
   transform: translate(calc(50vw - 50%), calc(50vh - 50%));
 
   @media #{map.get($display-breakpoints, 'sm-and-down')} {
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 10px 10px 20px 10px;
     transform: translate(0, calc(50vh - 50%));
-    width: calc(100% - 20px);
+    width: calc(100% - 40px);
   }
 }
 
@@ -113,5 +114,14 @@ const submit = async () => {
   @media #{map.get($display-breakpoints, 'sm-and-down')} {
     width: 100% !important;
   }
+}
+
+.background {
+  background-image: url('../../assets/join-table-background.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
 }
 </style>
