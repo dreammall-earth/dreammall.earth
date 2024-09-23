@@ -4,7 +4,7 @@
       <div class="d-flex flex-column align-center justify-space-around pa-4">
         <h2 class="section-headline">{{ tableName }}</h2>
 
-        <div class="reminder text-center mt-4 pa-5 font-weight-medium">
+        <div class="reminder text-center mt-8 pa-5 font-weight-medium">
           <LogoImage class="mx-auto" size="tiny" :text-enabled="false" />
           <p class="mt-5">
             {{ $t('joinTablePage.reminder') }}
@@ -83,6 +83,9 @@ const submit = async () => {
 </script>
 
 <style lang="scss" scoped>
+@use 'sass:map';
+@import 'vuetify/lib/styles/settings/_variables';
+
 .panel {
   width: min(636px, 100vw);
   padding: 20px 20px 40px 20px;
@@ -91,10 +94,24 @@ const submit = async () => {
   border: 1px solid var(--v-dm-panel-border-color);
   border-radius: 30px;
   transform: translate(calc(50vw - 50%), calc(50vh - 50%));
+
+  @media #{map.get($display-breakpoints, 'sm-and-down')} {
+    margin-left: 10px;
+    margin-right: 10px;
+    transform: translate(0, calc(50vh - 50%));
+    width: calc(100% - 20px);
+  }
 }
+
 .reminder {
   color: rgb(var(--v-theme-dm-panel-reminder-text-color));
   background-color: var(--v-dm-panel-reminder-text-background-color);
   border-radius: 24px;
+}
+
+.v-text-field {
+  @media #{map.get($display-breakpoints, 'sm-and-down')} {
+    width: 100% !important;
+  }
 }
 </style>
