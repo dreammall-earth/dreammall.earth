@@ -15,6 +15,7 @@ $font-family-default: 'Helvetica', sans-serif;
 @import './imports/_config';
 @import './imports/_fonts';
 @import './imports/_mixins';
+@import './vuetify-adjustments/dm.switch';
 
 :root {
   --menu-icon-height: 44px;
