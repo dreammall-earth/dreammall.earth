@@ -75,4 +75,12 @@ const userWithProfile = Prisma.validator<Prisma.UserDefaultArgs>()({
 
 type UserWithProfile = Prisma.UserGetPayload<typeof userWithProfile>
 
-export { prisma, UsersWithMeetings, UserWithMeeting, UserWithProfile }
+type DeamMallPrismaClient = typeof prisma
+
+export {
+  prisma,
+  DeamMallPrismaClient as PrismaClient,
+  UsersWithMeetings,
+  UserWithMeeting,
+  UserWithProfile,
+}

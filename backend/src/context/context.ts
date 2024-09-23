@@ -6,7 +6,7 @@ import { prisma } from '#src/prisma'
 import { findOrCreateUser } from './findOrCreateUser'
 import { getToken } from './getToken'
 
-import type { prisma as Prisma, UserWithProfile } from '#src/prisma'
+import type { PrismaClient, UserWithProfile } from '#src/prisma'
 import type { ContextFunction } from '@apollo/server'
 import type { ExpressContextFunctionArgument } from '@apollo/server/express4'
 
@@ -14,7 +14,7 @@ const JWKS = createRemoteJWKSet(new URL(CONFIG.JWKS_URI))
 
 export type Context = {
   user: UserWithProfile | null
-  dataSources: { prisma: typeof Prisma }
+  dataSources: { prisma: PrismaClient }
 }
 
 export interface CustomJwtPayload {
