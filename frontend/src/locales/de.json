@@ -101,7 +101,10 @@
   "joinTablePage": {
     "reminder": "Willkommen! Namen eintippen, Meeting beitreten – und danach registrieren, um nicht nur auf der Gästeliste zu stehen!",
     "submit": "Tisch betreten",
-    "guest-name": "Gastname"
+    "guestName": "Gastname",
+    "publicTable": "Öffentlicher Tisch",
+    "unknownTable": "Unbekannter Tisch",
+    "unknownTableErrorText": "Der von dir angefragte Tisch ist uns nicht bekannt oder öffentlich.\nBitte überprüfe deinen Einladungslink oder frage deinen Gastgeber dir einen aktuellen Link zu schicken."
   },
   "menu": {
     "cockpit": "Cockpit",
