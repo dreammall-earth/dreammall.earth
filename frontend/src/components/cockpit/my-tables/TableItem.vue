@@ -59,7 +59,6 @@ import { useI18n } from 'vue-i18n'
 import OptionButton from '#components/cockpit/options-list/OptionButton.vue'
 import OptionsList from '#components/cockpit/options-list/OptionsList.vue'
 import useModal from '#components/modal/useModal'
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { useTablesStore } from '#stores/tablesStore'
 
 import ChangeModerators from './change-moderators/ChangeModerators.vue'
@@ -111,8 +110,8 @@ const deleteTable = async () => {
   if (confirm(t('cockpit.myTables.deleteConfirmation'))) {
     try {
       await tablesStore.deleteTable(props.id)
-    } catch (error) {
-      GlobalErrorHandler.error('Could not delete table', error)
+    } catch (cause) {
+      throw new Error('Could not delete table', { cause })
     }
   }
 }

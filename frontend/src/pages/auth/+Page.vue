@@ -6,21 +6,22 @@
 import { navigate } from 'vike/client/router'
 import { inject, onBeforeMount } from 'vue'
 
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import AuthService from '#src/services/AuthService'
 
 const authService = inject<AuthService>('authService')
 
 onBeforeMount(async () => {
+  let user
   try {
-    const user = await authService?.signInCallback()
-    if (!user) {
-      throw new Error('Could not Sign In')
-    }
-    navigate('/')
-  } catch (error) {
-    GlobalErrorHandler.error('auth error', error)
+    user = await authService?.signInCallback()
+  } catch (cause) {
+    throw new Error('auth error', { cause })
   }
+
+  if (!user) {
+    throw new Error('Could not sign in')
+  }
+  navigate('/')
 })
 </script>
 

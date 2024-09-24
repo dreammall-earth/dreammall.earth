@@ -11,7 +11,7 @@ import { currentUserQuery } from '#queries/currentUserQuery'
 import { joinTableQuery } from '#queries/joinTableQuery'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 import { mockPageContext as globalMockPageContext } from '#tests/mock.vikePageContext'
-import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
+import { createMockPlugin } from '#tests/plugin.globalErrorHandler'
 
 import TablePage from './+Page.vue'
 import Route from './+route'
@@ -24,6 +24,8 @@ const currentUserQueryMock = vi.fn()
 const updateOpenTablesSubscriptionMock: IMockSubscription = createMockSubscription()
 
 const mockClient = createMockClient()
+
+const { mockPlugin, errorSpy } = createMockPlugin()
 
 const META: PageContext['publicEnv']['META'] = {
   BASE_URL: 'http://localhost:3000',
@@ -60,7 +62,9 @@ describe('Table Page', () => {
   const Wrapper = () => {
     return mount(VApp, {
       global: {
+        plugins: [mockPlugin],
         provide: {
+          toast: { success: () => {} },
           [vikePageContext as symbol]: mockPageContext,
         },
       },
@@ -108,10 +112,8 @@ describe('Table Page', () => {
     })
 
     it('toasts an error', () => {
-      expect(errorHandlerSpy).toHaveBeenCalledWith(
-        'Fehler beim Öffnen der Tabelle',
-        new ApolloError({ errorMessage: 'table does not exist' }),
-      )
+      const cause = new ApolloError({ errorMessage: 'table does not exist' })
+      expect(errorSpy).toHaveBeenCalledWith(new Error('Fehler beim Öffnen des Tisches', { cause }))
     })
   })
 

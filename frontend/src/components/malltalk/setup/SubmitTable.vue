@@ -35,18 +35,18 @@
 
 <script lang="ts" setup>
 import { navigate } from 'vike/client/router'
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 import { usePageContext } from '#context/usePageContext'
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { copyToClipboard } from '#src/utils/copyToClipboard'
 import { useTablesStore } from '#stores/tablesStore'
 
 import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
 import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
+import type { toast as Toast } from 'vue3-toastify'
 
 defineProps<StepProps>()
 const emit = defineEmits<StepEmits>()
@@ -70,8 +70,11 @@ const tableUrl = tablesStore.getJoinTableUrl(tableId, META.BASE_URL)
 const copiedIndicator = ref(false)
 let timerIndicator: ReturnType<typeof setTimeout> | null = null
 
+const toast = inject<typeof Toast>('toast')
+const copy = copyToClipboard(toast)
+
 const copyUrl = () => {
-  copyToClipboard(tableUrl, t('globalErrorHandler.copiedToClipboard'))
+  copy(tableUrl, t('copiedToClipboard'))
   copiedIndicator.value = true
 
   if (timerIndicator) clearTimeout(timerIndicator)
@@ -86,8 +89,8 @@ const navigateToTable = async () => {
   if (!tableId) return
   try {
     await navigate(tablesStore.getTableUri(tableId))
-  } catch (error) {
-    GlobalErrorHandler.error(t('globalErrorHandler.tableerror'), error)
+  } catch (cause) {
+    throw new Error(t('table.error'), { cause })
   }
 }
 </script>

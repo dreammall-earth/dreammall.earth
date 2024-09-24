@@ -1,7 +1,6 @@
 import { useQuery } from '@vue/apollo-composable'
 import { computed, ref } from 'vue'
 
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { searchUsersQuery } from '#queries/searchUsersQuery'
 
 export type SearchUser = {
@@ -39,8 +38,8 @@ export default function useSearchUsers() {
     searchString.value = query
     try {
       await refetch({ searchString: searchString.value })
-    } catch (e) {
-      GlobalErrorHandler.error('Error searching users:', e)
+    } catch (cause) {
+      throw new Error('Error searching users:', { cause })
     }
   }
 

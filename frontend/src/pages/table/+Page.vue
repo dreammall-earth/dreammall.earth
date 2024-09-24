@@ -24,7 +24,6 @@ import EmbeddedTable from '#components/embedded-table/EmbeddedTable.vue'
 import TableSettings from '#components/malltalk/settings/TableSettings.vue'
 import { usePageContext } from '#context/usePageContext'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { joinTableQuery } from '#queries/joinTableQuery'
 
 const { t } = useI18n()
@@ -61,9 +60,9 @@ watch(joinTableQueryResult, (data: { joinTable: string }) => {
 // eslint-disable-next-line promise/prefer-await-to-callbacks
 watch(joinTableQueryError, (error) => {
   if (!error) return
-  GlobalErrorHandler.error(t('globalErrorHandler.tableerror'), error)
   errorMessage.value = error.message
   tableUrl.value = null
+  throw new Error(t('table.error'), error)
 })
 
 const onTableClosed = () => navigate('/')

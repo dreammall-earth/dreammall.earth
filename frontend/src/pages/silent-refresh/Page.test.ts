@@ -6,7 +6,7 @@ import { VApp } from 'vuetify/components'
 
 import i18n from '#plugins/i18n'
 import { authService } from '#tests/mock.authService'
-import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
+import { createMockPlugin } from '#tests/plugin.globalErrorHandler'
 
 import SilentRefreshPage from './+Page.vue'
 import { title } from './+title'
@@ -14,11 +14,14 @@ import { title } from './+title'
 vi.mock('vike/client/router')
 vi.mocked(navigate).mockResolvedValue()
 
+const { mockPlugin, errorSpy } = createMockPlugin()
+
 describe('SilentRefreshPage', () => {
   const authServiceSpy = vi.spyOn(authService, 'renewToken')
 
   const Wrapper = () => {
     return mount(VApp, {
+      global: { plugins: [mockPlugin] },
       slots: {
         default: h(SilentRefreshPage as Component),
       },
@@ -56,7 +59,7 @@ describe('SilentRefreshPage', () => {
     })
 
     it('logs error to console', () => {
-      expect(errorHandlerSpy).toHaveBeenCalledWith('auth error', 'Ouch!')
+      expect(errorSpy).toHaveBeenCalledWith(new Error('auth error', { cause: 'Ouch!' }))
     })
   })
 })

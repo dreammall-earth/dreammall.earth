@@ -6,7 +6,7 @@ import { VApp } from 'vuetify/components'
 
 import i18n from '#plugins/i18n'
 import { authService } from '#tests/mock.authService'
-import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
+import { createMockPlugin } from '#tests/plugin.globalErrorHandler'
 
 import AuthPage from './+Page.vue'
 import { title } from './+title'
@@ -14,9 +14,12 @@ import { title } from './+title'
 vi.mock('vike/client/router')
 vi.mocked(navigate).mockResolvedValue()
 
+const { mockPlugin, errorSpy } = createMockPlugin()
+
 describe('AuthPage', () => {
   const Wrapper = () => {
     return mount(VApp, {
+      global: { plugins: [mockPlugin] },
       slots: {
         default: h(AuthPage as Component),
       },
@@ -70,16 +73,12 @@ describe('AuthPage', () => {
   describe('no user returned', () => {
     beforeEach(() => {
       vi.clearAllMocks()
-      authServiceSpy.mockResolvedValue()
+      authServiceSpy.mockResolvedValue(undefined)
+      Wrapper()
     })
 
     it('throws an error', () => {
-      try {
-        wrapper = Wrapper()
-      } catch (err) {
-        // eslint-disable-next-line vitest/no-conditional-expect
-        expect(err).toBe('Could not Sign In')
-      }
+      expect(errorSpy).toHaveBeenCalledWith(new Error('Could not sign in'))
     })
   })
 
@@ -87,11 +86,11 @@ describe('AuthPage', () => {
     beforeEach(() => {
       vi.clearAllMocks()
       authServiceSpy.mockRejectedValue('Ouch!')
-      wrapper = Wrapper()
+      Wrapper()
     })
 
     it('logs the error on console', () => {
-      expect(errorHandlerSpy).toHaveBeenCalledWith('auth error', 'Ouch!')
+      expect(errorSpy).toHaveBeenCalledWith(new Error('auth error', { cause: 'Ouch!' }))
     })
   })
 })

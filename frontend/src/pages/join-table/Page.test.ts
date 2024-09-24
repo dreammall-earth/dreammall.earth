@@ -8,7 +8,7 @@ import { VApp } from 'vuetify/components'
 
 import { getTableNameQuery } from '#queries/getTableName'
 import { joinTableAsGuestQuery } from '#queries/joinTableAsGuestQuery'
-import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
+import { createMockPlugin } from '#tests/plugin.globalErrorHandler'
 
 import JoinTablePage from './+Page.vue'
 import Route from './+route'
@@ -18,6 +18,7 @@ const joinTableAsGuestQueryMock = vi.fn()
 const getTableNameQueryMock = vi.fn()
 
 const mockClient = createMockClient()
+const { mockPlugin, errorSpy } = createMockPlugin()
 
 mockClient.setRequestHandler(joinTableAsGuestQuery, joinTableAsGuestQueryMock)
 mockClient.setRequestHandler(getTableNameQuery, getTableNameQueryMock)
@@ -27,6 +28,7 @@ provideApolloClient(mockClient)
 describe('JoinTablePage', () => {
   const Wrapper = () => {
     return mount(VApp, {
+      global: { plugins: [mockPlugin] },
       slots: {
         default: h(JoinTablePage as Component),
       },
@@ -112,9 +114,8 @@ describe('JoinTablePage', () => {
       })
 
       it('logs Table not found', () => {
-        expect(errorHandlerSpy).toHaveBeenCalledWith(
-          'table link not found',
-          new ApolloError({ errorMessage: 'autsch' }),
+        expect(errorSpy).toHaveBeenCalledWith(
+          new Error('table link not found', { cause: new ApolloError({ errorMessage: 'autsch' }) }),
         )
       })
     })
