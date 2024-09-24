@@ -1,45 +1,43 @@
 <template>
   <div class="background">
     <div class="panel">
-      <div class="d-flex flex-column align-center justify-space-around pa-4">
-        <div v-if="isError">
-          <h2 class="section-headline">{{ t('joinTablePage.unknownTable') }}</h2>
+      <div v-if="isError" class="d-flex flex-column align-center justify-space-around pa-4">
+        <h2 class="section-headline">{{ t('joinTablePage.unknownTable') }}</h2>
 
-          <div class="reminder text-center mt-8 pa-5 font-weight-medium">
-            <LogoImage class="mx-auto" size="tiny" :text-enabled="false" />
-            <p class="mt-5">
-              {{ $t('joinTablePage.unknownTableErrorText') }}
-            </p>
-          </div>
+        <div class="reminder text-center mt-8 pa-5 font-weight-medium">
+          <LogoImage class="mx-auto" size="tiny" :text-enabled="false" />
+          <p class="mt-5">
+            {{ $t('joinTablePage.unknownTableErrorText') }}
+          </p>
+        </div>
+      </div>
+
+      <div v-else class="d-flex flex-column align-center justify-space-around pa-4">
+        <h2 class="section-headline">{{ title }}</h2>
+
+        <div class="reminder text-center mt-8 pa-5 font-weight-medium">
+          <LogoImage class="mx-auto" size="tiny" :text-enabled="false" />
+          <p class="mt-5">
+            {{ $t('joinTablePage.reminder') }}
+          </p>
         </div>
 
-        <div v-else>
-          <h2 class="section-headline">{{ title }}</h2>
+        <v-text-field
+          v-model="userName"
+          flat
+          rounded
+          class="elevation-0 w-75 flex-grow-0 mt-12"
+          content-class="elevation-0"
+          :label="t('joinTablePage.guestName')"
+          variant="solo-filled"
+          append-inner-icon="mdi-pencil"
+          maxlength="64"
+          required
+          autofocus
+        />
+        <!-- todo: manage values as maxlength globally? -->
 
-          <div class="reminder text-center mt-8 pa-5 font-weight-medium">
-            <LogoImage class="mx-auto" size="tiny" :text-enabled="false" />
-            <p class="mt-5">
-              {{ $t('joinTablePage.reminder') }}
-            </p>
-          </div>
-
-          <v-text-field
-            v-model="userName"
-            flat
-            rounded
-            class="elevation-0 w-75 flex-grow-0 mt-12"
-            content-class="elevation-0"
-            :label="t('joinTablePage.guestName')"
-            variant="solo-filled"
-            append-inner-icon="mdi-pencil"
-            maxlength="64"
-            required
-            autofocus
-          />
-          <!-- todo: manage values as maxlength globally? -->
-
-          <SimpleButton class="mt-12 mx-auto" :label="t('joinTablePage.submit')" @click="submit" />
-        </div>
+        <SimpleButton class="mt-12 mx-auto" :label="t('joinTablePage.submit')" @click="submit" />
       </div>
     </div>
   </div>
