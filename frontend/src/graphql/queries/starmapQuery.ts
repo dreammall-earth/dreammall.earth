@@ -1,5 +1,7 @@
 import { gql } from 'graphql-tag'
 
+import { CurrentUser } from '#stores/userStore'
+
 export const starmapQuery = gql`
   query {
     starmap {
@@ -41,6 +43,7 @@ export type Star = {
   distance: number // relative distance
   magnitude: number // relative size
   color: number // relative color
+  data: CurrentUser
 }
 
 export type StarLine = {
