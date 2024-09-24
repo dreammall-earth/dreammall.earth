@@ -106,10 +106,10 @@ const submit = async () => {
   transform: translate(calc(50vw - 50%), calc(50vh - 50%));
 
   @media #{map.get($display-breakpoints, 'sm-and-down')} {
+    width: calc(100% - 40px);
     padding: 10px 10px 20px;
     margin-right: 20px;
     margin-left: 20px;
-    width: calc(100% - 40px);
     transform: translate(0, calc(50vh - 50%));
   }
 }
