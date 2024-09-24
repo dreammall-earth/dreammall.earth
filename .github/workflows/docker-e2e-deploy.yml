@@ -113,7 +113,7 @@ jobs:
           mkdir -p ~/.kube
           sops decrypt ./infrastructure/helmfile/secrets/kubeconfig > ~/.kube/config
       - run: echo "IMAGE_TAG=sha-$(echo $GITHUB_SHA | cut -c 1-7)" >> $GITHUB_ENV
-      - uses: helmfile/helmfile-action@314e6f498c8fb72ae64ed6f526e992a6a9a90e32 #v1.9.1
+      - uses: helmfile/helmfile-action@80fbb6408b98822310f94d8d1321a2cacf87f78f #v1.9.2
         with:
           helmfile-args: apply --environment master
           helmfile-workdirectory: ./infrastructure/helmfile

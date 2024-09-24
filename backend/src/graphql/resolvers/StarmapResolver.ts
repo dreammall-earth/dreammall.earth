@@ -1,15 +1,20 @@
-import { Resolver, Query, Authorized } from 'type-graphql'
+import { Resolver, Query, Ctx, Authorized } from 'type-graphql'
 
 import { StarMap } from '#models/StarModel'
-import { prisma, UserWithProfile } from '#src/prisma'
+import { UserWithProfile } from '#src/prisma'
 
 import { distributeStarsToSectorsRecursive } from './starmap/starmap'
+
+import type { Context } from '#src/context'
 
 @Resolver()
 export class StarmapResolver {
   @Authorized()
   @Query(() => StarMap)
-  async starmap(): Promise<StarMap> {
+  async starmap(@Ctx() context: Context): Promise<StarMap> {
+    const {
+      dataSources: { prisma },
+    } = context
     const users: UserWithProfile[] = await prisma.user.findMany({
       include: {
         userDetail: true,
