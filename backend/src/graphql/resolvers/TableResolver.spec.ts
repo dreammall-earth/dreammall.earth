@@ -405,6 +405,77 @@ describe('TableResolver', () => {
       })
     })
 
+    describe('getTableName', () => {
+      const query = `
+        query ($tableId: Int!) {
+          getTableName(tableId: $tableId)
+        }
+      `
+      describe('No table in DB', () => {
+        it('throws an Error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  tableId: 25,
+                },
+              },
+              { contextValue: mockContextValue() },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                errors: [expect.objectContaining({ message: 'Table does not exist' })],
+              },
+            },
+          })
+        })
+      })
+
+      describe('table in DB', () => {
+        let tableId: number
+        beforeEach(async () => {
+          const meeting = await prisma.meeting.create({
+            data: {
+              name: 'Club of Rome',
+              meetingID: 'Club of Rome',
+            },
+          })
+          tableId = meeting.id
+        })
+
+        afterEach(async () => {
+          await prisma.meeting.deleteMany()
+        })
+
+        it('returns name of table', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  tableId,
+                },
+              },
+              { contextValue: mockContextValue() },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: { getTableName: 'Club of Rome' },
+
+                errors: undefined,
+              },
+            },
+          })
+        })
+      })
+    })
+
     describe('tables', () => {
       it('throws access denied', async () => {
         await expect(
