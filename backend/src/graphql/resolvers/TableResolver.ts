@@ -392,6 +392,11 @@ export class TableResolver {
     const meeting = await prisma.meeting.findFirst({
       where: {
         id: tableId,
+        users: {
+          some: {
+            userId: user?.id,
+          },
+        },
       },
       include: {
         users: true,

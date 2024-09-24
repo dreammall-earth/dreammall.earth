@@ -2416,7 +2416,7 @@ describe('TableResolver', () => {
           ).resolves.toBeNull()
         })
 
-        it('throws error for already deleted connection', async () => {
+        it('throws error that meeting is not found', async () => {
           await expect(
             testServer.executeOperation(
               {
@@ -2432,7 +2432,7 @@ describe('TableResolver', () => {
               kind: 'single',
               singleResult: {
                 data: null,
-                errors: [expect.objectContaining({ message: 'User could not be detached.' })],
+                errors: [expect.objectContaining({ message: 'Meeting not found!' })],
               },
             },
           })
