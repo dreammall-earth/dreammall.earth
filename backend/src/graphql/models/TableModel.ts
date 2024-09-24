@@ -53,7 +53,7 @@ export class OpenTable {
     Object.assign(this, data)
   }
 
-  static fromMeetingInfo(meeting: MeetingInfo, id: number) {
+  static fromMeetingInfo(meeting: MeetingInfo, id: number): OpenTable {
     const { meetingID, meetingName, participantCount } = meeting
     const startTime = meeting.startTime.toString()
     const attendees = getAttendees(meeting)
@@ -84,4 +84,28 @@ export class OpenTable {
 
   @Field(() => [Attendee])
   attendees: Attendee[]
+}
+
+@ObjectType()
+export class OpenTables {
+  @Field(() => [OpenTable])
+  permanentTables: OpenTable[]
+
+  @Field(() => [OpenTable])
+  mallTalkTables: OpenTable[]
+
+  @Field(() => [OpenTable])
+  projectTables: OpenTable[]
+}
+
+@ObjectType()
+export class JoinTable {
+  @Field()
+  link: string
+
+  @Field()
+  tableType: string
+
+  @Field()
+  isModerator: boolean
 }
