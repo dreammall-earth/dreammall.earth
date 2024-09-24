@@ -29,6 +29,10 @@ import logger from '#src/logger'
 
 import type { PrismaClient, UserWithMeeting, UsersWithMeetings } from '#src/prisma'
 
+const removeNullish = <T>(array: (T | undefined)[]): T[] => {
+  return array.filter(Boolean) as T[]
+}
+
 @Resolver()
 export class TableResolver {
   @Authorized()
@@ -201,7 +205,7 @@ export class TableResolver {
     const meetings = await getMeetings()
     const openWelcomeTable = await getOpenWelcomeTable(context)(meetings)
     const openTables = await openTablesFromOpenMeetings(prisma)({ meetings, user })
-    return [openWelcomeTable, ...openTables]
+    return removeNullish([openWelcomeTable, ...openTables])
   }
 
   @Authorized()
@@ -520,7 +524,7 @@ export class TableResolver {
     if (!user) return []
     const openWelcomeTable = await getOpenWelcomeTable(context)(meetings)
     const openTables = await openTablesFromOpenMeetings(prisma)({ meetings, user })
-    return [openWelcomeTable, ...openTables]
+    return removeNullish([openWelcomeTable, ...openTables])
   }
 
   /*
@@ -671,11 +675,17 @@ const getOpenWelcomeTable = (context: Context) => async (meetings: MeetingInfo[]
     config,
     dataSources: { prisma },
   } = context
-  const welcomeTable = await prisma.meeting.findFirstOrThrow({
+  if (!config.WELCOME_TABLE_MEETING_ID) {
+    return
+  }
+  const welcomeTable = await prisma.meeting.findFirst({
     where: {
       meetingID: config.WELCOME_TABLE_MEETING_ID,
     },
   })
+  if (!welcomeTable) {
+    return
+  }
   const welcomeMeeting = meetings.find((m) => m.meetingID === config.WELCOME_TABLE_MEETING_ID)
   const attendees = welcomeMeeting
     ? typeof welcomeMeeting.attendees !== 'string'
