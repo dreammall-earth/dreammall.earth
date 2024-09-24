@@ -16,7 +16,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo, AttendeeRole } from '#api/BBB'
 import { CreateMeetingResponse } from '#api/BBB/types'
 import { CONFIG } from '#config/config'
-import { OpenTable, Table, getAttendees } from '#models/TableModel'
+import { JoinTable, OpenTable, OpenTables, Table, getAttendees } from '#models/TableModel'
 import { Context } from '#src/context'
 import {
   EVENT_CREATE_MY_TABLE,
@@ -188,8 +188,8 @@ export class TableResolver {
   }
 
   @Authorized()
-  @Query(() => [OpenTable])
-  async openTables(@Ctx() context: Context): Promise<OpenTable[]> {
+  @Query(() => OpenTables)
+  async openTables(@Ctx() context: Context): Promise<OpenTables> {
     const {
       dataSources: { prisma },
     } = context
@@ -273,11 +273,11 @@ export class TableResolver {
   }
 
   @Authorized()
-  @Query(() => String)
+  @Query(() => JoinTable)
   async joinTable(
     @Arg('tableId', () => Int) tableId: number,
     @Ctx() context: Context,
-  ): Promise<string> {
+  ): Promise<JoinTable> {
     const {
       user,
       dataSources: { prisma },
@@ -322,11 +322,15 @@ export class TableResolver {
       throw new Error('User has no access to meeting.')
     }
 
-    return joinMeetingLink({
-      fullName: user.name,
-      meetingID: table.meetingID,
-      password,
-    })
+    return {
+      link: joinMeetingLink({
+        fullName: user.name,
+        meetingID: table.meetingID,
+        password,
+      }),
+      tableType: '',
+      isModerator: false,
+    }
   }
 
   @Query(() => String)
@@ -521,14 +525,14 @@ export class TableResolver {
     return Table.fromMeeting(meeting, userInMeeting)
   }
 
-  @Subscription(() => [OpenTable], {
+  @Subscription(() => OpenTables, {
     topics: 'OPEN_TABLE_SUBSCRIPTION',
   })
   async updateOpenTables(
     @Root() meetings: MeetingInfo[],
     @Arg('username') username: string,
     @Ctx() context: Context,
-  ): Promise<OpenTable[]> {
+  ): Promise<OpenTables> {
     const {
       dataSources: { prisma },
     } = context
@@ -537,7 +541,7 @@ export class TableResolver {
         username,
       },
     })
-    if (!user) return []
+    if (!user) return { permanentTables: [], mallTalkTables: [], projectTables: [] }
     return openTablesFromOpenMeetings(context)({ meetings, user })
   }
 
@@ -561,16 +565,17 @@ type MeetingInfoUnionUser = {
 
 const openTablesFromOpenMeetings =
   (context: Context) =>
-  async (arg: MeetingInfoUnionUser): Promise<OpenTable[]> => {
+  async (arg: MeetingInfoUnionUser): Promise<OpenTables> => {
     const {
       dataSources: { prisma },
     } = context
-    const openTables: OpenTable[] = []
+    const openPermanentTables: OpenTable[] = []
     const welcomeTable = getOpenWelcomeTable(context)(arg.meetings)
     if (welcomeTable) {
-      openTables.push(welcomeTable)
+      openPermanentTables.push(welcomeTable)
     }
-    if (!arg.meetings.length) return openTables
+    if (!arg.meetings.length)
+      return { mallTalkTables: [], permanentTables: openPermanentTables, projectTables: [] }
     const dbMeetings = await prisma.meeting.findMany({
       where: {
         meetingID: { in: arg.meetings.map((m: MeetingInfo) => m.meetingID) },
@@ -600,13 +605,30 @@ const openTablesFromOpenMeetings =
       },
     })
 
+    const openMallTalkTables: OpenTable[] = []
+    const openTables: OpenTable[] = []
     dbMeetings.forEach((meeting) => {
       const meetingInfo = arg.meetings.find((m) => meeting.meetingID === m.meetingID)
       if (meetingInfo) {
-        openTables.push(OpenTable.fromMeetingInfo(meetingInfo, meeting.id ? meeting.id : 0))
+        const openTable = OpenTable.fromMeetingInfo(meetingInfo, meeting.id ? meeting.id : 0)
+        switch (meeting.type) {
+          case 'PROJECT':
+            openTables.push(openTable)
+            break
+          case 'PERMANENT':
+            openPermanentTables.push(openTable)
+            break
+          case 'MALL_TALK':
+            openMallTalkTables.push(openTable)
+            break
+        }
       }
     })
-    return openTables
+    return {
+      permanentTables: openPermanentTables,
+      mallTalkTables: openMallTalkTables,
+      projectTables: openTables,
+    }
   }
 
 const createUsersInMeetings =
