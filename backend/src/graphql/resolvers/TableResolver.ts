@@ -331,6 +331,24 @@ export class TableResolver {
     })
   }
 
+  @Query(() => String)
+  async getTableName(
+    @Arg('tableId', () => Int) tableId: number,
+    @Ctx() context: Context,
+  ): Promise<string> {
+    const {
+      dataSources: { prisma },
+    } = context
+    const meeting = await prisma.meeting.findUnique({
+      where: {
+        id: tableId,
+      },
+    })
+    if (!meeting) throw new Error('Table does not exist')
+
+    return meeting.name
+  }
+
   @Authorized()
   @Query(() => [Table])
   async tables(@Ctx() context: Context): Promise<Table[]> {
