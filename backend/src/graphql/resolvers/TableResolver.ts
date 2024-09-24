@@ -18,9 +18,15 @@ import { CreateMeetingResponse } from '#api/BBB/types'
 import { CONFIG } from '#config/config'
 import { OpenTable, Table } from '#models/TableModel'
 import { Context } from '#src/context'
-import { EVENT_CREATE_MY_TABLE, EVENT_UPDATE_MY_TABLE, EVENT_CREATE_TABLE } from '#src/event/Events'
+import {
+  EVENT_CREATE_MY_TABLE,
+  EVENT_UPDATE_MY_TABLE,
+  EVENT_CREATE_TABLE,
+  EVENT_UPDATE_TABLE,
+} from '#src/event/Events'
 import logger from '#src/logger'
-import { prisma, UserWithMeeting, UsersWithMeetings } from '#src/prisma'
+
+import type { PrismaClient, UserWithMeeting, UsersWithMeetings } from '#src/prisma'
 
 @Resolver()
 export class TableResolver {
@@ -34,12 +40,15 @@ export class TableResolver {
     @Arg('userIds', () => [Int], { nullable: 'itemsAndList' }) // eslint-disable-next-line type-graphql/invalid-nullable-input-type
     userIds?: number[] | null | undefined,
   ): Promise<Table> {
-    const { user } = context
+    const {
+      user,
+      dataSources: { prisma },
+    } = context
     if (!user) throw new Error('User not found!')
 
     const oldMeetindID = user.meetingId
 
-    const meetingID: string = await createMeetingID()
+    const meetingID: string = await createMeetingID(prisma)()
 
     const { meeting } = (await prisma.user.update({
       where: {
@@ -64,7 +73,7 @@ export class TableResolver {
     }
 
     if (userIds && userIds.length) {
-      await createUsersInMeetings({ userIds, meeting, role: AttendeeRole.VIEWER })
+      await createUsersInMeetings(prisma)({ userIds, meeting, role: AttendeeRole.VIEWER })
     }
 
     await EVENT_CREATE_MY_TABLE(user.id)
@@ -82,7 +91,7 @@ export class TableResolver {
         },
       })
     }
-    const usersInMeetings = await findUsersInMeetings(meeting)
+    const usersInMeetings = await findUsersInMeetings(prisma)(meeting)
 
     return new Table(meeting, usersInMeetings)
   }
@@ -97,7 +106,10 @@ export class TableResolver {
     @Arg('userIds', () => [Int], { nullable: 'itemsAndList' }) // eslint-disable-next-line type-graphql/invalid-nullable-input-type
     userIds?: number[] | null | undefined,
   ): Promise<Table> {
-    const { user } = context
+    const {
+      user,
+      dataSources: { prisma },
+    } = context
     if (!user) throw new Error('User not found!')
 
     if (!user.meetingId) {
@@ -133,7 +145,7 @@ export class TableResolver {
         })),
       })
     }
-    const usersInMeetings = await findUsersInMeetings(meeting)
+    const usersInMeetings = await findUsersInMeetings(prisma)(meeting)
 
     await EVENT_UPDATE_MY_TABLE(user.id)
 
@@ -143,7 +155,10 @@ export class TableResolver {
   @Authorized()
   @Mutation(() => Int)
   async joinMyTable(@Ctx() context: Context): Promise<number> {
-    const { user } = context
+    const {
+      user,
+      dataSources: { prisma },
+    } = context
     if (!user) throw new Error('User not found!')
 
     if (!user.meetingId) {
@@ -160,7 +175,7 @@ export class TableResolver {
 
     const inviteLink = createInviteLink(dbMeeting.id)
 
-    await createBBBMeeting({
+    await createBBBMeeting(prisma)({
       meetingID: dbMeeting.meetingID,
       name: dbMeeting.name,
       inviteLink,
@@ -173,6 +188,9 @@ export class TableResolver {
   @Authorized()
   @Query(() => [OpenTable])
   async openTables(@Ctx() context: Context): Promise<OpenTable[]> {
+    const {
+      dataSources: { prisma },
+    } = context
     const user = await prisma.user.findUnique({
       where: {
         id: context.user?.id,
@@ -180,7 +198,7 @@ export class TableResolver {
     })
     if (!user) throw new Error('User not found!')
     const meetings = await getMeetings()
-    return openTablesFromOpenMeetings({ meetings, user })
+    return openTablesFromOpenMeetings(prisma)({ meetings, user })
   }
 
   @Authorized()
@@ -194,7 +212,10 @@ export class TableResolver {
     @Arg('userIds', () => [Int], { nullable: 'itemsAndList' }) // eslint-disable-next-line type-graphql/invalid-nullable-input-type
     userIds?: number[] | null | undefined,
   ): Promise<Table> {
-    const { user } = context
+    const {
+      user,
+      dataSources: { prisma },
+    } = context
     if (!user) throw new Error('User not found!')
 
     // Get Meeting where user.id and userIds are Moderator
@@ -203,7 +224,7 @@ export class TableResolver {
     //   throw new Error('Meeting already exists!')
     // }
 
-    const meetingID: string = await createMeetingID()
+    const meetingID: string = await createMeetingID(prisma)()
 
     const dbMeeting = await prisma.meeting.create({
       data: { meetingID, name, public: isPublic },
@@ -218,9 +239,9 @@ export class TableResolver {
     }
 
     if (userIds.length) {
-      await createUsersInMeetings({ userIds, meeting: dbMeeting })
+      await createUsersInMeetings(prisma)({ userIds, meeting: dbMeeting })
     }
-    const usersInMeetings = await findUsersInMeetings(dbMeeting)
+    const usersInMeetings = await findUsersInMeetings(prisma)(dbMeeting)
 
     await EVENT_CREATE_TABLE(user.id)
 
@@ -233,7 +254,10 @@ export class TableResolver {
     @Arg('tableId', () => Int) tableId: number,
     @Ctx() context: Context,
   ): Promise<string> {
-    const { user } = context
+    const {
+      user,
+      dataSources: { prisma },
+    } = context
 
     if (!user) throw new Error('User not found!')
 
@@ -258,7 +282,7 @@ export class TableResolver {
       table.users.some((e) => e.userId === user.id && e.role === 'MODERATOR')
     ) {
       const inviteLink = createInviteLink(table.id)
-      const meeting = await createBBBMeeting({
+      const meeting = await createBBBMeeting(prisma)({
         meetingID: table.meetingID,
         name: table.name,
         inviteLink,
@@ -285,7 +309,11 @@ export class TableResolver {
   async joinTableAsGuest(
     @Arg('userName') userName: string,
     @Arg('tableId', () => Int) tableId: number,
+    @Ctx() context: Context,
   ): Promise<string> {
+    const {
+      dataSources: { prisma },
+    } = context
     const meeting = await prisma.meeting.findUnique({
       where: {
         id: tableId,
@@ -303,10 +331,31 @@ export class TableResolver {
     })
   }
 
+  @Query(() => String)
+  async getTableName(
+    @Arg('tableId', () => Int) tableId: number,
+    @Ctx() context: Context,
+  ): Promise<string> {
+    const {
+      dataSources: { prisma },
+    } = context
+    const meeting = await prisma.meeting.findUnique({
+      where: {
+        id: tableId,
+      },
+    })
+    if (!meeting) throw new Error('Table does not exist')
+
+    return meeting.name
+  }
+
   @Authorized()
   @Query(() => [Table])
   async tables(@Ctx() context: Context): Promise<Table[]> {
-    const { user } = context
+    const {
+      user,
+      dataSources: { prisma },
+    } = context
     const dbMeetings = await prisma.meeting.findMany({
       where: {
         users: {
@@ -321,7 +370,9 @@ export class TableResolver {
       },
     })
     const tables: Table[] = await Promise.all(
-      dbMeetings.map(async (meeting) => new Table(meeting, await findUsersInMeetings(meeting))),
+      dbMeetings.map(
+        async (meeting) => new Table(meeting, await findUsersInMeetings(prisma)(meeting)),
+      ),
     )
     return tables
   }
@@ -332,12 +383,20 @@ export class TableResolver {
     @Ctx() context: Context,
     @Arg('tableId', () => Int) tableId: number,
   ): Promise<boolean> {
-    const { user } = context
+    const {
+      user,
+      dataSources: { prisma },
+    } = context
     if (!user) throw new Error('User not found!')
 
     const meeting = await prisma.meeting.findFirst({
       where: {
         id: tableId,
+        users: {
+          some: {
+            userId: user?.id,
+          },
+        },
       },
       include: {
         users: true,
@@ -370,20 +429,92 @@ export class TableResolver {
     return true
   }
 
+  @Authorized()
+  @Mutation(() => Table)
+  async updateTable(
+    @Arg('tableId', () => Int) tableId: number,
+    @Ctx() context: Context,
+    @Arg('name', () => String, { nullable: true }) name: string | null | undefined,
+    @Arg('isPublic', { nullable: true }) isPublic: boolean = false,
+    // eslint-disable-next-line type-graphql/wrong-decorator-signature
+    @Arg('userIds', () => [Int], { nullable: 'itemsAndList' }) // eslint-disable-next-line type-graphql/invalid-nullable-input-type
+    userIds?: number[] | null | undefined,
+  ): Promise<Table> {
+    const {
+      user,
+      dataSources: { prisma },
+    } = context
+    if (!user) throw new Error('User not found!')
+
+    let meeting = await prisma.meeting.findFirst({
+      where: {
+        id: tableId,
+      },
+      include: {
+        users: true,
+      },
+    })
+    if (!meeting) throw new Error('Meeting not found!')
+    else if (!meeting.users.some((u) => u.userId === user.id && u.role === 'MODERATOR')) {
+      throw new Error('User has no right to edit meeting.')
+    }
+
+    if (name) {
+      meeting = await prisma.meeting.update({
+        where: {
+          id: tableId,
+        },
+        data: {
+          name,
+          public: isPublic,
+        },
+        include: {
+          users: true,
+        },
+      })
+
+      if (!meeting) {
+        throw new Error('Error updating the meeting!')
+      }
+    }
+
+    if (userIds && userIds.length) {
+      await prisma.usersInMeetings.deleteMany({
+        where: {
+          meetingId: tableId,
+        },
+      })
+      await prisma.usersInMeetings.createMany({
+        data: userIds.map((id) => ({
+          meetingId: tableId,
+          userId: id,
+        })),
+      })
+    }
+
+    const userInMeeting = await findUsersInMeetings(prisma)(meeting)
+    await EVENT_UPDATE_TABLE(user.id)
+    return new Table(meeting, userInMeeting)
+  }
+
   @Subscription(() => [OpenTable], {
     topics: 'OPEN_TABLE_SUBSCRIPTION',
   })
   async updateOpenTables(
     @Root() meetings: MeetingInfo[],
     @Arg('username') username: string,
+    @Ctx() context: Context,
   ): Promise<OpenTable[]> {
+    const {
+      dataSources: { prisma },
+    } = context
     const user = await prisma.user.findUnique({
       where: {
         username,
       },
     })
     if (!user) return []
-    return openTablesFromOpenMeetings({ meetings, user })
+    return openTablesFromOpenMeetings(prisma)({ meetings, user })
   }
 
   /*
@@ -404,71 +535,73 @@ type MeetingInfoUnionUser = {
   user: User
 }
 
-const openTablesFromOpenMeetings = async (arg: MeetingInfoUnionUser): Promise<OpenTable[]> => {
-  if (!arg.meetings.length) return []
-  const dbMeetings = await prisma.meeting.findMany({
-    where: {
-      meetingID: { in: arg.meetings.map((m: MeetingInfo) => m.meetingID) },
-      OR: [
-        {
-          public: true,
-        },
-        {
-          users: {
-            some: {
-              userId: arg.user.id,
+const openTablesFromOpenMeetings =
+  (prisma: PrismaClient) =>
+  async (arg: MeetingInfoUnionUser): Promise<OpenTable[]> => {
+    if (!arg.meetings.length) return []
+    const dbMeetings = await prisma.meeting.findMany({
+      where: {
+        meetingID: { in: arg.meetings.map((m: MeetingInfo) => m.meetingID) },
+        OR: [
+          {
+            public: true,
+          },
+          {
+            users: {
+              some: {
+                userId: arg.user.id,
+              },
             },
           },
-        },
-        arg.user.meetingId
-          ? {
-              id: arg.user.meetingId,
-            }
-          : {},
-      ],
-    },
-    select: {
-      id: true,
-      meetingID: true,
-      public: true,
-      users: true,
-    },
-  })
+          arg.user.meetingId
+            ? {
+                id: arg.user.meetingId,
+              }
+            : {},
+        ],
+      },
+      select: {
+        id: true,
+        meetingID: true,
+        public: true,
+        users: true,
+      },
+    })
 
-  const openTables: OpenTable[] = []
-  dbMeetings.forEach((meeting) => {
-    const meetingInfo = arg.meetings.find((m) => meeting.meetingID === m.meetingID)
-    if (meetingInfo) openTables.push(new OpenTable(meetingInfo, meeting.id ? meeting.id : 0))
-  })
-  return openTables
-}
+    const openTables: OpenTable[] = []
+    dbMeetings.forEach((meeting) => {
+      const meetingInfo = arg.meetings.find((m) => meeting.meetingID === m.meetingID)
+      if (meetingInfo) openTables.push(new OpenTable(meetingInfo, meeting.id ? meeting.id : 0))
+    })
+    return openTables
+  }
 
-const createUsersInMeetings = async (data: {
-  userIds: number[]
-  meeting: Meeting
-  role?: AttendeeRole
-}) => {
-  await prisma.usersInMeetings.createMany({
-    data: data.userIds.map((id) => ({
-      role: data.role,
-      meetingId: data.meeting.id,
-      userId: id,
-    })),
-  })
-}
+const createUsersInMeetings =
+  (prisma: PrismaClient) =>
+  async (data: { userIds: number[]; meeting: Meeting; role?: AttendeeRole }) => {
+    await prisma.usersInMeetings.createMany({
+      data: data.userIds.map((id) => ({
+        role: data.role,
+        meetingId: data.meeting.id,
+        userId: id,
+      })),
+    })
+  }
 
-const findUsersInMeetings = async (meeting: Meeting): Promise<UsersWithMeetings[]> => {
-  return (await prisma.usersInMeetings.findMany({
-    where: {
-      meetingId: meeting.id,
-    },
-    include: {
-      user: true,
-    },
-  })) as UsersWithMeetings[]
-}
+const findUsersInMeetings =
+  (prisma: PrismaClient) =>
+  async (meeting: Meeting): Promise<UsersWithMeetings[]> => {
+    return (await prisma.usersInMeetings.findMany({
+      where: {
+        meetingId: meeting.id,
+      },
+      include: {
+        user: true,
+      },
+    })) as UsersWithMeetings[]
+  }
 
-const createMeetingID = async (): Promise<string> => {
+const createMeetingID = (prisma: PrismaClient) => async (): Promise<string> => {
   let meetingID: string = uuidv4()
   while (
     await prisma.meeting.count({
@@ -486,39 +619,41 @@ function createInviteLink(tableId: number) {
   return new URL(`join-table/${tableId}`, CONFIG.FRONTEND_URL).toString()
 }
 
-async function createBBBMeeting(data: {
-  meetingID: string
-  name: string
-  inviteLink: string
-  tableId: number
-}): Promise<CreateMeetingResponse> {
-  const meeting = await createMeeting(
-    {
-      meetingID: data.meetingID,
-      name: data.name,
-    },
-    {
-      moderatorOnlyMessage: `Use this link to invite more people:<br/>${data.inviteLink}`,
-    },
-  )
-  if (!meeting) {
-    throw new Error('Error creating the meeting!')
-  }
-  try {
-    await prisma.meeting.update({
-      where: { id: data.tableId },
-      data: {
-        attendeePW: meeting.attendeePW,
-        moderatorPW: meeting.moderatorPW,
-        voiceBridge: meeting.voiceBridge,
-        dialNumber: meeting.dialNumber,
-        createTime: meeting.createTime,
-        createDate: new Date(meeting.createDate).toISOString(),
+const createBBBMeeting =
+  (prisma: PrismaClient) =>
+  async (data: {
+    meetingID: string
+    name: string
+    inviteLink: string
+    tableId: number
+  }): Promise<CreateMeetingResponse> => {
+    const meeting = await createMeeting(
+      {
+        meetingID: data.meetingID,
+        name: data.name,
       },
-    })
-  } catch (err) {
-    logger.error('Could not update Meeting in DB!', err)
-    throw new Error('Could not update Meeting in DB!')
+      {
+        moderatorOnlyMessage: `Use this link to invite more people:<br/>${data.inviteLink}`,
+      },
+    )
+    if (!meeting) {
+      throw new Error('Error creating the meeting!')
+    }
+    try {
+      await prisma.meeting.update({
+        where: { id: data.tableId },
+        data: {
+          attendeePW: meeting.attendeePW,
+          moderatorPW: meeting.moderatorPW,
+          voiceBridge: meeting.voiceBridge,
+          dialNumber: meeting.dialNumber,
+          createTime: meeting.createTime,
+          createDate: new Date(meeting.createDate).toISOString(),
+        },
+      })
+    } catch (err) {
+      logger.error('Could not update Meeting in DB!', err)
+      throw new Error('Could not update Meeting in DB!')
+    }
+    return meeting
   }
-  return meeting
-}

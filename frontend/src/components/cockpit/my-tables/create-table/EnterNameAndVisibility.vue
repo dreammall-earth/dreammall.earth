@@ -18,13 +18,7 @@
     />
     <!-- todo: manage values as maxlength globally? -->
 
-    <v-switch
-      v-model="createTableModel.isPrivate"
-      label="Privat"
-      color="#4caf50"
-      inset
-      hide-details
-    />
+    <v-switch v-model="createTableModel.isPrivate" label="Privat" color="#4caf50" hide-details />
 
     <SimpleButton type="submit" class="mt-12" :label="submitText" />
   </form>

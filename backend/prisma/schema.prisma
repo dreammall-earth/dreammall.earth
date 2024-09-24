@@ -40,12 +40,23 @@ model NewsletterPreOptIn {
   brevoSuccessList  DateTime?
 }
 
+enum EventType {
+  CONTACTFORM_SEND
+  NEWSLETTER_CONFIRM
+  NEWSLETTER_SUBSCRIBE
+  CREATE_USER
+  CREATE_MY_TABLE
+  UPDATE_MY_TABLE
+  UPDATE_TABLE
+  CREATE_TABLE
+}
+
 model Event {
-  id                Int      @id @default(autoincrement())
-  type              String   @db.VarChar(100)
-  involvedEmail     String?  @db.VarChar(254)
+  id                Int       @id @default(autoincrement())
+  type              EventType
+  involvedEmail     String?   @db.VarChar(254)
   involvedUserId    Int?
-  createdAt         DateTime @default(now())
+  createdAt         DateTime  @default(now())
 }
 
 model User {

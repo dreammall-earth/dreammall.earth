@@ -96,7 +96,8 @@
     }
   },
   "globalErrorHandler": {
-    "copiedToClipboard": "Link in Zwischenablage kopiert"
+    "copiedToClipboard": "Link in Zwischenablage kopiert",
+    "tableerror": "Fehler beim Öffnen der Tabelle"
   },
   "joinTablePage": {
     "reminder": "Willkommen! Namen eintippen, Meeting beitreten – und danach registrieren, um nicht nur auf der Gästeliste zu stehen!",

@@ -65,4 +65,4 @@ COPY --from=build ${DOCKER_WORKDIR}/server ./server
 COPY --from=build ${DOCKER_WORKDIR}/tsconfig.json ./tsconfig.json
 
 # Run command
-CMD /bin/sh -c "npm run server:prod"
+CMD /bin/sh -c "npm run server"

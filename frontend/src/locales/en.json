@@ -96,7 +96,8 @@
     }
   },
   "globalErrorHandler": {
-    "copiedToClipboard": "Link copied to clipboard"
+    "copiedToClipboard": "Link copied to clipboard",
+    "tableerror": "Error opening table"
   },
   "joinTablePage": {
     "reminder": "Welcome to the meeting! Type in your name, join the meeting - and then register to be on more than just the guest list!",

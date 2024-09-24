@@ -5,6 +5,7 @@ import { CONFIG } from '#config/config'
 import { findOrCreateUser } from '#src/context/findOrCreateUser'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
+import { mockContextValue } from '#test/mockContextValue'
 
 import type { Context } from '#src/context'
 import type { UserWithProfile } from '#src/prisma'
@@ -81,6 +82,20 @@ const deleteTableMutation = `mutation DeleteTable($tableId: Int!) {
   deleteTable(tableId: $tableId)
 }`
 
+const updateTableMutation = `mutation UpdateTable($tableId: Int!, $name: String, $isPublic: Boolean, $userIds: [Int]) {
+  updateTable(tableId: $tableId, name: $name, isPublic: $isPublic, userIds: $userIds) {
+    id
+    name
+    public
+    users {
+      id
+      name
+      role
+      username
+    }
+  }
+}`
+
 describe('TableResolver', () => {
   beforeAll(async () => {
     testServer = await createTestServer()
@@ -99,7 +114,7 @@ describe('TableResolver', () => {
                 userIds: [],
               },
             },
-            { contextValue: { user: null, dataSources: { prisma } } },
+            { contextValue: mockContextValue() },
           ),
         ).resolves.toMatchObject({
           body: {
@@ -130,7 +145,7 @@ describe('TableResolver', () => {
                 userIds: [],
               },
             },
-            { contextValue: { user: null, dataSources: { prisma } } },
+            { contextValue: mockContextValue() },
           ),
         ).resolves.toMatchObject({
           body: {
@@ -156,7 +171,7 @@ describe('TableResolver', () => {
             {
               query: 'mutation { joinMyTable }',
             },
-            { contextValue: { user: null, dataSources: { prisma } } },
+            { contextValue: mockContextValue() },
           ),
         ).resolves.toMatchObject({
           body: {
@@ -187,7 +202,7 @@ describe('TableResolver', () => {
                 userIds: [],
               },
             },
-            { contextValue: { user: null, dataSources: { prisma } } },
+            { contextValue: mockContextValue() },
           ),
         ).resolves.toMatchObject({
           body: {
@@ -222,7 +237,7 @@ describe('TableResolver', () => {
                 tableId: 69,
               },
             },
-            { contextValue: { user: null, dataSources: { prisma } } },
+            { contextValue: mockContextValue() },
           ),
         ).resolves.toMatchObject({
           body: {
@@ -248,7 +263,38 @@ describe('TableResolver', () => {
             {
               query: 'query { openTables { meetingName } }',
             },
-            { contextValue: { user: null, dataSources: { prisma } } },
+            { contextValue: mockContextValue() },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('updateTable', () => {
+      it('throws access denied', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: updateTableMutation,
+              variables: {
+                tableId: -1,
+                name: '',
+                isPublic: false,
+              },
+            },
+            { contextValue: mockContextValue() },
           ),
         ).resolves.toMatchObject({
           body: {
@@ -284,7 +330,7 @@ describe('TableResolver', () => {
                   tableId: 25,
                 },
               },
-              { contextValue: { user: null, dataSources: { prisma } } },
+              { contextValue: mockContextValue() },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -325,7 +371,7 @@ describe('TableResolver', () => {
                   tableId,
                 },
               },
-              { contextValue: { user: null, dataSources: { prisma } } },
+              { contextValue: mockContextValue() },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -348,12 +394,83 @@ describe('TableResolver', () => {
                 tableId,
               },
             },
-            { contextValue: { user: null, dataSources: { prisma } } },
+            { contextValue: mockContextValue() },
           )
           expect(joinMeetingLinkMock).toHaveBeenCalledWith({
             fullName: 'Pinky Pie',
             meetingID: 'Pony Ville',
             password: '',
+          })
+        })
+      })
+    })
+
+    describe('getTableName', () => {
+      const query = `
+        query ($tableId: Int!) {
+          getTableName(tableId: $tableId)
+        }
+      `
+      describe('No table in DB', () => {
+        it('throws an Error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  tableId: 25,
+                },
+              },
+              { contextValue: mockContextValue() },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                errors: [expect.objectContaining({ message: 'Table does not exist' })],
+              },
+            },
+          })
+        })
+      })
+
+      describe('table in DB', () => {
+        let tableId: number
+        beforeEach(async () => {
+          const meeting = await prisma.meeting.create({
+            data: {
+              name: 'Club of Rome',
+              meetingID: 'Club of Rome',
+            },
+          })
+          tableId = meeting.id
+        })
+
+        afterEach(async () => {
+          await prisma.meeting.deleteMany()
+        })
+
+        it('returns name of table', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  tableId,
+                },
+              },
+              { contextValue: mockContextValue() },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: { getTableName: 'Club of Rome' },
+
+                errors: undefined,
+              },
+            },
           })
         })
       })
@@ -366,7 +483,7 @@ describe('TableResolver', () => {
             {
               query: tablesQuery,
             },
-            { contextValue: { user: null, dataSources: { prisma } } },
+            { contextValue: mockContextValue() },
           ),
         ).resolves.toMatchObject({
           body: {
@@ -395,7 +512,7 @@ describe('TableResolver', () => {
                 tableId: -1,
               },
             },
-            { contextValue: { user: null, dataSources: { prisma } } },
+            { contextValue: mockContextValue() },
           ),
         ).resolves.toMatchObject({
           body: {
@@ -440,12 +557,7 @@ describe('TableResolver', () => {
                   userIds: [],
                 },
               },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -569,12 +681,7 @@ describe('TableResolver', () => {
                   userIds: [],
                 },
               },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -621,12 +728,7 @@ describe('TableResolver', () => {
                   userIds: [bibiUser.id, peterUser.id],
                 },
               },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -681,12 +783,7 @@ describe('TableResolver', () => {
                   userIds: [],
                 },
               },
-              {
-                contextValue: {
-                  user: userWithMeeting,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user: userWithMeeting }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -731,12 +828,7 @@ describe('TableResolver', () => {
                   userIds: [],
                 },
               },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -767,12 +859,7 @@ describe('TableResolver', () => {
                 userIds: [bibiUser.id, peterUser.id],
               },
             },
-            {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
-            },
+            { contextValue: mockContextValue({ user }) },
           )
         })
 
@@ -787,12 +874,7 @@ describe('TableResolver', () => {
                   isPublic: true,
                 },
               },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -937,12 +1019,7 @@ describe('TableResolver', () => {
                   userIds: [bibiUser.id, peterUser.id],
                 },
               },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -994,12 +1071,7 @@ describe('TableResolver', () => {
               {
                 query: 'mutation { joinMyTable }',
               },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -1028,12 +1100,7 @@ describe('TableResolver', () => {
                 isPublic: true,
               },
             },
-            {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
-            },
+            { contextValue: mockContextValue({ user }) },
           )
           jest.clearAllMocks()
 
@@ -1064,12 +1131,7 @@ describe('TableResolver', () => {
               {
                 query: 'mutation { joinMyTable }',
               },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -1123,12 +1185,7 @@ describe('TableResolver', () => {
               {
                 query: 'mutation { joinMyTable }',
               },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -1167,12 +1224,7 @@ describe('TableResolver', () => {
                   userIds: [bibiUser.id],
                 },
               },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -1382,12 +1434,7 @@ describe('TableResolver', () => {
                   userIds: [bibiUser.id],
                 },
               },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -1417,12 +1464,7 @@ describe('TableResolver', () => {
                   isPublic: true,
                 },
               },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -1463,12 +1505,7 @@ describe('TableResolver', () => {
                   userIds: [bibiUser.id, peterUser.id],
                 },
               },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -1527,12 +1564,7 @@ describe('TableResolver', () => {
                   tableId: -1,
                 },
               },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -1577,12 +1609,7 @@ describe('TableResolver', () => {
                     tableId,
                   },
                 },
-                {
-                  contextValue: {
-                    user,
-                    dataSources: { prisma },
-                  },
-                },
+                { contextValue: mockContextValue({ user }) },
               ),
             ).resolves.toMatchObject({
               body: {
@@ -1603,12 +1630,7 @@ describe('TableResolver', () => {
                   tableId,
                 },
               },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user }) },
             )
 
             expect(joinMeetingLinkMock).toHaveBeenCalledWith({
@@ -1668,12 +1690,7 @@ describe('TableResolver', () => {
                   tableId,
                 },
               },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user }) },
             )
 
             expect(joinMeetingLinkMock).toHaveBeenCalledWith({
@@ -1716,12 +1733,7 @@ describe('TableResolver', () => {
                     tableId,
                   },
                 },
-                {
-                  contextValue: {
-                    user: peterUser,
-                    dataSources: { prisma },
-                  },
-                },
+                { contextValue: mockContextValue({ user: peterUser }) },
               ),
             ).resolves.toMatchObject({
               body: {
@@ -1761,12 +1773,7 @@ describe('TableResolver', () => {
                   tableId,
                 },
               },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user }) },
             )
 
             expect(joinMeetingLinkMock).toHaveBeenCalledWith({
@@ -1784,12 +1791,7 @@ describe('TableResolver', () => {
                   tableId,
                 },
               },
-              {
-                contextValue: {
-                  user: bibiUser,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user: bibiUser }) },
             )
 
             expect(joinMeetingLinkMock).toHaveBeenCalledWith({
@@ -1807,12 +1809,7 @@ describe('TableResolver', () => {
                   tableId,
                 },
               },
-              {
-                contextValue: {
-                  user: peterUser,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user: peterUser }) },
             )
 
             expect(joinMeetingLinkMock).toHaveBeenCalledWith({
@@ -1844,12 +1841,7 @@ describe('TableResolver', () => {
                     tableId,
                   },
                 },
-                {
-                  contextValue: {
-                    user: raeuberUser,
-                    dataSources: { prisma },
-                  },
-                },
+                { contextValue: mockContextValue({ user: raeuberUser }) },
               ),
             ).resolves.toMatchObject({
               body: {
@@ -1882,12 +1874,7 @@ describe('TableResolver', () => {
               {
                 query: 'query { openTables { meetingName } }',
               },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -1941,12 +1928,7 @@ describe('TableResolver', () => {
                 query:
                   'query { openTables { id meetingName meetingID participantCount startTime attendees { fullName } } }',
               },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -2024,12 +2006,7 @@ describe('TableResolver', () => {
                 query:
                   'query { openTables { id meetingName meetingID participantCount startTime attendees { fullName } } }',
               },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -2122,12 +2099,7 @@ describe('TableResolver', () => {
                 query:
                   'query { openTables { id meetingName meetingID participantCount startTime attendees { fullName } } }',
               },
-              {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -2242,12 +2214,7 @@ describe('TableResolver', () => {
                 query:
                   'query { openTables { id meetingName meetingID participantCount startTime attendees { fullName } } }',
               },
-              {
-                contextValue: {
-                  user: bibiUser,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user: bibiUser }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -2271,7 +2238,7 @@ describe('TableResolver', () => {
             {
               query: tablesQuery,
             },
-            { contextValue: { user: raeuberUser, dataSources: { prisma } } },
+            { contextValue: mockContextValue({ user: raeuberUser }) },
           ),
         ).resolves.toMatchObject({
           body: {
@@ -2296,12 +2263,7 @@ describe('TableResolver', () => {
                 isPublic: true,
               },
             },
-            {
-              contextValue: {
-                user: raeuberUser,
-                dataSources: { prisma },
-              },
-            },
+            { contextValue: mockContextValue({ user: raeuberUser }) },
           )
         })
 
@@ -2311,7 +2273,7 @@ describe('TableResolver', () => {
               {
                 query: tablesQuery,
               },
-              { contextValue: { user: raeuberUser, dataSources: { prisma } } },
+              { contextValue: mockContextValue({ user: raeuberUser }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -2338,12 +2300,7 @@ describe('TableResolver', () => {
                 userIds: [bibiUser.id],
               },
             },
-            {
-              contextValue: {
-                user: raeuberUser,
-                dataSources: { prisma },
-              },
-            },
+            { contextValue: mockContextValue({ user: raeuberUser }) },
           )
         })
 
@@ -2353,7 +2310,7 @@ describe('TableResolver', () => {
               {
                 query: tablesQuery,
               },
-              { contextValue: { user: raeuberUser, dataSources: { prisma } } },
+              { contextValue: mockContextValue({ user: raeuberUser }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -2399,12 +2356,7 @@ describe('TableResolver', () => {
                 tableId: -1,
               },
             },
-            {
-              contextValue: {
-                user: raeuberUser,
-                dataSources: { prisma },
-              },
-            },
+            { contextValue: mockContextValue({ user: raeuberUser }) },
           ),
         ).resolves.toMatchObject({
           body: {
@@ -2442,12 +2394,7 @@ describe('TableResolver', () => {
                   tableId,
                 },
               },
-              {
-                contextValue: {
-                  user: raeuberUser,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user: raeuberUser }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -2469,7 +2416,7 @@ describe('TableResolver', () => {
           ).resolves.toBeNull()
         })
 
-        it('throws error for already deleted connection', async () => {
+        it('throws error that meeting is not found', async () => {
           await expect(
             testServer.executeOperation(
               {
@@ -2478,19 +2425,14 @@ describe('TableResolver', () => {
                   tableId,
                 },
               },
-              {
-                contextValue: {
-                  user: raeuberUser,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user: raeuberUser }) },
             ),
           ).resolves.toMatchObject({
             body: {
               kind: 'single',
               singleResult: {
                 data: null,
-                errors: [expect.objectContaining({ message: 'User could not be detached.' })],
+                errors: [expect.objectContaining({ message: 'Meeting not found!' })],
               },
             },
           })
@@ -2523,12 +2465,7 @@ describe('TableResolver', () => {
                   tableId,
                 },
               },
-              {
-                contextValue: {
-                  user: raeuberUser,
-                  dataSources: { prisma },
-                },
-              },
+              { contextValue: mockContextValue({ user: raeuberUser }) },
             ),
           ).resolves.toMatchObject({
             body: {
@@ -2540,6 +2477,217 @@ describe('TableResolver', () => {
               },
             },
           })
+        })
+      })
+    })
+
+    describe('updateTable', () => {
+      let meetingId: number | undefined
+      beforeAll(async () => {
+        const meeting = await prisma.meeting.create({
+          data: {
+            meetingID: 'DreamMall-Entwicklung-Edit',
+            name: 'DreamMall Entwicklung Edit',
+            attendeePW: 'attendee',
+            moderatorPW: 'moderator',
+            public: false,
+          },
+        })
+        await prisma.usersInMeetings.createMany({
+          data: [
+            {
+              meetingId: meeting.id,
+              userId: user.id,
+            },
+            {
+              meetingId: meeting.id,
+              userId: bibiUser.id,
+            },
+            {
+              meetingId: meeting.id,
+              userId: peterUser.id,
+            },
+          ],
+        })
+        meetingId = meeting.id
+      })
+
+      afterAll(async () => {
+        await prisma.usersInMeetings.deleteMany({
+          where: {
+            AND: [
+              {
+                meetingId,
+              },
+              {
+                OR: [
+                  {
+                    userId: user.id,
+                  },
+                  {
+                    userId: bibiUser.id,
+                  },
+                  {
+                    userId: peterUser.id,
+                  },
+                ],
+              },
+            ],
+          },
+        })
+        await prisma.meeting.delete({
+          where: {
+            id: meetingId,
+          },
+        })
+      })
+
+      it('throws error for wrong meeting id', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: updateTableMutation,
+              variables: {
+                tableId: -1,
+                name: '',
+                isPublic: false,
+              },
+            },
+            { contextValue: mockContextValue({ user }) },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Meeting not found!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+
+      it('updates the table name and visibility', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: updateTableMutation,
+              variables: {
+                tableId: meetingId,
+                name: 'DreamMall Entwicklung Edit Step 2',
+                isPublic: true,
+                // userIds: [user.id, bibiUser.id],
+              },
+            },
+            { contextValue: mockContextValue({ user }) },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: {
+                updateTable: {
+                  id: meetingId,
+                  name: 'DreamMall Entwicklung Edit Step 2',
+                  public: true,
+                  users: [
+                    {
+                      id: user.id,
+                      name: user.name,
+                      role: 'MODERATOR',
+                      username: user.username,
+                    },
+                    {
+                      id: bibiUser.id,
+                      name: bibiUser.name,
+                      role: 'MODERATOR',
+                      username: bibiUser.username,
+                    },
+                    {
+                      id: peterUser.id,
+                      name: peterUser.name,
+                      role: 'MODERATOR',
+                      username: peterUser.username,
+                    },
+                  ],
+                },
+              },
+            },
+          },
+        })
+      })
+
+      it('updates the table users', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: updateTableMutation,
+              variables: {
+                tableId: meetingId,
+                userIds: [user.id, bibiUser.id],
+              },
+            },
+            { contextValue: mockContextValue({ user }) },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: {
+                updateTable: {
+                  id: meetingId,
+                  name: 'DreamMall Entwicklung Edit Step 2',
+                  public: true,
+                  users: [
+                    {
+                      id: user.id,
+                      name: user.name,
+                      role: 'MODERATOR',
+                      username: user.username,
+                    },
+                    {
+                      id: bibiUser.id,
+                      name: bibiUser.name,
+                      role: 'MODERATOR',
+                      username: bibiUser.username,
+                    },
+                  ],
+                },
+              },
+            },
+          },
+        })
+      })
+
+      it('throws error since raeuber has no right on this meeting', async () => {
+        await expect(
+          testServer.executeOperation(
+            {
+              query: updateTableMutation,
+              variables: {
+                tableId: meetingId,
+                userIds: [user.id, bibiUser.id],
+              },
+            },
+            { contextValue: mockContextValue({ user: raeuberUser }) },
+          ),
+        ).resolves.toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'User has no right to edit meeting.',
+                }),
+              ]),
+            },
+          },
         })
       })
     })
