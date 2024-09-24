@@ -98,7 +98,7 @@ const submit = async () => {
 
 .panel {
   width: min(636px, 100vw);
-  padding: 20px 20px 40px 20px;
+  padding: 20px 20px 40px;
   background-color: var(--v-dm-panel-background-color);
   backdrop-filter: blur(30px);
   border: 1px solid var(--v-dm-panel-border-color);
@@ -106,11 +106,11 @@ const submit = async () => {
   transform: translate(calc(50vw - 50%), calc(50vh - 50%));
 
   @media #{map.get($display-breakpoints, 'sm-and-down')} {
-    margin-left: 20px;
+    padding: 10px 10px 20px;
     margin-right: 20px;
-    padding: 10px 10px 20px 10px;
-    transform: translate(0, calc(50vh - 50%));
+    margin-left: 20px;
     width: calc(100% - 40px);
+    transform: translate(0, calc(50vh - 50%));
   }
 }
 
@@ -127,11 +127,11 @@ const submit = async () => {
 }
 
 .background {
+  width: 100vw;
+  height: 100vh;
   background-image: url('../../assets/join-table-background.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 100vh;
-  width: 100vw;
 }
 </style>
