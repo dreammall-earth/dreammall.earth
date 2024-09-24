@@ -100,10 +100,10 @@
     "tableerror": "Fehler beim Öffnen der Tabelle"
   },
   "joinTablePage": {
-    "reminder": "Willkommen! Namen eintippen, Meeting beitreten – und danach registrieren, um nicht nur auf der Gästeliste zu stehen!",
-    "submit": "Tisch betreten",
     "guestName": "Gastname",
     "publicTable": "Öffentlicher Tisch",
+    "reminder": "Willkommen! Namen eintippen, Meeting beitreten – und danach registrieren, um nicht nur auf der Gästeliste zu stehen!",
+    "submit": "Tisch betreten",
     "unknownTable": "Unbekannter Tisch",
     "unknownTableErrorText": "Der von dir angefragte Tisch ist uns nicht bekannt oder öffentlich.\nBitte überprüfe deinen Einladungslink oder frage deinen Gastgeber dir einen aktuellen Link zu schicken."
   },
