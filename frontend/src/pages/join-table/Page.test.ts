@@ -1,3 +1,4 @@
+import { ApolloError } from '@apollo/client/errors'
 import { provideApolloClient } from '@vue/apollo-composable'
 import { flushPromises, mount } from '@vue/test-utils'
 import { createMockClient } from 'mock-apollo-client'
@@ -12,7 +13,6 @@ import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
 import JoinTablePage from './+Page.vue'
 import Route from './+route'
 import { title } from './+title'
-import {ApolloError} from "@apollo/client/errors";
 
 const joinTableAsGuestQueryMock = vi.fn()
 const getTableNameQueryMock = vi.fn()
@@ -82,7 +82,6 @@ describe('JoinTablePage', () => {
       await wrapper.find('input').setValue('PinkyPie')
       await wrapper.find('button').trigger('click')
       await flushPromises()
-
     })
 
     it('calls JoinTable query', () => {
