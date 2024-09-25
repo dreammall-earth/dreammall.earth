@@ -8,7 +8,10 @@
         </span>
       </div>
       <button class="action" @click="openTable(item.id)">
-        <v-icon class="icon" icon="$camera" />
+        <v-icon
+          class="icon"
+          :icon="item.type !== 'project' || item.amIModerator ? '$handshake' : '$reception'"
+        />
       </button>
     </li>
   </ul>

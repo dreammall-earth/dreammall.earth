@@ -16,7 +16,7 @@
             <v-col class="d-flex align-center justify-end">
               <button class="test-desktop-camera-button" @click="toggleDrawer('tables')">
                 <Circle>
-                  <v-icon icon="$camera"></v-icon>
+                  <v-icon icon="$handshake"></v-icon>
                 </Circle>
               </button>
               <UserInfo class="ml-2" />
@@ -63,7 +63,7 @@
         @click="() => toggleDrawer('tables')"
       >
         <Circle>
-          <v-icon icon="$camera"></v-icon>
+          <v-icon icon="$handshake"></v-icon>
         </Circle>
       </button>
       <SmallDreamMallButton

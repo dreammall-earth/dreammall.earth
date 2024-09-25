@@ -21,7 +21,7 @@
       :class="{ hidden: isShowingOptions }"
       @click="openTable"
     >
-      <v-icon class="camera-icon" icon="$camera" />
+      <v-icon class="join-table-icon" icon="$handshake" />
     </button>
     <button class="options" @click="toggleOptions">
       <v-icon
@@ -164,7 +164,7 @@ defineExpose({
   border-radius: 0 16px 16px 0;
 }
 
-.camera-icon {
+.table-icon {
   transform: scale(0.8);
 }
 
