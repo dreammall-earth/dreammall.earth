@@ -149,7 +149,10 @@
     "notFound": "Tisch nicht gefunden."
   },
   "tables": {
-    "participantCount": "{count} Teilnehmer"
+    "participantCount": "{count} Teilnehmer",
+    "member": "Mitglied",
+    "mallTalk": "Mall Talk",
+    "project": "Projekt",
   },
   "tablesDrawer": {
     "mallTalk": "Mall Talk",

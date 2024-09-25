@@ -149,7 +149,10 @@
     "notFound": "Table not found."
   },
   "tables": {
-    "participantCount": "{count} participants"
+    "participantCount": "{count} participants",
+    "member": "Member",
+    "mallTalk": "Mall Talk",
+    "project": "Project",
   },
   "tablesDrawer": {
     "mallTalk": "Mall Talk",

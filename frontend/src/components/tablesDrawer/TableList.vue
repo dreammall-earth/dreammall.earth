@@ -1,7 +1,10 @@
 <template>
   <ul class="list" :data-type="$props.type">
     <li v-for="item in items" :key="item.meetingID" class="table">
-      <div class="table-info bg-dropdown-background border-thin">
+      <div
+        class="table-info bg-dropdown-background border-thin"
+        :class="{ highlighted: item.amIModerator }"
+      >
         <span class="name">{{ item.meetingName }}</span>
         <span class="subtitle">
           {{ $t('tables.participantCount', { count: item.participantCount }) }}
@@ -17,6 +20,15 @@
           :icon="item.type !== 'project' || item.amIModerator ? '$handshake' : '$reception'"
         />
       </button>
+      <div class="badge border-thin" :class="{ highlighted: item.amIModerator }">
+        {{
+          item.amIModerator
+            ? $t('tables.member')
+            : item.type === 'mallTalk'
+              ? $t('tables.mallTalk')
+              : $t('tables.project')
+        }}
+      </div>
     </li>
   </ul>
 </template>
@@ -57,6 +69,7 @@ const openTable = (id: number) => {
 }
 
 .table {
+  position: relative;
   display: flex;
   gap: 8px;
   align-items: stretch;
@@ -71,6 +84,10 @@ const openTable = (id: number) => {
   min-width: 0; /* flex items needs to size freely! */
   padding: 3px 24px;
   border-radius: 16px 0 0 16px;
+}
+
+.table-info.highlighted {
+  border-color: var(--list-color) !important;
 }
 
 .name {
@@ -101,5 +118,26 @@ const openTable = (id: number) => {
 
 .action.highlighted {
   background-color: var(--list-color);
+}
+
+.badge {
+  position: absolute;
+  bottom: -6px;
+  right: 80px;
+  border-radius: 6px;
+
+  background: #f5f5f5;
+  width: 59px;
+  height: 13px;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.badge.highlighted {
+  border-color: var(--list-color) !important;
+  color: var(--list-color);
 }
 </style>
