@@ -15,7 +15,7 @@
           <v-row>
             <v-col class="d-flex align-center justify-end">
               <button class="test-desktop-camera-button" @click="toggleDrawer('tables')">
-                <Circle>
+                <Circle :is-active="visibleDrawer === 'tables'">
                   <v-icon icon="$handshake"></v-icon>
                 </Circle>
               </button>
@@ -62,7 +62,7 @@
         class="test-mobile-camera-button camera-button mx-auto"
         @click="() => toggleDrawer('tables')"
       >
-        <Circle>
+        <Circle :is-active="visibleDrawer === 'tables'">
           <v-icon icon="$handshake"></v-icon>
         </Circle>
       </button>
