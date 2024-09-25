@@ -160,6 +160,7 @@
     "invite": "Invite",
     "noResults": "No results found",
     "noTables": "No tables available",
-    "searchPlaceholder": "Open tables, attendees"
+    "searchPlaceholder": "Open tables, attendees",
+    "coffeeTime": "DreamMall Coffee Time"
   }
 }

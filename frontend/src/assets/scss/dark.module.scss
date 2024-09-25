@@ -36,6 +36,7 @@ $dm-panel-reminder-link-color: #ccc;
 $dm-panel-reminder-link-background-color: rgb(93 102 112 / 55%);
 $dm-switch-inactive-color: rgb(245 245 245);
 $dm-switch-active-color: rgb(35 173 91);
+$drawer-element-background: rgba(61, 71, 83, 0.85);
 
 :export {
     backgroundColor: $background-color;
@@ -76,4 +77,5 @@ $dm-switch-active-color: rgb(35 173 91);
     dmPanelReminderLinkBackgroundColor: $dm-panel-reminder-link-background-color;
     dmSwitchInactiveColor: $dm-switch-inactive-color;
     dmSwitchActiveColor: $dm-switch-active-color;
+    drawerElementBackground: $drawer-element-background;
 }

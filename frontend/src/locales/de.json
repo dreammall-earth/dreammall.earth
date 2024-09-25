@@ -160,6 +160,7 @@
     "invite": "Einladen",
     "noResults": "Keine Ergebnisse gefunden",
     "noTables": "Keine Tische verfügbar",
-    "searchPlaceholder": "Offene Tische, Teilnehmer"
+    "searchPlaceholder": "Offene Tische, Teilnehmer",
+    "coffeeTime": "DreamMall Coffee Time"
   }
 }

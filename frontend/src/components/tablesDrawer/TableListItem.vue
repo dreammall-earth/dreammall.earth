@@ -1,8 +1,8 @@
 <template>
   <li class="table">
     <div
-      class="table-info bg-dropdown-background border-thin"
-      :class="{ highlighted: item.amIModerator }"
+      class="table-info border-thin"
+      :class="{ highlighted: item.amIModerator, welcome: item.type === 'welcome' }"
     >
       <span class="name">{{ item.meetingName }}</span>
       <span class="subtitle">
@@ -11,7 +11,7 @@
     </div>
     <button
       class="action border-thin"
-      :class="{ highlighted: item.amIModerator }"
+      :class="{ highlighted: item.amIModerator, welcome: item.type === 'welcome' }"
       @click="$emit('open-table')"
     >
       <v-icon
@@ -59,10 +59,16 @@ defineEmits<{
   min-width: 0; /* flex items needs to size freely! */
   padding: 3px 24px;
   border-radius: 16px 0 0 16px;
+  background: var(--v-drawer-element-background);
 }
 
 .table-info.highlighted {
   border-color: var(--list-color) !important;
+}
+
+.table-info.welcome::before {
+  border-radius: 16px 0 0 16px;
+  background: linear-gradient(45deg, #f09630, #2ca5b1) border-box; /*3*/
 }
 
 .name {
@@ -95,13 +101,41 @@ defineEmits<{
   background-color: var(--list-color);
 }
 
+.action.highlighted.welcome {
+  background-color: var(--v-drawer-element-background);
+  color: var(--v-theme-font);
+}
+
+.action.welcome::before {
+  border-radius: 0 16px 16px 0;
+  color: black;
+  background: linear-gradient(45deg, #2ca5b1, #f09630) border-box; /*3*/
+}
+
+.welcome {
+  position: relative;
+  border: none !important;
+}
+
+.welcome::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 0.5px solid transparent;
+
+  -webkit-mask: /*4*/
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; /*5'*/
+  mask-composite: exclude; /*5*/
+}
+
 .badge {
   position: absolute;
   bottom: -6px;
   right: 80px;
   border-radius: 6px;
-
-  background: #f5f5f5;
+  background: var(--v-drawer-element-background);
   width: 59px;
   height: 13px;
   font-size: 9px;

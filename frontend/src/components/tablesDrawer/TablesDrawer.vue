@@ -20,6 +20,12 @@
     ></v-text-field>
 
     <!-- Coffee time -->
+    <TableListItem
+      v-if="tables.permanent"
+      :item="tables.permanent"
+      @open-table="openTable(tables.permanent.id)"
+      class="mb-4"
+    />
 
     <!-- Mall Talk -->
     <div class="lists">
@@ -45,12 +51,14 @@
 
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
+import { navigate } from 'vike/client/router'
 import { ref, computed, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import { OpenTable, useTablesStore } from '#stores/tablesStore'
 
 import TableList from './TableList.vue'
+import TableListItem from './TableListItem.vue'
 
 const { t } = useI18n()
 
@@ -63,7 +71,24 @@ const tablesStore = useTablesStore()
 const { getOpenTables: mallTalk } = storeToRefs(tablesStore)
 
 const tables = computed(() => ({
-  permanent: undefined,
+  permanent: {
+    id: 0,
+    meetingName: t('tablesDrawer.coffeeTime'),
+    type: 'welcome',
+    amIModerator: true,
+    participantCount: 2,
+    attendees: [
+      {
+        fullName: 'John Doe',
+      },
+      {
+        fullName: 'Jane Doe',
+      },
+      {
+        fullName: 'Max',
+      },
+    ],
+  } as OpenTable,
   mallTalk: mallTalk.value,
   projects: [
     {
@@ -148,6 +173,11 @@ watch(
     }
   },
 )
+
+const openTable = (id: number) => {
+  closeDrawer()
+  navigate(`/table/${id}`)
+}
 </script>
 
 <style scoped lang="scss">

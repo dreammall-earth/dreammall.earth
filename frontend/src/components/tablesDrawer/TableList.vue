@@ -86,6 +86,7 @@ watch(isCollapsed, () => {
 .outer-list {
   display: flex;
   flex-flow: column;
+  font-size: 12px;
 }
 
 .list {
