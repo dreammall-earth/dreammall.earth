@@ -46,7 +46,7 @@
     "graphql-yoga": "^5.7.0",
     "jose": "^5.9.2",
     "nanoid": "^3.3.7",
-    "prisma": "^5.19.1",
+    "prisma": "^5.20.0",
     "prisma-extension-soft-delete": "^1.0.1",
     "reflect-metadata": "^0.2.2",
     "tsconfig-paths": "^4.2.0",
