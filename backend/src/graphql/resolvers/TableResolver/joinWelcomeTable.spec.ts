@@ -23,9 +23,9 @@ const name = 'User'
 
 let testServer: ApolloServer<Context>
 
-const joinWelcomeTableQuery = `
-  query {
-    joinWelcomeTable
+const joinTableQuery = `
+  query ($id: String!) {
+    joinTable(tableId: $id)
   }
 `
 
@@ -36,12 +36,13 @@ describe('TableResolver', () => {
   beforeEach(jest.clearAllMocks)
 
   describe('unauthorized', () => {
-    describe('joinWelcomeTable', () => {
+    describe('joinTable', () => {
       it('throws access denied', async () => {
         await expect(
           testServer.executeOperation(
             {
-              query: joinWelcomeTableQuery,
+              query: joinTableQuery,
+              variables: { id: 'welcome' },
             },
             { contextValue: mockContextValue() },
           ),
@@ -64,7 +65,7 @@ describe('TableResolver', () => {
   })
 
   describe('authorized', () => {
-    describe('joinWelcomeTable', () => {
+    describe('joinTable (with id `welcome`)', () => {
       let contextValue: ReturnType<typeof mockContextValue>
       beforeEach(async () => {
         const user = await findOrCreateUser({ nickname, name })
@@ -95,7 +96,8 @@ describe('TableResolver', () => {
         await expect(
           testServer.executeOperation(
             {
-              query: joinWelcomeTableQuery,
+              query: joinTableQuery,
+              variables: { id: 'welcome' },
             },
             { contextValue },
           ),
@@ -103,7 +105,7 @@ describe('TableResolver', () => {
           body: {
             kind: 'single',
             singleResult: {
-              data: { joinWelcomeTable: 'https://my-link' },
+              data: { joinTable: 'https://my-link' },
               errors: undefined,
             },
           },
@@ -111,7 +113,10 @@ describe('TableResolver', () => {
       })
 
       it('builds a URL from the response of the API call to create a BBB session', async () => {
-        await testServer.executeOperation({ query: joinWelcomeTableQuery }, { contextValue })
+        await testServer.executeOperation(
+          { query: joinTableQuery, variables: { id: 'welcome' } },
+          { contextValue },
+        )
         expect(joinMeetingLinkMock).toHaveBeenCalledWith({
           fullName: 'User',
           meetingID: '4711-42',

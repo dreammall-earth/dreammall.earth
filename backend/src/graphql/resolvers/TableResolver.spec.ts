@@ -223,7 +223,7 @@ describe('TableResolver', () => {
 
     describe('joinTable', () => {
       const query = `
-        query ($tableId: Int!) {
+        query ($tableId: String!) {
           joinTable(tableId: $tableId)
         }
       `
@@ -234,7 +234,7 @@ describe('TableResolver', () => {
             {
               query,
               variables: {
-                tableId: 69,
+                tableId: '69',
               },
             },
             { contextValue: mockContextValue() },
@@ -1549,7 +1549,7 @@ describe('TableResolver', () => {
 
     describe('joinTable', () => {
       const query = `
-        query ($tableId: Int!) {
+        query ($tableId: String!) {
           joinTable(tableId: $tableId)
         }
       `
@@ -1561,7 +1561,7 @@ describe('TableResolver', () => {
               {
                 query,
                 variables: {
-                  tableId: -1,
+                  tableId: '-1',
                 },
               },
               { contextValue: mockContextValue({ user }) },
@@ -1606,7 +1606,7 @@ describe('TableResolver', () => {
                 {
                   query,
                   variables: {
-                    tableId,
+                    tableId: String(tableId),
                   },
                 },
                 { contextValue: mockContextValue({ user }) },
@@ -1627,7 +1627,7 @@ describe('TableResolver', () => {
               {
                 query,
                 variables: {
-                  tableId,
+                  tableId: String(tableId),
                 },
               },
               { contextValue: mockContextValue({ user }) },
@@ -1687,7 +1687,7 @@ describe('TableResolver', () => {
               {
                 query,
                 variables: {
-                  tableId,
+                  tableId: String(tableId),
                 },
               },
               { contextValue: mockContextValue({ user }) },
@@ -1730,7 +1730,7 @@ describe('TableResolver', () => {
                 {
                   query,
                   variables: {
-                    tableId,
+                    tableId: String(tableId),
                   },
                 },
                 { contextValue: mockContextValue({ user: peterUser }) },
@@ -1770,7 +1770,7 @@ describe('TableResolver', () => {
               {
                 query,
                 variables: {
-                  tableId,
+                  tableId: String(tableId),
                 },
               },
               { contextValue: mockContextValue({ user }) },
@@ -1788,7 +1788,7 @@ describe('TableResolver', () => {
               {
                 query,
                 variables: {
-                  tableId,
+                  tableId: String(tableId),
                 },
               },
               { contextValue: mockContextValue({ user: bibiUser }) },
@@ -1806,7 +1806,7 @@ describe('TableResolver', () => {
               {
                 query,
                 variables: {
-                  tableId,
+                  tableId: String(tableId),
                 },
               },
               { contextValue: mockContextValue({ user: peterUser }) },
@@ -1838,7 +1838,7 @@ describe('TableResolver', () => {
                 {
                   query,
                   variables: {
-                    tableId,
+                    tableId: String(tableId),
                   },
                 },
                 { contextValue: mockContextValue({ user: raeuberUser }) },

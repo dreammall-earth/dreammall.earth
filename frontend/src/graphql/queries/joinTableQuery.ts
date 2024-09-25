@@ -1,7 +1,7 @@
 import { gql } from 'graphql-tag'
 
 export const joinTableQuery = gql`
-  query ($tableId: Int!) {
+  query ($tableId: String!) {
     joinTable(tableId: $tableId)
   }
 `

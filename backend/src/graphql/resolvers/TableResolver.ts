@@ -252,30 +252,8 @@ export class TableResolver {
 
   @Authorized()
   @Query(() => String)
-  async joinWelcomeTable(@Ctx() context: Context): Promise<string> {
-    const { user, config } = context
-    if (!user) throw new Error('User not found!')
-
-    const { WELCOME_TABLE_MEETING_ID, WELCOME_TABLE_NAME } = config
-
-    const meeting = await createMeeting({
-      meetingID: WELCOME_TABLE_MEETING_ID,
-      name: WELCOME_TABLE_NAME,
-    })
-    if (!meeting) {
-      throw new Error('Error creating the meeting!')
-    }
-    return joinMeetingLink({
-      fullName: user.name,
-      meetingID: WELCOME_TABLE_MEETING_ID,
-      password: meeting.moderatorPW,
-    })
-  }
-
-  @Authorized()
-  @Query(() => String)
   async joinTable(
-    @Arg('tableId', () => Int) tableId: number,
+    @Arg('tableId', () => String) tableId: string,
     @Ctx() context: Context,
   ): Promise<string> {
     const {
@@ -285,9 +263,13 @@ export class TableResolver {
 
     if (!user) throw new Error('User not found!')
 
+    if (tableId === WELCOME_TABLE_ID) {
+      return joinWelcomeTable(context)(user)
+    }
+
     const table = await prisma.meeting.findUnique({
       where: {
-        id: tableId,
+        id: parseInt(tableId),
       },
       include: {
         user: true,
@@ -714,5 +696,23 @@ const getOpenWelcomeTable = (context: Context) => (meetings: MeetingInfo[]) => {
     participantCount: 0,
     startTime: new Date().toISOString(),
     attendees: [],
+  })
+}
+
+const joinWelcomeTable = (context: Context) => async (user: NonNullable<Context['user']>) => {
+  const { config } = context
+  const { WELCOME_TABLE_MEETING_ID, WELCOME_TABLE_NAME } = config
+
+  const meeting = await createMeeting({
+    meetingID: WELCOME_TABLE_MEETING_ID,
+    name: WELCOME_TABLE_NAME,
+  })
+  if (!meeting) {
+    throw new Error('Error creating the meeting!')
+  }
+  return joinMeetingLink({
+    fullName: user.name,
+    meetingID: WELCOME_TABLE_MEETING_ID,
+    password: meeting.moderatorPW,
   })
 }

@@ -32,12 +32,12 @@ const tableUrl = ref<string | null>(null)
 
 const pageContext = usePageContext()
 
-const tableId = ref(Number(pageContext.routeParams?.id))
+const tableId = ref(pageContext.routeParams?.id)
 
 const errorMessage = ref<string | null>(null)
 
 watch(pageContext, (context) => {
-  tableId.value = Number(context.routeParams?.id)
+  tableId.value = context.routeParams?.id
 })
 
 const { result: joinTableQueryResult, error: joinTableQueryError } = useQuery(

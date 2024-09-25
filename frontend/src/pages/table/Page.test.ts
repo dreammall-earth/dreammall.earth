@@ -103,7 +103,7 @@ describe('Table Page', () => {
 
     it('calls the API accordingly', () => {
       expect(joinTableQueryMock).toHaveBeenCalledWith({
-        tableId: NaN,
+        tableId: undefined,
       })
     })
 
