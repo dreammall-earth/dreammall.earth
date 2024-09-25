@@ -3,10 +3,12 @@ import Camera from './camera.svg?component'
 import Cockpit from './cockpit.svg?component'
 import Discord from './discord.svg?component'
 import Ellipsis from './ellipsis.svg?component'
+import Handshake from './handshake.svg?component'
 import Logout from './logout.svg?component'
 import Mall from './mall.svg?component'
 import Message from './message.svg?component'
 import Moon from './moon.svg?component'
+import Reception from './reception.svg?component'
 import Sun from './sun.svg?component'
 import Telegram from './telegram.svg?component'
 import Tiktok from './tiktok.svg?component'
@@ -22,10 +24,12 @@ const aliases: Partial<IconAliases> = {
   cockpit: Cockpit,
   discord: Discord,
   ellipsis: Ellipsis,
+  handshake: Handshake,
   logout: Logout,
   mall: Mall,
   message: Message,
   moon: Moon,
+  reception: Reception,
   sun: Sun,
   telegram: Telegram,
   tiktok: Tiktok,
