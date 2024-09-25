@@ -84,8 +84,4 @@ const openTable = (id: number) => {
   background-color: #f09630;
   border-radius: 0 16px 16px 0;
 }
-
-.icon {
-  transform: scale(0.8);
-}
 </style>

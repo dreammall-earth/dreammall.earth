@@ -164,10 +164,6 @@ defineExpose({
   border-radius: 0 16px 16px 0;
 }
 
-.table-icon {
-  transform: scale(0.8);
-}
-
 .options-icon {
   transition: transform 0.3s;
   transform: rotate(0);
