@@ -1,13 +1,17 @@
 <template>
   <ul class="list" :data-type="$props.type">
     <li v-for="item in items" :key="item.meetingID" class="table">
-      <div class="table-info bg-dropdown-background">
+      <div class="table-info bg-dropdown-background border-thin">
         <span class="name">{{ item.meetingName }}</span>
         <span class="subtitle">
           {{ $t('tables.participantCount', { count: item.participantCount }) }}
         </span>
       </div>
-      <button class="action" @click="openTable(item.id)">
+      <button
+        class="action border-thin"
+        :class="{ highlighted: item.amIModerator }"
+        @click="openTable(item.id)"
+      >
         <v-icon
           class="icon"
           :icon="item.type !== 'project' || item.amIModerator ? '$handshake' : '$reception'"
@@ -65,7 +69,7 @@ const openTable = (id: number) => {
   flex-flow: column;
   justify-content: space-between;
   min-width: 0; /* flex items needs to size freely! */
-  padding: 5px 24px;
+  padding: 3px 24px;
   border-radius: 16px 0 0 16px;
 }
 
@@ -79,7 +83,8 @@ const openTable = (id: number) => {
 }
 
 .subtitle {
-  font-size: 11px;
+  font-size: 10px;
+  font-weight: 300;
 }
 
 .action {
@@ -90,7 +95,11 @@ const openTable = (id: number) => {
   min-width: 41px;
   height: 42px;
   color: #fff;
-  background-color: var(--list-color);
+  background-color: #979797;
   border-radius: 0 16px 16px 0;
+}
+
+.action.highlighted {
+  background-color: var(--list-color);
 }
 </style>

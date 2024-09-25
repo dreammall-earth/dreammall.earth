@@ -154,6 +154,7 @@
   "tablesDrawer": {
     "mallTalk": "Mall Talk",
     "projects": "Projects",
+    "invite": "Invite",
     "noResults": "No results found",
     "noTables": "No tables available",
     "searchPlaceholder": "Open tables, attendees"

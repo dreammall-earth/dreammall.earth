@@ -28,6 +28,7 @@
     <TablesDrawer
       v-model="isTablesDrawerVisible"
       :location="$vuetify.display.smAndDown ? 'bottom' : 'right'"
+      @mall-talk-invite="toggleDrawer('dream-mall-button')"
     />
 
     <ModalPanel />

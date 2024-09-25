@@ -24,6 +24,14 @@
     <!-- Mall Talk -->
     <v-list v-for="list in lists" :key="list.heading">
       <h2 class="header mb-4">{{ list.heading }}</h2>
+      <button
+        v-if="list.type === 'mallTalk'"
+        class="invite-button bg-primary pl-3 pr-6 py-1 d-flex align-center justify-center mb-4"
+        @click="$emit('mall-talk-invite')"
+      >
+        <v-icon icon="mdi mdi-plus" class="mr-4" />
+        {{ $t('tablesDrawer.invite') }}
+      </button>
       <div v-if="!list.items.length">{{ $t('tablesDrawer.noTables') }}</div>
       <div v-else-if="!list.filteredItems.value.length">
         {{ $t('tablesDrawer.noResults') }}
@@ -48,6 +56,10 @@ import { OpenTable, useTablesStore } from '#stores/tablesStore'
 import TableList from './TableList.vue'
 
 const { t } = useI18n()
+
+defineEmits<{
+  (e: 'mall-talk-invite'): void
+}>()
 
 const tablesStore = useTablesStore()
 
@@ -93,12 +105,12 @@ const tables = computed(() => ({
 const lists = computed(() =>
   [
     {
-      type: 'mallTalk',
+      type: 'mallTalk' as const,
       heading: t('tablesDrawer.mallTalk'),
       items: tables.value.mallTalk,
     },
     {
-      type: 'projects',
+      type: 'projects' as const,
       heading: t('tablesDrawer.projects'),
       items: tables.value.projects,
     },
@@ -209,5 +221,11 @@ watch(
 .header {
   font-size: 14px;
   text-transform: uppercase;
+}
+
+.invite-button {
+  font-size: 14px;
+  color: white !important;
+  border-radius: 20px;
 }
 </style>
