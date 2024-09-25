@@ -19,7 +19,14 @@
         :icon="item.type !== 'project' || item.amIModerator ? '$handshake' : '$reception'"
       />
     </button>
-    <div class="badge border-thin" :class="{ highlighted: item.amIModerator }">
+    <img
+      v-if="item.type === 'welcome'"
+      :src="WelcomeBadge"
+      alt="Welcome"
+      class="welcome-badge"
+      :class="{ dark: $vuetify.theme.current.dark }"
+    />
+    <div v-else class="badge" :class="{ highlighted: item.amIModerator }">
       {{
         item.amIModerator
           ? $t('tables.member')
@@ -32,6 +39,7 @@
 </template>
 
 <script lang="ts" setup>
+import WelcomeBadge from '#assets/welcome-badge.svg'
 import { OpenTable } from '#stores/tablesStore'
 
 defineProps<{
@@ -148,5 +156,15 @@ defineEmits<{
 .badge.highlighted {
   border-color: var(--list-color) !important;
   color: var(--list-color);
+}
+
+.welcome-badge {
+  position: absolute;
+  bottom: -20px;
+  right: 80px;
+}
+
+.welcome-badge.dark {
+  filter: invert(1) brightness(4);
 }
 </style>
