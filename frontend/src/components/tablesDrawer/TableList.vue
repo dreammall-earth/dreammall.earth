@@ -43,24 +43,27 @@ const openTable = (id: number) => {
 .table {
   display: flex;
   gap: 8px;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
 }
 
 .table-info {
   display: flex;
+  flex: 1;
   flex-flow: column;
   justify-content: space-between;
-  width: 100%;
-  height: 42px;
+  min-width: 0; /* flex items needs to size freely! */
   padding: 5px 24px;
   border-radius: 16px 0 0 16px;
 }
 
 .name {
   height: 18px;
+  overflow: hidden;
   font-size: 14px;
   font-weight: bold;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .subtitle {
