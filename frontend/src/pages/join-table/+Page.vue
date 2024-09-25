@@ -1,6 +1,6 @@
 <template>
   <div class="background">
-    <form class="panel">
+    <v-form class="panel" @submit.prevent="submit">
       <div v-if="isError" class="d-flex flex-column align-center justify-space-around pa-4">
         <h2 class="section-headline">{{ t('joinTablePage.unknownTable') }}</h2>
 
@@ -39,7 +39,7 @@
 
         <SimpleButton class="mt-12 mx-auto" :label="t('joinTablePage.submit')" @click="submit" />
       </div>
-    </form>
+    </v-form>
   </div>
 </template>
 

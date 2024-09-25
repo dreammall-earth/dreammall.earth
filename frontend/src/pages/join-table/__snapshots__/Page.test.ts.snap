@@ -13,9 +13,11 @@ exports[`JoinTablePage > renders 1`] = `
       data-v-bb2bf2be=""
     >
       <form
-        class="panel"
+        class="v-form panel"
         data-v-bb2bf2be=""
+        novalidate=""
       >
+        
         <div
           class="d-flex flex-column align-center justify-space-around pa-4"
           data-v-bb2bf2be=""
@@ -243,6 +245,7 @@ exports[`JoinTablePage > renders 1`] = `
             <!---->
           </button>
         </div>
+        
       </form>
     </div>
     
