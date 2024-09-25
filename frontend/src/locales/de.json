@@ -152,7 +152,8 @@
     "participantCount": "{count} Teilnehmer"
   },
   "tablesDrawer": {
-    "header": "Offene Tische",
+    "mallTalk": "Mall Talk",
+    "projects": "Projekte",
     "noResults": "Keine Ergebnisse gefunden",
     "noTables": "Keine Tische verfügbar",
     "searchPlaceholder": "Offene Tische, Teilnehmer"

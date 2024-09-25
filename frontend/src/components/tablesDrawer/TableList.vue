@@ -1,5 +1,5 @@
 <template>
-  <ul class="list">
+  <ul class="list" :data-type="$props.type">
     <li v-for="item in items" :key="item.meetingID" class="table">
       <div class="table-info bg-dropdown-background">
         <span class="name">{{ item.meetingName }}</span>
@@ -24,6 +24,7 @@ import type { OpenTable } from '#stores/tablesStore'
 
 defineProps<{
   items: OpenTable[]
+  type: 'mallTalk' | 'projects'
 }>()
 
 const emit = defineEmits(['openTable'])
@@ -41,6 +42,14 @@ const openTable = (id: number) => {
   gap: 8px;
   padding: 0;
   list-style: none;
+}
+
+.list[data-type='mallTalk'] {
+  --list-color: #f09630;
+}
+
+.list[data-type='projects'] {
+  --list-color: #2ca5b1;
 }
 
 .table {
@@ -81,7 +90,7 @@ const openTable = (id: number) => {
   min-width: 41px;
   height: 42px;
   color: #fff;
-  background-color: #f09630;
+  background-color: var(--list-color);
   border-radius: 0 16px 16px 0;
 }
 </style>

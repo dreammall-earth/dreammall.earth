@@ -152,7 +152,8 @@
     "participantCount": "{count} participants"
   },
   "tablesDrawer": {
-    "header": "Open Tables",
+    "mallTalk": "Mall Talk",
+    "projects": "Projects",
     "noResults": "No results found",
     "noTables": "No tables available",
     "searchPlaceholder": "Open tables, attendees"

@@ -22,30 +22,102 @@
     <!-- Coffee time -->
 
     <!-- Mall Talk -->
-    <v-list>
-      <h2 class="header mb-4">{{ $t('tablesDrawer.header') }}</h2>
-      <div v-if="!items.length">{{ $t('tablesDrawer.noTables') }}</div>
-      <div v-else-if="!filteredItems.length">
+    <v-list v-for="list in lists" :key="list.heading">
+      <h2 class="header mb-4">{{ list.heading }}</h2>
+      <div v-if="!list.items.length">{{ $t('tablesDrawer.noTables') }}</div>
+      <div v-else-if="!list.filteredItems.value.length">
         {{ $t('tablesDrawer.noResults') }}
       </div>
-      <TableList v-else :items="filteredItems" @open-table="closeDrawer" />
+      <TableList
+        v-else
+        :items="list.filteredItems.value"
+        :type="list.type"
+        @open-table="closeDrawer"
+      />
     </v-list>
-
-    <!-- Projects -->
   </v-navigation-drawer>
 </template>
 
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
 import { ref, computed, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-import { useTablesStore } from '#stores/tablesStore'
+import { OpenTable, useTablesStore } from '#stores/tablesStore'
 
 import TableList from './TableList.vue'
 
+const { t } = useI18n()
+
 const tablesStore = useTablesStore()
 
-const { getOpenTables: items } = storeToRefs(tablesStore)
+const { getOpenTables: mallTalk } = storeToRefs(tablesStore)
+
+const tables = computed(() => ({
+  permanent: undefined,
+  mallTalk: mallTalk.value,
+  projects: [
+    {
+      id: 1,
+      meetingName: 'Project 1',
+      type: 'project',
+      amIModerator: true,
+      participantCount: 4,
+      attendees: [
+        {
+          fullName: 'John Doe',
+        },
+        {
+          fullName: 'Jane Doe',
+        },
+      ],
+    },
+    {
+      id: 2,
+      meetingName: 'Project 2',
+      type: 'project',
+      amIModerator: false,
+      participantCount: 30,
+      attendees: [
+        {
+          fullName: 'Max',
+        },
+        {
+          fullName: 'Sabrina',
+        },
+      ],
+    },
+  ] as OpenTable[],
+}))
+
+const lists = computed(() =>
+  [
+    {
+      type: 'mallTalk',
+      heading: t('tablesDrawer.mallTalk'),
+      items: tables.value.mallTalk,
+    },
+    {
+      type: 'projects',
+      heading: t('tablesDrawer.projects'),
+      items: tables.value.projects,
+    },
+  ].map((list) => ({
+    ...list,
+    filteredItems: computed(() => {
+      if (!searchValue.value) {
+        return list.items
+      }
+      return list.items.filter(
+        (item) =>
+          item.meetingName.toLowerCase().includes(searchValue.value.toLowerCase()) ||
+          item.attendees.find((attendee) =>
+            attendee.fullName.toLowerCase().includes(searchValue.value.toLowerCase()),
+          ),
+      )
+    }),
+  })),
+)
 
 const props = withDefaults(
   defineProps<{
@@ -65,19 +137,6 @@ const closeDrawer = () => {
 }
 
 const searchValue = ref('')
-
-const filteredItems = computed(() => {
-  if (!searchValue.value) {
-    return items.value
-  }
-  return items.value.filter(
-    (item) =>
-      item.meetingName.toLowerCase().includes(searchValue.value.toLowerCase()) ||
-      item.attendees.find((attendee) =>
-        attendee.fullName.toLowerCase().includes(searchValue.value.toLowerCase()),
-      ),
-  )
-})
 
 const currentLocation = ref(props.location)
 const isChangingOrientation = ref(false)
