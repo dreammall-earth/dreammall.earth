@@ -66,11 +66,7 @@
           <v-icon icon="$camera"></v-icon>
         </Circle>
       </button>
-      <SmallDreamMallButton
-        class="mx-auto"
-        :is-active="visibleDrawer === 'dream-mall-button'"
-        @click="() => toggleDrawer('dream-mall-button')"
-      />
+      <div class="mx-auto" />
       <UserInfo class="mx-auto" />
     </div>
   </v-main>
@@ -79,8 +75,7 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 
-import LargeDreamMallButton from '#components/buttons/LargeDreamMallButton.vue'
-import SmallDreamMallButton from '#components/buttons/SmallDreamMallButton.vue'
+import LargeDreamMallButton from '#components/buttons/DreamMallButton.vue'
 import TableSetup from '#components/malltalk/setup/TableSetup.vue'
 import Circle from '#components/menu/CircleElement.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
@@ -203,49 +198,6 @@ const { isModalActive } = useModal()
     @media #{map.get($display-breakpoints, 'md-and-up')} {
       bottom: 120px;
     }
-  }
-
-  .menu-triangle {
-    position: absolute;
-    top: -95px;
-    max-width: 10px;
-    transition:
-      0.75s transform,
-      0.75s 0.25s top;
-    transform-origin: center;
-
-    &--turned {
-      top: 10px;
-      transition:
-        0.75s rotate,
-        0.5s top;
-      transform: rotate(180deg);
-    }
-  }
-
-  .menu-divider {
-    position: absolute;
-    top: 0;
-    max-width: 60px;
-  }
-
-  .assistant-button {
-    margin: 0 40px;
-    transition-delay: 0.2s;
-
-    :deep(i) {
-      margin-right: 16px;
-    }
-  }
-
-  .new-project-button {
-    margin: 0 20px;
-    transition-delay: 0s;
-  }
-
-  .new-table-button {
-    margin: 0 20px;
-    transition-delay: 0.1s;
   }
 }
 
