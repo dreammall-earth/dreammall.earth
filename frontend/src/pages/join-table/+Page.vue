@@ -1,53 +1,71 @@
 <template>
-  <div class="d-flex bg-white text-center pa-6 v-container">
-    <v-row class="section-header newsletter-section">
-      <v-col>
-        <h2 class="section-headline">{{ $t('joinTablePage.header') }}</h2>
-        <div class="mt-8 d-flex justify-center">
-          <v-form ref="form" class="w-25" @submit.prevent="getTableLink">
-            <v-text-field
-              id="userName"
-              v-model="userName"
-              class="pb-3"
-              :counter="10"
-              :label="$t('joinTablePage.name')"
-              hide-details
-              required
-            ></v-text-field>
-            <MainButton
-              variant="submit"
-              size="auto"
-              :label="$t('joinTablePage.button')"
-              type="submit"
-              :is-loading="loading"
-            >
-            </MainButton>
-          </v-form>
+  <div class="background">
+    <v-form class="panel" @submit.prevent="submit">
+      <div v-if="isError" class="d-flex flex-column align-center justify-space-around pa-4">
+        <h2 class="section-headline">{{ t('joinTablePage.unknownTable') }}</h2>
+
+        <div class="reminder text-center mt-8 pa-5 font-weight-medium">
+          <LogoImage class="mx-auto" size="tiny" :text-enabled="false" />
+          <p class="mt-5">
+            {{ $t('joinTablePage.unknownTableErrorText') }}
+          </p>
         </div>
-      </v-col>
-    </v-row>
+      </div>
+
+      <div v-else class="d-flex flex-column align-center justify-space-around pa-4">
+        <h2 class="section-headline">{{ title }}</h2>
+
+        <div class="reminder text-center mt-8 pa-5 font-weight-medium">
+          <LogoImage class="mx-auto" size="tiny" :text-enabled="false" />
+          <p class="mt-5">
+            {{ $t('joinTablePage.reminder') }}
+          </p>
+        </div>
+
+        <v-text-field
+          v-model="userName"
+          flat
+          rounded
+          class="elevation-0 w-75 flex-grow-0 mt-12"
+          content-class="elevation-0"
+          :label="t('joinTablePage.guestName')"
+          variant="solo-filled"
+          append-inner-icon="mdi-pencil"
+          maxlength="64"
+          required
+          autofocus
+        />
+        <!-- todo: manage values as maxlength globally? -->
+
+        <SimpleButton class="mt-12 mx-auto" :label="t('joinTablePage.submit')" @click="submit" />
+      </div>
+    </v-form>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useQuery } from '@vue/apollo-composable'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-import MainButton from '#components/buttons/MainButton.vue'
+import SimpleButton from '#components/buttons/SimpleButton.vue'
+import LogoImage from '#components/menu/LogoImage.vue'
 import { usePageContext } from '#context/usePageContext'
+import useGetTableName from '#pages/join-table/useGetTableName'
 import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { joinTableAsGuestQuery } from '#queries/joinTableAsGuestQuery'
 
+const { t } = useI18n()
+
 const pageContext = usePageContext()
 const tableId = Number(pageContext.routeParams?.id)
+
+const { tableName, isError } = useGetTableName(tableId)
+const title = computed<string>(() => tableName.value ?? t('joinTablePage.publicTable'))
+
 const userName = ref('')
 
-const form = ref<HTMLFormElement>()
-const {
-  result: joinTableAsGuestQueryResult,
-  refetch: joinTableAsGuestQueryRefetch,
-  loading,
-} = useQuery(
+const { result: joinTableAsGuestQueryResult, refetch: joinTableAsGuestQueryRefetch } = useQuery(
   joinTableAsGuestQuery,
   {
     userName: userName.value,
@@ -59,7 +77,7 @@ const {
   },
 )
 
-const getTableLink = async () => {
+const submit = async () => {
   try {
     await joinTableAsGuestQueryRefetch({
       userName: userName.value,
@@ -73,3 +91,47 @@ const getTableLink = async () => {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@use 'sass:map';
+@import 'vuetify/lib/styles/settings/_variables';
+
+.panel {
+  width: min(636px, 100vw);
+  padding: 20px 20px 40px;
+  background-color: var(--v-dm-panel-background-color);
+  backdrop-filter: blur(30px);
+  border: 1px solid var(--v-dm-panel-border-color);
+  border-radius: 30px;
+  transform: translate(calc(50vw - 50%), calc(50vh - 50%));
+
+  @media #{map.get($display-breakpoints, 'sm-and-down')} {
+    width: calc(100% - 40px);
+    padding: 10px 10px 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+    transform: translate(0, calc(50vh - 50%));
+  }
+}
+
+.reminder {
+  color: rgb(var(--v-theme-dm-panel-reminder-text-color));
+  background-color: var(--v-dm-panel-reminder-text-background-color);
+  border-radius: 24px;
+}
+
+.v-text-field {
+  @media #{map.get($display-breakpoints, 'sm-and-down')} {
+    width: 100% !important;
+  }
+}
+
+.background {
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../../assets/join-table-background.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+</style>

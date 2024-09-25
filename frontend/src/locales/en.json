@@ -100,9 +100,12 @@
     "tableerror": "Error opening table"
   },
   "joinTablePage": {
-    "button": "Submit",
-    "header": "Join Table as:",
-    "name": "Name"
+    "guestName": "Guest name",
+    "publicTable": "Public table",
+    "reminder": "Welcome to the meeting! Type in your name, join the meeting - and then register to be on more than just the guest list!",
+    "submit": "Enter table",
+    "unknownTable": "Unbekannter Tisch",
+    "unknownTableErrorText": "The table you requested is not known to us or public.\nPlease check your invitation link or ask your host to send you a current link."
   },
   "menu": {
     "cockpit": "Cockpit",

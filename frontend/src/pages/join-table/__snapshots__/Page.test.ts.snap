@@ -9,178 +9,244 @@ exports[`JoinTablePage > renders 1`] = `
   >
     
     <div
-      class="d-flex bg-white text-center pa-6 v-container"
+      class="background"
+      data-v-bb2bf2be=""
     >
-      <div
-        class="v-row section-header newsletter-section"
+      <form
+        class="v-form panel"
+        data-v-bb2bf2be=""
+        novalidate=""
       >
+        
         <div
-          class="v-col"
+          class="d-flex flex-column align-center justify-space-around pa-4"
+          data-v-bb2bf2be=""
         >
           <h2
             class="section-headline"
+            data-v-bb2bf2be=""
           >
-            $t('joinTablePage.header')
+            Test Table
           </h2>
           <div
-            class="mt-8 d-flex justify-center"
+            class="reminder text-center mt-8 pa-5 font-weight-medium"
+            data-v-bb2bf2be=""
           >
-            <form
-              class="v-form w-25"
-              novalidate=""
+            <div
+              class="v-responsive v-img v-img--booting w-100 logo-tiny mx-auto"
+              data-v-bb2bf2be=""
+              data-v-f6be2607=""
+            >
+              <div
+                class="v-responsive__sizer"
+              />
+              
+              
+              <transition-stub
+                appear="true"
+                css="true"
+                name="fade-transition"
+                persisted="false"
+              >
+                <img
+                  class="v-img__img v-img__img--contain"
+                  src="/src/assets/dreammall-logo-simple.svg"
+                  style="display: none;"
+                />
+              </transition-stub>
+              <transition-stub
+                appear="false"
+                css="true"
+                name="fade-transition"
+                persisted="false"
+              >
+                <!---->
+              </transition-stub>
+              <!---->
+              <!---->
+              <!---->
+              
+              
+              <!---->
+            </div>
+            <p
+              class="mt-5"
+              data-v-bb2bf2be=""
+            >
+              $t('joinTablePage.reminder')
+            </p>
+          </div>
+          <div
+            class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-text-field elevation-0 w-75 flex-grow-0 mt-12"
+            data-v-bb2bf2be=""
+          >
+            <!---->
+            <div
+              class="v-input__control"
             >
               
               <div
-                class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-text-field pb-3"
+                class="v-field v-field--appended v-field--center-affix v-field--flat v-field--variant-solo-filled v-theme--light v-field--rounded v-locale--is-ltr"
               >
-                <!---->
                 <div
-                  class="v-input__control"
+                  class="v-field__overlay"
+                />
+                <div
+                  class="v-field__loader"
                 >
-                  
                   <div
-                    class="v-field v-field--center-affix v-field--variant-filled v-theme--light v-locale--is-ltr"
+                    aria-hidden="true"
+                    aria-valuemax="100"
+                    aria-valuemin="0"
+                    class="v-progress-linear v-theme--light v-locale--is-ltr"
+                    role="progressbar"
+                    style="top: 0px; height: 0px; --v-progress-linear-height: 2px;"
                   >
+                    <!---->
                     <div
-                      class="v-field__overlay"
+                      class="v-progress-linear__background"
+                      style="opacity: NaN;"
                     />
                     <div
-                      class="v-field__loader"
+                      class="v-progress-linear__buffer"
+                      style="opacity: NaN; width: 0%;"
+                    />
+                    <transition-stub
+                      appear="false"
+                      css="true"
+                      name="fade-transition"
+                      persisted="false"
                     >
                       <div
-                        aria-hidden="true"
-                        aria-valuemax="100"
-                        aria-valuemin="0"
-                        class="v-progress-linear v-theme--light v-locale--is-ltr"
-                        role="progressbar"
-                        style="top: 0px; height: 0px; --v-progress-linear-height: 2px;"
+                        class="v-progress-linear__indeterminate"
                       >
-                        <!---->
+                        
                         <div
-                          class="v-progress-linear__background"
-                          style="opacity: NaN;"
+                          class="v-progress-linear__indeterminate long"
                         />
                         <div
-                          class="v-progress-linear__buffer"
-                          style="opacity: NaN; width: 0%;"
+                          class="v-progress-linear__indeterminate short"
                         />
-                        <transition-stub
-                          appear="false"
-                          css="true"
-                          name="fade-transition"
-                          persisted="false"
-                        >
-                          <div
-                            class="v-progress-linear__indeterminate"
-                          >
-                            
-                            <div
-                              class="v-progress-linear__indeterminate long"
-                            />
-                            <div
-                              class="v-progress-linear__indeterminate short"
-                            />
-                            
-                          </div>
-                        </transition-stub>
-                        <!---->
+                        
                       </div>
-                    </div>
+                    </transition-stub>
                     <!---->
-                    <div
-                      class="v-field__field"
-                      data-no-activator=""
-                    >
-                      <label
-                        aria-hidden="true"
-                        class="v-label v-field-label v-field-label--floating"
-                        for="userName"
-                      >
-                        <!---->
-                        
-                        $t('joinTablePage.name')
-                        
-                      </label>
-                      <label
-                        class="v-label v-field-label"
-                        for="userName"
-                      >
-                        <!---->
-                        
-                        $t('joinTablePage.name')
-                        
-                      </label>
-                      
-                      
-                      <!---->
-                      <input
-                        aria-describedby="userName-messages"
-                        class="v-field__input"
-                        id="userName"
-                        required=""
-                        size="1"
-                        type="text"
-                        value=""
-                      />
-                      <!---->
-                      
-                      
-                    </div>
-                    <!---->
-                    <!---->
-                    <div
-                      class="v-field__outline"
-                    >
-                      <!---->
-                      <!---->
-                    </div>
                   </div>
+                </div>
+                <!---->
+                <div
+                  class="v-field__field"
+                  data-no-activator=""
+                >
+                  <label
+                    aria-hidden="true"
+                    class="v-label v-field-label v-field-label--floating"
+                    for="input-0"
+                  >
+                    <!---->
+                    
+                    Gastname
+                    
+                  </label>
+                  <label
+                    class="v-label v-field-label"
+                    for="input-0"
+                  >
+                    <!---->
+                    
+                    Gastname
+                    
+                  </label>
+                  
+                  
+                  <!---->
+                  <input
+                    aria-describedby="input-0-messages"
+                    autofocus=""
+                    class="v-field__input"
+                    content-class="elevation-0"
+                    id="input-0"
+                    maxlength="64"
+                    required=""
+                    size="1"
+                    type="text"
+                    value=""
+                  />
+                  <!---->
+                  
                   
                 </div>
                 <!---->
-                <!---->
-              </div>
-              <button
-                class="v-btn v-btn--elevated v-theme--light v-btn--density-default v-btn--variant-elevated main-button main-button--form-submit main-button-auto"
-                data-v-2b63c1fe=""
-                style="background-color: #23ad5b; color: #fff; caret-color: #fff; width: auto; height: auto;"
-                type="submit"
-              >
-                
-                <span
-                  class="v-btn__overlay"
-                />
-                <span
-                  class="v-btn__underlay"
-                />
-                
-                <!---->
-                <span
-                  class="v-btn__content"
-                  data-no-activator=""
+                <div
+                  class="v-field__append-inner"
                 >
-                  
-                  
-                  <!--v-if-->
-                  <!--v-if-->
-                  <span
-                    class="main-button-content"
-                    data-v-2b63c1fe=""
-                  >
-                    $t('joinTablePage.button') 
-                    <!--v-if-->
-                  </span>
-                  
-                  
-                </span>
-                <!---->
-                <!---->
-              </button>
+                  <!---->
+                  <i
+                    aria-hidden="true"
+                    class="mdi-pencil mdi v-icon notranslate v-theme--light v-icon--size-default"
+                  />
+                </div>
+                <div
+                  class="v-field__outline"
+                >
+                  <!---->
+                  <!---->
+                </div>
+              </div>
               
-            </form>
+            </div>
+            <!---->
+            <div
+              class="v-input__details"
+            >
+              <transition-group-stub
+                appear="false"
+                aria-live="polite"
+                class="v-messages"
+                css="true"
+                id="input-0-messages"
+                name="slide-y-transition"
+                persisted="false"
+                role="alert"
+                tag="div"
+              >
+                <!---->
+              </transition-group-stub>
+              <!---->
+            </div>
           </div>
+          <!-- todo: manage values as maxlength globally? -->
+          <button
+            class="v-btn v-btn--elevated v-theme--light v-btn--density-default elevation-0 v-btn--rounded v-btn--size-default v-btn--variant-elevated custom-green-btn mt-12 mx-auto"
+            data-v-bb2bf2be=""
+            data-v-ea088446=""
+            type="button"
+          >
+            
+            <span
+              class="v-btn__overlay"
+            />
+            <span
+              class="v-btn__underlay"
+            />
+            
+            <!---->
+            <span
+              class="v-btn__content"
+              data-no-activator=""
+            >
+              
+              
+              Tisch betreten
+              
+              
+            </span>
+            <!---->
+            <!---->
+          </button>
         </div>
-      </div>
+        
+      </form>
     </div>
     
   </div>

@@ -125,7 +125,6 @@ export const useTablesStore = defineStore(
     const tables = ref<Table[]>([])
 
     const getTables = computed(() => tables.value)
-
     const setTables = (newTables: Table[]) => {
       tables.value = newTables
     }
