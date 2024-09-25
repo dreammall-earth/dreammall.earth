@@ -66,8 +66,8 @@ defineEmits<{
   justify-content: space-between;
   min-width: 0; /* flex items needs to size freely! */
   padding: 3px 24px;
-  border-radius: 16px 0 0 16px;
   background: var(--v-drawer-element-background);
+  border-radius: 16px 0 0 16px;
 }
 
 .table-info.highlighted {
@@ -75,8 +75,8 @@ defineEmits<{
 }
 
 .table-info.welcome::before {
+  background: linear-gradient(45deg, #f09630, #2ca5b1) border-box; /* 3 */
   border-radius: 16px 0 0 16px;
-  background: linear-gradient(45deg, #f09630, #2ca5b1) border-box; /*3*/
 }
 
 .name {
@@ -110,14 +110,14 @@ defineEmits<{
 }
 
 .action.highlighted.welcome {
-  background-color: var(--v-drawer-element-background);
   color: var(--v-theme-font);
+  background-color: var(--v-drawer-element-background);
 }
 
 .action.welcome::before {
-  border-radius: 0 16px 16px 0;
   color: black;
-  background: linear-gradient(45deg, #2ca5b1, #f09630) border-box; /*3*/
+  background: linear-gradient(45deg, #2ca5b1, #f09630) border-box; /* 3 */
+  border-radius: 0 16px 16px 0;
 }
 
 .welcome {
@@ -126,42 +126,41 @@ defineEmits<{
 }
 
 .welcome::before {
-  content: '';
   position: absolute;
   inset: 0;
+  content: '';
   border: 0.5px solid transparent;
-
-  -webkit-mask: /*4*/
+  mask: /*4*/
     linear-gradient(#fff 0 0) padding-box,
     linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor; /*5'*/
-  mask-composite: exclude; /*5*/
+  mask-composite: xor; /* 5' */
+  mask-composite: exclude; /* 5 */
 }
 
 .badge {
   position: absolute;
-  bottom: -6px;
   right: 80px;
-  border-radius: 6px;
-  background: var(--v-drawer-element-background);
+  bottom: -6px;
   width: 59px;
   height: 13px;
   font-size: 9px;
   font-weight: 700;
   line-height: normal;
-  text-transform: uppercase;
   text-align: center;
+  text-transform: uppercase;
+  background: var(--v-drawer-element-background);
+  border-radius: 6px;
 }
 
 .badge.highlighted {
-  border-color: var(--list-color) !important;
   color: var(--list-color);
+  border-color: var(--list-color) !important;
 }
 
 .welcome-badge {
   position: absolute;
-  bottom: -20px;
   right: 80px;
+  bottom: -20px;
 }
 
 .welcome-badge.dark {

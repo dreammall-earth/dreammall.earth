@@ -91,10 +91,10 @@ watch(isCollapsed, () => {
   display: flex;
   flex-flow: column;
   gap: 8px;
-  padding: 0;
-  list-style: none;
-  overflow-y: auto;
   height: calc(40vh - 80px);
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
 }
 
 .list[data-type='mallTalk'] {

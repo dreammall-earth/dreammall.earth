@@ -149,18 +149,18 @@
     "notFound": "Tisch nicht gefunden."
   },
   "tables": {
-    "participantCount": "{count} Teilnehmer",
-    "member": "Mitglied",
     "mallTalk": "Mall Talk",
-    "project": "Projekt",
+    "member": "Mitglied",
+    "participantCount": "{count} Teilnehmer",
+    "project": "Projekt"
   },
   "tablesDrawer": {
-    "mallTalk": "Mall Talk",
-    "projects": "Projekte",
+    "coffeeTime": "DreamMall Coffee Time",
     "invite": "Einladen",
+    "mallTalk": "Mall Talk",
     "noResults": "Keine Ergebnisse gefunden",
     "noTables": "Keine Tische verfügbar",
-    "searchPlaceholder": "Offene Tische, Teilnehmer",
-    "coffeeTime": "DreamMall Coffee Time"
+    "projects": "Projekte",
+    "searchPlaceholder": "Offene Tische, Teilnehmer"
   }
 }

@@ -23,8 +23,8 @@
     <TableListItem
       v-if="tables.permanent"
       :item="tables.permanent"
-      @open-table="openTable(tables.permanent.id)"
       class="mb-4"
+      @open-table="openTable(tables.permanent.id)"
     />
 
     <!-- Mall Talk -->
