@@ -16,7 +16,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo, AttendeeRole } from '#api/BBB'
 import { CreateMeetingResponse } from '#api/BBB/types'
 import { CONFIG } from '#config/config'
-import { OpenTable, Table } from '#models/TableModel'
+import { OpenTable, Table, getAttendees } from '#models/TableModel'
 import { Context } from '#src/context'
 import {
   EVENT_CREATE_MY_TABLE,
@@ -27,6 +27,8 @@ import {
 import logger from '#src/logger'
 
 import type { PrismaClient, UserWithMeeting, UsersWithMeetings } from '#src/prisma'
+
+const WELCOME_TABLE_ID = 'welcome'
 
 @Resolver()
 export class TableResolver {
@@ -198,7 +200,7 @@ export class TableResolver {
     })
     if (!user) throw new Error('User not found!')
     const meetings = await getMeetings()
-    return openTablesFromOpenMeetings(prisma)({ meetings, user })
+    return openTablesFromOpenMeetings(context)({ meetings, user })
   }
 
   @Authorized()
@@ -246,6 +248,28 @@ export class TableResolver {
     await EVENT_CREATE_TABLE(user.id)
 
     return Table.fromMeeting(dbMeeting, usersInMeetings)
+  }
+
+  @Authorized()
+  @Query(() => String)
+  async joinWelcomeTable(@Ctx() context: Context): Promise<string> {
+    const { user, config } = context
+    if (!user) throw new Error('User not found!')
+
+    const { WELCOME_TABLE_MEETING_ID, WELCOME_TABLE_NAME } = config
+
+    const meeting = await createMeeting({
+      meetingID: WELCOME_TABLE_MEETING_ID,
+      name: WELCOME_TABLE_NAME,
+    })
+    if (!meeting) {
+      throw new Error('Error creating the meeting!')
+    }
+    return joinMeetingLink({
+      fullName: user.name,
+      meetingID: WELCOME_TABLE_MEETING_ID,
+      password: meeting.moderatorPW,
+    })
   }
 
   @Authorized()
@@ -514,7 +538,7 @@ export class TableResolver {
       },
     })
     if (!user) return []
-    return openTablesFromOpenMeetings(prisma)({ meetings, user })
+    return openTablesFromOpenMeetings(context)({ meetings, user })
   }
 
   /*
@@ -536,9 +560,17 @@ type MeetingInfoUnionUser = {
 }
 
 const openTablesFromOpenMeetings =
-  (prisma: PrismaClient) =>
+  (context: Context) =>
   async (arg: MeetingInfoUnionUser): Promise<OpenTable[]> => {
-    if (!arg.meetings.length) return []
+    const {
+      dataSources: { prisma },
+    } = context
+    const openTables: OpenTable[] = []
+    const welcomeTable = getOpenWelcomeTable(context)(arg.meetings)
+    if (welcomeTable) {
+      openTables.push(welcomeTable)
+    }
+    if (!arg.meetings.length) return openTables
     const dbMeetings = await prisma.meeting.findMany({
       where: {
         meetingID: { in: arg.meetings.map((m: MeetingInfo) => m.meetingID) },
@@ -568,7 +600,6 @@ const openTablesFromOpenMeetings =
       },
     })
 
-    const openTables: OpenTable[] = []
     dbMeetings.forEach((meeting) => {
       const meetingInfo = arg.meetings.find((m) => meeting.meetingID === m.meetingID)
       if (meetingInfo) {
@@ -659,3 +690,29 @@ const createBBBMeeting =
     }
     return meeting
   }
+
+const getOpenWelcomeTable = (context: Context) => (meetings: MeetingInfo[]) => {
+  const { config } = context
+  if (!config.WELCOME_TABLE_MEETING_ID) {
+    return
+  }
+  const welcomeMeeting = meetings.find((m) => m.meetingID === config.WELCOME_TABLE_MEETING_ID)
+  if (welcomeMeeting) {
+    return new OpenTable({
+      id: WELCOME_TABLE_ID,
+      meetingID: config.WELCOME_TABLE_MEETING_ID,
+      meetingName: config.WELCOME_TABLE_NAME,
+      participantCount: welcomeMeeting.participantCount,
+      startTime: new Date(welcomeMeeting.startTime).toISOString(),
+      attendees: getAttendees(welcomeMeeting),
+    })
+  }
+  return new OpenTable({
+    id: WELCOME_TABLE_ID,
+    meetingID: config.WELCOME_TABLE_MEETING_ID,
+    meetingName: config.WELCOME_TABLE_NAME,
+    participantCount: 0,
+    startTime: new Date().toISOString(),
+    attendees: [],
+  })
+}

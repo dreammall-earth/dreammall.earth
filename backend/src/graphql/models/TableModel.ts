@@ -7,6 +7,16 @@ import { UsersWithMeetings } from '#src/prisma'
 import { Attendee } from './AttendeeModel'
 import { UserInMeeting } from './UserInMeetingModel'
 
+export const getAttendees = (meeting: MeetingInfo): Attendee[] => {
+  const attendees =
+    typeof meeting.attendees !== 'string'
+      ? Array.isArray(meeting.attendees.attendee)
+        ? meeting.attendees.attendee.map((a: AttendeeInfo) => new Attendee(a))
+        : [meeting.attendees.attendee]
+      : []
+  return attendees
+}
+
 @ObjectType()
 export class Table {
   constructor(data: Pick<Table, 'id' | 'name' | 'public' | 'users'>) {
@@ -46,14 +56,9 @@ export class OpenTable {
   static fromMeetingInfo(meeting: MeetingInfo, id: number) {
     const { meetingID, meetingName, participantCount } = meeting
     const startTime = meeting.startTime.toString()
-    const attendees =
-      typeof meeting.attendees !== 'string'
-        ? Array.isArray(meeting.attendees.attendee)
-          ? meeting.attendees.attendee.map((a: AttendeeInfo) => new Attendee(a))
-          : [meeting.attendees.attendee]
-        : []
+    const attendees = getAttendees(meeting)
     return new OpenTable({
-      id,
+      id: String(id),
       meetingID,
       meetingName,
       participantCount,
@@ -62,8 +67,8 @@ export class OpenTable {
     })
   }
 
-  @Field(() => Int)
-  id: number
+  @Field()
+  id: string
 
   @Field()
   meetingID: string
