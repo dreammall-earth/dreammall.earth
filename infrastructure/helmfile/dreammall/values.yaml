@@ -34,5 +34,5 @@ configmap:
   jwks_uri: http://authentik-server/application/o/dreammallearth/jwks/
   presenter_url: https://master.dreammall.earth
   account_holder: 'DreamMall GBR'
-  iban: 'DE75512108001245126199'
-  bic: 'SOGEDEFFXXX'
+  iban: 'DE667 333170000 10000 504'
+  bic: 'GABLDE71XXX'
