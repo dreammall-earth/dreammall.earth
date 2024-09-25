@@ -22,27 +22,24 @@
     <!-- Coffee time -->
 
     <!-- Mall Talk -->
-    <v-list v-for="list in lists" :key="list.heading">
-      <h2 class="header mb-4">{{ list.heading }}</h2>
-      <button
-        v-if="list.type === 'mallTalk'"
-        class="invite-button bg-primary pl-3 pr-6 py-1 d-flex align-center justify-center mb-4"
-        @click="$emit('mall-talk-invite')"
-      >
-        <v-icon icon="mdi mdi-plus" class="mr-4" />
-        {{ $t('tablesDrawer.invite') }}
-      </button>
-      <div v-if="!list.items.length">{{ $t('tablesDrawer.noTables') }}</div>
-      <div v-else-if="!list.filteredItems.value.length">
-        {{ $t('tablesDrawer.noResults') }}
-      </div>
+    <div class="lists">
       <TableList
-        v-else
-        :items="list.filteredItems.value"
-        :type="list.type"
+        v-for="list in lists"
+        :key="list.type"
+        :list="list"
+        :search-value="searchValue"
         @open-table="closeDrawer"
-      />
-    </v-list>
+      >
+        <button
+          v-if="list.type === 'mallTalk'"
+          class="invite-button bg-primary pl-3 pr-6 py-1 d-flex align-center justify-center mb-4"
+          @click="$emit('mall-talk-invite')"
+        >
+          <v-icon icon="mdi mdi-plus" class="mr-4" />
+          {{ $t('tablesDrawer.invite') }}
+        </button>
+      </TableList>
+    </div>
   </v-navigation-drawer>
 </template>
 
@@ -102,34 +99,18 @@ const tables = computed(() => ({
   ] as OpenTable[],
 }))
 
-const lists = computed(() =>
-  [
-    {
-      type: 'mallTalk' as const,
-      heading: t('tablesDrawer.mallTalk'),
-      items: tables.value.mallTalk,
-    },
-    {
-      type: 'projects' as const,
-      heading: t('tablesDrawer.projects'),
-      items: tables.value.projects,
-    },
-  ].map((list) => ({
-    ...list,
-    filteredItems: computed(() => {
-      if (!searchValue.value) {
-        return list.items
-      }
-      return list.items.filter(
-        (item) =>
-          item.meetingName.toLowerCase().includes(searchValue.value.toLowerCase()) ||
-          item.attendees.find((attendee) =>
-            attendee.fullName.toLowerCase().includes(searchValue.value.toLowerCase()),
-          ),
-      )
-    }),
-  })),
-)
+const lists = computed(() => [
+  {
+    type: 'mallTalk' as const,
+    heading: t('tablesDrawer.mallTalk'),
+    items: tables.value.mallTalk,
+  },
+  {
+    type: 'projects' as const,
+    heading: t('tablesDrawer.projects'),
+    items: tables.value.projects,
+  },
+])
 
 const props = withDefaults(
   defineProps<{
@@ -218,9 +199,10 @@ watch(
   }
 }
 
-.header {
-  font-size: 14px;
-  text-transform: uppercase;
+.lists {
+  display: flex;
+  flex-flow: column;
+  gap: 16px;
 }
 
 .invite-button {
