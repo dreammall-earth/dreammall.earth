@@ -12,7 +12,7 @@
       <div v-else-if="!filteredItems.length">
         {{ $t('tablesDrawer.noResults') }}
       </div>
-      <ul class="list" :data-type="$props.list.type">
+      <ul v-if="filteredItems.length > 0" class="list" :data-type="$props.list.type">
         <TableListItem
           v-for="item in filteredItems"
           :key="item.meetingID"
@@ -83,12 +83,19 @@ watch(isCollapsed, () => {
 </script>
 
 <style scoped>
+.outer-list {
+  display: flex;
+  flex-flow: column;
+}
+
 .list {
   display: flex;
   flex-flow: column;
   gap: 8px;
   padding: 0;
   list-style: none;
+  overflow-y: auto;
+  height: calc(40vh - 80px);
 }
 
 .list[data-type='mallTalk'] {
