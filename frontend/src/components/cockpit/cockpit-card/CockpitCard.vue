@@ -20,12 +20,9 @@ const slots = useSlots()
 
 .cockpit-card {
   --padding: 20px;
-  --cockpit-card-height: 323px;
   --card-width: 100%;
 
   max-width: var(--card-width, 100%);
-  height: var(--cockpit-card-height);
-  max-height: var(--cockpit-card-height);
   padding: var(--padding);
   background-color: var(--v-sidebar-background);
   border-radius: 20px;
