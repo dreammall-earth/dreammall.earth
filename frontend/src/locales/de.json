@@ -62,6 +62,7 @@
       "share": "Teilen"
     }
   },
+  "copiedToClipboard": "Link in Zwischenablage kopiert",
   "dream-mall-panel": {
     "call": {
       "add-user": "Add",
@@ -94,10 +95,6 @@
       "h1": "500 Interner Fehler",
       "text": "Irgendetwas ist schief gegangen."
     }
-  },
-  "globalErrorHandler": {
-    "copiedToClipboard": "Link in Zwischenablage kopiert",
-    "tableerror": "Fehler beim Öffnen der Tabelle"
   },
   "joinTablePage": {
     "guestName": "Gastname",
@@ -148,6 +145,7 @@
     }
   },
   "table": {
+    "error": "Fehler beim Öffnen des Tisches",
     "notFound": "Tisch nicht gefunden."
   },
   "tables": {

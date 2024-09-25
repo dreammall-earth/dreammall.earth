@@ -1,35 +1,27 @@
+import { mount } from '@vue/test-utils'
 import { vi, describe, it, expect } from 'vitest'
-import { toast } from 'vue3-toastify'
+import { defineComponent } from 'vue'
 
-import globalErrorHandler from './globalErrorHandler'
-
-// vi.mock('vue3-toastify', async (importOriginal) => {
-//   const mod = await importOriginal<typeof import('vue3-toastify')>()
-//   return {
-//     ...mod,
-//     error: vi.fn(),
-//     warning: vi.fn(),
-//   }
-// })
+import { globalErrorHandler, toastErrors } from './globalErrorHandler'
 
 describe('GlobalErrorHandler', () => {
-  describe('Error', () => {
-    const errorSpy = vi.spyOn(toast, 'error')
+  describe('given a component throwing an unexpected runtime error', () => {
+    const toast = { error: vi.fn() }
+    const console = { error: vi.fn() }
+    const dependencies = { toast, console }
+
+    const component = defineComponent({
+      setup: () => {
+        throw new Error('Boom!')
+      },
+      template: '<template><h1>Hello World</h1></template>',
+    })
 
     it('toasts error message', () => {
-      globalErrorHandler.error('someError')
-
-      expect(errorSpy).toHaveBeenCalledWith('someError')
-    })
-  })
-
-  describe('Warning', () => {
-    const warningSpy = vi.spyOn(toast, 'warning')
-
-    it('toasts warning message', () => {
-      globalErrorHandler.warning('someWarning')
-
-      expect(warningSpy).toHaveBeenCalledWith('someWarning')
+      const plugin = globalErrorHandler(toastErrors(dependencies))
+      const setup = () => mount(component, { global: { plugins: [plugin] } })
+      expect(setup).toThrow('Boom!')
+      expect(dependencies.toast.error).toHaveBeenCalledWith('Unhandled Error: Boom!')
     })
   })
 })

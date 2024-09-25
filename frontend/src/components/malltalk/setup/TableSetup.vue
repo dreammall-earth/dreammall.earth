@@ -15,7 +15,6 @@ import { useI18n } from 'vue-i18n'
 
 import StepControl from '#components/steps/StepControl.vue'
 import { Step } from '#components/steps/useSteps'
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { useTablesStore } from '#stores/tablesStore'
 
 import EnterNameAndVisibility from './EnterNameAndVisibility.vue'
@@ -85,24 +84,19 @@ defineEmits<{
 }>()
 
 const onSubmit = async () => {
-  try {
-    const table = await tablesStore.createMyTable(
-      tableSettings.name,
-      !tableSettings.isPrivate,
-      tableSettings.users,
-    )
+  const table = await tablesStore.createMyTable(
+    tableSettings.name,
+    !tableSettings.isPrivate,
+    tableSettings.users,
+  )
 
-    if (!table) {
-      GlobalErrorHandler.error('Could not create MyTable')
-      return
-    }
+  if (!table) {
+    throw new Error(t('table.error'))
+  }
 
-    tableSettings.tableId = await tablesStore.joinMyTable()
-    if (!tableSettings.tableId) {
-      GlobalErrorHandler.error('Could not join myTable')
-    }
-  } catch (error) {
-    GlobalErrorHandler.error(t('globalErrorHandler.tableerror'), error)
+  tableSettings.tableId = await tablesStore.joinMyTable()
+  if (!tableSettings.tableId) {
+    throw new Error(t('table.error'))
   }
 
   stepControl.value?.next()

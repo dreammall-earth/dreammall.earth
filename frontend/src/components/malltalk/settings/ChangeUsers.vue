@@ -11,7 +11,6 @@
 <script lang="ts" setup>
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 import UserSelection from '#components/user-selection/UserSelection.vue'
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { useTablesStore } from '#stores/tablesStore'
 
 import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
@@ -27,8 +26,8 @@ const onSubmitUsers = async (): Promise<string | void> => {
   try {
     await tablesStore.updateMyTableUsers(tableSettings.value.users)
     emit('goTo', 'root')
-  } catch (error) {
-    GlobalErrorHandler.error('Error occurred by updating the users', error)
+  } catch (cause) {
+    throw new Error('Error occurred by updating the users', { cause })
   }
 }
 </script>

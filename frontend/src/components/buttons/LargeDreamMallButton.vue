@@ -297,8 +297,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
-
 const buttonIsTurned = ref(false)
 const warp = ref<HTMLInputElement | null>(null)
 
@@ -330,8 +328,8 @@ const onClick = (event: MouseEvent) => {
     }
 
     emit('click', 1)
-  } catch (error) {
-    GlobalErrorHandler.error('Error on CreateButton Click', error)
+  } catch (cause) {
+    throw new Error('Error on CreateButton Click', { cause })
   }
 }
 

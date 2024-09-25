@@ -14,7 +14,6 @@ import { reactive, ref } from 'vue'
 
 import StepControl from '#components/steps/StepControl.vue'
 import { Step } from '#components/steps/useSteps'
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { useTablesStore } from '#stores/tablesStore'
 
 import EnterNameAndVisibility from './EnterNameAndVisibility.vue'
@@ -73,8 +72,7 @@ const onSubmit = async () => {
   )
 
   if (!table) {
-    GlobalErrorHandler.error('Could not create table')
-    return
+    throw new Error('Could not create table')
   }
 
   createTableModel.tableId = table.id

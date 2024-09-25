@@ -62,6 +62,7 @@
       "share": "Share"
     }
   },
+  "copiedToClipboard": "Link copied to clipboard",
   "dream-mall-panel": {
     "call": {
       "add-user": "Add",
@@ -94,10 +95,6 @@
       "h1": "500 Internal Error",
       "text": "Something went wrong."
     }
-  },
-  "globalErrorHandler": {
-    "copiedToClipboard": "Link copied to clipboard",
-    "tableerror": "Error opening table"
   },
   "joinTablePage": {
     "guestName": "Guest name",
@@ -148,6 +145,7 @@
     }
   },
   "table": {
+    "error": "Error opening table",
     "notFound": "Table not found."
   },
   "tables": {

@@ -18,7 +18,6 @@
 import { inject } from 'vue'
 import { useTheme } from 'vuetify'
 
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import AuthService from '#src/services/AuthService'
 
 const theme = useTheme()
@@ -34,8 +33,8 @@ const authService = inject<AuthService>('authService')
 async function signOut() {
   try {
     await authService?.signOut()
-  } catch (error) {
-    GlobalErrorHandler.error('auth error', error)
+  } catch (cause) {
+    throw new Error('auth error', { cause })
   }
 }
 </script>

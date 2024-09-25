@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { navigate } from 'vike/client/router'
-import { computed, ref } from 'vue'
+import { computed, ref, inject } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
@@ -34,6 +34,10 @@ import { copyToClipboard } from '#src/utils/copyToClipboard'
 import { useTablesStore } from '#stores/tablesStore'
 
 import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
+import type { toast as Toast } from 'vue3-toastify'
+
+const toast = inject<typeof Toast>('toast')
+const copy = copyToClipboard(toast)
 
 const { t } = useI18n()
 
@@ -68,10 +72,7 @@ const buttons = computed(() => [
     indicator: copiedIndicator.value,
     action: () => {
       if (tableId.value) {
-        copyToClipboard(
-          tablesStore.getJoinTableUrl(tableId.value, META.BASE_URL),
-          t('globalErrorHandler.copiedToClipboard'),
-        )
+        copy(tablesStore.getJoinTableUrl(tableId.value, META.BASE_URL), t('copiedToClipboard'))
         copiedIndicator.value = true
 
         if (timerIndicator) clearTimeout(timerIndicator)

@@ -52,7 +52,6 @@ import SimpleButton from '#components/buttons/SimpleButton.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 import { usePageContext } from '#context/usePageContext'
 import useGetTableName from '#pages/join-table/useGetTableName'
-import GlobalErrorHandler from '#plugins/globalErrorHandler'
 import { joinTableAsGuestQuery } from '#queries/joinTableAsGuestQuery'
 
 const { t } = useI18n()
@@ -86,8 +85,8 @@ const submit = async () => {
     if (joinTableAsGuestQueryResult.value) {
       window.location.href = joinTableAsGuestQueryResult.value.joinTableAsGuest
     }
-  } catch (error) {
-    GlobalErrorHandler.error('table link not found', error)
+  } catch (cause) {
+    throw new Error('table link not found', { cause })
   }
 }
 </script>

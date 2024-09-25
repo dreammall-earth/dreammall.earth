@@ -40,7 +40,6 @@ import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 
 import ClientOnly from '#components/ClientOnly.vue'
-import globalErrorHandler from '#plugins/globalErrorHandler'
 import {
   useUserStore,
   UserAvailability,
@@ -72,8 +71,8 @@ const updateAvailability = async (newAvailability: UserAvailability) => {
       name: user.value!.name,
       availability: newAvailability,
     })
-  } catch (error) {
-    globalErrorHandler.error(`Could not update user: ${(error as Error).message}`, error)
+  } catch (cause) {
+    throw new Error(`Could not update user: ${(cause as Error).message}`, { cause })
   }
 }
 
