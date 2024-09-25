@@ -49,8 +49,8 @@ const openTable = (id: number) => {
 
 .table-info {
   flex: 1;
-  display: flex;
   flex-flow: column;
+  display: flex;
   justify-content: space-between;
   min-width: 0; /* flex items needs to size freely! */
   padding: 5px 24px;
@@ -61,8 +61,8 @@ const openTable = (id: number) => {
   height: 18px;
   font-size: 14px;
   font-weight: bold;
-  text-overflow: ellipsis;
   overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
