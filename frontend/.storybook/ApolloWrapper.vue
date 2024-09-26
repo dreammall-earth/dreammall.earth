@@ -7,7 +7,7 @@
  import { DefaultApolloClient } from '@vue/apollo-composable'
 
  import { joinMyTableMutation } from '#mutations/joinMyTableMutation'
- import { tablesQuery } from '#src/graphql/queries/tablesQuery'
+ import { tablesQuery } from '#queries/tablesQuery'
  import { MockedProvider } from '@apollo/client/testing'
 
  const apolloClient = new MockedProvider({
@@ -28,7 +28,7 @@
        },
        result: {
          data: {
-           openTables: [
+           tables: [
              {
                meetingID: 'my-meeting',
                meetingName: 'my meeting',

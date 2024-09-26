@@ -5,7 +5,7 @@ import { vi, describe, it, expect, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { tablesQuery } from '#queries/tablesQuery.js'
+import { tablesQuery } from '#queries/tablesQuery'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 import TablesDrawer from './TablesDrawer.vue'
