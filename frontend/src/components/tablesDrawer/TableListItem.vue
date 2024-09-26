@@ -26,7 +26,7 @@
       class="welcome-badge"
       :class="{ dark: $vuetify.theme.current.dark }"
     />
-    <div v-else class="badge" :class="{ highlighted: item.isModerator }">
+    <div v-else class="badge border-thin" :class="{ highlighted: item.isModerator }">
       {{
         item.isModerator
           ? $t('tables.member')
@@ -57,6 +57,7 @@ defineEmits<{
   gap: 8px;
   align-items: stretch;
   justify-content: center;
+  margin-bottom: 6px;
 }
 
 .table-info {
