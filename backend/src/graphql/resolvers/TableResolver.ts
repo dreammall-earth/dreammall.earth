@@ -280,6 +280,7 @@ export class TableResolver {
   ): Promise<JoinTable> {
     const {
       user,
+      config,
       dataSources: { prisma },
     } = context
 
@@ -300,7 +301,7 @@ export class TableResolver {
     }
 
     let password: string
-
+    let isModerator: boolean = false
     if (
       (table.user && table.user.id === user.id) ||
       table.users.some((e) => e.userId === user.id && e.role === 'MODERATOR')
@@ -313,6 +314,7 @@ export class TableResolver {
         tableId: table.id,
       })
       password = meeting.moderatorPW
+      isModerator = true
     } else if (table.public || table.users.some((u) => u.userId === user.id)) {
       if (!table.attendeePW) {
         throw new Error('This meeting does not exists.')
@@ -322,14 +324,21 @@ export class TableResolver {
       throw new Error('User has no access to meeting.')
     }
 
+    const { WELCOME_TABLE_MEETING_ID } = config
+    // TODO: Set type & isModerator
+    const type: string = table.user
+      ? 'MALL_TALK'
+      : table.meetingID === WELCOME_TABLE_MEETING_ID
+        ? 'PERMANENT'
+        : 'PROJECT'
     return {
       link: joinMeetingLink({
         fullName: user.name,
         meetingID: table.meetingID,
         password,
       }),
-      tableType: '',
-      isModerator: false,
+      type,
+      isModerator,
     }
   }
 
