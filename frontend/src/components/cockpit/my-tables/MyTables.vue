@@ -13,9 +13,9 @@
       </div>
     </template>
     <template #default>
-      <ul v-if="tables.length > 0" class="list">
+      <ul v-if="projectTables.length > 0" class="list">
         <TableItem
-          v-for="table in tables"
+          v-for="table in projectTables"
           :key="table.id"
           v-bind="table"
           ref="tableItemRefs"
@@ -50,7 +50,7 @@ const addTable = () => {
 
 const { getTables } = storeToRefs(useTablesStore())
 
-const tables = computed(() =>
+const projectTables = computed(() =>
   getTables.value.map((table: Table) => ({
     id: table.id,
     name: table.name,

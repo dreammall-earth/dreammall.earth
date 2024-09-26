@@ -3,18 +3,18 @@ import { createMockClient, createMockSubscription, IMockSubscription } from 'moc
 import { setActivePinia, createPinia } from 'pinia'
 import { vi, describe, it, expect, beforeEach } from 'vitest'
 
-import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
+import { tablesQuery } from '#queries/tablesQuery'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 import { useTablesStore } from './tablesStore'
 
 const updateOpenTablesSubscriptionMock: IMockSubscription = createMockSubscription()
 const mockClient = createMockClient()
-const openTablesQueryMock = vi.fn()
+const tablesQueryMock = vi.fn()
 mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateOpenTablesSubscriptionMock)
 mockClient.setRequestHandler(
-  openTablesQuery,
-  openTablesQueryMock.mockResolvedValue({ data: { openTables: [] } }),
+  tablesQuery,
+  tablesQueryMock.mockResolvedValue({ data: { tables: [] } }),
 )
 
 provideApolloClient(mockClient)
@@ -32,7 +32,7 @@ describe('Tables Store', () => {
 
   describe('api', () => {
     it('queries the API', () => {
-      expect(openTablesQueryMock).toHaveBeenCalledTimes(1)
+      expect(tablesQueryMock).toHaveBeenCalledTimes(1)
     })
 
     describe('subscription', () => {

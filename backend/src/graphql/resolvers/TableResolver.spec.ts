@@ -64,8 +64,8 @@ const createTableMutation = `mutation CreateTable($isPublic: Boolean!, $name: St
   }
 }`
 
-const tablesQuery = `{
-  tables {
+const projectTablesQuery = `{
+  projectTables {
     id
     name
     public
@@ -260,13 +260,13 @@ describe('TableResolver', () => {
       })
     })
 
-    describe('openTables', () => {
+    describe('tables', () => {
       it('throws access denied', async () => {
         await expect(
           testServer.executeOperation(
             {
               query: `query {
-                openTables {
+                tables {
                   mallTalkTables {
                     meetingName
                   }
@@ -492,12 +492,12 @@ describe('TableResolver', () => {
       })
     })
 
-    describe('tables', () => {
+    describe('projectTables', () => {
       it('throws access denied', async () => {
         await expect(
           testServer.executeOperation(
             {
-              query: tablesQuery,
+              query: projectTablesQuery,
             },
             { contextValue: mockContextValue() },
           ),
@@ -1888,7 +1888,7 @@ describe('TableResolver', () => {
       })
     })
 
-    describe('openTables', () => {
+    describe('tables', () => {
       describe('no meetings', () => {
         beforeEach(() => {
           getMeetingsMock.mockResolvedValue([])
@@ -1899,7 +1899,7 @@ describe('TableResolver', () => {
             testServer.executeOperation(
               {
                 query: `query {
-                  openTables {
+                  tables {
                     mallTalkTables {
                       id 
                       meetingName 
@@ -1940,7 +1940,7 @@ describe('TableResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  openTables: {
+                  tables: {
                     mallTalkTables: [],
                     permanentTables: [],
                     projectTables: [],
@@ -1961,7 +1961,7 @@ describe('TableResolver', () => {
               testServer.executeOperation(
                 {
                   query: `query {
-                    openTables {
+                    tables {
                       mallTalkTables {
                         id 
                         meetingName 
@@ -2002,7 +2002,7 @@ describe('TableResolver', () => {
                 kind: 'single',
                 singleResult: {
                   data: {
-                    openTables: {
+                    tables: {
                       mallTalkTables: [],
                       permanentTables: [
                         {
@@ -2064,7 +2064,7 @@ describe('TableResolver', () => {
             testServer.executeOperation(
               {
                 query: `query {
-                  openTables {
+                  tables {
                     mallTalkTables {
                       id 
                       meetingName 
@@ -2105,7 +2105,7 @@ describe('TableResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  openTables: {
+                  tables: {
                     mallTalkTables: [],
                     permanentTables: [],
                     projectTables: [],
@@ -2178,7 +2178,7 @@ describe('TableResolver', () => {
             testServer.executeOperation(
               {
                 query: `query {
-                  openTables {
+                  tables {
                     mallTalkTables {
                       id 
                       meetingName 
@@ -2219,7 +2219,7 @@ describe('TableResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  openTables: {
+                  tables: {
                     mallTalkTables: [],
                     permanentTables: [],
                     projectTables: [
@@ -2307,7 +2307,7 @@ describe('TableResolver', () => {
             testServer.executeOperation(
               {
                 query: `query { 
-                  openTables {
+                  tables {
                     mallTalkTables {
                       id 
                       meetingName 
@@ -2348,7 +2348,7 @@ describe('TableResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  openTables: {
+                  tables: {
                     mallTalkTables: [],
                     permanentTables: [],
                     projectTables: [
@@ -2458,7 +2458,7 @@ describe('TableResolver', () => {
             testServer.executeOperation(
               {
                 query: `query {
-                  openTables {
+                  tables {
                     mallTalkTables {
                       id 
                       meetingName 
@@ -2499,7 +2499,7 @@ describe('TableResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  openTables: {
+                  tables: {
                     mallTalkTables: [],
                     permanentTables: [],
                     projectTables: [],
@@ -2513,12 +2513,12 @@ describe('TableResolver', () => {
       })
     })
 
-    describe('tables', () => {
-      it('returns empty array for tables where user is owner', async () => {
+    describe('projectTables', () => {
+      it('returns empty array for projectTables where user is owner', async () => {
         await expect(
           testServer.executeOperation(
             {
-              query: tablesQuery,
+              query: projectTablesQuery,
             },
             { contextValue: mockContextValue({ user: raeuberUser }) },
           ),
@@ -2527,7 +2527,7 @@ describe('TableResolver', () => {
             kind: 'single',
             singleResult: {
               data: {
-                tables: [],
+                projectTables: [],
               },
               errors: undefined,
             },
@@ -2549,11 +2549,11 @@ describe('TableResolver', () => {
           )
         })
 
-        it('returns empty array for tables where user is moderator', async () => {
+        it('returns empty array for projectTables where user is moderator', async () => {
           await expect(
             testServer.executeOperation(
               {
-                query: tablesQuery,
+                query: projectTablesQuery,
               },
               { contextValue: mockContextValue({ user: raeuberUser }) },
             ),
@@ -2562,7 +2562,7 @@ describe('TableResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  tables: [],
+                  projectTables: [],
                 },
                 errors: undefined,
               },
@@ -2571,7 +2571,7 @@ describe('TableResolver', () => {
         })
       })
 
-      describe('setup tables', () => {
+      describe('setup projectTables', () => {
         beforeEach(async () => {
           await testServer.executeOperation(
             {
@@ -2586,11 +2586,11 @@ describe('TableResolver', () => {
           )
         })
 
-        it('returns array for tables where user is owner', async () => {
+        it('returns array for projectTables where user is owner', async () => {
           await expect(
             testServer.executeOperation(
               {
-                query: tablesQuery,
+                query: projectTablesQuery,
               },
               { contextValue: mockContextValue({ user: raeuberUser }) },
             ),
@@ -2599,7 +2599,7 @@ describe('TableResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  tables: [
+                  projectTables: [
                     {
                       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                       id: expect.any(Number),

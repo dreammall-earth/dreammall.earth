@@ -5,19 +5,19 @@ import { vi, describe, it, expect, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
+import { tablesQuery } from '#queries/tablesQuery.js'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 import TablesDrawer from './TablesDrawer.vue'
 
 export const mockClient = createMockClient()
 
-const openTablesQueryMock = vi.fn()
+const tablesQueryMock = vi.fn()
 const updateOpenTablesSubscriptionMock: IMockSubscription = createMockSubscription()
 
 mockClient.setRequestHandler(
-  openTablesQuery,
-  openTablesQueryMock.mockResolvedValue({ data: { openTables: [] } }),
+  tablesQuery,
+  tablesQueryMock.mockResolvedValue({ data: { tables: [] } }),
 )
 mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateOpenTablesSubscriptionMock)
 
