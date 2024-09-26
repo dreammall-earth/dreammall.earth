@@ -1069,7 +1069,13 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                           class="v-select__selection"
                         >
                           
-                          🟢 Available to work
+                          <i
+                            aria-hidden="true"
+                            class="mdi mdi-circle mdi v-icon notranslate v-theme--light v-icon--size-default mr-2"
+                            data-v-f444dc92=""
+                            style="color: #23AD5B; caret-color: #23AD5B;"
+                          />
+                           Available to work
                           
                         </div>
                         
