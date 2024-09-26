@@ -2,6 +2,7 @@
   <StepControl
     ref="stepControl"
     v-model="tableSettings"
+    :is-dream-mall-button-mode="true"
     :steps="steps"
     @submit="onSubmit"
     @close="() => $emit('close')"

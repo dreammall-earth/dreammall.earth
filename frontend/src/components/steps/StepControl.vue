@@ -4,6 +4,7 @@
     :title="steps[currentStep]?.title ?? 'unknown'"
     :is-back-button-visible="currentStep > 0 && steps[currentStep]?.canBack !== false"
     :is-close-button-visible="true"
+    :is-dream-mall-button-mode="props.isDreamMallButtonMode"
     @back="back"
     @close="$emit('close')"
   />
@@ -23,7 +24,9 @@
 import StepHeader from './StepHeader.vue'
 import { Step, useSteps } from './useSteps'
 
-const props = defineProps<{ steps: Step[] }>()
+const props = withDefaults(defineProps<{ steps: Step[]; isDreamMallButtonMode?: boolean }>(), {
+  isDreamMallButtonMode: false,
+})
 const model = defineModel<ModelType>()
 
 const emit = defineEmits<{
