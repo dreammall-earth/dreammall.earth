@@ -42,8 +42,10 @@
 
     <!-- Dream Mall Button & Panel -->
     <div class="dream-mall-floating-container" :class="{ active: isDmPanelVisible }">
-      <div class="dream-mall-button">
-        <DreamMallButton :is-active="isDmPanelVisible" @click="toggleDmPanel" />
+      <div class="dream-mall-button-wrapper">
+        <div class="dream-mall-button">
+          <DreamMallButton :is-active="isDmPanelVisible" @click="toggleDmPanel" />
+        </div>
       </div>
       <div class="dream-mall-panel">
         <slot name="dream-mall-button" :close="toggleDmPanel">
@@ -170,6 +172,7 @@ const { isModalActive } = useModal()
 .dream-mall-floating-container {
   --width: 400px;
   --button-size: 100px;
+  --button-scaling: 0.7;
   --panel-height: 200px;
   --animation-duration: 0.3s;
   --animation-timing: ease-out;
@@ -191,19 +194,37 @@ const { isModalActive } = useModal()
 
   transition: height var(--animation-duration) var(--animation-timing);
 
-  .dream-mall-button {
-    height: var(--button-size);
-    width: var(--button-size);
+  .dream-mall-button-wrapper {
     z-index: 10000;
-    pointer-events: auto;
+    width: var(--button-size);
+    height: var(--button-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: transform var(--animation-duration) var(--animation-timing);
+  }
+
+  .dream-mall-button {
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+    transition:
+      transform var(--animation-duration) var(--animation-timing),
+      width var(--animation-duration) var(--animation-timing),
+      height var(--animation-duration) var(--animation-timing);
   }
 
   &.active {
     height: calc(var(--panel-height) + var(--button-size));
 
-    .dream-mall-button {
+    .dream-mall-button-wrapper {
       transform: translateY(calc(var(--button-size) / 2));
+    }
+
+    .dream-mall-button {
+      transform: scale(var(--button-scaling));
+      width: calc(var(--button-size) * var(--button-scaling));
+      height: calc(var(--button-size) * var(--button-scaling));
     }
   }
 
