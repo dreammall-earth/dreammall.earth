@@ -104,7 +104,7 @@ export class JoinTable {
   link: string
 
   @Field()
-  tableType: string
+  type: string
 
   @Field()
   isModerator: boolean

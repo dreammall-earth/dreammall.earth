@@ -224,7 +224,11 @@ describe('TableResolver', () => {
     describe('joinTable', () => {
       const query = `
         query ($tableId: Int!) {
-          joinTable(tableId: $tableId)
+          joinTable(tableId: $tableId) {
+            link
+            type
+            isModerator
+          }
         }
       `
 
@@ -261,7 +265,19 @@ describe('TableResolver', () => {
         await expect(
           testServer.executeOperation(
             {
-              query: 'query { openTables { meetingName } }',
+              query: `query {
+                openTables {
+                  mallTalkTables {
+                    meetingName
+                  }
+                  projectTables {
+                    meetingName
+                  }
+                  permanentTables {
+                    meetingName
+                  }
+                }
+              }`,
             },
             { contextValue: mockContextValue() },
           ),
@@ -1550,7 +1566,11 @@ describe('TableResolver', () => {
     describe('joinTable', () => {
       const query = `
         query ($tableId: Int!) {
-          joinTable(tableId: $tableId)
+          joinTable(tableId: $tableId) {
+            link
+            type
+            isModerator
+          }
         }
       `
 
@@ -1615,7 +1635,13 @@ describe('TableResolver', () => {
               body: {
                 kind: 'single',
                 singleResult: {
-                  data: { joinTable: 'https://my-link' },
+                  data: {
+                    joinTable: {
+                      link: 'https://my-link',
+                      isModerator: false,
+                      type: 'PROJECT',
+                    },
+                  },
                   errors: undefined,
                 },
               },
@@ -1872,7 +1898,40 @@ describe('TableResolver', () => {
           await expect(
             testServer.executeOperation(
               {
-                query: 'query { openTables { meetingName } }',
+                query: `query {
+                  openTables {
+                    mallTalkTables {
+                      id 
+                      meetingName 
+                      meetingID 
+                      participantCount 
+                      startTime 
+                      attendees { 
+                        fullName 
+                      }
+                    }
+                    projectTables {
+                      id 
+                      meetingName 
+                      meetingID 
+                      participantCount 
+                      startTime 
+                      attendees { 
+                        fullName 
+                      }
+                    }
+                    permanentTables {
+                      id 
+                      meetingName 
+                      meetingID 
+                      participantCount 
+                      startTime 
+                      attendees { 
+                        fullName 
+                      }
+                    }
+                  }
+                }`,
               },
               { contextValue: mockContextValue({ user }) },
             ),
@@ -1880,7 +1939,13 @@ describe('TableResolver', () => {
             body: {
               kind: 'single',
               singleResult: {
-                data: { openTables: [] },
+                data: {
+                  openTables: {
+                    mallTalkTables: [],
+                    permanentTables: [],
+                    projectTables: [],
+                  },
+                },
                 errors: undefined,
               },
             },
@@ -1895,8 +1960,40 @@ describe('TableResolver', () => {
             await expect(
               testServer.executeOperation(
                 {
-                  query:
-                    'query { openTables { id meetingName meetingID participantCount startTime attendees { fullName } } }',
+                  query: `query {
+                    openTables {
+                      mallTalkTables {
+                        id 
+                        meetingName 
+                        meetingID 
+                        participantCount 
+                        startTime 
+                        attendees { 
+                          fullName 
+                        }
+                      }
+                      projectTables {
+                        id 
+                        meetingName 
+                        meetingID 
+                        participantCount 
+                        startTime 
+                        attendees { 
+                          fullName 
+                        }
+                      }
+                      permanentTables {
+                        id 
+                        meetingName 
+                        meetingID 
+                        participantCount 
+                        startTime 
+                        attendees { 
+                          fullName 
+                        }
+                      }
+                    }
+                  }`,
                 },
                 { contextValue },
               ),
@@ -1905,17 +2002,21 @@ describe('TableResolver', () => {
                 kind: 'single',
                 singleResult: {
                   data: {
-                    openTables: [
-                      {
-                        id: 'welcome',
-                        meetingName: 'I am the welcome table',
-                        meetingID: 'some-bbb-meeting-id',
-                        participantCount: 0,
-                        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                        startTime: expect.any(String),
-                        attendees: [],
-                      },
-                    ],
+                    openTables: {
+                      mallTalkTables: [],
+                      permanentTables: [
+                        {
+                          id: 'welcome',
+                          meetingName: 'I am the welcome table',
+                          meetingID: 'some-bbb-meeting-id',
+                          participantCount: 0,
+                          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                          startTime: expect.any(String),
+                          attendees: [],
+                        },
+                      ],
+                      projectTables: [],
+                    },
                   },
                   errors: undefined,
                 },
@@ -1962,8 +2063,40 @@ describe('TableResolver', () => {
           await expect(
             testServer.executeOperation(
               {
-                query:
-                  'query { openTables { id meetingName meetingID participantCount startTime attendees { fullName } } }',
+                query: `query {
+                  openTables {
+                    mallTalkTables {
+                      id 
+                      meetingName 
+                      meetingID 
+                      participantCount 
+                      startTime 
+                      attendees { 
+                        fullName 
+                      }
+                    }
+                    projectTables {
+                      id 
+                      meetingName 
+                      meetingID 
+                      participantCount 
+                      startTime 
+                      attendees { 
+                        fullName 
+                      }
+                    }
+                    permanentTables {
+                      id 
+                      meetingName 
+                      meetingID 
+                      participantCount 
+                      startTime 
+                      attendees { 
+                        fullName 
+                      }
+                    }
+                  }
+                }`,
               },
               { contextValue: mockContextValue({ user }) },
             ),
@@ -1972,7 +2105,11 @@ describe('TableResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  openTables: [],
+                  openTables: {
+                    mallTalkTables: [],
+                    permanentTables: [],
+                    projectTables: [],
+                  },
                 },
                 errors: undefined,
               },
@@ -2040,8 +2177,40 @@ describe('TableResolver', () => {
           await expect(
             testServer.executeOperation(
               {
-                query:
-                  'query { openTables { id meetingName meetingID participantCount startTime attendees { fullName } } }',
+                query: `query {
+                  openTables {
+                    mallTalkTables {
+                      id 
+                      meetingName 
+                      meetingID 
+                      participantCount 
+                      startTime 
+                      attendees { 
+                        fullName 
+                      }
+                    }
+                    projectTables {
+                      id 
+                      meetingName 
+                      meetingID 
+                      participantCount 
+                      startTime 
+                      attendees { 
+                        fullName 
+                      }
+                    }
+                    permanentTables {
+                      id 
+                      meetingName 
+                      meetingID 
+                      participantCount 
+                      startTime 
+                      attendees { 
+                        fullName 
+                      }
+                    }
+                  }
+                }`,
               },
               { contextValue: mockContextValue({ user }) },
             ),
@@ -2050,21 +2219,25 @@ describe('TableResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  openTables: [
-                    {
-                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                      id: expect.any(String),
-                      meetingName: 'Dreammall Entwicklung',
-                      meetingID: 'Dreammall-Entwicklung',
-                      participantCount: 0,
-                      startTime: '1718189',
-                      attendees: [
-                        {
-                          fullName: 'Peter Lustig',
-                        },
-                      ],
-                    },
-                  ],
+                  openTables: {
+                    mallTalkTables: [],
+                    permanentTables: [],
+                    projectTables: [
+                      {
+                        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                        id: expect.any(String),
+                        meetingName: 'Dreammall Entwicklung',
+                        meetingID: 'Dreammall-Entwicklung',
+                        participantCount: 0,
+                        startTime: '1718189',
+                        attendees: [
+                          {
+                            fullName: 'Peter Lustig',
+                          },
+                        ],
+                      },
+                    ],
+                  },
                 },
                 errors: undefined,
               },
@@ -2133,8 +2306,40 @@ describe('TableResolver', () => {
           await expect(
             testServer.executeOperation(
               {
-                query:
-                  'query { openTables { id meetingName meetingID participantCount startTime attendees { fullName } } }',
+                query: `query { 
+                  openTables {
+                    mallTalkTables {
+                      id 
+                      meetingName 
+                      meetingID 
+                      participantCount 
+                      startTime 
+                      attendees { 
+                        fullName 
+                      }
+                    }
+                    projectTables {
+                      id 
+                      meetingName 
+                      meetingID 
+                      participantCount 
+                      startTime 
+                      attendees { 
+                        fullName 
+                      }
+                    }
+                    permanentTables {
+                      id 
+                      meetingName 
+                      meetingID 
+                      participantCount 
+                      startTime 
+                      attendees { 
+                        fullName 
+                      }
+                    }
+                  } 
+                }`,
               },
               { contextValue: mockContextValue({ user }) },
             ),
@@ -2143,24 +2348,28 @@ describe('TableResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  openTables: [
-                    {
-                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                      id: expect.any(String),
-                      meetingName: 'Dreammall Entwicklung',
-                      meetingID: 'Dreammall-Entwicklung',
-                      participantCount: 0,
-                      startTime: '1718189',
-                      attendees: [
-                        {
-                          fullName: 'Peter Lustig',
-                        },
-                        {
-                          fullName: 'Bibi Bloxberg',
-                        },
-                      ],
-                    },
-                  ],
+                  openTables: {
+                    mallTalkTables: [],
+                    permanentTables: [],
+                    projectTables: [
+                      {
+                        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                        id: expect.any(String),
+                        meetingName: 'Dreammall Entwicklung',
+                        meetingID: 'Dreammall-Entwicklung',
+                        participantCount: 0,
+                        startTime: '1718189',
+                        attendees: [
+                          {
+                            fullName: 'Peter Lustig',
+                          },
+                          {
+                            fullName: 'Bibi Bloxberg',
+                          },
+                        ],
+                      },
+                    ],
+                  },
                 },
                 errors: undefined,
               },
@@ -2248,8 +2457,40 @@ describe('TableResolver', () => {
           await expect(
             testServer.executeOperation(
               {
-                query:
-                  'query { openTables { id meetingName meetingID participantCount startTime attendees { fullName } } }',
+                query: `query {
+                  openTables {
+                    mallTalkTables {
+                      id 
+                      meetingName 
+                      meetingID 
+                      participantCount 
+                      startTime 
+                      attendees { 
+                        fullName 
+                      }
+                    }
+                    projectTables {
+                      id 
+                      meetingName 
+                      meetingID 
+                      participantCount 
+                      startTime 
+                      attendees { 
+                        fullName 
+                      }
+                    }
+                    permanentTables {
+                      id 
+                      meetingName 
+                      meetingID 
+                      participantCount 
+                      startTime 
+                      attendees { 
+                        fullName 
+                      }
+                    }
+                  }
+                }`,
               },
               { contextValue: mockContextValue({ user: bibiUser }) },
             ),
@@ -2258,7 +2499,11 @@ describe('TableResolver', () => {
               kind: 'single',
               singleResult: {
                 data: {
-                  openTables: [],
+                  openTables: {
+                    mallTalkTables: [],
+                    permanentTables: [],
+                    projectTables: [],
+                  },
                 },
                 errors: undefined,
               },
