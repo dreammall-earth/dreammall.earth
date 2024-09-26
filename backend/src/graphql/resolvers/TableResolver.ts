@@ -602,6 +602,7 @@ const openTablesFromOpenMeetings =
         meetingID: true,
         public: true,
         users: true,
+        user: true,
       },
     })
 
@@ -611,16 +612,11 @@ const openTablesFromOpenMeetings =
       const meetingInfo = arg.meetings.find((m) => meeting.meetingID === m.meetingID)
       if (meetingInfo) {
         const openTable = OpenTable.fromMeetingInfo(meetingInfo, meeting.id ? meeting.id : 0)
-        switch (meeting.type) {
-          case 'PROJECT':
-            openTables.push(openTable)
-            break
-          case 'PERMANENT':
-            openPermanentTables.push(openTable)
-            break
-          case 'MALL_TALK':
-            openMallTalkTables.push(openTable)
-            break
+        // table.user && table.user.id === user.id => MALL_TALK
+        if (meeting.user) {
+          openMallTalkTables.push(openTable)
+        } else {
+          openTables.push(openTable)
         }
       }
     })
