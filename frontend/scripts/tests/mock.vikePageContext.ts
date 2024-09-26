@@ -12,6 +12,9 @@ type MockPageContext = {
 
 export const mockPageContext: MockPageContext = reactive({
   urlPathname: '/some-url',
+  urlParsed: {
+    search: {},
+  },
 })
 
 config.global.provide = {
