@@ -181,26 +181,22 @@ const { isModalActive } = useModal()
   bottom: 10px;
   left: calc(50% - var(--width) / 2);
   z-index: 5000;
+  display: flex;
+  flex-flow: column nowrap;
+  place-content: center flex-start;
+  align-items: center;
   width: var(--width);
   height: var(--button-size);
   pointer-events: none;
-
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-content: center;
-  justify-content: flex-start;
-  align-items: center;
-
   transition: height var(--animation-duration) var(--animation-timing);
 
   .dream-mall-button-wrapper {
     z-index: 5001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: var(--button-size);
     height: var(--button-size);
-    display: flex;
-    justify-content: center;
-    align-items: center;
     transition: transform var(--animation-duration) var(--animation-timing);
   }
 
@@ -222,9 +218,9 @@ const { isModalActive } = useModal()
     }
 
     .dream-mall-button {
-      transform: scale(var(--button-scaling));
       width: calc(var(--button-size) * var(--button-scaling));
       height: calc(var(--button-size) * var(--button-scaling));
+      transform: scale(var(--button-scaling));
     }
   }
 
@@ -232,27 +228,25 @@ const { isModalActive } = useModal()
     position: absolute;
     bottom: 0;
     left: 0;
+    z-index: 1000;
+    display: flex;
+    flex-flow: column nowrap;
+    place-content: center flex-start;
+    align-items: center;
     width: 100%;
     height: calc(var(--button-size) / 2);
-    opacity: 0;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    overflow: hidden;
+    pointer-events: auto;
     background-color: var(--v-dm-panel-background-color);
     backdrop-filter: blur(30px);
     border: 1px solid var(--v-dm-panel-border-color);
     border-radius: 30px;
-    padding-top: 10px;
-    padding-bottom: 20px;
-    pointer-events: auto;
-    z-index: 1000;
-    overflow: hidden;
+    opacity: 0;
     transition:
       height var(--animation-duration) var(--animation-timing),
       opacity var(--animation-duration) var(--animation-timing);
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-content: center;
-    justify-content: flex-start;
-    align-items: center;
   }
 
   &.active .dream-mall-panel {
@@ -264,8 +258,8 @@ const { isModalActive } = useModal()
     --width: 100vw;
     --panel-height: 75vh;
 
-    left: 0;
     bottom: 0;
+    left: 0;
 
     &.active {
       height: calc(var(--panel-height) + var(--button-size));

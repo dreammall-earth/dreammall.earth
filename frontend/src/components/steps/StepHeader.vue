@@ -52,12 +52,12 @@ const emitClose = () => emit('close')
   &__left,
   &__right {
     display: flex;
+    place-content: flex-start flex-start;
+    align-items: flex-start;
     width: 48px; // Ensures consistent spacing even when buttons are hidden
     height: 100%;
-    justify-content: flex-start;
-    align-content: flex-start;
-    align-items: flex-start;
   }
+
   &__right {
     justify-content: flex-end;
   }
