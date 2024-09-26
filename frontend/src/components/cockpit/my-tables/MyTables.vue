@@ -40,7 +40,7 @@ import { useTablesStore } from '#stores/tablesStore'
 import CreateTable from './create-table/CreateTable.vue'
 import TableItem from './TableItem.vue'
 
-import type { Table } from '#stores/tablesStore'
+import type { ProjectTable } from '#stores/tablesStore'
 
 const { setComponent } = useModal()
 
@@ -48,10 +48,10 @@ const addTable = () => {
   setComponent(CreateTable)
 }
 
-const { getTables } = storeToRefs(useTablesStore())
+const { getProjectTables } = storeToRefs(useTablesStore())
 
 const projectTables = computed(() =>
-  getTables.value.map((table: Table) => ({
+  getProjectTables.value.map((table: ProjectTable) => ({
     id: table.id,
     name: table.name,
     moderatorCount: table.users.filter((user) => user.role === 'MODERATOR').length,

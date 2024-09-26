@@ -40,10 +40,10 @@
 
 <script lang="ts" setup>
 import WelcomeBadge from '#assets/welcome-badge.svg'
-import { OpenTable } from '#stores/tablesStore'
+import { Table } from '#stores/tablesStore'
 
 defineProps<{
-  item: OpenTable
+  item: Table
 }>()
 
 defineEmits<{

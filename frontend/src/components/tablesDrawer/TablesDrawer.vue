@@ -55,7 +55,7 @@ import { navigate } from 'vike/client/router'
 import { ref, computed, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import { OpenTable, useTablesStore } from '#stores/tablesStore'
+import { Table, useTablesStore } from '#stores/tablesStore'
 
 import TableList from './TableList.vue'
 import TableListItem from './TableListItem.vue'
@@ -68,7 +68,7 @@ defineEmits<{
 
 const tablesStore = useTablesStore()
 
-const { getOpenTables: mallTalk } = storeToRefs(tablesStore)
+const { getTables: mallTalk } = storeToRefs(tablesStore)
 
 const tables = computed(() => ({
   permanent: {
@@ -89,7 +89,7 @@ const tables = computed(() => ({
         fullName: 'Max',
       },
     ],
-  } as OpenTable,
+  } as Table,
   mallTalk: mallTalk.value,
   projects: [
     {
@@ -188,7 +188,7 @@ const tables = computed(() => ({
         },
       ],
     },
-  ] as OpenTable[],
+  ] as Table[],
 }))
 
 const lists = computed(() => [

@@ -32,12 +32,12 @@ import { collapseSection, expandSection } from '#src/utils/collapseSection'
 
 import TableListItem from './TableListItem.vue'
 
-import type { OpenTable } from '#stores/tablesStore'
+import type { Table } from '#stores/tablesStore'
 
 const props = defineProps<{
   list: {
     heading: string
-    items: OpenTable[]
+    items: Table[]
     type: 'mallTalk' | 'projects'
   }
   searchValue: string

@@ -19,7 +19,7 @@ type Attendee = {
 
 type TableType = 'MALL_TALK' | 'PERMANENT' | 'PROJECT'
 
-export type OpenTable = {
+export type Table = {
   id: number
   type: TableType
   isModerator: boolean
@@ -37,7 +37,7 @@ export type UserInTable = {
   username: string
 }
 
-export type Table = {
+export type ProjectTable = {
   id: number
   name: string
   public: boolean
@@ -45,15 +45,15 @@ export type Table = {
 }
 
 type CreateMyTableResult = {
-  createMyTable: Table
+  createMyTable: ProjectTable
 }
 
 type UpdateMyTableResult = {
-  updateMyTable: Table
+  updateMyTable: ProjectTable
 }
 
 type UpdateTableResult = {
-  updateTable: Table
+  updateTable: ProjectTable
 }
 
 type JoinMyTableResult = {
@@ -61,7 +61,7 @@ type JoinMyTableResult = {
 }
 
 type CreateTableResult = {
-  createTable: Table
+  createTable: ProjectTable
 }
 
 type DeleteTableResult = {
@@ -83,8 +83,8 @@ export const useTablesStore = defineStore(
       },
     )
 
-    watch(tablesQueryResult, (data: { tables: OpenTable[] }) => {
-      setOpenTables(data.tables)
+    watch(tablesQueryResult, (data: { tables: Table[] }) => {
+      setTables(data.tables)
     })
 
     const { result: projectTablesQueryResult, loading: isLoadingTables } = useQuery(
@@ -96,8 +96,8 @@ export const useTablesStore = defineStore(
       },
     )
 
-    watch(projectTablesQueryResult, (data: { projectTables: Table[] }) => {
-      setTables(data.projectTables)
+    watch(projectTablesQueryResult, (data: { projectTables: ProjectTable[] }) => {
+      setProjectTables(data.projectTables)
     })
 
     const {
@@ -108,8 +108,8 @@ export const useTablesStore = defineStore(
       { fetchPolicy: 'no-cache' },
     )
 
-    watch(updateOpenTablesSubscriptionResult, (data: { updateOpenTables: OpenTable[] }) => {
-      setOpenTables(data.updateOpenTables)
+    watch(updateOpenTablesSubscriptionResult, (data: { updateOpenTables: Table[] }) => {
+      setTables(data.updateOpenTables)
     })
 
     /*
@@ -118,64 +118,64 @@ export const useTablesStore = defineStore(
     })
     */
 
-    const openTables = ref<OpenTable[]>([])
-
-    const getOpenTables = computed(() => openTables.value)
-
-    const setOpenTables = (newTables: OpenTable[]) => {
-      openTables.value = newTables
-    }
-
     const tables = ref<Table[]>([])
 
     const getTables = computed(() => tables.value)
+
     const setTables = (newTables: Table[]) => {
       tables.value = newTables
     }
 
+    const projectTables = ref<ProjectTable[]>([])
+
+    const getProjectTables = computed(() => projectTables.value)
+    const setProjectTables = (newTables: ProjectTable[]) => {
+      projectTables.value = newTables
+    }
+
     const { mutate: createMyTableMutate } = useMutation<CreateMyTableResult>(createMyTableMutation)
     const { mutate: updateMyTableMutate } = useMutation<UpdateMyTableResult>(updateMyTableMutation)
-    const { mutate: updateTableMutate } = useMutation<UpdateTableResult>(updateTableMutation)
+    const { mutate: updateProjectTableMutate } = useMutation<UpdateTableResult>(updateTableMutation)
     const { mutate: joinMyTableMutate } = useMutation<JoinMyTableResult>(joinMyTableMutation)
 
     const { mutate: createTableMutate } = useMutation<CreateTableResult>(createTableMutation)
-    const { mutate: deleteTableMutate } = useMutation<DeleteTableResult>(deleteTableMutation)
+    const { mutate: deleteProjectTableMutate } = useMutation<DeleteTableResult>(deleteTableMutation)
 
-    const createTable = async (name: string, isPublic: boolean, userIds: number[]) => {
+    const createProjectTable = async (name: string, isPublic: boolean, userIds: number[]) => {
       const result = await createTableMutate({ name, isPublic, userIds })
       if (result?.data?.createTable) {
-        setTables([...tables.value, result.data.createTable])
+        setProjectTables([...projectTables.value, result.data.createTable])
       }
       return result?.data?.createTable
     }
 
-    const updateTable = async (tableId: number, name: string, isPublic: boolean) => {
-      const result = await updateTableMutate({ name, tableId, isPublic })
+    const updateProjectTable = async (tableId: number, name: string, isPublic: boolean) => {
+      const result = await updateProjectTableMutate({ name, tableId, isPublic })
       if (result?.data?.updateTable) {
-        setTables([
-          ...tables.value.filter((table) => table.id !== tableId),
+        setProjectTables([
+          ...projectTables.value.filter((table) => table.id !== tableId),
           result.data.updateTable,
         ])
       }
       return result?.data?.updateTable
     }
 
-    const updateTableModerators = async (tableId: number, userIds: number[]) => {
-      const result = await updateTableMutate({ tableId, userIds })
+    const updateProjectTableModerators = async (tableId: number, userIds: number[]) => {
+      const result = await updateProjectTableMutate({ tableId, userIds })
       if (result?.data?.updateTable) {
-        setTables([
-          ...tables.value.filter((table) => table.id !== tableId),
+        setProjectTables([
+          ...projectTables.value.filter((table) => table.id !== tableId),
           result.data.updateTable,
         ])
       }
       return result?.data?.updateTable
     }
 
-    const deleteTable = async (tableId: number) => {
-      const result = await deleteTableMutate({ tableId })
+    const deleteProjectTable = async (tableId: number) => {
+      const result = await deleteProjectTableMutate({ tableId })
 
       if (result?.data?.deleteTable) {
-        setTables(tables.value.filter((table) => table.id !== tableId))
+        setProjectTables(projectTables.value.filter((table) => table.id !== tableId))
       }
 
       return result?.data?.deleteTable
@@ -224,20 +224,20 @@ export const useTablesStore = defineStore(
       id ? new URL(getJoinTableUri(id), baseUrl).href : ''
 
     return {
-      openTables,
-      setOpenTables,
-      getOpenTables,
-      isLoadingOpenTables,
-      getTables,
+      openTables: tables,
       setTables,
+      getTables,
+      isLoadingOpenTables,
+      getProjectTables,
+      setProjectTables,
       isLoadingTables,
       createMyTable,
       updateMyTable,
       updateMyTableUsers,
-      createTable,
-      updateTable,
-      updateTableModerators,
-      deleteTable,
+      createProjectTable,
+      updateProjectTable,
+      updateProjectTableModerators,
+      deleteProjectTable,
       joinMyTable,
       existsMyTable,
       defaultMyTableName,

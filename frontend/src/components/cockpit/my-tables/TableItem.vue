@@ -109,7 +109,7 @@ const shareTable = () => {
 const deleteTable = async () => {
   if (confirm(t('cockpit.myTables.deleteConfirmation'))) {
     try {
-      await tablesStore.deleteTable(props.id)
+      await tablesStore.deleteProjectTable(props.id)
     } catch (cause) {
       throw new Error('Could not delete table', { cause })
     }
