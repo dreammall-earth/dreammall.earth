@@ -16,45 +16,15 @@
 
 <script setup lang="ts">
 import { navigate } from 'vike/client/router'
-import { ref, watch } from 'vue'
-import { useI18n } from 'vue-i18n'
 
 import EmbeddedTable from '#components/embedded-table/EmbeddedTable.vue'
 import TableSettings from '#components/malltalk/settings/TableSettings.vue'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
-import { TableType } from '#stores/tablesStore'
 
-import type { UseQueryReturn } from '@vue/apollo-composable'
-
-const errorMessage = ref<string | null>(null)
-const tableUrl = ref<string | null>(null)
-
-const { t } = useI18n()
-
-const props = defineProps<{
-  useQueryResult:
-    | UseQueryReturn<any, { tableId: number }> // eslint-disable-line @typescript-eslint/no-explicit-any
-    | UseQueryReturn<any, Record<string, never>> // eslint-disable-line @typescript-eslint/no-explicit-any
+defineProps<{
+  tableUrl: string | null
+  errorMessage: string | null
 }>()
-
-const { result: joinTableQueryResult, error: joinTableQueryError } = props.useQueryResult
-
-watch(
-  joinTableQueryResult,
-  (data: { joinTable: { link: string; type: TableType; isModerator: boolean } }) => {
-    if (!data.joinTable) return
-    tableUrl.value = data.joinTable.link
-    errorMessage.value = null
-  },
-)
-
-// eslint-disable-next-line promise/prefer-await-to-callbacks
-watch(joinTableQueryError, (error) => {
-  if (!error) return
-  errorMessage.value = error.message
-  tableUrl.value = null
-  throw new Error(t('table.error'), error)
-})
 
 const onTableClosed = () => navigate('/')
 </script>
