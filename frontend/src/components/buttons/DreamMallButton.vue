@@ -354,7 +354,7 @@ svg {
 
   @media screen and (min-width: $mobile) and (max-width: $tablet) {
     transition: scale 1s;
-    transform: translate(-50%, -50%) scale(3);
+    transform: translate(-50%, -50%) scale(1.5);
   }
 
   @media screen and (min-width: $tablet) {

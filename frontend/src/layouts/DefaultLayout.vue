@@ -180,7 +180,7 @@ const { isModalActive } = useModal()
   position: fixed;
   bottom: 60px;
   left: calc(50% - var(--width) / 2);
-  z-index: 3000;
+  z-index: 5000;
   width: var(--width);
   height: var(--button-size);
   pointer-events: none;
@@ -195,7 +195,7 @@ const { isModalActive } = useModal()
   transition: height var(--animation-duration) var(--animation-timing);
 
   .dream-mall-button-wrapper {
-    z-index: 10000;
+    z-index: 5001;
     width: var(--button-size);
     height: var(--button-size);
     display: flex;
@@ -258,6 +258,30 @@ const { isModalActive } = useModal()
   &.active .dream-mall-panel {
     height: var(--panel-height);
     opacity: 1;
+  }
+
+  @media #{map.get($display-breakpoints, 'sm-and-down')} {
+    --width: 100vw;
+    --panel-height: 75vh;
+
+    left: 0;
+    bottom: 0;
+
+    &.active {
+      height: calc(var(--panel-height) + var(--button-size));
+    }
+
+    .dream-mall-panel {
+      border-radius: 30px 30px 0 0;
+    }
+
+    .dream-mall-button {
+      transform: translateY(-10px);
+    }
+
+    &.active .dream-mall-panel {
+      height: var(--panel-height);
+    }
   }
 }
 
