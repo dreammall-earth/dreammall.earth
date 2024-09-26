@@ -31,7 +31,7 @@
         r="59.9955"
         transform="rotate(90 866.136 859.155)"
         fill="#EEEFF0"
-        fill-opacity="0.0405"
+        fill-opacity="1"
       />
     </g>
     <circle
