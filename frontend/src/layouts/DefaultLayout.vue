@@ -207,7 +207,7 @@ const { isModalActive } = useModal()
   .dream-mall-button {
     width: 100%;
     height: 100%;
-    pointer-events: auto;
+    pointer-events: none;
     transition:
       transform var(--animation-duration) var(--animation-timing),
       width var(--animation-duration) var(--animation-timing),
