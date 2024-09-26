@@ -4,14 +4,14 @@ import { createMockClient, createMockSubscription, IMockSubscription } from 'moc
 import { describe, expect, it, vi } from 'vitest'
 
 import { currentUserQuery } from '#queries/currentUserQuery'
-import { tablesQuery } from '#queries/tablesQuery'
+import { projectTablesQuery } from '#queries/projectTablesQuery'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 import MyTables from './MyTables.vue'
 
 const currentUserQueryMock = vi.fn()
 const updateOpenTablesSubscriptionMock: IMockSubscription = createMockSubscription()
-const tablesQueryMock = vi.fn()
+const projectTablesQueryMock = vi.fn()
 
 const mockClient = createMockClient()
 
@@ -32,10 +32,10 @@ mockClient.setRequestHandler(
 mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateOpenTablesSubscriptionMock)
 
 mockClient.setRequestHandler(
-  tablesQuery,
-  tablesQueryMock.mockResolvedValue({
+  projectTablesQuery,
+  projectTablesQueryMock.mockResolvedValue({
     data: {
-      tables: [
+      projectTables: [
         {
           id: 1,
           name: 'My Table',

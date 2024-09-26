@@ -1,15 +1,16 @@
 import { gql } from 'graphql-tag'
 
-export const tablesQuery = gql(`{
-  tables {
-    id
-    name
-    public
-    users {
+export const tablesQuery = gql`
+  query {
+    tables {
       id
-      name
-      role
-      username
+      meetingID
+      meetingName
+      startTime
+      participantCount
+      attendees {
+        fullName
+      }
     }
   }
-}`)
+`

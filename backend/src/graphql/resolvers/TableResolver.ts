@@ -189,7 +189,7 @@ export class TableResolver {
 
   @Authorized()
   @Query(() => OpenTables)
-  async openTables(@Ctx() context: Context): Promise<OpenTables> {
+  async tables(@Ctx() context: Context): Promise<OpenTables> {
     const {
       dataSources: { prisma },
     } = context
@@ -325,7 +325,6 @@ export class TableResolver {
     }
 
     const { WELCOME_TABLE_MEETING_ID } = config
-    // TODO: Set type & isModerator
     const type: string = table.user
       ? 'MALL_TALK'
       : table.meetingID === WELCOME_TABLE_MEETING_ID
@@ -388,7 +387,7 @@ export class TableResolver {
 
   @Authorized()
   @Query(() => [Table])
-  async tables(@Ctx() context: Context): Promise<Table[]> {
+  async projectTables(@Ctx() context: Context): Promise<Table[]> {
     const {
       user,
       dataSources: { prisma },
@@ -578,13 +577,12 @@ const openTablesFromOpenMeetings =
     const {
       dataSources: { prisma },
     } = context
-    const openPermanentTables: OpenTable[] = []
+    const permanentTables: OpenTable[] = []
     const welcomeTable = getOpenWelcomeTable(context)(arg.meetings)
     if (welcomeTable) {
-      openPermanentTables.push(welcomeTable)
+      permanentTables.push(welcomeTable)
     }
-    if (!arg.meetings.length)
-      return { mallTalkTables: [], permanentTables: openPermanentTables, projectTables: [] }
+    if (!arg.meetings.length) return { mallTalkTables: [], permanentTables, projectTables: [] }
     const dbMeetings = await prisma.meeting.findMany({
       where: {
         meetingID: { in: arg.meetings.map((m: MeetingInfo) => m.meetingID) },
@@ -615,24 +613,24 @@ const openTablesFromOpenMeetings =
       },
     })
 
-    const openMallTalkTables: OpenTable[] = []
-    const openTables: OpenTable[] = []
+    const mallTalkTables: OpenTable[] = []
+    const projectTables: OpenTable[] = []
     dbMeetings.forEach((meeting) => {
       const meetingInfo = arg.meetings.find((m) => meeting.meetingID === m.meetingID)
       if (meetingInfo) {
         const openTable = OpenTable.fromMeetingInfo(meetingInfo, meeting.id ? meeting.id : 0)
         // table.user && table.user.id === user.id => MALL_TALK
         if (meeting.user) {
-          openMallTalkTables.push(openTable)
+          mallTalkTables.push(openTable)
         } else {
-          openTables.push(openTable)
+          projectTables.push(openTable)
         }
       }
     })
     return {
-      permanentTables: openPermanentTables,
-      mallTalkTables: openMallTalkTables,
-      projectTables: openTables,
+      permanentTables,
+      mallTalkTables,
+      projectTables,
     }
   }
 

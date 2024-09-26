@@ -7,13 +7,13 @@ import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 import { currentUserQuery } from '#queries/currentUserQuery'
-import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
+import { tablesQuery } from '#queries/tablesQuery'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 import CockpitPage from './+Page.vue'
 import { title } from './+title'
 
-const openTablesQueryMock = vi.fn()
+const tablesQueryMock = vi.fn()
 const mockSubscription: IMockSubscription = createMockSubscription()
 const currentUserQueryMock = vi.fn()
 const updateOpenTablesSubscriptionMock: IMockSubscription = createMockSubscription()
@@ -30,8 +30,8 @@ mockClient.setRequestHandler(
 )
 
 mockClient.setRequestHandler(
-  openTablesQuery,
-  openTablesQueryMock.mockResolvedValue({ data: { openTables: [] } }),
+  tablesQuery,
+  tablesQueryMock.mockResolvedValue({ data: { tables: [] } }),
 )
 mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateOpenTablesSubscriptionMock)
 mockClient.setRequestHandler(

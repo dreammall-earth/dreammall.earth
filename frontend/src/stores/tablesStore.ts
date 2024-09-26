@@ -8,8 +8,8 @@ import { deleteTableMutation } from '#mutations/deleteTableMutation'
 import { joinMyTableMutation } from '#mutations/joinMyTableMutation'
 import { updateMyTableMutation } from '#mutations/updateMyTableMutation'
 import { updateTableMutation } from '#mutations/updateTableMutation'
-import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
-import { tablesQuery } from '#src/graphql/queries/tablesQuery'
+import { tablesQuery } from '#queries/tablesQuery'
+import { projectTablesQuery } from '#src/graphql/queries/projectTablesQuery'
 import { useUserStore } from '#stores/userStore'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
@@ -74,20 +74,7 @@ export const useTablesStore = defineStore(
     const userStore = useUserStore()
     const { getMyTable: myTable, currentUser } = storeToRefs(userStore)
 
-    const { result: openTablesQueryResult, loading: isLoadingOpenTables } = useQuery(
-      openTablesQuery,
-      {},
-      {
-        prefetch: false,
-        fetchPolicy: 'no-cache',
-      },
-    )
-
-    watch(openTablesQueryResult, (data: { openTables: OpenTable[] }) => {
-      setOpenTables(data.openTables)
-    })
-
-    const { result: tablesQueryResult, loading: isLoadingTables } = useQuery(
+    const { result: tablesQueryResult, loading: isLoadingOpenTables } = useQuery(
       tablesQuery,
       {},
       {
@@ -96,8 +83,21 @@ export const useTablesStore = defineStore(
       },
     )
 
-    watch(tablesQueryResult, (data: { tables: Table[] }) => {
-      setTables(data.tables)
+    watch(tablesQueryResult, (data: { tables: OpenTable[] }) => {
+      setOpenTables(data.tables)
+    })
+
+    const { result: projectTablesQueryResult, loading: isLoadingTables } = useQuery(
+      projectTablesQuery,
+      {},
+      {
+        prefetch: false,
+        fetchPolicy: 'no-cache',
+      },
+    )
+
+    watch(projectTablesQueryResult, (data: { projectTables: Table[] }) => {
+      setTables(data.projectTables)
     })
 
     const {
