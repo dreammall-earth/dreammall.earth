@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useSubscription } from '@vue/apollo-composable'
 import { acceptHMRUpdate, defineStore, storeToRefs } from 'pinia'
-import { computed, ref, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 
 import { createMyTableMutation } from '#mutations/createMyTableMutation'
 import { createTableMutation } from '#mutations/createTableMutation'
@@ -28,6 +28,12 @@ export type Table = {
   startTime: string
   participantCount: number
   attendees: Attendee[]
+}
+
+export type TableList = {
+  mallTalkTables: Table[]
+  permanentTables: Table[]
+  projectTables: Table[]
 }
 
 export type UserInTable = {
@@ -83,7 +89,7 @@ export const useTablesStore = defineStore(
       },
     )
 
-    watch(tablesQueryResult, (data: { tables: Table[] }) => {
+    watch(tablesQueryResult, (data: { tables: TableList }) => {
       setTables(data.tables)
     })
 
@@ -108,7 +114,7 @@ export const useTablesStore = defineStore(
       { fetchPolicy: 'no-cache' },
     )
 
-    watch(updateOpenTablesSubscriptionResult, (data: { updateOpenTables: Table[] }) => {
+    watch(updateOpenTablesSubscriptionResult, (data: { updateOpenTables: TableList }) => {
       setTables(data.updateOpenTables)
     })
 
@@ -118,12 +124,27 @@ export const useTablesStore = defineStore(
     })
     */
 
-    const tables = ref<Table[]>([])
+    const tables = reactive<TableList>({
+      mallTalkTables: [],
+      permanentTables: [],
+      projectTables: [],
+    })
 
-    const getTables = computed(() => tables.value)
+    const getTables = computed(() => tables)
 
-    const setTables = (newTables: Table[]) => {
-      tables.value = newTables
+    const setTables = (newTables: TableList) => {
+      tables.mallTalkTables = newTables.mallTalkTables.map((table) => ({
+        ...table,
+        type: 'MALL_TALK',
+      }))
+      tables.permanentTables = newTables.permanentTables.map((table) => ({
+        ...table,
+        type: 'PERMANENT',
+      }))
+      tables.projectTables = newTables.projectTables.map((table) => ({
+        ...table,
+        type: 'PROJECT',
+      }))
     }
 
     const projectTables = ref<ProjectTable[]>([])

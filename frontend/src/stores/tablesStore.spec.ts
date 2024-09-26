@@ -78,20 +78,56 @@ describe('Tables Store', () => {
 
   describe('set tables action', () => {
     it('updates the store', () => {
-      tablesStore.setTables([
-        {
-          id: 77,
-          meetingID: 'my-meeting',
-          meetingName: 'my meeting',
-          startTime: '1234',
-          participantCount: 1,
-          attendees: [
-            {
-              fullName: 'Peter Lustig',
-            },
-          ],
-        },
-      ])
+      tablesStore.setTables({
+        permanentTables: [
+          {
+            id: 77,
+            meetingID: 'my-meeting',
+            meetingName: 'my meeting',
+            type: 'PERMANENT',
+            isModerator: true,
+            startTime: '1234',
+            participantCount: 1,
+            attendees: [
+              {
+                fullName: 'Peter Lustig',
+              },
+            ],
+          },
+        ],
+        mallTalkTables: [
+          {
+            id: 77,
+            meetingID: 'my-meeting',
+            meetingName: 'my meeting',
+            type: 'MALL_TALK',
+            isModerator: false,
+            startTime: '1234',
+            participantCount: 1,
+            attendees: [
+              {
+                fullName: 'Peter Lustig',
+              },
+            ],
+          },
+        ],
+        projectTables: [
+          {
+            id: 77,
+            meetingID: 'my-meeting',
+            meetingName: 'my meeting',
+            type: 'PROJECT',
+            isModerator: true,
+            startTime: '1234',
+            participantCount: 1,
+            attendees: [
+              {
+                fullName: 'Peter Lustig',
+              },
+            ],
+          },
+        ],
+      })
       expect(tablesStore.openTables).toEqual([
         {
           id: 77,
