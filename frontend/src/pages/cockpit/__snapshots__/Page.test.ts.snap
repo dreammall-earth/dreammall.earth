@@ -1178,12 +1178,14 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
           
           
           <section
-            class="cockpit-card"
+            class="cockpit-card-variable-height cockpit-card"
             data-v-1451ba78=""
+            data-v-d91b9f54=""
             data-v-f444dc92=""
           >
             <!--v-if-->
             <!--v-if-->
+            
             
             <div
               class="header mb-2"
@@ -1599,19 +1601,22 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
               </ul>
             </button>
             
+            
           </section>
           <!--v-if-->
           <!--v-if-->
           
           <section
-            class="cockpit-card"
+            class="cockpit-card-variable-height cockpit-card"
             data-v-1451ba78=""
             data-v-c2e63817=""
+            data-v-d91b9f54=""
           >
             <div
               class="header"
-              data-v-1451ba78=""
+              data-v-d91b9f54=""
             >
+              
               
               <div
                 class="header"
@@ -1635,17 +1640,20 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                 </button>
               </div>
               
+              
             </div>
             <hr
               class="hr"
-              data-v-1451ba78=""
+              data-v-d91b9f54=""
             />
+            
             
             <div
               data-v-c2e63817=""
             >
               $t('cockpit.myTables.noTables')
             </div>
+            
             
           </section>
           <div

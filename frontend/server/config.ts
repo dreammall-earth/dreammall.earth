@@ -18,8 +18,10 @@ const {
   PUBLIC_ENV__META__DEFAULT_AUTHOR = 'DreamMall Verlag GbR',
 
   PUBLIC_ENV__ACCOUNT_HOLDER = 'DreamMall GBR',
+  PUBLIC_ENV__ACCOUNT_HOLDER_ADDRESS = '',
   PUBLIC_ENV__IBAN = 'DE75512108001245126199', // source: https://www.iban.com/structure
   PUBLIC_ENV__BIC = 'SOGEDEFFXXX', // source: https://www.iban.com/structure
+  PUBLIC_ENV__BANK = 'Société Générale', // source: https://www.iban.com/structure
 } = process.env
 
 const AUTH = {
@@ -44,8 +46,10 @@ const META = {
 
 const ACCOUNTING = {
   ACCOUNT_HOLDER: PUBLIC_ENV__ACCOUNT_HOLDER,
+  ACCOUNT_HOLDER_ADDRESS: PUBLIC_ENV__ACCOUNT_HOLDER_ADDRESS,
   IBAN: PUBLIC_ENV__IBAN,
   BIC: PUBLIC_ENV__BIC,
+  BANK: PUBLIC_ENV__BANK,
 }
 
 export const publicEnv = { AUTH, ACCOUNTING, ENDPOINTS, META }
