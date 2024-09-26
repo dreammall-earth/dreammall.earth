@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useSubscription } from '@vue/apollo-composable'
 import { acceptHMRUpdate, defineStore, storeToRefs } from 'pinia'
-import { computed, ref, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 
 import { createMyTableMutation } from '#mutations/createMyTableMutation'
 import { createTableMutation } from '#mutations/createTableMutation'
@@ -8,8 +8,8 @@ import { deleteTableMutation } from '#mutations/deleteTableMutation'
 import { joinMyTableMutation } from '#mutations/joinMyTableMutation'
 import { updateMyTableMutation } from '#mutations/updateMyTableMutation'
 import { updateTableMutation } from '#mutations/updateTableMutation'
-import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
-import { tablesQuery } from '#src/graphql/queries/tablesQuery'
+import { tablesQuery } from '#queries/tablesQuery'
+import { projectTablesQuery } from '#src/graphql/queries/projectTablesQuery'
 import { useUserStore } from '#stores/userStore'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
@@ -17,13 +17,23 @@ type Attendee = {
   fullName: string
 }
 
-export type OpenTable = {
+export type TableType = 'MALL_TALK' | 'PERMANENT' | 'PROJECT'
+
+export type Table = {
   id: number
+  type: TableType
+  isModerator: boolean
   meetingID: string
   meetingName: string
   startTime: string
   participantCount: number
   attendees: Attendee[]
+}
+
+export type TableList = {
+  mallTalkTables: Table[]
+  permanentTables: Table[]
+  projectTables: Table[]
 }
 
 export type UserInTable = {
@@ -33,7 +43,7 @@ export type UserInTable = {
   username: string
 }
 
-export type Table = {
+export type ProjectTable = {
   id: number
   name: string
   public: boolean
@@ -41,15 +51,15 @@ export type Table = {
 }
 
 type CreateMyTableResult = {
-  createMyTable: Table
+  createMyTable: ProjectTable
 }
 
 type UpdateMyTableResult = {
-  updateMyTable: Table
+  updateMyTable: ProjectTable
 }
 
 type UpdateTableResult = {
-  updateTable: Table
+  updateTable: ProjectTable
 }
 
 type JoinMyTableResult = {
@@ -57,7 +67,7 @@ type JoinMyTableResult = {
 }
 
 type CreateTableResult = {
-  createTable: Table
+  createTable: ProjectTable
 }
 
 type DeleteTableResult = {
@@ -70,19 +80,6 @@ export const useTablesStore = defineStore(
     const userStore = useUserStore()
     const { getMyTable: myTable, currentUser } = storeToRefs(userStore)
 
-    const { result: openTablesQueryResult, loading: isLoadingOpenTables } = useQuery(
-      openTablesQuery,
-      {},
-      {
-        prefetch: false,
-        fetchPolicy: 'no-cache',
-      },
-    )
-
-    watch(openTablesQueryResult, (data: { openTables: OpenTable[] }) => {
-      setOpenTables(data.openTables)
-    })
-
     const { result: tablesQueryResult, loading: isLoadingTables } = useQuery(
       tablesQuery,
       {},
@@ -92,8 +89,21 @@ export const useTablesStore = defineStore(
       },
     )
 
-    watch(tablesQueryResult, (data: { tables: Table[] }) => {
+    watch(tablesQueryResult, (data: { tables: TableList }) => {
       setTables(data.tables)
+    })
+
+    const { result: projectTablesQueryResult, loading: isLoadingProjectTables } = useQuery(
+      projectTablesQuery,
+      {},
+      {
+        prefetch: false,
+        fetchPolicy: 'no-cache',
+      },
+    )
+
+    watch(projectTablesQueryResult, (data: { projectTables: ProjectTable[] }) => {
+      setProjectTables(data.projectTables)
     })
 
     const {
@@ -104,8 +114,8 @@ export const useTablesStore = defineStore(
       { fetchPolicy: 'no-cache' },
     )
 
-    watch(updateOpenTablesSubscriptionResult, (data: { updateOpenTables: OpenTable[] }) => {
-      setOpenTables(data.updateOpenTables)
+    watch(updateOpenTablesSubscriptionResult, (data: { updateOpenTables: TableList }) => {
+      setTables(data.updateOpenTables)
     })
 
     /*
@@ -114,64 +124,79 @@ export const useTablesStore = defineStore(
     })
     */
 
-    const openTables = ref<OpenTable[]>([])
+    const tables = reactive<TableList>({
+      mallTalkTables: [],
+      permanentTables: [],
+      projectTables: [],
+    })
 
-    const getOpenTables = computed(() => openTables.value)
+    const getTables = computed(() => tables)
 
-    const setOpenTables = (newTables: OpenTable[]) => {
-      openTables.value = newTables
+    const setTables = (newTables: TableList) => {
+      tables.mallTalkTables = newTables.mallTalkTables.map((table) => ({
+        ...table,
+        type: 'MALL_TALK',
+      }))
+      tables.permanentTables = newTables.permanentTables.map((table) => ({
+        ...table,
+        type: 'PERMANENT',
+      }))
+      tables.projectTables = newTables.projectTables.map((table) => ({
+        ...table,
+        type: 'PROJECT',
+      }))
     }
 
-    const tables = ref<Table[]>([])
+    const projectTables = ref<ProjectTable[]>([])
 
-    const getTables = computed(() => tables.value)
-    const setTables = (newTables: Table[]) => {
-      tables.value = newTables
+    const getProjectTables = computed(() => projectTables.value)
+    const setProjectTables = (newTables: ProjectTable[]) => {
+      projectTables.value = newTables
     }
 
     const { mutate: createMyTableMutate } = useMutation<CreateMyTableResult>(createMyTableMutation)
     const { mutate: updateMyTableMutate } = useMutation<UpdateMyTableResult>(updateMyTableMutation)
-    const { mutate: updateTableMutate } = useMutation<UpdateTableResult>(updateTableMutation)
+    const { mutate: updateProjectTableMutate } = useMutation<UpdateTableResult>(updateTableMutation)
     const { mutate: joinMyTableMutate } = useMutation<JoinMyTableResult>(joinMyTableMutation)
 
     const { mutate: createTableMutate } = useMutation<CreateTableResult>(createTableMutation)
-    const { mutate: deleteTableMutate } = useMutation<DeleteTableResult>(deleteTableMutation)
+    const { mutate: deleteProjectTableMutate } = useMutation<DeleteTableResult>(deleteTableMutation)
 
-    const createTable = async (name: string, isPublic: boolean, userIds: number[]) => {
+    const createProjectTable = async (name: string, isPublic: boolean, userIds: number[]) => {
       const result = await createTableMutate({ name, isPublic, userIds })
       if (result?.data?.createTable) {
-        setTables([...tables.value, result.data.createTable])
+        setProjectTables([...projectTables.value, result.data.createTable])
       }
       return result?.data?.createTable
     }
 
-    const updateTable = async (tableId: number, name: string, isPublic: boolean) => {
-      const result = await updateTableMutate({ name, tableId, isPublic })
+    const updateProjectTable = async (tableId: number, name: string, isPublic: boolean) => {
+      const result = await updateProjectTableMutate({ name, tableId, isPublic })
       if (result?.data?.updateTable) {
-        setTables([
-          ...tables.value.filter((table) => table.id !== tableId),
+        setProjectTables([
+          ...projectTables.value.filter((table) => table.id !== tableId),
           result.data.updateTable,
         ])
       }
       return result?.data?.updateTable
     }
 
-    const updateTableModerators = async (tableId: number, userIds: number[]) => {
-      const result = await updateTableMutate({ tableId, userIds })
+    const updateProjectTableModerators = async (tableId: number, userIds: number[]) => {
+      const result = await updateProjectTableMutate({ tableId, userIds })
       if (result?.data?.updateTable) {
-        setTables([
-          ...tables.value.filter((table) => table.id !== tableId),
+        setProjectTables([
+          ...projectTables.value.filter((table) => table.id !== tableId),
           result.data.updateTable,
         ])
       }
       return result?.data?.updateTable
     }
 
-    const deleteTable = async (tableId: number) => {
-      const result = await deleteTableMutate({ tableId })
+    const deleteProjectTable = async (tableId: number) => {
+      const result = await deleteProjectTableMutate({ tableId })
 
       if (result?.data?.deleteTable) {
-        setTables(tables.value.filter((table) => table.id !== tableId))
+        setProjectTables(projectTables.value.filter((table) => table.id !== tableId))
       }
 
       return result?.data?.deleteTable
@@ -220,20 +245,20 @@ export const useTablesStore = defineStore(
       id ? new URL(getJoinTableUri(id), baseUrl).href : ''
 
     return {
-      openTables,
-      setOpenTables,
-      getOpenTables,
-      isLoadingOpenTables,
-      getTables,
+      openTables: tables,
       setTables,
+      getTables,
       isLoadingTables,
+      getProjectTables,
+      setProjectTables,
+      isLoadingProjectTables,
       createMyTable,
       updateMyTable,
       updateMyTableUsers,
-      createTable,
-      updateTable,
-      updateTableModerators,
-      deleteTable,
+      createProjectTable,
+      updateProjectTable,
+      updateProjectTableModerators,
+      deleteProjectTable,
       joinMyTable,
       existsMyTable,
       defaultMyTableName,

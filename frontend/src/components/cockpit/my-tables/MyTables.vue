@@ -13,9 +13,9 @@
       </div>
     </template>
     <template #default>
-      <ul v-if="tables.length > 0" class="list">
+      <ul v-if="projectTables.length > 0" class="list">
         <TableItem
-          v-for="table in tables"
+          v-for="table in projectTables"
           :key="table.id"
           v-bind="table"
           ref="tableItemRefs"
@@ -40,7 +40,7 @@ import { useTablesStore } from '#stores/tablesStore'
 import CreateTable from './create-table/CreateTable.vue'
 import TableItem from './TableItem.vue'
 
-import type { Table } from '#stores/tablesStore'
+import type { ProjectTable } from '#stores/tablesStore'
 
 const { setComponent } = useModal()
 
@@ -48,10 +48,10 @@ const addTable = () => {
   setComponent(CreateTable)
 }
 
-const { getTables } = storeToRefs(useTablesStore())
+const { getProjectTables } = storeToRefs(useTablesStore())
 
-const tables = computed(() =>
-  getTables.value.map((table: Table) => ({
+const projectTables = computed(() =>
+  getProjectTables.value.map((table: ProjectTable) => ({
     id: table.id,
     name: table.name,
     moderatorCount: table.users.filter((user) => user.role === 'MODERATOR').length,

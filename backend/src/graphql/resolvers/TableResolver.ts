@@ -16,7 +16,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo, AttendeeRole } from '#api/BBB'
 import { CreateMeetingResponse } from '#api/BBB/types'
 import { CONFIG } from '#config/config'
-import { OpenTable, Table, getAttendees } from '#models/TableModel'
+import { JoinTable, OpenTable, OpenTables, Table, getAttendees } from '#models/TableModel'
 import { Context } from '#src/context'
 import {
   EVENT_CREATE_MY_TABLE,
@@ -188,8 +188,8 @@ export class TableResolver {
   }
 
   @Authorized()
-  @Query(() => [OpenTable])
-  async openTables(@Ctx() context: Context): Promise<OpenTable[]> {
+  @Query(() => OpenTables)
+  async tables(@Ctx() context: Context): Promise<OpenTables> {
     const {
       dataSources: { prisma },
     } = context
@@ -273,13 +273,14 @@ export class TableResolver {
   }
 
   @Authorized()
-  @Query(() => String)
+  @Query(() => JoinTable)
   async joinTable(
     @Arg('tableId', () => Int) tableId: number,
     @Ctx() context: Context,
-  ): Promise<string> {
+  ): Promise<JoinTable> {
     const {
       user,
+      config,
       dataSources: { prisma },
     } = context
 
@@ -300,7 +301,7 @@ export class TableResolver {
     }
 
     let password: string
-
+    let isModerator: boolean = false
     if (
       (table.user && table.user.id === user.id) ||
       table.users.some((e) => e.userId === user.id && e.role === 'MODERATOR')
@@ -313,6 +314,7 @@ export class TableResolver {
         tableId: table.id,
       })
       password = meeting.moderatorPW
+      isModerator = true
     } else if (table.public || table.users.some((u) => u.userId === user.id)) {
       if (!table.attendeePW) {
         throw new Error('This meeting does not exists.')
@@ -322,11 +324,21 @@ export class TableResolver {
       throw new Error('User has no access to meeting.')
     }
 
-    return joinMeetingLink({
-      fullName: user.name,
-      meetingID: table.meetingID,
-      password,
-    })
+    const { WELCOME_TABLE_MEETING_ID } = config
+    const type: string = table.user
+      ? 'MALL_TALK'
+      : table.meetingID === WELCOME_TABLE_MEETING_ID
+        ? 'PERMANENT'
+        : 'PROJECT'
+    return {
+      link: joinMeetingLink({
+        fullName: user.name,
+        meetingID: table.meetingID,
+        password,
+      }),
+      type,
+      isModerator,
+    }
   }
 
   @Query(() => String)
@@ -375,7 +387,7 @@ export class TableResolver {
 
   @Authorized()
   @Query(() => [Table])
-  async tables(@Ctx() context: Context): Promise<Table[]> {
+  async projectTables(@Ctx() context: Context): Promise<Table[]> {
     const {
       user,
       dataSources: { prisma },
@@ -521,14 +533,14 @@ export class TableResolver {
     return Table.fromMeeting(meeting, userInMeeting)
   }
 
-  @Subscription(() => [OpenTable], {
+  @Subscription(() => OpenTables, {
     topics: 'OPEN_TABLE_SUBSCRIPTION',
   })
   async updateOpenTables(
     @Root() meetings: MeetingInfo[],
     @Arg('username') username: string,
     @Ctx() context: Context,
-  ): Promise<OpenTable[]> {
+  ): Promise<OpenTables> {
     const {
       dataSources: { prisma },
     } = context
@@ -537,7 +549,7 @@ export class TableResolver {
         username,
       },
     })
-    if (!user) return []
+    if (!user) return { permanentTables: [], mallTalkTables: [], projectTables: [] }
     return openTablesFromOpenMeetings(context)({ meetings, user })
   }
 
@@ -561,16 +573,16 @@ type MeetingInfoUnionUser = {
 
 const openTablesFromOpenMeetings =
   (context: Context) =>
-  async (arg: MeetingInfoUnionUser): Promise<OpenTable[]> => {
+  async (arg: MeetingInfoUnionUser): Promise<OpenTables> => {
     const {
       dataSources: { prisma },
     } = context
-    const openTables: OpenTable[] = []
+    const permanentTables: OpenTable[] = []
     const welcomeTable = getOpenWelcomeTable(context)(arg.meetings)
     if (welcomeTable) {
-      openTables.push(welcomeTable)
+      permanentTables.push(welcomeTable)
     }
-    if (!arg.meetings.length) return openTables
+    if (!arg.meetings.length) return { mallTalkTables: [], permanentTables, projectTables: [] }
     const dbMeetings = await prisma.meeting.findMany({
       where: {
         meetingID: { in: arg.meetings.map((m: MeetingInfo) => m.meetingID) },
@@ -597,16 +609,39 @@ const openTablesFromOpenMeetings =
         meetingID: true,
         public: true,
         users: true,
+        user: true,
       },
     })
 
+    const mallTalkTables: OpenTable[] = []
+    const projectTables: OpenTable[] = []
     dbMeetings.forEach((meeting) => {
       const meetingInfo = arg.meetings.find((m) => meeting.meetingID === m.meetingID)
       if (meetingInfo) {
-        openTables.push(OpenTable.fromMeetingInfo(meetingInfo, meeting.id ? meeting.id : 0))
+        const isModerator =
+          meeting.users.some(
+            (user) =>
+              meeting.user?.id === context.user?.id ||
+              (context.user?.id === user.userId && user.role === 'MODERATOR'),
+          ) || meeting.user?.id === context.user?.id
+        const openTable = OpenTable.fromMeetingInfo(
+          meetingInfo,
+          meeting.id ? meeting.id : 0,
+          isModerator,
+        )
+        // table.user && table.user.id === user.id => MALL_TALK
+        if (meeting.user) {
+          mallTalkTables.push(openTable)
+        } else {
+          projectTables.push(openTable)
+        }
       }
     })
-    return openTables
+    return {
+      permanentTables,
+      mallTalkTables,
+      projectTables,
+    }
   }
 
 const createUsersInMeetings =
@@ -705,6 +740,7 @@ const getOpenWelcomeTable = (context: Context) => (meetings: MeetingInfo[]) => {
       participantCount: welcomeMeeting.participantCount,
       startTime: new Date(welcomeMeeting.startTime).toISOString(),
       attendees: getAttendees(welcomeMeeting),
+      isModerator: true,
     })
   }
   return new OpenTable({
@@ -714,5 +750,6 @@ const getOpenWelcomeTable = (context: Context) => (meetings: MeetingInfo[]) => {
     participantCount: 0,
     startTime: new Date().toISOString(),
     attendees: [],
+    isModerator: true,
   })
 }
