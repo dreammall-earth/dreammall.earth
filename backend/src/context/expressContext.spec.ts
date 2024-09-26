@@ -1,6 +1,6 @@
 import { jwtVerify } from 'jose'
 
-import { context } from './context'
+import { expressContext } from './expressContext'
 import { findOrCreateUser } from './findOrCreateUser'
 
 import type { CustomJwtPayload } from './context'
@@ -11,7 +11,7 @@ jest.mock('jose')
 const mockedFindOrCreateUser = jest.mocked(findOrCreateUser)
 const mockedJwtVerify = jest.mocked(jwtVerify<CustomJwtPayload>)
 
-describe('context', () => {
+describe('expressContext', () => {
   describe('if prisma client throws an error, e.g. because of pending migrations', () => {
     beforeEach(() => {
       mockedFindOrCreateUser.mockRejectedValue('Ouch!')
@@ -22,9 +22,9 @@ describe('context', () => {
 
     it('resolves to "INTERNAL_SERVER_ERROR" instead of "UNAUTHENTICATED"', async () => {
       const contextArgs = [{ req: { headers: { authorization: 'Bearer foobar' } } }] as Parameters<
-        typeof context
+        typeof expressContext
       >
-      await expect(context(...contextArgs)).rejects.toBe('Ouch!')
+      await expect(expressContext(...contextArgs)).rejects.toBe('Ouch!')
     })
   })
 })
