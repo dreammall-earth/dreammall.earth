@@ -16,7 +16,11 @@
     >
       <v-icon
         class="icon"
-        :icon="item.type !== 'PROJECT' || item.isModerator ? '$handshake' : '$reception'"
+        :icon="
+          item.type !== 'PROJECT' || item.isModerator || item.meetingID
+            ? '$handshake'
+            : '$reception'
+        "
       />
     </button>
     <img
