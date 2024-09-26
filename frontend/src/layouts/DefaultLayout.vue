@@ -171,6 +171,8 @@ const { isModalActive } = useModal()
   --width: 400px;
   --button-size: 100px;
   --panel-height: 200px;
+  --animation-duration: 0.3s;
+  --animation-timing: ease-out;
 
   position: fixed;
   bottom: 60px;
@@ -187,14 +189,14 @@ const { isModalActive } = useModal()
   justify-content: flex-start;
   align-items: center;
 
-  transition: height 0.3s ease-out;
+  transition: height var(--animation-duration) var(--animation-timing);
 
   .dream-mall-button {
     height: var(--button-size);
     width: var(--button-size);
     z-index: 10000;
     pointer-events: auto;
-    transition: transform 0.3s ease-out;
+    transition: transform var(--animation-duration) var(--animation-timing);
   }
 
   &.active {
@@ -211,6 +213,7 @@ const { isModalActive } = useModal()
     left: 0;
     width: 100%;
     height: 0;
+    opacity: 0;
     background-color: var(--v-dm-panel-background-color);
     backdrop-filter: blur(30px);
     border: 1px solid var(--v-dm-panel-border-color);
@@ -220,7 +223,9 @@ const { isModalActive } = useModal()
     pointer-events: auto;
     z-index: 1000;
     overflow: hidden;
-    transition: height 0.3s ease-out;
+    transition:
+      height var(--animation-duration) var(--animation-timing),
+      opacity var(--animation-duration) var(--animation-timing);
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -231,6 +236,7 @@ const { isModalActive } = useModal()
 
   &.active .dream-mall-panel {
     height: var(--panel-height);
+    opacity: 1;
   }
 }
 
