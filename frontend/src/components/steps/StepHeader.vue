@@ -1,5 +1,5 @@
 <template>
-  <div class="step-header">
+  <div class="step-header" :class="{ 'dream-mall-button-mode': props.isDreamMallButtonMode }">
     <div class="step-header__left">
       <v-btn v-if="isBackButtonVisible" icon variant="text" size="small" @click="emitBack">
         <v-icon icon="mdi-arrow-left" />
@@ -17,16 +17,18 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(
+const props = withDefaults(
   defineProps<{
     title: string
     isBackButtonVisible: boolean
     isCloseButtonVisible: boolean
+    isDreamMallButtonMode: boolean
   }>(),
   {
     title: '',
     isBackButtonVisible: true,
     isCloseButtonVisible: true,
+    isDreamMallButtonMode: false,
   },
 )
 
@@ -50,13 +52,24 @@ const emitClose = () => emit('close')
   &__left,
   &__right {
     display: flex;
-    align-items: center;
+    place-content: flex-start flex-start;
+    align-items: flex-start;
     width: 48px; // Ensures consistent spacing even when buttons are hidden
+    height: 100%;
+  }
+
+  &__right {
+    justify-content: flex-end;
   }
 
   &__middle {
     flex-grow: 1;
     text-align: center;
+  }
+
+  &.dream-mall-button-mode &__middle {
+    padding-top: 20px;
+    padding-bottom: 10px;
   }
 }
 </style>

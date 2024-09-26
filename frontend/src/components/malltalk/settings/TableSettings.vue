@@ -1,5 +1,11 @@
 <template>
-  <StepControl ref="stepControl" v-model="tableSettings" :steps="steps" @close="$emit('close')" />
+  <StepControl
+    ref="stepControl"
+    v-model="tableSettings"
+    :is-dream-mall-button-mode="true"
+    :steps="steps"
+    @close="$emit('close')"
+  />
 </template>
 
 <script setup lang="ts">

@@ -35,6 +35,13 @@ const config: UserConfig = {
   build: {
     outDir: './build',
   },
+  css: {
+    preprocessorOptions: {
+      sass: {
+        api: 'modern',
+      },
+    },
+  },
   ssr: { noExternal: ['vuetify'] },
   resolve: {
     alias: {
