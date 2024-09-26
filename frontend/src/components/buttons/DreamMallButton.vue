@@ -343,6 +343,7 @@ onMounted(() => {})
 
 <style scoped lang="scss">
 @import '#root/src/assets/scss/style';
+@import 'vuetify/lib/styles/settings/_variables';
 
 svg {
   position: absolute;
@@ -352,14 +353,14 @@ svg {
   height: calc(100vh - 10px);
   transform: translate(-50%, -50%);
 
-  @media screen and (min-width: $mobile) and (max-width: $tablet) {
+  @media screen and (max-width: $mobile) {
     transition: scale 1s;
-    transform: translate(-50%, -50%) scale(1.5);
+    transform: translate(-50%, -50%) scale(2);
   }
 
-  @media screen and (min-width: $tablet) {
+  @media screen and (min-width: $mobile) and (max-width: $tablet) {
     transition: scale 1s;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1.4);
   }
 
   #dream-mall-button {
