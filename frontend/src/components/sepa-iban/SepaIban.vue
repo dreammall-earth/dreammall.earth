@@ -1,6 +1,6 @@
 <template>
   <CockpitLayout>
-    <CockpitCard>
+    <CockpitCardVariableHeight>
       <template #header>
         <h2>
           {{ $t('sepaIban.explanation.title') }}
@@ -26,8 +26,8 @@
           {{ $t('sepaIban.qr.invalid') }}
         </p>
       </template>
-    </CockpitCard>
-    <CockpitCard>
+    </CockpitCardVariableHeight>
+    <CockpitCardVariableHeight>
       <template #header>
         <h2>{{ $t('sepaIban.accountData.title') }}</h2>
       </template>
@@ -83,7 +83,7 @@
           :label="$t('sepaIban.accountData.amount')"
         ></v-number-input>
       </template>
-    </CockpitCard>
+    </CockpitCardVariableHeight>
   </CockpitLayout>
 </template>
 
@@ -91,7 +91,7 @@
 import VueQrcode from '@chenfengyuan/vue-qrcode'
 import { ref, computed, defineProps } from 'vue'
 
-import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
+import CockpitCardVariableHeight from '#components/cockpit/cockpit-card/CockpitCardVariableHeight.vue'
 import CockpitLayout from '#components/cockpit/cockpit-layout/CockpitLayout.vue'
 
 import { generateQrCode } from './qrCode'
