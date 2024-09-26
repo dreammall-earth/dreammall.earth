@@ -91,7 +91,7 @@ watch(isCollapsed, () => {
   display: flex;
   flex-flow: column;
   gap: 8px;
-  height: calc(40vh - 80px);
+  max-height: calc(40vh - 80px);
   padding: 0;
   overflow-y: auto;
   list-style: none;

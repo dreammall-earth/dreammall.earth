@@ -124,6 +124,70 @@ const tables = computed(() => ({
         },
       ],
     },
+    {
+      id: 2,
+      meetingName: 'Project 2',
+      type: 'PROJECT',
+      meetingID: 'medfad',
+      isModerator: false,
+      participantCount: 30,
+      attendees: [
+        {
+          fullName: 'Max',
+        },
+        {
+          fullName: 'Sabrina',
+        },
+      ],
+    },
+    {
+      id: 2,
+      meetingName: 'Project 2',
+      type: 'PROJECT',
+      meetingID: 'medfad',
+      isModerator: false,
+      participantCount: 30,
+      attendees: [
+        {
+          fullName: 'Max',
+        },
+        {
+          fullName: 'Sabrina',
+        },
+      ],
+    },
+    {
+      id: 2,
+      meetingName: 'Project 2',
+      type: 'PROJECT',
+      meetingID: 'medfad',
+      isModerator: false,
+      participantCount: 30,
+      attendees: [
+        {
+          fullName: 'Max',
+        },
+        {
+          fullName: 'Sabrina',
+        },
+      ],
+    },
+    {
+      id: 2,
+      meetingName: 'Project 2',
+      type: 'PROJECT',
+      meetingID: 'medfad',
+      isModerator: false,
+      participantCount: 30,
+      attendees: [
+        {
+          fullName: 'Max',
+        },
+        {
+          fullName: 'Sabrina',
+        },
+      ],
+    },
   ] as OpenTable[],
 }))
 
