@@ -22,6 +22,8 @@ const testTables = [
       },
     ],
     joinLink: 'https://my.link',
+    isModerator: true,
+    type: 'mallTalk' as const,
   },
   {
     id: 77,
@@ -38,6 +40,8 @@ const testTables = [
       },
     ],
     joinLink: 'https://my.link',
+    isModerator: false,
+    type: 'mallTalk' as const,
   },
 ]
 
@@ -45,7 +49,14 @@ describe('TableList', () => {
   const Wrapper = () => {
     return mount(VApp, {
       slots: {
-        default: h(TableList, { items: testTables }),
+        default: h(TableList, {
+          list: {
+            type: 'mallTalk' as const,
+            heading: 'mall talk',
+            items: testTables,
+          },
+          searchValue: '',
+        }),
       },
     })
   }

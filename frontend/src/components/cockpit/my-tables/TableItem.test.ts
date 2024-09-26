@@ -85,10 +85,10 @@ describe('Table Item', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 
-  describe('camera icon', () => {
+  describe('join-table-icon', () => {
     it('navigates to table page when clicked', async () => {
       const wrapper = Wrapper()
-      await wrapper.find('.camera-icon').trigger('click')
+      await wrapper.find('.join-table-icon').trigger('click')
       expect(navigate).toHaveBeenCalledWith('/table/1')
     })
   })

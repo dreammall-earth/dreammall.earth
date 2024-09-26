@@ -2,7 +2,7 @@
   <li class="table">
     <div
       class="table-info border-thin"
-      :class="{ highlighted: item.amIModerator, welcome: item.type === 'welcome' }"
+      :class="{ highlighted: item.isModerator, welcome: item.type === 'welcome' }"
     >
       <span class="name">{{ item.meetingName }}</span>
       <span class="subtitle">
@@ -11,12 +11,12 @@
     </div>
     <button
       class="action border-thin"
-      :class="{ highlighted: item.amIModerator, welcome: item.type === 'welcome' }"
+      :class="{ highlighted: item.isModerator, welcome: item.type === 'welcome' }"
       @click="$emit('open-table')"
     >
       <v-icon
         class="icon"
-        :icon="item.type !== 'project' || item.amIModerator ? '$handshake' : '$reception'"
+        :icon="item.type !== 'project' || item.isModerator ? '$handshake' : '$reception'"
       />
     </button>
     <img
@@ -26,9 +26,9 @@
       class="welcome-badge"
       :class="{ dark: $vuetify.theme.current.dark }"
     />
-    <div v-else class="badge" :class="{ highlighted: item.amIModerator }">
+    <div v-else class="badge" :class="{ highlighted: item.isModerator }">
       {{
-        item.amIModerator
+        item.isModerator
           ? $t('tables.member')
           : item.type === 'mallTalk'
             ? $t('tables.mallTalk')

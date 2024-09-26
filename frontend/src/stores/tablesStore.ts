@@ -17,12 +17,12 @@ type Attendee = {
   fullName: string
 }
 
-type TableType = 'welcome' | 'mallTalk' | 'project'
+type TableType = 'MALL_TALK' | 'PERMANENT' | 'PROJECT'
 
 export type OpenTable = {
   id: number
   type: TableType
-  amIModerator: boolean
+  isModerator: boolean
   meetingID: string
   meetingName: string
   startTime: string

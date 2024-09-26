@@ -75,7 +75,7 @@ const tables = computed(() => ({
     id: 0,
     meetingName: t('tablesDrawer.coffeeTime'),
     type: 'welcome',
-    amIModerator: true,
+    isModerator: true,
     participantCount: 2,
     attendees: [
       {
@@ -95,7 +95,7 @@ const tables = computed(() => ({
       id: 1,
       meetingName: 'Project 1',
       type: 'project',
-      amIModerator: true,
+      isModerator: true,
       participantCount: 4,
       attendees: [
         {
@@ -110,7 +110,7 @@ const tables = computed(() => ({
       id: 2,
       meetingName: 'Project 2',
       type: 'project',
-      amIModerator: false,
+      isModerator: false,
       participantCount: 30,
       attendees: [
         {
