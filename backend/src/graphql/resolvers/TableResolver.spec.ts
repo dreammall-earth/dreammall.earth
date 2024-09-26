@@ -1886,6 +1886,43 @@ describe('TableResolver', () => {
             },
           })
         })
+
+        describe('but if CONFIG.WELCOME_TABLE_MEETING_ID is set', () => {
+          it('will always return a welcome table with id `welcome`', async () => {
+            const contextValue = { ...mockContextValue({ user }) }
+            contextValue.config.WELCOME_TABLE_MEETING_ID = 'some-bbb-meeting-id'
+            contextValue.config.WELCOME_TABLE_NAME = 'I am the welcome table'
+            await expect(
+              testServer.executeOperation(
+                {
+                  query:
+                    'query { openTables { id meetingName meetingID participantCount startTime attendees { fullName } } }',
+                },
+                { contextValue },
+              ),
+            ).resolves.toMatchObject({
+              body: {
+                kind: 'single',
+                singleResult: {
+                  data: {
+                    openTables: [
+                      {
+                        id: 'welcome',
+                        meetingName: 'I am the welcome table',
+                        meetingID: 'some-bbb-meeting-id',
+                        participantCount: 0,
+                        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                        startTime: expect.any(String),
+                        attendees: [],
+                      },
+                    ],
+                  },
+                  errors: undefined,
+                },
+              },
+            })
+          })
+        })
       })
 
       describe('meeting is not in database', () => {
@@ -2016,7 +2053,7 @@ describe('TableResolver', () => {
                   openTables: [
                     {
                       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                      id: expect.any(Number),
+                      id: expect.any(String),
                       meetingName: 'Dreammall Entwicklung',
                       meetingID: 'Dreammall-Entwicklung',
                       participantCount: 0,
@@ -2109,7 +2146,7 @@ describe('TableResolver', () => {
                   openTables: [
                     {
                       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                      id: expect.any(Number),
+                      id: expect.any(String),
                       meetingName: 'Dreammall Entwicklung',
                       meetingID: 'Dreammall-Entwicklung',
                       participantCount: 0,

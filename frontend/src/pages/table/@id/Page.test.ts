@@ -14,7 +14,6 @@ import { mockPageContext as globalMockPageContext } from '#tests/mock.vikePageCo
 import { createMockPlugin } from '#tests/plugin.globalErrorHandler'
 
 import TablePage from './+Page.vue'
-import Route from './+route'
 import { title } from './+title'
 
 import type { PageContext } from 'vike/types'
@@ -86,10 +85,6 @@ describe('Table Page', () => {
 
   it('renders', () => {
     expect(wrapper.element).toMatchSnapshot()
-  })
-
-  it('has tableID as param', () => {
-    expect(Route).toBe('/table/@id')
   })
 
   describe('route params in page context is undefined and API throws error', () => {
