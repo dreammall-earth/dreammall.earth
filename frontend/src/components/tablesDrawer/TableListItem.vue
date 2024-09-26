@@ -2,7 +2,7 @@
   <li class="table">
     <div
       class="table-info border-thin"
-      :class="{ highlighted: item.isModerator, welcome: item.type === 'welcome' }"
+      :class="{ highlighted: item.isModerator, welcome: item.type === 'PERMANENT' }"
     >
       <span class="name">{{ item.meetingName }}</span>
       <span class="subtitle">
@@ -11,16 +11,16 @@
     </div>
     <button
       class="action border-thin"
-      :class="{ highlighted: item.isModerator, welcome: item.type === 'welcome' }"
+      :class="{ highlighted: item.isModerator, welcome: item.type === 'PERMANENT' }"
       @click="$emit('open-table')"
     >
       <v-icon
         class="icon"
-        :icon="item.type !== 'project' || item.isModerator ? '$handshake' : '$reception'"
+        :icon="item.type !== 'PROJECT' || item.isModerator ? '$handshake' : '$reception'"
       />
     </button>
     <img
-      v-if="item.type === 'welcome'"
+      v-if="item.type === 'PERMANENT'"
       :src="WelcomeBadge"
       alt="Welcome"
       class="welcome-badge"
@@ -30,7 +30,7 @@
       {{
         item.isModerator
           ? $t('tables.member')
-          : item.type === 'mallTalk'
+          : item.type === 'MALL_TALK'
             ? $t('tables.mallTalk')
             : $t('tables.project')
       }}

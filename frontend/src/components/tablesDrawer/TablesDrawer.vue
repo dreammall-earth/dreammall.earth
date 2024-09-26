@@ -74,7 +74,8 @@ const tables = computed(() => ({
   permanent: {
     id: 0,
     meetingName: t('tablesDrawer.coffeeTime'),
-    type: 'welcome',
+    meetingID: 'welcome',
+    type: 'PERMANENT',
     isModerator: true,
     participantCount: 2,
     attendees: [
@@ -94,7 +95,8 @@ const tables = computed(() => ({
     {
       id: 1,
       meetingName: 'Project 1',
-      type: 'project',
+      meetingID: '1231',
+      type: 'MALL_TALK',
       isModerator: true,
       participantCount: 4,
       attendees: [
@@ -109,7 +111,8 @@ const tables = computed(() => ({
     {
       id: 2,
       meetingName: 'Project 2',
-      type: 'project',
+      type: 'PROJECT',
+      meetingID: 'medfad',
       isModerator: false,
       participantCount: 30,
       attendees: [
