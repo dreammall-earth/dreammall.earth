@@ -618,7 +618,16 @@ const openTablesFromOpenMeetings =
     dbMeetings.forEach((meeting) => {
       const meetingInfo = arg.meetings.find((m) => meeting.meetingID === m.meetingID)
       if (meetingInfo) {
-        const openTable = OpenTable.fromMeetingInfo(meetingInfo, meeting.id ? meeting.id : 0)
+        const isModerator = meeting.users.some(
+          (user) =>
+            meeting.user?.id === context.user?.id ||
+            (context.user?.id === user.userId && user.role === 'MODERATOR'),
+        )
+        const openTable = OpenTable.fromMeetingInfo(
+          meetingInfo,
+          meeting.id ? meeting.id : 0,
+          isModerator,
+        )
         // table.user && table.user.id === user.id => MALL_TALK
         if (meeting.user) {
           mallTalkTables.push(openTable)
@@ -730,6 +739,7 @@ const getOpenWelcomeTable = (context: Context) => (meetings: MeetingInfo[]) => {
       participantCount: welcomeMeeting.participantCount,
       startTime: new Date(welcomeMeeting.startTime).toISOString(),
       attendees: getAttendees(welcomeMeeting),
+      isModerator: true,
     })
   }
   return new OpenTable({
@@ -739,5 +749,6 @@ const getOpenWelcomeTable = (context: Context) => (meetings: MeetingInfo[]) => {
     participantCount: 0,
     startTime: new Date().toISOString(),
     attendees: [],
+    isModerator: true,
   })
 }

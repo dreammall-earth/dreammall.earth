@@ -1905,6 +1905,7 @@ describe('TableResolver', () => {
                       meetingName 
                       meetingID 
                       participantCount 
+                      isModerator
                       startTime 
                       attendees { 
                         fullName 
@@ -1915,6 +1916,7 @@ describe('TableResolver', () => {
                       meetingName 
                       meetingID 
                       participantCount 
+                      isModerator
                       startTime 
                       attendees { 
                         fullName 
@@ -1925,6 +1927,7 @@ describe('TableResolver', () => {
                       meetingName 
                       meetingID 
                       participantCount 
+                      isModerator
                       startTime 
                       attendees { 
                         fullName 
@@ -1967,6 +1970,7 @@ describe('TableResolver', () => {
                         meetingName 
                         meetingID 
                         participantCount 
+                        isModerator
                         startTime 
                         attendees { 
                           fullName 
@@ -1977,6 +1981,7 @@ describe('TableResolver', () => {
                         meetingName 
                         meetingID 
                         participantCount 
+                        isModerator
                         startTime 
                         attendees { 
                           fullName 
@@ -1987,6 +1992,7 @@ describe('TableResolver', () => {
                         meetingName 
                         meetingID 
                         participantCount 
+                        isModerator
                         startTime 
                         attendees { 
                           fullName 
@@ -2070,6 +2076,7 @@ describe('TableResolver', () => {
                       meetingName 
                       meetingID 
                       participantCount 
+                      isModerator
                       startTime 
                       attendees { 
                         fullName 
@@ -2080,6 +2087,7 @@ describe('TableResolver', () => {
                       meetingName 
                       meetingID 
                       participantCount 
+                      isModerator
                       startTime 
                       attendees { 
                         fullName 
@@ -2090,6 +2098,7 @@ describe('TableResolver', () => {
                       meetingName 
                       meetingID 
                       participantCount 
+                      isModerator
                       startTime 
                       attendees { 
                         fullName 
@@ -2184,6 +2193,7 @@ describe('TableResolver', () => {
                       meetingName 
                       meetingID 
                       participantCount 
+                      isModerator
                       startTime 
                       attendees { 
                         fullName 
@@ -2194,6 +2204,7 @@ describe('TableResolver', () => {
                       meetingName 
                       meetingID 
                       participantCount 
+                      isModerator
                       startTime 
                       attendees { 
                         fullName 
@@ -2204,6 +2215,7 @@ describe('TableResolver', () => {
                       meetingName 
                       meetingID 
                       participantCount 
+                      isModerator
                       startTime 
                       attendees { 
                         fullName 
@@ -2237,6 +2249,142 @@ describe('TableResolver', () => {
                         ],
                       },
                     ],
+                  },
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+      })
+
+      describe('one attendee and mall talk meeting in DB', () => {
+        beforeAll(async () => {
+          await prisma.meeting.create({
+            data: {
+              name: 'Own Table',
+              meetingID: 'Own Table',
+              attendeePW: '1234',
+              user: {
+                connect: {
+                  id: user.id,
+                },
+              },
+            },
+          })
+        })
+
+        beforeEach(() => {
+          getMeetingsMock.mockResolvedValue([
+            {
+              meetingName: 'Own Table',
+              meetingID: 'Own Table',
+              internalMeetingID: '258ea7269760758304b6b8494f17e9bf69dc1efe-1718189921310',
+              createTime: 1718189921310,
+              createDate: new Date('Wed Jun 12 10:58:41 UTC 2024'),
+              voiceBridge: 96378,
+              dialNumber: '613-555-1234',
+              attendeePW: 'MqgUFwdD',
+              moderatorPW: 'mTtxYGo2',
+              running: true,
+              duration: 0,
+              hasUserJoined: true,
+              recording: false,
+              hasBeenForciblyEnded: false,
+              startTime: 1718189,
+              endTime: 0,
+              participantCount: 0,
+              listenerCount: 1,
+              voiceParticipantCount: 0,
+              videoCount: 0,
+              maxUsers: 0,
+              moderatorCount: 1,
+              attendees: {
+                attendee: {
+                  userID: '1234',
+                  fullName: 'Peter Lustig',
+                  role: 'moderator',
+                  isPresenter: false,
+                  isListeningOnly: false,
+                  hasJoinedVoice: true,
+                  hasVideo: true,
+                  clientType: 'html5',
+                },
+              },
+              metadata: '',
+              isBreakout: false,
+            },
+          ])
+        })
+
+        it('returns table with attendee', async () => {
+          jest.clearAllMocks()
+          await expect(
+            testServer.executeOperation(
+              {
+                query: `query {
+                  tables {
+                    mallTalkTables {
+                      id 
+                      meetingName 
+                      meetingID 
+                      participantCount 
+                      isModerator
+                      startTime 
+                      attendees { 
+                        fullName 
+                      }
+                    }
+                    projectTables {
+                      id 
+                      meetingName 
+                      meetingID 
+                      participantCount 
+                      isModerator
+                      startTime 
+                      attendees { 
+                        fullName 
+                      }
+                    }
+                    permanentTables {
+                      id 
+                      meetingName 
+                      meetingID 
+                      participantCount 
+                      isModerator
+                      startTime 
+                      attendees { 
+                        fullName 
+                      }
+                    }
+                  }
+                }`,
+              },
+              { contextValue: mockContextValue({ user }) },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  tables: {
+                    mallTalkTables: [
+                      {
+                        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                        id: expect.any(String),
+                        meetingName: 'Own Table',
+                        meetingID: 'Own Table',
+                        participantCount: 0,
+                        startTime: '1718189',
+                        attendees: [
+                          {
+                            fullName: 'Peter Lustig',
+                          },
+                        ],
+                      },
+                    ],
+                    permanentTables: [],
+                    projectTables: [],
                   },
                 },
                 errors: undefined,
@@ -2313,6 +2461,7 @@ describe('TableResolver', () => {
                       meetingName 
                       meetingID 
                       participantCount 
+                      isModerator
                       startTime 
                       attendees { 
                         fullName 
@@ -2323,6 +2472,7 @@ describe('TableResolver', () => {
                       meetingName 
                       meetingID 
                       participantCount 
+                      isModerator
                       startTime 
                       attendees { 
                         fullName 
@@ -2333,6 +2483,7 @@ describe('TableResolver', () => {
                       meetingName 
                       meetingID 
                       participantCount 
+                      isModerator
                       startTime 
                       attendees { 
                         fullName 
@@ -2464,6 +2615,7 @@ describe('TableResolver', () => {
                       meetingName 
                       meetingID 
                       participantCount 
+                      isModerator
                       startTime 
                       attendees { 
                         fullName 
@@ -2473,7 +2625,8 @@ describe('TableResolver', () => {
                       id 
                       meetingName 
                       meetingID 
-                      participantCount 
+                      participantCount
+                      isModerator
                       startTime 
                       attendees { 
                         fullName 
@@ -2483,7 +2636,8 @@ describe('TableResolver', () => {
                       id 
                       meetingName 
                       meetingID 
-                      participantCount 
+                      participantCount
+                      isModerator
                       startTime 
                       attendees { 
                         fullName 

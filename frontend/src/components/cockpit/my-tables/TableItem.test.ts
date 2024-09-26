@@ -5,7 +5,7 @@ import { navigate } from 'vike/client/router'
 import { describe, expect, it, vi } from 'vitest'
 
 import { currentUserQuery } from '#queries/currentUserQuery'
-import { projectTablesQuery } from '#queries/projectTablesQuery.js'
+import { projectTablesQuery } from '#queries/projectTablesQuery'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 import TableItem from './TableItem.vue'
