@@ -76,12 +76,13 @@
           :label="$t('sepaIban.accountData.reference')"
           :model-value="props.reference"
         ></v-text-field>
-        <v-number-input
-          v-model="amount"
-          :min="0"
-          variant="outlined"
+        <v-text-field
+          variant="underlined"
+          readonly
+          persistent-hint
           :label="$t('sepaIban.accountData.amount')"
-        ></v-number-input>
+          :model-value="$n(amount, { style: 'currency', currency: 'EUR' })"
+        ></v-text-field>
       </template>
     </CockpitCardVariableHeight>
   </CockpitLayout>
@@ -89,7 +90,7 @@
 
 <script lang="ts" setup>
 import VueQrcode from '@chenfengyuan/vue-qrcode'
-import { ref, computed, defineProps } from 'vue'
+import { defineProps } from 'vue'
 
 import CockpitCardVariableHeight from '#components/cockpit/cockpit-card/CockpitCardVariableHeight.vue'
 import CockpitLayout from '#components/cockpit/cockpit-layout/CockpitLayout.vue'
@@ -98,29 +99,27 @@ import { generateQrCode } from './qrCode'
 
 import type { PageContext } from 'vike/types'
 
-const amount = ref(30)
+const amount = 22.9
 
 const props = defineProps<{
   accountData: PageContext['publicEnv']['ACCOUNTING']
   reference: string
 }>()
 
-const qr = computed(() => {
-  const data = {
-    name: props.accountData.ACCOUNT_HOLDER,
-    iban: props.accountData.IBAN,
-    amount: amount.value,
-    unstructuredReference: props.reference,
-  }
-  try {
-    const qr = generateQrCode(data)
-    return qr
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.warn('Invalid QR code data.\n', error)
-    return null
-  }
-})
+let qr: string | undefined
+const data = {
+  name: props.accountData.ACCOUNT_HOLDER,
+  iban: props.accountData.IBAN,
+  amount,
+  unstructuredReference: props.reference,
+}
+try {
+  qr = generateQrCode(data)
+} catch (error) {
+  // eslint-disable-next-line no-console
+  console.warn('Invalid QR code data.\n', error)
+  qr = undefined
+}
 </script>
 
 <style scoped>

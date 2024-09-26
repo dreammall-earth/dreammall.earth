@@ -67,18 +67,8 @@ describe('SepaIban', () => {
     it('as a QR code', () => {
       const wrapper = mount(SepaIban, opts)
       const value =
-        'BCD\n002\n1\nSCT\n\nMax Mustermann\nDE75512108001245126199\nEUR30.00\n\n\nREFEREN\n'
+        'BCD\n002\n1\nSCT\n\nMax Mustermann\nDE75512108001245126199\nEUR22.90\n\n\nREFEREN\n'
       expect(wrapper.getComponent({ name: 'vue-qrcode' }).props('value')).toEqual(value)
-    })
-
-    describe('when the user updates the amount', () => {
-      it('updates the QR code', async () => {
-        const wrapper = mount(SepaIban, opts)
-        await wrapper.find('input#input-12').setValue(42)
-        const value =
-          'BCD\n002\n1\nSCT\n\nMax Mustermann\nDE75512108001245126199\nEUR42.00\n\n\nREFEREN\n'
-        expect(wrapper.getComponent({ name: 'vue-qrcode' }).props('value')).toEqual(value)
-      })
     })
   })
 })

@@ -5,7 +5,6 @@ import 'vuetify/styles'
 import { I18n, useI18n } from 'vue-i18n'
 import { ThemeDefinition, createVuetify } from 'vuetify'
 import { aliases as mdiAliases } from 'vuetify/iconsets/mdi'
-import { VNumberInput } from 'vuetify/labs/VNumberInput'
 import { createVueI18nAdapter } from 'vuetify/locale/adapters/vue-i18n'
 
 import { aliases as customAliases } from '#assets/icons'
@@ -71,9 +70,6 @@ const themes = {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default (i18n: I18n<any, NonNullable<unknown>, NonNullable<unknown>, string, false>) =>
   createVuetify({
-    components: {
-      VNumberInput,
-    },
     locale: {
       adapter: createVueI18nAdapter({ i18n, useI18n }),
     },
