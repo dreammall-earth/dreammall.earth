@@ -2,13 +2,15 @@
 
 exports[`AboutMeView > renders 1`] = `
 <section
-  class="cockpit-card"
+  class="cockpit-card-variable-height cockpit-card"
   data-v-1451ba78=""
+  data-v-d91b9f54=""
   data-v-f444dc92=""
   editable="false"
 >
   <!--v-if-->
   <!--v-if-->
+  
   
   <div
     class="header mb-2"
@@ -584,19 +586,22 @@ exports[`AboutMeView > renders 1`] = `
       
     </ul>
   </button>
+  
   
 </section>
 `;
 
 exports[`AboutMeView > renders initials 1`] = `
 <section
-  class="cockpit-card"
+  class="cockpit-card-variable-height cockpit-card"
   data-v-1451ba78=""
+  data-v-d91b9f54=""
   data-v-f444dc92=""
   editable="false"
 >
   <!--v-if-->
   <!--v-if-->
+  
   
   <div
     class="header mb-2"
@@ -1173,18 +1178,21 @@ exports[`AboutMeView > renders initials 1`] = `
     </ul>
   </button>
   
+  
 </section>
 `;
 
 exports[`AboutMeView > renders without social media accounts 1`] = `
 <section
-  class="cockpit-card"
+  class="cockpit-card-variable-height cockpit-card"
   data-v-1451ba78=""
+  data-v-d91b9f54=""
   data-v-f444dc92=""
   editable="false"
 >
   <!--v-if-->
   <!--v-if-->
+  
   
   <div
     class="header mb-2"
@@ -1650,6 +1658,7 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
       $t('cockpit.about-me.empty-social-media')
     </span>
   </button>
+  
   
 </section>
 `;
