@@ -2,14 +2,16 @@
 
 exports[`MyTables > renders 1`] = `
 <section
-  class="cockpit-card"
+  class="cockpit-card-variable-height cockpit-card"
   data-v-1451ba78=""
   data-v-c2e63817=""
+  data-v-d91b9f54=""
 >
   <div
     class="header"
-    data-v-1451ba78=""
+    data-v-d91b9f54=""
   >
+    
     
     <div
       class="header"
@@ -33,17 +35,20 @@ exports[`MyTables > renders 1`] = `
       </button>
     </div>
     
+    
   </div>
   <hr
     class="hr"
-    data-v-1451ba78=""
+    data-v-d91b9f54=""
   />
+  
   
   <div
     data-v-c2e63817=""
   >
     $t('cockpit.myTables.noTables')
   </div>
+  
   
 </section>
 `;

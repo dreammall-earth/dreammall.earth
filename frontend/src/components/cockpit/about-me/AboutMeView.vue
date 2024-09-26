@@ -14,10 +14,15 @@
           class="availability"
           @update:model-value="updateAvailability"
         >
-          <template #selection="{ item }"> {{ item.props.circle }} {{ item.title }} </template>
+          <template #selection="{ item }">
+            <v-icon icon="mdi mdi-circle" :color="item.props.circleColor" class="mr-2" />
+            {{ item.title }}
+          </template>
           <template #item="{ item, props: listProps }">
             <v-list-item v-bind="listProps">
-              <template #prepend> {{ item.props.circle }} <span class="ml-2"></span></template>
+              <template #prepend>
+                <v-icon icon="mdi mdi-circle" :color="item.props.circleColor" class="mr-2" />
+              </template>
             </v-list-item>
           </template>
         </v-select>
@@ -103,10 +108,10 @@ const emit = defineEmits<{
 const availability = ref(props.availability)
 
 const availabilityOptions = [
-  { value: null, title: 'Please choose', props: { circle: '⚪️' } },
-  { value: 'available', title: 'Available to work', props: { circle: '🟢' } },
-  { value: 'partly_available', title: 'Busy but have time', props: { circle: '🟡' } },
-  { value: 'busy', title: 'Busy', props: { circle: '🔴' } },
+  { value: null, title: 'Please choose', props: { circleColor: '#CCCCCC' } },
+  { value: 'available', title: 'Available to work', props: { circleColor: '#23AD5B' } },
+  { value: 'partly_available', title: 'Busy but have time', props: { circleColor: '#F09630' } },
+  { value: 'busy', title: 'Busy', props: { circleColor: '#D02F44' } },
 ]
 
 const updateAvailability = (newAvailability: string) => {

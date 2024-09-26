@@ -20,7 +20,7 @@ import type { PageContext } from 'vike/types'
 
 const joinTableQueryMock = vi.fn()
 const currentUserQueryMock = vi.fn()
-const updateOpenTablesSubscriptionMock: IMockSubscription = createMockSubscription()
+const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
 
 const mockClient = createMockClient()
 
@@ -51,9 +51,17 @@ mockClient.setRequestHandler(
 )
 mockClient.setRequestHandler(
   joinTableQuery,
-  joinTableQueryMock.mockResolvedValue({ data: { joinTable: 'https://some-link-to-meeting.com' } }),
+  joinTableQueryMock.mockResolvedValue({
+    data: {
+      joinTable: {
+        link: 'https://some-link-to-meeting.com',
+        isModerator: true,
+        type: 'MALL_TALK',
+      },
+    },
+  }),
 )
-mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateOpenTablesSubscriptionMock)
+mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
 
 provideApolloClient(mockClient)
 
@@ -143,7 +151,14 @@ describe('Table Page', () => {
         id: 69,
       }
       joinTableQueryMock.mockResolvedValue({
-        data: { joinTable: 'https://some-link-to-meeting.com', errors: [] },
+        data: {
+          joinTable: {
+            link: 'https://some-link-to-meeting.com',
+            isModerator: true,
+            type: 'MALL_TALK',
+          },
+          errors: [],
+        },
       })
       wrapper = Wrapper()
       await flushPromises()

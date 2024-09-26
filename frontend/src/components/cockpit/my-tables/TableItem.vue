@@ -21,7 +21,7 @@
       :class="{ hidden: isShowingOptions }"
       @click="openTable"
     >
-      <v-icon class="camera-icon" icon="$camera" />
+      <v-icon class="join-table-icon" icon="$handshake" />
     </button>
     <button class="options" @click="toggleOptions">
       <v-icon
@@ -109,7 +109,7 @@ const shareTable = () => {
 const deleteTable = async () => {
   if (confirm(t('cockpit.myTables.deleteConfirmation'))) {
     try {
-      await tablesStore.deleteTable(props.id)
+      await tablesStore.deleteProjectTable(props.id)
     } catch (cause) {
       throw new Error('Could not delete table', { cause })
     }
@@ -162,10 +162,6 @@ defineExpose({
   color: #fff;
   background-color: #f09630;
   border-radius: 0 16px 16px 0;
-}
-
-.camera-icon {
-  transform: scale(0.8);
 }
 
 .options-icon {

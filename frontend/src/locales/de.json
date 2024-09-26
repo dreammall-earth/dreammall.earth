@@ -127,7 +127,9 @@
   "sepaIban": {
     "accountData": {
       "accountHolder": "Konto Inhaber",
+      "accountHolderAddress": "Adresse",
       "amount": "Betrag in Euro",
+      "bank": "Bank",
       "BIC": "BIC",
       "IBAN": "IBAN",
       "reference": "Verwendungszweck",
@@ -140,8 +142,7 @@
     },
     "qr": {
       "explanation": "Alternativ kannst du auch diesen QR Code mit deiner Banking-App scannen.",
-      "invalid": "Bitte gib einen gültigen Betrag ein, um einen QR-Code anzuzeigen.",
-      "title": "QR Code scannen"
+      "invalid": "Bitte gib einen gültigen Betrag ein, um einen QR-Code anzuzeigen."
     }
   },
   "table": {
@@ -149,12 +150,18 @@
     "notFound": "Tisch nicht gefunden."
   },
   "tables": {
-    "participantCount": "{count} Teilnehmer"
+    "mallTalk": "Mall Talk",
+    "member": "Mitglied",
+    "participantCount": "{count} Teilnehmer",
+    "project": "Projekt"
   },
   "tablesDrawer": {
-    "header": "Offene Tische",
+    "coffeeTime": "DreamMall Coffee Time",
+    "invite": "Einladen",
+    "mallTalk": "Mall Talk",
     "noResults": "Keine Ergebnisse gefunden",
     "noTables": "Keine Tische verfügbar",
+    "projects": "Projekte",
     "searchPlaceholder": "Offene Tische, Teilnehmer"
   }
 }

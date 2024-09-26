@@ -2,7 +2,7 @@ import { fn } from '@storybook/test'
 
 import { SBComp } from '#types/SBComp'
 
-import LargeDreamMallButton from './LargeDreamMallButton.vue'
+import LargeDreamMallButton from './DreamMallButton.vue'
 
 import type { Meta, StoryObj } from '@storybook/vue3'
 

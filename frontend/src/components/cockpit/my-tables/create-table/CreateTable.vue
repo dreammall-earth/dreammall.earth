@@ -65,7 +65,7 @@ const steps: Step[] = [
 const tablesStore = useTablesStore()
 
 const onSubmit = async () => {
-  const table = await tablesStore.createTable(
+  const table = await tablesStore.createProjectTable(
     createTableModel.name,
     !createTableModel.isPrivate,
     createTableModel.userIds,

@@ -31,7 +31,7 @@
         r="59.9955"
         transform="rotate(90 866.136 859.155)"
         fill="#EEEFF0"
-        fill-opacity="0.0405"
+        fill-opacity="1"
       />
     </g>
     <circle
@@ -47,7 +47,7 @@
       opacity="0.25"
       class="warp-ring"
       style="transform: scale(0)"
-      :class="[!buttonIsTurned ? 'button-warp-on' : 'button-warp-off']"
+      :class="[!props.isActive ? 'button-warp-on' : 'button-warp-off']"
       filter="url(#filter3_df_1513_6640)"
     >
       <ellipse
@@ -64,7 +64,7 @@
     </g>
     <g
       class="button-wave"
-      :class="[buttonIsTurned ? 'button-wave-on' : '']"
+      :class="[props.isActive ? 'button-wave-on' : '']"
       opacity="0.25"
       filter="url(#filter0_f_1513_6933)"
     >
@@ -78,7 +78,12 @@
         stroke-width="4"
       />
     </g>
-    <g id="dream-mall-button" clip-path="url(#clip0_1513_6640)" @click="onClick">
+    <g
+      id="dream-mall-button"
+      clip-path="url(#clip0_1513_6640)"
+      :class="{ 'dream-mall-button--turned': props.isActive }"
+      @click="onClick"
+    >
       <rect width="100%" height="100%" fill="transparent"></rect>
       <path
         d="M865.772 848.381H870C875.877 848.381 880.727 853.121 880.727 858.864C880.727 864.608 875.877 869.346 870 869.346H865.771H859.273H855.516H851.758H848V880.364H870C882.101 880.364 892 870.689 892 858.864C892 847.038 882.101 837.364 870 837.364H848V853.469V855.726H851.758H855.516H859.274H863.032H866.79H870C871.728 855.726 873.21 857.175 873.21 858.864C873.21 860.553 871.728 862.001 870 862.001H866.79H848V865.674H863.032H870C873.803 865.674 876.969 862.581 876.969 858.864C876.969 855.148 873.803 852.054 870 852.054H863.031H859.273H855.516H851.758V841.036H855.516H870C880.026 841.036 888.243 849.066 888.243 858.864C888.243 868.662 880.027 876.691 870 876.691H851.758V873.019H855.516H865.772H870C877.951 873.019 884.485 866.635 884.485 858.864C884.485 851.093 877.951 844.71 870 844.71H865.771H856.617V848.381H865.772Z"
@@ -297,21 +302,21 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 
-const buttonIsTurned = ref(false)
 const warp = ref<HTMLInputElement | null>(null)
 
 const emit = defineEmits<{
   (e: 'click', id: number): void
 }>()
 
-const onClick = (event: MouseEvent) => {
+const props = withDefaults(
+  defineProps<{
+    isActive: boolean
+  }>(),
+  { isActive: false },
+)
+
+const onClick = () => {
   try {
-    const node = event.target as HTMLElement
-    const parent = node.parentNode as SVGElement
-
-    parent.classList.toggle('dream-mall-button--turned')
-    buttonIsTurned.value = !buttonIsTurned.value
-
     if (warp.value) {
       const style = window.getComputedStyle(warp.value)
       const matrix = style.transform
@@ -338,6 +343,7 @@ onMounted(() => {})
 
 <style scoped lang="scss">
 @import '#root/src/assets/scss/style';
+@import 'vuetify/lib/styles/settings/_variables';
 
 svg {
   position: absolute;
@@ -347,14 +353,14 @@ svg {
   height: calc(100vh - 10px);
   transform: translate(-50%, -50%);
 
-  @media screen and (min-width: $mobile) and (max-width: $tablet) {
+  @media screen and (max-width: $mobile) {
     transition: scale 1s;
-    transform: translate(-50%, -50%) scale(3);
+    transform: translate(-50%, -50%) scale(2);
   }
 
-  @media screen and (min-width: $tablet) {
+  @media screen and (min-width: $mobile) and (max-width: $tablet) {
     transition: scale 1s;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1.4);
   }
 
   #dream-mall-button {

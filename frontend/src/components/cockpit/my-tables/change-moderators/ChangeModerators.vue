@@ -25,7 +25,7 @@ import { ref } from 'vue'
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 import StepHeader from '#components/steps/StepHeader.vue'
 import UserSelection from '#components/user-selection/UserSelection.vue'
-import { useTablesStore, Table } from '#stores/tablesStore'
+import { useTablesStore, ProjectTable } from '#stores/tablesStore'
 
 const props = defineProps<{
   tableId: number
@@ -37,15 +37,16 @@ const emit = defineEmits<{
 
 const tablesStore = useTablesStore()
 
-const { getTables: tables } = storeToRefs(tablesStore)
+const { getProjectTables: tables } = storeToRefs(tablesStore)
 
 const userIds = ref(
-  tables.value.find((table: Table) => table.id === props.tableId)?.users.map((user) => user.id) ??
-    [],
+  tables.value
+    .find((table: ProjectTable) => table.id === props.tableId)
+    ?.users.map((user) => user.id) ?? [],
 )
 
 const onSubmit = async (): Promise<void> => {
-  await tablesStore.updateTableModerators(props.tableId, userIds.value)
+  await tablesStore.updateProjectTableModerators(props.tableId, userIds.value)
 
   emit('close')
 }

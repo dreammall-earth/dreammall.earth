@@ -1,6 +1,6 @@
 <template>
   <CockpitLayout>
-    <CockpitCard>
+    <CockpitCardVariableHeight>
       <template #header>
         <h2>
           {{ $t('sepaIban.explanation.title') }}
@@ -10,113 +10,116 @@
         <p>
           {{ $t('sepaIban.explanation.introduction') }}
         </p>
-        <p class="pt-4">
+        <p class="py-4">
           {{ $t('sepaIban.explanation.callToAction') }}
         </p>
-      </template>
-    </CockpitCard>
-    <CockpitCard>
-      <template #header>
-        <h2>
-          {{ $t('sepaIban.qr.title') }}
-        </h2>
-      </template>
-      <template v-if="qr" #default>
-        <p class="pb-4">
-          {{ $t('sepaIban.qr.explanation') }}
-        </p>
-        <div class="d-flex justify-center">
-          <VueQrcode :value="qr" :options="{ width: 140 }"></VueQrcode>
-        </div>
-      </template>
-      <template v-else #default>
-        <p>
+
+        <template v-if="qr">
+          <div class="d-flex py-8 justify-center">
+            <VueQrcode :value="qr" :options="{ width: 140 }"></VueQrcode>
+          </div>
+          <p class="pb-4">
+            {{ $t('sepaIban.qr.explanation') }}
+          </p>
+        </template>
+        <p v-else>
           {{ $t('sepaIban.qr.invalid') }}
         </p>
       </template>
-    </CockpitCard>
-    <CockpitCard>
+    </CockpitCardVariableHeight>
+    <CockpitCardVariableHeight>
       <template #header>
         <h2>{{ $t('sepaIban.accountData.title') }}</h2>
       </template>
       <template #default>
-        <v-table density="compact" class="account-data-table">
-          <tbody>
-            <tr>
-              <td class="text-start">
-                <strong>{{ $t('sepaIban.accountData.accountHolder') }}</strong>
-              </td>
-              <td class="text-start">{{ props.accountData.ACCOUNT_HOLDER }}</td>
-            </tr>
-
-            <tr>
-              <td class="text-start">
-                <strong>{{ $t('sepaIban.accountData.IBAN') }}</strong>
-              </td>
-              <td class="text-start">{{ props.accountData.IBAN }}</td>
-            </tr>
-
-            <tr>
-              <td class="text-start">
-                <strong>{{ $t('sepaIban.accountData.BIC') }}</strong>
-              </td>
-              <td class="text-start">{{ props.accountData.BIC }}</td>
-            </tr>
-
-            <tr>
-              <td class="text-start">
-                <strong>{{ $t('sepaIban.accountData.amount') }}</strong>
-              </td>
-              <td class="text-start"><input v-model="amount" type="number" min="0" /></td>
-            </tr>
-
-            <tr>
-              <td class="text-start">
-                <strong>{{ $t('sepaIban.accountData.reference') }}</strong>
-              </td>
-              <td class="text-start">{{ props.reference }}</td>
-            </tr>
-          </tbody>
-        </v-table>
+        <v-text-field
+          variant="underlined"
+          readonly
+          persistent-hint
+          :label="$t('sepaIban.accountData.accountHolder')"
+          :model-value="props.accountData.ACCOUNT_HOLDER"
+        ></v-text-field>
+        <v-text-field
+          v-if="props.accountData.ACCOUNT_HOLDER_ADDRESS"
+          variant="underlined"
+          readonly
+          persistent-hint
+          :label="$t('sepaIban.accountData.accountHolderAddress')"
+          :model-value="props.accountData.ACCOUNT_HOLDER_ADDRESS"
+        ></v-text-field>
+        <v-text-field
+          variant="underlined"
+          readonly
+          persistent-hint
+          :label="$t('sepaIban.accountData.IBAN')"
+          :model-value="props.accountData.IBAN"
+        ></v-text-field>
+        <v-text-field
+          variant="underlined"
+          readonly
+          persistent-hint
+          :label="$t('sepaIban.accountData.BIC')"
+          :model-value="props.accountData.BIC"
+        ></v-text-field>
+        <v-text-field
+          v-if="props.accountData.BANK"
+          variant="underlined"
+          readonly
+          persistent-hint
+          :label="$t('sepaIban.accountData.bank')"
+          :model-value="props.accountData.BANK"
+        ></v-text-field>
+        <v-text-field
+          variant="underlined"
+          readonly
+          persistent-hint
+          :label="$t('sepaIban.accountData.reference')"
+          :model-value="props.reference"
+        ></v-text-field>
+        <v-text-field
+          variant="underlined"
+          readonly
+          persistent-hint
+          :label="$t('sepaIban.accountData.amount')"
+          :model-value="$n(amount, { style: 'currency', currency: 'EUR' })"
+        ></v-text-field>
       </template>
-    </CockpitCard>
+    </CockpitCardVariableHeight>
   </CockpitLayout>
 </template>
 
 <script lang="ts" setup>
 import VueQrcode from '@chenfengyuan/vue-qrcode'
-import { ref, computed, defineProps } from 'vue'
+import { defineProps } from 'vue'
 
-import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
+import CockpitCardVariableHeight from '#components/cockpit/cockpit-card/CockpitCardVariableHeight.vue'
 import CockpitLayout from '#components/cockpit/cockpit-layout/CockpitLayout.vue'
 
 import { generateQrCode } from './qrCode'
 
 import type { PageContext } from 'vike/types'
 
-const amount = ref(30)
+const amount = 22.9
 
 const props = defineProps<{
   accountData: PageContext['publicEnv']['ACCOUNTING']
   reference: string
 }>()
 
-const qr = computed(() => {
-  const data = {
-    name: props.accountData.ACCOUNT_HOLDER,
-    iban: props.accountData.IBAN,
-    amount: amount.value,
-    unstructuredReference: props.reference,
-  }
-  try {
-    const qr = generateQrCode(data)
-    return qr
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.warn('Invalid QR code data.\n', error)
-    return null
-  }
-})
+let qr: string | undefined
+const data = {
+  name: props.accountData.ACCOUNT_HOLDER,
+  iban: props.accountData.IBAN,
+  amount,
+  unstructuredReference: props.reference,
+}
+try {
+  qr = generateQrCode(data)
+} catch (error) {
+  // eslint-disable-next-line no-console
+  console.warn('Invalid QR code data.\n', error)
+  qr = undefined
+}
 </script>
 
 <style scoped>

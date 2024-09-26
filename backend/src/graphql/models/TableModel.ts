@@ -47,13 +47,19 @@ export class OpenTable {
   constructor(
     data: Pick<
       OpenTable,
-      'id' | 'meetingID' | 'meetingName' | 'participantCount' | 'startTime' | 'attendees'
+      | 'id'
+      | 'meetingID'
+      | 'meetingName'
+      | 'participantCount'
+      | 'startTime'
+      | 'attendees'
+      | 'isModerator'
     >,
   ) {
     Object.assign(this, data)
   }
 
-  static fromMeetingInfo(meeting: MeetingInfo, id: number) {
+  static fromMeetingInfo(meeting: MeetingInfo, id: number, isModerator: boolean): OpenTable {
     const { meetingID, meetingName, participantCount } = meeting
     const startTime = meeting.startTime.toString()
     const attendees = getAttendees(meeting)
@@ -64,6 +70,7 @@ export class OpenTable {
       participantCount,
       startTime,
       attendees,
+      isModerator,
     })
   }
 
@@ -84,4 +91,31 @@ export class OpenTable {
 
   @Field(() => [Attendee])
   attendees: Attendee[]
+
+  @Field()
+  isModerator: boolean
+}
+
+@ObjectType()
+export class OpenTables {
+  @Field(() => [OpenTable])
+  permanentTables: OpenTable[]
+
+  @Field(() => [OpenTable])
+  mallTalkTables: OpenTable[]
+
+  @Field(() => [OpenTable])
+  projectTables: OpenTable[]
+}
+
+@ObjectType()
+export class JoinTable {
+  @Field()
+  link: string
+
+  @Field()
+  type: string
+
+  @Field()
+  isModerator: boolean
 }
