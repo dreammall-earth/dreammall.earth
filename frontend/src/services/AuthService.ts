@@ -37,8 +37,9 @@ export default class AuthService {
   public signIn(pathname = '/') {
     return this.userManager.signinRedirect({
       // State is sent back to the client after successfull login.
-      // We use the pathname as the state to redirect back to the original page.
-      state: pathname,
+      state: {
+        redirectTo: pathname,
+      },
     })
   }
 

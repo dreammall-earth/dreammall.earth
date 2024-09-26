@@ -22,8 +22,14 @@ onBeforeMount(async () => {
     throw new Error('Could not sign in')
   }
 
-  if (typeof user.state === 'string' && user.state.length > 0) {
-    navigate(user.state)
+  if (
+    user.state &&
+    typeof user.state === 'object' &&
+    'redirectTo' in user.state &&
+    typeof user.state?.redirectTo === 'string' &&
+    user.state.redirectTo.length > 0
+  ) {
+    navigate(decodeURIComponent(user.state.redirectTo))
   } else {
     navigate('/')
   }

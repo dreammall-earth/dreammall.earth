@@ -84,7 +84,9 @@ describe('AuthPage', () => {
         },
         token_type: 'token_type',
         session_state: null,
-        state: '/my-path',
+        state: {
+          redirectTo: '/my-path',
+        },
         expires_in: 0,
         expired: false,
         scopes: ['email'],
