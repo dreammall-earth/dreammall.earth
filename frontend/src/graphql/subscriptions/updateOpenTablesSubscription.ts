@@ -1,8 +1,8 @@
 import { gql } from 'graphql-tag'
 
 export const updateOpenTablesSubscription = gql`
-  subscription ($username: String!) {
-    updateOpenTables(username: $username) {
+  subscription {
+    updateOpenTables {
       mallTalkTables {
         id
         meetingID

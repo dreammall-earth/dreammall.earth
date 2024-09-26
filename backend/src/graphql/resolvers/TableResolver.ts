@@ -538,17 +538,9 @@ export class TableResolver {
   })
   async updateOpenTables(
     @Root() meetings: MeetingInfo[],
-    @Arg('username') username: string,
     @Ctx() context: Context,
   ): Promise<OpenTables> {
-    const {
-      dataSources: { prisma },
-    } = context
-    const user = await prisma.user.findUnique({
-      where: {
-        username,
-      },
-    })
+    const { user } = context
     if (!user) return { permanentTables: [], mallTalkTables: [], projectTables: [] }
     return openTablesFromOpenMeetings(context)({ meetings, user })
   }

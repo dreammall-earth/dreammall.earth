@@ -108,11 +108,7 @@ export const useTablesStore = defineStore(
 
     const {
       result: updateOpenTablesSubscriptionResult /* , error: updateOpenTablesSubscriptionError */,
-    } = useSubscription(
-      updateOpenTablesSubscription,
-      () => ({ username: userStore.getCurrentUser?.username || 'Unknown User' }),
-      { fetchPolicy: 'no-cache' },
-    )
+    } = useSubscription(updateOpenTablesSubscription, () => ({}), { fetchPolicy: 'no-cache' })
 
     watch(updateOpenTablesSubscriptionResult, (data: { updateOpenTables: TableList }) => {
       setTables(data.updateOpenTables)
