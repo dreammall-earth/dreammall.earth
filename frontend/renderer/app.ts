@@ -29,7 +29,7 @@ function createApp(pageContext: PageContext, isClient = true) {
       )
       try {
         provide('authService', new AuthService(pageContext.publicEnv.AUTH))
-      } catch (error) {
+      } catch {
         if (navigator.cookieEnabled) {
           toast.error('🍪 Please enabled cookies!', {
             autoClose: false,
