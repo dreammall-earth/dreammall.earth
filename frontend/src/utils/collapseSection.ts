@@ -1,4 +1,6 @@
-export function collapseSection(element: HTMLElement) {
+export function collapseSection(element: HTMLElement | null) {
+  if (!element) return
+
   // get the height of the element's inner content, regardless of its actual size
   const sectionHeight = element.scrollHeight
 
@@ -25,7 +27,8 @@ export function collapseSection(element: HTMLElement) {
   element.setAttribute('data-collapsed', 'true')
 }
 
-export function expandSection(element: HTMLElement) {
+export function expandSection(element: HTMLElement | null) {
+  if (!element) return
   // get the height of the element's inner content, regardless of its actual size
   const sectionHeight = element.scrollHeight
 

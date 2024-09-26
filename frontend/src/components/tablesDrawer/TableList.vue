@@ -2,12 +2,19 @@
   <div class="outer-list">
     <div class="mb-4 d-flex align-center justify-space-between">
       <h2 class="header">{{ list.heading }}</h2>
-      <button @click="toggleCollapsed">
-        <v-icon icon="mdi mdi-menu-down" :class="{ 'mdi-rotate-180': isCollapsed }" />
+      <button @click="toggleCollapse">
+        <v-icon
+          icon="mdi mdi-menu-down"
+          :class="{ 'mdi-rotate-180': collapseState === 'collapsed' }"
+        />
       </button>
     </div>
     <slot></slot>
-    <div ref="listContentRef" class="list-content" :class="{ collapsed: isCollapsed }">
+    <div
+      ref="listContentRef"
+      class="list-content"
+      :class="{ collapsed: collapseState === 'collapsed' }"
+    >
       <div v-if="!list.items.length">{{ $t('tablesDrawer.noTables') }}</div>
       <div v-else-if="!filteredItems.length">
         {{ $t('tablesDrawer.noResults') }}
@@ -26,9 +33,9 @@
 
 <script lang="ts" setup>
 import { navigate } from 'vike/client/router'
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 
-import { collapseSection, expandSection } from '#src/utils/collapseSection'
+import { useCollapseSection } from '#src/utils/useCollapseSection'
 
 import TableListItem from './TableListItem.vue'
 
@@ -45,11 +52,9 @@ const props = defineProps<{
 
 const emit = defineEmits(['openTable'])
 
-const isCollapsed = ref(false)
+const listContentRef = ref<HTMLElement | null>(null)
 
-const toggleCollapsed = () => {
-  isCollapsed.value = !isCollapsed.value
-}
+const { collapseState, toggleCollapse } = useCollapseSection(listContentRef)
 
 const filteredItems = computed(() => {
   if (!props.searchValue) {
@@ -68,18 +73,6 @@ const openTable = (id: number) => {
   emit('openTable')
   navigate(`/table/${id}`)
 }
-
-const listContentRef = ref<HTMLElement | null>(null)
-
-watch(isCollapsed, () => {
-  if (listContentRef.value) {
-    if (isCollapsed.value) {
-      collapseSection(listContentRef.value)
-    } else {
-      expandSection(listContentRef.value)
-    }
-  }
-})
 </script>
 
 <style scoped>
