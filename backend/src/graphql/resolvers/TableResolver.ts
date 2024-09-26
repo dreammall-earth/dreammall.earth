@@ -618,11 +618,12 @@ const openTablesFromOpenMeetings =
     dbMeetings.forEach((meeting) => {
       const meetingInfo = arg.meetings.find((m) => meeting.meetingID === m.meetingID)
       if (meetingInfo) {
-        const isModerator = meeting.users.some(
-          (user) =>
-            meeting.user?.id === context.user?.id ||
-            (context.user?.id === user.userId && user.role === 'MODERATOR'),
-        )
+        const isModerator =
+          meeting.users.some(
+            (user) =>
+              meeting.user?.id === context.user?.id ||
+              (context.user?.id === user.userId && user.role === 'MODERATOR'),
+          ) || meeting.user?.id === context.user?.id
         const openTable = OpenTable.fromMeetingInfo(
           meetingInfo,
           meeting.id ? meeting.id : 0,
