@@ -25,26 +25,34 @@ export const createApolloClient = (ENDPOINTS: PageContext['publicEnv']['ENDPOINT
     })
   }
 
-  const wsLink = new GraphQLWsLink(
-    createClient({
-      webSocketImpl: WebSocket,
-      url: ENDPOINTS.WEBSOCKET_URI,
-    }),
-  )
-
   const httpLink = createHttpLink({
     uri: ENDPOINTS.GRAPHQL_URI,
   })
 
-  const splitLink = split(
-    ({ query }) => {
-      const definition = getMainDefinition(query)
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
-      return definition.kind === 'OperationDefinition' && definition.operation === 'subscription'
-    },
-    wsLink,
-    httpLink,
-  )
+  const createSplitLink = (getToken: () => string) => {
+    const wsLink = new GraphQLWsLink(
+      createClient({
+        webSocketImpl: WebSocket,
+        url: ENDPOINTS.WEBSOCKET_URI,
+        connectionParams: () => {
+          return {
+            token: getToken(),
+          }
+        },
+      }),
+    )
+
+    const splitLink = split(
+      ({ query }) => {
+        const definition = getMainDefinition(query)
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
+        return definition.kind === 'OperationDefinition' && definition.operation === 'subscription'
+      },
+      wsLink,
+      httpLink,
+    )
+    return splitLink
+  }
 
   const cache = new InMemoryCache()
 
@@ -57,7 +65,9 @@ export const createApolloClient = (ENDPOINTS: PageContext['publicEnv']['ENDPOINT
       })
     }
   })
+
   return (getToken: () => string, isClient: boolean) => {
+    const splitLink = createSplitLink(getToken)
     return new ApolloClient({
       ...(isClient ? { ssrForceFetchDelay: 100 } : { ssrMode: true }),
       link: createAuthLink(getToken)

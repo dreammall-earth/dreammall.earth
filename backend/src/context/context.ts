@@ -7,8 +7,6 @@ import { findOrCreateUser } from './findOrCreateUser'
 import { getToken } from './getToken'
 
 import type { PrismaClient, UserWithProfile } from '#src/prisma'
-import type { ContextFunction } from '@apollo/server'
-import type { ExpressContextFunctionArgument } from '@apollo/server/express4'
 
 const JWKS = createRemoteJWKSet(new URL(CONFIG.JWKS_URI))
 
@@ -47,10 +45,8 @@ const getCurrentUser = async (
   return findOrCreateUser(payload)
 }
 
-export const context: ContextFunction<[ExpressContextFunctionArgument], Context> = async ({
-  req,
-}) => {
-  const user = await getCurrentUser(req.headers.authorization)
+export const context: (token: string | undefined) => Promise<Context> = async (token) => {
+  const user = await getCurrentUser(token)
   return {
     user,
     config: CONFIG,

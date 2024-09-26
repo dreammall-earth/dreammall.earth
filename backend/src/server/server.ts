@@ -11,7 +11,7 @@ import { WebSocketServer } from 'ws'
 import { periodicallyRegisterWebhook, handleWebhook } from '#api/BBB'
 import { CONFIG } from '#config/config'
 import { schema } from '#graphql/schema'
-import { context } from '#src/context'
+import { expressContext, subscriptionContext } from '#src/context'
 
 import logger from './logger'
 
@@ -80,13 +80,19 @@ export async function listen(port: number) {
     path: '/subscriptions',
   })
 
-  const serverCleanup = useServer({ schema }, wsServer)
+  const serverCleanup = useServer(
+    {
+      schema,
+      context: subscriptionContext,
+    },
+    wsServer,
+  )
 
   const apolloServer = await createServer(true, httpServer, serverCleanup)
 
   await apolloServer.start()
 
-  app.use(expressMiddleware(apolloServer, { context }))
+  app.use(expressMiddleware(apolloServer, { context: expressContext }))
 
   httpServer.listen({ port })
 }
