@@ -13,7 +13,7 @@ import TableItem from './TableItem.vue'
 vi.mock('vike/client/router')
 
 const currentUserQueryMock = vi.fn()
-const updateOpenTablesSubscriptionMock: IMockSubscription = createMockSubscription()
+const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
 const projectTablesQueryMock = vi.fn()
 
 const mockClient = createMockClient()
@@ -32,7 +32,7 @@ mockClient.setRequestHandler(
   }),
 )
 
-mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateOpenTablesSubscriptionMock)
+mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
 
 mockClient.setRequestHandler(
   projectTablesQuery,

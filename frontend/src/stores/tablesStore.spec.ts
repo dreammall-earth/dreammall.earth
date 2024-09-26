@@ -8,13 +8,21 @@ import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSub
 
 import { useTablesStore } from './tablesStore'
 
-const updateOpenTablesSubscriptionMock: IMockSubscription = createMockSubscription()
+const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
 const mockClient = createMockClient()
 const tablesQueryMock = vi.fn()
-mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateOpenTablesSubscriptionMock)
+mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
 mockClient.setRequestHandler(
   tablesQuery,
-  tablesQueryMock.mockResolvedValue({ data: { tables: [] } }),
+  tablesQueryMock.mockResolvedValue({
+    data: {
+      tables: {
+        mallTalkTables: [],
+        permanentTables: [],
+        projectTables: [],
+      },
+    },
+  }),
 )
 
 provideApolloClient(mockClient)
@@ -25,8 +33,16 @@ describe('Tables Store', () => {
 
   describe('defaults', () => {
     it('has defaults set correctly', () => {
-      expect(tablesStore.openTables).toEqual([])
-      expect(tablesStore.getTables).toEqual([])
+      expect(tablesStore.openTables).toEqual({
+        permanentTables: [],
+        mallTalkTables: [],
+        projectTables: [],
+      })
+      expect(tablesStore.getTables).toEqual({
+        permanentTables: [],
+        mallTalkTables: [],
+        projectTables: [],
+      })
     })
   })
 
@@ -37,41 +53,52 @@ describe('Tables Store', () => {
 
     describe('subscription', () => {
       beforeEach(() => {
-        updateOpenTablesSubscriptionMock.next({
+        updateTablesSubscriptionMock.next({
           data: {
-            updateOpenTables: [
-              {
-                id: 69,
-                meetingID: 'my-meeting',
-                meetingName: 'My meeting',
-                startTime: '1234',
-                participantCount: 1,
-                attendees: [
-                  {
-                    fullName: 'Peter Lustig',
-                  },
-                ],
-              },
-            ],
+            updateOpenTables: {
+              permanentTables: [
+                {
+                  id: 69,
+                  meetingID: 'my-meeting',
+                  meetingName: 'My meeting',
+                  isModerator: true,
+                  startTime: '1234',
+                  participantCount: 1,
+                  attendees: [
+                    {
+                      fullName: 'Peter Lustig',
+                    },
+                  ],
+                },
+              ],
+              mallTalkTables: [],
+              projectTables: [],
+            },
           },
         })
       })
 
       it('updates the store', () => {
-        expect(tablesStore.getTables).toEqual([
-          {
-            id: 69,
-            meetingID: 'my-meeting',
-            meetingName: 'My meeting',
-            startTime: '1234',
-            participantCount: 1,
-            attendees: [
-              {
-                fullName: 'Peter Lustig',
-              },
-            ],
-          },
-        ])
+        expect(tablesStore.getTables).toEqual({
+          permanentTables: [
+            {
+              id: 69,
+              meetingID: 'my-meeting',
+              meetingName: 'My meeting',
+              isModerator: true,
+              startTime: '1234',
+              participantCount: 1,
+              type: 'PERMANENT',
+              attendees: [
+                {
+                  fullName: 'Peter Lustig',
+                },
+              ],
+            },
+          ],
+          mallTalkTables: [],
+          projectTables: [],
+        })
       })
     })
   })
@@ -128,20 +155,56 @@ describe('Tables Store', () => {
           },
         ],
       })
-      expect(tablesStore.openTables).toEqual([
-        {
-          id: 77,
-          meetingID: 'my-meeting',
-          meetingName: 'my meeting',
-          startTime: '1234',
-          participantCount: 1,
-          attendees: [
-            {
-              fullName: 'Peter Lustig',
-            },
-          ],
-        },
-      ])
+      expect(tablesStore.openTables).toEqual({
+        permanentTables: [
+          {
+            id: 77,
+            meetingID: 'my-meeting',
+            meetingName: 'my meeting',
+            type: 'PERMANENT',
+            isModerator: true,
+            startTime: '1234',
+            participantCount: 1,
+            attendees: [
+              {
+                fullName: 'Peter Lustig',
+              },
+            ],
+          },
+        ],
+        mallTalkTables: [
+          {
+            id: 77,
+            meetingID: 'my-meeting',
+            meetingName: 'my meeting',
+            type: 'MALL_TALK',
+            isModerator: false,
+            startTime: '1234',
+            participantCount: 1,
+            attendees: [
+              {
+                fullName: 'Peter Lustig',
+              },
+            ],
+          },
+        ],
+        projectTables: [
+          {
+            id: 77,
+            meetingID: 'my-meeting',
+            meetingName: 'my meeting',
+            type: 'PROJECT',
+            isModerator: true,
+            startTime: '1234',
+            participantCount: 1,
+            attendees: [
+              {
+                fullName: 'Peter Lustig',
+              },
+            ],
+          },
+        ],
+      })
     })
   })
 })

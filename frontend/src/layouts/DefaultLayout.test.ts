@@ -15,12 +15,12 @@ vi.mock('vike/client/router')
 vi.mocked(navigate).mockResolvedValue()
 
 const joinMyTableMutationMock = vi.fn()
-const updateOpenTablesSubscriptionMock: IMockSubscription = createMockSubscription()
+const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
 
 const mockClient = createMockClient()
 
 mockClient.setRequestHandler(joinMyTableMutation, joinMyTableMutationMock)
-mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateOpenTablesSubscriptionMock)
+mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
 
 provideApolloClient(mockClient)
 

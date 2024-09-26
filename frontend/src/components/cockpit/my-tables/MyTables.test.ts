@@ -10,7 +10,7 @@ import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSub
 import MyTables from './MyTables.vue'
 
 const currentUserQueryMock = vi.fn()
-const updateOpenTablesSubscriptionMock: IMockSubscription = createMockSubscription()
+const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
 const projectTablesQueryMock = vi.fn()
 
 const mockClient = createMockClient()
@@ -29,7 +29,7 @@ mockClient.setRequestHandler(
   }),
 )
 
-mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateOpenTablesSubscriptionMock)
+mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
 
 mockClient.setRequestHandler(
   projectTablesQuery,

@@ -91,7 +91,7 @@ exports[`TableList > renders correctly 1`] = `
               </i>
             </button>
             <div
-              class="badge highlighted"
+              class="badge border-thin highlighted"
               data-v-ad0cad76=""
             >
               $t('tables.member')
@@ -143,7 +143,7 @@ exports[`TableList > renders correctly 1`] = `
               </i>
             </button>
             <div
-              class="badge"
+              class="badge border-thin"
               data-v-ad0cad76=""
             >
               $t('tables.mallTalk')

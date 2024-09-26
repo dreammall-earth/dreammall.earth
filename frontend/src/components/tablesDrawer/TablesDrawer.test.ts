@@ -13,13 +13,66 @@ import TablesDrawer from './TablesDrawer.vue'
 export const mockClient = createMockClient()
 
 const tablesQueryMock = vi.fn()
-const updateOpenTablesSubscriptionMock: IMockSubscription = createMockSubscription()
+const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
 
 mockClient.setRequestHandler(
   tablesQuery,
-  tablesQueryMock.mockResolvedValue({ data: { tables: [] } }),
+  tablesQueryMock.mockResolvedValue({
+    data: {
+      tables: {
+        permanentTables: [
+          {
+            id: 77,
+            meetingID: 'my-meeting',
+            meetingName: 'my meeting',
+            type: 'PERMANENT',
+            isModerator: true,
+            startTime: '1234',
+            participantCount: 1,
+            attendees: [
+              {
+                fullName: 'Peter Lustig',
+              },
+            ],
+          },
+        ],
+        mallTalkTables: [
+          {
+            id: 77,
+            meetingID: 'my-meeting',
+            meetingName: 'my meeting',
+            type: 'MALL_TALK',
+            isModerator: false,
+            startTime: '1234',
+            participantCount: 1,
+            attendees: [
+              {
+                fullName: 'Peter Lustig',
+              },
+            ],
+          },
+        ],
+        projectTables: [
+          {
+            id: 77,
+            meetingID: 'my-meeting',
+            meetingName: 'my meeting',
+            type: 'PROJECT',
+            isModerator: true,
+            startTime: '1234',
+            participantCount: 1,
+            attendees: [
+              {
+                fullName: 'Peter Lustig',
+              },
+            ],
+          },
+        ],
+      },
+    },
+  }),
 )
-mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateOpenTablesSubscriptionMock)
+mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
 
 provideApolloClient(mockClient)
 
