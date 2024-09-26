@@ -221,35 +221,17 @@ describe('DefaultLayout', () => {
   //   })
   // })
 
-  describe('DreamMallButton Desktop', () => {
-    it('shows the Buttonlist and hides the drawer', async () => {
+  describe('DreamMallButton', () => {
+    it('shows the DM-Panel and hides the drawer', async () => {
       await wrapper.find('.test-desktop-camera-button').trigger('click')
       await wrapper.find('#dream-mall-button').trigger('click')
-      expect(wrapper.find('.button-list').classes()).toContain('button-list--active')
-      expect(wrapper.find('.v-navigation-drawer').classes()).not.toContain(
-        '.v-navigation-drawer--active',
-      )
+      expect(wrapper.find('.dream-mall-floating-container').classes()).toContain('active')
+      expect(wrapper.find('.v-navigation-drawer').classes()).not.toContain('active')
     })
-    it('hide the buttonlist after two clicks', async () => {
+    it('hide the DM-Panel after two clicks', async () => {
       await wrapper.find('#dream-mall-button').trigger('click')
       await wrapper.find('#dream-mall-button').trigger('click')
-      expect(wrapper.find('.button-list').classes()).not.toContain('button-list--active')
-    })
-  })
-
-  describe('DreamMallButton Mobile', () => {
-    it('shows the Buttonlist and hides the drawer', async () => {
-      await wrapper.find('.test-mobile-camera-button').trigger('click')
-      await wrapper.find('#small-dream-mall-button').trigger('click')
-      expect(wrapper.find('.button-list').classes()).toContain('button-list--active')
-      expect(wrapper.find('.v-navigation-drawer').classes()).not.toContain(
-        '.v-navigation-drawer--active',
-      )
-    })
-    it('hide the buttonlist after two clicks', async () => {
-      await wrapper.find('#small-dream-mall-button').trigger('click')
-      await wrapper.find('#small-dream-mall-button').trigger('click')
-      expect(wrapper.find('.button-list').classes()).not.toContain('button-list--active')
+      expect(wrapper.find('.dream-mall-floating-container').classes()).not.toContain('active')
     })
   })
 })
