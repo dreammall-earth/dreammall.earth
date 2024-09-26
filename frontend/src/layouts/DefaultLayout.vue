@@ -233,7 +233,7 @@ const { isModalActive } = useModal()
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 0;
+    height: calc(var(--button-size) / 2);
     opacity: 0;
     background-color: var(--v-dm-panel-background-color);
     backdrop-filter: blur(30px);
