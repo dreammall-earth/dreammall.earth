@@ -29,9 +29,9 @@ function createApp(pageContext: PageContext, isClient = true) {
       )
       try {
         provide('authService', new AuthService(pageContext.publicEnv.AUTH))
-      } catch {
-        if (navigator.cookieEnabled) {
-          toast.error('🍪 Please enabled cookies!', {
+      } catch (error) {
+        if (String(error).includes('SecurityError: Failed to read')) {
+          toast.error(i18n.global.t('error.enablecookie'), {
             autoClose: false,
             closeButton: false,
             closeOnClick: false,
