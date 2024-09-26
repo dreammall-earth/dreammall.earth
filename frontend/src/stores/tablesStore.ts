@@ -17,7 +17,7 @@ type Attendee = {
   fullName: string
 }
 
-type TableType = 'MALL_TALK' | 'PERMANENT' | 'PROJECT'
+export type TableType = 'MALL_TALK' | 'PERMANENT' | 'PROJECT'
 
 export type Table = {
   id: number
@@ -80,7 +80,7 @@ export const useTablesStore = defineStore(
     const userStore = useUserStore()
     const { getMyTable: myTable, currentUser } = storeToRefs(userStore)
 
-    const { result: tablesQueryResult, loading: isLoadingOpenTables } = useQuery(
+    const { result: tablesQueryResult, loading: isLoadingTables } = useQuery(
       tablesQuery,
       {},
       {
@@ -93,7 +93,7 @@ export const useTablesStore = defineStore(
       setTables(data.tables)
     })
 
-    const { result: projectTablesQueryResult, loading: isLoadingTables } = useQuery(
+    const { result: projectTablesQueryResult, loading: isLoadingProjectTables } = useQuery(
       projectTablesQuery,
       {},
       {
@@ -248,10 +248,10 @@ export const useTablesStore = defineStore(
       openTables: tables,
       setTables,
       getTables,
-      isLoadingOpenTables,
+      isLoadingTables,
       getProjectTables,
       setProjectTables,
-      isLoadingTables,
+      isLoadingProjectTables,
       createMyTable,
       updateMyTable,
       updateMyTableUsers,

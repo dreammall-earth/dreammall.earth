@@ -23,7 +23,7 @@ const testTables = [
     ],
     joinLink: 'https://my.link',
     isModerator: true,
-    type: 'mallTalk' as const,
+    type: 'MALL_TALK' as const,
   },
   {
     id: 77,
@@ -41,7 +41,7 @@ const testTables = [
     ],
     joinLink: 'https://my.link',
     isModerator: false,
-    type: 'mallTalk' as const,
+    type: 'MALL_TALK' as const,
   },
 ]
 
