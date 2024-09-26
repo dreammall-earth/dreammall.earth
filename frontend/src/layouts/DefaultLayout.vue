@@ -173,12 +173,12 @@ const { isModalActive } = useModal()
   --width: 400px;
   --button-size: 100px;
   --button-scaling: 0.7;
-  --panel-height: 200px;
+  --panel-height: 500px;
   --animation-duration: 0.3s;
   --animation-timing: ease-out;
 
   position: fixed;
-  bottom: 60px;
+  bottom: 10px;
   left: calc(50% - var(--width) / 2);
   z-index: 5000;
   width: var(--width);
