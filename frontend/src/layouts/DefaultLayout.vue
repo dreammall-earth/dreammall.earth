@@ -169,7 +169,6 @@ const { isModalActive } = useModal()
 
 .dream-mall-floating-container {
   --width: 400px;
-
   --button-size: 100px;
   --panel-height: 200px;
 
@@ -178,8 +177,8 @@ const { isModalActive } = useModal()
   left: calc(50% - var(--width) / 2);
   z-index: 3000;
   width: var(--width);
-  min-height: var(--button-size);
-  pointer-events: none; // This allows clicks to pass through to elements below
+  height: var(--button-size);
+  pointer-events: none;
 
   display: flex;
   flex-direction: column;
@@ -188,46 +187,50 @@ const { isModalActive } = useModal()
   justify-content: flex-start;
   align-items: center;
 
+  transition: height 0.3s ease-out;
+
   .dream-mall-button {
     height: var(--button-size);
     width: var(--button-size);
     z-index: 10000;
     pointer-events: auto;
+    transition: transform 0.3s ease-out;
   }
-  &.active .dream-mall-button {
-    transform: translateY(calc(var(--button-size) / 2));
-  }
-  .dream-mall-panel {
-    --width: 400px;
 
-    display: none;
+  &.active {
+    height: calc(var(--panel-height) + var(--button-size));
+
+    .dream-mall-button {
+      transform: translateY(calc(var(--button-size) / 2));
+    }
+  }
+
+  .dream-mall-panel {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: var(--panel-height);
+    height: 0;
     background-color: var(--v-dm-panel-background-color);
     backdrop-filter: blur(30px);
     border: 1px solid var(--v-dm-panel-border-color);
     border-radius: 30px;
     padding-top: 10px;
     padding-bottom: 20px;
-    pointer-events: auto; // This allows interaction with the panel
-
+    pointer-events: auto;
     z-index: 1000;
-  }
-
-  &.active {
-    min-height: calc(var(--panel-height) + var(--button-size));
-
-  }
-  &.active .dream-mall-panel {
+    overflow: hidden;
+    transition: height 0.3s ease-out;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     align-content: center;
     justify-content: flex-start;
     align-items: center;
+  }
+
+  &.active .dream-mall-panel {
+    height: var(--panel-height);
   }
 }
 
