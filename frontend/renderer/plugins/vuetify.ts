@@ -58,6 +58,7 @@ function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): Theme
       'dm-panel-border-color': theme.dmPanelBorderColor,
       'dm-panel-reminder-text-background-color': theme.dmPanelReminderTextBackgroundColor,
       'dm-panel-reminder-link-background-color': theme.dmPanelReminderLinkBackgroundColor,
+      'drawer-element-background': theme.drawerElementBackground,
     },
   }
 }

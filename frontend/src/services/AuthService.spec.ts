@@ -52,7 +52,20 @@ describe('AuthService', () => {
   describe('signIn', () => {
     it('calls signin redirect', async () => {
       await authService.signIn()
-      expect(signinRedirectMock).toHaveBeenCalledWith()
+      expect(signinRedirectMock).toHaveBeenCalledWith({
+        state: {
+          redirectTo: '/',
+        },
+      })
+    })
+
+    it('calls signin redirect with path', async () => {
+      await authService.signIn('/my-path')
+      expect(signinRedirectMock).toHaveBeenCalledWith({
+        state: {
+          redirectTo: '/my-path',
+        },
+      })
     })
   })
 

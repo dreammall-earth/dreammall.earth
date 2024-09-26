@@ -47,7 +47,7 @@ const emit = defineEmits<{
 
 const tablesStore = useTablesStore()
 
-const { getTables: tables } = storeToRefs(tablesStore)
+const { getProjectTables: tables } = storeToRefs(tablesStore)
 
 const table = computed(() => tables.value.find((table) => table.id === props.tableId))
 
@@ -59,7 +59,7 @@ const tableSettings = reactive({
 const onSubmit = async (): Promise<void> => {
   if (!table.value) return
 
-  await tablesStore.updateTable(table.value.id, tableSettings.name, !tableSettings.isPrivate)
+  await tablesStore.updateProjectTable(table.value.id, tableSettings.name, !tableSettings.isPrivate)
 
   emit('close')
 }

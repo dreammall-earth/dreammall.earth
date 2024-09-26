@@ -34,8 +34,13 @@ export default class AuthService {
     window.location.href = this.AUTH.AUTHORITY_SIGNUP_URI
   }
 
-  public signIn() {
-    return this.userManager.signinRedirect()
+  public signIn(pathname = '/') {
+    return this.userManager.signinRedirect({
+      // State is sent back to the client after successfull login.
+      state: {
+        redirectTo: pathname,
+      },
+    })
   }
 
   public signInCallback() {

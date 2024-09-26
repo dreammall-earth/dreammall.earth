@@ -5,7 +5,7 @@ import { navigate } from 'vike/client/router'
 import { describe, expect, it, vi } from 'vitest'
 
 import { currentUserQuery } from '#queries/currentUserQuery'
-import { tablesQuery } from '#queries/tablesQuery'
+import { projectTablesQuery } from '#queries/projectTablesQuery'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 import TableItem from './TableItem.vue'
@@ -13,8 +13,8 @@ import TableItem from './TableItem.vue'
 vi.mock('vike/client/router')
 
 const currentUserQueryMock = vi.fn()
-const updateOpenTablesSubscriptionMock: IMockSubscription = createMockSubscription()
-const tablesQueryMock = vi.fn()
+const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
+const projectTablesQueryMock = vi.fn()
 
 const mockClient = createMockClient()
 
@@ -32,13 +32,13 @@ mockClient.setRequestHandler(
   }),
 )
 
-mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateOpenTablesSubscriptionMock)
+mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
 
 mockClient.setRequestHandler(
-  tablesQuery,
-  tablesQueryMock.mockResolvedValue({
+  projectTablesQuery,
+  projectTablesQueryMock.mockResolvedValue({
     data: {
-      tables: [
+      projectTables: [
         {
           id: 1,
           name: 'My Table',
@@ -85,10 +85,10 @@ describe('Table Item', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 
-  describe('camera icon', () => {
+  describe('join-table-icon', () => {
     it('navigates to table page when clicked', async () => {
       const wrapper = Wrapper()
-      await wrapper.find('.camera-icon').trigger('click')
+      await wrapper.find('.join-table-icon').trigger('click')
       expect(navigate).toHaveBeenCalledWith('/table/1')
     })
   })

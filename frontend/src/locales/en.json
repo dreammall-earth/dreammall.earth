@@ -150,12 +150,18 @@
     "notFound": "Table not found."
   },
   "tables": {
-    "participantCount": "{count} participants"
+    "mallTalk": "Mall Talk",
+    "member": "Member",
+    "participantCount": "{count} participants",
+    "project": "Project"
   },
   "tablesDrawer": {
-    "header": "Open Tables",
+    "coffeeTime": "DreamMall Coffee Time",
+    "invite": "Invite",
+    "mallTalk": "Mall Talk",
     "noResults": "No results found",
     "noTables": "No tables available",
+    "projects": "Projects",
     "searchPlaceholder": "Open tables, attendees"
   }
 }

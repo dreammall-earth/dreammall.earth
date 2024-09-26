@@ -15,8 +15,8 @@
           <v-row>
             <v-col class="d-flex align-center justify-end">
               <button class="test-desktop-camera-button" @click="toggleDrawer('tables')">
-                <Circle>
-                  <v-icon icon="$camera"></v-icon>
+                <Circle :is-active="visibleDrawer === 'tables'">
+                  <v-icon icon="$handshake"></v-icon>
                 </Circle>
               </button>
               <UserInfo class="ml-2" />
@@ -28,6 +28,7 @@
     <TablesDrawer
       v-model="isTablesDrawerVisible"
       :location="$vuetify.display.smAndDown ? 'bottom' : 'right'"
+      @mall-talk-invite="toggleDrawer('dream-mall-button')"
     />
 
     <ModalPanel />
@@ -59,8 +60,8 @@
         class="test-mobile-camera-button camera-button mx-auto"
         @click="() => toggleDrawer('tables')"
       >
-        <Circle>
-          <v-icon icon="$camera"></v-icon>
+        <Circle :is-active="visibleDrawer === 'tables'">
+          <v-icon icon="$handshake"></v-icon>
         </Circle>
       </button>
       <div class="mx-auto" />
