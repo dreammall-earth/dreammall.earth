@@ -220,7 +220,7 @@ const openTable = (id: number) => {
 
 .search {
   :deep(.v-input__control) {
-    border: 1px solid rgb(var(--v-theme-icon));
+    border: 1px solid rgb(var(--v-theme-font));
     border-radius: 20px;
   }
 
