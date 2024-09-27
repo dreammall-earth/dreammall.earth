@@ -49,13 +49,13 @@
       <div class="dream-mall-button-wrapper">
         <div class="dream-mall-button">
           <DreamMallButton
-            :is-active="isDmPanelVisible"
+            :is-active="visibleDrawer === 'dream-mall-button'"
             @click="toggleDrawer('dream-mall-button')"
           />
         </div>
       </div>
       <div class="dream-mall-panel">
-        <slot name="dream-mall-button" :close="toggleDrawer('dream-mall-button')">
+        <slot name="dream-mall-button" :close="() => toggleDrawer('dream-mall-button')">
           <TableSetup ref="tableSetupRef" @close="toggleDrawer('dream-mall-button')" />
         </slot>
       </div>
