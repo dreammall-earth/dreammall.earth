@@ -26,7 +26,7 @@ function createApp(pageContext: PageContext, isClient = true) {
     setup: () => {
       provide(
         DefaultApolloClient,
-        createApolloClient(pageContext.publicEnv.ENDPOINTS)(getToken, isClient),
+        createApolloClient({ endpoints: pageContext.publicEnv.ENDPOINTS, getToken, isClient }),
       )
       const { AUTH } = pageContext.publicEnv
       try {
