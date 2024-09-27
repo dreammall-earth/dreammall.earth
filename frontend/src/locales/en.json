@@ -95,7 +95,7 @@
       "h1": "500 Internal Error",
       "text": "Something went wrong."
     },
-    "enablecookie": "🍪 Please enabled cookies in the browser!"
+    "enablecookie": "🍪 Please enable cookies in your browser!"
   },
   "joinTablePage": {
     "guestName": "Guest name",
