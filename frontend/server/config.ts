@@ -17,11 +17,11 @@ const {
   PUBLIC_ENV__META__BASE_URL = 'http://localhost:3000',
   PUBLIC_ENV__META__DEFAULT_AUTHOR = 'DreamMall Verlag GbR',
 
-  PUBLIC_ENV__ACCOUNT_HOLDER = 'DreamMall GBR',
-  PUBLIC_ENV__ACCOUNT_HOLDER_ADDRESS = '',
-  PUBLIC_ENV__IBAN = 'DE75512108001245126199', // source: https://www.iban.com/structure
-  PUBLIC_ENV__BIC = 'SOGEDEFFXXX', // source: https://www.iban.com/structure
-  PUBLIC_ENV__BANK = 'Société Générale', // source: https://www.iban.com/structure
+  PUBLIC_ENV__ACCOUNT_HOLDER = 'DreamMall Verlag GbR, Claudia Siebert und Sabine Laudien',
+  PUBLIC_ENV__ACCOUNT_HOLDER_ADDRESS = 'Rosenau 15, DE-87437 Kempten',
+  PUBLIC_ENV__IBAN = 'DE667 333170000 10000 504',
+  PUBLIC_ENV__BIC = 'GABLDE71XXX',
+  PUBLIC_ENV__BANK = 'Gabler-Saliter Bank',
 } = process.env
 
 const AUTH = {

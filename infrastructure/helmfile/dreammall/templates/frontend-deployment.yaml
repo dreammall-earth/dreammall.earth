@@ -59,6 +59,11 @@ spec:
                 configMapKeyRef:
                   name: {{ .Release.Name }}
                   key: account_holder
+            - name: PUBLIC_ENV__ACCOUNT_HOLDER_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: account_holder_address
             - name: PUBLIC_ENV__IBAN
               valueFrom:
                 configMapKeyRef:
@@ -69,6 +74,11 @@ spec:
                 configMapKeyRef:
                   name: {{ .Release.Name }}
                   key: bic
+            - name: PUBLIC_ENV__BANK
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: bank
           image: "{{ .Values.frontend.image.repository }}:{{ default .Values.global.image.tag .Values.frontend.image.tag "latest" }}"
           imagePullPolicy: {{ quote .Values.global.image.pullPolicy }}
           name: frontend
