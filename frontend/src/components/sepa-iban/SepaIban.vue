@@ -32,21 +32,25 @@
         <h2>{{ $t('sepaIban.accountData.title') }}</h2>
       </template>
       <template #default>
-        <v-text-field
+        <v-textarea
           variant="underlined"
+          rows="2"
+          no-resize
           readonly
           persistent-hint
           :label="$t('sepaIban.accountData.accountHolder')"
-          :model-value="props.accountData.ACCOUNT_HOLDER"
-        ></v-text-field>
-        <v-text-field
-          v-if="props.accountData.ACCOUNT_HOLDER_ADDRESS"
+          :model-value="accountHolder"
+        ></v-textarea>
+        <v-textarea
+          v-if="accountHolderAddress"
           variant="underlined"
+          rows="2"
+          no-resize
           readonly
           persistent-hint
           :label="$t('sepaIban.accountData.accountHolderAddress')"
-          :model-value="props.accountData.ACCOUNT_HOLDER_ADDRESS"
-        ></v-text-field>
+          :model-value="accountHolderAddress"
+        ></v-textarea>
         <v-text-field
           variant="underlined"
           readonly
@@ -105,6 +109,9 @@ const props = defineProps<{
   accountData: PageContext['publicEnv']['ACCOUNTING']
   reference: string
 }>()
+
+const accountHolder = props.accountData.ACCOUNT_HOLDER.replaceAll(', ', '\n')
+const accountHolderAddress = props.accountData.ACCOUNT_HOLDER_ADDRESS.replaceAll(', ', '\n')
 
 let qr: string | undefined
 const data = {

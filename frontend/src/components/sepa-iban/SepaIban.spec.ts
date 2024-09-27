@@ -7,7 +7,7 @@ describe('SepaIban', () => {
   const props = {
     reference: 'REFEREN',
     accountData: {
-      ACCOUNT_HOLDER: 'Max Mustermann',
+      ACCOUNT_HOLDER: 'Mustermann GmbH, Max Mustermann',
       ACCOUNT_HOLDER_ADDRESS: 'Musterstraße 10, 12345 Musterstadt',
       IBAN: 'DE75512108001245126199',
       BIC: 'SOGEDEFFXXX',
@@ -23,17 +23,17 @@ describe('SepaIban', () => {
 
   describe('renders account data so that the user can make a bank transfer', () => {
     describe('in read only input text fields', () => {
-      it('contains account holder', () => {
+      it('contains account holder and inserts new lines for a comma', () => {
         const wrapper = mount(SepaIban, opts)
-        expect((wrapper.find('input#input-0').element as HTMLInputElement).value).toBe(
-          'Max Mustermann',
+        expect((wrapper.find('textarea#input-0').element as HTMLInputElement).value).toBe(
+          'Mustermann GmbH\nMax Mustermann',
         )
       })
 
       it('contains account holder address, if given', () => {
         const wrapper = mount(SepaIban, opts)
-        expect((wrapper.find('input#input-2').element as HTMLInputElement).value).toBe(
-          'Musterstraße 10, 12345 Musterstadt',
+        expect((wrapper.find('textarea#input-2').element as HTMLInputElement).value).toBe(
+          'Musterstraße 10\n12345 Musterstadt',
         )
       })
 
@@ -67,7 +67,7 @@ describe('SepaIban', () => {
     it('as a QR code', () => {
       const wrapper = mount(SepaIban, opts)
       const value =
-        'BCD\n002\n1\nSCT\n\nMax Mustermann\nDE75512108001245126199\nEUR22.90\n\n\nREFEREN\n'
+        'BCD\n002\n1\nSCT\n\nMustermann GmbH, Max Mustermann\nDE75512108001245126199\nEUR22.90\n\n\nREFEREN\n'
       expect(wrapper.getComponent({ name: 'vue-qrcode' }).props('value')).toEqual(value)
     })
   })
