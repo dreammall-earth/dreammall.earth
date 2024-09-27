@@ -30,13 +30,14 @@ function createApp(pageContext: PageContext, isClient = true) {
       try {
         provide('authService', new AuthService(pageContext.publicEnv.AUTH))
       } catch (error) {
-        if (String(error).includes('SecurityError: Failed to read')) {
-          toast.error(i18n.global.t('error.enablecookie'), {
-            autoClose: false,
-            closeButton: false,
-            closeOnClick: false,
-          })
+        if (!(error instanceof DOMException && error.name === 'SecurityError')) {
+          throw error
         }
+        toast.error(i18n.global.t('error.enablecookie'), {
+          autoClose: false,
+          closeButton: false,
+          closeOnClick: false,
+        })
       }
       provide('pageContext', pageContext)
       provide('toast', toast)
