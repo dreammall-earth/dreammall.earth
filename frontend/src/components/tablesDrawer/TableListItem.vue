@@ -48,6 +48,37 @@ defineEmits<{
 }>()
 </script>
 <style scoped>
+.table-info {
+  display: flex;
+  flex: 1;
+  flex-flow: column;
+  justify-content: space-between;
+  min-width: 0;
+  padding: 3px 24px;
+  background: var(--v-drawer-element-background);
+  border-radius: 16px 0 0 16px;
+  transition:
+    border-color 0.3s,
+    color 0.3s,
+    background 0.3s;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 41px;
+  min-width: 41px;
+  height: 42px;
+  color: #fff;
+  background-color: #979797;
+  border-radius: 0 16px 16px 0;
+  transition:
+    border-color 0.3s,
+    color 0.3s,
+    background 0.3s;
+}
+
 .table {
   position: relative;
   display: flex;
@@ -55,18 +86,6 @@ defineEmits<{
   align-items: stretch;
   justify-content: center;
   margin-bottom: 6px;
-
-  &:not(.welcome) {
-    &:hover,
-    &.highlighted {
-      .table-info {
-        border-color: var(--list-color) !important;
-      }
-      .action {
-        background-color: var(--list-color);
-      }
-    }
-  }
 
   &.welcome {
     .table-info,
@@ -88,28 +107,31 @@ defineEmits<{
       }
 
       /* Gradient background */
-      &:after {
+      &::after {
         position: absolute;
+        inset: 0;
         z-index: -1;
         content: '';
-        inset: 0;
         opacity: 0;
         transition: opacity 0.3s;
       }
     }
+
     .table-info {
       &::before {
         background: linear-gradient(130deg, #f09630, #2ca5b1) border-box;
         border-radius: 16px 0 0 16px;
       }
-      &:after {
+
+      &::after {
         background: linear-gradient(130deg, #f09630, #2ca5b1);
         border-radius: 16px 0 0 16px;
       }
     }
+
     .action {
-      background-color: var(--v-drawer-element-background);
       color: var(--v-theme-font);
+      background-color: var(--v-drawer-element-background);
 
       &::before {
         background: linear-gradient(130deg, #2ca5b1, #f09630) border-box;
@@ -127,27 +149,26 @@ defineEmits<{
       .action {
         color: #f5f5f5;
         background-color: transparent;
+
         &::after {
           opacity: 1;
         }
       }
     }
   }
-}
 
-.table-info {
-  display: flex;
-  flex: 1;
-  flex-flow: column;
-  justify-content: space-between;
-  min-width: 0;
-  padding: 3px 24px;
-  background: var(--v-drawer-element-background);
-  border-radius: 16px 0 0 16px;
-  transition:
-    border-color 0.3s,
-    color 0.3s,
-    background 0.3s;
+  &:not(.welcome) {
+    &:hover,
+    &.highlighted {
+      .table-info {
+        border-color: var(--list-color) !important;
+      }
+
+      .action {
+        background-color: var(--list-color);
+      }
+    }
+  }
 }
 
 .name {
@@ -162,22 +183,6 @@ defineEmits<{
 .subtitle {
   font-size: 10px;
   font-weight: 300;
-}
-
-.action {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 41px;
-  min-width: 41px;
-  height: 42px;
-  color: #fff;
-  background-color: #979797;
-  border-radius: 0 16px 16px 0;
-  transition:
-    border-color 0.3s,
-    color 0.3s,
-    background 0.3s;
 }
 
 .badge {
