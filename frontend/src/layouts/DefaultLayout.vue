@@ -235,7 +235,7 @@ const { isModalActive } = useModal()
     padding-top: 10px;
     padding-bottom: 20px;
     overflow: hidden;
-    pointer-events: auto;
+    pointer-events: none;
     background-color: var(--v-dm-panel-background-color);
     backdrop-filter: blur(30px);
     border: 1px solid var(--v-dm-panel-border-color);
@@ -248,6 +248,7 @@ const { isModalActive } = useModal()
 
   &.active .dream-mall-panel {
     height: var(--panel-height);
+    pointer-events: all;
     opacity: 1;
   }
 
