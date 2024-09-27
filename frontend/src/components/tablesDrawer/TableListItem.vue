@@ -57,7 +57,8 @@ defineEmits<{
   margin-bottom: 6px;
 
   &:not(.welcome) {
-    &:hover {
+    &:hover,
+    &.highlighted {
       .table-info {
         border-color: var(--list-color) !important;
       }
@@ -68,25 +69,14 @@ defineEmits<{
   }
 
   &.welcome {
-    --gradient-color-1: rbg(240, 150, 48);
-    --gradient-color-2: rgb(44, 165, 177);
-
-    .table-info {
-      /* background: linear-gradient(130deg, rgba(240, 150, 48, 0.1), rgb(44, 165, 177, 0.1)); */
-    }
-
-    .action {
-      background: linear-gradient(130deg, #2ca5b1, #f09630);
-    }
-
     .table-info,
     .action {
       position: relative;
       border: none !important;
 
+      /* Gradient border */
       &::before {
         position: absolute;
-        z-index: -1;
         inset: 0;
         content: '';
         border: 0.5px solid transparent;
@@ -95,12 +85,25 @@ defineEmits<{
           linear-gradient(#fff 0 0);
         mask-composite: xor;
         mask-composite: exclude;
+      }
+
+      /* Gradient background */
+      &:after {
+        position: absolute;
+        z-index: -1;
+        content: '';
+        inset: 0;
         opacity: 0;
+        transition: opacity 0.3s;
       }
     }
     .table-info {
       &::before {
         background: linear-gradient(130deg, #f09630, #2ca5b1) border-box;
+        border-radius: 16px 0 0 16px;
+      }
+      &:after {
+        background: linear-gradient(130deg, #f09630, #2ca5b1);
         border-radius: 16px 0 0 16px;
       }
     }
@@ -109,24 +112,24 @@ defineEmits<{
       color: var(--v-theme-font);
 
       &::before {
-        color: black;
         background: linear-gradient(130deg, #2ca5b1, #f09630) border-box;
+        border-radius: 0 16px 16px 0;
+      }
+
+      &::after {
+        background: linear-gradient(130deg, #2ca5b1, #f09630);
         border-radius: 0 16px 16px 0;
       }
     }
 
     &:hover {
-      .table-info {
-        color: #f5f5f5;
-        /* background: linear-gradient(130deg, rgba(240, 150, 48, 1), rgb(44, 165, 177, 1)); */
-        &::before {
-          opacity: 1;
-        }
-      }
-
+      .table-info,
       .action {
         color: #f5f5f5;
-        /* background: linear-gradient(130deg, #2ca5b1, #f09630); */
+        background-color: transparent;
+        &::after {
+          opacity: 1;
+        }
       }
     }
   }
@@ -174,8 +177,7 @@ defineEmits<{
   transition:
     border-color 0.3s,
     color 0.3s,
-    background 0.3s,
-    background-opacity 0.3s;
+    background 0.3s;
 }
 
 .badge {
