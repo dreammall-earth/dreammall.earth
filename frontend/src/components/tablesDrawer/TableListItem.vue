@@ -98,7 +98,7 @@ defineEmits<{
         position: absolute;
         inset: 0;
         content: '';
-        border: 0.5px solid transparent;
+        border: 1px solid transparent;
         mask:
           linear-gradient(#fff 0 0) padding-box,
           linear-gradient(#fff 0 0);
