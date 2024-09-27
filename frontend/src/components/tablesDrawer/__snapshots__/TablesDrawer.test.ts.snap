@@ -183,12 +183,12 @@ exports[`TablesDrawer > renders correctly 1`] = `
         </div>
         <!-- Coffee time -->
         <li
-          class="table mb-4"
+          class="table highlighted welcome mb-4"
           data-v-ad0cad76=""
           data-v-cf2c9067=""
         >
           <div
-            class="table-info border-thin highlighted welcome"
+            class="table-info border-thin"
             data-v-ad0cad76=""
           >
             <span
@@ -205,7 +205,7 @@ exports[`TablesDrawer > renders correctly 1`] = `
             </span>
           </div>
           <button
-            class="action border-thin highlighted welcome"
+            class="action border-thin"
             data-v-ad0cad76=""
           >
             <i
@@ -384,12 +384,12 @@ exports[`TablesDrawer > renders correctly 1`] = `
               >
                 
                 <li
-                  class="table"
+                  class="table highlighted"
                   data-v-ad0cad76=""
                   data-v-de37061b=""
                 >
                   <div
-                    class="table-info border-thin highlighted"
+                    class="table-info border-thin"
                     data-v-ad0cad76=""
                   >
                     <span
@@ -406,7 +406,7 @@ exports[`TablesDrawer > renders correctly 1`] = `
                     </span>
                   </div>
                   <button
-                    class="action border-thin highlighted"
+                    class="action border-thin"
                     data-v-ad0cad76=""
                   >
                     <i

@@ -1,19 +1,12 @@
 <template>
-  <li class="table">
-    <div
-      class="table-info border-thin"
-      :class="{ highlighted: item.isModerator, welcome: item.type === 'PERMANENT' }"
-    >
+  <li class="table" :class="{ highlighted: item.isModerator, welcome: item.type === 'PERMANENT' }">
+    <div class="table-info border-thin">
       <span class="name">{{ item.meetingName }}</span>
       <span class="subtitle">
         {{ $t('tables.participantCount', { count: item.participantCount }) }}
       </span>
     </div>
-    <button
-      class="action border-thin"
-      :class="{ highlighted: item.isModerator, welcome: item.type === 'PERMANENT' }"
-      @click="$emit('open-table')"
-    >
+    <button class="action border-thin" @click="$emit('open-table')">
       <v-icon
         class="icon"
         :icon="
@@ -55,6 +48,37 @@ defineEmits<{
 }>()
 </script>
 <style scoped>
+.table-info {
+  display: flex;
+  flex: 1;
+  flex-flow: column;
+  justify-content: space-between;
+  min-width: 0;
+  padding: 3px 24px;
+  background: var(--v-drawer-element-background);
+  border-radius: 16px 0 0 16px;
+  transition:
+    border-color 0.3s,
+    color 0.3s,
+    background 0.3s;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 41px;
+  min-width: 41px;
+  height: 42px;
+  color: #fff;
+  background-color: #979797;
+  border-radius: 0 16px 16px 0;
+  transition:
+    border-color 0.3s,
+    color 0.3s,
+    background 0.3s;
+}
+
 .table {
   position: relative;
   display: flex;
@@ -62,26 +86,89 @@ defineEmits<{
   align-items: stretch;
   justify-content: center;
   margin-bottom: 6px;
-}
 
-.table-info {
-  display: flex;
-  flex: 1;
-  flex-flow: column;
-  justify-content: space-between;
-  min-width: 0; /* flex items needs to size freely! */
-  padding: 3px 24px;
-  background: var(--v-drawer-element-background);
-  border-radius: 16px 0 0 16px;
-}
+  &.welcome {
+    .table-info,
+    .action {
+      position: relative;
+      border: none !important;
 
-.table-info.highlighted {
-  border-color: var(--list-color) !important;
-}
+      /* Gradient border */
+      &::before {
+        position: absolute;
+        inset: 0;
+        content: '';
+        border: 1px solid transparent;
+        mask:
+          linear-gradient(#fff 0 0) padding-box,
+          linear-gradient(#fff 0 0);
+        mask-composite: xor;
+        mask-composite: exclude;
+      }
 
-.table-info.welcome::before {
-  background: linear-gradient(45deg, #f09630, #2ca5b1) border-box; /* 3 */
-  border-radius: 16px 0 0 16px;
+      /* Gradient background */
+      &::after {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        content: '';
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+    }
+
+    .table-info {
+      &::before {
+        background: linear-gradient(130deg, #f09630, #2ca5b1) border-box;
+        border-radius: 16px 0 0 16px;
+      }
+
+      &::after {
+        background: linear-gradient(130deg, #f09630, #2ca5b1);
+        border-radius: 16px 0 0 16px;
+      }
+    }
+
+    .action {
+      color: var(--v-theme-font);
+      background-color: var(--v-drawer-element-background);
+
+      &::before {
+        background: linear-gradient(130deg, #2ca5b1, #f09630) border-box;
+        border-radius: 0 16px 16px 0;
+      }
+
+      &::after {
+        background: linear-gradient(130deg, #2ca5b1, #f09630);
+        border-radius: 0 16px 16px 0;
+      }
+    }
+
+    &:hover {
+      .table-info,
+      .action {
+        color: #f5f5f5;
+        background-color: transparent;
+
+        &::after {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &:not(.welcome) {
+    &:hover,
+    &.highlighted {
+      .table-info {
+        border-color: var(--list-color) !important;
+      }
+
+      .action {
+        background-color: var(--list-color);
+      }
+    }
+  }
 }
 
 .name {
@@ -98,50 +185,6 @@ defineEmits<{
   font-weight: 300;
 }
 
-.action {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 41px;
-  min-width: 41px;
-  height: 42px;
-  color: #fff;
-  background-color: #979797;
-  border-radius: 0 16px 16px 0;
-}
-
-.action.highlighted {
-  background-color: var(--list-color);
-}
-
-.action.highlighted.welcome {
-  color: var(--v-theme-font);
-  background-color: var(--v-drawer-element-background);
-}
-
-.action.welcome::before {
-  color: black;
-  background: linear-gradient(45deg, #2ca5b1, #f09630) border-box; /* 3 */
-  border-radius: 0 16px 16px 0;
-}
-
-.welcome {
-  position: relative;
-  border: none !important;
-}
-
-.welcome::before {
-  position: absolute;
-  inset: 0;
-  content: '';
-  border: 0.5px solid transparent;
-  mask: /*4*/
-    linear-gradient(#fff 0 0) padding-box,
-    linear-gradient(#fff 0 0);
-  mask-composite: xor; /* 5' */
-  mask-composite: exclude; /* 5 */
-}
-
 .badge {
   position: absolute;
   right: 80px;
@@ -155,20 +198,20 @@ defineEmits<{
   text-transform: uppercase;
   background: var(--v-drawer-element-background);
   border-radius: 6px;
-}
 
-.badge.highlighted {
-  color: var(--list-color);
-  border-color: var(--list-color) !important;
+  &.highlighted {
+    color: var(--list-color);
+    border-color: var(--list-color) !important;
+  }
 }
 
 .welcome-badge {
   position: absolute;
   right: 80px;
   bottom: -20px;
-}
 
-.welcome-badge.dark {
-  filter: invert(1) brightness(4);
+  &.dark {
+    filter: invert(1) brightness(4);
+  }
 }
 </style>

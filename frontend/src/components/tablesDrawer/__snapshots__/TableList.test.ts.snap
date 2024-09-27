@@ -46,12 +46,12 @@ exports[`TableList > renders correctly 1`] = `
         >
           
           <li
-            class="table"
+            class="table highlighted"
             data-v-ad0cad76=""
             data-v-de37061b=""
           >
             <div
-              class="table-info border-thin highlighted"
+              class="table-info border-thin"
               data-v-ad0cad76=""
             >
               <span
@@ -68,7 +68,7 @@ exports[`TableList > renders correctly 1`] = `
               </span>
             </div>
             <button
-              class="action border-thin highlighted"
+              class="action border-thin"
               data-v-ad0cad76=""
             >
               <i
