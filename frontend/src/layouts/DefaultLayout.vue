@@ -42,15 +42,21 @@
     <div class="desktop-bottom-bar d-none d-md-flex"></div>
 
     <!-- Dream Mall Button & Panel -->
-    <div class="dream-mall-floating-container" :class="{ active: isDmPanelVisible }">
+    <div
+      class="dream-mall-floating-container"
+      :class="{ active: visibleDrawer === 'dream-mall-button' }"
+    >
       <div class="dream-mall-button-wrapper">
         <div class="dream-mall-button">
-          <DreamMallButton :is-active="isDmPanelVisible" @click="toggleDmPanel" />
+          <DreamMallButton
+            :is-active="visibleDrawer === 'dream-mall-button'"
+            @click="toggleDrawer('dream-mall-button')"
+          />
         </div>
       </div>
       <div class="dream-mall-panel">
-        <slot name="dream-mall-button" :close="toggleDmPanel">
-          <TableSetup ref="tableSetupRef" @close="toggleDmPanel" />
+        <slot name="dream-mall-button" :close="() => toggleDrawer('dream-mall-button')">
+          <TableSetup ref="tableSetupRef" @close="toggleDrawer('dream-mall-button')" />
         </slot>
       </div>
     </div>
@@ -86,7 +92,6 @@ import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
 type DrawerType = 'tables' | 'dream-mall-button' | null
 
 const visibleDrawer = ref<DrawerType>(null)
-const isDmPanelVisible = ref(false)
 
 const isTablesDrawerVisible = computed({
   get() {
@@ -107,15 +112,6 @@ const toggleDrawer = (drawer: DrawerType) => {
     if (drawer === 'dream-mall-button') {
       tableSetupRef.value?.reset()
     }
-  }
-}
-
-const toggleDmPanel = () => {
-  if (isDmPanelVisible.value) {
-    isDmPanelVisible.value = false
-  } else {
-    isDmPanelVisible.value = true
-    tableSetupRef.value?.reset()
   }
 }
 
@@ -239,7 +235,7 @@ const { isModalActive } = useModal()
     padding-top: 10px;
     padding-bottom: 20px;
     overflow: hidden;
-    pointer-events: auto;
+    pointer-events: none;
     background-color: var(--v-dm-panel-background-color);
     backdrop-filter: blur(30px);
     border: 1px solid var(--v-dm-panel-border-color);
@@ -252,6 +248,7 @@ const { isModalActive } = useModal()
 
   &.active .dream-mall-panel {
     height: var(--panel-height);
+    pointer-events: all;
     opacity: 1;
   }
 
