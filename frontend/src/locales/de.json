@@ -94,7 +94,8 @@
     "500": {
       "h1": "500 Interner Fehler",
       "text": "Irgendetwas ist schief gegangen."
-    }
+    },
+    "enablecookie": "🍪 Aktiviere Cookies in deinem Browser!"
   },
   "joinTablePage": {
     "guestName": "Gastname",

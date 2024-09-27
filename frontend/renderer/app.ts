@@ -27,7 +27,18 @@ function createApp(pageContext: PageContext, isClient = true) {
         DefaultApolloClient,
         createApolloClient(pageContext.publicEnv.ENDPOINTS)(getToken, isClient),
       )
-      provide('authService', new AuthService(pageContext.publicEnv.AUTH))
+      try {
+        provide('authService', new AuthService(pageContext.publicEnv.AUTH))
+      } catch (error) {
+        if (!(error instanceof DOMException && error.name === 'SecurityError')) {
+          throw error
+        }
+        toast.error(i18n.global.t('error.enablecookie'), {
+          autoClose: false,
+          closeButton: false,
+          closeOnClick: false,
+        })
+      }
       provide('pageContext', pageContext)
       provide('toast', toast)
     },
