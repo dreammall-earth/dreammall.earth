@@ -1,23 +1,25 @@
-import { UserManager } from 'oidc-client-ts'
-
 import { useAuthStore } from '#stores/authStore.js'
 
+import type { UserManager as ActualUserManager } from 'oidc-client-ts'
 import type { PageContext } from 'vike/types'
+
+export type UserManager = Pick<
+  ActualUserManager,
+  'signinRedirect' | 'signinSilentCallback' | 'signinCallback' | 'getUser'
+> & { events: Pick<ActualUserManager['events'], 'addUserLoaded' | 'addUserUnloaded'> }
 
 export default class AuthService {
   userManager: UserManager
-  AUTH: PageContext['publicEnv']['AUTH']
-  constructor(AUTH: PageContext['publicEnv']['AUTH']) {
+  AUTH: Pick<PageContext['publicEnv']['AUTH'], 'AUTHORITY_SIGNUP_URI' | 'AUTHORITY_SIGNOUT_URI'>
+  constructor({
+    AUTH,
+    userManager,
+  }: {
+    AUTH: Pick<PageContext['publicEnv']['AUTH'], 'AUTHORITY_SIGNUP_URI' | 'AUTHORITY_SIGNOUT_URI'>
+    userManager: UserManager
+  }) {
+    this.userManager = userManager
     this.AUTH = AUTH
-    this.userManager = new UserManager({
-      authority: AUTH.AUTHORITY,
-      client_id: AUTH.CLIENT_ID,
-      redirect_uri: AUTH.REDIRECT_URI,
-      silent_redirect_uri: AUTH.SILENT_REDIRECT_URI,
-      response_type: AUTH.RESPONSE_TYPE,
-      scope: AUTH.SCOPE,
-      loadUserInfo: true,
-    })
 
     this.userManager.events.addUserLoaded(async () => {
       const auth = useAuthStore()
