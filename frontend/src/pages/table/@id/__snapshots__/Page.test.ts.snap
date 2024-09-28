@@ -43,43 +43,19 @@ exports[`Table Page > renders 1`] = `
                 data-v-75d0be1e=""
                 href="/"
               >
-                <div
-                  class="v-responsive v-img v-img--booting w-100 logo-small"
+                <v-img-stub
+                  absolute="false"
+                  class="w-100 logo-small"
+                  cover="false"
                   data-v-75d0be1e=""
                   data-v-f6be2607=""
-                >
-                  <div
-                    class="v-responsive__sizer"
-                  />
-                  
-                  
-                  <transition-stub
-                    appear="true"
-                    css="true"
-                    name="fade-transition"
-                    persisted="false"
-                  >
-                    <img
-                      class="v-img__img v-img__img--contain"
-                      src="/src/assets/dreammall-logo.svg"
-                      style="display: none;"
-                    />
-                  </transition-stub>
-                  <transition-stub
-                    appear="false"
-                    css="true"
-                    name="fade-transition"
-                    persisted="false"
-                  >
-                    <!---->
-                  </transition-stub>
-                  <!---->
-                  <!---->
-                  <!---->
-                  
-                  
-                  <!---->
-                </div>
+                  eager="false"
+                  inline="false"
+                  options="[object Object]"
+                  src="/src/assets/dreammall-logo.svg"
+                  tile="false"
+                  transition="fade-transition"
+                />
               </a>
             </div>
             <div
