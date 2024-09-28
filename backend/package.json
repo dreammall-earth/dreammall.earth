@@ -44,7 +44,7 @@
     "graphql-scalars": "^1.23.0",
     "graphql-ws": "^5.16.0",
     "graphql-yoga": "^5.7.0",
-    "jose": "^5.9.2",
+    "jose": "^5.9.3",
     "nanoid": "^3.3.7",
     "prisma": "^5.20.0",
     "prisma-extension-soft-delete": "^1.0.1",
