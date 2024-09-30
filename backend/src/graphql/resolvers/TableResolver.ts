@@ -589,11 +589,11 @@ const openTablesFromOpenMeetings =
               },
             },
           },
-          arg.user.meetingId
-            ? {
-                id: arg.user.meetingId,
-              }
-            : {},
+          {
+            user: {
+              id: arg.user.id,
+            },
+          },
         ],
       },
       select: {
