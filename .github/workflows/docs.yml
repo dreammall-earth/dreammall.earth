@@ -17,7 +17,7 @@ jobs:
         with:
           node-version-file: './.tool-versions'
       - name: vuepress-deploy
-        uses: IT4Change/vuepress-build-and-deploy@b7244880d4eecbdd2fc984e71b888f7eb5b2ba48 # v1.9.0
+        uses: IT4Change/vuepress-build-and-deploy@19811ceb94c74ca2b49def1b7afdfe27135276b8 # v1.9.0
         env:
           ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           #TARGET_REPO: username/repo
