@@ -14,12 +14,12 @@ exports[`UserInfo > renders 1`] = `
       aria-expanded="false"
       aria-haspopup="menu"
       aria-owns="v-menu-0"
-      class="user-info rounded-pill d-flex flex-row text-icon border-sm align-center justify-center"
+      class="user-info rounded-pill d-flex flex-row text-font border-sm align-center justify-center"
       data-v-607bdd70=""
     >
       
       <div
-        class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm bg-primary"
+        class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm"
         data-v-607bdd70=""
         style="width: 44px; height: 44px;"
       >

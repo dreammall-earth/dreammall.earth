@@ -15,7 +15,8 @@ import compression from 'compression'
 import express from 'express'
 import { renderPage } from 'vike/server'
 
-import { root } from './root.js'
+import { publicEnv } from './config'
+import { root } from './root'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -73,6 +74,7 @@ async function startServer() {
     void (async (req, res, next) => {
       const pageContextInit = {
         urlOriginal: req.originalUrl,
+        publicEnv,
       }
       const pageContext = await renderPage(pageContextInit)
       const { httpResponse } = pageContext

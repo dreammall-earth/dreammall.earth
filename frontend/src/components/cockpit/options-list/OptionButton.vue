@@ -1,12 +1,16 @@
 <template>
-  <li class="item">
-    <button class="button" @click="$emit('click')">
+  <li class="item" :class="{ red }">
+    <button class="button" :disabled="$props.disabled" @click="$emit('click')">
       <slot />
     </button>
   </li>
 </template>
 
 <script lang="ts" setup>
+defineProps<{
+  red?: boolean
+  disabled?: boolean
+}>()
 defineEmits(['click'])
 </script>
 
@@ -31,6 +35,11 @@ defineEmits(['click'])
   }
 }
 
+.item.red {
+  color: #f5f5f5;
+  background-color: #d02f44;
+}
+
 .button {
   display: flex;
   flex-flow: column;
@@ -38,5 +47,10 @@ defineEmits(['click'])
   justify-content: center;
   width: 100%;
   height: 100%;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
 }
 </style>

@@ -2,7 +2,6 @@ import { ApolloServer } from '@apollo/server'
 
 import { confirmNewsletter, subscribeToNewsletter } from '#api/Brevo'
 import { CONFIG } from '#config/config'
-import { EventType } from '#src/event/EventType'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
 
@@ -34,7 +33,7 @@ describe('NewsletterSubscriptionResolver', () => {
       it('throws schema error', async () => {
         const response = await testServer.executeOperation({
           query: `mutation($data: SubscribeToNewsletterInput!) {
-                    subscribeToNewsletter(subscribeToNewsletterData: $data) 
+                    subscribeToNewsletter(subscribeToNewsletterData: $data)
                   }`,
           variables: {
             data: {
@@ -62,7 +61,7 @@ describe('NewsletterSubscriptionResolver', () => {
       it('throws schema error', async () => {
         const response = await testServer.executeOperation({
           query: `mutation($data: SubscribeToNewsletterInput!) {
-                    subscribeToNewsletter(subscribeToNewsletterData: $data) 
+                    subscribeToNewsletter(subscribeToNewsletterData: $data)
                   }`,
           variables: {
             data: {
@@ -91,7 +90,7 @@ describe('NewsletterSubscriptionResolver', () => {
       it('throws schema error', async () => {
         const response = await testServer.executeOperation({
           query: `mutation($data: SubscribeToNewsletterInput!) {
-                    subscribeToNewsletter(subscribeToNewsletterData: $data) 
+                    subscribeToNewsletter(subscribeToNewsletterData: $data)
                   }`,
           variables: {
             data: {
@@ -119,7 +118,7 @@ describe('NewsletterSubscriptionResolver', () => {
       it('throws schema error', async () => {
         const response = await testServer.executeOperation({
           query: `mutation($data: SubscribeToNewsletterInput!) {
-                    subscribeToNewsletter(subscribeToNewsletterData: $data) 
+                    subscribeToNewsletter(subscribeToNewsletterData: $data)
                   }`,
           variables: {
             data: {
@@ -150,7 +149,7 @@ describe('NewsletterSubscriptionResolver', () => {
         await prisma.event.deleteMany()
         response = await testServer.executeOperation({
           query: `mutation($data: SubscribeToNewsletterInput!) {
-                    subscribeToNewsletter(subscribeToNewsletterData: $data) 
+                    subscribeToNewsletter(subscribeToNewsletterData: $data)
                   }`,
           variables: {
             data: {
@@ -185,7 +184,7 @@ describe('NewsletterSubscriptionResolver', () => {
           expect.objectContaining({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
-            type: EventType.NEWSLETTER_SUBSCRIBE,
+            type: 'NEWSLETTER_SUBSCRIBE',
             involvedEmail: 'peter@lustig.de',
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             createdAt: expect.any(Date),
@@ -202,7 +201,7 @@ describe('NewsletterSubscriptionResolver', () => {
       await prisma.event.deleteMany()
       response = await testServer.executeOperation({
         query: `mutation($code: String!) {
-                  confirmNewsletter(code: $code) 
+                  confirmNewsletter(code: $code)
                 }`,
         variables: {
           code: '1234567890abcdef',
@@ -244,7 +243,7 @@ describe('NewsletterSubscriptionResolver', () => {
         expect.objectContaining({
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           id: expect.any(Number),
-          type: EventType.NEWSLETTER_CONFIRM,
+          type: 'NEWSLETTER_CONFIRM',
           involvedEmail: 'peter@lustig.de',
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           createdAt: expect.any(Date),

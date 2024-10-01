@@ -9,60 +9,71 @@ import { createClient } from 'graphql-ws'
 import { navigate } from 'vike/client/router'
 import { WebSocket } from 'ws'
 
-import { ENDPOINTS } from '#src/env'
+import type { PageContext } from 'vike/types'
 
-const createAuthLink = (getToken: () => string) => {
-  return setContext((_, { headers }) => {
-    const token = getToken()
-    return {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      headers: {
-        ...headers,
-        ...(token && { authorization: `Bearer ${token}` }),
-      },
-    }
-  })
-}
-
-const wsLink = new GraphQLWsLink(
-  createClient({
-    webSocketImpl: WebSocket,
-    url: ENDPOINTS.WEBSOCKET_URI,
-  }),
-)
-
-const httpLink = createHttpLink({
-  uri: ENDPOINTS.GRAPHQL_URI,
-})
-
-const splitLink = split(
-  ({ query }) => {
-    const definition = getMainDefinition(query)
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
-    return definition.kind === 'OperationDefinition' && definition.operation === 'subscription'
-  },
-  wsLink,
-  httpLink,
-)
-
-const cache = new InMemoryCache()
-
-const errorLink = onError(({ graphQLErrors }) => {
-  if (graphQLErrors) {
-    graphQLErrors.forEach(({ extensions }) => {
-      if (extensions !== null && extensions?.code === 'UNAUTHENTICATED') {
-        void navigate('/signin')
+export const createApolloClient = (ENDPOINTS: PageContext['publicEnv']['ENDPOINTS']) => {
+  const createAuthLink = (getToken: () => string) => {
+    return setContext((_, { headers }) => {
+      const token = getToken()
+      return {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        headers: {
+          ...headers,
+          ...(token && { authorization: `Bearer ${token}` }),
+        },
       }
     })
   }
-})
 
-export const createApolloClient = (getToken: () => string, isClient: boolean) => {
-  return new ApolloClient({
-    ...(isClient ? { ssrForceFetchDelay: 100 } : { ssrMode: true }),
-    link: createAuthLink(getToken)
-      .concat(errorLink)
-      .concat(isClient ? splitLink : httpLink),
-    cache,
+  const httpLink = createHttpLink({
+    uri: ENDPOINTS.GRAPHQL_URI,
   })
+
+  const createSplitLink = (getToken: () => string) => {
+    const wsLink = new GraphQLWsLink(
+      createClient({
+        webSocketImpl: WebSocket,
+        url: ENDPOINTS.WEBSOCKET_URI,
+        connectionParams: () => {
+          return {
+            token: getToken(),
+          }
+        },
+      }),
+    )
+
+    const splitLink = split(
+      ({ query }) => {
+        const definition = getMainDefinition(query)
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
+        return definition.kind === 'OperationDefinition' && definition.operation === 'subscription'
+      },
+      wsLink,
+      httpLink,
+    )
+    return splitLink
+  }
+
+  const cache = new InMemoryCache()
+
+  const errorLink = onError(({ graphQLErrors }) => {
+    if (graphQLErrors) {
+      graphQLErrors.forEach(({ extensions }) => {
+        if (extensions !== null && extensions?.code === 'UNAUTHENTICATED') {
+          void navigate('/signin')
+        }
+      })
+    }
+  })
+
+  return (getToken: () => string, isClient: boolean) => {
+    const splitLink = createSplitLink(getToken)
+    return new ApolloClient({
+      ...(isClient ? { ssrForceFetchDelay: 100 } : { ssrMode: true }),
+      link: createAuthLink(getToken)
+        .concat(errorLink)
+        .concat(isClient ? splitLink : httpLink),
+      cache,
+    })
+  }
 }

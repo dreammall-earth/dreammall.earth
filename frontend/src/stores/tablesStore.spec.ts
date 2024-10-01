@@ -3,18 +3,26 @@ import { createMockClient, createMockSubscription, IMockSubscription } from 'moc
 import { setActivePinia, createPinia } from 'pinia'
 import { vi, describe, it, expect, beforeEach } from 'vitest'
 
-import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
+import { tablesQuery } from '#queries/tablesQuery'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 import { useTablesStore } from './tablesStore'
 
-const updateOpenTablesSubscriptionMock: IMockSubscription = createMockSubscription()
+const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
 const mockClient = createMockClient()
-const openTablesQueryMock = vi.fn()
-mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateOpenTablesSubscriptionMock)
+const tablesQueryMock = vi.fn()
+mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
 mockClient.setRequestHandler(
-  openTablesQuery,
-  openTablesQueryMock.mockResolvedValue({ data: { openTables: [] } }),
+  tablesQuery,
+  tablesQueryMock.mockResolvedValue({
+    data: {
+      tables: {
+        mallTalkTables: [],
+        permanentTables: [],
+        projectTables: [],
+      },
+    },
+  }),
 )
 
 provideApolloClient(mockClient)
@@ -25,44 +33,86 @@ describe('Tables Store', () => {
 
   describe('defaults', () => {
     it('has defaults set correctly', () => {
-      expect(tablesStore.tables).toEqual([])
-      expect(tablesStore.getTables).toEqual([])
+      expect(tablesStore.openTables).toEqual({
+        permanentTables: [],
+        mallTalkTables: [],
+        projectTables: [],
+      })
+      expect(tablesStore.getTables).toEqual({
+        permanentTables: [],
+        mallTalkTables: [],
+        projectTables: [],
+      })
     })
   })
 
   describe('api', () => {
     it('queries the API', () => {
-      expect(openTablesQueryMock).toHaveBeenCalledTimes(1)
+      expect(tablesQueryMock).toHaveBeenCalledTimes(1)
     })
 
     describe('subscription', () => {
       beforeEach(() => {
-        updateOpenTablesSubscriptionMock.next({
+        updateTablesSubscriptionMock.next({
           data: {
-            updateOpenTables: [
-              {
-                id: 69,
-                meetingID: 'my-meeting',
-                meetingName: 'My meeting',
-                startTime: '1234',
-                participantCount: 1,
-                attendees: [
-                  {
-                    fullName: 'Peter Lustig',
-                  },
-                ],
-              },
-            ],
+            updateOpenTables: {
+              permanentTables: [
+                {
+                  id: 69,
+                  meetingID: 'my-meeting',
+                  meetingName: 'My meeting',
+                  isModerator: true,
+                  startTime: '1234',
+                  participantCount: 1,
+                  attendees: [
+                    {
+                      fullName: 'Peter Lustig',
+                    },
+                  ],
+                },
+              ],
+              mallTalkTables: [],
+              projectTables: [],
+            },
           },
         })
       })
 
       it('updates the store', () => {
-        expect(tablesStore.getTables).toEqual([
+        expect(tablesStore.getTables).toEqual({
+          permanentTables: [
+            {
+              id: 69,
+              meetingID: 'my-meeting',
+              meetingName: 'My meeting',
+              isModerator: true,
+              startTime: '1234',
+              participantCount: 1,
+              type: 'PERMANENT',
+              attendees: [
+                {
+                  fullName: 'Peter Lustig',
+                },
+              ],
+            },
+          ],
+          mallTalkTables: [],
+          projectTables: [],
+        })
+      })
+    })
+  })
+
+  describe('set tables action', () => {
+    it('updates the store', () => {
+      tablesStore.setTables({
+        permanentTables: [
           {
-            id: 69,
+            id: 77,
             meetingID: 'my-meeting',
-            meetingName: 'My meeting',
+            meetingName: 'my meeting',
+            type: 'PERMANENT',
+            isModerator: true,
             startTime: '1234',
             participantCount: 1,
             attendees: [
@@ -71,41 +121,90 @@ describe('Tables Store', () => {
               },
             ],
           },
-        ])
+        ],
+        mallTalkTables: [
+          {
+            id: 77,
+            meetingID: 'my-meeting',
+            meetingName: 'my meeting',
+            type: 'MALL_TALK',
+            isModerator: false,
+            startTime: '1234',
+            participantCount: 1,
+            attendees: [
+              {
+                fullName: 'Peter Lustig',
+              },
+            ],
+          },
+        ],
+        projectTables: [
+          {
+            id: 77,
+            meetingID: 'my-meeting',
+            meetingName: 'my meeting',
+            type: 'PROJECT',
+            isModerator: true,
+            startTime: '1234',
+            participantCount: 1,
+            attendees: [
+              {
+                fullName: 'Peter Lustig',
+              },
+            ],
+          },
+        ],
       })
-    })
-  })
-
-  describe('set tables action', () => {
-    it('updates the store', () => {
-      tablesStore.setTables([
-        {
-          id: 77,
-          meetingID: 'my-meeting',
-          meetingName: 'my meeting',
-          startTime: '1234',
-          participantCount: 1,
-          attendees: [
-            {
-              fullName: 'Peter Lustig',
-            },
-          ],
-        },
-      ])
-      expect(tablesStore.tables).toEqual([
-        {
-          id: 77,
-          meetingID: 'my-meeting',
-          meetingName: 'my meeting',
-          startTime: '1234',
-          participantCount: 1,
-          attendees: [
-            {
-              fullName: 'Peter Lustig',
-            },
-          ],
-        },
-      ])
+      expect(tablesStore.openTables).toEqual({
+        permanentTables: [
+          {
+            id: 77,
+            meetingID: 'my-meeting',
+            meetingName: 'my meeting',
+            type: 'PERMANENT',
+            isModerator: true,
+            startTime: '1234',
+            participantCount: 1,
+            attendees: [
+              {
+                fullName: 'Peter Lustig',
+              },
+            ],
+          },
+        ],
+        mallTalkTables: [
+          {
+            id: 77,
+            meetingID: 'my-meeting',
+            meetingName: 'my meeting',
+            type: 'MALL_TALK',
+            isModerator: false,
+            startTime: '1234',
+            participantCount: 1,
+            attendees: [
+              {
+                fullName: 'Peter Lustig',
+              },
+            ],
+          },
+        ],
+        projectTables: [
+          {
+            id: 77,
+            meetingID: 'my-meeting',
+            meetingName: 'my meeting',
+            type: 'PROJECT',
+            isModerator: true,
+            startTime: '1234',
+            participantCount: 1,
+            attendees: [
+              {
+                fullName: 'Peter Lustig',
+              },
+            ],
+          },
+        ],
+      })
     })
   })
 })

@@ -1,20 +1,20 @@
 import { mount } from '@vue/test-utils'
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
-
-import { AUTH } from '#src/env'
 
 import HeaderMenu from './HeaderMenu.vue'
 
 describe('HeaderMenu', () => {
   it('renders', () => {
-    AUTH.SIGNUP_URI = ''
-    AUTH.SIGNIN_URI = ''
-
     const wrapper = mount(VApp, {
       slots: {
-        default: h(HeaderMenu as Component),
+        default: h(HeaderMenu as Component, {
+          auth: {
+            SIGNUP_URI: '',
+            SIGNIN_URI: '',
+          },
+        }),
       },
     })
 
@@ -25,41 +25,35 @@ describe('HeaderMenu', () => {
     const Wrapper = () => {
       return mount(VApp, {
         slots: {
-          default: h(HeaderMenu as Component),
+          default: h(HeaderMenu as Component, {
+            auth: {
+              SIGNUP_URI: 'http://sign-up.uri',
+              SIGNIN_URI: 'http://signin-in.uri',
+            },
+          }),
         },
       })
     }
 
-    let wrapper: ReturnType<typeof Wrapper>
-
-    beforeEach(() => {
-      AUTH.SIGNUP_URI = 'http://sign-up.uri'
-      AUTH.SIGNIN_URI = 'http://sigin-in.uri'
-      wrapper = Wrapper()
-    })
-
     it('has a sign in button', () => {
+      const wrapper = Wrapper()
       expect(wrapper.find('button.sign-in').exists()).toBe(true)
     })
 
     describe('sign in button', () => {
-      beforeEach(async () => {
+      it('changes window location', async () => {
+        const wrapper = Wrapper()
         vi.clearAllMocks()
         await wrapper.find('button.sign-in').trigger('click')
-      })
-
-      it('changes window location', () => {
-        expect(global.window.location.href).toBe('http://sigin-in.uri/')
+        expect(global.window.location.href).toBe('http://signin-in.uri/')
       })
     })
 
     describe('sign up button', () => {
-      beforeEach(async () => {
+      it('changes window location', async () => {
+        const wrapper = Wrapper()
         vi.clearAllMocks()
         await wrapper.find('button.sign-up').trigger('click')
-      })
-
-      it('changes window location', () => {
         expect(global.window.location.href).toBe('http://sign-up.uri/')
       })
     })

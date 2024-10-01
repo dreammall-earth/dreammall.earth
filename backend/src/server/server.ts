@@ -8,8 +8,10 @@ import express, { json, urlencoded } from 'express'
 import { useServer } from 'graphql-ws/lib/use/ws'
 import { WebSocketServer } from 'ws'
 
+import { periodicallyRegisterWebhook, handleWebhook } from '#api/BBB'
+import { CONFIG } from '#config/config'
 import { schema } from '#graphql/schema'
-import { context } from '#src/context'
+import { expressContext, subscriptionContext } from '#src/context'
 
 import logger from './logger'
 
@@ -45,8 +47,32 @@ export const createTestServer = async () => {
 }
 
 export async function listen(port: number) {
+  if (CONFIG.BBB_WEBHOOK_URL) {
+    periodicallyRegisterWebhook()
+  }
+
   const app = express()
 
+  // Setup
+  app.use(json())
+  app.use(
+    urlencoded({
+      extended: true,
+      verify: (req, res, buf) => {
+        req.headers.rawBody = buf.toString()
+      },
+    }),
+  )
+  app.use(cors<cors.CorsRequest>())
+
+  // BBB Webhooks
+  app.post('/bbb-webhook', function requestHandler(req, res) {
+    res.status(200)
+    res.end('Webhook received')
+    handleWebhook(req)
+  })
+
+  // Websocket + Apollo
   const httpServer = createHttpServer(app)
 
   const wsServer = new WebSocketServer({
@@ -54,18 +80,19 @@ export async function listen(port: number) {
     path: '/subscriptions',
   })
 
-  const serverCleanup = useServer({ schema }, wsServer)
+  const serverCleanup = useServer(
+    {
+      schema,
+      context: subscriptionContext,
+    },
+    wsServer,
+  )
 
   const apolloServer = await createServer(true, httpServer, serverCleanup)
 
   await apolloServer.start()
 
-  app.use(json())
-  app.use(urlencoded({ extended: true }))
-
-  app.use(cors<cors.CorsRequest>())
-
-  app.use(expressMiddleware(apolloServer, { context }))
+  app.use(expressMiddleware(apolloServer, { context: expressContext }))
 
   httpServer.listen({ port })
 }

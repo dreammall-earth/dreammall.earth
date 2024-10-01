@@ -1,7 +1,7 @@
 import logger from '#src/logger'
 import { prisma } from '#src/prisma'
 
-import { EventType } from './EventType'
+import type { EventType } from '#src/prisma'
 
 interface EventOptions {
   involvedEmail?: string

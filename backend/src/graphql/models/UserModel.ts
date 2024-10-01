@@ -113,6 +113,7 @@ export class SocialMedia {
 export class CurrentUser {
   constructor(user: UserWithProfile, users: UsersWithMeetings[]) {
     this.id = user.id
+    this.referenceId = user.referenceId
     this.username = user.username
     this.name = user.name
     this.introduction = user.introduction
@@ -120,11 +121,14 @@ export class CurrentUser {
 
     this.details = user.userDetail.map((d) => new UserDetail(d))
     this.social = user.socialMedia.map((s) => new SocialMedia(s))
-    this.table = user.meeting ? new Table(user.meeting, users) : null
+    this.table = user.meeting ? Table.fromMeeting(user.meeting, users) : null
   }
 
   @Field(() => Int)
   id: number
+
+  @Field()
+  referenceId: string
 
   @Field()
   username: string

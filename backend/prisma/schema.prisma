@@ -40,16 +40,28 @@ model NewsletterPreOptIn {
   brevoSuccessList  DateTime?
 }
 
+enum EventType {
+  CONTACTFORM_SEND
+  NEWSLETTER_CONFIRM
+  NEWSLETTER_SUBSCRIBE
+  CREATE_USER
+  CREATE_MY_TABLE
+  UPDATE_MY_TABLE
+  UPDATE_TABLE
+  CREATE_TABLE
+}
+
 model Event {
-  id                Int      @id @default(autoincrement())
-  type              String   @db.VarChar(100)
-  involvedEmail     String?  @db.VarChar(254)
+  id                Int       @id @default(autoincrement())
+  type              EventType
+  involvedEmail     String?   @db.VarChar(254)
   involvedUserId    Int?
-  createdAt         DateTime @default(now())
+  createdAt         DateTime  @default(now())
 }
 
 model User {
   id                Int      @id @default(autoincrement())
+  referenceId       String   @db.VarChar(140) @unique
   username          String   @db.VarChar(100) @unique
   name              String   @db.VarChar(254)
   introduction      String?  @db.VarChar(25)
@@ -85,7 +97,7 @@ model UsersInMeetings {
   userId            Int
   assignedAt        DateTime @default(now())
   role              String   @db.VarChar(12) @default("MODERATOR")
-  
+
   @@id([meetingId, userId])
 }
 

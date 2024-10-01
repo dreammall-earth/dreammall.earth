@@ -1,19 +1,31 @@
 import { UserManager } from 'oidc-client-ts'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
-import { AUTH } from '#src/env'
+import AuthService from '#src/services/AuthService'
 import { useAuthStore } from '#stores/authStore'
 import {
-  authService,
   signinSilentCallbackMock,
   signinRedirectMock,
   signinCallbackMock,
   getUserMock,
 } from '#tests/mock.authService'
 
-AUTH.AUTHORITY_SIGNUP_URI = 'https://host/SOME_SIGNUP_URI'
+import type { PageContext } from 'vike/types'
 
 const authStore = useAuthStore()
+
+const AUTH = {
+  AUTHORITY: 'authority',
+  AUTHORITY_SIGNUP_URI: 'https://host/authority_signup_uri',
+  AUTHORITY_SIGNOUT_URI: 'https://host/authority_signout_uri',
+  CLIENT_ID: 'client_id',
+  REDIRECT_URI: 'redirect_uri',
+  SILENT_REDIRECT_URI: 'silent_redirect_uri',
+  RESPONSE_TYPE: 'response_type',
+  SCOPE: 'scope',
+} satisfies PageContext['publicEnv']['AUTH']
+
+const authService = new AuthService(AUTH)
 
 describe('AuthService', () => {
   describe('constructor', () => {
@@ -33,14 +45,27 @@ describe('AuthService', () => {
   describe('signUp', () => {
     it('redirects to signup URI', () => {
       authService.signUp()
-      expect(global.window.location.href).toBe(AUTH.AUTHORITY_SIGNUP_URI)
+      expect(global.window.location.href).toBe('https://host/authority_signup_uri')
     })
   })
 
   describe('signIn', () => {
     it('calls signin redirect', async () => {
       await authService.signIn()
-      expect(signinRedirectMock).toHaveBeenCalledWith()
+      expect(signinRedirectMock).toHaveBeenCalledWith({
+        state: {
+          redirectTo: '/',
+        },
+      })
+    })
+
+    it('calls signin redirect with path', async () => {
+      await authService.signIn('/my-path')
+      expect(signinRedirectMock).toHaveBeenCalledWith({
+        state: {
+          redirectTo: '/my-path',
+        },
+      })
     })
   })
 
@@ -67,7 +92,7 @@ describe('AuthService', () => {
     })
 
     it('redirects to signout URI', () => {
-      expect(global.window.location.href).toBe(AUTH.AUTHORITY_SIGNOUT_URI)
+      expect(global.window.location.href).toBe('https://host/authority_signout_uri')
     })
 
     it('calls auth store clear', () => {

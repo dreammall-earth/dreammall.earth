@@ -26,8 +26,15 @@ configmap:
   auth_signup_uri: https://auth.master.dreammall.earth/if/flow/dreammallearth-enrollment/
   auth_silent_redirect_uri: https://app.master.dreammall.earth/silent-refresh/
   bbb_url: https://cafe.dreammall.earth/bigbluebutton/api/
+  bbb_webhook_url: https://master.dreammall.earth/api/bbb-webhook
   endpoints_graphql_uri: https://master.dreammall.earth/api/
   endpoints_websocket_uri: ws://master.dreammall.earth/api/subscriptions
   frontend_url:  https://app.master.dreammall.earth
+  frontend_signin_url:  https://app.master.dreammall.earth/signin
   jwks_uri: http://authentik-server/application/o/dreammallearth/jwks/
   presenter_url: https://master.dreammall.earth
+  account_holder: 'DreamMall Verlag GbR Claudia Siebert und Sabine Laudien'
+  account_holder_address: 'Rosenau 15, DE-87437 Kempten'
+  iban: 'DE667 333170000 10000 504'
+  bic: 'GABLDE71XXX'
+  bank: 'Gabler-Saliter Bank'

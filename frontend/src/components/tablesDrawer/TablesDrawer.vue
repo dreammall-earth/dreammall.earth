@@ -18,28 +18,76 @@
       variant="solo"
       class="search"
     ></v-text-field>
-    <v-list>
-      <h2 class="header mb-4">{{ $t('tablesDrawer.header') }}</h2>
-      <div v-if="!items.length">{{ $t('tablesDrawer.noTables') }}</div>
-      <div v-else-if="!filteredItems.length">
-        {{ $t('tablesDrawer.noResults') }}
-      </div>
-      <TableList v-else :items="filteredItems" @open-table="closeDrawer" />
-    </v-list>
+
+    <!-- Coffee time -->
+    <TableListItem
+      v-if="tables.permanent"
+      :item="tables.permanent"
+      class="mb-4"
+      @open-table="openTable(tables.permanent.id)"
+    />
+
+    <!-- Mall Talk -->
+    <div class="lists">
+      <TableList
+        v-for="list in lists"
+        :key="list.type"
+        :list="list"
+        :search-value="searchValue"
+        @open-table="closeDrawer"
+      >
+        <button
+          v-if="list.type === 'mallTalk'"
+          class="invite-button bg-primary pl-3 pr-6 py-1 d-flex align-center justify-center mb-4"
+          @click="$emit('mall-talk-invite')"
+        >
+          <v-icon icon="mdi mdi-plus" class="mr-4" />
+          {{ $t('tablesDrawer.invite') }}
+        </button>
+      </TableList>
+    </div>
   </v-navigation-drawer>
 </template>
 
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
+import { navigate } from 'vike/client/router'
 import { ref, computed, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import { useTablesStore } from '#stores/tablesStore'
 
 import TableList from './TableList.vue'
+import TableListItem from './TableListItem.vue'
+
+const { t } = useI18n()
+
+defineEmits<{
+  (e: 'mall-talk-invite'): void
+}>()
 
 const tablesStore = useTablesStore()
 
-const { tables: items } = storeToRefs(tablesStore)
+const { getTables } = storeToRefs(tablesStore)
+
+const tables = computed(() => ({
+  permanent: getTables.value.permanentTables[0],
+  mallTalk: getTables.value.mallTalkTables,
+  projects: getTables.value.projectTables,
+}))
+
+const lists = computed(() => [
+  {
+    type: 'mallTalk' as const,
+    heading: t('tablesDrawer.mallTalk'),
+    items: tables.value.mallTalk,
+  },
+  {
+    type: 'projects' as const,
+    heading: t('tablesDrawer.projects'),
+    items: tables.value.projects,
+  },
+])
 
 const props = withDefaults(
   defineProps<{
@@ -60,19 +108,6 @@ const closeDrawer = () => {
 
 const searchValue = ref('')
 
-const filteredItems = computed(() => {
-  if (!searchValue.value) {
-    return items.value
-  }
-  return items.value.filter(
-    (item) =>
-      item.meetingName.toLowerCase().includes(searchValue.value.toLowerCase()) ||
-      item.attendees.find((attendee) =>
-        attendee.fullName.toLowerCase().includes(searchValue.value.toLowerCase()),
-      ),
-  )
-})
-
 const currentLocation = ref(props.location)
 const isChangingOrientation = ref(false)
 
@@ -90,6 +125,11 @@ watch(
     }
   },
 )
+
+const openTable = (id: number) => {
+  closeDrawer()
+  navigate(`/table/${id}`)
+}
 </script>
 
 <style scoped lang="scss">
@@ -132,7 +172,7 @@ watch(
 
 .search {
   :deep(.v-input__control) {
-    border: 1px solid rgb(var(--v-theme-icon));
+    border: 1px solid rgb(var(--v-theme-font));
     border-radius: 20px;
   }
 
@@ -141,8 +181,15 @@ watch(
   }
 }
 
-.header {
+.lists {
+  display: flex;
+  flex-flow: column;
+  gap: 16px;
+}
+
+.invite-button {
   font-size: 14px;
-  text-transform: uppercase;
+  color: white !important;
+  border-radius: 20px;
 }
 </style>

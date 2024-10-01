@@ -6,7 +6,14 @@
     >
       <span class="name">{{ props.name }}</span>
       <span class="subtitle">
-        {{ $t('cockpit.myTables.memberCount', { count: props.memberCount }) }}
+        {{
+          $t(
+            props.moderatorCount
+              ? 'cockpit.myTables.moderatorCount'
+              : 'cockpit.myTables.memberCount',
+            { count: props.moderatorCount ? props.moderatorCount : props.memberCount },
+          )
+        }}
       </span>
     </div>
     <button
@@ -14,7 +21,7 @@
       :class="{ hidden: isShowingOptions }"
       @click="openTable"
     >
-      <v-icon class="camera-icon" icon="$camera" />
+      <v-icon class="join-table-icon" icon="$handshake" />
     </button>
     <button class="options" @click="toggleOptions">
       <v-icon
@@ -24,7 +31,7 @@
       />
     </button>
     <OptionsList :is-visible="isShowingOptions">
-      <OptionButton class="trash" @click="deleteTable">
+      <OptionButton red @click="deleteTable">
         <v-icon icon="mdi mdi-trash-can-outline" />
         {{ $t('cockpit.myTables.delete') }}
       </OptionButton>
@@ -32,7 +39,7 @@
         <v-icon icon="mdi mdi-account-plus-outline" />
         {{ $t('cockpit.myTables.invite') }}
       </OptionButton>
-      <OptionButton @click="shareTable">
+      <OptionButton disabled @click="shareTable">
         <v-icon icon="mdi mdi-share-variant-outline" />
         {{ $t('cockpit.myTables.share') }}
       </OptionButton>
@@ -46,15 +53,32 @@
 
 <script lang="ts" setup>
 import { navigate } from 'vike/client/router'
-import { ref } from 'vue'
+import { ref, h } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import OptionButton from '#components/cockpit/options-list/OptionButton.vue'
 import OptionsList from '#components/cockpit/options-list/OptionsList.vue'
+import useModal from '#components/modal/useModal'
+import { useTablesStore } from '#stores/tablesStore'
+
+import ChangeModerators from './change-moderators/ChangeModerators.vue'
+import EditTable from './edit-table/EditTable.vue'
+
+const { setComponent } = useModal()
+
+const tablesStore = useTablesStore()
+
+const { t } = useI18n()
 
 const props = defineProps<{
   id: number
   name: string
-  memberCount: number
+  memberCount?: number
+  moderatorCount?: number
+}>()
+
+const emit = defineEmits<{
+  (e: 'option-opened'): void
 }>()
 
 const isShowingOptions = ref(false)
@@ -64,27 +88,42 @@ const openTable = () => {
 }
 
 const toggleOptions = () => {
+  if (!isShowingOptions.value) {
+    emit('option-opened')
+  }
   isShowingOptions.value = !isShowingOptions.value
 }
 
 const editTable = () => {
-  // TODO implement
+  setComponent(h(EditTable, { tableId: props.id }))
 }
 
 const invite = () => {
-  // TODO implement
+  setComponent(h(ChangeModerators, { tableId: props.id }))
 }
 
 const shareTable = () => {
   // TODO implement
 }
 
-const deleteTable = () => {
-  // TODO implement
+const deleteTable = async () => {
+  if (confirm(t('cockpit.myTables.deleteConfirmation'))) {
+    try {
+      await tablesStore.deleteProjectTable(props.id)
+    } catch (cause) {
+      throw new Error('Could not delete table', { cause })
+    }
+  }
 }
+
+defineExpose({
+  closeOptions: () => {
+    isShowingOptions.value = false
+  },
+})
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .table {
   position: relative;
   display: flex;
@@ -125,10 +164,6 @@ const deleteTable = () => {
   border-radius: 0 16px 16px 0;
 }
 
-.camera-icon {
-  transform: scale(0.8);
-}
-
 .options-icon {
   transition: transform 0.3s;
   transform: rotate(0);
@@ -136,11 +171,6 @@ const deleteTable = () => {
   &.turned {
     transform: rotate(90deg);
   }
-}
-
-.trash {
-  color: #f5f5f5;
-  background-color: #d02f44;
 }
 
 .animate-fade-out {

@@ -7,7 +7,7 @@ import { VApp } from 'vuetify/components'
 import i18n from '#plugins/i18n'
 import { useAuthStore } from '#stores/authStore'
 import { authService } from '#tests/mock.authService'
-import { errorHandlerSpy } from '#tests/plugin.globalErrorHandler'
+import { createMockPlugin } from '#tests/plugin.globalErrorHandler'
 
 import SigninPage from './+Page.vue'
 import { title } from './+title'
@@ -15,9 +15,12 @@ import { title } from './+title'
 vi.mock('vike/client/router')
 vi.mocked(navigate).mockResolvedValue()
 
+const { mockPlugin, errorSpy } = createMockPlugin()
+
 describe('SigninPage', () => {
   const Wrapper = () => {
     return mount(VApp, {
+      global: { plugins: [mockPlugin] },
       slots: {
         default: h(SigninPage as Component),
       },
@@ -37,8 +40,8 @@ describe('SigninPage', () => {
         Wrapper()
       })
 
-      it('calls authservie signin', () => {
-        expect(authServiceSpy).toHaveBeenCalledWith()
+      it('calls authservice signin', () => {
+        expect(authServiceSpy).toHaveBeenCalledWith(undefined)
       })
 
       it('navigates to /', () => {
@@ -54,7 +57,7 @@ describe('SigninPage', () => {
       })
 
       it('logs the error on console', () => {
-        expect(errorHandlerSpy).toHaveBeenCalledWith('auth error', 'Ouch!')
+        expect(errorSpy).toHaveBeenCalledWith(new Error('auth error', { cause: 'Ouch!' }))
       })
     })
   })

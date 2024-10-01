@@ -6,15 +6,14 @@ import { prisma } from '#src/prisma'
 import { findOrCreateUser } from './findOrCreateUser'
 import { getToken } from './getToken'
 
-import type { prisma as Prisma, UserWithProfile } from '#src/prisma'
-import type { ContextFunction } from '@apollo/server'
-import type { ExpressContextFunctionArgument } from '@apollo/server/express4'
+import type { PrismaClient, UserWithProfile } from '#src/prisma'
 
 const JWKS = createRemoteJWKSet(new URL(CONFIG.JWKS_URI))
 
 export type Context = {
+  config: typeof CONFIG
   user: UserWithProfile | null
-  dataSources: { prisma: typeof Prisma }
+  dataSources: { prisma: PrismaClient }
 }
 
 export interface CustomJwtPayload {
@@ -46,12 +45,11 @@ const getCurrentUser = async (
   return findOrCreateUser(payload)
 }
 
-export const context: ContextFunction<[ExpressContextFunctionArgument], Context> = async ({
-  req,
-}) => {
-  const user = await getCurrentUser(req.headers.authorization)
+export const context: (token: string | undefined) => Promise<Context> = async (token) => {
+  const user = await getCurrentUser(token)
   return {
     user,
+    config: CONFIG,
     dataSources: {
       prisma,
     },

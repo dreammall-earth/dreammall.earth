@@ -1,5 +1,5 @@
 <template>
-  <CockpitCard narrow>
+  <CockpitCard>
     <template #header>
       <div class="header">
         <button class="back" @click="$emit('back')">
@@ -117,9 +117,17 @@ const addSocial = () => {
 }
 
 .select-category {
-  max-width: 80px;
+  max-width: 70px;
 
   &:deep(.v-field__outline) {
+    display: none;
+  }
+
+  &:deep(.v-field--center-affix .v-field__append-inner) {
+    margin-left: 34px;
+  }
+
+  &:deep(.v-field__append-inner) {
     display: none;
   }
 }

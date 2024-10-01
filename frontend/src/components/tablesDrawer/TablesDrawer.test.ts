@@ -5,21 +5,74 @@ import { vi, describe, it, expect, beforeEach } from 'vitest'
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { openTablesQuery } from '#src/graphql/queries/openTablesQuery'
+import { tablesQuery } from '#queries/tablesQuery'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 import TablesDrawer from './TablesDrawer.vue'
 
 export const mockClient = createMockClient()
 
-const openTablesQueryMock = vi.fn()
-const updateOpenTablesSubscriptionMock: IMockSubscription = createMockSubscription()
+const tablesQueryMock = vi.fn()
+const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
 
 mockClient.setRequestHandler(
-  openTablesQuery,
-  openTablesQueryMock.mockResolvedValue({ data: { openTables: [] } }),
+  tablesQuery,
+  tablesQueryMock.mockResolvedValue({
+    data: {
+      tables: {
+        permanentTables: [
+          {
+            id: 77,
+            meetingID: 'my-meeting',
+            meetingName: 'my meeting',
+            type: 'PERMANENT',
+            isModerator: true,
+            startTime: '1234',
+            participantCount: 1,
+            attendees: [
+              {
+                fullName: 'Peter Lustig',
+              },
+            ],
+          },
+        ],
+        mallTalkTables: [
+          {
+            id: 77,
+            meetingID: 'my-meeting',
+            meetingName: 'my meeting',
+            type: 'MALL_TALK',
+            isModerator: false,
+            startTime: '1234',
+            participantCount: 1,
+            attendees: [
+              {
+                fullName: 'Peter Lustig',
+              },
+            ],
+          },
+        ],
+        projectTables: [
+          {
+            id: 77,
+            meetingID: 'my-meeting',
+            meetingName: 'my meeting',
+            type: 'PROJECT',
+            isModerator: true,
+            startTime: '1234',
+            participantCount: 1,
+            attendees: [
+              {
+                fullName: 'Peter Lustig',
+              },
+            ],
+          },
+        ],
+      },
+    },
+  }),
 )
-mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateOpenTablesSubscriptionMock)
+mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
 
 provideApolloClient(mockClient)
 

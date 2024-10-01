@@ -37,12 +37,9 @@ This projects utilizes `storybook` to develop, document & test frontend componen
 | --------------------------- | ------------------------------------------------ |
 | `npm install`               | Project setup                                    |
 | `npm run build`             | Compiles and minifies for production             |
-| `npm run server:prod`       | Runs productions server (node, cjs file)         |
+| `npm run server`            | Run production server                            |
 | **Develop**                 |                                                  |
 | `npm run dev`               | Compiles and hot-reloads for development         |
-| `npm run server:dev`        | Run development server                           |
-| `npm run server:prod:ts`    | Run production server without build (ts-node)    |
-| `npm run server:build`      | Build Server into an executable cjs file         |
 | **Test**                    |                                                  |
 | `npm run test:lint`         | Run all linters                                  |
 | `npm run test:lint:eslint`  | Run linter eslint                                |

@@ -1,29 +1,73 @@
 <template>
-  <ul class="list">
-    <li v-for="item in items" :key="item.meetingID" class="table">
-      <div class="table-info bg-dropdown-background">
-        <span class="name">{{ item.meetingName }}</span>
-        <span class="subtitle">
-          {{ $t('tables.participantCount', { count: item.participantCount }) }}
-        </span>
-      </div>
-      <button class="action" @click="openTable(item.id)">
-        <v-icon class="icon" icon="$camera" />
+  <div class="outer-list">
+    <div class="mb-4 d-flex align-center justify-space-between">
+      <h2 class="header">{{ list.heading }}</h2>
+      <button @click="toggleCollapse">
+        <v-icon
+          icon="mdi mdi-menu-down"
+          :class="{ 'mdi-rotate-180': collapseState === 'collapsed' }"
+        />
       </button>
-    </li>
-  </ul>
+    </div>
+    <slot></slot>
+    <div
+      ref="listContentRef"
+      class="list-content"
+      :class="{ collapsed: collapseState === 'collapsed' }"
+    >
+      <div v-if="!list.items.length">{{ $t('tablesDrawer.noTables') }}</div>
+      <div v-else-if="!filteredItems.length">
+        {{ $t('tablesDrawer.noResults') }}
+      </div>
+      <ul v-if="filteredItems.length > 0" class="list" :data-type="$props.list.type">
+        <TableListItem
+          v-for="item in filteredItems"
+          :key="item.meetingID"
+          :item="item"
+          @open-table="openTable(item.id)"
+        />
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { navigate } from 'vike/client/router'
+import { computed, ref } from 'vue'
 
-import { Table } from '#stores/tablesStore'
+import { useCollapseSection } from '#src/utils/useCollapseSection'
 
-defineProps<{
-  items: Table[]
+import TableListItem from './TableListItem.vue'
+
+import type { Table } from '#stores/tablesStore'
+
+const props = defineProps<{
+  list: {
+    heading: string
+    items: Table[]
+    type: 'mallTalk' | 'projects'
+  }
+  searchValue: string
 }>()
 
 const emit = defineEmits(['openTable'])
+
+const listContentRef = ref<HTMLElement | null>(null)
+
+const { collapseState, toggleCollapse } = useCollapseSection(listContentRef)
+
+const filteredItems = computed(() => {
+  if (!props.searchValue) {
+    return props.list.items
+  }
+  return props.list.items.filter(
+    (item) =>
+      item.meetingName.toLowerCase().includes(props.searchValue.toLowerCase()) ||
+      item.attendees.find((attendee) =>
+        attendee.fullName.toLowerCase().includes(props.searchValue.toLowerCase()),
+      ),
+  )
+})
 
 const openTable = (id: number) => {
   emit('openTable')
@@ -32,54 +76,34 @@ const openTable = (id: number) => {
 </script>
 
 <style scoped>
+.outer-list {
+  font-size: 12px;
+}
+
 .list {
   display: flex;
   flex-flow: column;
   gap: 8px;
+  max-height: calc(40vh - 80px);
   padding: 0;
+  overflow-y: auto;
   list-style: none;
 }
 
-.table {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  justify-content: center;
+.list[data-type='mallTalk'] {
+  --list-color: #f09630;
 }
 
-.table-info {
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-  width: 100%;
-  height: 42px;
-  padding: 5px 24px;
-  border-radius: 16px 0 0 16px;
+.list[data-type='projects'] {
+  --list-color: #2ca5b1;
 }
 
-.name {
-  height: 18px;
+.header {
   font-size: 14px;
-  font-weight: bold;
+  text-transform: uppercase;
 }
 
-.subtitle {
-  font-size: 11px;
-}
-
-.action {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 41px;
-  min-width: 41px;
-  height: 42px;
-  color: #fff;
-  background-color: #f09630;
-  border-radius: 0 16px 16px 0;
-}
-
-.icon {
-  transform: scale(0.8);
+.list-content {
+  transition: height 0.3s;
 }
 </style>

@@ -1,8 +1,13 @@
+import { customAlphabet } from 'nanoid'
+
 import { EVENT_CREATE_USER } from '#src/event/Events'
 import { prisma } from '#src/prisma'
 
 import type { UserWithProfile } from '#src/prisma'
 import type { CustomJwtPayload } from './context'
+
+const alphabet = '0123456789ABCDEFGHIJKLMNPQRSTUVWXYZ' // let's omit 'O' because of confusion with '0'
+const nanoid = customAlphabet(alphabet, 8)
 
 export const findOrCreateUser = async (payload: CustomJwtPayload): Promise<UserWithProfile> => {
   const { nickname: username, name } = payload
@@ -17,10 +22,12 @@ export const findOrCreateUser = async (payload: CustomJwtPayload): Promise<UserW
     },
   })
   if (user) return user
+  const referenceId = nanoid()
   user = await prisma.user.create({
     data: {
       username,
       name,
+      referenceId,
     },
     include: {
       meeting: true,

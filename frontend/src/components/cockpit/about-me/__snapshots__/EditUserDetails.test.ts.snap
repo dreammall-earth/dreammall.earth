@@ -9,14 +9,16 @@ exports[`EditUserDetails > renders 1`] = `
   >
     
     <section
-      class="cockpit-card narrow"
+      class="cockpit-card-variable-height cockpit-card"
       data-v-1451ba78=""
       data-v-8714041d=""
+      data-v-d91b9f54=""
     >
       <div
         class="header"
-        data-v-1451ba78=""
+        data-v-d91b9f54=""
       >
+        
         
         <div
           class="header"
@@ -39,11 +41,13 @@ exports[`EditUserDetails > renders 1`] = `
           </h2>
         </div>
         
+        
       </div>
       <hr
         class="hr"
-        data-v-1451ba78=""
+        data-v-d91b9f54=""
       />
+      
       
       <form
         class="v-form add-detail mb-2"
@@ -381,7 +385,7 @@ exports[`EditUserDetails > renders 1`] = `
           data-v-589db232=""
         >
           <span
-            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
             data-v-589db232=""
             draggable="false"
           >
@@ -405,6 +409,7 @@ exports[`EditUserDetails > renders 1`] = `
               />
                I am a student 
               <button
+                class="pl-1"
                 data-v-589db232=""
               >
                 <i
@@ -423,7 +428,7 @@ exports[`EditUserDetails > renders 1`] = `
           data-v-589db232=""
         >
           <span
-            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
             data-v-589db232=""
             draggable="false"
           >
@@ -447,6 +452,7 @@ exports[`EditUserDetails > renders 1`] = `
               />
                I am a worker 
               <button
+                class="pl-1"
                 data-v-589db232=""
               >
                 <i
@@ -465,7 +471,7 @@ exports[`EditUserDetails > renders 1`] = `
           data-v-589db232=""
         >
           <span
-            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
             data-v-589db232=""
             draggable="false"
           >
@@ -489,6 +495,7 @@ exports[`EditUserDetails > renders 1`] = `
               />
                I really like my job 
               <button
+                class="pl-1"
                 data-v-589db232=""
               >
                 <i
@@ -507,7 +514,7 @@ exports[`EditUserDetails > renders 1`] = `
           data-v-589db232=""
         >
           <span
-            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
             data-v-589db232=""
             draggable="false"
           >
@@ -531,6 +538,7 @@ exports[`EditUserDetails > renders 1`] = `
               />
                English 
               <button
+                class="pl-1"
                 data-v-589db232=""
               >
                 <i
@@ -549,7 +557,7 @@ exports[`EditUserDetails > renders 1`] = `
           data-v-589db232=""
         >
           <span
-            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
             data-v-589db232=""
             draggable="false"
           >
@@ -573,6 +581,7 @@ exports[`EditUserDetails > renders 1`] = `
               />
                Berlin 
               <button
+                class="pl-1"
                 data-v-589db232=""
               >
                 <i
@@ -591,7 +600,7 @@ exports[`EditUserDetails > renders 1`] = `
           data-v-589db232=""
         >
           <span
-            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
             data-v-589db232=""
             draggable="false"
           >
@@ -615,6 +624,7 @@ exports[`EditUserDetails > renders 1`] = `
               />
                Yeah! 
               <button
+                class="pl-1"
                 data-v-589db232=""
               >
                 <i
@@ -631,6 +641,7 @@ exports[`EditUserDetails > renders 1`] = `
         </li>
         
       </ul>
+      
       
     </section>
     

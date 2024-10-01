@@ -1,10 +1,72 @@
+import { provideApolloClient } from '@vue/apollo-composable'
 import { mount } from '@vue/test-utils'
+import { createMockClient, createMockSubscription, IMockSubscription } from 'mock-apollo-client'
 import { navigate } from 'vike/client/router'
 import { describe, expect, it, vi } from 'vitest'
+
+import { currentUserQuery } from '#queries/currentUserQuery'
+import { projectTablesQuery } from '#queries/projectTablesQuery'
+import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 import TableItem from './TableItem.vue'
 
 vi.mock('vike/client/router')
+
+const currentUserQueryMock = vi.fn()
+const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
+const projectTablesQueryMock = vi.fn()
+
+const mockClient = createMockClient()
+
+mockClient.setRequestHandler(
+  currentUserQuery,
+  currentUserQueryMock.mockResolvedValue({
+    data: {
+      currentUser: {
+        id: 666,
+        name: 'Current User',
+        username: 'currentUser',
+        table: null,
+      },
+    },
+  }),
+)
+
+mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
+
+mockClient.setRequestHandler(
+  projectTablesQuery,
+  projectTablesQueryMock.mockResolvedValue({
+    data: {
+      projectTables: [
+        {
+          id: 1,
+          name: 'My Table',
+          public: false,
+          users: [
+            {
+              name: 'Current User',
+              username: 'currentUser',
+              role: 'MODERATOR',
+            },
+            {
+              name: 'Bibi Bloxberg',
+              username: 'bibi',
+              role: 'VIEWER',
+            },
+            {
+              name: 'Peter Lustig',
+              username: 'peter',
+              role: 'VIEWER',
+            },
+          ],
+        },
+      ],
+    },
+  }),
+)
+
+provideApolloClient(mockClient)
 
 describe('Table Item', () => {
   const Wrapper = (
@@ -23,10 +85,10 @@ describe('Table Item', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 
-  describe('camera icon', () => {
+  describe('join-table-icon', () => {
     it('navigates to table page when clicked', async () => {
       const wrapper = Wrapper()
-      await wrapper.find('.camera-icon').trigger('click')
+      await wrapper.find('.join-table-icon').trigger('click')
       expect(navigate).toHaveBeenCalledWith('/table/1')
     })
   })

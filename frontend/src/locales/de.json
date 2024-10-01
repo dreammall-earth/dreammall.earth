@@ -38,31 +38,51 @@
     },
     "myTables": {
       "addTable": "Tisch hinzufügen",
+      "changeModerators": {
+        "title": "Moderatoren ändern",
+        "update": "Speichern"
+      },
+      "createTable": {
+        "chooseModerators": "Wähle deine Mitmoderatoren.",
+        "tableCreated": "Dein Tisch wurde erstellt.",
+        "visionIntoReality": "Deine Vision wird Realität, lass uns gemeinsam den ersten Schritt machen."
+      },
       "delete": "Löschen",
+      "deleteConfirmation": "Möchtest du diesen Tisch wirklich löschen?",
       "edit": "Bearbeiten",
+      "editTable": {
+        "title": "Tisch anpassen",
+        "update": "Speichern"
+      },
       "header": "Meine Tische",
       "invite": "Einladen",
       "memberCount": "{count} Mitglieder",
+      "moderatorCount": "{count} Moderatoren",
       "noTables": "Noch keine Gruppentische",
       "share": "Teilen"
     }
   },
+  "copiedToClipboard": "Link in Zwischenablage kopiert",
   "dream-mall-panel": {
     "call": {
       "add-user": "Add",
-      "edit": "Edit",
       "leave-table": "Tisch verlassen",
       "link": "Link"
     },
     "setup": {
       "continue": "Weiter",
-      "create-table": "Los geht's",
+      "create-table": "Fertig",
       "invitation-sent": "gesendet",
+      "invitation-title": "Leute einladen",
       "invite": "einladen",
       "no-result": "Keine Ergebnisse",
+      "private": "Privat",
+      "public": "Öffentlich",
       "reminder": "Deine Vision wird Realität,\nlass uns gerne dazu den ersten Schritt machen.",
       "search-error": "Bei der Suche ist ein Fehler aufgetreten.",
+      "submit-title": "Hinweis",
       "table-creation": "Tisch erstellen",
+      "table-creation-title": "Tisch erstellen",
       "table-name": "Tischname"
     }
   },
@@ -74,10 +94,16 @@
     "500": {
       "h1": "500 Interner Fehler",
       "text": "Irgendetwas ist schief gegangen."
-    }
+    },
+    "enablecookie": "🍪 Aktiviere Cookies in deinem Browser!"
   },
   "joinTablePage": {
-    "header": "Raum betreten als:"
+    "guestName": "Gastname",
+    "publicTable": "Öffentlicher Tisch",
+    "reminder": "Willkommen! Namen eintippen, Meeting beitreten – und danach registrieren, um nicht nur auf der Gästeliste zu stehen!",
+    "submit": "Tisch betreten",
+    "unknownTable": "Unbekannter Tisch",
+    "unknownTableErrorText": "Der von dir angefragte Tisch ist uns nicht bekannt oder öffentlich.\nBitte überprüfe deinen Einladungslink oder frage deinen Gastgeber dir einen aktuellen Link zu schicken."
   },
   "menu": {
     "cockpit": "Cockpit",
@@ -94,16 +120,49 @@
     "defaultTitle": "DreamMall",
     "joinTableTitle": "Raum beitreten"
   },
+  "paymentLink": {
+    "callToAction": "Upgrade auf PRO",
+    "subtitle": "Upgrade auf Premium, um weitere Funktionen freizuschalten",
+    "title": "Upgrade auf Premium"
+  },
+  "sepaIban": {
+    "accountData": {
+      "accountHolder": "Konto Inhaber",
+      "accountHolderAddress": "Adresse",
+      "amount": "Betrag in Euro",
+      "bank": "Bank",
+      "BIC": "BIC",
+      "IBAN": "IBAN",
+      "reference": "Verwendungszweck",
+      "title": "Kontodaten"
+    },
+    "explanation": {
+      "callToAction": "Um ein Dreammall-Abonnement abzuschließen, kannst du einfach in deinem Online-Banking einen Dauerauftrag einrichten. Die Kontodetails findest du auf dieser Seite.",
+      "introduction": "Danke, dass du dich für ein DreamMall-Abonnement entschieden hast!",
+      "title": "Dauerauftrag einrichten"
+    },
+    "qr": {
+      "explanation": "Alternativ kannst du auch diesen QR Code mit deiner Banking-App scannen.",
+      "invalid": "Bitte gib einen gültigen Betrag ein, um einen QR-Code anzuzeigen."
+    }
+  },
   "table": {
+    "error": "Fehler beim Öffnen des Tisches",
     "notFound": "Tisch nicht gefunden."
   },
   "tables": {
-    "participantCount": "{count} Teilnehmer"
+    "mallTalk": "Mall Talk",
+    "member": "Mitglied",
+    "participantCount": "{count} Teilnehmer",
+    "project": "Projekt"
   },
   "tablesDrawer": {
-    "header": "Offene Tische",
+    "coffeeTime": "DreamMall Coffee Time",
+    "invite": "Einladen",
+    "mallTalk": "Mall Talk",
     "noResults": "Keine Ergebnisse gefunden",
     "noTables": "Keine Tische verfügbar",
+    "projects": "Projekte",
     "searchPlaceholder": "Offene Tische, Teilnehmer"
   }
 }

@@ -4,6 +4,7 @@ export const currentUserQuery = gql`
   query {
     currentUser {
       id
+      referenceId
       name
       username
       introduction

@@ -4,6 +4,7 @@ import { describe, it, expect, beforeEach, vi, beforeAll, afterAll } from 'vites
 import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
+import { vikePageContext } from '#context/usePageContext'
 import { confirmNewsletter } from '#mutations/confirmNewsletter'
 import i18n from '#plugins/i18n'
 import { mockClient } from '#tests/mock.apolloClient'
@@ -25,6 +26,21 @@ mockClient.setRequestHandler(
 describe('OptinPage', () => {
   const Wrapper = () => {
     return mount(VApp, {
+      global: {
+        provide: {
+          [vikePageContext as symbol]: {
+            routeParams: {
+              code: 'my-code',
+            },
+            publicEnv: {
+              AUTH: {
+                SIGNIN_URI: '',
+                SIGNUP_URI: '',
+              },
+            },
+          },
+        },
+      },
       slots: {
         default: h(OptinPage as Component),
       },

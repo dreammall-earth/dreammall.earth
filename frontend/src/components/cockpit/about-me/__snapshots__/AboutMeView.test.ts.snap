@@ -2,20 +2,22 @@
 
 exports[`AboutMeView > renders 1`] = `
 <section
-  class="cockpit-card narrow"
+  class="cockpit-card-variable-height cockpit-card"
   data-v-1451ba78=""
+  data-v-d91b9f54=""
   data-v-f444dc92=""
   editable="false"
 >
   <!--v-if-->
   <!--v-if-->
   
+  
   <div
     class="header mb-2"
     data-v-f444dc92=""
   >
     <div
-      class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font bg-primary"
+      class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font"
       data-v-f444dc92=""
       style="width: 90px; height: 90px;"
     >
@@ -157,7 +159,13 @@ exports[`AboutMeView > renders 1`] = `
                 class="v-select__selection"
               >
                 
-                🟢 Available to work
+                <i
+                  aria-hidden="true"
+                  class="mdi mdi-circle mdi v-icon notranslate v-theme--light v-icon--size-default mr-2"
+                  data-v-f444dc92=""
+                  style="color: #23AD5B; caret-color: #23AD5B;"
+                />
+                 Available to work
                 
               </div>
               
@@ -256,7 +264,7 @@ exports[`AboutMeView > renders 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -290,7 +298,7 @@ exports[`AboutMeView > renders 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -324,7 +332,7 @@ exports[`AboutMeView > renders 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -358,7 +366,7 @@ exports[`AboutMeView > renders 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -392,7 +400,7 @@ exports[`AboutMeView > renders 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -426,7 +434,7 @@ exports[`AboutMeView > renders 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -584,26 +592,29 @@ exports[`AboutMeView > renders 1`] = `
       
     </ul>
   </button>
+  
   
 </section>
 `;
 
 exports[`AboutMeView > renders initials 1`] = `
 <section
-  class="cockpit-card narrow"
+  class="cockpit-card-variable-height cockpit-card"
   data-v-1451ba78=""
+  data-v-d91b9f54=""
   data-v-f444dc92=""
   editable="false"
 >
   <!--v-if-->
   <!--v-if-->
   
+  
   <div
     class="header mb-2"
     data-v-f444dc92=""
   >
     <div
-      class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font bg-primary"
+      class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font"
       data-v-f444dc92=""
       style="width: 90px; height: 90px;"
     >
@@ -745,7 +756,13 @@ exports[`AboutMeView > renders initials 1`] = `
                 class="v-select__selection"
               >
                 
-                🟢 Available to work
+                <i
+                  aria-hidden="true"
+                  class="mdi mdi-circle mdi v-icon notranslate v-theme--light v-icon--size-default mr-2"
+                  data-v-f444dc92=""
+                  style="color: #23AD5B; caret-color: #23AD5B;"
+                />
+                 Available to work
                 
               </div>
               
@@ -844,7 +861,7 @@ exports[`AboutMeView > renders initials 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -878,7 +895,7 @@ exports[`AboutMeView > renders initials 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -912,7 +929,7 @@ exports[`AboutMeView > renders initials 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -946,7 +963,7 @@ exports[`AboutMeView > renders initials 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -980,7 +997,7 @@ exports[`AboutMeView > renders initials 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -1014,7 +1031,7 @@ exports[`AboutMeView > renders initials 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -1173,25 +1190,28 @@ exports[`AboutMeView > renders initials 1`] = `
     </ul>
   </button>
   
+  
 </section>
 `;
 
 exports[`AboutMeView > renders without social media accounts 1`] = `
 <section
-  class="cockpit-card narrow"
+  class="cockpit-card-variable-height cockpit-card"
   data-v-1451ba78=""
+  data-v-d91b9f54=""
   data-v-f444dc92=""
   editable="false"
 >
   <!--v-if-->
   <!--v-if-->
   
+  
   <div
     class="header mb-2"
     data-v-f444dc92=""
   >
     <div
-      class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font bg-primary"
+      class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font"
       data-v-f444dc92=""
       style="width: 90px; height: 90px;"
     >
@@ -1333,7 +1353,13 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
                 class="v-select__selection"
               >
                 
-                🟢 Available to work
+                <i
+                  aria-hidden="true"
+                  class="mdi mdi-circle mdi v-icon notranslate v-theme--light v-icon--size-default mr-2"
+                  data-v-f444dc92=""
+                  style="color: #23AD5B; caret-color: #23AD5B;"
+                />
+                 Available to work
                 
               </div>
               
@@ -1432,7 +1458,7 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -1466,7 +1492,7 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -1500,7 +1526,7 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -1534,7 +1560,7 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -1568,7 +1594,7 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -1602,7 +1628,7 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
         data-v-589db232=""
       >
         <span
-          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail"
+          class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
           data-v-589db232=""
           draggable="false"
         >
@@ -1650,6 +1676,7 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
       $t('cockpit.about-me.empty-social-media')
     </span>
   </button>
+  
   
 </section>
 `;

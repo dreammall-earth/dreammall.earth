@@ -1,5 +1,5 @@
 <template>
-  <CockpitCard narrow>
+  <CockpitCard>
     <template #header>
       <div class="header">
         <button class="back" @click="$emit('back')">
@@ -43,7 +43,9 @@
           :disabled="newDetail.text?.length === 0 || props.loading"
           class="submit rounded-circle"
         >
-          <v-icon icon="mdi mdi-plus"></v-icon>
+          <v-icon
+            :icon="newDetail.text?.length === 0 || props.loading ? 'mdi mdi-plus' : 'mdi mdi-check'"
+          ></v-icon>
         </button>
       </v-form>
       <!-- </div> -->
@@ -111,9 +113,17 @@ const removeDetail = (id: number) => {
 }
 
 .select-category {
-  max-width: 80px;
+  max-width: 70px;
 
   &:deep(.v-field__outline) {
+    display: none;
+  }
+
+  &:deep(.v-field--center-affix .v-field__append-inner) {
+    margin-left: 34px;
+  }
+
+  &:deep(.v-field__append-inner) {
     display: none;
   }
 }
@@ -130,6 +140,7 @@ const removeDetail = (id: number) => {
   background: var(--v-cockpit-input-background);
 
   &:enabled {
+    color: white;
     background: #23ad5b;
   }
 }

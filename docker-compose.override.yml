@@ -58,6 +58,16 @@ services:
     volumes:
       - ./backend:/server
 
+  migrations:
+    build:
+      context: ./backend
+      target: development
+    command: npm run db:migrate
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./backend:/server
+
   documentation:
     build:
       target: documentation

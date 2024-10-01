@@ -1,5 +1,5 @@
 <template>
-  <v-main class="bg-background main-layout">
+  <v-main class="bg-background main-layout" :class="{ 'modal-active': isModalActive }">
     <!-- Top Menu -->
     <v-app-bar flat class="app-bar" height="70">
       <v-row class="ma-1">
@@ -13,13 +13,10 @@
         </v-col>
         <v-col class="d-none d-md-flex align-center">
           <v-row>
-            <v-col class="d-flex align-center">
-              <LightDarkSwitch class="d-none d-lg-flex" />
-            </v-col>
             <v-col class="d-flex align-center justify-end">
-              <button @click="toggleDrawer">
-                <Circle>
-                  <v-icon icon="$camera"></v-icon>
+              <button class="test-desktop-camera-button" @click="toggleDrawer('tables')">
+                <Circle :is-active="visibleDrawer === 'tables'">
+                  <v-icon icon="$handshake"></v-icon>
                 </Circle>
               </button>
               <UserInfo class="ml-2" />
@@ -31,91 +28,94 @@
     <TablesDrawer
       v-model="isTablesDrawerVisible"
       :location="$vuetify.display.smAndDown ? 'bottom' : 'right'"
+      @mall-talk-invite="toggleDrawer('dream-mall-button')"
     />
 
+    <ModalPanel />
+
     <!-- Page Content Container -->
-    <v-container fluid class="page-container px-8">
+    <v-container fluid class="page-container px-8 text-font">
       <slot></slot>
     </v-container>
 
     <!-- Desktop Bottom Bar -->
-    <div class="desktop-bottom-bar d-none d-md-flex">
-      <div class="dream-mall-button-container">
-        <LargeDreamMallButton @click="toggleButtonList" />
+    <div class="desktop-bottom-bar d-none d-md-flex"></div>
+
+    <!-- Dream Mall Button & Panel -->
+    <div
+      class="dream-mall-floating-container"
+      :class="{ active: visibleDrawer === 'dream-mall-button' }"
+    >
+      <div class="dream-mall-button-wrapper">
+        <div class="dream-mall-button">
+          <DreamMallButton
+            :is-active="visibleDrawer === 'dream-mall-button'"
+            @click="toggleDrawer('dream-mall-button')"
+          />
+        </div>
+      </div>
+      <div class="dream-mall-panel">
+        <slot name="dream-mall-button" :close="() => toggleDrawer('dream-mall-button')">
+          <TableSetup ref="tableSetupRef" @close="toggleDrawer('dream-mall-button')" />
+        </slot>
       </div>
     </div>
 
-    <!-- Universal Button List -->
-    <div class="button-list" :class="[isButtonListVisible ? 'button-list--active' : '']">
-      <v-img class="w-100 menu-divider" :src="Divider" />
-      <v-img
-        class="w-100 menu-triangle"
-        :class="[isButtonListVisible ? 'menu-triangle--turned' : '']"
-        :src="Triangle"
-      />
-      <TableSetup v-if="getMode() === 'setup'" ref="tableSetupRef" @close="toggleButtonList" />
-      <TableJoin v-if="getMode() === 'join'" @close="toggleButtonList" />
-      <TableSettings v-if="getMode() === 'table'" @close="toggleButtonList" />
-    </div>
-
     <div class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none">
-      <button class="camera-button mx-auto" @click="toggleDrawer">
-        <Circle>
-          <v-icon icon="$camera"></v-icon>
+      <button
+        class="test-mobile-camera-button camera-button mx-auto"
+        @click="() => toggleDrawer('tables')"
+      >
+        <Circle :is-active="visibleDrawer === 'tables'">
+          <v-icon icon="$handshake"></v-icon>
         </Circle>
       </button>
-      <SmallDreamMallButton
-        class="mx-auto"
-        :is-active="isButtonListVisible"
-        @click="toggleButtonList"
-      />
+      <div class="mx-auto" />
       <UserInfo class="mx-auto" />
     </div>
   </v-main>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
-import Divider from '#assets/img/divider.svg'
-import Triangle from '#assets/img/triangle.svg'
-import LargeDreamMallButton from '#components/buttons/LargeDreamMallButton.vue'
-import SmallDreamMallButton from '#components/buttons/SmallDreamMallButton.vue'
+import DreamMallButton from '#components/buttons/DreamMallButton.vue'
+import TableSetup from '#components/malltalk/setup/TableSetup.vue'
 import Circle from '#components/menu/CircleElement.vue'
-import LightDarkSwitch from '#components/menu/LightDarkSwitch.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 import TabControl from '#components/menu/TabControl.vue'
 import UserInfo from '#components/menu/UserInfo.vue'
+import ModalPanel from '#components/modal/ModalPanel.vue'
+import useModal from '#components/modal/useModal'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
-import TableJoin from '#src/panels/dreammall/TableJoin.vue'
-import TableSettings from '#src/panels/dreammall/TableSettings.vue'
-import TableSetup from '#src/panels/dreammall/TableSetup.vue'
-import { useUserStore } from '#stores/userStore'
 
-const isTablesDrawerVisible = ref(false)
+type DrawerType = 'tables' | 'dream-mall-button' | null
 
-const toggleDrawer = () => {
-  isTablesDrawerVisible.value = !isTablesDrawerVisible.value
-}
+const visibleDrawer = ref<DrawerType>(null)
 
-const isButtonListVisible = ref(false)
+const isTablesDrawerVisible = computed({
+  get() {
+    return visibleDrawer.value === 'tables'
+  },
+  set() {
+    toggleDrawer('tables')
+  },
+})
+
 const tableSetupRef = ref<InstanceType<typeof TableSetup> | null>(null)
 
-const toggleButtonList = () => {
-  if (isButtonListVisible.value) {
-    tableSetupRef.value?.reset()
+const toggleDrawer = (drawer: DrawerType) => {
+  if (visibleDrawer.value === drawer) {
+    visibleDrawer.value = null
+  } else {
+    visibleDrawer.value = drawer
+    if (drawer === 'dream-mall-button') {
+      tableSetupRef.value?.reset()
+    }
   }
-  isButtonListVisible.value = !isButtonListVisible.value
 }
 
-const userStore = useUserStore()
-
-const getMode = () => {
-  if (typeof window !== 'undefined' && window.location.pathname.includes('/table/')) {
-    return 'table'
-  }
-  return userStore.getMyTable?.id ? 'join' : 'setup'
-}
+const { isModalActive } = useModal()
 </script>
 
 <style scoped lang="scss">
@@ -127,6 +127,10 @@ const getMode = () => {
   padding-top: 0;
   padding-right: 0;
   background: $background-color-primary;
+
+  &.modal-active {
+    pointer-events: none;
+  }
 
   .page-container {
     padding-bottom: 120px;
@@ -158,89 +162,118 @@ const getMode = () => {
   align-items: center;
   justify-content: center;
   height: 120px;
-  overflow: hidden; // hotfix until the concept of DreamMallButton is clarified!
-  background: var(--v-bottom-menu-background);
-  backdrop-filter: blur(20px);
+  overflow: hidden;
+  background: transparent;
 }
 
-.dream-mall-button-container {
-  position: relative;
-  width: auto;
-  pointer-events: all;
-}
-
-.button-list {
+.dream-mall-floating-container {
   --width: 400px;
+  --button-size: 100px;
+  --button-scaling: 0.7;
+  --panel-height: 500px;
+  --animation-duration: 0.3s;
+  --animation-timing: ease-out;
 
   position: fixed;
-  bottom: -100%;
+  bottom: 10px;
   left: calc(50% - var(--width) / 2);
-  z-index: 1001;
+  z-index: 5000;
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  flex-flow: column nowrap;
+  place-content: center flex-start;
   align-items: center;
-  justify-content: start;
   width: var(--width);
-  height: var(--height);
-  padding-top: 30px;
-  padding-bottom: 40px;
-  background: var(--v-bottom-menu-background) !important;
-  backdrop-filter: blur(20px);
-  border-radius: 30px 30px 0 0;
-  transition: bottom 0.75s;
+  height: var(--button-size);
+  pointer-events: none;
+  transition: height var(--animation-duration) var(--animation-timing);
 
-  &--active {
-    @media #{map.get($display-breakpoints, 'sm-and-down')} {
-      bottom: 60px;
-    }
-
-    @media #{map.get($display-breakpoints, 'md-and-up')} {
-      bottom: 120px;
-    }
+  .dream-mall-button-wrapper {
+    z-index: 5001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--button-size);
+    height: var(--button-size);
+    transition: transform var(--animation-duration) var(--animation-timing);
   }
 
-  .menu-triangle {
-    position: absolute;
-    top: -95px;
-    max-width: 10px;
+  .dream-mall-button {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
     transition:
-      0.75s transform,
-      0.75s 0.25s top;
-    transform-origin: center;
+      transform var(--animation-duration) var(--animation-timing),
+      width var(--animation-duration) var(--animation-timing),
+      height var(--animation-duration) var(--animation-timing);
+  }
 
-    &--turned {
-      top: 10px;
-      transition:
-        0.75s rotate,
-        0.5s top;
-      transform: rotate(180deg);
+  &.active {
+    height: calc(var(--panel-height) + var(--button-size));
+
+    .dream-mall-button-wrapper {
+      transform: translateY(calc(var(--button-size) / 2));
+    }
+
+    .dream-mall-button {
+      width: calc(var(--button-size) * var(--button-scaling));
+      height: calc(var(--button-size) * var(--button-scaling));
+      transform: scale(var(--button-scaling));
     }
   }
 
-  .menu-divider {
+  .dream-mall-panel {
     position: absolute;
-    top: 0;
-    max-width: 60px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    flex-flow: column nowrap;
+    place-content: center flex-start;
+    align-items: center;
+    width: 100%;
+    height: calc(var(--button-size) / 2);
+    padding-top: 10px;
+    padding-bottom: 20px;
+    overflow: hidden;
+    pointer-events: none;
+    background-color: var(--v-dm-panel-background-color);
+    backdrop-filter: blur(30px);
+    border: 1px solid var(--v-dm-panel-border-color);
+    border-radius: 30px;
+    opacity: 0;
+    transition:
+      height var(--animation-duration) var(--animation-timing),
+      opacity var(--animation-duration) var(--animation-timing);
   }
 
-  .assistant-button {
-    margin: 0 40px;
-    transition-delay: 0.2s;
+  &.active .dream-mall-panel {
+    height: var(--panel-height);
+    pointer-events: all;
+    opacity: 1;
+  }
 
-    :deep(i) {
-      margin-right: 16px;
+  @media #{map.get($display-breakpoints, 'sm-and-down')} {
+    --width: 100vw;
+    --panel-height: 75vh;
+
+    bottom: 0;
+    left: 0;
+
+    &.active {
+      height: calc(var(--panel-height) + var(--button-size));
     }
-  }
 
-  .new-project-button {
-    margin: 0 20px;
-    transition-delay: 0s;
-  }
+    .dream-mall-panel {
+      border-radius: 30px 30px 0 0;
+    }
 
-  .new-table-button {
-    margin: 0 20px;
-    transition-delay: 0.1s;
+    .dream-mall-button {
+      transform: translateY(-10px);
+    }
+
+    &.active .dream-mall-panel {
+      height: var(--panel-height);
+    }
   }
 }
 

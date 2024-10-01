@@ -3,6 +3,7 @@ import { ApolloServer } from '@apollo/server'
 import { findOrCreateUser } from '#src/context/findOrCreateUser'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
+import { mockContextValue } from '#test/mockContextValue'
 
 import type { Context } from '#src/context'
 import type { UserWithProfile } from '#src/prisma'
@@ -24,7 +25,7 @@ describe('UserResolver', () => {
           {
             query: `{users {id name username}}`,
           },
-          { contextValue: { user: null, dataSources: { prisma } } },
+          { contextValue: mockContextValue() },
         )
         expect(response).toMatchObject({
           body: {
@@ -55,12 +56,7 @@ describe('UserResolver', () => {
             {
               query: `{users {id name username}}`,
             },
-            {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
-            },
+            { contextValue: mockContextValue({ user }) },
           )
           expect(response).toMatchObject({
             body: {
@@ -83,12 +79,7 @@ describe('UserResolver', () => {
               query: `query ($includeSelf: Boolean) {users(includeSelf: $includeSelf) {id name username}}`,
               variables: { includeSelf: true },
             },
-            {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
-            },
+            { contextValue: mockContextValue({ user }) },
           )
           expect(response).toMatchObject({
             body: {
@@ -118,18 +109,22 @@ describe('UserResolver', () => {
               {
                 name: 'Thomas Schmitt',
                 username: 'tom',
+                referenceId: 'UQV6KSVD',
               },
               {
                 name: 'Thomas Schmidt',
                 username: 'Toms',
+                referenceId: '1ZZIRJ2I',
               },
               {
                 name: 'Tomas Schmid',
                 username: 'Schmid',
+                referenceId: 'NV44R1LR',
               },
               {
                 name: 'Tomás Schmit',
                 username: 'Schmit',
+                referenceId: 'MC0CW1MV',
               },
             ],
           })
@@ -142,10 +137,7 @@ describe('UserResolver', () => {
               variables: { searchString: 'tom' },
             },
             {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
+              contextValue: mockContextValue({ user }),
             },
           )
 
@@ -194,10 +186,7 @@ describe('UserResolver', () => {
               variables: { searchString: 'TOM' },
             },
             {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
+              contextValue: mockContextValue({ user }),
             },
           )
 
@@ -246,10 +235,7 @@ describe('UserResolver', () => {
               variables: { searchString: 'sch' },
             },
             {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
+              contextValue: mockContextValue({ user }),
             },
           )
 
@@ -298,10 +284,7 @@ describe('UserResolver', () => {
               variables: { searchString: 'tomas' },
             },
             {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
+              contextValue: mockContextValue({ user }),
             },
           )
 
@@ -366,7 +349,7 @@ describe('UserResolver', () => {
       it('returns an unauthenticated error', async () => {
         const response = await testServer.executeOperation(
           { query },
-          { contextValue: { user: null, dataSources: { prisma } } },
+          { contextValue: mockContextValue() },
         )
         expect(response).toMatchObject({
           body: {
@@ -392,6 +375,47 @@ describe('UserResolver', () => {
       })
       let userId: number | undefined
 
+      describe('User.referenceId', () => {
+        const query = `{ currentUser { id referenceId name username } }`
+
+        it('provides a unique and unchangeable reference that can be used in the "purpose" field of a bank transfer to link it to the user\'s account', async () => {
+          const referenceId = 'RENC1MCC'
+          const user = await prisma.user.create({
+            data: {
+              username: 'Some username',
+              name: 'Some name',
+              referenceId,
+            },
+            include: {
+              meeting: true,
+              userDetail: true,
+              socialMedia: true,
+            },
+          })
+          const response = await testServer.executeOperation(
+            { query },
+            { contextValue: mockContextValue({ user }) },
+          )
+          expect(response).toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  currentUser: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    referenceId: 'RENC1MCC',
+                    name: 'Some name',
+                    username: 'Some username',
+                  },
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+      })
+
       describe('no table', () => {
         it('returns the user without table', async () => {
           userId = user?.id
@@ -400,10 +424,7 @@ describe('UserResolver', () => {
               query,
             },
             {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
+              contextValue: mockContextValue({ user }),
             },
           )
           expect(response).toMatchObject({
@@ -448,10 +469,7 @@ describe('UserResolver', () => {
               query,
             },
             {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
+              contextValue: mockContextValue({ user }),
             },
           )
           expect(response).toMatchObject({
@@ -491,6 +509,7 @@ describe('UserResolver', () => {
             data: {
               username: 'bibi',
               name: 'Bibi Bloxberg',
+              referenceId: 'BAN2ZWXV',
             },
           })
 
@@ -498,6 +517,7 @@ describe('UserResolver', () => {
             data: {
               username: 'peter',
               name: 'Peter Lustig',
+              referenceId: 'Q31R9L35',
             },
           })
 
@@ -551,10 +571,7 @@ describe('UserResolver', () => {
               query,
             },
             {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
+              contextValue: mockContextValue({ user }),
             },
           )
           expect(response).toMatchObject({
@@ -641,7 +658,7 @@ describe('UserResolver', () => {
               },
             },
           },
-          { contextValue: { user: null, dataSources: { prisma } } },
+          { contextValue: mockContextValue() },
         )
         expect(response).toMatchObject({
           body: {
@@ -691,6 +708,8 @@ describe('UserResolver', () => {
         ).resolves.toEqual({
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           id: expect.any(Number),
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          referenceId: expect.any(String),
           username: 'mockedUser',
           name: 'User',
           introduction: null,
@@ -715,10 +734,7 @@ describe('UserResolver', () => {
               },
             },
             {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
+              contextValue: mockContextValue({ user }),
             },
           )
         }
@@ -760,6 +776,8 @@ describe('UserResolver', () => {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
             username: 'mockedUser',
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            referenceId: expect.any(String),
             name: 'Peter Lustig',
             introduction: 'Latzhose und Nickelbrille',
             availability: 'busy',
@@ -786,10 +804,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({
@@ -831,10 +846,7 @@ describe('UserResolver', () => {
               },
             },
             {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
+              contextValue: mockContextValue({ user }),
             },
           )
         }
@@ -875,6 +887,8 @@ describe('UserResolver', () => {
           ).resolves.toEqual({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            referenceId: expect.any(String),
             name: 'Bibi Bloxberg',
             username: 'mockedUser',
             introduction: 'Latzhose und Nickelbrille',
@@ -912,10 +926,7 @@ describe('UserResolver', () => {
               },
             },
             {
-              contextValue: {
-                user,
-                dataSources: { prisma },
-              },
+              contextValue: mockContextValue({ user }),
             },
           )
         }
@@ -955,6 +966,8 @@ describe('UserResolver', () => {
           ).resolves.toEqual({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            referenceId: expect.any(String),
             name: 'User',
             username: 'mockedUser',
             introduction: 'Make me null',
@@ -973,6 +986,8 @@ describe('UserResolver', () => {
           ).resolves.toEqual({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            referenceId: expect.any(String),
             name: 'Bibi Bloxberg',
             username: 'mockedUser',
             introduction: null,
@@ -1007,7 +1022,7 @@ describe('UserResolver', () => {
               },
             },
           },
-          { contextValue: { user: null, dataSources: { prisma } } },
+          { contextValue: mockContextValue() },
         )
         expect(response).toMatchObject({
           body: {
@@ -1046,10 +1061,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({
@@ -1098,10 +1110,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({
@@ -1137,7 +1146,7 @@ describe('UserResolver', () => {
               id: -1,
             },
           },
-          { contextValue: { user: null, dataSources: { prisma } } },
+          { contextValue: mockContextValue() },
         )
         expect(response).toMatchObject({
           body: {
@@ -1172,10 +1181,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({
@@ -1236,10 +1242,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({
@@ -1277,10 +1280,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({
@@ -1330,7 +1330,7 @@ describe('UserResolver', () => {
               },
             },
           },
-          { contextValue: { user: null, dataSources: { prisma } } },
+          { contextValue: mockContextValue() },
         )
         expect(response).toMatchObject({
           body: {
@@ -1369,10 +1369,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({
@@ -1421,10 +1418,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({
@@ -1460,7 +1454,7 @@ describe('UserResolver', () => {
               id: -1,
             },
           },
-          { contextValue: { user: null, dataSources: { prisma } } },
+          { contextValue: mockContextValue() },
         )
         expect(response).toMatchObject({
           body: {
@@ -1496,10 +1490,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({
@@ -1560,10 +1551,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({
@@ -1601,10 +1589,7 @@ describe('UserResolver', () => {
                 },
               },
               {
-                contextValue: {
-                  user,
-                  dataSources: { prisma },
-                },
+                contextValue: mockContextValue({ user }),
               },
             ),
           ).resolves.toMatchObject({

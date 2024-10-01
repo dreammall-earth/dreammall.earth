@@ -1,7 +1,7 @@
 import { ApolloServer } from '@apollo/server'
 
-import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
+import { mockContextValue } from '#test/mockContextValue'
 
 import type { Context } from '#src/context'
 import type { UserWithProfile } from '#src/prisma'
@@ -36,7 +36,7 @@ describe('authChecker', () => {
           {
             query,
           },
-          { contextValue: { user: null, dataSources: { prisma } } },
+          { contextValue: mockContextValue() },
         ),
       ).resolves.toMatchObject({
         body: {
@@ -58,6 +58,7 @@ describe('authChecker', () => {
   describe('authenticated', () => {
     const user: UserWithProfile = {
       id: 81,
+      referenceId: '2G8P5DYG',
       username: 'mockedUser',
       name: 'Bibi Bloxberg',
       introduction: null,
@@ -75,12 +76,7 @@ describe('authChecker', () => {
           {
             query,
           },
-          {
-            contextValue: {
-              user,
-              dataSources: { prisma },
-            },
-          },
+          { contextValue: mockContextValue({ user }) },
         ),
       ).resolves.toMatchObject({
         body: {

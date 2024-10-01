@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from '@prisma/client'
+import { Prisma, PrismaClient, EventType } from '@prisma/client'
 import { createSoftDeleteExtension } from 'prisma-extension-soft-delete'
 
 import logger from './logger'
@@ -75,4 +75,13 @@ const userWithProfile = Prisma.validator<Prisma.UserDefaultArgs>()({
 
 type UserWithProfile = Prisma.UserGetPayload<typeof userWithProfile>
 
-export { prisma, UsersWithMeetings, UserWithMeeting, UserWithProfile }
+type DeamMallPrismaClient = typeof prisma
+
+export {
+  prisma,
+  DeamMallPrismaClient as PrismaClient,
+  EventType,
+  UserWithMeeting,
+  UserWithProfile,
+  UsersWithMeetings,
+}

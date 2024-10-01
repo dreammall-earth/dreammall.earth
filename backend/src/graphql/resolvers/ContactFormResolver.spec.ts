@@ -1,7 +1,6 @@
 import { ApolloServer } from '@apollo/server'
 
 import { sendContactEmails } from '#api/Brevo'
-import { EventType } from '#src/event/EventType'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
 
@@ -213,7 +212,7 @@ weils nach Datum, Medium, Anlass und Kosten auflisten)?`,
           expect.objectContaining({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
-            type: EventType.CONTACTFORM_SEND,
+            type: 'CONTACTFORM_SEND',
             involvedEmail: 'peter@lustig.de',
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             createdAt: expect.any(Date),

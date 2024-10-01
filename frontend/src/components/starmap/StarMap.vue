@@ -5,7 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-import { update as tweenUpdate } from '@tweenjs/tween.js'
 import { useQuery } from '@vue/apollo-composable'
 import {
   Scene,
@@ -17,6 +16,9 @@ import {
   LineBasicMaterial,
   BufferGeometry,
   Line,
+  Object3D,
+  Raycaster,
+  Vector2,
   Vector3,
   TextureLoader,
   BackSide,
@@ -46,15 +48,26 @@ watch(starmapQueryResult, (data: { starmap: StarmapQueryResult }) => {
   data.starmap.starLines.forEach((l: StarLine) => addLine(l.from, l.to))
 })
 
-const stars: Mesh[] = []
+class StarMesh extends Mesh {
+  star: Star
+
+  constructor(sphereGeometry: SphereGeometry, meshBasicMaterial: MeshBasicMaterial, star: Star) {
+    super(sphereGeometry, meshBasicMaterial)
+    this.star = star
+  }
+}
+
+const stars: StarMesh[] = []
 
 // Erhöht den Radius der Sphäre, um Verzerrungen zu reduzieren
 const SPHERE_RADIUS = 4500 // Angepasster Radius der Sphäre
-const STAR_RADIUS = 10
+const STAR_RADIUS = 15
 
 let renderer: WebGLRenderer
 let camera: PerspectiveCamera
 let scene: Scene
+let raycaster: Raycaster
+let mouse: Vector2
 
 // Initialisiert die 3D-Szene, Kamera, Renderer und Steuerungen
 const initScene = () => {
@@ -95,8 +108,11 @@ const initScene = () => {
   controls.enablePan = false // Deaktiviert das Schwenken
   controls.enableDamping = true // Fügt eine Dämpfung für sanftere Bewegungen hinzu
   controls.dampingFactor = 0.1
-  controls.minPolarAngle = Math.PI / 2 - Math.PI / 9 // Begrenzung nach unten: 50° vom Äquator (90° - 40° = 50°)
-  controls.maxPolarAngle = Math.PI / 2 + Math.PI / 9 // Begrenzung nach oben: 130° vom Äquator (90° + 40° = 130°)
+  controls.minPolarAngle = Math.PI / 2 - Math.PI / 9 // Begrenzung nach unten: 50° vom Äquator (90° - 20° = 70°)
+  controls.maxPolarAngle = Math.PI / 2 + Math.PI / 9 // Begrenzung nach oben: 130° vom Äquator (90° + 20° = 110°)
+
+  raycaster = new Raycaster()
+  mouse = new Vector2()
 
   // Fügt das dezente Raster zur Sphäre hinzu
   createDezentGrid()
@@ -104,7 +120,6 @@ const initScene = () => {
   // Startet die Animationsschleife
   const animate = () => {
     requestAnimationFrame(animate)
-    tweenUpdate()
     controls.update()
     renderer.render(scene, camera)
   }
@@ -112,6 +127,9 @@ const initScene = () => {
 
   // Fügt Event-Listener für das Anpassen der Fenstergröße hinzu
   window.addEventListener('resize', onWindowResize)
+
+  canvas.value?.addEventListener('click', onCanvasClick)
+  canvas.value?.addEventListener('mousemove', onCanvasMouseMove)
 }
 
 // Erstellt ein dezentes Raster auf der Sphäre
@@ -130,13 +148,7 @@ const createDezentGrid = () => {
 
     for (let j = 0; j <= 64; j++) {
       const theta = (j / 64) * Math.PI
-      meridianPoints.push(
-        new Vector3(
-          SPHERE_RADIUS * Math.sin(theta) * Math.cos(phi),
-          SPHERE_RADIUS * Math.cos(theta),
-          SPHERE_RADIUS * Math.sin(theta) * Math.sin(phi),
-        ),
-      )
+      meridianPoints.push(new Vector3(...cartesianFromSphere(theta, phi, SPHERE_RADIUS)))
     }
 
     const geometry = new BufferGeometry().setFromPoints(meridianPoints)
@@ -151,13 +163,7 @@ const createDezentGrid = () => {
 
     for (let j = 0; j <= 64; j++) {
       const phi = (j / 64) * Math.PI * 2
-      parallelPoints.push(
-        new Vector3(
-          SPHERE_RADIUS * Math.sin(theta) * Math.cos(phi),
-          SPHERE_RADIUS * Math.cos(theta),
-          SPHERE_RADIUS * Math.sin(theta) * Math.sin(phi),
-        ),
-      )
+      parallelPoints.push(new Vector3(...cartesianFromSphere(theta, phi, SPHERE_RADIUS)))
     }
 
     const geometry = new BufferGeometry().setFromPoints(parallelPoints)
@@ -176,7 +182,7 @@ const addStars = (data: Star[]) => {
     // Berechnet die Position des Sterns auf der Sphäre
     const [x, y, z] = cartesianFromSphere(data.azimuth, data.altitude, data.distance)
 
-    const star = new Mesh(starGeometry, starMaterial)
+    const star = new StarMesh(starGeometry, starMaterial, data)
     star.position.set(x, y, z)
     scene.add(star)
     stars.push(star)
@@ -225,10 +231,42 @@ const onWindowResize = () => {
   renderer.setSize(width, height)
 }
 
+const onCanvasClick = (event: MouseEvent) => {
+  const star = getRaycasterIntersects(event)
+  if (star) {
+    // eslint-disable-next-line no-console
+    console.log('Stern angeklickt!', star.data)
+  }
+}
+
+const onCanvasMouseMove = (event: MouseEvent) => {
+  const star = getRaycasterIntersects(event)
+  if (star) {
+    // eslint-disable-next-line no-console
+    console.log('Stern hover!', star.data)
+  }
+}
+
+const getRaycasterIntersects = (event: MouseEvent): Star | undefined => {
+  const rect = canvas.value?.getBoundingClientRect()
+  if (!rect) return
+
+  mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
+  mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1
+
+  raycaster.setFromCamera(mouse, camera)
+  const intersects = raycaster.intersectObjects(stars)
+
+  if (intersects.length > 0) {
+    const { star } = intersects[0].object as Object3D & { star: Star }
+    return star
+  }
+}
+
 // Berechnet die Abmessungen des Canvas-Containers basierend auf der Fenstergröße
 const getDimensions = (): { width: number; height: number } => ({
   width: window.innerWidth,
-  height: window.innerHeight - 136, // Sollte 85px in der mobilen Ansicht, 136px auf dem Desktop sein
+  height: window.innerHeight, // Sollte 85px in der mobilen Ansicht, 136px auf dem Desktop sein
 })
 
 // Startet die Initialisierung der Szene, sobald die Komponente gemountet ist
@@ -244,9 +282,14 @@ onMounted(() => {
 .canvas-container {
   --bottom-height: 136px;
 
-  position: relative;
-  width: 100%;
-  height: calc(100vh - var(--v-layout-top) - var(--bottom-height));
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+
+  // Todo: Remove after we are sure we want to keep it full screen.
+  // height: calc(100vh - var(--v-layout-top) - var(--bottom-height));
+  height: 100vh;
   overflow: hidden;
   border: none;
 }

@@ -16,11 +16,19 @@ describe('global route guard', () => {
 
   describe('unauthenticated', () => {
     it('throws and redirects', () => {
-      /* We expect redirect('/signin') to be thrown, but it's an object,
+      /* We expect redirect('/signin/') to be thrown, but it's an object,
          which is not an acceptable argument for toThrow(). */
       /* eslint-disable-next-line vitest/require-to-throw-message */
-      expect(() => guard({ hasToken: false } as PageContextServer)).toThrow()
-      expect(redirect).toHaveBeenCalledWith('/signin')
+      expect(() => guard({ hasToken: false, urlPathname: '/' } as PageContextServer)).toThrow()
+      expect(redirect).toHaveBeenCalledWith('/signin?previousUrl=%2F')
+    })
+
+    it('throws and redirects passing the path', () => {
+      /* We expect redirect('/signin/x/23') to be thrown, but it's an object,
+         which is not an acceptable argument for toThrow(). */
+      /* eslint-disable-next-line vitest/require-to-throw-message */
+      expect(() => guard({ hasToken: false, urlPathname: '/x/23' } as PageContextServer)).toThrow()
+      expect(redirect).toHaveBeenCalledWith('/signin?previousUrl=%2Fx%2F23')
     })
   })
 

@@ -1,8 +1,8 @@
 import { ApolloServer } from '@apollo/server'
 
 import { findOrCreateUser } from '#src/context/findOrCreateUser'
-import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
+import { mockContextValue } from '#test/mockContextValue'
 
 import type { Context } from '#src/context'
 import type { UserWithProfile } from '#src/prisma'
@@ -27,6 +27,25 @@ query {
       distance
       magnitude
       color
+      data {
+        id
+        referenceId
+        username
+        name
+        introduction
+        availability
+        details {
+          category
+          text
+        }
+        social {
+          type
+          link
+        }
+        table {
+          id
+        }
+      }
     }
     starLines {
       from
@@ -42,7 +61,7 @@ query {
           {
             query,
           },
-          { contextValue: { user: null, dataSources: { prisma } } },
+          { contextValue: mockContextValue() },
         )
         expect(response).toMatchObject({
           body: {
@@ -67,72 +86,52 @@ query {
         user = await findOrCreateUser({ nickname, name })
       })
 
-      it('returns the starmap', async () => {
-        const response = await testServer.executeOperation(
-          {
-            query,
-          },
-          {
-            contextValue: {
-              user,
-              dataSources: { prisma },
+      describe('only the authenticated user in DB', () => {
+        it('returns the starmap', async () => {
+          const response = await testServer.executeOperation(
+            {
+              query,
             },
-          },
-        )
+            { contextValue: mockContextValue({ user }) },
+          )
 
-        expect(response).toMatchObject({
-          body: {
-            kind: 'single',
-            singleResult: {
-              data: {
-                starmap: {
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                  stars: expect.arrayContaining([
-                    {
-                      id: 's8',
-                      azimuth: -0.043611111,
-                      altitude: -0.2531666667,
-                      distance: 1,
-                      magnitude: 3,
-                      color: 1,
-                    },
-                    {
-                      id: 's9',
-                      azimuth: 0.1731666667,
-                      altitude: -0.2131666667,
-                      distance: 1,
-                      magnitude: 3,
-                      color: 1,
-                    },
-                    {
-                      id: 's10',
-                      azimuth: 0.251666667,
-                      altitude: -0.043611111,
-                      distance: 1,
-                      magnitude: 3,
-                      color: 1,
-                    },
-                  ]),
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                  starLines: expect.arrayContaining([
-                    {
-                      from: 's6',
-                      to: 's7',
-                    },
-                    {
-                      from: 's6',
-                      to: 's8',
-                    },
-                    {
-                      from: 's6',
-                      to: 's9',
-                    },
-                  ]),
+          expect(response).toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  starmap: {
+                    stars: [
+                      {
+                        id: `u${user.id}`,
+                        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                        azimuth: expect.any(Number),
+                        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                        altitude: expect.any(Number),
+                        distance: 1,
+                        magnitude: 1,
+                        color: 1,
+                        data: {
+                          id: user.id,
+                          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                          referenceId: expect.any(String),
+                          username: user.username,
+                          name: user.name,
+                          introduction: null,
+                          availability: null,
+                          details: [],
+                          social: [],
+                          table: null,
+                        },
+                      },
+                    ],
+                    starLines: [],
+                  },
                 },
+                errors: undefined,
               },
-              errors: undefined,
             },
-          },
+          })
         })
       })
     })

@@ -7,13 +7,26 @@ import { UsersWithMeetings } from '#src/prisma'
 import { Attendee } from './AttendeeModel'
 import { UserInMeeting } from './UserInMeetingModel'
 
+export const getAttendees = (meeting: MeetingInfo): Attendee[] => {
+  const attendees =
+    typeof meeting.attendees !== 'string'
+      ? Array.isArray(meeting.attendees.attendee)
+        ? meeting.attendees.attendee.map((a: AttendeeInfo) => new Attendee(a))
+        : [meeting.attendees.attendee]
+      : []
+  return attendees
+}
+
 @ObjectType()
 export class Table {
-  constructor(meeting: Meeting, users: UsersWithMeetings[]) {
-    this.id = meeting.id
-    this.name = meeting.name
-    this.public = meeting.public
-    this.users = users.map((u) => new UserInMeeting(u))
+  constructor(data: Pick<Table, 'id' | 'name' | 'public' | 'users'>) {
+    Object.assign(this, data)
+  }
+
+  static fromMeeting(meeting: Meeting, usersWithMeetings: UsersWithMeetings[]) {
+    const { id, name } = meeting
+    const users = usersWithMeetings.map((u) => new UserInMeeting(u))
+    return new Table({ id, name, public: meeting.public, users })
   }
 
   @Field(() => Int)
@@ -31,22 +44,38 @@ export class Table {
 
 @ObjectType()
 export class OpenTable {
-  constructor(meeting: MeetingInfo, id: number) {
-    this.id = id
-    this.meetingID = meeting.meetingID
-    this.meetingName = meeting.meetingName
-    this.startTime = meeting.startTime.toString()
-    this.participantCount = meeting.participantCount
-    this.attendees =
-      typeof meeting.attendees !== 'string'
-        ? Array.isArray(meeting.attendees.attendee)
-          ? meeting.attendees.attendee.map((a: AttendeeInfo) => new Attendee(a))
-          : [meeting.attendees.attendee]
-        : []
+  constructor(
+    data: Pick<
+      OpenTable,
+      | 'id'
+      | 'meetingID'
+      | 'meetingName'
+      | 'participantCount'
+      | 'startTime'
+      | 'attendees'
+      | 'isModerator'
+    >,
+  ) {
+    Object.assign(this, data)
   }
 
-  @Field(() => Int)
-  id: number
+  static fromMeetingInfo(meeting: MeetingInfo, id: number, isModerator: boolean): OpenTable {
+    const { meetingID, meetingName, participantCount } = meeting
+    const startTime = meeting.startTime.toString()
+    const attendees = getAttendees(meeting)
+    return new OpenTable({
+      id: String(id),
+      meetingID,
+      meetingName,
+      participantCount,
+      startTime,
+      attendees,
+      isModerator,
+    })
+  }
+
+  @Field()
+  id: string
 
   @Field()
   meetingID: string
@@ -62,4 +91,31 @@ export class OpenTable {
 
   @Field(() => [Attendee])
   attendees: Attendee[]
+
+  @Field()
+  isModerator: boolean
+}
+
+@ObjectType()
+export class OpenTables {
+  @Field(() => [OpenTable])
+  permanentTables: OpenTable[]
+
+  @Field(() => [OpenTable])
+  mallTalkTables: OpenTable[]
+
+  @Field(() => [OpenTable])
+  projectTables: OpenTable[]
+}
+
+@ObjectType()
+export class JoinTable {
+  @Field()
+  link: string
+
+  @Field()
+  type: string
+
+  @Field()
+  isModerator: boolean
 }
