@@ -1,9 +1,8 @@
 <template>
   <button
     ref="tabControl"
-    class="tab-control ma-auto border-sm"
-    :class="{ open: isOpen, sliding: isSliding }"
-    @click="() => !isOpen && open()"
+    class="tab-control ma-auto border-sm open"
+    @click="() => {}"
   >
     <div v-show="isSliding" ref="marker" class="marker"></div>
     <div class="d-flex align-center justify-center h-100 w-100">
@@ -26,14 +25,11 @@
 
 <script lang="ts" setup>
 import { navigate } from 'vike/client/router'
-import { onMounted, onUnmounted, ref } from 'vue'
-
+import { onMounted, ref } from 'vue'
 import { usePageContext } from '#root/renderer/context/usePageContext'
-
 import type { Ref } from 'vue'
 
 const pageContext = usePageContext()
-
 const { urlPathname } = pageContext
 
 const items = [
@@ -43,13 +39,6 @@ const items = [
     text: 'menu.worldCafe',
     link: '/',
   },
-  /*
-  {
-    class: 'mall',
-    icon: '$mall',
-    text: 'menu.mall',
-  },
-  */
   {
     class: 'cockpit',
     icon: '$cockpit',
@@ -58,7 +47,6 @@ const items = [
   },
 ]
 
-const isOpen = ref(true)
 const isSliding = ref(false)
 
 let defaultItem = items.findIndex((i) =>
@@ -71,32 +59,7 @@ const tabControl: Ref<HTMLElement | null> = ref(null)
 const marker: Ref<HTMLElement | null> = ref(null)
 const itemRefs = ref([] as HTMLElement[])
 
-let timer: ReturnType<typeof setTimeout>
-
-/**
- * Open the tab control
- */
-function open() {
-  isOpen.value = true
-  closeWithDelay()
-}
-
-/**
- * Close the tab control after a delay
- */
-function closeWithDelay() {
-  timer = setTimeout(() => {
-    isSliding.value = false
-    isOpen.value = false
-  }, 3000)
-}
-
-/**
- * Move the marker to the active item
- * @param item
- */
 function moveMarker() {
-  // For some reason, this function is called before the refs are set
   if (activeItem.value < 0) return
 
   const itemRef = itemRefs.value[activeItem.value]
@@ -105,20 +68,10 @@ function moveMarker() {
   marker.value?.style.setProperty('left', `${itemRef.offsetLeft}px`)
 }
 
-/**
- * Set the active item
- * @param item s
- */
 function setItem(item: number) {
-  if (!isOpen.value) return
-
-  clearTimeout(timer)
-
   isSliding.value = true
-
   activeItem.value = item
 
-  // After the animation is done, navigate to the new route if necessary
   const itemRef = itemRefs.value[activeItem.value]
   const listener = (event: TransitionEvent) => {
     if (event.propertyName !== 'background-color') return
@@ -128,20 +81,15 @@ function setItem(item: number) {
   itemRef.addEventListener('transitionend', listener)
 
   requestAnimationFrame(() => {
-    // Move the marker to the active item
     moveMarker()
-
-    closeWithDelay()
+    setTimeout(() => {
+      isSliding.value = false
+    }, 500) // Match this with the transition time in CSS
   })
 }
 
 onMounted(() => {
   moveMarker()
-  closeWithDelay()
-})
-
-onUnmounted(() => {
-  clearTimeout(timer)
 })
 </script>
 
@@ -161,12 +109,6 @@ onUnmounted(() => {
   transform: scale(0.7);
 }
 
-/*
-.mall {
-  transform: scale(1.1);
-}
-*/
-
 .marker {
   position: absolute;
   top: 2px;
@@ -178,7 +120,6 @@ onUnmounted(() => {
   border-radius: 27.067px;
   opacity: 1;
   transition:
-    opacity cubic-bezier(1, 0, 0, 1) var(--animation-time),
     width ease-in-out 0.5s,
     left ease-in-out 0.5s;
 }
@@ -209,13 +150,11 @@ onUnmounted(() => {
   }
 }
 
-.item:first-child,
-.tab-control:not(.open) .item.active {
+.item:first-child {
   padding-left: 10px;
 }
 
-.item:last-child,
-.tab-control:not(.open) .item.active {
+.item:last-child {
   padding-right: 15px;
 }
 
@@ -224,6 +163,7 @@ onUnmounted(() => {
   --height: 50px;
   --background-color: #e1e6ed;
   --item-border-width: 0.677px;
+  --tab-control-padding: 2px;
 
   position: relative;
   display: flex;
@@ -238,47 +178,11 @@ onUnmounted(() => {
   color: #222;
   background-color: var(--background-color);
   border-radius: 27.067px;
-  transition: padding var(--animation-time);
+  border-color: rgb(255 255 255 / 78%) !important;
 
-  &.open {
-    --tab-control-padding: 2px;
-
-    border-color: rgb(255 255 255 / 78%) !important;
-
-    .item {
-      &.active {
-        background-color: #fff;
-
-        .icon {
-          background-color: var(--background-color);
-        }
-      }
-    }
-  }
-
-  &.open.sliding .item {
+  &.sliding .item {
     background-color: transparent;
     border-color: transparent;
-  }
-
-  &:not(.open) {
-    --tab-control-padding: 0px;
-
-    .item.active {
-      .icon {
-        padding: 2px;
-        background: none;
-      }
-    }
-
-    .item:not(.active) {
-      max-width: 0;
-      padding: 0;
-    }
-
-    .marker {
-      opacity: 0;
-    }
   }
 }
 </style>
