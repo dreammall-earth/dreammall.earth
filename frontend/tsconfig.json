@@ -22,7 +22,7 @@
       "#src/*": ["./src/*"],
       "#plugins/*": ["./renderer/plugins/*"],
       "#context/*": ["./renderer/context/*"],
-      "#tests/*": ["./scripts/tests/*"],
+      "#tests/*": ["./src/tests/*"],
       "#types/*": ["./types/*"],
       "#root/*": ["./*"]
     }
