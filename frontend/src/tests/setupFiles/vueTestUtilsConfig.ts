@@ -24,3 +24,8 @@ config.global.mocks = {
   i18n$n: i18n.global.n,
   $t: (tKey: string) => `$t('${tKey}')`,
 }
+
+config.global.stubs = {
+  ...config.global.stubs,
+  'v-img': true,
+}
