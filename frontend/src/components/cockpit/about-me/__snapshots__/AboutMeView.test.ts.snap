@@ -23,42 +23,17 @@ exports[`AboutMeView > renders 1`] = `
     >
       
       
-      <div
-        class="v-responsive v-img v-img--booting"
+      <v-img-stub
+        absolute="false"
+        cover="false"
         data-v-f444dc92=""
-      >
-        <div
-          class="v-responsive__sizer"
-        />
-        
-        
-        <transition-stub
-          appear="true"
-          css="true"
-          name="fade-transition"
-          persisted="false"
-        >
-          <img
-            class="v-img__img v-img__img--cover"
-            src="https://image.url/image.jpg"
-            style="display: none;"
-          />
-        </transition-stub>
-        <transition-stub
-          appear="false"
-          css="true"
-          name="fade-transition"
-          persisted="false"
-        >
-          <!---->
-        </transition-stub>
-        <!---->
-        <!---->
-        <!---->
-        
-        
-        <!---->
-      </div>
+        eager="false"
+        inline="false"
+        options="[object Object]"
+        src="https://image.url/image.jpg"
+        tile="false"
+        transition="fade-transition"
+      />
       
       
       
@@ -620,42 +595,17 @@ exports[`AboutMeView > renders initials 1`] = `
     >
       
       
-      <div
-        class="v-responsive v-img v-img--booting"
+      <v-img-stub
+        absolute="false"
+        cover="false"
         data-v-f444dc92=""
-      >
-        <div
-          class="v-responsive__sizer"
-        />
-        
-        
-        <transition-stub
-          appear="true"
-          css="true"
-          name="fade-transition"
-          persisted="false"
-        >
-          <img
-            class="v-img__img v-img__img--cover"
-            src="https://image.url/image.jpg"
-            style="display: none;"
-          />
-        </transition-stub>
-        <transition-stub
-          appear="false"
-          css="true"
-          name="fade-transition"
-          persisted="false"
-        >
-          <!---->
-        </transition-stub>
-        <!---->
-        <!---->
-        <!---->
-        
-        
-        <!---->
-      </div>
+        eager="false"
+        inline="false"
+        options="[object Object]"
+        src="https://image.url/image.jpg"
+        tile="false"
+        transition="fade-transition"
+      />
       
       
       
@@ -1217,42 +1167,17 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
     >
       
       
-      <div
-        class="v-responsive v-img v-img--booting"
+      <v-img-stub
+        absolute="false"
+        cover="false"
         data-v-f444dc92=""
-      >
-        <div
-          class="v-responsive__sizer"
-        />
-        
-        
-        <transition-stub
-          appear="true"
-          css="true"
-          name="fade-transition"
-          persisted="false"
-        >
-          <img
-            class="v-img__img v-img__img--cover"
-            src="https://image.url/image.jpg"
-            style="display: none;"
-          />
-        </transition-stub>
-        <transition-stub
-          appear="false"
-          css="true"
-          name="fade-transition"
-          persisted="false"
-        >
-          <!---->
-        </transition-stub>
-        <!---->
-        <!---->
-        <!---->
-        
-        
-        <!---->
-      </div>
+        eager="false"
+        inline="false"
+        options="[object Object]"
+        src="https://image.url/image.jpg"
+        tile="false"
+        transition="fade-transition"
+      />
       
       
       
