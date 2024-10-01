@@ -1,7 +1,4 @@
-import { config } from '@vue/test-utils'
 import { reactive } from 'vue'
-
-import { vikePageContext } from '#context/usePageContext'
 
 type MockPageContext = {
   urlPathname: string
@@ -16,8 +13,3 @@ export const mockPageContext: MockPageContext = reactive({
     search: {},
   },
 })
-
-config.global.provide = {
-  ...config.global.provide,
-  [vikePageContext as symbol]: mockPageContext,
-}

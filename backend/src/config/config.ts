@@ -12,45 +12,59 @@ config({
   path: path.resolve(__dirname, '../../.env'),
 })
 
+const toNumber = (env: string | undefined): number | undefined => {
+  const number = Number(env)
+  return isNaN(number) ? undefined : number
+}
+
 // Config
-const BREVO = {
-  BREVO_KEY: process.env.BREVO_KEY,
-  BREVO_ADMIN_NAME: process.env.BREVO_ADMIN_NAME,
-  BREVO_ADMIN_EMAIL: process.env.BREVO_ADMIN_EMAIL,
-  BREVO_CONTACT_TEMPLATE_ADMIN: !isNaN(Number(process.env.BREVO_CONTACT_TEMPLATE_ADMIN))
-    ? Number(process.env.BREVO_CONTACT_TEMPLATE_ADMIN)
-    : undefined,
-  BREVO_CONTACT_TEMPLATE_USER: !isNaN(Number(process.env.BREVO_CONTACT_TEMPLATE_USER))
-    ? Number(process.env.BREVO_CONTACT_TEMPLATE_USER)
-    : undefined,
-  BREVO_NEWSLETTER_TEMPLATE_OPTIN: !isNaN(Number(process.env.BREVO_NEWSLETTER_TEMPLATE_OPTIN))
-    ? Number(process.env.BREVO_NEWSLETTER_TEMPLATE_OPTIN)
-    : undefined,
-  BREVO_NEWSLETTER_LIST: !isNaN(Number(process.env.BREVO_NEWSLETTER_LIST))
-    ? Number(process.env.BREVO_NEWSLETTER_LIST)
-    : undefined,
-}
+const {
+  BREVO_KEY,
+  BREVO_ADMIN_NAME,
+  BREVO_ADMIN_EMAIL,
+  BREVO_CONTACT_TEMPLATE_ADMIN,
+  BREVO_CONTACT_TEMPLATE_USER,
+  BREVO_NEWSLETTER_TEMPLATE_OPTIN,
+  BREVO_NEWSLETTER_LIST,
 
-const BBB = {
-  BBB_SHARED_SECRET: process.env.BBB_SHARED_SECRET ?? 'unknown',
-  BBB_URL: process.env.BBB_URL ?? 'https://my.url',
-  BBB_PULL_MEETINGS: process.env.NODE_ENV !== 'test' && process.env.BBB_URL,
-  BBB_WEBHOOK_URL: process.env.BBB_WEBHOOK_URL ?? '',
-}
+  BBB_SHARED_SECRET = 'unknown',
+  BBB_URL = 'https://my.url',
+  BBB_WEBHOOK_URL = '',
 
-const FRONTEND_URL = process.env.FRONTEND_URL ?? 'http://localhost:3000/'
+  FRONTEND_URL = 'http://localhost:3000/',
 
-const FRONTEND = {
-  FRONTEND_URL,
-}
+  JWKS_URI,
 
-const { JWKS_URI } = process.env
+  WELCOME_TABLE_MEETING_ID = uuidv4(),
+  WELCOME_TABLE_NAME = 'DreamMall Coffeetime',
+} = process.env
+
 if (!JWKS_URI) {
   throw new Error('missing environment variable: JWKS_URI')
 }
 
-const WELCOME_TABLE_MEETING_ID = process.env.WELCOME_TABLE_MEETING_ID ?? uuidv4()
-const WELCOME_TABLE_NAME = process.env.WELCOME_TABLE_NAME ?? 'DreamMall Coffeetime'
+const BREVO = {
+  BREVO_KEY,
+  BREVO_ADMIN_NAME,
+  BREVO_ADMIN_EMAIL,
+  BREVO_CONTACT_TEMPLATE_ADMIN: toNumber(BREVO_CONTACT_TEMPLATE_ADMIN),
+  BREVO_CONTACT_TEMPLATE_USER: toNumber(BREVO_CONTACT_TEMPLATE_USER),
+  BREVO_NEWSLETTER_TEMPLATE_OPTIN: toNumber(BREVO_NEWSLETTER_TEMPLATE_OPTIN),
+  BREVO_NEWSLETTER_LIST: toNumber(BREVO_NEWSLETTER_LIST),
+}
+
+const BBB_PULL_MEETINGS = process.env.NODE_ENV !== 'test' && BBB_URL
+
+const BBB = {
+  BBB_PULL_MEETINGS,
+  BBB_SHARED_SECRET,
+  BBB_URL,
+  BBB_WEBHOOK_URL,
+}
+
+const FRONTEND = {
+  FRONTEND_URL,
+}
 
 export const CONFIG = {
   ...BREVO,
