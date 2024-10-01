@@ -39,7 +39,7 @@ const steps: Step[] = [
   {
     component: EnterNameAndVisibility,
     id: 'settings',
-    title: 'Tisch erstellen',
+    title: 'Tisch eröffnen',
     submit: 'users',
     submitText: 'Weiter',
     back: 'previous',
