@@ -5,7 +5,7 @@ import { TransactionalEmailsApi } from '@getbrevo/brevo'
 import { CONFIG } from '#config/config'
 import { prisma } from '#src/prisma'
 
-import { confirmNewsletter, sendContactEmails, subscribeToNewsletter } from './Brevo'
+import { confirmNewsletter, sendContactEmails, subscribeToNewsletter } from '.'
 
 CONFIG.BREVO_KEY = 'MY KEY'
 CONFIG.BREVO_ADMIN_NAME = 'Peter Lustig'

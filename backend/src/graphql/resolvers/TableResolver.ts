@@ -25,6 +25,7 @@ import {
   EVENT_UPDATE_TABLE,
 } from '#src/event/Events'
 import logger from '#src/logger'
+import { deleteTable } from '#src/use-cases/delete-table'
 
 import type { PrismaClient, UserWithMeeting, UsersWithMeetings } from '#src/prisma'
 
@@ -408,43 +409,7 @@ export class TableResolver {
       user,
       dataSources: { prisma },
     } = context
-
-    const meeting = await prisma.meeting.findFirst({
-      where: {
-        id: tableId,
-        users: {
-          some: {
-            userId: user.id,
-          },
-        },
-      },
-      include: {
-        users: true,
-      },
-    })
-    if (!meeting) {
-      throw new Error('Meeting not found!')
-    }
-    try {
-      await prisma.usersInMeetings.delete({
-        where: {
-          meetingId_userId: {
-            userId: user.id,
-            meetingId: tableId,
-          },
-        },
-      })
-      if (!meeting.users.some((u) => u.userId !== user.id && u.role === 'MODERATOR')) {
-        await prisma.meeting.delete({
-          where: {
-            id: tableId,
-          },
-        })
-      }
-    } catch (e) {
-      logger.error('User could not be detached', e)
-      throw new Error('User could not be detached.')
-    }
+    await deleteTable({ prisma, logger })({ userId: user.id, tableId })
 
     return true
   }

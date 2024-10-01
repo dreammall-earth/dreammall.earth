@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=https://goauthentik.io/blueprints/schema.json
+version: 1
+metadata:
+  name: Webhooks
+context:
+  dreammall_backend_url: !Env [DREAMMALL_BACKEND_URL, "http://backend:4000"]
+  dreammall_webhook_secret: !Env [DREAMMALL_WEBHOOK_SECRET, ""]
+entries:
+- model: authentik_blueprints.metaapplyblueprint
+  attrs:
+    identifiers:
+      path: system/bootstrap.yaml
+    required: false
+- model: authentik_events.notificationtransport
+  id: webhook_notification_transport
+  identifiers:
+    name: webhook_notification_transport
+  attrs:
+    mode: webhook
+    webhook_url: !Format ['%s/authentik-webhook?authorization=%s', !Context dreammall_backend_url, !Context dreammall_webhook_secret]
+- model: authentik_core.group
+  id: group
+  state: created
+  identifiers:
+    name: authentik Admins
+
+- model: authentik_policies_event_matcher.eventmatcherpolicy
+  id: delete_user_event_matcher
+  identifiers:
+    name: delete_user_event_matcher
+  attrs:
+    action: model_deleted
+    model: authentik_core.user
+- model: authentik_events.notificationrule
+  id: webhook_notification
+  identifiers:
+    name: webhook_notification
+  attrs:
+    severity: "notice"
+    group: !KeyOf group
+    transports:
+      - !KeyOf webhook_notification_transport
+- model: authentik_policies.policybinding
+  id: delete_user_event_matcher_binding
+  identifiers:
+    order: 0
+    policy: !KeyOf delete_user_event_matcher
+    target: !KeyOf webhook_notification
