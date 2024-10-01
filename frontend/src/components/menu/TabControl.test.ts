@@ -22,14 +22,12 @@ describe('TabControl', () => {
   let wrapper: ReturnType<typeof Wrapper>
 
   beforeEach(() => {
-    vi.useFakeTimers()
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     mockedUsePageContext.mockReturnValue({
       urlPathname: '/',
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any)
     wrapper = Wrapper()
-    vi.runAllTimers()
   })
 
   it('renders', () => {
@@ -68,11 +66,7 @@ describe('TabControl', () => {
     })
   })
 
-  describe('click tab control button', () => {
-    beforeEach(async () => {
-      await wrapper.find('button.tab-control').trigger('click')
-    })
-
+  describe('tab control functionality', () => {
     it('has two menu items', () => {
       expect(wrapper.find('button.tab-control').findAll('a.item')).toHaveLength(2)
     })
@@ -87,28 +81,12 @@ describe('TabControl', () => {
       })
     })
 
-    describe('set item with menu closed', () => {
-      beforeEach(async () => {
-        vi.runAllTimers()
-        await wrapper.findAll('a.item')[1].trigger('click')
+    it('always shows all items', () => {
+      const items = wrapper.findAll('a.item')
+      expect(items).toHaveLength(2)
+      items.forEach((item) => {
+        expect(item.isVisible()).toBe(true)
       })
-
-      it('does not change the active item', () => {
-        expect(wrapper.findAll('a.item')[0].classes('active')).toBe(true)
-      })
-    })
-  })
-
-  describe('unmount', () => {
-    const timeOutSpy = vi.spyOn(global.window, 'clearTimeout')
-
-    beforeEach(() => {
-      wrapper.unmount()
-    })
-
-    it('clears timeouts', () => {
-      // eslint-disable-next-line vitest/prefer-called-with
-      expect(timeOutSpy).toHaveBeenCalled()
     })
   })
 })

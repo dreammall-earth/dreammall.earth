@@ -1,9 +1,5 @@
 <template>
-  <button
-    ref="tabControl"
-    class="tab-control ma-auto border-sm open"
-    @click="() => {}"
-  >
+  <button ref="tabControl" class="tab-control ma-auto border-sm open" @click="() => {}">
     <div v-show="isSliding" ref="marker" class="marker"></div>
     <div class="d-flex align-center justify-center h-100 w-100">
       <a
@@ -26,7 +22,9 @@
 <script lang="ts" setup>
 import { navigate } from 'vike/client/router'
 import { onMounted, ref } from 'vue'
+
 import { usePageContext } from '#root/renderer/context/usePageContext'
+
 import type { Ref } from 'vue'
 
 const pageContext = usePageContext()

@@ -9,7 +9,7 @@ exports[`TabControl > renders 1`] = `
   >
     
     <button
-      class="tab-control ma-auto border-sm"
+      class="tab-control ma-auto border-sm open"
       data-v-d58c92bb=""
     >
       <div
