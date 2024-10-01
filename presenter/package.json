@@ -51,7 +51,7 @@
     "@vitejs/plugin-vue": "^5.1.4",
     "@vue/apollo-composable": "^4.2.1",
     "@vue/apollo-option": "^4.2.0",
-    "@vue/compiler-sfc": "^3.5.8",
+    "@vue/compiler-sfc": "^3.5.10",
     "@vue/server-renderer": "3.4.38",
     "compression": "^1.7.4",
     "cross-env": "^7.0.3",
