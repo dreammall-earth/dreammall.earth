@@ -142,7 +142,6 @@ const openTable = (id: number) => {
   padding-top: 70px;
   background: var(--v-sidebar-background) !important;
   backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
   transition:
     transform 0.3s ease,
     width 0.3s ease,
