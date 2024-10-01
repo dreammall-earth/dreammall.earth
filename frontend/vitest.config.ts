@@ -9,13 +9,7 @@ export default mergeConfig(
       css: true,
       globals: true,
       environment: 'happy-dom',
-      setupFiles: [
-        'scripts/tests/mock.$t.ts',
-        'scripts/tests/mock.vikePageContext.ts',
-        'scripts/tests/mock.authService.ts',
-        'scripts/tests/plugin.pinia.ts',
-        'scripts/tests/plugin.i18n-vuetify.ts',
-      ],
+      setupFiles: 'src/tests/setupFiles/vueTestUtilsConfig.ts',
       exclude: [
         ...configDefaults.exclude,
         // index page due to canvas issues
