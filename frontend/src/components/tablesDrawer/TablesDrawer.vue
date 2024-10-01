@@ -140,7 +140,7 @@ const openTable = (id: number) => {
   top: 0 !important;
   height: 100% !important;
   padding-top: 70px;
-  background: var(--v-sidebar-background) !important;
+  background: #3d4753bf;
   transition:
     transform 0.3s ease,
     width 0.3s ease,
