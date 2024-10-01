@@ -175,8 +175,8 @@ onMounted(() => {
   line-height: 150%;
   color: #222;
   background-color: var(--background-color);
-  border-radius: 27.067px;
   border-color: rgb(255 255 255 / 78%) !important;
+  border-radius: 27.067px;
 
   &.sliding .item {
     background-color: transparent;
