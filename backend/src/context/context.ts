@@ -12,13 +12,27 @@ const JWKS = createRemoteJWKSet(new URL(CONFIG.JWKS_URI))
 
 export type Context = {
   config: typeof CONFIG
-  user: UserWithProfile | null
+  user: UserWithProfile
   dataSources: { prisma: PrismaClient }
 }
 
 export interface CustomJwtPayload {
   nickname: string
   name: string
+}
+
+export const unauthenticatedUser: UserWithProfile = {
+  id: -1,
+  referenceId: '0000000',
+  createdAt: new Date(),
+  name: 'Unauthenticated User',
+  username: 'unauthenticatedUser',
+  introduction: null,
+  availability: null,
+  meetingId: null,
+  meeting: null,
+  userDetail: [],
+  socialMedia: [],
 }
 
 const decodePayload = async (
@@ -35,12 +49,10 @@ const decodePayload = async (
   }
 }
 
-const getCurrentUser = async (
-  authorization: string | undefined,
-): Promise<UserWithProfile | null> => {
+const getCurrentUser = async (authorization: string | undefined): Promise<UserWithProfile> => {
   const payload = await decodePayload(authorization)
   if (!payload) {
-    return null
+    return unauthenticatedUser
   }
   return findOrCreateUser(payload)
 }

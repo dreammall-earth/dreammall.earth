@@ -46,7 +46,6 @@ export class TableResolver {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
 
     const oldMeetindID = user.meetingId
 
@@ -112,7 +111,6 @@ export class TableResolver {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
 
     if (!user.meetingId) {
       throw new Error('User has no meeting!')
@@ -161,7 +159,6 @@ export class TableResolver {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
 
     if (!user.meetingId) {
       throw new Error('No meeting for user!')
@@ -190,15 +187,7 @@ export class TableResolver {
   @Authorized()
   @Query(() => OpenTables)
   async tables(@Ctx() context: Context): Promise<OpenTables> {
-    const {
-      dataSources: { prisma },
-    } = context
-    const user = await prisma.user.findUnique({
-      where: {
-        id: context.user?.id,
-      },
-    })
-    if (!user) throw new Error('User not found!')
+    const { user } = context
     const meetings = await getMeetings()
     return openTablesFromOpenMeetings(context)({ meetings, user })
   }
@@ -218,7 +207,6 @@ export class TableResolver {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
 
     // Get Meeting where user.id and userIds are Moderator
     // Check if GroupMeeting already exist how to recognize the Meeting?
@@ -254,7 +242,6 @@ export class TableResolver {
   @Query(() => String)
   async joinWelcomeTable(@Ctx() context: Context): Promise<string> {
     const { user, config } = context
-    if (!user) throw new Error('User not found!')
 
     const { WELCOME_TABLE_MEETING_ID, WELCOME_TABLE_NAME } = config
 
@@ -283,8 +270,6 @@ export class TableResolver {
       config,
       dataSources: { prisma },
     } = context
-
-    if (!user) throw new Error('User not found!')
 
     const table = await prisma.meeting.findUnique({
       where: {
@@ -396,7 +381,7 @@ export class TableResolver {
       where: {
         users: {
           some: {
-            userId: user?.id,
+            userId: user.id,
             role: AttendeeRole.MODERATOR,
           },
         },
@@ -423,14 +408,13 @@ export class TableResolver {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
 
     const meeting = await prisma.meeting.findFirst({
       where: {
         id: tableId,
         users: {
           some: {
-            userId: user?.id,
+            userId: user.id,
           },
         },
       },
@@ -445,12 +429,12 @@ export class TableResolver {
       await prisma.usersInMeetings.delete({
         where: {
           meetingId_userId: {
-            userId: user?.id,
+            userId: user.id,
             meetingId: tableId,
           },
         },
       })
-      if (!meeting.users.some((u) => u.userId !== user?.id && u.role === 'MODERATOR')) {
+      if (!meeting.users.some((u) => u.userId !== user.id && u.role === 'MODERATOR')) {
         await prisma.meeting.delete({
           where: {
             id: tableId,
@@ -480,7 +464,6 @@ export class TableResolver {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
 
     let meeting = await prisma.meeting.findFirst({
       where: {
@@ -613,9 +596,9 @@ const openTablesFromOpenMeetings =
         const isModerator =
           meeting.users.some(
             (user) =>
-              meeting.user?.id === context.user?.id ||
-              (context.user?.id === user.userId && user.role === 'MODERATOR'),
-          ) || meeting.user?.id === context.user?.id
+              meeting.user?.id === context.user.id ||
+              (context.user.id === user.userId && user.role === 'MODERATOR'),
+          ) || meeting.user?.id === context.user.id
         const openTable = OpenTable.fromMeetingInfo(
           meetingInfo,
           meeting.id ? meeting.id : 0,

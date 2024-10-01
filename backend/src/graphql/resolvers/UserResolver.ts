@@ -22,7 +22,6 @@ export class UserResolver {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) return []
     const where: Prisma.UserWhereInput = {}
     if (!includeSelf) {
       where.NOT = { id: user.id }
@@ -44,8 +43,6 @@ export class UserResolver {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
-
     return createCurrentUser(prisma)(user)
   }
 
@@ -59,8 +56,6 @@ export class UserResolver {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
-
     const updatedUser = await prisma.user.update({
       where: {
         id: user.id,
@@ -81,7 +76,6 @@ export class UserResolver {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
 
     const detail = await prisma.userDetail.create({
       data: {
@@ -103,7 +97,6 @@ export class UserResolver {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
 
     const detail = user.userDetail.find((d) => d.id === id)
 
@@ -128,7 +121,6 @@ export class UserResolver {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
 
     const socialMedia = await prisma.socialMedia.create({
       data: {
@@ -150,7 +142,6 @@ export class UserResolver {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
 
     const socialMedia = user.socialMedia.find((s) => s.id === id)
 
