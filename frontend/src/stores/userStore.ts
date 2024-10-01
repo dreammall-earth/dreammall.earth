@@ -56,9 +56,8 @@ export type SocialMedia = {
   link: string
 }
 
-export type CurrentUser = {
+export type UserWithProfile = {
   id: number
-  referenceId: string
   name: string
   username: string
   avatar?: string
@@ -68,6 +67,8 @@ export type CurrentUser = {
   details: UserDetail[]
   social: SocialMedia[]
 }
+
+export type CurrentUser = UserWithProfile & { referenceId: string }
 
 export type SearchUser = {
   id: number
