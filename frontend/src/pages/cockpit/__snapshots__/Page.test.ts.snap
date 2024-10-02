@@ -990,7 +990,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
       >
         
         <div
-          class="cockpit"
+          class="cockpit px-8"
           data-v-b49ea567=""
         >
           
