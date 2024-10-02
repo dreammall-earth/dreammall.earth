@@ -65,7 +65,7 @@ const steps: Step[] = [
     component: EnterNameAndVisibility,
     id: 'settings',
     title: t('dream-mall-panel.setup.table-creation-title'),
-    submit: () => (tableSettings.isPrivate ? 'users' : 'end'),
+    submit: 'next',
     submitText: t('dream-mall-panel.setup.continue'),
     back: 'previous',
   },
@@ -83,7 +83,7 @@ const steps: Step[] = [
     title: t('dream-mall-panel.setup.submit-title'),
     submit: 'next',
     submitText: t('dream-mall-panel.setup.create-table'),
-    back: () => (tableSettings.isPrivate ? 'users' : 'settings'),
+    back: 'previous',
     canBack: false,
   },
 ]
