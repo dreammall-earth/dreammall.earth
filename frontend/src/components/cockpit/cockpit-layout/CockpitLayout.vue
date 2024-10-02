@@ -1,5 +1,5 @@
 <template>
-  <div class="cockpit">
+  <div class="cockpit px-8">
     <slot></slot>
   </div>
 </template>
@@ -20,6 +20,7 @@
   .cockpit {
     grid-template-columns: 400px 400px;
     max-width: 1200px;
+    padding-bottom: 35px;
   }
 }
 </style>
