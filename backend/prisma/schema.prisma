@@ -61,6 +61,7 @@ model Event {
 
 model User {
   id                Int      @id @default(autoincrement())
+  pk                Int?     @unique
   referenceId       String   @db.VarChar(140) @unique
   username          String   @db.VarChar(100) @unique
   name              String   @db.VarChar(254)

@@ -34,7 +34,7 @@
     <ModalPanel />
 
     <!-- Page Content Container -->
-    <v-container fluid class="page-container px-8 text-font">
+    <v-container fluid class="page-container text-font">
       <slot></slot>
     </v-container>
 
@@ -139,6 +139,8 @@ const { isModalActive } = useModal()
 
   @media #{map.get($display-breakpoints, 'sm-and-down')} {
     .page-container {
+      height: 24%;
+      padding: 16px 0;
       margin-bottom: 50px;
     }
   }
