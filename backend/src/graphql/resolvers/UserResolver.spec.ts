@@ -8,6 +8,7 @@ import { mockContextValue } from '#test/mockContextValue'
 import type { Context } from '#src/context'
 import type { UserWithProfile } from '#src/prisma'
 
+const pk = 36
 const nickname = 'mockedUser'
 const name = 'User'
 
@@ -47,7 +48,7 @@ describe('UserResolver', () => {
     describe('authenticated', () => {
       let user: UserWithProfile
       beforeEach(async () => {
-        user = await findOrCreateUser({ nickname, name })
+        user = await findOrCreateUser({ prisma })({ pk, nickname, name })
       })
 
       describe('include self is false', () => {
@@ -107,21 +108,25 @@ describe('UserResolver', () => {
           await prisma.user.createMany({
             data: [
               {
+                pk: 2345,
                 name: 'Thomas Schmitt',
                 username: 'tom',
                 referenceId: 'UQV6KSVD',
               },
               {
+                pk: 2346,
                 name: 'Thomas Schmidt',
                 username: 'Toms',
                 referenceId: '1ZZIRJ2I',
               },
               {
+                pk: 2347,
                 name: 'Tomas Schmid',
                 username: 'Schmid',
                 referenceId: 'NV44R1LR',
               },
               {
+                pk: 2348,
                 name: 'Tomás Schmit',
                 username: 'Schmit',
                 referenceId: 'MC0CW1MV',
@@ -371,7 +376,7 @@ describe('UserResolver', () => {
     describe('authenticated', () => {
       let user: UserWithProfile
       beforeEach(async () => {
-        user = await findOrCreateUser({ nickname, name })
+        user = await findOrCreateUser({ prisma })({ pk, nickname, name })
       })
       let userId: number | undefined
 
@@ -382,6 +387,7 @@ describe('UserResolver', () => {
           const referenceId = 'RENC1MCC'
           const user = await prisma.user.create({
             data: {
+              pk: 89,
               username: 'Some username',
               name: 'Some name',
               referenceId,
@@ -507,6 +513,7 @@ describe('UserResolver', () => {
 
           const bibi = await prisma.user.create({
             data: {
+              pk: 77,
               username: 'bibi',
               name: 'Bibi Bloxberg',
               referenceId: 'BAN2ZWXV',
@@ -515,6 +522,7 @@ describe('UserResolver', () => {
 
           const peter = await prisma.user.create({
             data: {
+              pk: 78,
               username: 'peter',
               name: 'Peter Lustig',
               referenceId: 'Q31R9L35',
@@ -680,7 +688,7 @@ describe('UserResolver', () => {
     describe('authenticated', () => {
       let user: UserWithProfile
       beforeEach(async () => {
-        user = await findOrCreateUser({ nickname, name })
+        user = await findOrCreateUser({ prisma })({ pk, nickname, name })
         await prisma.user.update({
           where: {
             username: 'mockedUser',
@@ -708,6 +716,8 @@ describe('UserResolver', () => {
         ).resolves.toEqual({
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           id: expect.any(Number),
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          pk: expect.any(Number),
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           referenceId: expect.any(String),
           username: 'mockedUser',
@@ -775,6 +785,8 @@ describe('UserResolver', () => {
           ).resolves.toEqual({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            pk: expect.any(Number),
             username: 'mockedUser',
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             referenceId: expect.any(String),
@@ -888,6 +900,8 @@ describe('UserResolver', () => {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            pk: expect.any(Number),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             referenceId: expect.any(String),
             name: 'Bibi Bloxberg',
             username: 'mockedUser',
@@ -967,6 +981,8 @@ describe('UserResolver', () => {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            pk: expect.any(Number),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             referenceId: expect.any(String),
             name: 'User',
             username: 'mockedUser',
@@ -986,6 +1002,8 @@ describe('UserResolver', () => {
           ).resolves.toEqual({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             id: expect.any(Number),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            pk: expect.any(Number),
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             referenceId: expect.any(String),
             name: 'Bibi Bloxberg',
@@ -1044,7 +1062,7 @@ describe('UserResolver', () => {
     describe('authenticated', () => {
       let user: UserWithProfile
       beforeEach(async () => {
-        user = await findOrCreateUser({ nickname, name })
+        user = await findOrCreateUser({ prisma })({ pk, nickname, name })
       })
 
       describe('with valid data', () => {
@@ -1168,7 +1186,7 @@ describe('UserResolver', () => {
     describe('authenticated', () => {
       let user: UserWithProfile
       beforeEach(async () => {
-        user = await findOrCreateUser({ nickname, name })
+        user = await findOrCreateUser({ prisma })({ pk, nickname, name })
       })
       describe('detail id does not exist', () => {
         it('throws detail not found error', async () => {
@@ -1352,7 +1370,7 @@ describe('UserResolver', () => {
     describe('authenticated', () => {
       let user: UserWithProfile
       beforeEach(async () => {
-        user = await findOrCreateUser({ nickname, name })
+        user = await findOrCreateUser({ prisma })({ pk, nickname, name })
       })
 
       describe('with valid data', () => {
@@ -1476,7 +1494,7 @@ describe('UserResolver', () => {
     describe('authenticated', () => {
       let user: UserWithProfile
       beforeEach(async () => {
-        user = await findOrCreateUser({ nickname, name })
+        user = await findOrCreateUser({ prisma })({ pk, nickname, name })
       })
 
       describe('social media id does not exist', () => {
