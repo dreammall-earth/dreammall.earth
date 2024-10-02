@@ -179,7 +179,7 @@ export const subscribeToNewsletter =
       } else {
         // TODO: logging or event
       }
-    } catch (error) {
+    } catch (error) /* eslint-disable-line no-catch-all/no-catch-all */ {
       // TODO: logging or event
     }
 
@@ -235,7 +235,7 @@ const confirmNewsletter =
       } else {
         // TODO: logging or event
       }
-    } catch (error) {
+    } catch (error) /* eslint-disable-line no-catch-all/no-catch-all */ {
       // TODO: logging or event
     }
 
