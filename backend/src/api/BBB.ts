@@ -26,7 +26,7 @@ const parser = new XMLParser({
 
 const defaultCreateMeetingBodyOptions = {
   welcome: '<div></div>',
-  meetingLayout: MeetingLayouts.SMART_LAYOUT,
+  meetingLayout: MeetingLayouts.CUSTOM_LAYOUT,
   logoutURL: new URL('table-closed/', CONFIG.FRONTEND_URL),
 }
 
