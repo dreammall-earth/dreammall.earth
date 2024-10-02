@@ -29,12 +29,20 @@ import type { ComponentExposed } from 'vue-component-type-helpers'
 const tablesStore = useTablesStore()
 const { defaultMyTableName } = storeToRefs(tablesStore)
 
+const resetTableSettings = () => {
+  tableSettings.tableId = 0
+  tableSettings.name = defaultMyTableName.value
+  tableSettings.isPrivate = false
+  tableSettings.users = []
+}
+
 const tableSettings = reactive<MyTableSettings>({
-  name: defaultMyTableName.value,
+  name: '',
   isPrivate: false,
   users: [],
   tableId: 0,
 })
+resetTableSettings()
 
 const { t } = useI18n()
 
@@ -105,5 +113,10 @@ const onSubmit = async () => {
 
 const stepControl = ref<ComponentExposed<typeof StepControl<MyTableSettings>> | null>(null)
 
-defineExpose({ reset: () => stepControl.value?.reset() })
+defineExpose({
+  reset: () => {
+    resetTableSettings()
+    stepControl.value?.reset()
+  },
+})
 </script>
