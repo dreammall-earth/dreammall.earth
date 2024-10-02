@@ -4,7 +4,18 @@ import { CONFIG } from '#config/config'
 
 const { LOG_LEVEL } = CONFIG
 
-const logLevelsMap: Record<typeof LOG_LEVEL, number> = {
+const logLevels = ['SILLY', 'TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL'] as const
+type LogLevel = (typeof logLevels)[number]
+
+function isLogLevel(level: string): level is LogLevel {
+  return logLevels.includes(level as LogLevel)
+}
+
+if (!isLogLevel(LOG_LEVEL)) {
+  throw new Error(`Unknown log level '${LOG_LEVEL}'`)
+}
+
+const logLevelsMap: Record<LogLevel, number> = {
   SILLY: 0,
   TRACE: 1,
   DEBUG: 2,
@@ -43,17 +54,6 @@ class LoggerSingleton {
 
     return LoggerSingleton.instance
   }
-}
-
-const logLevels = ['SILLY', 'TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL'] as const
-type LogLevel = (typeof logLevels)[number]
-
-function isLogLevel(level: string): level is LogLevel {
-  return logLevels.includes(level as LogLevel)
-}
-
-if (!isLogLevel(LOG_LEVEL)) {
-  throw new Error(`Unknown log level '${LOG_LEVEL}'`)
 }
 
 const logger = LoggerSingleton.getInstance()
