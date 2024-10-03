@@ -3,5 +3,5 @@ import { AuthChecker } from 'type-graphql'
 import { Context } from '#src/context'
 
 export const authChecker: AuthChecker<Context> = ({ context }) => {
-  return !!context.user && context.user.id !== -1
+  return !!context.user
 }
