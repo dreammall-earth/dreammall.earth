@@ -142,11 +142,13 @@ query {
         let peter: UserWithProfile
 
         beforeAll(async () => {
-          bibi = await findOrCreateUser({
+          bibi = await findOrCreateUser({ prisma })({
+            pk: 43,
             nickname: 'bibi',
             name: 'Bibi Bloxberg',
           })
-          peter = await findOrCreateUser({
+          peter = await findOrCreateUser({ prisma })({
+            pk: 44,
             nickname: 'peter',
             name: 'Peter Lustig',
           })
