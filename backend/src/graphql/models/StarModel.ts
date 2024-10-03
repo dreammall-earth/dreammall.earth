@@ -1,7 +1,7 @@
 import { ObjectType, Field, Float } from 'type-graphql'
 
-import { CurrentUser } from '#models/UserModel'
-import { UserWithProfile } from '#src/prisma'
+import { UserWithProfile } from '#models/UserModel'
+import { UserWithProfile as DbUserWithProfile } from '#src/prisma'
 
 export type StarData = {
   id: string
@@ -10,7 +10,7 @@ export type StarData = {
   distance: number // relative distance
   magnitude: number // relative size
   color: number // relative color
-  data: UserWithProfile
+  data: DbUserWithProfile
 }
 
 @ObjectType()
@@ -22,7 +22,7 @@ export class Star {
     this.distance = starData.distance
     this.magnitude = starData.magnitude
     this.color = starData.color
-    this.data = new CurrentUser(starData.data, [])
+    this.data = new UserWithProfile(starData.data, [])
   }
 
   @Field()
@@ -43,8 +43,8 @@ export class Star {
   @Field(() => Float)
   color: number
 
-  @Field(() => CurrentUser)
-  data: CurrentUser
+  @Field(() => UserWithProfile)
+  data: UserWithProfile
 }
 
 @ObjectType()

@@ -31,7 +31,6 @@ query {
       color
       data {
         id
-        referenceId
         username
         name
         introduction
@@ -115,8 +114,6 @@ query {
                         color: 1,
                         data: {
                           id: user.id,
-                          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                          referenceId: expect.any(String),
                           username: user.username,
                           name: user.name,
                           introduction: null,

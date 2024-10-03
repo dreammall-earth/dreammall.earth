@@ -5,7 +5,7 @@ import {
 } from '@prisma/client'
 import { ObjectType, Field, Int, registerEnumType } from 'type-graphql'
 
-import { UsersWithMeetings, UserWithProfile } from '#src/prisma'
+import { UsersWithMeetings, UserWithProfile as DbUserWithProfile } from '#src/prisma'
 
 import { Table } from './TableModel'
 
@@ -110,12 +110,9 @@ export class SocialMedia {
 }
 
 @ObjectType()
-export class CurrentUser {
-  constructor(user: UserWithProfile, users: UsersWithMeetings[]) {
-    this.id = user.id
-    this.referenceId = user.referenceId
-    this.username = user.username
-    this.name = user.name
+export class UserWithProfile extends User {
+  constructor(user: DbUserWithProfile, users: UsersWithMeetings[]) {
+    super(user as DbUser)
     this.introduction = user.introduction
     this.availability = user.availability as UserAvailability
 
@@ -123,18 +120,6 @@ export class CurrentUser {
     this.social = user.socialMedia.map((s) => new SocialMedia(s))
     this.table = user.meeting ? Table.fromMeeting(user.meeting, users) : null
   }
-
-  @Field(() => Int)
-  id: number
-
-  @Field()
-  referenceId: string
-
-  @Field()
-  username: string
-
-  @Field()
-  name: string
 
   @Field(() => String, { nullable: true })
   introduction: string | null
@@ -150,4 +135,15 @@ export class CurrentUser {
 
   @Field(() => Table, { nullable: true })
   table: Table | null
+}
+
+@ObjectType()
+export class CurrentUser extends UserWithProfile {
+  constructor(user: DbUserWithProfile, users: UsersWithMeetings[]) {
+    super(user, users)
+    this.referenceId = user.referenceId
+  }
+
+  @Field()
+  referenceId: string
 }
