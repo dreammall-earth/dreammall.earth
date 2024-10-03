@@ -20,6 +20,7 @@ let testServer: ApolloServer<Context>
 
 CONFIG.FRONTEND_URL = 'https://my.frontend.url'
 
+const pk = 7
 const nickname = 'mockedUser'
 const name = 'User'
 
@@ -554,10 +555,22 @@ describe('TableResolver', () => {
     let peterUser: UserWithProfile
     let raeuberUser: UserWithProfile
     beforeAll(async () => {
-      user = await findOrCreateUser({ nickname, name })
-      bibiUser = await findOrCreateUser({ nickname: 'bibi', name: 'Bibi Bloxberg' })
-      peterUser = await findOrCreateUser({ nickname: 'peter', name: 'Peter Lustig' })
-      raeuberUser = await findOrCreateUser({ nickname: 'raeuber', name: 'Räuber Hotzenplotz' })
+      user = await findOrCreateUser({ prisma })({ pk, nickname, name })
+      bibiUser = await findOrCreateUser({ prisma })({
+        pk: 8,
+        nickname: 'bibi',
+        name: 'Bibi Bloxberg',
+      })
+      peterUser = await findOrCreateUser({ prisma })({
+        pk: 9,
+        nickname: 'peter',
+        name: 'Peter Lustig',
+      })
+      raeuberUser = await findOrCreateUser({ prisma })({
+        pk: 10,
+        nickname: 'raeuber',
+        name: 'Räuber Hotzenplotz',
+      })
     })
 
     describe('createMyTable', () => {
@@ -680,7 +693,11 @@ describe('TableResolver', () => {
 
       describe('meeting exists', () => {
         it('creates new meeting and deletes old one', async () => {
-          user = await findOrCreateUser({ name: user.name, nickname: user.username })
+          user = await findOrCreateUser({ prisma })({
+            pk,
+            name: user.name,
+            nickname: user.username,
+          })
 
           expect(user).not.toBeNull()
 
@@ -779,7 +796,8 @@ describe('TableResolver', () => {
 
       describe('private meeting exists', () => {
         it('creates new meeting and deletes old one', async () => {
-          const userWithMeeting = await findOrCreateUser({
+          const userWithMeeting = await findOrCreateUser({ prisma })({
+            pk,
             name: user.name,
             nickname: user.username,
           })
@@ -865,7 +883,7 @@ describe('TableResolver', () => {
 
       describe('private meeting exists', () => {
         beforeAll(async () => {
-          user = await findOrCreateUser({ nickname, name })
+          user = await findOrCreateUser({ prisma })({ pk, nickname, name })
           await testServer.executeOperation(
             {
               query: createMyTableMutation,
@@ -880,7 +898,7 @@ describe('TableResolver', () => {
         })
 
         it('returns the updated table', async () => {
-          user = await findOrCreateUser({ nickname, name })
+          user = await findOrCreateUser({ prisma })({ pk, nickname, name })
           await expect(
             testServer.executeOperation(
               {
@@ -1024,7 +1042,7 @@ describe('TableResolver', () => {
 
       describe('privat meeting exists', () => {
         it('returns the updated table', async () => {
-          user = await findOrCreateUser({ nickname, name })
+          user = await findOrCreateUser({ prisma })({ pk, nickname, name })
           await expect(
             testServer.executeOperation(
               {
@@ -1141,7 +1159,7 @@ describe('TableResolver', () => {
         })
 
         it('returns id of the table', async () => {
-          user = await findOrCreateUser({ nickname, name })
+          user = await findOrCreateUser({ prisma })({ pk, nickname, name })
           await expect(
             testServer.executeOperation(
               {
@@ -1195,7 +1213,7 @@ describe('TableResolver', () => {
       describe('createMeeting returns undefined', () => {
         it('throws meeting error', async () => {
           createMeetingMock.mockResolvedValue(null)
-          user = await findOrCreateUser({ nickname, name })
+          user = await findOrCreateUser({ prisma })({ pk, nickname, name })
           await expect(
             testServer.executeOperation(
               {
@@ -1229,7 +1247,7 @@ describe('TableResolver', () => {
 
       describe('meeting does not exist', () => {
         it('returns Table', async () => {
-          user = await findOrCreateUser({ nickname, name })
+          user = await findOrCreateUser({ prisma })({ pk, nickname, name })
           await expect(
             testServer.executeOperation(
               {

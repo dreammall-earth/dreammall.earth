@@ -2,6 +2,7 @@ import { ApolloServer } from '@apollo/server'
 // import { faker } from '@faker-js/faker'
 
 import { findOrCreateUser } from '#src/context/findOrCreateUser'
+import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
 import { mockContextValue } from '#test/mockContextValue'
 // import { prisma } from '#src/prisma'
@@ -12,6 +13,7 @@ import type { UserWithProfile } from '#src/prisma'
 // import { MAX_STARS_TO_SHOW } from './StarmapResolver'
 // import { StarMap } from '#models/StarModel'
 
+const pk = 42
 const nickname = 'mockedUser'
 const name = 'User'
 
@@ -87,7 +89,7 @@ query {
     describe('authenticated', () => {
       let user: UserWithProfile
       beforeEach(async () => {
-        user = await findOrCreateUser({ nickname, name })
+        user = await findOrCreateUser({ prisma })({ pk, nickname, name })
       })
 
       describe('only the authenticated user in DB', () => {

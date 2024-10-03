@@ -39,13 +39,7 @@ const emit = defineEmits<StepEmits>()
 
 const tableSettings = defineModel<MyTableSettings>({ required: true })
 
-const onNext = () => {
-  if (tableSettings.value.isPrivate) {
-    emit('next')
-  } else {
-    emit('submit')
-  }
-}
+const onNext = () => emit('next')
 </script>
 
 <style lang="scss" scoped>
