@@ -12,6 +12,7 @@ import { periodicallyRegisterWebhook, handleWebhook } from '#api/BBB'
 import { CONFIG } from '#config/config'
 import { schema } from '#graphql/schema'
 import { expressContext, subscriptionContext } from '#src/context'
+import { prisma } from '#src/prisma'
 
 import logger from './logger'
 
@@ -83,7 +84,7 @@ export async function listen(port: number) {
   const serverCleanup = useServer(
     {
       schema,
-      context: subscriptionContext,
+      context: subscriptionContext({ prisma }),
     },
     wsServer,
   )
@@ -92,7 +93,7 @@ export async function listen(port: number) {
 
   await apolloServer.start()
 
-  app.use(expressMiddleware(apolloServer, { context: expressContext }))
+  app.use(expressMiddleware(apolloServer, { context: expressContext({ prisma }) }))
 
   httpServer.listen({ port })
 }

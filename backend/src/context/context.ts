@@ -1,7 +1,6 @@
 import { jwtVerify, createRemoteJWKSet } from 'jose'
 
 import { CONFIG } from '#config/config'
-import { prisma } from '#src/prisma'
 
 import { findOrCreateUser } from './findOrCreateUser'
 import { getToken } from './getToken'
@@ -12,27 +11,16 @@ const JWKS = createRemoteJWKSet(new URL(CONFIG.JWKS_URI))
 
 export type Context = {
   config: typeof CONFIG
-  user: UserWithProfile
+  user: UserWithProfile | null
   dataSources: { prisma: PrismaClient }
 }
 
-export interface CustomJwtPayload {
-  nickname: string
-  name: string
-}
+export type AuthenticatedContext = Omit<Context, 'user'> & { user: UserWithProfile }
 
-export const unauthenticatedUser: UserWithProfile = {
-  id: -1,
-  referenceId: '0000000',
-  createdAt: new Date(),
-  name: 'Unauthenticated User',
-  username: 'unauthenticatedUser',
-  introduction: null,
-  availability: null,
-  meetingId: null,
-  meeting: null,
-  userDetail: [],
-  socialMedia: [],
+export interface CustomJwtPayload {
+  pk: number
+  name: string
+  nickname: string
 }
 
 const decodePayload = async (
@@ -49,16 +37,21 @@ const decodePayload = async (
   }
 }
 
-const getCurrentUser = async (authorization: string | undefined): Promise<UserWithProfile> => {
-  const payload = await decodePayload(authorization)
-  if (!payload) {
-    return unauthenticatedUser
+const getCurrentUser =
+  (deps: { prisma: PrismaClient }) =>
+  async (authorization: string | undefined): Promise<UserWithProfile | null> => {
+    const payload = await decodePayload(authorization)
+    if (!payload) {
+      return null
+    }
+    return findOrCreateUser(deps)(payload)
   }
-  return findOrCreateUser(payload)
-}
 
-export const context: (token: string | undefined) => Promise<Context> = async (token) => {
-  const user = await getCurrentUser(token)
+export const context: (deps: {
+  prisma: PrismaClient
+}) => (token: string | undefined) => Promise<Context> = (deps) => async (token) => {
+  const { prisma } = deps
+  const user = await getCurrentUser(deps)(token)
   return {
     user,
     config: CONFIG,

@@ -6,7 +6,7 @@ import { AddSocialMediaInput } from '#inputs/AddSocialMediaInput'
 import { AddUserDetailInput } from '#inputs/AddUserDetailInput'
 import { UpdateUserInput } from '#inputs/UpdateUserInput'
 
-import type { Context } from '#src/context'
+import type { AuthenticatedContext } from '#src/context'
 import type { PrismaClient, UsersWithMeetings, UserWithProfile } from '#src/prisma'
 
 @Resolver()
@@ -16,7 +16,7 @@ export class UserResolver {
   async users(
     @Arg('includeSelf', { nullable: true }) includeSelf: boolean = false,
     @Arg('searchString', () => String, { nullable: true }) searchString: string | null | undefined,
-    @Ctx() context: Context,
+    @Ctx() context: AuthenticatedContext,
   ): Promise<User[]> {
     const {
       user,
@@ -38,7 +38,7 @@ export class UserResolver {
 
   @Authorized()
   @Query(() => CurrentUser)
-  async currentUser(@Ctx() context: Context): Promise<CurrentUser> {
+  async currentUser(@Ctx() context: AuthenticatedContext): Promise<CurrentUser> {
     const {
       user,
       dataSources: { prisma },
@@ -50,7 +50,7 @@ export class UserResolver {
   @Mutation(() => CurrentUser)
   async updateUser(
     @Arg('data') data: UpdateUserInput,
-    @Ctx() context: Context,
+    @Ctx() context: AuthenticatedContext,
   ): Promise<CurrentUser> {
     const {
       user,
@@ -70,7 +70,7 @@ export class UserResolver {
   @Mutation(() => UserDetail)
   async addUserDetail(
     @Arg('data') data: AddUserDetailInput,
-    @Ctx() context: Context,
+    @Ctx() context: AuthenticatedContext,
   ): Promise<UserDetail> {
     const {
       user,
@@ -91,7 +91,7 @@ export class UserResolver {
   @Mutation(() => Boolean)
   async removeUserDetail(
     @Arg('id', () => Int) id: number,
-    @Ctx() context: Context,
+    @Ctx() context: AuthenticatedContext,
   ): Promise<boolean> {
     const {
       user,
@@ -115,7 +115,7 @@ export class UserResolver {
   @Mutation(() => SocialMedia)
   async addSocialMedia(
     @Arg('data') data: AddSocialMediaInput,
-    @Ctx() context: Context,
+    @Ctx() context: AuthenticatedContext,
   ): Promise<SocialMedia> {
     const {
       user,
@@ -136,7 +136,7 @@ export class UserResolver {
   @Mutation(() => Boolean)
   async removeSocialMedia(
     @Arg('id', () => Int) id: number,
-    @Ctx() context: Context,
+    @Ctx() context: AuthenticatedContext,
   ): Promise<boolean> {
     const {
       user,

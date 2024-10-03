@@ -5,13 +5,13 @@ import { UserWithProfile } from '#src/prisma'
 
 import { distributeStarsToSectorsRecursive } from './starmap/starmap'
 
-import type { Context } from '#src/context'
+import type { AuthenticatedContext } from '#src/context'
 
 @Resolver()
 export class StarmapResolver {
   @Authorized()
   @Query(() => StarMap)
-  async starmap(@Ctx() context: Context): Promise<StarMap> {
+  async starmap(@Ctx() context: AuthenticatedContext): Promise<StarMap> {
     const {
       dataSources: { prisma },
     } = context

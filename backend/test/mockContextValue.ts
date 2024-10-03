@@ -1,11 +1,10 @@
-import { unauthenticatedUser } from '#src/context'
 import { prisma } from '#src/prisma'
 
 import type { Context } from '#src/context'
 
 export const mockContextValue: (overrides?: Partial<Context>) => Context = (overrides = {}) => {
   const defaults: Context = {
-    user: unauthenticatedUser,
+    user: null,
     config: {
       BREVO_KEY: '',
       BREVO_ADMIN_NAME: '',
