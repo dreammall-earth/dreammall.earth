@@ -1,12 +1,14 @@
 import { ApolloServer } from '@apollo/server'
 
 import { findOrCreateUser } from '#src/context/findOrCreateUser'
+import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
 import { mockContextValue } from '#test/mockContextValue'
 
 import type { Context } from '#src/context'
 import type { UserWithProfile } from '#src/prisma'
 
+const pk = 42
 const nickname = 'mockedUser'
 const name = 'User'
 
@@ -82,7 +84,7 @@ query {
     describe('authenticated', () => {
       let user: UserWithProfile
       beforeEach(async () => {
-        user = await findOrCreateUser({ nickname, name })
+        user = await findOrCreateUser({ prisma })({ pk, nickname, name })
       })
 
       describe('only the authenticated user in DB', () => {
