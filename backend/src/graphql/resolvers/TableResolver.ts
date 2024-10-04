@@ -693,7 +693,7 @@ const createBBBMeeting =
         name: data.name,
       },
       {
-        moderatorOnlyMessage: `Use this link to invite more people:<br/>${data.inviteLink}`,
+        moderatorOnlyMessage: `Mit diesem Link können weitere Gäste zu diesem Tisch eingeladen werden:<br/>${data.inviteLink}`,
       },
     )
     if (!meeting) {
