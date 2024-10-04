@@ -77,9 +77,12 @@ type UserWithProfile = Prisma.UserGetPayload<typeof userWithProfile>
 
 type DeamMallPrismaClient = typeof prisma
 
+const { PrismaClientValidationError } = Prisma
+
 export {
   prisma,
   DeamMallPrismaClient as PrismaClient,
+  PrismaClientValidationError,
   EventType,
   UserWithMeeting,
   UserWithProfile,
