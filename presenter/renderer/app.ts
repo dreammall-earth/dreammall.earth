@@ -11,6 +11,8 @@ import pinia from '#plugins/pinia'
 import CreateVuetify from '#plugins/vuetify'
 import { locales } from '#src/locales'
 
+import { setupSentry } from './sentry'
+
 const vuetify = CreateVuetify(i18n)
 
 function createApp(pageContext: PageContext, isClient = true) {
@@ -69,6 +71,11 @@ function createApp(pageContext: PageContext, isClient = true) {
   if (pageContext.locale && locales.includes(pageContext.locale)) {
     i18n.global.locale.value = pageContext.locale
   }
+
+  const {
+    SENTRY: { SENTRY_DSN: dsn, SENTRY_ENVIRONMENT: environment },
+  } = pageContext.publicEnv
+  setupSentry({ app, dsn, environment })
 
   return { app, i18n }
 }
