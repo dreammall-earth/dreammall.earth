@@ -29,6 +29,7 @@ import type { ComponentExposed } from 'vue-component-type-helpers'
 const resetInvitation = () => {
   invitation.userId = 0
   invitation.userName = ''
+  invitation.userAvatar = ''
   invitation.tableId = 0
   invitation.tableName = ''
 }
@@ -36,10 +37,17 @@ const resetInvitation = () => {
 const invitation = reactive<Invitation>({
   userId: 0,
   userName: '',
+  userAvatar: '',
   tableId: 0,
   tableName: '',
 })
 resetInvitation()
+
+// todo: remove test data
+invitation.userName = 'Max Mustermann'
+invitation.tableName = 'Männerkreis Wintersonnenwende NRW'
+// ^^^
+
 
 const { t } = useI18n()
 

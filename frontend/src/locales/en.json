@@ -86,7 +86,11 @@
       "table-name": "Table Name"
     },
     "incoming-invitation": {
-      "title": "Mall Talk Einladung"
+      "title": "Mall Talk Einladung",
+      "accept-table": "Join",
+      "dismiss-table": "Drop",
+      "accept-swap": "Swap",
+      "dismiss-swap": "Stay"
     }
   },
   "error": {

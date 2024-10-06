@@ -1,9 +1,16 @@
 <template>
-  <form class="d-flex flex-column align-center pa-4 w-100" @submit.prevent="onNext"></form>
+  <IncomingInvitationItem
+    :invitation="invitation"
+    :dismiss-caption="$t('dream-mall-panel.incoming-invitation.dismiss-table')"
+    :accept-caption="$t('dream-mall-panel.incoming-invitation.accept-table')"
+    @accept="() => emit('submit')"
+    @dismiss="() => emit('next')"
+  />
 </template>
 
 <script setup lang="ts">
 import Invitation from '#components/malltalk/interfaces/Invitation'
+import IncomingInvitationItem from '#components/malltalk/invitation/IncomingInvitationItem.vue'
 
 import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
 
@@ -15,6 +22,4 @@ const invitation = defineModel<Invitation>({ required: true })
 const onNext = () => emit('next')
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

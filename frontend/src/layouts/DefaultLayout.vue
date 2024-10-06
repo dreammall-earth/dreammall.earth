@@ -56,7 +56,8 @@
       </div>
       <div class="dream-mall-panel">
         <slot name="dream-mall-button" :close="() => toggleDrawer('dream-mall-button')">
-          <TableSetup ref="tableSetupRef" @close="toggleDrawer('dream-mall-button')" />
+<!--          <TableSetup ref="tableSetupRef" @close="toggleDrawer('dream-mall-button')" />-->
+          <InvitationSteps @close="toggleDrawer('dream-mall-button')" />
         </slot>
       </div>
     </div>
@@ -88,6 +89,7 @@ import UserInfo from '#components/menu/UserInfo.vue'
 import ModalPanel from '#components/modal/ModalPanel.vue'
 import useModal from '#components/modal/useModal'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
+import InvitationSteps from "#components/malltalk/invitation/InvitationSteps.vue";
 
 type DrawerType = 'tables' | 'dream-mall-button' | null
 
