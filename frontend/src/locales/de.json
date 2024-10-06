@@ -84,6 +84,9 @@
       "table-creation": "Tisch eröffnen",
       "table-creation-title": "Tisch eröffnen",
       "table-name": "Tischname"
+    },
+    "incoming-invitation": {
+      "title": "Mall Talk Einladung"
     }
   },
   "error": {

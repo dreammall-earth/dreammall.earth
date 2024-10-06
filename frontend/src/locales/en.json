@@ -84,6 +84,9 @@
       "table-creation": "Open Table",
       "table-creation-title": "Open Table",
       "table-name": "Table Name"
+    },
+    "incoming-invitation": {
+      "title": "Mall Talk Einladung"
     }
   },
   "error": {

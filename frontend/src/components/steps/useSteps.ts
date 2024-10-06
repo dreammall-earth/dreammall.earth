@@ -6,7 +6,7 @@ export type Step = {
   id: string
   title: string
   submit: StepId
-  submitText: string
+  submitText?: string
   back: StepId
   canBack?: boolean
 }
