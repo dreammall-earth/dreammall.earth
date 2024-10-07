@@ -19,9 +19,6 @@ export class StarmapResolver {
       dataSources: { prisma },
     } = context
 
-    // see PR https://github.com/dreammall-earth/dreammall.earth/pull/2536
-    if (!user) return new StarMap([], [])
-
     const users: UserWithProfile[] = await prisma.user.findMany({
       where: {
         NOT: { id: user.id },
