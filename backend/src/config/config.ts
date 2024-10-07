@@ -37,6 +37,9 @@ const {
 
   WELCOME_TABLE_MEETING_ID = uuidv4(),
   WELCOME_TABLE_NAME = 'DreamMall Coffeetime',
+
+  SENTRY_DSN,
+  SENTRY_ENVIRONMENT,
 } = process.env
 
 if (!JWKS_URI) {
@@ -73,6 +76,8 @@ export const CONFIG = {
   WELCOME_TABLE_MEETING_ID,
   WELCOME_TABLE_NAME,
   JWKS_URI,
+  SENTRY_DSN,
+  SENTRY_ENVIRONMENT,
 }
 
 // Config Checks
