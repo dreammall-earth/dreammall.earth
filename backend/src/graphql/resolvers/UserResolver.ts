@@ -6,7 +6,7 @@ import { AddSocialMediaInput } from '#inputs/AddSocialMediaInput'
 import { AddUserDetailInput } from '#inputs/AddUserDetailInput'
 import { UpdateUserInput } from '#inputs/UpdateUserInput'
 
-import type { Context } from '#src/context'
+import type { AuthenticatedContext } from '#src/context'
 import type { PrismaClient, UsersWithMeetings, UserWithProfile } from '#src/prisma'
 
 @Resolver()
@@ -16,13 +16,12 @@ export class UserResolver {
   async users(
     @Arg('includeSelf', { nullable: true }) includeSelf: boolean = false,
     @Arg('searchString', () => String, { nullable: true }) searchString: string | null | undefined,
-    @Ctx() context: Context,
+    @Ctx() context: AuthenticatedContext,
   ): Promise<User[]> {
     const {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) return []
     const where: Prisma.UserWhereInput = {}
     if (!includeSelf) {
       where.NOT = { id: user.id }
@@ -39,13 +38,11 @@ export class UserResolver {
 
   @Authorized()
   @Query(() => CurrentUser)
-  async currentUser(@Ctx() context: Context): Promise<CurrentUser> {
+  async currentUser(@Ctx() context: AuthenticatedContext): Promise<CurrentUser> {
     const {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
-
     return createCurrentUser(prisma)(user)
   }
 
@@ -53,14 +50,12 @@ export class UserResolver {
   @Mutation(() => CurrentUser)
   async updateUser(
     @Arg('data') data: UpdateUserInput,
-    @Ctx() context: Context,
+    @Ctx() context: AuthenticatedContext,
   ): Promise<CurrentUser> {
     const {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
-
     const updatedUser = await prisma.user.update({
       where: {
         id: user.id,
@@ -75,13 +70,12 @@ export class UserResolver {
   @Mutation(() => UserDetail)
   async addUserDetail(
     @Arg('data') data: AddUserDetailInput,
-    @Ctx() context: Context,
+    @Ctx() context: AuthenticatedContext,
   ): Promise<UserDetail> {
     const {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
 
     const detail = await prisma.userDetail.create({
       data: {
@@ -97,13 +91,12 @@ export class UserResolver {
   @Mutation(() => Boolean)
   async removeUserDetail(
     @Arg('id', () => Int) id: number,
-    @Ctx() context: Context,
+    @Ctx() context: AuthenticatedContext,
   ): Promise<boolean> {
     const {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
 
     const detail = user.userDetail.find((d) => d.id === id)
 
@@ -122,13 +115,12 @@ export class UserResolver {
   @Mutation(() => SocialMedia)
   async addSocialMedia(
     @Arg('data') data: AddSocialMediaInput,
-    @Ctx() context: Context,
+    @Ctx() context: AuthenticatedContext,
   ): Promise<SocialMedia> {
     const {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
 
     const socialMedia = await prisma.socialMedia.create({
       data: {
@@ -144,13 +136,12 @@ export class UserResolver {
   @Mutation(() => Boolean)
   async removeSocialMedia(
     @Arg('id', () => Int) id: number,
-    @Ctx() context: Context,
+    @Ctx() context: AuthenticatedContext,
   ): Promise<boolean> {
     const {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
 
     const socialMedia = user.socialMedia.find((s) => s.id === id)
 

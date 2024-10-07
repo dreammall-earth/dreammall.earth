@@ -15,6 +15,8 @@ export type Context = {
   dataSources: { prisma: PrismaClient }
 }
 
+export type AuthenticatedContext = Omit<Context, 'user'> & { user: UserWithProfile }
+
 export interface CustomJwtPayload {
   pk: number
   name: string
