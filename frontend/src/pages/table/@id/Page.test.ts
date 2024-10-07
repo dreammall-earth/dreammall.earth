@@ -9,7 +9,7 @@ import { VApp } from 'vuetify/components'
 import { vikePageContext } from '#context/usePageContext'
 import { currentUserQuery } from '#queries/currentUserQuery'
 import { joinTableQuery } from '#queries/joinTableQuery'
-import { inviteTableSubscription } from '#subscriptions/inviteTableSubscription'
+import { callSubscription } from '#subscriptions/callSubscription'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 import { mockPageContext as globalMockPageContext } from '#tests/mock.vikePageContext'
 import { createMockPlugin } from '#tests/plugin.globalErrorHandler'
@@ -64,7 +64,7 @@ mockClient.setRequestHandler(
   }),
 )
 mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
-mockClient.setRequestHandler(inviteTableSubscription, () => inviteTableSubscriptionMock)
+mockClient.setRequestHandler(callSubscription, () => inviteTableSubscriptionMock)
 
 provideApolloClient(mockClient)
 

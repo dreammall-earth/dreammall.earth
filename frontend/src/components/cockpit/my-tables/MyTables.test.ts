@@ -5,7 +5,7 @@ import { describe, expect, it, vi } from 'vitest'
 
 import { currentUserQuery } from '#queries/currentUserQuery'
 import { projectTablesQuery } from '#queries/projectTablesQuery'
-import { inviteTableSubscription } from '#subscriptions/inviteTableSubscription'
+import { callSubscription } from '#subscriptions/callSubscription'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 import MyTables from './MyTables.vue'
@@ -32,7 +32,7 @@ mockClient.setRequestHandler(
 )
 
 mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
-mockClient.setRequestHandler(inviteTableSubscription, () => inviteTableSubscriptionMock)
+mockClient.setRequestHandler(callSubscription, () => inviteTableSubscriptionMock)
 
 mockClient.setRequestHandler(
   projectTablesQuery,

@@ -6,7 +6,7 @@ import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 import { tablesQuery } from '#queries/tablesQuery'
-import { inviteTableSubscription } from '#subscriptions/inviteTableSubscription'
+import { callSubscription } from '#subscriptions/callSubscription'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 import TablesDrawer from './TablesDrawer.vue'
@@ -75,7 +75,7 @@ mockClient.setRequestHandler(
   }),
 )
 mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
-mockClient.setRequestHandler(inviteTableSubscription, () => inviteTableSubscriptionMock)
+mockClient.setRequestHandler(callSubscription, () => inviteTableSubscriptionMock)
 
 provideApolloClient(mockClient)
 

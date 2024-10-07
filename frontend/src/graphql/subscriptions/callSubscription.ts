@@ -1,8 +1,8 @@
 import { gql } from 'graphql-tag'
 
-export const inviteTableSubscription = gql`
+export const callSubscription = gql`
   subscription {
-    inviteTable {
+    inviteCall {
       table {
         id
         meetingID
