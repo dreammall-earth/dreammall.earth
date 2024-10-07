@@ -58,18 +58,18 @@ exports[`DefaultLayout > renders 1`] = `
               </a>
             </div>
             <div
-              class="v-col d-flex align-center justify-center"
+              class="v-col d-flex align-center"
               data-v-75d0be1e=""
             >
               <button
-                class="tab-control ma-auto border-sm open"
+                class="tab-control ma-auto border-sm open mt-1"
                 data-v-75d0be1e=""
                 data-v-d58c92bb=""
               >
                 <div
                   class="marker"
                   data-v-d58c92bb=""
-                  style="display: none; width: 0px; left: 0px;"
+                  style="width: 0px; left: 0px;"
                 />
                 <div
                   class="d-flex align-center justify-center h-100 w-100"

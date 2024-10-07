@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`TabControl > renders 1`] = `
+exports[`TabControl > rendert korrekt 1`] = `
 <div
   class="v-application v-theme--light v-layout v-layout--full-height v-locale--is-ltr"
 >
@@ -15,7 +15,7 @@ exports[`TabControl > renders 1`] = `
       <div
         class="marker"
         data-v-d58c92bb=""
-        style="display: none; width: 0px; left: 0px;"
+        style="width: 0px; left: 0px;"
       />
       <div
         class="d-flex align-center justify-center h-100 w-100"

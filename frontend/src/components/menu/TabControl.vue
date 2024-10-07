@@ -1,6 +1,6 @@
 <template>
   <button ref="tabControl" class="tab-control ma-auto border-sm open" @click="() => {}">
-    <div v-show="isSliding" ref="marker" class="marker"></div>
+    <div ref="marker" class="marker"></div>
     <div class="d-flex align-center justify-center h-100 w-100">
       <a
         v-for="(item, index) in items"
@@ -21,14 +21,14 @@
 
 <script lang="ts" setup>
 import { navigate } from 'vike/client/router'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
 import { usePageContext } from '#root/renderer/context/usePageContext'
 
 import type { Ref } from 'vue'
 
 const pageContext = usePageContext()
-const { urlPathname } = pageContext
+const urlPathname = ref(pageContext.urlPathname)
 
 const items = [
   {
@@ -45,13 +45,15 @@ const items = [
   },
 ]
 
-const isSliding = ref(false)
+const activeItem = ref(0)
 
-let defaultItem = items.findIndex((i) =>
-  i.link === '/' ? urlPathname === '/' : urlPathname.startsWith(i.link),
-)
-defaultItem = defaultItem < 0 ? 0 : defaultItem
-const activeItem = ref(defaultItem)
+function updateActiveItem() {
+  const index = items.findIndex((i) =>
+    i.link === '/' ? urlPathname.value === '/' : urlPathname.value.startsWith(i.link),
+  )
+  activeItem.value = index < 0 ? 0 : index
+  moveMarker()
+}
 
 const tabControl: Ref<HTMLElement | null> = ref(null)
 const marker: Ref<HTMLElement | null> = ref(null)
@@ -67,28 +69,41 @@ function moveMarker() {
 }
 
 function setItem(item: number) {
-  isSliding.value = true
+  if (activeItem.value === item) return
+
+  const previousItem = activeItem.value
   activeItem.value = item
 
-  const itemRef = itemRefs.value[activeItem.value]
-  const listener = (event: TransitionEvent) => {
-    if (event.propertyName !== 'background-color') return
-    itemRef.removeEventListener('transitionend', listener)
+  moveMarker()
+
+  // Verzögerte Navigation nur von "Cockpit" zu "Weltencafé"
+  if (previousItem === 1 && item === 0) {
+    const markerRef = marker.value
+    if (!markerRef) return
+
+    const listener = (event: TransitionEvent) => {
+      if (event.propertyName !== 'left') return
+      markerRef.removeEventListener('transitionend', listener)
+      navigate(items[activeItem.value].link)
+    }
+    markerRef.addEventListener('transitionend', listener)
+  } else {
+    // Sofortige Navigation
     navigate(items[activeItem.value].link)
   }
-  itemRef.addEventListener('transitionend', listener)
-
-  requestAnimationFrame(() => {
-    moveMarker()
-    setTimeout(() => {
-      isSliding.value = false
-    }, 500) // Match this with the transition time in CSS
-  })
 }
 
 onMounted(() => {
-  moveMarker()
+  updateActiveItem()
 })
+
+watch(
+  () => pageContext.urlPathname,
+  (newUrl) => {
+    urlPathname.value = newUrl
+    updateActiveItem()
+  },
+)
 </script>
 
 <style scoped lang="scss">
@@ -118,8 +133,8 @@ onMounted(() => {
   border-radius: 27.067px;
   opacity: 1;
   transition:
-    width ease-in-out 0.5s,
-    left ease-in-out 0.5s;
+    width 0.5s ease-in-out,
+    left 0.5s ease-in-out;
 }
 
 .item {
@@ -133,8 +148,8 @@ onMounted(() => {
   border-color: transparent;
   border-width: var(--item-border-width);
   transition:
-    height var(--animation-time),
-    max-width var(--animation-time),
+    background-color var(--animation-time),
+    border-color var(--animation-time),
     padding var(--animation-time);
 
   &.active {
@@ -177,10 +192,5 @@ onMounted(() => {
   background-color: var(--background-color);
   border-color: rgb(255 255 255 / 78%) !important;
   border-radius: 27.067px;
-
-  &.sliding .item {
-    background-color: transparent;
-    border-color: transparent;
-  }
 }
 </style>

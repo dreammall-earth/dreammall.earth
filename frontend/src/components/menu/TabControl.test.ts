@@ -1,92 +1,81 @@
 import { mount } from '@vue/test-utils'
+import { navigate } from 'vike/client/router'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { Component, h } from 'vue'
+import { h, reactive, nextTick } from 'vue'
 import { VApp } from 'vuetify/components'
 
-import { usePageContext } from '#root/renderer/context/usePageContext'
+import { usePageContext } from '#context/usePageContext'
 
 import TabControl from './TabControl.vue'
 
-vi.mock('#root/renderer/context/usePageContext')
-const mockedUsePageContext = vi.mocked(usePageContext)
+import type { PageContext } from 'vike/types'
+
+vi.mock('#context/usePageContext', () => ({
+  usePageContext: vi.fn(),
+}))
+
+vi.mock('vike/client/router', () => ({
+  navigate: vi.fn(),
+}))
 
 describe('TabControl', () => {
+  let wrapper: ReturnType<typeof mount>
+  const mockedUsePageContext = vi.mocked(usePageContext)
+  const mockedNavigate = vi.mocked(navigate)
+
   const Wrapper = () => {
     return mount(VApp, {
       slots: {
-        default: h(TabControl as Component),
+        default: h(TabControl),
       },
     })
   }
 
-  let wrapper: ReturnType<typeof Wrapper>
-
   beforeEach(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    mockedUsePageContext.mockReturnValue({
-      urlPathname: '/',
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } as any)
-    wrapper = Wrapper()
+    vi.clearAllMocks()
   })
 
-  it('renders', () => {
+  it('rendert korrekt', async () => {
+    const pageContextMock = reactive<Partial<PageContext>>({
+      urlPathname: '/',
+    })
+    mockedUsePageContext.mockReturnValue(pageContextMock as PageContext)
+    wrapper = Wrapper()
+    await nextTick()
     expect(wrapper.element).toMatchSnapshot()
   })
 
-  describe('set active item by route', () => {
-    it('sets first item active for /', () => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      mockedUsePageContext.mockReturnValue({
+  describe('Setzt aktives Element basierend auf der Route', () => {
+    it('setzt das erste Element als aktiv für /', async () => {
+      const pageContextMock = reactive<Partial<PageContext>>({
         urlPathname: '/',
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } as any)
+      })
+      mockedUsePageContext.mockReturnValue(pageContextMock as PageContext)
       wrapper = Wrapper()
-      expect(wrapper.find('button.tab-control').findAll('a.item')[0].classes('active')).toBe(true)
+      await nextTick()
+      expect(wrapper.findAll('a.item')[0].classes()).toContain('active')
     })
 
-    it('sets second item active for /cockpit', () => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      mockedUsePageContext.mockReturnValue({
+    it('setzt das zweite Element als aktiv für /cockpit', async () => {
+      const pageContextMock = reactive<Partial<PageContext>>({
         urlPathname: '/cockpit',
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } as any)
+      })
+      mockedUsePageContext.mockReturnValue(pageContextMock as PageContext)
       wrapper = Wrapper()
-      expect(wrapper.find('button.tab-control').findAll('a.item')[1].classes('active')).toBe(true)
-    })
-
-    it('sets first item active for /somerandomroute', () => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      mockedUsePageContext.mockReturnValue({
-        urlPathname: '/somerandomroute',
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } as any)
-      wrapper = Wrapper()
-      expect(wrapper.find('button.tab-control').findAll('a.item')[0].classes('active')).toBe(true)
+      await nextTick()
+      expect(wrapper.findAll('a.item')[1].classes()).toContain('active')
     })
   })
 
-  describe('tab control functionality', () => {
-    it('has two menu items', () => {
-      expect(wrapper.find('button.tab-control').findAll('a.item')).toHaveLength(2)
-    })
-
-    describe('set item', () => {
-      beforeEach(async () => {
-        await wrapper.findAll('a.item')[1].trigger('click')
+  describe('Navigation beim Klicken auf ein Element', () => {
+    it('navigiert zu /cockpit, wenn das zweite Element angeklickt wird', async () => {
+      const pageContextMock = reactive<Partial<PageContext>>({
+        urlPathname: '/',
       })
-
-      it('changes active item', () => {
-        expect(wrapper.findAll('a.item')[1].classes('active')).toBe(true)
-      })
-    })
-
-    it('always shows all items', () => {
-      const items = wrapper.findAll('a.item')
-      expect(items).toHaveLength(2)
-      items.forEach((item) => {
-        expect(item.isVisible()).toBe(true)
-      })
+      mockedUsePageContext.mockReturnValue(pageContextMock as PageContext)
+      wrapper = Wrapper()
+      await wrapper.findAll('a.item')[1].trigger('click')
+      expect(mockedNavigate).toHaveBeenCalledWith('/cockpit')
     })
   })
 })

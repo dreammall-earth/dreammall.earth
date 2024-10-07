@@ -8,8 +8,8 @@
             <LogoImage size="small" />
           </a>
         </v-col>
-        <v-col class="d-flex align-center justify-center">
-          <TabControl />
+        <v-col class="d-flex align-center">
+          <TabControl class="mt-1" />
         </v-col>
         <v-col class="d-none d-md-flex align-center">
           <v-row>
