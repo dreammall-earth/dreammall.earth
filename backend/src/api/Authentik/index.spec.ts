@@ -16,8 +16,7 @@ const dependencies = {
 } satisfies Parameters<typeof createWebhook>[0]
 
 const userDelete = jest.spyOn(prisma.user, 'deleteMany')
-const meetingDelete = jest.spyOn(prisma.meeting, 'delete')
-const usersInMeetingDelete = jest.spyOn(prisma.usersInMeetings, 'deleteMany')
+const meetingDelete = jest.spyOn(prisma.meeting, 'deleteMany')
 const userDetailDelete = jest.spyOn(prisma.userDetail, 'deleteMany')
 const socialMediaDelete = jest.spyOn(prisma.socialMedia, 'deleteMany')
 
@@ -190,7 +189,6 @@ describe('webhook.handleWebhook', () => {
           })
 
           it.each([
-            ['usersInMeetings', usersInMeetingDelete],
             ['userDetail', userDetailDelete],
             ['socialMedia', socialMediaDelete],
           ] as const)(`deletes %s in the database`, async (_model, mock) => {
@@ -202,14 +200,14 @@ describe('webhook.handleWebhook', () => {
 
           describe('if the user owned a meeting', () => {
             const setup = async () => {
-              const table = await prisma.meeting.create({
+              await prisma.meeting.create({
                 data: {
                   id: 47,
                   name: 'Some meeting',
                   meetingID: 'some-meeting-id',
                 },
               })
-              const user = await prisma.user.create({
+              await prisma.user.create({
                 data: {
                   meetingId: 47,
                   referenceId: 'ABCDEFGHI',
@@ -219,15 +217,9 @@ describe('webhook.handleWebhook', () => {
                   id: 43,
                 },
               })
-              await prisma.usersInMeetings.create({
-                data: {
-                  userId: user.id,
-                  meetingId: table.id,
-                },
-              })
             }
 
-            it('will delete that one, too', async () => {
+            it('deletes that one, too', async () => {
               await setup()
               await handleWebhook(req)
               expect(meetingDelete).toHaveBeenCalledTimes(1)
@@ -235,6 +227,83 @@ describe('webhook.handleWebhook', () => {
                 where: { id: 47 },
               })
               await expect(prisma.meeting.count()).resolves.toBe(0)
+            })
+          })
+
+          describe('if the deleted user would leave an orphaned meeting without moderator', () => {
+            const setup = async () => {
+              await Promise.all([
+                prisma.meeting.create({
+                  data: {
+                    id: 47,
+                    name: 'Some meeting',
+                    meetingID: 'some-meeting-id',
+                  },
+                }),
+                prisma.meeting.create({
+                  data: {
+                    id: 48,
+                    name: 'Orphaned meeting',
+                    meetingID: 'orphaned-meeting-id',
+                  },
+                }),
+              ])
+              await Promise.all([
+                prisma.user.create({
+                  data: {
+                    referenceId: 'ABCDEFGHI',
+                    username: 'username',
+                    name: 'User Name',
+                    pk: 5,
+                    id: 43,
+                  },
+                }),
+                prisma.user.create({
+                  data: {
+                    referenceId: 'ABCDEFGHJ',
+                    username: 'another-moderator',
+                    name: 'Another Moderator',
+                    pk: 6,
+                    id: 44,
+                  },
+                }),
+              ])
+              await Promise.all([
+                prisma.usersInMeetings.create({
+                  data: {
+                    meetingId: 47,
+                    userId: 43,
+                    role: 'MODERATOR',
+                  },
+                }),
+                prisma.usersInMeetings.create({
+                  data: {
+                    meetingId: 48,
+                    userId: 43,
+                    role: 'MODERATOR',
+                  },
+                }),
+                prisma.usersInMeetings.create({
+                  data: {
+                    meetingId: 47,
+                    userId: 44,
+                    role: 'MODERATOR',
+                  },
+                }),
+              ])
+            }
+
+            it('deletes any meetings where the deleted user was the only moderator', async () => {
+              await setup()
+              await expect(prisma.meeting.count()).resolves.toBe(2)
+              await handleWebhook(req)
+              await expect(prisma.meeting.count()).resolves.toBe(1)
+              await expect(prisma.meeting.findUnique({ where: { id: 47 } })).resolves.toMatchObject(
+                {
+                  name: 'Some meeting',
+                  meetingID: 'some-meeting-id',
+                },
+              )
             })
           })
         })

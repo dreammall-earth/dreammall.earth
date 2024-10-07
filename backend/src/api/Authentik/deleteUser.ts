@@ -1,4 +1,4 @@
-import { deleteTable } from '#src/use-cases/delete-table'
+import { leaveTable } from '#src/use-cases/leave-table'
 
 import type { Dependencies } from '.'
 import type { Request } from 'express'
@@ -37,6 +37,9 @@ const handleEvent =
 
     const deletedUser = await prisma.user.findFirst({
       where: { pk },
+      include: {
+        meetings: true,
+      },
     })
 
     if (!deletedUser) {
@@ -45,10 +48,18 @@ const handleEvent =
 
     const { id: userId, meetingId } = deletedUser
 
+    const renameMeetingIdToTableId = (meeting: { userId: number; meetingId: number }) => ({
+      userId: meeting.userId,
+      tableId: meeting.meetingId,
+    })
+    await Promise.all(
+      deletedUser.meetings.map(renameMeetingIdToTableId).map(leaveTable({ prisma, logger })),
+    )
+
     if (meetingId) {
-      await deleteTable({ prisma, logger })({ userId, tableId: meetingId })
+      await prisma.meeting.deleteMany({ where: { id: meetingId } })
     }
-    await prisma.usersInMeetings.deleteMany({ where: { userId } })
+
     await prisma.userDetail.deleteMany({ where: { userId } })
     await prisma.socialMedia.deleteMany({ where: { userId } })
     await prisma.user.deleteMany({ where: { pk } })

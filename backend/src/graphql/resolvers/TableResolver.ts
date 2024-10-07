@@ -25,7 +25,7 @@ import {
   EVENT_UPDATE_TABLE,
 } from '#src/event/Events'
 import logger from '#src/logger'
-import { deleteTable } from '#src/use-cases/delete-table'
+import { leaveTable } from '#src/use-cases/leave-table'
 
 import type { PrismaClient, UserWithMeeting, UsersWithMeetings } from '#src/prisma'
 
@@ -409,8 +409,7 @@ export class TableResolver {
       user,
       dataSources: { prisma },
     } = context
-    await deleteTable({ prisma, logger })({ userId: user.id, tableId })
-
+    await leaveTable({ prisma, logger })({ userId: user.id, tableId })
     return true
   }
 

@@ -1,7 +1,11 @@
 import type Logger from '#src/logger'
 import type { PrismaClient } from '#src/prisma'
 
-export const deleteTable =
+const oneElseIsModerator = (userId: number) => (user: { userId: number; role: string }) => {
+  return user.userId !== userId && user.role === 'MODERATOR'
+}
+
+export const leaveTable =
   ({ prisma, logger }: { prisma: PrismaClient; logger: typeof Logger }) =>
   async ({ userId, tableId }: { userId: number; tableId: number }) => {
     const meeting = await prisma.meeting.findFirst({
@@ -29,7 +33,7 @@ export const deleteTable =
           },
         },
       })
-      if (!meeting.users.some((u) => u.userId !== userId && u.role === 'MODERATOR')) {
+      if (!meeting.users.some(oneElseIsModerator(userId))) {
         await prisma.meeting.delete({
           where: {
             id: tableId,
