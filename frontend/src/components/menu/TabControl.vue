@@ -23,7 +23,7 @@
 import { navigate } from 'vike/client/router'
 import { onMounted, ref, watch } from 'vue'
 
-import { usePageContext } from '#root/renderer/context/usePageContext'
+import { usePageContext } from '#context/usePageContext'
 
 import type { Ref } from 'vue'
 
