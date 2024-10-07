@@ -78,6 +78,19 @@ export class TableResolver {
 
     if (userIds && userIds.length) {
       await createUsersInMeetings(prisma)({ userIds, meeting, role: AttendeeRole.VIEWER })
+
+      pubSub.publish('INVITE_TABLE_SUBSCRIPTION', {
+        user,
+        table: {
+          id: String(meeting.id),
+          isModerator: false,
+          meetingID: meeting.meetingID,
+          meetingName: meeting.name,
+          startTime: String(meeting.createTime),
+          attendees: [],
+          participantCount: 0,
+        },
+      })
     }
 
     await EVENT_CREATE_MY_TABLE(user.id)
@@ -184,18 +197,6 @@ export class TableResolver {
       name: dbMeeting.name,
       inviteLink,
       tableId: dbMeeting.id,
-    })
-    pubSub.publish('INVITE_TABLE_SUBSCRIPTION', {
-      user,
-      table: {
-        id: String(dbMeeting.id),
-        isModerator: false,
-        meetingID: dbMeeting.meetingID,
-        meetingName: dbMeeting.name,
-        startTime: String(dbMeeting.createTime),
-        attendees: [],
-        participantCount: 0,
-      },
     })
     return dbMeeting.id
   }
@@ -581,7 +582,7 @@ export class TableResolver {
     })
 
     // eslint-disable-next-line no-console
-    console.log('TEST')
+    console.log('TEST', invitedTable)
 
     if (!meeting) {
       // eslint-disable-next-line no-console
