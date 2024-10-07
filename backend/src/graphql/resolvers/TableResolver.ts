@@ -17,14 +17,8 @@ import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo, AttendeeRole 
 import { CreateMeetingResponse } from '#api/BBB/types'
 import { CONFIG } from '#config/config'
 import { pubSub } from '#graphql/pubSub'
-import {
-  InvitedTable,
-  JoinTable,
-  OpenTable,
-  OpenTables,
-  Table,
-  getAttendees,
-} from '#models/TableModel'
+import { InvitedTable } from '#models/InvitedTable'
+import { JoinTable, OpenTable, OpenTables, Table, getAttendees } from '#models/TableModel'
 import { Context } from '#src/context'
 import {
   EVENT_CREATE_MY_TABLE,
@@ -586,13 +580,16 @@ export class TableResolver {
       },
     })
 
+    // eslint-disable-next-line no-console
     console.log('TEST')
 
     if (!meeting) {
+      // eslint-disable-next-line no-console
       console.log('––––––––––––––> NO MEETING')
       return null
     }
     if (!meeting.users.some((m) => m.userId === user.id)) {
+      // eslint-disable-next-line no-console
       console.log('––––––––––––––> NOT INVITED')
       return null
     }

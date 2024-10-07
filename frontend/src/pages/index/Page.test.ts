@@ -8,6 +8,7 @@ import { VApp } from 'vuetify/components'
 
 import { currentUserQuery } from '#queries/currentUserQuery'
 import { tablesQuery } from '#queries/tablesQuery'
+import { inviteTableSubscription } from '#subscriptions/inviteTableSubscription'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 import IndexPage from './+Page.vue'
@@ -17,6 +18,7 @@ const tablesQueryMock = vi.fn()
 const mockSubscription: IMockSubscription = createMockSubscription()
 const currentUserQueryMock = vi.fn()
 const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
+const inviteTableSubscriptionMock: IMockSubscription = createMockSubscription()
 
 const mockClient = createMockClient()
 
@@ -34,6 +36,7 @@ mockClient.setRequestHandler(
   tablesQueryMock.mockResolvedValue({ data: { tables: [] } }),
 )
 mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
+mockClient.setRequestHandler(inviteTableSubscription, () => inviteTableSubscriptionMock)
 mockClient.setRequestHandler(
   currentUserQuery,
   currentUserQueryMock.mockResolvedValue({

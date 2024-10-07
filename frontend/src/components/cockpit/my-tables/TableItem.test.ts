@@ -6,6 +6,7 @@ import { describe, expect, it, vi } from 'vitest'
 
 import { currentUserQuery } from '#queries/currentUserQuery'
 import { projectTablesQuery } from '#queries/projectTablesQuery'
+import { inviteTableSubscription } from '#subscriptions/inviteTableSubscription'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 import TableItem from './TableItem.vue'
@@ -14,6 +15,7 @@ vi.mock('vike/client/router')
 
 const currentUserQueryMock = vi.fn()
 const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
+const inviteTableSubscriptionMock: IMockSubscription = createMockSubscription()
 const projectTablesQueryMock = vi.fn()
 
 const mockClient = createMockClient()
@@ -33,6 +35,7 @@ mockClient.setRequestHandler(
 )
 
 mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
+mockClient.setRequestHandler(inviteTableSubscription, () => inviteTableSubscriptionMock)
 
 mockClient.setRequestHandler(
   projectTablesQuery,

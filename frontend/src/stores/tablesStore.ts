@@ -139,6 +139,7 @@ export const useTablesStore = defineStore(
     )
 
     watch(inviteTableSubscriptionResult, (data: { inviteTable: InvitedTable }) => {
+      // eslint-disable-next-line no-console
       console.log('INVITE TABLE SUBSCRIPTION', data.inviteTable)
     })
 
