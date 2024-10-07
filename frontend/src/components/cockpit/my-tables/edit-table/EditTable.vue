@@ -23,7 +23,7 @@
     />
     <!-- todo: manage values as maxlength globally? -->
 
-    <v-switch v-model="tableSettings.isPrivate" label="Privat" color="#4caf50" hide-details />
+    <PrivateSwitch v-model="tableSettings.isPrivate" />
 
     <SimpleButton type="submit" class="mt-12" :label="$t('cockpit.myTables.editTable.update')" />
   </form>
@@ -34,6 +34,7 @@ import { storeToRefs } from 'pinia'
 import { computed, reactive } from 'vue'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
+import PrivateSwitch from '#components/cockpit/my-tables/private-switch/PrivateSwitch.vue'
 import StepHeader from '#components/steps/StepHeader.vue'
 import { useTablesStore } from '#src/stores/tablesStore'
 
@@ -51,9 +52,13 @@ const { getProjectTables: tables } = storeToRefs(tablesStore)
 
 const table = computed(() => tables.value.find((table) => table.id === props.tableId))
 
+if (!table.value) {
+  throw new Error('Table not found')
+}
+
 const tableSettings = reactive({
-  name: table.value?.name || '',
-  isPrivate: table.value?.public,
+  name: table.value.name || '',
+  isPrivate: table.value.public,
 })
 
 const onSubmit = async (): Promise<void> => {

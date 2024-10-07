@@ -18,15 +18,7 @@
     />
     <!-- todo: manage values as maxlength globally? -->
 
-    <v-switch
-      v-model="createTableModel.isPrivate"
-      :label="
-        createTableModel.isPrivate
-          ? $t('dream-mall-panel.setup.private')
-          : $t('dream-mall-panel.setup.public')
-      "
-      hide-details
-    />
+    <PrivateSwitch v-model="createTableModel.isPrivate" />
 
     <SimpleButton type="submit" class="mt-12" :label="submitText" />
   </form>
@@ -34,6 +26,7 @@
 
 <script setup lang="ts">
 import SimpleButton from '#components/buttons/SimpleButton.vue'
+import PrivateSwitch from '#components/cockpit/my-tables/private-switch/PrivateSwitch.vue'
 
 import MotivationBox from './MotivationBox.vue'
 
@@ -45,3 +38,11 @@ defineEmits<StepEmits>()
 
 const createTableModel = defineModel<CreateTableModel>({ required: true })
 </script>
+
+<style scoped lang="scss">
+.private-switch {
+  :deep(.v-label) {
+    width: 80px;
+  }
+}
+</style>
