@@ -18,7 +18,15 @@
     />
     <!-- todo: manage values as maxlength globally? -->
 
-    <v-switch v-model="createTableModel.isPrivate" label="Privat" color="#4caf50" hide-details />
+    <v-switch
+      v-model="createTableModel.isPrivate"
+      :label="
+        createTableModel.isPrivate
+          ? $t('dream-mall-panel.setup.private')
+          : $t('dream-mall-panel.setup.public')
+      "
+      hide-details
+    />
 
     <SimpleButton type="submit" class="mt-12" :label="submitText" />
   </form>
