@@ -33,3 +33,4 @@ configmap:
   frontend_signin_url:  https://app.{{ .StateValues.domain }}/signin
   jwks_uri: http://authentik-server/application/o/dreammallearth/jwks/
   presenter_url: https://{{ .StateValues.domain }}
+  sentry_environment: {{ .StateValues.domain }}
