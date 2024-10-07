@@ -16,7 +16,15 @@ import { v4 as uuidv4 } from 'uuid'
 import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo, AttendeeRole } from '#api/BBB'
 import { CreateMeetingResponse } from '#api/BBB/types'
 import { CONFIG } from '#config/config'
-import { JoinTable, OpenTable, OpenTables, Table, getAttendees } from '#models/TableModel'
+import { pubSub } from '#graphql/pubSub'
+import {
+  InvitedTable,
+  JoinTable,
+  OpenTable,
+  OpenTables,
+  Table,
+  getAttendees,
+} from '#models/TableModel'
 import { Context } from '#src/context'
 import {
   EVENT_CREATE_MY_TABLE,
@@ -183,7 +191,18 @@ export class TableResolver {
       inviteLink,
       tableId: dbMeeting.id,
     })
-
+    pubSub.publish('INVITE_TABLE_SUBSCRIPTION', {
+      user,
+      table: {
+        id: String(dbMeeting.id),
+        isModerator: false,
+        meetingID: dbMeeting.meetingID,
+        meetingName: dbMeeting.name,
+        startTime: String(dbMeeting.createTime),
+        attendees: [],
+        participantCount: 0,
+      },
+    })
     return dbMeeting.id
   }
 
@@ -543,6 +562,42 @@ export class TableResolver {
     const { user } = context
     if (!user) return { permanentTables: [], mallTalkTables: [], projectTables: [] }
     return openTablesFromOpenMeetings(context)({ meetings, user })
+  }
+
+  @Subscription(() => InvitedTable, {
+    topics: 'INVITE_TABLE_SUBSCRIPTION',
+    nullable: true,
+  })
+  async inviteTable(
+    @Root() invitedTable: InvitedTable,
+    @Ctx() context: Context,
+  ): Promise<InvitedTable | null> {
+    const {
+      user,
+      dataSources: { prisma },
+    } = context
+    if (!user) return null
+    const meeting = await prisma.meeting.findFirst({
+      where: {
+        meetingID: invitedTable.table.meetingID,
+      },
+      include: {
+        users: true,
+      },
+    })
+
+    console.log('TEST')
+
+    if (!meeting) {
+      console.log('––––––––––––––> NO MEETING')
+      return null
+    }
+    if (!meeting.users.some((m) => m.userId === user.id)) {
+      console.log('––––––––––––––> NOT INVITED')
+      return null
+    }
+
+    return invitedTable
   }
 
   /*

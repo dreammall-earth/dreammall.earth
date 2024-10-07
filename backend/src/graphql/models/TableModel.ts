@@ -6,6 +6,7 @@ import { UsersWithMeetings } from '#src/prisma'
 
 import { Attendee } from './AttendeeModel'
 import { UserInMeeting } from './UserInMeetingModel'
+import { User } from './UserModel'
 
 export const getAttendees = (meeting: MeetingInfo): Attendee[] => {
   const attendees =
@@ -118,4 +119,13 @@ export class JoinTable {
 
   @Field()
   isModerator: boolean
+}
+
+@ObjectType()
+export class InvitedTable {
+  @Field(() => OpenTable)
+  table: OpenTable
+
+  @Field(() => User)
+  user: User
 }

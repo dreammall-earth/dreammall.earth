@@ -11,6 +11,7 @@ import { updateTableMutation } from '#mutations/updateTableMutation'
 import { tablesQuery } from '#queries/tablesQuery'
 import { projectTablesQuery } from '#src/graphql/queries/projectTablesQuery'
 import { useUserStore } from '#stores/userStore'
+import { inviteTableSubscription } from '#subscriptions/inviteTableSubscription'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 type Attendee = {
@@ -48,6 +49,17 @@ export type ProjectTable = {
   name: string
   public: boolean
   users: UserInTable[]
+}
+
+type User = {
+  id: number
+  name: string
+  username: string
+}
+
+type InvitedTable = {
+  user: User
+  table: Table
 }
 
 type CreateMyTableResult = {
@@ -119,6 +131,16 @@ export const useTablesStore = defineStore(
       console.log(updateOpenTablesSubscriptionError)
     })
     */
+
+    const { result: inviteTableSubscriptionResult } = useSubscription(
+      inviteTableSubscription,
+      () => ({}),
+      { fetchPolicy: 'no-cache' },
+    )
+
+    watch(inviteTableSubscriptionResult, (data: { inviteTable: InvitedTable }) => {
+      console.log('INVITE TABLE SUBSCRIPTION', data.inviteTable)
+    })
 
     const tables = reactive<TableList>({
       mallTalkTables: [],
