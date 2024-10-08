@@ -62,8 +62,8 @@ exports[`Table Page > renders 1`] = `
               class="v-col d-flex align-center justify-center"
               data-v-75d0be1e=""
             >
-              <button
-                class="tab-control ma-auto border-sm open"
+              <div
+                class="tab-control ma-auto border-sm"
                 data-v-75d0be1e=""
                 data-v-d58c92bb=""
               >
@@ -77,7 +77,7 @@ exports[`Table Page > renders 1`] = `
                   data-v-d58c92bb=""
                 >
                   
-                  <a
+                  <button
                     class="item active"
                     data-v-d58c92bb=""
                   >
@@ -305,8 +305,8 @@ exports[`Table Page > renders 1`] = `
                       </i>
                     </div>
                      $t('menu.worldCafe')
-                  </a>
-                  <a
+                  </button>
+                  <button
                     class="item"
                     data-v-d58c92bb=""
                   >
@@ -561,10 +561,10 @@ exports[`Table Page > renders 1`] = `
                       </i>
                     </div>
                      $t('menu.cockpit')
-                  </a>
+                  </button>
                   
                 </div>
-              </button>
+              </div>
             </div>
             <div
               class="v-col d-none d-md-flex align-center"

@@ -44,7 +44,7 @@ describe('TabControl', () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any)
       wrapper = Wrapper()
-      expect(wrapper.find('button.tab-control').findAll('a.item')[0].classes('active')).toBe(true)
+      expect(wrapper.find('.tab-control').findAll('.item')[0].classes('active')).toBe(true)
     })
 
     it('sets second item active for /cockpit', () => {
@@ -54,7 +54,7 @@ describe('TabControl', () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any)
       wrapper = Wrapper()
-      expect(wrapper.find('button.tab-control').findAll('a.item')[1].classes('active')).toBe(true)
+      expect(wrapper.find('.tab-control').findAll('.item')[1].classes('active')).toBe(true)
     })
 
     it('sets first item active for /somerandomroute', () => {
@@ -64,51 +64,27 @@ describe('TabControl', () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any)
       wrapper = Wrapper()
-      expect(wrapper.find('button.tab-control').findAll('a.item')[0].classes('active')).toBe(true)
+      expect(wrapper.find('.tab-control').findAll('.item')[0].classes('active')).toBe(true)
     })
   })
 
   describe('click tab control button', () => {
     beforeEach(async () => {
-      await wrapper.find('button.tab-control').trigger('click')
+      await wrapper.find('.tab-control').trigger('click')
     })
 
     it('has two menu items', () => {
-      expect(wrapper.find('button.tab-control').findAll('a.item')).toHaveLength(2)
+      expect(wrapper.find('.tab-control').findAll('.item')).toHaveLength(2)
     })
 
     describe('set item', () => {
       beforeEach(async () => {
-        await wrapper.findAll('a.item')[1].trigger('click')
+        await wrapper.findAll('.item')[1].trigger('click')
       })
 
       it('changes active item', () => {
-        expect(wrapper.findAll('a.item')[1].classes('active')).toBe(true)
+        expect(wrapper.findAll('.item')[1].classes('active')).toBe(true)
       })
-    })
-
-    describe('set item with menu closed', () => {
-      beforeEach(async () => {
-        vi.runAllTimers()
-        await wrapper.findAll('a.item')[1].trigger('click')
-      })
-
-      it('does not change the active item', () => {
-        expect(wrapper.findAll('a.item')[0].classes('active')).toBe(true)
-      })
-    })
-  })
-
-  describe('unmount', () => {
-    const timeOutSpy = vi.spyOn(global.window, 'clearTimeout')
-
-    beforeEach(() => {
-      wrapper.unmount()
-    })
-
-    it('clears timeouts', () => {
-      // eslint-disable-next-line vitest/prefer-called-with
-      expect(timeOutSpy).toHaveBeenCalled()
     })
   })
 })
