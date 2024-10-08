@@ -10,11 +10,11 @@ import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSub
 import { useTablesStore } from './tablesStore'
 
 const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
-const inviteTableSubscriptionMock: IMockSubscription = createMockSubscription()
+const callSubscriptionMock: IMockSubscription = createMockSubscription()
 const mockClient = createMockClient()
 const tablesQueryMock = vi.fn()
 mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
-mockClient.setRequestHandler(callSubscription, () => inviteTableSubscriptionMock)
+mockClient.setRequestHandler(callSubscription, () => callSubscriptionMock)
 mockClient.setRequestHandler(
   tablesQuery,
   tablesQueryMock.mockResolvedValue({

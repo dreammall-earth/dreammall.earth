@@ -132,11 +132,11 @@ export const useTablesStore = defineStore(
     })
     */
 
-    const { result: inviteCallSubscriptionResult } = useSubscription(callSubscription, () => ({}), {
+    const { result: callSubscriptionResult } = useSubscription(callSubscription, () => ({}), {
       fetchPolicy: 'no-cache',
     })
 
-    watch(inviteCallSubscriptionResult, (data: { call: Call }) => {
+    watch(callSubscriptionResult, (data: { call: Call }) => {
       // eslint-disable-next-line no-console
       console.log('INVITE TABLE SUBSCRIPTION', data.call)
     })

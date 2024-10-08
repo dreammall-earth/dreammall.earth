@@ -15,7 +15,7 @@ export const mockClient = createMockClient()
 
 const tablesQueryMock = vi.fn()
 const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
-const inviteTableSubscriptionMock: IMockSubscription = createMockSubscription()
+const callSubscriptionMock: IMockSubscription = createMockSubscription()
 
 mockClient.setRequestHandler(
   tablesQuery,
@@ -75,7 +75,7 @@ mockClient.setRequestHandler(
   }),
 )
 mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
-mockClient.setRequestHandler(callSubscription, () => inviteTableSubscriptionMock)
+mockClient.setRequestHandler(callSubscription, () => callSubscriptionMock)
 
 provideApolloClient(mockClient)
 

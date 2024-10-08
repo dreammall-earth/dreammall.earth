@@ -2,7 +2,7 @@ import { gql } from 'graphql-tag'
 
 export const callSubscription = gql`
   subscription {
-    inviteCall {
+    call {
       table {
         id
         meetingID

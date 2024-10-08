@@ -17,13 +17,13 @@ vi.mocked(navigate).mockResolvedValue()
 
 const joinMyTableMutationMock = vi.fn()
 const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
-const inviteTableSubscriptionMock: IMockSubscription = createMockSubscription()
+const callSubscriptionMock: IMockSubscription = createMockSubscription()
 
 const mockClient = createMockClient()
 
 mockClient.setRequestHandler(joinMyTableMutation, joinMyTableMutationMock)
 mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
-mockClient.setRequestHandler(callSubscription, () => inviteTableSubscriptionMock)
+mockClient.setRequestHandler(callSubscription, () => callSubscriptionMock)
 
 provideApolloClient(mockClient)
 

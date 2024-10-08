@@ -15,7 +15,7 @@ vi.mock('vike/client/router')
 
 const currentUserQueryMock = vi.fn()
 const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
-const inviteTableSubscriptionMock: IMockSubscription = createMockSubscription()
+const callSubscriptionMock: IMockSubscription = createMockSubscription()
 const projectTablesQueryMock = vi.fn()
 
 const mockClient = createMockClient()
@@ -35,7 +35,7 @@ mockClient.setRequestHandler(
 )
 
 mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
-mockClient.setRequestHandler(callSubscription, () => inviteTableSubscriptionMock)
+mockClient.setRequestHandler(callSubscription, () => callSubscriptionMock)
 
 mockClient.setRequestHandler(
   projectTablesQuery,

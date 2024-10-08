@@ -22,7 +22,7 @@ import type { PageContext } from 'vike/types'
 const joinTableQueryMock = vi.fn()
 const currentUserQueryMock = vi.fn()
 const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
-const inviteTableSubscriptionMock: IMockSubscription = createMockSubscription()
+const callSubscriptionMock: IMockSubscription = createMockSubscription()
 
 const mockClient = createMockClient()
 
@@ -64,7 +64,7 @@ mockClient.setRequestHandler(
   }),
 )
 mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
-mockClient.setRequestHandler(callSubscription, () => inviteTableSubscriptionMock)
+mockClient.setRequestHandler(callSubscription, () => callSubscriptionMock)
 
 provideApolloClient(mockClient)
 

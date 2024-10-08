@@ -18,7 +18,7 @@ const tablesQueryMock = vi.fn()
 const mockSubscription: IMockSubscription = createMockSubscription()
 const currentUserQueryMock = vi.fn()
 const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
-const inviteTableSubscriptionMock: IMockSubscription = createMockSubscription()
+const callSubscriptionMock: IMockSubscription = createMockSubscription()
 
 const mockClient = createMockClient()
 
@@ -36,7 +36,7 @@ mockClient.setRequestHandler(
   tablesQueryMock.mockResolvedValue({ data: { tables: [] } }),
 )
 mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
-mockClient.setRequestHandler(callSubscription, () => inviteTableSubscriptionMock)
+mockClient.setRequestHandler(callSubscription, () => callSubscriptionMock)
 mockClient.setRequestHandler(
   currentUserQuery,
   currentUserQueryMock.mockResolvedValue({
