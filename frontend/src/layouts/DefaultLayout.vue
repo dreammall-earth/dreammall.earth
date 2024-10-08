@@ -50,14 +50,15 @@
         <div class="dream-mall-button">
           <DreamMallButton
             :is-active="visibleDrawer === 'dream-mall-button'"
+            :is-notification="isIncomingInvitation"
             @click="toggleDrawer('dream-mall-button')"
           />
         </div>
       </div>
       <div class="dream-mall-panel">
         <slot name="dream-mall-button" :close="() => toggleDrawer('dream-mall-button')">
-<!--          <TableSetup ref="tableSetupRef" @close="toggleDrawer('dream-mall-button')" />-->
-          <InvitationSteps @close="toggleDrawer('dream-mall-button')" />
+          <InvitationSteps v-if="isIncomingInvitation" @close="toggleDrawer('dream-mall-button')" />
+          <TableSetup v-else ref="tableSetupRef" @close="toggleDrawer('dream-mall-button')" />
         </slot>
       </div>
     </div>
@@ -81,6 +82,7 @@
 import { computed, ref } from 'vue'
 
 import DreamMallButton from '#components/buttons/DreamMallButton.vue'
+import InvitationSteps from '#components/malltalk/invitation/InvitationSteps.vue'
 import TableSetup from '#components/malltalk/setup/TableSetup.vue'
 import Circle from '#components/menu/CircleElement.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
@@ -89,9 +91,8 @@ import UserInfo from '#components/menu/UserInfo.vue'
 import ModalPanel from '#components/modal/ModalPanel.vue'
 import useModal from '#components/modal/useModal'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
-import InvitationSteps from "#components/malltalk/invitation/InvitationSteps.vue";
 
-type DrawerType = 'tables' | 'dream-mall-button' | null
+type DrawerType = 'tables' | 'dream-mall-button' | 'call' | null
 
 const visibleDrawer = ref<DrawerType>(null)
 
@@ -104,18 +105,36 @@ const isTablesDrawerVisible = computed({
   },
 })
 
+const isIncomingInvitation = ref<boolean>(true)
 const tableSetupRef = ref<InstanceType<typeof TableSetup> | null>(null)
 
 const toggleDrawer = (drawer: DrawerType) => {
   if (visibleDrawer.value === drawer) {
     visibleDrawer.value = null
+    isIncomingInvitation.value = false
   } else {
     visibleDrawer.value = drawer
-    if (drawer === 'dream-mall-button') {
+    if (drawer === 'dream-mall-button' && !isIncomingInvitation.value) {
       tableSetupRef.value?.reset()
     }
   }
 }
+
+const setDrawer = (drawer: DrawerType) => {
+  if (visibleDrawer.value !== drawer) {
+    visibleDrawer.value = drawer
+  }
+}
+
+const handleIncomingInvitation = () => {
+  isIncomingInvitation.value = true
+  setDrawer('dream-mall-button')
+  tableSetupRef.value?.reset()
+}
+
+// todo: connect to Subscription
+setTimeout(handleIncomingInvitation, 3000)
+// ^^^^
 
 const { isModalActive } = useModal()
 </script>

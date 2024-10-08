@@ -311,8 +311,9 @@ const emit = defineEmits<{
 const props = withDefaults(
   defineProps<{
     isActive: boolean
+    isNotification: boolean
   }>(),
-  { isActive: false },
+  { isActive: false, isNotification: false },
 )
 
 const onClick = () => {
