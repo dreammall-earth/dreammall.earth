@@ -1,3 +1,5 @@
+import { deleteTable } from './delete-table'
+
 import type Logger from '#src/logger'
 import type { PrismaClient } from '#src/prisma'
 
@@ -34,11 +36,7 @@ export const leaveTable =
         },
       })
       if (!meeting.users.some(oneElseIsModerator(userId))) {
-        await prisma.meeting.delete({
-          where: {
-            id: tableId,
-          },
-        })
+        await deleteTable({ prisma })(tableId)
       }
     } catch (e) {
       logger.error('User could not be detached', e)
