@@ -81,6 +81,7 @@ const { PrismaClientValidationError } = Prisma
 
 export {
   prisma,
+  Prisma,
   DeamMallPrismaClient as PrismaClient,
   PrismaClientValidationError,
   EventType,

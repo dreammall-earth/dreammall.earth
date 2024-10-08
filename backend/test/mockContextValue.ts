@@ -23,6 +23,7 @@ export const mockContextValue: (overrides?: Partial<Context>) => Context = (over
       WELCOME_TABLE_MEETING_ID: '',
       SENTRY_DSN: '',
       SENTRY_ENVIRONMENT: '',
+      WEBHOOK_SECRET: undefined,
     },
     dataSources: { prisma },
   }

@@ -43,3 +43,13 @@ worker:
         secretKeyRef:
           name: dreammall
           key: authentik_bootstrap_password
+    - name: DREAMMALL_BACKEND_URL
+      valueFrom:
+        configMapKeyRef:
+          name: dreammall
+          key: backend_url
+    - name: DREAMMALL_WEBHOOK_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: dreammall
+          key: webhook_secret

@@ -42,3 +42,4 @@ configmap:
   sentry_dsn_frontend: 'https://a8ad24bf9db4356ad721fe8974c058f0@o4508075566956544.ingest.de.sentry.io/4508076485509200'
   sentry_dsn_presenter: 'https://ee21d8029a7c481e7e0835fc8e6421d6@o4508075566956544.ingest.de.sentry.io/4508076577521744'
   sentry_environment: ''
+  backend_url: http://dreammall-backend:4000
