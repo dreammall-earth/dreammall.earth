@@ -1,11 +1,6 @@
 <template>
   <div class="flat-text-field d-flex flex-column text-center pa-4">
-    <div class="reminder text-center pa-5 font-weight-medium">
-      <LogoImage class="mx-auto" size="tiny" :text-enabled="false" />
-      <p class="mt-5">
-        {{ $t('dream-mall-panel.setup.reminder') }}
-      </p>
-    </div>
+    <InfoBox :text="$t('dream-mall-panel.setup.reminder')" />
 
     <CopyToClipboard :table-url="tableUrl" class="mt-12" />
 
@@ -25,6 +20,7 @@ import { useTablesStore } from '#stores/tablesStore'
 
 import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
 import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
+import InfoBox from "#components/info-box/InfoBox.vue";
 
 defineProps<StepProps>()
 const emit = defineEmits<StepEmits>()
@@ -56,12 +52,6 @@ const navigateToTable = async () => {
 </script>
 
 <style scoped lang="scss">
-.reminder {
-  color: rgb(var(--v-theme-dm-panel-reminder-text-color));
-  background-color: var(--v-dm-panel-reminder-text-background-color);
-  border-radius: 24px;
-}
-
 :root {
   --custom-height: 48px;
 }

@@ -34,7 +34,7 @@ function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): Theme
       'dm-panel-call-action-button-indicator-color': theme.dmPanelCallActionButtonIndicatorColor,
       'dm-panel-call-action-button-indicator-background-color':
         theme.dmPanelCallActionButtonIndicatorBackgroundColor,
-      'dm-panel-reminder-text-color': theme.dmPanelReminderTextColor,
+      'info-box-text-color': theme.infoBoxTextColor,
       'dm-panel-reminder-link-color': theme.dmPanelReminderLinkColor,
       'dm-invitation-item-font-color': theme.dmInvitationItemFontColor,
       'dm-invitation-item-background-color': theme.dmInvitationItemBackgroundColor,
@@ -61,7 +61,7 @@ function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): Theme
       'dm-panel-text-input-background-color': theme.dmPanelTextInputBackgroundColor,
       'dm-panel-background-color': theme.dmPanelBackgroundColor,
       'dm-panel-border-color': theme.dmPanelBorderColor,
-      'dm-panel-reminder-text-background-color': theme.dmPanelReminderTextBackgroundColor,
+      'info-box-text-background-color': theme.infoBoxTextBackgroundColor,
       'dm-panel-reminder-link-background-color': theme.dmPanelReminderLinkBackgroundColor,
       'drawer-element-background': theme.drawerElementBackground,
     },
