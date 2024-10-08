@@ -38,5 +38,8 @@ configmap:
   iban: 'DE667 333170000 10000 504'
   bic: 'GABLDE71XXX'
   bank: 'Gabler-Saliter Bank'
-  sentry_dsn: 'https://1f94061db34f923d76b8eb85ccb132f8@o4508075566956544.ingest.de.sentry.io/4508075570561104'
+  sentry_dsn_backend: 'https://1f94061db34f923d76b8eb85ccb132f8@o4508075566956544.ingest.de.sentry.io/4508075570561104'
+  sentry_dsn_frontend: 'https://a8ad24bf9db4356ad721fe8974c058f0@o4508075566956544.ingest.de.sentry.io/4508076485509200'
+  sentry_dsn_presenter: 'https://ee21d8029a7c481e7e0835fc8e6421d6@o4508075566956544.ingest.de.sentry.io/4508076577521744'
   sentry_environment: ''
+  backend_url: http://dreammall-backend:4000

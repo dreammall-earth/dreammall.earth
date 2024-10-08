@@ -79,6 +79,16 @@ spec:
                 configMapKeyRef:
                   name: {{ .Release.Name }}
                   key: bank
+            - name: SENTRY_DSN
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: sentry_dsn_frontend
+            - name: SENTRY_ENVIRONMENT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: sentry_environment
           image: "{{ .Values.frontend.image.repository }}:{{ default .Values.global.image.tag .Values.frontend.image.tag "latest" }}"
           imagePullPolicy: {{ quote .Values.global.image.pullPolicy }}
           name: frontend

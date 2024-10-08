@@ -17,6 +17,8 @@ import CreateVuetify from '#plugins/vuetify'
 import AuthService from '#src/services/AuthService'
 import { useAuthStore } from '#stores/authStore'
 
+import { setupSentry } from './sentry'
+
 const vuetify = CreateVuetify(i18n)
 
 function createApp(pageContext: PageContext, isClient = true) {
@@ -102,6 +104,11 @@ function createApp(pageContext: PageContext, isClient = true) {
   const pageContextReactive = reactive(pageContext)
 
   setPageContext(app, pageContextReactive)
+
+  const {
+    SENTRY: { SENTRY_DSN: dsn, SENTRY_ENVIRONMENT: environment },
+  } = pageContext.publicEnv
+  setupSentry({ app, dsn, environment })
 
   return { app, i18n }
 }
