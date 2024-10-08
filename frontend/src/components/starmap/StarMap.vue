@@ -96,8 +96,8 @@ const initScene = () => {
   const sphereMaterial = new MeshBasicMaterial({
     map: spaceTexture,
     side: BackSide, // Textur wird auf der Innenseite der Sphäre angezeigt
-    transparent: true, // Ermöglicht die Transparenz
-    opacity: 0.5, // Setzt die Transparenz für das Hintergrundbild
+    // transparent: true, // Ermöglicht die Transparenz
+    // opacity: 0.5, // Setzt die Transparenz für das Hintergrundbild
   })
   const sphere = new Mesh(sphereGeometry, sphereMaterial)
   scene.add(sphere)
@@ -179,13 +179,23 @@ const addStars = (data: Star[]) => {
     const starGeometry = new SphereGeometry(STAR_RADIUS * data.magnitude, 16, 16)
     const starMaterial = new MeshBasicMaterial({ color: 0xffffff })
 
+    const hoverStarGeometry = new SphereGeometry(STAR_RADIUS * data.magnitude * 5, 16, 16)
+    const hoverStarMaterial = new MeshBasicMaterial({
+      color: 0xffffff,
+      opacity: 0,
+      transparent: true,
+    })
+
     // Berechnet die Position des Sterns auf der Sphäre
     const [x, y, z] = cartesianFromSphere(data.azimuth, data.altitude, data.distance)
 
     const star = new StarMesh(starGeometry, starMaterial, data)
+    const hoverStar = new StarMesh(hoverStarGeometry, hoverStarMaterial, data)
     star.position.set(x, y, z)
+    hoverStar.position.set(x, y, z)
     scene.add(star)
-    stars.push(star)
+    scene.add(hoverStar)
+    stars.push(hoverStar)
   })
 }
 
