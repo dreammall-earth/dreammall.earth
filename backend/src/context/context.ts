@@ -1,7 +1,6 @@
 import { jwtVerify, createRemoteJWKSet } from 'jose'
 
 import { CONFIG } from '#config/config'
-import { prisma } from '#src/prisma'
 
 import { findOrCreateUser } from './findOrCreateUser'
 import { getToken } from './getToken'
@@ -16,9 +15,12 @@ export type Context = {
   dataSources: { prisma: PrismaClient }
 }
 
+export type AuthenticatedContext = Omit<Context, 'user'> & { user: UserWithProfile }
+
 export interface CustomJwtPayload {
-  nickname: string
+  pk: number
   name: string
+  nickname: string
 }
 
 const decodePayload = async (
@@ -35,18 +37,21 @@ const decodePayload = async (
   }
 }
 
-const getCurrentUser = async (
-  authorization: string | undefined,
-): Promise<UserWithProfile | null> => {
-  const payload = await decodePayload(authorization)
-  if (!payload) {
-    return null
+const getCurrentUser =
+  (deps: { prisma: PrismaClient }) =>
+  async (authorization: string | undefined): Promise<UserWithProfile | null> => {
+    const payload = await decodePayload(authorization)
+    if (!payload) {
+      return null
+    }
+    return findOrCreateUser(deps)(payload)
   }
-  return findOrCreateUser(payload)
-}
 
-export const context: (token: string | undefined) => Promise<Context> = async (token) => {
-  const user = await getCurrentUser(token)
+export const context: (deps: {
+  prisma: PrismaClient
+}) => (token: string | undefined) => Promise<Context> = (deps) => async (token) => {
+  const { prisma } = deps
+  const user = await getCurrentUser(deps)(token)
   return {
     user,
     config: CONFIG,

@@ -21,6 +21,8 @@ export const mockContextValue: (overrides?: Partial<Context>) => Context = (over
       JWKS_URI: '',
       WELCOME_TABLE_NAME: '',
       WELCOME_TABLE_MEETING_ID: '',
+      SENTRY_DSN: '',
+      SENTRY_ENVIRONMENT: '',
     },
     dataSources: { prisma },
   }

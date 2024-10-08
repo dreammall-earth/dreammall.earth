@@ -57,7 +57,7 @@ const steps: Step[] = [
     id: 'end',
     title: 'Kleine Erinnerung',
     submit: 'close',
-    submitText: "Los geht's",
+    submitText: 'Tisch eröffnen',
     back: () => 'users',
   },
 ]

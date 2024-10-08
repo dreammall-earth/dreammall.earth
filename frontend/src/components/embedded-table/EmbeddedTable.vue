@@ -4,7 +4,7 @@
     width="100%"
     height="100%"
     :src="props.url"
-    allow="camera;microphone;fullscreen;display-capture *;"
+    allow="camera;microphone;fullscreen;display-capture;screen-wake-lock *;"
     class="table-iframe"
   ></iframe>
 </template>
@@ -38,8 +38,18 @@ onUnmounted(() => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@use 'sass:map';
+@import 'vuetify/lib/styles/settings/_variables';
+
 .table-iframe {
   border: none;
+  border-radius: 20px;
+}
+
+@media #{map.get($display-breakpoints, 'sm-and-down')} {
+  .table-iframe {
+    border-radius: 20px 20px 0 0;
+  }
 }
 </style>

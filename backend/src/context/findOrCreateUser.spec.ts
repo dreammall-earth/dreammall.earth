@@ -1,22 +1,28 @@
 import { prisma } from '#src/prisma'
+import { deleteAll } from '#test/helpers'
 
 import { findOrCreateUser } from './findOrCreateUser'
 
 describe('findOrCreateUser', () => {
+  beforeEach(async () => {
+    await deleteAll()
+  })
+
   const nickname = 'mockedUser'
   const name = 'User'
-  describe('first call', () => {
-    let userId: number
+  const pk = 11
 
+  describe('first call', () => {
     it('creates user in database', async () => {
-      await findOrCreateUser({ nickname, name })
+      await findOrCreateUser({ prisma })({ pk, nickname, name })
       const result = await prisma.user.findMany()
-      userId = result[0].id
       expect(result).toHaveLength(1)
       expect(result).toEqual([
         {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           id: expect.any(Number),
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          pk: expect.any(Number),
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           referenceId: expect.any(String),
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -31,6 +37,9 @@ describe('findOrCreateUser', () => {
     })
 
     it('creates CREATE USER event', async () => {
+      await findOrCreateUser({ prisma })({ pk, nickname, name })
+      const users = await prisma.user.findMany()
+      const [{ id: userId }] = users
       const result = await prisma.event.findMany()
       expect(result).toHaveLength(1)
       expect(result).toEqual([
@@ -47,12 +56,16 @@ describe('findOrCreateUser', () => {
   })
 
   describe('second call', () => {
+    beforeEach(async () => {
+      await findOrCreateUser({ prisma })({ pk, nickname, name })
+    })
+
     it('has the user in database', async () => {
       await expect(prisma.user.findMany()).resolves.toHaveLength(1)
     })
 
     it('has the same user in database', async () => {
-      await findOrCreateUser({ nickname, name })
+      await findOrCreateUser({ prisma })({ pk, nickname, name })
       await expect(prisma.user.findMany()).resolves.toHaveLength(1)
     })
   })

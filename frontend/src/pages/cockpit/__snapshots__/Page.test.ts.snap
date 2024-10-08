@@ -985,12 +985,12 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
       </transition-group-stub>
       <!-- Page Content Container -->
       <div
-        class="v-container v-container--fluid v-locale--is-ltr page-container px-8 text-font"
+        class="v-container v-container--fluid v-locale--is-ltr page-container text-font"
         data-v-75d0be1e=""
       >
         
         <div
-          class="cockpit"
+          class="cockpit px-8"
           data-v-b49ea567=""
         >
           
