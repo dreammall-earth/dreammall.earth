@@ -56,7 +56,7 @@
         rx="759"
         ry="768"
         transform="matrix(-4.37114e-08 1 1 4.37114e-08 98 100.364)"
-        stroke="#2CA5B1"
+        :stroke="props.isNotification ? '#F09630' : '#2CA5B1'"
         stroke-opacity="0.3"
         stroke-width="90"
         shape-rendering="crispEdges"
@@ -74,7 +74,7 @@
         rx="95"
         ry="95"
         transform="matrix(-4.37114e-08 1 1 4.37114e-08 98 100.364)"
-        stroke="#2CA5B1"
+        :stroke="props.isNotification ? '#F09630' : '#2CA5B1'"
         stroke-width="4"
       />
     </g>
@@ -220,7 +220,7 @@
         y2="936.983"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.0149795" stop-color="#2CA5B1" />
+        <stop offset="0.0149795" :stop-color="props.isNotification ? '#F09630' : '#2CA5B1'" />
         <stop offset="1" stop-color="#999999" />
       </linearGradient>
       <linearGradient
@@ -231,7 +231,7 @@
         y2="939.073"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.0149795" stop-color="#2CA5B1" />
+        <stop offset="0.0149795" :stop-color="props.isNotification ? '#F09630' : '#2CA5B1'" />
         <stop offset="1" stop-color="#999999" />
       </linearGradient>
       <linearGradient
@@ -242,7 +242,7 @@
         y2="924.479"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.0149795" stop-color="#2CA5B1" />
+        <stop offset="0.0149795" :stop-color="props.isNotification ? '#F09630' : '#2CA5B1'" />
         <stop offset="1" stop-color="#999999" />
       </linearGradient>
       <linearGradient
@@ -353,6 +353,15 @@ svg {
   width: 100vw;
   height: calc(100vh - 10px);
   transform: translate(-50%, -50%);
+
+  path[stroke='url(#paint0_linear_1513_6640)'],
+  circle[stroke='url(#paint1_linear_1513_6640)'],
+  circle[stroke='url(#paint2_linear_1513_6640)'],
+  path[fill='url(#paint3_linear_1513_6640)'] {
+    transition:
+      stroke 0.3s ease-in-out,
+      fill 0.3s ease-in-out;
+  }
 
   @media screen and (max-width: $mobile) {
     transition: scale 1s;
