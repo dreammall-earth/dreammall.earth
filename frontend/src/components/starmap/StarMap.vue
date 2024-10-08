@@ -286,20 +286,12 @@ onMounted(() => {
 })
 </script>
 
-<style scoped lang="scss">
-@use 'sass:map';
-@import 'vuetify/lib/styles/settings/_variables';
-
+<style scoped>
 .canvas-container {
-  --bottom-height: 136px;
-
   position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
-
-  // Todo: Remove after we are sure we want to keep it full screen.
-  // height: calc(100vh - var(--v-layout-top) - var(--bottom-height));
   height: 100vh;
   overflow: hidden;
   border: none;
@@ -309,11 +301,5 @@ canvas {
   display: block;
   width: 100%;
   height: 100%;
-}
-
-@media #{map.get($display-breakpoints, 'sm-and-down')} {
-  .container {
-    --bottom-height: 85px;
-  }
 }
 </style>

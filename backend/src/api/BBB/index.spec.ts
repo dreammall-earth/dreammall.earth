@@ -3,15 +3,16 @@ import { Request } from 'express'
 import { CONFIG } from '#config/config'
 import logger from '#src/logger'
 
+import { axiosInstance } from './axios'
+
 import {
   joinMeetingLink,
   getMeetings,
   MeetingInfo,
   createMeeting,
-  handleWebhook,
+  webhook,
   registerWebhook,
-} from './BBB'
-import { axiosInstance } from './BBB/axios'
+} from '.'
 
 // eslint-disable-next-line jest/no-untyped-mock-factory
 jest.mock('#src/logger', () => {
@@ -468,7 +469,90 @@ describe('createMeeting', () => {
   })
 })
 
-describe('handleWebhook', () => {
+describe('webhook.isAuthorized', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
+  describe('with checksum error', () => {
+    const req = {
+      headers: { rawBody: 'MismatchingBody' },
+      query: { checksum: 'ef21dc772f12e380e71e929756e05f2a320aa84a' },
+      body: { event: '{}', timestamp: 1724836968 },
+    } as unknown as Request
+
+    it('returns false', () => {
+      expect(webhook.isAuthorized(req)).toBe(false)
+    })
+
+    it('logs checksum error', () => {
+      webhook.isAuthorized(req)
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.error).toHaveBeenCalledWith(
+        'Webhook checksum received (ef21dc772f12e380e71e929756e05f2a320aa84a) does not match calculated checksum 6f355e209efcad2aad189a9fca32cb2dcfd6ac40',
+      )
+    })
+  })
+
+  describe('with header error', () => {
+    const req = {
+      headers: {
+        rawBody: 'Body',
+        authorization: 'Bearer InvalidSecret',
+      },
+      query: {},
+      body: { event: '{}', timestamp: 1724836968 },
+    } as unknown as Request
+
+    it('returns false', () => {
+      expect(webhook.isAuthorized(req)).toBe(false)
+    })
+
+    it('logs shared secret error', () => {
+      webhook.isAuthorized(req)
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.error).toHaveBeenCalledWith(
+        'Webhook bearer header received "(Bearer InvalidSecret)" does not match bbb shared secret configured',
+      )
+    })
+  })
+
+  describe('if both checksum and headers are valid', () => {
+    const req = {
+      headers: {
+        rawBody: 'Body',
+        authorization: `Bearer ${CONFIG.BBB_SHARED_SECRET}`,
+      },
+      query: { checksum: 'ef21dc772f12e380e71e929756e05f2a320aa84a' },
+      body: { event: '[{"data": {}}]', timestamp: 1724836968 },
+    } as unknown as Request
+    it('returns true', () => {
+      expect(webhook.isAuthorized(req)).toBe(true)
+    })
+
+    it('logs nothing', () => {
+      webhook.isAuthorized(req)
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.error).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('with header success', () => {
+    it('returns true', () => {
+      const req = {
+        headers: {
+          rawBody: 'Body',
+          authorization: `Bearer ${CONFIG.BBB_SHARED_SECRET}`,
+        },
+        query: {},
+        body: { event: '{}', timestamp: 1724836968 },
+      } as unknown as Request
+      expect(webhook.isAuthorized(req)).toBe(true)
+    })
+  })
+})
+
+describe('webhook.handleWebhook', () => {
   beforeEach(() => {
     jest.clearAllMocks()
   })
@@ -480,7 +564,7 @@ describe('handleWebhook', () => {
         query: { checksum: 'ef21dc772f12e380e71e929756e05f2a320aa84a' },
         body: { event: '[{"data": {}}]', timestamp: 1724836968 },
       }
-      handleWebhook(req as unknown as Request)
+      webhook.handleWebhook(req as unknown as Request)
 
       // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(logger.debug).toHaveBeenCalledWith(
@@ -501,46 +585,13 @@ describe('handleWebhook', () => {
         query: {},
         body: { event: '{}', timestamp: 1724836968 },
       }
-      handleWebhook(req as unknown as Request)
+      webhook.handleWebhook(req as unknown as Request)
 
       // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(logger.debug).toHaveBeenCalledWith(
         'webhook received',
         new Date('2024-08-28T09:22:48.000Z'),
         {},
-      )
-    })
-  })
-
-  describe('with checksum error', () => {
-    it('logs checksum error', () => {
-      const req = {
-        headers: { rawBody: 'MismatchingBody' },
-        query: { checksum: 'ef21dc772f12e380e71e929756e05f2a320aa84a' },
-        body: { event: '{}', timestamp: 1724836968 },
-      }
-      handleWebhook(req as unknown as Request)
-      // eslint-disable-next-line @typescript-eslint/unbound-method
-      expect(logger.error).toHaveBeenCalledWith(
-        'Webhook checksum received (ef21dc772f12e380e71e929756e05f2a320aa84a) does not match calculated checksum 6f355e209efcad2aad189a9fca32cb2dcfd6ac40',
-      )
-    })
-  })
-
-  describe('with header error', () => {
-    it('logs shared secret error', () => {
-      const req = {
-        headers: {
-          rawBody: 'Body',
-          authorization: 'Bearer InvalidSecret',
-        },
-        query: {},
-        body: { event: '{}', timestamp: 1724836968 },
-      }
-      handleWebhook(req as unknown as Request)
-      // eslint-disable-next-line @typescript-eslint/unbound-method
-      expect(logger.error).toHaveBeenCalledWith(
-        'Webhook bearer header received "(Bearer InvalidSecret)" does not match bbb shared secret configured',
       )
     })
   })
@@ -580,7 +631,7 @@ describe('handleWebhook', () => {
           timestamp: 1724836968,
         },
       }
-      handleWebhook(req as unknown as Request)
+      webhook.handleWebhook(req as unknown as Request)
 
       // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(logger.debug).toHaveBeenCalledWith(
@@ -617,7 +668,7 @@ describe('handleWebhook', () => {
           timestamp: 1724836968,
         },
       }
-      handleWebhook(req as unknown as Request)
+      webhook.handleWebhook(req as unknown as Request)
 
       // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(logger.debug).toHaveBeenCalledWith(
@@ -661,7 +712,7 @@ describe('handleWebhook', () => {
           timestamp: 1724836968,
         },
       }
-      handleWebhook(req as unknown as Request)
+      webhook.handleWebhook(req as unknown as Request)
 
       // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(logger.debug).toHaveBeenCalledWith(
@@ -702,7 +753,7 @@ describe('handleWebhook', () => {
           timestamp: 1724836968,
         },
       }
-      handleWebhook(req as unknown as Request)
+      webhook.handleWebhook(req as unknown as Request)
 
       // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(logger.debug).toHaveBeenCalledWith(
@@ -713,6 +764,28 @@ describe('handleWebhook', () => {
 
       // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(logger.debug).toHaveBeenCalledWith('webhook', 'user-left')
+    })
+  })
+
+  describe('unhandled event', () => {
+    it('logs unhandled', () => {
+      const event = {
+        type: 'event',
+        id: 'unknown-id',
+      }
+      const req = {
+        body: {
+          event: `[{"data": ${JSON.stringify(event)}}]`,
+          timestamp: 1724836968,
+        },
+      }
+      webhook.handleWebhook(req as unknown as Request)
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(logger.debug).toHaveBeenCalledWith('webhook unhandled event', {
+        type: 'event',
+        id: 'unknown-id',
+      })
     })
   })
 })

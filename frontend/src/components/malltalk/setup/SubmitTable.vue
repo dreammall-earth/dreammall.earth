@@ -7,27 +7,7 @@
       </p>
     </div>
 
-    <div class="d-flex align-start mt-12">
-      <v-text-field
-        v-model="tableUrl"
-        rounded
-        flat
-        class="elevation-0 w-100 flex-grow-1 mr-3 custom-text-field"
-        :class="{ 'copied-indicator': copiedIndicator }"
-        content-class="elevation-0"
-        variant="solo-filled"
-        hide-details
-        readonly
-      />
-      <v-btn
-        icon
-        class="custom-icon-btn"
-        :class="{ 'copied-indicator': copiedIndicator }"
-        @click="copyUrl"
-      >
-        <v-icon icon="mdi-content-copy" />
-      </v-btn>
-    </div>
+    <CopyToClipboard :table-url="tableUrl" class="mt-12" />
 
     <SimpleButton class="mt-12 mx-auto" :label="submitText" @click="onSubmit" />
   </div>
@@ -35,18 +15,16 @@
 
 <script lang="ts" setup>
 import { navigate } from 'vike/client/router'
-import { ref, inject } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
+import CopyToClipboard from '#components/copy-to-clipboard/CopyToClipboard.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 import { usePageContext } from '#context/usePageContext'
-import { copyToClipboard } from '#src/utils/copyToClipboard'
 import { useTablesStore } from '#stores/tablesStore'
 
 import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
 import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
-import type { toast as Toast } from 'vue3-toastify'
 
 defineProps<StepProps>()
 const emit = defineEmits<StepEmits>()
@@ -66,24 +44,6 @@ const { META } = pageContext.publicEnv
 const tableSettings = defineModel<MyTableSettings>({ required: true })
 const tableId = tableSettings.value.tableId ?? 0
 const tableUrl = tablesStore.getJoinTableUrl(tableId, META.BASE_URL)
-
-const copiedIndicator = ref(false)
-let timerIndicator: ReturnType<typeof setTimeout> | null = null
-
-const toast = inject<typeof Toast>('toast')
-const copy = copyToClipboard(toast)
-
-const copyUrl = () => {
-  copy(tableUrl, t('copiedToClipboard'))
-  copiedIndicator.value = true
-
-  if (timerIndicator) clearTimeout(timerIndicator)
-
-  timerIndicator = setTimeout(() => {
-    copiedIndicator.value = false
-    timerIndicator = null
-  }, 3000)
-}
 
 const navigateToTable = async () => {
   if (!tableId) return
