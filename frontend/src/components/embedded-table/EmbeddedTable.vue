@@ -4,7 +4,7 @@
     width="100%"
     height="100%"
     :src="props.url"
-    allow="camera;microphone;fullscreen;display-capture *;"
+    allow="camera;microphone;fullscreen;display-capture;screen-wake-lock *;"
     class="table-iframe"
   ></iframe>
 </template>
