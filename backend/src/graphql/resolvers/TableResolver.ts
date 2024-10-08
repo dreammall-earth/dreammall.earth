@@ -9,7 +9,6 @@ import {
   Int,
   Subscription,
   Root,
-  SubscriptionHandlerData,
 } from 'type-graphql'
 // eslint-disable-next-line import/named
 import { v4 as uuidv4 } from 'uuid'
@@ -80,7 +79,7 @@ export class TableResolver {
     if (userIds && userIds.length) {
       await createUsersInMeetings(prisma)({ userIds, meeting, role: AttendeeRole.VIEWER })
 
-      pubSub.publish('INVITE_TABLE_SUBSCRIPTION', {
+      pubSub.publish('CALL_SUBSCRIPTION', {
         user,
         userIds,
         table: {
