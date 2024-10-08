@@ -1,13 +1,8 @@
 <template>
-  <button
-    ref="tabControl"
-    class="tab-control ma-auto border-sm"
-    :class="{ open: isOpen, sliding: isSliding }"
-    @click="() => !isOpen && open()"
-  >
+  <div ref="tabControl" class="tab-control ma-auto border-sm" :class="{ sliding: isSliding }">
     <div v-show="isSliding" ref="marker" class="marker"></div>
     <div class="d-flex align-center justify-center h-100 w-100">
-      <a
+      <button
         v-for="(item, index) in items"
         :key="item.text"
         ref="itemRefs"
@@ -19,14 +14,14 @@
           <v-icon :icon="item.icon" class="w-100" :class="item.class"></v-icon>
         </div>
         {{ $t(item.text) }}
-      </a>
+      </button>
     </div>
-  </button>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { navigate } from 'vike/client/router'
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 import { usePageContext } from '#root/renderer/context/usePageContext'
 
@@ -58,7 +53,6 @@ const items = [
   },
 ]
 
-const isOpen = ref(true)
 const isSliding = ref(false)
 
 let defaultItem = items.findIndex((i) =>
@@ -70,26 +64,6 @@ const activeItem = ref(defaultItem)
 const tabControl: Ref<HTMLElement | null> = ref(null)
 const marker: Ref<HTMLElement | null> = ref(null)
 const itemRefs = ref([] as HTMLElement[])
-
-let timer: ReturnType<typeof setTimeout>
-
-/**
- * Open the tab control
- */
-function open() {
-  isOpen.value = true
-  closeWithDelay()
-}
-
-/**
- * Close the tab control after a delay
- */
-function closeWithDelay() {
-  timer = setTimeout(() => {
-    isSliding.value = false
-    isOpen.value = false
-  }, 3000)
-}
 
 /**
  * Move the marker to the active item
@@ -110,10 +84,6 @@ function moveMarker() {
  * @param item s
  */
 function setItem(item: number) {
-  if (!isOpen.value) return
-
-  clearTimeout(timer)
-
   isSliding.value = true
 
   activeItem.value = item
@@ -123,6 +93,7 @@ function setItem(item: number) {
   const listener = (event: TransitionEvent) => {
     if (event.propertyName !== 'background-color') return
     itemRef.removeEventListener('transitionend', listener)
+    isSliding.value = false
     navigate(items[activeItem.value].link)
   }
   itemRef.addEventListener('transitionend', listener)
@@ -130,18 +101,11 @@ function setItem(item: number) {
   requestAnimationFrame(() => {
     // Move the marker to the active item
     moveMarker()
-
-    closeWithDelay()
   })
 }
 
 onMounted(() => {
   moveMarker()
-  closeWithDelay()
-})
-
-onUnmounted(() => {
-  clearTimeout(timer)
 })
 </script>
 
@@ -209,13 +173,11 @@ onUnmounted(() => {
   }
 }
 
-.item:first-child,
-.tab-control:not(.open) .item.active {
+.item:first-child {
   padding-left: 10px;
 }
 
-.item:last-child,
-.tab-control:not(.open) .item.active {
+.item:last-child {
   padding-right: 15px;
 }
 
@@ -224,6 +186,7 @@ onUnmounted(() => {
   --height: 50px;
   --background-color: #e1e6ed;
   --item-border-width: 0.677px;
+  --tab-control-padding: 2px;
 
   position: relative;
   display: flex;
@@ -237,48 +200,13 @@ onUnmounted(() => {
   line-height: 150%;
   color: #222;
   background-color: var(--background-color);
+  border-color: rgb(255 255 255 / 78%) !important;
   border-radius: 27.067px;
   transition: padding var(--animation-time);
 
-  &.open {
-    --tab-control-padding: 2px;
-
-    border-color: rgb(255 255 255 / 78%) !important;
-
-    .item {
-      &.active {
-        background-color: #fff;
-
-        .icon {
-          background-color: var(--background-color);
-        }
-      }
-    }
-  }
-
-  &.open.sliding .item {
+  &.sliding .item {
     background-color: transparent;
     border-color: transparent;
-  }
-
-  &:not(.open) {
-    --tab-control-padding: 0px;
-
-    .item.active {
-      .icon {
-        padding: 2px;
-        background: none;
-      }
-    }
-
-    .item:not(.active) {
-      max-width: 0;
-      padding: 0;
-    }
-
-    .marker {
-      opacity: 0;
-    }
   }
 }
 </style>
