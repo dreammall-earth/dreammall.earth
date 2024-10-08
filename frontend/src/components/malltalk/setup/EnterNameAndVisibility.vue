@@ -22,6 +22,7 @@
           : $t('dream-mall-panel.setup.public')
       "
       hide-details
+      class="private-switch"
     />
 
     <SimpleButton type="submit" class="mt-12" :label="submitText" />
@@ -51,6 +52,12 @@ const onNext = () => emit('next')
 
   :deep(input) {
     color: rgb(var(--v-theme-dm-panel-text-input-color)) !important;
+  }
+}
+
+.private-switch {
+  :deep(.v-label) {
+    width: 80px;
   }
 }
 </style>
