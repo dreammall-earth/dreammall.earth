@@ -19,7 +19,7 @@ import { CONFIG } from '#config/config'
 import { pubSub } from '#graphql/pubSub'
 import { Call } from '#models/Call'
 import { JoinTable, OpenTable, OpenTables, Table, getAttendees } from '#models/TableModel'
-import { Context } from '#src/context'
+import { AuthenticatedContext } from '#src/context'
 import {
   EVENT_CREATE_MY_TABLE,
   EVENT_UPDATE_MY_TABLE,
@@ -39,7 +39,7 @@ export class TableResolver {
   async createMyTable(
     @Arg('name') name: string,
     @Arg('isPublic') isPublic: boolean,
-    @Ctx() context: Context,
+    @Ctx() context: AuthenticatedContext,
     // eslint-disable-next-line type-graphql/wrong-decorator-signature
     @Arg('userIds', () => [Int], { nullable: 'itemsAndList' }) // eslint-disable-next-line type-graphql/invalid-nullable-input-type
     userIds?: number[] | null | undefined,
@@ -48,7 +48,6 @@ export class TableResolver {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
 
     const oldMeetindID = user.meetingId
 
@@ -119,7 +118,7 @@ export class TableResolver {
   async updateMyTable(
     @Arg('name') name: string,
     @Arg('isPublic') isPublic: boolean,
-    @Ctx() context: Context,
+    @Ctx() context: AuthenticatedContext,
     // eslint-disable-next-line type-graphql/wrong-decorator-signature
     @Arg('userIds', () => [Int], { nullable: 'itemsAndList' }) // eslint-disable-next-line type-graphql/invalid-nullable-input-type
     userIds?: number[] | null | undefined,
@@ -128,7 +127,6 @@ export class TableResolver {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
 
     if (!user.meetingId) {
       throw new Error('User has no meeting!')
@@ -172,12 +170,11 @@ export class TableResolver {
 
   @Authorized()
   @Mutation(() => Int)
-  async joinMyTable(@Ctx() context: Context): Promise<number> {
+  async joinMyTable(@Ctx() context: AuthenticatedContext): Promise<number> {
     const {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
 
     if (!user.meetingId) {
       throw new Error('No meeting for user!')
@@ -204,16 +201,8 @@ export class TableResolver {
 
   @Authorized()
   @Query(() => OpenTables)
-  async tables(@Ctx() context: Context): Promise<OpenTables> {
-    const {
-      dataSources: { prisma },
-    } = context
-    const user = await prisma.user.findUnique({
-      where: {
-        id: context.user?.id,
-      },
-    })
-    if (!user) throw new Error('User not found!')
+  async tables(@Ctx() context: AuthenticatedContext): Promise<OpenTables> {
+    const { user } = context
     const meetings = await getMeetings()
     return openTablesFromOpenMeetings(context)({ meetings, user })
   }
@@ -224,7 +213,7 @@ export class TableResolver {
     // params: CreateGroupTableParams,
     @Arg('name') name: string,
     @Arg('isPublic') isPublic: boolean,
-    @Ctx() context: Context,
+    @Ctx() context: AuthenticatedContext,
     // eslint-disable-next-line type-graphql/wrong-decorator-signature
     @Arg('userIds', () => [Int], { nullable: 'itemsAndList' }) // eslint-disable-next-line type-graphql/invalid-nullable-input-type
     userIds?: number[] | null | undefined,
@@ -233,7 +222,6 @@ export class TableResolver {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
 
     // Get Meeting where user.id and userIds are Moderator
     // Check if GroupMeeting already exist how to recognize the Meeting?
@@ -267,9 +255,8 @@ export class TableResolver {
 
   @Authorized()
   @Query(() => String)
-  async joinWelcomeTable(@Ctx() context: Context): Promise<string> {
+  async joinWelcomeTable(@Ctx() context: AuthenticatedContext): Promise<string> {
     const { user, config } = context
-    if (!user) throw new Error('User not found!')
 
     const { WELCOME_TABLE_MEETING_ID, WELCOME_TABLE_NAME } = config
 
@@ -291,15 +278,13 @@ export class TableResolver {
   @Query(() => JoinTable)
   async joinTable(
     @Arg('tableId', () => Int) tableId: number,
-    @Ctx() context: Context,
+    @Ctx() context: AuthenticatedContext,
   ): Promise<JoinTable> {
     const {
       user,
       config,
       dataSources: { prisma },
     } = context
-
-    if (!user) throw new Error('User not found!')
 
     const table = await prisma.meeting.findUnique({
       where: {
@@ -360,7 +345,7 @@ export class TableResolver {
   async joinTableAsGuest(
     @Arg('userName') userName: string,
     @Arg('tableId', () => Int) tableId: number,
-    @Ctx() context: Context,
+    @Ctx() context: AuthenticatedContext,
   ): Promise<string> {
     const {
       dataSources: { prisma },
@@ -385,7 +370,7 @@ export class TableResolver {
   @Query(() => String)
   async getTableName(
     @Arg('tableId', () => Int) tableId: number,
-    @Ctx() context: Context,
+    @Ctx() context: AuthenticatedContext,
   ): Promise<string> {
     const {
       dataSources: { prisma },
@@ -402,7 +387,7 @@ export class TableResolver {
 
   @Authorized()
   @Query(() => [Table])
-  async projectTables(@Ctx() context: Context): Promise<Table[]> {
+  async projectTables(@Ctx() context: AuthenticatedContext): Promise<Table[]> {
     const {
       user,
       dataSources: { prisma },
@@ -411,7 +396,7 @@ export class TableResolver {
       where: {
         users: {
           some: {
-            userId: user?.id,
+            userId: user.id,
             role: AttendeeRole.MODERATOR,
           },
         },
@@ -431,21 +416,20 @@ export class TableResolver {
   @Authorized()
   @Mutation(() => Boolean)
   async deleteTable(
-    @Ctx() context: Context,
+    @Ctx() context: AuthenticatedContext,
     @Arg('tableId', () => Int) tableId: number,
   ): Promise<boolean> {
     const {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
 
     const meeting = await prisma.meeting.findFirst({
       where: {
         id: tableId,
         users: {
           some: {
-            userId: user?.id,
+            userId: user.id,
           },
         },
       },
@@ -460,12 +444,12 @@ export class TableResolver {
       await prisma.usersInMeetings.delete({
         where: {
           meetingId_userId: {
-            userId: user?.id,
+            userId: user.id,
             meetingId: tableId,
           },
         },
       })
-      if (!meeting.users.some((u) => u.userId !== user?.id && u.role === 'MODERATOR')) {
+      if (!meeting.users.some((u) => u.userId !== user.id && u.role === 'MODERATOR')) {
         await prisma.meeting.delete({
           where: {
             id: tableId,
@@ -484,7 +468,7 @@ export class TableResolver {
   @Mutation(() => Table)
   async updateTable(
     @Arg('tableId', () => Int) tableId: number,
-    @Ctx() context: Context,
+    @Ctx() context: AuthenticatedContext,
     @Arg('name', () => String, { nullable: true }) name: string | null | undefined,
     @Arg('isPublic', { nullable: true }) isPublic: boolean = false,
     // eslint-disable-next-line type-graphql/wrong-decorator-signature
@@ -495,7 +479,6 @@ export class TableResolver {
       user,
       dataSources: { prisma },
     } = context
-    if (!user) throw new Error('User not found!')
 
     let meeting = await prisma.meeting.findFirst({
       where: {
@@ -553,7 +536,7 @@ export class TableResolver {
   })
   async updateOpenTables(
     @Root() meetings: MeetingInfo[],
-    @Ctx() context: Context,
+    @Ctx() context: AuthenticatedContext,
   ): Promise<OpenTables> {
     const { user } = context
     if (!user) return { permanentTables: [], mallTalkTables: [], projectTables: [] }
@@ -599,7 +582,7 @@ type MeetingInfoUnionUser = {
 }
 
 const openTablesFromOpenMeetings =
-  (context: Context) =>
+  (context: AuthenticatedContext) =>
   async (arg: MeetingInfoUnionUser): Promise<OpenTables> => {
     const {
       dataSources: { prisma },
@@ -648,9 +631,9 @@ const openTablesFromOpenMeetings =
         const isModerator =
           meeting.users.some(
             (user) =>
-              meeting.user?.id === context.user?.id ||
-              (context.user?.id === user.userId && user.role === 'MODERATOR'),
-          ) || meeting.user?.id === context.user?.id
+              meeting.user?.id === context.user.id ||
+              (context.user.id === user.userId && user.role === 'MODERATOR'),
+          ) || meeting.user?.id === context.user.id
         const openTable = OpenTable.fromMeetingInfo(
           meetingInfo,
           meeting.id ? meeting.id : 0,
@@ -753,7 +736,7 @@ const createBBBMeeting =
     return meeting
   }
 
-const getOpenWelcomeTable = (context: Context) => (meetings: MeetingInfo[]) => {
+const getOpenWelcomeTable = (context: AuthenticatedContext) => (meetings: MeetingInfo[]) => {
   const { config } = context
   if (!config.WELCOME_TABLE_MEETING_ID) {
     return
