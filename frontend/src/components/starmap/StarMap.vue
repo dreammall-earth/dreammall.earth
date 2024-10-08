@@ -96,8 +96,8 @@ const initScene = () => {
   const sphereMaterial = new MeshBasicMaterial({
     map: spaceTexture,
     side: BackSide, // Textur wird auf der Innenseite der Sphäre angezeigt
-    // transparent: true, // Ermöglicht die Transparenz
-    // opacity: 0.5, // Setzt die Transparenz für das Hintergrundbild
+    transparent: true, // Ermöglicht die Transparenz
+    opacity: 0.5, // Setzt die Transparenz für das Hintergrundbild
   })
   const sphere = new Mesh(sphereGeometry, sphereMaterial)
   scene.add(sphere)
@@ -184,6 +184,7 @@ const addStars = (data: Star[]) => {
       color: 0xffffff,
       opacity: 0,
       transparent: true,
+      alphaTest: 0.5,
     })
 
     // Berechnet die Position des Sterns auf der Sphäre
