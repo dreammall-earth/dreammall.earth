@@ -8,7 +8,7 @@ exports[`TabControl > renders 1`] = `
     class="v-application__wrap"
   >
     
-    <button
+    <div
       class="tab-control ma-auto border-sm"
       data-v-d58c92bb=""
     >
@@ -22,7 +22,7 @@ exports[`TabControl > renders 1`] = `
         data-v-d58c92bb=""
       >
         
-        <a
+        <button
           class="item active"
           data-v-d58c92bb=""
         >
@@ -250,8 +250,8 @@ exports[`TabControl > renders 1`] = `
             </i>
           </div>
            $t('menu.worldCafe')
-        </a>
-        <a
+        </button>
+        <button
           class="item"
           data-v-d58c92bb=""
         >
@@ -506,10 +506,10 @@ exports[`TabControl > renders 1`] = `
             </i>
           </div>
            $t('menu.cockpit')
-        </a>
+        </button>
         
       </div>
-    </button>
+    </div>
     
   </div>
 </div>
