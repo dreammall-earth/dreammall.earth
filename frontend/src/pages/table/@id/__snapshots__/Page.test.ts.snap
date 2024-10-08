@@ -995,7 +995,7 @@ exports[`Table Page > renders 1`] = `
           data-v-42f67fe6=""
         >
           <iframe
-            allow="camera;microphone;fullscreen;display-capture *;"
+            allow="camera;microphone;fullscreen;display-capture;screen-wake-lock *;"
             class="table-iframe"
             data-v-42f67fe6=""
             data-v-51765335=""

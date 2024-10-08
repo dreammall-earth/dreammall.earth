@@ -5,7 +5,7 @@ import { UserWithProfile } from '#src/prisma'
 
 import { distributeStarsToSectorsRecursive } from './starmap/starmap'
 
-import type { Context } from '#src/context'
+import type { AuthenticatedContext } from '#src/context'
 
 export const MAX_STARS_TO_SHOW = 250
 
@@ -13,14 +13,11 @@ export const MAX_STARS_TO_SHOW = 250
 export class StarmapResolver {
   @Authorized()
   @Query(() => StarMap)
-  async starmap(@Ctx() context: Context): Promise<StarMap> {
+  async starmap(@Ctx() context: AuthenticatedContext): Promise<StarMap> {
     const {
       user,
       dataSources: { prisma },
     } = context
-
-    // see PR https://github.com/dreammall-earth/dreammall.earth/pull/2536
-    if (!user) return new StarMap([], [])
 
     const users: UserWithProfile[] = await prisma.user.findMany({
       where: {
