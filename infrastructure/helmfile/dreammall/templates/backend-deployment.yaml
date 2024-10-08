@@ -67,7 +67,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: {{ .Release.Name }}
-                  key: sentry_dsn
+                  key: sentry_dsn_backend
             - name: SENTRY_ENVIRONMENT
               valueFrom:
                 configMapKeyRef:
