@@ -158,8 +158,12 @@ const openTable = (id: number) => {
     left: var(--sides) !important;
     z-index: 2000 !important;
     width: calc(100% - (2 * var(--sides))) !important;
-    padding-top: 20px;
+    padding-top: 0; // iOS will misposition the closed drawer with a value over 0, so we specify the padding below
     border-radius: 30px 30px 0 0;
+
+    :deep(.v-navigation-drawer__content) {
+      padding-top: 20px;
+    }
 
     --sides: 12px;
   }
