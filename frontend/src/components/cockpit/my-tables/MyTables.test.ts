@@ -5,12 +5,14 @@ import { describe, expect, it, vi } from 'vitest'
 
 import { currentUserQuery } from '#queries/currentUserQuery'
 import { projectTablesQuery } from '#queries/projectTablesQuery'
+import { callSubscription } from '#subscriptions/callSubscription'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 import MyTables from './MyTables.vue'
 
 const currentUserQueryMock = vi.fn()
 const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
+const callSubscriptionMock: IMockSubscription = createMockSubscription()
 const projectTablesQueryMock = vi.fn()
 
 const mockClient = createMockClient()
@@ -30,6 +32,7 @@ mockClient.setRequestHandler(
 )
 
 mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
+mockClient.setRequestHandler(callSubscription, () => callSubscriptionMock)
 
 mockClient.setRequestHandler(
   projectTablesQuery,

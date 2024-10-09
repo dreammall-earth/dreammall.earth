@@ -40,6 +40,8 @@ const {
 
   SENTRY_DSN,
   SENTRY_ENVIRONMENT,
+
+  WEBHOOK_SECRET,
 } = process.env
 
 if (!JWKS_URI) {
@@ -78,6 +80,7 @@ export const CONFIG = {
   JWKS_URI,
   SENTRY_DSN,
   SENTRY_ENVIRONMENT,
+  WEBHOOK_SECRET,
 }
 
 // Config Checks

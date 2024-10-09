@@ -16,6 +16,8 @@ import { v4 as uuidv4 } from 'uuid'
 import { createMeeting, joinMeetingLink, getMeetings, MeetingInfo, AttendeeRole } from '#api/BBB'
 import { CreateMeetingResponse } from '#api/BBB/types'
 import { CONFIG } from '#config/config'
+import { pubSub } from '#graphql/pubSub'
+import { Call } from '#models/Call'
 import { JoinTable, OpenTable, OpenTables, Table, getAttendees } from '#models/TableModel'
 import { AuthenticatedContext } from '#src/context'
 import {
@@ -25,6 +27,7 @@ import {
   EVENT_UPDATE_TABLE,
 } from '#src/event/Events'
 import logger from '#src/logger'
+import { leaveTable } from '#src/use-cases/leave-table'
 
 import type { PrismaClient, UserWithMeeting, UsersWithMeetings } from '#src/prisma'
 
@@ -75,6 +78,20 @@ export class TableResolver {
 
     if (userIds && userIds.length) {
       await createUsersInMeetings(prisma)({ userIds, meeting, role: AttendeeRole.VIEWER })
+
+      pubSub.publish('CALL_SUBSCRIPTION', {
+        user,
+        userIds,
+        table: {
+          id: String(meeting.id),
+          isModerator: false,
+          meetingID: meeting.meetingID,
+          meetingName: meeting.name,
+          startTime: String(meeting.createTime),
+          attendees: [],
+          participantCount: 0,
+        },
+      })
     }
 
     await EVENT_CREATE_MY_TABLE(user.id)
@@ -180,7 +197,6 @@ export class TableResolver {
       inviteLink,
       tableId: dbMeeting.id,
     })
-
     return dbMeeting.id
   }
 
@@ -408,44 +424,7 @@ export class TableResolver {
       user,
       dataSources: { prisma },
     } = context
-
-    const meeting = await prisma.meeting.findFirst({
-      where: {
-        id: tableId,
-        users: {
-          some: {
-            userId: user.id,
-          },
-        },
-      },
-      include: {
-        users: true,
-      },
-    })
-    if (!meeting) {
-      throw new Error('Meeting not found!')
-    }
-    try {
-      await prisma.usersInMeetings.delete({
-        where: {
-          meetingId_userId: {
-            userId: user.id,
-            meetingId: tableId,
-          },
-        },
-      })
-      if (!meeting.users.some((u) => u.userId !== user.id && u.role === 'MODERATOR')) {
-        await prisma.meeting.delete({
-          where: {
-            id: tableId,
-          },
-        })
-      }
-    } catch (e) {
-      logger.error('User could not be detached', e)
-      throw new Error('User could not be detached.')
-    }
-
+    await leaveTable({ prisma, logger })({ userId: user.id, tableId })
     return true
   }
 
@@ -526,6 +505,26 @@ export class TableResolver {
     const { user } = context
     if (!user) return { permanentTables: [], mallTalkTables: [], projectTables: [] }
     return openTablesFromOpenMeetings(context)({ meetings, user })
+  }
+
+  @Subscription(() => Call, {
+    topics: 'CALL_SUBSCRIPTION',
+    filter: ({ payload, context }) => {
+      // Access the user from the context
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+      const currentUser = context.user
+
+      // Perform any necessary checks or filtering based on the user
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
+      if (payload.userIds.some((id: any) => currentUser.id === id)) {
+        return true // Allow this subscription for the recipient
+      }
+
+      return false // Deny this subscription
+    },
+  })
+  call(@Root() call: Call): Call {
+    return call
   }
 
   /*

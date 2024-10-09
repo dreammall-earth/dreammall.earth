@@ -21,6 +21,8 @@ $font-family-default: 'Helvetica', sans-serif;
 
 :root {
   --menu-icon-height: 44px;
+
+  overscroll-behavior: none;
 }
 
 a {

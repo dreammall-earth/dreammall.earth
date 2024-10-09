@@ -160,7 +160,6 @@ const { isModalActive } = useModal()
 
   @media #{map.get($display-breakpoints, 'sm-and-down')} {
     .page-container {
-      height: 24%;
       padding: 16px 0;
       margin-bottom: 50px;
     }

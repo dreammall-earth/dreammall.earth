@@ -66,6 +66,7 @@ services:
       BREVO_CONTACT_TEMPLATE_USER: "2"
       BREVO_NEWSLETTER_TEMPLATE_OPTIN: "3"
       BREVO_NEWSLETTER_LIST: "3"
+      WEBHOOK_SECRET: 1547ccd9fd7b143aa7a76021648581163ffae58c4a558be0da2e9ae0131707fc
 
   migrations:
     image: ghcr.io/dreammall-earth/dreammall.earth/backend:${IMAGE_TAG:-latest}
