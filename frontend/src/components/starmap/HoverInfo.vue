@@ -1,7 +1,7 @@
 <template>
   <div v-show="!!props.data" ref="hoverRef" class="hover-info">
     <div class="info-box pa-2">
-      <v-avatar :size="25" class="mb-2">
+      <v-avatar :size="25" class="avatar mb-2 text-font">
         <span>{{
           props.data?.name
             .split(' ')
@@ -76,15 +76,21 @@ watch(
   position: fixed;
   z-index: 3000;
 }
+
 .info-box {
-  border-radius: 10px;
-  border: 1px solid rgba(151, 151, 151, 0.3);
-  background: rgba(61, 71, 83, 0.75);
-  backdrop-filter: blur(15px);
-  color: #f5f5f5;
-  font-size: 10px;
   width: 100px;
   height: 100px;
+  font-size: 10px;
+  color: #f5f5f5;
   text-align: center;
+  background: rgb(61 71 83 / 75%);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgb(151 151 151 / 30%);
+  border-radius: 10px;
+}
+
+.avatar {
+  background-color: rgb(var(--v-theme-cockpit-highlight));
+  border-radius: 15px;
 }
 </style>
