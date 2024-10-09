@@ -1,6 +1,9 @@
 import { jwtVerify, createRemoteJWKSet } from 'jose'
 
 import { CONFIG } from '#config/config'
+import { createBrevoClient } from '#src/api/Brevo'
+import logger from '#src/logger'
+import { prisma } from '#src/prisma'
 
 import { findOrCreateUser } from './findOrCreateUser'
 import { getToken } from './getToken'
@@ -9,10 +12,13 @@ import type { PrismaClient, UserWithProfile } from '#src/prisma'
 
 const JWKS = createRemoteJWKSet(new URL(CONFIG.JWKS_URI))
 
+const brevo = createBrevoClient({ prisma, logger, config: CONFIG })
+
 export type Context = {
   config: typeof CONFIG
   user: UserWithProfile | null
   dataSources: { prisma: PrismaClient }
+  brevo: typeof brevo
 }
 
 export type AuthenticatedContext = Omit<Context, 'user'> & { user: UserWithProfile }
@@ -55,6 +61,7 @@ export const context: (deps: {
   return {
     user,
     config: CONFIG,
+    brevo,
     dataSources: {
       prisma,
     },
