@@ -2,6 +2,10 @@
   <div class="canvas-container">
     <canvas ref="canvas"></canvas>
   </div>
+  <div v-show="hoveredStar" ref="hoverRef" class="hover-info">
+    <h3>{{ hoveredStar.star?.data.name }}</h3>
+    <p>{{ hoveredStar.star?.data.details[0]?.text }}</p>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -24,13 +28,27 @@ import {
   BackSide,
 } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 
 import { starmapQuery, StarmapQueryResult, StarLine, Star } from '#queries/starmapQuery'
 
 const starData = ref<Star[]>([])
 
 const canvas = ref<HTMLCanvasElement | null>(null)
+
+type HoveredStar = {
+  star: Star | null
+  clientX: number
+  clientY: number
+}
+
+const hoveredStar = reactive<HoveredStar>({
+  star: null,
+  clientX: 0,
+  clientY: 0,
+})
+
+const hoverRef = ref<HTMLDivElement | null>(null)
 
 const { result: starmapQueryResult } = useQuery(
   starmapQuery,
@@ -253,8 +271,19 @@ const onCanvasClick = (event: MouseEvent) => {
 const onCanvasMouseMove = (event: MouseEvent) => {
   const star = getRaycasterIntersects(event)
   if (star) {
-    // eslint-disable-next-line no-console
-    console.log('Stern hover!', star.data)
+    const vector = new Vector3(...cartesianFromSphere(star.azimuth, star.altitude, star.distance))
+    const canvas = renderer.domElement // `renderer` is a THREE.WebGLRenderer
+
+    vector.project(camera) // `camera` is a THREE.PerspectiveCamera
+
+    const x = Math.round((0.5 + vector.x / 2) * (canvas.width / window.devicePixelRatio))
+    const y = Math.round((0.5 - vector.y / 2) * (canvas.height / window.devicePixelRatio))
+
+    hoverRef.value?.style.setProperty('top', `${y}px`)
+    hoverRef.value?.style.setProperty('left', `${x}px`)
+    hoveredStar.star = star
+  } else {
+    hoveredStar.star = null
   }
 }
 
@@ -301,5 +330,14 @@ canvas {
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.hover-info {
+  position: fixed;
+  z-index: 3000;
+  border-radius: 10px;
+  border: 1px solid rgba(151, 151, 151, 0.3);
+  background: rgba(61, 71, 83, 0.75);
+  backdrop-filter: blur(15px);
 }
 </style>
