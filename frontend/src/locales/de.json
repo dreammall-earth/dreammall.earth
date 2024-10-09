@@ -90,7 +90,8 @@
       "accept-table": "Beitreten",
       "dismiss-table": "Verwerfen",
       "accept-swap": "Wechseln",
-      "dismiss-swap": "Bleiben"
+      "dismiss-swap": "Bleiben",
+      "swap-text": "Tischtausch? Der alte klappt zusammen wenn du zum neuen springst. Trotzdem hinüber?"
     }
   },
   "error": {

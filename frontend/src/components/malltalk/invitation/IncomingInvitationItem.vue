@@ -1,5 +1,5 @@
 <template>
-  <div class="invitation-item d-flex align-center mx-3 my-2 pa-2 pr-3 rounded-pill">
+  <div class="invitation-item d-flex align-center pa-2 pr-3 rounded-pill">
     <v-avatar size="40" class="mr-3">
       <v-img
         v-if="invitation.userAvatar"

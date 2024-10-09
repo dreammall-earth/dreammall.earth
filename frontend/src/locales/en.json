@@ -90,7 +90,8 @@
       "accept-table": "Join",
       "dismiss-table": "Drop",
       "accept-swap": "Swap",
-      "dismiss-swap": "Stay"
+      "dismiss-swap": "Stay",
+      "swap-text": "Swap tables? The old one folds up when you jump to the new one. Still over?"
     }
   },
   "error": {

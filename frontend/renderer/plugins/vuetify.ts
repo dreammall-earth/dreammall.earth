@@ -61,7 +61,7 @@ function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): Theme
       'dm-panel-text-input-background-color': theme.dmPanelTextInputBackgroundColor,
       'dm-panel-background-color': theme.dmPanelBackgroundColor,
       'dm-panel-border-color': theme.dmPanelBorderColor,
-      'info-box-text-background-color': theme.infoBoxTextBackgroundColor,
+      'info-box-background-color': theme.infoBoxBackgroundColor,
       'dm-panel-reminder-link-background-color': theme.dmPanelReminderLinkBackgroundColor,
       'drawer-element-background': theme.drawerElementBackground,
     },

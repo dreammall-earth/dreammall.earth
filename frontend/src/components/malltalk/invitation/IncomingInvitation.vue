@@ -1,5 +1,6 @@
 <template>
   <IncomingInvitationItem
+    class="mx-3 my-2"
     :invitation="invitation"
     :dismiss-caption="$t('dream-mall-panel.incoming-invitation.dismiss-table')"
     :accept-caption="$t('dream-mall-panel.incoming-invitation.accept-table')"
@@ -18,8 +19,6 @@ defineProps<StepProps>()
 const emit = defineEmits<StepEmits>()
 
 const invitation = defineModel<Invitation>({ required: true })
-
-const onNext = () => emit('next')
 </script>
 
 <style lang="scss" scoped></style>
