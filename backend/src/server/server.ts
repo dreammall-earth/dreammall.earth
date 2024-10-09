@@ -8,7 +8,8 @@ import express, { json, urlencoded } from 'express'
 import { useServer } from 'graphql-ws/lib/use/ws'
 import { WebSocketServer } from 'ws'
 
-import { periodicallyRegisterWebhook, handleWebhook } from '#api/BBB'
+import { periodicallyRegisterWebhook } from '#api/BBB'
+import { installWebhooks, webhooks } from '#api/webhooks'
 import { CONFIG } from '#config/config'
 import { schema } from '#graphql/schema'
 import { expressContext, subscriptionContext } from '#src/context'
@@ -66,19 +67,14 @@ export async function listen(port: number) {
   app.use(
     urlencoded({
       extended: true,
-      verify: (req, res, buf) => {
+      verify: (req, _res, buf) => {
         req.headers.rawBody = buf.toString()
       },
     }),
   )
   app.use(cors<cors.CorsRequest>())
 
-  // BBB Webhooks
-  app.post('/bbb-webhook', function requestHandler(req, res) {
-    res.status(200)
-    res.end('Webhook received')
-    handleWebhook(req)
-  })
+  installWebhooks(app, webhooks)
 
   // Websocket + Apollo
   const httpServer = createHttpServer(app)

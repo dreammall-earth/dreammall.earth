@@ -4,9 +4,8 @@ import { XMLParser } from 'fast-xml-parser'
 import { CONFIG } from '#config/config'
 import logger from '#src/logger'
 
-import { axiosInstance, createChecksum } from './BBB/axios'
+import { axiosInstance, createChecksum } from './axios'
 import {
-  AttendeeRole, // eslint-disable-line @typescript-eslint/no-unused-vars
   CreateMeetingResponse,
   MeetingInfo,
   GetMeetingsResponse,
@@ -14,9 +13,9 @@ import {
   JoinMeetinLinkOptions,
   CreateMeetingBodyOptions,
   MeetingLayouts,
-} from './BBB/types'
+} from './types'
 
-export { MeetingInfo, AttendeeInfo, AttendeeRole } from './BBB/types'
+export { MeetingInfo, AttendeeInfo, AttendeeRole } from './types'
 
 const alwaysArray = ['response.meetings.meeting']
 
@@ -90,7 +89,7 @@ export const joinMeetingLink = (options: JoinMeetinLinkOptions): string => {
   return CONFIG.BBB_URL + 'join?' + params + '&checksum=' + checksum
 }
 
-export const handleWebhook = (req: Request): void => {
+const isAuthorized = (req: Request): boolean => {
   // Authorization
   if (req.query.checksum) {
     // Checksum validation
@@ -99,20 +98,24 @@ export const handleWebhook = (req: Request): void => {
       logger.error(
         `Webhook checksum received (${req.query.checksum as string}) does not match calculated checksum ${checksum}`,
       )
-      return
-    }
-  } else {
-    // Bearer Header validation
-    // In case auth2.0 is configured in bbb no checksum is transmitted but the shared secret is in the header.
-    // This case is not documented in the webhook documentation, but there is an issue for this case: https://github.com/bigbluebutton/bbb-webhooks/issues/8
-    if (req.headers.authorization !== `Bearer ${CONFIG.BBB_SHARED_SECRET}`) {
-      logger.error(
-        `Webhook bearer header received "(${req.headers.authorization as string})" does not match bbb shared secret configured`,
-      )
-      return
+      return false
     }
   }
 
+  // Bearer Header validation
+  // In case auth2.0 is configured in bbb no checksum is transmitted but the shared secret is in the header.
+  // This case is not documented in the webhook documentation, but there is an issue for this case: https://github.com/bigbluebutton/bbb-webhooks/issues/8
+  if (req.headers.authorization !== `Bearer ${CONFIG.BBB_SHARED_SECRET}`) {
+    logger.error(
+      `Webhook bearer header received "(${req.headers.authorization as string})" does not match bbb shared secret configured`,
+    )
+    return false
+  }
+
+  return true
+}
+
+const handleWebhook = (req: Request): void => {
   // Webhook Handling
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
   const webhook = JSON.parse(req.body.event as string)
@@ -229,10 +232,12 @@ export const handleWebhook = (req: Request): void => {
         logger.debug('webhook', 'user-left')
         break
       default:
-        logger.debug('webhook', 'unhandled')
+        logger.debug('webhook unhandled event', event)
     }
   }
 }
+
+export const webhook = { isAuthorized, handleWebhook }
 
 export const registerWebhook = async (): Promise<boolean> => {
   if (CONFIG.BBB_WEBHOOK_URL === '') {
@@ -257,16 +262,3 @@ export const periodicallyRegisterWebhook = (): void => {
   void registerWebhook()
   setTimeout(periodicallyRegisterWebhook, 100 * 1000)
 }
-
-/*
-export const listHooks = async () => {
-  try {
-    const result = await axiosInstance.get('/hooks/list')
-    console.log(result)
-  } catch (err) {
-    console.log(err)
-  }
-}
-
-
-*/
