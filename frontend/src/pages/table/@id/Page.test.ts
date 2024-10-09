@@ -9,6 +9,7 @@ import { VApp } from 'vuetify/components'
 import { vikePageContext } from '#context/usePageContext'
 import { currentUserQuery } from '#queries/currentUserQuery'
 import { joinTableQuery } from '#queries/joinTableQuery'
+import { callSubscription } from '#subscriptions/callSubscription'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 import { mockPageContext as globalMockPageContext } from '#tests/mock.vikePageContext'
 import { createMockPlugin } from '#tests/plugin.globalErrorHandler'
@@ -21,6 +22,7 @@ import type { PageContext } from 'vike/types'
 const joinTableQueryMock = vi.fn()
 const currentUserQueryMock = vi.fn()
 const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
+const callSubscriptionMock: IMockSubscription = createMockSubscription()
 
 const mockClient = createMockClient()
 
@@ -62,6 +64,7 @@ mockClient.setRequestHandler(
   }),
 )
 mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
+mockClient.setRequestHandler(callSubscription, () => callSubscriptionMock)
 
 provideApolloClient(mockClient)
 
