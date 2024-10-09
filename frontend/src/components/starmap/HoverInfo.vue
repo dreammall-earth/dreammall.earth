@@ -1,0 +1,90 @@
+<template>
+  <div v-show="!!props.data" ref="hoverRef" class="hover-info">
+    <div class="info-box pa-2">
+      <v-avatar :size="25" class="mb-2">
+        <span>{{
+          props.data?.name
+            .split(' ')
+            .map((n) => n.charAt(0))
+            .slice(0, 2)
+            .join('')
+        }}</span>
+      </v-avatar>
+      <h3>{{ props.data?.name }}</h3>
+    </div>
+    <div v-show="showMoreButton" class="mt-2 d-flex align-center justify-center">
+      <button @click="() => props.data && $emit('show-more', props.data?.id)">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="28"
+          height="28"
+          viewBox="0 0 28 28"
+          fill="none"
+        >
+          <g opacity="0.75">
+            <circle cx="14" cy="14" r="14" fill="#3D4753" />
+            <circle cx="14" cy="14" r="13.5" stroke="#979797" stroke-opacity="0.3" />
+          </g>
+          <circle cx="7" cy="14" r="2" transform="rotate(-90 7 14)" fill="#CCCCCC" />
+          <circle cx="14" cy="14" r="2" transform="rotate(-90 14 14)" fill="#CCCCCC" />
+          <circle cx="21" cy="14" r="2" transform="rotate(-90 21 14)" fill="#CCCCCC" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+
+import type { UserWithProfile } from '#stores/userStore'
+
+const hoverRef = ref<HTMLDivElement | null>(null)
+
+const props = defineProps<{
+  data: UserWithProfile | null
+  x: number
+  y: number
+  showMoreButton: boolean
+}>()
+
+defineEmits<{
+  (e: 'show-more', id: number): void
+}>()
+
+watch(
+  () => props.x,
+  () => {
+    if (hoverRef.value) {
+      hoverRef.value.style.left = `${props.x - 50}px`
+    }
+  },
+)
+
+watch(
+  () => props.y,
+  () => {
+    if (hoverRef.value) {
+      hoverRef.value.style.top = `${props.y - 50}px`
+    }
+  },
+)
+</script>
+
+<style scoped>
+.hover-info {
+  position: fixed;
+  z-index: 3000;
+}
+.info-box {
+  border-radius: 10px;
+  border: 1px solid rgba(151, 151, 151, 0.3);
+  background: rgba(61, 71, 83, 0.75);
+  backdrop-filter: blur(15px);
+  color: #f5f5f5;
+  font-size: 10px;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+}
+</style>

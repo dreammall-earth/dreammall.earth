@@ -2,10 +2,12 @@
   <div class="canvas-container">
     <canvas ref="canvas"></canvas>
   </div>
-  <div v-show="hoveredStar" ref="hoverRef" class="hover-info">
-    <h3>{{ hoveredStar.star?.data.name }}</h3>
-    <p>{{ hoveredStar.star?.data.details[0]?.text }}</p>
-  </div>
+  <HoverInfo
+    :data="hoveredStar.data"
+    :x="hoveredStar.x"
+    :y="hoveredStar.y"
+    :show-more-button="true"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -32,23 +34,25 @@ import { onMounted, reactive, ref, watch } from 'vue'
 
 import { starmapQuery, StarmapQueryResult, StarLine, Star } from '#queries/starmapQuery'
 
+import HoverInfo from './HoverInfo.vue'
+
+import type { UserWithProfile } from '#stores/userStore.js'
+
 const starData = ref<Star[]>([])
 
 const canvas = ref<HTMLCanvasElement | null>(null)
 
 type HoveredStar = {
-  star: Star | null
-  clientX: number
-  clientY: number
+  data: UserWithProfile | null
+  x: number
+  y: number
 }
 
 const hoveredStar = reactive<HoveredStar>({
-  star: null,
-  clientX: 0,
-  clientY: 0,
+  data: null,
+  x: 0,
+  y: 0,
 })
-
-const hoverRef = ref<HTMLDivElement | null>(null)
 
 const { result: starmapQueryResult } = useQuery(
   starmapQuery,
@@ -271,19 +275,20 @@ const onCanvasClick = (event: MouseEvent) => {
 const onCanvasMouseMove = (event: MouseEvent) => {
   const star = getRaycasterIntersects(event)
   if (star) {
+    // Get the position of the star on the screen
     const vector = new Vector3(...cartesianFromSphere(star.azimuth, star.altitude, star.distance))
-    const canvas = renderer.domElement // `renderer` is a THREE.WebGLRenderer
-
-    vector.project(camera) // `camera` is a THREE.PerspectiveCamera
+    const canvas = renderer.domElement
+    vector.project(camera)
 
     const x = Math.round((0.5 + vector.x / 2) * (canvas.width / window.devicePixelRatio))
     const y = Math.round((0.5 - vector.y / 2) * (canvas.height / window.devicePixelRatio))
 
-    hoverRef.value?.style.setProperty('top', `${y}px`)
-    hoverRef.value?.style.setProperty('left', `${x}px`)
-    hoveredStar.star = star
+    // Set data for info component
+    hoveredStar.x = x
+    hoveredStar.y = y
+    hoveredStar.data = star.data
   } else {
-    hoveredStar.star = null
+    hoveredStar.data = null
   }
 }
 
@@ -330,14 +335,5 @@ canvas {
   display: block;
   width: 100%;
   height: 100%;
-}
-
-.hover-info {
-  position: fixed;
-  z-index: 3000;
-  border-radius: 10px;
-  border: 1px solid rgba(151, 151, 151, 0.3);
-  background: rgba(61, 71, 83, 0.75);
-  backdrop-filter: blur(15px);
 }
 </style>
