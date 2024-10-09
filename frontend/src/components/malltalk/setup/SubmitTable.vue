@@ -14,13 +14,12 @@ import { useI18n } from 'vue-i18n'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 import CopyToClipboard from '#components/copy-to-clipboard/CopyToClipboard.vue'
-import LogoImage from '#components/menu/LogoImage.vue'
+import InfoBox from '#components/info-box/InfoBox.vue'
 import { usePageContext } from '#context/usePageContext'
 import { useTablesStore } from '#stores/tablesStore'
 
 import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
 import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
-import InfoBox from "#components/info-box/InfoBox.vue";
 
 defineProps<StepProps>()
 const emit = defineEmits<StepEmits>()
