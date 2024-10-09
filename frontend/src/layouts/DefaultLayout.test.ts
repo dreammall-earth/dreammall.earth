@@ -7,6 +7,7 @@ import { Component, h } from 'vue'
 import { VApp } from 'vuetify/components'
 
 import { joinMyTableMutation } from '#mutations/joinMyTableMutation'
+import { callSubscription } from '#subscriptions/callSubscription'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 import DefaultLayout from './DefaultLayout.vue'
@@ -16,11 +17,13 @@ vi.mocked(navigate).mockResolvedValue()
 
 const joinMyTableMutationMock = vi.fn()
 const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
+const callSubscriptionMock: IMockSubscription = createMockSubscription()
 
 const mockClient = createMockClient()
 
 mockClient.setRequestHandler(joinMyTableMutation, joinMyTableMutationMock)
 mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
+mockClient.setRequestHandler(callSubscription, () => callSubscriptionMock)
 
 provideApolloClient(mockClient)
 

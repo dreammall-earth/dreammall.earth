@@ -4,14 +4,17 @@ import { setActivePinia, createPinia } from 'pinia'
 import { vi, describe, it, expect, beforeEach } from 'vitest'
 
 import { tablesQuery } from '#queries/tablesQuery'
+import { callSubscription } from '#subscriptions/callSubscription'
 import { updateOpenTablesSubscription } from '#subscriptions/updateOpenTablesSubscription'
 
 import { useTablesStore } from './tablesStore'
 
 const updateTablesSubscriptionMock: IMockSubscription = createMockSubscription()
+const callSubscriptionMock: IMockSubscription = createMockSubscription()
 const mockClient = createMockClient()
 const tablesQueryMock = vi.fn()
 mockClient.setRequestHandler(updateOpenTablesSubscription, () => updateTablesSubscriptionMock)
+mockClient.setRequestHandler(callSubscription, () => callSubscriptionMock)
 mockClient.setRequestHandler(
   tablesQuery,
   tablesQueryMock.mockResolvedValue({

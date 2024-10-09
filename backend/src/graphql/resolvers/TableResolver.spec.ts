@@ -2,6 +2,7 @@ import { ApolloServer } from '@apollo/server'
 
 import { createMeeting, joinMeetingLink, getMeetings, AttendeeRole } from '#api/BBB'
 import { CONFIG } from '#config/config'
+import { pubSub } from '#graphql/pubSub'
 import { findOrCreateUser } from '#src/context/findOrCreateUser'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
@@ -15,6 +16,10 @@ jest.mock('#api/BBB')
 const createMeetingMock = jest.mocked(createMeeting)
 const joinMeetingLinkMock = jest.mocked(joinMeetingLink)
 const getMeetingsMock = jest.mocked(getMeetings)
+const pubsubMock = {
+  publish: jest.fn(),
+}
+pubSub.publish = pubsubMock.publish
 
 let testServer: ApolloServer<Context>
 
@@ -791,6 +796,26 @@ describe('TableResolver', () => {
               },
             },
           })
+
+          expect(pubsubMock.publish).toHaveBeenCalledWith(
+            'CALL_SUBSCRIPTION',
+            expect.objectContaining({
+              user,
+              userIds: [bibiUser.id, peterUser.id],
+              table: {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                id: expect.any(String),
+                isModerator: false,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                meetingID: expect.any(String),
+                meetingName: 'My Table',
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                startTime: expect.any(String),
+                attendees: [],
+                participantCount: 0,
+              },
+            }),
+          )
         })
       })
 
