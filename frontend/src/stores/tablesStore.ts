@@ -141,8 +141,6 @@ export const useTablesStore = defineStore(
 
     watch(callSubscriptionResult, (data: { call: Call }) => {
       currentCall.value = data.call
-      // eslint-disable-next-line no-console
-      console.log('INVITE TABLE SUBSCRIPTION', data.call)
     })
 
     const tables = reactive<TableList>({
