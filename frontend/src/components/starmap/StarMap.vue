@@ -1,6 +1,6 @@
 <template>
   <div class="canvas-container">
-    <canvas ref="canvas"></canvas>
+    <canvas ref="canvas" gl="{{powerPreference: 'default', antialias: false}}"></canvas>
   </div>
 </template>
 
