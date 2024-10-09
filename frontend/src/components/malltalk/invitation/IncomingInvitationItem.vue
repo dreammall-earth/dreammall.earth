@@ -62,6 +62,7 @@ const emit = defineEmits<{
 
 <style lang="scss" scoped>
 .invitation-item {
+  width: 100%;
   background-color: rgb(var(--v-theme-dm-invitation-item-background-color)) !important;
 
   .user-caption,

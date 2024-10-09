@@ -1,12 +1,13 @@
 <template>
-  <IncomingInvitationItem
-    class="mx-3 my-2"
-    :invitation="invitation"
-    :dismiss-caption="$t('dream-mall-panel.incoming-invitation.dismiss-table')"
-    :accept-caption="$t('dream-mall-panel.incoming-invitation.accept-table')"
-    @accept="() => emit('submit')"
-    @dismiss="() => emit('close')"
-  />
+  <div class="w-100 px-3 py-2">
+    <IncomingInvitationItem
+      :invitation="invitation"
+      :dismiss-caption="$t('dream-mall-panel.incoming-invitation.dismiss-table')"
+      :accept-caption="$t('dream-mall-panel.incoming-invitation.accept-table')"
+      @accept="() => emit('submit')"
+      @dismiss="() => emit('close')"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">

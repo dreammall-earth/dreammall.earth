@@ -57,7 +57,11 @@
       </div>
       <div class="dream-mall-panel">
         <slot name="dream-mall-button" :close="() => toggleDrawer('dream-mall-button')">
-          <InvitationSteps v-if="isIncomingInvitation" @close="toggleDrawer('dream-mall-button')" />
+          <InvitationSteps
+            v-if="isIncomingInvitation"
+            ref="invitationStepsRef"
+            @close="toggleDrawer('dream-mall-button')"
+          />
           <TableSetup v-else ref="tableSetupRef" @close="toggleDrawer('dream-mall-button')" />
         </slot>
       </div>
@@ -79,7 +83,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { computed, nextTick, ref, watch } from 'vue'
 
 import DreamMallButton from '#components/buttons/DreamMallButton.vue'
 import InvitationSteps from '#components/malltalk/invitation/InvitationSteps.vue'
@@ -91,6 +96,7 @@ import UserInfo from '#components/menu/UserInfo.vue'
 import ModalPanel from '#components/modal/ModalPanel.vue'
 import useModal from '#components/modal/useModal'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
+import { Call, useTablesStore } from '#stores/tablesStore'
 
 type DrawerType = 'tables' | 'dream-mall-button' | 'call' | null
 
@@ -105,8 +111,31 @@ const isTablesDrawerVisible = computed({
   },
 })
 
-const isIncomingInvitation = ref<boolean>(true)
+const isIncomingInvitation = ref<boolean>(false)
+const invitationStepsRef = ref<InstanceType<typeof InvitationSteps> | null>(null)
 const tableSetupRef = ref<InstanceType<typeof TableSetup> | null>(null)
+
+const tablesStore = useTablesStore()
+const { getCurrentCall } = storeToRefs(tablesStore)
+
+watch(getCurrentCall, (call: Call | null) => {
+  if (call && call.user?.id && call?.table) {
+    tableSetupRef.value?.reset()
+    isIncomingInvitation.value = true
+    nextTick(() => {
+      invitationStepsRef.value?.setInvitation(
+        call.user.id,
+        call.user.name,
+        call.table.id,
+        call.table.meetingName,
+      )
+      setDrawer('dream-mall-button')
+    })
+  } else {
+    invitationStepsRef.value?.reset()
+    isIncomingInvitation.value = false
+  }
+})
 
 const toggleDrawer = (drawer: DrawerType) => {
   if (visibleDrawer.value === drawer) {
@@ -125,16 +154,6 @@ const setDrawer = (drawer: DrawerType) => {
     visibleDrawer.value = drawer
   }
 }
-
-const handleIncomingInvitation = () => {
-  isIncomingInvitation.value = true
-  setDrawer('dream-mall-button')
-  tableSetupRef.value?.reset()
-}
-
-// todo: connect to Subscription
-setTimeout(handleIncomingInvitation, 3000)
-// ^^^^
 
 const { isModalActive } = useModal()
 </script>

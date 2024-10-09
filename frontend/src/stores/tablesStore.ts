@@ -57,7 +57,7 @@ type User = {
   username: string
 }
 
-type Call = {
+export type Call = {
   user: User
   table: Table
 }
@@ -136,7 +136,11 @@ export const useTablesStore = defineStore(
       fetchPolicy: 'no-cache',
     })
 
+    const currentCall = ref<Call | null>(null)
+    const getCurrentCall = computed(() => currentCall.value)
+
     watch(callSubscriptionResult, (data: { call: Call }) => {
+      currentCall.value = data.call
       // eslint-disable-next-line no-console
       console.log('INVITE TABLE SUBSCRIPTION', data.call)
     })
@@ -269,6 +273,7 @@ export const useTablesStore = defineStore(
       getProjectTables,
       setProjectTables,
       isLoadingProjectTables,
+      getCurrentCall,
       createMyTable,
       updateMyTable,
       updateMyTableUsers,

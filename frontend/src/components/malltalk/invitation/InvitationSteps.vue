@@ -22,19 +22,22 @@ import { Step } from '#components/steps/useSteps'
 import { usePageContext } from '#context/usePageContext'
 import { useTablesStore } from '#stores/tablesStore'
 
-import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
 import type { ComponentExposed } from 'vue-component-type-helpers'
-
-// todo: fetch information about table
-// const tablesStore = useTablesStore()
-// const { defaultMyTableName } = storeToRefs(tablesStore)
 
 const resetInvitation = () => {
   invitation.userId = 0
   invitation.userName = ''
   invitation.userAvatar = ''
-  invitation.tableId = 1
+  invitation.tableId = 0
   invitation.tableName = ''
+}
+
+const setInvitation = (userId: number, userName: string, tableId: number, tableName: string) => {
+  invitation.userId = userId
+  invitation.userName = userName
+  invitation.userAvatar = ''
+  invitation.tableId = tableId
+  invitation.tableName = tableName
 }
 
 const invitation = reactive<Invitation>({
@@ -45,11 +48,6 @@ const invitation = reactive<Invitation>({
   tableName: '',
 })
 resetInvitation()
-
-// todo: remove test data
-invitation.userName = 'Max Mustermann'
-invitation.tableName = 'Männerkreis Wintersonnenwende NRW'
-// ^^^
 
 const { t } = useI18n()
 
@@ -91,12 +89,13 @@ const onAccept = async () => {
   }
 }
 
-const stepControl = ref<ComponentExposed<typeof StepControl<MyTableSettings>> | null>(null)
+const stepControl = ref<ComponentExposed<typeof StepControl<Invitation>> | null>(null)
 
 defineExpose({
   reset: () => {
     resetInvitation()
     stepControl.value?.reset()
   },
+  setInvitation,
 })
 </script>
