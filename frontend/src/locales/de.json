@@ -69,6 +69,14 @@
       "leave-table": "Tisch verlassen",
       "link": "Link"
     },
+    "incoming-invitation": {
+      "accept-swap": "Wechseln",
+      "accept-table": "Beitreten",
+      "dismiss-swap": "Bleiben",
+      "dismiss-table": "Verwerfen",
+      "swap-text": "Tischtausch? Der alte klappt zusammen wenn du zum neuen springst. Trotzdem hinüber?",
+      "title": "Mall Talk Einladung"
+    },
     "setup": {
       "continue": "Weiter",
       "create-table": "Tisch eröffnen",
@@ -84,14 +92,6 @@
       "table-creation": "Tisch eröffnen",
       "table-creation-title": "Tisch eröffnen",
       "table-name": "Tischname"
-    },
-    "incoming-invitation": {
-      "title": "Mall Talk Einladung",
-      "accept-table": "Beitreten",
-      "dismiss-table": "Verwerfen",
-      "accept-swap": "Wechseln",
-      "dismiss-swap": "Bleiben",
-      "swap-text": "Tischtausch? Der alte klappt zusammen wenn du zum neuen springst. Trotzdem hinüber?"
     }
   },
   "error": {

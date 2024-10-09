@@ -69,6 +69,14 @@
       "leave-table": "Leave Table",
       "link": "Link"
     },
+    "incoming-invitation": {
+      "accept-swap": "Swap",
+      "accept-table": "Join",
+      "dismiss-swap": "Stay",
+      "dismiss-table": "Drop",
+      "swap-text": "Swap tables? The old one folds up when you jump to the new one. Still over?",
+      "title": "Mall Talk Einladung"
+    },
     "setup": {
       "continue": "Continue",
       "create-table": "Open Table",
@@ -84,14 +92,6 @@
       "table-creation": "Open Table",
       "table-creation-title": "Open Table",
       "table-name": "Table Name"
-    },
-    "incoming-invitation": {
-      "title": "Mall Talk Einladung",
-      "accept-table": "Join",
-      "dismiss-table": "Drop",
-      "accept-swap": "Swap",
-      "dismiss-swap": "Stay",
-      "swap-text": "Swap tables? The old one folds up when you jump to the new one. Still over?"
     }
   },
   "error": {
