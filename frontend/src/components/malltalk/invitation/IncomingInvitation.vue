@@ -21,5 +21,3 @@ const emit = defineEmits<StepEmits>()
 
 const invitation = defineModel<Invitation>({ required: true })
 </script>
-
-<style lang="scss" scoped></style>

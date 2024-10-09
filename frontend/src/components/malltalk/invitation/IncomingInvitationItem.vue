@@ -74,6 +74,7 @@ const emit = defineEmits<{
     &.bg-primary {
       background-color: rgb(var(--v-theme-dm-invitation-item-accept-color)) !important;
     }
+
     &.bg-secondary {
       background-color: rgb(var(--v-theme-dm-invitation-item-dismiss-color)) !important;
     }
