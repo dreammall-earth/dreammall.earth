@@ -5,7 +5,7 @@
     :dismiss-caption="$t('dream-mall-panel.incoming-invitation.dismiss-table')"
     :accept-caption="$t('dream-mall-panel.incoming-invitation.accept-table')"
     @accept="() => emit('submit')"
-    @dismiss="() => emit('next')"
+    @dismiss="() => emit('close')"
   />
 </template>
 

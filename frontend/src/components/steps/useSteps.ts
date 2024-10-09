@@ -21,6 +21,7 @@ export type Step = {
 
 export const useSteps = (steps: Step[], emit: (event: 'close') => void) => {
   const currentStep = ref(0)
+  const getCurrentId = () => steps[currentStep.value].id
 
   const transitToNext = () => transitToId(steps[currentStep.value].submit)
   const transitToPrevious = () => transitToId(steps[currentStep.value].back)
@@ -92,6 +93,7 @@ export const useSteps = (steps: Step[], emit: (event: 'close') => void) => {
 
   return {
     currentStep,
+    getCurrentId,
     next,
     back,
     goTo,

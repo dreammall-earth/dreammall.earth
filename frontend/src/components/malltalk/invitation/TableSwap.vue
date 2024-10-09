@@ -6,7 +6,7 @@
     :dismiss-caption="$t('dream-mall-panel.incoming-invitation.dismiss-swap')"
     :accept-caption="$t('dream-mall-panel.incoming-invitation.accept-swap')"
     @accept="() => emit('submit')"
-    @dismiss="() => emit('next')"
+    @dismiss="() => emit('close')"
   />
 </template>
 

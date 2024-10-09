@@ -17,6 +17,7 @@
     @next="next"
     @go-to="goTo"
     @submit="$emit('submit')"
+    @close="$emit('close')"
   />
 </template>
 
@@ -34,7 +35,7 @@ const emit = defineEmits<{
   (e: 'submit'): void
 }>()
 
-const { currentStep, next, back, goTo, reset } = useSteps(props.steps, emit)
+const { currentStep, getCurrentId, next, back, goTo, reset } = useSteps(props.steps, emit)
 
-defineExpose({ reset, goTo, next, back })
+defineExpose({ currentStep, getCurrentId, next, back, goTo, reset })
 </script>
