@@ -84,7 +84,6 @@ const steps: Step[] = [
     submit: 'next',
     submitText: t('dream-mall-panel.setup.create-table'),
     back: 'previous',
-    canBack: false,
   },
 ]
 
