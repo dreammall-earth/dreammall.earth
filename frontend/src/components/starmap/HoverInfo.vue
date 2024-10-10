@@ -7,7 +7,7 @@
       <h3>{{ props.data?.name }}</h3>
     </div>
     <div v-show="showMoreButton" class="mt-2 d-flex align-center justify-center">
-      <button @click="() => showMore()">
+      <button @click="showMore">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="28"
