@@ -4,9 +4,13 @@
 
 <script setup lang="ts">
 import { useQuery } from '@vue/apollo-composable'
-import { ref, watch } from 'vue'
+import { provide, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
+import {
+  IsModeratorInjection,
+  IsModeratorSymbol,
+} from '#components/malltalk/interfaces/IsModeratorInjection'
 import TableLayout from '#components/table-layout/TableLayout.vue'
 import { usePageContext } from '#context/usePageContext'
 import { joinTableQuery } from '#queries/joinTableQuery'
@@ -17,6 +21,11 @@ const pageContext = usePageContext()
 const { t } = useI18n()
 
 const tableId = ref(Number(pageContext.routeParams?.id))
+
+const isModeratorData: IsModeratorInjection = {
+  isModerator: ref(false),
+}
+provide(IsModeratorSymbol, isModeratorData)
 
 const errorMessage = ref<string | null>(null)
 const tableUrl = ref<string | null>(null)
@@ -41,6 +50,7 @@ watch(
   (data: { joinTable: { link: string; type: TableType; isModerator: boolean } }) => {
     if (!data.joinTable) return
     tableUrl.value = data.joinTable.link
+    isModeratorData.isModerator.value = data.joinTable.isModerator
     errorMessage.value = null
   },
 )

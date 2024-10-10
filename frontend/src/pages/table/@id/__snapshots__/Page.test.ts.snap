@@ -1743,6 +1743,48 @@ exports[`Table Page > renders 1`] = `
                   Link
                 </div>
               </div>
+              <div
+                class="v-col v-col-auto text-center px-2"
+                data-v-b63bd396=""
+              >
+                <button
+                  class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default elevation-0 v-btn--size-x-large v-btn--variant-elevated round-button mb-2"
+                  data-v-b63bd396=""
+                  type="button"
+                >
+                  
+                  <span
+                    class="v-btn__overlay"
+                  />
+                  <span
+                    class="v-btn__underlay"
+                  />
+                  
+                  <!---->
+                  <span
+                    class="v-btn__content"
+                    data-no-activator=""
+                  >
+                    
+                    
+                    <i
+                      aria-hidden="true"
+                      class="mdi-account-multiple-plus-outline mdi v-icon notranslate v-theme--light v-icon--size-default"
+                      data-v-b63bd396=""
+                    />
+                    
+                    
+                  </span>
+                  <!---->
+                  <!---->
+                </button>
+                <div
+                  class="text-caption"
+                  data-v-b63bd396=""
+                >
+                  Add
+                </div>
+              </div>
               
             </div>
             <button
