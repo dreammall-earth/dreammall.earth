@@ -72,8 +72,38 @@ const updateInvitationStatus = (userId: number, invited: boolean) => {
 
 <style lang="scss" scoped>
 .user-list-container {
-  height: 200px;
+  position: relative;
+  height: 208px;
   overflow-y: auto;
+
+  &::before,
+  &::after {
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: 1; // Ensures the gradients appear above the list items
+    height: 20px;
+    pointer-events: none; // Allows clicking through the gradient
+    content: '';
+  }
+
+  &::before {
+    top: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(var(--v-theme-dm-panel-overlay-color), 1) 0%,
+      rgba(var(--v-theme-dm-panel-overlay-color), 0) 50%
+    );
+  }
+
+  &::after {
+    bottom: 0;
+    background: linear-gradient(
+      to top,
+      rgba(var(--v-theme-dm-panel-overlay-color), 1) 0%,
+      rgba(var(--v-theme-dm-panel-overlay-color), 0) 50%
+    );
+  }
 
   .user-list {
     height: 100%;

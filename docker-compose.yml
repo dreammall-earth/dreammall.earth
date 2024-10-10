@@ -9,7 +9,7 @@ services:
       start_period: 10s
       interval: 10s
       timeout: 5s
-      retries: 3
+      retries: 100
     environment:
       - MARIADB_ALLOW_EMPTY_PASSWORD=1
       - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=1
@@ -55,18 +55,11 @@ services:
         condition: service_completed_successfully
     ports:
       - 4000:4000
+    env_file: backend/.env
     environment:
       DATABASE_URL: mysql://root:@database:3306/dreammall.earth
       JWKS_URI: http://authentik:9000/application/o/dreammallearth/jwks/
       NODE_ENV: production
-      BREVO_KEY: ""
-      BREVO_ADMIN_NAME: ""
-      BREVO_ADMIN_EMAIL: ""
-      BREVO_CONTACT_TEMPLATE_ADMIN: "1"
-      BREVO_CONTACT_TEMPLATE_USER: "2"
-      BREVO_NEWSLETTER_TEMPLATE_OPTIN: "3"
-      BREVO_NEWSLETTER_LIST: "3"
-      WEBHOOK_SECRET: 1547ccd9fd7b143aa7a76021648581163ffae58c4a558be0da2e9ae0131707fc
 
   migrations:
     image: ghcr.io/dreammall-earth/dreammall.earth/backend:${IMAGE_TAG:-latest}

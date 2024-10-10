@@ -29,4 +29,7 @@ class LoggerSingleton {
   }
 }
 
-export default LoggerSingleton.getInstance()
+const logger = LoggerSingleton.getInstance()
+export default logger
+type DreammallLogger = typeof logger
+export type { DreammallLogger as Logger }
