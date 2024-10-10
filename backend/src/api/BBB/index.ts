@@ -43,7 +43,7 @@ export const getMeetings = async (): Promise<MeetingInfo[]> => {
     } else {
       logger.error('parse getMeetings with error', parsed)
     }
-  } catch (err) {
+  } catch (err) /* eslint-disable-line no-catch-all/no-catch-all */ {
     logger.error('getMeetings with error', err)
   }
   return []
@@ -74,7 +74,7 @@ export const createMeeting = async (
       response: CreateMeetingResponse
     } = parser.parse(data as string)
     return parsed.response
-  } catch (err) {
+  } catch (err) /* eslint-disable-line no-catch-all/no-catch-all */ {
     logger.error('createMeeting with error', err)
     return null
   }

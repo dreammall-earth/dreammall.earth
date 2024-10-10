@@ -44,7 +44,7 @@ onBeforeMount(async () => {
   try {
     const result = await confirmNewsletterMutation({ code })
     isError.value = !result?.data?.confirmNewsletter
-  } catch (error) {
+  } catch /* eslint-disable-line no-catch-all/no-catch-all */ {
     isError.value = true
   }
 
