@@ -1,11 +1,6 @@
 <template>
   <div class="flat-text-field d-flex flex-column text-center pa-4">
-    <div class="reminder text-center pa-5 font-weight-medium">
-      <LogoImage class="mx-auto" size="tiny" :text-enabled="false" />
-      <p class="mt-5">
-        {{ $t('dream-mall-panel.setup.reminder') }}
-      </p>
-    </div>
+    <InfoBox :text="$t('dream-mall-panel.setup.reminder')" />
 
     <CopyToClipboard :table-url="tableUrl" class="mt-12" />
 
@@ -19,7 +14,7 @@ import { useI18n } from 'vue-i18n'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 import CopyToClipboard from '#components/copy-to-clipboard/CopyToClipboard.vue'
-import LogoImage from '#components/menu/LogoImage.vue'
+import InfoBox from '#components/info-box/InfoBox.vue'
 import { usePageContext } from '#context/usePageContext'
 import { useTablesStore } from '#stores/tablesStore'
 
