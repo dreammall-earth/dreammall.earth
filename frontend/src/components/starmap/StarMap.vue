@@ -31,7 +31,7 @@ import { starmapQuery, StarmapQueryResult, StarLine, Star } from '#queries/starm
 
 import HoverInfo from './HoverInfo.vue'
 
-import type { UserWithProfile } from '#stores/userStore.js'
+import type { UserWithProfile } from '#stores/userStore'
 
 const starData = ref<Star[]>([])
 
