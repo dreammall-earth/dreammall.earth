@@ -62,7 +62,7 @@ const style = computed(() => ({
 <style scoped>
 .hover-info {
   position: fixed;
-  z-index: 3000;
+  z-index: 100;
 }
 
 .info-box {
