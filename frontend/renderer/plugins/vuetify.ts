@@ -26,6 +26,7 @@ function makeThemeFromCssModule(theme: CSSModuleClasses, isDark: boolean): Theme
       font: theme.fontColor,
       'dropdown-background': theme.dropdownBackgroundColor,
       'cockpit-highlight': theme.cockpitHighlightColor,
+      'dm-panel-overlay-color': theme.dmPanelOverlayColor,
       'dm-panel-submit-color': theme.dmPanelSubmitColor,
       'dm-panel-submit-background-color': theme.dmPanelSubmitBackgroundColor,
       'dm-panel-text-input-color': theme.dmPanelTextInputColor,
