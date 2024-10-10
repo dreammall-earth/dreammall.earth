@@ -1,5 +1,21 @@
 import { ILogObj, Logger } from 'tslog'
 
+import { CONFIG } from '#config/config'
+
+const { LOG_LEVEL } = CONFIG
+
+const logLevelsMap: Record<typeof LOG_LEVEL, number> = {
+  SILLY: 0,
+  TRACE: 1,
+  DEBUG: 2,
+  INFO: 3,
+  WARN: 4,
+  ERROR: 5,
+  FATAL: 6,
+}
+
+const minLevel = logLevelsMap[LOG_LEVEL] // eslint-disable-line security/detect-object-injection
+
 /**
  * The Singleton class defines the `getInstance` method that lets clients access
  * the unique singleton instance.
@@ -22,11 +38,22 @@ class LoggerSingleton {
    */
   public static getInstance(): Logger<ILogObj> {
     if (!LoggerSingleton.instance) {
-      LoggerSingleton.instance = new Logger({ name: 'mainLogger' })
+      LoggerSingleton.instance = new Logger({ minLevel, name: 'mainLogger' })
     }
 
     return LoggerSingleton.instance
   }
+}
+
+const logLevels = ['SILLY', 'TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL'] as const
+type LogLevel = (typeof logLevels)[number]
+
+function isLogLevel(level: string): level is LogLevel {
+  return logLevels.includes(level as LogLevel)
+}
+
+if (!isLogLevel(LOG_LEVEL)) {
+  throw new Error(`Unknown log level '${LOG_LEVEL}'`)
 }
 
 const logger = LoggerSingleton.getInstance()

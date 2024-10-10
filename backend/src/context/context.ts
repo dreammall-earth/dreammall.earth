@@ -10,6 +10,10 @@ import { getToken } from './getToken'
 
 import type { PrismaClient, UserWithProfile } from '#src/prisma'
 
+if (!CONFIG.JWKS_URI) {
+  throw new Error('missing environment variable: JWKS_URI')
+}
+
 const JWKS = createRemoteJWKSet(new URL(CONFIG.JWKS_URI))
 
 const brevo = createBrevoClient({ prisma, logger, config: CONFIG })
