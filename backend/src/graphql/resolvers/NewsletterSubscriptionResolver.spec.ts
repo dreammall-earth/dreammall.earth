@@ -1,27 +1,33 @@
 import { ApolloServer } from '@apollo/server'
 
-import { confirmNewsletter, subscribeToNewsletter } from '#api/Brevo'
-import { CONFIG } from '#config/config'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
+import { createMockConfig } from '#test/mockConfig'
+import { mockContextValue as defaultMockContext } from '#test/mockContextValue'
 
+import type { createBrevoClient } from '#src/api/Brevo'
 import type { Context } from '#src/context'
-
-CONFIG.BREVO_KEY = 'MY KEY'
-CONFIG.BREVO_ADMIN_NAME = 'Bibi Bloxberg'
-CONFIG.BREVO_ADMIN_EMAIL = 'bibi@bloxberg.de'
-CONFIG.BREVO_NEWSLETTER_TEMPLATE_OPTIN = 3
 
 let testServer: ApolloServer<Context>
 
-// eslint-disable-next-line jest/no-untyped-mock-factory
-jest.mock('#api/Brevo', () => ({
-  subscribeToNewsletter: jest.fn().mockResolvedValue(true),
-  confirmNewsletter: jest
-    .fn()
-    .mockResolvedValueOnce(false)
-    .mockResolvedValue({ email: 'peter@lustig.de' }),
-}))
+const mockContextValue = () => {
+  const config = {
+    ...createMockConfig(),
+    BREVO_KEY: 'MY KEY',
+    BREVO_ADMIN_NAME: 'Bibi Bloxberg',
+    BREVO_ADMIN_EMAIL: 'bibi@bloxberg.de',
+    BREVO_NEWSLETTER_TEMPLATE_OPTIN: 3,
+  }
+  const brevo = {
+    sendContactEmails: jest.fn(),
+    subscribeToNewsletter: jest.fn().mockResolvedValue(true),
+    confirmNewsletter: jest
+      .fn()
+      .mockResolvedValueOnce(false)
+      .mockResolvedValue({ email: 'peter@lustig.de' }),
+  } as ReturnType<typeof createBrevoClient>
+  return defaultMockContext({ config, brevo })
+}
 
 describe('NewsletterSubscriptionResolver', () => {
   beforeAll(async () => {
@@ -31,18 +37,21 @@ describe('NewsletterSubscriptionResolver', () => {
   describe('subscribeToNewsletter mutation', () => {
     describe('email is no email', () => {
       it('throws schema error', async () => {
-        const response = await testServer.executeOperation({
-          query: `mutation($data: SubscribeToNewsletterInput!) {
+        const response = await testServer.executeOperation(
+          {
+            query: `mutation($data: SubscribeToNewsletterInput!) {
                     subscribeToNewsletter(subscribeToNewsletterData: $data)
                   }`,
-          variables: {
-            data: {
-              firstName: 'Peter',
-              lastName: 'Lustig',
-              email: 'peter(at)lustig.de',
+            variables: {
+              data: {
+                firstName: 'Peter',
+                lastName: 'Lustig',
+                email: 'peter(at)lustig.de',
+              },
             },
           },
-        })
+          { contextValue: mockContextValue() },
+        )
         expect(response.body).toMatchObject({
           kind: 'single',
           singleResult: {
@@ -59,19 +68,22 @@ describe('NewsletterSubscriptionResolver', () => {
 
     describe('email is too long', () => {
       it('throws schema error', async () => {
-        const response = await testServer.executeOperation({
-          query: `mutation($data: SubscribeToNewsletterInput!) {
+        const response = await testServer.executeOperation(
+          {
+            query: `mutation($data: SubscribeToNewsletterInput!) {
                     subscribeToNewsletter(subscribeToNewsletterData: $data)
                   }`,
-          variables: {
-            data: {
-              firstName: 'Peter',
-              lastName: 'Lustig',
-              email:
-                'Aloysius.Bartholomew.Chauncey.Constantine.Devereaux.Ellington.Feliciano.Giuseppe.Horatio.Ignatius@lustig.de',
+            variables: {
+              data: {
+                firstName: 'Peter',
+                lastName: 'Lustig',
+                email:
+                  'Aloysius.Bartholomew.Chauncey.Constantine.Devereaux.Ellington.Feliciano.Giuseppe.Horatio.Ignatius@lustig.de',
+              },
             },
           },
-        })
+          { contextValue: mockContextValue() },
+        )
         expect(response.body).toMatchObject({
           kind: 'single',
           singleResult: {
@@ -88,18 +100,21 @@ describe('NewsletterSubscriptionResolver', () => {
 
     describe('first name is too long', () => {
       it('throws schema error', async () => {
-        const response = await testServer.executeOperation({
-          query: `mutation($data: SubscribeToNewsletterInput!) {
+        const response = await testServer.executeOperation(
+          {
+            query: `mutation($data: SubscribeToNewsletterInput!) {
                     subscribeToNewsletter(subscribeToNewsletterData: $data)
                   }`,
-          variables: {
-            data: {
-              firstName: 'Aloysius Bartholomew Chauncey Constantine Devereaux',
-              lastName: 'Lustig',
-              email: 'peter@lustig.de',
+            variables: {
+              data: {
+                firstName: 'Aloysius Bartholomew Chauncey Constantine Devereaux',
+                lastName: 'Lustig',
+                email: 'peter@lustig.de',
+              },
             },
           },
-        })
+          { contextValue: mockContextValue() },
+        )
         expect(response.body).toMatchObject({
           kind: 'single',
           singleResult: {
@@ -116,19 +131,22 @@ describe('NewsletterSubscriptionResolver', () => {
 
     describe('last name is too long', () => {
       it('throws schema error', async () => {
-        const response = await testServer.executeOperation({
-          query: `mutation($data: SubscribeToNewsletterInput!) {
+        const response = await testServer.executeOperation(
+          {
+            query: `mutation($data: SubscribeToNewsletterInput!) {
                     subscribeToNewsletter(subscribeToNewsletterData: $data)
                   }`,
-          variables: {
-            data: {
-              firstName: 'Daenerys',
-              lastName:
-                'Stormborn of the House Targaryen, First of Her Name, the Unburnt, Queen of the Andals and the First Men, Khaleesi of the Great Grass Sea, Breaker of Chains, and Mother of Dragons',
-              email: 'daenerys@red-keep.westeros',
+            variables: {
+              data: {
+                firstName: 'Daenerys',
+                lastName:
+                  'Stormborn of the House Targaryen, First of Her Name, the Unburnt, Queen of the Andals and the First Men, Khaleesi of the Great Grass Sea, Breaker of Chains, and Mother of Dragons',
+                email: 'daenerys@red-keep.westeros',
+              },
             },
           },
-        })
+          { contextValue: mockContextValue() },
+        )
         expect(response.body).toMatchObject({
           kind: 'single',
           singleResult: {
@@ -145,25 +163,34 @@ describe('NewsletterSubscriptionResolver', () => {
 
     describe('with correct data', () => {
       let response: Awaited<ReturnType<typeof testServer.executeOperation>>
+      let contextValue: Context
       beforeEach(async () => {
+        contextValue = mockContextValue()
         await prisma.event.deleteMany()
-        response = await testServer.executeOperation({
-          query: `mutation($data: SubscribeToNewsletterInput!) {
+        response = await testServer.executeOperation(
+          {
+            query: `mutation($data: SubscribeToNewsletterInput!) {
                     subscribeToNewsletter(subscribeToNewsletterData: $data)
                   }`,
-          variables: {
-            data: {
-              firstName: 'Peter',
-              lastName: 'Lustig',
-              email: 'peter@lustig.de',
+            variables: {
+              data: {
+                firstName: 'Peter',
+                lastName: 'Lustig',
+                email: 'peter@lustig.de',
+              },
             },
           },
-        })
+          { contextValue },
+        )
       })
 
       it('calls subscribeToNewsletter', () => {
-        expect(subscribeToNewsletter).toHaveBeenCalledTimes(1)
-        expect(subscribeToNewsletter).toHaveBeenCalledWith('Peter', 'Lustig', 'peter@lustig.de')
+        expect(contextValue.brevo.subscribeToNewsletter).toHaveBeenCalledTimes(1)
+        expect(contextValue.brevo.subscribeToNewsletter).toHaveBeenCalledWith(
+          'Peter',
+          'Lustig',
+          'peter@lustig.de',
+        )
       })
 
       it('returns true', () => {
@@ -196,17 +223,22 @@ describe('NewsletterSubscriptionResolver', () => {
 
   describe('confirmNewsletter mutation', () => {
     let response: Awaited<ReturnType<typeof testServer.executeOperation>>
-    beforeEach(async () => {
+    let contextValue: Context
+    beforeAll(async () => {
       jest.clearAllMocks()
       await prisma.event.deleteMany()
-      response = await testServer.executeOperation({
-        query: `mutation($code: String!) {
+      contextValue = mockContextValue()
+      response = await testServer.executeOperation(
+        {
+          query: `mutation($code: String!) {
                   confirmNewsletter(code: $code)
                 }`,
-        variables: {
-          code: '1234567890abcdef',
+          variables: {
+            code: '1234567890abcdef',
+          },
         },
-      })
+        { contextValue },
+      )
     })
 
     it('returns false on first call', () => {
@@ -221,34 +253,51 @@ describe('NewsletterSubscriptionResolver', () => {
     })
 
     it('calls confirmNewsletter', () => {
-      expect(confirmNewsletter).toHaveBeenCalledTimes(1)
-      expect(confirmNewsletter).toHaveBeenCalledWith('1234567890abcdef')
+      expect(contextValue.brevo.confirmNewsletter).toHaveBeenCalledTimes(1)
+      expect(contextValue.brevo.confirmNewsletter).toHaveBeenCalledWith('1234567890abcdef')
     })
 
-    it('returns true', () => {
-      expect(response.body).toMatchObject({
-        kind: 'single',
-        singleResult: {
-          data: {
-            confirmNewsletter: true,
+    describe('on second call', () => {
+      beforeAll(async () => {
+        await prisma.event.deleteMany()
+        response = await testServer.executeOperation(
+          {
+            query: `mutation($code: String!) {
+              confirmNewsletter(code: $code)
+            }`,
+            variables: {
+              code: '1234567890abcdef',
+            },
           },
-        },
+          { contextValue },
+        )
       })
-    })
 
-    it('writes event to database', async () => {
-      const result = await prisma.event.findMany()
-      expect(result).toHaveLength(1)
-      expect(result).toEqual([
-        expect.objectContaining({
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          id: expect.any(Number),
-          type: 'NEWSLETTER_CONFIRM',
-          involvedEmail: 'peter@lustig.de',
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          createdAt: expect.any(Date),
-        }),
-      ])
+      it('returns true', () => {
+        expect(response.body).toMatchObject({
+          kind: 'single',
+          singleResult: {
+            data: {
+              confirmNewsletter: true,
+            },
+          },
+        })
+      })
+
+      it('writes event to database', async () => {
+        const result = await prisma.event.findMany()
+        expect(result).toHaveLength(1)
+        expect(result).toEqual([
+          expect.objectContaining({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            type: 'NEWSLETTER_CONFIRM',
+            involvedEmail: 'peter@lustig.de',
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            createdAt: expect.any(Date),
+          }),
+        ])
+      })
     })
   })
 })
