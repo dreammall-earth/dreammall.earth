@@ -1039,6 +1039,7 @@ exports[`Table Page > renders 1`] = `
                 opacity="0.25"
               >
                 <path
+                  class="base-color-transition"
                   d="M866 938.727C821.781 938.727 786 903.016 786 859.046C786 815.075 821.781 779.364 866 779.364C910.219 779.364 946 815.075 946 859.046C946 903.016 910.219 938.727 866 938.727Z"
                   data-v-57af6bd7=""
                   stroke="url(#paint0_linear_1513_6640)"
@@ -1050,6 +1051,7 @@ exports[`Table Page > renders 1`] = `
                 filter="url(#filter1_i_1513_6640)"
               >
                 <circle
+                  class="base-color-transition"
                   cx="866.318"
                   cy="859.045"
                   data-v-57af6bd7=""
@@ -1075,6 +1077,7 @@ exports[`Table Page > renders 1`] = `
                 />
               </g>
               <circle
+                class="base-color-transition"
                 cx="866.136"
                 cy="859.155"
                 data-v-57af6bd7=""
@@ -1741,6 +1744,48 @@ exports[`Table Page > renders 1`] = `
                   data-v-b63bd396=""
                 >
                   Link
+                </div>
+              </div>
+              <div
+                class="v-col v-col-auto text-center px-2"
+                data-v-b63bd396=""
+              >
+                <button
+                  class="v-btn v-btn--elevated v-btn--icon v-theme--light v-btn--density-default elevation-0 v-btn--size-x-large v-btn--variant-elevated round-button mb-2"
+                  data-v-b63bd396=""
+                  type="button"
+                >
+                  
+                  <span
+                    class="v-btn__overlay"
+                  />
+                  <span
+                    class="v-btn__underlay"
+                  />
+                  
+                  <!---->
+                  <span
+                    class="v-btn__content"
+                    data-no-activator=""
+                  >
+                    
+                    
+                    <i
+                      aria-hidden="true"
+                      class="mdi-account-multiple-plus-outline mdi v-icon notranslate v-theme--light v-icon--size-default"
+                      data-v-b63bd396=""
+                    />
+                    
+                    
+                  </span>
+                  <!---->
+                  <!---->
+                </button>
+                <div
+                  class="text-caption"
+                  data-v-b63bd396=""
+                >
+                  Add
                 </div>
               </div>
               

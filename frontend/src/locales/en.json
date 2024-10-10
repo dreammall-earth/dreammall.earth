@@ -69,6 +69,14 @@
       "leave-table": "Leave Table",
       "link": "Link"
     },
+    "incoming-invitation": {
+      "accept-swap": "Swap",
+      "accept-table": "Join",
+      "dismiss-swap": "Stay",
+      "dismiss-table": "Drop",
+      "swap-text": "Swap tables? The old table will be folded when you move to the new one. Do you want to continue?",
+      "title": "Mall Talk Einladung"
+    },
     "setup": {
       "continue": "Continue",
       "create-table": "Open Table",

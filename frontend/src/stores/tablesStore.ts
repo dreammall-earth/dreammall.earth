@@ -57,7 +57,7 @@ type User = {
   username: string
 }
 
-type Call = {
+export type Call = {
   user: User
   table: Table
 }
@@ -136,9 +136,11 @@ export const useTablesStore = defineStore(
       fetchPolicy: 'no-cache',
     })
 
+    const currentCall = ref<Call | null>(null)
+    const getCurrentCall = computed(() => currentCall.value)
+
     watch(callSubscriptionResult, (data: { call: Call }) => {
-      // eslint-disable-next-line no-console
-      console.log('INVITE TABLE SUBSCRIPTION', data.call)
+      currentCall.value = data.call
     })
 
     const tables = reactive<TableList>({
@@ -255,7 +257,6 @@ export const useTablesStore = defineStore(
 
     const existsMyTable = computed(() => myTable.value !== null)
     const defaultMyTableName = computed(() => currentUser.value?.name ?? '')
-    const isTableChangeable = (id: number): boolean => myTable.value?.id === id
     const getTableUri = (id: number): string => `/table/${id}`
     const getJoinTableUri = (id: number): string => `/join-table/${id}`
     const getJoinTableUrl = (id: number, baseUrl: string): string =>
@@ -269,6 +270,7 @@ export const useTablesStore = defineStore(
       getProjectTables,
       setProjectTables,
       isLoadingProjectTables,
+      getCurrentCall,
       createMyTable,
       updateMyTable,
       updateMyTableUsers,
@@ -279,7 +281,6 @@ export const useTablesStore = defineStore(
       joinMyTable,
       existsMyTable,
       defaultMyTableName,
-      isTableChangeable,
       getTableUri,
       getJoinTableUrl,
     }
