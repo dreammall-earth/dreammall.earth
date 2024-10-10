@@ -74,7 +74,7 @@
       "accept-table": "Join",
       "dismiss-swap": "Stay",
       "dismiss-table": "Drop",
-      "swap-text": "Swap tables? The old one folds up when you jump to the new one. Still over?",
+      "swap-text": "Swap tables? The old table will be folded when you move to the new one. Do you want to continue?",
       "title": "Mall Talk Einladung"
     },
     "setup": {
