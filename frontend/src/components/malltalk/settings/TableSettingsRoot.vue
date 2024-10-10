@@ -29,6 +29,10 @@ import { computed, ref, inject } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
+import {
+  IsModeratorInjection,
+  IsModeratorSymbol,
+} from '#components/malltalk/interfaces/IsModeratorInjection'
 import { usePageContext } from '#context/usePageContext'
 import { copyToClipboard } from '#src/utils/copyToClipboard'
 import { useTablesStore } from '#stores/tablesStore'
@@ -57,9 +61,8 @@ const tableId = computed(() => {
 })
 
 const tablesStore = useTablesStore()
-const showAddAction = computed(() => {
-  if (tableId.value === null) return false
-  return tablesStore.isTableChangeable(tableId.value)
+const isModeratorData = inject<IsModeratorInjection>(IsModeratorSymbol, {
+  isModerator: ref(false),
 })
 
 const copiedIndicator = ref(false)
@@ -84,7 +87,7 @@ const buttons = computed(() => [
       }
     },
   },
-  ...(showAddAction.value
+  ...(isModeratorData.isModerator.value
     ? [
         {
           icon: 'mdi-account-multiple-plus-outline',
