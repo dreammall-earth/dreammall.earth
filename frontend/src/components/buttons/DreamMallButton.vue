@@ -8,6 +8,7 @@
   >
     <g opacity="0.25" filter="url(#filter0_i_1513_6640)">
       <path
+        class="base-color-transition"
         d="M866 938.727C821.781 938.727 786 903.016 786 859.046C786 815.075 821.781 779.364 866 779.364C910.219 779.364 946 815.075 946 859.046C946 903.016 910.219 938.727 866 938.727Z"
         stroke="url(#paint0_linear_1513_6640)"
         stroke-width="22"
@@ -15,6 +16,7 @@
     </g>
     <g filter="url(#filter1_i_1513_6640)">
       <circle
+        class="base-color-transition"
         cx="866.318"
         cy="859.045"
         r="61.5"
@@ -35,6 +37,7 @@
       />
     </g>
     <circle
+      class="base-color-transition"
       cx="866.136"
       cy="859.155"
       r="49.9955"
@@ -56,7 +59,7 @@
         rx="759"
         ry="768"
         transform="matrix(-4.37114e-08 1 1 4.37114e-08 98 100.364)"
-        :stroke="props.isNotification ? '#F09630' : '#2CA5B1'"
+        :stroke="baseColor"
         stroke-opacity="0.3"
         stroke-width="90"
         shape-rendering="crispEdges"
@@ -74,7 +77,7 @@
         rx="95"
         ry="95"
         transform="matrix(-4.37114e-08 1 1 4.37114e-08 98 100.364)"
-        :stroke="props.isNotification ? '#F09630' : '#2CA5B1'"
+        :stroke="baseColor"
         stroke-width="4"
       />
     </g>
@@ -220,7 +223,7 @@
         y2="936.983"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.0149795" :stop-color="props.isNotification ? '#F09630' : '#2CA5B1'" />
+        <stop offset="0.0149795" :stop-color="baseColor" />
         <stop offset="1" stop-color="#999999" />
       </linearGradient>
       <linearGradient
@@ -231,7 +234,7 @@
         y2="939.073"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.0149795" :stop-color="props.isNotification ? '#F09630' : '#2CA5B1'" />
+        <stop offset="0.0149795" :stop-color="baseColor" />
         <stop offset="1" stop-color="#999999" />
       </linearGradient>
       <linearGradient
@@ -242,7 +245,7 @@
         y2="924.479"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.0149795" :stop-color="props.isNotification ? '#F09630' : '#2CA5B1'" />
+        <stop offset="0.0149795" :stop-color="baseColor" />
         <stop offset="1" stop-color="#999999" />
       </linearGradient>
       <linearGradient
@@ -300,7 +303,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 const warp = ref<HTMLInputElement | null>(null)
 
@@ -315,6 +318,8 @@ const props = withDefaults(
   }>(),
   { isActive: false, isNotification: false },
 )
+
+const baseColor = computed(() => (props.isNotification ? '#F09630' : '#2CA5B1'))
 
 const onClick = () => {
   try {
@@ -354,10 +359,7 @@ svg {
   height: calc(100vh - 10px);
   transform: translate(-50%, -50%);
 
-  path[stroke='url(#paint0_linear_1513_6640)'],
-  circle[stroke='url(#paint1_linear_1513_6640)'],
-  circle[stroke='url(#paint2_linear_1513_6640)'],
-  path[fill='url(#paint3_linear_1513_6640)'] {
+  .base-color-transition {
     transition:
       stroke 0.3s ease-in-out,
       fill 0.3s ease-in-out;
