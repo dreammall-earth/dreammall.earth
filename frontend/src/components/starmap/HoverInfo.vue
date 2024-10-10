@@ -1,19 +1,13 @@
 <template>
-  <div v-show="!!props.data" ref="hoverRef" class="hover-info">
+  <div v-show="!!props.data" ref="hoverRef" class="hover-info" :style="style">
     <div class="info-box pa-2">
       <v-avatar :size="25" class="avatar mb-2 text-font">
-        <span>{{
-          props.data?.name
-            .split(' ')
-            .map((n) => n.charAt(0))
-            .slice(0, 2)
-            .join('')
-        }}</span>
+        <span>{{ props.data && getInitials(props.data.name) }}</span>
       </v-avatar>
       <h3>{{ props.data?.name }}</h3>
     </div>
     <div v-show="showMoreButton" class="mt-2 d-flex align-center justify-center">
-      <button @click="() => props.data && $emit('show-more', props.data?.id)">
+      <button @click="() => showMore()">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="28"
@@ -35,11 +29,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { computed } from 'vue'
+
+import { getInitials } from '#src/utils/getInitials'
 
 import type { UserWithProfile } from '#stores/userStore'
-
-const hoverRef = ref<HTMLDivElement | null>(null)
 
 const props = defineProps<{
   data: UserWithProfile | null
@@ -48,27 +42,21 @@ const props = defineProps<{
   showMoreButton: boolean
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   (e: 'show-more', id: number): void
 }>()
 
-watch(
-  () => props.x,
-  () => {
-    if (hoverRef.value) {
-      hoverRef.value.style.left = `${props.x - 50}px`
-    }
-  },
-)
+const showMore = () => props.data && emit('show-more', props.data?.id)
 
-watch(
-  () => props.y,
-  () => {
-    if (hoverRef.value) {
-      hoverRef.value.style.top = `${props.y - 50}px`
-    }
-  },
-)
+const coordinates = computed(() => ({
+  x: props.x,
+  y: props.y,
+}))
+
+const style = computed(() => ({
+  left: `${coordinates.value.x - 50}px`,
+  top: `${coordinates.value.y - 50}px`,
+}))
 </script>
 
 <style scoped>

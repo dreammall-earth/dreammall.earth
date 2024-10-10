@@ -2,12 +2,7 @@
   <div class="canvas-container">
     <canvas ref="canvas"></canvas>
   </div>
-  <HoverInfo
-    :data="hoveredStar.data"
-    :x="hoveredStar.x"
-    :y="hoveredStar.y"
-    :show-more-button="true"
-  />
+  <HoverInfo v-bind="hoveredStar" :show-more-button="true" />
 </template>
 
 <script lang="ts" setup>
@@ -274,22 +269,22 @@ const onCanvasClick = (event: MouseEvent) => {
 
 const onCanvasMouseMove = (event: MouseEvent) => {
   const star = getRaycasterIntersects(event)
-  if (star) {
-    // Get the position of the star on the screen
-    const vector = new Vector3(...cartesianFromSphere(star.azimuth, star.altitude, star.distance))
-    const canvas = renderer.domElement
-    vector.project(camera)
-
-    const x = Math.round((0.5 + vector.x / 2) * (canvas.width / window.devicePixelRatio))
-    const y = Math.round((0.5 - vector.y / 2) * (canvas.height / window.devicePixelRatio))
-
-    // Set data for info component
-    hoveredStar.x = x
-    hoveredStar.y = y
-    hoveredStar.data = star.data
-  } else {
+  if (!star) {
     hoveredStar.data = null
+    return
   }
+  // Get the position of the star on the screen
+  const vector = new Vector3(...cartesianFromSphere(star.azimuth, star.altitude, star.distance))
+  const canvas = renderer.domElement
+  vector.project(camera)
+
+  const x = Math.round((0.5 + vector.x / 2) * (canvas.width / window.devicePixelRatio))
+  const y = Math.round((0.5 - vector.y / 2) * (canvas.height / window.devicePixelRatio))
+
+  // Set data for info component
+  hoveredStar.x = x
+  hoveredStar.y = y
+  hoveredStar.data = star.data
 }
 
 const getRaycasterIntersects = (event: MouseEvent): Star | undefined => {
