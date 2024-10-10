@@ -34,7 +34,7 @@
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build -o build/storybook",
     "storybook:test": "test-storybook",
-    "test:lint": "npm run test:lint:eslint && npm run test:lint:style && npm run test:lint:locales",
+    "test:lint": "npm run test:lint:eslint; npm run test:lint:style; npm run test:lint:locales",
     "test:lint:eslint": "eslint --ext .vue,.ts,.tsx,.js,.jsx,.cjs,.mjs,.json,.yml,.yaml --max-warnings 0 .",
     "test:lint:locales": "scripts/locales/locales.sh src/locales",
     "test:lint:style": "stylelint --max-warnings 0 --ignore-path .gitignore \"**/*.{css,scss,vue,vuex}\"",
