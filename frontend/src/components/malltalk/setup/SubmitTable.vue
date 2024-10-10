@@ -61,48 +61,4 @@ const navigateToTable = async () => {
   background-color: var(--v-dm-panel-reminder-text-background-color);
   border-radius: 24px;
 }
-
-:root {
-  --custom-height: 48px;
-}
-
-.custom-text-field {
-  :deep(.v-field__input) {
-    height: var(--custom-height) !important;
-    min-height: var(--custom-height) !important;
-    padding-top: 12px;
-    padding-bottom: 12px;
-  }
-
-  :deep(.v-field) {
-    color: rgb(var(--v-theme-dm-panel-reminder-link-color)) !important;
-    background-color: var(--v-dm-panel-reminder-link-background-color) !important;
-    border: 1px solid transparent;
-  }
-
-  :deep(input) {
-    color: var(--v-theme-dm-panel-reminder-link-color) !important;
-  }
-
-  &.copied-indicator {
-    :deep(.v-field) {
-      border: 1px solid rgb(var(--v-theme-dm-panel-call-action-button-indicator-background-color));
-    }
-  }
-}
-
-.custom-icon-btn {
-  width: 48px;
-  height: 48px;
-  color: rgb(var(--v-theme-dm-panel-reminder-link-color)) !important;
-  background-color: var(--v-dm-panel-reminder-link-background-color) !important;
-  box-shadow: none !important;
-
-  &.copied-indicator {
-    color: rgb(var(--v-theme-dm-panel-call-action-button-indicator-color)) !important;
-    background-color: rgb(
-      var(--v-theme-dm-panel-call-action-button-indicator-background-color)
-    ) !important;
-  }
-}
 </style>

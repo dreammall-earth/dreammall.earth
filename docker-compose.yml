@@ -9,7 +9,7 @@ services:
       start_period: 10s
       interval: 10s
       timeout: 5s
-      retries: 3
+      retries: 100
     environment:
       - MARIADB_ALLOW_EMPTY_PASSWORD=1
       - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=1
