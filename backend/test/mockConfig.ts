@@ -21,6 +21,5 @@ export const createMockConfig = (): typeof CONFIG => {
     SENTRY_DSN: '',
     SENTRY_ENVIRONMENT: '',
     WEBHOOK_SECRET: undefined,
-    LOG_LEVEL: 'DEBUG',
   }
 }

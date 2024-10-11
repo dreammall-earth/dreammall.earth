@@ -32,7 +32,7 @@ const {
 
   FRONTEND_URL = 'http://localhost:3000/',
 
-  JWKS_URI = 'http://localhost:9000/application/o/dreammallearth/jwks/',
+  JWKS_URI,
 
   WELCOME_TABLE_MEETING_ID = uuidv4(),
   WELCOME_TABLE_NAME = 'DreamMall Coffeetime',
@@ -41,9 +41,11 @@ const {
   SENTRY_ENVIRONMENT,
 
   WEBHOOK_SECRET,
-
-  LOG_LEVEL = 'DEBUG',
 } = process.env
+
+if (!JWKS_URI) {
+  throw new Error('missing environment variable: JWKS_URI')
+}
 
 const BREVO = {
   BREVO_KEY,
@@ -79,5 +81,4 @@ export const CONFIG = {
   SENTRY_DSN,
   SENTRY_ENVIRONMENT,
   WEBHOOK_SECRET,
-  LOG_LEVEL,
 }
