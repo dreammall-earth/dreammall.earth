@@ -1,14 +1,11 @@
 /* eslint-disable n/no-process-env */
-import path from 'path'
 
 import { config } from 'dotenv'
 // eslint-disable-next-line import/named
 import { v4 as uuidv4 } from 'uuid'
 
 // Load env file
-config({
-  path: path.resolve(__dirname, '../../.env'),
-})
+config()
 
 const toNumber = (env: string | undefined): number | undefined => {
   const number = Number(env)
