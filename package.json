@@ -27,7 +27,7 @@
     "release": "scripts/release.sh"
   },
   "devDependencies": {
-    "@vuepress/bundler-vite": "^2.0.0-rc.15",
+    "@vuepress/bundler-vite": "^2.0.0-rc.18",
     "@vuepress/theme-default": "^2.0.0-rc.52",
     "remark-cli": "^12.0.1",
     "remark-gfm": "^4.0.0",
