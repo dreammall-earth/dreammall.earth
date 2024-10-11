@@ -99,7 +99,7 @@ import { defineProps } from 'vue'
 import CockpitCardVariableHeight from '#components/cockpit/cockpit-card/CockpitCardVariableHeight.vue'
 import CockpitLayout from '#components/cockpit/cockpit-layout/CockpitLayout.vue'
 
-import { generateQrCode } from './qrCode'
+import { SepaValidationError, generateQrCode } from './qrCode'
 
 import type { PageContext } from 'vike/types'
 
@@ -123,9 +123,10 @@ const data = {
 try {
   qr = generateQrCode(data)
 } catch (error) {
-  // eslint-disable-next-line no-console
-  console.warn('Invalid QR code data.\n', error)
-  qr = undefined
+  if (error instanceof SepaValidationError) {
+    console.warn('Invalid QR code data.\n', error) // eslint-disable-line no-console
+    qr = undefined
+  } else throw error
 }
 </script>
 
