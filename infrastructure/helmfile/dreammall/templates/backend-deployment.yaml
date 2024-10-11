@@ -63,6 +63,21 @@ spec:
                 configMapKeyRef:
                   name: {{ .Release.Name }}
                   key: bbb_webhook_url
+            - name: SENTRY_DSN
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: sentry_dsn_backend
+            - name: SENTRY_ENVIRONMENT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: sentry_environment
+            - name: WEBHOOK_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}
+                  key: webhook_secret
             - name: NODE_ENV
               value: production
             - name: BREVO_KEY

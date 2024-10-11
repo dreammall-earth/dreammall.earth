@@ -19,7 +19,7 @@ module.exports = {
     parser: '@typescript-eslint/parser',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'import', 'promise', 'security', 'n'],
+  plugins: ['@typescript-eslint', 'import', 'promise', 'security', 'n', 'no-catch-all'],
   settings: {
     'import/resolver': {
       typescript: true,
@@ -27,6 +27,7 @@ module.exports = {
     },
   },
   rules: {
+    'no-catch-all/no-catch-all': 'error',
     'no-console': 'error',
     'no-debugger': 'error',
     camelcase: 'error',

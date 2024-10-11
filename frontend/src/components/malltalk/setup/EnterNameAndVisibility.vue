@@ -22,6 +22,7 @@
           : $t('dream-mall-panel.setup.public')
       "
       hide-details
+      class="private-switch"
     />
 
     <SimpleButton type="submit" class="mt-12" :label="submitText" />
@@ -39,13 +40,7 @@ const emit = defineEmits<StepEmits>()
 
 const tableSettings = defineModel<MyTableSettings>({ required: true })
 
-const onNext = () => {
-  if (tableSettings.value.isPrivate) {
-    emit('next')
-  } else {
-    emit('submit')
-  }
-}
+const onNext = () => emit('next')
 </script>
 
 <style lang="scss" scoped>
@@ -57,6 +52,12 @@ const onNext = () => {
 
   :deep(input) {
     color: rgb(var(--v-theme-dm-panel-text-input-color)) !important;
+  }
+}
+
+.private-switch {
+  :deep(.v-label) {
+    width: 80px;
   }
 }
 </style>

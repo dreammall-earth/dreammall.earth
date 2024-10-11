@@ -3,6 +3,6 @@ export type StepProps = {
 }
 
 export type StepEmits = {
-  (e: 'next' | 'submit'): void
+  (e: 'next' | 'submit' | 'close'): void
   (e: 'goTo', value: string): void
 }

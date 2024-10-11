@@ -42,7 +42,7 @@ const onTableClosed = () => navigate('/')
 
 @media #{map.get($display-breakpoints, 'sm-and-down')} {
   .container {
-    --bottom-height: 85px;
+    --bottom-height: 102px;
   }
 }
 </style>

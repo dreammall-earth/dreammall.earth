@@ -173,6 +173,23 @@ module "kube-hetzner" {
       location    = "fsn1",
       labels      = [],
       taints      = [],
+      count       = 0
+      # swap_size   = "2G" # remember to add the suffix, examples: 512M, 1G
+      # zram_size   = "2G" # remember to add the suffix, examples: 512M, 1G
+      # kubelet_args = ["kube-reserved=cpu=50m,memory=300Mi,ephemeral-storage=1Gi", "system-reserved=cpu=250m,memory=300Mi"]
+
+      # Fine-grained control over placement groups (nodes in the same group are spread over different physical servers, 10 nodes per placement group max):
+      # placement_group = "default"
+
+      # Enable automatic backups via Hetzner (default: false)
+      # backups = true
+    },
+    {
+      name        = "agent-large-2",
+      server_type = "cx32",
+      location    = "fsn1",
+      labels      = [],
+      taints      = [],
       count       = 2
       # swap_size   = "2G" # remember to add the suffix, examples: 512M, 1G
       # zram_size   = "2G" # remember to add the suffix, examples: 512M, 1G
@@ -656,7 +673,15 @@ module "kube-hetzner" {
 
   # Adding extra firewall rules, like opening a port
   # More info on the format here https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/firewall
-  # extra_firewall_rules = [
+  extra_firewall_rules = [
+    {
+      description = "Allow Outbound SMTP requests"
+      direction       = "out"
+      protocol        = "tcp"
+      port            = "587"
+      source_ips      = [] # Won't be used for this rule
+      destination_ips = ["0.0.0.0/0", "::/0"]
+    },
   #   {
   #     description = "For Postgres"
   #     direction       = "in"
@@ -673,7 +698,7 @@ module "kube-hetzner" {
   #     source_ips      = [] # Won't be used for this rule
   #     destination_ips = ["0.0.0.0/0", "::/0"]
   #   }
-  # ]
+  ]
 
   # If you want to configure a different CNI for k3s, use this flag
   # possible values: flannel (Default), calico, and cilium

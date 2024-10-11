@@ -42,51 +42,27 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                 data-v-75d0be1e=""
                 href="/"
               >
-                <div
-                  class="v-responsive v-img v-img--booting w-100 logo-small"
+                <v-img-stub
+                  absolute="false"
+                  class="w-100 logo-small"
+                  cover="false"
                   data-v-75d0be1e=""
                   data-v-f6be2607=""
-                >
-                  <div
-                    class="v-responsive__sizer"
-                  />
-                  
-                  
-                  <transition-stub
-                    appear="true"
-                    css="true"
-                    name="fade-transition"
-                    persisted="false"
-                  >
-                    <img
-                      class="v-img__img v-img__img--contain"
-                      src="/src/assets/dreammall-logo.svg"
-                      style="display: none;"
-                    />
-                  </transition-stub>
-                  <transition-stub
-                    appear="false"
-                    css="true"
-                    name="fade-transition"
-                    persisted="false"
-                  >
-                    <!---->
-                  </transition-stub>
-                  <!---->
-                  <!---->
-                  <!---->
-                  
-                  
-                  <!---->
-                </div>
+                  eager="false"
+                  inline="false"
+                  options="[object Object]"
+                  src="/src/assets/dreammall-logo.svg"
+                  tile="false"
+                  transition="fade-transition"
+                />
               </a>
             </div>
             <div
               class="v-col d-flex align-center justify-center"
               data-v-75d0be1e=""
             >
-              <button
-                class="tab-control ma-auto border-sm open"
+              <div
+                class="tab-control ma-auto border-sm"
                 data-v-75d0be1e=""
                 data-v-d58c92bb=""
               >
@@ -100,7 +76,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   data-v-d58c92bb=""
                 >
                   
-                  <a
+                  <button
                     class="item active"
                     data-v-d58c92bb=""
                   >
@@ -328,8 +304,8 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                       </i>
                     </div>
                      $t('menu.worldCafe')
-                  </a>
-                  <a
+                  </button>
+                  <button
                     class="item"
                     data-v-d58c92bb=""
                   >
@@ -584,10 +560,10 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                       </i>
                     </div>
                      $t('menu.cockpit')
-                  </a>
+                  </button>
                   
                 </div>
-              </button>
+              </div>
             </div>
             <div
               class="v-col d-none d-md-flex align-center"
@@ -1009,12 +985,12 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
       </transition-group-stub>
       <!-- Page Content Container -->
       <div
-        class="v-container v-container--fluid v-locale--is-ltr page-container px-8 text-font"
+        class="v-container v-container--fluid v-locale--is-ltr page-container text-font"
         data-v-75d0be1e=""
       >
         
         <div
-          class="cockpit"
+          class="cockpit px-8"
           data-v-b49ea567=""
         >
           
@@ -1649,6 +1625,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                 opacity="0.25"
               >
                 <path
+                  class="base-color-transition"
                   d="M866 938.727C821.781 938.727 786 903.016 786 859.046C786 815.075 821.781 779.364 866 779.364C910.219 779.364 946 815.075 946 859.046C946 903.016 910.219 938.727 866 938.727Z"
                   data-v-57af6bd7=""
                   stroke="url(#paint0_linear_1513_6640)"
@@ -1660,6 +1637,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                 filter="url(#filter1_i_1513_6640)"
               >
                 <circle
+                  class="base-color-transition"
                   cx="866.318"
                   cy="859.045"
                   data-v-57af6bd7=""
@@ -1685,6 +1663,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                 />
               </g>
               <circle
+                class="base-color-transition"
                 cx="866.136"
                 cy="859.155"
                 data-v-57af6bd7=""

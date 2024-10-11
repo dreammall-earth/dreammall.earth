@@ -22,6 +22,9 @@ const {
   PUBLIC_ENV__IBAN = 'DE667 333170000 10000 504',
   PUBLIC_ENV__BIC = 'GABLDE71XXX',
   PUBLIC_ENV__BANK = 'Gabler-Saliter Bank',
+
+  SENTRY_DSN,
+  SENTRY_ENVIRONMENT,
 } = process.env
 
 const AUTH = {
@@ -52,4 +55,9 @@ const ACCOUNTING = {
   BANK: PUBLIC_ENV__BANK,
 }
 
-export const publicEnv = { AUTH, ACCOUNTING, ENDPOINTS, META }
+const SENTRY = {
+  SENTRY_DSN,
+  SENTRY_ENVIRONMENT,
+}
+
+export const publicEnv = { AUTH, ACCOUNTING, ENDPOINTS, META, SENTRY }

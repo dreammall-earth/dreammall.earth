@@ -1,16 +1,19 @@
-import { Resolver, Mutation, Arg } from 'type-graphql'
+import { Resolver, Mutation, Ctx, Arg } from 'type-graphql'
 
-import { sendContactEmails } from '#api/Brevo'
 import { ContactFormInput } from '#inputs/ContactFormInput'
 import { EVENT_CONTACTFORM_SEND } from '#src/event/Events'
+
+import type { Context } from '#src/context'
 
 @Resolver()
 export class ContactFormResolver {
   @Mutation(() => Boolean)
   async createContactForm(
     @Arg('contactFormData') contactFormData: ContactFormInput,
+    @Ctx() context: Context,
   ): Promise<boolean> {
-    void sendContactEmails(contactFormData)
+    const { brevo } = context
+    await brevo.sendContactEmails(contactFormData)
     await EVENT_CONTACTFORM_SEND(contactFormData.email)
     return true
   }

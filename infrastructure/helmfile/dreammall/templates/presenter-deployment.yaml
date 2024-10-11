@@ -29,6 +29,16 @@ spec:
                 configMapKeyRef:
                   name: {{ .Release.Name }}
                   key: endpoints_graphql_uri
+            - name: SENTRY_DSN
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: sentry_dsn_presenter
+            - name: SENTRY_ENVIRONMENT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}
+                  key: sentry_environment
           image: "{{ .Values.presenter.image.repository }}:{{ default .Values.global.image.tag .Values.presenter.image.tag "latest" }}"
           imagePullPolicy: {{ quote .Values.global.image.pullPolicy }}
           name: presenter

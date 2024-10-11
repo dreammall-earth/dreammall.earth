@@ -1,4 +1,5 @@
 import { DefaultApolloClient } from '@vue/apollo-composable'
+import { UserManager } from 'oidc-client-ts'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { PageContext } from 'vike/types'
 import { createSSRApp, defineComponent, h, markRaw, reactive, Component, provide } from 'vue'
@@ -16,6 +17,8 @@ import CreateVuetify from '#plugins/vuetify'
 import AuthService from '#src/services/AuthService'
 import { useAuthStore } from '#stores/authStore'
 
+import { setupSentry } from './sentry'
+
 const vuetify = CreateVuetify(i18n)
 
 function createApp(pageContext: PageContext, isClient = true) {
@@ -25,10 +28,20 @@ function createApp(pageContext: PageContext, isClient = true) {
     setup: () => {
       provide(
         DefaultApolloClient,
-        createApolloClient(pageContext.publicEnv.ENDPOINTS)(getToken, isClient),
+        createApolloClient({ endpoints: pageContext.publicEnv.ENDPOINTS, getToken, isClient }),
       )
+      const { AUTH } = pageContext.publicEnv
       try {
-        provide('authService', new AuthService(pageContext.publicEnv.AUTH))
+        const userManager = new UserManager({
+          authority: AUTH.AUTHORITY,
+          client_id: AUTH.CLIENT_ID,
+          redirect_uri: AUTH.REDIRECT_URI,
+          silent_redirect_uri: AUTH.SILENT_REDIRECT_URI,
+          response_type: AUTH.RESPONSE_TYPE,
+          scope: AUTH.SCOPE,
+          loadUserInfo: true,
+        })
+        provide('authService', new AuthService({ userManager, AUTH }))
       } catch (error) {
         if (!(error instanceof DOMException && error.name === 'SecurityError')) {
           throw error
@@ -91,6 +104,11 @@ function createApp(pageContext: PageContext, isClient = true) {
   const pageContextReactive = reactive(pageContext)
 
   setPageContext(app, pageContextReactive)
+
+  const {
+    SENTRY: { SENTRY_DSN: dsn, SENTRY_ENVIRONMENT: environment },
+  } = pageContext.publicEnv
+  setupSentry({ app, dsn, environment })
 
   return { app, i18n }
 }

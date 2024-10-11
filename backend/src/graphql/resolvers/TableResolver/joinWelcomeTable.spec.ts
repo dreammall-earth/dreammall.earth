@@ -2,6 +2,7 @@ import { ApolloServer } from '@apollo/server'
 
 import { createMeeting, joinMeetingLink } from '#api/BBB'
 import { findOrCreateUser } from '#src/context/findOrCreateUser'
+import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
 import { mockContextValue } from '#test/mockContextValue'
 
@@ -18,6 +19,7 @@ jest.mock<typeof import('#api/BBB')>('#api/BBB', () => {
 
 const createMeetingMock = jest.mocked(createMeeting)
 const joinMeetingLinkMock = jest.mocked(joinMeetingLink)
+const pk = 19
 const nickname = 'mockedUser'
 const name = 'User'
 
@@ -67,7 +69,7 @@ describe('TableResolver', () => {
     describe('joinWelcomeTable', () => {
       let contextValue: ReturnType<typeof mockContextValue>
       beforeEach(async () => {
-        const user = await findOrCreateUser({ nickname, name })
+        const user = await findOrCreateUser({ prisma })({ pk, nickname, name })
         contextValue = mockContextValue({ user })
         contextValue.config.WELCOME_TABLE_MEETING_ID = '4711-42'
         contextValue.config.WELCOME_TABLE_NAME = 'I am the WELCOME_TABLE_ID'

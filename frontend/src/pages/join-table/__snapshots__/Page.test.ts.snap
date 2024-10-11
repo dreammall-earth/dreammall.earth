@@ -32,43 +32,19 @@ exports[`JoinTablePage > renders 1`] = `
             class="reminder text-center mt-8 pa-5 font-weight-medium"
             data-v-bb2bf2be=""
           >
-            <div
-              class="v-responsive v-img v-img--booting w-100 logo-tiny mx-auto"
+            <v-img-stub
+              absolute="false"
+              class="w-100 logo-tiny mx-auto"
+              cover="false"
               data-v-bb2bf2be=""
               data-v-f6be2607=""
-            >
-              <div
-                class="v-responsive__sizer"
-              />
-              
-              
-              <transition-stub
-                appear="true"
-                css="true"
-                name="fade-transition"
-                persisted="false"
-              >
-                <img
-                  class="v-img__img v-img__img--contain"
-                  src="/src/assets/dreammall-logo-simple.svg"
-                  style="display: none;"
-                />
-              </transition-stub>
-              <transition-stub
-                appear="false"
-                css="true"
-                name="fade-transition"
-                persisted="false"
-              >
-                <!---->
-              </transition-stub>
-              <!---->
-              <!---->
-              <!---->
-              
-              
-              <!---->
-            </div>
+              eager="false"
+              inline="false"
+              options="[object Object]"
+              src="/src/assets/dreammall-logo-simple.svg"
+              tile="false"
+              transition="fade-transition"
+            />
             <p
               class="mt-5"
               data-v-bb2bf2be=""

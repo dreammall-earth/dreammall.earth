@@ -31,9 +31,9 @@ describe('LogoImage', () => {
   describe('classes', () => {
     describe('default', () => {
       it('has class logo-medium', () => {
-        expect(wrapper.find('.v-img').classes('logo-large')).toBe(false)
-        expect(wrapper.find('.v-img').classes('logo-small')).toBe(false)
-        expect(wrapper.find('.v-img').classes('logo-medium')).toBe(true)
+        expect(wrapper.find('v-img-stub').classes('logo-large')).toBe(false)
+        expect(wrapper.find('v-img-stub').classes('logo-small')).toBe(false)
+        expect(wrapper.find('v-img-stub').classes('logo-medium')).toBe(true)
       })
     })
 
@@ -43,9 +43,9 @@ describe('LogoImage', () => {
       })
 
       it('has class logo-large', () => {
-        expect(wrapper.find('.v-img').classes('logo-medium')).toBe(false)
-        expect(wrapper.find('.v-img').classes('logo-small')).toBe(false)
-        expect(wrapper.find('.v-img').classes('logo-large')).toBe(true)
+        expect(wrapper.find('v-img-stub').classes('logo-medium')).toBe(false)
+        expect(wrapper.find('v-img-stub').classes('logo-small')).toBe(false)
+        expect(wrapper.find('v-img-stub').classes('logo-large')).toBe(true)
       })
     })
 
@@ -55,9 +55,9 @@ describe('LogoImage', () => {
       })
 
       it('has class logo-medium', () => {
-        expect(wrapper.find('.v-img').classes('logo-large')).toBe(false)
-        expect(wrapper.find('.v-img').classes('logo-small')).toBe(false)
-        expect(wrapper.find('.v-img').classes('logo-medium')).toBe(true)
+        expect(wrapper.find('v-img-stub').classes('logo-large')).toBe(false)
+        expect(wrapper.find('v-img-stub').classes('logo-small')).toBe(false)
+        expect(wrapper.find('v-img-stub').classes('logo-medium')).toBe(true)
       })
     })
 
@@ -67,9 +67,9 @@ describe('LogoImage', () => {
       })
 
       it('has class logo-small', () => {
-        expect(wrapper.find('.v-img').classes('logo-large')).toBe(false)
-        expect(wrapper.find('.v-img').classes('logo-medium')).toBe(false)
-        expect(wrapper.find('.v-img').classes('logo-small')).toBe(true)
+        expect(wrapper.find('v-img-stub').classes('logo-large')).toBe(false)
+        expect(wrapper.find('v-img-stub').classes('logo-medium')).toBe(false)
+        expect(wrapper.find('v-img-stub').classes('logo-small')).toBe(true)
       })
     })
   })

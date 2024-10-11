@@ -61,6 +61,7 @@ model Event {
 
 model User {
   id                Int      @id @default(autoincrement())
+  pk                Int?     @unique
   referenceId       String   @db.VarChar(140) @unique
   username          String   @db.VarChar(100) @unique
   name              String   @db.VarChar(254)
@@ -91,9 +92,9 @@ model Meeting {
 }
 
 model UsersInMeetings {
-  meeting           Meeting  @relation(fields: [meetingId], references: [id])
+  meeting           Meeting  @relation(fields: [meetingId], references: [id], onDelete: Cascade)
   meetingId         Int
-  user              User     @relation(fields: [userId], references: [id])
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId            Int
   assignedAt        DateTime @default(now())
   role              String   @db.VarChar(12) @default("MODERATOR")

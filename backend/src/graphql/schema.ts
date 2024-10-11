@@ -14,7 +14,7 @@ import { UserResolver } from './resolvers/UserResolver'
 
 if (CONFIG.BBB_PULL_MEETINGS) void checkForOpenTables()
 
-export const schema = async (): Promise<GraphQLSchema> => {
+export const schema = (): Promise<GraphQLSchema> => {
   return buildSchema({
     resolvers: [
       ContactFormResolver,

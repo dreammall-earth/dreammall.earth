@@ -2,6 +2,7 @@
   <div class="canvas-container">
     <canvas ref="canvas"></canvas>
   </div>
+  <HoverInfo v-bind="hoveredStar" :show-more-button="true" />
 </template>
 
 <script lang="ts" setup>
@@ -24,13 +25,29 @@ import {
   BackSide,
 } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 
 import { starmapQuery, StarmapQueryResult, StarLine, Star } from '#queries/starmapQuery'
+
+import HoverInfo from './HoverInfo.vue'
+
+import type { UserWithProfile } from '#stores/userStore'
 
 const starData = ref<Star[]>([])
 
 const canvas = ref<HTMLCanvasElement | null>(null)
+
+type HoveredStar = {
+  data: UserWithProfile | null
+  x: number
+  y: number
+}
+
+const hoveredStar = reactive<HoveredStar>({
+  data: null,
+  x: 0,
+  y: 0,
+})
 
 const { result: starmapQueryResult } = useQuery(
   starmapQuery,
@@ -179,13 +196,24 @@ const addStars = (data: Star[]) => {
     const starGeometry = new SphereGeometry(STAR_RADIUS * data.magnitude, 16, 16)
     const starMaterial = new MeshBasicMaterial({ color: 0xffffff })
 
+    const hoverStarGeometry = new SphereGeometry(STAR_RADIUS * data.magnitude * 5, 16, 16)
+    const hoverStarMaterial = new MeshBasicMaterial({
+      color: 0xffffff,
+      opacity: 0,
+      transparent: true,
+      alphaTest: 0.5,
+    })
+
     // Berechnet die Position des Sterns auf der Sphäre
     const [x, y, z] = cartesianFromSphere(data.azimuth, data.altitude, data.distance)
 
     const star = new StarMesh(starGeometry, starMaterial, data)
+    const hoverStar = new StarMesh(hoverStarGeometry, hoverStarMaterial, data)
     star.position.set(x, y, z)
+    hoverStar.position.set(x, y, z)
     scene.add(star)
-    stars.push(star)
+    scene.add(hoverStar)
+    stars.push(hoverStar)
   })
 }
 
@@ -241,10 +269,22 @@ const onCanvasClick = (event: MouseEvent) => {
 
 const onCanvasMouseMove = (event: MouseEvent) => {
   const star = getRaycasterIntersects(event)
-  if (star) {
-    // eslint-disable-next-line no-console
-    console.log('Stern hover!', star.data)
+  if (!star) {
+    hoveredStar.data = null
+    return
   }
+  // Get the position of the star on the screen
+  const vector = new Vector3(...cartesianFromSphere(star.azimuth, star.altitude, star.distance))
+  const canvas = renderer.domElement
+  vector.project(camera)
+
+  const x = Math.round((0.5 + vector.x / 2) * (canvas.width / window.devicePixelRatio))
+  const y = Math.round((0.5 - vector.y / 2) * (canvas.height / window.devicePixelRatio))
+
+  // Set data for info component
+  hoveredStar.x = x
+  hoveredStar.y = y
+  hoveredStar.data = star.data
 }
 
 const getRaycasterIntersects = (event: MouseEvent): Star | undefined => {
@@ -275,20 +315,12 @@ onMounted(() => {
 })
 </script>
 
-<style scoped lang="scss">
-@use 'sass:map';
-@import 'vuetify/lib/styles/settings/_variables';
-
+<style scoped>
 .canvas-container {
-  --bottom-height: 136px;
-
   position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
-
-  // Todo: Remove after we are sure we want to keep it full screen.
-  // height: calc(100vh - var(--v-layout-top) - var(--bottom-height));
   height: 100vh;
   overflow: hidden;
   border: none;
@@ -298,11 +330,5 @@ canvas {
   display: block;
   width: 100%;
   height: 100%;
-}
-
-@media #{map.get($display-breakpoints, 'sm-and-down')} {
-  .container {
-    --bottom-height: 85px;
-  }
 }
 </style>
