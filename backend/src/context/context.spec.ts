@@ -1,4 +1,4 @@
-import { jwtVerify } from 'jose'
+import { jwtVerify, errors } from 'jose'
 
 import logger from '#src/logger'
 import { prisma, PrismaClientValidationError } from '#src/prisma'
@@ -23,7 +23,7 @@ describe('context', () => {
     beforeEach(() => {
       jest
         .mocked(jwtVerify<CustomJwtPayload>)
-        .mockRejectedValue(new Error('JWS verification failed'))
+        .mockRejectedValue(new errors.JWTExpired('"exp" claim timestamp check failed', {}))
     })
 
     it('returns `null` for `contextValue.user`', async () => {
