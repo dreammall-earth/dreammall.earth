@@ -2,7 +2,7 @@
 
 exports[`EmbeddedTable > renders 1`] = `
 <iframe
-  allow="camera;microphone;fullscreen;display-capture;screen-wake-lock *;"
+  allow="camera;microphone;fullscreen;display-capture *;"
   class="table-iframe"
   data-v-51765335=""
   height="100%"
