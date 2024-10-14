@@ -95,10 +95,12 @@ const toggleOptions = () => {
 }
 
 const editTable = () => {
+  toggleOptions()
   setComponent(h(EditTable, { tableId: props.id }))
 }
 
 const invite = () => {
+  toggleOptions()
   setComponent(h(ChangeModerators, { tableId: props.id }))
 }
 
@@ -107,6 +109,7 @@ const shareTable = () => {
 }
 
 const deleteTable = async () => {
+  toggleOptions()
   if (confirm(t('cockpit.myTables.deleteConfirmation'))) {
     try {
       await tablesStore.deleteProjectTable(props.id)
