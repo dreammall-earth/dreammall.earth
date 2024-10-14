@@ -370,7 +370,7 @@ export class TableResolver {
 
   @Query(() => String)
   async getTableName(
-    @Arg('tableId', () => Int) tableId: number,
+    @Arg('tableId', () => String) tableId: string,
     @Ctx() context: AuthenticatedContext,
   ): Promise<string> {
     const {
@@ -378,7 +378,7 @@ export class TableResolver {
     } = context
     const meeting = await prisma.meeting.findUnique({
       where: {
-        id: tableId,
+        temporaryID: tableId,
       },
     })
     if (!meeting) throw new Error('Table does not exist')
