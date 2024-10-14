@@ -55,7 +55,7 @@
           />
         </template>
       </div>
-      <button @click="$emit('edit-details')">
+      <button class="w-100" @click="$emit('edit-details')">
         <UserDetails :details="props.details" />
       </button>
       <button class="social" @click="$emit('edit-social')">

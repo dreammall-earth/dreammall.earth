@@ -1,7 +1,7 @@
 <template>
   <ul class="details" :class="{ editable: props.editable }">
-    <li v-for="detail in details" :key="detail.id">
-      <v-chip class="detail border-thin">
+    <li v-for="detail in details" :key="detail.id" class="detail">
+      <v-chip class="detail-chip border-thin">
         <v-icon
           :icon="detailCategoryToIcon(detail.category)"
           class="mr-2"
@@ -57,10 +57,21 @@ const details: Ref<UserDetail[]> = computed(() => {
 
 <style scoped>
 .detail {
+  overflow: hidden;
+}
+
+.detail-chip {
   background: var(--v-cockpit-chip-background);
 
   &:deep(.v-chip__underlay) {
     display: none;
+  }
+
+  &:deep(.v-chip__content) {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
   }
 }
 
@@ -82,7 +93,7 @@ const details: Ref<UserDetail[]> = computed(() => {
     padding: 0;
     background: unset;
 
-    .detail {
+    .detail-chip {
       background: var(--v-cockpit-chip-background-2);
     }
   }
