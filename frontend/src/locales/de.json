@@ -43,7 +43,7 @@
         "update": "Speichern"
       },
       "createTable": {
-        "chooseModerators": "Wähle deine Mitmoderatoren.",
+        "chooseModerators": "Wähle dein Moderator-Team.",
         "tableCreated": "Dein Tisch wurde erstellt.",
         "visionIntoReality": "Deine Vision wird Realität, lass uns gemeinsam den ersten Schritt machen."
       },
@@ -68,6 +68,14 @@
       "add-user": "Add",
       "leave-table": "Tisch verlassen",
       "link": "Link"
+    },
+    "incoming-invitation": {
+      "accept-swap": "Wechseln",
+      "accept-table": "Beitreten",
+      "dismiss-swap": "Bleiben",
+      "dismiss-table": "Verwerfen",
+      "swap-text": "Tischtausch? Der alte klappt zusammen wenn du zum neuen springst. Trotzdem hinüber?",
+      "title": "Mall Talk Einladung"
     },
     "setup": {
       "continue": "Weiter",

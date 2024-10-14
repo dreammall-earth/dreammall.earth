@@ -156,7 +156,7 @@ async function submitForm() {
       setTimeout(() => {
         showFormSuccess.value = !showFormSuccess.value
       }, showInfoTime)
-    } catch {
+    } catch /* eslint-disable-line no-catch-all/no-catch-all */ {
       showFormError.value = !showFormError.value
       formIsLoading.value = !formIsLoading.value
 

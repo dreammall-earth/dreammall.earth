@@ -1,5 +1,5 @@
 import { ApolloServer } from '@apollo/server'
-import { buildSchema, Resolver, Query, Float, AuthorizationError } from 'type-graphql'
+import { buildSchema, Resolver, Query, Float, AuthenticationError } from 'type-graphql'
 
 import { createApolloPlugin } from './createApolloPlugin'
 
@@ -19,7 +19,9 @@ class ExampleResolver {
 
   @Query(() => Float)
   unauthorized(): number {
-    throw new AuthorizationError('Not allowed!')
+    throw new AuthenticationError(
+      'Access denied! You need to be authenticated to perform this action!',
+    )
   }
 }
 
@@ -133,7 +135,7 @@ describe('createApolloPlugin', () => {
       })
     })
 
-    describe('but on AuthorizationError', () => {
+    describe('but on AuthenticationError', () => {
       const query = `{ unauthorized }`
 
       it('ignores the error', async () => {

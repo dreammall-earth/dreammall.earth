@@ -1,6 +1,9 @@
-import { jwtVerify, createRemoteJWKSet } from 'jose'
+import { jwtVerify, createRemoteJWKSet, errors } from 'jose'
 
 import { CONFIG } from '#config/config'
+import { createBrevoClient } from '#src/api/Brevo'
+import logger from '#src/logger'
+import { prisma } from '#src/prisma'
 
 import { findOrCreateUser } from './findOrCreateUser'
 import { getToken } from './getToken'
@@ -9,10 +12,23 @@ import type { PrismaClient, UserWithProfile } from '#src/prisma'
 
 const JWKS = createRemoteJWKSet(new URL(CONFIG.JWKS_URI))
 
+const brevo = createBrevoClient({ prisma, logger, config: CONFIG })
+
+const knownErrorClasses = [
+  errors.JOSEAlgNotAllowed,
+  errors.JWTExpired,
+  errors.JWTInvalid,
+  errors.JWSInvalid,
+  errors.JWSSignatureVerificationFailed,
+]
+
+const knownErrorMessages = ['JWS verification failed']
+
 export type Context = {
   config: typeof CONFIG
   user: UserWithProfile | null
   dataSources: { prisma: PrismaClient }
+  brevo: typeof brevo
 }
 
 export type AuthenticatedContext = Omit<Context, 'user'> & { user: UserWithProfile }
@@ -32,8 +48,14 @@ const decodePayload = async (
   try {
     const { payload } = await jwtVerify<CustomJwtPayload>(token, JWKS)
     return payload
-  } catch (err) {
-    return null
+  } catch (error) {
+    if (
+      knownErrorClasses.some((errorClass) => error instanceof errorClass) ||
+      (error instanceof Error && knownErrorMessages.some((message) => message === error.message))
+    ) {
+      logger.trace(error)
+      return null
+    } else throw error
   }
 }
 
@@ -55,6 +77,7 @@ export const context: (deps: {
   return {
     user,
     config: CONFIG,
+    brevo,
     dataSources: {
       prisma,
     },

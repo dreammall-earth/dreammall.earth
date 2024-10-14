@@ -2,7 +2,7 @@
   <div class="step-header" :class="{ 'dream-mall-button-mode': props.isDreamMallButtonMode }">
     <div class="step-header__left">
       <v-btn v-if="isBackButtonVisible" icon variant="text" size="small" @click="emitBack">
-        <v-icon icon="mdi-arrow-left" />
+        <v-icon class="back" icon="mdi-chevron-left" />
       </v-btn>
     </div>
     <div class="step-header__middle">
@@ -70,6 +70,11 @@ const emitClose = () => emit('close')
   &.dream-mall-button-mode &__middle {
     padding-top: 20px;
     padding-bottom: 10px;
+  }
+
+  .back::before {
+    // Scales up the chevron icon to have an optically (not pixel!) equivalent size to the close button
+    font-size: 21px !important;
   }
 }
 </style>

@@ -2,18 +2,32 @@ import { randomBytes } from 'crypto'
 
 import { TransactionalEmailsApi } from '@getbrevo/brevo'
 
-import { CONFIG } from '#config/config'
 import { prisma } from '#src/prisma'
+import { createMockConfig } from '#test/mockConfig'
+import { createMockLogger } from '#test/mockLogger'
 
-import { confirmNewsletter, sendContactEmails, subscribeToNewsletter } from '.'
+import { createBrevoClient } from './Brevo'
 
-CONFIG.BREVO_KEY = 'MY KEY'
-CONFIG.BREVO_ADMIN_NAME = 'Peter Lustig'
-CONFIG.BREVO_ADMIN_EMAIL = 'peter@lustig.de'
-CONFIG.BREVO_CONTACT_TEMPLATE_ADMIN = 1
-CONFIG.BREVO_CONTACT_TEMPLATE_USER = 2
-CONFIG.BREVO_NEWSLETTER_TEMPLATE_OPTIN = 3
-CONFIG.BREVO_NEWSLETTER_LIST = 3
+import type { Logger } from '#src/logger'
+
+const CONFIG = {
+  ...createMockConfig(),
+  BREVO_KEY: 'MY KEY',
+  BREVO_ADMIN_NAME: 'Peter Lustig',
+  BREVO_ADMIN_EMAIL: 'peter@lustig.de',
+  BREVO_CONTACT_TEMPLATE_ADMIN: 1,
+  BREVO_CONTACT_TEMPLATE_USER: 2,
+  BREVO_NEWSLETTER_TEMPLATE_OPTIN: 3,
+  BREVO_NEWSLETTER_LIST: 3,
+}
+
+const logger = jest.mocked<Logger>(createMockLogger() as unknown as Logger)
+
+const { confirmNewsletter, sendContactEmails, subscribeToNewsletter } = createBrevoClient({
+  config: CONFIG,
+  prisma,
+  logger,
+})
 
 const mockSendTransacEmail = jest.fn().mockResolvedValue({
   response: { statusCode: 201 },
@@ -211,17 +225,14 @@ describe('Brevo', () => {
     })
 
     describe('without brevo key', () => {
-      beforeEach(async () => {
+      it('does not call sendSmtpEmail', async () => {
         jest.clearAllMocks()
-        CONFIG.BREVO_KEY = undefined
-        await sendContactEmails(contactFormData)
-      })
-
-      afterAll(() => {
-        CONFIG.BREVO_KEY = 'MY KEY'
-      })
-
-      it('does not call sendSmtpEmail', () => {
+        const brevo = createBrevoClient({
+          prisma,
+          logger,
+          config: { ...CONFIG, BREVO_KEY: undefined },
+        })
+        await brevo.sendContactEmails(contactFormData)
         expect(mockSendTransacEmail).not.toHaveBeenCalled()
       })
     })
@@ -415,14 +426,15 @@ describe('Brevo', () => {
 
     describe('without brevo key', () => {
       let result: Awaited<ReturnType<typeof subscribeToNewsletter>>
+
       beforeEach(async () => {
         jest.clearAllMocks()
-        CONFIG.BREVO_KEY = undefined
-        result = await subscribeToNewsletter(firstName, lastName, email)
-      })
-
-      afterAll(() => {
-        CONFIG.BREVO_KEY = 'MY KEY'
+        const brevo = createBrevoClient({
+          prisma,
+          logger,
+          config: { ...CONFIG, BREVO_KEY: undefined },
+        })
+        result = await brevo.subscribeToNewsletter(firstName, lastName, email)
       })
 
       it('returns false', () => {
@@ -805,8 +817,12 @@ describe('Brevo', () => {
       let result: Awaited<ReturnType<typeof confirmNewsletter>>
       beforeEach(async () => {
         jest.clearAllMocks()
-        CONFIG.BREVO_KEY = undefined
-        result = await confirmNewsletter(code)
+        const brevo = createBrevoClient({
+          prisma,
+          logger,
+          config: { ...CONFIG, BREVO_KEY: undefined },
+        })
+        result = await brevo.confirmNewsletter(code)
       })
 
       it('returns false', () => {

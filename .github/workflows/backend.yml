@@ -58,6 +58,7 @@ jobs:
       - uses: actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6 # v4.0.3
         with:
           node-version-file: './.tool-versions'
+      - run: touch backend/.env # docker-compose requires `env_file:` to be present https://github.com/docker/compose/issues/3560
       - name: Backend | docker-compose database
         run: docker compose -f docker-compose.yml up --detach --no-deps database
       - name: Backend | Unit

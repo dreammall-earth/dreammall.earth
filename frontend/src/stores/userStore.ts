@@ -22,6 +22,7 @@ import {
 } from '#mutations/updateUserMutation'
 import { currentUserQuery } from '#queries/currentUserQuery'
 import { searchUsersQuery } from '#queries/searchUsersQuery'
+import { getInitials } from '#src/utils/getInitials'
 
 export type { AddSocialMediaInput, SocialMediaType } from '#mutations/addSocialMediaMutation'
 export type { AddUserDetailInput } from '#mutations/addUserDetailMutation'
@@ -117,12 +118,7 @@ export const useUserStore = defineStore(
 
     const getCurrentUserInitials = computed(() => {
       const name = currentUser.value?.name
-      if (name)
-        return name
-          .split(' ')
-          .map((n) => n.charAt(0))
-          .slice(0, 2)
-          .join('')
+      if (name) return getInitials(name)
       return ''
     })
 

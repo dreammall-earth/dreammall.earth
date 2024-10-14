@@ -1,11 +1,6 @@
 <template>
   <div class="flat-text-field d-flex flex-column text-center pa-4">
-    <div class="reminder text-center pa-5 font-weight-medium">
-      <LogoImage class="mx-auto" size="tiny" :text-enabled="false" />
-      <p class="mt-5">
-        {{ $t('dream-mall-panel.setup.reminder') }}
-      </p>
-    </div>
+    <InfoBox :text="$t('dream-mall-panel.setup.reminder')" />
 
     <CopyToClipboard :table-url="tableUrl" class="mt-12" />
 
@@ -19,7 +14,7 @@ import { useI18n } from 'vue-i18n'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 import CopyToClipboard from '#components/copy-to-clipboard/CopyToClipboard.vue'
-import LogoImage from '#components/menu/LogoImage.vue'
+import InfoBox from '#components/info-box/InfoBox.vue'
 import { usePageContext } from '#context/usePageContext'
 import { useTablesStore } from '#stores/tablesStore'
 
@@ -60,49 +55,5 @@ const navigateToTable = async () => {
   color: rgb(var(--v-theme-dm-panel-reminder-text-color));
   background-color: var(--v-dm-panel-reminder-text-background-color);
   border-radius: 24px;
-}
-
-:root {
-  --custom-height: 48px;
-}
-
-.custom-text-field {
-  :deep(.v-field__input) {
-    height: var(--custom-height) !important;
-    min-height: var(--custom-height) !important;
-    padding-top: 12px;
-    padding-bottom: 12px;
-  }
-
-  :deep(.v-field) {
-    color: rgb(var(--v-theme-dm-panel-reminder-link-color)) !important;
-    background-color: var(--v-dm-panel-reminder-link-background-color) !important;
-    border: 1px solid transparent;
-  }
-
-  :deep(input) {
-    color: var(--v-theme-dm-panel-reminder-link-color) !important;
-  }
-
-  &.copied-indicator {
-    :deep(.v-field) {
-      border: 1px solid rgb(var(--v-theme-dm-panel-call-action-button-indicator-background-color));
-    }
-  }
-}
-
-.custom-icon-btn {
-  width: 48px;
-  height: 48px;
-  color: rgb(var(--v-theme-dm-panel-reminder-link-color)) !important;
-  background-color: var(--v-dm-panel-reminder-link-background-color) !important;
-  box-shadow: none !important;
-
-  &.copied-indicator {
-    color: rgb(var(--v-theme-dm-panel-call-action-button-indicator-color)) !important;
-    background-color: rgb(
-      var(--v-theme-dm-panel-call-action-button-indicator-background-color)
-    ) !important;
-  }
 }
 </style>
