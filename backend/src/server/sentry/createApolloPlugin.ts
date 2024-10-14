@@ -1,4 +1,4 @@
-import { AuthorizationError } from 'type-graphql'
+import { AuthenticationError } from 'type-graphql'
 
 import type { Context } from '#src/context'
 import type {
@@ -29,10 +29,10 @@ export const createApolloPlugin: (
           return
         }
         for (const err of ctx.errors) {
-          if (err.extensions?.code === 'UNAUTHORIZED') {
+          if (err.extensions?.code === 'UNAUTHENTICATED') {
             return
           }
-          if (err instanceof AuthorizationError) {
+          if (err instanceof AuthenticationError) {
             return
           }
           sentry.withScope((scope) => {
