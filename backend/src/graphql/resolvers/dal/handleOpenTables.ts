@@ -15,6 +15,7 @@ export const handleOpenTables = async (): Promise<void> => {
       },
     },
     data: {
+      temporaryID: null,
       attendeePW: null,
       moderatorPW: null,
       voiceBridge: null,

@@ -337,7 +337,7 @@ describe('TableResolver', () => {
 
     describe('joinTableAsGuest', () => {
       const query = `
-        query ($tableId: Int!, $userName: String!) {
+        query ($tableId: String!, $userName: String!) {
           joinTableAsGuest(tableId: $tableId, userName: $userName)
         }
       `
@@ -349,7 +349,7 @@ describe('TableResolver', () => {
                 query,
                 variables: {
                   userName: 'Pinky Pie',
-                  tableId: 25,
+                  tableId: '25',
                 },
               },
               { contextValue: mockContextValue() },
@@ -374,6 +374,7 @@ describe('TableResolver', () => {
             data: {
               name: 'Pony Ville',
               meetingID: 'Pony Ville',
+              temporaryID: 'temp-id',
             },
           })
           tableId = meeting.id
@@ -390,7 +391,7 @@ describe('TableResolver', () => {
                 query,
                 variables: {
                   userName: 'Pinky Pie',
-                  tableId,
+                  tableId: 'temp-id',
                 },
               },
               { contextValue: mockContextValue() },
@@ -1223,6 +1224,8 @@ describe('TableResolver', () => {
               name: 'My Table',
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               meetingID: expect.any(String),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              temporaryID: expect.any(String),
               attendeePW: 'w3VUvMcp',
               moderatorPW: 'MyPp9Zfq',
               voiceBridge: 255,
