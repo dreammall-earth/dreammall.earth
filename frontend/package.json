@@ -70,7 +70,7 @@
     "pinia": "^2.2.2",
     "pinia-plugin-persistedstate": "^4.1.1",
     "qrcode": "^1.5.4",
-    "sirv": "^2.0.4",
+    "sirv": "^3.0.0",
     "three": "^0.169.0",
     "tsx": "^4.19.1",
     "vike": "^0.4.199",
