@@ -24,9 +24,9 @@ export class Table {
   }
 
   static fromMeeting(meeting: Meeting, usersWithMeetings: UsersWithMeetings[]) {
-    const { id, name } = meeting
+    const { id, meetingID, name } = meeting
     const users = usersWithMeetings.map((u) => new UserInMeeting(u))
-    return new Table({ id, name, public: meeting.public, users })
+    return new Table({ id, meetingID, name, public: meeting.public, users })
   }
 
   @Field(() => Int)
@@ -34,7 +34,7 @@ export class Table {
 
   @Field(() => String)
   meetingID: string
-  
+
   @Field()
   name: string
 
