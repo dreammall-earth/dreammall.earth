@@ -14,7 +14,11 @@ spec:
     spec:
       restartPolicy: Always
       initContainers:
-        - env:
+        - name: backend-migrations
+          image: "{{ .Values.backend.image.repository }}:{{ default .Values.global.image.tag .Values.backend.image.tag "latest" }}"
+          imagePullPolicy: {{ quote .Values.global.image.pullPolicy }}
+          command: [ 'npm', 'run', 'db:migrate:deploy' ]
+          env:
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
@@ -27,12 +31,16 @@ spec:
                   key: frontend_url
             - name: NODE_ENV
               value: production
+      containers:
+        - name: backend
           image: "{{ .Values.backend.image.repository }}:{{ default .Values.global.image.tag .Values.backend.image.tag "latest" }}"
           imagePullPolicy: {{ quote .Values.global.image.pullPolicy }}
-          name: backend-migrations
-          command: [ 'npm', 'run', 'db:migrate:deploy' ]
-      containers:
-        - env:
+          ports:
+            - containerPort: 4000
+          envFrom:
+            - secretRef:
+                name: {{ .Release.Name }}-backend-env
+          env:
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
@@ -80,22 +88,3 @@ spec:
                   key: webhook_secret
             - name: NODE_ENV
               value: production
-            - name: BREVO_KEY
-              value: ""
-            - name: BREVO_ADMIN_NAME
-              value: ""
-            - name: BREVO_ADMIN_EMAIL
-              value: ""
-            - name: BREVO_CONTACT_TEMPLATE_ADMIN
-              value: "1"
-            - name: BREVO_CONTACT_TEMPLATE_USER
-              value: "2"
-            - name: BREVO_NEWSLETTER_TEMPLATE_OPTIN
-              value: "3"
-            - name: BREVO_NEWSLETTER_LIST
-              value: "3"
-          image: "{{ .Values.backend.image.repository }}:{{ default .Values.global.image.tag .Values.backend.image.tag "latest" }}"
-          imagePullPolicy: {{ quote .Values.global.image.pullPolicy }}
-          name: backend
-          ports:
-            - containerPort: 4000
