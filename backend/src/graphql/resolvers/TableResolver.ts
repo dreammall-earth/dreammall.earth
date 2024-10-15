@@ -189,7 +189,7 @@ export class TableResolver {
 
     if (!dbMeeting) throw new Error('Meeting not found!')
 
-    const inviteLink = await createInviteLink(prisma)(dbMeeting.id)
+    const inviteLink = createInviteLink(dbMeeting.meetingID)
 
     await createBBBMeeting(prisma)({
       meetingID: dbMeeting.meetingID,
@@ -307,7 +307,7 @@ export class TableResolver {
       (table.user && table.user.id === user.id) ||
       table.users.some((e) => e.userId === user.id && e.role === 'MODERATOR')
     ) {
-      const inviteLink = await createInviteLink(prisma)(table.id)
+      const inviteLink = createInviteLink(table.meetingID)
       const meeting = await createBBBMeeting(prisma)({
         meetingID: table.meetingID,
         name: table.name,
@@ -353,7 +353,7 @@ export class TableResolver {
     } = context
     const meeting = await prisma.meeting.findUnique({
       where: {
-        temporaryID: tableId,
+        meetingID: tableId,
       },
       include: {
         user: true,
@@ -378,7 +378,7 @@ export class TableResolver {
     } = context
     const meeting = await prisma.meeting.findUnique({
       where: {
-        temporaryID: tableId,
+        meetingID: tableId,
       },
     })
     if (!meeting) throw new Error('Table does not exist')
@@ -657,29 +657,9 @@ const createMeetingID = (prisma: PrismaClient) => async (): Promise<string> => {
   return meetingID
 }
 
-const createInviteLink =
-  (prisma: PrismaClient) =>
-  async (tableId: number): Promise<string> => {
-    let temporaryID: string = uuidv4()
-    while (
-      await prisma.meeting.count({
-        where: {
-          temporaryID,
-        },
-      })
-    ) {
-      temporaryID = uuidv4()
-    }
-    await prisma.meeting.update({
-      where: {
-        id: tableId,
-      },
-      data: {
-        temporaryID,
-      },
-    })
-    return new URL(`join-table/${temporaryID}`, CONFIG.FRONTEND_URL).toString()
-  }
+const createInviteLink = (tableId: string): string => {
+  return new URL(`join-table/${tableId}`, CONFIG.FRONTEND_URL).toString()
+}
 
 const createBBBMeeting =
   (prisma: PrismaClient) =>

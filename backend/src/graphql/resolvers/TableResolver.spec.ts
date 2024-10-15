@@ -374,7 +374,6 @@ describe('TableResolver', () => {
             data: {
               name: 'Pony Ville',
               meetingID: 'Pony Ville',
-              temporaryID: 'temp-id',
             },
           })
           tableId = meeting.id
@@ -391,7 +390,7 @@ describe('TableResolver', () => {
                 query,
                 variables: {
                   userName: 'Pinky Pie',
-                  tableId: 'temp-id',
+                  tableId: 'Pony Ville',
                 },
               },
               { contextValue: mockContextValue() },
@@ -463,8 +462,7 @@ describe('TableResolver', () => {
           await prisma.meeting.create({
             data: {
               name: 'Club of Rome',
-              meetingID: 'Club of Rome',
-              temporaryID: 'club-of-rome',
+              meetingID: 'club-of-rome',
             },
           })
         })
@@ -1223,8 +1221,6 @@ describe('TableResolver', () => {
               name: 'My Table',
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               meetingID: expect.any(String),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              temporaryID: expect.any(String),
               attendeePW: 'w3VUvMcp',
               moderatorPW: 'MyPp9Zfq',
               voiceBridge: 255,
