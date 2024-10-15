@@ -19,7 +19,7 @@ export const getAttendees = (meeting: MeetingInfo): Attendee[] => {
 
 @ObjectType()
 export class Table {
-  constructor(data: Pick<Table, 'id' | 'name' | 'public' | 'users'>) {
+  constructor(data: Pick<Table, 'id' | 'meetingID' | 'name' | 'public' | 'users'>) {
     Object.assign(this, data)
   }
 
@@ -32,6 +32,9 @@ export class Table {
   @Field(() => Int)
   id: number
 
+  @Field(() => String)
+  meetingID: string
+  
   @Field()
   name: string
 
