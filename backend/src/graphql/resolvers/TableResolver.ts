@@ -643,7 +643,7 @@ const findUsersInMeetings =
     })) as UsersWithMeetings[]
   }
 
-const createMeetingID = (prisma: PrismaClient) => async (): Promise<string> => {
+export const createMeetingID = (prisma: PrismaClient) => async (): Promise<string> => {
   let meetingID: string = uuidv4()
   while (
     await prisma.meeting.count({

@@ -103,6 +103,7 @@
     "#graphql/*": "./src/graphql/*",
     "#inputs/*": "./src/graphql/inputs/*",
     "#models/*": "./src/graphql/models/*",
+    "#resolvers/*": "./src/graphql/resolvers/*",
     "#src/*": "./src/*",
     "#test/*": "./test/*",
     "#types/*": "./src/graphql/types/*"
