@@ -6,6 +6,7 @@ import Ellipsis from './ellipsis.svg?component'
 import Handshake from './handshake.svg?component'
 import Logout from './logout.svg?component'
 import Mall from './mall.svg?component'
+import CustomStylusNote from './custom-stylus-note.svg?component'
 import Message from './message.svg?component'
 import Moon from './moon.svg?component'
 import Reception from './reception.svg?component'
@@ -27,6 +28,7 @@ const aliases: Partial<IconAliases> = {
   handshake: Handshake,
   logout: Logout,
   mall: Mall,
+  'custom-stylus-note': CustomStylusNote,
   message: Message,
   moon: Moon,
   reception: Reception,
