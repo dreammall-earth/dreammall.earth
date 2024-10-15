@@ -37,8 +37,11 @@ import { usePageContext } from '#context/usePageContext'
 import { copyToClipboard } from '#src/utils/copyToClipboard'
 import { useTablesStore } from '#stores/tablesStore'
 
+import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
 import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
 import type { toast as Toast } from 'vue3-toastify'
+
+const model = defineModel<MyTableSettings>()
 
 const toast = inject<typeof Toast>('toast')
 const copy = copyToClipboard(toast)
@@ -57,7 +60,7 @@ const pageContext = usePageContext()
 const { META } = pageContext.publicEnv
 
 const tableId = computed(() => {
-  return pageContext.routeParams?.id ? Number(pageContext.routeParams.id) : null
+  return model.value?.meetingID ? model.value.meetingID : ''
 })
 
 const tablesStore = useTablesStore()

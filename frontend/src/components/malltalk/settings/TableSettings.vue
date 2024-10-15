@@ -30,12 +30,14 @@ const tableSettings = reactive<MyTableSettings>({
   name: myTable.value?.name || '',
   isPrivate: !myTable.value?.public || false,
   users: myTable.value?.users.map((u) => u.id) || [],
+  meetingID: myTable.value?.meetingID || '',
 })
 
 watch(myTable, (value) => {
   tableSettings.name = value?.name || ''
   tableSettings.isPrivate = !value?.public || false
   tableSettings.users = value?.users.map((u) => u.id) || []
+  tableSettings.meetingID = value?.meetingID || ''
 })
 
 const steps: Step[] = [
