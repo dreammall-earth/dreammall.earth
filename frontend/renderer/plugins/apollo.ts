@@ -15,8 +15,9 @@ export const createApolloClient = (dependencies: {
   endpoints: PageContext['publicEnv']['ENDPOINTS']
   getToken: () => string
   isClient: boolean
+  pageContext: PageContext
 }) => {
-  const { endpoints, getToken, isClient } = dependencies
+  const { endpoints, getToken, isClient, pageContext } = dependencies
   const cache = new InMemoryCache()
 
   const authLink = setContext((_, { headers }) => {
@@ -38,7 +39,7 @@ export const createApolloClient = (dependencies: {
     if (graphQLErrors) {
       graphQLErrors.forEach(({ extensions }) => {
         if (extensions !== null && extensions?.code === 'UNAUTHENTICATED') {
-          void navigate('/signin')
+          void navigate(`/signin?previousUrl=${encodeURIComponent(pageContext.urlPathname)}`)
         }
       })
     }
