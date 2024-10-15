@@ -673,7 +673,15 @@ module "kube-hetzner" {
 
   # Adding extra firewall rules, like opening a port
   # More info on the format here https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/firewall
-  # extra_firewall_rules = [
+  extra_firewall_rules = [
+    {
+      description = "Allow Outbound SMTP requests"
+      direction       = "out"
+      protocol        = "tcp"
+      port            = "587"
+      source_ips      = [] # Won't be used for this rule
+      destination_ips = ["0.0.0.0/0", "::/0"]
+    },
   #   {
   #     description = "For Postgres"
   #     direction       = "in"
@@ -690,7 +698,7 @@ module "kube-hetzner" {
   #     source_ips      = [] # Won't be used for this rule
   #     destination_ips = ["0.0.0.0/0", "::/0"]
   #   }
-  # ]
+  ]
 
   # If you want to configure a different CNI for k3s, use this flag
   # possible values: flannel (Default), calico, and cilium

@@ -30,6 +30,7 @@ module.exports = {
     'vue',
     'storybook',
     'eslint-plugin-local-rules',
+    'no-catch-all',
   ],
   settings: {
     'import/resolver': {
@@ -41,6 +42,7 @@ module.exports = {
     },
   },
   rules: {
+    'no-catch-all/no-catch-all': 'error',
     'no-console': 'error',
     'no-debugger': 'error',
     camelcase: 'error',

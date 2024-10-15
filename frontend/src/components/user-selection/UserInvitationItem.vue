@@ -1,5 +1,5 @@
 <template>
-  <v-list-item class="user-invitation-item my-2 pa-2 pr-3 rounded-pill" elevation="0" rounded>
+  <v-list-item class="invitation-item my-2 pa-2 pr-3 rounded-pill" elevation="0" rounded>
     <template #prepend>
       <v-avatar size="40">
         <v-img v-if="user.avatar" :src="user.avatar" :alt="user.name" cover></v-img>
@@ -53,11 +53,11 @@ const toggleInvitation = () => {
 </script>
 
 <style lang="scss" scoped>
-.user-invitation-item {
-  --background-user-item: #5d6670; // todo: save globally
+.invitation-item {
+  --invitation-item-background: #5d6670; // todo: save globally
   --background-invitation-button: #8b949b; // todo: save globally
 
-  background-color: var(--background-user-item) !important;
+  background-color: var(--invitation-item-background) !important;
 
   .invitation-button {
     &.bg-secondary {
@@ -66,5 +66,3 @@ const toggleInvitation = () => {
   }
 }
 </style>
-#src/panels/dreammall-button-drawer/interfaces/UserInvitation.js
-#components/malltalk/interfaces/UserInvitation.js

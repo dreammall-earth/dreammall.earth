@@ -2,6 +2,7 @@
   <div class="canvas-container">
     <canvas ref="canvas" gl="{{powerPreference: 'default', antialias: false}}"></canvas>
   </div>
+  <HoverInfo v-bind="hoveredStar" :show-more-button="true" />
 </template>
 
 <script lang="ts" setup>
@@ -24,13 +25,29 @@ import {
   BackSide,
 } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 
 import { starmapQuery, StarmapQueryResult, StarLine, Star } from '#queries/starmapQuery'
+
+import HoverInfo from './HoverInfo.vue'
+
+import type { UserWithProfile } from '#stores/userStore'
 
 const starData = ref<Star[]>([])
 
 const canvas = ref<HTMLCanvasElement | null>(null)
+
+type HoveredStar = {
+  data: UserWithProfile | null
+  x: number
+  y: number
+}
+
+const hoveredStar = reactive<HoveredStar>({
+  data: null,
+  x: 0,
+  y: 0,
+})
 
 const { result: starmapQueryResult } = useQuery(
   starmapQuery,
@@ -252,10 +269,22 @@ const onCanvasClick = (event: MouseEvent) => {
 
 const onCanvasMouseMove = (event: MouseEvent) => {
   const star = getRaycasterIntersects(event)
-  if (star) {
-    // eslint-disable-next-line no-console
-    console.log('Stern hover!', star.data)
+  if (!star) {
+    hoveredStar.data = null
+    return
   }
+  // Get the position of the star on the screen
+  const vector = new Vector3(...cartesianFromSphere(star.azimuth, star.altitude, star.distance))
+  const canvas = renderer.domElement
+  vector.project(camera)
+
+  const x = Math.round((0.5 + vector.x / 2) * (canvas.width / window.devicePixelRatio))
+  const y = Math.round((0.5 - vector.y / 2) * (canvas.height / window.devicePixelRatio))
+
+  // Set data for info component
+  hoveredStar.x = x
+  hoveredStar.y = y
+  hoveredStar.data = star.data
 }
 
 const getRaycasterIntersects = (event: MouseEvent): Star | undefined => {
