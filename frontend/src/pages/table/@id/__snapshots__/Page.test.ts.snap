@@ -1697,6 +1697,7 @@ exports[`Table Page > renders 1`] = `
           <div
             class="flat-text-field d-flex flex-column align-center pa-4 w-100"
             data-v-b63bd396=""
+            modelvalue="[object Object]"
           >
             <div
               class="v-row v-row--no-gutters justify-space-around"
