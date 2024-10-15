@@ -20,7 +20,11 @@ import { setupSentry } from './sentry'
 
 import type { Context } from '#src/context'
 
-const { apolloPlugin: sentryPlugin, setupExpress } = setupSentry({
+const {
+  apolloPlugin: sentryPlugin,
+  setupExpress,
+  sentry,
+} = setupSentry({
   dsn: CONFIG.SENTRY_DSN,
   environment: CONFIG.SENTRY_ENVIRONMENT,
 })
@@ -87,7 +91,7 @@ export async function listen(port: number) {
   const serverCleanup = useServer(
     {
       schema,
-      context: subscriptionContext({ prisma }),
+      context: subscriptionContext({ prisma, sentry }),
     },
     wsServer,
   )
@@ -96,7 +100,7 @@ export async function listen(port: number) {
 
   await apolloServer.start()
 
-  app.use(expressMiddleware(apolloServer, { context: expressContext({ prisma }) }))
+  app.use(expressMiddleware(apolloServer, { context: expressContext({ prisma, sentry }) }))
 
   setupExpress(app)
 

@@ -17,11 +17,13 @@ import { CONFIG_CHECKS, validateConfig } from './configChecks'
 import type { CONFIG } from '#config/config'
 import type { Logger } from '#src/logger'
 import type { PrismaClient } from '#src/prisma'
+import type { Sentry } from '#src/server/sentry'
 
 type Dependencies = {
   prisma: PrismaClient
   config: typeof CONFIG
   logger: Logger
+  sentry: Sentry
 }
 
 const sendContactEmails =
@@ -75,9 +77,7 @@ const sendContactEmails =
     const emailClient = apiInstance.sendTransacEmail(smtpEmailToClient)
 
     // Construct result
-    const promiseAll = Promise.all([emailAdmin, emailClient])
-
-    await promiseAll
+    const promiseAll = await Promise.all([emailAdmin, emailClient])
 
     contactForm.brevoSuccess = new Date()
     await prisma.contactForm.update({
@@ -92,10 +92,10 @@ const sendContactEmails =
     return promiseAll
   }
 
-export const subscribeToNewsletter =
+const subscribeToNewsletter =
   (dependencies: Dependencies) =>
   async (firstName: string, lastName: string, email: string): Promise<boolean> => {
-    const { prisma, config } = dependencies
+    const { prisma, config, sentry } = dependencies
     if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_NEWSLETTER(config)) {
       return false
     }
@@ -177,10 +177,10 @@ export const subscribeToNewsletter =
           data: { brevoSuccessMail: new Date() },
         })
       } else {
-        // TODO: logging or event
+        throw new Error('Unexpected status code from Brevo API:', { cause: brevoResult })
       }
     } catch (error) /* eslint-disable-line no-catch-all/no-catch-all */ {
-      // TODO: logging or event
+      sentry.captureException(error)
     }
 
     return true
@@ -189,7 +189,7 @@ export const subscribeToNewsletter =
 const confirmNewsletter =
   (dependencies: Dependencies) =>
   async (code: string): Promise<false | NewsletterPreOptIn> => {
-    const { prisma, config } = dependencies
+    const { prisma, config, sentry } = dependencies
     if (!CONFIG_CHECKS.CONFIG_CHECK_BREVO_NEWSLETTER(config)) {
       return false
     }
@@ -233,10 +233,10 @@ const confirmNewsletter =
           },
         })
       } else {
-        // TODO: logging or event
+        throw new Error('Unexpected status code from Brevo API:', { cause: brevoResult })
       }
     } catch (error) /* eslint-disable-line no-catch-all/no-catch-all */ {
-      // TODO: logging or event
+      sentry.captureException(error)
     }
 
     return optin

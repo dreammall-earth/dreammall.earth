@@ -7,6 +7,10 @@ import type { Context } from '#src/context'
 
 export const mockContextValue: (overrides?: Partial<Context>) => Context = (overrides = {}) => {
   const config = createMockConfig()
+  const sentry = {
+    withScope: jest.fn(),
+    captureException: jest.fn(),
+  }
   const brevo = {
     sendContactEmails: jest.fn(),
     subscribeToNewsletter: jest.fn(),
@@ -17,6 +21,7 @@ export const mockContextValue: (overrides?: Partial<Context>) => Context = (over
     config,
     brevo,
     dataSources: { prisma },
+    sentry,
   }
   return {
     ...defaults,
