@@ -7,7 +7,7 @@
           class="mr-2"
           color="cockpit-highlight"
         ></v-icon>
-        {{ detail.text }}
+        <span class="detail-text" :title="detail.text" tabindex="0">{{ detail.text }}</span>
         <button
           v-if="props.editable && detail.id > 0"
           class="pl-1"
@@ -60,6 +60,15 @@ const details: Ref<UserDetail[]> = computed(() => {
   overflow: hidden;
 }
 
+.detail-text {
+  display: inline-block;
+  overflow: hidden;
+  width: 100%;
+  text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+}
+
 .detail-chip {
   background: var(--v-cockpit-chip-background);
 
@@ -68,10 +77,7 @@ const details: Ref<UserDetail[]> = computed(() => {
   }
 
   &:deep(.v-chip__content) {
-    display: inline-block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-wrap: nowrap;
+    width: 100%;
   }
 }
 
