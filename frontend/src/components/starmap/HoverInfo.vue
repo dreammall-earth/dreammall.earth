@@ -43,10 +43,10 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'show-more', id: number): void
+  (e: 'show-more'): void
 }>()
 
-const showMore = () => props.data && emit('show-more', props.data?.id)
+const showMore = () => emit('show-more')
 
 const coordinates = computed(() => ({
   x: props.x,
