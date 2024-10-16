@@ -15,6 +15,9 @@ const name = 'User'
 
 let testServer: ApolloServer<Context>
 
+CONFIG.TESTPHASE_DURATION_DAYS = undefined
+CONFIG.TESTPHASE_DEFAULT = undefined
+
 describe('UserResolver', () => {
   beforeAll(async () => {
     testServer = await createTestServer()
@@ -690,7 +693,6 @@ describe('UserResolver', () => {
     describe('authenticated', () => {
       let user: UserWithProfile
       beforeEach(async () => {
-        CONFIG.TESTPHASE_DURATION_DAYS = 30
         user = await findOrCreateUser({ prisma })({ pk, nickname, name })
         await prisma.user.update({
           where: {
@@ -730,8 +732,8 @@ describe('UserResolver', () => {
           meetingId: null,
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           createdAt: expect.any(Date),
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          testphaseEndsAt: expect.any(Date),
+
+          testphaseEndsAt: null,
         })
       })
 
@@ -770,7 +772,7 @@ describe('UserResolver', () => {
                     social: [],
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     table: expect.any(Object),
-                    testphaseEndsAt: user.testphaseEndsAt?.toISOString(),
+                    testphaseEndsAt: null,
                   },
                 },
                 errors: undefined,
