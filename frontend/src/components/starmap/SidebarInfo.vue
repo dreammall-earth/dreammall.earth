@@ -15,6 +15,17 @@
       {{ availability?.title }}
     </div>
     <UserDetails :details="props.profile.details" />
+
+    <ul v-if="props.profile.social.length > 0" class="social-list mt-8">
+      <li v-for="item in props.profile.social" :key="item.type" class="px-1">
+        <a
+          :href="buildSocialMediaLink(item.type, item.link)"
+          rel="nofollow noopener noreferrer"
+          target="_blank"
+          ><v-icon :icon="getSocialMediaIcon(item.type)"></v-icon
+        ></a>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -22,6 +33,7 @@
 import { computed } from 'vue'
 
 import { getInitials } from '#src/utils/getInitials'
+import { getSocialMediaIcon, buildSocialMediaLink } from '#src/utils/socialMediaPlatforms'
 
 import UserDetails from './UserDetails.vue'
 
@@ -90,5 +102,12 @@ const availabilityOptions = [
   background: #5d6670;
   border: 1px solid rgb(214 223 233 / 40%);
   font-size: 10px;
+}
+
+.social-list {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  list-style: none;
 }
 </style>

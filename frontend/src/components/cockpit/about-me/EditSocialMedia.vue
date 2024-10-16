@@ -67,8 +67,11 @@
 import { reactive } from 'vue'
 
 import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
-
-import { getSocialMediaIcon, socialMediaTypes, buildSocialMediaLink } from './socialMediaPlatforms'
+import {
+  getSocialMediaIcon,
+  socialMediaTypes,
+  buildSocialMediaLink,
+} from '#src/utils/socialMediaPlatforms'
 
 import type { SocialMedia, AddSocialMediaInput } from '#stores/userStore'
 
