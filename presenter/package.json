@@ -125,7 +125,7 @@
     "stylelint-config-standard": "^36.0.1",
     "stylelint-config-standard-scss": "^13.1.0",
     "typescript": "^5.4.5",
-    "vite-plugin-checker": "^0.6.4",
+    "vite-plugin-checker": "^0.8.0",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-vuetify": "^2.0.4",
     "vitest": "^2.0.4",
