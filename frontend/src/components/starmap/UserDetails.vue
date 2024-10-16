@@ -25,10 +25,14 @@ const props = defineProps<{
 
 <style scoped>
 .detail {
-  background: var(--v-cockpit-chip-background);
+  background: rgb(61 71 83);
 
   &:deep(.v-chip__underlay) {
     display: none;
+  }
+
+  &:deep(.v-chip__content) {
+    font-size: 11px;
   }
 }
 
@@ -39,7 +43,5 @@ const props = defineProps<{
   width: 100%;
   padding: 10px;
   list-style: none;
-  background: var(--v-cockpit-element-background);
-  border-radius: 15px;
 }
 </style>
