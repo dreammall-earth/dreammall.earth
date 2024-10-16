@@ -1,12 +1,12 @@
 import { ApolloServer } from '@apollo/server'
 
+import { CONFIG } from '#config/config'
 import { findOrCreateUser } from '#src/context/findOrCreateUser'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
 import { mockContextValue } from '#test/mockContextValue'
 
 import type { Context } from '#src/context'
-import { CONFIG } from '#config/config'
 import type { UserWithProfile } from '#src/prisma'
 
 const pk = 36
