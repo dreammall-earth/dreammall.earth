@@ -124,12 +124,12 @@
     "stylelint-config-recommended-vue": "^1.5.0",
     "stylelint-config-standard": "^36.0.1",
     "stylelint-config-standard-scss": "^13.1.0",
-    "typescript": "^5.4.5",
-    "vite-plugin-checker": "^0.6.4",
+    "typescript": "5.5.4",
+    "vite-plugin-checker": "^0.8.0",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-vuetify": "^2.0.4",
     "vitest": "^2.0.4",
-    "vue-tsc": "^1.8.27"
+    "vue-tsc": "^2.1.6"
   },
   "imports": {
     "#components/*": "./src/components/*",
