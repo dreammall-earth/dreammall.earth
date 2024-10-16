@@ -2,7 +2,12 @@
   <div class="canvas-container">
     <canvas ref="canvas" gl="{{powerPreference: 'default', antialias: false}}"></canvas>
   </div>
-  <HoverInfo v-bind="hoveredStar" :show-more-button="true" />
+  <HoverInfo
+    v-bind="hoveredStar"
+    :show-more-button="displayedProfile?.id !== hoveredStar.data?.id"
+    @show-more="displayHoveredProfile"
+  />
+  <SidebarInfo v-if="displayedProfile" :profile="displayedProfile" @close="closeProfile" />
 </template>
 
 <script lang="ts" setup>
@@ -30,6 +35,7 @@ import { onMounted, reactive, ref, watch } from 'vue'
 import { starmapQuery, StarmapQueryResult, StarLine, Star } from '#queries/starmapQuery'
 
 import HoverInfo from './HoverInfo.vue'
+import SidebarInfo from './SidebarInfo.vue'
 
 import type { UserWithProfile } from '#stores/userStore'
 
@@ -48,6 +54,20 @@ const hoveredStar = reactive<HoveredStar>({
   x: 0,
   y: 0,
 })
+
+const displayedProfile = ref<UserWithProfile | null>(null)
+
+const displayProfile = (data: UserWithProfile) => {
+  displayedProfile.value = data
+}
+
+const displayHoveredProfile = () => {
+  displayedProfile.value = hoveredStar.data
+}
+
+const closeProfile = () => {
+  displayedProfile.value = null
+}
 
 const { result: starmapQueryResult } = useQuery(
   starmapQuery,
@@ -262,8 +282,7 @@ const onWindowResize = () => {
 const onCanvasClick = (event: MouseEvent) => {
   const star = getRaycasterIntersects(event)
   if (star) {
-    // eslint-disable-next-line no-console
-    console.log('Stern angeklickt!', star.data)
+    displayProfile(star.data)
   }
 }
 
