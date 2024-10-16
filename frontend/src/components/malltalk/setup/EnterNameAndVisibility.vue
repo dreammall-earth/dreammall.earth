@@ -8,7 +8,7 @@
       content-class="elevation-0"
       :label="$t('dream-mall-panel.setup.table-name')"
       variant="solo-filled"
-      append-inner-icon="mdi-pencil"
+      append-inner-icon="$custom-stylus-note"
       maxlength="64"
       required
     />

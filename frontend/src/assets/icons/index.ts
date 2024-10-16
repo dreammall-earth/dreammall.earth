@@ -1,6 +1,7 @@
 import Bell from './bell.svg?component'
 import Camera from './camera.svg?component'
 import Cockpit from './cockpit.svg?component'
+import CustomStylusNote from './custom-stylus-note.svg?component'
 import Discord from './discord.svg?component'
 import Ellipsis from './ellipsis.svg?component'
 import Handshake from './handshake.svg?component'
@@ -27,6 +28,7 @@ const aliases: Partial<IconAliases> = {
   handshake: Handshake,
   logout: Logout,
   mall: Mall,
+  'custom-stylus-note': CustomStylusNote,
   message: Message,
   moon: Moon,
   reception: Reception,
