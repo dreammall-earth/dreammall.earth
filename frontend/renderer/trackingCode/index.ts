@@ -1,0 +1,1 @@
+export { trackingCode } from './trackingCode'
