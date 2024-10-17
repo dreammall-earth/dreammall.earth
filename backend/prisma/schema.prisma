@@ -73,6 +73,7 @@ model User {
   meetings          UsersInMeetings[]
   userDetail        UserDetail[]
   socialMedia       SocialMedia[]
+  testphaseEndsAt   DateTime?
 }
 
 model Meeting {
