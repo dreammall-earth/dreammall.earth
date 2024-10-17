@@ -50,6 +50,14 @@ export const createApolloClient = (dependencies: {
       ssrMode: true,
       link: authLink.concat(errorLink).concat(httpLink),
       cache,
+      defaultOptions: {
+        watchQuery: {
+          errorPolicy: 'ignore',
+        },
+        query: {
+          errorPolicy: 'ignore',
+        },
+      },
     })
   }
 
