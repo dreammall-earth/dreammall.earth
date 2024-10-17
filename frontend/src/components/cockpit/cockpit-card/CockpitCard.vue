@@ -23,5 +23,6 @@ const slots = useSlots()
 
   height: var(--cockpit-card-height);
   max-height: var(--cockpit-card-height);
+  overflow: hidden;
 }
 </style>
