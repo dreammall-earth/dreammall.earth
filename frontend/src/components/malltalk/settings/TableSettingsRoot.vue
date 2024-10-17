@@ -24,6 +24,7 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
 import { navigate } from 'vike/client/router'
 import { computed, ref, inject } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -57,12 +58,26 @@ const pageContext = usePageContext()
 const { META } = pageContext.publicEnv
 
 const tableId = computed(() => {
-  return pageContext.routeParams?.id ? Number(pageContext.routeParams.id) : null
+  return pageContext.routeParams?.id ? pageContext.routeParams.id : ''
 })
 
 const tablesStore = useTablesStore()
 const isModeratorData = inject<IsModeratorInjection>(IsModeratorSymbol, {
   isModerator: ref(false),
+})
+
+const { getTables } = storeToRefs(tablesStore)
+
+const allTables = computed(() => {
+  const { mallTalkTables, permanentTables, projectTables } = getTables.value
+  return [...mallTalkTables, ...permanentTables, ...projectTables]
+})
+
+const meetingID = computed(() => {
+  if (!(tableId.value && allTables.value?.length)) return ''
+  const currentTable = allTables.value.find((t) => t.id.toString() === tableId.value.toString())
+  if (currentTable) return currentTable.meetingID
+  return ''
 })
 
 const copiedIndicator = ref(false)
@@ -74,8 +89,8 @@ const buttons = computed(() => [
     text: t('dream-mall-panel.call.link'),
     indicator: copiedIndicator.value,
     action: () => {
-      if (tableId.value) {
-        copy(tablesStore.getJoinTableUrl(tableId.value, META.BASE_URL), t('copiedToClipboard'))
+      if (meetingID.value) {
+        copy(tablesStore.getJoinTableUrl(meetingID.value, META.BASE_URL), t('copiedToClipboard'))
         copiedIndicator.value = true
 
         if (timerIndicator) clearTimeout(timerIndicator)

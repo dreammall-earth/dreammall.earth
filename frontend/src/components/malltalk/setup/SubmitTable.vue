@@ -37,8 +37,12 @@ const pageContext = usePageContext()
 const { META } = pageContext.publicEnv
 
 const tableSettings = defineModel<MyTableSettings>({ required: true })
+
 const tableId = tableSettings.value.tableId ?? 0
-const tableUrl = tablesStore.getJoinTableUrl(tableId, META.BASE_URL)
+
+const meetingID = tableSettings.value.meetingID ?? ''
+
+const tableUrl = tablesStore.getJoinTableUrl(meetingID, META.BASE_URL)
 
 const navigateToTable = async () => {
   if (!tableId) return

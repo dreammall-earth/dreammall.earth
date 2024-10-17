@@ -337,7 +337,7 @@ describe('TableResolver', () => {
 
     describe('joinTableAsGuest', () => {
       const query = `
-        query ($tableId: Int!, $userName: String!) {
+        query ($tableId: String!, $userName: String!) {
           joinTableAsGuest(tableId: $tableId, userName: $userName)
         }
       `
@@ -349,7 +349,7 @@ describe('TableResolver', () => {
                 query,
                 variables: {
                   userName: 'Pinky Pie',
-                  tableId: 25,
+                  tableId: '25',
                 },
               },
               { contextValue: mockContextValue() },
@@ -390,7 +390,7 @@ describe('TableResolver', () => {
                 query,
                 variables: {
                   userName: 'Pinky Pie',
-                  tableId,
+                  tableId: 'Pony Ville',
                 },
               },
               { contextValue: mockContextValue() },
@@ -429,7 +429,7 @@ describe('TableResolver', () => {
 
     describe('getTableName', () => {
       const query = `
-        query ($tableId: Int!) {
+        query ($tableId: String!) {
           getTableName(tableId: $tableId)
         }
       `
@@ -440,7 +440,7 @@ describe('TableResolver', () => {
               {
                 query,
                 variables: {
-                  tableId: 25,
+                  tableId: '25',
                 },
               },
               { contextValue: mockContextValue() },
@@ -458,15 +458,13 @@ describe('TableResolver', () => {
       })
 
       describe('table in DB', () => {
-        let tableId: number
         beforeEach(async () => {
-          const meeting = await prisma.meeting.create({
+          await prisma.meeting.create({
             data: {
               name: 'Club of Rome',
-              meetingID: 'Club of Rome',
+              meetingID: 'club-of-rome',
             },
           })
-          tableId = meeting.id
         })
 
         afterEach(async () => {
@@ -479,7 +477,7 @@ describe('TableResolver', () => {
               {
                 query,
                 variables: {
-                  tableId,
+                  tableId: 'club-of-rome',
                 },
               },
               { contextValue: mockContextValue() },

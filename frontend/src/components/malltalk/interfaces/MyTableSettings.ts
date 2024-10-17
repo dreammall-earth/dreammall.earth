@@ -3,4 +3,5 @@ export default interface MyTableSettings {
   isPrivate: boolean
   users: number[]
   tableId?: number
+  meetingID?: string
 }

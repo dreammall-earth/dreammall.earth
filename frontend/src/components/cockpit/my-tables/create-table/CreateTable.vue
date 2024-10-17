@@ -27,9 +27,11 @@ export type CreateTableModel = {
   name: string
   userIds: number[]
   tableId?: number
+  meetingID?: string
 }
 
 const createTableModel = reactive<CreateTableModel>({
+  meetingID: '',
   isPrivate: false,
   name: '',
   userIds: [],
@@ -76,6 +78,7 @@ const onSubmit = async () => {
   }
 
   createTableModel.tableId = table.id
+  createTableModel.meetingID = table.meetingID
 
   stepControl.value?.next()
 }

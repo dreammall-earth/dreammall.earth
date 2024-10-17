@@ -4,6 +4,7 @@ export const createTableMutation =
   gql(`mutation CreateTable($isPublic: Boolean!, $name: String!, $userIds: [Int]) {
   createTable(isPublic: $isPublic, name: $name, userIds: $userIds) {
     id
+    meetingID
     name
     public
     users {

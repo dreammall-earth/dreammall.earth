@@ -27,11 +27,13 @@ const pageContext = usePageContext()
 const { META } = pageContext.publicEnv
 
 const createTableModel = defineModel<CreateTableModel>({ required: true })
+const meetingID = createTableModel.value.meetingID
 const tableId = createTableModel.value.tableId
 
+if (!meetingID) throw new Error('Meeting ID is required')
 if (!tableId) throw new Error('Table ID is required')
 
-const tableUrl = tablesStore.getJoinTableUrl(tableId, META.BASE_URL)
+const tableUrl = tablesStore.getJoinTableUrl(meetingID, META.BASE_URL)
 
 const props = defineProps<StepProps>()
 const emit = defineEmits<StepEmits>()

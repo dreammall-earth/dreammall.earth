@@ -31,6 +31,7 @@ const { defaultMyTableName } = storeToRefs(tablesStore)
 
 const resetTableSettings = () => {
   tableSettings.tableId = 0
+  tableSettings.meetingID = ''
   tableSettings.name = defaultMyTableName.value
   tableSettings.isPrivate = false
   tableSettings.users = []
@@ -41,6 +42,7 @@ const tableSettings = reactive<MyTableSettings>({
   isPrivate: false,
   users: [],
   tableId: 0,
+  meetingID: '',
 })
 resetTableSettings()
 
@@ -101,6 +103,8 @@ const onSubmit = async () => {
   if (!table) {
     throw new Error(t('table.error'))
   }
+
+  tableSettings.meetingID = table.meetingID
 
   tableSettings.tableId = await tablesStore.joinMyTable()
   if (!tableSettings.tableId) {

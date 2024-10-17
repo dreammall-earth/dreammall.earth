@@ -46,6 +46,7 @@ export type UserInTable = {
 
 export type ProjectTable = {
   id: number
+  meetingID: string
   name: string
   public: boolean
   users: UserInTable[]
@@ -258,8 +259,8 @@ export const useTablesStore = defineStore(
     const existsMyTable = computed(() => myTable.value !== null)
     const defaultMyTableName = computed(() => currentUser.value?.name ?? '')
     const getTableUri = (id: number): string => `/table/${id}`
-    const getJoinTableUri = (id: number): string => `/join-table/${id}`
-    const getJoinTableUrl = (id: number, baseUrl: string): string =>
+    const getJoinTableUri = (id: string): string => `/join-table/${id}`
+    const getJoinTableUrl = (id: string, baseUrl: string): string =>
       id ? new URL(getJoinTableUri(id), baseUrl).href : ''
 
     return {

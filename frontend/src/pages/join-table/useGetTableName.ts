@@ -7,7 +7,7 @@ type GetTableNameResult = {
   getTableName: string
 }
 
-export default function useGetTableName(tableId: number) {
+export default function useGetTableName(tableId: string) {
   const { result, loading, error } = useQuery<GetTableNameResult>(
     getTableNameQuery,
     { tableId },
