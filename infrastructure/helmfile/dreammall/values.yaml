@@ -2,12 +2,19 @@ global:
   image:
     pullPolicy: Always
     tag: master
+
 frontend:
   image:
     repository:  ghcr.io/dreammall-earth/dreammall.earth/frontend
+  env:
+    UMAMI_WEBSITE_ID: "848016ec-3c22-403c-86be-9b21864d1256"
+
 presenter:
   image:
     repository: ghcr.io/dreammall-earth/dreammall.earth/presenter
+  env:
+    UMAMI_WEBSITE_ID: "210f7ce8-f8a0-4adb-be35-bf54ae5c93aa"
+
 backend:
   image:
     repository:  ghcr.io/dreammall-earth/dreammall.earth/backend

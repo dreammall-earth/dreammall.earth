@@ -13,7 +13,15 @@ spec:
         io.kompose.service: presenter
     spec:
       containers:
-        - env:
+        - name: presenter
+          image: "{{ .Values.presenter.image.repository }}:{{ default .Values.global.image.tag .Values.presenter.image.tag "latest" }}"
+          imagePullPolicy: {{ quote .Values.global.image.pullPolicy }}
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-presenter-env
+          env:
             - name: PUBLIC_ENV__SIGNUP_URI
               valueFrom:
                 configMapKeyRef:
@@ -39,9 +47,4 @@ spec:
                 configMapKeyRef:
                   name: {{ .Release.Name }}
                   key: sentry_environment
-          image: "{{ .Values.presenter.image.repository }}:{{ default .Values.global.image.tag .Values.presenter.image.tag "latest" }}"
-          imagePullPolicy: {{ quote .Values.global.image.pullPolicy }}
-          name: presenter
-          ports:
-            - containerPort: 3000
       restartPolicy: Always

@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-frontend-env
+data:
+{{ .Values.frontend.env | toYaml | indent 2 }}
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-presenter-env
+data:
+{{ .Values.presenter.env | toYaml | indent 2 }}
