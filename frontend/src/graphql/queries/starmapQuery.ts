@@ -19,6 +19,7 @@ export const starmapQuery = gql`
           introduction
           availability
           details {
+            id
             category
             text
           }

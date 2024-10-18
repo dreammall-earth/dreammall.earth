@@ -7,13 +7,22 @@
           class="mr-2"
           color="cockpit-highlight"
         ></v-icon>
-        <span class="detail-text" :title="detail.text" tabindex="0">{{ detail.text }}</span>
+        <span
+          class="detail-text"
+          :class="{ 'two-line': twoLine === detail.id }"
+          :title="detail.text"
+          tabindex="0"
+          @click="toggleTwoLine(detail.id)"
+          >{{ detail.text }}</span
+        >
       </v-chip>
     </li>
   </ul>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+
 import { detailCategoryToIcon } from '#src/utils/detailCategories'
 
 import type { UserDetail } from '#stores/userStore'
@@ -21,6 +30,12 @@ import type { UserDetail } from '#stores/userStore'
 const props = defineProps<{
   details: UserDetail[]
 }>()
+
+const twoLine = ref<number | null>(null)
+
+const toggleTwoLine = (detailId: number) => {
+  twoLine.value = twoLine.value === detailId ? null : detailId
+}
 </script>
 
 <style scoped>
@@ -35,6 +50,10 @@ const props = defineProps<{
   text-overflow: ellipsis;
   text-overflow: ellipsis;
   text-wrap: nowrap;
+
+  &.two-line {
+    text-wrap: pretty;
+  }
 }
 
 .detail-chip {
