@@ -12,6 +12,14 @@ const toNumber = (env: string | undefined): number | undefined => {
   return isNaN(number) ? undefined : number
 }
 
+const toDate = (env: string | undefined): Date | undefined => {
+  if (typeof env === 'string') {
+    const date = new Date(env)
+    if (date.toString() !== 'Invalid date') return date
+  }
+  return undefined
+}
+
 // Config
 const {
   NODE_ENV,
@@ -40,6 +48,9 @@ const {
   WEBHOOK_SECRET,
 
   LOG_LEVEL = 'DEBUG',
+
+  TESTPHASE_DEFAULT,
+  TESTPHASE_DURATION_DAYS,
 } = process.env
 
 const BREVO = {
@@ -65,6 +76,11 @@ const FRONTEND = {
   FRONTEND_URL,
 }
 
+const TESTPHASE = {
+  TESTPHASE_DEFAULT: toDate(TESTPHASE_DEFAULT),
+  TESTPHASE_DURATION_DAYS: toNumber(TESTPHASE_DURATION_DAYS),
+}
+
 export const CONFIG = {
   ...BREVO,
   ...BBB,
@@ -77,4 +93,5 @@ export const CONFIG = {
   SENTRY_ENVIRONMENT,
   WEBHOOK_SECRET,
   LOG_LEVEL,
+  ...TESTPHASE,
 }

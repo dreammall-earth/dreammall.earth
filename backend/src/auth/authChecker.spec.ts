@@ -69,6 +69,7 @@ describe('authChecker', () => {
       meeting: null,
       userDetail: [{ id: 5, category: 'work', text: 'Schwer am Schuften', userId: 81 }],
       socialMedia: [],
+      testphaseEndsAt: null,
     }
 
     it('checks if a user is authenticated', async () => {

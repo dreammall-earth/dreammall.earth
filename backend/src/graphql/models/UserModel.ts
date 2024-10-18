@@ -142,8 +142,12 @@ export class CurrentUser extends UserWithProfile {
   constructor(user: DbUserWithProfile, users: UsersWithMeetings[]) {
     super(user, users)
     this.referenceId = user.referenceId
+    this.testphaseEndsAt = user.testphaseEndsAt
   }
 
   @Field()
   referenceId: string
+
+  @Field(() => Date, { nullable: true })
+  testphaseEndsAt: Date | null
 }
