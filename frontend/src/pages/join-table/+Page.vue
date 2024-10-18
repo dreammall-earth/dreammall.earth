@@ -57,7 +57,7 @@ import { joinTableAsGuestQuery } from '#queries/joinTableAsGuestQuery'
 const { t } = useI18n()
 
 const pageContext = usePageContext()
-const tableId = Number(pageContext.routeParams?.id)
+const tableId = pageContext.routeParams?.id
 
 const { tableName, isError } = useGetTableName(tableId)
 const title = computed<string>(() => tableName.value ?? t('joinTablePage.publicTable'))

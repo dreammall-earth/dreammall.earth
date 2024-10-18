@@ -32,7 +32,7 @@ jobs:
             authentik
             backend
             deps
-            dev-deps
+            deps-dev
             docu
             docker
             frontend

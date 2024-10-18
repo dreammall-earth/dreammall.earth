@@ -1,4 +1,5 @@
 import { getMeetings, MeetingInfo } from '#api/BBB'
+import { createMeetingID } from '#resolvers/TableResolver'
 import { pubSub } from '#src/graphql/pubSub'
 import { prisma } from '#src/prisma'
 
@@ -15,6 +16,7 @@ export const handleOpenTables = async (): Promise<void> => {
       },
     },
     data: {
+      meetingID: await createMeetingID(prisma)(),
       attendeePW: null,
       moderatorPW: null,
       voiceBridge: null,

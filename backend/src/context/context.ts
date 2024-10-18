@@ -16,13 +16,13 @@ const brevo = createBrevoClient({ prisma, logger, config: CONFIG })
 
 const knownErrorClasses = [
   errors.JOSEAlgNotAllowed,
-  errors.JWTExpired,
-  errors.JWTInvalid,
+  errors.JOSENotSupported,
+  errors.JWKSNoMatchingKey,
   errors.JWSInvalid,
   errors.JWSSignatureVerificationFailed,
+  errors.JWTExpired,
+  errors.JWTInvalid,
 ]
-
-const knownErrorMessages = ['JWS verification failed']
 
 export type Context = {
   config: typeof CONFIG
@@ -49,10 +49,7 @@ const decodePayload = async (
     const { payload } = await jwtVerify<CustomJwtPayload>(token, JWKS)
     return payload
   } catch (error) {
-    if (
-      knownErrorClasses.some((errorClass) => error instanceof errorClass) ||
-      (error instanceof Error && knownErrorMessages.some((message) => message === error.message))
-    ) {
+    if (knownErrorClasses.some((errorClass) => error instanceof errorClass)) {
       logger.trace(error)
       return null
     } else throw error
