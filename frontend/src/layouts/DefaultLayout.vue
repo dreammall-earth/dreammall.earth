@@ -204,6 +204,7 @@ const { isModalActive } = useModal()
   justify-content: center;
   height: 120px;
   overflow: hidden;
+  pointer-events: none;
   background: transparent;
 }
 
