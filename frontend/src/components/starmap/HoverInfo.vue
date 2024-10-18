@@ -6,7 +6,7 @@
       </v-avatar>
       <h3>{{ props.data?.name }}</h3>
     </div>
-    <div v-show="showMoreButton" class="mt-2 d-flex align-center justify-center">
+    <div v-if="showMoreButton" class="mt-2 d-flex align-center justify-center">
       <button @click="showMore">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -43,10 +43,10 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'show-more', id: number): void
+  (e: 'show-more'): void
 }>()
 
-const showMore = () => props.data && emit('show-more', props.data?.id)
+const showMore = () => emit('show-more')
 
 const coordinates = computed(() => ({
   x: props.x,
