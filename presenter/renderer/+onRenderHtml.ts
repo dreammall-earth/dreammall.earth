@@ -5,13 +5,14 @@ import logoUrl from '#assets/favicon.ico'
 import image from '#assets/img/dreammall-logo_social.png'
 
 import { createApp } from './app'
+import { trackingCode } from './trackingCode'
 import { getDescription, getTitle } from './utils'
 
 import type { OnRenderHtmlAsync } from 'vike/types'
 import type { App } from 'vue'
 
 const onRenderHtml: OnRenderHtmlAsync = async (pageContext) => {
-  const { META } = pageContext.publicEnv
+  const { META, ANALYTICS } = pageContext.publicEnv
   const { app, i18n } = createApp(pageContext, false)
 
   const locale = i18n.global.locale.value
@@ -45,6 +46,7 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext) => {
         <meta name="twitter:description" content="${description}" />
         <meta name="twitter:image" content="${META.BASE_URL}${image}" />
         <meta name="twitter:image:alt" content="${title}" />
+        ${dangerouslySkipEscape(trackingCode(ANALYTICS.UMAMI_WEBSITE_ID))}
         <title>${title}</title>
       </head>
       <body>
