@@ -2,12 +2,18 @@
   <div class="canvas-container">
     <canvas ref="canvas" gl="{{powerPreference: 'default', antialias: false}}"></canvas>
   </div>
-  <HoverInfo
-    v-bind="hoveredStar"
-    :show-more-button="displayedProfile?.id !== hoveredStar.data?.id"
-    @show-more="displayHoveredProfile"
-  />
-  <SidebarInfo v-if="displayedProfile" :profile="displayedProfile" @close="closeProfile" />
+  <FadeTransition>
+    <HoverInfo
+      v-show="hoveredStar.data"
+      v-bind="hoveredStar"
+      :show-more-button="displayedProfile?.id !== hoveredStar.data?.id"
+      @show-more="displayHoveredProfile"
+    />
+  </FadeTransition>
+
+  <FadeTransition>
+    <SidebarInfo v-if="displayedProfile" :profile="displayedProfile" @close="closeProfile" />
+  </FadeTransition>
 </template>
 
 <script lang="ts" setup>
@@ -32,6 +38,7 @@ import {
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { onMounted, reactive, ref, watch } from 'vue'
 
+import FadeTransition from '#components/transitions/FadeTransition.vue'
 import { starmapQuery, StarmapQueryResult, StarLine, Star } from '#queries/starmapQuery'
 
 import HoverInfo from './HoverInfo.vue'

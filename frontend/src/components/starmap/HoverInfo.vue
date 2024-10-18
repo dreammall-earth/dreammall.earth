@@ -1,5 +1,5 @@
 <template>
-  <div v-show="!!props.data" ref="hoverRef" class="hover-info" :style="style">
+  <div ref="hoverRef" class="hover-info" :style="style">
     <div class="info-box pa-2">
       <v-avatar :size="25" class="avatar mb-2 text-font">
         <span>{{ props.data && getInitials(props.data.name) }}</span>
