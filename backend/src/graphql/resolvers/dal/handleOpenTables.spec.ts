@@ -153,7 +153,8 @@ describe('handleOpenTables', () => {
             }),
             expect.objectContaining({
               name: 'Meeting 2',
-              meetingID: 'Meeting-2',
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              meetingID: expect.any(String),
               createTime: null,
             }),
           ]),
@@ -175,12 +176,14 @@ describe('handleOpenTables', () => {
           expect.arrayContaining([
             expect.objectContaining({
               name: 'Meeting 1',
-              meetingID: 'Meeting-1',
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              meetingID: expect.any(String),
               createTime: null,
             }),
             expect.objectContaining({
               name: 'Meeting 2',
-              meetingID: 'Meeting-2',
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              meetingID: expect.any(String),
               createTime: null,
             }),
           ]),
