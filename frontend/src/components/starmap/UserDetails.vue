@@ -1,13 +1,13 @@
 <template>
   <ul class="details">
-    <li v-for="detail in props.details" :key="detail.id">
-      <v-chip class="detail border-thin">
+    <li v-for="detail in props.details" :key="detail.id" class="detail">
+      <v-chip class="detail-chip border-thin">
         <v-icon
           :icon="detailCategoryToIcon(detail.category)"
           class="mr-2"
           color="cockpit-highlight"
         ></v-icon>
-        {{ detail.text }}
+        <span class="detail-text" :title="detail.text" tabindex="0">{{ detail.text }}</span>
       </v-chip>
     </li>
   </ul>
@@ -25,6 +25,19 @@ const props = defineProps<{
 
 <style scoped>
 .detail {
+  overflow: hidden;
+}
+
+.detail-text {
+  display: inline-block;
+  overflow: hidden;
+  width: 100%;
+  text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+}
+
+.detail-chip {
   background: rgb(61 71 83);
 
   &:deep(.v-chip__underlay) {
@@ -33,6 +46,7 @@ const props = defineProps<{
 
   &:deep(.v-chip__content) {
     font-size: 11px;
+    width: 100%;
   }
 }
 
