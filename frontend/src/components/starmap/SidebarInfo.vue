@@ -61,28 +61,28 @@ const availabilityOptions = [
 
 <style scoped>
 .sidebar {
-  border-radius: 15px 0px 0px 15px;
-  background: rgba(61, 71, 83, 0.75);
-  backdrop-filter: blur(15px);
+  position: fixed;
+  top: 90px;
+  right: 0;
+  z-index: 200;
   display: flex;
   flex-flow: column;
   align-items: center;
-  position: fixed;
-  right: 0;
-  top: 90px;
   width: min(350px, 100vw);
   height: 100%;
-  z-index: 200;
   color: #f5f5f5;
+  background: rgb(61 71 83 / 75%);
+  backdrop-filter: blur(15px);
+  border-radius: 15px 0 0 15px;
 }
 
 .close {
   display: flex;
+  place-content: flex-start flex-start;
+  align-items: flex-start;
+  justify-content: flex-end;
   width: 100%;
   padding: 8px 16px;
-  place-content: flex-start flex-start;
-  justify-content: flex-end;
-  align-items: flex-start;
 }
 
 .avatar {
@@ -97,11 +97,11 @@ const availabilityOptions = [
   justify-content: center;
   height: 30px;
   padding-inline: 8px;
+  font-size: 10px;
   color: white;
-  border-radius: 9999px;
   background: #5d6670;
   border: 1px solid rgb(214 223 233 / 40%);
-  font-size: 10px;
+  border-radius: 9999px;
 }
 
 .social-list {

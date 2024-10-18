@@ -58,8 +58,8 @@
 import { reactive } from 'vue'
 
 import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
-
 import { detailCategories, detailCategoryToIcon } from '#src/utils/detailCategories'
+
 import Details from './UserDetails.vue'
 
 import type { UserDetail, AddUserDetailInput } from '#stores/userStore'
