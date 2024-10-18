@@ -121,7 +121,7 @@ entries:
     attrs:
       activate_user_on_success: true
       subject: DreamMall Account Confirmation
-      template: email/account_confirmation.html
+      template: dreammall_account_confirmation.html
 #      token_expiry: 30 - how long should the token in the link be valid?
       use_global_settings: true
 
