@@ -45,9 +45,8 @@ const toggleTwoLine = (detailId: number) => {
 
 .detail-text {
   display: inline-block;
-  overflow: hidden;
   width: 100%;
-  text-overflow: ellipsis;
+  overflow: hidden;
   text-overflow: ellipsis;
   text-wrap: nowrap;
 
@@ -64,8 +63,8 @@ const toggleTwoLine = (detailId: number) => {
   }
 
   &:deep(.v-chip__content) {
-    font-size: 11px;
     width: 100%;
+    font-size: 11px;
   }
 }
 

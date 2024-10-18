@@ -204,8 +204,8 @@ const { isModalActive } = useModal()
   justify-content: center;
   height: 120px;
   overflow: hidden;
-  background: transparent;
   pointer-events: none;
+  background: transparent;
 }
 
 .dream-mall-floating-container {
