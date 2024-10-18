@@ -23,28 +23,11 @@ spec:
                 name: {{ .Release.Name }}-presenter-env
           env:
             - name: PUBLIC_ENV__SIGNUP_URI
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}
-                  key: auth_signup_uri
+              value: https://auth.{{ .Values.domain }}/if/flow/dreammallearth-enrollment/
             - name: PUBLIC_ENV__SIGNIN_URI
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}
-                  key: frontend_signin_url
+              value: https://app.{{ .Values.domain }}/signin
             - name: PUBLIC_ENV__ENDPOINTS__GRAPHQL_URI
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}
-                  key: endpoints_graphql_uri
-            - name: SENTRY_DSN
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}
-                  key: sentry_dsn_presenter
+              value: https://{{ .Values.domain }}/api/
             - name: SENTRY_ENVIRONMENT
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}
-                  key: sentry_environment
+              value: {{ .Values.domain }}
       restartPolicy: Always
