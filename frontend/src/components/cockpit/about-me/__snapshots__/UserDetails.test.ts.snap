@@ -7,10 +7,11 @@ exports[`UserDetails > renders in editable mode 1`] = `
 >
   
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >
@@ -50,10 +51,11 @@ exports[`UserDetails > renders in editable mode 1`] = `
     </span>
   </li>
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >
@@ -93,10 +95,11 @@ exports[`UserDetails > renders in editable mode 1`] = `
     </span>
   </li>
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >
@@ -136,10 +139,11 @@ exports[`UserDetails > renders in editable mode 1`] = `
     </span>
   </li>
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >
@@ -179,10 +183,11 @@ exports[`UserDetails > renders in editable mode 1`] = `
     </span>
   </li>
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >
@@ -222,10 +227,11 @@ exports[`UserDetails > renders in editable mode 1`] = `
     </span>
   </li>
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >
@@ -275,10 +281,11 @@ exports[`UserDetails > renders in non-editable mode 1`] = `
 >
   
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >
@@ -309,10 +316,11 @@ exports[`UserDetails > renders in non-editable mode 1`] = `
     </span>
   </li>
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >
@@ -343,10 +351,11 @@ exports[`UserDetails > renders in non-editable mode 1`] = `
     </span>
   </li>
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >
@@ -377,10 +386,11 @@ exports[`UserDetails > renders in non-editable mode 1`] = `
     </span>
   </li>
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >
@@ -411,10 +421,11 @@ exports[`UserDetails > renders in non-editable mode 1`] = `
     </span>
   </li>
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >
@@ -445,10 +456,11 @@ exports[`UserDetails > renders in non-editable mode 1`] = `
     </span>
   </li>
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >
@@ -489,10 +501,11 @@ exports[`UserDetails > renders placeholders 1`] = `
 >
   
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >
@@ -523,10 +536,11 @@ exports[`UserDetails > renders placeholders 1`] = `
     </span>
   </li>
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >
@@ -557,10 +571,11 @@ exports[`UserDetails > renders placeholders 1`] = `
     </span>
   </li>
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >
@@ -591,10 +606,11 @@ exports[`UserDetails > renders placeholders 1`] = `
     </span>
   </li>
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >
@@ -625,10 +641,11 @@ exports[`UserDetails > renders placeholders 1`] = `
     </span>
   </li>
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >
@@ -669,10 +686,11 @@ exports[`UserDetails > renders placeholders in editable mode 1`] = `
 >
   
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >
@@ -703,10 +721,11 @@ exports[`UserDetails > renders placeholders in editable mode 1`] = `
     </span>
   </li>
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >
@@ -737,10 +756,11 @@ exports[`UserDetails > renders placeholders in editable mode 1`] = `
     </span>
   </li>
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >
@@ -771,10 +791,11 @@ exports[`UserDetails > renders placeholders in editable mode 1`] = `
     </span>
   </li>
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >
@@ -805,10 +826,11 @@ exports[`UserDetails > renders placeholders in editable mode 1`] = `
     </span>
   </li>
   <li
+    class="detail"
     data-v-589db232=""
   >
     <span
-      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+      class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
       data-v-589db232=""
       draggable="false"
     >

@@ -1,13 +1,13 @@
 <template>
   <ul class="details" :class="{ editable: props.editable }">
-    <li v-for="detail in details" :key="detail.id">
-      <v-chip class="detail border-thin">
+    <li v-for="detail in details" :key="detail.id" class="detail">
+      <v-chip class="detail-chip border-thin">
         <v-icon
           :icon="detailCategoryToIcon(detail.category)"
           class="mr-2"
           color="cockpit-highlight"
         ></v-icon>
-        {{ detail.text }}
+        <span class="detail-text" :title="detail.text" tabindex="0">{{ detail.text }}</span>
         <button
           v-if="props.editable && detail.id > 0"
           class="pl-1"
@@ -57,10 +57,27 @@ const details: Ref<UserDetail[]> = computed(() => {
 
 <style scoped>
 .detail {
+  overflow: hidden;
+}
+
+.detail-text {
+  display: inline-block;
+  overflow: hidden;
+  width: 100%;
+  text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+}
+
+.detail-chip {
   background: var(--v-cockpit-chip-background);
 
   &:deep(.v-chip__underlay) {
     display: none;
+  }
+
+  &:deep(.v-chip__content) {
+    width: 100%;
   }
 }
 
@@ -82,7 +99,7 @@ const details: Ref<UserDetail[]> = computed(() => {
     padding: 0;
     background: unset;
 
-    .detail {
+    .detail-chip {
       background: var(--v-cockpit-chip-background-2);
     }
   }

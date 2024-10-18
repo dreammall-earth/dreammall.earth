@@ -382,10 +382,11 @@ exports[`EditUserDetails > renders 1`] = `
       >
         
         <li
+          class="detail"
           data-v-589db232=""
         >
           <span
-            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
             data-v-589db232=""
             draggable="false"
           >
@@ -425,10 +426,11 @@ exports[`EditUserDetails > renders 1`] = `
           </span>
         </li>
         <li
+          class="detail"
           data-v-589db232=""
         >
           <span
-            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
             data-v-589db232=""
             draggable="false"
           >
@@ -468,10 +470,11 @@ exports[`EditUserDetails > renders 1`] = `
           </span>
         </li>
         <li
+          class="detail"
           data-v-589db232=""
         >
           <span
-            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
             data-v-589db232=""
             draggable="false"
           >
@@ -511,10 +514,11 @@ exports[`EditUserDetails > renders 1`] = `
           </span>
         </li>
         <li
+          class="detail"
           data-v-589db232=""
         >
           <span
-            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
             data-v-589db232=""
             draggable="false"
           >
@@ -554,10 +558,11 @@ exports[`EditUserDetails > renders 1`] = `
           </span>
         </li>
         <li
+          class="detail"
           data-v-589db232=""
         >
           <span
-            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
             data-v-589db232=""
             draggable="false"
           >
@@ -597,10 +602,11 @@ exports[`EditUserDetails > renders 1`] = `
           </span>
         </li>
         <li
+          class="detail"
           data-v-589db232=""
         >
           <span
-            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+            class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
             data-v-589db232=""
             draggable="false"
           >

@@ -1217,6 +1217,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
               
             </div>
             <button
+              class="w-100"
               data-v-f444dc92=""
             >
               <ul
@@ -1226,10 +1227,11 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
               >
                 
                 <li
+                  class="detail"
                   data-v-589db232=""
                 >
                   <span
-                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
                     data-v-589db232=""
                     draggable="false"
                   >
@@ -1260,10 +1262,11 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   </span>
                 </li>
                 <li
+                  class="detail"
                   data-v-589db232=""
                 >
                   <span
-                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
                     data-v-589db232=""
                     draggable="false"
                   >
@@ -1294,10 +1297,11 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   </span>
                 </li>
                 <li
+                  class="detail"
                   data-v-589db232=""
                 >
                   <span
-                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
                     data-v-589db232=""
                     draggable="false"
                   >
@@ -1328,10 +1332,11 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   </span>
                 </li>
                 <li
+                  class="detail"
                   data-v-589db232=""
                 >
                   <span
-                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
                     data-v-589db232=""
                     draggable="false"
                   >
@@ -1362,10 +1367,11 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   </span>
                 </li>
                 <li
+                  class="detail"
                   data-v-589db232=""
                 >
                   <span
-                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
                     data-v-589db232=""
                     draggable="false"
                   >
