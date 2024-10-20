@@ -102,6 +102,8 @@ export class UserResolver {
 
     if (!detail) throw new Error('Detail not found!')
 
+    if (detail.userId !== user.id) throw new Error('Unauthorized')
+
     await prisma.userDetail.delete({
       where: {
         id,
@@ -146,6 +148,8 @@ export class UserResolver {
     const socialMedia = user.socialMedia.find((s) => s.id === id)
 
     if (!socialMedia) throw new Error('Social media not found!')
+
+    if (socialMedia.userId !== user.id) throw new Error('Unauthorized')
 
     await prisma.socialMedia.delete({
       where: {
