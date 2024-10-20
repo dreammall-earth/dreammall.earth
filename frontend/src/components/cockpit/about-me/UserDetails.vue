@@ -7,7 +7,13 @@
           class="mr-2"
           color="cockpit-highlight"
         ></v-icon>
-        <span class="detail-text" :title="detail.text" tabindex="0">{{ detail.text }}</span>
+        <span
+          class="detail-text"
+          :title="detail.text"
+          tabindex="0"
+          @click="$emit('edit-detail', detail.id)"
+          >{{ detail.text }}</span
+        >
         <button
           v-if="props.editable && detail.id > 0"
           class="pl-1"
@@ -37,6 +43,7 @@ const props = defineProps<{
 
 defineEmits<{
   (e: 'remove-detail', id: number): void
+  (e: 'edit-detail', id: number): void
 }>()
 
 const details: Ref<UserDetail[]> = computed(() => {
