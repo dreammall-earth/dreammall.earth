@@ -13,7 +13,15 @@ spec:
         io.kompose.service: frontend
     spec:
       containers:
-        - env:
+        - name: frontend
+          image: "{{ .Values.frontend.image.repository }}:{{ default .Values.global.image.tag .Values.frontend.image.tag "latest" }}"
+          imagePullPolicy: {{ quote .Values.global.image.pullPolicy }}
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-frontend-env
+          env:
             - name: PUBLIC_ENV__AUTH__AUTHORITY
               valueFrom:
                 configMapKeyRef:
@@ -89,9 +97,4 @@ spec:
                 configMapKeyRef:
                   name: {{ .Release.Name }}
                   key: sentry_environment
-          image: "{{ .Values.frontend.image.repository }}:{{ default .Values.global.image.tag .Values.frontend.image.tag "latest" }}"
-          imagePullPolicy: {{ quote .Values.global.image.pullPolicy }}
-          name: frontend
-          ports:
-            - containerPort: 3000
       restartPolicy: Always
