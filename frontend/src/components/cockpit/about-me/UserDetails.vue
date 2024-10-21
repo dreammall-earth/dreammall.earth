@@ -11,7 +11,7 @@
           class="detail-text"
           :title="detail.text"
           tabindex="0"
-          @click="$emit('edit-detail', detail.id)"
+          @click="$emit('edit-detail', detail.id, detail.category)"
           >{{ detail.text }}</span
         >
         <button
@@ -32,7 +32,7 @@ import { useI18n } from 'vue-i18n'
 
 import { detailCategories, detailCategoryToIcon } from './detailCategories'
 
-import type { UserDetail } from '#stores/userStore'
+import type { UserDetail, UserDetailCategory } from '#stores/userStore'
 
 const { t } = useI18n()
 
@@ -43,7 +43,7 @@ const props = defineProps<{
 
 defineEmits<{
   (e: 'remove-detail', id: number): void
-  (e: 'edit-detail', id: number): void
+  (e: 'edit-detail', id: number, category: UserDetailCategory): void
 }>()
 
 const details: Ref<UserDetail[]> = computed(() => {

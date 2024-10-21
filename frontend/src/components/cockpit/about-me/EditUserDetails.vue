@@ -29,6 +29,7 @@
           </template>
         </v-select>
         <v-text-field
+          ref="textField"
           v-model="text"
           name="text"
           clearable
@@ -93,6 +94,7 @@ const isUpdate = ref(false)
 const id = ref<number | null>(null)
 const category = ref<UserDetailCategory>('work')
 const text = ref<string | null>(null)
+const textField = ref<HTMLInputElement | null>(null)
 
 const submitIcon = computed(() =>
   isUpdate.value
@@ -128,13 +130,24 @@ const removeDetail = async (id: number) => {
   abortUpdate()
 }
 
-const editDetail = (detailId: number) => {
+const editDetail = (detailId: number, detailCategory: UserDetailCategory) => {
+  if (detailId < 1) {
+    // Placeholder was clicked
+    isUpdate.value = false
+    text.value = ''
+    category.value = detailCategory
+    textField.value?.focus()
+    return
+  }
+
   const detail = props.details.find((detail) => detail.id === detailId)
-  if (!detail) return
+  if (!detail) throw new Error('Detail not found')
+
   isUpdate.value = true
   id.value = detailId
   category.value = detail.category
   text.value = detail.text
+  textField.value?.focus()
 }
 
 const updateDetail = async () => {
