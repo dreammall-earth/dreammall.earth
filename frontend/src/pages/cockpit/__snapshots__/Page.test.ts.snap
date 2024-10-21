@@ -1253,7 +1253,14 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                         class="mdi mdi-school-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
                         data-v-589db232=""
                       />
-                       I am a student 
+                      <span
+                        class="detail-text"
+                        data-v-589db232=""
+                        tabindex="0"
+                        title="I am a student"
+                      >
+                        I am a student
+                      </span>
                       <!--v-if-->
                       
                     </div>
@@ -1288,7 +1295,14 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                         class="mdi mdi-map-marker-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
                         data-v-589db232=""
                       />
-                       Mein Standort 
+                      <span
+                        class="detail-text"
+                        data-v-589db232=""
+                        tabindex="0"
+                        title="Mein Standort"
+                      >
+                        Mein Standort
+                      </span>
                       <!--v-if-->
                       
                     </div>
@@ -1323,7 +1337,14 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                         class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
                         data-v-589db232=""
                       />
-                       Meine Arbeit 
+                      <span
+                        class="detail-text"
+                        data-v-589db232=""
+                        tabindex="0"
+                        title="Meine Arbeit"
+                      >
+                        Meine Arbeit
+                      </span>
                       <!--v-if-->
                       
                     </div>
@@ -1358,7 +1379,14 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                         class="mdi mdi-emoticon-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
                         data-v-589db232=""
                       />
-                       Wie ich mich heute fühle 
+                      <span
+                        class="detail-text"
+                        data-v-589db232=""
+                        tabindex="0"
+                        title="Wie ich mich heute fühle"
+                      >
+                        Wie ich mich heute fühle
+                      </span>
                       <!--v-if-->
                       
                     </div>
@@ -1393,7 +1421,14 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                         class="mdi mdi-web mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
                         data-v-589db232=""
                       />
-                       Sprachen, die ich spreche 
+                      <span
+                        class="detail-text"
+                        data-v-589db232=""
+                        tabindex="0"
+                        title="Sprachen, die ich spreche"
+                      >
+                        Sprachen, die ich spreche
+                      </span>
                       <!--v-if-->
                       
                     </div>

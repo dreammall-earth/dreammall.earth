@@ -263,7 +263,14 @@ exports[`AboutMeView > renders 1`] = `
               class="mdi mdi-school-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
               data-v-589db232=""
             />
-             I am a student 
+            <span
+              class="detail-text"
+              data-v-589db232=""
+              tabindex="0"
+              title="I am a student"
+            >
+              I am a student
+            </span>
             <!--v-if-->
             
           </div>
@@ -298,7 +305,14 @@ exports[`AboutMeView > renders 1`] = `
               class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
               data-v-589db232=""
             />
-             I am a worker 
+            <span
+              class="detail-text"
+              data-v-589db232=""
+              tabindex="0"
+              title="I am a worker"
+            >
+              I am a worker
+            </span>
             <!--v-if-->
             
           </div>
@@ -333,7 +347,14 @@ exports[`AboutMeView > renders 1`] = `
               class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
               data-v-589db232=""
             />
-             I really like my job 
+            <span
+              class="detail-text"
+              data-v-589db232=""
+              tabindex="0"
+              title="I really like my job"
+            >
+              I really like my job
+            </span>
             <!--v-if-->
             
           </div>
@@ -368,7 +389,14 @@ exports[`AboutMeView > renders 1`] = `
               class="mdi mdi-web mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
               data-v-589db232=""
             />
-             English 
+            <span
+              class="detail-text"
+              data-v-589db232=""
+              tabindex="0"
+              title="English"
+            >
+              English
+            </span>
             <!--v-if-->
             
           </div>
@@ -403,7 +431,14 @@ exports[`AboutMeView > renders 1`] = `
               class="mdi mdi-map-marker-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
               data-v-589db232=""
             />
-             Berlin 
+            <span
+              class="detail-text"
+              data-v-589db232=""
+              tabindex="0"
+              title="Berlin"
+            >
+              Berlin
+            </span>
             <!--v-if-->
             
           </div>
@@ -438,7 +473,14 @@ exports[`AboutMeView > renders 1`] = `
               class="mdi mdi-emoticon-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
               data-v-589db232=""
             />
-             Yeah! 
+            <span
+              class="detail-text"
+              data-v-589db232=""
+              tabindex="0"
+              title="Yeah!"
+            >
+              Yeah!
+            </span>
             <!--v-if-->
             
           </div>
@@ -842,7 +884,14 @@ exports[`AboutMeView > renders initials 1`] = `
               class="mdi mdi-school-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
               data-v-589db232=""
             />
-             I am a student 
+            <span
+              class="detail-text"
+              data-v-589db232=""
+              tabindex="0"
+              title="I am a student"
+            >
+              I am a student
+            </span>
             <!--v-if-->
             
           </div>
@@ -877,7 +926,14 @@ exports[`AboutMeView > renders initials 1`] = `
               class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
               data-v-589db232=""
             />
-             I am a worker 
+            <span
+              class="detail-text"
+              data-v-589db232=""
+              tabindex="0"
+              title="I am a worker"
+            >
+              I am a worker
+            </span>
             <!--v-if-->
             
           </div>
@@ -912,7 +968,14 @@ exports[`AboutMeView > renders initials 1`] = `
               class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
               data-v-589db232=""
             />
-             I really like my job 
+            <span
+              class="detail-text"
+              data-v-589db232=""
+              tabindex="0"
+              title="I really like my job"
+            >
+              I really like my job
+            </span>
             <!--v-if-->
             
           </div>
@@ -947,7 +1010,14 @@ exports[`AboutMeView > renders initials 1`] = `
               class="mdi mdi-web mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
               data-v-589db232=""
             />
-             English 
+            <span
+              class="detail-text"
+              data-v-589db232=""
+              tabindex="0"
+              title="English"
+            >
+              English
+            </span>
             <!--v-if-->
             
           </div>
@@ -982,7 +1052,14 @@ exports[`AboutMeView > renders initials 1`] = `
               class="mdi mdi-map-marker-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
               data-v-589db232=""
             />
-             Berlin 
+            <span
+              class="detail-text"
+              data-v-589db232=""
+              tabindex="0"
+              title="Berlin"
+            >
+              Berlin
+            </span>
             <!--v-if-->
             
           </div>
@@ -1017,7 +1094,14 @@ exports[`AboutMeView > renders initials 1`] = `
               class="mdi mdi-emoticon-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
               data-v-589db232=""
             />
-             Yeah! 
+            <span
+              class="detail-text"
+              data-v-589db232=""
+              tabindex="0"
+              title="Yeah!"
+            >
+              Yeah!
+            </span>
             <!--v-if-->
             
           </div>
@@ -1421,7 +1505,14 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
               class="mdi mdi-school-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
               data-v-589db232=""
             />
-             I am a student 
+            <span
+              class="detail-text"
+              data-v-589db232=""
+              tabindex="0"
+              title="I am a student"
+            >
+              I am a student
+            </span>
             <!--v-if-->
             
           </div>
@@ -1456,7 +1547,14 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
               class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
               data-v-589db232=""
             />
-             I am a worker 
+            <span
+              class="detail-text"
+              data-v-589db232=""
+              tabindex="0"
+              title="I am a worker"
+            >
+              I am a worker
+            </span>
             <!--v-if-->
             
           </div>
@@ -1491,7 +1589,14 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
               class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
               data-v-589db232=""
             />
-             I really like my job 
+            <span
+              class="detail-text"
+              data-v-589db232=""
+              tabindex="0"
+              title="I really like my job"
+            >
+              I really like my job
+            </span>
             <!--v-if-->
             
           </div>
@@ -1526,7 +1631,14 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
               class="mdi mdi-web mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
               data-v-589db232=""
             />
-             English 
+            <span
+              class="detail-text"
+              data-v-589db232=""
+              tabindex="0"
+              title="English"
+            >
+              English
+            </span>
             <!--v-if-->
             
           </div>
@@ -1561,7 +1673,14 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
               class="mdi mdi-map-marker-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
               data-v-589db232=""
             />
-             Berlin 
+            <span
+              class="detail-text"
+              data-v-589db232=""
+              tabindex="0"
+              title="Berlin"
+            >
+              Berlin
+            </span>
             <!--v-if-->
             
           </div>
@@ -1596,7 +1715,14 @@ exports[`AboutMeView > renders without social media accounts 1`] = `
               class="mdi mdi-emoticon-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
               data-v-589db232=""
             />
-             Yeah! 
+            <span
+              class="detail-text"
+              data-v-589db232=""
+              tabindex="0"
+              title="Yeah!"
+            >
+              Yeah!
+            </span>
             <!--v-if-->
             
           </div>

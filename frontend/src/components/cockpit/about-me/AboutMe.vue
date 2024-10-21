@@ -38,18 +38,11 @@ import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 
 import ClientOnly from '#components/ClientOnly.vue'
-import {
-  useUserStore,
-  UserAvailability,
-  AddUserDetailInput,
-  AddSocialMediaInput,
-} from '#stores/userStore'
+import { useUserStore, UserAvailability, AddSocialMediaInput } from '#stores/userStore'
 
 import AboutMeView from './AboutMeView.vue'
 import EditSocialMedia from './EditSocialMedia.vue'
 import EditUserDetails from './EditUserDetails.vue'
-
-import type { UpdateUserDetailInput } from '#mutations/updateUserDetailMutation'
 
 type Mode = 'view' | 'edit-details' | 'edit-social'
 const mode = ref<Mode>('view')
@@ -87,19 +80,6 @@ const updateIntroduction = async (newIntroduction: string) => {
     name: user.value!.name,
     introduction: newIntroduction,
   })
-}
-
-const addDetail = async (detail: AddUserDetailInput) => {
-  await userStore.addUserDetail(detail)
-  detail.text = ''
-}
-
-const updateDetail = async (detail: UpdateUserDetailInput) => {
-  await userStore.updateUserDetail(detail)
-}
-
-const removeDetail = async (detailId: number) => {
-  await userStore.removeUserDetail(detailId)
 }
 
 const addSocial = async (social: AddSocialMediaInput) => {

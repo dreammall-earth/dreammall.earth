@@ -69,9 +69,8 @@ const details: Ref<UserDetail[]> = computed(() => {
 
 .detail-text {
   display: inline-block;
-  overflow: hidden;
   width: 100%;
-  text-overflow: ellipsis;
+  overflow: hidden;
   text-overflow: ellipsis;
   text-wrap: nowrap;
 }
