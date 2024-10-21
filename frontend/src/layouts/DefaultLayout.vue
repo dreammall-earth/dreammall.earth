@@ -56,13 +56,13 @@
         </div>
       </div>
       <div class="dream-mall-panel">
-        <slot name="dream-mall-button" :close="() => toggleDrawer('dream-mall-button')">
-          <InvitationSteps
-            v-if="isIncomingInvitation"
-            ref="invitationStepsRef"
-            @close="toggleDrawer('dream-mall-button')"
-          />
-          <TableSetup v-else ref="tableSetupRef" @close="toggleDrawer('dream-mall-button')" />
+        <InvitationSteps
+          v-if="isIncomingInvitation"
+          ref="invitationStepsRef"
+          @close="toggleDrawer('dream-mall-button')"
+        />
+        <slot v-else name="dream-mall-button" :close="() => toggleDrawer('dream-mall-button')">
+          <TableSetup ref="tableSetupRef" @close="toggleDrawer('dream-mall-button')" />
         </slot>
       </div>
     </div>
@@ -87,6 +87,7 @@ import { storeToRefs } from 'pinia'
 import { computed, nextTick, ref, watch } from 'vue'
 
 import DreamMallButton from '#components/buttons/DreamMallButton.vue'
+import useDreamMallPanel from '#components/dream-mall-panel/useDreamMallPanel'
 import InvitationSteps from '#components/malltalk/invitation/InvitationSteps.vue'
 import TableSetup from '#components/malltalk/setup/TableSetup.vue'
 import Circle from '#components/menu/CircleElement.vue'
@@ -115,12 +116,17 @@ const isIncomingInvitation = ref<boolean>(false)
 const invitationStepsRef = ref<InstanceType<typeof InvitationSteps> | null>(null)
 const tableSetupRef = ref<InstanceType<typeof TableSetup> | null>(null)
 
+const { reset: resetDreamMallPanel, setComponentRef } = useDreamMallPanel()
+
+setComponentRef(invitationStepsRef, 'incoming-invitation')
+setComponentRef(tableSetupRef, 'mall-talk-setup')
+
 const tablesStore = useTablesStore()
 const { getCurrentCall } = storeToRefs(tablesStore)
 
 watch(getCurrentCall, (call: Call | null) => {
+  resetDreamMallPanel()
   if (call && call.user?.id && call?.table) {
-    tableSetupRef.value?.reset()
     isIncomingInvitation.value = true
     nextTick(() => {
       invitationStepsRef.value?.setInvitation(
@@ -132,7 +138,6 @@ watch(getCurrentCall, (call: Call | null) => {
       setDrawer('dream-mall-button')
     })
   } else {
-    invitationStepsRef.value?.reset()
     isIncomingInvitation.value = false
   }
 })
@@ -144,7 +149,7 @@ const toggleDrawer = (drawer: DrawerType) => {
   } else {
     visibleDrawer.value = drawer
     if (drawer === 'dream-mall-button' && !isIncomingInvitation.value) {
-      tableSetupRef.value?.reset()
+      resetDreamMallPanel()
     }
   }
 }

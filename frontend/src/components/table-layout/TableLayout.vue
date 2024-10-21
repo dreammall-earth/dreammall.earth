@@ -1,7 +1,7 @@
 <template>
   <DefaultLayout>
     <template #dream-mall-button="{ close }">
-      <TableSettings ref="tableSetupRef" @close="close" />
+      <TableSettings ref="tableSettingsRef" @close="close" />
     </template>
     <template #default>
       <div class="container">
@@ -16,7 +16,9 @@
 
 <script setup lang="ts">
 import { navigate } from 'vike/client/router'
+import { ref } from 'vue'
 
+import useDreamMallPanel from '#components/dream-mall-panel/useDreamMallPanel'
 import EmbeddedTable from '#components/embedded-table/EmbeddedTable.vue'
 import TableSettings from '#components/malltalk/settings/TableSettings.vue'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
@@ -25,6 +27,12 @@ defineProps<{
   tableUrl: string | null
   errorMessage: string | null
 }>()
+
+const { setComponentRef } = useDreamMallPanel()
+
+const tableSettingsRef = ref<InstanceType<typeof TableSettings>>()
+
+setComponentRef(tableSettingsRef, 'table-settings')
 
 const onTableClosed = () => navigate('/')
 </script>

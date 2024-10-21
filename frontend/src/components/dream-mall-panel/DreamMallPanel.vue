@@ -1,15 +1,30 @@
 <template>
-  <TransitionGroup name="modal">
-    <div v-if="!!currentComponent" class="modal">
-      <component :is="currentComponent" v-bind="currentProps" @close="close" />
-    </div>
-  </TransitionGroup>
+  <TransitionGroup name="modal"> </TransitionGroup>
 </template>
 
 <script setup lang="ts">
+import InvitationSteps from '#components/malltalk/invitation/InvitationSteps.vue'
+import TableSettings from '#components/malltalk/settings/TableSettings.vue'
+import TableSetup from '#components/malltalk/setup/TableSetup.vue'
+
 import useDreamMallPanel from './useDreamMallPanel'
 
-const { currentComponent, currentProps, close } = useDreamMallPanel()
+export type ComponentRefs = {
+  'mall-talk-setup': InstanceType<typeof TableSetup> | null
+  'table-settings': InstanceType<typeof TableSettings> | null
+  'incoming-invitation': InstanceType<typeof InvitationSteps> | null
+}
+
+export type PanelComponent =
+  | InstanceType<typeof TableSetup>
+  | InstanceType<typeof TableSettings>
+  | InstanceType<typeof InvitationSteps>
+
+export type TableSetupInstance = InstanceType<typeof TableSetup>
+export type TableSettingsInstance = InstanceType<typeof TableSettings>
+export type InvitationStepsInstance = InstanceType<typeof InvitationSteps>
+
+const { close } = useDreamMallPanel()
 </script>
 
 <style scoped>
