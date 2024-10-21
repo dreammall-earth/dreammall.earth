@@ -11,7 +11,7 @@
     <template #default>
       <v-form class="add-detail mb-2" @submit.prevent="submit">
         <v-select
-          :v-model="category"
+          v-model="category"
           flat
           rounded
           :items="detailCategories"
@@ -40,7 +40,7 @@
           maxlength="60"
         ></v-text-field>
         <button
-          v-if="isUpdate && text.length === 0"
+          v-if="isUpdate && (!text || text?.length === 0)"
           class="submit rounded-circle"
           @click="abortUpdate"
         >
@@ -50,7 +50,7 @@
         <button
           v-else
           type="submit"
-          :disabled="text?.length === 0 || props.loading"
+          :disabled="!text || text?.length === 0 || props.loading"
           class="submit rounded-circle"
         >
           <v-icon :icon="submitIcon"></v-icon>
@@ -76,8 +76,7 @@ import { UserDetailCategory, useUserStore } from '#stores/userStore'
 import { detailCategories, detailCategoryToIcon } from './detailCategories'
 import Details from './UserDetails.vue'
 
-import type { UpdateUserDetailInput } from '#mutations/updateUserDetailMutation'
-import type { UserDetail, AddUserDetailInput } from '#stores/userStore'
+import type { UserDetail } from '#stores/userStore'
 
 const userStore = useUserStore()
 
@@ -93,14 +92,12 @@ defineEmits<{
 const isUpdate = ref(false)
 const id = ref<number | null>(null)
 const category = ref<UserDetailCategory>('work')
-const text = ref('')
+const text = ref<string | null>(null)
 
 const submitIcon = computed(() =>
   isUpdate.value
-    ? text.value.length === 0 || props.loading
-      ? 'mdi mdi-close'
-      : 'mdi mdi-pencil'
-    : text.value.length === 0 || props.loading
+    ? 'mdi mdi-pencil'
+    : !text.value || text.value?.length === 0 || props.loading
       ? 'mdi mdi-plus'
       : 'mdi mdi-check',
 )
@@ -117,6 +114,8 @@ const abortUpdate = () => {
 }
 
 const addDetail = async () => {
+  if (!text.value) throw new Error('No text provided')
+
   await userStore.addUserDetail({
     category: category.value,
     text: text.value,
@@ -140,6 +139,7 @@ const editDetail = (detailId: number) => {
 
 const updateDetail = async () => {
   if (!id.value) throw new Error('No detail id provided')
+  if (!text.value) throw new Error('No text provided')
 
   await userStore.updateUserDetail({
     id: id.value,
