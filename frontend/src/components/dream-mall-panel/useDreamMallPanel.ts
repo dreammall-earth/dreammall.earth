@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 
-type Mode = 'mall-talk-setup' | 'table-settings' | 'incoming-invitation'
+type Mode = 'mall-talk-setup' | 'table-settings'
 
 const currentMode = ref<Mode | null>('mall-talk-setup')
 

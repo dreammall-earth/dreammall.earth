@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { navigate } from 'vike/client/router'
-import { onUnmounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 
 import useDreamMallPanel from '#components/dream-mall-panel/useDreamMallPanel'
 import EmbeddedTable from '#components/embedded-table/EmbeddedTable.vue'
@@ -24,7 +24,9 @@ defineProps<{
 
 const { setMode } = useDreamMallPanel()
 
-setMode('table-settings')
+onMounted(() => {
+  setMode('table-settings')
+})
 
 onUnmounted(() => {
   setMode('mall-talk-setup')

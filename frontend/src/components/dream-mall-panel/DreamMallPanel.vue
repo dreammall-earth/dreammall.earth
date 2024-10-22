@@ -59,8 +59,6 @@ const currentComponent = computed(() => {
       return TableSetup
     case 'table-settings':
       return TableSettings
-    case 'incoming-invitation':
-      return InvitationSteps
     default:
       return null
   }
@@ -85,7 +83,7 @@ const tablesStore = useTablesStore()
 const { getCurrentCall } = storeToRefs(tablesStore)
 
 watch(getCurrentCall, (call: Call | null) => {
-  resetDreamMallPanel() // Is this what we want? Would it be desirable to keep the state of the panel and restore it after accepting or declining the invitation?
+  resetDreamMallPanel()
   if (call && call.user?.id && call?.table) {
     isIncomingInvitation.value = true
     nextTick(() => {

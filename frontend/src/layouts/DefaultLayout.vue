@@ -90,10 +90,6 @@ const toggleDrawer = (drawer: DrawerType) => {
     visibleDrawer.value = null
   } else {
     visibleDrawer.value = drawer
-    /*
-    if (drawer === 'dream-mall-button' && !isIncomingInvitation.value) {
-      resetDreamMallPanel()
-    } */
   }
 }
 
