@@ -134,7 +134,7 @@ const openTable = (id: number) => {
 
 <style scoped lang="scss">
 @use 'sass:map';
-@import 'vuetify/lib/styles/settings/_variables';
+@use 'vuetify/lib/styles/settings/_variables' as variables;
 
 .menu-drawer {
   top: 0 !important;
@@ -153,7 +153,7 @@ const openTable = (id: number) => {
   transition: none !important;
 }
 
-@media #{map.get($display-breakpoints, 'sm-and-down')} {
+@media #{map.get(variables.$display-breakpoints, 'sm-and-down')} {
   .menu-drawer {
     left: var(--sides) !important;
     z-index: 2000 !important;
@@ -169,7 +169,7 @@ const openTable = (id: number) => {
   }
 }
 
-@media #{map.get($display-breakpoints, 'md-and-up')} {
+@media #{map.get(variables.$display-breakpoints, 'md-and-up')} {
   .menu-drawer {
     border-radius: 20px 0 0 20px;
   }

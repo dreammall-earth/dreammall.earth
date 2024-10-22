@@ -348,8 +348,7 @@ onMounted(() => {})
 </script>
 
 <style scoped lang="scss">
-@import '#root/src/assets/scss/style';
-@import 'vuetify/lib/styles/settings/_variables';
+@use '#root/src/assets/scss/imports/_config.scss' as config;
 
 svg {
   position: absolute;
@@ -365,12 +364,12 @@ svg {
       fill 0.3s ease-in-out;
   }
 
-  @media screen and (max-width: $mobile) {
+  @media screen and (max-width: config.$mobile) {
     transition: scale 1s;
     transform: translate(-50%, -50%) scale(2);
   }
 
-  @media screen and (min-width: $mobile) and (max-width: $tablet) {
+  @media screen and (min-width: config.$mobile) and (max-width: config.$tablet) {
     transition: scale 1s;
     transform: translate(-50%, -50%) scale(1.4);
   }
