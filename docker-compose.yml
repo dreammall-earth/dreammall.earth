@@ -60,6 +60,7 @@ services:
       DATABASE_URL: mysql://root:@database:3306/dreammall.earth
       JWKS_URI: http://authentik:9000/application/o/dreammallearth/jwks/
       NODE_ENV: production
+      # LOG_LEVEL: SILLY
 
   migrations:
     image: ghcr.io/dreammall-earth/dreammall.earth/backend:${IMAGE_TAG:-latest}
