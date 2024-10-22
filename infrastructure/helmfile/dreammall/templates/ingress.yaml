@@ -8,12 +8,12 @@ metadata:
 spec:
   tls:
   - hosts:
-      - {{ quote .Values.hosts.frontend }}
-      - {{ quote .Values.hosts.presenter }}
+      - {{ printf "app.%s" .Values.domain | quote }}
+      - {{ .Values.domain | quote }}
     secretName: {{ .Release.Name }}-letsencrypt-tls
 
   rules:
-  - host: {{ quote .Values.hosts.frontend }}
+  - host: {{ printf "app.%s" .Values.domain | quote }}
     http:
       paths:
         - path: /
@@ -24,7 +24,7 @@ spec:
               port:
                 number: 3000
 
-  - host: {{ quote .Values.hosts.presenter }}
+  - host: {{ .Values.domain | quote }}
     http:
       paths:
       - path: /
@@ -54,7 +54,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: "{{ .Release.Namespace }}-{{ .Release.Name }}-stripprefix@kubernetescrd"
 spec:
   rules:
-  - host: {{ quote .Values.hosts.presenter }}
+  - host: {{ .Values.domain | quote }}
     http:
       paths:
       - path: /api

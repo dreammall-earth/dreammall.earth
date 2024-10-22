@@ -30,6 +30,12 @@ releases:
     values:
       - ./values/authentik.yaml.gotmpl
 
+  - name: authentik-secrets
+    namespace: {{ .StateValues.namespace }}
+    chart: ./authentik-secrets
+    secrets:
+      - ./secrets/authentik.yaml
+
   - name: mariadb
     namespace: {{ .StateValues.namespace }}
     chart: bitnami/mariadb
