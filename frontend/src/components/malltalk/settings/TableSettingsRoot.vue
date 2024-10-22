@@ -24,7 +24,6 @@
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
 import { navigate } from 'vike/client/router'
 import { computed, ref, inject } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -66,18 +65,8 @@ const isModeratorData = inject<IsModeratorInjection>(IsModeratorSymbol, {
   isModerator: ref(false),
 })
 
-const { getTables } = storeToRefs(tablesStore)
-
-const allTables = computed(() => {
-  const { mallTalkTables, permanentTables, projectTables } = getTables.value
-  return [...mallTalkTables, ...permanentTables, ...projectTables]
-})
-
 const meetingID = computed(() => {
-  if (!(tableId.value && allTables.value?.length)) return ''
-  const currentTable = allTables.value.find((t) => t.id.toString() === tableId.value.toString())
-  if (currentTable) return currentTable.meetingID
-  return ''
+  return tablesStore.getTable(tableId.value)?.meetingID ?? ''
 })
 
 const copiedIndicator = ref(false)

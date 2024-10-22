@@ -55,14 +55,14 @@ const steps: Step[] = [
   {
     component: IncomingInvitation,
     id: 'start',
-    title: t('dream-mall-panel.incoming-invitation.title'),
+    title: ref(t('dream-mall-panel.incoming-invitation.title')),
     submit: 'next',
     back: 'previous',
   },
   {
     component: TableSwap,
     id: 'swap',
-    title: t('dream-mall-panel.incoming-invitation.title'),
+    title: ref(t('dream-mall-panel.incoming-invitation.title')),
     submit: 'next',
     back: 'previous',
   },
