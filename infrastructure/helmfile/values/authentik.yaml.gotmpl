@@ -29,27 +29,18 @@ blueprints:
 worker:
   env:
     - name: DREAMMALL_FRONTEND_URL
-      valueFrom:
-        configMapKeyRef:
-          name: dreammall
-          key: frontend_url
+      value: https://app.{{ .StateValues.domain }}
     - name: DREAMMALL_PRESENTER_URL
-      valueFrom:
-        configMapKeyRef:
-          name: dreammall
-          key: presenter_url
+      value: https://{{ .StateValues.domain }}
+    - name: DREAMMALL_BACKEND_URL
+      value: http://dreammall-backend:4000
     - name: AUTHENTIK_BOOTSTRAP_PASSWORD
       valueFrom:
         secretKeyRef:
-          name: dreammall
+          name: authentik-secrets
           key: authentik_bootstrap_password
-    - name: DREAMMALL_BACKEND_URL
-      valueFrom:
-        configMapKeyRef:
-          name: dreammall
-          key: backend_url
     - name: DREAMMALL_WEBHOOK_SECRET
       valueFrom:
         secretKeyRef:
-          name: dreammall
-          key: webhook_secret
+          name: dreammall-backend-env
+          key: WEBHOOK_SECRET
