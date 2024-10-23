@@ -1150,6 +1150,245 @@ describe('UserResolver', () => {
     })
   })
 
+  describe('updateUserDetail mutation', () => {
+    const query = `mutation updateUserDetail($data: UpdateUserDetailInput!) {
+  updateUserDetail(data: $data) {
+    id
+    category
+    text
+  }
+}`
+
+    describe('unauthenticated', () => {
+      it('returns an unauthenticated error', async () => {
+        const response = await testServer.executeOperation(
+          {
+            query,
+            variables: {
+              data: {
+                id: -1,
+                text: 'Heute eher lax',
+              },
+            },
+          },
+          { contextValue: mockContextValue() },
+        )
+        expect(response).toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('authenticated', () => {
+      let user: UserWithProfile
+      beforeEach(async () => {
+        user = await findOrCreateUser({ prisma })({ pk, nickname, name })
+      })
+      describe('detail id does not exist', () => {
+        it('throws detail not found error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    id: -1,
+                    text: 'Heute eher lax',
+                  },
+                },
+              },
+              {
+                contextValue: mockContextValue({ user }),
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Detail not found!',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('detail belongs to another user', () => {
+        let detailId: number | undefined
+
+        beforeAll(async () => {
+          const bibi = await prisma.user.findUnique({
+            where: {
+              username: 'bibi',
+            },
+          })
+
+          if (bibi) {
+            const detail = await prisma.userDetail.create({
+              data: {
+                userId: bibi.id,
+                category: 'work',
+                text: 'Ich arbeite im Hexenhaus',
+              },
+            })
+
+            detailId = detail?.id
+          }
+        })
+
+        afterAll(async () => {
+          await prisma.userDetail.delete({
+            where: {
+              id: detailId,
+            },
+          })
+        })
+
+        it('throws detail not found error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    id: detailId,
+                    text: 'Heute eher lax',
+                  },
+                },
+              },
+              {
+                contextValue: mockContextValue({ user }),
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Detail not found!',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('detail belongs to user', () => {
+        let detailId: number | undefined
+
+        beforeAll(async () => {
+          const detail = await prisma.userDetail.findFirst()
+          detailId = detail?.id
+        })
+
+        it('returns updated user detail', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    id: detailId,
+                    text: 'Heute eher lax',
+                  },
+                },
+              },
+              {
+                contextValue: mockContextValue({ user }),
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  updateUserDetail: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    category: 'work',
+                    text: 'Heute eher lax',
+                  },
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it('updates userDetail in database', async () => {
+          await expect(
+            prisma.userDetail.findFirst({
+              where: {
+                id: detailId,
+              },
+            }),
+          ).resolves.toMatchObject({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            userId: expect.any(Number),
+            category: 'work',
+            text: 'Heute eher lax',
+          })
+        })
+
+        describe('text is too long', () => {
+          it('throws validation error', async () => {
+            await expect(
+              testServer.executeOperation(
+                {
+                  query,
+                  variables: {
+                    data: {
+                      id: detailId,
+                      text: 'Ich arbeite sehr hart in den Diamanten-Minen der Republik Kongo',
+                    },
+                  },
+                },
+                {
+                  contextValue: mockContextValue({ user }),
+                },
+              ),
+            ).resolves.toMatchObject({
+              body: {
+                kind: 'single',
+                singleResult: {
+                  data: null,
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                  errors: expect.arrayContaining([
+                    expect.objectContaining({
+                      message: 'Argument Validation Error',
+                    }),
+                  ]),
+                },
+              },
+            })
+          })
+        })
+      })
+    })
+  })
+
   describe('removeUserDetail mutation', () => {
     const query = `mutation removeUserDetail($id: Int!) {
   removeUserDetail(id: $id)
