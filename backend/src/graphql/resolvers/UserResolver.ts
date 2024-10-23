@@ -9,8 +9,9 @@ import { AddSocialMediaInput } from '#inputs/AddSocialMediaInput'
 import { AddUserDetailInput } from '#inputs/AddUserDetailInput'
 import { UpdateUserInput } from '#inputs/UpdateUserInput'
 
-import type { AuthenticatedContext } from '#src/context'
+import type { AuthenticatedContext, Context } from '#src/context'
 import type { PrismaClient, UsersWithMeetings, UserWithProfile } from '#src/prisma'
+import { Invitation } from '#graphql/models/InvitationModel'
 
 @Resolver()
 export class UserResolver {
@@ -202,6 +203,31 @@ export class UserResolver {
     return config.FRONTEND_URL + 'invite/' + dbInviationLink.code
   }
 
+  @Query(() => Invitation)
+  async validateInvitationLink(
+    @Arg('code') code: string,
+    @Ctx() context: Context,
+  ): Promise<Invitation> {
+    const {
+      dataSources: { prisma },
+    } = context
+    const invitationLink = await prisma.invitationLink.findUnique({
+      where: {
+        code,
+      },
+      include: {
+        user: true,
+      },
+    })
+    if (!invitationLink) throw new Error('Invalid invitation code.')
+    if (invitationLink.acceptedUserId) {
+      throw new Error('Link already used.')
+    }
+    return {
+      name: invitationLink.user.name,
+    }
+  }
+
   @Authorized()
   @Mutation(() => Boolean)
   async redeemInvitationLink(
@@ -265,4 +291,8 @@ const createInvitationCode = (prisma: PrismaClient) => async (): Promise<string>
     invitationCode = uuidv4()
   }
   return invitationCode
+}
+
+export type InvitationLinkName = {
+  username: string
 }
