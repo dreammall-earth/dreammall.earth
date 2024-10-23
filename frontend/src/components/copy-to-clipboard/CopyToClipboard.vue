@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex align-start">
     <v-text-field
-      :model-value="props.tableUrl"
+      :model-value="props.url"
       rounded
       flat
       class="elevation-0 w-100 flex-grow-1 mr-3 custom-text-field"
@@ -31,7 +31,7 @@ import { copyToClipboard } from '#src/utils/copyToClipboard'
 import type { toast as Toast } from 'vue3-toastify'
 
 const props = defineProps<{
-  tableUrl: string
+  url: string
 }>()
 
 const copiedIndicator = ref(false)
@@ -43,7 +43,7 @@ const copy = copyToClipboard(toast)
 const { t } = useI18n()
 
 const copyUrl = () => {
-  copy(props.tableUrl, t('copiedToClipboard'))
+  copy(props.url, t('copiedToClipboard'))
   copiedIndicator.value = true
 
   if (timerIndicator) clearTimeout(timerIndicator)

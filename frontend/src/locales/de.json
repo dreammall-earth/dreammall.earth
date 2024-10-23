@@ -105,6 +105,9 @@
     },
     "enablecookie": "🍪 Aktiviere Cookies in deinem Browser!"
   },
+  "invitationLink": {
+    "motivation": "Die Einladungslinks sind der Schlüssel auf unsere Plattform, wähle Sorgfältig."
+  },
   "joinTablePage": {
     "guestName": "Gastname",
     "publicTable": "Öffentlicher Tisch",

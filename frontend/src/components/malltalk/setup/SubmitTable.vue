@@ -2,7 +2,7 @@
   <div class="flat-text-field d-flex flex-column text-center pa-4">
     <InfoBox :text="$t('dream-mall-panel.setup.reminder')" />
 
-    <CopyToClipboard :table-url="tableUrl" class="mt-12" />
+    <CopyToClipboard :url="tableUrl" class="mt-12" />
 
     <SimpleButton class="mt-12 mx-auto" :label="submitText" @click="onSubmit" />
   </div>

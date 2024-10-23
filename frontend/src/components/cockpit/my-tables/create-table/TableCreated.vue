@@ -3,7 +3,7 @@
     <MotivationBox>
       {{ $t('cockpit.myTables.createTable.tableCreated') }}
     </MotivationBox>
-    <CopyToClipboard :table-url="tableUrl" class="copy-url" />
+    <CopyToClipboard :url="tableUrl" class="copy-url" />
     <SimpleButton class="mt-12 mx-auto" :label="props.submitText" @click="openTable" />
   </div>
 </template>

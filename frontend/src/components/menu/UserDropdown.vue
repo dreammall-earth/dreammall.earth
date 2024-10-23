@@ -12,7 +12,7 @@
       </button>
     </li>
     <li>
-      <button>
+      <button @click="openInvitationLink()">
         <v-icon icon="mdi mdi-email-multiple-outline"></v-icon>
         {{ $t('menu.invitationLinks') }}
       </button>
@@ -24,6 +24,8 @@
 import { inject } from 'vue'
 import { useTheme } from 'vuetify'
 
+import InvitationLink from '#components/invitation-link/InvitationLink.vue'
+import useModal from '#components/modal/useModal'
 import AuthService from '#src/services/AuthService'
 
 const theme = useTheme()
@@ -32,6 +34,12 @@ const isDarkTheme = theme.global.current.value.dark
 
 function toggleTheme() {
   theme.global.name.value = isDarkTheme ? 'light' : 'dark'
+}
+
+const { setComponent } = useModal()
+
+function openInvitationLink() {
+  setComponent(InvitationLink)
 }
 
 const authService = inject<AuthService>('authService')
