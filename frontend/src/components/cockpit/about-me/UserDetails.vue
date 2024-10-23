@@ -30,7 +30,7 @@
 import { computed, Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import { detailCategories, detailCategoryToIcon } from './detailCategories'
+import { detailCategories, detailCategoryToIcon } from '#src/utils/detailCategories'
 
 import type { UserDetail, UserDetailCategory } from '#stores/userStore'
 
