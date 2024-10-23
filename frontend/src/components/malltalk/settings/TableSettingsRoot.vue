@@ -31,9 +31,9 @@ import { useI18n } from 'vue-i18n'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 import {
-  IsModeratorInjection,
-  IsModeratorSymbol,
-} from '#components/malltalk/interfaces/IsModeratorInjection'
+  TableDataInjection,
+  TableDataSymbol,
+} from '#components/malltalk/interfaces/TableDataInjection'
 import { usePageContext } from '#context/usePageContext'
 import { copyToClipboard } from '#src/utils/copyToClipboard'
 import { useTablesStore } from '#stores/tablesStore'
@@ -62,7 +62,8 @@ const tableId = computed(() => {
 })
 
 const tablesStore = useTablesStore()
-const isModeratorData = inject<IsModeratorInjection>(IsModeratorSymbol, {
+const tableData = inject<TableDataInjection>(TableDataSymbol, {
+  name: ref(''),
   isModerator: ref(false),
 })
 
@@ -102,7 +103,7 @@ const buttons = computed(() => [
       }
     },
   },
-  ...(isModeratorData.isModerator.value
+  ...(tableData.isModerator.value
     ? [
         {
           icon: 'mdi-account-multiple-plus-outline',
