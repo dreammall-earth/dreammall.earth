@@ -121,12 +121,11 @@ model SocialMedia {
 }
 
 model MallTalkHistory {
-  from              User @relation("outgoingCall", fields: [fromId], references: [id], onDelete: Cascade)
+  id                Int      @id @default(autoincrement())
+  from              User     @relation("outgoingCall", fields: [fromId], references: [id], onDelete: Cascade)
   fromId            Int
-  to                User @relation("incomingCall", fields: [toId], references: [id], onDelete: Cascade)
+  to                User     @relation("incomingCall", fields: [toId], references: [id], onDelete: Cascade)
   toId              Int
   createdAt         DateTime @default(now())
-  status            String  @db.VarChar(12)  @default("UNKNOWN")
-
-  @@id([fromId, toId])
+  status            String   @db.VarChar(12)  @default("UNKNOWN")
 }
