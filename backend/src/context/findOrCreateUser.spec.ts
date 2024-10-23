@@ -74,19 +74,19 @@ describe('findOrCreateUser', () => {
         }),
       ])
     })
+  })
 
-    describe('second call', () => {
-      beforeEach(async () => {
-        user = await findOrCreateUser({ prisma })({ pk, nickname, name })
-      })
+  describe('second call', () => {
+    beforeEach(async () => {
+      user = await findOrCreateUser({ prisma })({ pk, nickname, name })
+    })
 
-      it('has the user in database', async () => {
-        await expect(prisma.user.findMany()).resolves.toHaveLength(1)
-      })
+    it('has the user in database', async () => {
+      await expect(prisma.user.findMany()).resolves.toHaveLength(1)
+    })
 
-      it('has the same user in database', async () => {
-        await expect(findOrCreateUser({ prisma })({ pk, nickname, name })).resolves.toEqual(user)
-      })
+    it('has the same user in database', async () => {
+      await expect(findOrCreateUser({ prisma })({ pk, nickname, name })).resolves.toEqual(user)
     })
   })
 })
