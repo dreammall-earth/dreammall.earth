@@ -73,6 +73,8 @@ model User {
   meetings          UsersInMeetings[]
   userDetail        UserDetail[]
   socialMedia       SocialMedia[]
+  outgoingCalls     MallTalkHistory[] @relation("outgoingCall")
+  incomingCalls     MallTalkHistory[] @relation("incomingCall")
 }
 
 model Meeting {
@@ -116,4 +118,15 @@ model SocialMedia {
   link              String   @db.VarChar(60)
   user              User     @relation(fields: [userId], references: [id])
   userId            Int
+}
+
+model MallTalkHistory {
+  from              User @relation("outgoingCall", fields: [fromId], references: [id], onDelete: Cascade)
+  fromId            Int
+  to                User @relation("incomingCall", fields: [toId], references: [id], onDelete: Cascade)
+  toId              Int
+  createdtA         DateTime @default(now())
+  status            String  @db.VarChar(12)  @default("UNKNOWN")
+
+  @@id([fromId, toId])
 }
