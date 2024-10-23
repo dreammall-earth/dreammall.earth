@@ -75,6 +75,7 @@ model User {
   socialMedia       SocialMedia[]
   outgoingCalls     MallTalkHistory[] @relation("outgoingCall")
   incomingCalls     MallTalkHistory[] @relation("incomingCall")
+  testphaseEndsAt   DateTime @default("2024-10-31T00:00:00Z")
 }
 
 model Meeting {

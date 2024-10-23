@@ -114,11 +114,11 @@ const onClick = () => {
 </script>
 
 <style scoped lang="scss">
-@import '#root/src/assets/scss/style';
+@use '#root/src/assets/scss/style' as style;
 
 .main-button {
   padding: 12px 39px;
-  font-family: $font-family-default;
+  font-family: style.$font-family-default;
   font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.6rem;
@@ -129,61 +129,61 @@ const onClick = () => {
 
   &--primary {
     color: white !important;
-    background-color: $main-button-primary-background;
+    background-color: style.$main-button-primary-background;
   }
 
   &--primary:hover {
-    @include linear-gradient-btn-hover($primary-color, $primary-color-transition);
+    @include style.linear-gradient-btn-hover(style.$primary-color, style.$primary-color-transition);
 
-    box-shadow: 0 6px 24px 0 $main-button-primary-shadow;
+    box-shadow: 0 6px 24px 0 style.$main-button-primary-shadow;
   }
 
   &--secondary {
-    color: $main-button-secondary-color;
-    background-color: $main-button-secondary-bg;
+    color: style.$main-button-secondary-color;
+    background-color: style.$main-button-secondary-bg;
   }
 
   &--third {
     padding: 8px 40px;
     color: white !important;
-    background-color: $main-button-third-bg;
+    background-color: style.$main-button-third-bg;
     border-radius: 10px;
   }
 
   &--third-inverse {
     padding: 8px 38px;
-    color: $font-color-default !important;
+    color: style.$font-color-default !important;
     background-color: transparent;
-    border: 1px solid $font-color-default;
+    border: 1px solid style.$font-color-default;
     border-radius: 10px;
   }
 
   &--fourth {
     padding: 0.75rem 2.4375rem;
-    background-color: $main-button-fourth-bg;
+    background-color: style.$main-button-fourth-bg;
   }
 
   &--fourth:hover {
-    @include linear-gradient-btn-hover(
-      $main-button-fourth-bg-hover-transition-start,
-      $main-button-fourth-bg-hover-transition-end
+    @include style.linear-gradient-btn-hover(
+      style.$main-button-fourth-bg-hover-transition-start,
+      style.$main-button-fourth-bg-hover-transition-end
     );
 
-    box-shadow: 0 6px 24px 0 $main-button-primary-shadow;
+    box-shadow: 0 6px 24px 0 style.$main-button-primary-shadow;
   }
 
   &--form-submit {
-    background: $main-button-submit-bg;
+    background: style.$main-button-submit-bg;
     border-radius: 15px;
   }
 
   &--form-submit:hover {
-    @include linear-gradient-btn-hover(
-      $main-button-submit-bg-hover-transition-start,
-      $main-button-submit-bg-hover-transition-end
+    @include style.linear-gradient-btn-hover(
+      style.$main-button-submit-bg-hover-transition-start,
+      style.$main-button-submit-bg-hover-transition-end
     );
 
-    box-shadow: 0 6px 24px 0 $main-button-primary-shadow;
+    box-shadow: 0 6px 24px 0 style.$main-button-primary-shadow;
   }
 
   &--reload {
@@ -192,7 +192,7 @@ const onClick = () => {
     font-weight: 400;
     line-height: 110%; /* 1.1rem */
     color: #bcbcbc;
-    background: $background-color-alt;
+    background: style.$background-color-alt;
     border: 1px solid #e3e3e3;
     border-radius: 3.25rem;
 
@@ -214,7 +214,7 @@ const onClick = () => {
   }
 
   &--download {
-    background: $main-button-download-bg;
+    background: style.$main-button-download-bg;
     border-radius: 15px;
   }
 
@@ -224,12 +224,12 @@ const onClick = () => {
   }
 
   &--download:hover {
-    @include linear-gradient-btn-hover(
-      $main-button-download-bg-hover-transition-start,
-      $main-button-download-bg-hover-transition-end
+    @include style.linear-gradient-btn-hover(
+      style.$main-button-download-bg-hover-transition-start,
+      style.$main-button-download-bg-hover-transition-end
     );
 
-    box-shadow: 0 6px 24px 0 $main-button-primary-shadow;
+    box-shadow: 0 6px 24px 0 style.$main-button-primary-shadow;
   }
 
   &--border-gradient {
