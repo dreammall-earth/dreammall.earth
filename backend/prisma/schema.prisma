@@ -73,7 +73,7 @@ model User {
   meetings          UsersInMeetings[]
   userDetail        UserDetail[]
   socialMedia       SocialMedia[]
-  testphaseEndsAt   DateTime?
+  testphaseEndsAt   DateTime @default("2024-10-31T00:00:00Z")
 }
 
 model Meeting {
