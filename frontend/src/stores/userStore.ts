@@ -117,6 +117,8 @@ export const useUserStore = defineStore(
 
     const getCurrentUserAvatar = computed(() => currentUser.value?.avatar)
 
+    const getCurrentUserName = computed(() => currentUser.value?.name)
+
     const getCurrentUserInitials = computed(() => {
       const name = currentUser.value?.name
       if (name) return getInitials(name)
@@ -219,6 +221,7 @@ export const useUserStore = defineStore(
       currentUser,
       getCurrentUser,
       setCurrentUser,
+      getCurrentUserName,
       getCurrentUserInitials,
       getCurrentUserAvatar,
       getMyTable,

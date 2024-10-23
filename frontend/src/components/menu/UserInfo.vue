@@ -7,10 +7,9 @@
         class="user-info rounded-pill d-flex flex-row text-font border-sm align-center justify-center"
       >
         <ClientOnly
-          ><v-avatar class="avatar d-flex align-center text-font border-sm" size="44">
-            <v-img v-if="userStore.getCurrentUserAvatar" :src="userStore.getCurrentUserAvatar" />
-            <span v-else>{{ userStore.getCurrentUserInitials?.toUpperCase() }}</span>
-          </v-avatar>
+          ><UserAvatar
+            :name="userStore.getCurrentUserName"
+            :avatar-src="userStore.getCurrentUserAvatar" />
           <div class="d-flex flex-column justify-center text-right pa-1 pl-3 w-100">
             <v-icon
               icon="$ellipsis"
@@ -28,6 +27,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
+import UserAvatar from '#components/Avatar/UserAvatar.vue'
 import ClientOnly from '#components/ClientOnly.vue'
 import { useUserStore } from '#stores/userStore'
 
@@ -51,14 +51,6 @@ const isOpen = ref(false)
 .phrase {
   font-size: 12px;
   text-wrap: nowrap;
-}
-
-.avatar {
-  width: calc(var(--menu-icon-height) - 6px) !important;
-  height: calc(var(--menu-icon-height) - 6px) !important;
-  margin: 3px !important;
-  background-color: rgb(var(--v-theme-cockpit-highlight));
-  border-color: rgb(var(--v-theme-border) 0.8);
 }
 
 .ellipsis-icon {
