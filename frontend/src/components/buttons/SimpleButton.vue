@@ -35,8 +35,8 @@ const onClick = () => {
   font-weight: 600;
   color: #249435;
   text-transform: none;
-  border: 1px solid #249435;
   background-color: #f5f5f5;
+  border: 1px solid #249435;
 
   &::before {
     display: none;
