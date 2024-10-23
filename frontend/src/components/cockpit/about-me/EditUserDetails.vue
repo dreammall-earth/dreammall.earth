@@ -72,9 +72,9 @@
 import { computed, ref } from 'vue'
 
 import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
+import { detailCategories, detailCategoryToIcon } from '#src/utils/detailCategories'
 import { UserDetailCategory, useUserStore } from '#stores/userStore'
 
-import { detailCategories, detailCategoryToIcon } from './detailCategories'
 import Details from './UserDetails.vue'
 
 import type { UserDetail } from '#stores/userStore'
