@@ -173,7 +173,7 @@ const initScene = () => {
   window.addEventListener('resize', onWindowResize)
 
   canvas.value?.addEventListener('click', onCanvasClick)
-  canvas.value?.addEventListener('mousemove', onCanvasMouseMove)
+  canvas.value?.addEventListener('pointermove', onCanvasMouseMove)
 }
 
 // Erstellt ein dezentes Raster auf der Sphäre
@@ -293,7 +293,8 @@ const onCanvasClick = (event: MouseEvent) => {
   }
 }
 
-const onCanvasMouseMove = (event: MouseEvent) => {
+const onCanvasMouseMove = (event: PointerEvent) => {
+  if (event.pointerType !== 'mouse') return
   const star = getRaycasterIntersects(event)
   if (!star) {
     hoveredStar.data = null
