@@ -33,10 +33,10 @@ const onClick = () => {
   padding: 0 20px;
   font-size: 16px;
   font-weight: 600;
-  color: #249435;
+  color: rgb(var(--v-theme-dm-panel-submit-color));
   text-transform: none;
-  background-color: #f5f5f5;
-  border: 1px solid #249435;
+  background-color: rgb(var(--v-theme-dm-panel-submit-background-color));
+  border: 1px solid rgb(var(--v-theme-dm-panel-submit-color));
 
   &::before {
     display: none;
