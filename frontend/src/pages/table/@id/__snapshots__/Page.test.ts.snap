@@ -621,13 +621,14 @@ exports[`Table Page > renders 1`] = `
                     
                     <div
                       class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm"
+                      data-v-526a6e2d=""
                       data-v-607bdd70=""
                       style="width: 44px; height: 44px;"
                     >
                       
                       
                       <span
-                        data-v-607bdd70=""
+                        data-v-526a6e2d=""
                       >
                         CU
                       </span>
@@ -1874,13 +1875,14 @@ exports[`Table Page > renders 1`] = `
           
           <div
             class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm"
+            data-v-526a6e2d=""
             data-v-607bdd70=""
             style="width: 44px; height: 44px;"
           >
             
             
             <span
-              data-v-607bdd70=""
+              data-v-526a6e2d=""
             >
               CU
             </span>
