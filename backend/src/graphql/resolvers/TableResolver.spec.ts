@@ -579,7 +579,7 @@ describe('TableResolver', () => {
 
     describe('createMyTable', () => {
       describe('meeting does not exist and no userIds given', () => {
-        it('returns Table and creates CREATE_MY_TABLE event in db ', async () => {
+        it('returns Table and creates CREATE_MY_TABLE event in db', async () => {
           await expect(
             testServer.executeOperation(
               {
@@ -777,7 +777,7 @@ describe('TableResolver', () => {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(Number),
               fromId: user.id,
-              toId: bibiUser.id, 
+              toId: bibiUser.id,
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               createdAt: expect.any(Date),
               status: 'UNKNOWN',
@@ -786,7 +786,7 @@ describe('TableResolver', () => {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(Number),
               fromId: user.id,
-              toId: peterUser.id, 
+              toId: peterUser.id,
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               createdAt: expect.any(Date),
               status: 'UNKNOWN',

@@ -81,7 +81,7 @@ export class TableResolver {
       await createUsersInMeetings(prisma)({ userIds, meeting, role: AttendeeRole.VIEWER })
 
       await createMallTalkHistoryEntry(prisma)(user.id, userIds)
-      
+
       pubSub.publish('CALL_SUBSCRIPTION', {
         user,
         userIds,
@@ -719,12 +719,13 @@ const getOpenWelcomeTable = (context: AuthenticatedContext) => (meetings: Meetin
   })
 }
 
-const createMallTalkHistoryEntry = (prisma: PrismaClient) =>
-      async (fromId: number, toIds: number[]): Promise<GetBatchResult> => {
-        return prisma.mallTalkHistory.createMany({
-          data: toIds.map((toId: number) => ({
-            fromId,
-            toId,
-          })),
-        })
-      }
+const createMallTalkHistoryEntry =
+  (prisma: PrismaClient) =>
+  async (fromId: number, toIds: number[]): Promise<GetBatchResult> => {
+    return prisma.mallTalkHistory.createMany({
+      data: toIds.map((toId: number) => ({
+        fromId,
+        toId,
+      })),
+    })
+  }
