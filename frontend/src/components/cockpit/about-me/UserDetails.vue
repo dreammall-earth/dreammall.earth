@@ -1,13 +1,19 @@
 <template>
   <ul class="details" :class="{ editable: props.editable }">
-    <li v-for="detail in details" :key="detail.id">
-      <v-chip class="detail border-thin">
+    <li v-for="detail in details" :key="detail.id" class="detail">
+      <v-chip class="detail-chip border-thin">
         <v-icon
           :icon="detailCategoryToIcon(detail.category)"
           class="mr-2"
           color="cockpit-highlight"
         ></v-icon>
-        {{ detail.text }}
+        <span
+          class="detail-text"
+          :title="detail.text"
+          tabindex="0"
+          @click="$emit('edit-detail', detail.id, detail.category)"
+          >{{ detail.text }}</span
+        >
         <button
           v-if="props.editable && detail.id > 0"
           class="pl-1"
@@ -26,7 +32,7 @@ import { useI18n } from 'vue-i18n'
 
 import { detailCategories, detailCategoryToIcon } from './detailCategories'
 
-import type { UserDetail } from '#stores/userStore'
+import type { UserDetail, UserDetailCategory } from '#stores/userStore'
 
 const { t } = useI18n()
 
@@ -37,6 +43,7 @@ const props = defineProps<{
 
 defineEmits<{
   (e: 'remove-detail', id: number): void
+  (e: 'edit-detail', id: number, category: UserDetailCategory): void
 }>()
 
 const details: Ref<UserDetail[]> = computed(() => {
@@ -57,10 +64,26 @@ const details: Ref<UserDetail[]> = computed(() => {
 
 <style scoped>
 .detail {
+  overflow: hidden;
+}
+
+.detail-text {
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+}
+
+.detail-chip {
   background: var(--v-cockpit-chip-background);
 
   &:deep(.v-chip__underlay) {
     display: none;
+  }
+
+  &:deep(.v-chip__content) {
+    width: 100%;
   }
 }
 
@@ -82,7 +105,7 @@ const details: Ref<UserDetail[]> = computed(() => {
     padding: 0;
     background: unset;
 
-    .detail {
+    .detail-chip {
       background: var(--v-cockpit-chip-background-2);
     }
   }
