@@ -128,4 +128,5 @@ model MallTalkHistory {
   toId              Int
   createdAt         DateTime @default(now())
   status            String   @db.VarChar(12)  @default("UNKNOWN")
+  tableId           Int
 }

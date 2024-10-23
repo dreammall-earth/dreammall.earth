@@ -19,6 +19,7 @@ import { CreateMeetingResponse } from '#api/BBB/types'
 import { CONFIG } from '#config/config'
 import { pubSub } from '#graphql/pubSub'
 import { Call } from '#models/Call'
+import { MallTalkHistoryIncoming, MallTalkStatus } from '#models/MallTalkHistoryModel'
 import { JoinTable, OpenTable, OpenTables, Table, getAttendees } from '#models/TableModel'
 import { AuthenticatedContext } from '#src/context'
 import {
@@ -80,7 +81,11 @@ export class TableResolver {
     if (userIds && userIds.length) {
       await createUsersInMeetings(prisma)({ userIds, meeting, role: AttendeeRole.VIEWER })
 
-      await createMallTalkHistoryEntry(prisma)(user.id, userIds)
+      await createMallTalkHistoryEntry(prisma)({
+        fromId: user.id,
+        toIds: userIds,
+        tableId: meeting.id,
+      })
 
       pubSub.publish('CALL_SUBSCRIPTION', {
         user,
@@ -498,6 +503,48 @@ export class TableResolver {
     return Table.fromMeeting(meeting, userInMeeting)
   }
 
+  @Authorized()
+  @Mutation(() => MallTalkHistoryIncoming)
+  async updateMallTalkHistoryStatus(
+    @Arg('tableId', () => Int) tableId: number,
+    @Arg('fromId', () => Int) fromId: number,
+    @Arg('status', () => MallTalkStatus) status: MallTalkStatus,
+    @Ctx() context: AuthenticatedContext,
+  ): Promise<MallTalkHistoryIncoming> {
+    const {
+      user,
+      dataSources: { prisma },
+    } = context
+
+    const history = await prisma.mallTalkHistory.findFirst({
+      where: {
+        tableId,
+        fromId,
+        toId: user.id,
+      },
+      include: {
+        from: true,
+        to: true,
+      },
+    })
+
+    if (!history) {
+      throw new Error('History entry not found!')
+    }
+
+    await prisma.mallTalkHistory.update({
+      where: {
+        id: history.id,
+      },
+      data: {
+        status,
+      },
+    })
+
+    history.status = status
+    return new MallTalkHistoryIncoming(history)
+  }
+
   @Subscription(() => OpenTables, {
     topics: 'OPEN_TABLE_SUBSCRIPTION',
   })
@@ -721,11 +768,20 @@ const getOpenWelcomeTable = (context: AuthenticatedContext) => (meetings: Meetin
 
 const createMallTalkHistoryEntry =
   (prisma: PrismaClient) =>
-  async (fromId: number, toIds: number[]): Promise<GetBatchResult> => {
+  async ({
+    fromId,
+    toIds,
+    tableId,
+  }: {
+    fromId: number
+    toIds: number[]
+    tableId: number
+  }): Promise<GetBatchResult> => {
     return prisma.mallTalkHistory.createMany({
       data: toIds.map((toId: number) => ({
         fromId,
         toId,
+        tableId,
       })),
     })
   }

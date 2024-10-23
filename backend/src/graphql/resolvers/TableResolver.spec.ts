@@ -781,6 +781,8 @@ describe('TableResolver', () => {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               createdAt: expect.any(Date),
               status: 'UNKNOWN',
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              tableId: expect.any(Number),
             },
             {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -790,6 +792,8 @@ describe('TableResolver', () => {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               createdAt: expect.any(Date),
               status: 'UNKNOWN',
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              tableId: expect.any(Number),
             },
           ])
         })
