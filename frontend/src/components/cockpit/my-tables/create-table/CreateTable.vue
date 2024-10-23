@@ -41,7 +41,7 @@ const steps: Step[] = [
   {
     component: EnterNameAndVisibility,
     id: 'settings',
-    title: ref('Tisch eröffnen'),
+    title: 'Tisch eröffnen',
     submit: 'users',
     submitText: 'Weiter',
     back: 'previous',
@@ -49,7 +49,7 @@ const steps: Step[] = [
   {
     component: SelectUsers,
     id: 'users',
-    title: ref('Leute einladen'),
+    title: 'Leute einladen',
     submit: 'next',
     submitText: 'Weiter',
     back: 'previous',
@@ -57,7 +57,7 @@ const steps: Step[] = [
   {
     component: TableCreated,
     id: 'end',
-    title: ref('Kleine Erinnerung'),
+    title: 'Kleine Erinnerung',
     submit: 'close',
     submitText: 'Tisch eröffnen',
     back: () => 'users',

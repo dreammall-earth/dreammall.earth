@@ -10,12 +10,10 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { reactive, watch, ref, computed } from 'vue'
+import { reactive, watch, ref } from 'vue'
 
 import StepControl from '#components/steps/StepControl.vue'
 import { Step } from '#components/steps/useSteps'
-import { usePageContext } from '#context/usePageContext'
-import { useTablesStore } from '#stores/tablesStore'
 import { useUserStore } from '#stores/userStore'
 
 import ChangeUsers from './ChangeUsers.vue'
@@ -35,19 +33,6 @@ const tableSettings = reactive<MyTableSettings>({
   meetingID: myTable.value?.meetingID || '',
 })
 
-const pageContext = usePageContext()
-const tablesStore = useTablesStore()
-
-const tableId = computed(() => {
-  return pageContext.routeParams?.id ? pageContext.routeParams.id : ''
-})
-
-watch(tablesStore.getTables, () => {
-  meetingName.value = tablesStore.getTable(tableId.value)?.meetingName || 'Mein Tisch'
-})
-
-const meetingName = ref<string>('Mein Tisch')
-
 watch(myTable, (value) => {
   tableSettings.name = value?.name || ''
   tableSettings.isPrivate = !value?.public || false
@@ -59,7 +44,7 @@ const steps: Step[] = [
   {
     component: TableSettingsRoot,
     id: 'root',
-    title: meetingName,
+    title: 'Mein Tisch',
     submit: 'close',
     submitText: 'Beenden',
     back: 'previous',
@@ -67,7 +52,7 @@ const steps: Step[] = [
   {
     component: ChangeUsers,
     id: 'users',
-    title: ref('Teilnehmer'),
+    title: 'Teilnehmer',
     submit: 'root',
     submitText: 'Übernehmen',
     back: 'root',
