@@ -1592,27 +1592,23 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
         </div>
         
       </div>
-      <!-- Desktop Bottom Bar -->
-      <div
-        class="desktop-bottom-bar d-none d-md-flex"
-        data-v-75d0be1e=""
-      />
       <!-- Dream Mall Button & Panel -->
       <div
         class="dream-mall-floating-container"
         data-v-75d0be1e=""
+        data-v-e7870397=""
       >
         <div
           class="dream-mall-button-wrapper"
-          data-v-75d0be1e=""
+          data-v-e7870397=""
         >
           <div
             class="dream-mall-button"
-            data-v-75d0be1e=""
+            data-v-e7870397=""
           >
             <svg
               data-v-57af6bd7=""
-              data-v-75d0be1e=""
+              data-v-e7870397=""
               fill="none"
               height="1719"
               viewBox="0 0 1731 1719"
@@ -2218,9 +2214,8 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
         </div>
         <div
           class="dream-mall-panel"
-          data-v-75d0be1e=""
+          data-v-e7870397=""
         >
-          
           
           <div
             class="step-header dream-mall-button-mode"
@@ -2316,7 +2311,6 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
             <!---->
             <!---->
           </button>
-          
           
         </div>
       </div>
