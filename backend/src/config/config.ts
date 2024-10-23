@@ -41,7 +41,6 @@ const {
 
   LOG_LEVEL = 'DEBUG',
 
-  TESTPHASE_DEFAULT,
   TESTPHASE_DURATION_DAYS,
 } = process.env
 

@@ -33,7 +33,7 @@ export const findOrCreateUser =
     const referenceId = nanoid()
     const testphaseEndsAt = new Date()
     testphaseEndsAt.setDate(testphaseEndsAt.getDate() + CONFIG.TESTPHASE_DURATION_DAYS)
-  
+
     user = await prisma.user.create({
       data: {
         pk,

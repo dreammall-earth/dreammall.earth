@@ -56,7 +56,7 @@ describe('findOrCreateUser', () => {
         (CONFIG.TESTPHASE_DURATION_DAYS - 1) * dayInMilliseconds + createdAt,
       )
     })
-    
+
     it('creates CREATE USER event', async () => {
       await findOrCreateUser({ prisma })({ pk, nickname, name })
       const users = await prisma.user.findMany()
