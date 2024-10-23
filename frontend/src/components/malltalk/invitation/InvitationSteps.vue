@@ -47,7 +47,6 @@ const invitation = reactive<Invitation>({
   tableId: 0,
   tableName: '',
 })
-resetInvitation()
 
 const { t } = useI18n()
 
@@ -76,13 +75,16 @@ const pageContext = usePageContext()
 const tablesStore = useTablesStore()
 
 const onAccept = async () => {
-  const isAlreadyInMeeting = pageContext.urlPathname === 'table'
+  const isAlreadyInMeeting = pageContext.urlPathname.startsWith('/table')
   if (isAlreadyInMeeting && stepControl.value?.getCurrentId() !== 'swap') {
     stepControl.value?.goTo('swap')
   } else {
-    if (!invitation.tableId) return
+    if (!invitation.tableId) {
+      throw new Error('Invitation has no table id')
+    }
     try {
       await navigate(tablesStore.getTableUri(invitation.tableId))
+      emit('close')
     } catch (cause) {
       throw new Error(t('table.error'), { cause })
     }
