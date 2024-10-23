@@ -14,10 +14,7 @@ import { useSlots } from 'vue'
 const slots = useSlots()
 </script>
 
-<style scoped lang="scss">
-@use 'sass:map';
-@import 'vuetify/lib/styles/settings/_variables';
-
+<style scoped>
 .cockpit-card-variable-height {
   --padding: 20px;
   --card-width: 100%;

@@ -1417,7 +1417,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                 >
                   <i
                     aria-hidden="true"
-                    class="mdi-instagram mdi v-icon notranslate v-theme--light v-icon--size-default"
+                    class="mdi mdi-instagram mdi v-icon notranslate v-theme--light v-icon--size-default"
                     data-v-f444dc92=""
                   />
                 </li>
