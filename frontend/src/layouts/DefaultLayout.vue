@@ -38,34 +38,12 @@
       <slot></slot>
     </v-container>
 
-    <!-- Desktop Bottom Bar -->
-    <div class="desktop-bottom-bar d-none d-md-flex"></div>
-
     <!-- Dream Mall Button & Panel -->
-    <div
-      class="dream-mall-floating-container"
-      :class="{ active: visibleDrawer === 'dream-mall-button' }"
-    >
-      <div class="dream-mall-button-wrapper">
-        <div class="dream-mall-button">
-          <DreamMallButton
-            :is-active="visibleDrawer === 'dream-mall-button'"
-            :is-notification="isIncomingInvitation"
-            @click="toggleDrawer('dream-mall-button')"
-          />
-        </div>
-      </div>
-      <div class="dream-mall-panel">
-        <slot name="dream-mall-button" :close="() => toggleDrawer('dream-mall-button')">
-          <InvitationSteps
-            v-if="isIncomingInvitation"
-            ref="invitationStepsRef"
-            @close="toggleDrawer('dream-mall-button')"
-          />
-          <TableSetup v-else ref="tableSetupRef" @close="toggleDrawer('dream-mall-button')" />
-        </slot>
-      </div>
-    </div>
+    <DreamMallPanel
+      :is-visible="visibleDrawer === 'dream-mall-button'"
+      @toggle="toggleDrawer('dream-mall-button')"
+      @open="setDrawer('dream-mall-button')"
+    />
 
     <div class="bottom-menu w-100 position-fixed bottom-0 py-2 d-md-none">
       <button
@@ -83,12 +61,9 @@
 </template>
 
 <script lang="ts" setup>
-import { storeToRefs } from 'pinia'
-import { computed, nextTick, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 
-import DreamMallButton from '#components/buttons/DreamMallButton.vue'
-import InvitationSteps from '#components/malltalk/invitation/InvitationSteps.vue'
-import TableSetup from '#components/malltalk/setup/TableSetup.vue'
+import DreamMallPanel from '#components/dream-mall-panel/DreamMallPanel.vue'
 import Circle from '#components/menu/CircleElement.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 import TabControl from '#components/menu/TabControl.vue'
@@ -96,7 +71,6 @@ import UserInfo from '#components/menu/UserInfo.vue'
 import ModalPanel from '#components/modal/ModalPanel.vue'
 import useModal from '#components/modal/useModal'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
-import { Call, useTablesStore } from '#stores/tablesStore'
 
 type DrawerType = 'tables' | 'dream-mall-button' | 'call' | null
 
@@ -111,41 +85,11 @@ const isTablesDrawerVisible = computed({
   },
 })
 
-const isIncomingInvitation = ref<boolean>(false)
-const invitationStepsRef = ref<InstanceType<typeof InvitationSteps> | null>(null)
-const tableSetupRef = ref<InstanceType<typeof TableSetup> | null>(null)
-
-const tablesStore = useTablesStore()
-const { getCurrentCall } = storeToRefs(tablesStore)
-
-watch(getCurrentCall, (call: Call | null) => {
-  if (call && call.user?.id && call?.table) {
-    tableSetupRef.value?.reset()
-    isIncomingInvitation.value = true
-    nextTick(() => {
-      invitationStepsRef.value?.setInvitation(
-        call.user.id,
-        call.user.name,
-        call.table.id,
-        call.table.meetingName,
-      )
-      setDrawer('dream-mall-button')
-    })
-  } else {
-    invitationStepsRef.value?.reset()
-    isIncomingInvitation.value = false
-  }
-})
-
 const toggleDrawer = (drawer: DrawerType) => {
   if (visibleDrawer.value === drawer) {
     visibleDrawer.value = null
-    isIncomingInvitation.value = false
   } else {
     visibleDrawer.value = drawer
-    if (drawer === 'dream-mall-button' && !isIncomingInvitation.value) {
-      tableSetupRef.value?.reset()
-    }
   }
 }
 
@@ -189,131 +133,6 @@ const { isModalActive } = useModal()
 
 .logo {
   width: 140px;
-}
-
-.desktop-bottom-bar {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 3000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 120px;
-  overflow: hidden;
-  background: transparent;
-}
-
-.dream-mall-floating-container {
-  --width: 400px;
-  --button-size: 100px;
-  --button-scaling: 0.7;
-  --panel-height: 500px;
-  --animation-duration: 0.3s;
-  --animation-timing: ease-out;
-
-  position: fixed;
-  bottom: 10px;
-  left: calc(50% - var(--width) / 2);
-  z-index: 5000;
-  display: flex;
-  flex-flow: column nowrap;
-  place-content: center flex-start;
-  align-items: center;
-  width: var(--width);
-  height: var(--button-size);
-  pointer-events: none;
-  transition: height var(--animation-duration) var(--animation-timing);
-
-  .dream-mall-button-wrapper {
-    z-index: 5001;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: var(--button-size);
-    height: var(--button-size);
-    transition: transform var(--animation-duration) var(--animation-timing);
-  }
-
-  .dream-mall-button {
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    transition:
-      transform var(--animation-duration) var(--animation-timing),
-      width var(--animation-duration) var(--animation-timing),
-      height var(--animation-duration) var(--animation-timing);
-  }
-
-  &.active {
-    height: calc(var(--panel-height) + var(--button-size));
-
-    .dream-mall-button-wrapper {
-      transform: translateY(calc(var(--button-size) / 2));
-    }
-
-    .dream-mall-button {
-      width: calc(var(--button-size) * var(--button-scaling));
-      height: calc(var(--button-size) * var(--button-scaling));
-      transform: scale(var(--button-scaling));
-    }
-  }
-
-  .dream-mall-panel {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 1000;
-    display: flex;
-    flex-flow: column nowrap;
-    place-content: center flex-start;
-    align-items: center;
-    width: 100%;
-    height: calc(var(--button-size) / 2);
-    padding-top: 10px;
-    padding-bottom: 20px;
-    overflow: hidden;
-    pointer-events: none;
-    background-color: var(--v-dm-panel-background-color);
-    backdrop-filter: blur(30px);
-    border: 1px solid var(--v-dm-panel-border-color);
-    border-radius: 30px;
-    opacity: 0;
-    transition:
-      height var(--animation-duration) var(--animation-timing),
-      opacity var(--animation-duration) var(--animation-timing);
-  }
-
-  &.active .dream-mall-panel {
-    height: var(--panel-height);
-    pointer-events: all;
-    opacity: 1;
-  }
-
-  @media #{map.get(variables.$display-breakpoints, 'sm-and-down')} {
-    --width: 100vw;
-    --panel-height: 75vh;
-
-    bottom: 0;
-    left: 0;
-
-    &.active {
-      height: calc(var(--panel-height) + var(--button-size));
-    }
-
-    .dream-mall-panel {
-      border-radius: 30px 30px 0 0;
-    }
-
-    .dream-mall-button {
-      transform: translateY(-10px);
-    }
-
-    &.active .dream-mall-panel {
-      height: var(--panel-height);
-    }
-  }
 }
 
 .bottom-menu {
