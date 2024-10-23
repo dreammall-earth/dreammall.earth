@@ -201,6 +201,38 @@ export class UserResolver {
     })
     return config.FRONTEND_URL + 'invite/' + dbInviationLink.code
   }
+
+  @Authorized()
+  @Mutation(() => Boolean)
+  async redeemInvitationLink(
+    @Arg('code') code: string,
+    @Ctx() context: AuthenticatedContext,
+  ): Promise<boolean> {
+    const {
+      user,
+      dataSources: { prisma },
+    } = context
+    const invitationLink = await prisma.invitationLink.findUnique({
+      where: {
+        code,
+      },
+    })
+    if (!invitationLink) {
+      throw new Error('Invalid invitation code.')
+    }
+    if (invitationLink.acceptedUserId) {
+      throw new Error('Link already used.')
+    }
+    await prisma.invitationLink.update({
+      where: {
+        code,
+      },
+      data: {
+        acceptedUserId: user.id,
+      },
+    })
+    return true
+  }
 }
 
 const createCurrentUser =
