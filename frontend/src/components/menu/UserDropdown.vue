@@ -8,7 +8,13 @@
     </li>
     <li>
       <button class="sign-out" @click="signOut">
-        <v-icon icon="$logout"></v-icon>{{ $t('buttons.signout') }}
+        <v-icon icon="mdi mdi-logout"></v-icon>{{ $t('buttons.signout') }}
+      </button>
+    </li>
+    <li>
+      <button>
+        <v-icon icon="mdi mdi-email-multiple-outline"></v-icon>
+        {{ $t('menu.invitationLinks') }}
       </button>
     </li>
   </ul>

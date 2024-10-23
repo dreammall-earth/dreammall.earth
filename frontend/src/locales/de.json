@@ -115,6 +115,7 @@
   },
   "menu": {
     "cockpit": "Cockpit",
+    "invitationLinks": "Einladungslink",
     "mall": "Mall",
     "theme": {
       "dark": "Dunkel",
