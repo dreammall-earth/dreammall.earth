@@ -10,8 +10,8 @@
 import { useQuery } from '@vue/apollo-composable'
 import { ref, watch } from 'vue'
 
-import MotivationBox from '#components/cockpit/my-tables/create-table/MotivationBox.vue'
 import CopyToClipboard from '#components/copy-to-clipboard/CopyToClipboard.vue'
+import MotivationBox from '#components/motivation-box/MotivationBox.vue'
 import StepHeader from '#components/steps/StepHeader.vue'
 import { createInvitationLinkMutation } from '#mutations/createInvitationLinkMutation'
 

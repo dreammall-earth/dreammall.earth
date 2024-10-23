@@ -27,8 +27,7 @@
 <script setup lang="ts">
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 import PrivateSwitch from '#components/cockpit/my-tables/private-switch/PrivateSwitch.vue'
-
-import MotivationBox from './MotivationBox.vue'
+import MotivationBox from '#components/motivation-box/MotivationBox.vue'
 
 import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
 import type { CreateTableModel } from './CreateTable.vue'
