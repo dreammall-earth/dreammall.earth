@@ -81,7 +81,14 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import type { Component } from 'vue'
 
+// Import SVG icons as components
+import DiscordIcon from '#assets/icons/discord.svg?component'
+import TelegramIcon from '#assets/icons/telegram.svg?component'
+import TiktokIcon from '#assets/icons/tiktok.svg?component'
+import XIcon from '#assets/icons/x.svg?component'
+import XingIcon from '#assets/icons/xing.svg?component'
 import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
 
 import UserDetails from './UserDetails.vue'
@@ -149,14 +156,11 @@ const updateIntroduction = (event: Event) => {
   emit('update-introduction', (event.target as HTMLInputElement).value)
 }
 
-// Import SVG icons as components
-import DiscordIcon from '#assets/icons/discord.svg?component'
-import TelegramIcon from '#assets/icons/telegram.svg?component'
-import XingIcon from '#assets/icons/xing.svg?component'
-import TiktokIcon from '#assets/icons/tiktok.svg?component'
-import XIcon from '#assets/icons/x.svg?component'
+// Define the type for SVG icon names
+type SvgIconType = 'discord' | 'telegram' | 'xing' | 'tiktok' | 'x'
 
-const svgIconComponents: Record<string, any> = {
+// Map of SVG icon components
+const svgIconComponents: Record<SvgIconType, Component> = {
   discord: DiscordIcon,
   telegram: TelegramIcon,
   xing: XingIcon,
@@ -165,25 +169,15 @@ const svgIconComponents: Record<string, any> = {
 }
 
 // Function to check if an icon is SVG
-const isSVGIcon = (type: string) => {
-  return Object.keys(svgIconComponents).includes(type)
+const isSVGIcon = (type: string): type is SvgIconType => {
+  return type in svgIconComponents
 }
 
 // Function to get SVG icon component
-const getSVGIconComponent = (type: string) => {
-  return svgIconComponents[type] || null
+const getSVGIconComponent = (type: SvgIconType): Component => {
+  return svgIconComponents[type]
 }
 </script>
-
-<style scoped>
-/* Your existing styles */
-
-.social-icon {
-  width: 24px;
-  height: 24px;
-}
-</style>
-
 
 <style scoped>
 .header {
@@ -290,5 +284,4 @@ hr {
   width: 24px;
   height: 24px;
   margin-top: 6px;
-}
-</style>
+}</style>
