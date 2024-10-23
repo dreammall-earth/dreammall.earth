@@ -62,7 +62,12 @@
         <v-icon icon="mdi mdi-share-variant-outline" class="mr-2" />
         <ul v-if="props.social.length > 0" class="social-list">
           <li v-for="item in props.social" :key="item.type">
-            <v-icon :icon="`mdi-${item.type}`"></v-icon>
+            <template v-if="isSVGIcon(item.type)">
+              <component :is="getSVGIconComponent(item.type)" class="social-icon" />
+            </template>
+            <template v-else>
+              <v-icon :icon="`mdi mdi-${item.type}`"></v-icon>
+            </template>
           </li>
         </ul>
         <span v-else>
@@ -143,7 +148,42 @@ const updateName = (event: Event) => {
 const updateIntroduction = (event: Event) => {
   emit('update-introduction', (event.target as HTMLInputElement).value)
 }
+
+// Import SVG icons as components
+import DiscordIcon from '#assets/icons/discord.svg?component'
+import TelegramIcon from '#assets/icons/telegram.svg?component'
+import XingIcon from '#assets/icons/xing.svg?component'
+import TiktokIcon from '#assets/icons/tiktok.svg?component'
+import XIcon from '#assets/icons/x.svg?component'
+
+const svgIconComponents: Record<string, any> = {
+  discord: DiscordIcon,
+  telegram: TelegramIcon,
+  xing: XingIcon,
+  tiktok: TiktokIcon,
+  x: XIcon,
+}
+
+// Function to check if an icon is SVG
+const isSVGIcon = (type: string) => {
+  return Object.keys(svgIconComponents).includes(type)
+}
+
+// Function to get SVG icon component
+const getSVGIconComponent = (type: string) => {
+  return svgIconComponents[type] || null
+}
 </script>
+
+<style scoped>
+/* Your existing styles */
+
+.social-icon {
+  width: 24px;
+  height: 24px;
+}
+</style>
+
 
 <style scoped>
 .header {
@@ -244,5 +284,10 @@ const updateIntroduction = (event: Event) => {
 hr {
   margin-block: 10px;
   border-color: white;
+}
+
+.social-icon {
+  width: 24px;
+  height: 24px;
 }
 </style>
