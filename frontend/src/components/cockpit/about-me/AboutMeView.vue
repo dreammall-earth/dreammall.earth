@@ -81,7 +81,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import type { Component } from 'vue'
 
 // Import SVG icons as components
 import DiscordIcon from '#assets/icons/discord.svg?component'
@@ -94,6 +93,7 @@ import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
 import UserDetails from './UserDetails.vue'
 
 import type { UserDetail, UserAvailability, SocialMedia } from '#stores/userStore'
+import type { Component } from 'vue'
 
 const { t } = useI18n()
 
@@ -175,6 +175,7 @@ const isSVGIcon = (type: string): type is SvgIconType => {
 
 // Function to get SVG icon component
 const getSVGIconComponent = (type: SvgIconType): Component => {
+  // eslint-disable-next-line security/detect-object-injection
   return svgIconComponents[type]
 }
 </script>
@@ -284,4 +285,5 @@ hr {
   width: 24px;
   height: 24px;
   margin-top: 6px;
-}</style>
+}
+</style>
