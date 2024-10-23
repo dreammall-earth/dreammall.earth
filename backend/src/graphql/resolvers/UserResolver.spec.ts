@@ -633,6 +633,7 @@ describe('UserResolver', () => {
     username
     introduction
     availability
+    testphaseEndsAt
     details {
       category
       text
@@ -727,6 +728,8 @@ describe('UserResolver', () => {
           meetingId: null,
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           createdAt: expect.any(Date),
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          testphaseEndsAt: expect.any(Date),
         })
       })
 
@@ -756,8 +759,7 @@ describe('UserResolver', () => {
               singleResult: {
                 data: {
                   updateUser: {
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                    id: expect.any(Number),
+                    id: user.id,
                     name: 'Peter Lustig',
                     username: 'mockedUser',
                     introduction: 'Latzhose und Nickelbrille',
@@ -766,6 +768,7 @@ describe('UserResolver', () => {
                     social: [],
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     table: expect.any(Object),
+                    testphaseEndsAt: user.testphaseEndsAt.toISOString(),
                   },
                 },
                 errors: undefined,
@@ -783,8 +786,7 @@ describe('UserResolver', () => {
               },
             }),
           ).resolves.toEqual({
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            id: expect.any(Number),
+            id: user.id,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             pk: expect.any(Number),
             username: 'mockedUser',
@@ -796,6 +798,7 @@ describe('UserResolver', () => {
             meetingId: null,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             createdAt: expect.any(Date),
+            testphaseEndsAt: user.testphaseEndsAt,
           })
         })
       })
@@ -897,12 +900,10 @@ describe('UserResolver', () => {
               },
             }),
           ).resolves.toEqual({
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            id: expect.any(Number),
+            id: user.id,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             pk: expect.any(Number),
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            referenceId: expect.any(String),
+            referenceId: user.referenceId,
             name: 'Bibi Bloxberg',
             username: 'mockedUser',
             introduction: 'Latzhose und Nickelbrille',
@@ -910,6 +911,7 @@ describe('UserResolver', () => {
             meetingId: null,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             createdAt: expect.any(Date),
+            testphaseEndsAt: user.testphaseEndsAt,
           })
         })
       })
@@ -978,12 +980,10 @@ describe('UserResolver', () => {
               },
             }),
           ).resolves.toEqual({
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            id: expect.any(Number),
+            id: user.id,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             pk: expect.any(Number),
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            referenceId: expect.any(String),
+            referenceId: user.referenceId,
             name: 'User',
             username: 'mockedUser',
             introduction: 'Make me null',
@@ -991,6 +991,7 @@ describe('UserResolver', () => {
             meetingId: null,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             createdAt: expect.any(Date),
+            testphaseEndsAt: user.testphaseEndsAt,
           })
           await action()
           await expect(
@@ -1000,12 +1001,10 @@ describe('UserResolver', () => {
               },
             }),
           ).resolves.toEqual({
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            id: expect.any(Number),
+            id: user.id,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             pk: expect.any(Number),
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            referenceId: expect.any(String),
+            referenceId: user.referenceId,
             name: 'Bibi Bloxberg',
             username: 'mockedUser',
             introduction: null,
@@ -1013,6 +1012,7 @@ describe('UserResolver', () => {
             meetingId: null,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             createdAt: expect.any(Date),
+            testphaseEndsAt: user.testphaseEndsAt,
           })
         })
       })
