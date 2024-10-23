@@ -21,8 +21,6 @@
       :details="user.details"
       :loading="loading"
       @back="() => setMode('view')"
-      @add-detail="addDetail"
-      @remove-detail="removeDetail"
     />
     <EditSocialMedia
       v-if="user && mode === 'edit-social'"
@@ -40,12 +38,7 @@ import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 
 import ClientOnly from '#components/ClientOnly.vue'
-import {
-  useUserStore,
-  UserAvailability,
-  AddUserDetailInput,
-  AddSocialMediaInput,
-} from '#stores/userStore'
+import { useUserStore, UserAvailability, AddSocialMediaInput } from '#stores/userStore'
 
 import AboutMeView from './AboutMeView.vue'
 import EditSocialMedia from './EditSocialMedia.vue'
@@ -87,15 +80,6 @@ const updateIntroduction = async (newIntroduction: string) => {
     name: user.value!.name,
     introduction: newIntroduction,
   })
-}
-
-const addDetail = async (detail: AddUserDetailInput) => {
-  await userStore.addUserDetail(detail)
-  detail.text = ''
-}
-
-const removeDetail = async (detailId: number) => {
-  await userStore.removeUserDetail(detailId)
 }
 
 const addSocial = async (social: AddSocialMediaInput) => {

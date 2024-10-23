@@ -16,6 +16,11 @@ import {
 import { removeSocialMediaMutation } from '#mutations/removeSocialMediaMutation'
 import { removeUserDetailMutation } from '#mutations/removeUserDetailMutation'
 import {
+  UpdateUserDetailInput,
+  updateUserDetailMutation,
+  UpdateUserDetailMutationResult,
+} from '#mutations/updateUserDetailMutation'
+import {
   updateUserMutation,
   UpdateUserInput,
   UpdateUserMutationResult,
@@ -158,6 +163,30 @@ export const useUserStore = defineStore(
       }
     }
 
+    const { mutate: updateUserDetailMutationResult } = useMutation<UpdateUserDetailMutationResult>(
+      updateUserDetailMutation,
+      {
+        fetchPolicy: 'no-cache',
+      },
+    )
+
+    const updateUserDetail = async (userDetail: UpdateUserDetailInput) => {
+      const result = await updateUserDetailMutationResult({ data: userDetail })
+      if (result?.data && currentUser.value?.id) {
+        setCurrentUser({
+          ...currentUser.value,
+          details: currentUser.value.details.map((d) =>
+            d.id === result.data?.updateUserDetail.id
+              ? {
+                  ...d,
+                  text: result.data.updateUserDetail.text,
+                }
+              : d,
+          ),
+        })
+      }
+    }
+
     const { mutate: removeUserDetailMutationResult } = useMutation(removeUserDetailMutation, {
       fetchPolicy: 'no-cache',
     })
@@ -228,6 +257,7 @@ export const useUserStore = defineStore(
       updateUser,
       addUserDetail,
       addSocialMedia,
+      updateUserDetail,
       removeUserDetail,
       removeSocialMedia,
     }
