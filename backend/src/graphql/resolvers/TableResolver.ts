@@ -1,4 +1,5 @@
 import { Meeting, User } from '@prisma/client'
+import { GetBatchResult } from '@prisma/client/runtime/library.d'
 import {
   Resolver,
   Mutation,
@@ -79,6 +80,8 @@ export class TableResolver {
     if (userIds && userIds.length) {
       await createUsersInMeetings(prisma)({ userIds, meeting, role: AttendeeRole.VIEWER })
 
+      await createMallTalkHistoryEntry(prisma)(user.id, userIds)
+      
       pubSub.publish('CALL_SUBSCRIPTION', {
         user,
         userIds,
@@ -526,18 +529,6 @@ export class TableResolver {
   call(@Root() call: Call): Call {
     return call
   }
-
-  /*
-  @Query(() => Boolean)
-  test(): boolean {
-    try {
-      pubSub.publish('OPEN_TABLE_SUBSCRIPTION', 'Hallo')
-    } catch (err) {
-      console.log(err)
-    }
-    return true
-  }
-  */
 }
 
 type MeetingInfoUnionUser = {
@@ -727,3 +718,13 @@ const getOpenWelcomeTable = (context: AuthenticatedContext) => (meetings: Meetin
     isModerator: true,
   })
 }
+
+const createMallTalkHistoryEntry = (prisma: PrismaClient) =>
+      async (fromId: number, toIds: number[]): Promise<GetBatchResult> => {
+        return prisma.mallTalkHistory.createMany({
+          data: toIds.map((toId: number) => ({
+            fromId,
+            toId,
+          })),
+        })
+      }
