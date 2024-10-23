@@ -121,4 +121,7 @@ export class JoinTable {
 
   @Field()
   isModerator: boolean
+
+  @Field()
+  name: string
 }

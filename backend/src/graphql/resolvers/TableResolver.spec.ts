@@ -234,6 +234,7 @@ describe('TableResolver', () => {
             link
             type
             isModerator
+            name
           }
         }
       `
@@ -1942,36 +1943,36 @@ describe('TableResolver', () => {
                 query: `query {
                   tables {
                     mallTalkTables {
-                      id 
-                      meetingName 
-                      meetingID 
-                      participantCount 
+                      id
+                      meetingName
+                      meetingID
+                      participantCount
                       isModerator
-                      startTime 
-                      attendees { 
-                        fullName 
+                      startTime
+                      attendees {
+                        fullName
                       }
                     }
                     projectTables {
-                      id 
-                      meetingName 
-                      meetingID 
-                      participantCount 
+                      id
+                      meetingName
+                      meetingID
+                      participantCount
                       isModerator
-                      startTime 
-                      attendees { 
-                        fullName 
+                      startTime
+                      attendees {
+                        fullName
                       }
                     }
                     permanentTables {
-                      id 
-                      meetingName 
-                      meetingID 
-                      participantCount 
+                      id
+                      meetingName
+                      meetingID
+                      participantCount
                       isModerator
-                      startTime 
-                      attendees { 
-                        fullName 
+                      startTime
+                      attendees {
+                        fullName
                       }
                     }
                   }
@@ -2007,36 +2008,36 @@ describe('TableResolver', () => {
                   query: `query {
                     tables {
                       mallTalkTables {
-                        id 
-                        meetingName 
-                        meetingID 
-                        participantCount 
+                        id
+                        meetingName
+                        meetingID
+                        participantCount
                         isModerator
-                        startTime 
-                        attendees { 
-                          fullName 
+                        startTime
+                        attendees {
+                          fullName
                         }
                       }
                       projectTables {
-                        id 
-                        meetingName 
-                        meetingID 
-                        participantCount 
+                        id
+                        meetingName
+                        meetingID
+                        participantCount
                         isModerator
-                        startTime 
-                        attendees { 
-                          fullName 
+                        startTime
+                        attendees {
+                          fullName
                         }
                       }
                       permanentTables {
-                        id 
-                        meetingName 
-                        meetingID 
-                        participantCount 
+                        id
+                        meetingName
+                        meetingID
+                        participantCount
                         isModerator
-                        startTime 
-                        attendees { 
-                          fullName 
+                        startTime
+                        attendees {
+                          fullName
                         }
                       }
                     }
@@ -2113,36 +2114,36 @@ describe('TableResolver', () => {
                 query: `query {
                   tables {
                     mallTalkTables {
-                      id 
-                      meetingName 
-                      meetingID 
-                      participantCount 
+                      id
+                      meetingName
+                      meetingID
+                      participantCount
                       isModerator
-                      startTime 
-                      attendees { 
-                        fullName 
+                      startTime
+                      attendees {
+                        fullName
                       }
                     }
                     projectTables {
-                      id 
-                      meetingName 
-                      meetingID 
-                      participantCount 
+                      id
+                      meetingName
+                      meetingID
+                      participantCount
                       isModerator
-                      startTime 
-                      attendees { 
-                        fullName 
+                      startTime
+                      attendees {
+                        fullName
                       }
                     }
                     permanentTables {
-                      id 
-                      meetingName 
-                      meetingID 
-                      participantCount 
+                      id
+                      meetingName
+                      meetingID
+                      participantCount
                       isModerator
-                      startTime 
-                      attendees { 
-                        fullName 
+                      startTime
+                      attendees {
+                        fullName
                       }
                     }
                   }
@@ -2230,36 +2231,36 @@ describe('TableResolver', () => {
                 query: `query {
                   tables {
                     mallTalkTables {
-                      id 
-                      meetingName 
-                      meetingID 
-                      participantCount 
+                      id
+                      meetingName
+                      meetingID
+                      participantCount
                       isModerator
-                      startTime 
-                      attendees { 
-                        fullName 
+                      startTime
+                      attendees {
+                        fullName
                       }
                     }
                     projectTables {
-                      id 
-                      meetingName 
-                      meetingID 
-                      participantCount 
+                      id
+                      meetingName
+                      meetingID
+                      participantCount
                       isModerator
-                      startTime 
-                      attendees { 
-                        fullName 
+                      startTime
+                      attendees {
+                        fullName
                       }
                     }
                     permanentTables {
-                      id 
-                      meetingName 
-                      meetingID 
-                      participantCount 
+                      id
+                      meetingName
+                      meetingID
+                      participantCount
                       isModerator
-                      startTime 
-                      attendees { 
-                        fullName 
+                      startTime
+                      attendees {
+                        fullName
                       }
                     }
                   }
@@ -2366,36 +2367,36 @@ describe('TableResolver', () => {
                 query: `query {
                   tables {
                     mallTalkTables {
-                      id 
-                      meetingName 
-                      meetingID 
-                      participantCount 
+                      id
+                      meetingName
+                      meetingID
+                      participantCount
                       isModerator
-                      startTime 
-                      attendees { 
-                        fullName 
+                      startTime
+                      attendees {
+                        fullName
                       }
                     }
                     projectTables {
-                      id 
-                      meetingName 
-                      meetingID 
-                      participantCount 
+                      id
+                      meetingName
+                      meetingID
+                      participantCount
                       isModerator
-                      startTime 
-                      attendees { 
-                        fullName 
+                      startTime
+                      attendees {
+                        fullName
                       }
                     }
                     permanentTables {
-                      id 
-                      meetingName 
-                      meetingID 
-                      participantCount 
+                      id
+                      meetingName
+                      meetingID
+                      participantCount
                       isModerator
-                      startTime 
-                      attendees { 
-                        fullName 
+                      startTime
+                      attendees {
+                        fullName
                       }
                     }
                   }
@@ -2495,42 +2496,42 @@ describe('TableResolver', () => {
           await expect(
             testServer.executeOperation(
               {
-                query: `query { 
+                query: `query {
                   tables {
                     mallTalkTables {
-                      id 
-                      meetingName 
-                      meetingID 
-                      participantCount 
+                      id
+                      meetingName
+                      meetingID
+                      participantCount
                       isModerator
-                      startTime 
-                      attendees { 
-                        fullName 
+                      startTime
+                      attendees {
+                        fullName
                       }
                     }
                     projectTables {
-                      id 
-                      meetingName 
-                      meetingID 
-                      participantCount 
+                      id
+                      meetingName
+                      meetingID
+                      participantCount
                       isModerator
-                      startTime 
-                      attendees { 
-                        fullName 
+                      startTime
+                      attendees {
+                        fullName
                       }
                     }
                     permanentTables {
-                      id 
-                      meetingName 
-                      meetingID 
-                      participantCount 
+                      id
+                      meetingName
+                      meetingID
+                      participantCount
                       isModerator
-                      startTime 
-                      attendees { 
-                        fullName 
+                      startTime
+                      attendees {
+                        fullName
                       }
                     }
-                  } 
+                  }
                 }`,
               },
               { contextValue: mockContextValue({ user }) },
@@ -2652,36 +2653,36 @@ describe('TableResolver', () => {
                 query: `query {
                   tables {
                     mallTalkTables {
-                      id 
-                      meetingName 
-                      meetingID 
-                      participantCount 
+                      id
+                      meetingName
+                      meetingID
+                      participantCount
                       isModerator
-                      startTime 
-                      attendees { 
-                        fullName 
+                      startTime
+                      attendees {
+                        fullName
                       }
                     }
                     projectTables {
-                      id 
-                      meetingName 
-                      meetingID 
+                      id
+                      meetingName
+                      meetingID
                       participantCount
                       isModerator
-                      startTime 
-                      attendees { 
-                        fullName 
+                      startTime
+                      attendees {
+                        fullName
                       }
                     }
                     permanentTables {
-                      id 
-                      meetingName 
-                      meetingID 
+                      id
+                      meetingName
+                      meetingID
                       participantCount
                       isModerator
-                      startTime 
-                      attendees { 
-                        fullName 
+                      startTime
+                      attendees {
+                        fullName
                       }
                     }
                   }
