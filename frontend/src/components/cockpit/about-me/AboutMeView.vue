@@ -289,5 +289,6 @@ hr {
 .social-icon {
   width: 24px;
   height: 24px;
+  margin-top: 6px;
 }
 </style>
