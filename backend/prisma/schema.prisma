@@ -125,7 +125,7 @@ model MallTalkHistory {
   fromId            Int
   to                User @relation("incomingCall", fields: [toId], references: [id], onDelete: Cascade)
   toId              Int
-  createdtA         DateTime @default(now())
+  createdAt         DateTime @default(now())
   status            String  @db.VarChar(12)  @default("UNKNOWN")
 
   @@id([fromId, toId])
