@@ -3,32 +3,32 @@ import { jwtVerify, createRemoteJWKSet, errors } from 'jose'
 import { CONFIG } from '#config/config'
 import { createBrevoClient } from '#src/api/Brevo'
 import logger from '#src/logger'
-import { prisma } from '#src/prisma'
 
 import { findOrCreateUser } from './findOrCreateUser'
 import { getToken } from './getToken'
 
+import type { BrevoClient } from '#src/api/Brevo'
 import type { PrismaClient, UserWithProfile } from '#src/prisma'
+import type { Sentry } from '#src/server/sentry'
 
 const JWKS = createRemoteJWKSet(new URL(CONFIG.JWKS_URI))
 
-const brevo = createBrevoClient({ prisma, logger, config: CONFIG })
-
 const knownErrorClasses = [
   errors.JOSEAlgNotAllowed,
-  errors.JWTExpired,
-  errors.JWTInvalid,
+  errors.JOSENotSupported,
+  errors.JWKSNoMatchingKey,
   errors.JWSInvalid,
   errors.JWSSignatureVerificationFailed,
+  errors.JWTExpired,
+  errors.JWTInvalid,
 ]
-
-const knownErrorMessages = ['JWS verification failed']
 
 export type Context = {
   config: typeof CONFIG
   user: UserWithProfile | null
   dataSources: { prisma: PrismaClient }
-  brevo: typeof brevo
+  brevo: BrevoClient
+  sentry: Sentry
 }
 
 export type AuthenticatedContext = Omit<Context, 'user'> & { user: UserWithProfile }
@@ -49,10 +49,7 @@ const decodePayload = async (
     const { payload } = await jwtVerify<CustomJwtPayload>(token, JWKS)
     return payload
   } catch (error) {
-    if (
-      knownErrorClasses.some((errorClass) => error instanceof errorClass) ||
-      (error instanceof Error && knownErrorMessages.some((message) => message === error.message))
-    ) {
+    if (knownErrorClasses.some((errorClass) => error instanceof errorClass)) {
       logger.trace(error)
       return null
     } else throw error
@@ -69,10 +66,16 @@ const getCurrentUser =
     return findOrCreateUser(deps)(payload)
   }
 
-export const context: (deps: {
+export type ContextDependencies = {
   prisma: PrismaClient
-}) => (token: string | undefined) => Promise<Context> = (deps) => async (token) => {
-  const { prisma } = deps
+  sentry: Sentry
+}
+
+export const context: (
+  deps: ContextDependencies,
+) => (token: string | undefined) => Promise<Context> = (deps) => async (token) => {
+  const { sentry, prisma } = deps
+  const brevo = createBrevoClient({ prisma, logger, config: CONFIG, sentry })
   const user = await getCurrentUser(deps)(token)
   return {
     user,
@@ -81,5 +84,6 @@ export const context: (deps: {
     dataSources: {
       prisma,
     },
+    sentry,
   }
 }

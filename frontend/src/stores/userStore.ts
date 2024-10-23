@@ -36,6 +36,7 @@ export type UserInTable = {
 
 export type MyTable = {
   id: number
+  meetingID: string
   name: string
   public: boolean
   users: UserInTable[]

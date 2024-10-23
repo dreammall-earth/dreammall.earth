@@ -25,6 +25,8 @@ const {
 
   SENTRY_DSN,
   SENTRY_ENVIRONMENT,
+
+  UMAMI_WEBSITE_ID,
 } = process.env
 
 const AUTH = {
@@ -60,4 +62,8 @@ const SENTRY = {
   SENTRY_ENVIRONMENT,
 }
 
-export const publicEnv = { AUTH, ACCOUNTING, ENDPOINTS, META, SENTRY }
+const ANALYTICS = {
+  UMAMI_WEBSITE_ID,
+}
+
+export const publicEnv = { AUTH, ACCOUNTING, ENDPOINTS, META, SENTRY, ANALYTICS }
