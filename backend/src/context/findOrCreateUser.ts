@@ -25,18 +25,15 @@ export const findOrCreateUser =
         socialMedia: true,
       },
     })
-    if (user) return migrateTestphaseEndsAt({ prisma })(user)
+    if (user) return user
 
     user = await migratePk({ prisma })(payload)
-    if (user) return migrateTestphaseEndsAt({ prisma })(user)
+    if (user) return user
 
     const referenceId = nanoid()
-    const now = new Date()
-    let testphaseEndsAt: Date | null = null
-    if (CONFIG.TESTPHASE_DURATION_DAYS) {
-      now.setDate(now.getDate() + CONFIG.TESTPHASE_DURATION_DAYS)
-      testphaseEndsAt = now
-    }
+    const testphaseEndsAt = new Date()
+    testphaseEndsAt.setDate(testphaseEndsAt.getDate() + CONFIG.TESTPHASE_DURATION_DAYS)
+  
     user = await prisma.user.create({
       data: {
         pk,
@@ -52,22 +49,5 @@ export const findOrCreateUser =
       },
     })
     await EVENT_CREATE_USER(user.id)
-    return user
-  }
-
-const migrateTestphaseEndsAt =
-  ({ prisma }: { prisma: PrismaClient }) =>
-  async (user: UserWithProfile): Promise<UserWithProfile> => {
-    if (user.testphaseEndsAt) return user
-    if (!CONFIG.TESTPHASE_DEFAULT) return user
-    await prisma.user.update({
-      where: {
-        id: user.id,
-      },
-      data: {
-        testphaseEndsAt: CONFIG.TESTPHASE_DEFAULT,
-      },
-    })
-    user.testphaseEndsAt = CONFIG.TESTPHASE_DEFAULT
     return user
   }

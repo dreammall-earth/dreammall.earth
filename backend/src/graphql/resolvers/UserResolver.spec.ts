@@ -1,6 +1,5 @@
 import { ApolloServer } from '@apollo/server'
 
-import { CONFIG } from '#config/config'
 import { findOrCreateUser } from '#src/context/findOrCreateUser'
 import { prisma } from '#src/prisma'
 import { createTestServer } from '#src/server/server'
@@ -14,9 +13,6 @@ const nickname = 'mockedUser'
 const name = 'User'
 
 let testServer: ApolloServer<Context>
-
-CONFIG.TESTPHASE_DURATION_DAYS = undefined
-CONFIG.TESTPHASE_DEFAULT = undefined
 
 describe('UserResolver', () => {
   beforeAll(async () => {
@@ -732,8 +728,8 @@ describe('UserResolver', () => {
           meetingId: null,
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           createdAt: expect.any(Date),
-
-          testphaseEndsAt: null,
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          testphaseEndsAt: expect.any(Date),
         })
       })
 
@@ -772,7 +768,7 @@ describe('UserResolver', () => {
                     social: [],
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     table: expect.any(Object),
-                    testphaseEndsAt: null,
+                    testphaseEndsAt: user.testphaseEndsAt.toISOString(),
                   },
                 },
                 errors: undefined,

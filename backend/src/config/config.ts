@@ -12,14 +12,6 @@ const toNumber = (env: string | undefined): number | undefined => {
   return isNaN(number) ? undefined : number
 }
 
-const toDate = (env: string | undefined): Date | undefined => {
-  if (typeof env === 'string') {
-    const date = new Date(env)
-    if (date.toString() !== 'Invalid date') return date
-  }
-  return undefined
-}
-
 // Config
 const {
   NODE_ENV,
@@ -77,8 +69,7 @@ const FRONTEND = {
 }
 
 const TESTPHASE = {
-  TESTPHASE_DEFAULT: toDate(TESTPHASE_DEFAULT),
-  TESTPHASE_DURATION_DAYS: toNumber(TESTPHASE_DURATION_DAYS),
+  TESTPHASE_DURATION_DAYS: toNumber(TESTPHASE_DURATION_DAYS) || 30,
 }
 
 export const CONFIG = {

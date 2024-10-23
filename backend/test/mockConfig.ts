@@ -22,7 +22,6 @@ export const createMockConfig = (): typeof CONFIG => {
     SENTRY_ENVIRONMENT: '',
     WEBHOOK_SECRET: undefined,
     LOG_LEVEL: 'DEBUG',
-    TESTPHASE_DEFAULT: undefined,
-    TESTPHASE_DURATION_DAYS: undefined,
+    TESTPHASE_DURATION_DAYS: 30,
   }
 }
