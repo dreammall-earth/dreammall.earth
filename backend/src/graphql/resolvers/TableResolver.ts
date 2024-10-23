@@ -504,6 +504,50 @@ export class TableResolver {
   }
 
   @Authorized()
+  @Query(() => [MallTalkHistoryIncoming])
+  async incomingMallTalkHistory(
+    @Ctx() context: AuthenticatedContext,
+  ): Promise<MallTalkHistoryIncoming[]> {
+    const {
+      user,
+      dataSources: { prisma },
+    } = context
+
+    const history = await prisma.mallTalkHistory.findMany({
+      where: {
+        toId: user.id,
+      },
+      include: {
+        from: true,
+        to: true,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    })
+
+    const missedCalls = history.filter((h) => h.status === 'UNKNOWN')
+
+    if (missedCalls.length) {
+      await prisma.mallTalkHistory.updateMany({
+        where: {
+          id: {
+            in: missedCalls.map((h) => {
+              h.status = MallTalkStatus.MISSED
+              return h.id
+            }),
+          },
+        },
+        data: {
+          status: MallTalkStatus.MISSED,
+        },
+      })
+    }
+
+    return history.map((h) => new MallTalkHistoryIncoming(h))
+  }
+
+  @Authorized()
   @Mutation(() => MallTalkHistoryIncoming)
   async updateMallTalkHistoryStatus(
     @Arg('tableId', () => Int) tableId: number,
