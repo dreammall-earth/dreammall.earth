@@ -62,7 +62,7 @@
         <v-icon icon="mdi mdi-share-variant-outline" class="mr-2" />
         <ul v-if="props.social.length > 0" class="social-list">
           <li v-for="item in props.social" :key="item.type">
-            <v-icon :icon="`mdi-${item.type}`"></v-icon>
+            <v-icon :icon="getSocialMediaIcon(item.type)"></v-icon>
           </li>
         </ul>
         <span v-else>
@@ -79,6 +79,7 @@ import { useI18n } from 'vue-i18n'
 
 import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
 
+import { getSocialMediaIcon } from './socialMediaPlatforms'
 import UserDetails from './UserDetails.vue'
 
 import type { UserDetail, UserAvailability, SocialMedia } from '#stores/userStore'
