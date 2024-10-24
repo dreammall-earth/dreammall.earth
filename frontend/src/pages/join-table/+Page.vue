@@ -57,7 +57,7 @@ import { joinTableAsGuestQuery } from '#queries/joinTableAsGuestQuery'
 const { t } = useI18n()
 
 const pageContext = usePageContext()
-const tableId = Number(pageContext.routeParams?.id)
+const tableId = pageContext.routeParams?.id
 
 const { tableName, isError } = useGetTableName(tableId)
 const title = computed<string>(() => tableName.value ?? t('joinTablePage.publicTable'))
@@ -93,7 +93,7 @@ const submit = async () => {
 
 <style lang="scss" scoped>
 @use 'sass:map';
-@import 'vuetify/lib/styles/settings/_variables';
+@use 'vuetify/lib/styles/settings/_variables' as variables;
 
 .panel {
   width: min(636px, 100vw);
@@ -104,7 +104,7 @@ const submit = async () => {
   border-radius: 30px;
   transform: translate(calc(50vw - 50%), calc(50vh - 50%));
 
-  @media #{map.get($display-breakpoints, 'sm-and-down')} {
+  @media #{map.get(variables.$display-breakpoints, 'sm-and-down')} {
     width: calc(100% - 40px);
     padding: 10px 10px 20px;
     margin-right: 20px;
@@ -120,7 +120,7 @@ const submit = async () => {
 }
 
 .v-text-field {
-  @media #{map.get($display-breakpoints, 'sm-and-down')} {
+  @media #{map.get(variables.$display-breakpoints, 'sm-and-down')} {
     width: 100% !important;
   }
 }

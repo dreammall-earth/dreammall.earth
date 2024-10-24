@@ -36,6 +36,7 @@ const onClick = () => {
   color: rgb(var(--v-theme-dm-panel-submit-color));
   text-transform: none;
   background-color: rgb(var(--v-theme-dm-panel-submit-background-color));
+  border: 1px solid rgb(var(--v-theme-dm-panel-submit-color));
 
   &::before {
     display: none;

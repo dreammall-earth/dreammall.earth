@@ -633,6 +633,7 @@ describe('UserResolver', () => {
     username
     introduction
     availability
+    testphaseEndsAt
     details {
       category
       text
@@ -727,6 +728,8 @@ describe('UserResolver', () => {
           meetingId: null,
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           createdAt: expect.any(Date),
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          testphaseEndsAt: expect.any(Date),
         })
       })
 
@@ -756,8 +759,7 @@ describe('UserResolver', () => {
               singleResult: {
                 data: {
                   updateUser: {
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                    id: expect.any(Number),
+                    id: user.id,
                     name: 'Peter Lustig',
                     username: 'mockedUser',
                     introduction: 'Latzhose und Nickelbrille',
@@ -766,6 +768,7 @@ describe('UserResolver', () => {
                     social: [],
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     table: expect.any(Object),
+                    testphaseEndsAt: user.testphaseEndsAt.toISOString(),
                   },
                 },
                 errors: undefined,
@@ -783,8 +786,7 @@ describe('UserResolver', () => {
               },
             }),
           ).resolves.toEqual({
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            id: expect.any(Number),
+            id: user.id,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             pk: expect.any(Number),
             username: 'mockedUser',
@@ -796,6 +798,7 @@ describe('UserResolver', () => {
             meetingId: null,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             createdAt: expect.any(Date),
+            testphaseEndsAt: user.testphaseEndsAt,
           })
         })
       })
@@ -897,12 +900,10 @@ describe('UserResolver', () => {
               },
             }),
           ).resolves.toEqual({
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            id: expect.any(Number),
+            id: user.id,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             pk: expect.any(Number),
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            referenceId: expect.any(String),
+            referenceId: user.referenceId,
             name: 'Bibi Bloxberg',
             username: 'mockedUser',
             introduction: 'Latzhose und Nickelbrille',
@@ -910,6 +911,7 @@ describe('UserResolver', () => {
             meetingId: null,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             createdAt: expect.any(Date),
+            testphaseEndsAt: user.testphaseEndsAt,
           })
         })
       })
@@ -978,12 +980,10 @@ describe('UserResolver', () => {
               },
             }),
           ).resolves.toEqual({
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            id: expect.any(Number),
+            id: user.id,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             pk: expect.any(Number),
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            referenceId: expect.any(String),
+            referenceId: user.referenceId,
             name: 'User',
             username: 'mockedUser',
             introduction: 'Make me null',
@@ -991,6 +991,7 @@ describe('UserResolver', () => {
             meetingId: null,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             createdAt: expect.any(Date),
+            testphaseEndsAt: user.testphaseEndsAt,
           })
           await action()
           await expect(
@@ -1000,12 +1001,10 @@ describe('UserResolver', () => {
               },
             }),
           ).resolves.toEqual({
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            id: expect.any(Number),
+            id: user.id,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             pk: expect.any(Number),
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            referenceId: expect.any(String),
+            referenceId: user.referenceId,
             name: 'Bibi Bloxberg',
             username: 'mockedUser',
             introduction: null,
@@ -1013,6 +1012,7 @@ describe('UserResolver', () => {
             meetingId: null,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             createdAt: expect.any(Date),
+            testphaseEndsAt: user.testphaseEndsAt,
           })
         })
       })
@@ -1144,6 +1144,245 @@ describe('UserResolver', () => {
                 ]),
               },
             },
+          })
+        })
+      })
+    })
+  })
+
+  describe('updateUserDetail mutation', () => {
+    const query = `mutation updateUserDetail($data: UpdateUserDetailInput!) {
+  updateUserDetail(data: $data) {
+    id
+    category
+    text
+  }
+}`
+
+    describe('unauthenticated', () => {
+      it('returns an unauthenticated error', async () => {
+        const response = await testServer.executeOperation(
+          {
+            query,
+            variables: {
+              data: {
+                id: -1,
+                text: 'Heute eher lax',
+              },
+            },
+          },
+          { contextValue: mockContextValue() },
+        )
+        expect(response).toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('authenticated', () => {
+      let user: UserWithProfile
+      beforeEach(async () => {
+        user = await findOrCreateUser({ prisma })({ pk, nickname, name })
+      })
+      describe('detail id does not exist', () => {
+        it('throws detail not found error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    id: -1,
+                    text: 'Heute eher lax',
+                  },
+                },
+              },
+              {
+                contextValue: mockContextValue({ user }),
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Detail not found!',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('detail belongs to another user', () => {
+        let detailId: number | undefined
+
+        beforeAll(async () => {
+          const bibi = await prisma.user.findUnique({
+            where: {
+              username: 'bibi',
+            },
+          })
+
+          if (bibi) {
+            const detail = await prisma.userDetail.create({
+              data: {
+                userId: bibi.id,
+                category: 'work',
+                text: 'Ich arbeite im Hexenhaus',
+              },
+            })
+
+            detailId = detail?.id
+          }
+        })
+
+        afterAll(async () => {
+          await prisma.userDetail.delete({
+            where: {
+              id: detailId,
+            },
+          })
+        })
+
+        it('throws detail not found error', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    id: detailId,
+                    text: 'Heute eher lax',
+                  },
+                },
+              },
+              {
+                contextValue: mockContextValue({ user }),
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Detail not found!',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('detail belongs to user', () => {
+        let detailId: number | undefined
+
+        beforeAll(async () => {
+          const detail = await prisma.userDetail.findFirst()
+          detailId = detail?.id
+        })
+
+        it('returns updated user detail', async () => {
+          await expect(
+            testServer.executeOperation(
+              {
+                query,
+                variables: {
+                  data: {
+                    id: detailId,
+                    text: 'Heute eher lax',
+                  },
+                },
+              },
+              {
+                contextValue: mockContextValue({ user }),
+              },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  updateUserDetail: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(Number),
+                    category: 'work',
+                    text: 'Heute eher lax',
+                  },
+                },
+                errors: undefined,
+              },
+            },
+          })
+        })
+
+        it('updates userDetail in database', async () => {
+          await expect(
+            prisma.userDetail.findFirst({
+              where: {
+                id: detailId,
+              },
+            }),
+          ).resolves.toMatchObject({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            userId: expect.any(Number),
+            category: 'work',
+            text: 'Heute eher lax',
+          })
+        })
+
+        describe('text is too long', () => {
+          it('throws validation error', async () => {
+            await expect(
+              testServer.executeOperation(
+                {
+                  query,
+                  variables: {
+                    data: {
+                      id: detailId,
+                      text: 'Ich arbeite sehr hart in den Diamanten-Minen der Republik Kongo',
+                    },
+                  },
+                },
+                {
+                  contextValue: mockContextValue({ user }),
+                },
+              ),
+            ).resolves.toMatchObject({
+              body: {
+                kind: 'single',
+                singleResult: {
+                  data: null,
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                  errors: expect.arrayContaining([
+                    expect.objectContaining({
+                      message: 'Argument Validation Error',
+                    }),
+                  ]),
+                },
+              },
+            })
           })
         })
       })
@@ -1631,6 +1870,272 @@ describe('UserResolver', () => {
               },
             }),
           ).resolves.toBeNull()
+        })
+      })
+    })
+  })
+
+  describe('createInvitationLink mutation', () => {
+    const query = `mutation {
+      createInvitationLink
+    }`
+    describe('unauthenticated', () => {
+      it('returns an unauthenticated error', async () => {
+        const response = await testServer.executeOperation(
+          {
+            query,
+          },
+          { contextValue: mockContextValue() },
+        )
+        expect(response).toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('authenticated', () => {
+      let user: UserWithProfile
+      beforeEach(async () => {
+        user = await findOrCreateUser({ prisma })({ pk, nickname, name })
+      })
+
+      describe('with existing user', () => {
+        it('sends a valid invitation link', async () => {
+          const response = await testServer.executeOperation(
+            {
+              query,
+            },
+            {
+              contextValue: mockContextValue({ user }),
+            },
+          )
+          expect(response.body).toMatchObject({
+            kind: 'single',
+            singleResult: {
+              data: {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                createInvitationLink: expect.any(String),
+              },
+            },
+          })
+        })
+      })
+    })
+  })
+
+  describe('validateInvitationLink query', () => {
+    const query = `query($code: String!) {
+      validateInvitationLink(code: $code) {
+        name
+      }
+    }`
+    describe('unauthenticated', () => {
+      let user: UserWithProfile
+      beforeEach(async () => {
+        user = await findOrCreateUser({ prisma })({ pk, nickname, name })
+      })
+      describe('with non existing code', () => {
+        it('throws an error', async () => {
+          const response = await testServer.executeOperation(
+            {
+              query,
+              variables: {
+                code: 'mocked-validate',
+              },
+            },
+            {
+              contextValue: mockContextValue(),
+            },
+          )
+          expect(response).toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Invalid invitation code.',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('with existing code', () => {
+        beforeAll(async () => {
+          await prisma.invitationLink.create({
+            data: {
+              code: 'mocked-validate',
+              userId: user.id,
+            },
+          })
+        })
+
+        it('returns an unauthenticated error', async () => {
+          const response = await testServer.executeOperation(
+            {
+              query,
+              variables: {
+                code: 'mocked-validate',
+              },
+            },
+            { contextValue: mockContextValue() },
+          )
+          expect(response.body).toMatchObject({
+            kind: 'single',
+            singleResult: {
+              data: {
+                validateInvitationLink: {
+                  name: 'User',
+                },
+              },
+            },
+          })
+        })
+      })
+    })
+  })
+
+  describe('redeemInvitationLink mutation', () => {
+    const query = `mutation($code: String!) {
+      redeemInvitationLink(code: $code)
+    }`
+    describe('unauthenticated', () => {
+      it('returns an unauthenticated error', async () => {
+        const response = await testServer.executeOperation(
+          {
+            query,
+            variables: {
+              code: 'mocked',
+            },
+          },
+          { contextValue: mockContextValue() },
+        )
+        expect(response).toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('authenticated', () => {
+      let user: UserWithProfile
+      beforeEach(async () => {
+        user = await findOrCreateUser({ prisma })({ pk, nickname, name })
+      })
+
+      describe('with non existing code', () => {
+        it('throws an error', async () => {
+          const response = await testServer.executeOperation(
+            {
+              query,
+              variables: {
+                code: 'mocked',
+              },
+            },
+            {
+              contextValue: mockContextValue({ user }),
+            },
+          )
+          expect(response).toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Invalid invitation code.',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('with existing code', () => {
+        beforeAll(async () => {
+          await prisma.invitationLink.create({
+            data: {
+              code: 'mocked',
+              userId: user.id,
+            },
+          })
+        })
+
+        it('returns a success at first call', async () => {
+          const response = await testServer.executeOperation(
+            {
+              query,
+              variables: {
+                code: 'mocked',
+              },
+            },
+            {
+              contextValue: mockContextValue({ user }),
+            },
+          )
+          expect(response.body).toMatchObject({
+            kind: 'single',
+            singleResult: {
+              data: {
+                redeemInvitationLink: true,
+              },
+            },
+          })
+        })
+
+        it('throws an error after first usage', async () => {
+          const response = await testServer.executeOperation(
+            {
+              query,
+              variables: {
+                code: 'mocked',
+              },
+            },
+            {
+              contextValue: mockContextValue({ user }),
+            },
+          )
+          expect(response).toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Link already used.',
+                  }),
+                ]),
+              },
+            },
+          })
         })
       })
     })
