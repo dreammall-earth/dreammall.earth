@@ -189,7 +189,7 @@ export class TableResolver {
 
     if (!dbMeeting) throw new Error('Meeting not found!')
 
-    const inviteLink = createInviteLink(dbMeeting.id)
+    const inviteLink = createInviteLink(dbMeeting.meetingID)
 
     await createBBBMeeting(prisma)({
       meetingID: dbMeeting.meetingID,
@@ -307,7 +307,7 @@ export class TableResolver {
       (table.user && table.user.id === user.id) ||
       table.users.some((e) => e.userId === user.id && e.role === 'MODERATOR')
     ) {
-      const inviteLink = createInviteLink(table.id)
+      const inviteLink = createInviteLink(table.meetingID)
       const meeting = await createBBBMeeting(prisma)({
         meetingID: table.meetingID,
         name: table.name,
@@ -345,7 +345,7 @@ export class TableResolver {
   @Query(() => String)
   async joinTableAsGuest(
     @Arg('userName') userName: string,
-    @Arg('tableId', () => Int) tableId: number,
+    @Arg('tableId', () => String) tableId: string,
     @Ctx() context: AuthenticatedContext,
   ): Promise<string> {
     const {
@@ -353,7 +353,7 @@ export class TableResolver {
     } = context
     const meeting = await prisma.meeting.findUnique({
       where: {
-        id: tableId,
+        meetingID: tableId,
       },
       include: {
         user: true,
@@ -370,7 +370,7 @@ export class TableResolver {
 
   @Query(() => String)
   async getTableName(
-    @Arg('tableId', () => Int) tableId: number,
+    @Arg('tableId', () => String) tableId: string,
     @Ctx() context: AuthenticatedContext,
   ): Promise<string> {
     const {
@@ -378,7 +378,7 @@ export class TableResolver {
     } = context
     const meeting = await prisma.meeting.findUnique({
       where: {
-        id: tableId,
+        meetingID: tableId,
       },
     })
     if (!meeting) throw new Error('Table does not exist')
@@ -643,7 +643,7 @@ const findUsersInMeetings =
     })) as UsersWithMeetings[]
   }
 
-const createMeetingID = (prisma: PrismaClient) => async (): Promise<string> => {
+export const createMeetingID = (prisma: PrismaClient) => async (): Promise<string> => {
   let meetingID: string = uuidv4()
   while (
     await prisma.meeting.count({
@@ -657,7 +657,7 @@ const createMeetingID = (prisma: PrismaClient) => async (): Promise<string> => {
   return meetingID
 }
 
-function createInviteLink(tableId: number) {
+const createInviteLink = (tableId: string): string => {
   return new URL(`join-table/${tableId}`, CONFIG.FRONTEND_URL).toString()
 }
 
@@ -675,7 +675,7 @@ const createBBBMeeting =
         name: data.name,
       },
       {
-        moderatorOnlyMessage: `Mit diesem Link können weitere Gäste zu diesem Tisch eingeladen werden:<br/>${data.inviteLink}`,
+        moderatorOnlyMessage: `Mit diesem Link k&ouml;nnen weitere G&auml;ste zu diesem Tisch eingeladen werden:<br/>${data.inviteLink}`,
       },
     )
     if (!meeting) {

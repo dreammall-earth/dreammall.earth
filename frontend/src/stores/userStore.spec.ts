@@ -105,6 +105,7 @@ describe('User Store', () => {
         social: [{ id: 1, type: 'instagram', link: 'https://instagram.com' }],
         table: {
           id: 1234,
+          meetingID: 'my-table',
           name: 'My Table',
           public: false,
           users: [
@@ -137,6 +138,7 @@ describe('User Store', () => {
         social: [{ id: 1, type: 'instagram', link: 'https://instagram.com' }],
         table: {
           id: 1234,
+          meetingID: 'my-table',
           name: 'My Table',
           public: false,
           users: [
@@ -160,6 +162,7 @@ describe('User Store', () => {
     it('updates my table', () => {
       expect(userStore.getMyTable).toEqual({
         id: 1234,
+        meetingID: 'my-table',
         name: 'My Table',
         public: false,
         users: [

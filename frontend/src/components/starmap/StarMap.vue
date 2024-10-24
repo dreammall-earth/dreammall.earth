@@ -1,8 +1,19 @@
 <template>
   <div class="canvas-container">
-    <canvas ref="canvas"></canvas>
+    <canvas ref="canvas" gl="{{powerPreference: 'default', antialias: false}}"></canvas>
   </div>
-  <HoverInfo v-bind="hoveredStar" :show-more-button="true" />
+  <FadeTransition>
+    <HoverInfo
+      v-show="hoveredStar.data"
+      v-bind="hoveredStar"
+      :show-more-button="displayedProfile?.id !== hoveredStar.data?.id"
+      @show-more="displayHoveredProfile"
+    />
+  </FadeTransition>
+
+  <FadeTransition>
+    <SidebarInfo v-if="displayedProfile" :profile="displayedProfile" @close="closeProfile" />
+  </FadeTransition>
 </template>
 
 <script lang="ts" setup>
@@ -27,9 +38,11 @@ import {
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { onMounted, reactive, ref, watch } from 'vue'
 
+import FadeTransition from '#components/transitions/FadeTransition.vue'
 import { starmapQuery, StarmapQueryResult, StarLine, Star } from '#queries/starmapQuery'
 
 import HoverInfo from './HoverInfo.vue'
+import SidebarInfo from './SidebarInfo.vue'
 
 import type { UserWithProfile } from '#stores/userStore'
 
@@ -48,6 +61,20 @@ const hoveredStar = reactive<HoveredStar>({
   x: 0,
   y: 0,
 })
+
+const displayedProfile = ref<UserWithProfile | null>(null)
+
+const displayProfile = (data: UserWithProfile) => {
+  displayedProfile.value = data
+}
+
+const displayHoveredProfile = () => {
+  displayedProfile.value = hoveredStar.data
+}
+
+const closeProfile = () => {
+  displayedProfile.value = null
+}
 
 const { result: starmapQueryResult } = useQuery(
   starmapQuery,
@@ -146,7 +173,7 @@ const initScene = () => {
   window.addEventListener('resize', onWindowResize)
 
   canvas.value?.addEventListener('click', onCanvasClick)
-  canvas.value?.addEventListener('mousemove', onCanvasMouseMove)
+  canvas.value?.addEventListener('pointermove', onCanvasMouseMove)
 }
 
 // Erstellt ein dezentes Raster auf der Sphäre
@@ -262,12 +289,12 @@ const onWindowResize = () => {
 const onCanvasClick = (event: MouseEvent) => {
   const star = getRaycasterIntersects(event)
   if (star) {
-    // eslint-disable-next-line no-console
-    console.log('Stern angeklickt!', star.data)
+    displayProfile(star.data)
   }
 }
 
-const onCanvasMouseMove = (event: MouseEvent) => {
+const onCanvasMouseMove = (event: PointerEvent) => {
+  if (event.pointerType !== 'mouse') return
   const star = getRaycasterIntersects(event)
   if (!star) {
     hoveredStar.data = null

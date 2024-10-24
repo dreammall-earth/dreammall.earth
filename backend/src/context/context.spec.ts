@@ -1,4 +1,4 @@
-import { jwtVerify } from 'jose'
+import { jwtVerify, errors } from 'jose'
 
 import logger from '#src/logger'
 import { prisma, PrismaClientValidationError } from '#src/prisma'
@@ -13,6 +13,11 @@ jest.mock('jose')
 
 const token = 'foobar'
 
+const sentry = {
+  withScope: jest.fn(),
+  captureException: jest.fn(),
+}
+
 describe('context', () => {
   beforeEach(async () => {
     await deleteAll()
@@ -23,11 +28,11 @@ describe('context', () => {
     beforeEach(() => {
       jest
         .mocked(jwtVerify<CustomJwtPayload>)
-        .mockRejectedValue(new Error('JWS verification failed'))
+        .mockRejectedValue(new errors.JWTExpired('"exp" claim timestamp check failed', {}))
     })
 
     it('returns `null` for `contextValue.user`', async () => {
-      await expect(context({ prisma })(token)).resolves.toMatchObject({
+      await expect(context({ prisma, sentry })(token)).resolves.toMatchObject({
         user: null,
       })
     })
@@ -44,7 +49,7 @@ describe('context', () => {
     })
 
     it('creates and returns a new user in `contextValue.user`', async () => {
-      await expect(context({ prisma })(token)).resolves.toMatchObject({
+      await expect(context({ prisma, sentry })(token)).resolves.toMatchObject({
         user: {
           username: 'nickname',
           name: 'name',
@@ -67,7 +72,7 @@ describe('context', () => {
 
       it('returns the found user for `contextValue.user`', async () => {
         await setup()
-        await expect(context({ prisma })(token)).resolves.toMatchObject({
+        await expect(context({ prisma, sentry })(token)).resolves.toMatchObject({
           user: {
             id: 21,
             username: 'nickname',
@@ -83,7 +88,7 @@ describe('context', () => {
         const prisma = {
           user: { findUnique: jest.fn().mockRejectedValue('Ouch!') },
         } as unknown as PrismaClient
-        await expect(context({ prisma })(token)).rejects.toBe('Ouch!')
+        await expect(context({ prisma, sentry })(token)).rejects.toBe('Ouch!')
       })
     })
 
@@ -100,7 +105,9 @@ describe('context', () => {
       it('crashes quite dramatically', async () => {
         const silencedLogger = jest.spyOn(logger, 'error')
         silencedLogger.mockImplementation(() => undefined)
-        await expect(context({ prisma })(token)).rejects.toThrow(PrismaClientValidationError)
+        await expect(context({ prisma, sentry })(token)).rejects.toThrow(
+          PrismaClientValidationError,
+        )
         silencedLogger.mockRestore()
         // TODO: make sure we don't silence logger.error permanently by accident
         // logger.error('See me on the console!')
