@@ -1,5 +1,5 @@
 <template>
-  <div class="background">
+  <SimpleLayout>
     <v-form class="panel" @submit.prevent="submit">
       <div v-if="isError" class="d-flex flex-column align-center justify-space-around pa-4">
         <h2 class="section-headline">{{ t('joinTablePage.unknownTable') }}</h2>
@@ -40,7 +40,7 @@
         <SimpleButton class="mt-12 mx-auto" :label="t('joinTablePage.submit')" @click="submit" />
       </div>
     </v-form>
-  </div>
+  </SimpleLayout>
 </template>
 
 <script lang="ts" setup>
@@ -51,6 +51,7 @@ import { useI18n } from 'vue-i18n'
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 import LogoImage from '#components/menu/LogoImage.vue'
 import { usePageContext } from '#context/usePageContext'
+import SimpleLayout from '#layouts/SimpleLayout.vue'
 import useGetTableName from '#pages/join-table/useGetTableName'
 import { joinTableAsGuestQuery } from '#queries/joinTableAsGuestQuery'
 
@@ -123,14 +124,5 @@ const submit = async () => {
   @media #{map.get(variables.$display-breakpoints, 'sm-and-down')} {
     width: 100% !important;
   }
-}
-
-.background {
-  width: 100vw;
-  height: 100vh;
-  background-image: url('../../assets/join-table-background.jpg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
 }
 </style>

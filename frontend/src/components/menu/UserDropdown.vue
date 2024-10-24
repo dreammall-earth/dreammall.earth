@@ -8,7 +8,13 @@
     </li>
     <li>
       <button class="sign-out" @click="signOut">
-        <v-icon icon="$logout"></v-icon>{{ $t('buttons.signout') }}
+        <v-icon icon="mdi mdi-logout"></v-icon>{{ $t('buttons.signout') }}
+      </button>
+    </li>
+    <li>
+      <button @click="openInvitationLink()">
+        <v-icon icon="mdi mdi-email-multiple-outline"></v-icon>
+        {{ $t('menu.invitationLinks') }}
       </button>
     </li>
   </ul>
@@ -18,6 +24,8 @@
 import { inject } from 'vue'
 import { useTheme } from 'vuetify'
 
+import InvitationLink from '#components/invitation-link/InvitationLink.vue'
+import useModal from '#components/modal/useModal'
 import AuthService from '#src/services/AuthService'
 
 const theme = useTheme()
@@ -26,6 +34,12 @@ const isDarkTheme = theme.global.current.value.dark
 
 function toggleTheme() {
   theme.global.name.value = isDarkTheme ? 'light' : 'dark'
+}
+
+const { setComponent } = useModal()
+
+function openInvitationLink() {
+  setComponent(InvitationLink)
 }
 
 const authService = inject<AuthService>('authService')

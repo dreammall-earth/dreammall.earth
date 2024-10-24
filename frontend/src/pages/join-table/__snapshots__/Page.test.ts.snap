@@ -11,7 +11,9 @@ exports[`JoinTablePage > renders 1`] = `
     <div
       class="background"
       data-v-bb2bf2be=""
+      data-v-f5a81e3e=""
     >
+      
       <form
         class="v-form panel"
         data-v-bb2bf2be=""
@@ -223,6 +225,7 @@ exports[`JoinTablePage > renders 1`] = `
         </div>
         
       </form>
+      
     </div>
     
   </div>

@@ -71,6 +71,7 @@ import UserInfo from '#components/menu/UserInfo.vue'
 import ModalPanel from '#components/modal/ModalPanel.vue'
 import useModal from '#components/modal/useModal'
 import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
+import { useRedeemInvitation } from '#src/composables/useRedeemInvitation'
 
 type DrawerType = 'tables' | 'dream-mall-button' | 'call' | null
 
@@ -100,6 +101,8 @@ const setDrawer = (drawer: DrawerType) => {
 }
 
 const { isModalActive } = useModal()
+
+useRedeemInvitation()
 </script>
 
 <style scoped lang="scss">
