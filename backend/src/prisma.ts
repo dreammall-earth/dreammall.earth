@@ -75,6 +75,15 @@ const userWithProfile = Prisma.validator<Prisma.UserDefaultArgs>()({
 
 type UserWithProfile = Prisma.UserGetPayload<typeof userWithProfile>
 
+const mallTalkHistoryWithUsers = Prisma.validator<Prisma.MallTalkHistoryDefaultArgs>()({
+  include: {
+    from: true,
+    to: true,
+  },
+})
+
+type MallTalkHistoryWithUsers = Prisma.MallTalkHistoryGetPayload<typeof mallTalkHistoryWithUsers>
+
 type DeamMallPrismaClient = typeof prisma
 
 const { PrismaClientValidationError } = Prisma
@@ -88,4 +97,5 @@ export {
   UserWithMeeting,
   UserWithProfile,
   UsersWithMeetings,
+  MallTalkHistoryWithUsers,
 }

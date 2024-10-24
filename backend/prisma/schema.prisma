@@ -73,6 +73,8 @@ model User {
   meetings          UsersInMeetings[]
   userDetail        UserDetail[]
   socialMedia       SocialMedia[]
+  outgoingCalls     MallTalkHistory[] @relation("outgoingCall")
+  incomingCalls     MallTalkHistory[] @relation("incomingCall")
   testphaseEndsAt   DateTime @default("2024-10-31T00:00:00Z")
 }
 
@@ -117,4 +119,15 @@ model SocialMedia {
   link              String   @db.VarChar(60)
   user              User     @relation(fields: [userId], references: [id])
   userId            Int
+}
+
+model MallTalkHistory {
+  id                Int      @id @default(autoincrement())
+  from              User     @relation("outgoingCall", fields: [fromId], references: [id], onDelete: Cascade)
+  fromId            Int
+  to                User     @relation("incomingCall", fields: [toId], references: [id], onDelete: Cascade)
+  toId              Int
+  createdAt         DateTime @default(now())
+  status            String   @db.VarChar(12)  @default("UNKNOWN")
+  tableId           Int
 }
