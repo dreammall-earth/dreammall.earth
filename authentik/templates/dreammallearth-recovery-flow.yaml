@@ -1,0 +1,227 @@
+version: 1
+metadata:
+  name: DreamMall Password Reset
+context: {}
+entries:
+- attrs:
+    authentication: require_unauthenticated
+    denied_action: message_continue
+    designation: recovery
+    layout: sidebar_right
+    name: DreamMall recovery flow
+    policy_engine_mode: any
+    title: Reset your password
+  conditions: []
+  identifiers:
+    pk: b18f8a7e-b152-41fa-96c7-980dbfe71cdd
+    slug: dreammallearth-recovery-flow
+  model: authentik_flows.flow
+  permissions: []
+  state: present
+
+- attrs:
+    field_key: password
+    label: Password
+    name: default-recovery-field-password
+    order: 0
+    placeholder: Password
+    required: true
+    type: password
+  conditions: []
+  identifiers:
+    pk: 9cfa13df-b117-4f71-a5cc-16cac1c6c81a
+  model: authentik_stages_prompt.prompt
+  permissions: []
+  state: present
+
+- attrs:
+    field_key: password_repeat
+    label: Password (repeat)
+    name: default-recovery-field-password-repeat
+    order: 1
+    placeholder: Password (repeat)
+    required: true
+    type: password
+  conditions: []
+  identifiers:
+    pk: 0c1c2fcf-f5b7-4b16-ac3d-f08d8c29986d
+  model: authentik_stages_prompt.prompt
+  permissions: []
+  state: present
+
+- attrs:
+    expression: return bool(request.context.get('is_restored', True))
+    name: default-recovery-skip-if-restored
+  conditions: []
+  identifiers:
+    pk: 1e580373-d34d-431a-97f7-a15032d8c8f7
+  model: authentik_policies_expression.expressionpolicy
+  permissions: []
+  state: present
+- attrs:
+    expression: 'context[''flow_plan''].context[''redirect''] = ''https://stage1.app.dreammall.earth/signin''
+
+      return True'
+    name: dreammall-redirect-frontend
+  conditions: []
+  identifiers:
+    pk: 8f72ccbc-f4c3-4d3a-a2b8-374a013329fe
+  model: authentik_policies_expression.expressionpolicy
+  permissions: []
+  state: present
+- attrs:
+    geoip_binding: no_binding
+    network_binding: no_binding
+    remember_me_offset: seconds=0
+    session_duration: seconds=0
+  conditions: []
+  identifiers:
+    name: default-recovery-user-login
+    pk: 31c19993-8ac9-422d-b22b-7594fb337551
+  model: authentik_stages_user_login.userloginstage
+  permissions: []
+  state: present
+- attrs:
+    activate_user_on_success: true
+    from_address: system@authentik.local
+    host: localhost
+    port: 25
+    subject: DreamMall: Passwort zurücksetzen
+    template: dreammall_password_reset.html
+    timeout: 10
+    token_expiry: 30
+    use_global_settings: true
+  conditions: []
+  identifiers:
+    name: default-recovery-email
+    pk: 754a518c-6058-4c9d-bfd2-70e28423187e
+  model: authentik_stages_email.emailstage
+  permissions: []
+  state: present
+- attrs:
+    user_creation_mode: never_create
+    user_type: external
+  conditions: []
+  identifiers:
+    name: default-recovery-user-write
+    pk: c082ef19-fcc3-4655-ab70-efacb96169b6
+  model: authentik_stages_user_write.userwritestage
+  permissions: []
+  state: present
+- attrs:
+    fields:
+    - 9cfa13df-b117-4f71-a5cc-16cac1c6c81a
+    - 0c1c2fcf-f5b7-4b16-ac3d-f08d8c29986d
+  conditions: []
+  identifiers:
+    name: Change your password
+    pk: d2769cac-37cd-40cf-b171-fc4b6abf99f8
+  model: authentik_stages_prompt.promptstage
+  permissions: []
+  state: present
+- attrs:
+    case_insensitive_matching: true
+    pretend_user_exists: true
+    show_matched_user: true
+    user_fields:
+    - username
+    - email
+  conditions: []
+  identifiers:
+    name: default-recovery-identification
+    pk: f82e8437-b84b-4b06-a45e-043d214f87c4
+  model: authentik_stages_identification.identificationstage
+  permissions: []
+  state: present
+
+- attrs:
+    evaluate_on_plan: true
+    invalid_response_action: retry
+    policy_engine_mode: any
+    re_evaluate_policies: true
+  conditions: []
+  identifiers:
+    order: 10
+    pk: a9e9e30d-53ba-41c1-8e86-90f125dc0e82
+    stage: f82e8437-b84b-4b06-a45e-043d214f87c4
+    target: b18f8a7e-b152-41fa-96c7-980dbfe71cdd
+  model: authentik_flows.flowstagebinding
+  permissions: []
+  state: present
+- attrs:
+    evaluate_on_plan: true
+    invalid_response_action: retry
+    policy_engine_mode: any
+    re_evaluate_policies: true
+  conditions: []
+  identifiers:
+    order: 20
+    pk: a4e09b51-685e-4d9f-a312-0f2307db0b60
+    stage: 754a518c-6058-4c9d-bfd2-70e28423187e
+    target: b18f8a7e-b152-41fa-96c7-980dbfe71cdd
+  model: authentik_flows.flowstagebinding
+  permissions: []
+  state: present
+- attrs:
+    evaluate_on_plan: true
+    invalid_response_action: retry
+    policy_engine_mode: any
+  conditions: []
+  identifiers:
+    order: 30
+    pk: 1219d06e-2c06-4c5b-a162-78e3959c6cf0
+    stage: d2769cac-37cd-40cf-b171-fc4b6abf99f8
+    target: b18f8a7e-b152-41fa-96c7-980dbfe71cdd
+  model: authentik_flows.flowstagebinding
+  permissions: []
+  state: present
+- attrs:
+    evaluate_on_plan: true
+    invalid_response_action: retry
+    policy_engine_mode: any
+  conditions: []
+  identifiers:
+    order: 40
+    pk: 488de557-3876-46ae-8975-a37b2599a4da
+    stage: c082ef19-fcc3-4655-ab70-efacb96169b6
+    target: b18f8a7e-b152-41fa-96c7-980dbfe71cdd
+  model: authentik_flows.flowstagebinding
+  permissions: []
+  state: present
+- attrs:
+    evaluate_on_plan: true
+    invalid_response_action: retry
+    policy_engine_mode: any
+  conditions: []
+  identifiers:
+    order: 100
+    pk: c6a62333-db5d-4000-8c16-a4bced16c7f7
+    stage: 31c19993-8ac9-422d-b22b-7594fb337551
+    target: b18f8a7e-b152-41fa-96c7-980dbfe71cdd
+  model: authentik_flows.flowstagebinding
+  permissions: []
+  state: present
+- attrs:
+    enabled: true
+    timeout: 30
+  conditions: []
+  identifiers:
+    order: 0
+    pk: 4c613313-8fdc-44f0-b8fb-05e9e27f1b77
+    policy: 1e580373-d34d-431a-97f7-a15032d8c8f7
+    target: a9e9e30d-53ba-41c1-8e86-90f125dc0e82
+  model: authentik_policies.policybinding
+  permissions: []
+  state: present
+- attrs:
+    enabled: true
+    timeout: 30
+  conditions: []
+  identifiers:
+    order: 0
+    pk: e80e320d-ac55-48a6-849d-7837503928be
+    policy: 8f72ccbc-f4c3-4d3a-a2b8-374a013329fe
+    target: c6a62333-db5d-4000-8c16-a4bced16c7f7
+  model: authentik_policies.policybinding
+  permissions: []
+  state: present
