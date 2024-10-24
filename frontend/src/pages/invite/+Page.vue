@@ -20,12 +20,12 @@ const authStore = useAuthStore()
 
 const pageContext = usePageContext()
 
-const code = ref(Number(pageContext.routeParams?.code))
+const code = ref(pageContext.routeParams?.code)
 
 const isValidCode = ref<boolean | undefined>()
 
 watch(pageContext, (context) => {
-  code.value = Number(context.routeParams?.id)
+  code.value = context.routeParams?.code
 })
 
 const { result: validateInvitationQueryResult } = useQuery(
