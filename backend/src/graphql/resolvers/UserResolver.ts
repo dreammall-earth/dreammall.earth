@@ -4,6 +4,7 @@ import { Resolver, Query, Authorized, Ctx, Arg, Mutation, Int } from 'type-graph
 import { v4 as uuidv4 } from 'uuid'
 
 import { UpdateUserDetailInput } from '#graphql/inputs/UpdateUserDetailInput'
+import { Invitation } from '#graphql/models/InvitationModel'
 import { User, CurrentUser, UserDetail, SocialMedia } from '#graphql/models/UserModel'
 import { AddSocialMediaInput } from '#inputs/AddSocialMediaInput'
 import { AddUserDetailInput } from '#inputs/AddUserDetailInput'
@@ -11,7 +12,6 @@ import { UpdateUserInput } from '#inputs/UpdateUserInput'
 
 import type { AuthenticatedContext, Context } from '#src/context'
 import type { PrismaClient, UsersWithMeetings, UserWithProfile } from '#src/prisma'
-import { Invitation } from '#graphql/models/InvitationModel'
 
 @Resolver()
 export class UserResolver {
