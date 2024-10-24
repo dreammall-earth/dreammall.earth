@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { reactive, watch, ref } from 'vue'
+import {reactive, watch, ref, inject} from 'vue'
 
 import StepControl from '#components/steps/StepControl.vue'
 import { Step } from '#components/steps/useSteps'
@@ -21,6 +21,7 @@ import TableSettingsRoot from './TableSettingsRoot.vue'
 
 import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
 import type { ComponentExposed } from 'vue-component-type-helpers'
+import {TableDataInjection, TableDataSymbol} from "#components/malltalk/interfaces/TableDataInjection";
 
 const userStore = useUserStore()
 
@@ -40,11 +41,16 @@ watch(myTable, (value) => {
   tableSettings.meetingID = value?.meetingID || ''
 })
 
+const tableData = inject<TableDataInjection>(TableDataSymbol, {
+  isModerator: ref(false),
+  name: ref(''),
+})
+
 const steps: Step[] = [
   {
     component: TableSettingsRoot,
     id: 'root',
-    title: 'Mein Tisch',
+    title: tableData.name.value || 'Mein Tisch',
     submit: 'close',
     submitText: 'Beenden',
     back: 'previous',

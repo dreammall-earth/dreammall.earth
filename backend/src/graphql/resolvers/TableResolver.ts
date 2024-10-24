@@ -339,6 +339,7 @@ export class TableResolver {
       }),
       type,
       isModerator,
+      name: table.name,
     }
   }
 
