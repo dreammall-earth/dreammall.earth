@@ -1,21 +1,11 @@
 <template>
   <div class="invitation-item d-flex align-center pa-2 pr-3 rounded-pill">
-    <v-avatar size="40" class="mr-3">
-      <v-img
-        v-if="invitation.userAvatar"
-        :src="invitation.userAvatar"
-        :alt="invitation.userName"
-        cover
-      ></v-img>
-      <svg v-else width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="20" cy="20" r="20" fill="#E0E0E0" />
-        <circle cx="20" cy="15" r="7" fill="#BDBDBD" />
-        <path
-          d="M6 34.5C6 27.5964 11.5964 22 18.5 22H21.5C28.4036 22 34 27.5964 34 34.5V40H6V34.5Z"
-          fill="#BDBDBD"
-        />
-      </svg>
-    </v-avatar>
+    <UserAvatar
+      :size="40"
+      class="mr-3"
+      :name="invitation.userName"
+      :avatar-src="invitation.userAvatar"
+    />
 
     <div class="flex-grow-1">
       <div class="table-caption text-caption">{{ invitation.tableName }}</div>
@@ -46,6 +36,7 @@
 </template>
 
 <script lang="ts" setup>
+import UserAvatar from '#components/Avatar/UserAvatar.vue'
 import Invitation from '#components/malltalk/interfaces/Invitation'
 
 defineProps<{

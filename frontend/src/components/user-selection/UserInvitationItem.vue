@@ -1,17 +1,7 @@
 <template>
   <v-list-item class="invitation-item my-2 pa-2 pr-3 rounded-pill" elevation="0" rounded>
     <template #prepend>
-      <v-avatar size="40">
-        <v-img v-if="user.avatar" :src="user.avatar" :alt="user.name" cover></v-img>
-        <svg v-else width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="20" cy="20" r="20" fill="#E0E0E0" />
-          <circle cx="20" cy="15" r="7" fill="#BDBDBD" />
-          <path
-            d="M6 34.5C6 27.5964 11.5964 22 18.5 22H21.5C28.4036 22 34 27.5964 34 34.5V40H6V34.5Z"
-            fill="#BDBDBD"
-          />
-        </svg>
-      </v-avatar>
+      <UserAvatar :size="40" :name="user.name" :avatar-src="user.avatar" />
     </template>
 
     <v-list-item-title class="text-white font-weight-medium">
@@ -37,6 +27,8 @@
 </template>
 
 <script lang="ts" setup>
+import UserAvatar from '#components/Avatar/UserAvatar.vue'
+
 import type UserInvitation from './UserInvitation'
 
 const props = defineProps<{
