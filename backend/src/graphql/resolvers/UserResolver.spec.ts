@@ -1934,6 +1934,82 @@ describe('UserResolver', () => {
     })
   })
 
+  describe('validateInvitationLink query', () => {
+    const query = `query($code: String!) {
+      validateInvitationLink(code: $code) {
+        name
+      }
+    }`
+    describe('unauthenticated', () => {
+      let user: UserWithProfile
+      beforeEach(async () => {
+        user = await findOrCreateUser({ prisma })({ pk, nickname, name })
+      })
+      describe('with non existing code', () => {
+        it('throws an error', async () => {
+          const response = await testServer.executeOperation(
+            {
+              query,
+              variables: {
+                code: 'mocked-validate',
+              },
+            },
+            {
+              contextValue: mockContextValue(),
+            },
+          )
+          expect(response).toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Invalid invitation code.',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('with existing code', () => {
+        beforeAll(async () => {
+          await prisma.invitationLink.create({
+            data: {
+              code: 'mocked-validate',
+              userId: user.id,
+            },
+          })
+        })
+
+        it('returns an unauthenticated error', async () => {
+          const response = await testServer.executeOperation(
+            {
+              query,
+              variables: {
+                code: 'mocked-validate',
+              },
+            },
+            { contextValue: mockContextValue() },
+          )
+          expect(response.body).toMatchObject({
+            kind: 'single',
+            singleResult: {
+              data: {
+                validateInvitationLink: {
+                  name: 'User',
+                },
+              },
+            },
+          })
+        })
+      })
+    })
+  })
+
   describe('redeemInvitationLink mutation', () => {
     const query = `mutation($code: String!) {
       redeemInvitationLink(code: $code)
