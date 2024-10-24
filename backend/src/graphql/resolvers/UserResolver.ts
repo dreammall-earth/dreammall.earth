@@ -289,7 +289,3 @@ const createInvitationCode = (prisma: PrismaClient) => async (): Promise<string>
   }
   return invitationCode
 }
-
-export type InvitationLinkName = {
-  username: string
-}
