@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.11.8",
-    "@intlify/unplugin-vue-i18n": "^4.0.0",
+    "@intlify/unplugin-vue-i18n": "^5.2.0",
     "@mdi/font": "^7.4.47",
     "@sentry/vue": "^8.34.0",
     "@vitejs/plugin-vue": "^5.1.4",
