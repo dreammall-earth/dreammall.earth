@@ -105,6 +105,11 @@
     },
     "enablecookie": "🍪 Aktiviere Cookies in deinem Browser!"
   },
+  "invite": {
+    "invalidCode": "Der Einladungslink ist leider ungültig.",
+    "usedCode": "Der Einladungslink wurde bereits benutzt.",
+    "register": "Trotzdem beiteten"
+  },
   "invitationLink": {
     "motivation": "Die Einladungslinks sind der Schlüssel auf unsere Plattform, wähle Sorgfältig."
   },
