@@ -1874,4 +1874,69 @@ describe('UserResolver', () => {
       })
     })
   })
+
+  describe('createInvitationLink mutation', () => {
+    const query = `mutation {
+      createInvitationLink
+    }`
+    describe('unauthenticated', () => {
+      it('returns an unauthenticated error', async () => {
+        const response = await testServer.executeOperation(
+          {
+            query,
+            variables: {
+              data: {
+                link: 'https://yunite.me/user/ork',
+                type: 'discord',
+              },
+            },
+          },
+          { contextValue: mockContextValue() },
+        )
+        expect(response).toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('authenticated', () => {
+      let user: UserWithProfile
+      beforeEach(async () => {
+        user = await findOrCreateUser({ prisma })({ pk, nickname, name })
+      })
+
+      describe('with existing user', () => {
+        it('sends a valid invitation link', async () => {
+          const response = await testServer.executeOperation(
+            {
+              query,
+            },
+            {
+              contextValue: mockContextValue({ user }),
+            },
+          )
+          expect(response.body).toMatchObject({
+            kind: 'single',
+            singleResult: {
+              data: {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                createInvitationLink: expect.any(String),
+              },
+            },
+          })
+        })
+      })
+    })
+  })
 })
