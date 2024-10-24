@@ -40,6 +40,8 @@ const {
   WEBHOOK_SECRET,
 
   LOG_LEVEL = 'DEBUG',
+
+  TESTPHASE_DURATION_DAYS,
 } = process.env
 
 const BREVO = {
@@ -65,6 +67,10 @@ const FRONTEND = {
   FRONTEND_URL,
 }
 
+const TESTPHASE = {
+  TESTPHASE_DURATION_DAYS: toNumber(TESTPHASE_DURATION_DAYS) || 30,
+}
+
 export const CONFIG = {
   ...BREVO,
   ...BBB,
@@ -77,4 +83,5 @@ export const CONFIG = {
   SENTRY_ENVIRONMENT,
   WEBHOOK_SECRET,
   LOG_LEVEL,
+  ...TESTPHASE,
 }

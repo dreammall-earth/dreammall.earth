@@ -12,12 +12,12 @@ $font-family-default: 'Helvetica', sans-serif;
     xl: 8px
   ),
 );
-@import './imports/_config';
-@import './imports/_fonts';
-@import './imports/_mixins';
-@import './vuetify-adjustments/dm.switch';
-@import './vuetify-adjustments/navigationDrawer';
-@import './vuetify-adjustments/v-select';
+@forward './imports/_config';
+@forward './imports/_mixins';
+@use './imports/_fonts';
+@use './vuetify-adjustments/dm.switch';
+@use './vuetify-adjustments/navigationDrawer';
+@use './vuetify-adjustments/v-select';
 
 :root {
   --menu-icon-height: 44px;

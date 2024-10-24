@@ -1,5 +1,6 @@
 import { customAlphabet } from 'nanoid'
 
+import { CONFIG } from '#config/config'
 import { EVENT_CREATE_USER } from '#src/event/Events'
 
 import { migratePk } from './migratePk'
@@ -30,12 +31,16 @@ export const findOrCreateUser =
     if (user) return user
 
     const referenceId = nanoid()
+    const testphaseEndsAt = new Date()
+    testphaseEndsAt.setDate(testphaseEndsAt.getDate() + CONFIG.TESTPHASE_DURATION_DAYS)
+
     user = await prisma.user.create({
       data: {
         pk,
         username,
         name,
         referenceId,
+        testphaseEndsAt,
       },
       include: {
         meeting: true,

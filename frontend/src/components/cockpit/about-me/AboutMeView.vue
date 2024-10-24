@@ -55,7 +55,7 @@
           />
         </template>
       </div>
-      <button @click="$emit('edit-details')">
+      <button class="w-100" @click="$emit('edit-details')">
         <UserDetails :details="props.details" />
       </button>
       <button class="social" @click="$emit('edit-social')">
@@ -90,6 +90,7 @@ import XIcon from '#assets/icons/x.svg?component'
 import XingIcon from '#assets/icons/xing.svg?component'
 import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
 
+import { getSocialMediaIcon } from './socialMediaPlatforms'
 import UserDetails from './UserDetails.vue'
 
 import type { UserDetail, UserAvailability, SocialMedia } from '#stores/userStore'

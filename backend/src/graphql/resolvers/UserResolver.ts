@@ -1,6 +1,7 @@
 import { Prisma } from '@prisma/client'
 import { Resolver, Query, Authorized, Ctx, Arg, Mutation, Int } from 'type-graphql'
 
+import { UpdateUserDetailInput } from '#graphql/inputs/UpdateUserDetailInput'
 import { User, CurrentUser, UserDetail, SocialMedia } from '#graphql/models/UserModel'
 import { AddSocialMediaInput } from '#inputs/AddSocialMediaInput'
 import { AddUserDetailInput } from '#inputs/AddUserDetailInput'
@@ -85,6 +86,34 @@ export class UserResolver {
     })
 
     return new UserDetail(detail)
+  }
+
+  @Authorized()
+  @Mutation(() => UserDetail)
+  async updateUserDetail(
+    @Arg('data') data: UpdateUserDetailInput,
+    @Ctx() context: AuthenticatedContext,
+  ): Promise<UserDetail> {
+    const {
+      user,
+      dataSources: { prisma },
+    } = context
+
+    const detail = user.userDetail.find((d) => d.id === data.id)
+
+    if (!detail) throw new Error('Detail not found!')
+
+    const updatedDetail = await prisma.userDetail.update({
+      where: {
+        id: data.id,
+      },
+      data: {
+        text: data.text,
+        category: detail.category,
+      },
+    })
+
+    return new UserDetail(updatedDetail)
   }
 
   @Authorized()
