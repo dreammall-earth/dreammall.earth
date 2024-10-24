@@ -1884,12 +1884,6 @@ describe('UserResolver', () => {
         const response = await testServer.executeOperation(
           {
             query,
-            variables: {
-              data: {
-                link: 'https://yunite.me/user/ork',
-                type: 'discord',
-              },
-            },
           },
           { contextValue: mockContextValue() },
         )
