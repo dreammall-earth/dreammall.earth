@@ -105,13 +105,13 @@
     },
     "enablecookie": "🍪 Please enable cookies in your browser!"
   },
-  "invite": {
-    "invalidCode": "Invalid invitation code.",
-    "usedCode": "This invitation code has already been used.",
-    "register": "Join anyway"
-  },
   "invitationLink": {
     "motivation": "Inivitation links are the key to our platform. Choose carefully."
+  },
+  "invite": {
+    "invalidCode": "Invalid invitation code.",
+    "register": "Join anyway",
+    "usedCode": "This invitation code has already been used."
   },
   "joinTablePage": {
     "guestName": "Guest name",
