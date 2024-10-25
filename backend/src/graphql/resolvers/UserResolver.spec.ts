@@ -1963,7 +1963,7 @@ describe('UserResolver', () => {
             {
               query,
               variables: {
-                code: 'mocked-validate',
+                code: 'mocked-invalidate',
               },
             },
             {
@@ -1997,7 +1997,7 @@ describe('UserResolver', () => {
           })
         })
 
-        it('returns an unauthenticated error', async () => {
+        it('returns the name of the user that created the link', async () => {
           const response = await testServer.executeOperation(
             {
               query,
