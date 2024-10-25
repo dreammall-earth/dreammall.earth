@@ -54,6 +54,7 @@ services:
       <<: *x-shared-environments
     volumes:
       - ./templates:/templates
+      - ./logo.png:/web/dist/assets/icons/icon_left_brand.png
     env_file:
       - .env
     ports:
