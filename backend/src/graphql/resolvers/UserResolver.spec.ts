@@ -1911,7 +1911,7 @@ describe('UserResolver', () => {
       })
 
       describe('with existing user', () => {
-        it('sends a valid invitation link', async () => {
+        it('sends a valid invitation link and stores the invitation in the database', async () => {
           const response = await testServer.executeOperation(
             {
               query,
@@ -1929,6 +1929,19 @@ describe('UserResolver', () => {
               },
             },
           })
+          // const code = response.body.singleResult.data.createInvitationLink
+          const databaseRecord = await prisma.invitationLink.findMany({})
+          expect(databaseRecord).toMatchObject([
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              code: expect.any(String),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              userId: expect.any(Number),
+              acceptedUserId: null,
+            },
+          ])
         })
       })
     })
