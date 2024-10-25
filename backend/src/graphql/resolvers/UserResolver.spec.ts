@@ -2024,7 +2024,7 @@ describe('UserResolver', () => {
           })
         })
 
-        it('returns a success at first call', async () => {
+        it('returns an error if creator equals redeemer', async () => {
           const response = await testServer.executeOperation(
             {
               query,
@@ -2039,10 +2039,65 @@ describe('UserResolver', () => {
           expect(response.body).toMatchObject({
             kind: 'single',
             singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Can not redeem own invitation code.',
+                }),
+              ]),
+            },
+          })
+          const redeemedInvitationLink = await prisma.invitationLink.findUnique({
+            where: {
+              code: 'mocked',
+            },
+          })
+          expect(redeemedInvitationLink).toMatchObject({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            userId: user.id,
+            code: 'mocked',
+            acceptedUserId: null,
+          })
+        })
+
+        it('returns a success at first call', async () => {
+          const user2 = await findOrCreateUser({ prisma })({
+            pk: 42,
+            nickname: 'mockedUser2',
+            name: 'user2',
+          })
+          const response = await testServer.executeOperation(
+            {
+              query,
+              variables: {
+                code: 'mocked',
+              },
+            },
+            {
+              contextValue: mockContextValue({ user: user2 }),
+            },
+          )
+          expect(response.body).toMatchObject({
+            kind: 'single',
+            singleResult: {
               data: {
                 redeemInvitationLink: true,
               },
             },
+          })
+          const redeemedInvitationLink = await prisma.invitationLink.findUnique({
+            where: {
+              code: 'mocked',
+            },
+          })
+          expect(redeemedInvitationLink).toMatchObject({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            userId: user.id,
+            code: 'mocked',
+            acceptedUserId: user2.id,
           })
         })
 

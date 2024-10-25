@@ -223,6 +223,9 @@ export class UserResolver {
     if (invitationLink.acceptedUserId) {
       throw new Error('Link already used.')
     }
+    if (user.id === invitationLink.userId) {
+      throw new Error('Can not redeem own invitation code.')
+    }
     await prisma.invitationLink.update({
       where: {
         code,
