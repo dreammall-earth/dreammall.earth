@@ -11,7 +11,7 @@ CREATE TABLE `InvitationLink` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `InvitationLink` ADD CONSTRAINT `InvitationLink_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `InvitationLink` ADD CONSTRAINT `InvitationLink_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `InvitationLink` ADD CONSTRAINT `InvitationLink_acceptedUserId_fkey` FOREIGN KEY (`acceptedUserId`) REFERENCES `User`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `InvitationLink` ADD CONSTRAINT `InvitationLink_acceptedUserId_fkey` FOREIGN KEY (`acceptedUserId`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

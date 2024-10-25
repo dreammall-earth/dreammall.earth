@@ -124,8 +124,8 @@ model SocialMedia {
 model InvitationLink {
   id                Int     @id @default(autoincrement())
   code              String  @db.VarChar(36) @unique
-  user              User    @relation("owner", fields: [userId], references: [id])
+  user              User    @relation("owner", fields: [userId], references: [id], onDelete: Cascade)
   userId            Int
-  acceptedUser      User?   @relation("redeemer", fields: [acceptedUserId], references: [id])
+  acceptedUser      User?   @relation("redeemer", fields: [acceptedUserId], references: [id], onDelete: Cascade)
   acceptedUserId    Int?    @unique
 }
