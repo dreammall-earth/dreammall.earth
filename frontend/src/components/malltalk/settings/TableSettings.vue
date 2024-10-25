@@ -10,8 +10,12 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import {reactive, watch, ref, inject} from 'vue'
+import { reactive, watch, ref, inject } from 'vue'
 
+import {
+  TableDataInjection,
+  TableDataSymbol,
+} from '#components/malltalk/interfaces/TableDataInjection'
 import StepControl from '#components/steps/StepControl.vue'
 import { Step } from '#components/steps/useSteps'
 import { useUserStore } from '#stores/userStore'
@@ -21,7 +25,6 @@ import TableSettingsRoot from './TableSettingsRoot.vue'
 
 import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
 import type { ComponentExposed } from 'vue-component-type-helpers'
-import {TableDataInjection, TableDataSymbol} from "#components/malltalk/interfaces/TableDataInjection";
 
 const userStore = useUserStore()
 

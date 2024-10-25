@@ -5,6 +5,4 @@ export interface TableDataInjection {
   isModerator: Ref<boolean>
 }
 
-export const TableDataSymbol: InjectionKey<TableDataInjection> = Symbol(
-  'ActiveTableData',
-)
+export const TableDataSymbol: InjectionKey<TableDataInjection> = Symbol('ActiveTableData')
