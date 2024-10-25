@@ -1937,8 +1937,7 @@ describe('UserResolver', () => {
               id: expect.any(Number),
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               code: expect.any(String),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              userId: expect.any(Number),
+              userId: user.id,
               acceptedUserId: null,
             },
           ])
