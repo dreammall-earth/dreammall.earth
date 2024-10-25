@@ -9,14 +9,15 @@
       </div>
     </template>
     <template #default>
-      <v-form class="add-detail mb-2" @submit.prevent="addDetail">
+      <v-form class="add-detail mb-2" @submit.prevent="submit">
         <v-select
-          v-model="newDetail.category"
+          v-model="category"
           flat
           rounded
           :items="detailCategories"
           class="select-category"
           density="compact"
+          :disabled="isUpdate"
         >
           <template #selection="{ item }">
             <v-icon :icon="detailCategoryToIcon(item.value)"></v-icon>
@@ -28,7 +29,8 @@
           </template>
         </v-select>
         <v-text-field
-          v-model="newDetail.text"
+          ref="textField"
+          v-model="text"
           name="text"
           clearable
           rounded
@@ -39,53 +41,133 @@
           maxlength="60"
         ></v-text-field>
         <button
+          v-if="isUpdate && (!text || text?.length === 0)"
+          class="submit rounded-circle"
+          @click="abortUpdate"
+        >
+          <v-icon icon="mdi mdi-close" />
+        </button>
+
+        <button
+          v-else
           type="submit"
-          :disabled="newDetail.text?.length === 0 || props.loading"
+          :disabled="!text || text?.length === 0 || props.loading"
           class="submit rounded-circle"
         >
-          <v-icon
-            :icon="newDetail.text?.length === 0 || props.loading ? 'mdi mdi-plus' : 'mdi mdi-check'"
-          ></v-icon>
+          <v-icon :icon="submitIcon"></v-icon>
         </button>
       </v-form>
       <!-- </div> -->
-      <Details :details="props.details" editable @remove-detail="removeDetail" />
+      <Details
+        :details="props.details"
+        editable
+        @remove-detail="removeDetail"
+        @edit-detail="editDetail"
+      />
     </template>
   </CockpitCard>
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { computed, ref } from 'vue'
 
 import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
+import { detailCategories, detailCategoryToIcon } from '#src/utils/detailCategories'
+import { UserDetailCategory, useUserStore } from '#stores/userStore'
 
-import { detailCategories, detailCategoryToIcon } from './detailCategories'
 import Details from './UserDetails.vue'
 
-import type { UserDetail, AddUserDetailInput } from '#stores/userStore'
+import type { UserDetail } from '#stores/userStore'
+
+const userStore = useUserStore()
 
 const props = defineProps<{
   details: UserDetail[]
   loading?: boolean
 }>()
 
-const emit = defineEmits<{
+defineEmits<{
   (e: 'back'): void
-  (e: 'add-detail', detail: AddUserDetailInput): void
-  (e: 'remove-detail', id: number): void
 }>()
 
-const newDetail = reactive<AddUserDetailInput>({
-  category: 'work',
-  text: '',
-})
+const isUpdate = ref(false)
+const id = ref<number | null>(null)
+const category = ref<UserDetailCategory>('work')
+const text = ref<string | null>(null)
+const textField = ref<HTMLInputElement | null>(null)
 
-const addDetail = () => {
-  emit('add-detail', newDetail)
+const submitIcon = computed(() =>
+  isUpdate.value
+    ? 'mdi mdi-pencil'
+    : !text.value || text.value?.length === 0 || props.loading
+      ? 'mdi mdi-plus'
+      : 'mdi mdi-check',
+)
+
+const resetDetail = () => {
+  text.value = ''
+  category.value = 'work'
+  id.value = 0
 }
 
-const removeDetail = (id: number) => {
-  emit('remove-detail', id)
+const abortUpdate = () => {
+  isUpdate.value = false
+  resetDetail()
+}
+
+const addDetail = async () => {
+  if (!text.value) throw new Error('No text provided')
+
+  await userStore.addUserDetail({
+    category: category.value,
+    text: text.value,
+  })
+  text.value = ''
+}
+
+const removeDetail = async (id: number) => {
+  await userStore.removeUserDetail(id)
+  abortUpdate()
+}
+
+const editDetail = (detailId: number, detailCategory: UserDetailCategory) => {
+  if (detailId < 1) {
+    // Placeholder was clicked
+    isUpdate.value = false
+    text.value = ''
+    category.value = detailCategory
+    textField.value?.focus()
+    return
+  }
+
+  const detail = props.details.find((detail) => detail.id === detailId)
+  if (!detail) throw new Error('Detail not found')
+
+  isUpdate.value = true
+  id.value = detailId
+  category.value = detail.category
+  text.value = detail.text
+  textField.value?.focus()
+}
+
+const updateDetail = async () => {
+  if (!id.value) throw new Error('No detail id provided')
+  if (!text.value) throw new Error('No text provided')
+
+  await userStore.updateUserDetail({
+    id: id.value,
+    text: text.value,
+  })
+  isUpdate.value = false
+  resetDetail()
+}
+
+const submit = () => {
+  if (isUpdate.value) {
+    updateDetail()
+  } else {
+    addDetail()
+  }
 }
 </script>
 

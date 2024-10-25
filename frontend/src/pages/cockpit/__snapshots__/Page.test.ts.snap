@@ -1218,6 +1218,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
               
             </div>
             <button
+              class="w-100"
               data-v-f444dc92=""
             >
               <ul
@@ -1227,10 +1228,11 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
               >
                 
                 <li
+                  class="detail"
                   data-v-589db232=""
                 >
                   <span
-                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
                     data-v-589db232=""
                     draggable="false"
                   >
@@ -1252,7 +1254,14 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                         class="mdi mdi-school-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
                         data-v-589db232=""
                       />
-                       I am a student 
+                      <span
+                        class="detail-text"
+                        data-v-589db232=""
+                        tabindex="0"
+                        title="I am a student"
+                      >
+                        I am a student
+                      </span>
                       <!--v-if-->
                       
                     </div>
@@ -1261,10 +1270,11 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   </span>
                 </li>
                 <li
+                  class="detail"
                   data-v-589db232=""
                 >
                   <span
-                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
                     data-v-589db232=""
                     draggable="false"
                   >
@@ -1286,7 +1296,14 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                         class="mdi mdi-map-marker-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
                         data-v-589db232=""
                       />
-                       Mein Standort 
+                      <span
+                        class="detail-text"
+                        data-v-589db232=""
+                        tabindex="0"
+                        title="Mein Standort"
+                      >
+                        Mein Standort
+                      </span>
                       <!--v-if-->
                       
                     </div>
@@ -1295,10 +1312,11 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   </span>
                 </li>
                 <li
+                  class="detail"
                   data-v-589db232=""
                 >
                   <span
-                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
                     data-v-589db232=""
                     draggable="false"
                   >
@@ -1320,7 +1338,14 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                         class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
                         data-v-589db232=""
                       />
-                       Meine Arbeit 
+                      <span
+                        class="detail-text"
+                        data-v-589db232=""
+                        tabindex="0"
+                        title="Meine Arbeit"
+                      >
+                        Meine Arbeit
+                      </span>
                       <!--v-if-->
                       
                     </div>
@@ -1329,10 +1354,11 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   </span>
                 </li>
                 <li
+                  class="detail"
                   data-v-589db232=""
                 >
                   <span
-                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
                     data-v-589db232=""
                     draggable="false"
                   >
@@ -1354,7 +1380,14 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                         class="mdi mdi-emoticon-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
                         data-v-589db232=""
                       />
-                       Wie ich mich heute fühle 
+                      <span
+                        class="detail-text"
+                        data-v-589db232=""
+                        tabindex="0"
+                        title="Wie ich mich heute fühle"
+                      >
+                        Wie ich mich heute fühle
+                      </span>
                       <!--v-if-->
                       
                     </div>
@@ -1363,10 +1396,11 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   </span>
                 </li>
                 <li
+                  class="detail"
                   data-v-589db232=""
                 >
                   <span
-                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail border-thin"
+                    class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
                     data-v-589db232=""
                     draggable="false"
                   >
@@ -1388,7 +1422,14 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                         class="mdi mdi-web mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
                         data-v-589db232=""
                       />
-                       Sprachen, die ich spreche 
+                      <span
+                        class="detail-text"
+                        data-v-589db232=""
+                        tabindex="0"
+                        title="Sprachen, die ich spreche"
+                      >
+                        Sprachen, die ich spreche
+                      </span>
                       <!--v-if-->
                       
                     </div>
@@ -1418,7 +1459,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                 >
                   <i
                     aria-hidden="true"
-                    class="mdi-instagram mdi v-icon notranslate v-theme--light v-icon--size-default"
+                    class="mdi mdi-instagram mdi v-icon notranslate v-theme--light v-icon--size-default"
                     data-v-f444dc92=""
                   />
                 </li>
@@ -1593,27 +1634,23 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
         </div>
         
       </div>
-      <!-- Desktop Bottom Bar -->
-      <div
-        class="desktop-bottom-bar d-none d-md-flex"
-        data-v-75d0be1e=""
-      />
       <!-- Dream Mall Button & Panel -->
       <div
         class="dream-mall-floating-container"
         data-v-75d0be1e=""
+        data-v-e7870397=""
       >
         <div
           class="dream-mall-button-wrapper"
-          data-v-75d0be1e=""
+          data-v-e7870397=""
         >
           <div
             class="dream-mall-button"
-            data-v-75d0be1e=""
+            data-v-e7870397=""
           >
             <svg
               data-v-57af6bd7=""
-              data-v-75d0be1e=""
+              data-v-e7870397=""
               fill="none"
               height="1719"
               viewBox="0 0 1731 1719"
@@ -2219,9 +2256,8 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
         </div>
         <div
           class="dream-mall-panel"
-          data-v-75d0be1e=""
+          data-v-e7870397=""
         >
-          
           
           <div
             class="step-header dream-mall-button-mode"
@@ -2317,7 +2353,6 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
             <!---->
             <!---->
           </button>
-          
           
         </div>
       </div>
