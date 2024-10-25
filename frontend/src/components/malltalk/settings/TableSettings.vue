@@ -43,14 +43,14 @@ watch(myTable, (value) => {
 
 const tableData = inject<TableDataInjection>(TableDataSymbol, {
   isModerator: ref(false),
-  name: ref(''),
+  name: ref('Mein Tisch'),
 })
 
 const steps: Step[] = [
   {
     component: TableSettingsRoot,
     id: 'root',
-    title: tableData.name.value || 'Mein Tisch',
+    title: tableData.name,
     submit: 'close',
     submitText: 'Beenden',
     back: 'previous',
@@ -58,7 +58,7 @@ const steps: Step[] = [
   {
     component: ChangeUsers,
     id: 'users',
-    title: 'Teilnehmer',
+    title: ref('Teilnehmer'),
     submit: 'root',
     submitText: 'Übernehmen',
     back: 'root',

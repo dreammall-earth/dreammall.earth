@@ -1,10 +1,10 @@
-import { Component, onMounted, onUnmounted, ref } from 'vue'
+import { Component, onMounted, onUnmounted, Ref, ref } from 'vue'
 
 type StepId = string | (() => string)
 export type Step = {
   component: Component
   id: string
-  title: string
+  title: Ref<string>
   submit: StepId
   submitText?: string
   back: StepId
