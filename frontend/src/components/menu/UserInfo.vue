@@ -8,6 +8,7 @@
       >
         <ClientOnly
           ><UserAvatar
+            class="border-sm"
             :name="userStore.getCurrentUserName"
             :avatar-src="userStore.getCurrentUserAvatar" />
           <div class="d-flex flex-column justify-center text-right pa-1 pl-3 w-100">

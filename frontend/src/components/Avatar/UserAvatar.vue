@@ -1,6 +1,6 @@
 <template>
-  <v-avatar class="avatar d-flex align-center text-font border-sm" :size="size">
-    <v-img v-if="avatarSrc" :src="avatarSrc" :alt="name" cover />
+  <v-avatar class="avatar d-flex align-center text-font" :size="size">
+    <v-img v-if="avatarSrc" :src="avatarSrc" :alt="name || ''" cover />
     <span v-else>{{ initials }}</span>
   </v-avatar>
 </template>
