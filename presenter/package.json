@@ -61,7 +61,7 @@
     "graphql": "^16.9.0",
     "graphql-tag": "^2.12.6",
     "pinia": "^2.2.3",
-    "pinia-plugin-persistedstate": "^4.1.1",
+    "pinia-plugin-persistedstate": "^4.1.2",
     "sirv": "^3.0.0",
     "tsx": "^4.19.1",
     "validator": "^13.12.0",
