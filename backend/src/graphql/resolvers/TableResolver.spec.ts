@@ -1353,7 +1353,6 @@ describe('TableResolver', () => {
       beforeAll(async () => {
         await prisma.usersInMeetings.deleteMany()
         await prisma.meeting.deleteMany()
-        // await prisma.event.deleteMany()
       })
 
       describe('meeting does not exist', () => {
