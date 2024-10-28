@@ -102,6 +102,56 @@ const updateTableMutation = `mutation UpdateTable($tableId: Int!, $name: String,
   }
 }`
 
+const joinTableQuery = `
+  query ($tableId: Int!) {
+    joinTable(tableId: $tableId) {
+      link
+      type
+      isModerator
+      name
+    }
+  }
+`
+
+const tablesQuery = `
+  query {
+    tables {
+      mallTalkTables {
+        id
+        meetingName
+        meetingID
+        participantCount
+        isModerator
+        startTime
+        attendees {
+        fullName
+      }
+    }
+    projectTables {
+      id
+      meetingName
+      meetingID
+      participantCount
+      isModerator
+      startTime
+      attendees {
+        fullName
+      }
+    }
+    permanentTables {
+      id
+      meetingName
+      meetingID
+      participantCount
+      isModerator
+      startTime
+      attendees {
+        fullName
+      }
+    }
+  }
+}`
+
 describe('TableResolver', () => {
   beforeAll(async () => {
     testServer = await createTestServer()
@@ -1606,15 +1656,7 @@ describe('TableResolver', () => {
     })
 
     describe('joinTable', () => {
-      const query = `
-        query ($tableId: Int!) {
-          joinTable(tableId: $tableId) {
-            link
-            type
-            isModerator
-          }
-        }
-      `
+      const query = joinTableQuery
 
       describe('no table in DB', () => {
         it('throws an Error', async () => {
@@ -1940,43 +1982,7 @@ describe('TableResolver', () => {
           await expect(
             testServer.executeOperation(
               {
-                query: `query {
-                  tables {
-                    mallTalkTables {
-                      id
-                      meetingName
-                      meetingID
-                      participantCount
-                      isModerator
-                      startTime
-                      attendees {
-                        fullName
-                      }
-                    }
-                    projectTables {
-                      id
-                      meetingName
-                      meetingID
-                      participantCount
-                      isModerator
-                      startTime
-                      attendees {
-                        fullName
-                      }
-                    }
-                    permanentTables {
-                      id
-                      meetingName
-                      meetingID
-                      participantCount
-                      isModerator
-                      startTime
-                      attendees {
-                        fullName
-                      }
-                    }
-                  }
-                }`,
+                query: tablesQuery,
               },
               { contextValue: mockContextValue({ user }) },
             ),
@@ -2005,43 +2011,7 @@ describe('TableResolver', () => {
             await expect(
               testServer.executeOperation(
                 {
-                  query: `query {
-                    tables {
-                      mallTalkTables {
-                        id
-                        meetingName
-                        meetingID
-                        participantCount
-                        isModerator
-                        startTime
-                        attendees {
-                          fullName
-                        }
-                      }
-                      projectTables {
-                        id
-                        meetingName
-                        meetingID
-                        participantCount
-                        isModerator
-                        startTime
-                        attendees {
-                          fullName
-                        }
-                      }
-                      permanentTables {
-                        id
-                        meetingName
-                        meetingID
-                        participantCount
-                        isModerator
-                        startTime
-                        attendees {
-                          fullName
-                        }
-                      }
-                    }
-                  }`,
+                  query: tablesQuery,
                 },
                 { contextValue },
               ),
@@ -2111,43 +2081,7 @@ describe('TableResolver', () => {
           await expect(
             testServer.executeOperation(
               {
-                query: `query {
-                  tables {
-                    mallTalkTables {
-                      id
-                      meetingName
-                      meetingID
-                      participantCount
-                      isModerator
-                      startTime
-                      attendees {
-                        fullName
-                      }
-                    }
-                    projectTables {
-                      id
-                      meetingName
-                      meetingID
-                      participantCount
-                      isModerator
-                      startTime
-                      attendees {
-                        fullName
-                      }
-                    }
-                    permanentTables {
-                      id
-                      meetingName
-                      meetingID
-                      participantCount
-                      isModerator
-                      startTime
-                      attendees {
-                        fullName
-                      }
-                    }
-                  }
-                }`,
+                query: tablesQuery,
               },
               { contextValue: mockContextValue({ user }) },
             ),
@@ -2228,43 +2162,7 @@ describe('TableResolver', () => {
           await expect(
             testServer.executeOperation(
               {
-                query: `query {
-                  tables {
-                    mallTalkTables {
-                      id
-                      meetingName
-                      meetingID
-                      participantCount
-                      isModerator
-                      startTime
-                      attendees {
-                        fullName
-                      }
-                    }
-                    projectTables {
-                      id
-                      meetingName
-                      meetingID
-                      participantCount
-                      isModerator
-                      startTime
-                      attendees {
-                        fullName
-                      }
-                    }
-                    permanentTables {
-                      id
-                      meetingName
-                      meetingID
-                      participantCount
-                      isModerator
-                      startTime
-                      attendees {
-                        fullName
-                      }
-                    }
-                  }
-                }`,
+                query: tablesQuery,
               },
               { contextValue: mockContextValue({ user }) },
             ),
@@ -2364,43 +2262,7 @@ describe('TableResolver', () => {
           await expect(
             testServer.executeOperation(
               {
-                query: `query {
-                  tables {
-                    mallTalkTables {
-                      id
-                      meetingName
-                      meetingID
-                      participantCount
-                      isModerator
-                      startTime
-                      attendees {
-                        fullName
-                      }
-                    }
-                    projectTables {
-                      id
-                      meetingName
-                      meetingID
-                      participantCount
-                      isModerator
-                      startTime
-                      attendees {
-                        fullName
-                      }
-                    }
-                    permanentTables {
-                      id
-                      meetingName
-                      meetingID
-                      participantCount
-                      isModerator
-                      startTime
-                      attendees {
-                        fullName
-                      }
-                    }
-                  }
-                }`,
+                query: tablesQuery,
               },
               { contextValue: mockContextValue({ user }) },
             ),
@@ -2496,43 +2358,7 @@ describe('TableResolver', () => {
           await expect(
             testServer.executeOperation(
               {
-                query: `query {
-                  tables {
-                    mallTalkTables {
-                      id
-                      meetingName
-                      meetingID
-                      participantCount
-                      isModerator
-                      startTime
-                      attendees {
-                        fullName
-                      }
-                    }
-                    projectTables {
-                      id
-                      meetingName
-                      meetingID
-                      participantCount
-                      isModerator
-                      startTime
-                      attendees {
-                        fullName
-                      }
-                    }
-                    permanentTables {
-                      id
-                      meetingName
-                      meetingID
-                      participantCount
-                      isModerator
-                      startTime
-                      attendees {
-                        fullName
-                      }
-                    }
-                  }
-                }`,
+                query: tablesQuery,
               },
               { contextValue: mockContextValue({ user }) },
             ),
@@ -2650,43 +2476,7 @@ describe('TableResolver', () => {
           await expect(
             testServer.executeOperation(
               {
-                query: `query {
-                  tables {
-                    mallTalkTables {
-                      id
-                      meetingName
-                      meetingID
-                      participantCount
-                      isModerator
-                      startTime
-                      attendees {
-                        fullName
-                      }
-                    }
-                    projectTables {
-                      id
-                      meetingName
-                      meetingID
-                      participantCount
-                      isModerator
-                      startTime
-                      attendees {
-                        fullName
-                      }
-                    }
-                    permanentTables {
-                      id
-                      meetingName
-                      meetingID
-                      participantCount
-                      isModerator
-                      startTime
-                      attendees {
-                        fullName
-                      }
-                    }
-                  }
-                }`,
+                query: tablesQuery,
               },
               { contextValue: mockContextValue({ user: bibiUser }) },
             ),
