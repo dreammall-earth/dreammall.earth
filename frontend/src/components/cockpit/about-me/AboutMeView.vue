@@ -61,14 +61,9 @@
       <button class="social" @click="$emit('edit-social')">
         <v-icon icon="mdi mdi-share-variant-outline" class="mr-2" />
         <ul v-if="props.social.length > 0" class="social-list">
-          <li v-for="item in props.social" :key="item.type">
-            <template v-if="isSVGIcon(item.type)">
-              <component :is="getSVGIconComponent(item.type)" class="social-icon" />
-            </template>
-            <template v-else>
-              <v-icon :icon="`mdi mdi-${item.type}`"></v-icon>
-            </template>
-          </li>
+        <li v-for="item in props.social" :key="item.type">
+        <v-icon :icon="getSocialMediaIcon(item.type)"></v-icon>
+      </li>
         </ul>
         <span v-else>
           {{ $t('cockpit.about-me.empty-social-media') }}
@@ -81,19 +76,16 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-
-// Import SVG icons as components
-import DiscordIcon from '#assets/icons/discord.svg?component'
-import TelegramIcon from '#assets/icons/telegram.svg?component'
-import TiktokIcon from '#assets/icons/tiktok.svg?component'
-import XIcon from '#assets/icons/x.svg?component'
-import XingIcon from '#assets/icons/xing.svg?component'
 import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
-
 import UserDetails from './UserDetails.vue'
 
+
+import {
+  getSocialMediaIcon,
+  buildSocialMediaLink,
+} from '#src/utils/socialMediaPlatforms'
+
 import type { UserDetail, UserAvailability, SocialMedia } from '#stores/userStore'
-import type { Component } from 'vue'
 
 const { t } = useI18n()
 
@@ -156,28 +148,12 @@ const updateIntroduction = (event: Event) => {
   emit('update-introduction', (event.target as HTMLInputElement).value)
 }
 
-// Define the type for SVG icon names
-type SvgIconType = 'discord' | 'telegram' | 'xing' | 'tiktok' | 'x'
 
-// Map of SVG icon components
-const svgIconComponents: Record<SvgIconType, Component> = {
-  discord: DiscordIcon,
-  telegram: TelegramIcon,
-  xing: XingIcon,
-  tiktok: TiktokIcon,
-  x: XIcon,
+ // Simplify the getIconName function
+const getIconName = (type: string): string => {
+  return type
 }
 
-// Function to check if an icon is SVG
-const isSVGIcon = (type: string): type is SvgIconType => {
-  return type in svgIconComponents
-}
-
-// Function to get SVG icon component
-const getSVGIconComponent = (type: SvgIconType): Component => {
-  // eslint-disable-next-line security/detect-object-injection
-  return svgIconComponents[type]
-}
 </script>
 
 <style scoped>
