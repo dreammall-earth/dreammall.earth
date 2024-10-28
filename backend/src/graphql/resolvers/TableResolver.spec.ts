@@ -794,26 +794,6 @@ describe('TableResolver', () => {
               },
             },
           })
-
-          expect(pubsubMock.publish).toHaveBeenCalledWith(
-            'CALL_SUBSCRIPTION',
-            expect.objectContaining({
-              user,
-              userIds: [bibiUser.id, peterUser.id],
-              table: {
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                id: expect.any(String),
-                isModerator: false,
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                meetingID: expect.any(String),
-                meetingName: 'My Table',
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                startTime: expect.any(String),
-                attendees: [],
-                participantCount: 0,
-              },
-            }),
-          )
         })
       })
 
@@ -1233,6 +1213,113 @@ describe('TableResolver', () => {
         })
       })
 
+      describe('meeting exists in DB with userIds', () => {
+        beforeAll(async () => {
+          await testServer.executeOperation(
+            {
+              query: createMyTableMutation,
+              variables: {
+                name: 'My Table',
+                isPublic: true,
+                userIds: [bibiUser.id],
+              },
+            },
+            { contextValue: mockContextValue({ user }) },
+          )
+          jest.clearAllMocks()
+
+          joinMeetingLinkMock.mockReturnValue('https://my-link')
+          createMeetingMock.mockResolvedValue({
+            returncode: 'SUCCESS',
+            meetingID: 'xxx',
+            internalMeetingID: 'b60d121b438a380c343d5ec3c2037564b82ffef3-1715231322715',
+            parentMeetingID: 'bbb-none',
+            attendeePW: 'w3VUvMcp',
+            moderatorPW: 'MyPp9Zfq',
+            createTime: 1718189921310,
+            voiceBridge: 255,
+            dialNumber: '613-555-1234',
+            createDate: new Date(),
+            hasUserJoined: false,
+            duration: 0,
+            hasBeenForciblyEnded: false,
+            messageKey: '',
+            message: '',
+          })
+        })
+
+        it('returns id of the table and fires subscription', async () => {
+          user = await findOrCreateUser({ prisma })({ pk, nickname, name })
+          await expect(
+            testServer.executeOperation(
+              {
+                query: 'mutation { joinMyTable }',
+              },
+              { contextValue: mockContextValue({ user }) },
+            ),
+          ).resolves.toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: {
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                  joinMyTable: expect.any(Number),
+                },
+                errors: undefined,
+              },
+            },
+          })
+
+          expect(pubsubMock.publish).toHaveBeenCalledWith(
+            'CALL_SUBSCRIPTION',
+            expect.objectContaining({
+              user,
+              userIds: [bibiUser.id],
+              table: {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                id: expect.any(String),
+                isModerator: false,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                meetingID: expect.any(String),
+                meetingName: 'My Table',
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                startTime: expect.any(String),
+                attendees: [],
+                participantCount: 0,
+              },
+            }),
+          )
+        })
+
+        it('updates meeting in database', async () => {
+          await expect(
+            prisma.user.findFirst({
+              where: {
+                id: user.id,
+              },
+              include: {
+                meeting: true,
+              },
+            }),
+          ).resolves.toMatchObject({
+            meeting: {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              name: 'My Table',
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              meetingID: expect.any(String),
+              attendeePW: 'w3VUvMcp',
+              moderatorPW: 'MyPp9Zfq',
+              voiceBridge: 255,
+              dialNumber: '613-555-1234',
+              createTime: 1718189921310n,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createDate: expect.any(Date),
+            },
+          })
+        })
+      })
+
       describe('createMeeting returns undefined', () => {
         it('throws meeting error', async () => {
           createMeetingMock.mockResolvedValue(null)
@@ -1266,6 +1353,7 @@ describe('TableResolver', () => {
       beforeAll(async () => {
         await prisma.usersInMeetings.deleteMany()
         await prisma.meeting.deleteMany()
+        // await prisma.event.deleteMany()
       })
 
       describe('meeting does not exist', () => {
@@ -1454,6 +1542,15 @@ describe('TableResolver', () => {
               createdAt: expect.any(Date),
               involvedEmail: null,
               type: 'UPDATE_MY_TABLE',
+              involvedUserId: user?.id,
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_MY_TABLE',
               involvedUserId: user?.id,
             },
             {
