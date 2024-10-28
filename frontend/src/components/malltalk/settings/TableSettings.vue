@@ -11,6 +11,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { reactive, watch, ref, inject } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import {
   TableDataInjection,
@@ -25,6 +26,8 @@ import TableSettingsRoot from './TableSettingsRoot.vue'
 
 import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
 import type { ComponentExposed } from 'vue-component-type-helpers'
+
+const { t } = useI18n()
 
 const userStore = useUserStore()
 
@@ -46,7 +49,7 @@ watch(myTable, (value) => {
 
 const tableData = inject<TableDataInjection>(TableDataSymbol, {
   isModerator: ref(false),
-  name: ref('Mein Tisch'),
+  name: ref(t('dream-mall-panel.call.my-table')),
 })
 
 const steps: Step[] = [
@@ -55,7 +58,7 @@ const steps: Step[] = [
     id: 'root',
     title: tableData.name,
     submit: 'close',
-    submitText: 'Beenden',
+    submitText: t('dream-mall-panel.call.leave-table'),
     back: 'previous',
   },
   {
@@ -63,7 +66,7 @@ const steps: Step[] = [
     id: 'users',
     title: ref('Teilnehmer'),
     submit: 'root',
-    submitText: 'Übernehmen',
+    submitText: t('dream-mall-panel.call.apply'),
     back: 'root',
   },
 ]

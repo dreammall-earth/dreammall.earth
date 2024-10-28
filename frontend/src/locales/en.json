@@ -66,8 +66,10 @@
   "dream-mall-panel": {
     "call": {
       "add-user": "Add",
+      "apply": "Apply",
       "leave-table": "Leave Table",
-      "link": "Link"
+      "link": "Link",
+      "my-table": "My Table"
     },
     "incoming-invitation": {
       "accept-swap": "Swap",
