@@ -61,9 +61,9 @@
       <button class="social" @click="$emit('edit-social')">
         <v-icon icon="mdi mdi-share-variant-outline" class="mr-2" />
         <ul v-if="props.social.length > 0" class="social-list">
-        <li v-for="item in props.social" :key="item.type">
-        <v-icon :icon="getSocialMediaIcon(item.type)"></v-icon>
-      </li>
+          <li v-for="item in props.social" :key="item.type">
+            <v-icon :icon="getSocialMediaIcon(item.type)"></v-icon>
+          </li>
         </ul>
         <span v-else>
           {{ $t('cockpit.about-me.empty-social-media') }}
@@ -76,14 +76,11 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+
 import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
+import { getSocialMediaIcon } from '#src/utils/socialMediaPlatforms'
+
 import UserDetails from './UserDetails.vue'
-
-
-import {
-  getSocialMediaIcon,
-  buildSocialMediaLink,
-} from '#src/utils/socialMediaPlatforms'
 
 import type { UserDetail, UserAvailability, SocialMedia } from '#stores/userStore'
 
@@ -147,13 +144,6 @@ const updateName = (event: Event) => {
 const updateIntroduction = (event: Event) => {
   emit('update-introduction', (event.target as HTMLInputElement).value)
 }
-
-
- // Simplify the getIconName function
-const getIconName = (type: string): string => {
-  return type
-}
-
 </script>
 
 <style scoped>
