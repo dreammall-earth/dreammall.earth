@@ -78,8 +78,8 @@ import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import CockpitCard from '#components/cockpit/cockpit-card/CockpitCard.vue'
+import { getSocialMediaIcon } from '#src/utils/socialMediaPlatforms'
 
-import { getSocialMediaIcon } from './socialMediaPlatforms'
 import UserDetails from './UserDetails.vue'
 
 import type { UserDetail, UserAvailability, SocialMedia } from '#stores/userStore'
