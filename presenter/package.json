@@ -129,7 +129,7 @@
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-vuetify": "^2.0.4",
     "vitest": "^2.0.4",
-    "vue-tsc": "^2.1.8"
+    "vue-tsc": "^2.1.10"
   },
   "imports": {
     "#components/*": "./src/components/*",
