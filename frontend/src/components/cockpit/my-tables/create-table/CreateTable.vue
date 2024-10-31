@@ -11,6 +11,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import StepControl from '#components/steps/StepControl.vue'
 import { Step } from '#components/steps/useSteps'
@@ -21,6 +22,8 @@ import SelectUsers from './SelectUsers.vue'
 import TableCreated from './TableCreated.vue'
 
 import type { ComponentExposed } from 'vue-component-type-helpers'
+
+const { t } = useI18n()
 
 export type CreateTableModel = {
   isPrivate: boolean
@@ -41,25 +44,25 @@ const steps: Step[] = [
   {
     component: EnterNameAndVisibility,
     id: 'settings',
-    title: ref('Tisch eröffnen'),
+    title: ref(t('cockpit.myTables.createTable.create-title')),
     submit: 'users',
-    submitText: 'Weiter',
+    submitText: t('cockpit.myTables.createTable.continue'),
     back: 'previous',
   },
   {
     component: SelectUsers,
     id: 'users',
-    title: ref('Leute einladen'),
+    title: ref(t('cockpit.myTables.createTable.invitation-title')),
     submit: 'next',
-    submitText: 'Weiter',
+    submitText: t('cockpit.myTables.createTable.continue'),
     back: 'previous',
   },
   {
     component: TableCreated,
     id: 'end',
-    title: ref('Kleine Erinnerung'),
+    title: ref(t('cockpit.myTables.createTable.created-title')),
     submit: 'close',
-    submitText: 'Tisch eröffnen',
+    submitText: t('cockpit.myTables.createTable.created-submit'),
     back: () => 'users',
   },
 ]

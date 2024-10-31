@@ -58,7 +58,7 @@ const steps: Step[] = [
   {
     component: StartSetup,
     id: 'start',
-    title: ref('Mall Talk'),
+    title: ref(t('dream-mall-panel.setup.mall-talk')),
     submit: 'next',
     submitText: t('dream-mall-panel.setup.continue'),
     back: 'previous',

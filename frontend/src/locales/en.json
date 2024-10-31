@@ -44,6 +44,11 @@
       },
       "createTable": {
         "chooseModerators": "Choose your moderator team.",
+        "continue": "Continue",
+        "create-title": "Open Table",
+        "created-submit": "Open Table",
+        "created-title": "Hint",
+        "invitation-title": "Invite People",
         "tableCreated": "Your table was created.",
         "visionIntoReality": "Your vision turns into reality. Let's take the first step together."
       },
@@ -85,6 +90,7 @@
       "invitation-sent": "sent",
       "invitation-title": "Invite People",
       "invite": "invite",
+      "mall-talk": "Mall Talk",
       "no-result": "No results",
       "private": "Private",
       "public": "Public",

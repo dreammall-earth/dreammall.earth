@@ -44,6 +44,11 @@
       },
       "createTable": {
         "chooseModerators": "Wähle dein Moderator-Team.",
+        "continue": "Weiter",
+        "create-title": "Tisch eröffnen",
+        "created-submit": "Tisch eröffnen",
+        "created-title": "Hinweis",
+        "invitation-title": "Leute einladen",
         "tableCreated": "Dein Tisch wurde erstellt.",
         "visionIntoReality": "Deine Vision wird Realität, lass uns gemeinsam den ersten Schritt machen."
       },
@@ -85,6 +90,7 @@
       "invitation-sent": "gesendet",
       "invitation-title": "Leute einladen",
       "invite": "einladen",
+      "mall-talk": "Mall Talk",
       "no-result": "Keine Ergebnisse",
       "private": "Privat",
       "public": "Öffentlich",
