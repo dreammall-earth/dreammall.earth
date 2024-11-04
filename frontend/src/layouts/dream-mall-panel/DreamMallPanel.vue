@@ -109,7 +109,7 @@ const closeInvitation = () => {
 
 <style scoped lang="scss">
 @use 'sass:map';
-@import 'vuetify/lib/styles/settings/_variables';
+@use 'vuetify/lib/styles/settings/_variables' as variables;
 
 .dream-mall-floating-container {
   --width: 400px;
@@ -197,7 +197,7 @@ const closeInvitation = () => {
     opacity: 1;
   }
 
-  @media #{map.get($display-breakpoints, 'sm-and-down')} {
+  @media #{map.get(variables.$display-breakpoints, 'sm-and-down')} {
     --width: 100vw;
     --panel-height: 75vh;
 
