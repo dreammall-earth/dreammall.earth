@@ -1,4 +1,4 @@
-import { SocialMediaType } from '#stores/userStore'
+import type { SocialMediaType } from '#stores/userStore'
 
 export type SocialMediaPlatform = {
   type: SocialMediaType

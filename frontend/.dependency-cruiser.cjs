@@ -2,6 +2,19 @@
 module.exports = {
   forbidden: [
     {
+      name: 'not-from-utils',
+      comment: 'Utils should not have any dependency outside out utils.',
+      severity: 'error',
+      from: {
+        path: '^src/utils',
+      },
+      to: {
+        path: 'src',
+        pathNot: '^src/utils',
+        dependencyTypesNot: ['type-only'],
+      },
+    },
+    {
       name: 'no-circular',
       severity: 'warn',
       comment:
