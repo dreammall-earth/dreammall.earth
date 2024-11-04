@@ -58,7 +58,7 @@
   },
   "devDependencies": {
     "@eslint-community/eslint-plugin-eslint-comments": "^4.4.1",
-    "@faker-js/faker": "^9.1.0",
+    "@faker-js/faker": "^9.2.0",
     "@sentry/core": "^8.34.0",
     "@sentry/types": "^8.34.0",
     "@types/cors": "^2.8.17",
