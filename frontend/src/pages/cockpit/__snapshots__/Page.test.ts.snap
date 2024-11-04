@@ -47,7 +47,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   class="w-100 logo-small"
                   cover="false"
                   data-v-75d0be1e=""
-                  data-v-f6be2607=""
+                  data-v-ec9956ac=""
                   eager="false"
                   inline="false"
                   options="[object Object]"
@@ -63,31 +63,31 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
             >
               <div
                 class="tab-control ma-auto border-sm"
+                data-v-2758bcdb=""
                 data-v-75d0be1e=""
-                data-v-d58c92bb=""
               >
                 <div
                   class="marker"
-                  data-v-d58c92bb=""
+                  data-v-2758bcdb=""
                   style="display: none; width: 0px; left: 0px;"
                 />
                 <div
                   class="d-flex align-center justify-center h-100 w-100"
-                  data-v-d58c92bb=""
+                  data-v-2758bcdb=""
                 >
                   
                   <button
                     class="item active"
-                    data-v-d58c92bb=""
+                    data-v-2758bcdb=""
                   >
                     <div
                       class="icon d-flex justify-center align-center"
-                      data-v-d58c92bb=""
+                      data-v-2758bcdb=""
                     >
                       <i
                         aria-hidden="true"
                         class="v-icon notranslate v-theme--light v-icon--size-default w-100 world-cafe"
-                        data-v-d58c92bb=""
+                        data-v-2758bcdb=""
                       >
                         <svg
                           fill="none"
@@ -307,16 +307,16 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   </button>
                   <button
                     class="item"
-                    data-v-d58c92bb=""
+                    data-v-2758bcdb=""
                   >
                     <div
                       class="icon d-flex justify-center align-center"
-                      data-v-d58c92bb=""
+                      data-v-2758bcdb=""
                     >
                       <i
                         aria-hidden="true"
                         class="v-icon notranslate v-theme--light v-icon--size-default w-100 cockpit"
-                        data-v-d58c92bb=""
+                        data-v-2758bcdb=""
                       >
                         <svg
                           fill="none"
@@ -583,8 +583,8 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   >
                     <div
                       class="circle rounded-circle border-sm text-font pa-2 d-flex justify-center align-center"
-                      data-v-39e8094e=""
                       data-v-75d0be1e=""
+                      data-v-93e4e641=""
                     >
                       
                       <i
@@ -615,18 +615,18 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                     aria-haspopup="menu"
                     aria-owns="v-menu-1"
                     class="ml-2 user-info rounded-pill d-flex flex-row text-font border-sm align-center justify-center"
-                    data-v-607bdd70=""
+                    data-v-912716f1=""
                   >
                     
                     <div
                       class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm"
-                      data-v-607bdd70=""
+                      data-v-912716f1=""
                       style="width: 44px; height: 44px;"
                     >
                       
                       
                       <span
-                        data-v-607bdd70=""
+                        data-v-912716f1=""
                       >
                         CU
                       </span>
@@ -641,13 +641,13 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                     </div>
                     <div
                       class="d-flex flex-column justify-center text-right pa-1 pl-3 w-100"
-                      data-v-607bdd70=""
+                      data-v-912716f1=""
                     >
                       <i
                         aria-hidden="true"
                         class="v-icon notranslate v-theme--light v-icon--size-default ellipsis-icon"
                         data-test="user-dropdown"
-                        data-v-607bdd70=""
+                        data-v-912716f1=""
                       >
                         <svg
                           fill="none"
@@ -692,7 +692,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
       
       <nav
         class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer px-4"
-        data-v-cf2c9067=""
+        data-v-52e39d66=""
         style="right: 0px; z-index: 1004; transform: translateX(308px); position: fixed; transition: none !important; height: calc(100% - 70px - 0px); top: 70px; bottom: 0px; width: 308px;"
       >
         <!---->
@@ -703,7 +703,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
           
           <div
             class="v-input v-input--horizontal v-input--center-affix v-input--density-compact v-theme--light v-locale--is-ltr v-text-field search"
-            data-v-cf2c9067=""
+            data-v-52e39d66=""
           >
             <!---->
             <div
@@ -866,53 +866,53 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
           <!-- Mall Talk -->
           <div
             class="lists"
-            data-v-cf2c9067=""
+            data-v-52e39d66=""
           >
             
             <div
               class="outer-list"
-              data-v-cf2c9067=""
-              data-v-de37061b=""
+              data-v-3b521c35=""
+              data-v-52e39d66=""
             >
               <div
                 class="mb-4 d-flex align-center justify-space-between"
-                data-v-de37061b=""
+                data-v-3b521c35=""
               >
                 <h2
                   class="header"
-                  data-v-de37061b=""
+                  data-v-3b521c35=""
                 >
                   Mall Talk
                 </h2>
                 <button
-                  data-v-de37061b=""
+                  data-v-3b521c35=""
                 >
                   <i
                     aria-hidden="true"
                     class="mdi mdi-menu-down mdi v-icon notranslate v-theme--light v-icon--size-default"
-                    data-v-de37061b=""
+                    data-v-3b521c35=""
                   />
                 </button>
               </div>
               
               <button
                 class="invite-button bg-primary pl-3 pr-6 py-1 d-flex align-center justify-center mb-4"
-                data-v-cf2c9067=""
+                data-v-52e39d66=""
               >
                 <i
                   aria-hidden="true"
                   class="mdi mdi-plus mdi v-icon notranslate v-theme--light v-icon--size-default mr-4"
-                  data-v-cf2c9067=""
+                  data-v-52e39d66=""
                 />
                  $t('tablesDrawer.invite')
               </button>
               
               <div
                 class="list-content"
-                data-v-de37061b=""
+                data-v-3b521c35=""
               >
                 <div
-                  data-v-de37061b=""
+                  data-v-3b521c35=""
                 >
                   $t('tablesDrawer.noTables')
                 </div>
@@ -921,26 +921,26 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
             </div>
             <div
               class="outer-list"
-              data-v-cf2c9067=""
-              data-v-de37061b=""
+              data-v-3b521c35=""
+              data-v-52e39d66=""
             >
               <div
                 class="mb-4 d-flex align-center justify-space-between"
-                data-v-de37061b=""
+                data-v-3b521c35=""
               >
                 <h2
                   class="header"
-                  data-v-de37061b=""
+                  data-v-3b521c35=""
                 >
                   Projekte
                 </h2>
                 <button
-                  data-v-de37061b=""
+                  data-v-3b521c35=""
                 >
                   <i
                     aria-hidden="true"
                     class="mdi mdi-menu-down mdi v-icon notranslate v-theme--light v-icon--size-default"
-                    data-v-de37061b=""
+                    data-v-3b521c35=""
                   />
                 </button>
               </div>
@@ -948,10 +948,10 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
               
               <div
                 class="list-content"
-                data-v-de37061b=""
+                data-v-3b521c35=""
               >
                 <div
-                  data-v-de37061b=""
+                  data-v-3b521c35=""
                 >
                   $t('tablesDrawer.noTables')
                 </div>
@@ -976,7 +976,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
       <transition-group-stub
         appear="false"
         css="true"
-        data-v-48393cd1=""
+        data-v-33c2a336=""
         data-v-75d0be1e=""
         name="modal"
         persisted="false"
@@ -991,15 +991,15 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
         
         <div
           class="cockpit px-8"
-          data-v-b49ea567=""
+          data-v-89485a75=""
         >
           
           
           <section
             class="cockpit-card-variable-height cockpit-card"
-            data-v-1451ba78=""
-            data-v-d91b9f54=""
-            data-v-f444dc92=""
+            data-v-3c670794=""
+            data-v-40b4d4c0=""
+            data-v-6ca8774d=""
           >
             <!--v-if-->
             <!--v-if-->
@@ -1007,17 +1007,17 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
             
             <div
               class="header mb-2"
-              data-v-f444dc92=""
+              data-v-6ca8774d=""
             >
               <div
                 class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font"
-                data-v-f444dc92=""
+                data-v-6ca8774d=""
                 style="width: 90px; height: 90px;"
               >
                 
                 
                 <span
-                  data-v-f444dc92=""
+                  data-v-6ca8774d=""
                 >
                   CU
                 </span>
@@ -1032,7 +1032,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
               </div>
               <div
                 class="v-input v-input--horizontal v-input--center-affix v-input--density-default v-theme--light v-locale--is-ltr v-input--dirty v-text-field v-select v-select--single v-select--selected v-select--selection-slot availability"
-                data-v-f444dc92=""
+                data-v-6ca8774d=""
               >
                 <!---->
                 <div
@@ -1127,7 +1127,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                           <i
                             aria-hidden="true"
                             class="mdi mdi-circle mdi v-icon notranslate v-theme--light v-icon--size-default mr-2"
-                            data-v-f444dc92=""
+                            data-v-6ca8774d=""
                             style="color: #23AD5B; caret-color: #23AD5B;"
                           />
                            Available to work
@@ -1199,18 +1199,18 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
               
               <button
                 class="name"
-                data-v-f444dc92=""
+                data-v-6ca8774d=""
               >
                 Current User 
                 <i
                   aria-hidden="true"
                   class="mdi mdi-pencil-outline mdi v-icon notranslate v-theme--light v-icon--size-default"
-                  data-v-f444dc92=""
+                  data-v-6ca8774d=""
                 />
               </button>
               <button
                 class="introduction"
-                data-v-f444dc92=""
+                data-v-6ca8774d=""
               >
                 Hello, I am the current user
               </button>
@@ -1218,21 +1218,21 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
             </div>
             <button
               class="w-100"
-              data-v-f444dc92=""
+              data-v-6ca8774d=""
             >
               <ul
                 class="details"
-                data-v-589db232=""
-                data-v-f444dc92=""
+                data-v-6ca8774d=""
+                data-v-a170885f=""
               >
                 
                 <li
                   class="detail"
-                  data-v-589db232=""
+                  data-v-a170885f=""
                 >
                   <span
                     class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
-                    data-v-589db232=""
+                    data-v-a170885f=""
                     draggable="false"
                   >
                     
@@ -1251,11 +1251,11 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                       <i
                         aria-hidden="true"
                         class="mdi mdi-school-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
-                        data-v-589db232=""
+                        data-v-a170885f=""
                       />
                       <span
                         class="detail-text"
-                        data-v-589db232=""
+                        data-v-a170885f=""
                         tabindex="0"
                         title="I am a student"
                       >
@@ -1270,11 +1270,11 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                 </li>
                 <li
                   class="detail"
-                  data-v-589db232=""
+                  data-v-a170885f=""
                 >
                   <span
                     class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
-                    data-v-589db232=""
+                    data-v-a170885f=""
                     draggable="false"
                   >
                     
@@ -1293,11 +1293,11 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                       <i
                         aria-hidden="true"
                         class="mdi mdi-map-marker-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
-                        data-v-589db232=""
+                        data-v-a170885f=""
                       />
                       <span
                         class="detail-text"
-                        data-v-589db232=""
+                        data-v-a170885f=""
                         tabindex="0"
                         title="Mein Standort"
                       >
@@ -1312,11 +1312,11 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                 </li>
                 <li
                   class="detail"
-                  data-v-589db232=""
+                  data-v-a170885f=""
                 >
                   <span
                     class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
-                    data-v-589db232=""
+                    data-v-a170885f=""
                     draggable="false"
                   >
                     
@@ -1335,11 +1335,11 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                       <i
                         aria-hidden="true"
                         class="mdi mdi-briefcase-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
-                        data-v-589db232=""
+                        data-v-a170885f=""
                       />
                       <span
                         class="detail-text"
-                        data-v-589db232=""
+                        data-v-a170885f=""
                         tabindex="0"
                         title="Meine Arbeit"
                       >
@@ -1354,11 +1354,11 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                 </li>
                 <li
                   class="detail"
-                  data-v-589db232=""
+                  data-v-a170885f=""
                 >
                   <span
                     class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
-                    data-v-589db232=""
+                    data-v-a170885f=""
                     draggable="false"
                   >
                     
@@ -1377,11 +1377,11 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                       <i
                         aria-hidden="true"
                         class="mdi mdi-emoticon-outline mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
-                        data-v-589db232=""
+                        data-v-a170885f=""
                       />
                       <span
                         class="detail-text"
-                        data-v-589db232=""
+                        data-v-a170885f=""
                         tabindex="0"
                         title="Wie ich mich heute fühle"
                       >
@@ -1396,11 +1396,11 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                 </li>
                 <li
                   class="detail"
-                  data-v-589db232=""
+                  data-v-a170885f=""
                 >
                   <span
                     class="v-chip v-theme--light v-chip--density-default v-chip--size-default v-chip--variant-tonal detail-chip border-thin"
-                    data-v-589db232=""
+                    data-v-a170885f=""
                     draggable="false"
                   >
                     
@@ -1419,11 +1419,11 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                       <i
                         aria-hidden="true"
                         class="mdi mdi-web mdi v-icon notranslate v-theme--light v-icon--size-default text-cockpit-highlight mr-2"
-                        data-v-589db232=""
+                        data-v-a170885f=""
                       />
                       <span
                         class="detail-text"
-                        data-v-589db232=""
+                        data-v-a170885f=""
                         tabindex="0"
                         title="Sprachen, die ich spreche"
                       >
@@ -1441,25 +1441,25 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
             </button>
             <button
               class="social"
-              data-v-f444dc92=""
+              data-v-6ca8774d=""
             >
               <i
                 aria-hidden="true"
                 class="mdi mdi-share-variant-outline mdi v-icon notranslate v-theme--light v-icon--size-default mr-2"
-                data-v-f444dc92=""
+                data-v-6ca8774d=""
               />
               <ul
                 class="social-list"
-                data-v-f444dc92=""
+                data-v-6ca8774d=""
               >
                 
                 <li
-                  data-v-f444dc92=""
+                  data-v-6ca8774d=""
                 >
                   <i
                     aria-hidden="true"
                     class="mdi mdi-instagram mdi v-icon notranslate v-theme--light v-icon--size-default"
-                    data-v-f444dc92=""
+                    data-v-6ca8774d=""
                   />
                 </li>
                 
@@ -1473,33 +1473,33 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
           
           <section
             class="cockpit-card-variable-height cockpit-card"
-            data-v-1451ba78=""
-            data-v-c2e63817=""
-            data-v-d91b9f54=""
+            data-v-3c670794=""
+            data-v-40b4d4c0=""
+            data-v-d85e5d0d=""
           >
             <div
               class="header"
-              data-v-d91b9f54=""
+              data-v-3c670794=""
             >
               
               
               <div
                 class="header"
-                data-v-c2e63817=""
+                data-v-d85e5d0d=""
               >
                 <h2
-                  data-v-c2e63817=""
+                  data-v-d85e5d0d=""
                 >
                   $t('cockpit.myTables.header')
                 </h2>
                 <button
                   class="add-table bg-primary px-3 py-1 d-flex align-center justify-center"
-                  data-v-c2e63817=""
+                  data-v-d85e5d0d=""
                 >
                   <i
                     aria-hidden="true"
                     class="mdi mdi-plus mdi v-icon notranslate v-theme--light v-icon--size-default"
-                    data-v-c2e63817=""
+                    data-v-d85e5d0d=""
                   />
                    $t('cockpit.myTables.addTable')
                 </button>
@@ -1509,12 +1509,12 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
             </div>
             <hr
               class="hr"
-              data-v-d91b9f54=""
+              data-v-3c670794=""
             />
             
             
             <div
-              data-v-c2e63817=""
+              data-v-d85e5d0d=""
             >
               $t('cockpit.myTables.noTables')
             </div>
@@ -1523,7 +1523,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
           </section>
           <div
             class="v-card v-card--flat v-theme--light v-card--density-default v-card--variant-elevated payment-link"
-            data-v-f97d716a=""
+            data-v-caf0bd3e=""
           >
             <!---->
             <div
@@ -1589,13 +1589,13 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
             
             <div
               class="v-card-text"
-              data-v-f97d716a=""
+              data-v-caf0bd3e=""
             >
               $t('paymentLink.subtitle')
             </div>
             <a
               class="v-btn v-btn--block v-theme--light v-btn--border bg-primary v-btn--density-default v-btn--size-default v-btn--variant-elevated"
-              data-v-f97d716a=""
+              data-v-caf0bd3e=""
               href="/cockpit/payment"
             >
               
@@ -1637,19 +1637,19 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
       <div
         class="dream-mall-floating-container"
         data-v-75d0be1e=""
-        data-v-e7870397=""
+        data-v-a93cef15=""
       >
         <div
           class="dream-mall-button-wrapper"
-          data-v-e7870397=""
+          data-v-a93cef15=""
         >
           <div
             class="dream-mall-button"
-            data-v-e7870397=""
+            data-v-a93cef15=""
           >
             <svg
-              data-v-57af6bd7=""
-              data-v-e7870397=""
+              data-v-56f25dae=""
+              data-v-a93cef15=""
               fill="none"
               height="1719"
               viewBox="0 0 1731 1719"
@@ -1657,27 +1657,27 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <g
-                data-v-57af6bd7=""
+                data-v-56f25dae=""
                 filter="url(#filter0_i_1513_6640)"
                 opacity="0.25"
               >
                 <path
                   class="base-color-transition"
                   d="M866 938.727C821.781 938.727 786 903.016 786 859.046C786 815.075 821.781 779.364 866 779.364C910.219 779.364 946 815.075 946 859.046C946 903.016 910.219 938.727 866 938.727Z"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   stroke="url(#paint0_linear_1513_6640)"
                   stroke-width="22"
                 />
               </g>
               <g
-                data-v-57af6bd7=""
+                data-v-56f25dae=""
                 filter="url(#filter1_i_1513_6640)"
               >
                 <circle
                   class="base-color-transition"
                   cx="866.318"
                   cy="859.045"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   r="61.5"
                   stroke="url(#paint1_linear_1513_6640)"
                   stroke-opacity="0.5"
@@ -1686,13 +1686,13 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                 />
               </g>
               <g
-                data-v-57af6bd7=""
+                data-v-56f25dae=""
                 filter="url(#filter2_i_1513_6640)"
               >
                 <circle
                   cx="866.136"
                   cy="859.155"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   fill="#EEEFF0"
                   fill-opacity="1"
                   r="59.9955"
@@ -1703,7 +1703,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                 class="base-color-transition"
                 cx="866.136"
                 cy="859.155"
-                data-v-57af6bd7=""
+                data-v-56f25dae=""
                 r="49.9955"
                 stroke="url(#paint2_linear_1513_6640)"
                 stroke-width="20"
@@ -1711,7 +1711,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
               />
               <g
                 class="warp-ring button-warp-on"
-                data-v-57af6bd7=""
+                data-v-56f25dae=""
                 filter="url(#filter3_df_1513_6640)"
                 opacity="0.25"
                 style="transform: scale(0);"
@@ -1719,7 +1719,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                 <ellipse
                   cx="759"
                   cy="768"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   rx="759"
                   ry="768"
                   shape-rendering="crispEdges"
@@ -1731,14 +1731,14 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
               </g>
               <g
                 class="button-wave"
-                data-v-57af6bd7=""
+                data-v-56f25dae=""
                 filter="url(#filter0_f_1513_6933)"
                 opacity="0.25"
               >
                 <ellipse
                   cx="759"
                   cy="768"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   rx="95"
                   ry="95"
                   stroke="#2CA5B1"
@@ -1749,39 +1749,39 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
               <g
                 class=""
                 clip-path="url(#clip0_1513_6640)"
-                data-v-57af6bd7=""
+                data-v-56f25dae=""
                 id="dream-mall-button"
               >
                 <rect
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   fill="transparent"
                   height="100%"
                   width="100%"
                 />
                 <path
                   d="M865.772 848.381H870C875.877 848.381 880.727 853.121 880.727 858.864C880.727 864.608 875.877 869.346 870 869.346H865.771H859.273H855.516H851.758H848V880.364H870C882.101 880.364 892 870.689 892 858.864C892 847.038 882.101 837.364 870 837.364H848V853.469V855.726H851.758H855.516H859.274H863.032H866.79H870C871.728 855.726 873.21 857.175 873.21 858.864C873.21 860.553 871.728 862.001 870 862.001H866.79H848V865.674H863.032H870C873.803 865.674 876.969 862.581 876.969 858.864C876.969 855.148 873.803 852.054 870 852.054H863.031H859.273H855.516H851.758V841.036H855.516H870C880.026 841.036 888.243 849.066 888.243 858.864C888.243 868.662 880.027 876.691 870 876.691H851.758V873.019H855.516H865.772H870C877.951 873.019 884.485 866.635 884.485 858.864C884.485 851.093 877.951 844.71 870 844.71H865.771H856.617V848.381H865.772Z"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   fill="url(#paint3_linear_1513_6640)"
                 />
                 <path
                   d="M856.537 855.364H868.921H870V852.365H868.921L861.075 852.364H856.537H852V855.364H856.537Z"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   fill="url(#paint4_linear_1513_6640)"
                   opacity="0.75"
                 />
                 <path
                   d="M856.64 873.244H869.304H870.407V869.365H869.304L861.28 869.364H856.64H852V873.244H856.64Z"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   fill="url(#paint5_linear_1513_6640)"
                   opacity="0.75"
                 />
               </g>
               <defs
-                data-v-57af6bd7=""
+                data-v-56f25dae=""
               >
                 <filter
                   color-interpolation-filters="sRGB"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   filterUnits="userSpaceOnUse"
                   height="1719"
                   id="filter0_f_1513_6933"
@@ -1790,26 +1790,26 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   y="0"
                 >
                   <feflood
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     flood-opacity="0"
                     result="BackgroundImageFix"
                   />
                   <feblend
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in="SourceGraphic"
                     in2="BackgroundImageFix"
                     mode="normal"
                     result="shape"
                   />
                   <fegaussianblur
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     result="effect1_foregroundBlur_1513_6933"
                     stdDeviation="5"
                   />
                 </filter>
                 <filter
                   color-interpolation-filters="sRGB"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   filterUnits="userSpaceOnUse"
                   height="183.364"
                   id="filter0_i_1513_6640"
@@ -1818,46 +1818,46 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   y="768.364"
                 >
                   <feflood
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     flood-opacity="0"
                     result="BackgroundImageFix"
                   />
                   <feblend
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in="SourceGraphic"
                     in2="BackgroundImageFix"
                     mode="normal"
                     result="shape"
                   />
                   <fecolormatrix
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in="SourceAlpha"
                     result="hardAlpha"
                     type="matrix"
                     values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
                   />
                   <feoffset
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     dy="2"
                   />
                   <fegaussianblur
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     stdDeviation="2.5"
                   />
                   <fecomposite
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in2="hardAlpha"
                     k2="-1"
                     k3="1"
                     operator="arithmetic"
                   />
                   <fecolormatrix
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     type="matrix"
                     values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
                   />
                   <feblend
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in2="shape"
                     mode="normal"
                     result="effect1_innerShadow_1513_6640"
@@ -1865,7 +1865,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                 </filter>
                 <filter
                   color-interpolation-filters="sRGB"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   filterUnits="userSpaceOnUse"
                   height="149"
                   id="filter1_i_1513_6640"
@@ -1874,46 +1874,46 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   y="785.545"
                 >
                   <feflood
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     flood-opacity="0"
                     result="BackgroundImageFix"
                   />
                   <feblend
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in="SourceGraphic"
                     in2="BackgroundImageFix"
                     mode="normal"
                     result="shape"
                   />
                   <fecolormatrix
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in="SourceAlpha"
                     result="hardAlpha"
                     type="matrix"
                     values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
                   />
                   <feoffset
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     dy="2"
                   />
                   <fegaussianblur
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     stdDeviation="2.5"
                   />
                   <fecomposite
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in2="hardAlpha"
                     k2="-1"
                     k3="1"
                     operator="arithmetic"
                   />
                   <fecolormatrix
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     type="matrix"
                     values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
                   />
                   <feblend
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in2="shape"
                     mode="normal"
                     result="effect1_innerShadow_1513_6640"
@@ -1921,7 +1921,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                 </filter>
                 <filter
                   color-interpolation-filters="sRGB"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   filterUnits="userSpaceOnUse"
                   height="121.991"
                   id="filter2_i_1513_6640"
@@ -1930,46 +1930,46 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   y="799.159"
                 >
                   <feflood
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     flood-opacity="0"
                     result="BackgroundImageFix"
                   />
                   <feblend
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in="SourceGraphic"
                     in2="BackgroundImageFix"
                     mode="normal"
                     result="shape"
                   />
                   <fecolormatrix
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in="SourceAlpha"
                     result="hardAlpha"
                     type="matrix"
                     values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
                   />
                   <feoffset
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     dy="2"
                   />
                   <fegaussianblur
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     stdDeviation="2.5"
                   />
                   <fecomposite
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in2="hardAlpha"
                     k2="-1"
                     k3="1"
                     operator="arithmetic"
                   />
                   <fecolormatrix
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     type="matrix"
                     values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
                   />
                   <feblend
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in2="shape"
                     mode="normal"
                     result="effect1_innerShadow_1513_6640"
@@ -1977,7 +1977,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                 </filter>
                 <filter
                   color-interpolation-filters="sRGB"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   filterUnits="userSpaceOnUse"
                   height="1718"
                   id="filter3_df_1513_6640"
@@ -1986,56 +1986,56 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   y="0.36377"
                 >
                   <feflood
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     flood-opacity="0"
                     result="BackgroundImageFix"
                   />
                   <fecolormatrix
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in="SourceAlpha"
                     result="hardAlpha"
                     type="matrix"
                     values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
                   />
                   <feoffset
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     dy="4"
                   />
                   <fegaussianblur
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     stdDeviation="2"
                   />
                   <fecomposite
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in2="hardAlpha"
                     operator="out"
                   />
                   <fecolormatrix
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     type="matrix"
                     values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
                   />
                   <feblend
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in2="BackgroundImageFix"
                     mode="normal"
                     result="effect1_dropShadow_1513_6640"
                   />
                   <feblend
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in="SourceGraphic"
                     in2="effect1_dropShadow_1513_6640"
                     mode="normal"
                     result="shape"
                   />
                   <fegaussianblur
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     result="effect2_foregroundBlur_1513_6640"
                     stdDeviation="25"
                   />
                 </filter>
                 <lineargradient
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   gradientUnits="userSpaceOnUse"
                   id="paint0_linear_1513_6640"
                   x1="973.763"
@@ -2044,18 +2044,18 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   y2="936.983"
                 >
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.0149795"
                     stop-color="#2CA5B1"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="1"
                     stop-color="#999999"
                   />
                 </lineargradient>
                 <lineargradient
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   gradientUnits="userSpaceOnUse"
                   id="paint1_linear_1513_6640"
                   x1="811.919"
@@ -2064,18 +2064,18 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   y2="939.073"
                 >
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.0149795"
                     stop-color="#2CA5B1"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="1"
                     stop-color="#999999"
                   />
                 </lineargradient>
                 <lineargradient
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   gradientUnits="userSpaceOnUse"
                   id="paint2_linear_1513_6640"
                   x1="821.732"
@@ -2084,18 +2084,18 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   y2="924.479"
                 >
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.0149795"
                     stop-color="#2CA5B1"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="1"
                     stop-color="#999999"
                   />
                 </lineargradient>
                 <lineargradient
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   gradientUnits="userSpaceOnUse"
                   id="paint3_linear_1513_6640"
                   x1="880.448"
@@ -2104,18 +2104,18 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   y2="830.742"
                 >
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.1721"
                     stop-color="#2CA5B1"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.804"
                     stop-color="#F09630"
                   />
                 </lineargradient>
                 <lineargradient
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   gradientUnits="userSpaceOnUse"
                   id="paint4_linear_1513_6640"
                   x1="870"
@@ -2124,60 +2124,60 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   y2="853.864"
                 >
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     stop-color="white"
                     stop-opacity="0"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.0405"
                     stop-color="#EEEFF0"
                     stop-opacity="0.0405"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.1632"
                     stop-color="#BFC3C7"
                     stop-opacity="0.1632"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.29"
                     stop-color="#979DA3"
                     stop-opacity="0.29"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.4195"
                     stop-color="#777E86"
                     stop-opacity="0.4195"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.5522"
                     stop-color="#5D6670"
                     stop-opacity="0.5522"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.6896"
                     stop-color="#4B5460"
                     stop-opacity="0.6896"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.8346"
                     stop-color="#404A56"
                     stop-opacity="0.8346"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="1"
                     stop-color="#3D4753"
                   />
                 </lineargradient>
                 <lineargradient
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   gradientUnits="userSpaceOnUse"
                   id="paint5_linear_1513_6640"
                   x1="870.407"
@@ -2186,66 +2186,66 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
                   y2="871.304"
                 >
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     stop-color="white"
                     stop-opacity="0"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.0405"
                     stop-color="#EEEFF0"
                     stop-opacity="0.0405"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.1632"
                     stop-color="#BFC3C7"
                     stop-opacity="0.1632"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.29"
                     stop-color="#979DA3"
                     stop-opacity="0.29"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.4195"
                     stop-color="#777E86"
                     stop-opacity="0.4195"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.5522"
                     stop-color="#5D6670"
                     stop-opacity="0.5522"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.6896"
                     stop-color="#4B5460"
                     stop-opacity="0.6896"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.8346"
                     stop-color="#404A56"
                     stop-opacity="0.8346"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="1"
                     stop-color="#3D4753"
                   />
                 </lineargradient>
                 <clippath
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   id="clip0_1513_6640"
                 >
                   <circle
                     cx="866"
                     cy="859"
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     r="60"
                   />
                 </clippath>
@@ -2255,7 +2255,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
         </div>
         <div
           class="dream-mall-panel"
-          data-v-e7870397=""
+          data-v-a93cef15=""
         >
           
           <div
@@ -2318,7 +2318,7 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
           </div>
           <button
             class="v-btn v-btn--elevated v-theme--light v-btn--density-default elevation-0 v-btn--rounded v-btn--size-default v-btn--variant-elevated custom-green-btn mb-5"
-            data-v-ea088446=""
+            data-v-38a94fe9=""
             modelvalue="[object Object]"
             submit-text="Weiter"
             type="button"
@@ -2365,8 +2365,8 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
         >
           <div
             class="circle rounded-circle border-sm text-font pa-2 d-flex justify-center align-center"
-            data-v-39e8094e=""
             data-v-75d0be1e=""
+            data-v-93e4e641=""
           >
             
             <i
@@ -2401,18 +2401,18 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
           aria-haspopup="menu"
           aria-owns="v-menu-8"
           class="mx-auto user-info rounded-pill d-flex flex-row text-font border-sm align-center justify-center"
-          data-v-607bdd70=""
+          data-v-912716f1=""
         >
           
           <div
             class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm"
-            data-v-607bdd70=""
+            data-v-912716f1=""
             style="width: 44px; height: 44px;"
           >
             
             
             <span
-              data-v-607bdd70=""
+              data-v-912716f1=""
             >
               CU
             </span>
@@ -2427,13 +2427,13 @@ exports[`Cockpit Page > without apollo error > renders 1`] = `
           </div>
           <div
             class="d-flex flex-column justify-center text-right pa-1 pl-3 w-100"
-            data-v-607bdd70=""
+            data-v-912716f1=""
           >
             <i
               aria-hidden="true"
               class="v-icon notranslate v-theme--light v-icon--size-default ellipsis-icon"
               data-test="user-dropdown"
-              data-v-607bdd70=""
+              data-v-912716f1=""
             >
               <svg
                 fill="none"

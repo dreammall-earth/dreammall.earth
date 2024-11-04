@@ -150,6 +150,7 @@
     "#components/*": "./src/components/*",
     "#pages/*": "./src/pages/*",
     "#assets/*": "./src/assets/*",
+    "#constants/*": "./src/constants/*",
     "#layouts/*": "./src/layouts/*",
     "#queries/*": "./src/graphql/queries/*",
     "#mutations/*": "./src/graphql/mutations/*",

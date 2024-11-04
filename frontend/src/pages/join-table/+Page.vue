@@ -48,9 +48,9 @@ import { useQuery } from '@vue/apollo-composable'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import SimpleButton from '#components/buttons/SimpleButton.vue'
-import LogoImage from '#components/menu/LogoImage.vue'
+import SimpleButton from '#components/simple-button/SimpleButton.vue'
 import { usePageContext } from '#context/usePageContext'
+import LogoImage from '#layouts/menu/LogoImage.vue'
 import useGetTableName from '#pages/join-table/useGetTableName'
 import { joinTableAsGuestQuery } from '#queries/joinTableAsGuestQuery'
 

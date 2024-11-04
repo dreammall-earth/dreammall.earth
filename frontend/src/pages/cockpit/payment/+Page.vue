@@ -11,9 +11,9 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 
-import SepaIban from '#components/sepa-iban/SepaIban.vue'
 import { usePageContext } from '#context/usePageContext'
 import DefaultLayout from '#layouts/DefaultLayout.vue'
+import SepaIban from '#pages/cockpit/payment/(components)/sepa-iban/SepaIban.vue'
 import { useUserStore } from '#stores/userStore'
 
 const pageContext = usePageContext()

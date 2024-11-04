@@ -1,0 +1,31 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`OptionsList > renders when not visible 1`] = `
+<transition-group-stub
+  appear="false"
+  css="true"
+  data-v-6e29fe90=""
+  name="options"
+  persisted="false"
+>
+  <!--v-if-->
+</transition-group-stub>
+`;
+
+exports[`OptionsList > renders when visible 1`] = `
+<transition-group-stub
+  appear="false"
+  css="true"
+  data-v-6e29fe90=""
+  name="options"
+  persisted="false"
+>
+  <ul
+    class="options-list"
+    data-v-6e29fe90=""
+  >
+    
+    
+  </ul>
+</transition-group-stub>
+`;
