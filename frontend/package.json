@@ -88,7 +88,7 @@
     "@pinia/testing": "^0.1.5",
     "@storybook/addon-essentials": "^8.4.2",
     "@storybook/addon-interactions": "^8.4.1",
-    "@storybook/addon-links": "^8.3.6",
+    "@storybook/addon-links": "^8.4.2",
     "@storybook/blocks": "^8.3.6",
     "@storybook/test": "^8.4.1",
     "@storybook/test-runner": "^0.19.1",
