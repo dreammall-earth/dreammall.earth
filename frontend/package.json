@@ -71,7 +71,7 @@
     "pinia-plugin-persistedstate": "^4.1.2",
     "qrcode": "^1.5.4",
     "sirv": "^3.0.0",
-    "three": "^0.169.0",
+    "three": "^0.170.0",
     "tsx": "^4.19.2",
     "vike": "^0.4.200",
     "vite": "^5.4.10",
