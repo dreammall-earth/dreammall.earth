@@ -72,10 +72,12 @@ function createApp(pageContext: PageContext, isClient = true) {
     i18n.global.locale.value = pageContext.locale
   }
 
-  const {
-    SENTRY: { SENTRY_DSN: dsn, SENTRY_ENVIRONMENT: environment },
-  } = pageContext.publicEnv
-  setupSentry({ app, dsn, environment })
+  if (isClient) {
+    const {
+      SENTRY: { SENTRY_DSN: dsn, SENTRY_ENVIRONMENT: environment },
+    } = pageContext.publicEnv
+    setupSentry({ app, dsn, environment })
+  }
 
   return { app, i18n }
 }

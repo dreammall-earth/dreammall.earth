@@ -110,10 +110,12 @@ function createApp(pageContext: PageContext, isClient = true) {
 
   setPageContext(app, pageContextReactive)
 
-  const {
-    SENTRY: { SENTRY_DSN: dsn, SENTRY_ENVIRONMENT: environment },
-  } = pageContext.publicEnv
-  setupSentry({ app, dsn, environment })
+  if (isClient) {
+    const {
+      SENTRY: { SENTRY_DSN: dsn, SENTRY_ENVIRONMENT: environment },
+    } = pageContext.publicEnv
+    setupSentry({ app, dsn, environment })
+  }
 
   return { app, i18n }
 }
