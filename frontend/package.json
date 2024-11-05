@@ -57,7 +57,7 @@
     "@vue/apollo-ssr": "^4.0.0",
     "@vue/compiler-sfc": "^3.5.12",
     "@vue/server-renderer": "3.4.35",
-    "compression": "^1.7.4",
+    "compression": "^1.7.5",
     "cookie": "^0.7.2",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
