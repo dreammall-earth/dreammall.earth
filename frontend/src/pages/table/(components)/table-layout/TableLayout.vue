@@ -14,7 +14,7 @@ import { navigate } from 'vike/client/router'
 import { onMounted, onUnmounted } from 'vue'
 
 import DefaultLayout from '#layouts/DefaultLayout.vue'
-import useDreamMallPanel from '#layouts/dream-mall-panel/useDreamMallPanel.js'
+import useDreamMallPanel from '#layouts/dream-mall-panel/useDreamMallPanel'
 import EmbeddedTable from '#pages/table/(components)/embedded-table/EmbeddedTable.vue'
 
 defineProps<{

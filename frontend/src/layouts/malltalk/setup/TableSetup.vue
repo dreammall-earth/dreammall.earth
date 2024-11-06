@@ -23,7 +23,7 @@ import SelectUsers from './SelectUsers.vue'
 import StartSetup from './StartSetup.vue'
 import SubmitTable from './SubmitTable.vue'
 
-import type MyTableSettings from '#layouts/malltalk/interfaces/MyTableSettings.js'
+import type MyTableSettings from '#layouts/malltalk/interfaces/MyTableSettings'
 import type { ComponentExposed } from 'vue-component-type-helpers'
 
 const tablesStore = useTablesStore()

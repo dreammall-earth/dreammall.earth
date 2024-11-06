@@ -56,7 +56,7 @@ import { navigate } from 'vike/client/router'
 import { ref, h } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import useModal from '#layouts/modal/useModal.js'
+import useModal from '#layouts/modal/useModal'
 import OptionButton from '#pages/cockpit/(components)/options-list/OptionButton.vue'
 import OptionsList from '#pages/cockpit/(components)/options-list/OptionsList.vue'
 import { useTablesStore } from '#stores/tablesStore'

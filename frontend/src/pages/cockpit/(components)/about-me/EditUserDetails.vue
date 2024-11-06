@@ -71,7 +71,7 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 
-import { detailCategories, detailCategoryToIcon } from '#constants/detailCategories.js'
+import { detailCategories, detailCategoryToIcon } from '#constants/detailCategories'
 import CockpitCard from '#pages/cockpit/(components)/cockpit-card/CockpitCard.vue'
 import { UserDetailCategory, useUserStore } from '#stores/userStore'
 

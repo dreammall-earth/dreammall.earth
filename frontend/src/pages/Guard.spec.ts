@@ -2,7 +2,7 @@ import { redirect } from 'vike/abort'
 import { PageContextServer } from 'vike/types'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
-import { useAuthStore } from '#stores/authStore.js'
+import { useAuthStore } from '#stores/authStore'
 
 import { guard } from './+guard'
 

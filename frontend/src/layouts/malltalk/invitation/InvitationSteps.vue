@@ -17,7 +17,7 @@ import { useI18n } from 'vue-i18n'
 import StepControl from '#components/steps/StepControl.vue'
 import { Step } from '#components/steps/useSteps'
 import { usePageContext } from '#context/usePageContext'
-import Invitation from '#layouts/malltalk/interfaces/Invitation.js'
+import Invitation from '#layouts/malltalk/interfaces/Invitation'
 import { useTablesStore } from '#stores/tablesStore'
 
 import IncomingInvitation from './IncomingInvitation.vue'

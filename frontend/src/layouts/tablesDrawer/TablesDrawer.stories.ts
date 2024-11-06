@@ -1,4 +1,4 @@
-import { withApollo } from '#root/.storybook/withApollo.decorator.js'
+import { withApollo } from '#root/.storybook/withApollo.decorator'
 import { SBComp } from '#types/SBComp'
 
 import TablesDrawer from './TablesDrawer.vue'

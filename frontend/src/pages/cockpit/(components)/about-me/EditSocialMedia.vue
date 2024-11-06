@@ -70,7 +70,7 @@ import {
   getSocialMediaIcon,
   socialMediaTypes,
   buildSocialMediaLink,
-} from '#constants/socialMediaPlatforms.js'
+} from '#constants/socialMediaPlatforms'
 import CockpitCard from '#pages/cockpit/(components)/cockpit-card/CockpitCard.vue'
 
 import type { SocialMedia, AddSocialMediaInput } from '#stores/userStore'

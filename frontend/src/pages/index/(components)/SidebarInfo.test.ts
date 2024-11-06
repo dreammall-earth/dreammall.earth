@@ -5,7 +5,7 @@ import { VApp } from 'vuetify/components'
 
 import SidebarInfo from './SidebarInfo.vue'
 
-import type { UserWithProfile } from '#stores/userStore.js'
+import type { UserWithProfile } from '#stores/userStore'
 
 const profile: UserWithProfile = {
   id: 1,

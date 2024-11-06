@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import InfoBox from '#components/info-box/InfoBox.vue'
-import Invitation from '#layouts/malltalk/interfaces/Invitation.js'
+import Invitation from '#layouts/malltalk/interfaces/Invitation'
 
 import IncomingInvitationItem from './IncomingInvitationItem.vue'
 

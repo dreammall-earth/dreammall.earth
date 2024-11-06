@@ -34,7 +34,7 @@ import { usePageContext } from '#context/usePageContext'
 import {
   IsModeratorInjection,
   IsModeratorSymbol,
-} from '#layouts/malltalk/interfaces/IsModeratorInjection.js'
+} from '#layouts/malltalk/interfaces/IsModeratorInjection'
 import { copyToClipboard } from '#src/utils/copyToClipboard'
 import { useTablesStore } from '#stores/tablesStore'
 

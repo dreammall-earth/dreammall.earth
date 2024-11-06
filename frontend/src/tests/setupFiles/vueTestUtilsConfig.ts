@@ -4,7 +4,7 @@ import { config } from '@vue/test-utils'
 import { vikePageContext } from '#context/usePageContext'
 import i18n from '#plugins/i18n'
 import vuetify from '#plugins/vuetify'
-import { authService } from '#src/tests/mock.authService.js'
+import { authService } from '#src/tests/mock.authService'
 import { mockPageContext } from '#tests/mock.vikePageContext'
 
 config.global.plugins.push(i18n)

@@ -19,7 +19,7 @@ import { usePageContext } from '#context/usePageContext'
 import { useTablesStore } from '#stores/tablesStore'
 
 import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
-import type MyTableSettings from '#layouts/malltalk/interfaces/MyTableSettings.js'
+import type MyTableSettings from '#layouts/malltalk/interfaces/MyTableSettings'
 
 defineProps<StepProps>()
 const emit = defineEmits<StepEmits>()

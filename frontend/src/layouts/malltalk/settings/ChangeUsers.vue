@@ -14,7 +14,7 @@ import UserSelection from '#components/user-selection/UserSelection.vue'
 import { useTablesStore } from '#stores/tablesStore'
 
 import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
-import type MyTableSettings from '#layouts/malltalk/interfaces/MyTableSettings.js'
+import type MyTableSettings from '#layouts/malltalk/interfaces/MyTableSettings'
 
 const props = defineProps<StepProps>()
 const emit = defineEmits<StepEmits>()

@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import { detailCategoryToIcon } from '#constants/detailCategories.js'
+import { detailCategoryToIcon } from '#constants/detailCategories'
 
 import type { UserDetail } from '#stores/userStore'
 

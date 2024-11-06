@@ -11,7 +11,7 @@ import { usePageContext } from '#context/usePageContext'
 import {
   IsModeratorInjection,
   IsModeratorSymbol,
-} from '#layouts/malltalk/interfaces/IsModeratorInjection.js'
+} from '#layouts/malltalk/interfaces/IsModeratorInjection'
 import TableLayout from '#pages/table/(components)/table-layout/TableLayout.vue'
 import { joinTableQuery } from '#queries/joinTableQuery'
 

@@ -46,7 +46,7 @@
 </template>
 
 <script lang="ts" setup>
-import Invitation from '#layouts/malltalk/interfaces/Invitation.js'
+import Invitation from '#layouts/malltalk/interfaces/Invitation'
 
 defineProps<{
   invitation: Invitation

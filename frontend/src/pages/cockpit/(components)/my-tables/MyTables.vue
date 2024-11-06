@@ -33,7 +33,7 @@
 import { storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
 
-import useModal from '#layouts/modal/useModal.js'
+import useModal from '#layouts/modal/useModal'
 import CockpitCard from '#pages/cockpit/(components)/cockpit-card/CockpitCard.vue'
 import { useTablesStore } from '#stores/tablesStore'
 

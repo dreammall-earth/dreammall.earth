@@ -19,7 +19,7 @@ import { useUserStore } from '#stores/userStore'
 import ChangeUsers from './ChangeUsers.vue'
 import TableSettingsRoot from './TableSettingsRoot.vue'
 
-import type MyTableSettings from '#layouts/malltalk/interfaces/MyTableSettings.js'
+import type MyTableSettings from '#layouts/malltalk/interfaces/MyTableSettings'
 import type { ComponentExposed } from 'vue-component-type-helpers'
 
 const userStore = useUserStore()

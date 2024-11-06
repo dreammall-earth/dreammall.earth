@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import Invitation from '#layouts/malltalk/interfaces/Invitation.js'
+import Invitation from '#layouts/malltalk/interfaces/Invitation'
 
 import IncomingInvitationItem from './IncomingInvitationItem.vue'
 
