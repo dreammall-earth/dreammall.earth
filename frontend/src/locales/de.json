@@ -105,6 +105,14 @@
     },
     "enablecookie": "🍪 Aktiviere Cookies in deinem Browser!"
   },
+  "invitationLink": {
+    "motivation": "Die Einladungslinks sind der Schlüssel auf unsere Plattform, wähle Sorgfältig."
+  },
+  "invite": {
+    "invalidCode": "Der Einladungslink ist leider ungültig.",
+    "register": "Trotzdem beiteten",
+    "usedCode": "Der Einladungslink wurde bereits benutzt."
+  },
   "joinTablePage": {
     "guestName": "Gastname",
     "publicTable": "Öffentlicher Tisch",
@@ -115,6 +123,7 @@
   },
   "menu": {
     "cockpit": "Cockpit",
+    "invitationLinks": "Einladungslink",
     "mall": "Mall",
     "theme": {
       "dark": "Dunkel",

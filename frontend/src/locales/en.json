@@ -105,6 +105,14 @@
     },
     "enablecookie": "🍪 Please enable cookies in your browser!"
   },
+  "invitationLink": {
+    "motivation": "Inivitation links are the key to our platform. Choose carefully."
+  },
+  "invite": {
+    "invalidCode": "Invalid invitation code.",
+    "register": "Join anyway",
+    "usedCode": "This invitation code has already been used."
+  },
   "joinTablePage": {
     "guestName": "Guest name",
     "publicTable": "Public table",
@@ -115,6 +123,7 @@
   },
   "menu": {
     "cockpit": "Cockpit",
+    "invitationLinks": "Invitation Link",
     "mall": "Mall",
     "theme": {
       "dark": "Dark",

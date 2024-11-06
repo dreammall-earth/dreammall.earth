@@ -3,7 +3,7 @@
     <MotivationBox>
       {{ $t('cockpit.myTables.createTable.tableCreated') }}
     </MotivationBox>
-    <CopyToClipboard :table-url="tableUrl" class="copy-url" />
+    <CopyToClipboard :url="tableUrl" class="copy-url" />
     <SimpleButton class="mt-12 mx-auto" :label="props.submitText" @click="openTable" />
   </div>
 </template>
@@ -13,10 +13,9 @@ import { navigate } from 'vike/client/router'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 import CopyToClipboard from '#components/copy-to-clipboard/CopyToClipboard.vue'
+import MotivationBox from '#components/motivation-box/MotivationBox.vue'
 import { usePageContext } from '#context/usePageContext'
 import { useTablesStore } from '#stores/tablesStore'
-
-import MotivationBox from './MotivationBox.vue'
 
 import type { StepEmits, StepProps } from '#components/steps/StepComponentTypes'
 import type { CreateTableModel } from './CreateTable.vue'
