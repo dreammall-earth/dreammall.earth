@@ -82,7 +82,7 @@
     "@storybook/test-runner": "^0.19.1",
     "@storybook/testing-library": "^0.2.2",
     "@storybook/vue3": "^8.4.2",
-    "@storybook/vue3-vite": "^8.4.1",
+    "@storybook/vue3-vite": "^8.4.2",
     "@types/compression": "^1.7.5",
     "@types/express": "^5.0.0",
     "@types/fs-extra": "^11.0.4",
