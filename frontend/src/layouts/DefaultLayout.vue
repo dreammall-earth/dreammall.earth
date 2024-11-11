@@ -63,14 +63,14 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 
-import DreamMallPanel from '#components/dream-mall-panel/DreamMallPanel.vue'
-import Circle from '#components/menu/CircleElement.vue'
-import LogoImage from '#components/menu/LogoImage.vue'
-import TabControl from '#components/menu/TabControl.vue'
-import UserInfo from '#components/menu/UserInfo.vue'
-import ModalPanel from '#components/modal/ModalPanel.vue'
-import useModal from '#components/modal/useModal'
-import TablesDrawer from '#components/tablesDrawer/TablesDrawer.vue'
+import DreamMallPanel from '#layouts/dream-mall-panel/DreamMallPanel.vue'
+import Circle from '#layouts/menu/CircleElement.vue'
+import LogoImage from '#layouts/menu/LogoImage.vue'
+import TabControl from '#layouts/menu/TabControl.vue'
+import UserInfo from '#layouts/menu/UserInfo.vue'
+import ModalPanel from '#layouts/modal/ModalPanel.vue'
+import useModal from '#layouts/modal/useModal'
+import TablesDrawer from '#layouts/tablesDrawer/TablesDrawer.vue'
 
 type DrawerType = 'tables' | 'dream-mall-button' | 'call' | null
 

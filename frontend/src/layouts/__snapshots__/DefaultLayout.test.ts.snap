@@ -47,7 +47,7 @@ exports[`DefaultLayout > renders 1`] = `
                   class="w-100 logo-small"
                   cover="false"
                   data-v-75d0be1e=""
-                  data-v-f6be2607=""
+                  data-v-ec9956ac=""
                   eager="false"
                   inline="false"
                   options="[object Object]"
@@ -63,31 +63,31 @@ exports[`DefaultLayout > renders 1`] = `
             >
               <div
                 class="tab-control ma-auto border-sm"
+                data-v-2758bcdb=""
                 data-v-75d0be1e=""
-                data-v-d58c92bb=""
               >
                 <div
                   class="marker"
-                  data-v-d58c92bb=""
+                  data-v-2758bcdb=""
                   style="display: none; width: 0px; left: 0px;"
                 />
                 <div
                   class="d-flex align-center justify-center h-100 w-100"
-                  data-v-d58c92bb=""
+                  data-v-2758bcdb=""
                 >
                   
                   <button
                     class="item active"
-                    data-v-d58c92bb=""
+                    data-v-2758bcdb=""
                   >
                     <div
                       class="icon d-flex justify-center align-center"
-                      data-v-d58c92bb=""
+                      data-v-2758bcdb=""
                     >
                       <i
                         aria-hidden="true"
                         class="v-icon notranslate v-theme--light v-icon--size-default w-100 world-cafe"
-                        data-v-d58c92bb=""
+                        data-v-2758bcdb=""
                       >
                         <svg
                           fill="none"
@@ -307,16 +307,16 @@ exports[`DefaultLayout > renders 1`] = `
                   </button>
                   <button
                     class="item"
-                    data-v-d58c92bb=""
+                    data-v-2758bcdb=""
                   >
                     <div
                       class="icon d-flex justify-center align-center"
-                      data-v-d58c92bb=""
+                      data-v-2758bcdb=""
                     >
                       <i
                         aria-hidden="true"
                         class="v-icon notranslate v-theme--light v-icon--size-default w-100 cockpit"
-                        data-v-d58c92bb=""
+                        data-v-2758bcdb=""
                       >
                         <svg
                           fill="none"
@@ -583,8 +583,8 @@ exports[`DefaultLayout > renders 1`] = `
                   >
                     <div
                       class="circle rounded-circle border-sm text-font pa-2 d-flex justify-center align-center"
-                      data-v-39e8094e=""
                       data-v-75d0be1e=""
+                      data-v-93e4e641=""
                     >
                       
                       <i
@@ -615,18 +615,18 @@ exports[`DefaultLayout > renders 1`] = `
                     aria-haspopup="menu"
                     aria-owns="v-menu-1"
                     class="ml-2 user-info rounded-pill d-flex flex-row text-font border-sm align-center justify-center"
-                    data-v-607bdd70=""
+                    data-v-912716f1=""
                   >
                     
                     <div
                       class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm"
-                      data-v-607bdd70=""
+                      data-v-912716f1=""
                       style="width: 44px; height: 44px;"
                     >
                       
                       
                       <span
-                        data-v-607bdd70=""
+                        data-v-912716f1=""
                       />
                       
                       
@@ -639,13 +639,13 @@ exports[`DefaultLayout > renders 1`] = `
                     </div>
                     <div
                       class="d-flex flex-column justify-center text-right pa-1 pl-3 w-100"
-                      data-v-607bdd70=""
+                      data-v-912716f1=""
                     >
                       <i
                         aria-hidden="true"
                         class="v-icon notranslate v-theme--light v-icon--size-default ellipsis-icon"
                         data-test="user-dropdown"
-                        data-v-607bdd70=""
+                        data-v-912716f1=""
                       >
                         <svg
                           fill="none"
@@ -690,7 +690,7 @@ exports[`DefaultLayout > renders 1`] = `
       
       <nav
         class="v-navigation-drawer v-navigation-drawer--right v-navigation-drawer--temporary v-theme--light v-navigation-drawer--mobile menu-drawer px-4 changing-orientation"
-        data-v-cf2c9067=""
+        data-v-52e39d66=""
         style="bottom: 0px; z-index: 1004; transform: translateX(308px); position: fixed; transition: none !important; height: calc(100% - 70px - 0px); width: 308px; right: 0px; top: 70px;"
       >
         <!---->
@@ -701,7 +701,7 @@ exports[`DefaultLayout > renders 1`] = `
           
           <div
             class="v-input v-input--horizontal v-input--center-affix v-input--density-compact v-theme--light v-locale--is-ltr v-text-field search"
-            data-v-cf2c9067=""
+            data-v-52e39d66=""
           >
             <!---->
             <div
@@ -864,53 +864,53 @@ exports[`DefaultLayout > renders 1`] = `
           <!-- Mall Talk -->
           <div
             class="lists"
-            data-v-cf2c9067=""
+            data-v-52e39d66=""
           >
             
             <div
               class="outer-list"
-              data-v-cf2c9067=""
-              data-v-de37061b=""
+              data-v-3b521c35=""
+              data-v-52e39d66=""
             >
               <div
                 class="mb-4 d-flex align-center justify-space-between"
-                data-v-de37061b=""
+                data-v-3b521c35=""
               >
                 <h2
                   class="header"
-                  data-v-de37061b=""
+                  data-v-3b521c35=""
                 >
                   Mall Talk
                 </h2>
                 <button
-                  data-v-de37061b=""
+                  data-v-3b521c35=""
                 >
                   <i
                     aria-hidden="true"
                     class="mdi mdi-menu-down mdi v-icon notranslate v-theme--light v-icon--size-default"
-                    data-v-de37061b=""
+                    data-v-3b521c35=""
                   />
                 </button>
               </div>
               
               <button
                 class="invite-button bg-primary pl-3 pr-6 py-1 d-flex align-center justify-center mb-4"
-                data-v-cf2c9067=""
+                data-v-52e39d66=""
               >
                 <i
                   aria-hidden="true"
                   class="mdi mdi-plus mdi v-icon notranslate v-theme--light v-icon--size-default mr-4"
-                  data-v-cf2c9067=""
+                  data-v-52e39d66=""
                 />
                  $t('tablesDrawer.invite')
               </button>
               
               <div
                 class="list-content"
-                data-v-de37061b=""
+                data-v-3b521c35=""
               >
                 <div
-                  data-v-de37061b=""
+                  data-v-3b521c35=""
                 >
                   $t('tablesDrawer.noTables')
                 </div>
@@ -919,26 +919,26 @@ exports[`DefaultLayout > renders 1`] = `
             </div>
             <div
               class="outer-list"
-              data-v-cf2c9067=""
-              data-v-de37061b=""
+              data-v-3b521c35=""
+              data-v-52e39d66=""
             >
               <div
                 class="mb-4 d-flex align-center justify-space-between"
-                data-v-de37061b=""
+                data-v-3b521c35=""
               >
                 <h2
                   class="header"
-                  data-v-de37061b=""
+                  data-v-3b521c35=""
                 >
                   Projekte
                 </h2>
                 <button
-                  data-v-de37061b=""
+                  data-v-3b521c35=""
                 >
                   <i
                     aria-hidden="true"
                     class="mdi mdi-menu-down mdi v-icon notranslate v-theme--light v-icon--size-default"
-                    data-v-de37061b=""
+                    data-v-3b521c35=""
                   />
                 </button>
               </div>
@@ -946,10 +946,10 @@ exports[`DefaultLayout > renders 1`] = `
               
               <div
                 class="list-content"
-                data-v-de37061b=""
+                data-v-3b521c35=""
               >
                 <div
-                  data-v-de37061b=""
+                  data-v-3b521c35=""
                 >
                   $t('tablesDrawer.noTables')
                 </div>
@@ -974,7 +974,7 @@ exports[`DefaultLayout > renders 1`] = `
       <transition-group-stub
         appear="false"
         css="true"
-        data-v-48393cd1=""
+        data-v-33c2a336=""
         data-v-75d0be1e=""
         name="modal"
         persisted="false"
@@ -993,19 +993,19 @@ exports[`DefaultLayout > renders 1`] = `
       <div
         class="dream-mall-floating-container"
         data-v-75d0be1e=""
-        data-v-e7870397=""
+        data-v-a93cef15=""
       >
         <div
           class="dream-mall-button-wrapper"
-          data-v-e7870397=""
+          data-v-a93cef15=""
         >
           <div
             class="dream-mall-button"
-            data-v-e7870397=""
+            data-v-a93cef15=""
           >
             <svg
-              data-v-57af6bd7=""
-              data-v-e7870397=""
+              data-v-56f25dae=""
+              data-v-a93cef15=""
               fill="none"
               height="1719"
               viewBox="0 0 1731 1719"
@@ -1013,27 +1013,27 @@ exports[`DefaultLayout > renders 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <g
-                data-v-57af6bd7=""
+                data-v-56f25dae=""
                 filter="url(#filter0_i_1513_6640)"
                 opacity="0.25"
               >
                 <path
                   class="base-color-transition"
                   d="M866 938.727C821.781 938.727 786 903.016 786 859.046C786 815.075 821.781 779.364 866 779.364C910.219 779.364 946 815.075 946 859.046C946 903.016 910.219 938.727 866 938.727Z"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   stroke="url(#paint0_linear_1513_6640)"
                   stroke-width="22"
                 />
               </g>
               <g
-                data-v-57af6bd7=""
+                data-v-56f25dae=""
                 filter="url(#filter1_i_1513_6640)"
               >
                 <circle
                   class="base-color-transition"
                   cx="866.318"
                   cy="859.045"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   r="61.5"
                   stroke="url(#paint1_linear_1513_6640)"
                   stroke-opacity="0.5"
@@ -1042,13 +1042,13 @@ exports[`DefaultLayout > renders 1`] = `
                 />
               </g>
               <g
-                data-v-57af6bd7=""
+                data-v-56f25dae=""
                 filter="url(#filter2_i_1513_6640)"
               >
                 <circle
                   cx="866.136"
                   cy="859.155"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   fill="#EEEFF0"
                   fill-opacity="1"
                   r="59.9955"
@@ -1059,7 +1059,7 @@ exports[`DefaultLayout > renders 1`] = `
                 class="base-color-transition"
                 cx="866.136"
                 cy="859.155"
-                data-v-57af6bd7=""
+                data-v-56f25dae=""
                 r="49.9955"
                 stroke="url(#paint2_linear_1513_6640)"
                 stroke-width="20"
@@ -1067,7 +1067,7 @@ exports[`DefaultLayout > renders 1`] = `
               />
               <g
                 class="warp-ring button-warp-on"
-                data-v-57af6bd7=""
+                data-v-56f25dae=""
                 filter="url(#filter3_df_1513_6640)"
                 opacity="0.25"
                 style="transform: scale(0);"
@@ -1075,7 +1075,7 @@ exports[`DefaultLayout > renders 1`] = `
                 <ellipse
                   cx="759"
                   cy="768"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   rx="759"
                   ry="768"
                   shape-rendering="crispEdges"
@@ -1087,14 +1087,14 @@ exports[`DefaultLayout > renders 1`] = `
               </g>
               <g
                 class="button-wave"
-                data-v-57af6bd7=""
+                data-v-56f25dae=""
                 filter="url(#filter0_f_1513_6933)"
                 opacity="0.25"
               >
                 <ellipse
                   cx="759"
                   cy="768"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   rx="95"
                   ry="95"
                   stroke="#2CA5B1"
@@ -1105,39 +1105,39 @@ exports[`DefaultLayout > renders 1`] = `
               <g
                 class=""
                 clip-path="url(#clip0_1513_6640)"
-                data-v-57af6bd7=""
+                data-v-56f25dae=""
                 id="dream-mall-button"
               >
                 <rect
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   fill="transparent"
                   height="100%"
                   width="100%"
                 />
                 <path
                   d="M865.772 848.381H870C875.877 848.381 880.727 853.121 880.727 858.864C880.727 864.608 875.877 869.346 870 869.346H865.771H859.273H855.516H851.758H848V880.364H870C882.101 880.364 892 870.689 892 858.864C892 847.038 882.101 837.364 870 837.364H848V853.469V855.726H851.758H855.516H859.274H863.032H866.79H870C871.728 855.726 873.21 857.175 873.21 858.864C873.21 860.553 871.728 862.001 870 862.001H866.79H848V865.674H863.032H870C873.803 865.674 876.969 862.581 876.969 858.864C876.969 855.148 873.803 852.054 870 852.054H863.031H859.273H855.516H851.758V841.036H855.516H870C880.026 841.036 888.243 849.066 888.243 858.864C888.243 868.662 880.027 876.691 870 876.691H851.758V873.019H855.516H865.772H870C877.951 873.019 884.485 866.635 884.485 858.864C884.485 851.093 877.951 844.71 870 844.71H865.771H856.617V848.381H865.772Z"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   fill="url(#paint3_linear_1513_6640)"
                 />
                 <path
                   d="M856.537 855.364H868.921H870V852.365H868.921L861.075 852.364H856.537H852V855.364H856.537Z"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   fill="url(#paint4_linear_1513_6640)"
                   opacity="0.75"
                 />
                 <path
                   d="M856.64 873.244H869.304H870.407V869.365H869.304L861.28 869.364H856.64H852V873.244H856.64Z"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   fill="url(#paint5_linear_1513_6640)"
                   opacity="0.75"
                 />
               </g>
               <defs
-                data-v-57af6bd7=""
+                data-v-56f25dae=""
               >
                 <filter
                   color-interpolation-filters="sRGB"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   filterUnits="userSpaceOnUse"
                   height="1719"
                   id="filter0_f_1513_6933"
@@ -1146,26 +1146,26 @@ exports[`DefaultLayout > renders 1`] = `
                   y="0"
                 >
                   <feflood
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     flood-opacity="0"
                     result="BackgroundImageFix"
                   />
                   <feblend
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in="SourceGraphic"
                     in2="BackgroundImageFix"
                     mode="normal"
                     result="shape"
                   />
                   <fegaussianblur
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     result="effect1_foregroundBlur_1513_6933"
                     stdDeviation="5"
                   />
                 </filter>
                 <filter
                   color-interpolation-filters="sRGB"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   filterUnits="userSpaceOnUse"
                   height="183.364"
                   id="filter0_i_1513_6640"
@@ -1174,46 +1174,46 @@ exports[`DefaultLayout > renders 1`] = `
                   y="768.364"
                 >
                   <feflood
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     flood-opacity="0"
                     result="BackgroundImageFix"
                   />
                   <feblend
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in="SourceGraphic"
                     in2="BackgroundImageFix"
                     mode="normal"
                     result="shape"
                   />
                   <fecolormatrix
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in="SourceAlpha"
                     result="hardAlpha"
                     type="matrix"
                     values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
                   />
                   <feoffset
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     dy="2"
                   />
                   <fegaussianblur
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     stdDeviation="2.5"
                   />
                   <fecomposite
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in2="hardAlpha"
                     k2="-1"
                     k3="1"
                     operator="arithmetic"
                   />
                   <fecolormatrix
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     type="matrix"
                     values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
                   />
                   <feblend
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in2="shape"
                     mode="normal"
                     result="effect1_innerShadow_1513_6640"
@@ -1221,7 +1221,7 @@ exports[`DefaultLayout > renders 1`] = `
                 </filter>
                 <filter
                   color-interpolation-filters="sRGB"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   filterUnits="userSpaceOnUse"
                   height="149"
                   id="filter1_i_1513_6640"
@@ -1230,46 +1230,46 @@ exports[`DefaultLayout > renders 1`] = `
                   y="785.545"
                 >
                   <feflood
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     flood-opacity="0"
                     result="BackgroundImageFix"
                   />
                   <feblend
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in="SourceGraphic"
                     in2="BackgroundImageFix"
                     mode="normal"
                     result="shape"
                   />
                   <fecolormatrix
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in="SourceAlpha"
                     result="hardAlpha"
                     type="matrix"
                     values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
                   />
                   <feoffset
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     dy="2"
                   />
                   <fegaussianblur
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     stdDeviation="2.5"
                   />
                   <fecomposite
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in2="hardAlpha"
                     k2="-1"
                     k3="1"
                     operator="arithmetic"
                   />
                   <fecolormatrix
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     type="matrix"
                     values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
                   />
                   <feblend
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in2="shape"
                     mode="normal"
                     result="effect1_innerShadow_1513_6640"
@@ -1277,7 +1277,7 @@ exports[`DefaultLayout > renders 1`] = `
                 </filter>
                 <filter
                   color-interpolation-filters="sRGB"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   filterUnits="userSpaceOnUse"
                   height="121.991"
                   id="filter2_i_1513_6640"
@@ -1286,46 +1286,46 @@ exports[`DefaultLayout > renders 1`] = `
                   y="799.159"
                 >
                   <feflood
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     flood-opacity="0"
                     result="BackgroundImageFix"
                   />
                   <feblend
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in="SourceGraphic"
                     in2="BackgroundImageFix"
                     mode="normal"
                     result="shape"
                   />
                   <fecolormatrix
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in="SourceAlpha"
                     result="hardAlpha"
                     type="matrix"
                     values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
                   />
                   <feoffset
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     dy="2"
                   />
                   <fegaussianblur
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     stdDeviation="2.5"
                   />
                   <fecomposite
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in2="hardAlpha"
                     k2="-1"
                     k3="1"
                     operator="arithmetic"
                   />
                   <fecolormatrix
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     type="matrix"
                     values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
                   />
                   <feblend
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in2="shape"
                     mode="normal"
                     result="effect1_innerShadow_1513_6640"
@@ -1333,7 +1333,7 @@ exports[`DefaultLayout > renders 1`] = `
                 </filter>
                 <filter
                   color-interpolation-filters="sRGB"
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   filterUnits="userSpaceOnUse"
                   height="1718"
                   id="filter3_df_1513_6640"
@@ -1342,56 +1342,56 @@ exports[`DefaultLayout > renders 1`] = `
                   y="0.36377"
                 >
                   <feflood
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     flood-opacity="0"
                     result="BackgroundImageFix"
                   />
                   <fecolormatrix
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in="SourceAlpha"
                     result="hardAlpha"
                     type="matrix"
                     values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
                   />
                   <feoffset
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     dy="4"
                   />
                   <fegaussianblur
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     stdDeviation="2"
                   />
                   <fecomposite
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in2="hardAlpha"
                     operator="out"
                   />
                   <fecolormatrix
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     type="matrix"
                     values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
                   />
                   <feblend
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in2="BackgroundImageFix"
                     mode="normal"
                     result="effect1_dropShadow_1513_6640"
                   />
                   <feblend
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     in="SourceGraphic"
                     in2="effect1_dropShadow_1513_6640"
                     mode="normal"
                     result="shape"
                   />
                   <fegaussianblur
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     result="effect2_foregroundBlur_1513_6640"
                     stdDeviation="25"
                   />
                 </filter>
                 <lineargradient
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   gradientUnits="userSpaceOnUse"
                   id="paint0_linear_1513_6640"
                   x1="973.763"
@@ -1400,18 +1400,18 @@ exports[`DefaultLayout > renders 1`] = `
                   y2="936.983"
                 >
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.0149795"
                     stop-color="#2CA5B1"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="1"
                     stop-color="#999999"
                   />
                 </lineargradient>
                 <lineargradient
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   gradientUnits="userSpaceOnUse"
                   id="paint1_linear_1513_6640"
                   x1="811.919"
@@ -1420,18 +1420,18 @@ exports[`DefaultLayout > renders 1`] = `
                   y2="939.073"
                 >
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.0149795"
                     stop-color="#2CA5B1"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="1"
                     stop-color="#999999"
                   />
                 </lineargradient>
                 <lineargradient
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   gradientUnits="userSpaceOnUse"
                   id="paint2_linear_1513_6640"
                   x1="821.732"
@@ -1440,18 +1440,18 @@ exports[`DefaultLayout > renders 1`] = `
                   y2="924.479"
                 >
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.0149795"
                     stop-color="#2CA5B1"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="1"
                     stop-color="#999999"
                   />
                 </lineargradient>
                 <lineargradient
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   gradientUnits="userSpaceOnUse"
                   id="paint3_linear_1513_6640"
                   x1="880.448"
@@ -1460,18 +1460,18 @@ exports[`DefaultLayout > renders 1`] = `
                   y2="830.742"
                 >
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.1721"
                     stop-color="#2CA5B1"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.804"
                     stop-color="#F09630"
                   />
                 </lineargradient>
                 <lineargradient
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   gradientUnits="userSpaceOnUse"
                   id="paint4_linear_1513_6640"
                   x1="870"
@@ -1480,60 +1480,60 @@ exports[`DefaultLayout > renders 1`] = `
                   y2="853.864"
                 >
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     stop-color="white"
                     stop-opacity="0"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.0405"
                     stop-color="#EEEFF0"
                     stop-opacity="0.0405"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.1632"
                     stop-color="#BFC3C7"
                     stop-opacity="0.1632"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.29"
                     stop-color="#979DA3"
                     stop-opacity="0.29"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.4195"
                     stop-color="#777E86"
                     stop-opacity="0.4195"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.5522"
                     stop-color="#5D6670"
                     stop-opacity="0.5522"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.6896"
                     stop-color="#4B5460"
                     stop-opacity="0.6896"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.8346"
                     stop-color="#404A56"
                     stop-opacity="0.8346"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="1"
                     stop-color="#3D4753"
                   />
                 </lineargradient>
                 <lineargradient
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   gradientUnits="userSpaceOnUse"
                   id="paint5_linear_1513_6640"
                   x1="870.407"
@@ -1542,66 +1542,66 @@ exports[`DefaultLayout > renders 1`] = `
                   y2="871.304"
                 >
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     stop-color="white"
                     stop-opacity="0"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.0405"
                     stop-color="#EEEFF0"
                     stop-opacity="0.0405"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.1632"
                     stop-color="#BFC3C7"
                     stop-opacity="0.1632"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.29"
                     stop-color="#979DA3"
                     stop-opacity="0.29"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.4195"
                     stop-color="#777E86"
                     stop-opacity="0.4195"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.5522"
                     stop-color="#5D6670"
                     stop-opacity="0.5522"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.6896"
                     stop-color="#4B5460"
                     stop-opacity="0.6896"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="0.8346"
                     stop-color="#404A56"
                     stop-opacity="0.8346"
                   />
                   <stop
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     offset="1"
                     stop-color="#3D4753"
                   />
                 </lineargradient>
                 <clippath
-                  data-v-57af6bd7=""
+                  data-v-56f25dae=""
                   id="clip0_1513_6640"
                 >
                   <circle
                     cx="866"
                     cy="859"
-                    data-v-57af6bd7=""
+                    data-v-56f25dae=""
                     r="60"
                   />
                 </clippath>
@@ -1611,7 +1611,7 @@ exports[`DefaultLayout > renders 1`] = `
         </div>
         <div
           class="dream-mall-panel"
-          data-v-e7870397=""
+          data-v-a93cef15=""
         >
           
           <div
@@ -1674,7 +1674,7 @@ exports[`DefaultLayout > renders 1`] = `
           </div>
           <button
             class="v-btn v-btn--elevated v-theme--light v-btn--density-default elevation-0 v-btn--rounded v-btn--size-default v-btn--variant-elevated custom-green-btn mb-5"
-            data-v-ea088446=""
+            data-v-38a94fe9=""
             modelvalue="[object Object]"
             submit-text="Weiter"
             type="button"
@@ -1721,8 +1721,8 @@ exports[`DefaultLayout > renders 1`] = `
         >
           <div
             class="circle rounded-circle border-sm text-font pa-2 d-flex justify-center align-center"
-            data-v-39e8094e=""
             data-v-75d0be1e=""
+            data-v-93e4e641=""
           >
             
             <i
@@ -1757,18 +1757,18 @@ exports[`DefaultLayout > renders 1`] = `
           aria-haspopup="menu"
           aria-owns="v-menu-7"
           class="mx-auto user-info rounded-pill d-flex flex-row text-font border-sm align-center justify-center"
-          data-v-607bdd70=""
+          data-v-912716f1=""
         >
           
           <div
             class="v-avatar v-theme--light v-avatar--density-default v-avatar--variant-flat avatar d-flex align-center text-font border-sm"
-            data-v-607bdd70=""
+            data-v-912716f1=""
             style="width: 44px; height: 44px;"
           >
             
             
             <span
-              data-v-607bdd70=""
+              data-v-912716f1=""
             />
             
             
@@ -1781,13 +1781,13 @@ exports[`DefaultLayout > renders 1`] = `
           </div>
           <div
             class="d-flex flex-column justify-center text-right pa-1 pl-3 w-100"
-            data-v-607bdd70=""
+            data-v-912716f1=""
           >
             <i
               aria-hidden="true"
               class="v-icon notranslate v-theme--light v-icon--size-default ellipsis-icon"
               data-test="user-dropdown"
-              data-v-607bdd70=""
+              data-v-912716f1=""
             >
               <svg
                 fill="none"

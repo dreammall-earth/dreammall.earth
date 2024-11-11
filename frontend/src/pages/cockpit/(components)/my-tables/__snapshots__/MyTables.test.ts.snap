@@ -1,0 +1,54 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MyTables > renders 1`] = `
+<section
+  class="cockpit-card-variable-height cockpit-card"
+  data-v-3c670794=""
+  data-v-40b4d4c0=""
+  data-v-d85e5d0d=""
+>
+  <div
+    class="header"
+    data-v-3c670794=""
+  >
+    
+    
+    <div
+      class="header"
+      data-v-d85e5d0d=""
+    >
+      <h2
+        data-v-d85e5d0d=""
+      >
+        $t('cockpit.myTables.header')
+      </h2>
+      <button
+        class="add-table bg-primary px-3 py-1 d-flex align-center justify-center"
+        data-v-d85e5d0d=""
+      >
+        <i
+          aria-hidden="true"
+          class="mdi mdi-plus mdi v-icon notranslate v-theme--light v-icon--size-default"
+          data-v-d85e5d0d=""
+        />
+         $t('cockpit.myTables.addTable')
+      </button>
+    </div>
+    
+    
+  </div>
+  <hr
+    class="hr"
+    data-v-3c670794=""
+  />
+  
+  
+  <div
+    data-v-d85e5d0d=""
+  >
+    $t('cockpit.myTables.noTables')
+  </div>
+  
+  
+</section>
+`;

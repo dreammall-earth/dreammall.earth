@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import LogoImage from '#components/menu/LogoImage.vue'
+import LogoImage from '#layouts/menu/LogoImage.vue'
 
 defineProps<{
   text: string

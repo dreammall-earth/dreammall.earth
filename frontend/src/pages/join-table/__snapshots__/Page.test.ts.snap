@@ -37,7 +37,7 @@ exports[`JoinTablePage > renders 1`] = `
               class="w-100 logo-tiny mx-auto"
               cover="false"
               data-v-bb2bf2be=""
-              data-v-f6be2607=""
+              data-v-ec9956ac=""
               eager="false"
               inline="false"
               options="[object Object]"
@@ -194,8 +194,8 @@ exports[`JoinTablePage > renders 1`] = `
           <!-- todo: manage values as maxlength globally? -->
           <button
             class="v-btn v-btn--elevated v-theme--light v-btn--density-default elevation-0 v-btn--rounded v-btn--size-default v-btn--variant-elevated custom-green-btn mt-12 mx-auto"
+            data-v-38a94fe9=""
             data-v-bb2bf2be=""
-            data-v-ea088446=""
             type="button"
           >
             

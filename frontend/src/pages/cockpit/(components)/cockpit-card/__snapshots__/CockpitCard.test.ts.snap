@@ -1,0 +1,100 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CockpitCard > renders 1`] = `
+<section
+  class="cockpit-card-variable-height cockpit-card"
+  data-v-3c670794=""
+  data-v-40b4d4c0=""
+  narrow="false"
+>
+  <div
+    class="header"
+    data-v-3c670794=""
+  >
+    
+    
+    <h2>
+      Header
+    </h2>
+    
+    
+  </div>
+  <hr
+    class="hr"
+    data-v-3c670794=""
+  />
+  
+  
+  <div>
+    Content
+  </div>
+  
+  
+</section>
+`;
+
+exports[`CockpitCard > renders narrow 1`] = `
+<section
+  class="cockpit-card-variable-height cockpit-card"
+  data-v-3c670794=""
+  data-v-40b4d4c0=""
+  narrow="true"
+>
+  <div
+    class="header"
+    data-v-3c670794=""
+  >
+    
+    
+    <h2>
+      Header
+    </h2>
+    
+    
+  </div>
+  <hr
+    class="hr"
+    data-v-3c670794=""
+  />
+  
+  
+  <div>
+    Content
+  </div>
+  
+  
+</section>
+`;
+
+exports[`CockpitCard > renders with empty header slot 1`] = `
+<section
+  class="cockpit-card-variable-height cockpit-card"
+  data-v-3c670794=""
+  data-v-40b4d4c0=""
+  narrow="false"
+>
+  <div
+    class="header"
+    data-v-3c670794=""
+  >
+    
+    
+    <h2>
+      Header
+    </h2>
+    
+    
+  </div>
+  <hr
+    class="hr"
+    data-v-3c670794=""
+  />
+  
+  
+  <div>
+    Content
+  </div>
+  
+  
+</section>
+`;

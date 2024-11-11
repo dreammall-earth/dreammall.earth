@@ -7,7 +7,7 @@ import { useQuery } from '@vue/apollo-composable'
 import { watch, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import TableLayout from '#components/table-layout/TableLayout.vue'
+import TableLayout from '#pages/table/(components)/table-layout/TableLayout.vue'
 import { joinWelcomeTableQuery } from '#queries/joinWelcomeTableQuery'
 
 const { t } = useI18n()

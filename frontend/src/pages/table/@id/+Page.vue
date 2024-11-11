@@ -7,12 +7,12 @@ import { useQuery } from '@vue/apollo-composable'
 import { provide, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
+import { usePageContext } from '#context/usePageContext'
 import {
   IsModeratorInjection,
   IsModeratorSymbol,
-} from '#components/malltalk/interfaces/IsModeratorInjection'
-import TableLayout from '#components/table-layout/TableLayout.vue'
-import { usePageContext } from '#context/usePageContext'
+} from '#layouts/malltalk/interfaces/IsModeratorInjection'
+import TableLayout from '#pages/table/(components)/table-layout/TableLayout.vue'
 import { joinTableQuery } from '#queries/joinTableQuery'
 
 import type { TableType } from '#stores/tablesStore'

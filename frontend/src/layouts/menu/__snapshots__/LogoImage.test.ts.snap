@@ -1,0 +1,16 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LogoImage > renders Logo 1`] = `
+<v-img-stub
+  absolute="false"
+  class="w-100 logo-medium"
+  cover="false"
+  data-v-ec9956ac=""
+  eager="false"
+  inline="false"
+  options="[object Object]"
+  src="/src/assets/dreammall-logo.svg"
+  tile="false"
+  transition="fade-transition"
+/>
+`;
