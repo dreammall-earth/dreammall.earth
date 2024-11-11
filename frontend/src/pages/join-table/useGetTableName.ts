@@ -12,6 +12,7 @@ export default function useGetTableName(tableId: string) {
     getTableNameQuery,
     { tableId },
     {
+      prefetch: false,
       fetchPolicy: 'no-cache',
     },
   )

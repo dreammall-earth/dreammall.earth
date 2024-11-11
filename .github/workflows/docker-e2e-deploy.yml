@@ -28,7 +28,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@70b2cdc6480c1a8b86edf1777157f8f437de2166
+        uses: docker/metadata-action@0de3687b53cd804b63dd87819f7bda043569ce4a
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
@@ -65,7 +65,7 @@ jobs:
     needs: build-and-push-images
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.1.7
-      - uses: actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6 # v4.0.3
+      - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.0.3
         with:
           node-version-file: './.tool-versions'
       - run: echo "IMAGE_TAG=sha-$(echo $GITHUB_SHA | cut -c 1-7)" > .env
@@ -78,7 +78,7 @@ jobs:
           sudo ln -fs /opt/cucumber-json-formatter /usr/bin/cucumber-json-formatter
       - name: E2E | Run all tests
         id: e2e-run
-        uses: cypress-io/github-action@0da3c06ed8217b912deea9d8ee69630baed1737e # v6.7.2
+        uses: cypress-io/github-action@f1f0912d392f0d06bdd01fb9ebe3b3299e5806fb # v6.7.2
         with:
           working-directory: tests
       - name: E2E | if tests failed, compile html report
@@ -114,7 +114,7 @@ jobs:
           mkdir -p ~/.kube
           sops decrypt ./infrastructure/helmfile/secrets/kubeconfig > ~/.kube/config
       - run: echo "IMAGE_TAG=sha-$(echo $GITHUB_SHA | cut -c 1-7)" >> $GITHUB_ENV
-      - uses: helmfile/helmfile-action@a98973d0d054cc23b921ab87c37e846390e6c896 #v1.9.3
+      - uses: helmfile/helmfile-action@4a3727a54a9a7b6e93b2c1f1e04ece5e6e4cdd31 #v1.9.4
         with:
           helmfile-args: apply --environment master
           helmfile-workdirectory: ./infrastructure/helmfile
