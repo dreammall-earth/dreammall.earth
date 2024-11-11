@@ -58,7 +58,7 @@ const steps: Step[] = [
   {
     component: StartSetup,
     id: 'start',
-    title: 'Mall Talk',
+    title: ref(t('dream-mall-panel.setup.mall-talk')),
     submit: 'next',
     submitText: t('dream-mall-panel.setup.continue'),
     back: 'previous',
@@ -66,7 +66,7 @@ const steps: Step[] = [
   {
     component: EnterNameAndVisibility,
     id: 'settings',
-    title: t('dream-mall-panel.setup.table-creation-title'),
+    title: ref(t('dream-mall-panel.setup.table-creation-title')),
     submit: 'next',
     submitText: t('dream-mall-panel.setup.continue'),
     back: 'previous',
@@ -74,7 +74,7 @@ const steps: Step[] = [
   {
     component: SelectUsers,
     id: 'users',
-    title: t('dream-mall-panel.setup.invitation-title'),
+    title: ref(t('dream-mall-panel.setup.invitation-title')),
     submit: 'next',
     submitText: t('dream-mall-panel.setup.continue'),
     back: 'previous',
@@ -82,7 +82,7 @@ const steps: Step[] = [
   {
     component: SubmitTable,
     id: 'end',
-    title: t('dream-mall-panel.setup.submit-title'),
+    title: ref(t('dream-mall-panel.setup.submit-title')),
     submit: 'next',
     submitText: t('dream-mall-panel.setup.create-table'),
     back: 'previous',

@@ -152,6 +152,19 @@ export const useTablesStore = defineStore(
 
     const getTables = computed(() => tables)
 
+    function getTableFromTables(tableId: string, tables: Table[]): Table | undefined {
+      if (!tableId || !tables.length) return undefined
+      return tables.find((t) => t.id.toString() === tableId.toString())
+    }
+
+    const getTable = (tableId: string) => {
+      return (
+        getTableFromTables(tableId, tables.mallTalkTables) ||
+        getTableFromTables(tableId, tables.permanentTables) ||
+        getTableFromTables(tableId, tables.projectTables)
+      )
+    }
+
     const setTables = (newTables: TableList) => {
       tables.mallTalkTables = newTables.mallTalkTables.map((table) => ({
         ...table,
@@ -267,6 +280,7 @@ export const useTablesStore = defineStore(
       openTables: tables,
       setTables,
       getTables,
+      getTable,
       isLoadingTables,
       getProjectTables,
       setProjectTables,

@@ -24,16 +24,15 @@
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
 import { navigate } from 'vike/client/router'
 import { computed, ref, inject } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import SimpleButton from '#components/buttons/SimpleButton.vue'
 import {
-  IsModeratorInjection,
-  IsModeratorSymbol,
-} from '#components/malltalk/interfaces/IsModeratorInjection'
+  TableDataInjection,
+  TableDataSymbol,
+} from '#components/malltalk/interfaces/TableDataInjection'
 import { usePageContext } from '#context/usePageContext'
 import { copyToClipboard } from '#src/utils/copyToClipboard'
 import { useTablesStore } from '#stores/tablesStore'
@@ -62,22 +61,13 @@ const tableId = computed(() => {
 })
 
 const tablesStore = useTablesStore()
-const isModeratorData = inject<IsModeratorInjection>(IsModeratorSymbol, {
+const tableData = inject<TableDataInjection>(TableDataSymbol, {
+  name: ref(''),
   isModerator: ref(false),
 })
 
-const { getTables } = storeToRefs(tablesStore)
-
-const allTables = computed(() => {
-  const { mallTalkTables, permanentTables, projectTables } = getTables.value
-  return [...mallTalkTables, ...permanentTables, ...projectTables]
-})
-
 const meetingID = computed(() => {
-  if (!(tableId.value && allTables.value?.length)) return ''
-  const currentTable = allTables.value.find((t) => t.id.toString() === tableId.value.toString())
-  if (currentTable) return currentTable.meetingID
-  return ''
+  return tablesStore.getTable(tableId.value)?.meetingID ?? ''
 })
 
 const copiedIndicator = ref(false)
@@ -102,7 +92,7 @@ const buttons = computed(() => [
       }
     },
   },
-  ...(isModeratorData.isModerator.value
+  ...(tableData.isModerator.value
     ? [
         {
           icon: 'mdi-account-multiple-plus-outline',

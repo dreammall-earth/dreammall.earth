@@ -10,8 +10,13 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { reactive, watch, ref } from 'vue'
+import { reactive, watch, ref, inject } from 'vue'
+import { useI18n } from 'vue-i18n'
 
+import {
+  TableDataInjection,
+  TableDataSymbol,
+} from '#components/malltalk/interfaces/TableDataInjection'
 import StepControl from '#components/steps/StepControl.vue'
 import { Step } from '#components/steps/useSteps'
 import { useUserStore } from '#stores/userStore'
@@ -21,6 +26,8 @@ import TableSettingsRoot from './TableSettingsRoot.vue'
 
 import type MyTableSettings from '#components/malltalk/interfaces/MyTableSettings'
 import type { ComponentExposed } from 'vue-component-type-helpers'
+
+const { t } = useI18n()
 
 const userStore = useUserStore()
 
@@ -40,21 +47,26 @@ watch(myTable, (value) => {
   tableSettings.meetingID = value?.meetingID || ''
 })
 
+const tableData = inject<TableDataInjection>(TableDataSymbol, {
+  isModerator: ref(false),
+  name: ref(t('dream-mall-panel.call.my-table')),
+})
+
 const steps: Step[] = [
   {
     component: TableSettingsRoot,
     id: 'root',
-    title: 'Mein Tisch',
+    title: tableData.name,
     submit: 'close',
-    submitText: 'Beenden',
+    submitText: t('dream-mall-panel.call.leave-table'),
     back: 'previous',
   },
   {
     component: ChangeUsers,
     id: 'users',
-    title: 'Teilnehmer',
+    title: ref('Teilnehmer'),
     submit: 'root',
-    submitText: 'Übernehmen',
+    submitText: t('dream-mall-panel.call.apply'),
     back: 'root',
   },
 ]

@@ -1,7 +1,7 @@
 <template>
   <StepHeader
     v-if="steps"
-    :title="steps[currentStep]?.title ?? 'unknown'"
+    :title="steps[currentStep]?.title.value ?? 'unknown'"
     :is-back-button-visible="currentStep > 0 && steps[currentStep]?.canBack !== false"
     :is-close-button-visible="true"
     :is-dream-mall-button-mode="props.isDreamMallButtonMode"

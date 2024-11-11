@@ -8,9 +8,9 @@ import { provide, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import {
-  IsModeratorInjection,
-  IsModeratorSymbol,
-} from '#components/malltalk/interfaces/IsModeratorInjection'
+  TableDataInjection,
+  TableDataSymbol,
+} from '#components/malltalk/interfaces/TableDataInjection'
 import TableLayout from '#components/table-layout/TableLayout.vue'
 import { usePageContext } from '#context/usePageContext'
 import { joinTableQuery } from '#queries/joinTableQuery'
@@ -22,10 +22,11 @@ const { t } = useI18n()
 
 const tableId = ref(Number(pageContext.routeParams?.id))
 
-const isModeratorData: IsModeratorInjection = {
+const tableData: TableDataInjection = {
+  name: ref(''),
   isModerator: ref(false),
 }
-provide(IsModeratorSymbol, isModeratorData)
+provide(TableDataSymbol, tableData)
 
 const errorMessage = ref<string | null>(null)
 const tableUrl = ref<string | null>(null)
@@ -47,10 +48,11 @@ const { result: joinTableQueryResult, error: joinTableQueryError } = useQuery(
 
 watch(
   joinTableQueryResult,
-  (data: { joinTable: { link: string; type: TableType; isModerator: boolean } }) => {
+  (data: { joinTable: { link: string; type: TableType; isModerator: boolean; name: string } }) => {
     if (!data.joinTable) return
     tableUrl.value = data.joinTable.link
-    isModeratorData.isModerator.value = data.joinTable.isModerator
+    tableData.name.value = data.joinTable.name
+    tableData.isModerator.value = data.joinTable.isModerator
     errorMessage.value = null
   },
 )
