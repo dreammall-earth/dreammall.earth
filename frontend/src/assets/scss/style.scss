@@ -12,8 +12,6 @@ $font-family-default: 'Helvetica', sans-serif;
     xl: 8px
   ),
 );
-@forward './imports/_config';
-@forward './imports/_mixins';
 @use './imports/_fonts';
 @use './vuetify-adjustments/dm.switch';
 @use './vuetify-adjustments/navigationDrawer';

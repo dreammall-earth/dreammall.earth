@@ -1,8 +1,0 @@
-// linear gradient for background effect
-@mixin linear-gradient-btn-hover($startColor, $endColor){
-    background: linear-gradient(
-      98deg,
-      $startColor 8.53%,
-      $endColor 107.12%
-    );
-}
