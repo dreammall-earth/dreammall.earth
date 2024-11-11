@@ -54,7 +54,7 @@ const displayedUsers = computed<UserInvitation[]>(() => {
   return searchResults.value.map((user) => ({
     id: user.id,
     name: user.name || user.username,
-    avatar: null, // not supporting yet
+    avatar: undefined, // not supporting yet
     invited: users.value.includes(user.id), // todo: user already included in myTable?
   }))
 })
