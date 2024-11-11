@@ -1,0 +1,8 @@
+@use 'sass:map';
+@use 'vuetify/lib/styles/settings/_variables' as variables;
+
+@mixin respond-to($size) {
+  @media #{map.get(variables.$display-breakpoints, $size)} {
+    @content;
+  }
+}

@@ -92,8 +92,7 @@ const submit = async () => {
 </script>
 
 <style lang="scss" scoped>
-@use 'sass:map';
-@use 'vuetify/lib/styles/settings/_variables' as variables;
+@use '@style/breakpoints';
 
 .panel {
   width: min(636px, 100vw);
@@ -104,7 +103,7 @@ const submit = async () => {
   border-radius: 30px;
   transform: translate(calc(50vw - 50%), calc(50vh - 50%));
 
-  @media #{map.get(variables.$display-breakpoints, 'sm-and-down')} {
+  @include breakpoints.respond-to('sm-and-down') {
     width: calc(100% - 40px);
     padding: 10px 10px 20px;
     margin-right: 20px;
@@ -120,7 +119,7 @@ const submit = async () => {
 }
 
 .v-text-field {
-  @media #{map.get(variables.$display-breakpoints, 'sm-and-down')} {
+  @include breakpoints.respond-to('sm-and-down') {
     width: 100% !important;
   }
 }

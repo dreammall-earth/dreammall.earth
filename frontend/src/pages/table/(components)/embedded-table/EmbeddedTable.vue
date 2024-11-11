@@ -39,15 +39,14 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="scss">
-@use 'sass:map';
-@use 'vuetify/lib/styles/settings/_variables' as variables;
+@use '@style/breakpoints';
 
 .table-iframe {
   border: none;
   border-radius: 20px;
 }
 
-@media #{map.get(variables.$display-breakpoints, 'sm-and-down')} {
+@include breakpoints.respond-to('sm-and-down') {
   .table-iframe {
     border-radius: 20px 20px 0 0;
   }

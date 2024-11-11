@@ -103,8 +103,7 @@ const { isModalActive } = useModal()
 </script>
 
 <style scoped lang="scss">
-@use 'sass:map';
-@use 'vuetify/lib/styles/settings/_variables' as variables;
+@use '@style/breakpoints';
 
 .main-layout {
   padding-top: 0;
@@ -119,7 +118,7 @@ const { isModalActive } = useModal()
     margin-top: 70px;
   }
 
-  @media #{map.get(variables.$display-breakpoints, 'sm-and-down')} {
+  @include breakpoints.respond-to('sm-and-down') {
     .page-container {
       padding: 16px 0;
       margin-bottom: 50px;

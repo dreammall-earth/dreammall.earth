@@ -5,8 +5,7 @@
 </template>
 
 <style scoped lang="scss">
-@use 'sass:map';
-@use 'vuetify/lib/styles/settings/_variables' as variables;
+@use '@style/breakpoints';
 
 .cockpit {
   display: grid;
@@ -16,7 +15,7 @@
   margin: auto;
 }
 
-@media #{map.get(variables.$display-breakpoints, 'md-and-up')} {
+@include breakpoints.respond-to('md-and-up') {
   .cockpit {
     grid-template-columns: 400px 400px;
     max-width: 1200px;

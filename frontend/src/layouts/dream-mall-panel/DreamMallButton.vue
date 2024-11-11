@@ -348,8 +348,7 @@ onMounted(() => {})
 </script>
 
 <style scoped lang="scss">
-@use 'sass:map';
-@use 'vuetify/lib/styles/settings/_variables' as variables;
+@use '@style/breakpoints';
 
 svg {
   position: absolute;
@@ -365,12 +364,12 @@ svg {
       fill 0.3s ease-in-out;
   }
 
-  @media #{map.get(variables.$display-breakpoints, 'xs')} {
+  @include breakpoints.respond-to('xs') {
     transition: scale 1s;
     transform: translate(-50%, -50%) scale(2);
   }
 
-  @media #{map.get(variables.$display-breakpoints, 'sm')} {
+  @include breakpoints.respond-to('sm') {
     transition: scale 1s;
     transform: translate(-50%, -50%) scale(1.4);
   }

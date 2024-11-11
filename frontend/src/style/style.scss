@@ -12,7 +12,7 @@ $font-family-default: 'Helvetica', sans-serif;
     xl: 8px
   ),
 );
-@use './imports/_fonts';
+@use './_fonts';
 @use './vuetify-adjustments/dm.switch';
 @use './vuetify-adjustments/navigationDrawer';
 @use './vuetify-adjustments/v-select';

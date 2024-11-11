@@ -156,6 +156,7 @@
     "#mutations/*": "./src/graphql/mutations/*",
     "#subscriptions/*": "./src/graphql/subscriptions/*",
     "#stores/*": "./src/stores/*",
+    "#style/*": "./src/style/*",
     "#src/*": "./src/*",
     "#plugins/*": "./renderer/plugins/*",
     "#context/*": "./renderer/context/*",
