@@ -78,7 +78,7 @@
     "@storybook/addon-essentials": "^8.4.2",
     "@storybook/addon-interactions": "^8.4.2",
     "@storybook/addon-links": "^8.4.4",
-    "@storybook/blocks": "^8.3.6",
+    "@storybook/blocks": "^8.4.4",
     "@storybook/test-runner": "^0.19.1",
     "@storybook/testing-library": "^0.2.2",
     "@storybook/vue3": "^8.4.2",
