@@ -97,29 +97,3 @@ jobs:
         with:
           name: dreammall-e2e-test-report-pr-${{ steps.pr-number.outputs.pr }}
           path: /home/runner/work/dreammall.earth/dreammall.earth/tests/cypress/reports/dreammall-e2e_html_report
-
-  deploy-to-kubernetes:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
-    needs: build-and-push-images
-    steps:
-      - uses: mdgreenwald/mozilla-sops-action@d9714e521cbaecdae64a89d2fdd576dd2aa97056 # v1.6.0
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.1.7
-      - run: |
-          mkdir -p ~/.config/sops/age
-          echo $SOPS_KEY | base64 --decode > ~/.config/sops/age/keys.txt
-        env:
-          SOPS_KEY: ${{ secrets.SOPS_KEY }}
-      - run: |
-          mkdir -p ~/.kube
-          sops decrypt ./infrastructure/helmfile/secrets/kubeconfig > ~/.kube/config
-      - run: echo "IMAGE_TAG=sha-$(echo $GITHUB_SHA | cut -c 1-7)" >> $GITHUB_ENV
-      - uses: helmfile/helmfile-action@d816691da49c62e2f689bcab06114ce6918a15a3 #v2.0.0
-        with:
-          helmfile-args: apply --environment master
-          helmfile-workdirectory: ./infrastructure/helmfile
-          helm-plugins: >
-            https://github.com/databus23/helm-diff,
-            https://github.com/jkroepke/helm-secrets
-
-
