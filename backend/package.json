@@ -81,7 +81,7 @@
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-no-catch-all": "^1.1.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-promise": "^6.6.0",
+    "eslint-plugin-promise": "^7.2.0",
     "eslint-plugin-security": "^3.0.1",
     "eslint-plugin-type-graphql": "^1.0.0",
     "eslint-plugin-yml": "^1.15.0",
