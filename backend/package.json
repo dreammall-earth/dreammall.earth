@@ -30,7 +30,7 @@
   "dependencies": {
     "@apollo/server": "^4.11.2",
     "@getbrevo/brevo": "^2.2.0",
-    "@graphql-tools/schema": "^10.0.9",
+    "@graphql-tools/schema": "^10.0.10",
     "@graphql-yoga/subscription": "^5.0.1",
     "@prisma/client": "^5.22.0",
     "@sentry/node": "^8.37.1",
