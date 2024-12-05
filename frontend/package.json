@@ -142,7 +142,7 @@
     "vite-plugin-checker": "^0.8.0",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-vuetify": "^2.0.3",
-    "vitest": "^2.0.4",
+    "vitest": "^2.1.8",
     "vue-component-type-helpers": "^2.1.10",
     "vue-tsc": "^2.1.10"
   },
