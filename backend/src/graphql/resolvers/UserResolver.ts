@@ -1,5 +1,7 @@
 import { Prisma } from '@prisma/client'
 import { Resolver, Query, Authorized, Ctx, Arg, Mutation, Int } from 'type-graphql'
+// eslint-disable-next-line import/named
+import { v4 as uuidv4 } from 'uuid'
 
 import { UpdateUserDetailInput } from '#graphql/inputs/UpdateUserDetailInput'
 import { User, CurrentUser, UserDetail, SocialMedia } from '#graphql/models/UserModel'
@@ -184,6 +186,56 @@ export class UserResolver {
 
     return true
   }
+
+  @Authorized()
+  @Mutation(() => String)
+  async createInvitationLink(@Ctx() context: AuthenticatedContext): Promise<string> {
+    const {
+      user,
+      config,
+      dataSources: { prisma },
+    } = context
+    const inviationCode = await createInvitationCode(prisma)()
+    const dbInviationLink = await prisma.invitationLink.create({
+      data: { code: inviationCode, userId: user.id },
+    })
+    return config.FRONTEND_URL + 'invite/' + dbInviationLink.code
+  }
+
+  @Authorized()
+  @Mutation(() => Boolean)
+  async redeemInvitationLink(
+    @Arg('code') code: string,
+    @Ctx() context: AuthenticatedContext,
+  ): Promise<boolean> {
+    const {
+      user,
+      dataSources: { prisma },
+    } = context
+    const invitationLink = await prisma.invitationLink.findUnique({
+      where: {
+        code,
+      },
+    })
+    if (!invitationLink) {
+      throw new Error('Invalid invitation code.')
+    }
+    if (invitationLink.acceptedUserId) {
+      throw new Error('Link already used.')
+    }
+    if (user.id === invitationLink.userId) {
+      throw new Error('Can not redeem own invitation code.')
+    }
+    await prisma.invitationLink.update({
+      where: {
+        code,
+      },
+      data: {
+        acceptedUserId: user.id,
+      },
+    })
+    return true
+  }
 }
 
 const createCurrentUser =
@@ -200,3 +252,17 @@ const createCurrentUser =
 
     return new CurrentUser(user, usersInMeetings)
   }
+
+const createInvitationCode = (prisma: PrismaClient) => async (): Promise<string> => {
+  let invitationCode: string = uuidv4()
+  while (
+    await prisma.invitationLink.count({
+      where: {
+        code: invitationCode,
+      },
+    })
+  ) {
+    invitationCode = uuidv4()
+  }
+  return invitationCode
+}

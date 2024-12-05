@@ -1874,4 +1874,261 @@ describe('UserResolver', () => {
       })
     })
   })
+
+  describe('createInvitationLink mutation', () => {
+    const query = `mutation {
+      createInvitationLink
+    }`
+    describe('unauthenticated', () => {
+      it('returns an unauthenticated error', async () => {
+        const response = await testServer.executeOperation(
+          {
+            query,
+          },
+          { contextValue: mockContextValue() },
+        )
+        expect(response).toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('authenticated', () => {
+      let user: UserWithProfile
+      beforeEach(async () => {
+        user = await findOrCreateUser({ prisma })({ pk, nickname, name })
+      })
+
+      describe('with existing user', () => {
+        it('sends a valid invitation link and stores the invitation in the database', async () => {
+          const response = await testServer.executeOperation(
+            {
+              query,
+            },
+            {
+              contextValue: mockContextValue({ user }),
+            },
+          )
+          expect(response.body).toMatchObject({
+            kind: 'single',
+            singleResult: {
+              data: {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                createInvitationLink: expect.any(String),
+              },
+            },
+          })
+          // const code = response.body.singleResult.data.createInvitationLink
+          const databaseRecord = await prisma.invitationLink.findMany({})
+          expect(databaseRecord).toMatchObject([
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              code: expect.any(String),
+              userId: user.id,
+              acceptedUserId: null,
+            },
+          ])
+        })
+      })
+    })
+  })
+
+  describe('redeemInvitationLink mutation', () => {
+    const query = `mutation($code: String!) {
+      redeemInvitationLink(code: $code)
+    }`
+    describe('unauthenticated', () => {
+      it('returns an unauthenticated error', async () => {
+        const response = await testServer.executeOperation(
+          {
+            query,
+            variables: {
+              code: 'mocked',
+            },
+          },
+          { contextValue: mockContextValue() },
+        )
+        expect(response).toMatchObject({
+          body: {
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Access denied! You need to be authenticated to perform this action!',
+                }),
+              ]),
+            },
+          },
+        })
+      })
+    })
+
+    describe('authenticated', () => {
+      let user: UserWithProfile
+      beforeEach(async () => {
+        user = await findOrCreateUser({ prisma })({ pk, nickname, name })
+      })
+
+      describe('with non existing code', () => {
+        it('throws an error', async () => {
+          const response = await testServer.executeOperation(
+            {
+              query,
+              variables: {
+                code: 'mocked',
+              },
+            },
+            {
+              contextValue: mockContextValue({ user }),
+            },
+          )
+          expect(response).toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Invalid invitation code.',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+
+      describe('with existing code', () => {
+        beforeAll(async () => {
+          await prisma.invitationLink.create({
+            data: {
+              code: 'mocked',
+              userId: user.id,
+            },
+          })
+        })
+
+        it('returns an error if creator equals redeemer', async () => {
+          const response = await testServer.executeOperation(
+            {
+              query,
+              variables: {
+                code: 'mocked',
+              },
+            },
+            {
+              contextValue: mockContextValue({ user }),
+            },
+          )
+          expect(response.body).toMatchObject({
+            kind: 'single',
+            singleResult: {
+              data: null,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              errors: expect.arrayContaining([
+                expect.objectContaining({
+                  message: 'Can not redeem own invitation code.',
+                }),
+              ]),
+            },
+          })
+          const redeemedInvitationLink = await prisma.invitationLink.findUnique({
+            where: {
+              code: 'mocked',
+            },
+          })
+          expect(redeemedInvitationLink).toMatchObject({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            userId: user.id,
+            code: 'mocked',
+            acceptedUserId: null,
+          })
+        })
+
+        it('returns a success at first call', async () => {
+          const user2 = await findOrCreateUser({ prisma })({
+            pk: 42,
+            nickname: 'mockedUser2',
+            name: 'user2',
+          })
+          const response = await testServer.executeOperation(
+            {
+              query,
+              variables: {
+                code: 'mocked',
+              },
+            },
+            {
+              contextValue: mockContextValue({ user: user2 }),
+            },
+          )
+          expect(response.body).toMatchObject({
+            kind: 'single',
+            singleResult: {
+              data: {
+                redeemInvitationLink: true,
+              },
+            },
+          })
+          const redeemedInvitationLink = await prisma.invitationLink.findUnique({
+            where: {
+              code: 'mocked',
+            },
+          })
+          expect(redeemedInvitationLink).toMatchObject({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            id: expect.any(Number),
+            userId: user.id,
+            code: 'mocked',
+            acceptedUserId: user2.id,
+          })
+        })
+
+        it('throws an error after first usage', async () => {
+          const response = await testServer.executeOperation(
+            {
+              query,
+              variables: {
+                code: 'mocked',
+              },
+            },
+            {
+              contextValue: mockContextValue({ user }),
+            },
+          )
+          expect(response).toMatchObject({
+            body: {
+              kind: 'single',
+              singleResult: {
+                data: null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                errors: expect.arrayContaining([
+                  expect.objectContaining({
+                    message: 'Link already used.',
+                  }),
+                ]),
+              },
+            },
+          })
+        })
+      })
+    })
+  })
 })
