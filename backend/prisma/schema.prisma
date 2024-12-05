@@ -74,6 +74,8 @@ model User {
   userDetail        UserDetail[]
   socialMedia       SocialMedia[]
   testphaseEndsAt   DateTime @default("2024-10-31T00:00:00Z")
+  invitationLinks   InvitationLink[] @relation("owner")
+  redeemedLink      InvitationLink?  @relation("redeemer")
 }
 
 model Meeting {
@@ -117,4 +119,13 @@ model SocialMedia {
   link              String   @db.VarChar(60)
   user              User     @relation(fields: [userId], references: [id])
   userId            Int
+}
+
+model InvitationLink {
+  id                Int     @id @default(autoincrement())
+  code              String  @db.VarChar(36) @unique
+  user              User    @relation("owner", fields: [userId], references: [id], onDelete: Cascade)
+  userId            Int
+  acceptedUser      User?   @relation("redeemer", fields: [acceptedUserId], references: [id], onDelete: Cascade)
+  acceptedUserId    Int?    @unique
 }
