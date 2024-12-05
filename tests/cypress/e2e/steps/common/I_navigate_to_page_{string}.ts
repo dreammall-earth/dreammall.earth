@@ -3,11 +3,17 @@ import 'cypress-network-idle'
 import { Given } from '@badeball/cypress-cucumber-preprocessor'
 
 Given('I navigate to page {string}', (page: string) => {
-  if (page === 'authentik') {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    cy.visit(Cypress.env('authentikURL'))
-  } else {
-    cy.visit(page)
+  switch (page) {
+    case 'authentik':
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      cy.visit(Cypress.env('authentikURL'))
+      break
+    case 'signup':
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      cy.visit(`${Cypress.env('authentikURL')}if/flow/dreammallearth-enrollment/`)
+      break
+    default:
+      cy.visit(page)
   }
   cy.waitForNetworkIdle(5000)
 })

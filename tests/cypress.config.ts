@@ -3,6 +3,8 @@ import { createEsbuildPlugin } from '@badeball/cypress-cucumber-preprocessor/esb
 import createBundler from '@bahmutov/cypress-esbuild-preprocessor'
 import { defineConfig } from 'cypress'
 
+let emailLink: string
+
 async function setupNodeEvents(
   on: Cypress.PluginEvents,
   config: Cypress.PluginConfigOptions,
@@ -16,15 +18,26 @@ async function setupNodeEvents(
     }),
   )
 
+  on('task', {
+    setEmailLink: (link: string) => {
+      return (emailLink = link)
+    },
+    getEmailLink: () => {
+      return emailLink
+    },
+  })
+
   return config
 }
 
 export default defineConfig({
   e2e: {
     chromeWebSecurity: false,
+    pageLoadTimeout: 90000,
+    experimentalOriginDependencies: true,
     baseUrl: 'http://localhost:3000/',
     specPattern: 'cypress/e2e/features/*.feature',
-    supportFile: false,
+    supportFile: 'cypress/support/e2e.ts',
     retries: 0,
     video: false,
     viewportHeight: 1080,
@@ -32,6 +45,7 @@ export default defineConfig({
     env: {
       authentikURL: 'http://localhost:9000/',
       backendURL: 'http://localhost:4000/',
+      mailpitURL: 'http://localhost:8025/',
     },
     setupNodeEvents,
   },
