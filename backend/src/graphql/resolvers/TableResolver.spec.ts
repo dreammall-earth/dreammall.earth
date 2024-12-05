@@ -557,7 +557,7 @@ describe('TableResolver', () => {
     let bibiUser: UserWithProfile
     let peterUser: UserWithProfile
     let raeuberUser: UserWithProfile
-    beforeAll(async () => {
+    beforeEach(async () => {
       user = await findOrCreateUser({ prisma })({ pk, nickname, name })
       bibiUser = await findOrCreateUser({ prisma })({
         pk: 8,
@@ -574,11 +574,12 @@ describe('TableResolver', () => {
         nickname: 'raeuber',
         name: 'Räuber Hotzenplotz',
       })
+      await prisma.event.deleteMany()
     })
 
     describe('createMyTable', () => {
-      describe('meeting does not exist', () => {
-        it('returns Table', async () => {
+      describe('meeting does not exist and no userIds given', () => {
+        it('returns Table and creates CREATE_MY_TABLE event in db', async () => {
           await expect(
             testServer.executeOperation(
               {
@@ -608,6 +609,17 @@ describe('TableResolver', () => {
               },
             },
           })
+          await expect(prisma.event.findMany()).resolves.toEqual([
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_MY_TABLE',
+              involvedUserId: user.id,
+            },
+          ])
         })
 
         it('creates meeting in database', async () => {
@@ -632,65 +644,8 @@ describe('TableResolver', () => {
           })
         })
 
-        it('creates create my table event in the database', async () => {
-          const user = await prisma.user.findUnique({
-            where: {
-              username: nickname,
-            },
-          })
-          const result = await prisma.event.findMany({
-            orderBy: {
-              createdAt: 'asc',
-            },
-          })
-
-          expect(result).toEqual([
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_USER',
-              involvedUserId: user?.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_USER',
-              involvedUserId: bibiUser.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_USER',
-              involvedUserId: peterUser.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_USER',
-              involvedUserId: raeuberUser.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_MY_TABLE',
-              involvedUserId: user?.id,
-            },
-          ])
+        it('does not create any mall talk history entries', async () => {
+          await expect(prisma.mallTalkHistory.findMany()).resolves.toEqual([])
         })
       })
 
@@ -743,7 +698,7 @@ describe('TableResolver', () => {
         })
       })
 
-      describe('private meeting', () => {
+      describe('private meeting with given UserIds', () => {
         beforeAll(async () => {
           await prisma.usersInMeetings.deleteMany()
           await prisma.meeting.deleteMany()
@@ -753,7 +708,7 @@ describe('TableResolver', () => {
           }
         })
 
-        it('returns table with users', async () => {
+        it('returns table with users and publishes subscription', async () => {
           await expect(
             testServer.executeOperation(
               {
@@ -814,6 +769,33 @@ describe('TableResolver', () => {
               },
             }),
           )
+        })
+
+        it('creates mall talk history entries', async () => {
+          await expect(prisma.mallTalkHistory.findMany()).resolves.toEqual([
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              fromId: user.id,
+              toId: bibiUser.id,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              status: 'UNKNOWN',
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              tableId: expect.any(Number),
+            },
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              fromId: user.id,
+              toId: peterUser.id,
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              status: 'UNKNOWN',
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              tableId: expect.any(Number),
+            },
+          ])
         })
       })
 
@@ -920,7 +902,7 @@ describe('TableResolver', () => {
           )
         })
 
-        it('returns the updated table', async () => {
+        it('returns the updated table and creates UPDATE_MY_TABLE event in db', async () => {
           user = await findOrCreateUser({ prisma })({ pk, nickname, name })
           await expect(
             testServer.executeOperation(
@@ -950,106 +932,7 @@ describe('TableResolver', () => {
               },
             },
           })
-        })
-
-        it('has no meeting user mapping left in database', async () => {
-          await expect(prisma.usersInMeetings.findMany()).resolves.toHaveLength(0)
-        })
-
-        it('creates update my table event', async () => {
-          const user = await prisma.user.findUnique({
-            where: {
-              username: nickname,
-            },
-          })
-          const result = await prisma.event.findMany({
-            orderBy: {
-              createdAt: 'asc',
-            },
-          })
-
-          expect(result).toEqual([
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_USER',
-              involvedUserId: user?.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_USER',
-              involvedUserId: bibiUser.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_USER',
-              involvedUserId: peterUser.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_USER',
-              involvedUserId: raeuberUser.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_MY_TABLE',
-              involvedUserId: user?.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_MY_TABLE',
-              involvedUserId: user?.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_MY_TABLE',
-              involvedUserId: user?.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_MY_TABLE',
-              involvedUserId: user?.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_MY_TABLE',
-              involvedUserId: user?.id,
-            },
+          await expect(prisma.event.findMany()).resolves.toEqual([
             {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(Number),
@@ -1060,6 +943,10 @@ describe('TableResolver', () => {
               involvedUserId: user?.id,
             },
           ])
+        })
+
+        it('has no meeting user mapping left in database', async () => {
+          await expect(prisma.usersInMeetings.findMany()).resolves.toHaveLength(0)
         })
       })
 
@@ -1269,7 +1156,7 @@ describe('TableResolver', () => {
       })
 
       describe('meeting does not exist', () => {
-        it('returns Table', async () => {
+        it('returns Table and creates CREATE_TABLE event in db', async () => {
           user = await findOrCreateUser({ prisma })({ pk, nickname, name })
           await expect(
             testServer.executeOperation(
@@ -1311,6 +1198,17 @@ describe('TableResolver', () => {
               },
             },
           })
+          await expect(prisma.event.findMany()).resolves.toEqual([
+            {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(Number),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              createdAt: expect.any(Date),
+              involvedEmail: null,
+              type: 'CREATE_TABLE',
+              involvedUserId: user?.id,
+            },
+          ])
         })
 
         it('creates meeting in database', async () => {
@@ -1343,138 +1241,6 @@ describe('TableResolver', () => {
             name: 'Table',
             public: true,
           })
-        })
-
-        it('creates create table event in the database', async () => {
-          const user = await prisma.user.findUnique({
-            where: {
-              username: nickname,
-            },
-          })
-          const result = await prisma.event.findMany({
-            orderBy: {
-              createdAt: 'asc',
-            },
-          })
-          expect(result).toEqual([
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_USER',
-              involvedUserId: user?.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_USER',
-              involvedUserId: bibiUser.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_USER',
-              involvedUserId: peterUser.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_USER',
-              involvedUserId: raeuberUser.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_MY_TABLE',
-              involvedUserId: user?.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_MY_TABLE',
-              involvedUserId: user?.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_MY_TABLE',
-              involvedUserId: user?.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_MY_TABLE',
-              involvedUserId: user?.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_MY_TABLE',
-              involvedUserId: user?.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'UPDATE_MY_TABLE',
-              involvedUserId: user?.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'UPDATE_MY_TABLE',
-              involvedUserId: user?.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_MY_TABLE',
-              involvedUserId: user?.id,
-            },
-            {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(Number),
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              createdAt: expect.any(Date),
-              involvedEmail: null,
-              type: 'CREATE_TABLE',
-              involvedUserId: user?.id,
-            },
-          ])
         })
       })
 

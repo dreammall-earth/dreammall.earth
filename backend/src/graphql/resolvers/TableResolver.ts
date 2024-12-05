@@ -1,4 +1,5 @@
 import { Meeting, User } from '@prisma/client'
+import { GetBatchResult } from '@prisma/client/runtime/library.d'
 import {
   Resolver,
   Mutation,
@@ -18,6 +19,7 @@ import { CreateMeetingResponse } from '#api/BBB/types'
 import { CONFIG } from '#config/config'
 import { pubSub } from '#graphql/pubSub'
 import { Call } from '#models/Call'
+import { MallTalkHistoryIncoming, MallTalkStatus } from '#models/MallTalkHistoryModel'
 import { JoinTable, OpenTable, OpenTables, Table, getAttendees } from '#models/TableModel'
 import { AuthenticatedContext } from '#src/context'
 import {
@@ -78,6 +80,12 @@ export class TableResolver {
 
     if (userIds && userIds.length) {
       await createUsersInMeetings(prisma)({ userIds, meeting, role: AttendeeRole.VIEWER })
+
+      await createMallTalkHistoryEntry(prisma)({
+        fromId: user.id,
+        toIds: userIds,
+        tableId: meeting.id,
+      })
 
       pubSub.publish('CALL_SUBSCRIPTION', {
         user,
@@ -495,6 +503,92 @@ export class TableResolver {
     return Table.fromMeeting(meeting, userInMeeting)
   }
 
+  @Authorized()
+  @Query(() => [MallTalkHistoryIncoming])
+  async incomingMallTalkHistory(
+    @Ctx() context: AuthenticatedContext,
+  ): Promise<MallTalkHistoryIncoming[]> {
+    const {
+      user,
+      dataSources: { prisma },
+    } = context
+
+    const history = await prisma.mallTalkHistory.findMany({
+      where: {
+        toId: user.id,
+      },
+      include: {
+        from: true,
+        to: true,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    })
+
+    const missedCalls = history.filter((h) => h.status === 'UNKNOWN')
+
+    if (missedCalls.length) {
+      await prisma.mallTalkHistory.updateMany({
+        where: {
+          id: {
+            in: missedCalls.map((h) => {
+              h.status = MallTalkStatus.MISSED
+              return h.id
+            }),
+          },
+        },
+        data: {
+          status: MallTalkStatus.MISSED,
+        },
+      })
+    }
+
+    return history.map((h) => new MallTalkHistoryIncoming(h))
+  }
+
+  @Authorized()
+  @Mutation(() => MallTalkHistoryIncoming)
+  async updateMallTalkHistoryStatus(
+    @Arg('tableId', () => Int) tableId: number,
+    @Arg('fromId', () => Int) fromId: number,
+    @Arg('status', () => MallTalkStatus) status: MallTalkStatus,
+    @Ctx() context: AuthenticatedContext,
+  ): Promise<MallTalkHistoryIncoming> {
+    const {
+      user,
+      dataSources: { prisma },
+    } = context
+
+    const history = await prisma.mallTalkHistory.findFirst({
+      where: {
+        tableId,
+        fromId,
+        toId: user.id,
+      },
+      include: {
+        from: true,
+        to: true,
+      },
+    })
+
+    if (!history) {
+      throw new Error('History entry not found!')
+    }
+
+    await prisma.mallTalkHistory.update({
+      where: {
+        id: history.id,
+      },
+      data: {
+        status,
+      },
+    })
+
+    history.status = status
+    return new MallTalkHistoryIncoming(history)
+  }
+
   @Subscription(() => OpenTables, {
     topics: 'OPEN_TABLE_SUBSCRIPTION',
   })
@@ -526,18 +620,6 @@ export class TableResolver {
   call(@Root() call: Call): Call {
     return call
   }
-
-  /*
-  @Query(() => Boolean)
-  test(): boolean {
-    try {
-      pubSub.publish('OPEN_TABLE_SUBSCRIPTION', 'Hallo')
-    } catch (err) {
-      console.log(err)
-    }
-    return true
-  }
-  */
 }
 
 type MeetingInfoUnionUser = {
@@ -727,3 +809,23 @@ const getOpenWelcomeTable = (context: AuthenticatedContext) => (meetings: Meetin
     isModerator: true,
   })
 }
+
+const createMallTalkHistoryEntry =
+  (prisma: PrismaClient) =>
+  async ({
+    fromId,
+    toIds,
+    tableId,
+  }: {
+    fromId: number
+    toIds: number[]
+    tableId: number
+  }): Promise<GetBatchResult> => {
+    return prisma.mallTalkHistory.createMany({
+      data: toIds.map((toId: number) => ({
+        fromId,
+        toId,
+        tableId,
+      })),
+    })
+  }
