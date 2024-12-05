@@ -1,3 +1,5 @@
+domain: dreammall.earth
+
 global:
   image:
     pullPolicy: Always
@@ -7,46 +9,27 @@ frontend:
   image:
     repository:  ghcr.io/dreammall-earth/dreammall.earth/frontend
   env:
-    UMAMI_WEBSITE_ID: "848016ec-3c22-403c-86be-9b21864d1256"
+    UMAMI_WEBSITE_ID: 848016ec-3c22-403c-86be-9b21864d1256
+    SENTRY_DSN: https://a8ad24bf9db4356ad721fe8974c058f0@o4508075566956544.ingest.de.sentry.io/4508076485509200
+    PUBLIC_ENV__ACCOUNT_HOLDER: 'DreamMall Verlag GbR Claudia Siebert und Sabine Laudien'
+    PUBLIC_ENV__ACCOUNT_HOLDER_ADDRESS: 'Rosenau 15, DE-87437 Kempten'
+    PUBLIC_ENV__IBAN: 'DE667 333170000 10000 504'
+    PUBLIC_ENV__BIC: 'GABLDE71XXX'
+    PUBLIC_ENV__BANK: 'Gabler-Saliter Bank'
 
 presenter:
   image:
     repository: ghcr.io/dreammall-earth/dreammall.earth/presenter
   env:
-    UMAMI_WEBSITE_ID: "210f7ce8-f8a0-4adb-be35-bf54ae5c93aa"
+    UMAMI_WEBSITE_ID: 210f7ce8-f8a0-4adb-be35-bf54ae5c93aa
+    SENTRY_DSN: https://ee21d8029a7c481e7e0835fc8e6421d6@o4508075566956544.ingest.de.sentry.io/4508076577521744
 
 backend:
   image:
     repository:  ghcr.io/dreammall-earth/dreammall.earth/backend
+  env:
+    BBB_URL: https://cafe.dreammall.earth/bigbluebutton/api/
+    SENTRY_DSN: https://1f94061db34f923d76b8eb85ccb132f8@o4508075566956544.ingest.de.sentry.io/4508075570561104
 
 cert_manager:
   issuer:
-
-hosts:
-  frontend: app.master.dreammall.earth
-  presenter: master.dreammall.earth
-
-configmap:
-  auth_authority_url: https://auth.master.dreammall.earth/application/o/dreammallearth/
-  auth_redirect_uri: https://app.master.dreammall.earth/auth/
-  auth_signout_uri: https://auth.master.dreammall.earth/if/flow/dreammallearth-invalidation-flow/
-  auth_signup_uri: https://auth.master.dreammall.earth/if/flow/dreammallearth-enrollment/
-  auth_silent_redirect_uri: https://app.master.dreammall.earth/silent-refresh/
-  bbb_url: https://cafe.dreammall.earth/bigbluebutton/api/
-  bbb_webhook_url: https://master.dreammall.earth/api/bbb-webhook
-  endpoints_graphql_uri: https://master.dreammall.earth/api/
-  endpoints_websocket_uri: ws://master.dreammall.earth/api/subscriptions
-  frontend_url:  https://app.master.dreammall.earth
-  frontend_signin_url:  https://app.master.dreammall.earth/signin
-  jwks_uri: http://authentik-server/application/o/dreammallearth/jwks/
-  presenter_url: https://master.dreammall.earth
-  account_holder: 'DreamMall Verlag GbR Claudia Siebert und Sabine Laudien'
-  account_holder_address: 'Rosenau 15, DE-87437 Kempten'
-  iban: 'DE667 333170000 10000 504'
-  bic: 'GABLDE71XXX'
-  bank: 'Gabler-Saliter Bank'
-  sentry_dsn_backend: 'https://1f94061db34f923d76b8eb85ccb132f8@o4508075566956544.ingest.de.sentry.io/4508075570561104'
-  sentry_dsn_frontend: 'https://a8ad24bf9db4356ad721fe8974c058f0@o4508075566956544.ingest.de.sentry.io/4508076485509200'
-  sentry_dsn_presenter: 'https://ee21d8029a7c481e7e0835fc8e6421d6@o4508075566956544.ingest.de.sentry.io/4508076577521744'
-  sentry_environment: ''
-  backend_url: http://dreammall-backend:4000

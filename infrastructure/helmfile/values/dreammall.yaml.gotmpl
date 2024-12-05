@@ -1,3 +1,5 @@
+domain: {{ .StateValues.domain }}
+
 global:
   image:
     tag: {{ .StateValues.image_tag }}
@@ -14,24 +16,3 @@ backend:
 
 cert_manager:
   issuer: {{ .StateValues.cert_manager_issuer }}
-
-hosts:
-  frontend: app.{{ .StateValues.domain }}
-  presenter: {{ .StateValues.domain }}
-
-configmap:
-  auth_authority_url: https://auth.{{ .StateValues.domain }}/application/o/dreammallearth/
-  auth_redirect_uri: https://app.{{ .StateValues.domain }}/auth/
-  auth_signout_uri: https://auth.{{ .StateValues.domain }}/if/flow/dreammallearth-invalidation-flow/
-  auth_signup_uri: https://auth.{{ .StateValues.domain }}/if/flow/dreammallearth-enrollment/
-  auth_silent_redirect_uri: https://app.{{ .StateValues.domain }}/silent-refresh/
-  bbb_url: https://cafe.dreammall.earth/bigbluebutton/api/
-  bbb_webhook_url: https://{{ .StateValues.domain }}/api/bbb-webhook
-  endpoints_graphql_uri: https://{{ .StateValues.domain }}/api/
-  endpoints_websocket_uri: wss://{{ .StateValues.domain }}/api/subscriptions
-  frontend_url:  https://app.{{ .StateValues.domain }}
-  frontend_signin_url:  https://app.{{ .StateValues.domain }}/signin
-  jwks_uri: http://authentik-server/application/o/dreammallearth/jwks/
-  presenter_url: https://{{ .StateValues.domain }}
-  sentry_environment: {{ .StateValues.domain }}
-  backend_url: http://backend-server:4000

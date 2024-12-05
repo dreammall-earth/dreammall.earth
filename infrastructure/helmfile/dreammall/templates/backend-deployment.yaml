@@ -18,19 +18,9 @@ spec:
           image: "{{ .Values.backend.image.repository }}:{{ default .Values.global.image.tag .Values.backend.image.tag "latest" }}"
           imagePullPolicy: {{ quote .Values.global.image.pullPolicy }}
           command: [ 'npm', 'run', 'db:migrate:deploy' ]
-          env:
-            - name: DATABASE_URL
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Release.Name }}
-                  key: database_url
-            - name: FRONTEND_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}
-                  key: frontend_url
-            - name: NODE_ENV
-              value: production
+          envFrom:
+            - secretRef:
+                name: {{ .Release.Name }}-backend-env
       containers:
         - name: backend
           image: "{{ .Values.backend.image.repository }}:{{ default .Values.global.image.tag .Values.backend.image.tag "latest" }}"
@@ -38,53 +28,16 @@ spec:
           ports:
             - containerPort: 4000
           envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-backend-env
             - secretRef:
                 name: {{ .Release.Name }}-backend-env
           env:
-            - name: DATABASE_URL
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Release.Name }}
-                  key: database_url
-            - name: FRONTEND_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}
-                  key: frontend_url
             - name: JWKS_URI
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}
-                  key: jwks_uri
-            - name: BBB_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}
-                  key: bbb_url
-            - name: BBB_SHARED_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Release.Name }}
-                  key: bbb_shared_secret
-            - name: BBB_WEBHOOK_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}
-                  key: bbb_webhook_url
-            - name: SENTRY_DSN
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}
-                  key: sentry_dsn_backend
+              value: http://authentik-server/application/o/dreammallearth/jwks/
             - name: SENTRY_ENVIRONMENT
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}
-                  key: sentry_environment
-            - name: WEBHOOK_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Release.Name }}
-                  key: webhook_secret
-            - name: NODE_ENV
-              value: production
+              value: {{ .Values.domain }}
+            - name: FRONTEND_URL
+              value: https://app.{{ .Values.domain }}
+            - name: BBB_WEBHOOK_URL
+              value: https://{{ .Values.domain }}/api/bbb-webhook
