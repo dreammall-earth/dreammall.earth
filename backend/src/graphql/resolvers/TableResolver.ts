@@ -76,22 +76,8 @@ export class TableResolver {
       throw new Error('Error creating the meeting!')
     }
 
-    if (userIds && userIds.length) {
+    if (userIds?.length) {
       await createUsersInMeetings(prisma)({ userIds, meeting, role: AttendeeRole.VIEWER })
-
-      pubSub.publish('CALL_SUBSCRIPTION', {
-        user,
-        userIds,
-        table: {
-          id: String(meeting.id),
-          isModerator: false,
-          meetingID: meeting.meetingID,
-          meetingName: meeting.name,
-          startTime: String(meeting.createTime),
-          attendees: [],
-          participantCount: 0,
-        },
-      })
     }
 
     await EVENT_CREATE_MY_TABLE(user.id)
@@ -185,6 +171,9 @@ export class TableResolver {
       where: {
         id: user.meetingId,
       },
+      include: {
+        users: true,
+      },
     })
 
     if (!dbMeeting) throw new Error('Meeting not found!')
@@ -197,6 +186,23 @@ export class TableResolver {
       inviteLink,
       tableId: dbMeeting.id,
     })
+
+    if (dbMeeting.users?.length) {
+      pubSub.publish('CALL_SUBSCRIPTION', {
+        user,
+        userIds: dbMeeting.users.map((u) => u.userId),
+        table: {
+          id: String(dbMeeting.id),
+          isModerator: false,
+          meetingID: dbMeeting.meetingID,
+          meetingName: dbMeeting.name,
+          startTime: String(dbMeeting.createTime),
+          attendees: [],
+          participantCount: 0,
+        },
+      })
+    }
+
     return dbMeeting.id
   }
 
