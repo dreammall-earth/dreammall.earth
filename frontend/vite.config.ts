@@ -29,7 +29,7 @@ const config: UserConfig = {
       typescript: true,
       vueTsc: true,
     }),
-    vuetify({ styles: { configFile: './src/assets/scss/style.scss' } }),
+    vuetify({ styles: { configFile: './src/style/style.scss' } }),
     viteCompression({ filter: /\.*$/i }),
   ],
   build: {
@@ -58,6 +58,8 @@ const config: UserConfig = {
       '#context': path.join(__dirname, '/renderer/context'),
       '#types': path.join(__dirname, '/types'),
       '#root': __dirname,
+      // SCSS aliases should not start with a hash
+      '@style': path.join(__dirname, '/src/style'),
     },
   },
   assetsInclude: isStorybook() ? ['/sb-preview/runtime.js'] : [],
