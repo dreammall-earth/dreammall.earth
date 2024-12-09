@@ -48,7 +48,7 @@
   "dependencies": {
     "@apollo/client": "^3.11.10",
     "@chenfengyuan/vue-qrcode": "^2.0.0",
-    "@intlify/unplugin-vue-i18n": "^4.0.0",
+    "@intlify/unplugin-vue-i18n": "^6.0.1",
     "@mdi/font": "^7.4.47",
     "@sentry/vue": "^8.37.1",
     "@vitejs/plugin-vue": "^5.1.5",
