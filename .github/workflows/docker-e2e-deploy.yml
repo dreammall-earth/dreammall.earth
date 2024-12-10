@@ -78,7 +78,7 @@ jobs:
           sudo ln -fs /opt/cucumber-json-formatter /usr/bin/cucumber-json-formatter
       - name: E2E | Run all tests
         id: e2e-run
-        uses: cypress-io/github-action@f1f0912d392f0d06bdd01fb9ebe3b3299e5806fb # v6.7.2
+        uses: cypress-io/github-action@57b70560982e6a11d23d4b8bec7f8a487cdbb71b # v6.7.2
         with:
           working-directory: tests
       - name: E2E | if tests failed, compile html report
